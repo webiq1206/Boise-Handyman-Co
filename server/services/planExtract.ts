@@ -81,7 +81,7 @@ function buildContent(files: PlanExtractionInput[]): Anthropic.ContentBlockParam
 
   blocks.push({
     type: "text",
-    text: "Read these drawings and report the facts a builder needs to budget them. Check the cover sheet first: most sets state the areas outright. Decide whether this is a ground-up new home or a remodel before anything else, and never report an area the drawings do not state.",
+    text: "Read these drawings and report the facts an estimator needs to budget them. Check the cover sheet first: most sets state the areas outright. Decide whether this is a ground-up new home or a remodel before anything else, and never report an area the drawings do not state.",
   });
 
   return blocks;

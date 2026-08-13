@@ -26,7 +26,7 @@ const MAX_INPUT_CHARS = 2_000;
 const GREETING: ChatMessage = {
   role: "assistant",
   content:
-    "Hey - I can price out a project for you right here, or answer anything about building in the Treasure Valley. What are you thinking about?",
+    "Hey - I can price out a repair or install for you right here, or answer anything about our handyman service in the Treasure Valley. What needs doing?",
 };
 
 /** Paths the widget must never appear on. */
@@ -187,7 +187,7 @@ export function AssistantWidget() {
           {/* Header */}
           <div className="flex items-center justify-between gap-3 border-b border-card-border bg-card px-4 py-3">
             <div className="min-w-0">
-              <p className="truncate text-sm font-normal text-foreground">Boise Construction Co</p>
+              <p className="truncate text-sm font-normal text-foreground">Boise Handyman Co</p>
               <p className="text-xs text-muted-foreground">Virtual assistant · instant estimates</p>
             </div>
             <button
@@ -252,7 +252,7 @@ export function AssistantWidget() {
               }}
               rows={1}
               maxLength={MAX_INPUT_CHARS}
-              placeholder="Ask about your project..."
+              placeholder="Ask about a repair or install..."
               aria-label="Message"
               data-testid="input-assistant-message"
               className="max-h-28 min-h-11 flex-1 resize-none rounded-sm border border-card-border bg-background px-3 py-2.5 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-legible"

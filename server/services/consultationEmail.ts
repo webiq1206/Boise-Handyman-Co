@@ -88,7 +88,7 @@ export interface PropertyEnrichment {
  * guess that could land on a 404. Swap in a per-lead URL once both are settled.
  */
 export const LEADS_DASHBOARD_URL =
-  process.env.NEXT_PUBLIC_LEADS_DASHBOARD_URL ?? "https://leads.boiseremodeling.co";
+  process.env.NEXT_PUBLIC_LEADS_DASHBOARD_URL ?? "https://leads.boisehandyman.co";
 
 export function formatUsd(n: number): string {
   return `$${Math.round(n).toLocaleString("en-US")}`;
@@ -490,9 +490,9 @@ function renderBudgetHtml(est: VerifiedEstimate, audience: "admin" | "client"): 
   const reassurance =
     audience === "client" && a.state === "below"
       ? `<p style="margin:12px 0 0;color:${EMAIL_BRAND.text};font-size:13.5px;line-height:1.6;">` +
-        `We will focus on the rooms and features that matter most to you, look at where a simpler ` +
-        `footprint or plan buys back real money, and show you what is worth spending on now versus ` +
-        `finishing later. Our job is to find the best path forward for your home, never to tell you ` +
+        `We will focus on the fixes that matter most to you, look at where combining tasks into ` +
+        `one visit saves real money, and show you what is worth doing now versus later. Our job is ` +
+        `to find the best path forward for your home, never to tell you ` +
         `your budget is not enough.</p>`
       : "";
 
@@ -820,7 +820,7 @@ export function buildCustomerEmailHtml(
   // it and generic reassurance is the honest most we can offer.
   const budgetNote =
     lead.budget && !estimate?.statedBudget
-    ? `<p style="margin:16px 0;color:${EMAIL_BRAND.text};line-height:1.6;">Your stated project budget is <strong>${escapeHtml(lead.budget)}</strong>. We will do everything we can to recommend solutions that fit within that budget while helping you achieve the goals you have shared. If your ideal scope runs beyond it, we will focus on the rooms and features that matter most to you, look at where a simpler footprint or a different plan buys back real money, and show you what is worth spending on now versus finishing later. Our job is to find the best path forward for your home, never to tell you your budget is not enough.</p>`
+    ? `<p style="margin:16px 0;color:${EMAIL_BRAND.text};line-height:1.6;">Your stated budget is <strong>${escapeHtml(lead.budget)}</strong>. We will do everything we can to recommend fixes that fit within that budget while helping you achieve the goals you have shared. If your full list runs beyond it, we will focus on the repairs that matter most, look at where combining tasks into one visit saves real money, and show you what is worth doing now versus later. Our job is to find the best path forward for your home, never to tell you your budget is not enough.</p>`
     : "";
 
   const content = estimate
@@ -828,11 +828,11 @@ export function buildCustomerEmailHtml(
       <p class="greeting" style="font-size:18px;color:${EMAIL_BRAND.text};margin:0 0 20px;">Thanks, ${escapeHtml(firstName)}. Here is the planning range you built.</p>
       ${buildEstimateSectionsHtml(estimate, overrides)}
       ${budgetNote}
-      <p style="color:${EMAIL_BRAND.text};line-height:1.6;">We will reach out within one business day to book your free planning consultation, where we confirm the scope and give you a firm number. Until then, reply here or call <a href="${SITE_CONFIG.phoneHref}" style="color:${EMAIL_BRAND.accent};">${escapeHtml(SITE_CONFIG.phone)}</a> with any questions.</p>
+      <p style="color:${EMAIL_BRAND.text};line-height:1.6;">We will reach out within one business day to confirm the scope, give you a firm number, and get your repair visit on the schedule. Until then, reply here or call <a href="${SITE_CONFIG.phoneHref}" style="color:${EMAIL_BRAND.accent};">${escapeHtml(SITE_CONFIG.phone)}</a> with any questions.</p>
       <p style="margin-top:24px;color:${EMAIL_BRAND.text};">The ${escapeHtml(SITE_CONFIG.name)} team</p>
     `
     : `
-      <p class="greeting" style="font-size:18px;color:${EMAIL_BRAND.text};margin:0 0 20px;">We received your consultation request and will reach out within one business day to schedule your free planning consultation.</p>
+      <p class="greeting" style="font-size:18px;color:${EMAIL_BRAND.text};margin:0 0 20px;">We received your request and will reach out within one business day to talk through the job and get your visit scheduled.</p>
       <p style="color:${EMAIL_BRAND.text};line-height:1.6;">In the meantime, feel free to call us at <a href="${SITE_CONFIG.phoneHref}" style="color:${EMAIL_BRAND.accent};">${escapeHtml(SITE_CONFIG.phone)}</a>, <a href="${SITE_CONFIG.phoneSmsHref}" style="color:${EMAIL_BRAND.accent};">send us a text</a>, or reply to this email with any questions.</p>
       <p style="margin-top:24px;color:${EMAIL_BRAND.text};">The ${escapeHtml(SITE_CONFIG.name)} team</p>
     `;

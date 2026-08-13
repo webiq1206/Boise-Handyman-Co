@@ -1,9 +1,16 @@
-# Backlink Engine - boiseremodeling.co
+# Backlink Engine - boisehandyman.co
 
 An autonomous backlink **intelligence** system with **human-approved outreach**. It discovers,
 qualifies, scores, prioritizes, monitors, and drafts on a schedule with no human involvement - and
 keeps a human on the irreversible send/submit/pay step. See `ARCHITECTURE.md` for the design and the
 rationale for that boundary.
+
+> **REBRAND NOTICE (2026-08):** configs and templates now target **Boise Handyman Co /
+> boisehandyman.co**, but everything under `data/` and `outreach/queue.json` +
+> `outreach/citations/` is **stale generated output from the old Boise Remodeling profile**.
+> Regenerate with `npm run backlink:run -- --dry-run` before acting on any draft or packet, and
+> do **not** enable sends until boisehandyman.co has SPF, DKIM and DMARC verified in Resend
+> (see `EMAIL_DELIVERABILITY_SETUP.md` at the repo root).
 
 ## Layout
 ```
@@ -48,7 +55,7 @@ npm run backlink:send        # dry-run report of what WOULD send (never sends un
 | `DATABASE_URL` | Neon Postgres persistence (durable across the ephemeral cron) | falls back to JSON files |
 | `RESEND_API_KEY` | sending approved outreach | sends unavailable (drafts still generate) |
 | `BACKLINK_SEND_ENABLED` | global send kill-switch (`true` to arm) | off by default - nothing sends |
-| `OUTREACH_FROM` | From address for sends | `hello@boiseremodeling.co` |
+| `OUTREACH_FROM` | From address for sends | `hello@boisehandyman.co` |
 | `HUNTER_API_KEY` | enhanced email discovery (optional) | site-crawl only (still finds most) |
 
 ## The autonomous loop

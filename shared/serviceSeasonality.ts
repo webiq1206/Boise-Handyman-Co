@@ -14,10 +14,18 @@ interface ServiceSeasonConfig {
 }
 
 /**
- * New home construction runs year-round in the Treasure Valley. Winter slows
- * foundation and flatwork rather than stopping the job, and design, permitting,
- * and interior work continue regardless of season, so every service carries a
- * full-year window. None are recurring by nature.
+ * Handyman seasonality in the Treasure Valley:
+ * - Interior work (drywall, plumbing, electrical, carpentry, mounting) runs
+ *   year-round; winter is actually the natural season for interior lists.
+ * - Caulking and weatherproofing runs year-round but peaks in early fall,
+ *   before the first hard freeze.
+ * - Fence, deck, and gutter work is genuinely seasonal: concrete post-setting
+ *   and exterior sealants want temperatures above roughly 40 degrees, and
+ *   gutter cleaning clusters in late fall. That service carries a Mar-Nov
+ *   window with a spring buffer so it surfaces as "coming into season".
+ * - Painting includes interior work, so it stays year-round even though
+ *   exterior touch-ups cluster May-Oct.
+ * None are recurring by nature (no weekly/monthly subscription work).
  */
 const YEAR_ROUND: ServiceSeasonConfig = {
   seasons: [{ startMonth: 1, startDay: 1, endMonth: 12, endDay: 31 }],
@@ -26,15 +34,22 @@ const YEAR_ROUND: ServiceSeasonConfig = {
   maxFrequency: null,
 };
 
+const EXTERIOR_SEASON: ServiceSeasonConfig = {
+  seasons: [{ startMonth: 3, startDay: 1, endMonth: 11, endDay: 30 }],
+  nearSeasonBufferDays: 21,
+  isRecurringEligible: false,
+  maxFrequency: null,
+};
+
 const SERVICE_SEASON_CONFIG: Record<string, ServiceSeasonConfig> = {
-  "custom-home-builder": YEAR_ROUND,
-  "semi-custom-homes": YEAR_ROUND,
-  "build-on-your-lot": YEAR_ROUND,
-  "design-build": YEAR_ROUND,
-  "home-plans-design": YEAR_ROUND,
-  "lot-evaluation": YEAR_ROUND,
-  "shop-homes-barndominiums": YEAR_ROUND,
-  "energy-efficient-homes": YEAR_ROUND,
+  "drywall-repair": YEAR_ROUND,
+  "painting-touch-ups": YEAR_ROUND,
+  "plumbing-repairs": YEAR_ROUND,
+  "electrical-repairs": YEAR_ROUND,
+  "carpentry-trim-repair": YEAR_ROUND,
+  "mounting-assembly": YEAR_ROUND,
+  "fence-deck-gutter-repair": EXTERIOR_SEASON,
+  "home-maintenance": YEAR_ROUND,
 };
 
 function dateToYearDay(month: number, day: number): number {

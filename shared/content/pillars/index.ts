@@ -4,18 +4,18 @@
  * One hub pillar guide per file. 6 pillars.
  */
 import type { GuidePageData } from '../../guideContent';
-import { boiseHomeBuildingCostGuide } from './boise-home-building-cost-guide';
-import { boiseHomeBuildingProcessGuide } from './boise-home-building-process-guide';
-import { buyingLandToBuildBoise } from './buying-land-to-build-boise';
-import { chooseHomeBuilderBoise } from './choose-home-builder-boise';
-import { customHomeDesignGuide } from './custom-home-design-guide';
-import { treasureValleyHomeBuildingGuide } from './treasure-valley-home-building-guide';
+import { boiseHomeMaintenanceGuide } from './boise-home-maintenance-guide';
+import { boiseHomeRepairCostGuide } from './boise-home-repair-cost-guide';
+import { firstTimeHomeownerRepairHandbook } from './first-time-homeowner-repair-handbook';
+import { hireAHandymanTreasureValley } from './hire-a-handyman-treasure-valley';
+import { smallHomeUpgradesThatPayOff } from './small-home-upgrades-that-pay-off';
+import { treasureValleyExteriorHomeCareGuide } from './treasure-valley-exterior-home-care-guide';
 
 export const PILLAR_GUIDES: GuidePageData[] = [
-  boiseHomeBuildingCostGuide,
-  boiseHomeBuildingProcessGuide,
-  buyingLandToBuildBoise,
-  chooseHomeBuilderBoise,
-  customHomeDesignGuide,
-  treasureValleyHomeBuildingGuide,
+  boiseHomeMaintenanceGuide,
+  boiseHomeRepairCostGuide,
+  firstTimeHomeownerRepairHandbook,
+  hireAHandymanTreasureValley,
+  smallHomeUpgradesThatPayOff,
+  treasureValleyExteriorHomeCareGuide,
 ];

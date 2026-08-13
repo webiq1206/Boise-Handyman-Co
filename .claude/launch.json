@@ -1,12 +1,11 @@
 {
   "version": "0.0.1",
-  "autoPort": true,
   "configurations": [
     {
-      "name": "dev",
+      "name": "bhc-dev",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["next", "dev"],
-      "autoPort": true
+      "runtimeArgs": ["next", "dev", "-p", "3456"],
+      "port": 3456
     }
   ]
 }

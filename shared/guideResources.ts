@@ -13,46 +13,47 @@ export interface GuideResource {
 }
 
 /**
- * Filenames keep their original paths where the subject survived the
- * repositioning, so existing inbound links and any copy already saved to
- * someone's downloads folder keep resolving. The permit guide is unchanged in
- * subject; the budget worksheet and the old kitchen-and-bath checklist are
- * rebuilt for new construction, and the checklist becomes a lot-evaluation
- * checklist, which is the equivalent "bring this to the first meeting" document
- * for someone building rather than renovating.
+ * Rebuilt for the handyman repositioning. The old construction-planning PDFs
+ * (new-home budget worksheet, lot evaluation checklist, new-home permit guide)
+ * are replaced by handyman-relevant documents with new filenames, because the
+ * content changed subject, not just wording. The retired /downloads/*.pdf
+ * paths must 301 to their successors - see contentRedirects.js notes in the
+ * conversion report. Regenerate the files with `npm run resources:generate`
+ * (scripts/generate-resource-pdfs.ts) after editing resourcePdfContent.ts.
  */
 export const GUIDE_RESOURCES: Record<string, GuideResource> = {
-  'budget-worksheet': {
-    id: 'budget-worksheet',
-    title: 'New Home Budget Worksheet',
+  'maintenance-checklist': {
+    id: 'maintenance-checklist',
+    title: 'Home Maintenance Checklist',
     description:
-      'Printable worksheet with 2026 Treasure Valley build cost bands, budget buckets from land through landscaping, and bid comparison checks.',
+      'Printable season-by-season checklist for Treasure Valley homes: fall freeze prep, spring damage audit, and the monthly five-minute water check.',
     kind: 'pdf',
-    href: '/downloads/new-home-budget-worksheet.pdf',
+    href: '/downloads/home-maintenance-checklist.pdf',
     fileLabel: 'PDF · 2 pages',
   },
-  'lot-checklist': {
-    id: 'lot-checklist',
-    title: 'Lot Evaluation Checklist',
+  'repair-priority-worksheet': {
+    id: 'repair-priority-worksheet',
+    title: 'Home Repair Priority Worksheet',
     description:
-      'What to verify before you buy a parcel: access, utilities, septic feasibility, soils, slope, and setbacks. Bring it to a showing.',
+      'Walk your house and triage the list: what is urgent, what can wait, what to DIY, and what to hand to a pro, with typical cost ranges for each.',
     kind: 'pdf',
-    href: '/downloads/lot-evaluation-checklist.pdf',
+    href: '/downloads/home-repair-priority-worksheet.pdf',
     fileLabel: 'PDF · 2 pages',
   },
-  'ada-canyon-permit-pdf': {
-    id: 'ada-canyon-permit-pdf',
-    title: 'Ada vs Canyon Permit Guide',
+  'repair-permit-pdf': {
+    id: 'repair-permit-pdf',
+    title: 'Home Repair Permit Guide',
     description:
-      'One-page reference: which county reviews your build, what a new-home permit package contains, and the inspection sequence.',
+      'One-page reference: which home repairs need a permit in Ada and Canyon County, which do not, and who to call to check before work starts.',
     kind: 'pdf',
-    href: '/downloads/ada-canyon-permit-guide.pdf',
+    href: '/downloads/home-repair-permit-guide.pdf',
     fileLabel: 'PDF · 1 page',
   },
   'ada-canyon-permit-flow': {
     id: 'ada-canyon-permit-flow',
-    title: 'Permit Flow Infographic',
-    description: 'Visual walkthrough of Ada vs Canyon County paths and inspection milestones.',
+    title: 'Repair Permit Flow Infographic',
+    description:
+      'Visual walkthrough: when a home repair needs a permit in Ada vs Canyon County, and the path from application to final inspection.',
     kind: 'visual',
     href: '/resources/ada-canyon-permit-flow',
     fileLabel: 'Interactive page',
@@ -61,35 +62,31 @@ export const GUIDE_RESOURCES: Record<string, GuideResource> = {
 
 /** Resource IDs shown on each guide slug */
 export const RESOURCES_BY_GUIDE_SLUG: Record<string, string[]> = {
-  'boise-home-building-cost-guide': ['budget-worksheet', 'lot-checklist'],
-  'boise-home-building-process-guide': [
-    'ada-canyon-permit-pdf',
-    'ada-canyon-permit-flow',
-    'budget-worksheet',
+  'boise-home-maintenance-guide': ['maintenance-checklist', 'repair-priority-worksheet'],
+  'first-time-homeowner-repair-handbook': [
+    'repair-priority-worksheet',
+    'maintenance-checklist',
+    'repair-permit-pdf',
   ],
-  'buying-land-to-build-boise': ['lot-checklist', 'ada-canyon-permit-pdf'],
-  'treasure-valley-home-building-guide': [
-    'budget-worksheet',
-    'ada-canyon-permit-pdf',
-    'ada-canyon-permit-flow',
-  ],
-  'custom-home-design-guide': ['budget-worksheet'],
-  'choose-home-builder-boise': ['budget-worksheet'],
-  'boise-home-building-guide': ['budget-worksheet', 'lot-checklist'],
+  'boise-home-repair-cost-guide': ['repair-priority-worksheet', 'repair-permit-pdf'],
+  'hire-a-handyman-treasure-valley': ['repair-permit-pdf', 'ada-canyon-permit-flow'],
+  'treasure-valley-exterior-home-care-guide': ['maintenance-checklist'],
+  'small-home-upgrades-that-pay-off': ['repair-permit-pdf'],
+  'boise-handyman-guide': ['maintenance-checklist', 'repair-priority-worksheet'],
 };
 
+/**
+ * Blog slugs here must exist in shared/content/wave2. The wave2 library is
+ * being rewritten in parallel; only slugs confirmed stable are mapped, extend
+ * this table as the new posts land.
+ */
 export const RESOURCES_BY_BLOG_SLUG: Record<string, string[]> = {
   'ada-vs-canyon-county-permit-timelines': [
-    'ada-canyon-permit-pdf',
+    'repair-permit-pdf',
     'ada-canyon-permit-flow',
   ],
-  'boise-building-permit-guide': ['ada-canyon-permit-pdf', 'ada-canyon-permit-flow'],
-  'how-to-budget-a-new-home-boise': ['budget-worksheet'],
-  'cost-to-build-a-house-boise': ['budget-worksheet'],
-  'lot-evaluation-checklist': ['lot-checklist'],
-  'how-to-buy-a-buildable-lot-boise': ['lot-checklist'],
-  'well-and-septic-cost-idaho': ['lot-checklist'],
-  'how-to-compare-builder-bids': ['budget-worksheet'],
+  'what-small-home-repairs-cost-boise': ['repair-priority-worksheet'],
+  'handyman-red-flags': ['repair-priority-worksheet'],
 };
 
 export function getResourcesForGuide(slug: string): GuideResource[] {

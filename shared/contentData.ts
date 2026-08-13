@@ -1,4 +1,4 @@
-// Content Data for Boise Construction Co
+// Content Data for Boise Handyman Co
 // Serves the Treasure Valley: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton
 
 export interface ServiceData {
@@ -7,16 +7,17 @@ export interface ServiceData {
   shortDescription: string;
   /**
    * Planning starting point (a floor, not a bid or a wide range). Rendered as
-   * "Planning from $X" to give price context without committing to a spread -
-   * the real number comes from the estimator + in-home visit. Sourced from the
-   * published GBP starting figures (shared/gbpProfile.ts).
+   * "From $X" to give price context without committing to a spread - the real
+   * number comes from the estimator + on-site look. Floors derive from the
+   * estimate engine's placeholder model ($49 trip fee + $95/hr, one-hour
+   * minimum = $144 first visit). PLACEHOLDER figures:
+   * [NEEDS: real pricing confirmation] before launch.
    */
   planningFrom: string;
   /**
-   * Secondary services expand keyword coverage (lot evaluation, shop homes,
-   * high-performance builds). They get full service + city pages, nav, and
-   * sitemap entries, but are kept off the homepage grid so the primary five
-   * stay front-and-center. Shown in full on /services.
+   * Secondary services expand keyword coverage. They get full service + city
+   * pages, nav, and sitemap entries, but are kept off the homepage grid so the
+   * primary five stay front-and-center. Shown in full on /services.
    */
   secondary?: boolean;
 }
@@ -31,64 +32,63 @@ export interface CityData {
 /**
  * Each service maps to a distinct buyer intent rather than a keyword variation,
  * so the service and service+city pages do not compete with each other. Generic
- * "new home construction {city}" intent is carried by the location pages, which
- * is why there is no separate generic new-construction service page.
+ * "handyman {city}" intent is carried by the location pages, which is why there
+ * is no separate generic handyman-services page.
  *
- * planningFrom figures are budget floors for a modest build of that type in the
- * Treasure Valley, derived from the 2026 local range of roughly $225 to $400
- * per finished square foot excluding land. They are deliberately conservative:
- * the real number comes from the estimator and a site visit.
+ * planningFrom figures are per-visit starting points for a small job of that
+ * type in the Treasure Valley. They are deliberately conservative placeholders
+ * pending real pricing: [NEEDS: real pricing confirmation].
  */
 export const SERVICES: ServiceData[] = [
   {
-    slug: 'custom-home-builder',
-    name: 'Custom Home Building',
-    shortDescription: 'A home drawn from a blank page around your lot, your budget, and how you actually live.',
-    planningFrom: '$525k',
+    slug: 'drywall-repair',
+    name: 'Drywall Repair & Patching',
+    shortDescription: 'Holes, cracks, water-stained patches, and popcorn-ceiling repairs finished and blended to match.',
+    planningFrom: '$149',
   },
   {
-    slug: 'semi-custom-homes',
-    name: 'Semi-Custom Homes',
-    shortDescription: 'Start from a proven floor plan and personalize it, for a shorter timeline and a tighter budget range.',
-    planningFrom: '$425k',
+    slug: 'painting-touch-ups',
+    name: 'Interior & Exterior Painting',
+    shortDescription: 'Room refreshes, trim and door repaints, and exterior touch-ups with proper prep and clean lines.',
+    planningFrom: '$199',
   },
   {
-    slug: 'build-on-your-lot',
-    name: 'Build on Your Lot',
-    shortDescription: 'You already own the land. We handle feasibility, design, permits, and construction from there.',
-    planningFrom: '$475k',
+    slug: 'plumbing-repairs',
+    name: 'Minor Plumbing Repairs',
+    shortDescription: 'Faucets, toilets, garbage disposals, supply lines, and slow drains fixed or swapped in a single visit.',
+    planningFrom: '$145',
   },
   {
-    slug: 'design-build',
-    name: 'Design-Build',
-    shortDescription: 'Design and construction under one contract, so the drawings and the budget never drift apart.',
-    planningFrom: '$525k',
+    slug: 'electrical-repairs',
+    name: 'Minor Electrical Repairs',
+    shortDescription: 'Outlets, switches, light fixtures, and ceiling fans replaced or repaired safely and to code.',
+    planningFrom: '$145',
   },
   {
-    slug: 'home-plans-design',
-    name: 'Home Design & Plans',
-    shortDescription: 'Architectural design, engineering, and permit-ready drawings for a home built to your site.',
-    planningFrom: '$9k',
+    slug: 'carpentry-trim-repair',
+    name: 'Carpentry & Trim Repair',
+    shortDescription: 'Doors that stick, damaged trim and baseboard, stair rails, and small carpentry fixes done cleanly.',
+    planningFrom: '$149',
   },
   {
-    slug: 'lot-evaluation',
-    name: 'Lot Evaluation & Feasibility',
-    shortDescription: 'Soils, utilities, access, setbacks, and slope reviewed before you commit to a parcel.',
-    planningFrom: '$950',
+    slug: 'mounting-assembly',
+    name: 'Mounting & Assembly',
+    shortDescription: 'TVs, shelves, mirrors, and curtain rods mounted level and anchored right; furniture assembled fast.',
+    planningFrom: '$145',
     secondary: true,
   },
   {
-    slug: 'shop-homes-barndominiums',
-    name: 'Shop Homes & Barndominiums',
-    shortDescription: 'Post-frame and steel-framed homes that pair finished living space with real working shop square footage.',
-    planningFrom: '$330k',
+    slug: 'fence-deck-gutter-repair',
+    name: 'Fence, Deck & Gutter Repair',
+    shortDescription: 'Leaning fence panels, loose deck boards and rails, gutter cleaning, and minor exterior repairs.',
+    planningFrom: '$149',
     secondary: true,
   },
   {
-    slug: 'energy-efficient-homes',
-    name: 'Energy-Efficient Homes',
-    shortDescription: 'High-performance envelopes, tight ducts, and low operating costs verified by blower-door testing.',
-    planningFrom: '$575k',
+    slug: 'home-maintenance',
+    name: 'Caulking & Home Maintenance',
+    shortDescription: 'Caulking and weatherproofing, tile and grout touch-ups, and punch-list work knocked out in one trip.',
+    planningFrom: '$145',
     secondary: true,
   },
 ];
@@ -120,4 +120,3 @@ export function getCityBySlug(slug: string): CityData | undefined {
 export function getCountyLabel(county: CityData['county']): string {
   return county === 'ada' ? 'Ada County' : 'Canyon County';
 }
-

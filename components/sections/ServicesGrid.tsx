@@ -11,8 +11,9 @@ import { getServiceBackground } from "@/shared/serviceBackgrounds";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 
 export function ServicesGrid() {
-  // Homepage shows the primary services; secondary ones (lot evaluation, shop
-  // homes, energy-efficient builds) live on their own pages and /services.
+  // Homepage shows the primary services; secondary ones (mounting and
+  // assembly, exterior repair, home maintenance) live on their own pages
+  // and /services.
   const primary = SERVICES.filter((s) => !s.secondary);
   return (
     <Section id="services" divider>
@@ -22,11 +23,11 @@ export function ServicesGrid() {
           size="display"
           title={
             <>
-              Every way there is to{" "}
-              <em className="brc-accent">build</em>
+              We fix, install, and{" "}
+              <em className="brc-accent">maintain</em>
             </>
           }
-          description="One firm carries the entire build - the drawings, the engineering, the permit set, and the field work - so nothing slips through the gap between a designer and a contractor. The same team stays with you from the first sketch to the day the keys are in your hand."
+          description="Small jobs are the whole business: drywall, paint, minor plumbing and electrical, carpentry, mounting, exterior repairs, and maintenance. Every job is quoted upfront, and the person who quotes it is the one accountable for how it turns out."
         />
 
         <div className="grid sm:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
@@ -36,7 +37,7 @@ export function ServicesGrid() {
                 <div className="relative aspect-[4/3] overflow-hidden rounded-sm mb-4">
                   <Image
                     src={getServiceBackground(service.slug)}
-                    alt={`${service.name} by ${SITE_CONFIG.name} in the Treasure Valley, Idaho`}
+                    alt={`${service.name} handyman service by ${SITE_CONFIG.name} in the Treasure Valley, Idaho`}
                     fill
                     sizes="(max-width: 640px) 100vw, 50vw"
                     quality={70}
@@ -71,12 +72,12 @@ export function ServicesGrid() {
               leaves a lonely card, and gives the section a clear next step. */}
           <Reveal delay={primary.length * 40}>
             <div className="h-full min-h-[220px] rounded-sm border border-card-border bg-card p-6 md:p-8 flex flex-col justify-center">
-              <div className="brc-label mb-3">Not sure of the first step</div>
+              <div className="brc-label mb-3">Got a list instead</div>
               <h3 className="font-sans font-light text-xl md:text-2xl tracking-tight mb-2 text-foreground">
-                Tell us what you want to <em className="brc-accent">build</em>
+                Tell us what needs <em className="brc-accent">doing</em>
               </h3>
               <p className="text-sm leading-relaxed mb-5 text-muted-foreground">
-                Every build begins the same way - a free planning consultation and a candid budget band, with nothing owed and no pressure to continue.
+                Every job starts the same way - send the task list with photos and get an upfront quote, with nothing owed and no pressure to book.
               </p>
               <Button variant="brand" className="self-start" asChild>
                 <a href="#consult">{CTA_SECONDARY}</a>

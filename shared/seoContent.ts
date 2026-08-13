@@ -27,671 +27,746 @@ export interface ServiceSEOContent {
   processSteps: { title: string; description: string }[];
   faqs: FAQItem[];
   /**
-   * Server-rendered cost planning copy. The estimator's price bands are
-   * client-side JS and invisible to crawlers and AI engines; this section puts
-   * the same planning ranges in static HTML (local-seo-audit/10-aeo-geo-plan.md
-   * Fix A). Ranges must stay consistent with the estimator and pillar guides.
+   * Server-rendered cost copy. The estimator's price bands are client-side JS
+   * and invisible to crawlers and AI engines; this section puts the pricing
+   * model (hourly + trip fee, upfront quotes) in static HTML. All our own
+   * dollar figures are placeholders: [NEEDS: real pricing confirmation].
    */
   costGuidance?: { heading: string; paragraphs: string[] };
+  /** Examples of jobs this service covers, rendered as a "typical jobs" section. */
+  typicalJobs?: string[];
+  /**
+   * What this service does NOT cover, with the referral note. Rendered as its
+   * own section so scope stays honest on every service and city page.
+   */
+  outOfScope?: { heading: string; paragraphs: string[] };
 }
 
 /**
- * Cost figures below are 2026 Treasure Valley planning ranges for new
- * residential construction, quoted per finished square foot and excluding land
- * unless stated. They are anchored to the local market range of roughly $225
- * to $400 per square foot and must stay consistent with the estimator engine
- * and the pillar cost guides.
+ * Pricing model used across every service below, stated once so pages stay
+ * consistent: a flat trip fee of $49 per visit plus $95 per hour of labor,
+ * with an upfront quote before any work starts. Market context: Treasure
+ * Valley handyman rates typically run $60 to $120 per hour. Our own figures
+ * (trip fee, hourly rate, and every "from" price) are PLACEHOLDERS pending
+ * owner confirmation: [NEEDS: real pricing confirmation].
  */
 export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
-  'custom-home-builder': {
-    slug: 'custom-home-builder',
-    name: 'Custom Home Building',
-    headline: 'Custom Home Builder in the Treasure Valley',
-    primaryKeyword: 'custom home builder boise idaho',
+  'drywall-repair': {
+    slug: 'drywall-repair',
+    name: 'Drywall Repair & Patching',
+    headline: 'Drywall Repair and Patching in Boise and the Treasure Valley',
+    primaryKeyword: 'drywall repair boise',
     overview:
-      'A custom home starts from a blank page rather than a catalog. Boise Construction Co handles feasibility, design, engineering, permitting, and construction under one contract, so the drawings, the budget, and the schedule stay tied together from the first sketch to the day you get the keys.',
+      'Boise Handyman Co patches holes, cracks, and water-damaged drywall for homes across the Treasure Valley, then blends the texture and paint so the repair disappears. You get an upfront quote based on the size and number of patches, and most repairs are finished across one or two short visits.',
     benefits: [
-      'One team and one contract from feasibility through final walkthrough',
-      'Line-item budget you can see, not a single lump-sum number',
-      'Allowance amounts set from real local pricing, not placeholder figures',
-      'Written weekly schedule and cost updates for the life of the build',
+      'Texture matched to your wall, not a flat shiny square',
+      'Upfront quote from photos before we ever visit',
+      'Dust contained with plastic and drop cloths, then cleaned up',
+      'One team handles the patch, the texture, and the paint blend',
     ],
     inclusions: [
-      'Site and soils review before design begins',
-      'Architectural design, structural engineering, and permit-ready drawings',
-      'Ada or Canyon County plan review, permits, and impact fees',
-      'Full construction with a dedicated project manager on your build',
-      'Blower-door test, final inspections, and a written workmanship warranty',
+      'Holes and dents from doorknobs, furniture, or wall anchors',
+      'Stress cracks at corners, seams, and above doorways',
+      'Water-stained ceiling and wall patches after the leak is fixed',
+      'Popcorn ceiling patching and small-area texture repair',
+      'Anchor removal, hole filling, and wall prep before painting',
+      'Priming and paint blending over the finished patch',
     ],
     timeline:
-      'Plan on 10 to 14 months end to end: roughly 3 to 5 months for design, engineering, and permitting, then 7 to 10 months of construction depending on size and site complexity.',
+      'Small patches take 1 to 3 hours of working time. Because joint compound needs to dry between coats, larger repairs are usually split across two short visits a day or two apart, with texture and paint on the second visit.',
     processSteps: [
       {
-        title: 'Planning consultation',
-        description: 'We talk through your lot, your program, and a realistic budget band before anyone draws anything.',
+        title: 'Send photos',
+        description: 'A photo of each hole or crack with something for scale lets us quote accurately before we arrive.',
       },
       {
-        title: 'Feasibility and site review',
-        description: 'Soils, utilities, access, setbacks, and slope get checked so the design suits the ground it sits on.',
+        title: 'Upfront quote',
+        description: 'You approve the price, hourly labor plus the trip fee, before any work starts.',
       },
       {
-        title: 'Design and fixed scope',
-        description: 'Drawings, selections, and a line-item budget are locked together before we submit for permit.',
+        title: 'Patch and texture',
+        description: 'We cut in the patch, tape and mud it, and match your wall texture. Bigger repairs get a second short visit for finish coats.',
       },
       {
-        title: 'Build and handover',
-        description: 'Weekly updates through construction, then testing, walkthrough, and your warranty documents.',
+        title: 'Blend and clean up',
+        description: 'Primer and paint blended over the repair, dust cleaned up, and debris hauled away.',
       },
+    ],
+    typicalJobs: [
+      'a doorknob hole behind a bathroom door',
+      'a ceiling stain patch after a roof or plumbing leak was fixed',
+      'settling cracks above a door frame',
+      'a row of anchor holes after shelves came down',
+      'a patch where a wall-mounted TV moved',
     ],
     faqs: [
       {
-        question: 'How much does it cost to build a custom home in Boise?',
+        question: 'How much does drywall repair cost in Boise?',
         answer:
-          'Most Treasure Valley custom homes plan between $250 and $400 per finished square foot in 2026, excluding land, with our simplest single-level designs starting near $525,000. A common 2,400 square foot custom home lands between $600,000 and $960,000. Foothills lots and highly detailed designs run above that range.',
+          'Small drywall repairs with Boise Handyman Co start around $149 per visit, which covers our flat trip fee and the first stretch of labor. Most single patches land between $149 and $350 depending on size and texture matching, and larger water-damage repairs with multiple patches typically run $350 to $650. We quote the exact price upfront from photos before any work starts.',
       },
       {
-        question: 'How long does it take to build a custom home in the Treasure Valley?',
+        question: 'Can you match my wall texture?',
         answer:
-          'Budget 10 to 14 months from the start of design to move-in. Design, engineering, and permitting take 3 to 5 months, and construction runs 7 to 10 months. Plan review timelines in Ada and Canyon County are the most common source of delay.',
+          'Yes. Orange peel, knockdown, and most common Treasure Valley textures can be blended so the patch is hard to find once painted. Heavy custom textures take an extra finishing pass, which we include in the quote.',
       },
       {
-        question: 'Do I need to own land before I contact a builder?',
+        question: 'Do you paint the patch too?',
         answer:
-          'No, and it is often better if you have not bought yet. We review candidate lots for soils, utilities, access, and setback constraints before you commit, because the parcel drives a large share of the final budget.',
+          'Yes. We prime every patch and blend paint over it. If you have leftover matching paint, we use it; otherwise we can color-match a sample at the paint store on the way.',
       },
       {
-        question: 'What is not included in a per-square-foot price?',
+        question: 'Why does drywall repair take two visits?',
         answer:
-          'Per-square-foot figures cover vertical construction. Land, site work, well and septic on rural parcels, impact fees, landscaping, fencing, and window coverings sit outside that number. We itemize each one so nothing surfaces late.',
+          'Joint compound has to dry before the next coat, and rushing it leaves a visible bump. Small dents can be done in one visit with fast-setting compound; patches larger than a fist usually get two short visits so the finish is actually flat.',
       },
       {
-        question: 'How do you handle budget changes during construction?',
+        question: 'Do you repair the leak that caused the damage?',
         answer:
-          'Every change is priced and approved in writing before the work happens. You see the running cost against the original line-item budget in your weekly update, so there is no reconciliation surprise at the end.',
-      },
-      {
-        question: 'Do you build on rural acreage outside city limits?',
-        answer:
-          'Yes. Rural parcels in Ada and Canyon County usually need a well, a septic system permitted through Central District Health, and sometimes private road or power extension. That work commonly adds $80,000 to $150,000 before a foundation is poured, so we price it during feasibility.',
-      },
-      {
-        question: 'Can I supply my own plans?',
-        answer:
-          'Yes. We will review them for constructability, code compliance, and cost, then tell you plainly where the drawings and your budget disagree before we contract to build.',
+          'We fix minor plumbing leaks like a failed supply line or a dripping trap as part of the same visit. Roof leaks and anything inside walls that needs a licensed plumber get referred out first, because patching over an active leak just ruins the new drywall.',
       },
     ],
     costGuidance: {
-      heading: 'Custom home building cost in the Treasure Valley',
+      heading: 'Drywall repair cost in the Treasure Valley',
       paragraphs: [
-        'As of 2026, most Treasure Valley custom homes plan between $250 and $400 per finished square foot excluding land. Our published planning-from figure of $525,000 reflects the simplest single-level designs on flat valley lots, near $225 per square foot; a common 2,400 square foot home lands between $600,000 and $960,000, and foothills sites, steep grades, and highly detailed interiors regularly exceed $450 per square foot.',
-        'These are planning ranges, not bids. Lot conditions, home size, roof and wall complexity, and finish level drive the final number, which we confirm with a line-item budget after a lot walkthrough.',
+        'Drywall repair with Boise Handyman Co starts around $149 per visit. That covers a flat $49 trip fee plus labor at $95 per hour, quoted upfront. A typical single patch lands between $149 and $350, and multi-patch or water-damage repairs usually run $350 to $650 including texture matching and paint blending. For context, Treasure Valley handyman rates generally run $60 to $120 per hour.',
+        'These are planning figures, not a bid. Send photos of the damage and we reply with a firm upfront quote, usually within one business day, before any work is scheduled.',
+      ],
+    },
+    outOfScope: {
+      heading: 'What drywall work we refer out',
+      paragraphs: [
+        'We handle patches and repairs, not construction. Hanging drywall for new rooms or additions, full ceiling replacements, asbestos-era popcorn removal across whole rooms, and repairs that reveal structural or moisture problems inside the wall belong with a drywall contractor or general contractor. If your job turns out to be one of those, we will tell you plainly and point you to a licensed contractor who does that work well.',
       ],
     },
   },
 
-  'semi-custom-homes': {
-    slug: 'semi-custom-homes',
-    name: 'Semi-Custom Homes',
-    headline: 'Semi-Custom Home Building in the Treasure Valley',
-    primaryKeyword: 'semi custom home builder boise idaho',
+  'painting-touch-ups': {
+    slug: 'painting-touch-ups',
+    name: 'Interior & Exterior Painting',
+    headline: 'Interior and Exterior Painting in Boise and the Treasure Valley',
+    primaryKeyword: 'painting handyman boise',
     overview:
-      'A semi-custom home starts from a floor plan that has already been drawn, engineered, and built, then adapts it to your lot and your selections. You give up some layout freedom and get back a shorter timeline, a narrower budget range, and far fewer decisions.',
+      'Boise Handyman Co paints rooms, trim, doors, and exterior touch-up areas for Treasure Valley homes, with proper prep and clean lines. It is painting at handyman scale: an accent wall, a refreshed bedroom, scuffed trim, a faded front door, or peeling patches caught before they spread. You get an upfront quote and tidy work.',
     benefits: [
-      'Proven plans with known costs, so the budget band is tighter from day one',
-      'Two to four months shorter than an equivalent fully custom build',
-      'Structural engineering already complete on the base plan',
-      'Curated finish packages that keep selections from stalling the schedule',
+      'Real prep: cleaning, sanding, patching, and caulking before paint',
+      'Clean cut lines at ceilings, corners, and trim',
+      'Upfront quote per room or task, not an open-ended day rate',
+      'Furniture and floors protected, and the room put back afterward',
     ],
     inclusions: [
-      'Plan selection and adaptation to your lot and orientation',
-      'Structural updates required by your site and snow or wind loads',
-      'Permit-ready drawing set and county submission',
-      'Finish package selection with fixed allowance amounts',
-      'Full construction, final inspections, and written workmanship warranty',
+      'Single rooms, accent walls, and touch-up painting',
+      'Trim, baseboard, door, and cabinet-front repainting',
+      'Front door and shutter refinishing',
+      'Small-area exterior touch-ups where paint has peeled or faded',
+      'Caulking gaps and filling nail holes before painting',
+      'Color matching from a chip or sample',
     ],
     timeline:
-      'Most semi-custom homes run 7 to 10 months total: 6 to 10 weeks for plan adaptation and permitting, then 6 to 8 months of construction.',
+      'A single accent wall takes 2 to 3 hours. A standard bedroom, walls only, is typically 3 to 5 hours. A front door refinish runs 2 to 4 hours across coats. We quote the expected time upfront with the price.',
     processSteps: [
       {
-        title: 'Plan and lot match',
-        description: 'We walk your lot and identify which base plans actually fit the setbacks, slope, and views.',
+        title: 'Describe the space',
+        description: 'Room sizes, surfaces, and photos let us quote the job and the paint quantity accurately.',
       },
       {
-        title: 'Adaptation and pricing',
-        description: 'Structural and layout changes are drawn and priced against a fixed base, so you see what each change costs.',
+        title: 'Upfront quote',
+        description: 'A firm price for labor, the trip fee, and materials, with paint either supplied by you or picked up by us.',
       },
       {
-        title: 'Selections',
-        description: 'You choose from finish packages with real allowance figures rather than open-ended placeholders.',
+        title: 'Prep and protect',
+        description: 'Floors and furniture covered, holes filled, gaps caulked, surfaces sanded and cleaned.',
       },
       {
-        title: 'Build and handover',
-        description: 'Construction on a published schedule, then inspections, walkthrough, and warranty documents.',
+        title: 'Paint and reset',
+        description: 'Coats applied with clean lines, then the room put back and the tape, trays, and debris hauled away.',
       },
+    ],
+    typicalJobs: [
+      'repainting a bedroom before it becomes a nursery',
+      'an accent wall behind the bed or media unit',
+      'scuffed baseboards and door casings through a hallway',
+      'a faded front door brought back to life',
+      'peeling exterior trim spot-primed and repainted before winter',
     ],
     faqs: [
       {
-        question: 'How much does a semi-custom home cost in the Treasure Valley?',
+        question: 'How much does it cost to paint a room in Boise?',
         answer:
-          'Semi-custom homes generally plan between $225 and $300 per finished square foot in 2026, excluding land, with our simplest plans starting near $425,000. A common 2,000 square foot home lands between $450,000 and $600,000.',
+          'Painting jobs with Boise Handyman Co start around $199 per visit. A typical bedroom, walls only with paint supplied, usually lands between $250 and $450 in labor, and trim or door repaints are quoted per piece. That reflects our flat trip fee plus hourly labor, quoted upfront. Whole-house repaints are better suited to a dedicated painting contractor, and we will say so.',
       },
       {
-        question: 'What is the difference between semi-custom and fully custom?',
+        question: 'Do I supply the paint or do you?',
         answer:
-          'Semi-custom starts from an existing engineered plan and modifies it. Fully custom starts from a blank page. Semi-custom is faster and the budget band is narrower; fully custom gives you complete control over layout and massing.',
+          'Either works. Many customers pick their color and have the paint ready when we arrive. If you prefer, we collect it on the way and it appears on the invoice at store cost plus the pickup time.',
       },
       {
-        question: 'How much can I change a semi-custom plan?',
+        question: 'Can you match my existing wall color?',
         answer:
-          'Finishes, cabinetry, elevations, and non-structural walls are straightforward. Moving load-bearing walls, changing the roof structure, or altering the foundation footprint triggers re-engineering, and at that point a custom design is often the better value.',
+          'Yes. A chip the size of a coin is enough for the paint store to scan an accurate match, and we can take the sample and handle the matching for you.',
       },
       {
-        question: 'Is a semi-custom home lower quality than a custom home?',
+        question: 'Do you paint exteriors?',
         answer:
-          'No. The framing, envelope, mechanical systems, and workmanship standards are identical. The difference is how much of the design work has already been done.',
+          'We do exterior touch-ups: peeling fascia sections, faded doors, railing and shutter repaints, and small siding areas, weather permitting. Full exterior repaints need spray rigs and crews, so we refer those to painting contractors.',
       },
       {
-        question: 'Can a semi-custom plan work on a sloped or irregular lot?',
+        question: 'When is the best time for exterior painting in the Treasure Valley?',
         answer:
-          'Sometimes, with a daylight basement or a revised foundation. We check this during the lot match step, because forcing an unsuitable plan onto a difficult site erases the cost advantage that made it appealing.',
-      },
-      {
-        question: 'How long does a semi-custom home take to build?',
-        answer:
-          'Typically 7 to 10 months from contract to move-in, compared with 10 to 14 months for a fully custom home of similar size.',
+          'Late spring through early fall. Exterior paint wants dry surfaces and temperatures reliably above about 50 degrees, so we schedule exterior touch-ups between roughly May and October and handle interior painting year-round.',
       },
     ],
     costGuidance: {
-      heading: 'Semi-custom home cost in the Treasure Valley',
+      heading: 'Painting cost in the Treasure Valley',
       paragraphs: [
-        'As of 2026, semi-custom homes in the Treasure Valley plan between $225 and $300 per finished square foot excluding land. Our published planning-from figure of $425,000 reflects the simplest plans; a common 2,000 square foot home lands between $450,000 and $600,000. The savings against a fully custom build come from design and engineering work that is already complete, not from cheaper construction.',
-        'These are planning ranges, not bids. Lot conditions, plan modifications, and finish level move the number, which we confirm with a line-item budget once a plan and lot are matched.',
+        'Painting with Boise Handyman Co starts around $199 per visit, which covers a flat $49 trip fee plus labor at $95 per hour, quoted upfront. A typical single room, walls only, lands between $250 and $450 in labor with paint billed separately or supplied by you. Treasure Valley handyman rates for this kind of work generally run $60 to $120 per hour.',
+        'These are planning figures, not a bid. Tell us the rooms and surfaces, send a photo or two, and we reply with a firm upfront quote before anything is scheduled.',
+      ],
+    },
+    outOfScope: {
+      heading: 'What painting work we refer out',
+      paragraphs: [
+        'Whole-house interior repaints, full exterior repaints, two-story exterior work needing staging, and cabinet refinishing with sprayed factory finishes are jobs for a dedicated painting contractor. We are honest about that line: if your project is bigger than a handyman visit does well, we will say so and refer you to a painter we trust.',
       ],
     },
   },
 
-  'build-on-your-lot': {
-    slug: 'build-on-your-lot',
-    name: 'Build on Your Lot',
-    headline: 'Build on Your Lot in the Treasure Valley',
-    primaryKeyword: 'build on your lot boise idaho',
+  'plumbing-repairs': {
+    slug: 'plumbing-repairs',
+    name: 'Minor Plumbing Repairs',
+    headline: 'Minor Plumbing Repairs in Boise and the Treasure Valley',
+    primaryKeyword: 'minor plumbing repair boise',
     overview:
-      'You already own the land, whether it is family acreage, an infill parcel, or a lot in a master-planned community. Boise Construction Co takes it from there: feasibility, design that suits the ground, permits, and construction, with the site constraints priced before you commit to a plan.',
+      'Boise Handyman Co fixes the everyday plumbing problems that do not need a plumbing company: dripping faucets, running toilets, slow drains, failed garbage disposals, and worn supply lines. Fixture swaps and repairs are quoted upfront and usually finished in a single visit.',
     benefits: [
-      'Site constraints identified and priced before design money is spent',
-      'Design shaped around your existing parcel, views, and orientation',
-      'Well, septic, and utility extension scoped up front on rural land',
-      'HOA and architectural committee submissions handled for you',
+      'Most fixture repairs and swaps done in one visit',
+      'Upfront quote before we touch a fitting',
+      'We bring common washers, valves, and supply lines on the truck',
+      'Straight advice on repair versus replace, with no upsell',
     ],
     inclusions: [
-      'Soils, utility, access, and setback review on your parcel',
-      'Site plan, grading, and drainage design',
-      'Architectural design and permit-ready drawings',
-      'County or city permits, impact fees, and HOA design approval',
-      'Full construction with a dedicated project manager',
+      'Faucet repair and replacement in kitchens and bathrooms',
+      'Toilet repairs: fill valves, flappers, seals, and full swaps',
+      'Garbage disposal replacement',
+      'Slow drains cleared at sinks, tubs, and showers',
+      'Supply line, shutoff valve, and P-trap replacement',
+      'Showerhead, sprayer, and drain hardware upgrades',
     ],
     timeline:
-      'Plan on 9 to 13 months end to end. Serviced lots inside city limits move fastest; rural parcels needing a well, septic approval, or power extension add 6 to 12 weeks before construction can start.',
+      'A running toilet or dripping faucet is typically fixed in about an hour. Faucet and disposal replacements run 1 to 2 hours. A toilet swap takes 1.5 to 2.5 hours including haul-away of the old unit.',
     processSteps: [
       {
-        title: 'Lot walkthrough',
-        description: 'We walk the parcel with you and flag what will drive cost: slope, soils, access, and utility distance.',
+        title: 'Describe the problem',
+        description: 'A photo of the fixture and a note on the symptom lets us arrive with the right parts.',
       },
       {
-        title: 'Feasibility report',
-        description: 'You get a written summary of site work, utility, and permitting costs before committing to a design.',
+        title: 'Upfront quote',
+        description: 'A firm price for the fix or the swap, labor plus trip fee, with parts listed separately.',
       },
       {
-        title: 'Design and permits',
-        description: 'Drawings tuned to the lot, then submission to the county, city, and any HOA committee.',
+        title: 'One-trip repair',
+        description: 'Water off, repair or replacement done, connections tested under pressure before we leave.',
       },
       {
-        title: 'Build and handover',
-        description: 'Construction on a published schedule, then inspections, walkthrough, and warranty documents.',
+        title: 'Test and tidy',
+        description: 'We check for leaks, wipe down the work area, and haul away old fixtures and packaging.',
       },
+    ],
+    typicalJobs: [
+      'a kitchen faucet that drips at the base',
+      'a toilet that runs every twenty minutes',
+      'a bathroom sink that drains slowly',
+      'a garbage disposal that hums but will not spin',
+      'a new vanity faucet you bought and need installed',
     ],
     faqs: [
       {
-        question: 'What does it cost to build on land I already own?',
+        question: 'How much do minor plumbing repairs cost in Boise?',
         answer:
-          'Vertical construction plans between $225 and $400 per finished square foot in 2026. Site work is separate and varies enormously: a serviced lot in a Meridian subdivision might need $25,000 to $50,000, while rural acreage requiring a well, septic, and access can run $80,000 to $150,000.',
+          'Minor plumbing visits with Boise Handyman Co start around $129, covering our flat trip fee and the first stretch of labor. Simple fixes like a fill valve or flapper usually land between $145 and $220, and faucet, toilet, or disposal replacements typically run $180 to $350 in labor with the fixture billed separately or supplied by you. Every job is quoted upfront.',
       },
       {
-        question: 'How do I know if my lot is actually buildable?',
+        question: 'When do I need a licensed plumber instead of a handyman?',
         answer:
-          'Buildability comes down to soils, utility access, legal access, setbacks, slope, and floodplain status. We review all six before design begins, and we will tell you if a parcel is not worth building on.',
+          'Anything behind the wall or under the slab: repipes, water heater replacement, gas lines, sewer lines, and new plumbing runs. Idaho requires licensed plumbers for that work, and we refer it out to plumbing companies we trust rather than touching it.',
       },
       {
-        question: 'Do I need a well and septic on rural Ada or Canyon County land?',
+        question: 'Can you install a faucet or toilet I already bought?',
         answer:
-          'If municipal water and sewer are not at the property line, yes. Septic systems are permitted through Central District Health and wells through the Idaho Department of Water Resources. Together they commonly add $35,000 to $70,000, more if the well has to go deep.',
+          'Yes, that is one of our most common jobs. Have the new fixture on site, and we handle removal, installation, new supply lines if needed, and haul-away of the old unit in one visit.',
       },
       {
-        question: 'Can you build in a subdivision with an HOA?',
+        question: 'Can you fix a slow drain?',
         answer:
-          'Yes. Master-planned communities in Meridian, Eagle, Star, and Kuna typically have architectural committees governing elevations, materials, and colors. We prepare and submit those packages as part of the design phase.',
+          'Usually. We clear hair and buildup clogs at sinks, tubs, and showers with hand tools and small augers. Main-line backups, roots, and recurring whole-house drainage problems need a drain company with camera and jetting gear, and we will tell you if that is what you have.',
       },
       {
-        question: 'What if my lot has a slope?',
+        question: 'What should I do before you arrive for a leak?',
         answer:
-          'Slope is not a problem, it is a design input. A daylight basement can turn grade change into usable square footage at a lower cost per foot than above-grade space. Steep sites do require engineered foundations and retaining, which we price during feasibility.',
-      },
-      {
-        question: 'Can you help before I buy the land?',
-        answer:
-          'Yes, and that is the better sequence. Our lot evaluation service reviews a parcel before purchase so you are not discovering a $90,000 access problem after closing.',
+          'If water is actively leaking, close the shutoff valve under the fixture, or the main house shutoff if the fixture valve will not turn. Then send us a photo. Stopping the water first protects your cabinets and drywall while the repair gets scheduled.',
       },
     ],
     costGuidance: {
-      heading: 'Build on your lot cost in the Treasure Valley',
+      heading: 'Minor plumbing repair cost in the Treasure Valley',
       paragraphs: [
-        'As of 2026, vertical construction on an owned lot plans between $225 and $400 per finished square foot, and site work is budgeted separately. Serviced lots inside city limits commonly need $25,000 to $50,000 of site work, while rural parcels requiring a well, septic system, and access improvements run $80,000 to $150,000 before the foundation is poured.',
-        'These are planning ranges, not bids. Because the parcel drives so much of the number, we produce a written feasibility summary for your specific lot before design begins.',
+        'Minor plumbing repairs with Boise Handyman Co start around $145 per visit: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. Simple internal repairs land between $145 and $220, and fixture replacements typically run $180 to $350 in labor plus the fixture. Treasure Valley handyman rates generally run $60 to $120 per hour, while licensed plumber call-outs often start well above that for the same small jobs.',
+        'These are planning figures, not a bid. Describe the problem, send a photo, and we reply with a firm upfront quote before scheduling.',
+      ],
+    },
+    outOfScope: {
+      heading: 'What plumbing work we refer out',
+      paragraphs: [
+        'Water heaters, repipes, gas lines, sewer and main drain lines, slab leaks, and any new plumbing runs are licensed-plumber territory under Idaho rules, and we do not take them on. When your problem crosses that line we say so immediately and refer you to a licensed plumbing contractor we trust, so you are never paying a handyman to learn plumbing on your house.',
       ],
     },
   },
 
-  'design-build': {
-    slug: 'design-build',
-    name: 'Design-Build',
-    headline: 'Design-Build Home Construction in the Treasure Valley',
-    primaryKeyword: 'design build home builder boise idaho',
+  'electrical-repairs': {
+    slug: 'electrical-repairs',
+    name: 'Minor Electrical Repairs',
+    headline: 'Minor Electrical Repairs in Boise and the Treasure Valley',
+    primaryKeyword: 'minor electrical repair boise',
     overview:
-      'Design-build puts the drawings and the construction under one contract. Instead of hiring an architect, bidding the finished plans, and discovering the design costs 40 percent more than you budgeted, the design is priced continuously as it develops.',
+      'Boise Handyman Co handles small, like-for-like electrical jobs across the Treasure Valley: replacing outlets and switches, swapping light fixtures, and installing ceiling fans where wiring already exists. Everything is quoted upfront, done to code, and tested before we leave, and anything bigger goes to a licensed electrician.',
     benefits: [
-      'Design priced as it develops, so the drawings never outrun the budget',
-      'One contract and one point of accountability instead of two',
-      'No re-drawing cycle after bids come back over budget',
-      'Constructability reviewed by the people who will actually build it',
+      'Like-for-like swaps done safely, with power verified off',
+      'Fixtures and fans installed on existing wiring in one visit',
+      'Upfront quote per fixture, not an open-ended hourly gamble',
+      'Clear line on what belongs with a licensed electrician',
     ],
     inclusions: [
-      'Programming and budget alignment before design begins',
-      'Architectural design with continuous cost feedback',
-      'Structural, mechanical, and energy compliance engineering',
-      'Permit submission and plan review management',
-      'Construction, inspections, and written workmanship warranty',
+      'Outlet and switch replacement, including worn or discolored devices',
+      'Dimmer and smart switch installation on existing circuits',
+      'Light fixture replacement: flush mounts, pendants, and vanity bars',
+      'Ceiling fan replacement where a fan-rated box exists',
+      'Doorbell, smoke detector, and CO detector replacement',
+      'Loose outlet, cover plate, and fixture tightening and repair',
     ],
     timeline:
-      'Design-build projects generally run 10 to 14 months end to end. The design phase overlaps with permitting and long-lead ordering, which typically saves 4 to 8 weeks against a design-bid-build sequence.',
+      'An outlet or switch swap takes about 30 to 60 minutes. A light fixture replacement runs about an hour. A ceiling fan swap on an existing fan-rated box takes 1.5 to 2.5 hours including balancing and testing.',
     processSteps: [
       {
-        title: 'Programming and budget',
-        description: 'We agree on the target budget and what the home has to do before a single line is drawn.',
+        title: 'Tell us the fixture',
+        description: 'A photo of what is there now, and of the replacement if you have it, lets us confirm the job is handyman scope.',
       },
       {
-        title: 'Schematic design with live pricing',
-        description: 'Each design iteration comes back with a cost, so trade-offs are made with real numbers in hand.',
+        title: 'Upfront quote',
+        description: 'A firm per-fixture price, labor plus trip fee, before anything is scheduled.',
       },
       {
-        title: 'Documentation and permits',
-        description: 'Construction documents, engineering, and county submission, with long-lead items ordered in parallel.',
+        title: 'Safe swap',
+        description: 'Breaker off, power verified dead at the fixture, replacement wired and mounted properly.',
       },
       {
-        title: 'Build and handover',
-        description: 'Construction by the team that priced the design, then testing, walkthrough, and warranty.',
+        title: 'Test and tidy',
+        description: 'Every device tested, packaging and the old fixture hauled away, work area wiped down.',
       },
+    ],
+    typicalJobs: [
+      'a dining room fixture swapped for the new one you bought',
+      'yellowed outlets and switches replaced through a hallway',
+      'a bedroom ceiling fan replaced on the existing box',
+      'a dimmer added to the living room lights',
+      'a chirping smoke detector replaced with a fresh sealed unit',
     ],
     faqs: [
       {
-        question: 'What does design-build mean for a new home?',
+        question: 'How much do minor electrical repairs cost in Boise?',
         answer:
-          'Design and construction sit under one contract with one company. You have a single point of accountability, and the design is priced continuously rather than bid once it is finished.',
+          'Minor electrical visits with Boise Handyman Co start around $129, covering our flat trip fee and the first stretch of labor. Outlet and switch swaps land around $129 to $180 each visit, light fixture replacements typically run $150 to $250, and ceiling fan swaps $200 to $350 in labor. Fixtures are billed separately or supplied by you, and every job is quoted upfront.',
       },
       {
-        question: 'Is design-build cheaper than hiring an architect separately?',
+        question: 'When do I need a licensed electrician instead of a handyman?',
         answer:
-          'Not automatically, but it removes the most expensive failure mode in home building: a completed design that comes in far over budget and has to be re-drawn. Continuous pricing catches that at the sketch stage instead of after construction documents.',
+          'New circuits, panel or breaker work, service upgrades, EV charger installs, hot tub wiring, aluminum wiring, and anything that involves running new wire. Idaho requires licensed electricians for that work, and we refer it to electrical contractors we trust.',
       },
       {
-        question: 'Do I lose design quality by not hiring an architect directly?',
+        question: 'Can you install a ceiling fan where there is only a light?',
         answer:
-          'No. Design-build teams include licensed design professionals. What changes is who holds the contract and whether cost feedback arrives during design or after it.',
+          'Only if the ceiling box is fan-rated. Fans are heavy and they move, so a standard light box is not safe to hang one from. We check the box first; if it needs replacing or bracing we tell you upfront, and if new wiring is required the job goes to an electrician.',
       },
       {
-        question: 'Can I bring my own architect into a design-build contract?',
+        question: 'Do you install smart switches and dimmers?',
         answer:
-          'Yes. We work alongside an owner-selected architect regularly, providing pricing during design so the drawings stay inside your budget.',
+          'Yes, on existing circuits. Bring the device you want, or tell us the brand and we will pick one up. We confirm your wiring has the neutral most smart switches require before quoting.',
       },
       {
-        question: 'How much does the design phase cost?',
+        question: 'My outlet stopped working. Can you fix it?',
         answer:
-          'Design, engineering, and permit-ready documents typically run 5 to 12 percent of construction cost, which is roughly $9,000 to $35,000 for most Treasure Valley homes. On a design-build contract a portion of that credits toward construction.',
-      },
-      {
-        question: 'What happens if the design comes in over budget anyway?',
-        answer:
-          'With live pricing it rarely gets far off, but when it does we present specific trade-offs with costs attached rather than asking you to cut blindly.',
+          'Often, yes. A dead outlet is frequently a tripped GFCI, a worn device, or a loose connection at that outlet, all of which we can fix. If the cause traces back into the circuit or the panel, that is electrician territory and we will say so rather than guess.',
       },
     ],
     costGuidance: {
-      heading: 'Design-build cost in the Treasure Valley',
+      heading: 'Minor electrical repair cost in the Treasure Valley',
       paragraphs: [
-        'As of 2026, design-build homes in the Treasure Valley plan between $250 and $400 per finished square foot excluding land. The design and engineering portion typically represents 5 to 12 percent of construction cost, or about $9,000 to $35,000 for a typical home, and is folded into a single contract rather than billed separately.',
-        'These are planning ranges, not bids. The advantage of design-build is that your number gets more precise at every design milestone instead of arriving all at once when drawings go out to bid.',
+        'Minor electrical work with Boise Handyman Co starts around $145 per visit: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. Typical jobs land between $145 and $350 in labor depending on the fixture, with the device itself billed separately or supplied by you. Treasure Valley handyman rates generally run $60 to $120 per hour for this class of work.',
+        'These are planning figures, not a bid. Send a photo of the fixture and we confirm the job is handyman scope and reply with a firm upfront quote.',
+      ],
+    },
+    outOfScope: {
+      heading: 'What electrical work we refer out',
+      paragraphs: [
+        'Panel and breaker work, new circuits and wire runs, service upgrades, EV chargers, spa and hot tub wiring, and troubleshooting that leads back into the walls all require a licensed electrician in Idaho. We keep strictly to like-for-like replacements on existing wiring, and when a job crosses that line we stop and refer you to a licensed electrical contractor we trust.',
       ],
     },
   },
 
-  'home-plans-design': {
-    slug: 'home-plans-design',
-    name: 'Home Design & Plans',
-    headline: 'Custom Home Design and Plans in the Treasure Valley',
-    primaryKeyword: 'custom home plans boise idaho',
+  'carpentry-trim-repair': {
+    slug: 'carpentry-trim-repair',
+    name: 'Carpentry & Trim Repair',
+    headline: 'Carpentry, Trim, and Door Repair in Boise and the Treasure Valley',
+    primaryKeyword: 'carpentry repair boise',
     overview:
-      'Permit-ready drawings for a home designed around your actual lot. We produce architectural design, structural engineering, and the energy compliance documentation Ada and Canyon County require, whether or not you ultimately build with us.',
+      'Boise Handyman Co handles the small carpentry that keeps a house feeling solid: doors that stick or will not latch, damaged baseboard and casing, loose stair rails, and worn thresholds. Repairs are quoted upfront and finished cleanly, with filler, caulk, and paint touch-up where it matters.',
     benefits: [
-      'Drawings designed for your specific lot, orientation, and views',
-      'Structural engineering and energy compliance included in the set',
-      'Costed as it is drawn, so the design matches your budget',
-      'Plans you own outright and can build with any licensed contractor',
+      'Doors adjusted to close properly, not just shaved to fit',
+      'Trim replacements matched to your existing profiles',
+      'Loose rails and banisters anchored solidly into framing',
+      'Finish-ready work: filled, caulked, and touch-up painted',
     ],
     inclusions: [
-      'Programming session and site measurement',
-      'Schematic floor plans and exterior elevations',
-      'Construction documents and building sections',
-      'Structural engineering and Idaho energy code compliance',
-      'Permit submission support for Ada or Canyon County',
+      'Door adjustment, planing, and hinge and latch repair',
+      'Interior door and hardware replacement',
+      'Baseboard, casing, and crown repair and replacement',
+      'Stair rail, banister, and spindle tightening and repair',
+      'Weatherstripping and door sweep replacement',
+      'Window operation fixes: sticking sashes, locks, and balances',
     ],
     timeline:
-      'A complete permit-ready set typically takes 8 to 16 weeks depending on home size and how quickly design decisions are made. County plan review adds a further 3 to 8 weeks.',
+      'A sticking door is usually adjusted in about an hour. Trim repairs run 1 to 3 hours depending on length and profile matching. An interior door swap with hardware takes 2 to 3 hours.',
     processSteps: [
       {
-        title: 'Programming',
-        description: 'We document how you want to live in the home and what the budget will actually support.',
+        title: 'Show us the problem',
+        description: 'Photos of the door, trim, or rail, plus a note on what it is doing, let us quote and bring matching material.',
       },
       {
-        title: 'Schematic design',
-        description: 'Floor plans and elevations, revised with cost feedback at each round.',
+        title: 'Upfront quote',
+        description: 'A firm price for the repair, labor plus trip fee, with any lumber or hardware listed separately.',
       },
       {
-        title: 'Construction documents',
-        description: 'Full drawing set with structural engineering and energy compliance calculations.',
+        title: 'Repair in one trip',
+        description: 'We adjust, replace, or rebuild the piece, matching profiles and anchoring into solid framing.',
       },
       {
-        title: 'Permit submission',
-        description: 'We submit to the county or city and manage plan review comments through approval.',
+        title: 'Finish and clean up',
+        description: 'Nail holes filled, joints caulked, paint touched up where supplied, and sawdust cleaned away.',
       },
+    ],
+    typicalJobs: [
+      'a bathroom door that will not latch since the house settled',
+      'baseboard chewed up by a puppy or a move',
+      'a stair banister that shifts when you grab it',
+      'a new interior door slab hung in an existing frame',
+      'weatherstripping replaced before winter drafts arrive',
     ],
     faqs: [
       {
-        question: 'How much do custom home plans cost in Idaho?',
+        question: 'How much does carpentry or trim repair cost in Boise?',
         answer:
-          'A permit-ready set with structural engineering typically runs 5 to 12 percent of construction cost, roughly $9,000 to $35,000 for most Treasure Valley homes. Small or simple homes sit at the low end; large or architecturally complex homes sit above it.',
+          'Carpentry visits with Boise Handyman Co start around $149, covering our flat trip fee and the first stretch of labor. Door adjustments usually land between $149 and $250, trim repairs $150 to $350 depending on length, and interior door replacements $250 to $400 in labor with the door billed separately. Everything is quoted upfront before work starts.',
       },
       {
-        question: 'Do I own the plans when they are finished?',
+        question: 'Why do doors stick in Treasure Valley homes?',
         answer:
-          'Yes. You own the drawings and can build them with any licensed contractor. We would like to be that contractor, but the plans are yours either way.',
+          'Seasonal humidity swings and normal settling. Wood doors swell in wet months and shrink in dry ones, and hinges loosen over years of use. Most sticking doors need hinge adjustment or minor planing, not replacement, and we will tell you which yours needs.',
       },
       {
-        question: 'Can I buy a stock plan online instead?',
+        question: 'Can you match my existing trim profile?',
         answer:
-          'You can, but stock plans are not drawn for your lot and almost always need Idaho-specific structural engineering, energy compliance, and a site-adapted foundation before a county will permit them. Factor that rework into the comparison.',
+          'Usually, yes. Common profiles are stocked locally, and close matches can be blended at the joints so the repair reads as original. Genuinely custom or historic profiles may need a millwork shop, and we will tell you before committing.',
       },
       {
-        question: 'What does a permit-ready set actually include?',
+        question: 'Do you build custom furniture or built-ins?',
         answer:
-          'Floor plans, exterior elevations, building sections, foundation and framing plans, electrical and mechanical layouts, structural engineering, and Idaho energy code compliance documentation.',
+          'No. We repair and install rather than fabricate. Custom built-ins, cabinetry, and furniture belong with a finish carpenter or cabinet shop, and we are glad to point you to one.',
       },
       {
-        question: 'How long does county plan review take?',
+        question: 'Can you fix a sagging gate or exterior door too?',
         answer:
-          'Ada County and City of Boise residential review commonly runs 3 to 6 weeks; Canyon County jurisdictions are often similar. Revision cycles add time, which is why a complete first submission matters.',
-      },
-      {
-        question: 'Can you design for a lot I have not purchased yet?',
-        answer:
-          'We recommend completing a lot evaluation first. Setbacks, slope, soils, and utility locations all shape the design, and drawing before those are known usually means drawing twice.',
+          'Yes. Exterior doors, thresholds, and weatherstripping are core carpentry work, and wooden gates and their hardware fall under our fence and deck repair service, often handled in the same visit.',
       },
     ],
     costGuidance: {
-      heading: 'Home design and plan cost in the Treasure Valley',
+      heading: 'Carpentry and trim repair cost in the Treasure Valley',
       paragraphs: [
-        'As of 2026, a permit-ready custom home drawing set with structural engineering and energy compliance runs roughly $9,000 to $35,000 in the Treasure Valley, or about 5 to 12 percent of construction cost. Simple single-level homes sit near the bottom of that range and large or complex designs above it.',
-        'These are planning ranges, not bids. Home size, structural complexity, and the number of design revision rounds drive the final figure, which we fix in writing after a programming session.',
+        'Carpentry and trim repair with Boise Handyman Co starts around $149 per visit: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. Most door, trim, and rail repairs land between $149 and $400 in labor, with lumber and hardware listed separately on the quote. Treasure Valley handyman rates generally run $60 to $120 per hour.',
+        'These are planning figures, not a bid. Send photos of the repair and we reply with a firm upfront quote, usually within one business day.',
+      ],
+    },
+    outOfScope: {
+      heading: 'What carpentry work we refer out',
+      paragraphs: [
+        'Structural framing, load-bearing changes, new window and exterior door installation into new openings, and custom cabinetry are beyond handyman scope. Those belong with a general contractor, window installer, or cabinet shop, and if your repair uncovers a structural problem we stop and tell you before doing anything cosmetic over it.',
       ],
     },
   },
 
-  'lot-evaluation': {
-    slug: 'lot-evaluation',
-    name: 'Lot Evaluation & Feasibility',
-    headline: 'Lot Evaluation and Site Feasibility in the Treasure Valley',
-    primaryKeyword: 'lot evaluation boise idaho',
+  'mounting-assembly': {
+    slug: 'mounting-assembly',
+    name: 'Mounting & Assembly',
+    headline: 'TV Mounting, Shelving, and Furniture Assembly in Boise',
+    primaryKeyword: 'tv mounting boise',
     overview:
-      'Before you buy a parcel, find out what it will cost to build on it. We review soils, utilities, legal access, setbacks, slope, and floodplain status, then give you a written summary of the site work and permitting costs the lot will carry.',
+      'Boise Handyman Co mounts TVs, shelves, mirrors, and curtain rods level and anchored into the right structure, and assembles flat-pack furniture without the missing-screw meltdown. Fixed pricing per item, quoted upfront, with most visits finished inside two hours.',
     benefits: [
-      'Site costs known before you close, not after',
-      'Written feasibility summary you can take to a lender or seller',
-      'Comparison across multiple candidate parcels',
-      'Credited toward design if you build with us',
+      'Anchored into studs or rated anchors, never just drywall',
+      'Level lines checked twice before any holes are drilled',
+      'Cables concealed neatly where the wall allows it',
+      'Flat-pack assembly done fast, square, and fully tightened',
     ],
     inclusions: [
-      'Soils and drainage review, including expansive soil risk',
-      'Utility locations and connection or extension cost estimate',
-      'Legal access, easement, and right-of-way check',
-      'Zoning, setback, and floodplain confirmation',
-      'Written site work and permitting cost summary',
+      'TV mounting on drywall, with concealed cords where feasible',
+      'Floating shelves, cabinets, and heavy mirror hanging',
+      'Curtain rods, blinds, and window hardware installation',
+      'Flat-pack furniture assembly: dressers, desks, beds, and shelving',
+      'Anchoring furniture to walls for child safety',
+      'Gallery walls, art, and heavy frame hanging',
     ],
     timeline:
-      'A standard lot evaluation takes 2 to 4 weeks. Parcels needing a formal geotechnical report or a septic feasibility test through Central District Health can take 4 to 8 weeks.',
+      'A standard TV mount takes 1 to 1.5 hours. Curtain rods and shelves run about 30 to 45 minutes each. Flat-pack furniture varies from 30 minutes for a small bookcase to 2 to 3 hours for a large wardrobe or bed with storage.',
     processSteps: [
       {
-        title: 'Parcel research',
-        description: 'We pull zoning, plat, easement, and floodplain records before setting foot on the property.',
+        title: 'List the items',
+        description: 'Tell us what needs mounting or assembling, with photos of the wall and the boxes.',
       },
       {
-        title: 'Site walkthrough',
-        description: 'On-site review of slope, drainage, access, vegetation, and utility proximity.',
+        title: 'Upfront quote',
+        description: 'A firm per-item price, labor plus one trip fee, so a list of tasks shares a single visit.',
       },
       {
-        title: 'Cost summary',
-        description: 'A written estimate of site work, utilities, and permitting specific to that parcel.',
+        title: 'Mount and assemble',
+        description: 'Studs located, anchors matched to the load, everything leveled, assembled, and tightened.',
       },
       {
-        title: 'Go or no-go',
-        description: 'A plain recommendation, including telling you when a lot is not worth what it will cost to build on.',
+        title: 'Clean finish',
+        description: 'Packaging broken down and hauled away, dust vacuumed, and every item load-tested before we go.',
       },
+    ],
+    typicalJobs: [
+      'a 65-inch TV mounted above a console with cords hidden',
+      'an IKEA wardrobe assembled and anchored to the wall',
+      'floating shelves hung level across a kitchen wall',
+      'curtain rods installed through a whole main floor',
+      'a heavy entry mirror hung on the right anchors',
     ],
     faqs: [
       {
-        question: 'How much does a lot evaluation cost?',
+        question: 'How much does TV mounting cost in Boise?',
         answer:
-          'A standard Treasure Valley lot evaluation runs $950 to $3,500 depending on parcel size and whether a geotechnical report or septic feasibility test is needed. The fee is credited toward design if you go on to build with us.',
+          'Mounting and assembly visits with Boise Handyman Co start around $145, covering our flat trip fee and the first hour of labor. A standard TV mount typically lands between $145 and $220 in labor with your bracket, and furniture assembly runs $95 per hour after the trip fee. Multiple items share one trip fee, which makes a list the best value.',
       },
       {
-        question: 'What makes a lot expensive to build on?',
+        question: 'Do I need to supply the TV mount or shelf hardware?',
         answer:
-          'Distance to utilities, expansive or unstable soils, steep slope requiring engineered foundations and retaining, lack of legal access, floodplain status, and the need for a well or septic system. Any one of these can add tens of thousands before construction starts.',
+          'Bring the item and its bracket or hardware if you have them. If not, tell us the TV size and wall type and we will bring a suitable mount, listed on the quote at its store price.',
       },
       {
-        question: 'Can I get a lot evaluated before I make an offer?',
+        question: 'Can you hide the TV cables in the wall?',
         answer:
-          'Yes, and that is the point. Many buyers schedule an evaluation during the inspection contingency period so they can renegotiate or walk if the site work costs are worse than expected.',
+          'On most interior drywall we can fit an in-wall cord concealment kit rated for power and low-voltage cables, which hides everything between the TV and the outlet. Fire-blocked, exterior, and masonry walls sometimes limit this, and we will tell you on site before cutting.',
       },
       {
-        question: 'Do you evaluate rural acreage in Canyon County?',
+        question: 'Can you mount on brick, tile, or plaster?',
         answer:
-          'Yes. Rural parcels are where evaluations matter most, because well depth, septic suitability, power extension distance, and private road requirements vary enormously between neighboring properties.',
+          'Yes, with the right anchors and drill bits, which we carry. Masonry and tile take a little longer than drywall, and we flag that in the quote.',
       },
       {
-        question: 'What is expansive soil and why does it matter in the Treasure Valley?',
+        question: 'Is there a minimum job size?',
         answer:
-          'Expansive clay soils swell when wet and shrink when dry, which moves foundations. Parts of the valley carry this risk, and it is addressed with over-excavation, engineered fill, or a deeper foundation design. It is far cheaper to know before you buy.',
-      },
-      {
-        question: 'Will you tell me not to buy a lot?',
-        answer:
-          'Yes. That recommendation is the most valuable thing an evaluation produces, and it is why we charge for the service rather than treating it as a sales call.',
+          'The flat trip fee applies to every visit, so a single small task starts around $145 all-in. Most customers bundle two or three items into the same visit, which spreads that trip fee across the list.',
       },
     ],
     costGuidance: {
-      heading: 'Lot evaluation cost in the Treasure Valley',
+      heading: 'Mounting and assembly cost in the Treasure Valley',
       paragraphs: [
-        'As of 2026, a written lot evaluation in the Treasure Valley runs $950 to $3,500. A standard review of a serviced subdivision lot sits near the lower end, while rural acreage requiring a geotechnical report, septic feasibility testing through Central District Health, or a well yield assessment sits at the upper end.',
-        'These are planning ranges, not bids. The fee is credited toward design if you build with us, and it routinely surfaces site costs that dwarf it.',
+        'Mounting and assembly with Boise Handyman Co starts around $145 per visit: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. A standard TV mount lands between $145 and $220 in labor, and flat-pack assembly is billed on time, with most single pieces finished inside an hour. Treasure Valley rates for this work generally run $60 to $120 per hour.',
+        'These are planning figures, not a bid. Send your list and photos, and we reply with a firm per-item quote before scheduling.',
+      ],
+    },
+    outOfScope: {
+      heading: 'What mounting work we refer out',
+      paragraphs: [
+        'Home theater wiring with new in-wall power, projector and surround-sound system design, and commercial display installations belong with an audio-video or electrical contractor. We mount, conceal, and connect what exists; new circuits and dedicated AV design get a referral.',
       ],
     },
   },
 
-  'shop-homes-barndominiums': {
-    slug: 'shop-homes-barndominiums',
-    name: 'Shop Homes & Barndominiums',
-    headline: 'Shop Homes and Barndominiums in the Treasure Valley',
-    primaryKeyword: 'barndominium builder idaho',
+  'fence-deck-gutter-repair': {
+    slug: 'fence-deck-gutter-repair',
+    name: 'Fence, Deck & Gutter Repair',
+    headline: 'Fence, Deck, and Gutter Repair in Boise and the Treasure Valley',
+    primaryKeyword: 'fence repair boise',
     overview:
-      'A shop home pairs finished living space with genuine working shop square footage under one structure. Post-frame and steel-framed construction covers large spans efficiently, which is why these builds are popular on Canyon County and rural Ada County acreage.',
+      'Boise Handyman Co repairs the exterior wear items Treasure Valley weather works on hardest: leaning fence panels and rotted posts, loose deck boards and railings, and gutters that sag, leak, or overflow. Repairs are quoted upfront and sized for a visit, not a rebuild.',
     benefits: [
-      'Lower cost per square foot than conventional framing on large spans',
-      'Living quarters and working shop under one roof and one permit',
-      'Clear-span shop space without interior structural columns',
-      'Straightforward to expand later as needs change',
+      'Fence posts reset properly in concrete, not just propped',
+      'Deck boards and rails replaced with matched, exterior-grade material',
+      'Gutters cleaned, resealed, and re-pitched to actually drain',
+      'Honest advice on repair versus replacement, with referrals for rebuilds',
     ],
     inclusions: [
-      'Post-frame or steel structural package engineered for Idaho loads',
-      'Insulated and finished living quarters',
-      'Shop slab, overhead doors, and electrical service',
-      'County permits and, on rural parcels, well and septic coordination',
-      'Full construction and written workmanship warranty',
+      'Leaning and broken fence post replacement and resetting',
+      'Fence panel, picket, and gate repair, including sagging gates',
+      'Deck board, stair tread, and railing replacement',
+      'Deck re-securing: loose ledger hardware flagged, fasteners tightened',
+      'Gutter cleaning, resealing seams, and re-pitching runs',
+      'Downspout repair, extensions, and splash block placement',
     ],
     timeline:
-      'Most shop homes run 6 to 9 months from permit to move-in. The shell goes up quickly compared with conventional framing; the finished living quarters drive the schedule.',
+      'A fence post reset takes 2 to 3 hours plus concrete cure time before the panel rehangs. Gate repairs run 1 to 2 hours. Deck board swaps take 1 to 3 hours. A full gutter clean on a single-story home takes about 1.5 to 2.5 hours.',
     processSteps: [
       {
-        title: 'Program and ratio',
-        description: 'We settle how much of the footprint is living space versus shop, which drives cost more than total size.',
+        title: 'Send photos outside',
+        description: 'Shots of the leaning section, damaged boards, or overflowing run tell us materials and time.',
       },
       {
-        title: 'Site and utility review',
-        description: 'Access, power capacity, and well or septic requirements checked on rural parcels.',
+        title: 'Upfront quote',
+        description: 'A firm price for labor and the trip fee, with lumber, hardware, and sealant listed separately.',
       },
       {
-        title: 'Design and permits',
-        description: 'Engineered structural package plus finished-space drawings, submitted to the county.',
+        title: 'Repair visit',
+        description: 'Posts set, boards replaced, seams sealed, and hardware upgraded to exterior-grade fasteners.',
       },
       {
-        title: 'Build and handover',
-        description: 'Shell erection, then interior finish, inspections, walkthrough, and warranty.',
+        title: 'Walkthrough and haul-away',
+        description: 'We test gates and railings with you, rinse gutter runs to prove drainage, and haul away the debris.',
       },
+    ],
+    typicalJobs: [
+      'two fence panels leaning after a windstorm',
+      'a gate that drags and will not latch',
+      'a handful of cupped deck boards replaced before summer',
+      'gutters cleaned and resealed before fall rain',
+      'a downspout extension added where water pooled at the foundation',
     ],
     faqs: [
       {
-        question: 'How much does a barndominium cost to build in Idaho?',
+        question: 'How much does fence repair cost in Boise?',
         answer:
-          'Shop homes generally plan between $140 and $250 per square foot in 2026, blended across finished and shop space. Our published planning-from figure of $330,000 reflects a smaller living area with a larger shop-to-house ratio, since the shop portion costs far less per square foot. A 1,600 square foot living area with an attached 1,200 square foot shop commonly lands between $385,000 and $630,000 excluding land. The shop itself runs about $55 to $60 per square foot insulated, with a slab, an overhead door and power.',
+          'Exterior repair visits with Boise Handyman Co start around $149, covering our flat trip fee and the first stretch of labor. A single post reset typically lands between $150 and $300 in labor plus materials, gate repairs $150 to $250, and gutter cleaning $149 to $300 depending on house size. Wind-damage repairs are quoted upfront from photos.',
       },
       {
-        question: 'Why is a shop home cheaper per square foot than a conventional house?',
+        question: 'Can you fix a leaning fence or does it need replacing?',
         answer:
-          'The shop portion carries far less cost than finished living space, which pulls the blended average down. Post-frame structure also spans large areas with less material. Compare finished living space directly and the gap narrows considerably.',
+          'If the rails and pickets are sound and only the posts have failed, resetting the posts saves most of the fence. If rot runs through the rails and pickets too, replacement is the honest answer, and full fence replacement is fencing-contractor work we refer out.',
       },
       {
-        question: 'Can I get a mortgage on a barndominium?',
+        question: 'When should gutters be cleaned in the Treasure Valley?',
         answer:
-          'Often yes, though fewer lenders participate and appraisals can be harder because comparable sales are thin in some areas. Talk to a lender experienced with post-frame residential construction early, before you commit to a design.',
+          'At least once a year, ideally in late fall after the leaves drop and before the first hard freeze. Homes under mature trees benefit from a second clean in spring. Clogged gutters overflow at the foundation and grow ice dams in winter, so fall is the visit that matters most.',
       },
       {
-        question: 'Are shop homes allowed everywhere in Ada and Canyon County?',
+        question: 'Do you build new decks or fences?',
         answer:
-          'No. Zoning and subdivision covenants govern whether a shop-dominant structure is permitted and what it can look like. Rural and agricultural zoning is generally accommodating; master-planned subdivisions usually are not.',
+          'No. New fence lines, full fence replacement, and new deck construction are contractor projects with their own permits and crews. We repair what exists and refer new construction to fence and deck contractors we trust.',
       },
       {
-        question: 'How well do shop homes hold up to Treasure Valley winters?',
+        question: 'What time of year is best for fence and deck repairs?',
         answer:
-          'Very well when the envelope is done properly. The critical details are a continuous air barrier between shop and living space, adequate insulation, and managing condensation on steel. These are the details that separate a comfortable shop home from a cold one.',
-      },
-      {
-        question: 'Can I finish the living space later?',
-        answer:
-          'Yes. Some owners build the shell and shop first, then finish the living quarters in a second phase. We design for that sequence when it fits your budget.',
+          'Spring through fall. Concrete for post setting and stains and sealants all want temperatures above roughly 40 to 50 degrees, so we schedule most exterior repairs between March and November and keep winter for interior work.',
       },
     ],
     costGuidance: {
-      heading: 'Shop home and barndominium cost in the Treasure Valley',
+      heading: 'Fence, deck, and gutter repair cost in the Treasure Valley',
       paragraphs: [
-        'As of 2026, shop homes in the Treasure Valley plan between $140 and $250 per square foot blended across finished and shop space. Our published planning-from figure of $330,000 reflects a smaller living area with a larger shop-to-house ratio; a 1,600 square foot living area with an attached 1,200 square foot shop commonly runs $385,000 to $630,000 excluding land and site work.',
-        'These are planning ranges, not bids. The ratio of finished space to shop space moves the blended cost more than any other variable, which we settle before design begins.',
+        'Exterior repairs with Boise Handyman Co start around $149 per visit: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. Typical repairs land between $150 and $450 in labor depending on scope, with lumber, hardware, and sealant listed separately. Treasure Valley handyman rates generally run $60 to $120 per hour for exterior repair work.',
+        'These are planning figures, not a bid. Send photos of the damage and we reply with a firm upfront quote before anything is scheduled.',
+      ],
+    },
+    outOfScope: {
+      heading: 'What exterior work we refer out',
+      paragraphs: [
+        'New fence and deck construction, full replacements, retaining walls, concrete flatwork, roof repairs, and full gutter system replacement belong with specialty contractors. Structural deck problems, especially ledger attachment to the house, get flagged to you honestly and referred to a licensed contractor rather than patched over.',
       ],
     },
   },
 
-  'energy-efficient-homes': {
-    slug: 'energy-efficient-homes',
-    name: 'Energy-Efficient Homes',
-    headline: 'Energy-Efficient Home Building in the Treasure Valley',
-    primaryKeyword: 'energy efficient home builder boise idaho',
+  'home-maintenance': {
+    slug: 'home-maintenance',
+    name: 'Caulking & Home Maintenance',
+    headline: 'Caulking, Weatherproofing, and Home Maintenance in Boise',
+    primaryKeyword: 'home maintenance handyman boise',
     overview:
-      'A high-performance home costs less to operate and stays comfortable through Treasure Valley temperature swings. The work is unglamorous: a continuous air barrier, generous insulation, sealed ducts inside conditioned space, and verification by blower-door testing rather than assumption.',
+      'Boise Handyman Co handles the recurring small maintenance that keeps a Treasure Valley home tight and dry: fresh caulk in kitchens and baths, weatherstripping and draft sealing before winter, tile and grout touch-ups, and whole punch lists of small tasks cleared in a single visit.',
     benefits: [
-      'Measurably lower heating and cooling costs for the life of the home',
-      'Even temperatures and no cold rooms in January',
-      'Blower-door and duct-leakage testing, so performance is verified',
-      'Better sound isolation and filtered air as a side effect of a tight envelope',
+      'Old caulk cut out fully, not smeared over',
+      'Draft sealing that shows up on your winter heating bill',
+      'Punch lists cleared in one visit under a single trip fee',
+      'Seasonal reminders of what your home needs before the weather turns',
     ],
     inclusions: [
-      'Continuous air barrier detailing and thermal bridge reduction',
-      'Above-code wall, roof, and slab-edge insulation',
-      'High-performance windows selected by orientation',
-      'Ducts sealed and located inside conditioned space',
-      'Balanced mechanical ventilation and blower-door verification',
+      'Kitchen and bathroom recaulking: tubs, showers, sinks, and backsplashes',
+      'Exterior caulking at siding joints, windows, and penetrations',
+      'Weatherstripping, door sweeps, and draft sealing',
+      'Tile and grout repair and touch-up',
+      'Small punch-list tasks: hinges, handles, stops, filters, and hardware',
+      'Move-in and pre-listing fix-it lists',
     ],
     timeline:
-      'Schedule matches a comparable custom build at 10 to 14 months, plus roughly two weeks for envelope testing and commissioning before handover.',
+      'A tub and shower recaulk takes 1.5 to 2.5 hours, plus overnight cure before water use. Draft sealing a typical home runs 2 to 3 hours. Punch lists depend on the list, and we quote the expected time upfront.',
     processSteps: [
       {
-        title: 'Performance target',
-        description: 'We agree on an air-tightness and efficiency target up front, because it changes how the home is detailed.',
+        title: 'Send your list',
+        description: 'Every small task counts. Photos of caulk lines, drafts, and grout help us bring the right materials.',
       },
       {
-        title: 'Envelope design',
-        description: 'Wall assemblies, window selection, and thermal bridge details drawn before framing, not decided on site.',
+        title: 'Upfront quote',
+        description: 'One trip fee, hourly labor, and materials listed separately, so the whole list has a clear price.',
       },
       {
-        title: 'Verified construction',
-        description: 'Mid-build blower-door test while the air barrier is still accessible and inexpensive to correct.',
+        title: 'Work the list',
+        description: 'Old caulk removed, surfaces prepped, seals and repairs done properly, tasks checked off one by one.',
       },
       {
-        title: 'Commissioning',
-        description: 'Final blower-door and duct-leakage testing, ventilation balancing, and documented results.',
+        title: 'Walkthrough',
+        description: 'We review the finished list with you, note anything seasonal to plan for, and clean up completely.',
       },
+    ],
+    typicalJobs: [
+      'a shower recaulked after the old bead went dark',
+      'drafty front and garage doors sealed before winter',
+      'cracked grout lines repaired in an entry floor',
+      'a pre-listing punch list cleared before photos',
+      'a rental turnover list finished between tenants',
     ],
     faqs: [
       {
-        question: 'How much more does an energy-efficient home cost to build?',
+        question: 'How much does recaulking or a maintenance visit cost in Boise?',
         answer:
-          'A well-executed high-performance envelope typically adds 3 to 8 percent to construction cost, roughly $20,000 to $55,000 on a mid-size Treasure Valley home. Much of that is offset by being able to install smaller heating and cooling equipment.',
+          'Maintenance visits with Boise Handyman Co start around $145, covering our flat trip fee and the first hour of labor. A tub and shower recaulk typically lands between $150 and $300, draft sealing a whole home $200 to $350, and punch lists are billed on quoted time at $95 per hour. One trip fee covers the entire visit.',
       },
       {
-        question: 'How much will I actually save on utility bills?',
+        question: 'How often should caulk be replaced?',
         answer:
-          'Depends on the target and how the home is operated, but a 30 to 50 percent reduction against a code-minimum home of the same size is a realistic expectation in this climate. We model the specific number for your design rather than quoting a generic figure.',
+          'Wet areas like tubs and showers want fresh caulk every 3 to 5 years, sooner if it darkens, cracks, or pulls away. Exterior caulk in the Treasure Valley takes a beating from freeze-thaw cycles and hot dry summers, so checking it each fall is worth the ten minutes.',
       },
       {
-        question: 'What is a blower-door test and why does it matter?',
+        question: 'When should I weatherproof my home in Idaho?',
         answer:
-          'It pressurizes the house to measure how much air leaks through the envelope. It converts air-tightness from a claim into a number. We test mid-build, while leaks are still cheap to fix, and again at completion.',
+          'September and October are ideal, before the first hard freeze. Sealing drafts at doors, windows, and penetrations then means the work pays for itself across the heating season, and the same sealing keeps hot air out in July.',
       },
       {
-        question: 'Do I need solar panels for an efficient home?',
+        question: 'Can you handle a whole punch list in one visit?',
         answer:
-          'No, and panels are usually the wrong first dollar. Reducing the load through the envelope and mechanical systems is cheaper per unit of energy saved. Build tight first, then add generation if you want it.',
+          'Yes, that is the point of the service. Send the full list, however small the items feel, and we quote it as one visit with one trip fee. Most lists of eight to twelve small tasks fit inside half a day.',
       },
       {
-        question: 'Does a tight house have air quality problems?',
+        question: 'Do you do pre-listing repairs for home sales?',
         answer:
-          'Only if it is built tight without ventilation. A high-performance home includes balanced mechanical ventilation with filtration, which generally delivers better indoor air quality than a leaky house that ventilates unpredictably.',
-      },
-      {
-        question: 'Is this worth it in the Treasure Valley climate?',
-        answer:
-          'Yes. The valley sees hot dry summers and cold winters, so the envelope works in both directions. Cooling load reduction in July and heating load reduction in January come from the same investment.',
+          'Yes. Agents and sellers use us to clear inspection-style lists before photos and showings: caulk, hardware, doors, paint touch-ups, and the small flaws buyers notice. Items on your list that need licensed trades get flagged and referred rather than guessed at.',
       },
     ],
     costGuidance: {
-      heading: 'Energy-efficient home cost in the Treasure Valley',
+      heading: 'Home maintenance cost in the Treasure Valley',
       paragraphs: [
-        'As of 2026, high-performance homes in the Treasure Valley plan between $275 and $425 per finished square foot excluding land. Our published planning-from figure of $575,000 reflects a smaller or simpler high-performance home; the envelope and mechanical upgrades that separate it from a code-minimum build typically add 3 to 8 percent on top of your base home cost, or about $20,000 to $55,000 on a mid-size home.',
-        'These are planning ranges, not bids. Part of the premium is recovered immediately through smaller heating and cooling equipment, and the rest through operating costs over the life of the home.',
+        'Maintenance visits with Boise Handyman Co start around $145: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. Most caulking, weatherproofing, and punch-list visits land between $145 and $400 depending on the list, with materials listed separately. Treasure Valley handyman rates generally run $60 to $120 per hour.',
+        'These are planning figures, not a bid. Send your list with photos and we reply with a firm quote for the whole visit, usually within one business day.',
+      ],
+    },
+    outOfScope: {
+      heading: 'What maintenance work we refer out',
+      paragraphs: [
+        'Full bathroom regrouts and tile replacement, window replacement, insulation projects, HVAC service, and roof maintenance belong with specialty contractors. If a maintenance item on your list turns out to be a symptom of a bigger problem, a leak, rot, or a failing system, we tell you what we found and refer the right licensed trade instead of covering it up.',
       ],
     },
   },
@@ -699,7 +774,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
 export function getAreaIntro(city: CityData): string {
   const county = getCountyLabel(city.county);
-  return `Boise Construction Co builds new homes for clients in ${city.name}, Idaho and throughout ${county}. From fully custom homes and semi-custom plans to building on land you already own, you work with one accountable team from feasibility through final walkthrough.`;
+  return `Boise Handyman Co provides handyman services for homes in ${city.name}, Idaho and throughout ${county}: small repairs, installs, and maintenance with upfront quotes, a flat trip fee, and most jobs finished in a single visit.`;
 }
 
 export function getCityServiceIntro(
@@ -710,8 +785,8 @@ export function getCityServiceIntro(
   const county = getCountyLabel(city.county);
   const fact = localFact
     ? ` ${localFact}`
-    : ` We know ${county} plan review requirements, impact fees, and the lot conditions common around ${city.name}.`;
-  return `Planning ${service.name.toLowerCase()} in ${city.name}, Idaho?${fact} Boise Construction Co works design-build, with a line-item budget, weekly written updates, and a written workmanship warranty. Book a free planning consultation or use our estimator for a planning range.`;
+    : ` We work throughout ${city.name} and the surrounding ${county} area, so scheduling is local and travel never balloons the bill.`;
+  return `Need ${service.name.toLowerCase()} in ${city.name}, Idaho?${fact} Boise Handyman Co quotes every job upfront, charges a simple hourly rate plus one flat trip fee, and finishes most jobs in a single visit. Get an instant estimate online or book a handyman visit.`;
 }
 
 export function getCityServiceFaqs(service: ServiceSEOContent, city: CityData): FAQItem[] {
@@ -726,18 +801,18 @@ export function getCityServiceFaqs(service: ServiceSEOContent, city: CityData): 
       ? [
           {
             question: `How much does ${service.name.toLowerCase()} cost in ${city.name}?`,
-            answer: `${city.name} pricing tracks the broader Treasure Valley market. ${costSentence} Book a lot walkthrough for a line-item budget specific to your site.`,
+            answer: `${city.name} pricing is the same as the rest of our Treasure Valley service area, with no extra travel charge. ${costSentence} Send photos for a firm upfront quote for your ${city.name} home.`,
           },
         ]
       : []),
     ...service.faqs.slice(0, 2),
     {
-      question: `Do you build in ${city.name}?`,
-      answer: `Yes. We regularly build in ${city.name} and the surrounding ${county} area, and we are familiar with the local plan review process and impact fees.`,
+      question: `Do you serve ${city.name}?`,
+      answer: `Yes. ${city.name} is part of our core service area, along with the rest of ${county} and the Treasure Valley. The same flat trip fee applies across the whole area.`,
     },
     {
-      question: `How do I get a budget for ${service.name.toLowerCase()} in ${city.name}?`,
-      answer: `Use our online estimator for a planning range, then book a free planning consultation. If you have a lot under consideration, we will walk it with you and identify what will drive the site costs.`,
+      question: `How do I get a quote for ${service.name.toLowerCase()} in ${city.name}?`,
+      answer: `Use the online estimator for an instant planning range, or send photos of the job by text or through the contact form. We reply with a firm upfront quote, usually within one business day, before anything is scheduled.`,
     },
   ];
 }
@@ -746,8 +821,7 @@ export function getCityServiceFaqs(service: ServiceSEOContent, city: CityData): 
  * Build localized long-form sections for a city x service page. This is the
  * core doorway-page mitigation: instead of a single keyword-swapped paragraph,
  * each page gets service-scoped local substance (neighborhoods, landmarks,
- * climate, and county permit specifics) drawn from CITY_SEO_DATA. See
- * seo-audit/doorway-page-analysis.md.
+ * climate) drawn from CITY_SEO_DATA.
  */
 export function getCityServiceSections(
   service: ServiceSEOContent,
@@ -761,20 +835,30 @@ export function getCityServiceSections(
 
   const sections: LandingSection[] = [
     // Server-rendered cost bands (extractable by crawlers and AI engines,
-    // unlike the client-side estimator). See local-seo-audit/10-aeo-geo-plan.md.
+    // unlike the client-side estimator).
     ...(service.costGuidance
       ? [
           {
             heading: `${service.name} cost in ${city.name}`,
             paragraphs: [
-              `Planning ranges for ${city.name} match the broader Treasure Valley market. ${service.costGuidance.paragraphs[0]}`,
+              `Pricing in ${city.name} matches the rest of our Treasure Valley service area, with no added travel charge. ${service.costGuidance.paragraphs[0]}`,
               service.costGuidance.paragraphs[1],
             ],
             links: [
               {
-                label: 'Boise Home Building Cost Guide',
-                href: '/guides/boise-home-building-cost-guide',
+                label: 'Get an instant estimate',
+                href: '/estimate',
               },
+            ],
+          },
+        ]
+      : []),
+    ...(service.typicalJobs?.length
+      ? [
+          {
+            heading: `Typical ${serviceLC} jobs in ${city.name}`,
+            paragraphs: [
+              `The calls we get from ${city.name} look like the calls we get everywhere: ${service.typicalJobs.join('; ')}. If your job sounds like one of these, it is squarely in scope, and if it is bigger, we will say so and point you to the right specialty contractor.`,
             ],
           },
         ]
@@ -783,26 +867,34 @@ export function getCityServiceSections(
       heading: `${service.name} across ${city.name}`,
       paragraphs: [
         neighborhoods.length
-          ? `We build throughout ${city.name}, including ${neighborhoods.join(', ')}. Lot conditions, utility access, and subdivision design standards vary between these areas, so we tailor the site plan, foundation, and elevations to the specific parcel rather than dropping a plan onto it.`
-          : `We build throughout ${city.name}, tailoring the site plan, foundation design, and elevations to the specific parcel rather than dropping a plan onto it.`,
+          ? `We serve homes throughout ${city.name}, including ${neighborhoods.join(', ')}. Housing stock varies between these areas, from newer subdivision builds to older homes with settled doors and original fixtures, so we ask the right questions up front and arrive with materials that suit the house.`
+          : `We serve homes throughout ${city.name}, from newer subdivision builds to older houses with settled doors and original fixtures, and we arrive with materials that suit the house.`,
         landmarks.length
-          ? `As a local team familiar with ${city.name} landmarks like ${landmarks.slice(0, 3).join(', ')}, we understand how the area is developing and plan ${serviceLC} that fits the neighborhood and holds its value.`
-          : `As a local team, we plan ${serviceLC} that fits the neighborhood and holds its value.`,
+          ? `As a local team that knows ${city.name} landmarks like ${landmarks.slice(0, 3).join(', ')}, scheduling is straightforward: we quote a real arrival time, confirm before heading out, and one flat trip fee covers the visit.`
+          : `As a local team, scheduling is straightforward: we quote a real arrival time, confirm before heading out, and one flat trip fee covers the visit.`,
       ],
     },
     {
-      heading: `New construction permits and plan review in ${county}`,
+      heading: `Scheduling ${serviceLC} in ${county}`,
       paragraphs: [
-        `New home construction in ${city.name} requires a building permit, plan review, and impact fees through ${county}. Residential plan review commonly runs 3 to 6 weeks, and parcels outside municipal service need septic approval through Central District Health and a well permit through the Idaho Department of Water Resources. We build those timelines into your schedule from day one and handle submissions, fees, and inspections as part of the contract.`,
+        `We take bookings across ${county} and typically reply to new requests within one business day. Most ${serviceLC} jobs are quoted from photos, scheduled within the week, and finished in a single visit, and bundling several small tasks into the same appointment spreads the trip fee across the list.`,
         seo?.climate
-          ? `Our ${city.name} designs also account for the local ${seo.climate}, from insulation and ventilation choices to frost depth, snow load, and materials that hold up to Treasure Valley freeze-thaw cycles.`
-          : `Our ${city.name} designs account for the local Treasure Valley climate, including frost depth, snow load, insulation levels, and durable exterior materials.`,
+          ? `The local ${seo.climate} is hard on homes: caulk and exterior seals crack with freeze-thaw cycles, doors swell and shrink with the seasons, and gutters need attention before winter. We plan the work, and the materials, around that reality.`
+          : `The Treasure Valley climate is hard on homes: caulk cracks with freeze-thaw cycles, doors swell and shrink with the seasons, and gutters need attention before winter. We plan the work around that reality.`,
       ],
       links: [
-        { label: `${city.name} home builder overview`, href: `/areas/${city.slug}` },
-        { label: 'Ada vs Canyon County permit timelines', href: '/resources/ada-canyon-permit-flow' },
+        { label: `Handyman services in ${city.name}`, href: `/areas/${city.slug}` },
+        { label: `All ${service.name} details`, href: `/services/${service.slug}` },
       ],
     },
+    ...(service.outOfScope
+      ? [
+          {
+            heading: service.outOfScope.heading,
+            paragraphs: service.outOfScope.paragraphs,
+          },
+        ]
+      : []),
   ];
 
   return sections;
@@ -810,46 +902,51 @@ export function getCityServiceSections(
 
 export const AREA_PAGE_FAQS: FAQItem[] = [
   {
-    question: 'What kinds of homes do you build?',
+    question: 'What kinds of jobs do you take on?',
     answer:
-      'Fully custom homes, semi-custom homes from adapted plans, builds on land you already own, and shop homes. We also provide design and lot evaluation as standalone services.',
+      'Small repairs, installs, and maintenance: drywall patching, painting touch-ups, minor plumbing and electrical fixes, carpentry and door repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and weatherproofing. Most jobs run one to eight hours.',
   },
   {
-    question: 'Are you licensed and insured?',
+    question: 'How does pricing work?',
     answer:
-      'Yes. Boise Construction Co is licensed, bonded, and insured. Idaho contractor registration details are available on request.',
+      'A simple hourly rate plus one flat trip fee per visit, with an upfront quote before any work starts. Materials appear as their own line, and bundling several tasks into one visit spreads the trip fee across the list.',
   },
   {
-    question: 'How do I start a project?',
+    question: 'Do you handle remodels or large projects?',
     answer:
-      'Call us, use our construction estimator for a planning range, or book a free planning consultation through our website.',
+      'No. Full remodels, additions, and anything needing a general contractor or major permits are outside our scope. We stick to small jobs done well, and we are glad to refer larger projects to contractors we trust.',
+  },
+  {
+    question: 'How do I get started?',
+    answer:
+      'Call or text us, use the online estimator for an instant planning range, or send your task list with photos through the contact form. We reply within one business day with an upfront quote.',
   },
 ];
 
 export const HOMEPAGE_FAQS_FOR_SCHEMA: FAQItem[] = [
   {
-    question: 'How much does it cost to build a house in the Treasure Valley?',
+    question: 'What does a handyman cost in the Treasure Valley?',
     answer:
-      'Most Treasure Valley new homes plan between $225 and $400 per finished square foot in 2026, excluding land. A 2,400 square foot custom home commonly lands between $600,000 and $960,000, with site work budgeted separately.',
+      'Treasure Valley handyman rates typically run $60 to $120 per hour. Boise Handyman Co charges a simple hourly rate plus a flat trip fee, with visits starting around $145 and every job quoted upfront before work starts.',
   },
   {
-    question: 'How are you different from other home builders in the Treasure Valley?',
+    question: 'What services do you offer?',
     answer:
-      'We publish our numbers. You get a line-item budget rather than a lump sum, allowance amounts based on real local pricing, and a written weekly cost and schedule update for the life of the build.',
+      'Drywall repair, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance.',
   },
   {
     question: 'What areas do you serve?',
     answer:
-      'Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell, and the greater Treasure Valley.',
+      'Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell, and the greater Treasure Valley across Ada and Canyon County.',
   },
   {
-    question: 'How long does it take to build a new home?',
+    question: 'How quickly can you come out?',
     answer:
-      'Plan on 10 to 14 months for a custom home and 7 to 10 months for a semi-custom home, measured from the start of design to move-in. County plan review is the most common source of delay.',
+      'We reply to new requests within one business day and most jobs are scheduled within the week. Quotes come first, from photos, so the visit itself is spent fixing rather than estimating.',
   },
   {
-    question: 'Do you handle permits?',
+    question: 'Do you handle big remodels?',
     answer:
-      'Yes. Building permits, plan review, impact fees, and inspections are included in our scope for Ada and Canyon County, including septic and well permitting on rural parcels.',
+      'No. We focus on small repair, install, and maintenance jobs, typically one to eight hours. Remodels, additions, and projects needing a general contractor get referred to contractors we trust.',
   },
 ];

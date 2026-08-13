@@ -38,7 +38,7 @@ idaho" (60).
 
 ## Changes made from this research (2026-08)
 
-- Homepage `<title>`: `Custom Home Builder in Boise, Idaho | Boise Construction
+- Homepage `<title>`: `Custom Home Builder in Boise, Idaho | Boise Handyman
   Co` — leads with the primary buy-intent term, which the old brand-led title
   ("… | Treasure Valley Home Builder") missed. "Treasure Valley" still carried by
   the description, service title, and every location page.

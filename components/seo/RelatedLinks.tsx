@@ -31,7 +31,7 @@ function ExploreFurther({ serviceSlug }: { serviceSlug?: string }) {
      an internal link on a redirect hop - which is what scripts/internal-links
      audits for. */
   const links: { href: string; label: string }[] = [
-    guide ?? { href: '/guides/treasure-valley-home-building-guide', label: 'Treasure Valley Building Guide' },
+    guide ?? { href: '/guides/hire-a-handyman-treasure-valley', label: 'Hiring a Handyman in the Treasure Valley' },
     { href: '/services', label: 'Compare how we build' },
     { href: '/resources', label: 'Free home building planning worksheets' },
     { href: '/estimate', label: 'Estimate your build cost' },

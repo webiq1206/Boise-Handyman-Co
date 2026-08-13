@@ -39,25 +39,25 @@ const EstimateCalculator = dynamic(
 );
 
 export const metadata: Metadata = {
-  // 55 chars. Leads with the primary term ("custom home builder Boise") rather
-  // than the brand, which the suffix carries anyway.
-  title: { absolute: `Custom Home Builder in Boise, ID | ${SITE_CONFIG.name}` },
+  // 49 chars. Leads with the primary term ("handyman in Boise") rather than
+  // the brand, which the suffix carries anyway.
+  title: { absolute: `Handyman in Boise, ID | ${SITE_CONFIG.name}` },
   description:
-    "Design-build home builder for Boise, Meridian, Eagle, Nampa & the Treasure Valley. Custom and semi-custom homes, or build on your own lot, with a line-item budget before we break ground.",
+    "Handyman service for Boise, Meridian, Eagle, Nampa & the Treasure Valley. Small repairs, installs & maintenance with hourly plus trip-fee pricing and upfront quotes. Book a visit today.",
   alternates: {
     canonical: buildCanonical("/"),
     // Setting `alternates` replaces the root declaration, so the feed link has
     // to be repeated here or the homepage loses feed discovery entirely.
     types: {
       "application/rss+xml": [
-        { url: "/feed.xml", title: `${SITE_CONFIG.name} | Home Building Guides and Insights` },
+        { url: "/feed.xml", title: `${SITE_CONFIG.name} | Home Repair Guides and Insights` },
       ],
     },
   },
   openGraph: {
-    title: `${SITE_CONFIG.name} | Treasure Valley Home Builder`,
+    title: `${SITE_CONFIG.name} | Treasure Valley Handyman`,
     description:
-      `${SITE_TAGLINE}. Custom homes, semi-custom homes, build-on-your-lot, and design-build across the Treasure Valley.`,
+      `${SITE_TAGLINE}. Small repairs, installs, and home maintenance across the Treasure Valley.`,
     type: "website",
     url: buildCanonical("/"),
     siteName: SITE_CONFIG.name,
@@ -70,48 +70,49 @@ export default function HomePage() {
     <div className="flex flex-col pb-20 md:pb-0 bg-background">
       {/* PAGE ORDER IS THE SALES CONVERSATION, IN THE ORDER A HOMEOWNER HAS IT.
 
-          1. Hero            who we are, and the one action we want
+          1. Hero            who we are, where, how pricing works (answer block)
           2. Where the money goes   frames price before we quote one
           3. Estimator       the number - the question every visitor arrives with
-          4. What's included what that number actually covers
-          5. Services        what we do
-          6. Our work        proof we do it well
+          4. What's included what a quote actually covers
+          5. Services        what we fix, install, and maintain
+          6. Our work        proof (renders nothing until real job photos exist)
           7. Why us          why this company rather than another
           8. Process         what happens after they say yes
           9. Brand band      the emotional close
           10. FAQ            the last objections
-          11. Consultation   the ask
+          11. Booking        the ask
 
           The estimator sits third on purpose. It is the site's primary lead
           generator and the hero's own call to action points at it, so burying
-          it below services, process, a featured project and the gallery meant
-          the highest-intent visitors scrolled past five sections to reach the
-          thing they came for. Everything above it now exists only to make the
-          number land well; everything below it answers what the number raised. */}
+          it below services and process meant the highest-intent visitors
+          scrolled past five sections to reach the thing they came for.
+          Everything above it now exists only to make the number land well;
+          everything below it answers what the number raised. */}
       <HomePageSchema />
       <HeroSection />
       <ValueOverheadSection />
       <EstimateCalculator />
       <BudgetInclusionsSection />
       <ServicesGrid />
-      {/* No longer excludes whole-home: the featured before/after slider that
-          used to carry that project was removed, so the gallery is now the only
-          place it appears. */}
+      {/* Renders nothing while GALLERY_PROJECTS is empty; returns automatically
+          once real, photographed handyman jobs are added. No fabricated proof
+          ships in the meantime - the services grid above and the process
+          section below carry the page instead. */}
       <ProjectGallerySection limit={6} showViewAll={true} />
 
       <EstimatePromptBand
-        eyebrow="Still comparing builders"
+        eyebrow="Still comparing handymen"
         title={
           <>
-            Find out what your home will{' '}
+            Find out what your fix will{' '}
             <em className="brc-accent">cost</em>
           </>
         }
-        description="Missed the estimator higher up the page? It stays open whenever you are ready - or book a free planning consultation and we will work through your lot, your plan, and a realistic budget band in person."
+        description="Missed the estimator higher up the page? It stays open whenever you are ready - or send your task list with photos and we will reply with a firm upfront quote within one business day."
         variant="tint"
         bullets={[
-          "A ballpark range built from current Treasure Valley build costs",
-          "A free planning consultation when you want the detail",
+          "A ballpark range built from current Treasure Valley job costs",
+          "A firm upfront quote when you send photos",
           "No strings - a copy of whatever the estimator returns lands in your inbox",
         ]}
       />
@@ -144,14 +145,13 @@ export default function HomePage() {
               <Reveal>
                 <div className="brc-label mb-5">Begin a conversation</div>
                 <h2 className="font-sans font-light text-[2rem] md:text-[2.75rem] lg:text-[3.25rem] leading-[1.08] tracking-tight mb-4 text-foreground">
-                  Tell us what you want to{" "}
-                  <em className="brc-accent">build</em>.
+                  Tell us what needs{" "}
+                  <em className="brc-accent">fixing</em>.
                 </h2>
                 <p className="text-base leading-relaxed mb-8 text-muted-foreground">
-                  Send a few details and we will set up a free 60 to 90 minute
-                  planning session, usually within one business day. By the end you
-                  will have a realistic budget band, a clear-eyed read on your lot,
-                  and no expectation to go any further.
+                  Send a few details, photos help, and we will reply within one
+                  business day with an upfront quote and a time that works. No
+                  pressure, and no expectation to go any further.
                 </p>
                 <div className="space-y-3">
                   {CONSULT_BULLETS.map((item) => (

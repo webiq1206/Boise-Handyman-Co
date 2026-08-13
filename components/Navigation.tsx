@@ -19,7 +19,7 @@ function Logo() {
       {/* Bone wordmark with the ochre "Co." for the dark ground. Intrinsic
           size is 1765.71x159.96, so 26px tall renders ~287px wide. */}
       <img
-        src="/brand/svg/wordmark/dark/boise-construction-co-wordmark-bone-accent.svg"
+        src="/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg"
         alt={SITE_CONFIG.name}
         width={287}
         height={26}

@@ -21,7 +21,7 @@ const BASE_ADMIN_EMAILS = [
   // The new company email. The old one is kept alongside it so admin access
   // does not break if the owner still authenticates with the remodeling address
   // during the switchover; remove it once sign-in is confirmed on the new one.
-  'hello@boiseconstruction.co',
+  'hello@boisehandyman.co',
   'hello@boiseremodeling.co',
   'hello@boisecabinet.co',
   'hello@p5homeco.com',

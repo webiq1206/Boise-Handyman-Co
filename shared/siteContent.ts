@@ -8,28 +8,26 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-export const SITE_TAGLINE = "Treasure Valley home building, built on clarity and craftsmanship";
+export const SITE_TAGLINE = "Treasure Valley handyman service, built on upfront quotes and tidy work";
 
-export const HERO_EYEBROW = "Boise Home Builder · Treasure Valley";
+export const HERO_EYEBROW = "Boise Handyman · Treasure Valley";
 
-// Avoids the old remodeling subhead's shape ("One accountable design-build team
-// from first visit to final walkthrough") and does not repeat the H1's "to the
-// keys". Leads instead with the actual differentiator - a real budget before any
-// dirt moves - which is what separates this builder from both a remodeler and a
-// production builder.
+// The hero subhead doubles as the homepage's extractable answer block: what we
+// do, where, and how pricing works, in one readable sentence pair. Pricing
+// model figures are placeholders: [NEEDS: real pricing confirmation].
 export const HERO_SUBHEAD =
-  "A custom home builder for Boise and the Treasure Valley, with a line-item budget before we break ground and weekly cost updates through the build.";
+  "Boise Handyman Co handles small repairs, installs, and maintenance for homes in Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley. Simple hourly rates plus a flat trip fee, an upfront quote before any work starts, and most jobs finished in a single visit.";
 
 export const HERO_STATS = [
-  { num: "60 sec", label: "Instant build cost range" },
-  { num: "Free", label: "Planning consultation" },
-  { num: "Line-item", label: "Budget before we break ground" },
+  { num: "60 sec", label: "Instant online estimate" },
+  { num: "Upfront", label: "Quote before work starts" },
+  { num: "1 trip", label: "Most jobs done in one visit" },
 ] as const;
 
-export const DIFFERENTIATORS_HEADLINE = "Built for people who want a real number, not a moving target";
+export const DIFFERENTIATORS_HEADLINE = "Built for people whose small jobs keep getting ignored";
 
 export const DIFFERENTIATORS_INTRO =
-  "Most people we meet have heard the same stories: a build that started at one price and finished at another, allowances set so low they were guaranteed to be blown, months of silence between updates. We built our process around the opposite. One accountable team, a line-item budget before we break ground, allowances set at what things actually cost here, and a written update every Friday.";
+  "Most people we meet have the same story: contractors who never called back because the job was too small, a vague quote that grew once the work started, or a fix that needed a second and third visit. We built our process around the opposite. Small jobs taken seriously, an upfront quote before any work starts, and one person who shows up with the right materials to finish in a single trip.";
 
 export interface Differentiator {
   title: string;
@@ -42,106 +40,104 @@ export const HOMEPAGE_DIFFERENTIATOR_INDICES = [0, 1, 2, 3, 4] as const;
 
 export const DIFFERENTIATORS: Differentiator[] = [
   {
-    title: "A line-item budget before we break ground",
-    contrast: "Instead of a price per square foot that quietly changes once the foundation is in,",
-    body: "you get a line-item budget covering every division of the build, from excavation to final grade. You can see what each part of your home costs, which means you can decide where to spend and where to pull back while it is still just a drawing.",
+    title: "An upfront quote before any work starts",
+    contrast: "Instead of a vague ballpark that quietly grows once the tools come out,",
+    body: "you get a written quote before we start: the hourly rate, the trip fee, and what the job should take. If we open something up and find more than expected, we stop and talk to you before the price changes.",
   },
   {
-    title: "Allowances set at what things actually cost",
-    contrast: "Rather than lowball allowances that make an early bid look competitive and then surface as overages,",
-    body: "we set flooring, cabinetry, plumbing, and lighting allowances at real Treasure Valley pricing for the finish level you chose. If you spend to your allowance, you pay what the budget said.",
+    title: "Small jobs treated as real jobs",
+    contrast: "Rather than being told your repair is too small to bother with,",
+    body: "small jobs are the whole business. A sticking door, a leaking faucet, a drywall patch, a wobbly fence panel: these are the jobs we schedule, show up for on time, and finish properly.",
   },
   {
-    title: "A leaner operation, spent on your build",
-    contrast: "Rather than spreading your budget across the cost of running a large company,",
-    body: "we keep the team small and the overhead honest, then reinvest the difference into the parts of a house that outlast everything else: the structure, the envelope, the mechanical systems, and the finishes you selected. You notice it in the quality on site, not in a line item you were never shown.",
+    title: "One trip whenever the job allows it",
+    contrast: "Instead of a look-around visit, a parts visit, and a someday follow-up,",
+    body: "we ask the right questions and request photos up front, so we arrive with the materials and hardware the job actually needs. Most repairs and installs are finished the first time we visit.",
   },
   {
-    title: "One team, accountable from sketch to keys",
-    contrast: "Rather than refereeing a designer, an architect, a builder, and a rotating cast of subcontractors who trade blame when a detail slips,",
-    body: "you have a single design-build team carrying the project the whole way. Drawing, engineering, permitting, and field work live with the same people, and the same project manager stays with you from the first plan to the day you move in.",
+    title: "One person accountable for the fix",
+    contrast: "Rather than a call center, a dispatcher, and a rotating cast of strangers,",
+    body: "you deal with the same local team from the first message to the finished job. The person who quoted the work is accountable for how it turns out.",
   },
   {
-    title: "A written update lands every Friday",
-    contrast: "Rather than driving past the lot to guess at the week's progress,",
-    body: "you get a short written report each Friday: what got finished, what comes next, which selections are coming due, and any decision we need from you. When a cost or a date shifts, you hear it while there is still room to respond.",
+    title: "A tidy home when we leave",
+    contrast: "Rather than dust on the floor and packaging left by the bins,",
+    body: "we protect the work area, clean up after ourselves, and haul away the small debris a job creates. You should only be able to tell we were there by the thing that now works.",
   },
   {
-    title: "Land and permit expertise before you commit",
-    contrast: "Rather than discovering after closing that a parcel needs a well, a septic system, and three hundred feet of driveway,",
-    body: "we evaluate lots before you buy. We handle Ada and Canyon County permitting in-house and build realistic approval timelines into your schedule from day one, rather than treating them as an afterthought.",
+    title: "Honest advice about what the job needs",
+    contrast: "Instead of upselling a bigger project than you asked for,",
+    body: "we tell you plainly when a cheap part fixes it, when a replacement beats a repair, and when a job is beyond handyman scope and belongs with a licensed specialty contractor. If we are not the right fit, we say so and point you to someone who is.",
   },
   {
-    title: "We work with your lender, not around them",
-    contrast: "Instead of leaving you to translate between your bank and your builder,",
-    body: "we provide the budgets, plans, and draw documentation construction-to-permanent lenders ask for, and we schedule inspections to match your draw milestones so financing does not become the thing that stalls your build.",
+    title: "Clear scope for licensed trade work",
+    contrast: "Rather than quietly taking on work that should go to a specialist,",
+    body: "we stick to minor plumbing, minor electrical, and small repairs. Panel work, repipes, gas lines, HVAC, roofing, and structural changes get referred to licensed specialty contractors we trust.",
   },
   {
-    title: "Confidence that outlasts the project",
-    contrast: "Beyond a quick sign-off and goodbye,",
-    body: "we stand behind our work with a written workmanship warranty and pass through every manufacturer warranty on what we install. Optional 3D visualization is available for clients who want certainty on layout and finish decisions before framing starts.",
+    title: "Scheduling that respects your day",
+    contrast: "Instead of a four-hour window that turns into a no-show,",
+    body: "we agree a time, confirm before we head out, and let you know if anything shifts. Your time is part of the job.",
   },
   {
-    title: "Schedule changes communicated early",
-    contrast: "Instead of finding out a milestone slipped after the fact,",
-    body: "we build realistic timelines into your plan from day one, including the weather windows that genuinely affect foundation and flatwork in Idaho. When something moves, you hear it from us in writing.",
+    title: "Materials handled the way you prefer",
+    contrast: "Rather than surprise markups on parts you never saw,",
+    body: "you can supply your own materials or have us pick them up on the way. When we supply parts, they appear on the quote as their own line, not folded into a mystery number.",
   },
   {
-    title: "Craftsmanship you review before we close out",
-    contrast: "Rather than rushing to the next job before you have had a chance to inspect the work,",
-    body: "we walk the finished home with you and build a punch list together. Your selections are documented in the contract before construction, so what gets built matches what you approved.",
+    title: "We stand behind the work",
+    contrast: "Beyond a quick fix and a fast exit,",
+    body: "if something we repaired or installed fails because of our workmanship, tell us and we come back to make it right. That is how repeat customers happen, and repeat customers are the business.",
   },
 ];
 
 /**
  * Headline credibility stats. Owner-provided facts about the business - keep
- * these accurate and update in one place. `established` is the founding year
- * (see shared/gbpProfile.ts GBP_NAP.founded).
+ * these accurate and update in one place.
  *
- * A completed-project count was deliberately removed in the move to new
- * construction: the prior "100+" figure reflected remodeling work and would
- * misrepresent home building experience. Add a count back only when there is a
- * real number of completed homes to cite.
+ * `established` is intentionally blank: the previous "2020" figure belonged to
+ * the prior construction business, and publishing it for Boise Handyman Co
+ * would fabricate a years-in-business claim. [NEEDS: real founding year]
  */
 export const PROOF_STATS = {
-  established: "2020",
+  established: "",
 } as const;
 
 /**
- * Post-hero proof bar. Leads with the founding year, then the genuine trust
- * signals the business carries. No review counts, ratings, or project counts
- * until real ones exist. Keep labels concise and keep this at six entries so
- * the strip fills the six-column desktop grid in HeroSection.
+ * Post-hero proof bar. Only claims the business genuinely carries: no bonded
+ * or insured claims, review counts, ratings, or job counters until real ones
+ * are confirmed for the handyman entity. Keep at six entries so the strip
+ * fills the six-column desktop grid in HeroSection.
  */
 export const TRUST_ITEMS = [
-  `Est. ${PROOF_STATS.established}`,
-  "Design-Build",
-  "Bonded · Insured",
-  "Permits In-House",
-  "Workmanship Warranty",
-  "Free Consultation",
+  "Locally Owned",
+  "Upfront Quotes",
+  "Hourly + Trip Fee Pricing",
+  "One-Trip Fixes",
+  "Tidy Job Sites",
+  "Ada & Canyon County",
 ];
 
 export const PROMISE_ITEMS = [
   {
     num: "01",
-    title: "A budget you can actually read",
-    body: "A line-item budget before we break ground, with allowances set at real local pricing, so you know what your home costs and where the money goes.",
+    title: "A quote you can actually read",
+    body: "An upfront quote before work starts: the hourly rate, the trip fee, and any materials as their own line, so you know what the job costs before we touch a tool.",
   },
   {
     num: "02",
-    title: "Proactive communication",
-    body: "Every Friday: what was completed, what is next, and any decisions needed from you. One project manager from first consultation to final walkthrough.",
+    title: "Communication without chasing",
+    body: "We reply within one business day, confirm before we head out, and tell you immediately if a job turns out bigger than quoted.",
   },
   {
     num: "03",
     title: "A schedule you can plan around",
-    body: "Realistic timelines built in from day one, including permitting and weather windows, with written notice when anything moves.",
+    body: "An agreed arrival time, not a half-day window. If anything shifts, you hear it from us before it happens.",
   },
   {
     num: "04",
-    title: "The workmanship warranty",
-    body: "We stand behind the home we build with a written workmanship warranty, long after you have moved in.",
+    title: "Work we stand behind",
+    body: "If a repair or install fails because of our workmanship, we come back and make it right.",
   },
 ];
 
@@ -153,33 +149,33 @@ export interface ClientPriority {
 
 export const CLIENT_PRIORITIES: ClientPriority[] = [
   {
-    title: "Trust and credibility",
-    body: "Bonded and insured, permits handled in-house, and a signed scope and budget before anyone breaks ground.",
+    title: "Trust in your home",
+    body: "A local team you can identify by name, an agreed arrival time, and respect for your home while we work in it.",
     icon: ShieldCheck,
   },
   {
-    title: "Quality construction",
-    body: "A tight building envelope, skilled trades, and a walkthrough of every finished detail before we hand over the keys.",
+    title: "Quality workmanship",
+    body: "Proper anchors, level lines, clean caulk beads, and paint that blends. Small jobs done the careful way.",
     icon: Hammer,
   },
   {
     title: "Clear communication",
-    body: "Weekly written updates and one project manager who knows your build from the first consultation to closing.",
+    body: "Replies within one business day, a confirmation before we arrive, and a heads-up the moment anything changes.",
     icon: MessageSquare,
   },
   {
-    title: "Staying on budget",
-    body: "Line-item budgets, honest allowances, and written change orders before any additional work is performed.",
+    title: "Honest pricing",
+    body: "Hourly rate plus a flat trip fee, quoted upfront. Materials listed as their own line, never a hidden markup.",
     icon: Wallet,
   },
   {
-    title: "Staying on schedule",
-    body: "Permitting, inspection, and construction milestones you can follow, with weather windows accounted for upfront.",
+    title: "Your time respected",
+    body: "One scheduled visit with the right parts on the truck, instead of three visits and a month of waiting.",
     icon: CalendarClock,
   },
   {
-    title: "A process without the stress",
-    body: "We coordinate the lender draws, the inspections, and the trades, so building a home does not become your second job.",
+    title: "No pressure, ever",
+    body: "We quote the job you asked about. If it is beyond handyman scope, we say so and refer you to a specialist.",
     icon: HeartHandshake,
   },
 ];
@@ -187,115 +183,115 @@ export const CLIENT_PRIORITIES: ClientPriority[] = [
 export const HOW_WE_BUILD_STEPS = [
   {
     number: "01",
-    title: "Free planning consultation",
-    desc: "We talk through what you want to build, where, and what it should cost. You leave with a realistic budget band and clear next steps. No obligation.",
+    title: "Tell us what needs doing",
+    desc: "Call, text, or send the form with your task list. Photos help us quote accurately and arrive with the right materials.",
   },
   {
     number: "02",
-    title: "Land and feasibility review",
-    desc: "Before you commit, we look at the lot: utilities, septic and well, slope, access, setbacks, and what the site work will realistically cost.",
+    title: "Get an upfront quote",
+    desc: "We reply within one business day with a clear quote: hourly rate, trip fee, and expected time. No surprises, no obligation.",
   },
   {
     number: "03",
-    title: "Design, selections, and a line-item budget",
-    desc: "We develop plans and finish selections together, then price them line by line so you approve a real number before construction starts.",
+    title: "Pick a time that works",
+    desc: "We agree an arrival time, not a half-day window, and confirm before we head out.",
   },
   {
     number: "04",
-    title: "Permits and construction",
-    desc: "We pull Ada and Canyon County permits in-house, coordinate inspections and lender draws, and send a written update every Friday.",
+    title: "One-trip fix",
+    desc: "We show up with the parts the job needs and work through your list. Most repairs and installs are finished in a single visit.",
   },
   {
     number: "05",
-    title: "Walkthrough and workmanship warranty",
-    desc: "We tour the finished home together and write the punch list side by side before you take the keys. Anything that later fails because of how we built it, we come back and make right under the workmanship warranty.",
+    title: "Walkthrough and cleanup",
+    desc: "We walk the finished work with you, clean up the area, and haul away the small debris. If our workmanship ever lets you down, we come back and make it right.",
   },
 ];
 
 export const PRINCIPLES = [
   {
-    title: "A real budget before we build",
-    desc: "Every home starts with a line-item budget and documented selections, so you know exactly what you are buying before ground is broken.",
+    title: "Quote first, work second",
+    desc: "Every job starts with an upfront quote. If the scope grows once we open something up, we stop and talk before the price changes.",
   },
   {
-    title: "Written change orders only",
-    desc: "If the scope changes mid-build, you get a written change order with a price before any additional work begins. Always.",
+    title: "Small jobs get real respect",
+    desc: "A one-hour fix gets the same scheduling, the same care, and the same cleanup as a full-day list.",
   },
   {
-    title: "Allowances you can actually hit",
-    desc: "We set allowances at what materials genuinely cost in this market, because an allowance you are guaranteed to blow is just a hidden overage.",
+    title: "Know the limits of the trade",
+    desc: "Minor plumbing and electrical, yes. Panels, repipes, gas, HVAC, roofing, and structural work go to licensed specialists, every time.",
   },
   {
-    title: "The site stays under control",
-    desc: "Materials stored properly, the envelope protected from weather, and the lot kept clean. How a site is run shows up in the finished house.",
+    title: "Leave it tidy",
+    desc: "Drop cloths down, dust contained, packaging hauled away. The only evidence we were there should be the thing that now works.",
   },
   {
-    title: "One PM, start to finish",
-    desc: "Your project manager is the same person from the first consultation to the final walkthrough. You always know who to call.",
+    title: "One accountable person",
+    desc: "The person who quotes your job is accountable for how it turns out. You always know who to call.",
   },
   {
-    title: "Workmanship warranty",
-    desc: "We stand behind what we build with a written workmanship warranty, because we build homes meant to outlast us.",
+    title: "Stand behind the work",
+    desc: "If a repair or install fails because of our workmanship, we come back and fix it. Simple as that.",
   },
 ];
 
 export const STANDARD_INCLUSIONS = [
-  "Permits handled in-house, start to finish",
-  "One project manager who owns your build",
-  "A line-item budget approved before ground breaks",
-  "A written progress note every Friday",
-  "Lender draw and inspection scheduling",
-  "A written workmanship warranty",
+  "An upfront quote before any work starts",
+  "A flat trip fee, stated in advance",
+  "Materials listed as their own line on the quote",
+  "An agreed arrival time, confirmed beforehand",
+  "Cleanup and small-debris haul-away",
+  "Workmanship we stand behind",
 ];
 
 export const OPTIONAL_ENHANCEMENTS = {
-  title: "3D renderings before framing starts",
-  body: "An optional design upgrade that lets you see the finished home before framing starts. It adds to the project investment and the design timeline, but for many clients it is what makes committing to a layout, a roofline, or a finish package feel like a decision rather than a gamble.",
-  note: "Available on request during your design consultation.",
+  title: "Add to the list while we are there",
+  body: "Once the trip fee is paid, extra tasks in the same visit only cost the additional time. Many customers keep a running punch list, the loose handle, the slow drain, the picture that never got hung, and clear the whole thing in one appointment.",
+  note: "Mention your extra tasks when you book so we bring the right materials.",
 };
 
 export const BUDGET_GUIDANCE_POINTS = [
   {
-    title: "A range first, then a real budget",
-    body: "The estimator here and your planning consultation give you an early band that reflects size, finish level, the specifics of your lot, and where prices sit today. Once plans and selections are set, that band resolves into a line-item budget you approve.",
+    title: "A range first, then a firm quote",
+    body: "The online estimator gives you an instant planning range for your kind of job. Once we see photos or the task itself, that range becomes a firm upfront quote you approve before work starts.",
   },
   {
-    title: "A line-item budget before construction",
-    body: "Before we break ground, you receive a budget broken down by division, with allowances stated in writing. You can see what the foundation costs, what the cabinets cost, and where you have room to adjust.",
+    title: "Hourly rate plus a flat trip fee",
+    body: "You pay for the time the job takes plus one flat trip fee that covers travel and setup. Book several tasks in one visit and the trip fee is paid once, which is why a list is the best value.",
   },
   {
-    title: "Site costs called out separately",
-    body: "Driveways, well and septic, utility runs, retaining, and rock excavation vary enormously between lots. We price them as their own lines rather than burying them in a square-foot number.",
+    title: "Materials as their own line",
+    body: "Parts and materials appear on the quote separately, at what they cost. You are welcome to supply your own, or we pick them up on the way for the time it takes.",
   },
   {
-    title: "Changes priced before they happen",
-    body: "If something shifts once we are building, it becomes a written change order with a price and a schedule effect that you approve first. Nothing extra gets built on a handshake.",
+    title: "Changes agreed before they happen",
+    body: "If we open a wall and find more than expected, we stop, show you, and agree a revised price before continuing. Nothing extra happens on a handshake.",
   },
 ];
 
 export const LEADERSHIP_COPY = {
   label: "Our commitment",
-  headline: "Building a home should feel clear, not chaotic.",
+  headline: "Getting small things fixed should be easy.",
   paragraphs: [
-    "Boise Construction Co was built on a simple belief: people building a home in the Treasure Valley deserve a builder who prices honestly, communicates without being chased, and treats the process as something you should be able to understand.",
-    "We know how builders usually get compared: a square-foot number, a glossy plan book, and allowances that quietly guarantee an overage. None of that tells you what your home will actually cost.",
-    "So we do it the other way around. One accountable team, a line-item budget before we break ground, allowances set at real local pricing, weekly written updates while we build, and a team that answers the phone.",
+    "Boise Handyman Co was built on a simple observation: Treasure Valley homeowners can find someone to build a house or gut a kitchen, but getting a door adjusted, a faucet replaced, or a fence panel fixed means calls that never get returned.",
+    "We know how that feels, and we know why it happens. Small jobs do not fit the way big contractors price and schedule, so those jobs get ignored or quoted absurdly.",
+    "So we built a company around them instead. Simple hourly pricing with a flat trip fee, quotes before work starts, one scheduled visit with the right materials, and a clean home when we leave.",
   ],
-  closing: "That is not a slogan. It is how we would want the job run if the house were ours.",
+  closing: "That is not a slogan. It is how we would want the job handled if the house were ours.",
 };
 
 export const FINANCING_BULLETS = [
-  "Construction-to-permanent lender coordination",
-  "Budgets and plans formatted for underwriting",
-  "Draw schedules matched to build milestones",
-  "Inspections scheduled around your draws",
-  "Works alongside cash, lot equity, or wire",
+  "Card, check, and electronic payments accepted",
+  "Pay when the work is done, not before",
+  "One trip fee per visit, however many tasks",
+  "Written quote to keep, whatever you decide",
+  "No deposits on standard small jobs",
 ];
 
 export const CONSULT_BULLETS = [
-  "Nobody in the room works on commission",
-  "No pressure to sign anything on the spot",
-  "A written budget band that is yours to keep",
+  "Nobody here works on commission",
+  "No pressure and no obligation to book",
+  "An upfront quote that is yours to keep",
   "We reply within one business day",
 ];
 
@@ -305,28 +301,28 @@ export const CONSULT_BULLETS = [
  * `accentWord` renders as the ochre Libre Baskerville italic accent (keep it to one word).
  */
 export const STATEMENT_BAND = {
-  eyebrow: "The standard we build to",
-  statement: "Nothing about your home is left to",
-  accentWord: "chance",
+  eyebrow: "The standard we work to",
+  statement: "No job is too small to be done",
+  accentWord: "right",
   support:
-    "One team owns the result, the budget is settled on paper before we break ground, and a plain-language update reaches you every week - from the first time we walk your lot to the morning we hand you the keys.",
+    "One person owns the fix, the price is agreed before the toolbox opens, and the room is left cleaner than we found it - whether the job took forty minutes or all afternoon.",
 } as const;
 
 /**
- * "Where your money goes" positioning: as a lean, newer company we keep
- * overhead low and reinvest it in the work. Flagship homepage band placed just
- * before the estimator so it frames the pricing conversation. Editorial voice,
- * confident (not a "what you're not paying for" list).
+ * "Where your money goes" positioning: a lean local operation without the
+ * overhead of a franchise or a big contracting firm. Flagship homepage band
+ * placed just before the estimator so it frames the pricing conversation.
+ * Editorial voice, confident (not a "what you're not paying for" list).
  */
 export const VALUE_MODEL = {
-  eyebrow: "Where the budget lands",
-  headlineA: "Put the money where",
-  headlineB: "you will actually",
-  accentWord: "live",
-  costs: "A corner office. A showroom stocked with finishes you never picked. Wrapped trucks. A tier of managers who never set foot on your lot.",
-  costsBody: "None of it is free. It gets folded quietly into a price per square foot and handed to the next buyer, whether that buyer wanted any of it or not.",
+  eyebrow: "Where your money goes",
+  headlineA: "Pay for the fix,",
+  headlineB: "not the",
+  accentWord: "overhead",
+  costs: "A franchise fee. A call center in another state. Wrapped trucks and a dispatcher who has never held a drill.",
+  costsBody: "None of it is free. It gets folded into a minimum charge and an inflated hourly rate, whether your job needed any of it or not.",
   reframe:
-    "We built the company to leave that out. A small, deliberate team keeps our carrying costs low, so the budget you approve goes into your foundation, your framing, and the finishes you chose - not into keeping the lights on somewhere you will never visit.",
-  taglineLead: "More of your budget,",
-  taglineAccent: "standing on your lot",
+    "We built the company to leave that out. A small local operation keeps our costs low, so what you pay goes into the time and materials your repair actually takes - a fair hourly rate, one flat trip fee, and nothing padding the invoice.",
+  taglineLead: "Fair rates,",
+  taglineAccent: "honest invoices",
 } as const;

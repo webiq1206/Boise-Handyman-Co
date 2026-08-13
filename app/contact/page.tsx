@@ -43,36 +43,36 @@ const CONTACT_FAQS = [
   {
     question: 'How quickly will you respond to my inquiry?',
     answer:
-      'We respond within one business day. Call us during business hours for an immediate conversation, or submit the form and we will reach out to schedule your free planning consultation.',
+      'We respond within one business day. Call or text during business hours for an immediate conversation, or send the form with photos of the job and we will reply with an upfront quote.',
   },
   {
-    question: 'Is the planning consultation really free?',
+    question: 'Are quotes really free?',
     answer:
-      'Yes. The 60 to 90 minute consultation is free with no obligation. We meet at our office, or on your lot if you already own one, and you leave with a budget band, a realistic schedule, and a read on what your site will require - never a high-pressure sales pitch.',
+      'Yes. Send your task list with photos and we quote it at no charge and with no obligation. The quote states the hourly rate, the flat trip fee, and the expected time, so you know the price before anything is scheduled.',
   },
   {
-    question: 'Do I need to own land before I contact you?',
+    question: 'What should I include when I reach out?',
     answer:
-      'No. Roughly half the people who call us are still looking. We will walk a lot with you before you buy and tell you what it will cost to build on, which is the single most useful thing you can know before making an offer.',
+      'A short description of each task and a photo or two of each one. Photos are the difference between a guess and a firm quote, and they let us arrive with the right parts so the job finishes in one trip.',
   },
   {
     question: 'What areas do you serve?',
-    answer: `We build in ${TREASURE_VALLEY_CITIES}, and surrounding Treasure Valley communities across Ada and Canyon County.`,
+    answer: `We work in ${TREASURE_VALLEY_CITIES}, and surrounding Treasure Valley communities across Ada and Canyon County. The same flat trip fee applies everywhere in the service area.`,
   },
   {
-    question: 'Do you handle permits?',
+    question: 'Can I book more than one task in a visit?',
     answer:
-      'Yes. Building permits, plan review, engineering, and utility applications are part of our design-build scope and handled in-house for both Ada and Canyon County jurisdictions.',
+      'Please do. One trip fee covers the whole visit, so the second and third tasks only cost the additional time. Send the full list when you book so we bring the right materials.',
   },
   {
-    question: 'How do I get a cost estimate for my home?',
+    question: 'How do I get a cost estimate for my job?',
     answer:
-      'Use our online build cost estimator for an instant range, then book a free consultation for a written, line-item budget tailored to your plan and your lot.',
+      'Use the online estimator for an instant planning range, then send photos for a firm upfront quote. Nothing is scheduled until you approve the price.',
   },
 ];
 
 const SPEAKABLE_SUMMARY =
-  `Contact ${SITE_CONFIG.name} for a free consultation. Schedule a free 60 to 90 minute planning consultation, call our team, or use the build cost estimator to explore a range for your new home.`;
+  `Contact ${SITE_CONFIG.name} for an upfront handyman quote. Send your task list with photos, call or text our team, or use the online estimator to explore a range for your repair, install, or maintenance job.`;
 
 function HeroBreadcrumbs() {
   const items = [
@@ -200,7 +200,7 @@ export default function ContactPage() {
     generateWebPageSchema({
       title: `Contact ${SITE_CONFIG.name}`,
       description:
-        'Schedule a free planning consultation or call our Treasure Valley design-build home building team.',
+        'Book a handyman visit or get an upfront quote from our Treasure Valley handyman team.',
       url: '/contact',
     }),
     generateBreadcrumbSchema([
@@ -219,7 +219,7 @@ export default function ContactPage() {
         <section className="relative min-h-[520px] md:min-h-[72vh] flex items-end overflow-hidden bg-inverse">
           <Image
             src={SITE_IMAGES.hero}
-            alt="Newly built modern home interior in Boise, Idaho"
+            alt="Well-kept home interior in Boise, Idaho"
             fill
             className="object-cover opacity-[0.82] img-brand-grade"
             sizes="100vw"
@@ -241,12 +241,12 @@ export default function ContactPage() {
             </p>
             <div className="brc-label brc-label-on-photo mt-6 mb-5">Get in touch</div>
             <h1 className="font-sans font-light text-display tracking-tight text-inverse-foreground max-w-4xl mb-6">
-              Contact Boise Construction{' '}
+              Contact Boise Handyman{' '}
               <em className="brc-accent">Co</em>
             </h1>
             <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-6">
-              Schedule a free 60 to 90 minute planning consultation, call our team, or use the build
-              cost estimator to explore a range for your new home.
+              Send your task list with photos for an upfront quote, call or text our team, or use
+              the online estimator to explore a range for your repair, install, or maintenance job.
             </p>
             <BusinessPhoneContact
               layout="stack"
@@ -264,10 +264,10 @@ export default function ContactPage() {
             </a>
             <div className="flex flex-wrap gap-3 mb-8">
               {/* Primary action on the contact page is the inline form below -
-                  one tap from the hero. The estimator lives on the homepage. */}
+                  one tap from the hero. The estimator lives at /estimate. */}
               <Button variant="brand" asChild>
                 <a href="#consult">
-                  Request your free visit <ArrowRight className="h-4 w-4" />
+                  Book a handyman visit <ArrowRight className="h-4 w-4" />
                 </a>
               </Button>
               <Button variant="heroGhost" asChild>
@@ -294,7 +294,7 @@ export default function ContactPage() {
                   <em className="brc-accent">connect</em>
                 </>
               }
-              description="Call, email, or visit - we respond within one business day and never use high-pressure sales tactics."
+              description="Call, text, or email - we respond within one business day and never use high-pressure sales tactics."
               className="max-w-3xl"
             />
             <div className="grid sm:grid-cols-2 gap-4">
@@ -351,7 +351,7 @@ export default function ContactPage() {
                 <ContactChannel
                   icon={<MapPin className="h-5 w-5" strokeWidth={1.5} />}
                   label="Service area"
-                  subtext="Free planning consultations across the Treasure Valley"
+                  subtext="One flat trip fee across the whole Treasure Valley"
                 >
                   <span className="text-sm leading-relaxed">{TREASURE_VALLEY_CITIES}</span>
                 </ContactChannel>
@@ -366,7 +366,7 @@ export default function ContactPage() {
             <div className="relative min-h-[260px] md:min-h-[520px] overflow-hidden bg-inverse order-2 md:order-1">
               <Image
                 src={SITE_IMAGES.leadership}
-                alt={`${SITE_CONFIG.name} team reviewing plans at a build site`}
+                alt={`${SITE_CONFIG.name} team at work on a home repair`}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover img-brand-grade"
@@ -377,7 +377,7 @@ export default function ContactPage() {
                 style={{ backgroundImage: GRAIN_URL, backgroundRepeat: 'repeat', opacity: 0.028 }}
               />
               <div className="absolute bottom-0 left-0 p-8 md:p-12">
-                <div className="brc-label brc-label-on-photo mb-3">Your free visit includes</div>
+                <div className="brc-label brc-label-on-photo mb-3">Your quote includes</div>
                 <p className="font-sans font-light text-xl md:text-2xl text-inverse-foreground">
                   No pressure.
                   <br />
@@ -396,7 +396,7 @@ export default function ContactPage() {
                       <em className="brc-accent">Just answers.</em>
                     </>
                   }
-                  description="Your free 60 to 90 minute planning consultation is focused on what your build will actually cost and how long it will take - not a commission-driven pitch."
+                  description="Your quote states what the job will actually cost and how long it will take - the hourly rate, the flat trip fee, and the expected time - not a commission-driven pitch."
                   className="mb-8 max-w-none"
                 />
                 <ul className="flex flex-col gap-0 mb-8">
@@ -427,15 +427,15 @@ export default function ContactPage() {
             <div className="max-w-5xl mx-auto grid md:grid-cols-5 gap-12 items-start">
               <div className="md:col-span-2">
                 <Reveal>
-                  <div className="brc-label mb-5">Request your consultation</div>
+                  <div className="brc-label mb-5">Book your visit</div>
                   <h2 className="font-sans font-light text-[2rem] md:text-[2.75rem] leading-[1.08] tracking-tight mb-4 text-foreground">
-                    Tell us about the home you want to{' '}
-                    <em className="brc-accent">build</em>.
+                    Tell us what needs{' '}
+                    <em className="brc-accent">fixing</em>.
                   </h2>
                   <p className="text-base leading-relaxed mb-8 text-muted-foreground">
-                    Send a few details and we will reach out within one business day to schedule
-                    your free 60 to 90 minute planning consultation - budget band, schedule, and
-                    site requirements, with no obligation.
+                    Send a few details, photos help, and we will reach out within one business day
+                    with an upfront quote and a time that works - price, trip fee, and expected
+                    duration, with no obligation.
                   </p>
                 </Reveal>
               </div>
@@ -483,7 +483,7 @@ export default function ContactPage() {
               <em className="brc-accent">call</em>?
             </>
           }
-          description="Use our online build cost estimator for an instant Treasure Valley range - then schedule your free consultation when you're ready for a written, line-item budget."
+          description="Use our online estimator for an instant Treasure Valley range - then book your handyman visit when you're ready for a firm, written quote."
           variant="canvas"
         />
 
@@ -498,7 +498,7 @@ export default function ContactPage() {
                   Where we <em className="brc-accent">work</em>
                 </>
               }
-              description={`We serve homeowners in ${TREASURE_VALLEY_CITIES}, and surrounding communities.`}
+              description={`We handle repairs, installs, and maintenance for homeowners in ${TREASURE_VALLEY_CITIES}, and surrounding communities.`}
               className="max-w-3xl"
             />
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">

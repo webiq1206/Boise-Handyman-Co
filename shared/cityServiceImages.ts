@@ -1,12 +1,10 @@
 /**
  * Imagery for service pages, service-in-city pages, and area pages.
  *
- * The previous version pointed at forty per-service-per-city renders of
- * remodeled kitchens and bathrooms. Those describe work the company no longer
- * does, so the mapping is rebuilt against the construction image library in
- * public/images/construction.
+ * Keys follow the handyman service catalog in shared/contentData.ts. Values
+ * point at the AI-generated handyman photo library in public/images/handyman
+ * (2026-08); swap for real job photography when it exists.
  *
- * Each service has a primary image that matches what the service actually is.
  * City variants rotate through a per-service shortlist so that no two city
  * pages for the same service open with the same photograph, which keeps the
  * eight variants of a service page from looking like one page printed eight
@@ -16,7 +14,7 @@
  * Key format for CITY_SERVICE_IMAGES: "service-slug/city-slug"
  */
 
-import { CONSTRUCTION_IMAGES, SITE_IMAGES } from "./siteImages";
+import { SITE_IMAGES } from "./siteImages";
 import { type LandingImageSet } from "./serviceBackgrounds";
 
 const CITY_SLUGS = [
@@ -30,6 +28,9 @@ const CITY_SLUGS = [
   "caldwell",
 ] as const;
 
+/** AI-generated handyman photo library (2026-08). */
+const h = (name: string) => `/images/handyman/${name}.webp`;
+
 /**
  * Per-service rotation. The first entry is the service's primary image and is
  * what the service overview page uses; the rest supply the city variants.
@@ -37,85 +38,85 @@ const CITY_SLUGS = [
  * within a service.
  */
 const SERVICE_ROTATION: Record<string, readonly string[]> = {
-  "custom-home-builder": [
-    CONSTRUCTION_IMAGES.customHome,
-    CONSTRUCTION_IMAGES.interior,
-    CONSTRUCTION_IMAGES.framing,
-    CONSTRUCTION_IMAGES.kitchen,
-    CONSTRUCTION_IMAGES.foundation,
-    CONSTRUCTION_IMAGES.outdoor,
-    CONSTRUCTION_IMAGES.meeting,
-    CONSTRUCTION_IMAGES.foothills,
+  "drywall-repair": [
+    h("service-drywall-repair"),
+    h("punch-list-markers"),
+    h("service-painting"),
+    h("toolbag-ready"),
+    h("repair-materials"),
+    h("estimate-clipboard"),
+    h("consult-doorstep"),
+    h("hero-door-repair"),
   ],
-  "semi-custom-homes": [
-    CONSTRUCTION_IMAGES.semiCustom,
-    CONSTRUCTION_IMAGES.kitchen,
-    CONSTRUCTION_IMAGES.framing,
-    CONSTRUCTION_IMAGES.interior,
-    CONSTRUCTION_IMAGES.plans,
-    CONSTRUCTION_IMAGES.foundation,
-    CONSTRUCTION_IMAGES.customHome,
-    CONSTRUCTION_IMAGES.meeting,
+  "painting-touch-ups": [
+    h("service-painting"),
+    h("front-door-repaint"),
+    h("punch-list-markers"),
+    h("service-drywall-repair"),
+    h("toolbag-ready"),
+    h("estimate-clipboard"),
+    h("consult-doorstep"),
+    h("hero-door-repair"),
   ],
-  "build-on-your-lot": [
-    CONSTRUCTION_IMAGES.lot,
-    CONSTRUCTION_IMAGES.foundation,
-    CONSTRUCTION_IMAGES.ruralSite,
-    CONSTRUCTION_IMAGES.framing,
-    CONSTRUCTION_IMAGES.customHome,
-    CONSTRUCTION_IMAGES.foothills,
-    CONSTRUCTION_IMAGES.semiCustom,
-    CONSTRUCTION_IMAGES.meeting,
+  "plumbing-repairs": [
+    h("service-plumbing"),
+    h("toilet-repair"),
+    h("service-caulking"),
+    h("repair-materials"),
+    h("toolbag-ready"),
+    h("estimate-clipboard"),
+    h("consult-doorstep"),
+    h("hero-door-repair"),
   ],
-  "design-build": [
-    CONSTRUCTION_IMAGES.meeting,
-    CONSTRUCTION_IMAGES.plans,
-    CONSTRUCTION_IMAGES.framing,
-    CONSTRUCTION_IMAGES.budget,
-    CONSTRUCTION_IMAGES.roughIn,
-    CONSTRUCTION_IMAGES.interior,
-    CONSTRUCTION_IMAGES.customHome,
-    CONSTRUCTION_IMAGES.foundation,
+  "electrical-repairs": [
+    h("service-electrical"),
+    h("service-mounting"),
+    h("repair-materials"),
+    h("toolbag-ready"),
+    h("estimate-clipboard"),
+    h("consult-doorstep"),
+    h("hero-door-repair"),
+    h("door-hinge-fix"),
   ],
-  "home-plans-design": [
-    CONSTRUCTION_IMAGES.plans,
-    CONSTRUCTION_IMAGES.interior,
-    CONSTRUCTION_IMAGES.kitchen,
-    CONSTRUCTION_IMAGES.meeting,
-    CONSTRUCTION_IMAGES.outdoor,
-    CONSTRUCTION_IMAGES.customHome,
-    CONSTRUCTION_IMAGES.semiCustom,
-    CONSTRUCTION_IMAGES.framing,
+  "carpentry-trim-repair": [
+    h("service-carpentry-trim"),
+    h("hero-door-repair"),
+    h("door-hinge-fix"),
+    h("service-fence-repair"),
+    h("toolbag-ready"),
+    h("repair-materials"),
+    h("estimate-clipboard"),
+    h("consult-doorstep"),
   ],
-  "lot-evaluation": [
-    CONSTRUCTION_IMAGES.lot,
-    CONSTRUCTION_IMAGES.ruralSite,
-    CONSTRUCTION_IMAGES.foothills,
-    CONSTRUCTION_IMAGES.foundation,
-    CONSTRUCTION_IMAGES.plans,
-    CONSTRUCTION_IMAGES.meeting,
-    CONSTRUCTION_IMAGES.budget,
-    CONSTRUCTION_IMAGES.customHome,
+  "mounting-assembly": [
+    h("service-mounting"),
+    h("cabinet-hardware-upgrade"),
+    h("grab-bar-install"),
+    h("repair-materials"),
+    h("toolbag-ready"),
+    h("estimate-clipboard"),
+    h("consult-doorstep"),
+    h("hero-door-repair"),
   ],
-  "shop-homes-barndominiums": [
-    CONSTRUCTION_IMAGES.shopHome,
-    CONSTRUCTION_IMAGES.framing,
-    CONSTRUCTION_IMAGES.lot,
-    CONSTRUCTION_IMAGES.interior,
-    CONSTRUCTION_IMAGES.foundation,
-    CONSTRUCTION_IMAGES.ruralSite,
-    CONSTRUCTION_IMAGES.customHome,
-    CONSTRUCTION_IMAGES.meeting,
+  "fence-deck-gutter-repair": [
+    h("service-fence-repair"),
+    h("deck-board-replacement"),
+    h("hero-gutter-cleaning"),
+    h("winterize-spigot"),
+    h("toolbag-ready"),
+    h("estimate-clipboard"),
+    h("consult-doorstep"),
+    h("repair-materials"),
   ],
-  "energy-efficient-homes": [
-    CONSTRUCTION_IMAGES.insulation,
-    CONSTRUCTION_IMAGES.roughIn,
-    CONSTRUCTION_IMAGES.framing,
-    CONSTRUCTION_IMAGES.interior,
-    CONSTRUCTION_IMAGES.customHome,
-    CONSTRUCTION_IMAGES.plans,
-    CONSTRUCTION_IMAGES.semiCustom,
-    CONSTRUCTION_IMAGES.foundation,
+  "home-maintenance": [
+    h("service-caulking"),
+    h("weatherstripping"),
+    h("winterize-spigot"),
+    h("punch-list-markers"),
+    h("toolbag-ready"),
+    h("estimate-clipboard"),
+    h("consult-doorstep"),
+    h("hero-gutter-cleaning"),
   ],
 };
 
@@ -185,7 +186,7 @@ export function getCityServiceImageSet(
   return {
     hero,
     // Offset by three rather than one so the two images on a page are visually
-    // unrelated instead of adjacent stages of the same build.
+    // unrelated instead of adjacent shots of the same subject.
     breather: rotation[(cityIndex + 3) % rotation.length],
     process: rotation[0],
   };
@@ -193,12 +194,12 @@ export function getCityServiceImageSet(
 
 /**
  * Three distinct images for an area (city) page: the city hero, plus two
- * construction images that vary by city so neighbouring area pages do not
- * open with the same pair.
+ * rotation images that vary by city so neighbouring area pages do not open
+ * with the same pair.
  */
 export function getAreaImageSet(citySlug: string): LandingImageSet {
   const hero = CITY_HERO_IMAGES[citySlug] ?? SITE_IMAGES.hero;
-  const rotation = SERVICE_ROTATION["custom-home-builder"];
+  const rotation = SERVICE_ROTATION["home-maintenance"];
   const i = Math.max(0, CITY_SLUGS.indexOf(citySlug as (typeof CITY_SLUGS)[number]));
   return {
     hero,

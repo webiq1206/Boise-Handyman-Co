@@ -25,14 +25,14 @@ export const metadata = buildPageMetadata({
   path: "/areas",
   titleOverride: "Treasure Valley Service Areas",
   descriptionOverride:
-    "Custom home building across the Treasure Valley: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho.",
+    "Handyman service across the Treasure Valley: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho. Upfront quotes and one flat trip fee everywhere.",
 });
 
 export default function AreasHubPage() {
   const schemas = [
     generateWebPageSchema({
       title: "Treasure Valley Service Areas",
-      description: `Custom and semi-custom home building serving ${TREASURE_VALLEY_CITIES}.`,
+      description: `Handyman repairs, installs, and maintenance serving ${TREASURE_VALLEY_CITIES}.`,
       url: "/areas",
     }),
     generateBreadcrumbSchema([
@@ -47,7 +47,7 @@ export default function AreasHubPage() {
       <div className="flex flex-col pb-20 md:pb-0">
         <PageHeroBand
           imageSrc={SITE_IMAGES.hero}
-          imageAlt="Newly built Treasure Valley home with open kitchen and living space"
+          imageAlt="Well-kept Treasure Valley home interior"
         >
           <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Service Areas" }]} />
           <div className="brc-label text-inverse-muted mt-6 mb-4">Treasure Valley</div>
@@ -56,11 +56,12 @@ export default function AreasHubPage() {
             <em className="brc-accent">areas</em>
           </h1>
           <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-4">
-            We build custom and semi-custom homes across {TREASURE_VALLEY_CITIES}, and the surrounding
-            communities, on lots you own and lots we help you find, under one design-build team.
+            We handle small repairs, installs, and home maintenance across {TREASURE_VALLEY_CITIES},
+            and the surrounding communities, with upfront quotes and the same flat trip fee
+            everywhere we work.
           </p>
           <p className="sr-only" data-speakable="summary">
-            Treasure Valley new home construction service areas.
+            Treasure Valley handyman service areas across Ada and Canyon County.
           </p>
           <div className="flex flex-wrap gap-3">
             <ConsultCTA variant="brand">
@@ -76,8 +77,8 @@ export default function AreasHubPage() {
           <div className="container px-4">
             <SectionHeader
               eyebrow="Treasure Valley"
-              title={<>Eight cities, one design-build team</>}
-              description="Custom homes, semi-custom homes, and builds on your own lot across Ada and Canyon County."
+              title={<>Eight cities, one local handyman team</>}
+              description="Repairs, installs, and maintenance across Ada and Canyon County, quoted upfront."
               className="mb-10 max-w-2xl mx-auto text-center [&_.brc-label]:justify-center"
               align="center"
             />
@@ -94,11 +95,11 @@ export default function AreasHubPage() {
         <EstimatePromptBand
           title={
             <>
-              Planning a build in your{' '}
+              Got a fix waiting in your{' '}
               <em className="brc-accent">city</em>?
             </>
           }
-          description="Lot costs, impact fees, and permit timelines differ across Ada and Canyon County. Get an instant build cost range for your city, then book a free consultation for local guidance."
+          description="The same upfront quotes and flat trip fee apply across Ada and Canyon County. Get an instant estimate for your job, then book a handyman visit when you're ready."
           variant="tint"
         />
 

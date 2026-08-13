@@ -3,7 +3,7 @@
 Complete entity inventory: organization, services, locations, team, projects.
 
 > Note: organization identity below is kept in sync with `shared/siteConfig.ts`
-> (Boise Construction Co, boiseconstruction.co). The service, location, and
+> (Boise Handyman Co, boisehandyman.co). The service, location, and
 > project tables were captured during the original remodeling-site audit and
 > predate the new-construction rebuild, so treat them as historical.
 
@@ -11,13 +11,13 @@ Complete entity inventory: organization, services, locations, team, projects.
 
 | Attribute | Value | Source | Status |
 |---|---|---|---|
-| Name | Boise Construction Co | `shared/siteConfig.ts` | OK |
-| Legal name | Boise Construction Co LLC | siteConfig | OK |
+| Name | Boise Handyman Co | `shared/siteConfig.ts` | OK |
+| Legal name | Boise Handyman Co | siteConfig | OK |
 | Alternate names | — | — | **GAP** (add "Boise Remodeling", "BRC") |
 | Description | Design-build remodeler, est. 2017 | `lib/schema.ts` | OK |
 | Founded | 2017 | `BUSINESS_INFO.founded` | OK |
 | Phone | (208) 477-1169 | siteConfig | OK |
-| Email | hello@boiseconstruction.co | siteConfig | OK |
+| Email | hello@boisehandyman.co | siteConfig | OK |
 | Address (NAP) | 4031 W Wapoot St, Meridian, ID 83646 | siteConfig | OK in schema; **footer shows "Boise, Idaho" only — inconsistency** |
 | Logo | — | — | **GAP** (no Organization `logo`) |
 | sameAs | Facebook, Instagram | `BUSINESS_INFO.sameAs` | **WEAK** (no Google/GBP, Yelp, Houzz, BBB) |

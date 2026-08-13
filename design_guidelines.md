@@ -1,25 +1,25 @@
-# Boise Construction Co Design Guidelines
+# Boise Handyman Co Design Guidelines
 
 ## Design Approach
 
-**Premium, Clear, Trustworthy** - Design-build custom home construction with a calm, editorial feel: warm neutrals, confident typography, and generous whitespace.
+**Premium, Clear, Trustworthy** - A local handyman service presented with a calm, editorial feel: warm neutrals, confident typography, and generous whitespace. Small jobs, treated seriously.
 
 **Core principles:**
 - Clarity over clutter: one primary action per section
-- Bone primary CTAs; **ochre is the brand accent** - strategic, not decorative
+- Bone primary CTAs; **steel blue is the brand accent** - strategic, not decorative
 - Mobile-first conversion (estimator, consult CTA)
 - Shared tokens in `app/globals.css` - no one-off page styles
 
-**Ochre usage (two tones, used where each reads best):**
-- **Ochre `#D09A5C` (`--accent-legible`) = all accent TEXT:** heading accent
+**Steel blue usage (two tones, used where each reads best):**
+- **Steel blue `#8FAEC4` (`--accent-legible`) = all accent TEXT:** heading accent
   words (`.brc-accent`), eyebrow ticks, text-link hover, focus rings, step
   numerals. AA-legible (5.38:1) on the charcoal ground at any size. Never set
-  ochre text on bone (2.28:1, decorative only).
-- **Deep ochre `#7E6344` (`--accent`) = graphic fills only:** chips, tints,
+  steel blue text on bone (2.28:1, decorative only).
+- **Deep steel blue `#4E6B7E` (`--accent`) = graphic fills only:** chips, tints,
   slider track, icon grounds (always with bone text on top). Too dark for text.
 
-The seal carries ochre on its outer ring and dots; the wordmark carries it on
-the italic "Co." only. Never recolor marks outside charcoal, bone, and `#D09A5C`.
+The seal carries steel blue on its outer ring and dots; the wordmark carries it on
+the italic "Co." only. Never recolor marks outside charcoal, bone, and `#8FAEC4`.
 
 ---
 
@@ -33,17 +33,17 @@ the italic "Co." only. Never recolor marks outside charcoal, bone, and `#D09A5C`
 | Ink | `--foreground` | Body text (AA) |
 | Meta | `--muted-foreground` | Eyebrows, captions only |
 | Anchor | `--inverse` | Dark bands, footer |
-| Accent | `--accent-legible` (ochre #D09A5C) | `.brc-accent` accent words, links, focus, eyebrow ticks |
-| Graphic fill | `--accent` (deep ochre #7E6344) | chips, tints, slider thumb, icon grounds - not text |
+| Accent | `--accent-legible` (steel blue #8FAEC4) | `.brc-accent` accent words, links, focus, eyebrow ticks |
+| Graphic fill | `--accent` (deep steel blue #4E6B7E) | chips, tints, slider thumb, icon grounds - not text |
 
 ---
 
 ## Typography
 
 - **UI & body:** Montserrat (`font-sans`)
-- **Accent word:** Libre Baskerville italic in ochre via `.brc-accent` (max one word per heading)
+- **Accent word:** Libre Baskerville italic in steel blue via `.brc-accent` (max one word per heading)
 - **Numerals:** Libre Baskerville via `.brc-display-num` / `<DisplayNum>`
-- **Eyebrows:** `.brc-label` — 11px, uppercase, 0.14em tracking
+- **Eyebrows:** `.brc-label` - 11px, uppercase, 0.14em tracking
 
 Living reference: `/style-guide` (noindex).
 
@@ -61,11 +61,11 @@ Do not use `brandAccent`, `brandGhost`, or `brandInverseOutline` on marketing pa
 
 ## Components
 
-- `Section` — variants: `canvas` (default), `greige`, `surface`, `inverse`, `tint`
-- `PageHeader` — inner page heroes
+- `Section` - variants: `canvas` (default), `greige`, `surface`, `inverse`, `tint`
+- `PageHeader` - inner page heroes
 - `MarketingCard` / `BlogCard`
-- `Hairline` — fullBleed, spaced
-- `Chip` — categories and tags
+- `Hairline` - fullBleed, spaced
+- `Chip` - categories and tags
 
 ---
 

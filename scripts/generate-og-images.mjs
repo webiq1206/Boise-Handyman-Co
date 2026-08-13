@@ -2,7 +2,7 @@
  * Generates branded Open Graph share cards for blog posts / guides.
  *
  * Each card = featured photo (full-bleed) + dark charcoal overlay + the post
- * title in brand type (Montserrat) + the Boise Construction Co eyebrow, output as a
+ * title in brand type (Montserrat) + the Boise Handyman Co eyebrow, output as a
  * 1200x630 PNG (best social/iMessage compatibility) at public/images/blog/{slug}-og.png.
  *
  * Usage:
@@ -29,11 +29,11 @@ const H = 630;
 const BONE = '#F7F5F3';
 const BODY = '#E6E3DE';
 const MIST = '#9F9C97';
-const OCHRE = '#D09A5C';
+const ACCENT = '#8FAEC4'; // steel blue, 5.74:1 on charcoal
 const CHARCOAL = '#201E1D';
 
-// Company name and its own domain, now that the site runs at boiseconstruction.co.
-const BRAND_EYEBROW = 'BOISE CONSTRUCTION CO   ·   BOISECONSTRUCTION.CO';
+// Company name and its own domain, now that the site runs at boisehandyman.co.
+const BRAND_EYEBROW = 'BOISE HANDYMAN CO   ·   BOISEHANDYMAN.CO';
 
 const fontLight = fs.readFileSync(path.join(assets, 'Montserrat-Light.ttf'));
 const fontMedium = fs.readFileSync(path.join(assets, 'Montserrat-Medium.ttf'));
@@ -86,8 +86,8 @@ export async function generateOgCard(slug, title, sourceImage) {
         display: 'flex', textAlign: 'center', fontSize: 58, fontWeight: 300, color: BONE,
         lineHeight: 1.14, letterSpacing: '-0.5px', maxWidth: 760,
       }, title),
-      // Sage rule
-      h('div', { width: 56, height: 2, backgroundColor: OCHRE, marginTop: 32, marginBottom: 20, display: 'flex' }),
+      // Accent rule
+      h('div', { width: 56, height: 2, backgroundColor: ACCENT, marginTop: 32, marginBottom: 20, display: 'flex' }),
       // Eyebrow - brand + domain, centered
       h('div', {
         display: 'flex', textAlign: 'center', fontSize: 18, fontWeight: 500, color: MIST,

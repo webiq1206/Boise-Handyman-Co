@@ -147,12 +147,14 @@ interface Lead {
 }
 
 const PRIORITY_SERVICES = [
-  { slug: "kitchen-remodel", name: "Kitchen Remodel" },
-  { slug: "bathroom-remodel", name: "Bathroom Remodel" },
-  { slug: "whole-home-remodel", name: "Whole-Home Remodel" },
-  { slug: "room-addition", name: "Room Addition" },
-  { slug: "basement-finish", name: "Basement Finish" },
-  { slug: "outdoor-living", name: "Outdoor Living" },
+  { slug: "drywall-repair", name: "Drywall Repair & Patching" },
+  { slug: "painting-touch-ups", name: "Interior & Exterior Painting" },
+  { slug: "plumbing-repairs", name: "Minor Plumbing Repairs" },
+  { slug: "electrical-repairs", name: "Minor Electrical Repairs" },
+  { slug: "carpentry-trim-repair", name: "Carpentry & Trim Repair" },
+  { slug: "mounting-assembly", name: "Mounting & Assembly" },
+  { slug: "fence-deck-gutter-repair", name: "Fence, Deck & Gutter Repair" },
+  { slug: "home-maintenance", name: "Caulking & Home Maintenance" },
 ];
 
 const AGREEMENT_VERSION = "1.0";
@@ -2108,14 +2110,14 @@ function SubcontractorPortalContent() {
                 </li>
                 <li>
                   <strong>Professional Conduct:</strong> You agree to conduct yourself professionally when 
-                  contacting customers. You represent your own business, not Boise Construction Co.
+                  contacting customers. You represent your own business, not Boise Handyman Co.
                 </li>
                 <li>
                   <strong>No Resale:</strong> You may not resell, share, or transfer leads to any third party.
                 </li>
                 <li>
                   <strong>Insurance & Licensing:</strong> You warrant that you maintain appropriate business 
-                  insurance and any required licenses for remodeling and construction services in Idaho.
+                  insurance and any licenses or registrations required for the trades you perform in Idaho.
                 </li>
                 <li>
                   <strong>Privacy:</strong> Customer information is confidential. You agree not to use contact 

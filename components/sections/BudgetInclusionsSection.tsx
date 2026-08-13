@@ -36,16 +36,16 @@ export function BudgetInclusionsSection() {
       <div className="container px-4 relative z-10">
         <div className="max-w-5xl mx-auto">
           <SectionHeader
-            eyebrow="Budget and scope"
+            eyebrow="Pricing and scope"
             inverse
             size="display"
             title={
               <>
-                What your number actually{" "}
+                What your quote actually{" "}
                 <em className="brc-accent">covers</em>
               </>
             }
-            description="A planning range upfront, a line-item budget before we break ground, and the same standard inclusions on every home, so you always know where things stand."
+            description="An instant range upfront, a firm quote before any work starts, and the same standard inclusions on every visit, so you always know where things stand."
             className="mb-0"
           />
 
@@ -68,7 +68,7 @@ export function BudgetInclusionsSection() {
             <Reveal delay={60}>
               <div className="md:border-l md:border-inverse-foreground/15 md:pl-16">
                 <h3 className="font-sans font-normal text-sm mb-5 text-inverse-foreground">
-                  Included on every home we build
+                  Included on every visit
                 </h3>
                 <ul className="space-y-3 mb-10">
                   {STANDARD_INCLUSIONS.map((item) => (
@@ -99,7 +99,7 @@ export function BudgetInclusionsSection() {
                     href="#consult"
                     className="inline-flex items-center gap-2 text-sm font-normal text-inverse-foreground hover:text-inverse-muted transition-colors"
                   >
-                    Ask about visualizations
+                    Start your task list
                     <ArrowRight className="h-4 w-4" />
                   </a>
                 </div>

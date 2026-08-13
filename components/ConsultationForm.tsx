@@ -41,10 +41,11 @@ import {
 } from "@/shared/addressValidation";
 
 /**
- * Someone who has not bought land yet has no site to give us, and that is the
- * single most common state for a new-build enquiry. Requiring a locatable
- * address of them would reject the lead we most want. Everyone else has a site,
- * so it stays required for them - see isLocatableSite for the accepted forms.
+ * Legacy sentinel from the home-builder era ("still looking for land"). No
+ * handyman project option uses this value any more, so the address field is
+ * effectively always required - a handyman job always has a service address.
+ * The constant and its branches are kept so the validation logic stays inert
+ * rather than rewritten.
  */
 const LAND_SEARCH_PROJECT_TYPE = "looking-for-land";
 
@@ -112,19 +113,22 @@ const formSchema = z
 type FormData = z.infer<typeof formSchema>;
 
 /**
- * Mirrors SERVICES in shared/contentData.ts, plus the two answers that are not a
- * service: someone still shopping for land, and someone who does not know yet.
- * Both are real states for a new-build lead and routing them to "other" loses
- * the one detail that changes the first call.
+ * Mirrors SERVICES in shared/contentData.ts (same slugs, so leads line up with
+ * service pages and the estimator), plus the two answers that are not a single
+ * service: a multi-task list, and someone who does not know yet. Both are real
+ * states for a handyman lead and routing them to "other" loses the one detail
+ * that changes the first reply.
  */
 const PROJECT_OPTIONS = [
-  { value: "custom-home", label: "Custom Home" },
-  { value: "semi-custom-home", label: "Semi-Custom Home" },
-  { value: "build-on-my-lot", label: "Build on My Lot" },
-  { value: "shop-home", label: "Shop Home / Barndominium" },
-  { value: "plans-only", label: "Home Design & Plans Only" },
-  { value: "lot-evaluation", label: "Lot Evaluation" },
-  { value: "looking-for-land", label: "Still Looking for Land" },
+  { value: "drywall-repair", label: "Drywall Repair & Patching" },
+  { value: "painting-touch-ups", label: "Interior / Exterior Painting" },
+  { value: "plumbing-repairs", label: "Minor Plumbing Repair" },
+  { value: "electrical-repairs", label: "Minor Electrical Repair" },
+  { value: "carpentry-trim-repair", label: "Carpentry, Doors & Trim" },
+  { value: "mounting-assembly", label: "Mounting & Assembly" },
+  { value: "fence-deck-gutter-repair", label: "Fence, Deck & Gutter Repair" },
+  { value: "home-maintenance", label: "Caulking & Home Maintenance" },
+  { value: "task-list", label: "A List of Small Jobs" },
   { value: "other", label: "Other / Not sure yet" },
 ];
 
@@ -367,8 +371,8 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
       <div className="flex flex-col items-start py-2 space-y-4" data-testid="consultation-success">
         {/* Brand icon (ochre field) confirms the brand on the request-received state */}
         <img
-          src="/brand/svg/icon/boise-construction-co-icon-accent.svg"
-          alt="Boise Construction Co"
+          src="/brand/svg/icon/boise-handyman-co-icon-accent.svg"
+          alt="Boise Handyman Co"
           width={48}
           height={48}
           className="h-12 w-12"
@@ -400,14 +404,14 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
             <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-[11px] font-normal text-foreground">
               2
             </span>
-            <span className="pt-0.5">We reach out within one business day to find a time that works.</span>
+            <span className="pt-0.5">We reply within one business day with an upfront quote and a time that works.</span>
           </li>
           <li className="flex gap-3">
             <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-[11px] font-normal text-foreground">
               3
             </span>
             <span className="pt-0.5">
-              Your free 60 to 90 minute in-home visit: planning guidance, design direction, no obligation.
+              Your scheduled visit: we arrive with the right materials and finish in one trip whenever the job allows.
             </span>
           </li>
         </ol>
@@ -572,13 +576,13 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
             render={({ field }) => (
               <FormItem>
                 <FormLabel className={labelClass}>
-                  What are you planning to build?
+                  What needs doing?
                   <RequiredMark />
                 </FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger data-testid="select-project-type" aria-required="true">
-                      <SelectValue placeholder="Select a project type" />
+                      <SelectValue placeholder="Select a job type" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -721,7 +725,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
           render={({ field }) => (
             <FormItem>
               <FormLabel className={labelClass}>
-                {searchingForLand ? "Where are you looking?" : "Build site address"}
+                {searchingForLand ? "Where are you looking?" : "Service address"}
                 {!searchingForLand && <RequiredMark />}
               </FormLabel>
               <FormControl>
@@ -737,8 +741,8 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
               </FormControl>
               <FormDescription className="text-xs text-muted-foreground mt-1">
                 {searchingForLand
-                  ? "Optional. A city or neighborhood is enough while you are still shopping for a lot."
-                  : "No street number yet? A parcel number or lot and subdivision works."}
+                  ? "Optional. A city or neighborhood is enough for now."
+                  : "Where the work will happen - so we can confirm the service area and plan the visit."}
               </FormDescription>
               <button
                 type="button"
@@ -753,8 +757,8 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
               </button>
               {showAddrInfo && (
                 <FormDescription id="address-info" className="text-xs text-muted-foreground mt-1">
-                  We pull county parcel records before we meet, so we can tell you what your site will
-                  require. Your information is never shared or sold -{" "}
+                  The address confirms you are inside our service area and lets us plan the visit and
+                  materials before we arrive. Your information is never shared or sold -{" "}
                   <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-foreground">
                     privacy policy
                   </Link>
@@ -779,7 +783,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Your home, your vision, or your timeline..."
+                    placeholder="The task list, the symptoms, or your timing..."
                     rows={3}
                     autoFocus
                     data-testid="textarea-message"

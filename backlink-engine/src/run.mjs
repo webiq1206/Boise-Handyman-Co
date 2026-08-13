@@ -26,7 +26,7 @@ const P = (f) => join(ROOT, f);
 const readJSON = (f) => JSON.parse(readFileSync(P(f), "utf8"));
 const DRY = process.argv.includes("--dry-run");
 const DATE = _today();
-const OURS = "boiseconstruction.co";
+const OURS = "boisehandyman.co";
 
 const gates = readJSON("config/quality-gates.json");
 const log = [`## Run ${DATE}${DRY ? " (dry-run)" : ""} [store: ${store.mode}]`];

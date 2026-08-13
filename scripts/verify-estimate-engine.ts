@@ -1,848 +1,263 @@
+/**
+ * Invariant suite for the handyman pricing engine (shared/estimateEngine.ts).
+ *
+ * Exact expected numbers live in verify-golden-estimates.ts; this file proves
+ * the RELATIONSHIPS that must hold for every reachable input:
+ *
+ * - the wizard's categories match the live service catalog in contentData
+ * - every task prices to a finite, positive, correctly ordered range
+ * - the one-hour minimum and the trip fee always apply, the trip fee once
+ * - more quantity never costs less; higher urgency never costs less
+ * - the we-pick-up supply run always costs more than customer materials
+ * - the range brackets the computed total at -10% / +20%, rounded to $5
+ * - empty input produces no estimate (never a fake $0 range)
+ *
+ *   npx tsx scripts/verify-estimate-engine.ts
+ */
 import {
-  EMPTY_ESTIMATE_INPUT,
-  EMPTY_REFINEMENTS,
-  calculateEstimate,
-  countVisibleUserRefinements,
-  getMaxRefinementFields,
-  getProjectSizeConfig,
-  getRefinementVisibility,
-  getSetRefinementKeys,
-  getSizePresets,
-  PLANNING_RANGE_ADJUSTMENT_LOW,
-  PLANNING_RANGE_ADJUSTMENT_HIGH,
-  getAvailableFinishLevels,
-  isCompleteEstimateInput,
-  type ProjectType,
-  type UserRefinementKey,
-  type FinishLevel,
-  type EstimateRefinements,
+  calculateHandymanEstimate,
+  findTaskOption,
+  getTasksForCategory,
+  HOURLY_RATE_USD,
+  JOB_CATEGORY_IDS,
+  JOB_CATEGORY_LABELS,
+  MATERIALS_PLAN_VALUES,
+  MAX_TASK_QUANTITY,
+  MINIMUM_LABOR_HOURS,
+  OTHER_JOB_SIZES,
+  OTHER_JOB_SIZE_VALUES,
+  RANGE_HIGH_FACTOR,
+  RANGE_LOW_FACTOR,
+  RANGE_ROUNDING_USD,
+  SUPPLY_RUN_HOURS,
+  TASK_CATALOG,
+  TRIP_FEE_USD,
+  URGENCY_LEVELS,
+  URGENCY_LEVEL_VALUES,
+  type HandymanEstimateInput,
+  type JobCategoryId,
 } from "../shared/estimateEngine";
-import {
-  buildTakeoff,
-  shareSum,
-  takeoffForClient,
-  CLIENT_HIDDEN_COMPONENT_IDS,
-  findForbiddenPhrase,
-  TAKEOFF_BASIS_NOTICE,
-  TAKEOFF_SCOPE_NOTICE,
-} from "../shared/costCatalog";
-import {
-  buildCustomerEmailHtml,
-  buildAdminEmailHtml,
-  buildEstimateSectionsHtml,
-} from "../server/services/consultationEmail";
+import { SERVICES } from "../shared/contentData";
+
+let checks = 0;
+let failures = 0;
 
 function assert(condition: boolean, message: string) {
+  checks++;
   if (!condition) {
+    failures++;
     console.error(`FAIL: ${message}`);
-    process.exit(1);
   }
 }
 
-const projects: ProjectType[] = ["kitchen", "bathroom", "whole-home", "addition", "adu", "basement"];
+/* ─────────────────────────────── catalog stays in sync with the services */
 
-const mid = (r: { priceLow: number; priceHigh: number }) => (r.priceLow + r.priceHigh) / 2;
-const width = (r: { priceLow: number; priceHigh: number }) => r.priceHigh - r.priceLow;
-
-// Nothing is selected by default and no estimate can exist without selections.
-assert(EMPTY_ESTIMATE_INPUT.project === null, "no project selected by default");
-assert(EMPTY_ESTIMATE_INPUT.finish === null, "no finish selected by default");
-assert(EMPTY_ESTIMATE_INPUT.sqft === null, "no size selected by default");
-assert(
-  Object.values(EMPTY_REFINEMENTS).every((v) => v === null),
-  "no refinement selected by default",
-);
-assert(!isCompleteEstimateInput(EMPTY_ESTIMATE_INPUT), "empty input is not calculable");
-assert(getSetRefinementKeys(EMPTY_REFINEMENTS).length === 0, "no refinement keys set by default");
-
-for (const project of projects) {
-  const visibility = getRefinementVisibility(project);
-  const maxFields = getMaxRefinementFields(project);
-  const visibleCount = Object.values(visibility).filter(Boolean).length;
-  assert(maxFields === visibleCount, `${project} max fields matches visibility (${maxFields})`);
-
-  // Bathroom count is now priced on every project whose published rate covers a
-  // known number of them, so these counts include it.
-  if (project === "adu") {
-    // A dwelling unit always has a kitchen, so the question is full vs compact
-    // rather than whether one exists at all.
-    assert(!visibility.layoutChanges, `${project} hides layout changes`);
-    assert(visibility.bathroomCount, `${project} asks how many bathrooms`);
-    assert(visibility.kitchenIncluded, `${project} asks full kitchen vs kitchenette`);
-    assert(maxFields === 4, `${project} exposes four refinement fields`);
-  } else if (project === "addition") {
-    assert(!visibility.layoutChanges, `${project} hides layout changes`);
-    assert(visibility.bathroomCount, `${project} asks how many bathrooms`);
-    assert(visibility.kitchenIncluded, `${project} asks about a kitchen`);
-    assert(maxFields === 4, `${project} exposes four refinement fields`);
-  } else if (project === "basement") {
-    assert(visibility.layoutChanges, `${project} shows layout changes`);
-    assert(visibility.bathroomCount, `${project} asks how many bathrooms`);
-    assert(visibility.kitchenIncluded, `${project} asks about a wet bar`);
-    assert(maxFields === 4, `${project} exposes four refinement fields`);
-  } else if (project === "whole-home") {
-    // Layout, systems, bathroom count and kitchen inclusion. Bathroom count and
-    // kitchen replaced the retired roomCount, which double counted size.
-    assert(visibility.layoutChanges, `${project} shows layout changes`);
-    assert(visibility.bathroomCount, `${project} asks how many bathrooms`);
-    assert(visibility.kitchenIncluded, `${project} asks whether the kitchen is included`);
-    assert(maxFields === 4, `${project} exposes four refinement fields`);
-  } else if (project === "bathroom") {
-    // Layout, systems, fixture count within a bathroom, and how many bathrooms.
-    assert(visibility.layoutChanges, `${project} shows layout changes`);
-    assert(visibility.fixtureCount, `${project} asks fixture count`);
-    assert(visibility.bathroomCount, `${project} asks how many bathrooms`);
-    assert(maxFields === 4, `${project} exposes four refinement fields`);
-  } else {
-    assert(visibility.layoutChanges, `${project} shows layout changes`);
-    assert(maxFields === 3, `${project} exposes three refinement fields`);
-  }
-
-  // Size presets are valid, intentional starting points within bounds.
-  const config = getProjectSizeConfig(project);
-  const presets = getSizePresets(project);
-  assert(presets.length === 3, `${project} has three size presets`);
-  for (const preset of presets) {
-    assert(
-      preset.sqft >= config.min && preset.sqft <= config.max,
-      `${project} preset ${preset.id} within bounds`,
-    );
-    assert(preset.sqft % config.step === 0, `${project} preset ${preset.id} snaps to step`);
-  }
-}
-
-const kitchenMax = getMaxRefinementFields("kitchen");
-const kitchenDetailed = calculateEstimate(
-  {
-    project: "kitchen",
-    finish: "mid-range",
-    sqft: getProjectSizeConfig("kitchen").baselineSqft,
-    refinements: {
-      ...EMPTY_REFINEMENTS,
-      layoutChanges: "major",
-      plumbingElectrical: "full",
-      cabinetTier: "custom",
-    },
-  },
-  kitchenMax,
-);
-assert(kitchenDetailed.confidence === "detailed", "kitchen reaches detailed guidance at max fields");
-assert(kitchenDetailed.confidencePercent === 85, "kitchen detailed guidance is 85%");
-
-const kitchenBase = calculateEstimate(
-  {
-    project: "kitchen",
-    finish: "mid-range",
-    sqft: getProjectSizeConfig("kitchen").baselineSqft,
-    refinements: { ...EMPTY_REFINEMENTS },
-  },
-  0,
-);
-const kitchenNeutral = calculateEstimate(
-  {
-    project: "kitchen",
-    finish: "mid-range",
-    sqft: getProjectSizeConfig("kitchen").baselineSqft,
-    refinements: { ...EMPTY_REFINEMENTS, layoutChanges: "none", plumbingElectrical: "cosmetic" },
-  },
-  2,
-);
-// Neutral refinements carry no cost premium, so the CENTER is unchanged - but
-// answering the questions (even with "standard") is information that reduces
-// uncertainty, so the band tightens and the range gets narrower.
-assert(
-  Math.abs(mid(kitchenNeutral) - mid(kitchenBase)) <= 1000,
-  "neutral refinements keep the estimate center",
-);
-assert(
-  width(kitchenNeutral) < width(kitchenBase),
-  "providing detail (even neutral) narrows the range",
-);
-
-// The uncertainty band tightens as detail is added: a fully-specified estimate
-// is strictly narrower (as a spread) than the starting range.
-assert(
-  kitchenDetailed.priceHigh / kitchenDetailed.priceLow < kitchenBase.priceHigh / kitchenBase.priceLow,
-  "adding detail narrows the range spread",
-);
-
-// ADU configuration: detached carries a premium over attached; neither uses
-// the two-story addition multiplier.
-const aduInput = {
-  project: "adu" as const,
-  finish: "mid-range" as const,
-  sqft: getProjectSizeConfig("adu").baselineSqft,
-};
-const aduDetached = calculateEstimate(
-  { ...aduInput, refinements: { ...EMPTY_REFINEMENTS, aduConfig: "detached" } },
-  1,
-);
-const aduAttached = calculateEstimate(
-  { ...aduInput, refinements: { ...EMPTY_REFINEMENTS, aduConfig: "attached" } },
-  1,
-);
-assert(aduDetached.priceHigh > aduAttached.priceHigh, "detached ADU prices above attached");
-assert(
-  aduDetached.included.includes("Detached ADU") && aduAttached.included.includes("Attached ADU"),
-  "ADU configuration reflected in scope",
-);
-
-const aduDetailed = calculateEstimate(
-  {
-    ...aduInput,
-    refinements: {
-      ...EMPTY_REFINEMENTS,
-      plumbingElectrical: "full",
-      aduConfig: "attached",
-      bathroomCount: 1,
-      kitchenIncluded: true,
-    },
-  },
-  4,
-);
-assert(aduDetailed.confidence === "detailed", "ADU reaches detailed guidance at max fields");
-
-const hiddenKeys: UserRefinementKey[] = ["layoutChanges", "plumbingElectrical"];
-const hiddenCount = countVisibleUserRefinements("adu", hiddenKeys);
-assert(hiddenCount === 1, "hidden layout refinements are not counted for ADU");
-assert(
-  countVisibleUserRefinements("adu", ["aduConfig", "stories"]) === 1,
-  "stories not counted for ADU; aduConfig counted",
-);
-
-// Sub-baseline counts never discount below the base range.
-const bathBase = calculateEstimate(
-  {
-    project: "bathroom",
-    finish: "mid-range",
-    sqft: getProjectSizeConfig("bathroom").baselineSqft,
-    refinements: { ...EMPTY_REFINEMENTS },
-  },
-  0,
-);
-const bathOneFixture = calculateEstimate(
-  {
-    project: "bathroom",
-    finish: "mid-range",
-    sqft: getProjectSizeConfig("bathroom").baselineSqft,
-    refinements: { ...EMPTY_REFINEMENTS, fixtureCount: 1 },
-  },
-  1,
-);
-// A low fixture count carries no discount multiplier, so it never pulls the
-// estimate CENTER below the base (the band may tighten around that center as
-// detail is added, but the midpoint does not drop).
-// Tolerance is one rounding step, not one dollar. Both endpoints round to the
-// nearest $1,000 independently, so the midpoint can legitimately shift by up to
-// $500 without any discount having been applied. The invariant being protected
-// is that no DISCOUNT multiplier exists for a low fixture count, not that the
-// rounded midpoint is bit-identical.
-assert(
-  mid(bathOneFixture) >= mid(bathBase) - 1000,
-  "low fixture count never discounts the estimate center",
-);
-
-const wholeHomeLarge = calculateEstimate(
-  {
-    project: "whole-home",
-    finish: "mid-range",
-    sqft: 8000,
-    refinements: { ...EMPTY_REFINEMENTS },
-  },
-  0,
-);
-const wholeHomeBase = calculateEstimate(
-  {
-    project: "whole-home",
-    finish: "mid-range",
-    sqft: getProjectSizeConfig("whole-home").baselineSqft,
-    refinements: { ...EMPTY_REFINEMENTS },
-  },
-  0,
-);
-assert(
-  wholeHomeLarge.priceHigh > wholeHomeBase.priceHigh,
-  "whole-home price scales up with square footage",
-);
-
-const aduMaxSqft = getProjectSizeConfig("adu").max;
-assert(aduMaxSqft === 900, "ADU square footage is capped at 900");
-
-/* ══════════════════════════════════════════════════════════════════════
-   EXHAUSTIVE INVARIANT SWEEP
-
-   The checks above are scenario spot-checks. These sweep the entire input
-   space (every project x finish x size step x scope ladder) and assert the
-   properties the model must ALWAYS satisfy. This is what catches a pricing
-   regression before a homeowner sees it.
-
-   NOTE: this proves the arithmetic is self-consistent and well-behaved. It
-   cannot prove the base rates in PRICE_MATRIX match real Boise costs; that
-   requires calibration against closed jobs.
-══════════════════════════════════════════════════════════════════════ */
-
-let sweepChecks = 0;
-function check(condition: boolean, message: string) {
-  sweepChecks++;
-  assert(condition, message);
-}
-
-function sizeGrid(project: ProjectType): number[] {
-  const { min, max, step } = getProjectSizeConfig(project);
-  const points: number[] = [];
-  for (let s = min; s <= max; s += step) points.push(s);
-  if (points[points.length - 1] !== max) points.push(max);
-  return points;
-}
-
-function priceAt(
-  project: ProjectType,
-  finish: FinishLevel,
-  sqft: number,
-  refinements: EstimateRefinements,
-) {
-  const count = countVisibleUserRefinements(project, getSetRefinementKeys(refinements));
-  return calculateEstimate({ project, finish, sqft, refinements }, count);
-}
-
-// 1. Well-formedness across every reachable combination.
-for (const project of projects) {
-  for (const finish of getAvailableFinishLevels(project)) {
-    for (const sqft of sizeGrid(project)) {
-      const r = priceAt(project, finish, sqft, { ...EMPTY_REFINEMENTS });
-      const where = `${project}/${finish}/${sqft}sf`;
-      check(Number.isFinite(r.priceLow) && Number.isFinite(r.priceHigh), `${where}: finite price`);
-      check(r.priceLow > 0, `${where}: positive low`);
-      check(r.priceLow < r.priceHigh, `${where}: low below high`);
-      check(r.priceLow % 1000 === 0 && r.priceHigh % 1000 === 0, `${where}: rounded to 1k`);
-      const spread = r.priceHigh / r.priceLow;
-      check(spread >= 1.1, `${where}: band at least 1.1x (got ${spread.toFixed(2)})`);
-      check(spread <= 2.2, `${where}: band at most 2.2x (got ${spread.toFixed(2)})`);
-    }
-  }
-}
-
-// 2. Monotonic in size: a larger space never costs less.
-for (const project of projects) {
-  for (const finish of getAvailableFinishLevels(project)) {
-    let prev = 0;
-    for (const sqft of sizeGrid(project)) {
-      const m = mid(priceAt(project, finish, sqft, { ...EMPTY_REFINEMENTS }));
-      check(m >= prev, `${project}/${finish}: size monotonic at ${sqft}sf (${m} < ${prev})`);
-      prev = m;
-    }
-  }
-}
-
-// 3. Monotonic in finish: a richer finish never costs less.
-for (const project of projects) {
-  for (const sqft of sizeGrid(project)) {
-    let prev = 0;
-    for (const finish of getAvailableFinishLevels(project)) {
-      const m = mid(priceAt(project, finish, sqft, { ...EMPTY_REFINEMENTS }));
-      check(m >= prev, `${project}@${sqft}sf: finish monotonic at ${finish} (${m} < ${prev})`);
-      prev = m;
-    }
-  }
-}
-
-// 4. Monotonic in scope: escalating any refinement never lowers the estimate.
-const LADDERS: { key: keyof EstimateRefinements; values: unknown[] }[] = [
-  { key: "layoutChanges", values: ["none", "moderate", "major"] },
-  { key: "plumbingElectrical", values: ["cosmetic", "partial", "full"] },
-  { key: "cabinetTier", values: ["standard", "semi-custom", "custom"] },
-  { key: "fixtureCount", values: [1, 2, 3, 4, 5, 6, 7, 8] },
-  { key: "bathroomCount", values: [1, 2, 3, 4, 5] },
-  { key: "kitchenIncluded", values: [false, true] },
-  { key: "stories", values: [1, 2] },
-  { key: "aduConfig", values: ["attached", "detached"] },
-];
-
-for (const project of projects) {
-  const v = getRefinementVisibility(project);
-  const shows: Record<string, boolean> = {
-    layoutChanges: v.layoutChanges,
-    plumbingElectrical: v.plumbingElectrical,
-    cabinetTier: v.cabinetTier,
-    fixtureCount: v.fixtureCount,
-    bathroomCount: v.bathroomCount,
-    kitchenIncluded: v.kitchenIncluded,
-    stories: v.stories,
-    aduConfig: v.aduConfiguration,
-  };
-  for (const finish of getAvailableFinishLevels(project)) {
-    const sqft = getProjectSizeConfig(project).baselineSqft;
-    for (const { key, values } of LADDERS) {
-      if (!shows[key as string]) continue;
-      let prev = 0;
-      for (const value of values) {
-        const refinements = { ...EMPTY_REFINEMENTS, [key]: value } as EstimateRefinements;
-        const m = mid(priceAt(project, finish, sqft, refinements));
-        check(
-          m >= prev,
-          `${project}/${finish}: scope monotonic for ${String(key)}=${String(value)} (${m} < ${prev})`,
-        );
-        prev = m;
-      }
-    }
-  }
-}
-
-// 5. Size scaling must be SUBLINEAR for remodels. Cost follows cabinet runs,
-//    fixture counts and tile area, not floor area. Linear scaling here is what
-//    produced the $198k-$247k kitchen that triggered this work.
-for (const project of ["kitchen", "bathroom", "basement", "whole-home"] as ProjectType[]) {
-  const cfg = getProjectSizeConfig(project);
-  const doubled = Math.min(cfg.max, cfg.baselineSqft * 2);
-  if (doubled <= cfg.baselineSqft) continue;
-  const small = mid(priceAt(project, "mid-range", cfg.baselineSqft, { ...EMPTY_REFINEMENTS }));
-  const big = mid(priceAt(project, "mid-range", doubled, { ...EMPTY_REFINEMENTS }));
-  const areaRatio = doubled / cfg.baselineSqft;
-  const priceRatio = big / small;
-  check(
-    priceRatio < areaRatio,
-    `${project}: price scaled ${priceRatio.toFixed(2)}x for ${areaRatio.toFixed(2)}x area (must be sublinear)`,
+const serviceSlugs = SERVICES.map((s) => s.slug);
+for (const slug of serviceSlugs) {
+  assert(
+    (JOB_CATEGORY_IDS as readonly string[]).includes(slug),
+    `service ${slug} from contentData is offered as a wizard category`,
   );
 }
+assert(
+  JOB_CATEGORY_IDS.length === serviceSlugs.length + 1,
+  "wizard offers exactly the live services plus the something-else catch-all",
+);
+assert(
+  (JOB_CATEGORY_IDS as readonly string[]).includes("something-else"),
+  "the something-else catch-all exists",
+);
 
-// 6. New construction SHOULD scale close to linearly: an addition really does
-//    cost roughly proportionally more per square foot added.
-for (const project of ["addition", "adu"] as ProjectType[]) {
-  const cfg = getProjectSizeConfig(project);
-  const bigger = Math.min(cfg.max, Math.round(cfg.baselineSqft * 1.5));
-  if (bigger <= cfg.baselineSqft) continue;
-  const small = mid(priceAt(project, "mid-range", cfg.baselineSqft, { ...EMPTY_REFINEMENTS }));
-  const big = mid(priceAt(project, "mid-range", bigger, { ...EMPTY_REFINEMENTS }));
-  const areaRatio = bigger / cfg.baselineSqft;
-  const priceRatio = big / small;
-  check(
-    priceRatio > 1 + (areaRatio - 1) * 0.6,
-    `${project}: new construction should scale near-linearly (got ${priceRatio.toFixed(2)}x for ${areaRatio.toFixed(2)}x area)`,
-  );
-}
-
-// 7. SOURCE FIDELITY. At its baseline size with no refinements, every project
-//    and finish must reproduce its reference pricing exactly. That reference is
-//    the 2025 owner-supplied cost guide for every category except ADU, which
-//    is calibrated to a real closed job (see the note on the adu entry below).
-//    This is the check that keeps the estimator honest to the published
-//    pricing: any future edit to PRICE_MATRIX, the band model, or the size
-//    scaling that causes the tool to quote something other than the guide at
-//    the reference size now fails the build.
-const COST_GUIDE_2025: Partial<Record<ProjectType, Partial<Record<FinishLevel, [number, number]>>>> = {
-  // Kitchen is no longer the guide. Calibrated 2026-07 against two issued
-  // estimates (EST-10088 $34,335 and EST-10049 $31,850), both scope-normalized
-  // to this catalog's kitchen definition, which put a full-scope mid-range
-  // equivalent at 0.71x and 0.94x of what the model quoted. Every tier scaled
-  // by the conservative middle, 0.85. Guide values were [18750, 31250],
-  // [43750, 68750], [100000, 162500], [175000, 225000].
-  kitchen: {
-    refresh: [15900, 26600],
-    "mid-range": [37200, 58400],
-    "high-end": [85000, 138100],
-    luxury: [148800, 191300],
-  },
-  bathroom: {
-    refresh: [12000, 20000],
-    "mid-range": [22000, 36000],
-    "high-end": [44000, 64000],
-    luxury: [72000, 112000],
-  },
-  // Whole-home is no longer the guide. Owner pricing decision 2026-07: every
-  // tier scaled by 4/3 so an 1,800 sqft mid-range whole-home quotes $180,000 to
-  // $240,000 ($100/sf floor) rather than $135,000 to $180,000 ($75/sf). Guide
-  // values were [54000, 90000], [135000, 225000], [270000, 387000],
-  // [450000, 765000].
-  "whole-home": {
-    refresh: [72000, 120000],
-    "mid-range": [180000, 300000],
-    "high-end": [360000, 516000],
-    luxury: [600000, 1020000],
-  },
-  // Addition, like ADU, is no longer the guide. The guide priced an addition
-  // above an ADU per square foot, which is backwards: an ADU carries a kitchen,
-  // a bath and utility connections that an addition does not. Derived from the
-  // calibrated ADU minus those (18%) plus a tie-in allowance (10%), i.e. 0.8116
-  // of the guide. Guide values were [120000, 170000], [200000, 280000],
-  // [340000, 460000].
-  addition: {
-    "mid-range": [97000, 138000],
-    "high-end": [162000, 227000],
-    luxury: [276000, 373000],
-  },
-  // ADU is the one category NOT from the guide. It is calibrated to a real
-  // closed job: cheapest delivered detached ADU about $145,000, owner-set
-  // starting point $250/sq ft. Guide values were [210000, 300000],
-  // [300000, 420000], [420000, 600000], all scaled by 0.7364.
-  adu: {
-    "mid-range": [155000, 221000],
-    "high-end": [221000, 309000],
-    luxury: [309000, 442000],
-  },
-  basement: {
-    "mid-range": [45000, 76500],
-    "high-end": [90000, 144000],
-    luxury: [157500, 225000],
-  },
-};
-
-for (const project of projects) {
-  const tiers = COST_GUIDE_2025[project];
-  if (!tiers) continue;
-  const baseline = getProjectSizeConfig(project).baselineSqft;
-  for (const finish of getAvailableFinishLevels(project)) {
-    const expected = tiers[finish];
-    if (!expected) continue;
-    const r = priceAt(project, finish, baseline, { ...EMPTY_REFINEMENTS });
-    // The floor now tracks the guide and only the ceiling is reduced, so the
-    // relationship is asymmetric. It is also no longer exact: where a category's
-    // published spread is narrow, compressing the top alone pushes the band
-    // under MIN_BAND, and the model widens it back symmetrically around the
-    // centre rather than quote a falsely precise range. So this asserts the
-    // output sits inside a sane envelope around the intended figures rather
-    // than matching them to the dollar, which would fail for that reason alone.
-    const wantLow = expected[0] * PLANNING_RANGE_ADJUSTMENT_LOW;
-    const wantHigh = expected[1] * PLANNING_RANGE_ADJUSTMENT_HIGH;
-    const tolerance = 0.12; // room for the MIN_BAND re-centring
-    check(
-      r.priceLow >= wantLow * (1 - tolerance) &&
-        r.priceLow <= wantLow * (1 + tolerance) &&
-        r.priceHigh >= wantHigh * (1 - tolerance) &&
-        r.priceHigh <= wantHigh * (1 + tolerance),
-      `cost-guide fidelity ${project}/${finish} @${baseline}sf: engine ${r.priceLow}-${r.priceHigh}, expected near ${Math.round(wantLow)}-${Math.round(wantHigh)} (guide ${expected[0]}-${expected[1]}, low x${PLANNING_RANGE_ADJUSTMENT_LOW} high x${PLANNING_RANGE_ADJUSTMENT_HIGH})`,
-    );
-
-    // The ceiling must never exceed what the guide itself publishes.
-    check(
-      r.priceHigh <= expected[1],
-      `${project}/${finish} ceiling ${r.priceHigh} exceeds the published ${expected[1]}`,
-    );
-  }
-}
-
-// 8. COMPONENT TAKEOFF RECONCILIATION. The catalog prices a project from
-//    components and quantities, but it must never move a price. Shares are
-//    asserted to sum to exactly 1 per project, and the sum of the line items
-//    is asserted to reproduce the estimate midpoint on every project, finish
-//    and size. Without this, a share edit could silently change what a
-//    homeowner is quoted.
-for (const project of projects) {
-  const sum = shareSum(project);
-  check(
-    Math.abs(sum - 1) < 1e-9,
-    `${project}: component shares sum to ${sum}, must be exactly 1 or the takeoff cannot reconcile`,
-  );
-
-  const sizeConfig = getProjectSizeConfig(project);
-  for (const finish of getAvailableFinishLevels(project)) {
-    for (let sqft = sizeConfig.min; sqft <= sizeConfig.max; sqft += sizeConfig.step) {
-      const result = calculateEstimate({
-        project,
-        finish,
-        sqft,
-        refinements: EMPTY_REFINEMENTS,
-      });
-      const midpoint = (result.priceLow + result.priceHigh) / 2;
-      const takeoff = buildTakeoff(project, finish, sqft, midpoint);
-
-      // Each line rounds to the nearest dollar, so drift is bounded by the
-      // line count. Anything larger means the shares no longer reconcile.
-      const drift = Math.abs(takeoff.total - midpoint);
-      check(
-        drift <= takeoff.lines.length,
-        `${project}/${finish} @${sqft}sf: takeoff total ${takeoff.total} drifts ${drift.toFixed(2)} from midpoint ${midpoint}`,
-      );
-      sweepChecks++;
-
-      check(
-        takeoff.lines.every((line) => line.cost >= 0 && Number.isFinite(line.cost)),
-        `${project}/${finish} @${sqft}sf: takeoff produced a negative or non-finite line`,
-      );
-      sweepChecks++;
-
-      // CLIENT VIEW. Project management and overhead must never appear as
-      // lines a homeowner can see, and folding them in must not move the
-      // total by a single dollar.
-      const clientView = takeoffForClient(takeoff);
-      check(
-        clientView.lines.every((line) => !CLIENT_HIDDEN_COMPONENT_IDS.has(line.id)),
-        `${project}/${finish} @${sqft}sf: client takeoff leaks a hidden line`,
-      );
-      sweepChecks++;
-      check(
-        clientView.total === takeoff.total,
-        `${project}/${finish} @${sqft}sf: client takeoff total ${clientView.total} != full total ${takeoff.total}`,
-      );
-      sweepChecks++;
-      check(
-        clientView.lines.every((line) => line.cost >= 0 && Number.isFinite(line.cost)) &&
-          clientView.lines.length === takeoff.lines.length - 2,
-        `${project}/${finish} @${sqft}sf: client takeoff malformed`,
-      );
-      sweepChecks++;
-      check(
-        clientView.lines.every((line) => {
-          const original = takeoff.lines.find((l) => l.id === line.id);
-          return original !== undefined && line.cost >= original.cost;
-        }),
-        `${project}/${finish} @${sqft}sf: folding hidden costs in must not shrink any visible line`,
-      );
-      sweepChecks++;
-    }
-  }
-}
-
-// 9. NO SIZE PLATEAUS. "A larger space never costs less" permits equal, which
-//    is how a hard multiplier clamp went unnoticed while it made every
-//    whole-home between 4,070 and 8,000 sqft quote an identical price. Price
-//    must actually respond to size across the whole slider.
-for (const project of projects) {
-  const sizeConfig = getProjectSizeConfig(project);
-  const steps = Math.floor((sizeConfig.max - sizeConfig.min) / sizeConfig.step);
-  for (const finish of getAvailableFinishLevels(project)) {
-    let longestFlatRun = 0;
-    let run = 0;
-    let previous = -1;
-    for (let sqft = sizeConfig.min; sqft <= sizeConfig.max; sqft += sizeConfig.step) {
-      const { priceLow } = calculateEstimate({
-        project,
-        finish,
-        sqft,
-        refinements: EMPTY_REFINEMENTS,
-      });
-      if (priceLow === previous) {
-        run++;
-        longestFlatRun = Math.max(longestFlatRun, run);
-      } else {
-        run = 0;
-      }
-      previous = priceLow;
-    }
-    // Adjacent steps can round to the same dollar figure; a plateau spanning
-    // more than a tenth of the slider is a clamp, not rounding.
-    const allowed = Math.max(2, Math.ceil(steps * 0.1));
-    check(
-      longestFlatRun <= allowed,
-      `${project}/${finish}: price is flat across ${longestFlatRun} consecutive size steps (max allowed ${allowed}); a clamp is binding inside the valid range`,
-    );
-    sweepChecks++;
-
-    const smallest = calculateEstimate({ project, finish, sqft: sizeConfig.min, refinements: EMPTY_REFINEMENTS });
-    const largest = calculateEstimate({ project, finish, sqft: sizeConfig.max, refinements: EMPTY_REFINEMENTS });
-    check(
-      largest.priceLow > smallest.priceLow,
-      `${project}/${finish}: largest size does not cost more than smallest`,
-    );
-    sweepChecks++;
-  }
-}
-
-// 10. UPGRADE SCOPE. Kitchen and bathroom "what are you upgrading" chips scope
-//     the estimate down for a partial remodel. The invariants that keep this
-//     honest: an unspecified or complete scope reproduces the full rate exactly
-//     (so source fidelity holds), a partial scope always costs strictly less
-//     than the full remodel, and adding a component never lowers the price.
-const SCOPE_CHIPS: Partial<Record<ProjectType, string[]>> = {
-  kitchen: ["cabinets", "counters", "flooring", "lighting"],
-  bathroom: ["shower", "tub", "vanity", "tile"],
-};
-for (const project of projects) {
-  const chips = SCOPE_CHIPS[project];
-  if (!chips) {
-    // A project without scope chips must be completely unaffected by the field.
-    const cfg = getProjectSizeConfig(project);
-    const withScope = calculateEstimate({
-      project,
-      finish: getAvailableFinishLevels(project)[0],
-      sqft: cfg.baselineSqft,
-      refinements: { ...EMPTY_REFINEMENTS, upgradeScope: ["anything"] },
-    });
-    const without = calculateEstimate({
-      project,
-      finish: getAvailableFinishLevels(project)[0],
-      sqft: cfg.baselineSqft,
-      refinements: EMPTY_REFINEMENTS,
-    });
+for (const id of JOB_CATEGORY_IDS) {
+  assert(Boolean(JOB_CATEGORY_LABELS[id]?.label), `category ${id} has a label`);
+  const service = SERVICES.find((s) => s.slug === id);
+  if (service) {
     assert(
-      withScope.priceLow === without.priceLow && withScope.priceHigh === without.priceHigh,
-      `${project}: upgradeScope must not affect a project with no scope chips`,
+      JOB_CATEGORY_LABELS[id].label === service.name ||
+        id === "mounting-assembly" /* short label allowed, name matches */,
+      `category label for ${id} matches the service name (${service.name})`,
     );
-    sweepChecks++;
-    continue;
-  }
-
-  const cfg = getProjectSizeConfig(project);
-  for (const finish of getAvailableFinishLevels(project)) {
-    const base = { project, finish, sqft: cfg.baselineSqft } as const;
-    const full = calculateEstimate({ ...base, refinements: EMPTY_REFINEMENTS });
-    const allSelected = calculateEstimate({
-      ...base,
-      refinements: { ...EMPTY_REFINEMENTS, upgradeScope: [...chips] },
-    });
-
-    // None specified and all selected both mean a full remodel.
-    assert(
-      allSelected.priceLow === full.priceLow && allSelected.priceHigh === full.priceHigh,
-      `${project}/${finish}: selecting every upgrade chip must equal the full base rate`,
-    );
-    sweepChecks++;
-
-    // A single-component partial scope must cost strictly less than the full
-    // remodel, and progressively adding components must never lower the price.
-    let prev = 0;
-    for (let i = 1; i <= chips.length; i++) {
-      const subset = chips.slice(0, i);
-      const r = calculateEstimate({
-        ...base,
-        refinements: { ...EMPTY_REFINEMENTS, upgradeScope: subset },
-      });
-      if (i < chips.length) {
-        assert(
-          r.priceHigh < full.priceHigh,
-          `${project}/${finish}: partial scope (${subset.join("+")}) must cost less than a full remodel`,
-        );
-      }
-      assert(
-        r.priceLow >= prev,
-        `${project}/${finish}: adding an upgrade lowered the price at ${subset.join("+")}`,
-      );
-      prev = r.priceLow;
-      sweepChecks++;
-    }
   }
 }
 
-// 11. LEAD-FACING VOCABULARY. The takeoff invariants above prove that
-//     takeoffForClient strips the hidden lines, but that only protects a
-//     surface that remembers to call it. This section renders the REAL
-//     customer email and asserts the finished HTML contains none of the
-//     forbidden vocabulary, so a future surface that forgets the client view
-//     fails the build instead of reaching a homeowner.
-//
-//     An issued proposal (EST-10079) carried a visible "Contractor OH&P" line
-//     to a client, which is the concrete failure this guard exists to prevent.
-{
-  const sampleLead = {
-    name: "Verification Lead",
-    phone: "2085550000",
-    email: "verify@example.com",
-    address: "123 Main St",
-    zip: "83702",
-    projectType: "kitchen",
-    budget: "$50,000",
-  };
-
-  // Refinement combinations that change which lines render, so the guard is
-  // not just checking one happy path.
-  const refinementCombos: EstimateRefinements[] = [
-    EMPTY_REFINEMENTS,
-    { ...EMPTY_REFINEMENTS, cabinetTier: "custom", layoutChanges: "major", plumbingElectrical: "full" },
-    { ...EMPTY_REFINEMENTS, upgradeScope: ["cabinets"] },
-  ];
-
-  let renderedEmails = 0;
-
-  for (const project of projects) {
-    const cfg = getProjectSizeConfig(project);
-    for (const finish of getAvailableFinishLevels(project)) {
-      for (const sqft of [cfg.min, cfg.baselineSqft, cfg.max]) {
-        for (const refinements of refinementCombos) {
-          const result = calculateEstimate({ project, finish, sqft, refinements });
-          const estimate = {
-            project,
-            finish,
-            sqft,
-            priceLow: result.priceLow,
-            priceHigh: result.priceHigh,
-            roi: result.roi,
-            confidence: result.confidenceLabel,
-            refinements,
-            included: result.included,
-          };
-
-          const customerHtml = buildCustomerEmailHtml(sampleLead, estimate);
-          const leaked = findForbiddenPhrase(customerHtml);
-          check(
-            leaked === null,
-            `${project}/${finish} @${sqft}sf: customer email leaks forbidden vocabulary ("${leaked}"). ` +
-              `These costs must be folded into the visible line items, never named. See CLIENT_FORBIDDEN_PHRASES.`,
-          );
-
-          // The plain-text alternative is derived from this HTML by the send
-          // path, so a clean HTML body is a clean text body.
-          const clientSections = buildEstimateSectionsHtml(estimate, undefined, "client");
-          const sectionLeak = findForbiddenPhrase(clientSections);
-          check(
-            sectionLeak === null,
-            `${project}/${finish} @${sqft}sf: client estimate sections leak forbidden vocabulary ("${sectionLeak}")`,
-          );
-
-          // NO PER-LINE DOLLARS. The client sees trades and quantities; the
-          // dollar figures are proportional allocations, not priced work.
-          // The scope notice renders in place of the basis notice, and the
-          // priced midpoint subtotal must not appear at all.
-          check(
-            clientSections.includes(TAKEOFF_SCOPE_NOTICE) &&
-              !clientSections.includes(TAKEOFF_BASIS_NOTICE),
-            `${project}/${finish} @${sqft}sf: client sections must carry the scope notice, not the priced-basis notice`,
-          );
-          check(
-            !clientSections.includes("Midpoint of your planning range"),
-            `${project}/${finish} @${sqft}sf: client sections must not render the priced takeoff subtotal`,
-          );
-
-          renderedEmails++;
-        }
-      }
-    }
+/* Task ids are globally unique, hours sane, quantities bounded. */
+const seenIds = new Set<string>();
+for (const [categoryId, tasks] of Object.entries(TASK_CATALOG)) {
+  assert(tasks.length >= 3, `${categoryId} offers at least 3 common tasks`);
+  for (const task of tasks) {
+    assert(!seenIds.has(task.id), `task id ${task.id} is globally unique`);
+    seenIds.add(task.id);
+    assert(task.hours > 0 && task.hours <= 8, `${task.id} hours are in (0, 8]`);
+    assert(
+      (task.maxQuantity ?? 1) >= 1 && (task.maxQuantity ?? 1) <= MAX_TASK_QUANTITY,
+      `${task.id} maxQuantity within bounds`,
+    );
+    assert(findTaskOption(task.id) === task, `${task.id} resolves via findTaskOption`);
   }
+}
+assert(findTaskOption("not-a-real-task") === null, "unknown task ids resolve to null");
+assert(getTasksForCategory("something-else").length === 0, "something-else has no fixed tasks");
 
-  // MUTATION CHECK. A guard that cannot fail proves nothing. The admin email
-  // renders internal figures on purpose, so it MUST trip the same detector.
-  // If this ever passes as "clean", the detector has stopped working and every
-  // assertion above became worthless.
-  //
-  // This used to prove itself against the old allocation takeoff, which itemized
-  // "Project management and supervision" and "Overhead and profit". That format
-  // has been removed - the admin email carried it AND the line-item engine
-  // rollup, two sets of numbers for one job - so the proof now rests on the
-  // rollup's own internal columns, which are just as forbidden lead-side.
-  const adminHtml = buildAdminEmailHtml(sampleLead, {
-    project: "kitchen",
-    finish: "mid-range",
-    sqft: 250,
-    priceLow: 44000,
-    priceHigh: 55000,
-    roi: 74,
-    confidence: "Starting range",
-    refinements: EMPTY_REFINEMENTS,
-    included: ["Semi-custom cabinetry"],
+/* ────────────────────────────────────────────── empty input never prices */
+
+for (const category of JOB_CATEGORY_IDS) {
+  const empty = calculateHandymanEstimate({
+    category,
+    tasks: [],
+    otherJob: null,
+    materials: "customer",
+    urgency: "standard",
   });
-  check(
-    findForbiddenPhrase(adminHtml) !== null,
-    "admin email no longer contains the hidden lines: the forbidden-phrase detector is broken, " +
-      "so the customer-email assertions above are vacuous",
-  );
-  check(
-    adminHtml.includes("Internal breakdown") &&
-      adminHtml.includes("Our cost") &&
-      adminHtml.includes("Gross profit"),
-    "admin email must keep the line-item engine rollup, with our cost and gross profit, for the team",
-  );
-  // Exactly one pricing format. The allocation takeoff and the engine rollup
-  // disagreeing by a few hundred dollars on the same job is worse than either
-  // alone, because the reader has to decide which to trust.
-  check(
-    !adminHtml.includes("Where the money typically goes") &&
-      !adminHtml.includes("Midpoint of your planning range"),
-    "admin email must not carry the retired allocation takeoff alongside the engine rollup",
-  );
+  assert(empty === null, `${category}: no tasks means no estimate, never $0`);
+}
+assert(
+  calculateHandymanEstimate({
+    category: "something-else",
+    tasks: [],
+    otherJob: { description: "   ", size: "small" },
+    materials: "customer",
+    urgency: "standard",
+  }) === null,
+  "whitespace-only other-job description does not price",
+);
 
-  console.log(
-    `  lead-facing vocabulary: ${renderedEmails} rendered customer emails clean, detector proven live against the admin email.`,
+/* ──────────────────────────────── every task, every urgency, every plan */
+
+function base(category: JobCategoryId, taskId: string, quantity = 1): HandymanEstimateInput {
+  return {
+    category,
+    tasks: [{ taskId, quantity }],
+    otherJob: null,
+    materials: "customer",
+    urgency: "standard",
+  };
+}
+
+for (const [categoryId, tasks] of Object.entries(TASK_CATALOG) as [
+  Exclude<JobCategoryId, "something-else">,
+  (typeof TASK_CATALOG)[keyof typeof TASK_CATALOG],
+][]) {
+  for (const task of tasks) {
+    const estimate = calculateHandymanEstimate(base(categoryId, task.id));
+    assert(estimate !== null, `${task.id} produces an estimate`);
+    if (!estimate) continue;
+
+    assert(Number.isFinite(estimate.priceLow) && Number.isFinite(estimate.priceHigh), `${task.id} range is finite`);
+    assert(estimate.priceLow > 0, `${task.id} low bound is positive`);
+    assert(estimate.priceLow < estimate.priceHigh, `${task.id} range is ordered and never collapses`);
+    assert(
+      estimate.laborHours >= MINIMUM_LABOR_HOURS,
+      `${task.id} bills at least the ${MINIMUM_LABOR_HOURS}-hour minimum`,
+    );
+    assert(
+      estimate.lines.filter((l) => l.id === "trip-fee").length === 1 &&
+        estimate.lines[0].amount === TRIP_FEE_USD,
+      `${task.id} carries exactly one trip fee of $${TRIP_FEE_USD}`,
+    );
+    assert(
+      estimate.total === estimate.lines.reduce((s, l) => s + l.amount, 0),
+      `${task.id} total equals the sum of its lines`,
+    );
+    assert(
+      estimate.priceLow === Math.round((estimate.total * RANGE_LOW_FACTOR) / RANGE_ROUNDING_USD) * RANGE_ROUNDING_USD,
+      `${task.id} low bound is total * ${RANGE_LOW_FACTOR} rounded to $${RANGE_ROUNDING_USD}`,
+    );
+    assert(
+      estimate.priceHigh === Math.round((estimate.total * RANGE_HIGH_FACTOR) / RANGE_ROUNDING_USD) * RANGE_ROUNDING_USD,
+      `${task.id} high bound is total * ${RANGE_HIGH_FACTOR} rounded to $${RANGE_ROUNDING_USD}`,
+    );
+
+    /* Monotonic in quantity. */
+    const max = task.maxQuantity ?? 1;
+    let prevTotal = estimate.total;
+    for (let qty = 2; qty <= Math.min(max, 4); qty++) {
+      const more = calculateHandymanEstimate(base(categoryId, task.id, qty));
+      assert(more !== null && more.total >= prevTotal, `${task.id} x${qty} never costs less than x${qty - 1}`);
+      if (more) prevTotal = more.total;
+    }
+
+    /* Monotonic in urgency, and exact multiplier arithmetic. */
+    let prevUrgencyTotal = 0;
+    for (const urgency of URGENCY_LEVEL_VALUES) {
+      const withUrgency = calculateHandymanEstimate({ ...base(categoryId, task.id), urgency });
+      assert(withUrgency !== null, `${task.id} prices at ${urgency}`);
+      if (!withUrgency) continue;
+      assert(
+        withUrgency.total >= prevUrgencyTotal,
+        `${task.id}: ${urgency} never costs less than the tier below`,
+      );
+      prevUrgencyTotal = withUrgency.total;
+      const expected =
+        TRIP_FEE_USD +
+        withUrgency.laborHours * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
+      assert(
+        Math.abs(withUrgency.total - expected) < 0.01,
+        `${task.id} at ${urgency}: total = tripFee + hours * rate * multiplier`,
+      );
+    }
+
+    /* Supply run costs exactly SUPPLY_RUN_HOURS of labor more (standard urgency). */
+    for (const materials of MATERIALS_PLAN_VALUES) {
+      const withMaterials = calculateHandymanEstimate({ ...base(categoryId, task.id), materials });
+      assert(withMaterials !== null, `${task.id} prices with materials=${materials}`);
+      if (materials === "we-pick-up" && withMaterials) {
+        assert(
+          Math.abs(withMaterials.total - (estimate.total + SUPPLY_RUN_HOURS * HOURLY_RATE_USD)) < 0.01,
+          `${task.id}: pick-up adds exactly the supply run`,
+        );
+        assert(
+          withMaterials.lines.some((l) => l.id === "supply-run"),
+          `${task.id}: pick-up shows a supply-run line`,
+        );
+      }
+    }
+  }
+}
+
+/* ───────────────────────────────────────────── other-job size behaviour */
+
+let prevOtherTotal = 0;
+for (const size of OTHER_JOB_SIZE_VALUES) {
+  const est = calculateHandymanEstimate({
+    category: "something-else",
+    tasks: [],
+    otherJob: { description: "Sagging gate and a loose railing", size },
+    materials: "customer",
+    urgency: "standard",
+  });
+  assert(est !== null, `other-job ${size} prices`);
+  if (!est) continue;
+  assert(est.total > prevOtherTotal, `other-job ${size} costs more than the size below`);
+  prevOtherTotal = est.total;
+  assert(
+    est.laborHours === Math.max(OTHER_JOB_SIZES[size].hours, MINIMUM_LABOR_HOURS),
+    `other-job ${size} bills its bucket hours`,
   );
 }
 
-console.log(
-  `All estimate engine checks passed (${sweepChecks} exhaustive invariant checks across every project, finish, size step and scope ladder).`,
+/* Unknown task ids are ignored, not priced and not fatal. */
+const withUnknown = calculateHandymanEstimate({
+  category: "plumbing-repairs",
+  tasks: [
+    { taskId: "plumbing-faucet-swap", quantity: 1 },
+    { taskId: "definitely-not-real", quantity: 5 },
+  ],
+  otherJob: null,
+  materials: "customer",
+  urgency: "standard",
+});
+const knownOnly = calculateHandymanEstimate(base("plumbing-repairs", "plumbing-faucet-swap"));
+assert(
+  withUnknown !== null && knownOnly !== null && withUnknown.total === knownOnly.total,
+  "unknown task ids never move the price",
 );
+
+/* Range factors themselves stay sane. */
+assert(RANGE_LOW_FACTOR < 1 && RANGE_HIGH_FACTOR > 1, "range brackets the total");
+assert(TRIP_FEE_USD > 0 && HOURLY_RATE_USD > 0, "rates are positive");
+
+if (failures > 0) {
+  console.error(`\nverify-estimate-engine: ${failures} of ${checks} checks FAILED`);
+  process.exit(1);
+}
+console.log(`verify-estimate-engine: all ${checks} checks passed`);

@@ -26,9 +26,9 @@ export default function BlogPage() {
       { name: "Blog", url: "/blog" },
     ]),
     generateCollectionPageSchema({
-      title: "Home Building Insights",
+      title: "Home Repair & Maintenance Insights",
       description:
-        "Straight answers for Treasure Valley families building a new home: what it costs, how long it takes, how to read a bid, and what to look for in a lot.",
+        "Straight answers for Treasure Valley homeowners: what small repairs cost, what to fix before it gets expensive, how to hire well, and what each season demands.",
       url: "/blog",
       items: BLOG_POSTS.map((post) => ({
         name: post.title,
@@ -42,24 +42,24 @@ export default function BlogPage() {
       <JsonLd data={schemas} />
 
       <PageHeroBand
-        imageSrc={getBlogHeroImage("stages-of-building-a-house")}
-        imageAlt={getBlogImageAlt("stages-of-building-a-house")}
+        imageSrc={getBlogHeroImage("what-small-home-repairs-cost-boise")}
+        imageAlt={getBlogImageAlt("what-small-home-repairs-cost-boise")}
       >
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Blog" }]} />
         <div className="brc-label text-inverse-muted mt-6 mb-4">Blog</div>
         <h1 className="font-sans font-light text-display tracking-tight text-inverse-foreground max-w-3xl mb-4">
-          Home Building Insights
+          Home Repair &amp; Maintenance Insights
         </h1>
         <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-4">
-          Straight answers for Treasure Valley families building a new home. What it actually costs,
-          how long each stage takes, how to compare two bids that look nothing alike, and what to
-          check before you buy a lot.
+          Straight answers for Treasure Valley homeowners. What small repairs actually cost,
+          which fixes cannot wait, how to hire someone you can trust, and what to do each
+          season before the weather does it for you.
         </p>
         <Link
           href="/guides"
           className="text-sm text-inverse-foreground/90 hover:text-inverse-foreground inline-flex items-center transition-colors"
         >
-          Browse the full home building guides
+          Browse the full home repair guides
           <ArrowRight className="ml-1 h-4 w-4" />
         </Link>
       </PageHeroBand>
@@ -67,14 +67,14 @@ export default function BlogPage() {
       <BlogIndexClient />
 
       <EstimatePromptBand
-        eyebrow="Ready to plan"
+        eyebrow="Ready to fix it"
         title={
           <>
             From articles to an actual{' '}
-            <em className="brc-accent">range</em>
+            <em className="brc-accent">quote</em>
           </>
         }
-        description="Read enough to know roughly what you want? Run it through the estimator for a Treasure Valley build range in about 60 seconds. No obligation, no phone number required."
+        description="Read enough to know what needs doing? Send us your list with a few photos and get a flat, upfront quote - no site-visit fee, no obligation, and most jobs done in one trip."
         variant="greige"
       />
     </>

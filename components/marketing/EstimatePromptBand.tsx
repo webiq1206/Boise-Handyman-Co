@@ -23,7 +23,7 @@ export function EstimatePromptBand({
   description,
   variant = "greige",
   bullets = [
-    "Based on real Treasure Valley project costs",
+    "Based on real Treasure Valley handyman job costs",
     "Instant range in about 60 seconds",
     "No obligation - we email you a copy",
   ],

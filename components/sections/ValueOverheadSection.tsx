@@ -50,7 +50,7 @@ export function ValueOverheadSection() {
             <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-sm">
               <Image
                 src={SITE_IMAGES.valueCraft}
-                alt="Boise Construction Co carpenter leveling custom white oak cabinetry above a quartz counter in a new Treasure Valley home"
+                alt="Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home"
                 fill
                 loading="lazy"
                 sizes="(max-width: 768px) 100vw, 40vw"

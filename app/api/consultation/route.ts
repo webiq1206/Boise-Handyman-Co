@@ -254,7 +254,7 @@ export async function POST(request: NextRequest) {
       estimateRange: estimate
         ? `${formatUsd(estimate.priceLow)} to ${formatUsd(estimate.priceHigh)}`
         : undefined,
-      source: "boiseconstruction.co",
+      source: "boisehandyman.co",
     });
 
     if (!data.skipEmail) {

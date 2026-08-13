@@ -1,12 +1,12 @@
-# Autonomous Backlink Acquisition Engine — Architecture
+# Autonomous Backlink Acquisition Engine - Architecture
 
-Target: **boiseremodeling.co** · Goal: sustainable authority growth toward DA/DR 50+ via
+Target: **boisehandyman.co** · Goal: sustainable authority growth toward DA/DR 50+ via
 white-hat, quality-over-quantity link earning. Compliant with Google's link-spam guidelines.
 
 ## Operating principle
 
 > **Autonomous intelligence + human-approved outreach.**
-> The engine autonomously discovers, qualifies, scores, prioritizes, monitors, and *drafts* — the
+> The engine autonomously discovers, qualifies, scores, prioritizes, monitors, and *drafts* - the
 > full analytical loop runs on a schedule with no human involvement. The only step gated on a human
 > is the **irreversible outward action** (sending an email, submitting a form, joining a paid
 > program). This is deliberate: fully-unsupervised outreach at scale is the exact footprint Google's
@@ -23,14 +23,14 @@ white-hat, quality-over-quantity link earning. Compliant with Google's link-spam
         └──────────────────────── (5) MONITOR (new/lost/competitor growth) ◄──────────────────────── acquired
 ```
 
-### (0) Audit & protect — *runs first, then monthly*
+### (0) Audit & protect - *runs first, then monthly*
 - Pull our live backlink profile (Ahrefs `site-explorer-referring-domains` + `backlinks-stats`).
 - Flag toxic/PBN/web2.0-spam residue → `data/disavow.txt` for Search Console.
 - Track links worth **protecting** (e.g. `expertise.com`) so a lost-link alert fires if they drop.
 - *Finding on 2026-07-14: DR 0.1, 33 live refdomains, ~31 of them spam-blog network domains.
   Cleanup precedes acquisition.*
 
-### (1) Discover — *weekly*
+### (1) Discover - *weekly*
 Multi-source, each blind to the others (so nothing is missed):
 | Source | Tooling | Yields |
 |--------|---------|--------|
@@ -44,14 +44,14 @@ Multi-source, each blind to the others (so nothing is missed):
 | Journalist queries | Featured/Qwoted/HAB2BW feeds | digital-PR targets |
 New rows are appended to the opportunity store, deduped by domain.
 
-### (2) Qualify — hard gates (`config/quality-gates.json`)
+### (2) Qualify - hard gates (`config/quality-gates.json`)
 Pass/fail BEFORE scoring. Rejects on: spam flags (pbn, link-network, web2-spam-blog, scraper,
 paid-marketplace, deindexed…), zero-authority profile links, and the web2.0-churn footprint.
 Also enforces **anchor-text mix** (≤10% exact-match) and **link velocity** caps (≤8 new live
 links/week) so growth stays natural.
 
 ### (3) Score & rank (`config/scoring.json`, `src/score.mjs`)
-Transparent 0–100 **value blend**: relevance 30% · authority(DR) 26% · link type 16% · traffic 12% ·
+Transparent 0-100 **value blend**: relevance 30% · authority(DR) 26% · link type 16% · traffic 12% ·
 dofollow 10% · local 6%. Then **priority = value × feasibility-multiplier + competitor-validation
 bonus**, bucketed into P1 (pursue now) → P4. Feasibility slightly favors *winnable* links; the
 competitor bonus rewards targets ≥1 rival already holds.
@@ -60,7 +60,7 @@ competitor bonus rewards targets ≥1 rival already holds.
 Per-channel personalized draft written to `outreach/queue.json` (+ citation submission packets).
 **Never auto-sends.** Human approves batches; velocity caps apply.
 
-### (5) Monitor — *weekly + monthly*
+### (5) Monitor - *weekly + monthly*
 - New/lost links (`refdomains history`, `backlinks-stats` deltas) → lost-link recovery.
 - Competitor refdomain growth → surfaces their fresh wins as our new targets.
 - DR/DA trajectory vs the DR-50 goal (`domain-rating-history`).
@@ -83,11 +83,11 @@ and clicks send.
 | `outreach/queue.json` | drafted messages awaiting human approval |
 
 ## Realistic trajectory to DR/DA 50+
-DR 50 for a *single-location remodeler* is an ambitious multi-year target — most strong local
-remodelers sit DR 10–30. The path is not directories (those plateau ~DR 15); it is **editorial +
+DR 50 for a *single-location handyman service* is an ambitious multi-year target - most strong local
+home-service companies sit DR 10-30. The path is not directories (those plateau ~DR 15); it is **editorial +
 digital PR + associations + supplier links** compounding over time.
-- **0–3 mo:** disavow spam; land foundational citations + Houzz/Angi/BBB/NARI/Idaho Power → DR ~5–12.
-- **3–9 mo:** associations + supplier locators + first digital-PR/local-news wins → DR ~12–22.
-- **9–24 mo:** repeatable digital PR (data studies, local-news, HARO) + partnerships → DR ~25–40.
-- **24 mo+:** sustained PR + linkable-asset content → DR 40–50+.
+- **0-3 mo:** disavow spam; land foundational citations + Houzz/Angi/BBB/NARI/Idaho Power → DR ~5-12.
+- **3-9 mo:** associations + supplier locators + first digital-PR/local-news wins → DR ~12-22.
+- **9-24 mo:** repeatable digital PR (data studies, local-news, HARO) + partnerships → DR ~25-40.
+- **24 mo+:** sustained PR + linkable-asset content → DR 40-50+.
 Quality compounds; volume does not. The engine optimizes for the former.

@@ -99,3 +99,33 @@ Result: **0 light-background leaks and 0 low-contrast text anywhere.** Fixes app
 - Contrast: all text token pairs pass AA (body 12.98:1, muted 6.2:1, sage-as-text 6.2:1, bone button
   12.3:1, sage badge 4.98:1). `--faint` is used only for de-emphasized placeholder/meta (passes the
   3:1 large/UI threshold); hairlines are decorative dividers (exempt).
+
+## 2026-08-13 - Handyman conversion: server, portal, RE-10, assistant, outreach (server-portal package)
+
+Scope conversion (home builder -> handyman) across the server-side and portal surfaces, following
+the repo-wide brand string swap to Boise Handyman Co / boisehandyman.co:
+
+- **Email services** (`server/services/*`): consultation and estimate emails now speak handyman
+  language (repair visit, fixes, one-visit bundling) instead of remodel/footprint framing; email
+  footer tagline "Design & Build" -> "Repairs & Maintenance"; stale lead-dashboard fallback URL
+  `leads.boiseremodeling.co` -> `leads.boisehandyman.co`. All senders already flow through
+  SITE_CONFIG / PLATFORM_EMAIL (hello@boisehandyman.co) via Resend.
+- **Review outreach** (`shared/reviewOutreach.ts`): review asks now reference finding "a handyman
+  they can trust" rather than a builder; closeout copy de-construction-ified.
+- **Portal UI**: subcontractor landing sells home repair leads (not "new-construction leads");
+  lead marketplace, admin leads panel, and purchases page display names now mirror the 8-service
+  handyman catalog in `shared/contentData.ts`; marketplace terms no longer assert
+  remodeling/construction licensing.
+- **RE-10 page**: "Why a home builder does this work" section rewritten to handyman framing;
+  meta description and Service schema now target "RE-10 repairs Boise handyman" intent. No pricing
+  logic changes.
+- **Assistant** (`app/api/assistant`, `server/services/assistant`, `components/assistant`): system
+  prompt rewritten for the handyman business (8 services, hourly + trip fee model, out-of-scope
+  referrals, no license/insured claims); tool schemas now derive project enums from
+  `shared/estimatePayload` so they cannot drift from the engine.
+- **Backlink engine**: configs, templates and docs rebuilt for boisehandyman.co with honest
+  credentials wording; generated data/queue/citation artifacts flagged STALE (old Boise Remodeling
+  profile) and must be regenerated; sends must stay disabled until SPF/DKIM/DMARC are live on the
+  new domain (see EMAIL_DELIVERABILITY_SETUP.md, updated).
+- **Docs**: `.agents` content brief rewritten for the handyman library; design_guidelines brand
+  personality updated.

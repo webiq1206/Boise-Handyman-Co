@@ -11,10 +11,10 @@ export function BlogEndCta() {
   return (
     <MarketingCard className="cta-card-dark p-10 md:p-16 text-center max-w-4xl mx-auto">
       <h2 className="text-2xl md:text-3xl font-sans font-light tracking-tight mb-4 text-inverse-foreground">
-        Ready to start your project?
+        Ready to get it fixed?
       </h2>
       <p className="text-inverse-muted mb-8 max-w-lg mx-auto">
-        Get an instant planning range in 60 seconds, then book a free in-home visit when you&apos;re
+        Get an instant estimate in 60 seconds, then book a handyman visit when you&apos;re
         ready. No obligation, no pressure.
       </p>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -23,7 +23,7 @@ export function BlogEndCta() {
           <ArrowRight className="ml-2 h-5 w-5" />
         </EstimateCTA>
         <Button variant="heroGhost" size="lg" asChild data-testid="link-bottom-cta-consult">
-          <a href="/contact#consult">Book a free visit</a>
+          <a href="/contact#consult">Book a handyman visit</a>
         </Button>
         <div className="flex flex-col items-center gap-1">
           <BusinessPhoneLink

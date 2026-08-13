@@ -2,153 +2,121 @@ import type { BlogPostData } from '../../blogContent';
 
 export const boiseBuildingPermitGuide: BlogPostData = {
   slug: 'boise-building-permit-guide',
-  title: 'Building Permits in Boise: What a New Home Needs',
-  seoTitle: 'Building Permits in Boise: New Home Guide',
+  title: 'Do Home Repairs Need a Permit in Boise? A Practical Guide',
+  seoTitle: 'Boise Permit Guide: Which Home Repairs Need One',
   metaDescription:
-    'What a new-home building permit in Boise actually contains: site plan, architectural set, structural engineering, energy compliance, and utility approvals.',
+    'Most Boise home repairs need no permit: painting, drywall, trim, fixture swaps. See which small jobs do, which do not, and get yours fixed the right way.',
   excerpt:
-    'A new-home permit is a package, not a form. Here is what goes into it, who submits it, what plan review looks for, and how inspections run through the build.',
-  category: 'The Building Process',
-  hubSlug: 'home-building-process',
-  author: 'Boise Construction Co',
+    'The permit question stops a lot of small projects that never needed stopping. Here is where the line actually sits in Boise, and what it means for the repair list on your fridge.',
+  category: 'Costs & Hiring',
+  hubSlug: 'costs-and-hiring',
+  author: 'Boise Handyman Co',
   publishedAt: '2026-06-15',
-  tags: ['permits', 'new construction', 'boise', 'building process'],
-  primaryKeyword: 'boise building permit new home',
+  updatedAt: '2026-08-13',
+  tags: ['permits', 'boise', 'home repairs', 'hiring'],
+  primaryKeyword: 'do home repairs need a permit in Boise',
   secondaryKeywords: [
-    'new home building permit boise',
-    'what does a building permit include',
-    'ada county building permit house',
+    'boise permit for small projects',
+    'what home improvements need a permit idaho',
+    'permit exempt work boise',
   ],
   searchIntent: 'informational',
   featuredSnippetTargets: [
-    'what does a new home building permit include',
-    'boise building permit requirements',
+    'what needs a permit in boise',
+    'do I need a permit to remodel in boise',
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'A new-home building permit in the Boise area requires a complete package: a site plan, a full architectural drawing set, structural engineering, energy code compliance documentation, and utility or septic approvals. Your builder submits it, the jurisdiction reviews it, and inspections continue through construction until a certificate of occupancy is issued.',
+    'Most home repairs in Boise need no permit. Painting, drywall repair, flooring, trim, cabinets, caulking, and like-for-like fixture swaps are typically exempt maintenance. Permits generally apply to structural changes, new circuits or gas lines, water heaters, re-roofs, additions, and decks over about 30 inches. When in doubt, call the city before you start.',
   keyTakeaways: [
-    'A new-home permit is a document package, not a single application form.',
-    'Structural engineering and energy compliance are separate deliverables inside that package.',
-    'Your builder should submit and manage the permit, not hand you a checklist.',
-    'Plan review checks code compliance, zoning and setbacks, structure, and energy.',
-    'Inspections gate the build: framing, rough-ins, insulation, and final all have to pass.',
-    'The certificate of occupancy, not the final inspection, is what legally lets you move in.',
+    'Cosmetic work and like-for-like repairs are typically permit-exempt in Boise.',
+    'The permit line roughly tracks the handyman-scope line: change the structure or the systems and you likely need one.',
+    'Water heaters, new circuits, gas work, re-roofs, and most new decks need permits and licensed trades.',
+    'Small detached structures under about 200 square feet are commonly exempt from building permits, though zoning rules still apply.',
+    'Unpermitted work that needed a permit surfaces at sale time; doing it right is cheaper.',
+    'A reputable handyman will tell you when your project has outgrown handyman scope.',
   ],
   relatedLinks: [
-    { url: '/guides/boise-home-building-process-guide', anchor: 'The Boise Home Building Process' },
-    { url: '/blog/ada-vs-canyon-county-permit-timelines', anchor: 'Ada vs Canyon County' },
-    { url: '/blog/how-long-does-it-take-to-build-a-house-boise', anchor: 'How Long a Boise Build Takes' },
-    { url: '/blog/stages-of-building-a-house', anchor: 'The Stages of Building a House' },
-    { url: '/services/design-build', anchor: 'Design-Build' },
+    { url: '/blog/ada-vs-canyon-county-permit-timelines', anchor: 'Ada vs Canyon County: Permits for Small Projects' },
+    { url: '/blog/diy-vs-hiring-a-handyman', anchor: 'DIY vs Hiring a Handyman' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/services/drywall-repair', anchor: 'Drywall Repair & Patching' },
+    { url: '/services/plumbing-repairs', anchor: 'Minor Plumbing Repairs' },
+    { url: '/services/carpentry-trim-repair', anchor: 'Carpentry & Trim Repair' },
     { url: '/contact', anchor: 'Contact' },
   ],
   faqs: [
     {
-      question: 'What documents do I need for a new home building permit in Boise?',
+      question: 'What home repairs can I do without a permit in Boise?',
       answer:
-        'A site plan showing the house, setbacks, driveway, and drainage; a complete architectural drawing set; structural engineering with calculations; energy code compliance documentation; and proof of utility service or an approved septic design. Rural parcels add a well and septic approval through Central District Health. Additional approvals apply if a highway district approach or an irrigation easement is involved.',
+        'Typically exempt: painting inside and out, drywall repair, flooring, trim and interior doors, cabinets and countertops, caulking and weatherproofing, and replacing faucets, toilets, light fixtures, and outlets like-for-like in the same location. These are treated as ordinary maintenance. Exemption lists are set by the jurisdiction, so confirm anything you are unsure about with the city.',
     },
     {
-      question: 'Who pulls the building permit, me or the builder?',
+      question: 'What always needs a permit in Boise?',
       answer:
-        'Your builder should. We handle permits, plan review responses, engineering coordination, and utility applications in-house for Ada and Canyon County. A homeowner who pulls their own permit takes on responsibility for code compliance and inspection scheduling, which is rarely a good trade even when a builder offers it as a way to save a line item.',
+        'Structural changes, additions, re-roofs, new or moved walls, new electrical circuits or panel work, new plumbing or gas lines, water heater replacement, HVAC replacement, and most new decks, especially attached ones or those over about 30 inches above grade. This work also generally requires licensed trade contractors, not a handyman, which is why we refer it out.',
     },
     {
-      question: 'How long does plan review take?',
+      question: 'Do I need a permit to build a shed in Boise?',
       answer:
-        'It varies with the jurisdiction and its current volume, so we plan in weeks rather than promising a date. What we can control is submitting a complete, coordinated set the first time, because the biggest schedule risk is a correction cycle that sends the drawings back and puts them at the end of the queue again.',
+        'One-story detached accessory structures under about 200 square feet are commonly exempt from a building permit under the residential code. Zoning still applies, so setbacks from property lines and height limits matter even when no building permit does. Check both before you place it. Assembling a kit shed on an approved spot is squarely handyman work, and we do it.',
     },
     {
-      question: 'What does the building permit cost?',
+      question: 'Does swapping a light fixture or faucet need a permit?',
       answer:
-        'Permit and impact fees vary by jurisdiction and by house size, so we price them from the current published schedules for your specific address rather than a rule of thumb. Design and engineering, which is a separate cost from the fees themselves, commonly runs 5 to 12 percent of construction cost, roughly $9,000 to $35,000, excluding land.',
+        'A like-for-like swap in the same location, new faucet on existing supply lines, new fixture on an existing box and circuit, is generally exempt maintenance in Boise. The line is crossed when you add wiring, add a circuit, or move plumbing. Our minor electrical and plumbing services stay on the exempt side of that line by design.',
     },
     {
-      question: 'What inspections happen during construction?',
+      question: 'What happens if work was done without a required permit?',
       answer:
-        'The usual sequence is footing and foundation, underground plumbing, framing, then mechanical, electrical, and plumbing rough-ins, followed by insulation and energy, drywall in some cases, and a final inspection for each trade. Site-specific items like a septic system or a driveway approach are inspected by the agency that permitted them.',
+        'It tends to surface later: home inspections at sale time, insurance claims, refinancing appraisals. Sellers in Idaho disclose known unpermitted work, and buyers negotiate accordingly. Retroactive permits exist but cost more time and money than doing it right once. It is the main reason we will not quietly take on permit-level work, and you should be wary of anyone who will.',
     },
     {
-      question: 'What is a certificate of occupancy?',
+      question: 'Will Boise Handyman Co pull permits for my project?',
       answer:
-        'It is the document that says the house is legally habitable. It is issued after all final inspections pass, and it is what lenders and insurers look for at closing. A final framing or electrical sign-off is not the same thing. You should not plan a move-in date that assumes occupancy before the certificate is in hand.',
-    },
-    {
-      question: 'Can I start site work before the permit is issued?',
-      answer:
-        'Some jurisdictions allow limited early work such as a grading or excavation permit ahead of the full building permit, and some do not. It depends on the parcel and the agency, and it is worth asking rather than assuming. Starting structural work without an issued permit risks a stop-work order and having to uncover finished work for inspection.',
+        'Our work is deliberately scoped to jobs that do not require permits: repairs, maintenance, and small installs. If your project needs a permit, it needs a licensed general or specialty contractor, and we will tell you that upfront and point you in the right direction. What we promise is the honest version of the answer, not the convenient one.',
     },
   ],
   content: `
-<h2 id="what-it-is">What a new-home permit actually is</h2>
-<p><strong>A building permit for a new house is a package of engineered documents that a jurisdiction reviews and approves, not a form you fill out at a counter.</strong> That distinction explains most of what confuses people about permitting. You are not asking permission in the abstract. You are submitting a complete description of the house you intend to build, and a plans examiner is checking it against the building code, the zoning ordinance, and the energy code before anyone is allowed to dig.</p>
-<p>Homes in Boise, Meridian, Eagle, Kuna, and Star permit through Ada County jurisdictions. Nampa, Caldwell, and Middleton permit through Canyon County jurisdictions. The document requirements are broadly similar across both. The portals, review cadence, and fee structures are not, which is covered separately in <a href="/blog/ada-vs-canyon-county-permit-timelines">Ada versus Canyon County</a>. This article is part of our <a href="/guides/boise-home-building-process-guide">Boise home building process guide</a>.</p>
+<h2 id="short-answer">The short answer</h2>
+<p><strong>Most home repairs in Boise need no permit at all.</strong> The city, like every Treasure Valley jurisdiction, treats cosmetic work and like-for-like repairs as ordinary maintenance: painting, drywall patches, flooring, trim, cabinets, caulking, fixture swaps. Permits enter the picture when work changes the structure or the systems of the house: new walls or openings, new circuits, new plumbing or gas runs, water heaters, re-roofs, additions, and most new decks.</p>
+<p>That means the repair list on your fridge is very unlikely to involve city hall. This guide walks the line in more detail, because knowing where it sits saves you from two opposite mistakes: stalling a simple fix out of permit anxiety, and letting someone do permit-level work in your house without one.</p>
 
-<h2 id="the-package">What goes into the package</h2>
-<p><strong>Five components make up the core of a new-dwelling submittal, and a missing one stops the whole thing.</strong> They are produced by different people at different times, which is exactly why permitting takes weeks rather than an afternoon.</p>
-<table>
-<thead><tr><th>Component</th><th>What it shows</th></tr></thead>
-<tbody>
-<tr><td>Site plan</td><td>House placement, setbacks, driveway and approach, easements, grading and drainage, well and septic locations where applicable</td></tr>
-<tr><td>Architectural set</td><td>Floor plans, elevations, sections, details, window and door schedules, wall assemblies</td></tr>
-<tr><td>Structural engineering</td><td>Foundation design, framing plans, beam and header sizing, shear and connection details, stamped calculations</td></tr>
-<tr><td>Energy compliance</td><td>Insulation values, window performance, air sealing and duct testing approach, mechanical equipment efficiency</td></tr>
-<tr><td>Utility and septic approvals</td><td>Water and sewer connection or an approved well and septic design, power and gas service, irrigation district sign-off where relevant</td></tr>
-</tbody>
-</table>
-<p>Each of those has a lead time of its own. The engineer cannot stamp a structure that is still being redesigned, and the energy compliance path cannot be finalized until windows and the mechanical system are chosen. Coordinating those dependencies is most of what pre-construction is.</p>
+<h2 id="exempt">The exempt side: ordinary maintenance</h2>
+<p><strong>If you are replacing what exists, where it exists, you are almost always exempt.</strong> The recurring items on Boise-area exemption lists, and the heart of what a handyman does:</p>
+<ul>
+<li>Painting, inside and out, and drywall repair of any size, from nail holes to <a href="/services/drywall-repair">full-sheet patches</a>.</li>
+<li>Flooring, trim, interior doors, cabinets, and countertops.</li>
+<li>Caulking, weatherstripping, and general weatherproofing.</li>
+<li>Like-for-like swaps: a new faucet on existing supply lines, a new toilet in the same spot, a new light fixture on an existing box, a new outlet or switch on an existing circuit.</li>
+<li>Gutter cleaning and repair, fence repair, deck board and railing repair.</li>
+<li>Shelving, TV mounts, and furniture assembly.</li>
+</ul>
+<p>One nuance worth knowing: exemption from a building permit does not mean exemption from the rules. Work is still supposed to be done to code, and zoning rules like fence heights and shed setbacks apply even when no permit does.</p>
 
-<h2 id="site-plan">The site plan does more work than people expect</h2>
-<p><strong>More permits stall on the site plan than on the house drawings.</strong> The architectural set is usually clean because it is drawn by people who draw houses. The site plan has to satisfy the zoning ordinance, the highway district, sometimes an irrigation district, sometimes a homeowners association, and the drainage requirements of the parcel, all at once.</p>
-<p>Setbacks, lot coverage, and building height are the common friction points on a subdivision lot. On a rural parcel, the driveway approach, the septic drainfield location and its required separations, and stormwater retention all become site plan problems. Foothills lots add slope, access grade, and geotechnical requirements. A lot evaluation before you buy is the cheapest way to find these out; a written one runs $950 to $3,500 and has saved buyers considerably more than that.</p>
+<h2 id="permit-required">The permit side: changing the house</h2>
+<p><strong>Permits track change, not size.</strong> A small job that alters structure or systems needs one; a large job that alters neither may not. In Boise the reliable triggers are:</p>
+<ul>
+<li>Structural work: removing or modifying walls, cutting new window or door openings, anything touching a load path.</li>
+<li>Electrical beyond a swap: new circuits, subpanels, service upgrades.</li>
+<li>Plumbing beyond a swap: new or relocated lines, and water heater replacement, which surprises people but holds in most Treasure Valley jurisdictions.</li>
+<li>Gas work of nearly any kind.</li>
+<li>Re-roofs, additions, garage conversions, and new attached or elevated decks.</li>
+</ul>
+<p>Here is the useful pattern: the permit line and the handyman line almost coincide. Work that needs a permit generally also needs a licensed trade or general contractor. So the question "does this need a permit?" is usually also answering "is this a handyman job?", and both answers arrive in the same phone call.</p>
 
-<h2 id="who-submits">Who submits it and who chases it</h2>
-<p><strong>Your builder should own the permit from submittal through issuance, including every correction response.</strong> We handle permits, plan review, engineering coordination, and utility applications in-house across Ada and Canyon County, because the alternative is a homeowner learning a portal in the middle of a schedule that depends on it.</p>
-<p>There is a version of this where a builder tells you to pull the permit yourself, usually framed as saving money. Be careful with it. The permit holder carries responsibility for code compliance and inspection scheduling, and it can complicate who is accountable if something fails inspection. Our <a href="/services/design-build">design-build</a> approach exists partly to keep this accountability in one place.</p>
+<h2 id="gray-areas">The gray areas people actually ask about</h2>
+<p><strong>A few jobs sit close to the line and deserve straight answers.</strong> Sheds: one-story detached structures under about 200 square feet are commonly exempt from building permits, but zoning setbacks still apply, so check placement. Fences: repair is maintenance, but new fences must respect zoning height limits, typically around six to seven feet depending on location on the lot. Decks: replacing boards and tightening railings is repair; building new, attaching to the house, or exceeding about 30 inches above grade generally means a permit. Water heaters: yes, really, a permit, and a licensed plumber. Dishwashers and disposals: like-for-like replacement is generally fine.</p>
+<p>Where you live changes the details. Outside Boise city limits, your jurisdiction may be Ada County or another city entirely, and in much of Idaho the electrical and plumbing permits run through state licensing channels rather than the city desk. Our <a href="/blog/ada-vs-canyon-county-permit-timelines">Ada vs Canyon County comparison</a> covers how that plays out across the valley.</p>
 
-<h2 id="plan-review">What plan review is actually looking for</h2>
-<p><strong>Reviewers check four things: zoning and land use, structural adequacy, life safety and code compliance, and energy performance.</strong> They are not evaluating whether your house is well designed or good value. They are checking whether it is legal, safe, and buildable as drawn.</p>
-<p>Zoning review confirms setbacks, height, lot coverage, and use. Structural review confirms that the engineering supports the spans, loads, and connections shown. Building code review looks at egress, stairs, guards, fire separations at the garage, ventilation, and similar. Energy review confirms the house meets the applicable energy code through either a prescriptive or performance path. Comments come back as a correction list, the design team responds, and the set is resubmitted. Correction cycles are normal. Multiple correction cycles usually mean the set was submitted before it was ready.</p>
+<h2 id="why-it-matters">Why the line is worth respecting</h2>
+<p><strong>Unpermitted work that needed a permit does not disappear; it waits.</strong> It waits for the home inspection when you sell, the insurance adjuster after a water leak, the appraiser during a refinance. Idaho sellers disclose known unpermitted work, and buyers price it in or demand retroactive permits, which cost more than the original permit would have. None of this is scare talk; it is just the boring mechanics of why doing it right is cheaper.</p>
+<p>It also explains a thing that occasionally frustrates people: why we decline work. A handyman who says yes to a water heater swap or a wall removal is not doing you a favor. Our scope, <a href="/services/plumbing-repairs">minor plumbing</a>, minor electrical, <a href="/services/carpentry-trim-repair">carpentry and trim</a>, drywall, painting, and maintenance, is built to live entirely on the exempt side of the line, done properly, in one trip where we can.</p>
 
-<h2 id="fees">Fees, and why we do not quote them from memory</h2>
-<p><strong>Permit fees and impact fees are set by each jurisdiction, revised periodically, and calculated from house size and valuation, so a number quoted from memory is a number that will be wrong.</strong> We pull the current published schedule for your specific address and put the real figure in your line-item budget before you sign anything.</p>
-<p>What we can generalize: fees are a small share of a new-home budget compared with construction, but they are not trivial, and impact fees in particular differ meaningfully between jurisdictions. Design and engineering, which is separate from jurisdiction fees, commonly runs 5 to 12 percent of construction cost, or roughly $9,000 to $35,000, excluding land. Both belong in the budget from the start rather than appearing as a surprise later.</p>
+<h2 id="checklist">A 30-second self-check before any project</h2>
+<p><strong>Ask three questions.</strong> Am I replacing something that exists, in the place it exists? Am I leaving the structure, wiring runs, plumbing runs, and gas lines untouched? Is nothing new being built outside beyond a small detached structure? Three yeses and you are almost certainly in maintenance territory, whether you do it yourself or call us; our <a href="/blog/diy-vs-hiring-a-handyman">DIY vs handyman post</a> helps with that choice. Any no, and a quick call to your jurisdiction, or to us for a straight opinion, comes first.</p>
 
-<h2 id="other-permits">The permits that are not the building permit</h2>
-<p><strong>A new house usually needs several approvals that are issued by other agencies and run on their own schedules.</strong> People assume the building permit is one document that covers everything, and then discover a separate application sitting in the critical path.</p>
-<p>The common ones are a septic permit through Central District Health on any parcel without city sewer, a well permit and driller coordination on the same parcels, a driveway or approach permit from the road authority, an irrigation district review where a lateral or easement crosses the property, a floodplain review on parcels near a waterway, and a design review from a homeowners association where covenants require one. A homeowners association review is not a government process and has no obligation to be quick, which surprises people who have budgeted for the city and forgotten the neighborhood.</p>
-<p>The way to keep these from becoming delays is to identify them at the lot stage, not the permit stage. Every one of them is knowable before you buy.</p>
-
-<h2 id="early-submittal">What happens while the permit is in review</h2>
-<p><strong>Plan review is not dead time, and a builder who treats it as a pause is wasting weeks you already paid for.</strong> While the set is in the queue, there is real work available that does not require an issued permit.</p>
-<p>We use that window to finalize the selection schedule, price and place orders for long-lead items such as windows and cabinets, confirm subcontractor availability against a start date, complete utility applications, and line up any early site work the jurisdiction allows separately. We also use it to resolve the small design questions that were deferred so the set could be submitted on time, because those questions do not go away and are much cheaper to answer now than during framing.</p>
-<p>What we do not do is order anything that a correction cycle could change. A window schedule that gets revised after the glass has been fabricated is an expensive lesson in enthusiasm.</p>
-
-<h2 id="inspections">The inspection sequence during construction</h2>
-<p><strong>Inspections are checkpoints that gate the work behind them, which is why a failed one costs schedule rather than just a re-visit.</strong> The typical sequence for a new house runs like this.</p>
-<table>
-<thead><tr><th>Stage</th><th>What is inspected</th></tr></thead>
-<tbody>
-<tr><td>Footing and foundation</td><td>Excavation depth, rebar placement, forms, setbacks before concrete</td></tr>
-<tr><td>Underground</td><td>Plumbing and any electrical below the slab, before it is covered</td></tr>
-<tr><td>Framing</td><td>Structure, connections, shear, blocking, openings, roof framing</td></tr>
-<tr><td>Rough-ins</td><td>Mechanical, electrical, and plumbing in open walls, usually separate inspections</td></tr>
-<tr><td>Insulation and energy</td><td>Insulation coverage, air sealing, sometimes a blower door or duct test</td></tr>
-<tr><td>Final</td><td>Completed trades, life safety devices, address and egress, site conditions</td></tr>
-</tbody>
-</table>
-<p>Site-specific items are inspected by whoever permitted them. A septic system on a rural parcel is inspected by Central District Health, not the building department. A driveway approach may be inspected by the highway district. Coordinating several agencies onto one schedule is ordinary work for a builder and genuinely difficult for a homeowner doing it once.</p>
-
-<h2 id="cover-up">Why nothing gets covered before it is inspected</h2>
-<p><strong>The single most expensive permitting mistake is covering work before it has passed inspection.</strong> Drywall over an uninspected rough-in is not a paperwork problem. It is a demolition problem, because the inspector still needs to see what is behind it.</p>
-<p>This is also why a builder's scheduling discipline matters more than it looks. Insulation and drywall crews are booked in advance and are expensive to reschedule, so there is real pressure to keep them moving. A builder who lets that pressure override the inspection sequence is trading a week now for a month later, and you will be the one paying for it.</p>
-
-<h2 id="co">The certificate of occupancy</h2>
-<p><strong>The certificate of occupancy is what legally makes the house habitable, and it comes after every final inspection has passed.</strong> Not after the last one you happened to watch, and not after the house looks finished. Lenders and insurers care about this document, and a closing date that assumes occupancy before it is issued is a date at risk.</p>
-<p>Occasionally a jurisdiction will issue a temporary certificate when something outside the house, typically landscaping or final flatwork, cannot be completed because of the season. That is a normal accommodation, not a shortcut, and it comes with a deadline for finishing the outstanding items. We flag it in advance rather than at the closing table when a winter finish makes it likely.</p>
-
-<h2 id="next-steps">Let us handle the paperwork</h2>
-<p><strong>Permitting is the part of a build that rewards experience and punishes improvisation, which is why it belongs with your builder rather than on your desk.</strong> We assemble the package, submit it, answer corrections, coordinate the outside agencies, and schedule every inspection, then tell you where it stands in the weekly written update. For how permitting fits the wider calendar, see <a href="/blog/how-long-does-it-take-to-build-a-house-boise">how long a Boise build takes</a>, or <a href="/blog/stages-of-building-a-house">the stages of building a house in order</a>. When you want to talk through a specific parcel, <a href="/contact">reach out</a> and we will read it with you.</p>
+<h2 id="next-steps">Have a list you have been sitting on?</h2>
+<p><strong>Send it over and we will sort it: what we can fix, what needs a contractor, and what it will cost.</strong> Most repair lists turn out to be entirely permit-free and doable in a visit or two, quoted upfront. See <a href="/blog/what-small-home-repairs-cost-boise">what common repairs cost in Boise</a>, or <a href="/contact">get in touch</a> with photos and we will take it from there.</p>
 `.trim(),
 };

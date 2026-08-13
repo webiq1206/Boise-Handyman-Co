@@ -28,7 +28,7 @@ import { GRAIN_URL } from '@/lib/grain';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 
 const SPEAKABLE_SUMMARY =
-  'We are a locally owned design-build home builder serving the Treasure Valley. Our focus is clarity: a line-item budget before we break ground, a published draw schedule, weekly written updates, permits handled in-house for Ada and Canyon County, and a one-year workmanship warranty after you take possession.';
+  'We are a locally owned handyman service for the Treasure Valley: small repairs, installs, and home maintenance across Boise, Meridian, Eagle, Nampa, and the surrounding Ada and Canyon County communities. Our focus is simplicity: an upfront quote before any work starts, hourly pricing with a flat trip fee, and most jobs finished in a single visit.';
 
 function HeroBreadcrumbs() {
   const items = [
@@ -90,7 +90,7 @@ export default function AboutPage() {
     generateWebPageSchema({
       title: `About ${SITE_CONFIG.name}`,
       description:
-        'Treasure Valley design-build home builder. Bonded, insured, and committed to clear communication.',
+        'Locally owned Treasure Valley handyman service committed to upfront quotes, one-trip fixes, and clear communication.',
       url: '/about',
     }),
     generateBreadcrumbSchema([
@@ -108,7 +108,7 @@ export default function AboutPage() {
         <section className="relative min-h-[540px] md:min-h-[78vh] flex items-end overflow-hidden bg-inverse">
           <Image
             src={SITE_IMAGES.leadership}
-            alt={`${SITE_CONFIG.name} design-build team reviewing plans on a build site`}
+            alt={`${SITE_CONFIG.name} team at work on a Treasure Valley home repair`}
             fill
             className="object-cover opacity-[0.82] img-brand-grade"
             sizes="100vw"
@@ -130,19 +130,19 @@ export default function AboutPage() {
             </p>
             <div className="brc-label brc-label-on-photo mt-6 mb-5">About us</div>
             <h1 className="font-sans font-light text-display tracking-tight text-inverse-foreground max-w-4xl mb-6">
-              About Boise Construction{' '}
+              About Boise Handyman{' '}
               <em className="brc-accent">Co</em>
             </h1>
             <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-4">
-              We are a locally owned design-build home builder serving the Treasure Valley. You work
-              with one accountable team from the first conversation about your lot through the day
-              you get the keys.
+              We are a locally owned handyman service for the Treasure Valley. Small repairs,
+              installs, and maintenance, handled by one accountable local team from your first
+              message to the finished job.
             </p>
             <p className="text-base md:text-lg text-inverse-foreground/75 max-w-2xl leading-relaxed mb-8">
-              Our focus is clarity: a line-item budget before we break ground, a published draw
-              schedule, a written update every week, permits handled in-house for Ada and Canyon
-              County, and a one-year workmanship warranty. The point of all of it is simple - you
-              always know what your home costs and where the build stands.
+              Our focus is simplicity: an upfront quote before any work starts, a simple hourly
+              rate plus one flat trip fee, an agreed arrival time, and a clean home when we leave.
+              The point of all of it is simple - you always know what the job costs and when it
+              will be done.
             </p>
             <div className="flex flex-wrap gap-3 mb-8">
               <ConsultCTA variant="brand">
@@ -160,13 +160,17 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ─── Design-build split ─── */}
+        {/* ─── How we work split ───
+            The id="team" anchor is kept from the old team section so any
+            existing /about#team links still land somewhere sensible. No
+            invented team bios or history appear here.
+            [NEEDS: owner bio/photo approval before adding any team content] */}
         <Section variant="greige" spacing="none" divider className="p-0">
           <div id="team" className="grid md:grid-cols-2 overflow-hidden scroll-mt-24">
             <div className="relative min-h-[260px] md:min-h-[520px] overflow-hidden bg-inverse">
               <Image
                 src={SITE_IMAGES.process}
-                alt="Architectural drawings and finish selections for a Treasure Valley new home"
+                alt="Quoting and planning a home repair task list in the Treasure Valley"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover img-brand-grade"
@@ -177,11 +181,11 @@ export default function AboutPage() {
                 style={{ backgroundImage: GRAIN_URL, backgroundRepeat: 'repeat', opacity: 0.028 }}
               />
               <div className="absolute bottom-0 left-0 p-8 md:p-12">
-                <div className="brc-label brc-label-on-photo mb-3">Design-build, explained</div>
+                <div className="brc-label brc-label-on-photo mb-3">How we work</div>
                 <p className="font-sans font-light text-xl md:text-2xl text-inverse-foreground">
-                  One team from
+                  Request, quote,
                   <br />
-                  concept to completion
+                  one-trip fix
                 </p>
               </div>
             </div>
@@ -192,16 +196,16 @@ export default function AboutPage() {
                   eyebrow="Our model"
                   title={
                     <>
-                      Design-build,{' '}
-                      <em className="brc-accent">explained</em>
+                      How we <em className="brc-accent">work</em>
                     </>
                   }
-                  description="Design-build means your designer, estimator, and construction lead work together under one roof. The plan, the budget, the engineering, and the permit set stay aligned, so the house you are shown in design is the house that gets priced and built."
+                  description="Three steps, no mystery. You send the task, ideally with photos. We reply with an upfront quote: the hourly rate, the flat trip fee, and the expected time. Then we arrive at the agreed time with the right materials and finish the job, in one trip whenever the work allows it."
                   className="mb-8 max-w-none"
                 />
                 <p className="text-sm text-muted-foreground leading-relaxed mb-8">
-                  Idaho contractor registration information is available upon request. We are bonded
-                  and insured for residential construction across the Treasure Valley.
+                  We keep our work within the scope Idaho allows for handyman services and refer
+                  licensed trade work to specialists we trust. Business registration and insurance
+                  details are available on request.
                 </p>
                 <ul className="grid sm:grid-cols-2 gap-3">
                   {TRUST_ITEMS.map((item) => (
@@ -214,43 +218,41 @@ export default function AboutPage() {
                 <div className="mt-8 pt-8 border-t border-border">
                   <div className="brc-label text-muted-foreground mb-3">Our commitment</div>
                   <h3 className="font-sans font-normal text-base text-foreground mb-2">
-                    One accountable team
+                    One accountable local team
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    {SITE_CONFIG.name} has worked in Treasure Valley residential construction since
-                    2020. One team leads every build from the first look at your lot through Ada and
-                    Canyon County permitting to the final walkthrough, and stands behind a line-item budget
-                    before we break ground and a one-year workmanship warranty after you move in.
+                    {SITE_CONFIG.name} is locally owned and serves the Treasure Valley only. The
+                    person who quotes your job is accountable for how it turns out, and if our
+                    workmanship ever lets you down, we come back and make it right.
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed mt-4">
-                    New to building? Start with our{' '}
+                    Not sure where your job fits? Start with our most requested service,{' '}
                     <Link
-                      href="/guides/boise-home-building-cost-guide"
+                      href="/services/drywall-repair"
                       className="text-foreground underline underline-offset-2 hover:text-accent-legible"
                     >
-                      Boise home building cost guide
-                    </Link>{' '}
-                    or explore our most requested service,{' '}
+                      drywall repair and patching
+                    </Link>
+                    , or browse{' '}
                     <Link
-                      href="/services/custom-home-builder"
+                      href="/services"
                       className="text-foreground underline underline-offset-2 hover:text-accent-legible"
                     >
-                      custom home building in Boise
+                      everything we fix, install, and maintain
                     </Link>
                     .
                   </p>
                 </div>
                 <div className="mt-8 pt-8 border-t border-border">
-                  <div className="brc-label text-muted-foreground mb-3">Where the budget lands</div>
+                  <div className="brc-label text-muted-foreground mb-3">Where your money goes</div>
                   <h3 className="font-sans font-normal text-base text-foreground mb-2">
-                    Your budget builds the house, not the company
+                    You pay for the fix, not the overhead
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    A larger builder's offices, model homes, and branded trucks are real costs, and
-                    they are quietly recovered inside the price per square foot you are quoted. We keep
-                    our footprint small on purpose, so a bigger share of what you spend goes into the
-                    foundation, the framing, the envelope, and the finishes you chose - the parts of
-                    the home you actually live with.
+                    Franchise fees, call centers, and wrapped trucks are real costs, and they are
+                    quietly recovered inside minimum charges and inflated hourly rates. We keep our
+                    footprint small on purpose, so what you spend goes into the time and materials
+                    your repair actually takes.
                   </p>
                 </div>
               </Reveal>
@@ -267,8 +269,8 @@ export default function AboutPage() {
           <div className="container px-4 max-w-5xl">
             {/* Brand icon (ochre field) - bright badge on the dark band */}
             <img
-              src="/brand/svg/icon/boise-construction-co-icon-accent.svg"
-              alt="Boise Construction Co"
+              src="/brand/svg/icon/boise-handyman-co-icon-accent.svg"
+              alt="Boise Handyman Co"
               width={72}
               height={72}
               className="h-16 w-16 md:h-[72px] md:w-[72px] mb-8"
@@ -315,7 +317,7 @@ export default function AboutPage() {
                   Service <em className="brc-accent">areas</em>
                 </>
               }
-              description={`We serve homeowners in ${TREASURE_VALLEY_CITIES}, and surrounding communities.`}
+              description={`We handle repairs, installs, and maintenance for homeowners in ${TREASURE_VALLEY_CITIES}, and surrounding communities. One flat trip fee applies across the whole area.`}
               className="max-w-3xl"
             />
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -333,13 +335,18 @@ export default function AboutPage() {
           <div className="container px-4 max-w-2xl mx-auto">
             <MarketingCard className="cta-card-dark p-10 md:p-12 text-center">
               <h2 className="font-sans font-light text-section-title mb-4 text-inverse-foreground">
-                Ready to start your project?
+                Ready to clear that to-do list?
               </h2>
               <p className="text-base text-inverse-muted mb-8">
-                Schedule a free in-home visit for planning guidance, design direction, and an honest
-                project range.
+                Send your tasks with photos and get an upfront quote within one business day. No
+                pressure, no obligation.
               </p>
-              <ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA>
+                <Button variant="heroGhost" asChild>
+                  <a href="/contact#consult">{CTA_SECONDARY}</a>
+                </Button>
+              </div>
             </MarketingCard>
           </div>
         </Section>

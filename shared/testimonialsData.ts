@@ -7,7 +7,7 @@ export interface TestimonialItem {
 }
 
 /**
- * Empty until real, attributable client reviews exist for Boise Construction Co.
+ * Empty until real, attributable client reviews exist for Boise Handyman Co.
  *
  * The previous entries were placeholder remodeling testimonials with invented
  * customer names. Carrying them onto a new-construction site would misrepresent

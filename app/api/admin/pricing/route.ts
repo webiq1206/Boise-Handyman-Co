@@ -39,9 +39,10 @@ import {
 } from "@/server/services/unitCostOverrides";
 
 /*
- * Admin pricing covers new construction first, since that is what the company
- * sells, and keeps the remodel types below it because RE-10 repair work and
- * legacy leads still price against them.
+ * Admin pricing still exposes every project type the legacy line-item engine
+ * can price. The company now sells handyman repair work (RE-10 repairs price
+ * through shared/costs/re10Repairs, not this engine), but legacy leads and
+ * stored estimates still resolve against these types, so they stay tunable.
  */
 const PROJECTS: ProjectType[] = [
   "custom-home",

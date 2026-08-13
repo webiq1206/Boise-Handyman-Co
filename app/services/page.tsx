@@ -24,9 +24,9 @@ import { generateBreadcrumbSchema } from '@/lib/schema';
 import { CTA_PRIMARY, CTA_SECONDARY } from '@/shared/ctaCopy';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 
-const TITLE = 'Home Building Services | Treasure Valley';
+const TITLE = 'Handyman Services | Treasure Valley';
 const DESCRIPTION =
-  'Design-build home building in Boise, Meridian, Eagle, Nampa and the Treasure Valley. Custom homes, semi-custom homes, builds on your own lot, and permit-ready design under one accountable team.';
+  'Handyman services in Boise, Meridian, Eagle, Nampa and the Treasure Valley: drywall repair, painting, minor plumbing and electrical, carpentry, mounting, and maintenance. Upfront quotes - book a visit.';
 
 export const metadata: Metadata = {
   title: { absolute: `${TITLE} | ${SITE_CONFIG.name}` },
@@ -58,7 +58,7 @@ export default function ServicesIndexPage() {
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'Home Building Services',
+    name: 'Handyman Services',
     itemListElement: SERVICES.map((service, i) => ({
       '@type': 'ListItem',
       position: i + 1,
@@ -73,18 +73,19 @@ export default function ServicesIndexPage() {
 
       <PageHeroBand
         imageSrc={SITE_IMAGES.statementBand}
-        imageAlt="Newly built Treasure Valley great room with vaulted ceiling and natural light"
+        imageAlt="Well-maintained Treasure Valley home interior after a handyman visit"
       >
         <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Services' }]} />
         <div className="brc-label text-inverse-muted mt-6 mb-4">Our services</div>
         <h1 className="font-sans font-light text-display tracking-tight text-inverse-foreground max-w-3xl mb-4">
-          Every way to build a{' '}
-          <em className="brc-accent">new home</em> here
+          Everything we fix, install, and{' '}
+          <em className="brc-accent">maintain</em>
         </h1>
         <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed">
-          One accountable team handles feasibility, design, engineering, Ada and Canyon County permits,
-          and construction under a single contract, so your build stays aligned from the first planning
-          consultation through the day you get the keys.
+          Small repairs, installs, and maintenance for Treasure Valley homes, quoted upfront with a
+          simple hourly rate plus one flat trip fee. Most jobs run one to eight hours and are
+          finished in a single visit; anything bigger gets an honest referral to a specialty
+          contractor.
         </p>
       </PageHeroBand>
 
@@ -98,7 +99,7 @@ export default function ServicesIndexPage() {
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={getServiceBackground(service.slug)}
-                        alt={`${service.name} by ${SITE_CONFIG.name}`}
+                        alt={`${service.name} handyman service by ${SITE_CONFIG.name}`}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         quality={70}
@@ -133,12 +134,12 @@ export default function ServicesIndexPage() {
 
             <Reveal delay={SERVICES.length * 40}>
               <div className="h-full min-h-[220px] rounded-sm border border-card-border bg-card p-6 md:p-8 flex flex-col justify-center">
-                <div className="brc-label mb-3">Not sure where to start</div>
+                <div className="brc-label mb-3">Not sure where your job fits</div>
                 <h2 className="font-sans font-light text-xl md:text-2xl tracking-tight mb-2 text-foreground">
-                  Tell us about your <em className="brc-accent">project</em>
+                  Tell us about your <em className="brc-accent">list</em>
                 </h2>
                 <p className="text-sm leading-relaxed mb-5 text-muted-foreground">
-                  Every build starts with a free planning consultation and an honest budget band, with no obligation.
+                  Every job starts with an upfront quote from your photos, with no obligation. One trip fee covers the whole visit.
                 </p>
                 <ConsultCTA variant="brand" className="self-start">
                   {CTA_PRIMARY}
@@ -153,10 +154,10 @@ export default function ServicesIndexPage() {
         title={
           <>
             Know your range before you{' '}
-            <em className="brc-accent">commit</em>
+            <em className="brc-accent">book</em>
           </>
         }
-        description="Use our Treasure Valley build cost estimator to see a realistic range for a custom or semi-custom home, or a build on land you already own - then book a free consultation when you're ready."
+        description="Use our Treasure Valley estimator to see a realistic range for your repair, install, or maintenance job - then book a handyman visit when you're ready."
       />
 
       <Section divider>
@@ -171,7 +172,7 @@ export default function ServicesIndexPage() {
                 <em className="brc-accent">valley</em>
               </>
             }
-            description="Lot availability, permit paths, impact fees, and HOA design review differ between Ada and Canyon County communities. Choose your city for local guidance."
+            description="We serve every Ada and Canyon County community below with the same flat trip fee. Choose your city for local details and scheduling."
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
             {CITIES.map((city, i) => (
@@ -187,10 +188,10 @@ export default function ServicesIndexPage() {
         <div className="container px-4 max-w-2xl mx-auto">
           <MarketingCard className="cta-card-dark p-10 md:p-12 text-center">
             <h2 className="font-sans font-light text-section-title mb-4 text-inverse-foreground">
-              Ready to plan your <em className="brc-accent">build</em>?
+              Ready to get it <em className="brc-accent">fixed</em>?
             </h2>
             <p className="text-inverse-muted mb-8 max-w-md mx-auto">
-              Book a free planning consultation or get an instant build cost range.
+              Get an instant estimate online, or book a handyman visit with an upfront quote.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA>

@@ -42,21 +42,21 @@ html, body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   BOISE CONSTRUCTION CO - DARK-ONLY BRAND IDENTITY
+   BOISE HANDYMAN CO - DARK-ONLY BRAND IDENTITY
    Committed charcoal ground. :root and .dark carry IDENTICAL values so
    there is no light-mode leak whether or not the .dark class is present.
    This is the identity, not a toggle. The approved brand kit defines just
-   three colors - charcoal, bone, ochre - so the dark neutral ramp is a
+   three colors - charcoal, bone, steel blue - so the dark neutral ramp is a
    cool, near-neutral charcoal family (hue ~163) drawn from the brand ink
    #2C302F; the light/text tones stay warm to match bone. No sage/green
    as a brand tone. Palette:
      charcoal (ink / dark ground) #2C302F · surface/bands stepped from it
      bone #F7F5F3 · body #E6E3DE · mist #9F9C97 · faint #767370
-     Accent = Ochre #D09A5C (the one brand-distinct color; charcoal +
-     bone are shared unchanged). deep ochre #7E6344 = graphic fills/
-     chips/tints · ochre #D09A5C = ALL accent text (accent WORDS,
+     Accent = Steel blue #8FAEC4 (the one brand-distinct color; charcoal +
+     bone are shared unchanged). deep steel blue #4E6B7E = graphic fills/
+     chips/tints · steel blue #8FAEC4 = ALL accent text (accent WORDS,
      eyebrow ticks, links/hover, focus, numerals). AA on charcoal (5.38:1).
-     Never recolor outside charcoal, bone, and #D09A5C.
+     Never recolor outside charcoal, bone, and #8FAEC4.
    ═══════════════════════════════════════════════════════════════════ */
 :root, .dark {
   --button-outline: rgba(255,255,255, .08);
@@ -91,11 +91,11 @@ html, body {
   --sidebar: 163 5% 10%;
   --sidebar-foreground: 37 14% 89%;
   --sidebar-border: 163 6% 24%;
-  --sidebar-primary: 32 55% 59%;       /* ochre #D09A5C */
+  --sidebar-primary: 205 31% 66%;       /* steel blue #8FAEC4 */
   --sidebar-primary-foreground: 163 5% 18%;  /* charcoal #2C302F */
   --sidebar-accent: 163 6% 16%;
   --sidebar-accent-foreground: 37 14% 89%;
-  --sidebar-ring: 32 55% 59%;          /* ochre #D09A5C */
+  --sidebar-ring: 205 31% 66%;          /* steel blue #8FAEC4 */
 
   --popover: 163 6% 16%;
   --popover-foreground: 37 14% 89%;
@@ -112,28 +112,28 @@ html, body {
   --muted-foreground: 32 4% 61%;     /* mist */
   --faint: 32 3% 45%;                 /* faint */
 
-  /* Small accents use a deep, muted ochre #7E6344 (dots, marks, pills,
-     tints, icons). Text on an ochre fill uses bone (5.3:1, AA). Accent WORDS
-     render bone via .brc-accent; links + focus rings keep the legible ochre
-     --accent-legible. Never recolor outside charcoal, bone, and #D09A5C. */
-  --accent: 32 30% 38%;               /* deep ochre #7E6344 */
-  --accent-foreground: 30 20% 96%;    /* bone text on an ochre fill */
+  /* Small accents use a deep, muted steel blue #4E6B7E (dots, marks, pills,
+     tints, icons). Text on an steel blue fill uses bone (5.3:1, AA). Accent WORDS
+     render bone via .brc-accent; links + focus rings keep the legible steel blue
+     --accent-legible. Never recolor outside charcoal, bone, and #8FAEC4. */
+  --accent: 204 24% 40%;               /* deep steel blue #4E6B7E */
+  --accent-foreground: 30 20% 96%;    /* bone text on an steel blue fill */
 
-  --brass: 32 30% 38%;                /* deep ochre #7E6344 */
+  --brass: 204 24% 40%;                /* deep steel blue #4E6B7E */
   --brass-foreground: 30 20% 96%;
 
-  /* Ochre for anything that must stay legible on the dark ground:
+  /* Steel blue for anything that must stay legible on the dark ground:
      text links (hover) and focus rings. AA on the warm charcoal ground (5.38:1). */
-  --accent-legible: 32 55% 59%;       /* ochre #D09A5C */
+  --accent-legible: 205 31% 66%;       /* steel blue #8FAEC4 */
 
   /* Danger - muted terracotta #C77B6B */
   --destructive: 10 45% 60%;
   --destructive-foreground: 30 20% 96%;
 
   --input: 163 6% 13%;                /* input */
-  --ring: 32 55% 59%;                  /* ochre #D09A5C */
+  --ring: 205 31% 66%;                  /* steel blue #8FAEC4 */
 
-  --chart-1: 32 55% 59%;               /* ochre #D09A5C */
+  --chart-1: 205 31% 66%;               /* steel blue #8FAEC4 */
   --chart-2: 163 6% 16%;
   --chart-3: 30 20% 96%;
   --chart-4: 32 4% 61%;
@@ -382,9 +382,9 @@ html, body {
   font-family: var(--font-libre-baskerville, Georgia, serif);
   font-style: italic;
   font-optical-sizing: auto;
-  /* Accent WORDS are the serif grace note AND the brand's ochre moment. We use
-     the legible ochre (#D09A5C), not the deep #7E6344, because the deep tone
-     fails legibility as text on the charcoal ground - the ochre stays AA
+  /* Accent WORDS are the serif grace note AND the brand's steel blue moment. We use
+     the legible steel blue (#8FAEC4), not the deep #4E6B7E, because the deep tone
+     fails legibility as text on the charcoal ground - the steel blue stays AA
      (5.38:1) at any size while reading unmistakably as the same brand accent.
      Overrides any text-accent on the same element. */
   color: hsl(var(--accent-legible));
@@ -413,7 +413,7 @@ html, body {
   content: "";
   width: 24px;
   height: 1px;
-  /* Ochre tick: the eyebrow's brand accent. Legible ochre so the 1px hairline
+  /* Steel blue tick: the eyebrow's brand accent. Legible steel blue so the 1px hairline
      actually reads on the dark ground. */
   background: hsl(var(--accent-legible));
   flex-shrink: 0;
@@ -431,7 +431,7 @@ html, body {
 .brc-label.brc-label-on-photo {
   color: hsl(var(--inverse-foreground) / 0.92);
 }
-/* The ochre tick is intentional on every band, but keep the label TEXT muted. */
+/* The steel blue tick is intentional on every band, but keep the label TEXT muted. */
 
 /* ─── Calculator range slider ─── */
 /* The size slider is the estimator's primary measurement control, and on a
@@ -644,7 +644,7 @@ html, body {
 }
 
 /* ===================================================================
-   Guide callouts - ochre-forward tips, key points, checklists, warnings,
+   Guide callouts - steel blue-forward tips, key points, checklists, warnings,
    and budget snapshots. Opt-in via markup (.callout.<variant>) inside
    .blog-content, so blog posts are unaffected unless they use them.
    =================================================================== */
@@ -681,13 +681,13 @@ html, body {
   transform: rotate(45deg);
 }
 
-/* Tip - legible ochre, soft ochre wash */
+/* Tip - legible steel blue, soft steel blue wash */
 .blog-content .callout.tip {
   border-left-color: hsl(var(--accent-legible));
   background: hsl(var(--accent) / 0.07);
 }
 
-/* Key point - deep ochre, heavier bar */
+/* Key point - deep steel blue, heavier bar */
 .blog-content .callout.note {
   border-left-width: 4px;
   border-left-color: hsl(var(--accent));
@@ -701,7 +701,7 @@ html, body {
 }
 .blog-content .callout.cost strong { color: hsl(var(--accent-legible)); font-weight: 500; }
 
-/* Warning / important - a redder terracotta than the ochre accent (hue ~15 vs
+/* Warning / important - a redder terracotta than the steel blue accent (hue ~15 vs
    ~32) so caution reads distinctly and never mistakes itself for a brand accent.
    Used sparingly so caution reads distinctly from tips. */
 .blog-content .callout.warning {
@@ -711,7 +711,7 @@ html, body {
 .blog-content .callout.warning .callout-label { color: hsl(15 55% 66%); }
 .blog-content .callout.warning .callout-label::before { background: hsl(15 55% 66%); }
 
-/* Checklist - ochre checkboxes with a checkmark */
+/* Checklist - steel blue checkboxes with a checkmark */
 .blog-content .callout.checklist ul {
   list-style: none;
   margin: 0.35rem 0 0;
@@ -745,7 +745,7 @@ html, body {
   transform: rotate(45deg);
 }
 
-/* Decorative lead paragraph + inline ochre accent for eye-draw */
+/* Decorative lead paragraph + inline steel blue accent for eye-draw */
 .blog-content .guide-lead {
   font-size: 1.15rem;
   line-height: 1.7;
@@ -756,7 +756,7 @@ html, body {
   font-weight: 500;
 }
 
-/* Numbered step flow - ochre numerals draw the eye through a sequence */
+/* Numbered step flow - steel blue numerals draw the eye through a sequence */
 .blog-content ol.steps {
   list-style: none;
   counter-reset: step;
@@ -819,12 +819,12 @@ html, body {
   gap: 0.25rem 1rem;
 }
 
-/* Marketing text link (tertiary action) - reveals ochre on hover.
+/* Marketing text link (tertiary action) - reveals steel blue on hover.
    min-h-6 = the 24px WCAG 2.2 target-size floor for standalone links. */
 .brc-text-link {
   @apply inline-flex min-h-6 items-center gap-2 text-sm font-normal text-foreground underline-offset-2 hover:underline hover:text-accent-legible transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm;
 }
-/* Arrow in text links picks up the ochre on hover too */
+/* Arrow in text links picks up the steel blue on hover too */
 .brc-text-link:hover svg {
   color: hsl(var(--accent-legible));
 }

@@ -1,11 +1,11 @@
-# SEO Audit Context - Boise Construction Co
+# SEO Audit Context - Boise Handyman Co
 
 > Note: the identity fields below track the current code (`shared/siteConfig.ts`).
 > The route inventory, service, and content sections were captured during the
 > original remodeling-site audit and predate the rebuild into a new-construction
 > builder, so treat those sections as historical until a fresh audit is run.
 
-**Domain:** boiseconstruction.co
+**Domain:** boisehandyman.co
 **Stack:** Next.js 14.2 App Router, React 18, TypeScript, Tailwind, shadcn/ui
 **Rendering:** Static (SSG via `generateStaticParams`) for all public pages
 **Database:** Neon PostgreSQL (Drizzle ORM), non-SEO surface
@@ -14,10 +14,10 @@
 **Image hosting:** local `/public/images/*` only (no CDN)
 
 ## Business NAP
-- Name: Boise Construction Co
-- Legal: Boise Construction Co LLC
+- Name: Boise Handyman Co
+- Legal: Boise Handyman Co
 - Phone: (208) 477-1169
-- Email: hello@boiseconstruction.co
+- Email: hello@boisehandyman.co
 - Address: 4031 W Wapoot St, Meridian, ID 83646
 - Founded: 2017
 - Service Area: Kuna, Boise, Meridian, Eagle, Star, Middleton (Idaho Treasure Valley, USDA Zone 6b-7a)
@@ -25,7 +25,7 @@
 ## Existing SEO Infrastructure
 | Asset | Location | Status |
 |---|---|---|
-| Root metadata + template | `app/layout.tsx` | Present; default title + template `%s | Boise Construction Co` |
+| Root metadata + template | `app/layout.tsx` | Present; default title + template `%s | Boise Handyman Co` |
 | Sitemap | `app/sitemap.ts` | Present; covers all 294 public routes |
 | robots.txt | `app/robots.ts` | Present; disallows `/api/`, `/admin/`, `/subcontractor/` |
 | 404 page | `app/not-found.tsx` | Present (had no metadata - fixed) |

@@ -1,13 +1,12 @@
 import { cn } from '@/lib/utils';
 
 const STEPS = [
-  { n: 1, title: 'Define scope', body: 'Layout, structural, plumbing, or electrical changes?' },
-  { n: 2, title: 'Confirm jurisdiction', body: 'Ada vs Canyon County (see map below)' },
-  { n: 3, title: 'Design & plans', body: 'Stamped sheets when required' },
-  { n: 4, title: 'Submit application', body: 'County portal + fees' },
-  { n: 5, title: 'Plan review', body: '2–8+ weeks typical for layout work' },
-  { n: 6, title: 'Approved → build', body: 'Rough inspections before cover-up' },
-  { n: 7, title: 'Final inspection', body: 'Close permit before finish concealment' },
+  { n: 1, title: 'Describe the work', body: 'Like-for-like swap, or moving / adding wiring, plumbing, structure?' },
+  { n: 2, title: 'Check the lists below', body: 'Most repair and maintenance work needs no permit' },
+  { n: 3, title: 'Confirm jurisdiction', body: 'City limits vs unincorporated Ada or Canyon County' },
+  { n: 4, title: 'Call and ask', body: 'Five minutes with the building department settles borderline cases' },
+  { n: 5, title: 'Permit needed?', body: 'The licensed contractor doing the work normally pulls it' },
+  { n: 6, title: 'Inspections', body: 'Rough inspections before cover-up, final before close-out' },
 ];
 
 function FlowStep({
@@ -69,7 +68,7 @@ export function PermitFlowGraphic() {
     <div className="space-y-10" data-testid="permit-flow-graphic">
       <div>
         <h2 className="text-sm font-normal uppercase tracking-wider text-muted-foreground mb-4">
-          Typical permit path
+          How to check, in order
         </h2>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {STEPS.map((step, i) => (
@@ -86,14 +85,43 @@ export function PermitFlowGraphic() {
         </div>
       </div>
 
+      <div className="rounded-lg border border-dashed border-border p-5 bg-muted/20">
+        <h2 className="text-sm font-normal text-foreground mb-3">
+          Usually no permit (typical handyman scope)
+        </h2>
+        <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-muted-foreground">
+          <span>Paint, caulk &amp; cosmetic finishes</span>
+          <span>Drywall patching &amp; texture</span>
+          <span>Like-for-like fixture swaps</span>
+          <span>Cabinet, trim &amp; door repair</span>
+          <span>Fence &amp; gate repair</span>
+          <span>Deck board &amp; rail repair</span>
+          <span>Gutter cleaning &amp; repair</span>
+          <span>Mounting, shelving &amp; assembly</span>
+        </div>
+        <h2 className="text-sm font-normal text-foreground mt-5 mb-3">
+          Usually needs a permit (and often a licensed trade)
+        </h2>
+        <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-muted-foreground">
+          <span>New circuits or panel work</span>
+          <span>Moved or added plumbing</span>
+          <span>Water heater replacement</span>
+          <span>Wall removal / structural work</span>
+          <span>Additions, ADUs &amp; conversions</span>
+          <span>Re-roofs &amp; HVAC replacement</span>
+          <span>Any gas line work</span>
+          <span>Deck framing &amp; ledgers</span>
+        </div>
+      </div>
+
       <div>
         <h2 className="text-sm font-normal uppercase tracking-wider text-muted-foreground mb-4">
-          Which county?
+          Which county answers the question?
         </h2>
         <div className="grid md:grid-cols-2 gap-4">
           <CountyColumn
             title="Ada County"
-            subtitle="Most Boise metro new builds"
+            subtitle="Eastern Treasure Valley"
             cities={['Boise', 'Meridian', 'Eagle', 'Kuna', 'Star']}
             accentClass="border-accent/40 bg-accent/5"
           />
@@ -104,52 +132,39 @@ export function PermitFlowGraphic() {
             accentClass="border-border bg-muted/30"
           />
         </div>
-      </div>
-
-      <div className="rounded-lg border border-dashed border-border p-5 bg-muted/20">
-        <h2 className="text-sm font-normal text-foreground mb-3">Usually needs permits</h2>
-        <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-muted-foreground">
-          <span>Wall removal / beams</span>
-          <span>Plumbing relocations</span>
-          <span>Panel or circuit additions</span>
-          <span>Additions & ADUs</span>
-        </div>
-        <h2 className="text-sm font-normal text-foreground mt-5 mb-3">Often minimal review</h2>
-        <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-muted-foreground">
-          <span>Like-for-like fixture swap</span>
-          <span>Cabinet refacing (no MEP)</span>
-          <span>Paint & cosmetic finishes</span>
-          <span>Same-location replacements</span>
-        </div>
+        <p className="text-xs text-muted-foreground mt-3">
+          Inside city limits, the city building department reviews the work; outside them, the
+          county does. When in doubt, start with the city and they will redirect you.
+        </p>
       </div>
 
       <div className="overflow-x-auto">
         <h2 className="text-sm font-normal uppercase tracking-wider text-muted-foreground mb-4">
-          Timeline comparison (layout changes)
+          If a permit is needed: typical timeline
         </h2>
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="border-b border-border">
               <th className="text-left py-2 pr-4 font-normal text-foreground">Phase</th>
-              <th className="text-left py-2 pr-4 font-normal text-foreground">Ada County</th>
-              <th className="text-left py-2 font-normal text-foreground">Canyon County</th>
+              <th className="text-left py-2 pr-4 font-normal text-foreground">Small permitted project</th>
+              <th className="text-left py-2 font-normal text-foreground">Notes</th>
             </tr>
           </thead>
           <tbody className="text-muted-foreground">
             <tr className="border-b border-border/60">
-              <td className="py-2 pr-4">Plan preparation</td>
-              <td className="py-2 pr-4">2–6 weeks</td>
-              <td className="py-2">2–6 weeks</td>
+              <td className="py-2 pr-4">Application</td>
+              <td className="py-2 pr-4">Same day to 1 week</td>
+              <td className="py-2">Simple trade permits are often over the counter or online</td>
             </tr>
             <tr className="border-b border-border/60">
-              <td className="py-2 pr-4">County review</td>
-              <td className="py-2 pr-4">2–8+ weeks</td>
-              <td className="py-2">2–8+ weeks</td>
+              <td className="py-2 pr-4">Review</td>
+              <td className="py-2 pr-4">Days to a few weeks</td>
+              <td className="py-2">Longer when plans or structural changes are involved</td>
             </tr>
             <tr>
               <td className="py-2 pr-4">Inspections</td>
-              <td className="py-2 pr-4">During construction</td>
-              <td className="py-2">During construction</td>
+              <td className="py-2 pr-4">During the work</td>
+              <td className="py-2">Rough inspection before cover-up, final at completion</td>
             </tr>
           </tbody>
         </table>

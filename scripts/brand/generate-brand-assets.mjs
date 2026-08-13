@@ -1,15 +1,25 @@
 /**
- * SUPERSEDED - kept for reference only. Do not run against public/brand.
+ * Boise Handyman Co - PLACEHOLDER brand kit generator.
  *
- * The approved Boise Construction Co brand kit (professionally drawn, outlined
- * artwork in svg/ + png/, favicon.ico, BRAND.md) now lives in public/brand and
- * is the single source of truth for every mark. Regenerating from fonts here
- * would overwrite that approved artwork, so this script is no longer wired into
- * the build. It historically rebuilt the marks from the source fonts (Montserrat
- * Light for the lettering, Libre Baskerville italic for the script elements).
+ * Rebuilds the full public/brand kit (seal, wordmark, wordmark-full, icon,
+ * favicons, app icons) from the source fonts using opentype.js + resvg. The
+ * output tree and file naming mirror the previous professionally drawn
+ * Boise Construction Co kit exactly:
  *
- * Usage (legacy):
- *   node scripts/brand/generate-brand-assets.mjs          # write assets
+ *   public/brand/svg/{seal,wordmark,wordmark-full,icon}/...
+ *   public/brand/png/...   (same tree, size-suffixed)
+ *   public/brand/favicon.ico
+ *   public/favicon.svg, favicon.ico, favicon-16.png, favicon-32.png
+ *   public/icons/apple-touch-icon.png, icon-192.png, icon-512.png
+ *
+ * Naming: boise-handyman-co-{mark}-{ink}[-accent]-{size}
+ *
+ * STATUS: this kit is a programmatically generated PLACEHOLDER pending real
+ * brand assets. When approved artwork arrives, drop it into public/brand and
+ * retire this script again.
+ *
+ * Usage:
+ *   node scripts/brand/generate-brand-assets.mjs           # write assets
  *   node scripts/brand/generate-brand-assets.mjs --preview # also write previews
  */
 import fs from "fs";
@@ -21,27 +31,29 @@ import { Resvg } from "@resvg/resvg-js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..", "..");
 const assets = path.join(root, "scripts", "og-assets");
-const brandDir = path.join(root, "public", "brand");
 
 const BRAND = {
-  name: "Boise Construction Co",
-  tagline: "CUSTOM HOME BUILDER",
-  region: "TREASURE VALLEY \u00b7 IDAHO",
-  established: "EST 2020",
-  slug: "boise-construction-co",
+  name: "Boise Handyman Co",
+  tagline: "HANDYMAN SERVICES",
+  region: "TREASURE VALLEY · IDAHO",
+  slug: "boise-handyman-co",
 };
 
 const COLOR = {
-  ink: "#2C302F",         // charcoal (shared brand ink)
-  bone: "#F7F5F3",        // bone (shared brand light)
-  rule: "#C9C4BC",        // hairline rule on light grounds
-  accent: "#D09A5C",      // Ochre - the one brand-distinct color. Per the brand
-                          // kit it appears ONLY on the seal's outer ring + dots
-                          // and on the wordmark's "Co." (AA on charcoal, 5.38:1).
-  accentDeep: "#7E6344",  // deep ochre for graphic fills on light grounds
-  mist: "#9F9C97",        // warm neutral grey for secondary tagline/region text
-  ringMuted: "#5E5A55",   // warm neutral hairline for the reverse primary-logo rule
+  ink: "#2C302F",   // charcoal (shared brand ink)
+  bone: "#F7F5F3",  // bone (shared brand light)
+  accent: "#8FAEC4", // Steel blue - the one brand-distinct color. It appears
+                     // ONLY on the seal's outer ring + dots, the wordmark's
+                     // "Co.", the full wordmark's rule, and the icon field.
+                     // WCAG contrast on charcoal 5.74:1 (AA for normal text);
+                     // on bone 2.14:1 (decorative only).
 };
+
+const METADATA =
+  "Boise Handyman Co, handyman services, home repairs, drywall repair, " +
+  "painting, plumbing repairs, electrical repairs, carpentry, mounting, " +
+  "home maintenance, Boise, Meridian, Eagle, Nampa, Treasure Valley, Idaho, " +
+  "logo, brand identity";
 
 const loadFont = (file) =>
   opentype.parse(fs.readFileSync(path.join(assets, file)).buffer);
@@ -152,7 +164,7 @@ function layout(font, text, { size, trackEm = 0, x = 0, y = 0 }) {
 }
 
 /** Lay out text along a circular arc, one rotated glyph at a time. */
-function layoutArc(font, text, { size, trackEm = 0, cx, cy, radius, centerDeg, flip = false, ink = COLOR.bone }) {
+function layoutArc(font, text, { size, trackEm = 0, cx, cy, radius, centerDeg, flip = false, ink }) {
   const tracking = trackEm * size;
 
   const widths = [...text].map((ch) => ({
@@ -192,109 +204,17 @@ function layoutArc(font, text, { size, trackEm = 0, cx, cy, radius, centerDeg, f
 }
 
 const svgHeader = (w, h, label, desc) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${label}"><title>${label}</title><desc>${desc}</desc>`;
-
-/* ------------------------------------------------------------------ *
- * Wordmark - "BOISE CONSTRUCTION Co."
- * ------------------------------------------------------------------ */
-function buildWordmark(fill, coFill = fill) {
-  const CAP_HEIGHT = 78.4;
-  const size = capSize(montserrat, CAP_HEIGHT);
-  const baseline = 132;
-  const startX = 73.4;
-
-  const caps = layout(montserrat, "BOISE CONSTRUCTION", {
-    size,
-    trackEm: TRACK_EM,
-    x: startX,
-    y: baseline,
-  });
-
-  // The italic "Co." is the wordmark's single accent moment (brand kit rule).
-  const co = coMark({
-    capHeight: CAP_HEIGHT,
-    x: caps.maxX + size * 0.34,
-    y: baseline,
-    fill: coFill,
-  });
-
-  const width = Math.round(co.maxX + startX);
-  const label = `${BRAND.name} wordmark logo`;
-  const desc = `Horizontal wordmark logo for ${BRAND.name} - custom home builder and new residential construction in Boise and the Treasure Valley, Idaho.`;
-
-  return (
-    svgHeader(width, 200, label, desc) +
-    `<path d="${caps.d}" fill="${fill}"/>` +
-    co.svg +
-    `</svg>`
-  );
-}
-
-/* ------------------------------------------------------------------ *
- * Primary logo - wordmark over rule, tagline, and region line
- * ------------------------------------------------------------------ */
-function buildPrimaryLogo(fill, ruleColor, taglineColor, regionColor, coFill = fill) {
-  const CAP_HEIGHT = 72.8;
-  const size = capSize(montserrat, CAP_HEIGHT);
-  const baseline = 196;
-  const startX = 60;
-
-  const caps = layout(montserrat, "BOISE CONSTRUCTION", {
-    size,
-    trackEm: TRACK_EM,
-    x: startX,
-    y: baseline,
-  });
-  const co = coMark({
-    capHeight: CAP_HEIGHT,
-    x: caps.maxX + size * 0.34,
-    y: baseline,
-    fill: coFill,
-  });
-
-  const width = Math.round(co.maxX + startX);
-  const center = width / 2;
-
-  // Tagline and region lines, centred under the wordmark.
-  const tagSize = capSize(montserrat, 18.54);
-  const tagTrack = 0.28;
-  const tagProbe = layout(montserrat, BRAND.tagline, { size: tagSize, trackEm: tagTrack, x: 0, y: 0 });
-  const tag = layout(montserrat, BRAND.tagline, {
-    size: tagSize,
-    trackEm: tagTrack,
-    x: center - tagProbe.inkWidth / 2 - (tagProbe.minX - 0),
-    y: 312,
-  });
-
-  const regSize = capSize(montserrat, 13.3);
-  const regTrack = 0.24;
-  const regProbe = layout(montserrat, BRAND.region, { size: regSize, trackEm: regTrack, x: 0, y: 0 });
-  const reg = layout(montserrat, BRAND.region, {
-    size: regSize,
-    trackEm: regTrack,
-    x: center - regProbe.inkWidth / 2 - (regProbe.minX - 0),
-    y: 356,
-  });
-
-  const ruleHalf = 150;
-  const label = `${BRAND.name} logo - custom home builder in Boise, Idaho`;
-  const desc = `Primary logo for ${BRAND.name}, custom home builder and new residential construction serving Boise and the Treasure Valley, Idaho. Typeset wordmark with tagline.`;
-
-  return (
-    svgHeader(width, 420, label, desc) +
-    `<path d="${caps.d}" fill="${fill}"/>` +
-    co.svg +
-    `<line x1="${center - ruleHalf}" y1="262" x2="${center + ruleHalf}" y2="262" stroke="${ruleColor}" stroke-width="1.4"/>` +
-    `<path d="${tag.d}" fill="${taglineColor}"/>` +
-    `<path d="${reg.d}" fill="${regionColor}"/>` +
-    `</svg>`
-  );
-}
+  `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}"><title>${label}</title><desc>${desc}</desc><metadata>${METADATA}</metadata>`;
 
 /* ------------------------------------------------------------------ *
  * Seal - circular maker's mark
+ *
+ * Top arc: HANDYMAN SERVICES. Bottom arc: TREASURE VALLEY / IDAHO. The
+ * previous kit carried "EST 2020" in the bottom arc; that founding-year
+ * claim is removed, and the region line takes its place so the ring stays
+ * balanced top to bottom.
  * ------------------------------------------------------------------ */
-function buildSeal({ background, ink = COLOR.bone, ring = COLOR.accent, dotColor = COLOR.accent }) {
+function buildSeal({ ink, ring, dotColor, disc = null, variantLabel }) {
   const S = 1024;
   const cx = S / 2;
   const cy = S / 2;
@@ -310,7 +230,7 @@ function buildSeal({ background, ink = COLOR.bone, ring = COLOR.accent, dotColor
     centerDeg: 0,
     ink,
   });
-  const bottomArc = layoutArc(montserrat, BRAND.established, {
+  const bottomArc = layoutArc(montserrat, BRAND.region, {
     size: arcSize,
     trackEm: 0.16,
     cx,
@@ -335,18 +255,22 @@ function buildSeal({ background, ink = COLOR.bone, ring = COLOR.accent, dotColor
   // Script word, scaled to fit the seal interior.
   const SCRIPT_MAX_WIDTH = 800;
   let scriptSize = 250;
-  let script = layout(fraunces, "Construction", { size: scriptSize, x: 0, y: 0 });
+  let script = layout(fraunces, "Handyman", { size: scriptSize, x: 0, y: 0 });
   if (script.inkWidth > SCRIPT_MAX_WIDTH) {
     scriptSize = scriptSize * (SCRIPT_MAX_WIDTH / script.inkWidth);
-    script = layout(fraunces, "Construction", { size: scriptSize, x: 0, y: 0 });
+    script = layout(fraunces, "Handyman", { size: scriptSize, x: 0, y: 0 });
   }
-  const scriptPlaced = layout(fraunces, "Construction", {
+  const scriptPlaced = layout(fraunces, "Handyman", {
     size: scriptSize,
     x: cx - script.inkWidth / 2 - script.minX,
     y: 580,
   });
 
-  // Small "C O" under the script.
+  // Small "C O" under the script. Unlike "Construction", "Handyman" has a
+  // descender: the "y" tail ends about 51 units below the script baseline
+  // (about y 631), so this line sits lower than it did in the old kit to
+  // clear the tail's ball terminal.
+  const CO_BASELINE = 664;
   const coSize = capSize(montserrat, 13.3);
   const coTrack = 0.6;
   const coProbe = layout(montserrat, "CO", { size: coSize, trackEm: coTrack, x: 0, y: 0 });
@@ -354,10 +278,10 @@ function buildSeal({ background, ink = COLOR.bone, ring = COLOR.accent, dotColor
     size: coSize,
     trackEm: coTrack,
     x: cx - coProbe.inkWidth / 2 - coProbe.minX,
-    y: 642,
+    y: CO_BASELINE,
   });
 
-  // Tick hairlines follow the ink; dots carry the ochre accent.
+  // Tick hairlines follow the ink; dots carry the accent (accent variants).
   const tick = (x1, x2, y) =>
     `<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${ink}" stroke-width="1.3"/>`;
   const dot = (x, y, r = 2.1) =>
@@ -369,13 +293,14 @@ function buildSeal({ background, ink = COLOR.bone, ring = COLOR.accent, dotColor
   const coLeftEnd = co.minX - boiseRuleGap;
   const coRightStart = co.maxX + boiseRuleGap;
 
-  const label = `${BRAND.name} seal`;
-  const desc = `Circular maker's seal for ${BRAND.name}, custom home builder in Boise and the Treasure Valley, Idaho.`;
+  const label = `${BRAND.name} seal, ${variantLabel}`;
+  const desc = `Circular seal logo for ${BRAND.name}, handyman services in Boise and the Treasure Valley, Idaho.`;
 
-  // Outer ring carries the ochre accent; inner ring + all lettering are ink.
+  // Outer ring and dots carry the accent on accent variants; the inner ring
+  // and all lettering are ink.
   return (
     svgHeader(S, S, label, desc) +
-    `<rect width="${S}" height="${S}" fill="${background}"/>` +
+    (disc ? `<circle cx="${cx}" cy="${cy}" r="${S / 2}" fill="${disc}"/>` : "") +
     `<circle cx="${cx}" cy="${cy}" r="500" fill="none" stroke="${ring}" stroke-width="2.3"/>` +
     `<circle cx="${cx}" cy="${cy}" r="487" fill="none" stroke="${ink}" stroke-width="1.5"/>` +
     topArc +
@@ -393,66 +318,210 @@ function buildSeal({ background, ink = COLOR.bone, ring = COLOR.accent, dotColor
     `<path d="${boise.d}" fill="${ink}"/>` +
     `<path d="${scriptPlaced.d}" fill="${ink}"/>` +
     `<path d="${co.d}" fill="${ink}"/>` +
-    tick(coLeftEnd - 78, coLeftEnd, 634) +
-    tick(coRightStart, coRightStart + 78, 634) +
-    dot(coLeftEnd - 78, 634) +
-    dot(coRightStart + 78, 634) +
+    tick(coLeftEnd - 78, coLeftEnd, 656) +
+    tick(coRightStart, coRightStart + 78, 656) +
+    dot(coLeftEnd - 78, 656) +
+    dot(coRightStart + 78, 656) +
     `</svg>`
   );
 }
 
 /* ------------------------------------------------------------------ *
- * Emblem - compact monogram for favicons and small surfaces
+ * Wordmark - "BOISE HANDYMAN Co."
  * ------------------------------------------------------------------ */
-function buildEmblem(background, markColor, hairline, coFill = markColor) {
-  const S = 400;
-  const cx = S / 2;
-  const MAX_LINE_WIDTH = 290;
+function buildWordmark(fill, coFill, variantLabel) {
+  const CAP_HEIGHT = 78.4;
+  const size = capSize(montserrat, CAP_HEIGHT);
+  const baseline = 132;
+  const startX = 73.4;
 
-  /** Centre a tracked cap line, shrinking it if it would breach the frame. */
-  const capLine = (text, capHeight, trackEm, baseline) => {
-    let size = capSize(montserrat, capHeight);
-    let probe = layout(montserrat, text, { size, trackEm, x: 0, y: 0 });
-    if (probe.inkWidth > MAX_LINE_WIDTH) {
-      size *= MAX_LINE_WIDTH / probe.inkWidth;
-      probe = layout(montserrat, text, { size, trackEm, x: 0, y: 0 });
-    }
-    return layout(montserrat, text, {
-      size,
-      trackEm,
-      x: cx - probe.inkWidth / 2 - probe.minX,
-      y: baseline,
-    });
-  };
+  const caps = layout(montserrat, "BOISE HANDYMAN", {
+    size,
+    trackEm: TRACK_EM,
+    x: startX,
+    y: baseline,
+  });
 
-  const line1 = capLine("BOISE", 19.5, 0.34, 100);
-  const line2 = capLine("CONSTRUCTION", 19.5, 0.34, 139);
-
-  const CO_CAP = 93.3;
+  // The italic "Co." is the wordmark's single accent moment (brand kit rule).
   const co = coMark({
-    capHeight: CO_CAP,
-    x: cx - (CO_MARK.width * CO_CAP) / CO_MARK.capHeight / 2,
-    y: 269,
+    capHeight: CAP_HEIGHT,
+    x: caps.maxX + size * 0.34,
+    y: baseline,
     fill: coFill,
   });
 
-  const tag = capLine(BRAND.tagline, 7, 0.32, 329);
-
-  const label = `${BRAND.name} emblem logo`;
-  const desc = `Stacked emblem logo for ${BRAND.name} - custom home builder and new residential construction, Boise and the Treasure Valley, Idaho.`;
+  const width = Math.round(co.maxX + startX);
+  const label = `${BRAND.name} wordmark, ${variantLabel}`;
+  const desc = `Horizontal wordmark for ${BRAND.name}, handyman services in Boise and the Treasure Valley, Idaho.`;
 
   return (
-    svgHeader(S, S, label, desc) +
-    `<rect width="${S}" height="${S}" rx="28" fill="${background}"/>` +
-    `<rect x="30" y="30" width="340" height="340" rx="14" fill="none" stroke="${hairline}" stroke-width="1.3"/>` +
-    `<path d="${line1.d}" fill="${markColor}"/>` +
-    `<path d="${line2.d}" fill="${markColor}"/>` +
+    svgHeader(width, 200, label, desc) +
+    `<path d="${caps.d}" fill="${fill}"/>` +
     co.svg +
-    `<line x1="158" y1="304" x2="242" y2="304" stroke="${hairline}" stroke-width="1.2"/>` +
-    `<path d="${tag.d}" fill="${markColor}" opacity="0.8"/>` +
     `</svg>`
   );
 }
+
+/* ------------------------------------------------------------------ *
+ * Full wordmark - name over rule, tagline, and region line
+ * ------------------------------------------------------------------ */
+function buildWordmarkFull(fill, ruleColor, coFill, variantLabel) {
+  const CAP_HEIGHT = 72.8;
+  const size = capSize(montserrat, CAP_HEIGHT);
+  const baseline = 196;
+  const startX = 60;
+
+  const caps = layout(montserrat, "BOISE HANDYMAN", {
+    size,
+    trackEm: TRACK_EM,
+    x: startX,
+    y: baseline,
+  });
+  const co = coMark({
+    capHeight: CAP_HEIGHT,
+    x: caps.maxX + size * 0.34,
+    y: baseline,
+    fill: coFill,
+  });
+
+  const width = Math.round(co.maxX + startX);
+  const center = width / 2;
+
+  // Tagline and region lines, centred under the wordmark.
+  const tagSize = capSize(montserrat, 18.54);
+  const tagTrack = 0.28;
+  const tagProbe = layout(montserrat, BRAND.tagline, { size: tagSize, trackEm: tagTrack, x: 0, y: 0 });
+  const tag = layout(montserrat, BRAND.tagline, {
+    size: tagSize,
+    trackEm: tagTrack,
+    x: center - tagProbe.inkWidth / 2 - tagProbe.minX,
+    y: 312,
+  });
+
+  const regSize = capSize(montserrat, 13.3);
+  const regTrack = 0.24;
+  const regProbe = layout(montserrat, BRAND.region, { size: regSize, trackEm: regTrack, x: 0, y: 0 });
+  const reg = layout(montserrat, BRAND.region, {
+    size: regSize,
+    trackEm: regTrack,
+    x: center - regProbe.inkWidth / 2 - regProbe.minX,
+    y: 356,
+  });
+
+  const ruleHalf = 150;
+  const label = `${BRAND.name} full wordmark, ${variantLabel}`;
+  const desc = `Stacked wordmark lockup for ${BRAND.name}, handyman services in Boise and the Treasure Valley, Idaho.`;
+
+  return (
+    svgHeader(width, 420, label, desc) +
+    `<path d="${caps.d}" fill="${fill}"/>` +
+    co.svg +
+    `<line x1="${center - ruleHalf}" y1="262" x2="${center + ruleHalf}" y2="262" stroke="${ruleColor}" stroke-width="1.4"/>` +
+    `<path d="${tag.d}" fill="${fill}"/>` +
+    `<path d="${reg.d}" fill="${fill}"/>` +
+    `</svg>`
+  );
+}
+
+/* ------------------------------------------------------------------ *
+ * Icon - small-size mark: the script "H" initial on a disc
+ *
+ * The seal stops reading below about 160px, so this separately built mark
+ * covers favicons, app icons, and avatars. The accent is a solid band at
+ * 5.9% of the diameter where a ring is present; the letterform is the
+ * script initial from "Handyman".
+ * ------------------------------------------------------------------ */
+function buildIcon({ field, innerDisc = null, glyph, variantLabel }) {
+  const S = 512;
+  const c = S / 2;
+  const TARGET_INK_HEIGHT = 220;
+
+  // Measure the script H at a probe size, then scale so the ink box lands at
+  // the target height, centred on the disc.
+  const probe = layout(fraunces, "H", { size: 100, x: 0, y: 0 });
+  const size = (100 * TARGET_INK_HEIGHT) / (probe.maxY - probe.minY);
+  const measured = layout(fraunces, "H", { size, x: 0, y: 0 });
+  const placed = layout(fraunces, "H", {
+    size,
+    x: c - measured.inkWidth / 2 - measured.minX,
+    y: c + (measured.maxY - measured.minY) / 2 - measured.maxY,
+  });
+
+  const label = `${BRAND.slug} icon, ${variantLabel}`;
+  const desc = `Small-size icon mark for ${BRAND.name}, handyman services in Boise, Idaho.`;
+
+  return (
+    svgHeader(S, S, label, desc) +
+    `<circle cx="${c}" cy="${c}" r="${c}" fill="${field}"/>` +
+    (innerDisc ? `<circle cx="${c}" cy="${c}" r="226" fill="${innerDisc}"/>` : "") +
+    `<path d="${placed.d}" fill="${glyph}"/>` +
+    `</svg>`
+  );
+}
+
+/* ------------------------------------------------------------------ *
+ * Build every SVG variant (mirrors the previous kit's tree exactly)
+ * ------------------------------------------------------------------ */
+const { ink, bone, accent } = COLOR;
+const slug = BRAND.slug;
+
+const svgs = {
+  // Seal: light ground (transparent), dark ground (transparent), and "any"
+  // (opaque disc for placement over photography or color).
+  [`svg/seal/light/${slug}-seal-charcoal.svg`]: buildSeal({
+    ink, ring: ink, dotColor: ink, variantLabel: "charcoal",
+  }),
+  [`svg/seal/light/${slug}-seal-charcoal-accent.svg`]: buildSeal({
+    ink, ring: accent, dotColor: accent, variantLabel: "charcoal accent",
+  }),
+  [`svg/seal/dark/${slug}-seal-bone.svg`]: buildSeal({
+    ink: bone, ring: bone, dotColor: bone, variantLabel: "bone",
+  }),
+  [`svg/seal/dark/${slug}-seal-bone-accent.svg`]: buildSeal({
+    ink: bone, ring: accent, dotColor: accent, variantLabel: "bone accent",
+  }),
+  [`svg/seal/any/${slug}-seal-on-charcoal.svg`]: buildSeal({
+    ink: bone, ring: bone, dotColor: bone, disc: ink, variantLabel: "on charcoal",
+  }),
+  [`svg/seal/any/${slug}-seal-on-charcoal-accent.svg`]: buildSeal({
+    ink: bone, ring: accent, dotColor: accent, disc: ink, variantLabel: "on charcoal accent",
+  }),
+  [`svg/seal/any/${slug}-seal-on-bone.svg`]: buildSeal({
+    ink, ring: ink, dotColor: ink, disc: bone, variantLabel: "on bone",
+  }),
+  [`svg/seal/any/${slug}-seal-on-bone-accent.svg`]: buildSeal({
+    ink, ring: accent, dotColor: accent, disc: bone, variantLabel: "on bone accent",
+  }),
+
+  // Wordmark.
+  [`svg/wordmark/light/${slug}-wordmark-charcoal.svg`]: buildWordmark(ink, ink, "charcoal"),
+  [`svg/wordmark/light/${slug}-wordmark-charcoal-accent.svg`]: buildWordmark(ink, accent, "charcoal accent"),
+  [`svg/wordmark/dark/${slug}-wordmark-bone.svg`]: buildWordmark(bone, bone, "bone"),
+  [`svg/wordmark/dark/${slug}-wordmark-bone-accent.svg`]: buildWordmark(bone, accent, "bone accent"),
+
+  // Full wordmark: accent variants carry the accent on the rule and "Co.".
+  [`svg/wordmark-full/light/${slug}-wordmark-full-charcoal.svg`]: buildWordmarkFull(ink, ink, ink, "charcoal"),
+  [`svg/wordmark-full/light/${slug}-wordmark-full-charcoal-accent.svg`]: buildWordmarkFull(ink, accent, accent, "charcoal accent"),
+  [`svg/wordmark-full/dark/${slug}-wordmark-full-bone.svg`]: buildWordmarkFull(bone, bone, bone, "bone"),
+  [`svg/wordmark-full/dark/${slug}-wordmark-full-bone-accent.svg`]: buildWordmarkFull(bone, accent, accent, "bone accent"),
+
+  // Small-size icon mark.
+  [`svg/icon/${slug}-icon-accent.svg`]: buildIcon({
+    field: accent, glyph: ink, variantLabel: "accent",
+  }),
+  [`svg/icon/${slug}-icon-bone.svg`]: buildIcon({
+    field: accent, innerDisc: bone, glyph: ink, variantLabel: "bone",
+  }),
+  [`svg/icon/${slug}-icon-charcoal.svg`]: buildIcon({
+    field: accent, innerDisc: ink, glyph: bone, variantLabel: "charcoal",
+  }),
+  [`svg/icon/${slug}-icon-mono-charcoal.svg`]: buildIcon({
+    field: bone, innerDisc: ink, glyph: bone, variantLabel: "mono-charcoal",
+  }),
+  [`svg/icon/${slug}-icon-mono-bone.svg`]: buildIcon({
+    field: ink, innerDisc: bone, glyph: ink, variantLabel: "mono-bone",
+  }),
+};
 
 /* ------------------------------------------------------------------ *
  * Emit
@@ -464,90 +533,36 @@ const write = (rel, contents) => {
   console.log("  wrote", rel.replace(/\\/g, "/"));
 };
 
-const files = {
-  // Light-ground marks keep lettering in ink; the "Co." stays ink because the
-  // brand rule forbids accent-coloured text on bone (2.28:1). Reverse (on-dark)
-  // marks carry the ochre "Co.".
-  [`public/brand/logos/${BRAND.slug}-wordmark.svg`]: buildWordmark(COLOR.ink),
-  [`public/brand/logos/${BRAND.slug}-wordmark-reverse.svg`]: buildWordmark(COLOR.bone, COLOR.accent),
-  [`public/brand/logos/${BRAND.slug}-logo-primary.svg`]: buildPrimaryLogo(
-    COLOR.ink,
-    COLOR.rule,
-    COLOR.ink,
-    COLOR.ink,
-    COLOR.ink,
-  ),
-  [`public/brand/logos/${BRAND.slug}-logo-primary-reverse.svg`]: buildPrimaryLogo(
-    COLOR.bone,
-    COLOR.ringMuted,
-    COLOR.mist,
-    COLOR.mist,
-    COLOR.accent,
-  ),
-  // Seal: charcoal disc, bone lettering, ochre outer ring + dots (brand kit).
-  [`public/brand/icons/${BRAND.slug}-seal-dark.svg`]: buildSeal({ background: COLOR.ink }),
-  // Light seal: charcoal ink on a transparent ground with a deep-ochre ring/dots
-  // for placement on bone or photography.
-  [`public/brand/icons/${BRAND.slug}-seal-light.svg`]: buildSeal({
-    background: "none",
-    ink: COLOR.ink,
-    ring: COLOR.accentDeep,
-    dotColor: COLOR.accentDeep,
-  }),
-  [`public/brand/icons/${BRAND.slug}-emblem-dark.svg`]: buildEmblem(
-    COLOR.ink,
-    COLOR.bone,
-    "rgba(247,245,243,0.30)",
-    COLOR.accent,
-  ),
-  [`public/brand/icons/${BRAND.slug}-emblem-light.svg`]: buildEmblem(
-    COLOR.bone,
-    COLOR.ink,
-    "rgba(44,48,47,0.30)",
-  ),
-};
-
-console.log("Brand marks:");
-for (const [rel, contents] of Object.entries(files)) write(rel, contents);
+console.log("Brand marks (SVG):");
+for (const [rel, contents] of Object.entries(svgs)) {
+  write(path.join("public", "brand", rel), contents);
+}
 
 /* Raster ladders ---------------------------------------------------- */
-const PNG_SIZES = [16, 32, 48, 64, 128, 180, 256, 512, 1024];
-
 function raster(svg, width) {
   return new Resvg(svg, { fitTo: { mode: "width", value: width } }).render().asPng();
 }
 
-console.log("Raster exports:");
-for (const variant of ["dark", "light"]) {
-  const sealSvg = files[`public/brand/icons/${BRAND.slug}-seal-${variant}.svg`];
-  const emblemSvg = files[`public/brand/icons/${BRAND.slug}-emblem-${variant}.svg`];
-  for (const size of PNG_SIZES) {
-    if (variant === "dark") {
-      write(`public/brand/seal/${BRAND.slug}-seal-dark-${size}.png`, raster(sealSvg, size));
-    }
-    write(`public/brand/emblem/${BRAND.slug}-emblem-${variant}-${size}.png`, raster(emblemSvg, size));
-  }
-}
+const SEAL_SIZES = [64, 128, 256, 512, 1024];
+const WORDMARK_WIDTHS = [300, 600, 1200, 2400];
+const ICON_SIZES = [16, 32, 64, 128, 180, 256, 512];
 
-for (const [name, width] of [
-  ["wordmark-reverse-1660w", 1660],
-  ["wordmark-reverse-3320w", 3320],
-  ["wordmark-reverse-4980w", 4980],
-]) {
-  write(
-    `public/brand/logos/${BRAND.slug}-${name}.png`,
-    raster(files[`public/brand/logos/${BRAND.slug}-wordmark-reverse.svg`], width),
-  );
-}
-for (const [name, width] of [
-  ["logo-primary-reverse-1560w", 1560],
-  ["logo-primary-reverse-3120w", 3120],
-  ["logo-primary-reverse-4680w", 4680],
-]) {
-  write(
-    `public/brand/logos/${BRAND.slug}-${name}.png`,
-    raster(files[`public/brand/logos/${BRAND.slug}-logo-primary-reverse.svg`], width),
-  );
+console.log("Raster exports (PNG):");
+for (const [rel, svg] of Object.entries(svgs)) {
+  const pngRel = rel.replace(/^svg\//, "png/").replace(/\.svg$/, "");
+  if (rel.startsWith("svg/seal/")) {
+    for (const size of SEAL_SIZES) {
+      write(path.join("public", "brand", `${pngRel}-${size}px.png`), raster(svg, size));
+    }
+  } else if (rel.startsWith("svg/wordmark")) {
+    for (const w of WORDMARK_WIDTHS) {
+      write(path.join("public", "brand", `${pngRel}-${w}w.png`), raster(svg, w));
+    }
+  } else if (rel.startsWith("svg/icon/")) {
+    for (const size of ICON_SIZES) {
+      write(path.join("public", "brand", `${pngRel}-${size}px.png`), raster(svg, size));
+    }
+  }
 }
 
 /**
@@ -583,34 +598,31 @@ function buildIco(pngs) {
   return Buffer.concat([header, ...entries, ...pngs.map((p) => p.data)]);
 }
 
-/* Favicons and app icons -------------------------------------------- */
-const sealDark = files[`public/brand/icons/${BRAND.slug}-seal-dark.svg`];
-write("public/favicon.svg", sealDark);
-write("public/favicon-16.png", raster(sealDark, 16));
-write("public/favicon-32.png", raster(sealDark, 32));
-write("public/icons/apple-touch-icon.png", raster(sealDark, 180));
-write("public/icons/icon-192.png", raster(sealDark, 192));
-write("public/icons/icon-512.png", raster(sealDark, 512));
-write(
-  "public/favicon.ico",
-  buildIco([16, 32, 48].map((size) => ({ size, data: raster(sealDark, size) }))),
-);
+/* Favicons and app icons -------------------------------------------- *
+ * The favicon is the script "H" initial on the accent field (icon-accent),
+ * the boldest read at very small sizes.                                */
+const faviconSvg = svgs[`svg/icon/${slug}-icon-accent.svg`];
+const ico = buildIco([16, 32, 48, 64].map((size) => ({ size, data: raster(faviconSvg, size) })));
 
-/* Email logos -------------------------------------------------------- */
-write(
-  "public/email/bcc-logo.png",
-  raster(files[`public/brand/logos/${BRAND.slug}-wordmark-reverse.svg`], 1200),
-);
-write("public/email/bcc-icon.png", raster(sealDark, 256));
+console.log("Favicons and app icons:");
+write("public/brand/favicon.ico", ico);
+write("public/favicon.ico", ico);
+write("public/favicon.svg", faviconSvg);
+write("public/favicon-16.png", raster(faviconSvg, 16));
+write("public/favicon-32.png", raster(faviconSvg, 32));
+write("public/icons/apple-touch-icon.png", raster(faviconSvg, 180));
+write("public/icons/icon-192.png", raster(faviconSvg, 192));
+write("public/icons/icon-512.png", raster(faviconSvg, 512));
 
 /* Optional previews --------------------------------------------------- */
 if (process.argv.includes("--preview")) {
   const previewDir = "scripts/brand/preview";
   console.log("Previews:");
-  write(`${previewDir}/new-logo-primary.png`, raster(files[`public/brand/logos/${BRAND.slug}-logo-primary.svg`], 1400));
-  write(`${previewDir}/new-wordmark.png`, raster(files[`public/brand/logos/${BRAND.slug}-wordmark.svg`], 1400));
-  write(`${previewDir}/new-seal-dark.png`, raster(sealDark, 900));
-  write(`${previewDir}/new-emblem-dark.png`, raster(files[`public/brand/icons/${BRAND.slug}-emblem-dark.svg`], 400));
+  write(`${previewDir}/new-seal-light-accent.png`, raster(svgs[`svg/seal/light/${slug}-seal-charcoal-accent.svg`], 900));
+  write(`${previewDir}/new-seal-on-charcoal-accent.png`, raster(svgs[`svg/seal/any/${slug}-seal-on-charcoal-accent.svg`], 900));
+  write(`${previewDir}/new-wordmark-charcoal-accent.png`, raster(svgs[`svg/wordmark/light/${slug}-wordmark-charcoal-accent.svg`], 1400));
+  write(`${previewDir}/new-wordmark-full-charcoal-accent.png`, raster(svgs[`svg/wordmark-full/light/${slug}-wordmark-full-charcoal-accent.svg`], 1400));
+  write(`${previewDir}/new-icon-accent.png`, raster(svgs[`svg/icon/${slug}-icon-accent.svg`], 400));
 }
 
 console.log("\nDone.");

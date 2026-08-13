@@ -18,8 +18,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
 
 const CHARCOAL = '#201E1D';
-const OCHRE = '#7E6344';
-const OCHRE_LIGHT = '#D09A5C';
+const OCHRE = '#4E6B7E';
+const OCHRE_LIGHT = '#8FAEC4';
 const LINE = '#3D3A37';
 
 /** Build a placeholder SVG at the given dimensions (pure shapes, no fonts). */
