@@ -465,7 +465,8 @@ export const KITCHEN_RULES: ScopeRule[] = [
   // neither the package nor the install labour belongs in a kitchen estimate.
   // Carrying the labour was still wrong: we do not set them, and billing an
   // hour for it contradicts what every page of the site tells homeowners.
-  // Enforced by verify-no-appliance-costs so it cannot come back.
+  // Was enforced by the retired verify-no-appliance-costs script (this legacy
+  // engine is no longer on the public estimator; see shared/estimateEngine.ts).
   {
     code: "03-21-06", // Custom vent hood
     qty: () => 1,

@@ -42,12 +42,12 @@ const PATH = "/re-10-repairs-boise";
  * for nobody. Primary term front-loaded, one secondary term, brand last.
  */
 // 57 characters including the brand.
-const TITLE_WITH_BRAND = "RE-10 and Inspection Repairs Boise | Boise Construction Co";
+const TITLE_WITH_BRAND = "RE-10 and Inspection Repairs Boise | Boise Handyman Co";
 // The social/OG variant does not carry the brand, which the card shows anyway.
 const TITLE = "RE-10 and Inspection Repairs in Boise";
 // 154 characters, benefit-led, ends on the action.
 const DESCRIPTION =
-  "RE-10 repairs completed before closing. We handle inspection repair lists for agents, buyers and sellers across Boise and the Treasure Valley. Send yours.";
+  "RE-10 repairs completed before closing. Boise handyman service handling inspection repair lists for agents, buyers and sellers in the Treasure Valley. Send yours.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE_WITH_BRAND },
@@ -79,7 +79,7 @@ export default function Re10RepairsPage() {
     // from body copy.
     generateServiceSchema(
       "RE-10 and Home Inspection Repairs",
-      "Inspection response repairs for real estate transactions: review of the RE-10 and inspection report, written scope and pricing, multi-trade coordination, access scheduling, completion, and photo documentation for the transaction file.",
+      "Handyman inspection response repairs for real estate transactions: review of the RE-10 and inspection report, written scope and pricing, coordination across the repair list, access scheduling, completion, and photo documentation for the transaction file.",
     ),
     generateFAQSchema(RE10_FAQS),
     generateBreadcrumbSchema([
@@ -145,7 +145,7 @@ export default function Re10RepairsPage() {
       <Section variant="greige" divider>
         <div className="container px-4 max-w-3xl mx-auto">
           <SectionHeader
-            eyebrow="Why a home builder does this work"
+            eyebrow="Why a handyman service fits this work"
             size="display"
             title={
               <>
@@ -157,25 +157,25 @@ export default function Re10RepairsPage() {
           />
           <div className="space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed">
             <p>
-              We build new homes. That is the main thing we do, and it is fair to ask why a builder
-              takes on a repair list. The answer is that an RE-10 is not really a construction
-              problem. Nothing on a typical list is difficult. What is difficult is that six
-              unrelated trades have to be sequenced through an occupied house and finished before a
-              date that will not move, and that is the same problem we solve on every build.
+              Small repairs are our whole business. A typical RE-10 list is drywall patches, a
+              faucet, a GFCI, trim, caulking - exactly the jobs a handyman service does every day.
+              Nothing on the list is difficult. What is difficult is that a dozen small, unrelated
+              fixes have to move through an occupied house and be finished before a date that will
+              not move.
             </p>
             <p>
-              A new home has one client and a schedule we control. An RE-10 has a contractual
-              deadline, two sides who have already argued about the price, an inspection report
-              behind every line, an occupant whose home it still is, and a closing that does not
-              move because a contractor was slow.
+              A normal repair visit has one homeowner and a flexible calendar. An RE-10 has a
+              contractual deadline, two sides who have already argued about the price, an
+              inspection report behind every line, an occupant whose home it still is, and a
+              closing that does not move because a contractor was slow.
             </p>
             <p>
               So we treat it as coordination first: we ask for the deadline and the closing date
               before we quote, we confirm access in writing, we tell you the same day if something
               behind a wall changes the scope, and we document what was done so nobody has to take
-              anyone&apos;s word for it. The trade partners who do the work are the same ones who
-              frame, wire and plumb our houses, which is why we can put six of them in one property
-              in one week.
+              anyone&apos;s word for it. Where a line item needs a licensed specialist - panel
+              work, sewer, HVAC - we name it up front and help you get the right trade in, rather
+              than quietly leaving it off the quote.
             </p>
           </div>
         </div>
@@ -476,9 +476,9 @@ export default function Re10RepairsPage() {
             <Link href="/areas/boise" className="underline underline-offset-4 hover:text-foreground">
               Boise area
             </Link>{" "}
-            specifically. Building a new home instead?{" "}
+            specifically. Have a repair list of your own, outside a transaction?{" "}
             <Link href="/estimate" className="underline underline-offset-4 hover:text-foreground">
-              Use the build cost estimator
+              Use the repair cost estimator
             </Link>
             .
           </p>

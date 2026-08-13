@@ -6,7 +6,7 @@
  * `npm run images:blog`.
  */
 
-export type BlogImageSource = 'construction';
+export type BlogImageSource = 'handyman';
 
 export interface BlogImageEntry {
   hero: string;
@@ -18,326 +18,319 @@ export interface BlogImageEntry {
 
 export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   'ada-vs-canyon-county-permit-timelines': {
-    hero: '/images/construction/building-permit-placard.webp',
-    alt: 'A residential building-permit placard posted on a stake at a new-home construction site with the framed house and stacked lumber behind it',
-    topicTags: ["permits","ada county","canyon county","building process","home"],
-    source: 'construction',
-  },
-  'adu-cost-boise': {
-    hero: '/images/construction/semi-custom-home.webp',
-    alt: 'Newly built single-story semi-custom home on a serviced subdivision lot in Meridian, Idaho',
-    topicTags: ["adu","accessory dwelling unit","new construction","cost","boise"],
-    source: 'construction',
+    hero: '/images/handyman/permit-paperwork.webp',
+    alt: 'Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen',
+    topicTags: ["permits","ada county","canyon county","home repairs","costs"],
+    source: 'handyman',
   },
   'aging-in-place-home-design': {
-    hero: '/images/construction/accessible-primary-bathroom.webp',
-    alt: 'Accessible primary bathroom in a new Idaho home with a curbless walk-in shower, fold-down bench, and a floating vanity',
-    topicTags: ["aging in place","accessibility","home design","floor plans","new construction"],
-    source: 'construction',
-  },
-  'allowances-explained-new-home': {
-    hero: '/images/construction/finish-selections-board.webp',
-    alt: 'Flat-lay of new-home finish selections: quartz and wood samples, tile, cabinet doors, a paint deck, and matte black hardware',
-    topicTags: ["allowances","contracts","budget","new construction","home"],
-    source: 'construction',
+    hero: '/images/handyman/grab-bar-install.webp',
+    alt: 'Brushed nickel safety grab bar freshly installed on white subway tile in a walk-in shower',
+    topicTags: ["aging in place","grab bars","home safety","installs"],
+    source: 'handyman',
   },
   'boise-building-permit-guide': {
-    hero: '/images/construction/building-permit-documents.webp',
-    alt: 'Residential building permit packet with stamped site and floor plans, an application, and an approval stamp on a desk',
-    topicTags: ["permits","new construction","boise","building process","home"],
-    source: 'construction',
+    hero: '/images/handyman/permit-paperwork.webp',
+    alt: 'Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen',
+    topicTags: ["permits","boise","home repairs","hiring","costs"],
+    source: 'handyman',
   },
-  'build-vs-buy-boise': {
-    hero: '/images/construction/build-vs-buy-comparison.webp',
-    alt: 'An existing finished resale home with a yard sign next to a new home under wood framing on a Treasure Valley subdivision street',
-    topicTags: ["build vs buy","planning","treasure valley","cost","home"],
-    source: 'construction',
+  'caulking-guide-boise-homes': {
+    hero: '/images/handyman/service-caulking.webp',
+    alt: 'Caulk gun applying a clean white silicone bead where a bathtub meets white subway tile',
+    topicTags: ["caulking","home maintenance","sealing","boise","home"],
+    source: 'handyman',
   },
-  'building-in-the-boise-foothills': {
-    hero: '/images/construction/foothills-building-site.webp',
-    alt: 'Terraced building pad cut into a Boise foothills hillside with a boulder retaining wall and access road',
-    topicTags: ["foothills","land","boise","cost","slope"],
-    source: 'construction',
+  'common-toilet-problems-and-fixes': {
+    hero: '/images/handyman/toilet-repair.webp',
+    alt: 'Plumber lifting the porcelain lid off a toilet tank to service the fill valve in a clean bathroom',
+    topicTags: ["plumbing","toilet repair","boise","repairs"],
+    source: 'handyman',
   },
-  'choosing-finishes-for-a-new-home': {
-    hero: '/images/construction/new-home-kitchen.webp',
-    alt: 'Newly completed kitchen in a custom home with a quartz island and full-height tile backsplash',
-    topicTags: ["finishes","selections","new construction","budget","home"],
-    source: 'construction',
+  'deck-maintenance-boise': {
+    hero: '/images/handyman/deck-board-replacement.webp',
+    alt: 'Gloved hands replacing a weathered deck board with a new cedar board on a backyard deck',
+    topicTags: ["deck","exterior","maintenance","boise"],
+    source: 'handyman',
   },
-  'construction-loan-basics-idaho': {
-    hero: '/images/construction/construction-loan-draw.webp',
-    alt: 'A construction loan draw schedule and bank statement on a desk with a calculator and a hard hat, a new home visible through the window',
-    topicTags: ["financing","construction loan","idaho","planning","home"],
-    source: 'construction',
+  'diy-vs-hiring-a-handyman': {
+    hero: '/images/handyman/toolbag-ready.webp',
+    alt: 'Neatly organized canvas tool bag with drill, levels, and tape measure staged on a drop cloth in a living room',
+    topicTags: ["diy","hiring","home repairs","handyman","costs"],
+    source: 'handyman',
   },
-  'cost-to-build-a-house-boise': {
-    hero: '/images/construction/custom-home-exterior.webp',
-    alt: 'Newly completed custom home with board-and-batten siding and a covered porch on a Treasure Valley lot',
-    topicTags: ["cost","custom home","boise","new construction","home"],
-    source: 'construction',
+  'drywall-repair-cost-boise': {
+    hero: '/images/handyman/service-drywall-repair.webp',
+    alt: 'Hands spreading joint compound over a drywall patch with a taping knife in a bright room',
+    topicTags: ["drywall","cost","boise","repairs","costs"],
+    source: 'handyman',
   },
-  'covered-outdoor-living-new-home': {
-    hero: '/images/construction/covered-outdoor-living.webp',
-    alt: 'Deep covered patio with a timber ceiling and outdoor kitchen attached to a newly built Idaho home',
-    topicTags: ["outdoor living","covered patio","home design","new construction","treasure valley"],
-    source: 'construction',
+  'energy-saving-home-fixes-boise': {
+    hero: '/images/handyman/weatherstripping.webp',
+    alt: 'Hands applying self-adhesive foam weatherstripping to a white exterior door frame to seal drafts',
+    topicTags: ["energy efficiency","weatherstripping","caulking","boise","home maintenance"],
+    source: 'handyman',
   },
-  'custom-home-cost-per-square-foot-boise': {
-    hero: '/images/construction/home-under-framing.webp',
-    alt: 'New house under construction with wall framing and roof trusses in place on an Idaho building site',
-    topicTags: ["cost","cost per square foot","boise","custom home","home"],
-    source: 'construction',
+  'fence-repair-treasure-valley': {
+    hero: '/images/handyman/service-fence-repair.webp',
+    alt: 'Gloved hands screwing a new cedar picket onto a backyard fence rail with a cordless drill',
+    topicTags: ["fence repair","exterior","treasure valley","boise"],
+    source: 'handyman',
   },
-  'custom-home-floor-plan-ideas-boise': {
-    hero: '/images/construction/blueprints-drafting.webp',
-    alt: 'Rolled residential blueprints, an architect\'s scale, and a basswood study model on a drafting desk',
-    topicTags: ["floor plans","home design","new construction","boise","treasure valley"],
-    source: 'construction',
+  'fixing-squeaky-floors-and-sticking-doors': {
+    hero: '/images/handyman/door-hinge-fix.webp',
+    alt: 'Hand tightening the hinge screws of a white interior door with a screwdriver',
+    topicTags: ["floors","doors","repairs","carpentry"],
+    source: 'handyman',
   },
-  'design-build-vs-general-contractor': {
-    hero: '/images/construction/custom-home-dusk-exterior.webp',
-    alt: 'Newly completed modern farmhouse custom home glowing at dusk on a Treasure Valley lot with the Boise foothills behind',
-    topicTags: ["choosing a builder","design-build","boise","new construction","choosing"],
-    source: 'construction',
+  'gutter-cleaning-schedule-boise': {
+    hero: '/images/handyman/hero-gutter-cleaning.webp',
+    alt: 'Worker on a ladder clearing autumn leaves from the rain gutter of a single-story suburban Boise home',
+    topicTags: ["gutter cleaning","home maintenance","boise","exterior","home"],
+    source: 'handyman',
   },
-  'energy-efficient-home-building-boise': {
-    hero: '/images/construction/insulation-and-air-sealing.webp',
-    alt: 'Wall cavities insulated and air sealed in a new Idaho home before drywall goes up',
-    topicTags: ["energy efficiency","high performance","hvac","insulation","new construction"],
-    source: 'construction',
+  'handyman-prices-boise': {
+    hero: '/images/handyman/estimate-clipboard.webp',
+    alt: 'Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table',
+    topicTags: ["cost","handyman rates","boise","hiring","costs"],
+    source: 'handyman',
   },
-  'first-meeting-with-a-home-builder': {
-    hero: '/images/construction/site-meeting.webp',
-    alt: 'Builder reviewing plans with homeowners in front of a partially framed house on an Idaho site',
-    topicTags: ["consultation","new construction","boise","getting started","home"],
-    source: 'construction',
+  'handyman-red-flags': {
+    hero: '/images/handyman/consult-doorstep.webp',
+    alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
+    topicTags: ["hiring a handyman","boise","quotes","home repairs","costs"],
+    source: 'handyman',
   },
-  'fixed-price-vs-cost-plus': {
-    hero: '/images/construction/builder-bid-comparison.webp',
-    alt: 'Three residential construction bids fanned out on a desk with a highlighter marking line items for comparison',
-    topicTags: ["choosing a builder","contracts","boise","new construction","choosing"],
-    source: 'construction',
+  'handyman-vs-contractor': {
+    hero: '/images/handyman/toolbag-ready.webp',
+    alt: 'Neatly organized canvas tool bag with drill, levels, and tape measure staged on a drop cloth in a living room',
+    topicTags: ["hiring a handyman","contractors","boise","home repairs","costs"],
+    source: 'handyman',
   },
-  'home-builder-red-flags': {
-    hero: '/images/construction/planning-consultation-table.webp',
-    alt: 'New-home planning consultation at a kitchen table with printed floor plans and a tablet showing a 3D house model',
-    topicTags: ["choosing a builder","contracts","boise","new construction","choosing"],
-    source: 'construction',
+  'home-maintenance-budget-idaho': {
+    hero: '/images/handyman/estimate-clipboard.webp',
+    alt: 'Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table',
+    topicTags: ["budgeting","home maintenance","idaho","costs"],
+    source: 'handyman',
   },
-  'how-long-does-it-take-to-build-a-house-boise': {
-    hero: '/images/construction/mechanical-rough-in.webp',
-    alt: 'Open stud walls with plumbing, electrical, and ductwork roughed in before drywall in a new home',
-    topicTags: ["new construction","timeline","boise","building process","home"],
-    source: 'construction',
+  'home-repairs-before-selling-boise': {
+    hero: '/images/handyman/front-door-repaint.webp',
+    alt: 'Freshly repainted sage green craftsman front door with painter\'s tape being peeled away',
+    topicTags: ["home repairs","selling a house","boise","punch list","repairs"],
+    source: 'handyman',
   },
-  'how-to-budget-a-new-home-boise': {
-    hero: '/images/construction/line-item-budget.webp',
-    alt: 'Line-item construction budget and draw schedule on a desk beside a wooden architectural model',
-    topicTags: ["budget","cost","planning","boise","home"],
-    source: 'construction',
+  'hourly-rate-vs-flat-rate-handyman': {
+    hero: '/images/handyman/estimate-clipboard.webp',
+    alt: 'Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table',
+    topicTags: ["handyman rates","pricing","boise","hiring a handyman","costs"],
+    source: 'handyman',
   },
-  'how-to-buy-a-buildable-lot-boise': {
-    hero: '/images/construction/buildable-lot.webp',
-    alt: 'Vacant buildable lot on the Treasure Valley floor with a survey stake, power line, and irrigation ditch',
-    topicTags: ["land","lots","boise","site work","due diligence"],
-    source: 'construction',
+  'how-long-do-common-home-repairs-take': {
+    hero: '/images/handyman/hero-door-repair.webp',
+    alt: 'Handyman adjusting a sticking white interior door in a bright Idaho home with a tool bag on a drop cloth nearby',
+    topicTags: ["home repairs","boise","drywall repair","plumbing repairs","repairs"],
+    source: 'handyman',
   },
-  'how-to-compare-builder-bids': {
-    hero: '/images/construction/builder-bid-spreadsheet.webp',
-    alt: 'A laptop showing a builder-bid comparison chart beside two printed proposal folders and a notepad on a desk',
-    topicTags: ["choosing a builder","budgeting","boise","new construction","choosing"],
-    source: 'construction',
+  'how-to-budget-home-repairs-boise': {
+    hero: '/images/handyman/repair-materials.webp',
+    alt: 'Assorted screws, wall anchors, and picture hangers organized in a small parts tray on a workbench',
+    topicTags: ["home repair costs","budgeting","boise","punch list","costs"],
+    source: 'handyman',
   },
-  'impact-fees-and-utility-connections': {
-    hero: '/images/construction/utility-connections-trench.webp',
-    alt: 'An open utility trench running water, sewer, and power conduit to a new home foundation on a subdivision lot with a meter pedestal',
-    topicTags: ["impact fees","permits","utilities","ada county","canyon county"],
-    source: 'construction',
+  'how-to-compare-handyman-quotes': {
+    hero: '/images/handyman/estimate-clipboard.webp',
+    alt: 'Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table',
+    topicTags: ["handyman quotes","hiring a handyman","boise","pricing","costs"],
+    source: 'handyman',
   },
-  'lot-evaluation-checklist': {
-    hero: '/images/construction/rural-acreage-parcel.webp',
-    alt: 'Vacant rural acreage building parcel in Canyon County, Idaho with a survey stake and desert mountains on the horizon',
-    topicTags: ["land","lots","checklist","due diligence","treasure valley"],
-    source: 'construction',
+  'how-to-patch-drywall': {
+    hero: '/images/handyman/service-drywall-repair.webp',
+    alt: 'Hands spreading joint compound over a drywall patch with a taping knife in a bright room',
+    topicTags: ["drywall repair","repairs","boise","diy"],
+    source: 'handyman',
   },
-  'luxury-home-building-cost-boise': {
-    hero: '/images/construction/great-room-evening.webp',
-    alt: 'Finished great room in a new Idaho home at dusk with a tile fireplace, beamed ceiling, and a steel-frame window wall',
-    topicTags: ["luxury","cost","custom home","boise","home"],
-    source: 'construction',
+  'interior-paint-touch-up-guide': {
+    hero: '/images/handyman/service-painting.webp',
+    alt: 'Painter cutting in crisp paint along white window trim with an angled brush and painter\'s tape',
+    topicTags: ["painting","paint touch-up","repairs","boise"],
+    source: 'handyman',
   },
-  'multigenerational-home-design': {
-    hero: '/images/construction/new-home-interior.webp',
-    alt: 'Finished great room in a new custom home with vaulted ceiling, stone fireplace, and foothills views',
-    topicTags: ["multigenerational","home design","floor plans","accessibility","new construction"],
-    source: 'construction',
+  'new-home-punch-list-handyman': {
+    hero: '/images/handyman/punch-list-markers.webp',
+    alt: 'Blue painter\'s tape markers on a wall and window trim marking touch-up spots, notepad on the windowsill',
+    topicTags: ["punch list","home maintenance","boise","new home","home"],
+    source: 'handyman',
   },
-  'new-home-walkthrough-and-warranty': {
-    hero: '/images/construction/staircase-foyer.webp',
-    alt: 'Finished entry staircase in a new Idaho home with white oak treads, black metal balusters, and a two-story foyer',
-    topicTags: ["warranty","walkthrough","punch list","new construction","home"],
-    source: 'construction',
+  'preparing-your-boise-home-for-winter': {
+    hero: '/images/handyman/winterize-spigot.webp',
+    alt: 'Insulated faucet cover being fitted over an outdoor hose spigot with frost on the grass',
+    topicTags: ["winterizing","home maintenance","boise","seasonal","home"],
+    source: 'handyman',
   },
-  'production-vs-custom-home-builder': {
-    hero: '/images/construction/new-neighborhood-street.webp',
-    alt: 'Street of recently finished new-construction homes with young trees and fresh sidewalks in a Treasure Valley subdivision',
-    topicTags: ["choosing a builder","custom homes","boise","new construction","choosing"],
-    source: 'construction',
+  'questions-to-ask-a-handyman': {
+    hero: '/images/handyman/consult-doorstep.webp',
+    alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
+    topicTags: ["hiring a handyman","boise","handyman costs","home repair","costs"],
+    source: 'handyman',
   },
-  'questions-to-ask-a-home-builder': {
-    hero: '/images/construction/plans-and-selections.webp',
-    alt: 'Residential floor plan and elevation drawings laid out with flooring, countertop, and paint samples',
-    topicTags: ["choosing a builder","contracts","boise","new construction","choosing"],
-    source: 'construction',
+  'replacing-faucets-and-fixtures': {
+    hero: '/images/handyman/service-plumbing.webp',
+    alt: 'Hands installing a new brushed-nickel kitchen faucet with supply lines and a wrench at a farmhouse sink',
+    topicTags: ["plumbing","faucet replacement","installs","boise"],
+    source: 'handyman',
   },
-  'shop-homes-and-barndominiums-idaho': {
-    hero: '/images/construction/shop-home-barndominium.webp',
-    alt: 'Shop home combining a finished living wing with an attached shop under one metal roof on Idaho acreage',
-    topicTags: ["barndominium","shop home","post frame","new construction","idaho"],
-    source: 'construction',
+  'seasonal-home-maintenance-checklist-boise': {
+    hero: '/images/handyman/toolbag-ready.webp',
+    alt: 'Neatly organized canvas tool bag with drill, levels, and tape measure staged on a drop cloth in a living room',
+    topicTags: ["home maintenance","seasonal checklist","boise","gutters","winterizing"],
+    source: 'handyman',
   },
-  'single-story-vs-two-story-home': {
-    hero: '/images/construction/two-story-home-exterior.webp',
-    alt: 'Newly built two-story craftsman home with stone wainscot and a covered front porch on a Meridian, Idaho lot',
-    topicTags: ["floor plans","home design","cost","new construction","treasure valley"],
-    source: 'construction',
+  'small-home-upgrade-ideas-boise': {
+    hero: '/images/handyman/cabinet-hardware-upgrade.webp',
+    alt: 'Hands swapping new brushed brass knobs onto white shaker kitchen cabinet doors with a screwdriver',
+    topicTags: ["home upgrades","installs","boise","painting","lighting"],
+    source: 'handyman',
   },
-  'stages-of-building-a-house': {
-    hero: '/images/construction/foundation-and-excavation.webp',
-    alt: 'Freshly poured concrete foundation and stem walls outlining a new home on a flat valley lot',
-    topicTags: ["new construction","building process","boise","construction stages","home"],
-    source: 'construction',
+  'tv-mounting-and-anchoring-guide': {
+    hero: '/images/handyman/service-mounting.webp',
+    alt: 'Handyman holding a bubble level and drill while installing a TV wall-mount bracket in a living room',
+    topicTags: ["tv mounting","installs","boise","anchoring"],
+    source: 'handyman',
   },
-  'well-and-septic-cost-idaho': {
-    hero: '/images/construction/rural-site-work.webp',
-    alt: 'Well drilling rig and septic drainfield excavation underway on a rural Idaho building site',
-    topicTags: ["land","well","septic","rural","site work"],
-    source: 'construction',
+  'what-small-home-repairs-cost-boise': {
+    hero: '/images/handyman/repair-materials.webp',
+    alt: 'Assorted screws, wall anchors, and picture hangers organized in a small parts tray on a workbench',
+    topicTags: ["handyman costs","boise","hiring a handyman","home repair","costs"],
+    source: 'handyman',
   },
-  'what-drives-home-building-costs-boise': {
-    hero: '/images/construction/framing-materials-onsite.webp',
-    alt: 'A new home under wood framing surrounded by stacked lumber, roof trusses, and wrapped material pallets on an Idaho job site',
-    topicTags: ["cost","new construction","boise","planning","home"],
-    source: 'construction',
+  'what-to-expect-first-handyman-visit': {
+    hero: '/images/handyman/consult-doorstep.webp',
+    alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
+    topicTags: ["hiring a handyman","boise","home repairs","quotes","costs"],
+    source: 'handyman',
   },
-  'why-home-building-bids-vary': {
-    hero: '/images/construction/cost-breakdown-variance.webp',
-    alt: 'A detailed construction cost breakdown with a magnifying glass and highlighters showing how widely line-item prices vary',
-    topicTags: ["choosing a builder","budgeting","boise","new construction","choosing"],
-    source: 'construction',
+  'who-supplies-materials-handyman-jobs': {
+    hero: '/images/handyman/repair-materials.webp',
+    alt: 'Assorted screws, wall anchors, and picture hangers organized in a small parts tray on a workbench',
+    topicTags: ["materials","hiring","pricing","handyman","costs"],
+    source: 'handyman',
   },
-  'boise-home-building-cost-guide': {
-    hero: '/images/construction/line-item-budget.webp',
-    alt: 'Line-item construction budget and draw schedule on a desk beside a wooden architectural model',
-    topicTags: ["cost","budgeting","custom home","new construction","boise"],
-    source: 'construction',
+  'why-handyman-quotes-vary': {
+    hero: '/images/handyman/estimate-clipboard.webp',
+    alt: 'Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table',
+    topicTags: ["handyman costs","hiring a handyman","boise","quotes","costs"],
+    source: 'handyman',
   },
-  'boise-home-building-process-guide': {
-    hero: '/images/construction/home-under-framing.webp',
-    alt: 'New house under construction with wall framing and roof trusses in place on an Idaho building site',
-    topicTags: ["building process","new construction","boise","permits","treasure valley"],
-    source: 'construction',
+  'boise-home-maintenance-guide': {
+    hero: '/images/handyman/toolbag-ready.webp',
+    alt: 'Neatly organized canvas tool bag with drill, levels, and tape measure staged on a drop cloth in a living room',
+    topicTags: ["maintenance","seasonal","checklist","home care","boise"],
+    source: 'handyman',
   },
-  'buying-land-to-build-boise': {
-    hero: '/images/construction/rural-acreage-parcel.webp',
-    alt: 'Vacant rural acreage building parcel in Canyon County, Idaho with a survey stake and desert mountains on the horizon',
-    topicTags: ["land","lots","buildable lot","site work","due diligence"],
-    source: 'construction',
+  'boise-home-repair-cost-guide': {
+    hero: '/images/handyman/estimate-clipboard.webp',
+    alt: 'Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table',
+    topicTags: ["cost","handyman rates","home repair","pricing","boise"],
+    source: 'handyman',
   },
-  'choose-home-builder-boise': {
-    hero: '/images/construction/site-meeting.webp',
-    alt: 'Builder reviewing plans with homeowners in front of a partially framed house on an Idaho site',
-    topicTags: ["choosing a builder","home builder","contracts","design-build","boise"],
-    source: 'construction',
+  'first-time-homeowner-repair-handbook': {
+    hero: '/images/handyman/hero-door-repair.webp',
+    alt: 'Handyman adjusting a sticking white interior door in a bright Idaho home with a tool bag on a drop cloth nearby',
+    topicTags: ["first-time homeowner","repairs","diy","basics","boise"],
+    source: 'handyman',
   },
-  'custom-home-design-guide': {
-    hero: '/images/construction/blueprints-drafting.webp',
-    alt: 'Rolled residential blueprints, an architect\'s scale, and a basswood study model on a drafting desk',
-    topicTags: ["home design","floor plans","custom homes","new construction","treasure valley"],
-    source: 'construction',
+  'hire-a-handyman-treasure-valley': {
+    hero: '/images/handyman/consult-doorstep.webp',
+    alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
+    topicTags: ["hiring","handyman","vetting","quotes","boise"],
+    source: 'handyman',
   },
-  'treasure-valley-home-building-guide': {
-    hero: '/images/construction/new-neighborhood-street.webp',
-    alt: 'Street of recently finished new-construction homes with young trees and fresh sidewalks in a Treasure Valley subdivision',
-    topicTags: ["treasure valley","new construction","ada county","canyon county","home building"],
-    source: 'construction',
+  'small-home-upgrades-that-pay-off': {
+    hero: '/images/handyman/cabinet-hardware-upgrade.webp',
+    alt: 'Hands swapping new brushed brass knobs onto white shaker kitchen cabinet doors with a screwdriver',
+    topicTags: ["upgrades","installs","painting","lighting","boise"],
+    source: 'handyman',
   },
-  'boise-home-building-guide': {
+  'treasure-valley-exterior-home-care-guide': {
+    hero: '/images/handyman/hero-gutter-cleaning.webp',
+    alt: 'Worker on a ladder clearing autumn leaves from the rain gutter of a single-story suburban Boise home',
+    topicTags: ["exterior","fence","deck","gutters","siding"],
+    source: 'handyman',
+  },
+  'boise-handyman-guide': {
     hero: '/images/areas/boise.webp',
     alt: 'Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street',
-    topicTags: ["boise","idaho","new construction","treasure"],
-    source: 'construction',
+    topicTags: ["boise","idaho","handyman","costs"],
+    source: 'handyman',
   },
-  'meridian-home-building-guide': {
+  'meridian-handyman-guide': {
     hero: '/images/areas/meridian.webp',
-    alt: 'Newly built craftsman two-story home lit at dusk on a landscaped subdivision lot in Meridian, Idaho',
-    topicTags: ["meridian","idaho","new construction","treasure"],
-    source: 'construction',
+    alt: 'Craftsman two-story home lit at dusk on a landscaped subdivision lot in Meridian, Idaho',
+    topicTags: ["meridian","idaho","handyman","costs"],
+    source: 'handyman',
   },
-  'eagle-home-building-guide': {
+  'eagle-handyman-guide': {
     hero: '/images/areas/eagle.webp',
-    alt: 'Luxury custom home on a landscaped Eagle, Idaho acreage lot at sunset with the foothills in the distance',
-    topicTags: ["eagle","idaho","new construction","treasure"],
-    source: 'construction',
+    alt: 'Custom home on a landscaped Eagle, Idaho acreage lot at sunset with the foothills in the distance',
+    topicTags: ["eagle","idaho","handyman","costs"],
+    source: 'handyman',
   },
-  'kuna-home-building-guide': {
+  'kuna-handyman-guide': {
     hero: '/images/areas/kuna.webp',
-    alt: 'Modern farmhouse custom home on rural Kuna, Idaho acreage bordered by sagebrush and open farmland',
-    topicTags: ["kuna","idaho","new construction","treasure"],
-    source: 'construction',
+    alt: 'Modern farmhouse home on rural Kuna, Idaho acreage bordered by sagebrush and open farmland',
+    topicTags: ["kuna","idaho","handyman","costs"],
+    source: 'handyman',
   },
-  'star-home-building-guide': {
+  'star-handyman-guide': {
     hero: '/images/areas/star.webp',
-    alt: 'Riverfront custom home in Star, Idaho with a lawn running down to the Boise River and shade trees along the bank',
-    topicTags: ["star","idaho","new construction","treasure"],
-    source: 'construction',
+    alt: 'Riverfront home in Star, Idaho with a lawn running down to the Boise River and shade trees along the bank',
+    topicTags: ["star","idaho","handyman","costs"],
+    source: 'handyman',
   },
-  'middleton-home-building-guide': {
+  'middleton-handyman-guide': {
     hero: '/images/areas/middleton.webp',
     alt: 'White farmhouse with a wraparound porch on a Middleton, Idaho parcel surrounded by wheat fields at sunset',
-    topicTags: ["middleton","idaho","new construction","treasure"],
-    source: 'construction',
+    topicTags: ["middleton","idaho","handyman","costs"],
+    source: 'handyman',
   },
-  'nampa-home-building-guide': {
+  'nampa-handyman-guide': {
     hero: '/images/areas/nampa.webp',
     alt: 'Established brick ranch home on a landscaped corner lot in Nampa, Idaho with farmland behind',
-    topicTags: ["nampa","idaho","new construction","treasure"],
-    source: 'construction',
+    topicTags: ["nampa","idaho","handyman","costs"],
+    source: 'handyman',
   },
-  'caldwell-home-building-guide': {
+  'caldwell-handyman-guide': {
     hero: '/images/areas/caldwell.webp',
-    alt: 'Stucco custom home overlooking the vineyards of the Sunnyslope wine district near Caldwell, Idaho at sunset',
-    topicTags: ["caldwell","idaho","new construction","treasure"],
-    source: 'construction',
+    alt: 'Stucco home overlooking the vineyards of the Sunnyslope wine district near Caldwell, Idaho at sunset',
+    topicTags: ["caldwell","idaho","handyman","costs"],
+    source: 'handyman',
   },
-  'eagle-foothills-home-building-guide': {
-    hero: '/images/construction/foothills-building-site.webp',
-    alt: 'Terraced building pad cut into a Boise foothills hillside with a boulder retaining wall and access road',
-    topicTags: ["eagle","the eagle foothills","idaho","new construction","treasure"],
-    source: 'construction',
+  'eagle-foothills-handyman-guide': {
+    hero: '/images/areas/eagle.webp',
+    alt: 'Custom home on a landscaped Eagle, Idaho acreage lot at sunset with the foothills in the distance',
+    topicTags: ["eagle","the eagle foothills","idaho","handyman","costs"],
+    source: 'handyman',
   },
-  'hidden-springs-home-building-guide': {
-    hero: '/images/construction/custom-home-exterior.webp',
-    alt: 'Newly completed custom home with board-and-batten siding and a covered porch on a Treasure Valley lot',
-    topicTags: ["eagle","hidden springs","idaho","new construction","treasure"],
-    source: 'construction',
+  'hidden-springs-handyman-guide': {
+    hero: '/images/areas/boise.webp',
+    alt: 'Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street',
+    topicTags: ["eagle","hidden springs","idaho","handyman","costs"],
+    source: 'handyman',
   },
-  'harris-ranch-home-building-guide': {
-    hero: '/images/construction/great-room-evening.webp',
-    alt: 'Finished great room in a new Idaho home at dusk with a tile fireplace, beamed ceiling, and a steel-frame window wall',
-    topicTags: ["boise","harris ranch","idaho","new construction","treasure"],
-    source: 'construction',
+  'harris-ranch-handyman-guide': {
+    hero: '/images/areas/boise.webp',
+    alt: 'Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street',
+    topicTags: ["boise","harris ranch","idaho","handyman","costs"],
+    source: 'handyman',
   },
 };
 
 export const HUB_HERO_IMAGES: Record<string, string> = {
-  'home-building-costs': '/images/construction/line-item-budget.webp',
-  'choosing-a-builder': '/images/construction/site-meeting.webp',
-  'home-building-process': '/images/construction/home-under-framing.webp',
-  'land-and-lots': '/images/construction/buildable-lot.webp',
-  'home-design-and-plans': '/images/construction/plans-and-selections.webp',
-  'treasure-valley-locations': '/images/construction/custom-home-exterior.webp',
+  'repairs-and-fixes': '/images/handyman/toolbag-ready.webp',
+  'installs-and-upgrades': '/images/handyman/service-mounting.webp',
+  'home-maintenance': '/images/handyman/service-caulking.webp',
+  'costs-and-hiring': '/images/handyman/estimate-clipboard.webp',
+  'exterior-and-outdoor': '/images/handyman/hero-gutter-cleaning.webp',
 };
 
 /** Retained for the setup script's interface; nothing is copied any more. */

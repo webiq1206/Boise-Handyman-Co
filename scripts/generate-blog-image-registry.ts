@@ -23,150 +23,106 @@ import { CONTENT_HUBS } from '../shared/contentHubs';
 
 const root = path.join(__dirname, '..');
 
-const img = (name: string) => `/images/construction/${name}.webp`;
+const img = (name: string) => `/images/handyman/${name}.webp`;
 const area = (name: string) => `/images/areas/${name}.webp`;
 
-/** The construction image library, with the alt text each image warrants. */
+/** The handyman image library, with the alt text each image warrants. */
 const LIBRARY = {
-  customHome: {
-    src: img('custom-home-exterior'),
-    alt: 'Newly completed custom home with board-and-batten siding and a covered porch on a Treasure Valley lot',
+  doorRepair: {
+    src: img('hero-door-repair'),
+    alt: 'Handyman adjusting a sticking white interior door in a bright Idaho home with a tool bag on a drop cloth nearby',
   },
-  semiCustom: {
-    src: img('semi-custom-home'),
-    alt: 'Newly built single-story semi-custom home on a serviced subdivision lot in Meridian, Idaho',
+  gutterCleaning: {
+    src: img('hero-gutter-cleaning'),
+    alt: 'Worker on a ladder clearing autumn leaves from the rain gutter of a single-story suburban Boise home',
   },
-  framing: {
-    src: img('home-under-framing'),
-    alt: 'New house under construction with wall framing and roof trusses in place on an Idaho building site',
+  drywall: {
+    src: img('service-drywall-repair'),
+    alt: 'Hands spreading joint compound over a drywall patch with a taping knife in a bright room',
   },
-  foundation: {
-    src: img('foundation-and-excavation'),
-    alt: 'Freshly poured concrete foundation and stem walls outlining a new home on a flat valley lot',
+  painting: {
+    src: img('service-painting'),
+    alt: 'Painter cutting in crisp paint along white window trim with an angled brush and painter\'s tape',
   },
-  roughIn: {
-    src: img('mechanical-rough-in'),
-    alt: 'Open stud walls with plumbing, electrical, and ductwork roughed in before drywall in a new home',
+  plumbing: {
+    src: img('service-plumbing'),
+    alt: 'Hands installing a new brushed-nickel kitchen faucet with supply lines and a wrench at a farmhouse sink',
   },
-  insulation: {
-    src: img('insulation-and-air-sealing'),
-    alt: 'Wall cavities insulated and air sealed in a new Idaho home before drywall goes up',
+  electrical: {
+    src: img('service-electrical'),
+    alt: 'Hands replacing a white electrical outlet with a screwdriver, faceplate and voltage tester nearby',
   },
-  interior: {
-    src: img('new-home-interior'),
-    alt: 'Finished great room in a new custom home with vaulted ceiling, stone fireplace, and foothills views',
+  carpentry: {
+    src: img('service-carpentry-trim'),
+    alt: 'Carpenter fitting a new piece of white baseboard trim along a wood floor in a modern home',
   },
-  kitchen: {
-    src: img('new-home-kitchen'),
-    alt: 'Newly completed kitchen in a custom home with a quartz island and full-height tile backsplash',
+  mounting: {
+    src: img('service-mounting'),
+    alt: 'Handyman holding a bubble level and drill while installing a TV wall-mount bracket in a living room',
   },
-  lot: {
-    src: img('buildable-lot'),
-    alt: 'Vacant buildable lot on the Treasure Valley floor with a survey stake, power line, and irrigation ditch',
+  fence: {
+    src: img('service-fence-repair'),
+    alt: 'Gloved hands screwing a new cedar picket onto a backyard fence rail with a cordless drill',
   },
-  foothills: {
-    src: img('foothills-building-site'),
-    alt: 'Terraced building pad cut into a Boise foothills hillside with a boulder retaining wall and access road',
+  caulking: {
+    src: img('service-caulking'),
+    alt: 'Caulk gun applying a clean white silicone bead where a bathtub meets white subway tile',
   },
-  ruralSite: {
-    src: img('rural-site-work'),
-    alt: 'Well drilling rig and septic drainfield excavation underway on a rural Idaho building site',
+  consult: {
+    src: img('consult-doorstep'),
+    alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
   },
-  plans: {
-    src: img('plans-and-selections'),
-    alt: 'Residential floor plan and elevation drawings laid out with flooring, countertop, and paint samples',
+  toolbag: {
+    src: img('toolbag-ready'),
+    alt: 'Neatly organized canvas tool bag with drill, levels, and tape measure staged on a drop cloth in a living room',
   },
-  budget: {
-    src: img('line-item-budget'),
-    alt: 'Line-item construction budget and draw schedule on a desk beside a wooden architectural model',
+  toilet: {
+    src: img('toilet-repair'),
+    alt: 'Plumber lifting the porcelain lid off a toilet tank to service the fill valve in a clean bathroom',
   },
-  meeting: {
-    src: img('site-meeting'),
-    alt: 'Builder reviewing plans with homeowners in front of a partially framed house on an Idaho site',
+  weatherstrip: {
+    src: img('weatherstripping'),
+    alt: 'Hands applying self-adhesive foam weatherstripping to a white exterior door frame to seal drafts',
   },
-  outdoor: {
-    src: img('covered-outdoor-living'),
-    alt: 'Deep covered patio with a timber ceiling and outdoor kitchen attached to a newly built Idaho home',
+  grabBar: {
+    src: img('grab-bar-install'),
+    alt: 'Brushed nickel safety grab bar freshly installed on white subway tile in a walk-in shower',
   },
-  shopHome: {
-    src: img('shop-home-barndominium'),
-    alt: 'Shop home combining a finished living wing with an attached shop under one metal roof on Idaho acreage',
+  hardware: {
+    src: img('cabinet-hardware-upgrade'),
+    alt: 'Hands swapping new brushed brass knobs onto white shaker kitchen cabinet doors with a screwdriver',
   },
-  customHomeDusk: {
-    src: img('custom-home-dusk-exterior'),
-    alt: 'Newly completed modern farmhouse custom home glowing at dusk on a Treasure Valley lot with the Boise foothills behind',
+  estimate: {
+    src: img('estimate-clipboard'),
+    alt: 'Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table',
   },
-  twoStory: {
-    src: img('two-story-home-exterior'),
-    alt: 'Newly built two-story craftsman home with stone wainscot and a covered front porch on a Meridian, Idaho lot',
+  deck: {
+    src: img('deck-board-replacement'),
+    alt: 'Gloved hands replacing a weathered deck board with a new cedar board on a backyard deck',
   },
-  subdivision: {
-    src: img('new-neighborhood-street'),
-    alt: 'Street of recently finished new-construction homes with young trees and fresh sidewalks in a Treasure Valley subdivision',
+  winterSpigot: {
+    src: img('winterize-spigot'),
+    alt: 'Insulated faucet cover being fitted over an outdoor hose spigot with frost on the grass',
   },
-  greatRoom: {
-    src: img('great-room-evening'),
-    alt: 'Finished great room in a new Idaho home at dusk with a tile fireplace, beamed ceiling, and a steel-frame window wall',
+  hinge: {
+    src: img('door-hinge-fix'),
+    alt: 'Hand tightening the hinge screws of a white interior door with a screwdriver',
   },
-  accessibleBath: {
-    src: img('accessible-primary-bathroom'),
-    alt: 'Accessible primary bathroom in a new Idaho home with a curbless walk-in shower, fold-down bench, and a floating vanity',
+  punchList: {
+    src: img('punch-list-markers'),
+    alt: 'Blue painter\'s tape markers on a wall and window trim marking touch-up spots, notepad on the windowsill',
   },
-  staircase: {
-    src: img('staircase-foyer'),
-    alt: 'Finished entry staircase in a new Idaho home with white oak treads, black metal balusters, and a two-story foyer',
+  materials: {
+    src: img('repair-materials'),
+    alt: 'Assorted screws, wall anchors, and picture hangers organized in a small parts tray on a workbench',
   },
-  blueprints: {
-    src: img('blueprints-drafting'),
-    alt: 'Rolled residential blueprints, an architect\'s scale, and a basswood study model on a drafting desk',
+  frontDoor: {
+    src: img('front-door-repaint'),
+    alt: 'Freshly repainted sage green craftsman front door with painter\'s tape being peeled away',
   },
-  selections: {
-    src: img('finish-selections-board'),
-    alt: 'Flat-lay of new-home finish selections: quartz and wood samples, tile, cabinet doors, a paint deck, and matte black hardware',
-  },
-  permitDocs: {
-    src: img('building-permit-documents'),
-    alt: 'Residential building permit packet with stamped site and floor plans, an application, and an approval stamp on a desk',
-  },
-  consultTable: {
-    src: img('planning-consultation-table'),
-    alt: 'New-home planning consultation at a kitchen table with printed floor plans and a tablet showing a 3D house model',
-  },
-  bidCompare: {
-    src: img('builder-bid-comparison'),
-    alt: 'Three residential construction bids fanned out on a desk with a highlighter marking line items for comparison',
-  },
-  acreage: {
-    src: img('rural-acreage-parcel'),
-    alt: 'Vacant rural acreage building parcel in Canyon County, Idaho with a survey stake and desert mountains on the horizon',
-  },
-  buildVsBuy: {
-    src: img('build-vs-buy-comparison'),
-    alt: 'An existing finished resale home with a yard sign next to a new home under wood framing on a Treasure Valley subdivision street',
-  },
-  permitPlacard: {
-    src: img('building-permit-placard'),
-    alt: 'A residential building-permit placard posted on a stake at a new-home construction site with the framed house and stacked lumber behind it',
-  },
-  constructionLoan: {
-    src: img('construction-loan-draw'),
-    alt: 'A construction loan draw schedule and bank statement on a desk with a calculator and a hard hat, a new home visible through the window',
-  },
-  bidSpreadsheet: {
-    src: img('builder-bid-spreadsheet'),
-    alt: 'A laptop showing a builder-bid comparison chart beside two printed proposal folders and a notepad on a desk',
-  },
-  bidsVary: {
-    src: img('cost-breakdown-variance'),
-    alt: 'A detailed construction cost breakdown with a magnifying glass and highlighters showing how widely line-item prices vary',
-  },
-  utilityTrench: {
-    src: img('utility-connections-trench'),
-    alt: 'An open utility trench running water, sewer, and power conduit to a new home foundation on a subdivision lot with a meter pedestal',
-  },
-  costDrivers: {
-    src: img('framing-materials-onsite'),
-    alt: 'A new home under wood framing surrounded by stacked lumber, roof trusses, and wrapped material pallets on an Idaho job site',
+  permits: {
+    src: img('permit-paperwork'),
+    alt: 'Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen',
   },
   boiseArea: {
     src: area('boise'),
@@ -174,19 +130,19 @@ const LIBRARY = {
   },
   meridianArea: {
     src: area('meridian'),
-    alt: 'Newly built craftsman two-story home lit at dusk on a landscaped subdivision lot in Meridian, Idaho',
+    alt: 'Craftsman two-story home lit at dusk on a landscaped subdivision lot in Meridian, Idaho',
   },
   eagleArea: {
     src: area('eagle'),
-    alt: 'Luxury custom home on a landscaped Eagle, Idaho acreage lot at sunset with the foothills in the distance',
+    alt: 'Custom home on a landscaped Eagle, Idaho acreage lot at sunset with the foothills in the distance',
   },
   kunaArea: {
     src: area('kuna'),
-    alt: 'Modern farmhouse custom home on rural Kuna, Idaho acreage bordered by sagebrush and open farmland',
+    alt: 'Modern farmhouse home on rural Kuna, Idaho acreage bordered by sagebrush and open farmland',
   },
   starArea: {
     src: area('star'),
-    alt: 'Riverfront custom home in Star, Idaho with a lawn running down to the Boise River and shade trees along the bank',
+    alt: 'Riverfront home in Star, Idaho with a lawn running down to the Boise River and shade trees along the bank',
   },
   middletonArea: {
     src: area('middleton'),
@@ -198,7 +154,7 @@ const LIBRARY = {
   },
   caldwellArea: {
     src: area('caldwell'),
-    alt: 'Stucco custom home overlooking the vineyards of the Sunnyslope wine district near Caldwell, Idaho at sunset',
+    alt: 'Stucco home overlooking the vineyards of the Sunnyslope wine district near Caldwell, Idaho at sunset',
   },
 } as const;
 
@@ -206,12 +162,11 @@ type LibraryKey = keyof typeof LIBRARY;
 
 /** Fallback per hub, used for any slug without an explicit assignment. */
 const HUB_DEFAULT: Record<string, LibraryKey> = {
-  'home-building-costs': 'budget',
-  'choosing-a-builder': 'meeting',
-  'home-building-process': 'framing',
-  'land-and-lots': 'lot',
-  'home-design-and-plans': 'plans',
-  'treasure-valley-locations': 'customHome',
+  'repairs-and-fixes': 'toolbag',
+  'installs-and-upgrades': 'mounting',
+  'home-maintenance': 'caulking',
+  'costs-and-hiring': 'estimate',
+  'exterior-and-outdoor': 'gutterCleaning',
 };
 
 /**
@@ -220,70 +175,70 @@ const HUB_DEFAULT: Record<string, LibraryKey> = {
  * need to appear.
  */
 const BY_SLUG: Record<string, LibraryKey> = {
-  // Costs
-  'cost-to-build-a-house-boise': 'customHome',
-  'custom-home-cost-per-square-foot-boise': 'framing',
-  'what-drives-home-building-costs-boise': 'costDrivers',
-  'luxury-home-building-cost-boise': 'greatRoom',
-  'build-vs-buy-boise': 'buildVsBuy',
-  'allowances-explained-new-home': 'selections',
-  'construction-loan-basics-idaho': 'constructionLoan',
+  // Repairs & fixes
+  'how-to-patch-drywall': 'drywall',
+  'interior-paint-touch-up-guide': 'painting',
+  'common-toilet-problems-and-fixes': 'toilet',
+  'fixing-squeaky-floors-and-sticking-doors': 'hinge',
+  'how-long-do-common-home-repairs-take': 'doorRepair',
+  'home-repairs-before-selling-boise': 'frontDoor',
 
-  // Choosing a builder
-  'questions-to-ask-a-home-builder': 'plans',
-  'design-build-vs-general-contractor': 'customHomeDusk',
-  'production-vs-custom-home-builder': 'subdivision',
-  'fixed-price-vs-cost-plus': 'bidCompare',
-  'home-builder-red-flags': 'consultTable',
-  'how-to-compare-builder-bids': 'bidSpreadsheet',
-  'why-home-building-bids-vary': 'bidsVary',
+  // Installs & upgrades
+  'tv-mounting-and-anchoring-guide': 'mounting',
+  'replacing-faucets-and-fixtures': 'plumbing',
+  'small-home-upgrade-ideas-boise': 'hardware',
+  'aging-in-place-home-design': 'grabBar',
 
-  // Process
-  'stages-of-building-a-house': 'foundation',
-  'boise-building-permit-guide': 'permitDocs',
-  'ada-vs-canyon-county-permit-timelines': 'permitPlacard',
-  'choosing-finishes-for-a-new-home': 'kitchen',
-  'new-home-walkthrough-and-warranty': 'staircase',
-  'first-meeting-with-a-home-builder': 'meeting',
-  'how-long-does-it-take-to-build-a-house-boise': 'roughIn',
+  // Home maintenance
+  'caulking-guide-boise-homes': 'caulking',
+  'seasonal-home-maintenance-checklist-boise': 'toolbag',
+  'preparing-your-boise-home-for-winter': 'winterSpigot',
+  'energy-saving-home-fixes-boise': 'weatherstrip',
+  'gutter-cleaning-schedule-boise': 'gutterCleaning',
+  'new-home-punch-list-handyman': 'punchList',
 
-  // Land and lots
-  'well-and-septic-cost-idaho': 'ruralSite',
-  'building-in-the-boise-foothills': 'foothills',
-  'impact-fees-and-utility-connections': 'utilityTrench',
-  'lot-evaluation-checklist': 'acreage',
+  // Costs & hiring
+  'handyman-prices-boise': 'estimate',
+  'what-small-home-repairs-cost-boise': 'materials',
+  'drywall-repair-cost-boise': 'drywall',
+  'why-handyman-quotes-vary': 'estimate',
+  'how-to-compare-handyman-quotes': 'estimate',
+  'hourly-rate-vs-flat-rate-handyman': 'estimate',
+  'how-to-budget-home-repairs-boise': 'materials',
+  'home-maintenance-budget-idaho': 'estimate',
+  'questions-to-ask-a-handyman': 'consult',
+  'handyman-red-flags': 'consult',
+  'handyman-vs-contractor': 'toolbag',
+  'what-to-expect-first-handyman-visit': 'consult',
+  'diy-vs-hiring-a-handyman': 'toolbag',
+  'who-supplies-materials-handyman-jobs': 'materials',
+  'ada-vs-canyon-county-permit-timelines': 'permits',
+  'boise-building-permit-guide': 'permits',
 
-  // Design and plans
-  'single-story-vs-two-story-home': 'twoStory',
-  'energy-efficient-home-building-boise': 'insulation',
-  'shop-homes-and-barndominiums-idaho': 'shopHome',
-  'covered-outdoor-living-new-home': 'outdoor',
-  'custom-home-floor-plan-ideas-boise': 'blueprints',
-  'aging-in-place-home-design': 'accessibleBath',
-  'multigenerational-home-design': 'interior',
-  'adu-cost-boise': 'semiCustom',
+  // Exterior & outdoor
+  'fence-repair-treasure-valley': 'fence',
+  'deck-maintenance-boise': 'deck',
 
-  // Pillars
-  'boise-home-building-cost-guide': 'budget',
-  'choose-home-builder-boise': 'meeting',
-  'boise-home-building-process-guide': 'framing',
-  'buying-land-to-build-boise': 'acreage',
-  'custom-home-design-guide': 'blueprints',
-  'treasure-valley-home-building-guide': 'subdivision',
+  // Pillar guides
+  'boise-home-repair-cost-guide': 'estimate',
+  'hire-a-handyman-treasure-valley': 'consult',
+  'boise-home-maintenance-guide': 'toolbag',
+  'small-home-upgrades-that-pay-off': 'hardware',
+  'first-time-homeowner-repair-handbook': 'doorRepair',
+  'treasure-valley-exterior-home-care-guide': 'gutterCleaning',
 
-  // Location guides - each city guide gets its own city streetscape so the
-  // imagery is locally specific and no two location guides repeat a hero.
-  'boise-home-building-guide': 'boiseArea',
-  'meridian-home-building-guide': 'meridianArea',
-  'eagle-home-building-guide': 'eagleArea',
-  'kuna-home-building-guide': 'kunaArea',
-  'star-home-building-guide': 'starArea',
-  'middleton-home-building-guide': 'middletonArea',
-  'nampa-home-building-guide': 'nampaArea',
-  'caldwell-home-building-guide': 'caldwellArea',
-  'eagle-foothills-home-building-guide': 'foothills',
-  'hidden-springs-home-building-guide': 'customHome',
-  'harris-ranch-home-building-guide': 'greatRoom',
+  // Location guides - each place keeps a locally specific streetscape hero.
+  'boise-handyman-guide': 'boiseArea',
+  'meridian-handyman-guide': 'meridianArea',
+  'eagle-handyman-guide': 'eagleArea',
+  'kuna-handyman-guide': 'kunaArea',
+  'star-handyman-guide': 'starArea',
+  'middleton-handyman-guide': 'middletonArea',
+  'nampa-handyman-guide': 'nampaArea',
+  'caldwell-handyman-guide': 'caldwellArea',
+  'eagle-foothills-handyman-guide': 'eagleArea',
+  'hidden-springs-handyman-guide': 'boiseArea',
+  'harris-ranch-handyman-guide': 'boiseArea',
 };
 
 const HUB_HERO: Record<string, LibraryKey> = HUB_DEFAULT;
@@ -346,7 +301,7 @@ const registryBody = Object.entries(entries)
     hero: '${e.hero}',
     alt: '${e.alt.replace(/'/g, "\\'")}',
     topicTags: ${JSON.stringify(e.topicTags)},
-    source: 'construction',
+    source: 'handyman',
   },`,
   )
   .join('\n');
@@ -363,7 +318,7 @@ const ts = `/**
  * \`npm run images:blog\`.
  */
 
-export type BlogImageSource = 'construction';
+export type BlogImageSource = 'handyman';
 
 export interface BlogImageEntry {
   hero: string;

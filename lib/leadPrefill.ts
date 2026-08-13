@@ -14,7 +14,7 @@
  * We also strip any PII params from the visible URL for privacy.
  *
  * Example completion-button link:
- *   https://boiseconstruction.co/?src=fb&name=Jane%20Smith&email=...&phone=...#calculator
+ *   https://boisehandyman.co/?src=fb&name=Jane%20Smith&email=...&phone=...#calculator
  */
 
 export interface LeadPrefill {

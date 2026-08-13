@@ -28,7 +28,7 @@ export const WEBSITE_ID = `${baseUrl}/#website`;
 // a charcoal disc (bone lettering, ochre ring) is square and stays legible on
 // any background, unlike the reverse wordmark which vanished on Google's white
 // panels. Served at its native 512px with explicit dimensions.
-const LOGO_URL = `${baseUrl}/brand/png/seal/any/boise-construction-co-seal-on-charcoal-accent-512px.png`;
+const LOGO_URL = `${baseUrl}/brand/png/seal/any/boise-handyman-co-seal-on-charcoal-accent-512px.png`;
 const LOGO_SIZE = 512;
 
 /**
@@ -59,11 +59,13 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'GeneralContractor',
+    // Schema.org has no dedicated Handyman type; HomeAndConstructionBusiness is
+    // the closest LocalBusiness subtype for repair/maintenance/install work.
+    '@type': 'HomeAndConstructionBusiness',
     name: BUSINESS_INFO.name,
     legalName: BUSINESS_INFO.legalName,
-    description: `Design-build home builder serving ${city || 'Boise'} and the Treasure Valley, Idaho. Custom homes, semi-custom homes, build-on-your-lot, and shop homes.`,
-    image: `${baseUrl}/images/hero-great-room.webp`,
+    description: `Handyman service for ${city || 'Boise'} and the Treasure Valley, Idaho. Small repairs, installs, and home maintenance: drywall, painting, minor plumbing and electrical, carpentry, and mounting.`,
+    image: `${baseUrl}/images/handyman/hero-door-repair.webp`,
     logo: LOGO_URL,
     '@id': LOCALBUSINESS_ID,
     url: baseUrl,
@@ -105,13 +107,13 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
           },
         }
       : {}),
-    foundingDate: BUSINESS_INFO.founded,
-    slogan: 'Boise\'s Design-Build Home Builder',
-    paymentAccepted: 'Cash, Credit Card, Check, Financing',
+    ...(BUSINESS_INFO.founded ? { foundingDate: BUSINESS_INFO.founded } : {}),
+    slogan: 'Boise\'s Local Handyman Service',
+    paymentAccepted: 'Cash, Credit Card, Check',
     currenciesAccepted: 'USD',
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'Home Building Services',
+      name: 'Handyman Services',
       itemListElement: SERVICES.map((s) => ({
         '@type': 'Offer',
         url: `${baseUrl}/services/${s.slug}`,
@@ -137,7 +139,7 @@ export function generateWebSiteSchema(): SchemaContext {
     name: BUSINESS_INFO.name,
     url: baseUrl,
     description:
-      'Design-build home builder serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell, and the Treasure Valley, Idaho.',
+      'Handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell, and the Treasure Valley, Idaho.',
     publisher: { '@id': ORG_ID },
     // NOTE: SearchAction intentionally omitted. The previous target
     // (/blog?q={search_term_string}) had no search handler, which advertised a
@@ -156,7 +158,7 @@ export function generateServiceSchema(serviceName: string, serviceDescription: s
     name: serviceName,
     description: serviceDescription,
     provider: {
-      '@type': 'GeneralContractor',
+      '@type': 'HomeAndConstructionBusiness',
       name: BUSINESS_INFO.name,
       telephone: BUSINESS_INFO.phone,
       email: BUSINESS_INFO.email,
@@ -222,8 +224,8 @@ export function generateOrganizationSchema(): SchemaContext {
       width: LOGO_SIZE,
       height: LOGO_SIZE,
     },
-    description: 'Design-build home builder serving the Treasure Valley since 2020. Custom homes, semi-custom homes, builds on client-owned land, and shop homes. Bonded, insured, and committed to line-item budgets before construction.',
-    foundingDate: BUSINESS_INFO.founded,
+    description: 'Locally owned handyman service for the Treasure Valley. Drywall repair, painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, and general home maintenance with upfront quotes.',
+    ...(BUSINESS_INFO.founded ? { foundingDate: BUSINESS_INFO.founded } : {}),
     // founder is gated: only emitted once a real named founder is supplied in
     // BUSINESS_INFO.founderName (see seo-audit/trust-signal-map.md).
     ...(BUSINESS_INFO.founderName
@@ -245,17 +247,18 @@ export function generateOrganizationSchema(): SchemaContext {
       addressCountry: BUSINESS_INFO.address.country,
     },
     knowsAbout: [
-      'custom home building',
-      'semi-custom home building',
-      'build on your lot',
-      'design-build construction',
-      'residential home design',
-      'lot evaluation and feasibility',
-      'shop homes and barndominiums',
-      'energy-efficient home construction',
-      'construction-to-permanent financing',
-      'Ada County building permits',
-      'Canyon County building permits',
+      'drywall repair and patching',
+      'interior and exterior painting',
+      'minor plumbing repairs',
+      'minor electrical repairs',
+      'carpentry and trim repair',
+      'door and window adjustment',
+      'TV, shelf, and furniture mounting and assembly',
+      'fence and deck repair',
+      'gutter cleaning and minor gutter repair',
+      'caulking and weatherproofing',
+      'tile and grout repair',
+      'home maintenance and punch-list work',
     ],
     sameAs: BUSINESS_INFO.sameAs,
     contactPoint: {
@@ -280,7 +283,7 @@ export function generateReviewSchema(reviews: Array<{
 }>): SchemaContext {
   return {
     '@context': 'https://schema.org',
-    '@type': 'GeneralContractor',
+    '@type': 'HomeAndConstructionBusiness',
     '@id': LOCALBUSINESS_ID,
     name: BUSINESS_INFO.name,
     // AggregateRating is gated on a real, populated review count. Emitting a
@@ -504,7 +507,7 @@ export function generateHomePageSchemaGraph(
       stripSchemaContext(
         generateSpeakableSchema({
           path: '/',
-          name: 'Boise Construction Co, Design-Build Home Builder in the Treasure Valley',
+          name: 'Boise Handyman Co, Handyman Services in the Treasure Valley',
         }),
       ),
     ],

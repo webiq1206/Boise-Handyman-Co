@@ -61,7 +61,7 @@ export function Footer() {
                   the brand column leads with the primary mark alone. Intrinsic
                   size is 1765.71x159.96, so 26px tall renders ~287px wide. */}
               <img
-                src="/brand/svg/wordmark/dark/boise-construction-co-wordmark-bone-accent.svg"
+                src="/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg"
                 alt={SITE_CONFIG.name}
                 width={287}
                 height={26}
@@ -135,7 +135,7 @@ export function Footer() {
                   href="/guides"
                   className="text-sm text-inverse-muted hover:text-inverse-foreground transition-colors"
                 >
-                  Home Building Guides
+                  Home Repair Guides
                 </Link>
               </li>
               <li>
@@ -143,7 +143,7 @@ export function Footer() {
                   href="/resources"
                   className="text-sm text-inverse-muted hover:text-inverse-foreground transition-colors"
                 >
-                  Planning Downloads
+                  Homeowner Downloads
                 </Link>
               </li>
               {CONTENT_HUBS.filter(
@@ -172,7 +172,9 @@ export function Footer() {
                 { label: "RE-10 Repairs", href: "/re-10-repairs-boise" },
                 { label: "Contact", href: "/contact" },
                 { label: "Why Choose Us", href: "/#why-choose-us" },
-                { label: "How We Build", href: "/#how-we-build" },
+                // Label updated for handyman scope; the anchor id stays
+                // "how-we-build" so existing deep links keep working.
+                { label: "How We Work", href: "/#how-we-build" },
                 // Guides/Blog already have their own columns; not repeated here.
               ].map((link) => (
                 <li key={link.label}>
@@ -239,12 +241,12 @@ export function Footer() {
                 (manifest.blogByCategory as Record<
                   string,
                   Array<{ slug: string; title: string }>
-                /* 'remodeling-costs' was the pre-repositioning hub slug. It now
-                   exists only as a legacy redirect on individual posts, not as a
-                   hub, so both lookups missed and this footer column rendered
-                   empty rather than erroring. */
-                >)?.['home-building-costs'] ??
-                BLOG_POSTS.filter((p) => p.hubSlug === 'home-building-costs')
+                /* 'costs-and-hiring' is the handyman-era hub slug (see the
+                   conversion brief taxonomy). The manifest fallback keys off
+                   BLOG_POSTS so the column degrades to empty, not an error,
+                   until data/internal-links.json is regenerated. */
+                >)?.['costs-and-hiring'] ??
+                BLOG_POSTS.filter((p) => p.hubSlug === 'costs-and-hiring')
                   .slice(0, 1)
                   .map((p) => ({ slug: p.slug, title: p.title }))
               )

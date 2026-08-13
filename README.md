@@ -1,8 +1,8 @@
-# Boise Construction Co
+# Boise Handyman Co
 
-Treasure Valley residential new construction: custom and semi-custom homes, design-build, and pre-construction planning. Also runs a separate RE-10 inspection-repair service for real estate transactions.
+Treasure Valley handyman service: small repairs, installs, and home maintenance — drywall repair, painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, and exterior upkeep. Also runs an RE-10 inspection-repair service for real estate transactions.
 
-The operating brand is **Boise Construction Co** and the site runs on its own domain, `boiseconstruction.co` (the canonical value in `shared/siteConfig.ts`, which every canonical URL, sitemap entry, OG URL, and schema `@id` is built from). It was created by duplicating and rebuilding the separate `boiseremodeling.co` remodeling site, so shared code and some internal notes still reference that origin. Those references are expected, not a mistake.
+The operating brand is **Boise Handyman Co** and the site runs on its own domain, `boisehandyman.co` (the canonical value in `shared/siteConfig.ts`, which every canonical URL, sitemap entry, OG URL, and schema `@id` is built from). It was created by duplicating and rebuilding a separate general-contracting site, so shared code and some internal notes still reference that origin. Those references are expected, not a mistake.
 
 ## Development
 
@@ -41,17 +41,14 @@ folder and letting Git be the sync mechanism.
 
 Copy `.env.example` and fill in secrets. Two that gate optional features:
 
-- `ANTHROPIC_API_KEY` — powers the RE-10 document reader and the new-home plan
-  reader. Absent, both fall back gracefully to a "we'll review it by hand"
-  path rather than erroring.
+- `ANTHROPIC_API_KEY` — powers the RE-10 document reader. Absent, it falls back
+  gracefully to a "we'll review it by hand" path rather than erroring.
 - `BLOB_READ_WRITE_TOKEN` — Vercel Blob for uploads. Absent, uploads fall back
   to the database, then to disk.
 
 ## Key paths
 
 - Homepage + estimator: `app/page.tsx`, `components/EstimateCalculator.tsx`
-- New-home estimate engine: `shared/estimateEngine.ts`, `shared/costs/`
-- Accessory-structure pricing: `shared/costs/accessoryStructures.ts`
-- Plan reader: `shared/plans/`, `server/services/planExtract.ts`, `app/api/plans/analyze`
+- Handyman estimate engine: `shared/estimateEngine.ts`, `shared/costs/`
 - RE-10 repair service: `app/re-10-repairs-boise`, `shared/costs/re10Repairs.ts`, `shared/re10/`
 - Site copy: `shared/siteContent.ts`

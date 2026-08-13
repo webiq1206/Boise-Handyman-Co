@@ -35,24 +35,20 @@ const libreBaskerville = Libre_Baskerville({
 export const metadata: Metadata = {
   title: {
     /*
-     * Leads with the primary commercial term rather than the brand. Ahrefs
-     * (US, 2026-08): "custom home builder boise" ~150/mo and low difficulty is
-     * the strongest buy-intent phrase for what the company does, and it was
-     * absent from the homepage title, which led with "Treasure Valley Home
-     * Builder". "Treasure Valley" still carries the 200/mo regional term through
-     * the description, the service title, and every location page, so nothing is
-     * lost by putting Boise + the service first here. 58 chars incl. the brand.
+     * Leads with the primary commercial term ("handyman boise") rather than the
+     * brand, mirroring the old title strategy. The regional "Treasure Valley"
+     * term is carried by the description and every location page.
      */
-    default: `Custom Home Builder in Boise, Idaho | ${SITE_CONFIG.name}`,
+    default: `Handyman in Boise, Idaho | ${SITE_CONFIG.name}`,
     template: `%s | ${SITE_CONFIG.name}`,
   },
-  description: `Boise custom home builder and new home construction across Meridian, Eagle, Nampa, Kuna & the Treasure Valley. Custom and semi-custom homes, design-build, and builds on your lot, with a line-item budget before we break ground.`,
+  description: `Boise handyman for small repairs, installs & home maintenance across Meridian, Eagle, Nampa, Kuna & the Treasure Valley. Drywall, painting, minor plumbing & electrical, carpentry, and mounting, with upfront quotes before we start.`,
   manifest: '/site.webmanifest',
   // Feed discovery for readers, aggregators, and AI/answer-engine crawlers.
   alternates: {
     types: {
       'application/rss+xml': [
-        { url: '/feed.xml', title: `${SITE_CONFIG.name} | Home Building Guides and Insights` },
+        { url: '/feed.xml', title: `${SITE_CONFIG.name} | Home Repair and Maintenance Guides` },
       ],
     },
   },
@@ -76,14 +72,14 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: '/',
     siteName: SITE_CONFIG.name,
-    title: `${SITE_CONFIG.name} | Treasure Valley Home Builder`,
-    description: `${SITE_TAGLINE}. Custom homes, semi-custom homes, build-on-your-lot, and design-build across the Treasure Valley.`,
+    title: `${SITE_CONFIG.name} | Treasure Valley Handyman`,
+    description: `${SITE_TAGLINE}. Small repairs, installs, and home maintenance across the Treasure Valley.`,
     images: [{ url: '/images/og-default.png', width: 1200, height: 630, alt: SITE_CONFIG.name }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE_CONFIG.name} | Treasure Valley Home Builder`,
-    description: `${SITE_TAGLINE}. Design-build home building for Boise and the Treasure Valley.`,
+    title: `${SITE_CONFIG.name} | Treasure Valley Handyman`,
+    description: `${SITE_TAGLINE}. Handyman repairs, installs, and maintenance for Boise and the Treasure Valley.`,
     images: ['/images/og-default.png'],
   },
   robots: {

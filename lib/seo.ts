@@ -1,5 +1,5 @@
 /**
- * SEO Utilities for Boise Construction Co
+ * SEO Utilities for Boise Handyman Co
  * Generates optimized meta tags, titles, and descriptions
  * for service and location pages
  */
@@ -62,7 +62,7 @@ const BRAND = SITE_CONFIG.name;
 
 /**
  * Generate SEO-optimized page title
- * Format: "[Service] in [City], ID | Boise Construction Co | Free Quotes"
+ * Format: "[Service] in [City], ID | Boise Handyman Co | Free Quotes"
  * Max 60 characters for optimal Google display
  * GUARANTEED ≤60 chars through intelligent truncation
  */
@@ -70,11 +70,11 @@ export function generatePageTitle(params: ServiceSEOParams): string {
   const { serviceName, city, isHomePage } = params;
 
   if (isHomePage) {
-    return `${BRAND} | Custom Home Builder`;
+    return `${BRAND} | Handyman Services`;
   }
 
   if (city && serviceName) {
-    // Full formula: "[Service] in [City], ID | Boise Construction Co | Free Quotes"
+    // Full formula: "[Service] in [City], ID | Boise Handyman Co | Free Quotes"
     const fullTitle = `${serviceName} in ${city}, ID | ${BRAND} | Free Quotes`;
 
     if (fullTitle.length <= 60) {
@@ -88,27 +88,27 @@ export function generatePageTitle(params: ServiceSEOParams): string {
     }
 
     // Level 3: Shorten brand
-    const shortTitle = `${serviceName} in ${city}, ID | Home Builder`;
+    const shortTitle = `${serviceName} in ${city}, ID | Handyman`;
     if (shortTitle.length <= 60) {
       return shortTitle;
     }
 
-    const maxServiceLength = 60 - ` in ${city}, ID | Home Builder`.length;
+    const maxServiceLength = 60 - ` in ${city}, ID | Handyman`.length;
     const truncatedService = truncateServiceName(serviceName, maxServiceLength);
-    return `${truncatedService} in ${city}, ID | Home Builder`;
+    return `${truncatedService} in ${city}, ID | Handyman`;
   }
 
   if (city) {
-    const fullTitle = `Home Builder in ${city}, ID | ${BRAND}`;
+    const fullTitle = `Handyman in ${city}, ID | ${BRAND}`;
     if (fullTitle.length <= 60) {
       return fullTitle;
     }
-    return `Home Builder in ${city}, ID`;
+    return `Handyman in ${city}, ID`;
   }
 
-  // Service-only title (defaults to Kuna as home base)
+  // Service-only title
   if (!serviceName) {
-    return `${BRAND} | Custom Home Builder`;
+    return `${BRAND} | Handyman Services`;
   }
 
   const fullTitle = `${serviceName} | ${BRAND} | Free Quotes`;
@@ -128,8 +128,8 @@ export function generatePageTitle(params: ServiceSEOParams): string {
 }
 
 const CITY_DESCRIPTION_VARIANTS: Record<string, string> = {
-  Kuna: "Kuna's trusted design-build",
-  Boise: "Boise's design-build",
+  Kuna: "Kuna's trusted local",
+  Boise: "Boise's local",
   Meridian: "Meridian's trusted",
   Eagle: "Eagle's preferred",
   Star: "Star's reliable",
@@ -139,14 +139,14 @@ const CITY_DESCRIPTION_VARIANTS: Record<string, string> = {
 };
 
 const CITY_CTA_VARIANTS: Record<string, string> = {
-  Kuna: "Free planning consultation",
-  Boise: "Treasure Valley design-build",
-  Meridian: "Bonded & insured",
-  Eagle: "Line-item budget upfront",
-  Star: "Weekly written updates",
-  Middleton: "Workmanship warranty",
-  Nampa: "Ada & Canyon County permits",
-  Caldwell: "Design-build home building",
+  Kuna: "Free upfront quotes",
+  Boise: "Treasure Valley handyman",
+  Eagle: "Upfront quotes",
+  Meridian: "One-trip fixes",
+  Star: "Same-week scheduling",
+  Middleton: "Workmanship guarantee",
+  Nampa: "Ada & Canyon County service",
+  Caldwell: "Repairs and installs",
 };
 
 /**
@@ -159,31 +159,31 @@ export function generateMetaDescription(params: ServiceSEOParams): string {
   const phone = SITE_CONFIG.phone;
   
   if (params.isHomePage) {
-    return `Design-build home builder serving Boise, Meridian, Eagle & the Treasure Valley. Bonded, insured, line-item budgets. Call ${phone} for a free planning consultation!`;
+    return `Handyman services in Boise, Meridian, Eagle & the Treasure Valley. Repairs, installs & maintenance with upfront quotes. Call ${phone} to book a visit!`;
   }
-  
+
   if (city && serviceName) {
     const serviceLC = serviceName.toLowerCase();
     const cityVariant = CITY_DESCRIPTION_VARIANTS[city] || `${city}'s trusted`;
     const ctaVariant = CITY_CTA_VARIANTS[city] || "Satisfaction guaranteed";
-    return `${cityVariant} ${serviceLC} team. Bonded & insured. ${ctaVariant}. Call ${phone} for a free consultation!`;
+    return `${cityVariant} ${serviceLC} team. Upfront quotes. ${ctaVariant}. Call ${phone} to book a visit!`;
   }
-  
+
   if (city) {
-    return `Home builder in ${city}, Idaho. Bonded, insured & locally owned. Call ${phone} for a free planning consultation in ${city}!`;
+    return `Handyman in ${city}, Idaho. Locally owned repairs, installs & maintenance. Call ${phone} to book a handyman visit in ${city}!`;
   }
-  
+
   if (!serviceName) {
-    return `New home builder in Boise & the Treasure Valley. Bonded, insured, design-build. Call ${phone} for a free planning consultation and a realistic budget band!`;
+    return `Handyman services in Boise & the Treasure Valley. Small repairs, installs & home maintenance with upfront quotes. Call ${phone} to book a visit!`;
   }
-  
+
   const serviceLC = serviceName.toLowerCase();
-  return `${serviceLC} in Boise & the Treasure Valley. Bonded, insured, with a line-item budget before we build. Call ${phone} for a free consultation!`;
+  return `${serviceLC} in Boise & the Treasure Valley. Upfront quotes and one-trip fixes from a local handyman. Call ${phone} to book a visit!`;
 }
 
 /**
  * Generate varied city-service title (used for page metadata title field)
- * Does NOT include brand name since layout template appends "| Boise Construction Co"
+ * Does NOT include brand name since layout template appends "| Boise Handyman Co"
  * Target: under 36 chars so final rendered title stays under 60 chars
  */
 
@@ -193,14 +193,16 @@ export function generateMetaDescription(params: ServiceSEOParams): string {
  * in shared/contentData.ts.
  */
 const SERVICE_SHORT_NAMES: Record<string, string> = {
-  'Custom Home Building': 'Custom Homes',
-  'Lot Evaluation & Feasibility': 'Lot Evaluation',
-  'Shop Homes & Barndominiums': 'Shop Homes',
-  'Home Design & Plans': 'Home Plans',
-  'Energy-Efficient Homes': 'Efficient Homes',
+  'Drywall Repair & Patching': 'Drywall Repair',
+  'Interior & Exterior Painting': 'Painting',
+  'Minor Plumbing Repairs': 'Plumbing Fixes',
+  'Minor Electrical Repairs': 'Electrical Fixes',
+  'Carpentry & Trim Repair': 'Carpentry Repair',
+  'Fence, Deck & Gutter Repair': 'Exterior Repair',
+  'Caulking & Home Maintenance': 'Maintenance',
 };
 
-/** Budget after the layout template appends " | Boise Construction Co" (24). */
+/** Budget after the layout template appends " | Boise Handyman Co" (20). */
 const CITY_SERVICE_TITLE_BUDGET = 36;
 
 export function generateCityServiceTitle(serviceName: string, cityName: string): string {
@@ -238,24 +240,24 @@ export function generateCityServiceDescription(
   const neighborhood = cityData?.neighborhoods?.[0];
 
   if (neighborhood) {
-    const withNeighborhood = `${cityVariant} ${serviceLC}. Serving ${neighborhood} & all ${cityName}. Bonded & insured. Call ${phone}!`;
+    const withNeighborhood = `${cityVariant} ${serviceLC}. Serving ${neighborhood} & all ${cityName}. Upfront quotes. Call ${phone}!`;
     if (withNeighborhood.length <= 160) return withNeighborhood;
   }
 
   if (shortDescription) {
-    const desc = `${cityVariant} ${serviceLC}. ${shortDescription}. Bonded & insured. Call ${phone}!`;
+    const desc = `${cityVariant} ${serviceLC}. ${shortDescription}. Upfront quotes. Call ${phone}!`;
     if (desc.length <= 160) return desc;
   }
 
-  const base = `${cityVariant} ${serviceLC} in ${cityName}, ID. Bonded & insured. Call ${phone} for a free consultation!`;
+  const base = `${cityVariant} ${serviceLC} in ${cityName}, ID. Upfront quotes. Call ${phone} to book a visit!`;
   if (base.length <= 160) return base;
 
-  return `${serviceLC} in ${cityName}, ID. Bonded & insured builder. Call ${phone} for a free consultation!`;
+  return `${serviceLC} in ${cityName}, ID. Upfront quotes from a local handyman. Call ${phone} to book a visit!`;
 }
 
 /**
  * Generate a page title for any service or area page
- * Ensures final rendered title (with layout template " | Boise Construction Co")
+ * Ensures final rendered title (with layout template " | Boise Handyman Co")
  * stays under 60 characters
  */
 export function generateSafePageTitle(primary: string, suffix?: string): string {
@@ -336,22 +338,22 @@ export function generateLogoAltTag(params: ServiceSEOParams): string {
   const { serviceName, city, isHomePage } = params;
   
   if (isHomePage) {
-    return `${BRAND} logo - Design-build home builder in Boise, Idaho`;
+    return `${BRAND} logo - Handyman services in Boise, Idaho`;
   }
-  
+
   if (city && serviceName) {
     // City-specific alt tag with service context
-    return `${BRAND} logo - ${serviceName} in ${city} Idaho - Bonded and insured home builder`;
+    return `${BRAND} logo - ${serviceName} in ${city} Idaho - Local handyman service`;
   }
-  
+
   if (city) {
     // City page alt tag without service
-    return `${BRAND} logo - New home construction in ${city} Idaho`;
+    return `${BRAND} logo - Handyman services in ${city} Idaho`;
   }
-  
+
   if (!serviceName) {
     // Fallback for pages without service
-    return `${BRAND} logo - Design-build home builder serving the Treasure Valley, Idaho`;
+    return `${BRAND} logo - Handyman serving the Treasure Valley, Idaho`;
   }
   
   // Service-specific alt tag
@@ -483,7 +485,7 @@ export const CITY_SEO_DATA: Record<string, {
 export const BUSINESS_INFO = {
   name: SITE_CONFIG.name,
   legalName: SITE_CONFIG.legalName,
-  alternateName: ['Boise Construction', 'BCC'],
+  alternateName: ['Boise Handyman', 'BHC'],
   /**
    * No named individual is published on the site by request. Left empty so the
    * Organization schema omits the `founder` Person entity (the emit is gated on
@@ -510,15 +512,17 @@ export const BUSINESS_INFO = {
     saturday: '8:00 AM - 4:00 PM',
     sunday: 'Closed',
   },
-  founded: '2020',
+  // Founding year intentionally blank for Boise Handyman Co: emitting the old
+  // brand's date would fabricate a years-in-business claim. Schema gates
+  // foundingDate on this being non-empty. [NEEDS: real founding year]
+  founded: '',
   serviceArea: ['Boise', 'Meridian', 'Eagle', 'Nampa', 'Kuna', 'Star', 'Middleton', 'Caldwell'],
   serviceRadius: '35 miles',
-  licenses: ['License details available upon request'],
-  certifications: ['Design-Build Home Building', 'Bonded & Insured'],
-  // Kept consistent with GBP and the `licenses` field above: the business
-  // publishes bonded/insured status and provides registration details on
-  // request, so nothing here should assert a specific license.
-  insurance: 'Bonded & Insured',
+  licenses: ['Registration details available upon request'],
+  // No certification or insured/bonded claims are published until confirmed
+  // for the handyman entity. [NEEDS: confirm insurance/bond status]
+  certifications: [] as string[],
+  insurance: 'Insurance details available upon request',
   rating: 0,
   reviewCount: 0,
   yearlyServicesCompleted: 0,

@@ -76,15 +76,17 @@ interface Lead {
 }
 
 // Friendly display names for the service a lead carries, shown in the
-// subcontractor purchases view. Mirrors the live service slugs in
-// shared/seoContent.ts; anything not listed falls back to a title-cased slug.
+// subcontractor purchases view. Mirrors the live handyman service slugs in
+// shared/contentData.ts; anything not listed falls back to a title-cased slug.
 const PRIORITY_SERVICES = [
-  { slug: "custom-home-builder", name: "Custom Home Building" },
-  { slug: "semi-custom-homes", name: "Semi-Custom Homes" },
-  { slug: "build-on-your-lot", name: "Build on Your Lot" },
-  { slug: "design-build", name: "Design-Build" },
-  { slug: "home-plans-design", name: "Home Design & Plans" },
-  { slug: "shop-homes-barndominiums", name: "Shop Homes & Barndominiums" },
+  { slug: "drywall-repair", name: "Drywall Repair & Patching" },
+  { slug: "painting-touch-ups", name: "Interior & Exterior Painting" },
+  { slug: "plumbing-repairs", name: "Minor Plumbing Repairs" },
+  { slug: "electrical-repairs", name: "Minor Electrical Repairs" },
+  { slug: "carpentry-trim-repair", name: "Carpentry & Trim Repair" },
+  { slug: "mounting-assembly", name: "Mounting & Assembly" },
+  { slug: "fence-deck-gutter-repair", name: "Fence, Deck & Gutter Repair" },
+  { slug: "home-maintenance", name: "Caulking & Home Maintenance" },
 ];
 
 function calculateQuoteRange(finalQuote: string | number, variance: number = 0.15) {

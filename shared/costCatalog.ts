@@ -34,7 +34,7 @@
  * - Category totals: validated. From the 2025 owner-supplied cost guide, and
  *   for ADU from a real closed job (see ESTIMATOR-CALIBRATION.md).
  * - Component shares: industry-typical cost distributions. NOT measured
- *   against Boise Construction Co. jobs.
+ *   against Boise Handyman Co. jobs.
  * - Quantity ratios: standard takeoff rules of thumb.
  *
  * Every component therefore carries a `provenance` field. Nothing should

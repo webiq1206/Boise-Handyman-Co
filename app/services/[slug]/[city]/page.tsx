@@ -64,13 +64,13 @@ export default function CityServicePage({
   const county = getCountyLabel(city.county);
   const neighborhood = seo?.neighborhoods[0];
   const localFact = neighborhood
-    ? `Homes near ${neighborhood} and across ${city.name} often need layouts that respect ${county} codes and local inspection timelines.`
+    ? `We regularly work in homes near ${neighborhood} and across ${city.name}, so scheduling is local and the flat trip fee never grows with the drive.`
     : undefined;
 
   const overview = getCityServiceIntro(content, city, localFact);
   const h1 = `${service.name} in ${city.name}, Idaho`;
   const faqs = getCityServiceFaqs(content, city);
-  const localNote = `Permitting for ${content.name.toLowerCase()} projects in ${city.name} runs through ${county}. We build permit timelines into your schedule from day one.`;
+  const localNote = `${city.name} sits inside our core ${county} service area, so ${content.name.toLowerCase()} jobs are quoted from photos, scheduled locally, and charged the same flat trip fee as everywhere else we work.`;
   const images = getCityServiceImageSet(service.slug, city.slug);
   const sections = getCityServiceSections(content, city, seo);
 

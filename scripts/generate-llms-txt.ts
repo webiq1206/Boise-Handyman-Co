@@ -32,19 +32,19 @@ const cityGuides = GUIDE_PAGES.filter((g) => g.guideType === 'location');
 const neighborhoodGuides = GUIDE_PAGES.filter((g) => g.guideType === 'neighborhood');
 
 const SUMMARY =
-  `New residential construction in Boise, Idaho and the Treasure Valley: custom homes, ` +
-  `semi-custom homes, build-on-your-lot, shop homes, and the design and permitting that ` +
-  `precede them. Design-build, founded 2020. Serving ${CITIES.map((c) => c.name).join(', ')}. ` +
+  `Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, ` +
+  `and maintenance. Drywall repair, interior and exterior painting, minor plumbing and ` +
+  `electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, ` +
+  `caulking and punch-list work. Serving ${CITIES.map((c) => c.name).join(', ')}. ` +
   `Phone ${SITE_CONFIG.phone}.`;
 
 const POSITIONING =
-  `Design-build means one accountable team handles architectural design, engineering, ` +
-  `estimating, Ada and Canyon County permitting, and construction under a single contract, ` +
-  `backed by a written line-item scope before the foundation is poured. Budget ranges are ` +
-  `produced by an on-site estimator from house geometry and specification level rather than ` +
-  `a flat price per square foot, because the same 2,400 square feet costs very different ` +
-  `money on a flat infill lot than on a sloped foothills parcel with a shared well. Ranges ` +
-  `are planning estimates, not quotes; a firm proposal follows a site visit and a lot review.`;
+  `Pricing is a simple hourly rate plus a flat trip fee, quoted upfront before any work ` +
+  `starts, and most jobs are finished in a single visit. Typical starting rates are a $49 ` +
+  `trip fee plus $95 per hour with a one-hour minimum, so a single small repair starts ` +
+  `around $145 (rates are being finalized; every job gets a written quote first). Work that ` +
+  `needs a general contractor or a licensed trade, such as full remodels, additions, ` +
+  `repipes, or panel work, is out of scope and referred out honestly.`;
 
 function buildShort(): string {
   const lines: string[] = [];
@@ -88,11 +88,11 @@ function buildShort(): string {
 
   lines.push('## About and contact', '');
   lines.push(
-    `- [About ${SITE_CONFIG.name}](${url('/about')}): design-build home building across the Treasure Valley since 2020.`,
+    `- [About ${SITE_CONFIG.name}](${url('/about')}): locally owned handyman service for the Treasure Valley.`,
   );
   lines.push(`- [Contact](${url('/contact')})`);
-  lines.push(`- [Free build estimator](${url('/estimate')})`);
-  lines.push(`- [Planning resources and worksheets](${url('/resources')})`, '');
+  lines.push(`- [Instant handyman estimate](${url('/estimate')})`);
+  lines.push(`- [Homeowner resources and checklists](${url('/resources')})`, '');
 
   lines.push('## Optional', '');
   lines.push(`- [Blog](${url('/blog')})`, '');
@@ -114,31 +114,30 @@ function buildFull(): string {
 
   lines.push('## About', '');
   lines.push(
-    `${SITE_CONFIG.name} is a residential design-build home builder serving the Treasure Valley ` +
-      `since 2020. We build new homes: custom homes drawn from a blank page, semi-custom homes ` +
-      `personalized from a proven plan, and build-on-your-lot projects for families who already ` +
-      `own land. Design-build means design, engineering, permitting, and construction are ` +
-      `delivered by one team under one contract, which removes the handoff between an architect ` +
-      `and a general contractor and keeps the drawings and the budget on the same schedule. ` +
-      `Every project includes a written line-item scope before construction, named allowances ` +
-      `for selections, and a workmanship warranty at completion.`,
+    `${SITE_CONFIG.name} is a locally owned handyman service for the Treasure Valley. We handle ` +
+      `the small jobs that keep a home working: drywall repair and patching, interior and ` +
+      `exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim ` +
+      `repair, door and window adjustment, TV, shelf and furniture mounting and assembly, ` +
+      `fence, deck and gutter repair, caulking and weatherproofing, and general punch-list ` +
+      `work. Every job gets a written quote before work starts, and most jobs are finished in ` +
+      `one visit. Full remodels, additions, and anything that requires a general contractor or ` +
+      `a licensed trade are out of scope and referred out.`,
     '',
   );
-  lines.push('- Business type: Residential design-build home builder (new construction)');
-  lines.push('- Founded: 2020');
-  lines.push('- Service model: One accountable team for design, permits, and construction');
+  lines.push('- Business type: Handyman service (home repairs, installs, and maintenance)');
+  lines.push('- Service model: Upfront written quotes, one-trip fixes, hourly rate plus flat trip fee');
   lines.push(`- Contact: ${url('/contact')}`);
-  lines.push(`- Build estimator: ${url('/estimate')}`, '');
+  lines.push(`- Instant estimator: ${url('/estimate')}`, '');
 
   lines.push('## Service area', '');
-  lines.push('We build in the following Treasure Valley cities across Ada and Canyon County:', '');
+  lines.push('We serve the following Treasure Valley cities across Ada and Canyon County:', '');
   if (adaCities.length) lines.push(`- Ada County: ${adaCities.join(', ')}`);
   if (canyonCities.length) lines.push(`- Canyon County: ${canyonCities.join(', ')}`);
   lines.push(
     '',
-    'Permit paths, impact fees, and inspection sequencing differ between Ada County and Canyon ' +
-      'County, and again between incorporated city limits and county jurisdiction. We coordinate ' +
-      'submissions, fees, and inspections as part of the design-build contract.',
+    'Most handyman-scope repairs do not require a permit in Ada or Canyon County, and we flag ' +
+      'the exceptions (structural, gas, major electrical or plumbing alterations) before work ' +
+      'begins so the right licensed trade handles them.',
     '',
   );
 
@@ -171,37 +170,35 @@ function buildFull(): string {
   lines.push('', `${BLOG_POSTS.length} articles across these hubs. Index: /blog`, '');
 
   lines.push('## Planning resources', '');
-  lines.push('- Home building planning resources (free PDFs and visual guides): /resources');
-  lines.push('- New home budget worksheet: /downloads/new-home-budget-worksheet.pdf');
-  lines.push('- Lot evaluation checklist: /downloads/lot-evaluation-checklist.pdf');
+  lines.push('- Homeowner resources (free PDFs and visual guides): /resources');
+  lines.push('- Home maintenance checklist: /downloads/home-maintenance-checklist.pdf');
+  lines.push('- Home repair priority worksheet: /downloads/home-repair-priority-worksheet.pdf');
   lines.push('- Ada vs Canyon County permit flow (visual guide): /resources/ada-canyon-permit-flow', '');
 
   lines.push('## Common questions', '');
   lines.push(
-    '- How long does it take to build a house in the Treasure Valley? Design and engineering ' +
-      'typically run two to four months, plan review and permitting another one to three ' +
-      'depending on jurisdiction, and construction ten to fourteen months for a custom home. ' +
-      'Semi-custom plans compress the design phase because the drawings already exist.',
+    '- What does a handyman visit cost in Boise? Market rates in the Treasure Valley typically ' +
+      'run $60 to $120 per hour. Our model is a flat trip fee plus an hourly rate, quoted as a ' +
+      'written flat price before work starts, with a single small repair starting around $145.',
   );
   lines.push(
-    '- What does a new home cost per square foot here? A blended rate is the wrong unit, because ' +
-      'site work, foundation type, and specification level move the number more than area does. ' +
-      'The estimator prices geometry and scope instead, then reports a range.',
+    '- How fast can a repair be scheduled? Standard visits book at the next available slot, ' +
+      'usually within the week; priority scheduling within two business days is available for ' +
+      'an added fee. Most small repairs are finished in a single one-to-three-hour visit.',
   );
   lines.push(
-    '- Can I build on land I already own? Yes, that is the build-on-your-lot path. Before design ' +
-      'starts we review soils, utilities, access, setbacks, easements, and slope, because those ' +
-      'determine what the parcel can actually carry and what the site work will cost.',
+    '- Who supplies the materials? Either works. You can have parts on the counter when we ' +
+      'arrive, or we pick them up and bill materials at cost with a supply-run line on the quote.',
   );
   lines.push(
-    '- Do I need a construction loan? Most owners use a construction-to-permanent loan that draws ' +
-      'against completed milestones and converts to a mortgage at occupancy. The draw schedule ' +
-      'has to match the build schedule, which is something we set up with the lender.',
+    '- What is out of scope? Full remodels, additions, structural work, repipes, panel or ' +
+      'service upgrades, gas lines, and re-roofs. Those need a general contractor or a licensed ' +
+      'trade, and we say so and refer out rather than take the job.',
   );
   lines.push(
-    '- How do I compare two builder bids? Only when the allowances, site work assumptions, and ' +
-      'permit responsibilities match. Most of the spread between two bids on the same house is ' +
-      'scope that one of them left out, not margin.',
+    '- Do small repairs need a permit? Most handyman-scope work in Ada and Canyon County does ' +
+      'not. Structural changes and major electrical, plumbing, or mechanical alterations do, ' +
+      'and we flag those before any work begins.',
     '',
   );
 
@@ -210,7 +207,7 @@ function buildFull(): string {
   lines.push(`- About: ${url('/about')}`);
   lines.push(`- Services: ${url('/services')}`);
   lines.push(`- Service areas: ${url('/areas')}`);
-  lines.push(`- Build estimator: ${url('/estimate')}`);
+  lines.push(`- Instant estimator: ${url('/estimate')}`);
   lines.push(`- Blog: ${url('/blog')}`);
   lines.push(`- Guides: ${url('/guides')}`);
   lines.push(`- Resources: ${url('/resources')}`);
@@ -226,9 +223,9 @@ function buildFull(): string {
       `invoices and receipts for the transaction file. Structural, foundation, mold and asbestos ` +
       `abatement, main electrical service, sewer and septic, HVAC replacement, gas lines and full ` +
       `roof replacement are coordinated to licensed specialists rather than performed in house. ` +
-      `We take this work because an inspection repair is a deadline problem rather than a ` +
-      `construction problem, and sequencing trades against a date that will not move is the same ` +
-      `thing we do on every build. Details: ${url('/re-10-repairs-boise')}`,
+      `Inspection repair lists are exactly the small, defined jobs a handyman does every day, ` +
+      `and we sequence them against a closing date that will not move. ` +
+      `Details: ${url('/re-10-repairs-boise')}`,
     '',
   );
 

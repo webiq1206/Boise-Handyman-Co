@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Check, ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { AnimatedPrice } from "@/components/estimate/EstimateResultPanel";
 import { requestHideMobileNavBar } from "@/lib/mobileNavBar";
-import type { EstimateResult } from "@/shared/estimateEngine";
-
-const SHEET_SCOPE_COUNT = 4;
+import type { HandymanEstimate } from "@/shared/estimateEngine";
+import { formatHandymanCurrency, HANDYMAN_RATE_DISCLAIMER } from "@/shared/estimateEngine";
 
 export interface StickyEstimateBarProps {
   /**
@@ -19,7 +18,7 @@ export interface StickyEstimateBarProps {
   mode: "inline" | "modal";
   /** Inline only: whether the estimator section is currently on screen. */
   visible?: boolean;
-  result: EstimateResult | null;
+  estimate: HandymanEstimate | null;
   /** Short selections summary, or a hint when nothing is selected yet. */
   summary: string;
   ctaLabel: string;
@@ -30,12 +29,12 @@ export interface StickyEstimateBarProps {
 /**
  * Bottom-anchored estimate bar for mobile. Always pinned to the bottom of the
  * viewport (inline) or dialog (modal), safe-area aware, with a tap-to-expand
- * summary sheet once a planning range exists.
+ * breakdown sheet once a range exists.
  */
 export function StickyEstimateBar({
   mode,
   visible = true,
-  result,
+  estimate,
   summary,
   ctaLabel,
   ctaDisabled = false,
@@ -52,10 +51,10 @@ export function StickyEstimateBar({
     return requestHideMobileNavBar();
   }, [isInline, visible]);
 
-  // Collapse the sheet when the range goes away (e.g. user changed project).
+  // Collapse the sheet when the range goes away (e.g. user changed the job).
   useEffect(() => {
-    if (!result) setExpanded(false);
-  }, [result]);
+    if (!estimate) setExpanded(false);
+  }, [estimate]);
 
   if (isInline && !visible) return null;
 
@@ -70,31 +69,28 @@ export function StickyEstimateBar({
       )}
       data-testid="mobile-estimate-bar"
     >
-      {expanded && result && (
+      {expanded && estimate && (
         <div
           id={sheetId}
           className="px-4 pt-4 pb-2 border-b border-border"
           data-testid="estimate-bar-sheet"
         >
-          <div className="flex items-baseline justify-between gap-3 mb-2">
-            <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
-              {summary}
-            </p>
-            <p className="text-[11px] text-muted-foreground">{result.confidenceLabel}</p>
-          </div>
+          <p className="text-[11px] uppercase tracking-wide text-muted-foreground mb-2">
+            {summary}
+          </p>
           <ul className="space-y-1.5 mb-2">
-            {result.included.slice(0, SHEET_SCOPE_COUNT).map((item) => (
+            {estimate.lines.map((line) => (
               <li
-                key={item}
-                className="flex items-start gap-2 text-xs leading-snug text-muted-foreground"
+                key={line.id}
+                className="flex items-baseline justify-between gap-3 text-xs leading-snug text-muted-foreground"
               >
-                <Check className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" />
-                {item}
+                <span>{line.label}</span>
+                <span className="tabular-nums">{formatHandymanCurrency(line.amount)}</span>
               </li>
             ))}
           </ul>
           <p className="text-[10px] leading-snug text-muted-foreground">
-            Planning estimate only, not a binding quote.
+            {HANDYMAN_RATE_DISCLAIMER}
           </p>
         </div>
       )}
@@ -102,27 +98,27 @@ export function StickyEstimateBar({
       <div className="flex items-center justify-between gap-3 px-4 py-2.5 max-w-6xl mx-auto">
         <button
           type="button"
-          onClick={() => result && setExpanded((prev) => !prev)}
-          disabled={!result}
-          aria-expanded={result ? expanded : undefined}
-          aria-controls={result ? sheetId : undefined}
+          onClick={() => estimate && setExpanded((prev) => !prev)}
+          disabled={!estimate}
+          aria-expanded={estimate ? expanded : undefined}
+          aria-controls={estimate ? sheetId : undefined}
           className="min-w-0 flex-1 text-left min-h-11 flex items-center gap-2"
           data-testid="estimate-bar-toggle"
         >
           <span className="min-w-0">
             <span className="block text-[10px] uppercase tracking-wide truncate text-muted-foreground">
-              {result ? summary : "Your planning range"}
+              {estimate ? summary : "Your estimated range"}
             </span>
-            {result ? (
+            {estimate ? (
               <span
                 className="block text-lg leading-tight brc-display-num tabular-nums text-foreground"
                 data-testid="mobile-estimate-range"
                 aria-live="polite"
                 aria-atomic="true"
               >
-                <AnimatedPrice value={result.priceLow} />
+                <AnimatedPrice value={estimate.priceLow} />
                 <span aria-hidden="true"> to </span>
-                <AnimatedPrice value={result.priceHigh} />
+                <AnimatedPrice value={estimate.priceHigh} />
               </span>
             ) : (
               <span
@@ -133,7 +129,7 @@ export function StickyEstimateBar({
               </span>
             )}
           </span>
-          {result &&
+          {estimate &&
             (expanded ? (
               <ChevronDown className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
             ) : (
@@ -146,7 +142,7 @@ export function StickyEstimateBar({
           onClick={onCta}
           disabled={ctaDisabled}
           className="flex-shrink-0 px-5 py-2.5 text-xs"
-          data-testid="mobile-button-book-visit"
+          data-testid="mobile-button-get-estimate"
         >
           {ctaLabel}
         </Button>

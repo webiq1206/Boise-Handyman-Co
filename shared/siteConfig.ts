@@ -5,16 +5,19 @@
 
 const DEFAULT_PHONE = "(208) 477-1169";
 const DEFAULT_PHONE_TEL = "2084771169";
-const DEFAULT_EMAIL = "hello@boiseconstruction.co";
-// This site now lives on its own domain. boiseremodeling.co was duplicated and
-// rebuilt as Boise Construction Co, which runs at boiseconstruction.co;
-// boiseremodeling.co remains the separate remodeling business. Every canonical,
-// sitemap entry, OG URL, schema @id, and absolute link is built from this value.
-const DEFAULT_SITE_URL = "https://boiseconstruction.co";
+const DEFAULT_EMAIL = "hello@boisehandyman.co";
+// This site now lives on its own domain. The old general-contractor site was
+// duplicated and rebuilt as Boise Handyman Co, which runs at boisehandyman.co;
+// the general-contracting business remains on its original domain. Every
+// canonical, sitemap entry, OG URL, schema @id, and absolute link is built from
+// this value.
+const DEFAULT_SITE_URL = "https://boisehandyman.co";
 
 export const SITE_CONFIG = {
-  name: "Boise Construction Co",
-  legalName: "Boise Construction Co LLC",
+  name: "Boise Handyman Co",
+  // NEEDS: confirm the registered legal entity name for Boise Handyman before
+  // launch. Set to the brand name (no invented "LLC" suffix) until confirmed.
+  legalName: "Boise Handyman Co",
   phone: process.env.NEXT_PUBLIC_PHONE ?? DEFAULT_PHONE,
   phoneTel: process.env.NEXT_PUBLIC_PHONE_TEL ?? DEFAULT_PHONE_TEL,
   phoneHref: `tel:${process.env.NEXT_PUBLIC_PHONE_TEL ?? DEFAULT_PHONE_TEL}`,

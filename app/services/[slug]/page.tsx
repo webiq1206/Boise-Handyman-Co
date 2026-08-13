@@ -56,18 +56,28 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         heading: content.costGuidance.heading,
         paragraphs: content.costGuidance.paragraphs,
         links: [
-          { label: 'Boise Home Building Cost Guide', href: '/guides/boise-home-building-cost-guide' },
-          { label: 'Get your build cost range', href: '/#calculator' },
+          { label: 'Get an instant estimate', href: '/estimate' },
+          { label: 'Book a handyman visit', href: '/contact#consult' },
         ],
       }
     : undefined;
 
   const sections: LandingSection[] = [
+    ...(content.typicalJobs?.length
+      ? [
+          {
+            heading: `Typical ${serviceLC} jobs`,
+            paragraphs: [
+              `The calls we get for ${serviceLC} look like this: ${content.typicalJobs.join('; ')}. If your job sounds like one of these, it is squarely in scope. If it is bigger, we will say so upfront and point you to the right specialty contractor instead of stretching a handyman visit around it.`,
+            ],
+          },
+        ]
+      : []),
     {
       heading: `${service.name} across the Treasure Valley`,
       paragraphs: [
-        `We provide ${serviceLC} services throughout the Treasure Valley, with dedicated local pages for each city we serve. Lot availability, permit paths, impact fees, and HOA design review differ between Ada and Canyon County communities, so each city page covers the details that matter where you plan to build.`,
-        `Choose your city below to see local ${serviceLC} guidance, or schedule a free planning consultation to discuss your build directly.`,
+        `We provide ${serviceLC} throughout the Treasure Valley, with dedicated local pages for each city we serve. The same upfront quotes and flat trip fee apply everywhere in Ada and Canyon County, so where you live never inflates the price.`,
+        `Choose your city below for local ${serviceLC} details, or send photos of the job for an upfront quote.`,
       ],
       links: CITIES.map((c) => ({
         label: `${service.name} in ${c.name}`,
@@ -75,17 +85,23 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       })),
     },
     {
-      heading: `Why design-build for your ${serviceLC}`,
+      heading: `Why book a handyman for ${serviceLC}`,
       paragraphs: [
-        `As a design-build home builder, we bring architectural design, engineering, estimating, permitting, and construction under one contract and one accountable team. That removes the handoffs and finger-pointing that happen when the architect, the plan reviewer, and the general contractor all answer to someone different - and it keeps your ${serviceLC} on a single, coordinated schedule.`,
-        // The line-item budget, allowances, weekly updates, and warranty are
-        // already stated as scannable bullets above (benefits/inclusions) -
-        // restating them here in prose was pure repetition. This paragraph
-        // now adds only what those lists don't: the fixed-price framing and
-        // the draw schedule.
-        `You get a written, fixed price before we break ground and a published draw schedule through the build.`,
+        `Specialty contractors are built for big projects, which is why small ${serviceLC} jobs get ignored, wait weeks, or carry minimum charges out of proportion to the work. A handyman service is built the other way: small jobs are the whole business, so they get quoted quickly, scheduled promptly, and finished in one visit whenever the work allows.`,
+        // The pricing model, inclusions, and one-trip framing are already
+        // stated as scannable bullets above (benefits/inclusions) - this
+        // paragraph adds only what those lists don't: the honest-scope close.
+        `And when a job genuinely needs a licensed specialty contractor, we say so and refer you to one, rather than learning on your house.`,
       ],
     },
+    ...(content.outOfScope
+      ? [
+          {
+            heading: content.outOfScope.heading,
+            paragraphs: content.outOfScope.paragraphs,
+          },
+        ]
+      : []),
   ];
 
   const schemas = [

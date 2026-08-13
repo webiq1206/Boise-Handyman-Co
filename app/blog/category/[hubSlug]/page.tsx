@@ -47,7 +47,7 @@ export async function generateMetadata({
   // to earn the click, instead of the old formulaic 60-char template.
   const countPhrase = posts.length >= 3 ? `${posts.length} in-depth articles` : 'Expert articles';
   const rawDescription =
-    `${hub.description} ${countPhrase} on ${hub.title.toLowerCase()} for Boise, Meridian, Eagle, Nampa and Treasure Valley families planning to build a new home.`.replace(
+    `${hub.description} ${countPhrase} on ${hub.title.toLowerCase()} for homeowners in Boise, Meridian, Eagle, Nampa and across the Treasure Valley.`.replace(
       /\s+/g,
       ' ',
     );
@@ -141,11 +141,11 @@ export default function BlogCategoryHubPage({
           </h1>
           <p className="text-lg text-muted-foreground mb-4 max-w-2xl">{hub.description}</p>
           <p className="text-base text-muted-foreground mb-6 max-w-2xl leading-relaxed">
-            Every article below is written by the Boise Construction Co design-build team for
-            families across Boise, Meridian, Eagle, Nampa and the wider Treasure Valley, with
-            real planning ranges, Ada and Canyon County permit context, and lessons from homes
-            we have actually built. Start with the complete guide for the full overview, or jump
-            to a specific article below.
+            Every article below is written by the Boise Handyman Co team for homeowners across
+            Boise, Meridian, Eagle, Nampa and the wider Treasure Valley, with realistic local
+            price ranges, honest DIY-or-pro calls, and Ada and Canyon County context where it
+            matters. Start with the complete guide for the full overview, or jump to a specific
+            article below.
           </p>
           <Link
             href={guidePath(hub.pillarSlug)}

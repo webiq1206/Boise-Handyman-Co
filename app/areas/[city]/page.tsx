@@ -46,18 +46,18 @@ export default function AreaPage({ params }: { params: { city: string } }) {
   const overview = getAreaIntro(city);
   const images = getAreaImageSet(city.slug);
   const localNote = seo
-    ? `We serve ${city.name} homeowners across ${seo.neighborhoods.slice(0, 3).join(', ')}, and all of ${county}. Permits are coordinated through ${county} for projects requiring approval.`
-    : `We serve ${city.name} and all of ${county} with design-build home construction.`;
+    ? `We serve ${city.name} homeowners across ${seo.neighborhoods.slice(0, 3).join(', ')}, and all of ${county}. Same-week scheduling is typical, and one flat trip fee covers the visit wherever you are in the service area.`
+    : `We serve ${city.name} and all of ${county} with handyman repairs, installs, and maintenance.`;
 
   const neighborhoods = seo?.neighborhoods ?? [];
   const landmarks = seo?.landmarks ?? [];
 
   const sections: LandingSection[] = [
     {
-      heading: `Home building services in ${city.name}`,
+      heading: `Handyman services in ${city.name}`,
       paragraphs: [
-        `${SITE_CONFIG.name} is a design-build home builder serving ${city.name} and the surrounding ${county} area. Whether you are building a fully custom home, adapting a semi-custom plan, or building on land you already own, every project runs through one accountable team - from the first planning consultation and lot review, through design, permits, construction, and the day you get the keys.`,
-        `Explore the specific services we offer in ${city.name} below. Each links to a dedicated ${city.name} page with local details, typical scope, and budget guidance.`,
+        `${SITE_CONFIG.name} is a locally owned handyman service covering ${city.name} and the surrounding ${county} area. Whether it is a drywall patch, a dripping faucet, a sticking door, a TV that needs mounting, or a whole to-do list, every job runs the same way: an upfront quote from photos, an agreed arrival time, and a one-trip fix whenever the work allows.`,
+        `Explore the specific services we offer in ${city.name} below. Each links to a dedicated ${city.name} page with local details, typical jobs, and pricing guidance.`,
       ],
       links: SERVICES.map((s) => ({
         label: `${s.name} in ${city.name}`,
@@ -65,23 +65,23 @@ export default function AreaPage({ params }: { params: { city: string } }) {
       })),
     },
     {
-      heading: `Neighborhoods and lots we build on in ${city.name}`,
+      heading: `Neighborhoods we serve in ${city.name}`,
       paragraphs: [
         neighborhoods.length
-          ? `We build throughout ${city.name}, including ${neighborhoods.join(', ')}. Lots vary block by block in setbacks, utilities, soil, and slope, so we evaluate the specific parcel before we price the home rather than applying a flat square-foot number.`
-          : `We build throughout ${city.name}, evaluating each parcel for setbacks, utilities, soil, and slope before we price the home rather than applying a flat square-foot number.`,
+          ? `We work throughout ${city.name}, including ${neighborhoods.join(', ')}. Housing stock varies between these areas, from newer subdivision builds to older homes with settled doors, aging caulk, and original fixtures, so we ask the right questions up front and arrive with materials that suit the house.`
+          : `We work throughout ${city.name}, from newer subdivision builds to older homes with settled doors, aging caulk, and original fixtures, and we arrive with materials that suit the house.`,
         landmarks.length
-          ? `As a local team familiar with ${city.name} landmarks like ${landmarks.slice(0, 3).join(', ')}, we understand the area's character and how to design a home that fits its street and holds its value.`
-          : `As a local team, we understand the area's character and how to design a home that fits its street and holds its value.`,
+          ? `As a local team familiar with ${city.name} landmarks like ${landmarks.slice(0, 3).join(', ')}, scheduling is genuinely local: a real arrival time, a confirmation before we head out, and no travel surcharge beyond the standard flat trip fee.`
+          : `As a local team, scheduling is genuinely local: a real arrival time, a confirmation before we head out, and no travel surcharge beyond the standard flat trip fee.`,
       ],
     },
     {
-      heading: `Permits and planning in ${county}`,
+      heading: `Seasonal home maintenance in ${county}`,
       paragraphs: [
-        `Every new home in ${city.name} requires a building permit through ${county}, along with plan review, and often site-specific approvals for driveways, septic, or well. We build plan review and inspection windows into the master schedule so timelines stay realistic, and we coordinate submissions, fees, and inspections as part of your design-build contract.`,
+        `The ${county} seasons set the rhythm for home upkeep: gutters want cleaning in late fall before the first freeze, caulking and weatherstripping pay for themselves when refreshed before winter, and fence, deck, and exterior repairs are best done spring through fall while concrete and sealants can cure. Interior work, drywall, paint, plumbing, electrical, and mounting, runs year-round.`,
         seo?.climate
-          ? `Our ${city.name} designs also account for the local ${seo.climate} - from insulation levels and window specification to a building envelope and exterior materials that hold up to freeze-thaw cycles.`
-          : `Our designs also account for the Treasure Valley climate, from insulation levels and window specification to a building envelope built for freeze-thaw cycles.`,
+          ? `The local ${seo.climate} is hard on the small stuff - caulk lines crack with freeze-thaw cycles, doors swell and shrink, and exterior finishes fade - which is exactly the work a scheduled handyman visit keeps ahead of.`
+          : `The Treasure Valley climate is hard on the small stuff - caulk lines crack with freeze-thaw cycles, doors swell and shrink, and exterior finishes fade - which is exactly the work a scheduled handyman visit keeps ahead of.`,
       ],
     },
   ];
@@ -101,12 +101,12 @@ export default function AreaPage({ params }: { params: { city: string } }) {
         }
       : undefined;
 
-  const h1 = `Home Builder in ${city.name}, Idaho`;
+  const h1 = `Handyman in ${city.name}, Idaho`;
   const faqs = [
     ...AREA_PAGE_FAQS,
     {
-      question: `Do you build in ${city.name}, Idaho?`,
-      answer: `Yes. ${city.name} is part of our Treasure Valley service area. We build custom homes, semi-custom homes, and homes on land you already own, and we can evaluate a ${city.name} lot before you buy it.`,
+      question: `Do you serve ${city.name}, Idaho?`,
+      answer: `Yes. ${city.name} is part of our core Treasure Valley service area. We handle small repairs, installs, and maintenance across the city, with the same upfront quotes and flat trip fee as everywhere else we work.`,
     },
   ];
 
@@ -138,15 +138,15 @@ export default function AreaPage({ params }: { params: { city: string } }) {
           { name: city.name },
         ]}
         benefits={[
-          `Local experience in ${city.name} and ${county}`,
-          'Design-build team, one accountable contact',
-          'Line-item budget before we break ground',
-          'Written workmanship warranty',
+          `Local service in ${city.name} and ${county}`,
+          'One accountable local contact',
+          'Upfront quote before any work starts',
+          'Most jobs finished in one visit',
         ]}
         localNote={localNote}
         sections={sections}
         proof={proof}
-        proofHeading={`Recent ${city.name} projects`}
+        proofHeading={`Recent ${city.name} jobs`}
         showEstimatePrompt
         faqs={faqs}
         related={{ variant: 'area', citySlug: city.slug }}

@@ -20,10 +20,62 @@ export default function StyleGuidePage() {
         <div className="container px-4 max-w-4xl">
           <PageHeader
             eyebrow="Internal reference"
-            title="Boise Construction Co - Design System"
+            title="Boise Handyman Co - Design System"
             description="Tokens, typography, buttons, cards, and article styles for all marketing pages."
             align="left"
           />
+        </div>
+      </Section>
+
+      <Section variant="greige" divider>
+        <div className="container px-4 max-w-4xl space-y-8">
+          <h2 className="text-section-title font-sans font-light">Brand kit (placeholder)</h2>
+          <p className="text-sm text-muted-foreground max-w-prose">
+            PLACEHOLDER kit generated programmatically pending real brand assets. Charcoal
+            #2C302F, bone #F7F5F3, and the brand accent steel blue #8FAEC4 (5.74:1 on
+            charcoal, passes AA; 2.14:1 on bone, decorative only). Full kit and usage rules:{" "}
+            <a href="/brand/brand-kit.html" className="underline underline-offset-4">
+              /brand/brand-kit.html
+            </a>
+            .
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 items-center">
+            <div className="rounded-sm border bg-[#F7F5F3] p-4 flex items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand/svg/seal/light/boise-handyman-co-seal-charcoal-accent.svg"
+                alt="Boise Handyman Co seal, charcoal with steel accent"
+                className="w-28 h-28"
+              />
+            </div>
+            <div className="rounded-sm border bg-[#2C302F] p-4 flex items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand/svg/seal/dark/boise-handyman-co-seal-bone-accent.svg"
+                alt="Boise Handyman Co seal, bone with steel accent"
+                className="w-28 h-28"
+              />
+            </div>
+            <div className="rounded-sm border bg-[#F7F5F3] p-4 flex items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand/svg/icon/boise-handyman-co-icon-accent.svg"
+                alt="Boise Handyman Co icon, steel field"
+                className="w-20 h-20"
+              />
+            </div>
+            <div className="rounded-sm border h-full min-h-24 bg-[#8FAEC4] flex items-end p-2">
+              <span className="text-xs text-[#2C302F]">Accent #8FAEC4</span>
+            </div>
+          </div>
+          <div className="rounded-sm border bg-[#2C302F] p-6">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg"
+              alt="Boise Handyman Co wordmark, bone with steel Co."
+              className="w-full max-w-xl mx-auto"
+            />
+          </div>
         </div>
       </Section>
 

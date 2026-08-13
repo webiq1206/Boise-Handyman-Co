@@ -36,10 +36,10 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
         <DialogContent className="max-w-lg w-[95vw] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="font-sans font-light text-xl text-foreground">
-              Schedule your free in-home visit
+              Book a handyman visit
             </DialogTitle>
             <DialogDescription className="text-sm text-muted-foreground">
-              No obligation - we&apos;ll walk your space and give you an honest planning range.
+              No obligation - tell us what needs doing and we&apos;ll reply with an upfront quote.
             </DialogDescription>
           </DialogHeader>
           <ConsultationForm onRevise={() => setOpen("estimate")} showTrust />
@@ -50,10 +50,10 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
         <DialogContent className="max-w-4xl w-[95vw] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="font-sans font-light text-xl text-foreground">
-              Get your planning range
+              Get your instant estimate
             </DialogTitle>
             <DialogDescription className="text-sm text-muted-foreground">
-              Three quick choices, an instant range. Nothing is pre-selected or submitted
+              A few quick choices, an instant range. Nothing is pre-selected or submitted
               until you say so.
             </DialogDescription>
           </DialogHeader>

@@ -10,7 +10,7 @@ Preferred communication style: Simple, everyday language.
 
 ### UI/UX Decisions
 - **Design System**: Mobile-first responsive design, dark-only. Montserrat (`font-sans`) for all headings and body text; the serif (Libre Baskerville, `font-serif`) is reserved exclusively for decorative accents — italic emphasis words via `.brc-accent` and display numerals via `.brc-display-num`. Do not apply `font-serif` to heading elements.
-- **Color Palette**: Boise Construction Co brand kit — charcoal ground/ink `#2C302F`, bone `#F7F5F3`, ochre accent `#D09A5C` (with deep ochre `#7E6344` for graphic fills). These three brand colors only; never recolor outside them.
+- **Color Palette**: Boise Handyman Co brand kit — charcoal ground/ink `#2C302F`, bone `#F7F5F3`, ochre accent `#D09A5C` (with deep ochre `#7E6344` for graphic fills). These three brand colors only; never recolor outside them.
 - **Component Library**: shadcn/ui (Radix UI primitives) with custom Tailwind CSS.
 - **Homepage**: 12-section single-page marketing layout: Hero → Trust Strip → Founder Note → Inspiration Gallery → Estimate Calculator → Below-Calculator Cards → How We Build → Principles → Financing/Guarantee → Founding Clients → FAQ Accordion → Consultation Form.
 - **Founding Spots**: `FOUNDING_SPOTS_REMAINING` constant in `shared/contentData.ts` — update manually as spots fill.
@@ -23,7 +23,7 @@ Preferred communication style: Simple, everyday language.
 - **FAQ Section**: Client component (`FAQSection.tsx`) — Radix Accordion with 9 Q&As.
 - **Lead Distribution System**: B2B lead marketplace with admin dashboard, subcontractor portal, privacy protection, automated lead pricing, legal agreement flow, and in-app notifications. Integrates with Stripe for payments and supports an account credits system.
 - **Blog System**: Infrastructure kept but no posts yet — `shared/blogContent.ts` has empty `BLOG_POSTS` array.
-- **Email**: Resend. From/Reply-To = `hello@boiseconstruction.co` (a verified domain/sender in the Resend account). Transport: `server/services/emailTransport.ts` — `getUncachableEmailClient()` returns a Resend client; API key from `RESEND_API_KEY` secret, falling back to the `resend` connector. Dev without a key returns a no-op client. Gmail/Google Workspace approach was abandoned (the connected Google account could not send from the alias).
+- **Email**: Resend. From/Reply-To = `hello@boisehandyman.co` (a verified domain/sender in the Resend account). Transport: `server/services/emailTransport.ts` — `getUncachableEmailClient()` returns a Resend client; API key from `RESEND_API_KEY` secret, falling back to the `resend` connector. Dev without a key returns a no-op client. Gmail/Google Workspace approach was abandoned (the connected Google account could not send from the alias).
 - **Service Areas**: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton (Ada + Canyon County).
 - **Services**: Kitchen Remodel, Bathroom Remodel, Whole-Home Remodel, Room Addition.
 

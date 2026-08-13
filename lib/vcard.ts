@@ -40,7 +40,7 @@ export function buildBusinessVCard(): string {
   // it is confirmed whether the profiles were renamed, a saved contact should
   // not ship a link that may point at the wrong or a defunct account.
   const note = [
-    "Treasure Valley design-build home builder.",
+    "Treasure Valley handyman service. Repairs, installs, and home maintenance.",
     SITE_CONFIG.address.serviceArea,
     `Hours: ${hoursSummary}`,
   ].join("\n");
@@ -66,4 +66,4 @@ export function buildBusinessVCard(): string {
 }
 
 export const BUSINESS_VCARD_PATH = "/contact.vcf";
-export const BUSINESS_VCARD_FILENAME = "Boise-Construction-Co.vcf";
+export const BUSINESS_VCARD_FILENAME = "Boise-Handyman-Co.vcf";

@@ -10,22 +10,22 @@ const PRIVACY_CANONICAL = buildCanonical("/privacy-policy");
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Boise Construction Co privacy policy. How we protect your data when you request home building services across Boise and the Treasure Valley.",
+  description: "Boise Handyman Co privacy policy. How we protect your data when you request handyman services across Boise and the Treasure Valley.",
   alternates: {
     canonical: PRIVACY_CANONICAL,
       types: FEED_ALTERNATES,
   },
   openGraph: {
-    title: "Privacy Policy | Boise Construction Co",
-    description: "How we protect your data when you use Boise Construction Co home building services in Idaho.",
+    title: "Privacy Policy | Boise Handyman Co",
+    description: "How we protect your data when you use Boise Handyman Co handyman services in Idaho.",
     url: PRIVACY_CANONICAL,
     type: "website",
-    images: [{ url: "/images/og-default.png", width: 1200, height: 630, alt: "Boise Construction Co" }],
+    images: [{ url: "/images/og-default.png", width: 1200, height: 630, alt: "Boise Handyman Co" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Privacy Policy | Boise Construction Co",
-    description: "How we protect your data when you use Boise Construction Co home building services in Idaho.",
+    title: "Privacy Policy | Boise Handyman Co",
+    description: "How we protect your data when you use Boise Handyman Co handyman services in Idaho.",
   },
 };
 
@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
   ]);
   const webPageSchema = generateWebPageSchema({
     title: "Privacy Policy",
-    description: "Privacy policy for Boise Construction Co. How we collect, use, and protect your personal information.",
+    description: "Privacy policy for Boise Handyman Co. How we collect, use, and protect your personal information.",
     url: "/privacy-policy",
   });
 
@@ -53,14 +53,14 @@ export default function PrivacyPolicyPage() {
       <section className="py-16 md:py-24">
         <div className="container px-4">
           <div className="max-w-3xl mx-auto blog-content prose-measure">
-            <h1>Privacy Policy for Boise Construction Co Services</h1>
+            <h1>Privacy Policy for Boise Handyman Co Handyman Services</h1>
             <p className="lead text-muted-foreground">
               Last updated: January 2024
             </p>
 
             <h2>Introduction</h2>
             <p>
-              Boise Construction Co ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+              Boise Handyman Co ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
             </p>
 
             <h2>Information We Collect</h2>
@@ -112,7 +112,7 @@ export default function PrivacyPolicyPage() {
               If you have questions about this Privacy Policy, please contact us at:
             </p>
             <ul>
-              <li>Email: <ObfuscatedEmail user="hello" domain="boiseconstruction.co" className="text-primary hover:underline inline-flex items-center gap-1" showIcon={false} /></li>
+              <li>Email: <ObfuscatedEmail user="hello" domain="boisehandyman.co" className="text-primary hover:underline inline-flex items-center gap-1" showIcon={false} /></li>
               <li>
                 Phone: <BusinessPhoneLink className="text-primary hover:underline" />{" "}
                 <span className="text-muted-foreground">·</span>{" "}

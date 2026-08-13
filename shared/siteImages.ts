@@ -1,56 +1,55 @@
 /**
- * Marketing image paths. These point at project photography in
- * `public/images/`. Replace with your own photos using the same filenames
- * (or update the paths here) - .jpg or .webp also work.
+ * Marketing image paths. These point at photography in `public/images/`.
+ *
+ * All photography is AI-generated placeholder imagery produced for the
+ * Boise Handyman conversion (2026-08). Swap for real job-site photography
+ * when it exists. [NEEDS: real photography when available]
  */
 
 export const SITE_IMAGES = {
-  /** Homepage hero - great room with kitchen visible; distinct from whole-home after. */
-  hero: "/images/hero-great-room.webp",
-  /** Design-build / plan review split panels. */
-  process: "/images/process-design-review.webp",
-  /** "Where your money goes" value band - a carpenter setting custom cabinetry,
-   *  reinforcing that the budget is spent on craftsmanship, not overhead. */
-  valueCraft: "/images/value-craftsmanship-cabinetry.webp",
-  /** A house being framed - process sections. */
-  processInProgress: "/images/framing-in-progress.webp",
-  /** Full-bleed brand statement band. */
-  statementBand: "/images/statement-great-room.webp",
-  /** About/contact split panels and about hero. */
-  leadership: "/images/leadership-team.webp",
-  /** Consultation section background (homepage). */
-  consultBg: "/images/consult-lifestyle.webp",
-  /** Budget section subtle texture - island detail crop. */
-  budgetDetail: "/images/budget-kitchen-detail.webp",
+  /** Homepage hero: a handyman adjusting a sticking interior door in a bright home. */
+  hero: "/images/handyman/hero-door-repair.webp",
+  /** "How we work" split panels: a written quote on a clipboard with a tape measure. */
+  process: "/images/handyman/estimate-clipboard.webp",
+  /** "Where your money goes" value band: careful trim carpentry up close. */
+  valueCraft: "/images/handyman/service-carpentry-trim.webp",
+  /** Process sections: a tidy tool bag staged on a drop cloth for a repair visit. */
+  processInProgress: "/images/handyman/toolbag-ready.webp",
+  /** Full-bleed brand statement band: crisp cut-in paint lines on trim. */
+  statementBand: "/images/handyman/service-painting.webp",
+  /** About/contact split panels and about hero: a doorstep walkthrough with a homeowner. */
+  leadership: "/images/handyman/consult-doorstep.webp",
+  /** Consultation section background (homepage): a freshly repainted front door. */
+  consultBg: "/images/handyman/front-door-repaint.webp",
+  /** Pricing section subtle texture: new cabinet hardware going on. */
+  budgetDetail: "/images/handyman/cabinet-hardware-upgrade.webp",
 } as const;
 
 /**
- * The construction image library in public/images/construction, keyed by what
- * each photograph actually shows.
- *
- * Service pages, city-service pages, and the blog and guide hero registry all
- * draw from this one set, so a page never ends up illustrated with a stage of
- * construction it is not about. It lives here rather than beside either
- * consumer because both serviceBackgrounds and cityServiceImages need it and
- * they already depend on this module.
+ * The shared handyman image library in public/images/handyman. The export
+ * keeps its historical name (CONSTRUCTION_IMAGES) because serviceBackgrounds,
+ * cityServiceImages, and the hero registries import it; the keys map old
+ * building concepts to their nearest handyman-scope shot. It lives here
+ * rather than beside either consumer because both need it and they already
+ * depend on this module.
  */
-const c = (name: string) => `/images/construction/${name}.webp`;
+const h = (name: string) => `/images/handyman/${name}.webp`;
 
 export const CONSTRUCTION_IMAGES = {
-  customHome: c("custom-home-exterior"),
-  semiCustom: c("semi-custom-home"),
-  framing: c("home-under-framing"),
-  foundation: c("foundation-and-excavation"),
-  roughIn: c("mechanical-rough-in"),
-  insulation: c("insulation-and-air-sealing"),
-  interior: c("new-home-interior"),
-  kitchen: c("new-home-kitchen"),
-  lot: c("buildable-lot"),
-  foothills: c("foothills-building-site"),
-  ruralSite: c("rural-site-work"),
-  plans: c("plans-and-selections"),
-  budget: c("line-item-budget"),
-  meeting: c("site-meeting"),
-  outdoor: c("covered-outdoor-living"),
-  shopHome: c("shop-home-barndominium"),
+  customHome: h("hero-gutter-cleaning"),
+  semiCustom: h("front-door-repaint"),
+  framing: h("service-drywall-repair"),
+  foundation: h("service-fence-repair"),
+  roughIn: h("service-plumbing"),
+  insulation: h("weatherstripping"),
+  interior: h("hero-door-repair"),
+  kitchen: h("cabinet-hardware-upgrade"),
+  lot: h("deck-board-replacement"),
+  foothills: h("winterize-spigot"),
+  ruralSite: h("service-fence-repair"),
+  plans: h("estimate-clipboard"),
+  budget: h("repair-materials"),
+  meeting: h("consult-doorstep"),
+  outdoor: h("deck-board-replacement"),
+  shopHome: h("toolbag-ready"),
 } as const;

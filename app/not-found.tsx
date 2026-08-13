@@ -9,7 +9,7 @@ import { SaveContactLink } from "@/components/SaveContactLink";
 
 export const metadata: Metadata = {
   title: "Page Not Found (404)",
-  description: "The page you're looking for could not be found. Browse our home building services or contact Boise Construction Co.",
+  description: "The page you're looking for could not be found. Browse our home building services or contact Boise Handyman Co.",
   robots: {
     index: false,
     follow: true,

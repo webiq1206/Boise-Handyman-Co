@@ -27,8 +27,8 @@ export function WhyChooseUsSection({ limit }: WhyChooseUsSectionProps) {
           size="display"
           title={
             <>
-              Built for people who want a real{" "}
-              <em className="brc-accent">number</em>, not a moving target
+              Built for people whose small jobs kept getting{" "}
+              <em className="brc-accent">ignored</em>
             </>
           }
           description={DIFFERENTIATORS_INTRO}

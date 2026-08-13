@@ -1,7 +1,7 @@
 {
-  "name": "Boise Construction Co",
-  "short_name": "Boise Construction",
-  "description": "Design-build home builder for custom homes, semi-custom homes, and builds on your lot in the Treasure Valley, Idaho.",
+  "name": "Boise Handyman Co",
+  "short_name": "Boise Handyman",
+  "description": "Handyman service for small repairs, installs, and home maintenance in the Treasure Valley, Idaho.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#2C302F",

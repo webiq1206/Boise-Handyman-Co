@@ -1,4 +1,4 @@
-// Blog content for Boise Construction Co
+// Blog content for Boise Handyman Co
 
 import { ALL_BLOG_POSTS } from './content/allBlogPosts';
 

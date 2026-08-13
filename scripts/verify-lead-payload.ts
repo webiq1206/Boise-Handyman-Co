@@ -1,179 +1,204 @@
 /**
- * The lead routes must accept what the calculator actually sends.
+ * Wire-schema suite for the handyman estimate payload
+ * (shared/estimatePayload.ts, consumed by /api/estimate-lead).
  *
- * Both /api/estimate-lead and /api/consultation validate the estimate with a
- * Zod schema. When the calculator moved to new construction, that schema still
- * listed only the six remodel project types, so every lead the public estimator
- * produced was rejected with a 400. Nothing caught it: there is no test that
- * posts a realistic payload, and the calculator swallows non-5xx failures.
+ * Proves that:
+ * - every category, size, materials plan and urgency the engine defines is
+ *   accepted over the wire (the compile-time checks in estimatePayload.ts
+ *   guard the type level; this guards the runtime zod enums)
+ * - a payload built from real engine output round-trips the schema
+ * - malformed payloads (bad enums, zero/negative quantities, oversized
+ *   arrays and strings) are rejected instead of silently accepted
+ * - the server-side recompute agrees with the submitted numbers for an
+ *   honestly built payload, so verifyEstimate never logs false mismatches
  *
- * Two distinct failure modes are checked here, because they break differently:
- *
- *   1. REJECTION. A project type or finish the calculator can produce is not in
- *      the enum, so the lead is lost outright.
- *
- *   2. SILENT STRIPPING. Zod drops unknown keys instead of erroring, so a
- *      refinement missing from the schema does not fail: it vanishes. The
- *      server then recomputes the price without the garage, the basement, or
- *      the well and septic, logs an "Estimate mismatch", and quotes a number
- *      the visitor was never shown. That is worse than a 400 because it looks
- *      like it worked.
- *
- * Run: npm run verify:lead-payload
+ *   npx tsx scripts/verify-lead-payload.ts
  */
-import { estimateSchema, PROJECT_TYPE_VALUES } from '../shared/estimatePayload';
 import {
-  EMPTY_REFINEMENTS,
-  NEW_CONSTRUCTION_PROJECT_TYPES,
-  getProjectSizeConfig,
-  type EstimateRefinements,
-  type FinishLevel,
-  type ProjectType,
-} from '../shared/estimateEngine';
+  handymanEstimateSchema,
+  jobCategorySchema,
+  materialsPlanSchema,
+  otherJobSizeSchema,
+  urgencyLevelSchema,
+} from "../shared/estimatePayload";
+import {
+  calculateHandymanEstimate,
+  JOB_CATEGORY_IDS,
+  MATERIALS_PLAN_VALUES,
+  MAX_TASK_QUANTITY,
+  OTHER_JOB_SIZE_VALUES,
+  TASK_CATALOG,
+  URGENCY_LEVEL_VALUES,
+  type HandymanEstimateInput,
+} from "../shared/estimateEngine";
 
-let failures = 0;
 let checks = 0;
+let failures = 0;
 
-function t(name: string, pass: boolean, detail = '') {
+function assert(condition: boolean, message: string) {
   checks++;
-  if (!pass) {
+  if (!condition) {
     failures++;
-    console.error(`  x ${name}${detail ? ` - ${detail}` : ''}`);
+    console.error(`FAIL: ${message}`);
   }
 }
 
-const FINISHES: FinishLevel[] = ['refresh', 'mid-range', 'high-end', 'luxury'];
+/* ─────────────────────────── every engine value is accepted on the wire */
 
-/**
- * A fully-populated refinement set. Every field is deliberately non-null so
- * that a key missing from the wire schema shows up as a dropped value rather
- * than passing because it happened to be null anyway.
- */
-const FULL_REFINEMENTS: EstimateRefinements = {
-  layoutChanges: 'moderate',
-  plumbingElectrical: 'full',
-  cabinetTier: 'semi-custom',
-  fixtureCount: 3,
-  stories: 2,
-  roomCount: 6,
-  bathroomCount: 3,
-  kitchenIncluded: true,
-  aduConfig: 'detached',
-  upgradeScope: ['flooring', 'cabinets'],
-  garageBays: 'three',
-  basementType: 'finished',
-  lotServices: 'well-septic',
-  siteDifficulty: 'steep',
-  coveredOutdoor: 400,
-  shopSize: 1200,
-};
-
-/* ── 1. EVERY PROJECT THE CALCULATOR OFFERS IS ACCEPTED ──────────────────── */
-
-for (const project of PROJECT_TYPE_VALUES) {
-  const size = getProjectSizeConfig(project as ProjectType);
-  for (const finish of FINISHES) {
-    const parsed = estimateSchema.safeParse({
-      project,
-      finish,
-      sqft: size.baselineSqft,
-      priceLow: 500_000,
-      priceHigh: 650_000,
-      roi: 0.7,
-      refinements: FULL_REFINEMENTS,
-      statedBudget: 600_000,
-      layoutLabel: 'Open concept great room',
-      upgradeLabels: ['Three-car garage', 'Finished basement'],
-    });
-    t(
-      `accepts/${project}/${finish}`,
-      parsed.success,
-      parsed.success ? '' : JSON.stringify(parsed.error.issues[0]),
-    );
-  }
+for (const v of JOB_CATEGORY_IDS) {
+  assert(jobCategorySchema.safeParse(v).success, `category ${v} accepted`);
+}
+for (const v of OTHER_JOB_SIZE_VALUES) {
+  assert(otherJobSizeSchema.safeParse(v).success, `size ${v} accepted`);
+}
+for (const v of MATERIALS_PLAN_VALUES) {
+  assert(materialsPlanSchema.safeParse(v).success, `materials ${v} accepted`);
+}
+for (const v of URGENCY_LEVEL_VALUES) {
+  assert(urgencyLevelSchema.safeParse(v).success, `urgency ${v} accepted`);
 }
 
-// The four the public estimator actually shows must be in the enum. This is the
-// exact regression: they were not.
-for (const project of NEW_CONSTRUCTION_PROJECT_TYPES) {
-  t(
-    `public-project-in-enum/${project}`,
-    (PROJECT_TYPE_VALUES as readonly string[]).includes(project),
-    'the public calculator offers a project the API rejects',
+/* ─────────────────────── an honest payload round-trips and re-verifies */
+
+function buildPayload(input: HandymanEstimateInput) {
+  const estimate = calculateHandymanEstimate(input);
+  if (!estimate) throw new Error("scenario did not price");
+  return {
+    category: input.category,
+    tasks: input.tasks,
+    otherJob: input.otherJob ?? null,
+    materials: input.materials,
+    urgency: input.urgency,
+    priceLow: estimate.priceLow,
+    priceHigh: estimate.priceHigh,
+    laborHours: estimate.laborHours,
+  };
+}
+
+/* One representative task per category, plus the free-text path. */
+for (const [category, tasks] of Object.entries(TASK_CATALOG)) {
+  const input: HandymanEstimateInput = {
+    category: category as HandymanEstimateInput["category"],
+    tasks: [{ taskId: tasks[0].id, quantity: 2 }],
+    otherJob: null,
+    materials: "we-pick-up",
+    urgency: "priority",
+  };
+  const payload = buildPayload(input);
+  const parsed = handymanEstimateSchema.safeParse(payload);
+  assert(parsed.success, `${category}: engine-built payload parses`);
+  if (!parsed.success) continue;
+
+  /* The recompute the route performs must agree with the submitted numbers. */
+  const recomputed = calculateHandymanEstimate({
+    category: parsed.data.category,
+    tasks: parsed.data.tasks,
+    otherJob: parsed.data.otherJob ?? null,
+    materials: parsed.data.materials,
+    urgency: parsed.data.urgency,
+  });
+  assert(
+    recomputed !== null &&
+      recomputed.priceLow === payload.priceLow &&
+      recomputed.priceHigh === payload.priceHigh,
+    `${category}: server recompute matches the submitted range`,
   );
 }
 
-/* ── 2. NO REFINEMENT IS SILENTLY DROPPED ────────────────────────────────── */
+const otherPayload = buildPayload({
+  category: "something-else",
+  tasks: [],
+  otherJob: { description: "Handful of small fixes around the house", size: "small" },
+  materials: "customer",
+  urgency: "standard",
+});
+assert(
+  handymanEstimateSchema.safeParse(otherPayload).success,
+  "free-text other-job payload parses",
+);
 
-const roundTrip = estimateSchema.safeParse({
-  project: 'shop-home',
-  finish: 'high-end',
-  sqft: 2400,
-  priceLow: 700_000,
-  priceHigh: 850_000,
-  roi: 0.7,
-  refinements: FULL_REFINEMENTS,
+/* ───────────────────────────────────────────── malformed payloads fail */
+
+const valid = buildPayload({
+  category: "plumbing-repairs",
+  tasks: [{ taskId: "plumbing-faucet-swap", quantity: 1 }],
+  otherJob: null,
+  materials: "customer",
+  urgency: "standard",
 });
 
-if (!roundTrip.success) {
-  t('round-trip/parses', false, JSON.stringify(roundTrip.error.issues[0]));
-} else {
-  const out = (roundTrip.data.refinements ?? {}) as Record<string, unknown>;
-  for (const [key, value] of Object.entries(FULL_REFINEMENTS)) {
-    if (value === null) continue;
-    t(
-      `round-trip/${key}`,
-      JSON.stringify(out[key]) === JSON.stringify(value),
-      out[key] === undefined
-        ? 'stripped by the schema; the server would price without it'
-        : `sent ${JSON.stringify(value)}, parsed ${JSON.stringify(out[key])}`,
-    );
-  }
+function rejects(name: string, mutate: (p: Record<string, unknown>) => void) {
+  const copy: Record<string, unknown> = JSON.parse(JSON.stringify(valid));
+  mutate(copy);
+  assert(!handymanEstimateSchema.safeParse(copy).success, `rejects ${name}`);
 }
 
-// EMPTY_REFINEMENTS is what the engine starts from, so its shape defines the
-// full key set. Anything in it that the schema does not know about is a gap.
-const emptyParsed = estimateSchema.safeParse({
-  project: 'custom-home',
-  finish: 'mid-range',
-  sqft: 2400,
-  priceLow: 1,
-  priceHigh: 2,
-  roi: 0,
-  refinements: EMPTY_REFINEMENTS,
+rejects("an unknown category", (p) => {
+  p.category = "kitchen-remodel";
 });
-t('empty-refinements/parses', emptyParsed.success);
-
-/* ── 3. BOUNDS ARE ENFORCED ──────────────────────────────────────────────── */
-
-// A client-supplied square footage feeds a takeoff directly, so the absurd
-// values have to bounce rather than produce an absurd quote.
-const absurd = estimateSchema.safeParse({
-  project: 'shop-home',
-  finish: 'mid-range',
-  sqft: 2400,
-  priceLow: 1,
-  priceHigh: 2,
-  roi: 0,
-  refinements: { ...FULL_REFINEMENTS, shopSize: 500_000 },
+rejects("a construction-era project type", (p) => {
+  p.category = "custom-home";
 });
-t('bounds/rejects-absurd-shop-size', !absurd.success);
-
-const negative = estimateSchema.safeParse({
-  project: 'custom-home',
-  finish: 'mid-range',
-  sqft: -1,
-  priceLow: 1,
-  priceHigh: 2,
-  roi: 0,
-  refinements: null,
+rejects("an unknown urgency", (p) => {
+  p.urgency = "yesterday";
 });
-t('bounds/rejects-negative-sqft', !negative.success);
+rejects("an unknown materials plan", (p) => {
+  p.materials = "contractor-account";
+});
+rejects("a zero quantity", (p) => {
+  (p.tasks as { quantity: number }[])[0].quantity = 0;
+});
+rejects("a negative quantity", (p) => {
+  (p.tasks as { quantity: number }[])[0].quantity = -2;
+});
+rejects(`a quantity above ${MAX_TASK_QUANTITY}`, (p) => {
+  (p.tasks as { quantity: number }[])[0].quantity = MAX_TASK_QUANTITY + 1;
+});
+rejects("a fractional quantity", (p) => {
+  (p.tasks as { quantity: number }[])[0].quantity = 1.5;
+});
+rejects("more than 30 task rows", (p) => {
+  p.tasks = Array.from({ length: 31 }, () => ({
+    taskId: "plumbing-faucet-swap",
+    quantity: 1,
+  }));
+});
+rejects("an oversized other-job description", (p) => {
+  p.otherJob = { description: "x".repeat(601), size: "small" };
+});
+rejects("a negative price", (p) => {
+  p.priceLow = -10;
+});
+rejects("an absurd price", (p) => {
+  p.priceHigh = 2_000_000;
+});
+rejects("missing tasks entirely", (p) => {
+  delete p.tasks;
+});
 
-/* ── RESULT ──────────────────────────────────────────────────────────────── */
+/* Unknown task ids parse (stale clients must not 400) but never price. */
+const staleClient = {
+  ...valid,
+  tasks: [{ taskId: "task-renamed-since-this-client-cached", quantity: 1 }],
+};
+const staleParsed = handymanEstimateSchema.safeParse(staleClient);
+assert(staleParsed.success, "unknown task ids still parse (stale client)");
+if (staleParsed.success) {
+  const recomputed = calculateHandymanEstimate({
+    category: staleParsed.data.category,
+    tasks: staleParsed.data.tasks,
+    otherJob: null,
+    materials: staleParsed.data.materials,
+    urgency: staleParsed.data.urgency,
+  });
+  assert(
+    recomputed === null,
+    "a payload with only unknown tasks re-verifies to null (route 400s it)",
+  );
+}
 
 if (failures > 0) {
-  console.error(`\nverify:lead-payload FAILED - ${failures} of ${checks} checks`);
+  console.error(`\nverify-lead-payload: ${failures} of ${checks} checks FAILED`);
   process.exit(1);
 }
-console.log(`verify:lead-payload OK (${checks} checks)`);
+console.log(`verify-lead-payload: all ${checks} checks passed`);

@@ -36,7 +36,7 @@ export function HeroSection() {
       <section className="relative min-h-[85vh] md:min-h-screen flex items-center overflow-hidden bg-inverse">
         <Image
           src={SITE_IMAGES.hero}
-          alt="Great room in a newly built custom home in the Treasure Valley, Idaho"
+          alt="Bright, well-kept living space in a Treasure Valley, Idaho home"
           fill
           priority
           sizes="(max-width: 768px) 100vw, 1400px"
@@ -69,15 +69,13 @@ export function HeroSection() {
                   3.15:1, under the 4.5:1 AA needs, and lightening the scrim
                   behind it would only widen that gap. */}
               <div className="brc-label brc-label-on-photo mb-6">{HERO_EYEBROW}</div>
-              {/* Leads with "Boise custom home" (the primary Ahrefs buy-intent
-                  term) and closes on a line a remodeler cannot say. The previous
-                  H1, "Build your Boise home with clarity and confidence", echoed
-                  the old remodeling tagline ("Boise remodeling with clarity and
-                  confidence") almost word for word - the same company with a noun
-                  swapped, which is the resemblance the repositioning has to lose. */}
+              {/* Leads with the fix/install/maintain framing that defines the
+                  business, in plain words a contractor would not use. The
+                  subhead below doubles as the homepage's extractable answer
+                  block: what we do, where, and how pricing works. */}
               <h1 className="font-sans font-light text-inverse-foreground text-display tracking-tight mb-6">
-                Your Boise custom home,{" "}
-                <em className="brc-accent">from bare lot to the keys</em>.
+                Boise home repairs,{" "}
+                <em className="brc-accent">fixed right in one trip</em>.
               </h1>
               {/* Full opacity, not /90: over the lightened scrim the subhead
                   measured 4.28:1 against the 4.5:1 minimum. Buying the

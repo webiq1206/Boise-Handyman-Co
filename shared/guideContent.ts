@@ -1,6 +1,6 @@
 /**
- * Guide pages: the six hub pillars plus the twelve city and neighborhood
- * guides under the locations hub.
+ * Guide pages: the six hub pillar guides plus the eleven city and neighborhood
+ * handyman guides under the costs-and-hiring hub.
  *
  * Pillars are hand-written, one file per pillar in ./content/pillars, and
  * collected by a generated barrel. Location guides are assembled in

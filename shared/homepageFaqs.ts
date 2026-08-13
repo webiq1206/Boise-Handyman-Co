@@ -16,65 +16,51 @@ export const INITIAL_FAQ_COUNT = 8;
  * Homepage FAQ set. These feed FAQPage schema, so answers lead with the direct
  * response before adding context.
  *
- * Cost figures must stay consistent with the anchors documented in
- * shared/seoContent.ts (roughly $225-$400 per finished square foot for 2026
- * Treasure Valley construction, excluding land) and with the estimator engine.
+ * Our own dollar figures (trip fee, hourly rate, visit minimums) are
+ * placeholders pending owner sign-off: [NEEDS: real pricing confirmation].
+ * Market ranges ($60-$120/hour) are editorial context, not our quote.
  */
 export const HOMEPAGE_FAQS: HomepageFaq[] = [
   {
-    q: "How much does it cost to build a house in Boise and the Treasure Valley?",
-    a: "As of 2026, most Treasure Valley custom homes plan between $250 and $400 per finished square foot excluding land, which puts a 2,400 square foot home roughly between $600,000 and $960,000. Simpler single-level designs on flat valley lots can approach $225 per square foot, while foothills sites, steep grades, and highly detailed interiors regularly exceed $450. Land, site work, and utility connections are separate and vary more between lots than the house itself does, which is why we price them as their own lines rather than folding them into a square-foot number.",
+    q: "How much does a handyman cost in Boise and the Treasure Valley?",
+    a: "Treasure Valley handyman rates typically run $60 to $120 per hour, with many companies adding a service call or minimum charge on top. We keep it simple: a flat trip fee per visit plus an hourly labor rate, quoted upfront before any work starts. Most single-task visits start around $99 to $149, and materials appear on the quote as their own line at what they cost. Because the trip fee is paid once per visit, bundling several small tasks into one appointment is the best value.",
   },
   {
-    q: "How are you different from other home builders in the Treasure Valley?",
-    a: "You get a line-item budget before we break ground, not a price per square foot that changes once the foundation is in. We set allowances for flooring, cabinetry, plumbing, and lighting at what those things genuinely cost here, so an allowance is not a hidden overage waiting to surface. We work as a true design-build firm, meaning design, engineering, permitting, and construction sit under one contract with one project manager, and we send a written update every Friday rather than waiting for you to call. Any change during construction requires a written change order with a price and a schedule impact before the work happens.",
+    q: "How quickly can you get to my job?",
+    a: "We reply to every new request within one business day, and most jobs are scheduled within the week. Because we quote from photos before we come out, the visit itself is spent doing the work rather than looking at it. If your job is urgent, say so when you reach out and we will tell you honestly what the soonest slot is. We are not an emergency service, so for active water leaks, shut off the supply valve first, and for anything dangerous call the appropriate emergency line before calling us.",
   },
   {
-    q: "Do I need to own land before I contact you?",
-    a: "No. Roughly half the people we talk to are still looking. If you already own a lot or have one under contract, we can start with a feasibility review of that specific parcel. If you are still searching, we can evaluate a lot before you make an offer and tell you what the site work will realistically cost, which is the part most buyers underestimate. A cheap parcel that needs a well, a septic system, three hundred feet of driveway, and significant grading is often more expensive overall than a serviced lot that costs more up front.",
+    q: "What areas do you serve?",
+    a: "We serve the Treasure Valley: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, along with the surrounding areas of Ada and Canyon County. The same flat trip fee applies across the whole service area, so where you live never inflates the quote. If you sit just outside these areas, reach out anyway and we will tell you honestly whether we can take the job.",
   },
   {
-    q: "What is the difference between a custom home and a semi-custom home?",
-    a: "A custom home starts from a blank page: the plan is drawn for your family and your specific lot. A semi-custom home starts from an existing plan we adapt, changing finishes, room configurations, and elevations without redrawing the structure from scratch. Semi-custom is typically faster to permit and less expensive because the engineering and design work is largely done, and it suits people who find a layout they like and want to personalize rather than originate it. Custom makes sense when the lot is unusual or your requirements do not map onto an existing plan.",
+    q: "How do quotes work?",
+    a: "Send us the task, ideally with a photo or two, and we reply with a written upfront quote: the hourly rate, the flat trip fee, the expected time, and any materials as their own line. You approve the number before anything is scheduled. If we open something up and find more than expected, we stop and agree a revised price with you before continuing, so the final bill is never a surprise.",
   },
   {
-    q: "How long does it take to build a new home?",
-    a: "Plan on 10 to 16 months from first consultation to move-in for most custom homes. That usually breaks down as two to four months of design and selections, one to three months for permitting through Ada or Canyon County, and seven to eleven months of construction. Semi-custom homes on an existing plan are often two to four months faster because the design and engineering are largely complete. Winter slows foundation and flatwork in Idaho rather than stopping the job, and we build those weather windows into the schedule rather than discovering them later.",
+    q: "Who supplies the materials?",
+    a: "Either of us, whichever you prefer. Many customers buy their own fixture, paint, or hardware and have it ready when we arrive, which works perfectly. If you would rather not, we pick up materials on the way and list them on the invoice at store cost plus the pickup time. We also carry common parts on the truck, washers, anchors, caulk, supply lines, and fasteners, so small jobs rarely wait on a store run.",
   },
   {
-    q: "How does construction financing work, and do you help with it?",
-    a: "Most clients use a construction-to-permanent loan, which funds the build in stages called draws and then converts to a standard mortgage at completion. We provide the budgets, plans, and draw documentation lenders ask for during underwriting, and we schedule inspections to line up with your draw milestones so financing does not stall the build. We are not a lender and do not originate loans, but we work with your bank throughout rather than leaving you to translate between the two.",
+    q: "Is there a minimum job size or trip fee?",
+    a: "Yes. Every visit carries one flat trip fee that covers travel and setup, so the practical minimum for a single small task is around $99. No job is too small, the trip fee just means a lone picture-hanging costs more per minute than a morning of tasks. That is why we encourage a list: the second, third, and fourth tasks in the same visit only cost the additional time.",
   },
   {
-    q: "Do you handle permits?",
-    a: "Yes. Permits are included in our scope and handled in-house. We work with the Ada and Canyon County offices regularly and build plan review and inspection windows into your schedule from day one rather than treating them as an afterthought. Beyond the building permit itself, new construction often needs separate approvals for driveway access, septic, or well, and we coordinate those as well.",
+    // Deliberately claims nothing: [NEEDS: confirm insurance/bond status and
+    // Idaho registration details before strengthening this answer].
+    q: "Are you licensed and insured?",
+    a: "We keep our work within the scope Idaho allows for handyman services and refer anything that requires a licensed plumbing, electrical, or HVAC contractor to licensed specialists we trust. Business registration and insurance details are available on request, and we are happy to answer any question about coverage before you book.",
   },
   {
-    q: "Can you build on land I already own?",
-    a: "Yes, and it is one of the most common ways we work. We start by evaluating the parcel: utilities, septic and well feasibility, soil, slope, access, setbacks, and any covenants that affect what can be built. That review tells you what your site work will cost before you commit to a house plan, which matters because site costs vary far more between lots than construction costs do.",
+    q: "Do you handle big remodels or additions?",
+    a: "No. Kitchen and bathroom remodels, additions, basement finishes, re-roofs, and anything needing a general contractor or major permits are outside our scope on purpose. We do small jobs well: repairs, installs, and maintenance that take one to eight hours. When your project is bigger than that, we will say so plainly and refer you to a contractor we would use on our own house.",
   },
   {
-    q: "What is included in the price, and what is an allowance?",
-    a: "Your line-item budget covers every division of the build, from excavation and foundation through framing, mechanical systems, finishes, and final grade. Some categories are carried as allowances rather than fixed prices because you have not chosen the specific product yet, typically flooring, cabinetry, countertops, plumbing fixtures, lighting, and appliances. We set those allowances at real Treasure Valley pricing for the finish level you chose, so if you spend to your allowance you pay what the budget said. Spend above it and the difference appears as a change order before the work happens.",
+    q: "What kinds of jobs do you take on?",
+    a: "Drywall patching and texture blending, room and trim painting, minor plumbing fixes like faucets, toilets, and disposals, minor electrical swaps like outlets, fixtures, and ceiling fans, carpentry and door repair, TV mounting and furniture assembly, fence, deck, and gutter repairs, and caulking, weatherproofing, and punch lists. If it is a small job a homeowner would rather not do themselves, it is probably on our list.",
   },
   {
-    q: "What areas do you build in?",
-    a: "We build across the Treasure Valley: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, along with the surrounding areas of Ada and Canyon County. If your lot sits just outside these areas, reach out and we will tell you honestly whether we can take it on.",
-  },
-  {
-    q: "How does design-build compare to hiring an architect and a builder separately?",
-    a: "With design-build, the designer, estimator, and construction lead work together from day one under one contract, so the plan gets priced as it is drawn rather than after. That tends to prevent the most common failure in the separate model, which is finishing a design you cannot afford and paying to have it redrawn. It also means one accountable party if something needs to change. Hiring separately can make sense when you want a specific architect for a highly unusual home, and it gives you an independent designer advocating for the design rather than the budget.",
-  },
-  {
-    q: "Do you use your own crews or subcontractors?",
-    a: "We employ a core in-house team for project management, design coordination, and site supervision. The specialized trades, including framing, mechanical, electrical, plumbing, and finish work, are performed by vetted trade partners we work with repeatedly on the same terms and standards. Your project manager stays your single point of contact regardless of who is on site on any given day.",
-  },
-  {
-    q: "What is your workmanship warranty?",
-    a: "We provide a written workmanship warranty on the home we build. If something we built or installed fails because of workmanship, rather than normal wear, deferred maintenance, or later modifications, we come back and fix it at no charge. We also pass through every manufacturer warranty on the products we install, including appliances, windows, roofing, and mechanical equipment.",
-  },
-  {
-    q: "What does the free planning consultation include?",
-    a: "A 60 to 90 minute conversation about what you want to build, where, and what it should realistically cost. We go through your lot or your lot search, the size and style you have in mind, your finish expectations, and your financing approach. You leave with a realistic budget band and clear next steps. There is no obligation and no commission-driven salesperson in the room, because we do not employ any.",
+    q: "Do you guarantee your work?",
+    a: "We stand behind our workmanship. If something we repaired or installed fails because of how we did the work, rather than normal wear, misuse, or a pre-existing condition, tell us and we come back to make it right. Materials carry their manufacturers' warranties, which we pass through on anything we supply.",
   },
 ];

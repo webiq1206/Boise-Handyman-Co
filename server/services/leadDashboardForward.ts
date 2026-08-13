@@ -1,7 +1,7 @@
 import type { LeadEstimateRecord, LeadPropertyRecord } from "@/server/services/leadRecord";
 
 /**
- * Fire-and-forget forwarding to the Boise Construction lead dashboard.
+ * Fire-and-forget forwarding to the Boise Handyman lead dashboard.
  * Never throws or awaits -- a failure here must never affect the API response.
  *
  * FIELD NAMES ARE A CONTRACT. The dashboard validates with a plain zod object,
@@ -94,7 +94,7 @@ export function forwardToLeadDashboard(payload: ForwardPayload): void {
       : undefined,
   };
 
-  fetch("https://leads.boiseconstruction.co/api/external/leads", {
+  fetch("https://leads.boisehandyman.co/api/external/leads", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

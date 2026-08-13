@@ -7,26 +7,15 @@ import { getSession, getUserFromDb } from "@/lib/auth";
 
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY) : null;
 
-const KNOWN_UNRESOLVED_PURCHASES = [
-  {
-    leadId: "d934a12c-2d73-470c-a7f2-481b991a9b69",
-    userId: "55074230",
-    purchasePrice: "30.00",
-    label: "Gary - Jeff L Johnson bathroom-remodel Boise",
-  },
-  {
-    leadId: "2c924537-de65-47a1-bb5c-d5f8bb748111",
-    userId: "55074230",
-    purchasePrice: "5.00",
-    label: "Gary - Hannah kitchen-remodel Boise $5",
-  },
-  {
-    leadId: "2a8eb4b6-dfb5-4f3f-a8f2-09962889a897",
-    userId: "55074230",
-    purchasePrice: "10.00",
-    label: "Gary - Hannah Turner kitchen-remodel Boise $10",
-  },
-];
+// One-time fixups for stuck purchases. The previous brand's legacy entries
+// (with customer PII) were removed when this codebase became Boise Handyman Co;
+// add entries here only for a specific stuck payment, then remove them again.
+const KNOWN_UNRESOLVED_PURCHASES: {
+  leadId: string;
+  userId: string;
+  purchasePrice: string;
+  label: string;
+}[] = [];
 
 async function resolveLeadPurchase(leadId: string, userId: string, purchasePrice: string, piId?: string) {
   if (!db) throw new Error("Database not available");

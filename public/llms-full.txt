@@ -1,107 +1,105 @@
-# Boise Construction Co - Full Reference
+# Boise Handyman Co - Full Reference
 
-> New residential construction in Boise, Idaho and the Treasure Valley: custom homes, semi-custom homes, build-on-your-lot, shop homes, and the design and permitting that precede them. Design-build, founded 2020. Serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell. Phone (208) 477-1169.
+> Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, and maintenance. Drywall repair, interior and exterior painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, caulking and punch-list work. Serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell. Phone (208) 477-1169.
 
 ## About
 
-Boise Construction Co is a residential design-build home builder serving the Treasure Valley since 2020. We build new homes: custom homes drawn from a blank page, semi-custom homes personalized from a proven plan, and build-on-your-lot projects for families who already own land. Design-build means design, engineering, permitting, and construction are delivered by one team under one contract, which removes the handoff between an architect and a general contractor and keeps the drawings and the budget on the same schedule. Every project includes a written line-item scope before construction, named allowances for selections, and a workmanship warranty at completion.
+Boise Handyman Co is a locally owned handyman service for the Treasure Valley. We handle the small jobs that keep a home working: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, door and window adjustment, TV, shelf and furniture mounting and assembly, fence, deck and gutter repair, caulking and weatherproofing, and general punch-list work. Every job gets a written quote before work starts, and most jobs are finished in one visit. Full remodels, additions, and anything that requires a general contractor or a licensed trade are out of scope and referred out.
 
-- Business type: Residential design-build home builder (new construction)
-- Founded: 2020
-- Service model: One accountable team for design, permits, and construction
-- Contact: https://boiseconstruction.co/contact
-- Build estimator: https://boiseconstruction.co/estimate
+- Business type: Handyman service (home repairs, installs, and maintenance)
+- Service model: Upfront written quotes, one-trip fixes, hourly rate plus flat trip fee
+- Contact: https://boisehandyman.co/contact
+- Instant estimator: https://boisehandyman.co/estimate
 
 ## Service area
 
-We build in the following Treasure Valley cities across Ada and Canyon County:
+We serve the following Treasure Valley cities across Ada and Canyon County:
 
 - Ada County: Boise, Meridian, Eagle, Kuna, Star
 - Canyon County: Nampa, Middleton, Caldwell
 
-Permit paths, impact fees, and inspection sequencing differ between Ada County and Canyon County, and again between incorporated city limits and county jurisdiction. We coordinate submissions, fees, and inspections as part of the design-build contract.
+Most handyman-scope repairs do not require a permit in Ada or Canyon County, and we flag the exceptions (structural, gas, major electrical or plumbing alterations) before work begins so the right licensed trade handles them.
 
 ## Services
 
-- Custom Home Building: /services/custom-home-builder - A home drawn from a blank page around your lot, your budget, and how you actually live.
-- Semi-Custom Homes: /services/semi-custom-homes - Start from a proven floor plan and personalize it, for a shorter timeline and a tighter budget range.
-- Build on Your Lot: /services/build-on-your-lot - You already own the land. We handle feasibility, design, permits, and construction from there.
-- Design-Build: /services/design-build - Design and construction under one contract, so the drawings and the budget never drift apart.
-- Home Design & Plans: /services/home-plans-design - Architectural design, engineering, and permit-ready drawings for a home built to your site.
-- Lot Evaluation & Feasibility: /services/lot-evaluation - Soils, utilities, access, setbacks, and slope reviewed before you commit to a parcel.
-- Shop Homes & Barndominiums: /services/shop-homes-barndominiums - Post-frame and steel-framed homes that pair finished living space with real working shop square footage.
-- Energy-Efficient Homes: /services/energy-efficient-homes - High-performance envelopes, tight ducts, and low operating costs verified by blower-door testing.
+- Drywall Repair & Patching: /services/drywall-repair - Holes, cracks, water-stained patches, and popcorn-ceiling repairs finished and blended to match.
+- Interior & Exterior Painting: /services/painting-touch-ups - Room refreshes, trim and door repaints, and exterior touch-ups with proper prep and clean lines.
+- Minor Plumbing Repairs: /services/plumbing-repairs - Faucets, toilets, garbage disposals, supply lines, and slow drains fixed or swapped in a single visit.
+- Minor Electrical Repairs: /services/electrical-repairs - Outlets, switches, light fixtures, and ceiling fans replaced or repaired safely and to code.
+- Carpentry & Trim Repair: /services/carpentry-trim-repair - Doors that stick, damaged trim and baseboard, stair rails, and small carpentry fixes done cleanly.
+- Mounting & Assembly: /services/mounting-assembly - TVs, shelves, mirrors, and curtain rods mounted level and anchored right; furniture assembled fast.
+- Fence, Deck & Gutter Repair: /services/fence-deck-gutter-repair - Leaning fence panels, loose deck boards and rails, gutter cleaning, and minor exterior repairs.
+- Caulking & Home Maintenance: /services/home-maintenance - Caulking and weatherproofing, tile and grout touch-ups, and punch-list work knocked out in one trip.
 
 Each service has a dedicated page per city at /services/{service-slug}/{city-slug} for boise, meridian, eagle, nampa, kuna, star, middleton, caldwell. City service-area hubs live at /areas/{city-slug}.
 
-## Authoritative guides (https://boiseconstruction.co/guides)
+## Authoritative guides (https://boisehandyman.co/guides)
 
 Pillar guides (own the head terms):
 
-- Boise Home Building Cost Guide: /guides/boise-home-building-cost-guide
-- The Boise Home Building Process: /guides/boise-home-building-process-guide
-- Buying Land to Build On in the Treasure Valley: /guides/buying-land-to-build-boise
-- How to Choose a Home Builder in Boise: /guides/choose-home-builder-boise
-- Designing a Custom Home in the Treasure Valley: /guides/custom-home-design-guide
-- Treasure Valley Home Building Guide: /guides/treasure-valley-home-building-guide
+- The Complete Boise Home Maintenance Guide: /guides/boise-home-maintenance-guide
+- Boise Home Repair Cost Guide: /guides/boise-home-repair-cost-guide
+- The First-Time Homeowner's Repair Handbook: /guides/first-time-homeowner-repair-handbook
+- How to Hire a Handyman in the Treasure Valley: /guides/hire-a-handyman-treasure-valley
+- Small Home Upgrades That Pay Off: /guides/small-home-upgrades-that-pay-off
+- The Treasure Valley Exterior Home Care Guide: /guides/treasure-valley-exterior-home-care-guide
 
 City guides:
 
-- /guides/boise-home-building-guide
-- /guides/meridian-home-building-guide
-- /guides/eagle-home-building-guide
-- /guides/kuna-home-building-guide
-- /guides/star-home-building-guide
-- /guides/middleton-home-building-guide
-- /guides/nampa-home-building-guide
-- /guides/caldwell-home-building-guide
+- /guides/boise-handyman-guide
+- /guides/meridian-handyman-guide
+- /guides/eagle-handyman-guide
+- /guides/kuna-handyman-guide
+- /guides/star-handyman-guide
+- /guides/middleton-handyman-guide
+- /guides/nampa-handyman-guide
+- /guides/caldwell-handyman-guide
 
 Neighborhood guides:
 
-- /guides/eagle-foothills-home-building-guide
-- /guides/hidden-springs-home-building-guide
-- /guides/harris-ranch-home-building-guide
+- /guides/eagle-foothills-handyman-guide
+- /guides/hidden-springs-handyman-guide
+- /guides/harris-ranch-handyman-guide
 
 ## Blog category hubs (long-tail questions support the pillars)
 
-- Home Building Costs: /blog/category/home-building-costs
-- Choosing a Builder: /blog/category/choosing-a-builder
-- The Building Process: /blog/category/home-building-process
-- Land & Lots: /blog/category/land-and-lots
-- Design & Floor Plans: /blog/category/home-design-and-plans
-- Treasure Valley Locations: /blog/category/treasure-valley-locations
+- Repairs & Fixes: /blog/category/repairs-and-fixes
+- Installs & Upgrades: /blog/category/installs-and-upgrades
+- Home Maintenance: /blog/category/home-maintenance
+- Costs & Hiring: /blog/category/costs-and-hiring
+- Exterior & Outdoor: /blog/category/exterior-and-outdoor
 
-35 articles across these hubs. Index: /blog
+34 articles across these hubs. Index: /blog
 
 ## Planning resources
 
-- Home building planning resources (free PDFs and visual guides): /resources
-- New home budget worksheet: /downloads/new-home-budget-worksheet.pdf
-- Lot evaluation checklist: /downloads/lot-evaluation-checklist.pdf
+- Homeowner resources (free PDFs and visual guides): /resources
+- Home maintenance checklist: /downloads/home-maintenance-checklist.pdf
+- Home repair priority worksheet: /downloads/home-repair-priority-worksheet.pdf
 - Ada vs Canyon County permit flow (visual guide): /resources/ada-canyon-permit-flow
 
 ## Common questions
 
-- How long does it take to build a house in the Treasure Valley? Design and engineering typically run two to four months, plan review and permitting another one to three depending on jurisdiction, and construction ten to fourteen months for a custom home. Semi-custom plans compress the design phase because the drawings already exist.
-- What does a new home cost per square foot here? A blended rate is the wrong unit, because site work, foundation type, and specification level move the number more than area does. The estimator prices geometry and scope instead, then reports a range.
-- Can I build on land I already own? Yes, that is the build-on-your-lot path. Before design starts we review soils, utilities, access, setbacks, easements, and slope, because those determine what the parcel can actually carry and what the site work will cost.
-- Do I need a construction loan? Most owners use a construction-to-permanent loan that draws against completed milestones and converts to a mortgage at occupancy. The draw schedule has to match the build schedule, which is something we set up with the lender.
-- How do I compare two builder bids? Only when the allowances, site work assumptions, and permit responsibilities match. Most of the spread between two bids on the same house is scope that one of them left out, not margin.
+- What does a handyman visit cost in Boise? Market rates in the Treasure Valley typically run $60 to $120 per hour. Our model is a flat trip fee plus an hourly rate, quoted as a written flat price before work starts, with a single small repair starting around $145.
+- How fast can a repair be scheduled? Standard visits book at the next available slot, usually within the week; priority scheduling within two business days is available for an added fee. Most small repairs are finished in a single one-to-three-hour visit.
+- Who supplies the materials? Either works. You can have parts on the counter when we arrive, or we pick them up and bill materials at cost with a supply-run line on the quote.
+- What is out of scope? Full remodels, additions, structural work, repipes, panel or service upgrades, gas lines, and re-roofs. Those need a general contractor or a licensed trade, and we say so and refer out rather than take the job.
+- Do small repairs need a permit? Most handyman-scope work in Ada and Canyon County does not. Structural changes and major electrical, plumbing, or mechanical alterations do, and we flag those before any work begins.
 
 ## Key pages
 
-- Home: https://boiseconstruction.co/
-- About: https://boiseconstruction.co/about
-- Services: https://boiseconstruction.co/services
-- Service areas: https://boiseconstruction.co/areas
-- Build estimator: https://boiseconstruction.co/estimate
-- Blog: https://boiseconstruction.co/blog
-- Guides: https://boiseconstruction.co/guides
-- Resources: https://boiseconstruction.co/resources
-- Contact: https://boiseconstruction.co/contact
+- Home: https://boisehandyman.co/
+- About: https://boisehandyman.co/about
+- Services: https://boisehandyman.co/services
+- Service areas: https://boisehandyman.co/areas
+- Instant estimator: https://boisehandyman.co/estimate
+- Blog: https://boisehandyman.co/blog
+- Guides: https://boisehandyman.co/guides
+- Resources: https://boisehandyman.co/resources
+- Contact: https://boisehandyman.co/contact
 
 ## RE-10 / Inspection Repairs
 
-Boise Construction Co also completes RE-10 and home inspection repairs for real estate agents, buyers and sellers across Boise and the Treasure Valley. An RE-10 is the Idaho inspection response form: after a home inspection the buyer requests specific repairs before closing. We review the RE-10 and inspection report, provide a written scope and pricing, coordinate access, complete the approved work across multiple trades, and supply photo documentation, invoices and receipts for the transaction file. Structural, foundation, mold and asbestos abatement, main electrical service, sewer and septic, HVAC replacement, gas lines and full roof replacement are coordinated to licensed specialists rather than performed in house. We take this work because an inspection repair is a deadline problem rather than a construction problem, and sequencing trades against a date that will not move is the same thing we do on every build. Details: https://boiseconstruction.co/re-10-repairs-boise
+Boise Handyman Co also completes RE-10 and home inspection repairs for real estate agents, buyers and sellers across Boise and the Treasure Valley. An RE-10 is the Idaho inspection response form: after a home inspection the buyer requests specific repairs before closing. We review the RE-10 and inspection report, provide a written scope and pricing, coordinate access, complete the approved work across multiple trades, and supply photo documentation, invoices and receipts for the transaction file. Structural, foundation, mold and asbestos abatement, main electrical service, sewer and septic, HVAC replacement, gas lines and full roof replacement are coordinated to licensed specialists rather than performed in house. Inspection repair lists are exactly the small, defined jobs a handyman does every day, and we sequence them against a closing date that will not move. Details: https://boisehandyman.co/re-10-repairs-boise
 
-Last updated: 2026-08-03. Full sitemap: https://boiseconstruction.co/sitemap.xml
+Last updated: 2026-08-13. Full sitemap: https://boisehandyman.co/sitemap.xml

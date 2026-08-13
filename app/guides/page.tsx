@@ -36,9 +36,9 @@ function GuideCardStats({ guide }: { guide: GuidePageData }) {
 export const metadata: Metadata = buildPageMetadata({
   kind: 'blog',
   path: '/guides',
-  titleOverride: 'Home Building Guides | Boise Construction Co',
+  titleOverride: 'Home Repair & Maintenance Guides | Boise Handyman Co',
   descriptionOverride:
-    'In-depth Treasure Valley home building guides: what a custom home costs, how the build process runs, buying land, choosing a builder, design decisions, and construction financing.',
+    'In-depth Treasure Valley home repair guides: what small repairs cost, how to hire a handyman, seasonal maintenance, smart small upgrades, and exterior care.',
 });
 
 const PILLAR_TYPES = new Set(['hub-pillar', 'master']);
@@ -51,9 +51,9 @@ export default function GuidesIndexPage() {
   const sortedHubs = [...CONTENT_HUBS].sort((a, b) => a.priorityTier - b.priorityTier);
 
   const webPageSchema = generateWebPageSchema({
-    title: 'Home Building Guides',
+    title: 'Home Repair & Maintenance Guides',
     description:
-      'In-depth Treasure Valley home building guides: what a custom home costs, how the build process runs, buying land, choosing a builder, design decisions, and construction financing.',
+      'In-depth Treasure Valley home repair guides: what small repairs cost, how to hire a handyman, seasonal maintenance, smart small upgrades, and exterior care.',
     url: '/guides',
   });
 
@@ -74,22 +74,23 @@ export default function GuidesIndexPage() {
       />
 
       <PageHeroBand
-        imageSrc={getBlogHeroImage('what-drives-home-building-costs-boise')}
-        imageAlt={getBlogImageAlt('what-drives-home-building-costs-boise')}
+        imageSrc={getBlogHeroImage('boise-home-repair-cost-guide')}
+        imageAlt={getBlogImageAlt('boise-home-repair-cost-guide')}
       >
-        <div className="brc-label text-inverse-muted mb-3">Treasure Valley authority</div>
+        <div className="brc-label text-inverse-muted mb-3">Treasure Valley know-how</div>
         <h1 className="font-sans font-light text-display tracking-tight text-inverse-foreground max-w-3xl mb-4">
-          Home Building Guides
+          Home Repair &amp; Maintenance Guides
         </h1>
         <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-4">
-          In-depth guides for Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley. What
-          building costs here, how the process runs, which lots work, and how to pay for it.
+          In-depth guides for Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley.
+          What small repairs cost here, how to hire well, what each season demands, and which
+          fixes to do before they get expensive.
         </p>
         <Link
           href="/resources"
           className="text-sm text-inverse-foreground/90 hover:text-inverse-foreground inline-flex items-center transition-colors"
         >
-          Free PDF worksheets &amp; permit infographic
+          Free PDF checklists &amp; permit guide
           <ArrowRight className="ml-1 h-4 w-4" />
         </Link>
       </PageHeroBand>
@@ -97,7 +98,7 @@ export default function GuidesIndexPage() {
       <Section spacing="default" className="pt-12 md:pt-16">
         <div className="container px-4 max-w-6xl mx-auto mb-16">
           <h2 className="text-sm font-normal uppercase tracking-wider text-muted-foreground mb-6">
-            Hub pillar guides
+            Cornerstone guides
           </h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {pillarGuides.map((guide) => (
@@ -196,14 +197,14 @@ export default function GuidesIndexPage() {
       </Section>
 
       <EstimatePromptBand
-        eyebrow="From reading to planning"
+        eyebrow="From reading to fixing"
         title={
           <>
-            Turn what you learned into a{' '}
-            <em className="brc-accent">number</em>
+            Turn your repair list into a{' '}
+            <em className="brc-accent">flat quote</em>
           </>
         }
-        description="After reading our guides, use the project estimator for an instant Treasure Valley planning range - then book a free in-home visit when you're ready to move forward."
+        description="Read enough to know what your house needs? Send us the list with a few photos and we will reply with a flat, upfront quote - most small jobs are scheduled within the week and done in one trip."
         variant="canvas"
       />
     </>

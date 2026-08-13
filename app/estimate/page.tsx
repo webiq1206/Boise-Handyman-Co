@@ -1,20 +1,26 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Section } from "@/components/marketing/Section";
 import { MarketingCard } from "@/components/marketing/MarketingCard";
 import { PageHeroBand } from "@/components/sections/PageHeroBand";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildCanonical } from "@/lib/page-metadata";
-import { generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema";
+import {
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+  generateWebPageSchema,
+} from "@/lib/schema";
 import { CONSTRUCTION_IMAGES } from "@/shared/siteImages";
-import { CONSULT_BULLETS } from "@/shared/siteContent";
 import { SITE_CONFIG } from "@/shared/siteConfig";
-import { CTA_SECONDARY } from "@/shared/ctaCopy";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import {
+  HOURLY_RATE_USD,
+  TRIP_FEE_USD,
+  HANDYMAN_RATE_DISCLAIMER,
+} from "@/shared/estimateEngine";
 
 const EstimateCalculator = dynamic(
   () =>
@@ -22,16 +28,48 @@ const EstimateCalculator = dynamic(
   {
     loading: () => (
       <div className="container px-4 py-16 text-center text-sm text-muted-foreground">
-        Loading project estimator...
+        Loading the estimator...
       </div>
     ),
   },
 );
 
-// 34 chars, so the branded title below lands at 58 with the 24-char suffix.
-const TITLE = "Home Build Cost Estimator, Idaho";
+// 25 chars; the branded title lands at 45 with the 20-char suffix.
+const TITLE = "Instant Handyman Estimate";
 const DESCRIPTION =
-  "Get an instant cost range for building a new home in Boise, Meridian, Eagle, Nampa, and the Treasure Valley. Covers size, finish level, and site costs. Free, no obligation.";
+  "See a real price range for your repair in about a minute. Pick your tasks, get a trip fee plus hourly breakdown for Boise and the Treasure Valley, then book your visit.";
+
+/*
+ * The rates below render the pricing model on-page. They come straight from
+ * shared/estimateEngine.ts, which is flagged [NEEDS: real pricing confirmation]
+ * at every constant; the visible disclaimer keeps the page honest meanwhile.
+ */
+const FAQS = [
+  {
+    question: "How does handyman pricing work here?",
+    answer: `Simple math you can check: a $${TRIP_FEE_USD} trip fee once per visit, labor at $${HOURLY_RATE_USD} per hour with a one hour minimum, and a surcharge only if you pick priority (+15%) or same-week emergency (+30%) scheduling. Materials are billed at cost with the receipt. ${HANDYMAN_RATE_DISCLAIMER}`,
+  },
+  {
+    question: "Is the online number a quote?",
+    answer:
+      "No, it is a starting range based on typical hours for the tasks you pick. Every job gets a firm written quote before any work begins, and the final price never changes without your OK first.",
+  },
+  {
+    question: "What if my job is not on the list?",
+    answer:
+      "Choose \"Something else\" and describe it in a sentence or two, then guess whether it is a small, medium, or large job. We confirm the real scope by phone or at the door before work starts.",
+  },
+  {
+    question: "Do you charge for the estimate itself?",
+    answer:
+      "No. The online estimate is free and takes about a minute, and the written quote that follows is free too. You only ever pay for work you have approved.",
+  },
+  {
+    question: "What areas do you cover?",
+    answer:
+      "Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell. If you are elsewhere in the Treasure Valley, send the estimate through anyway and we will tell you straight away whether we can get to you.",
+  },
+];
 
 export const metadata: Metadata = {
   title: { absolute: `${TITLE} | ${SITE_CONFIG.name}` },
@@ -55,14 +93,15 @@ export const metadata: Metadata = {
 export default function EstimatePage() {
   const schemas = [
     generateWebPageSchema({
-      title: "Home Build Cost Estimator",
+      title: "Instant Handyman Estimate",
       description: DESCRIPTION,
       url: "/estimate",
     }),
     generateBreadcrumbSchema([
       { name: "Home", url: "/" },
-      { name: "Project Estimator", url: "/estimate" },
+      { name: "Instant Estimate", url: "/estimate" },
     ]),
+    generateFAQSchema(FAQS),
   ];
 
   return (
@@ -70,19 +109,24 @@ export default function EstimatePage() {
       <JsonLd data={schemas} />
 
       <PageHeroBand
-        imageSrc={CONSTRUCTION_IMAGES.customHome}
-        imageAlt="Newly built custom home exterior in the Treasure Valley at dusk"
+        imageSrc={CONSTRUCTION_IMAGES.plans}
+        imageAlt="Written handyman estimate on a clipboard with a calculator and tape measure"
         scrim={0.85}
       >
-        <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Project Estimator" }]} />
-        <div className="brc-label text-inverse-muted mt-6 mb-4">Free planning tool</div>
+        <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Instant Estimate" }]} />
+        <div className="brc-label text-inverse-muted mt-6 mb-4">Free, no obligation</div>
         <h1 className="font-sans font-light text-display tracking-tight text-inverse-foreground max-w-3xl mb-4">
-          Treasure Valley home build{" "}
-          <em className="brc-accent">estimator</em>
+          Instant handyman <em className="brc-accent">estimate</em>
         </h1>
+        {/* Direct answer block: what this is, where, and how pricing works. */}
         <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed">
-          Answer a few questions about the home you want to build and get an instant planning range
-          based on real Treasure Valley construction costs - takes about 2 minutes, no obligation.
+          Boise Handyman Co prices small repairs across Boise and the Treasure
+          Valley the same way every time: a ${TRIP_FEE_USD} trip fee, labor at $
+          {HOURLY_RATE_USD} per hour with a one hour minimum, and materials at
+          cost. Pick your tasks below and see your range in about a minute.
+        </p>
+        <p className="mt-3 text-sm text-inverse-muted max-w-2xl">
+          {HANDYMAN_RATE_DISCLAIMER}
         </p>
       </PageHeroBand>
 
@@ -93,23 +137,29 @@ export default function EstimatePage() {
           <div>
             <div className="brc-label mb-4">What happens next</div>
             <h2 className="font-sans font-light text-2xl md:text-3xl tracking-tight text-foreground mb-4">
-              Your range is a starting point - not a quote
+              Your range is a starting point, your quote is in writing
             </h2>
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
-              The estimator gives you a realistic planning band for your home type, size, and
-              finish level. When you&apos;re ready for detail, book a free consultation and we&apos;ll
-              walk your lot, talk through plans and site costs, and put a written range in your hands.
+              The estimator prices the tasks you pick at our standard rates. A
+              real person reviews every request, confirms the scope with you,
+              and sends a firm written quote before anything goes on the
+              calendar. Most small jobs are done in a single trip.
             </p>
             <Button variant="brandOutline" asChild>
               <Link href="/contact#consult">
-                {CTA_SECONDARY} <ArrowRight className="ml-2 h-4 w-4" />
+                Ask a question first <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>
           <MarketingCard padding="lg">
-            <p className="text-sm font-normal text-foreground mb-4">Your free consultation includes</p>
+            <p className="text-sm font-normal text-foreground mb-4">Every visit includes</p>
             <ul className="space-y-3">
-              {CONSULT_BULLETS.map((bullet) => (
+              {[
+                "A firm written quote before any work begins",
+                "One trip fee, no matter how many small tasks we knock out",
+                "Materials billed at cost, receipt included",
+                "A tidy work area and a walkthrough when we finish",
+              ].map((bullet) => (
                 <li key={bullet} className="flex items-start gap-3 text-sm text-muted-foreground">
                   <Check className="h-4 w-4 text-accent-legible flex-shrink-0 mt-0.5" />
                   {bullet}
@@ -117,6 +167,25 @@ export default function EstimatePage() {
               ))}
             </ul>
           </MarketingCard>
+        </div>
+      </Section>
+
+      <Section variant="canvas" divider>
+        <div className="container px-4 max-w-3xl mx-auto">
+          <div className="brc-label mb-4">Estimate questions</div>
+          <h2 className="font-sans font-light text-2xl md:text-3xl tracking-tight text-foreground mb-8">
+            How the estimate works
+          </h2>
+          <div className="space-y-8">
+            {FAQS.map((faq) => (
+              <div key={faq.question}>
+                <h3 className="text-base font-normal text-foreground mb-2">{faq.question}</h3>
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </Section>
     </>

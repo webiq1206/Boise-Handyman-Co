@@ -1,6 +1,11 @@
 /**
- * Extracts the italic "Co." lockup from the Boise Construction Co
- * wordmark and stores it, normalised, as reusable outline data.
+ * HISTORICAL, one-shot: extracted the italic "Co." lockup from an earlier
+ * brand wordmark SVG and stored it, normalised, as reusable outline data in
+ * scripts/brand/co-mark.json. The source SVG it read
+ * (public/brand/logos/...-wordmark.svg) no longer exists in the repo; the
+ * extracted co-mark.json is checked in and is what
+ * generate-brand-assets.mjs consumes, so this script never needs to run
+ * again unless the "Co." outlines must be re-lifted from new artwork.
  *
  * "Co." is unchanged by the rename, so reusing the original outlines keeps the
  * suffix pixel-faithful to the established identity and avoids re-rendering it
@@ -19,7 +24,7 @@ import { fileURLToPath } from "url";
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 
 const svg = fs.readFileSync(
-  path.join(root, "public/brand/logos/boise-construction-co-wordmark.svg"),
+  path.join(root, "public/brand/logos/boise-handyman-co-wordmark.svg"),
   "utf8",
 );
 const glyphs = svg.match(/<path d="([^"]+)" fill="#2C302F"/)[1].trim().split(/\s+(?=M)/);

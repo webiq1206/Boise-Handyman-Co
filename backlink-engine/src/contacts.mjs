@@ -42,7 +42,7 @@ async function fetchText(url, ms = 9000) {
   try {
     const c = new AbortController();
     const t = setTimeout(() => c.abort(), ms);
-    const r = await fetch(url, { redirect: "follow", signal: c.signal, headers: { "user-agent": "BoiseConstructionBacklinkBot/1.0 (+https://boiseconstruction.co)" } });
+    const r = await fetch(url, { redirect: "follow", signal: c.signal, headers: { "user-agent": "BoiseConstructionBacklinkBot/1.0 (+https://boisehandyman.co)" } });
     clearTimeout(t);
     if (!r.ok) return "";
     return await r.text();

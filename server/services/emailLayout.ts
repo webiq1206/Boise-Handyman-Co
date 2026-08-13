@@ -2,8 +2,8 @@ import { SITE_CONFIG } from "@/shared/siteConfig";
 
 /**
  * Dark-brand email tokens - the site's actual palette (app/globals.css). Every
- * outbound email renders on the charcoal ground with bone text and ochre accents
- * so it matches boiseconstruction.co. Key names are semantic (bg/surface/text/...)
+ * outbound email renders on the charcoal ground with bone text and steel blue accents
+ * so it matches boisehandyman.co. Key names are semantic (bg/surface/text/...)
  * so both the shared CSS here and the inline styles in emailNotifications.ts
  * pull the same colors.
  */
@@ -14,8 +14,8 @@ export const EMAIL_BRAND = {
   hairline: "#454B49",   // borders + dividers
   text: "#F7F5F3",       // primary text (bone)
   textMuted: "#9F9C97",  // secondary text (mist)
-  accent: "#D09A5C",     // ochre - links, bars, ticks (AA on charcoal)
-  accentDeep: "#7E6344", // deep ochre fill
+  accent: "#8FAEC4",     // steel blue - links, bars, ticks (AA on charcoal)
+  accentDeep: "#4E6B7E", // deep steel blue fill
 } as const;
 
 export const SITE_BASE_URL = SITE_CONFIG.siteUrl;
@@ -57,7 +57,7 @@ export function htmlToPlainText(html: string): string {
  */
 export function buildLogoImage(width = 210): string {
   return `
-    <img src="${SITE_BASE_URL}/brand/png/wordmark/dark/boise-construction-co-wordmark-bone-accent-1200w.png"
+    <img src="${SITE_BASE_URL}/brand/png/wordmark/dark/boise-handyman-co-wordmark-bone-accent-1200w.png"
       alt="${escapeHtml(SITE_CONFIG.name)}" width="${width}"
       style="display:block;margin:0 auto;width:${width}px;max-width:72%;height:auto;border:0;outline:none;text-decoration:none;" />
   `;
@@ -68,10 +68,10 @@ export function buildTextLogo(): string {
   return `
     <div style="margin-bottom:16px;">
       <div style="font-family:'Libre Baskerville',Georgia,'Times New Roman',serif;font-size:20px;font-weight:400;color:${EMAIL_BRAND.text};line-height:1.2;">
-        Boise Construction <span style="color:${EMAIL_BRAND.accent};font-style:italic;">Co.</span>
+        Boise Handyman <span style="color:${EMAIL_BRAND.accent};font-style:italic;">Co.</span>
       </div>
       <div style="font-family:Arial,Helvetica,sans-serif;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:${EMAIL_BRAND.textMuted};margin-top:6px;">
-        Design &amp; Build
+        Repairs &amp; Maintenance
       </div>
     </div>
   `;

@@ -1,17 +1,20 @@
 /**
- * City and neighborhood guides for building a new home, under the
- * treasure-valley-locations hub.
+ * City and neighborhood handyman guides, under the costs-and-hiring hub.
  *
- * These are assembled from a per-place data table rather than written as twelve
+ * These are assembled from a per-place data table rather than written as
  * standalone files, but the differentiating material is real prose written once
  * per place, not a template with the city name substituted in. That distinction
- * is the whole point: the previous version of this file generated twelve pages
- * whose only differences were a city name and a county label, which is exactly
- * the near-duplicate pattern that stops a location page from ranking.
+ * is the whole point: a location page earns its ranking by saying something
+ * true about that place's housing stock and what it needs, and the housing
+ * stock genuinely differs - a 1920s North End bungalow and a 2019 Meridian
+ * subdivision home do not break in the same ways.
  *
- * The shared scaffolding below is deliberately thin - a permit callout, a
+ * The shared scaffolding below is deliberately thin - a coverage callout, a
  * services block, and a closing section - because everything that makes a page
  * worth reading has to come from the place-specific fields.
+ *
+ * Local claims here are limited to common knowledge about each area's housing
+ * stock, climate, and geography. No invented job counts, clients, or projects.
  */
 import type { GuidePageData } from '../guideContent';
 
@@ -29,14 +32,14 @@ interface PlaceGuide {
   excerpt: string;
   quickAnswer: string;
   takeaways: string[];
-  /** What building here actually involves. 2 to 4 paragraphs of HTML. */
-  landscape: string;
-  /** Lots and land: what is available and what it costs to make buildable. */
-  lots: string;
-  /** The local wrinkle that catches people out here. */
+  /** The housing stock and what it means for repairs. 2 paragraphs of HTML. */
+  housingStock: string;
+  /** The repairs and installs this stock typically needs. */
+  commonRepairs: string;
+  /** The local wrinkle that catches homeowners out here. */
   watchOut: string;
-  /** Budget context specific to this place. */
-  budget: string;
+  /** Seasonal maintenance notes specific to this place. */
+  seasonal: string;
   faqs: Array<{ question: string; answer: string }>;
 }
 
@@ -44,605 +47,596 @@ const countyLabel = (c: 'ada' | 'canyon') => (c === 'ada' ? 'Ada County' : 'Cany
 
 const PLACES: PlaceGuide[] = [
   {
-    slug: 'boise-home-building-guide',
+    slug: 'boise-handyman-guide',
     name: 'Boise',
     citySlug: 'boise',
     county: 'ada',
     guideType: 'location',
-    title: 'Building a Home in Boise',
-    seoTitle: 'Building a New Home in Boise, Idaho',
+    title: 'Handyman Services in Boise',
+    seoTitle: 'Handyman Services in Boise, Idaho',
     metaDescription:
-      'What it takes to build a new home in Boise: infill lots, foothills sites, Ada County permitting, and what each of those does to a construction budget.',
+      'Handyman services in Boise: repairs for North End and Bench-era homes, newer East Boise builds, seasonal maintenance, and flat upfront pricing.',
     excerpt:
-      'Boise has two very different building problems: tight infill lots inside the established grid, and foothills parcels where the site costs more than people expect.',
+      'Boise houses span a century of construction, and a 1920s North End bungalow needs a very different repair list from a 2015 build in Barber Valley.',
     quickAnswer:
-      'Building a new home in Boise usually means one of two things: an infill lot inside the established city, where the constraint is the buildable envelope, or a foothills parcel, where slope and access drive the budget. Custom builds run $250 to $400 per finished square foot, excluding land, with foothills sites regularly above $450.',
+      'We provide handyman services across Boise: drywall repair, minor plumbing and electrical, carpentry, painting, mounting, and seasonal maintenance, with flat quotes starting at $145. Boise’s housing spans a century, so the work ranges from plaster-era repairs in the North End to settling fixes in newer East Boise homes.',
     takeaways: [
-      'Boise building splits into infill lots and foothills sites, and the two have almost nothing in common cost-wise.',
-      'Infill parcels are usually serviced, so site work sits in the $25,000 to $50,000 band.',
-      'Foothills sites bring slope, access, geotechnical work, and wildland-urban interface requirements.',
-      'Permits route through the City of Boise and Ada County depending on the address.',
-      'On a tight infill lot, the buildable envelope after setbacks decides the plan before preference does.',
+      'Boise’s housing stock spans a century, and the repair list changes with the decade the house was built.',
+      'Older neighborhoods bring plaster walls, original wood windows and doors, and mature trees that fill gutters fast.',
+      'Mid-century Bench homes are solid but at the age where fixtures, caulk, and hardware all wear at once.',
+      'Newer East and South Boise homes mostly need settling repairs, installs, and builder-grade part swaps.',
+      'Old-house electrical and plumbing surprises are common: we handle minor repairs and tell you when a licensed trade is needed.',
     ],
-    landscape: `<p><strong>Boise gives you two entirely different building problems depending on which side of the bench you are on.</strong> Inside the established city, new construction is mostly infill: a teardown, a split parcel, or one of the few remaining vacant lots inside a neighborhood built out decades ago. These are serviced, flat, and straightforward to build on, and the difficulty is spatial rather than technical. Front, side, and rear setbacks plus lot coverage limits carve a buildable rectangle that is frequently much smaller than buyers assume, and on a narrow lot that rectangle often rules out a single-level plan entirely.</p>
-<p>Above the bench, the foothills are a different exercise. Slope drives excavation, retaining, and foundation design. Access has to satisfy the fire district, which on a long private drive is a real cost rather than a formality. Geotechnical investigation is commonly required, and wildland-urban interface considerations affect materials and defensible space. None of it is exotic, but all of it is money that a valley-floor budget does not carry.</p>`,
-    lots: `<p><strong>Infill lots in Boise are expensive per square foot of land and cheap to make buildable; foothills parcels are the reverse.</strong> On an infill parcel the utilities are usually at the line, the street exists, and site work sits in the $25,000 to $50,000 range that a serviced lot normally carries. What you pay for is the land and the location. In the foothills the land can be less per acre and the site work far more, because you may be extending power, building a driveway to a fire-access standard, and moving a lot of dirt before anything is poured.</p>
-<p>Either way, get the buildable envelope drawn on the actual parcel before committing to a plan. A written lot evaluation runs $950 to $3,500 and is the cheapest way to find out whether the house you want fits the ground you are buying.</p>`,
-    watchOut: `<p><strong>The thing that surprises people building in Boise is how much of the plan is decided by the lot rather than by them.</strong> On an infill parcel, setbacks and coverage limits often mean the answer is a two storey with a compact footprint whether or not that was the preference, and the garage placement is frequently dictated by the width available between side setbacks. In the foothills, the driveway grade and the fire district access standard can eliminate an otherwise appealing building site. In both cases the constraint is knowable before purchase, and almost nobody checks.</p>`,
-    budget: `<p>A straightforward custom home on a serviced Boise lot sits in the $250 to $400 per finished square foot band, excluding land. A simple single-level plan on a flat, serviced lot can approach $225. Foothills sites with meaningful slope and higher detail regularly run above $450 per finished square foot, and that is before the site work required to make the parcel buildable.</p>`,
+    housingStock: `<p><strong>Boise is the rare Treasure Valley city where the age of the house tells you most of what will be on the repair list.</strong> The North End and East End hold homes from the early 1900s through the 1950s: plaster and lath walls, original wood windows and doors that have swelled and shrunk through a hundred summers, small garages, and mature trees overhead. The Bench neighborhoods add a broad band of mid-century houses, structurally settled and honestly built, but at the age where everything consumable, caulk, fixtures, hardware, water heaters, wears out in the same decade. Then Southeast Boise and the Barber Valley run right up to the present, where the issues are the ones new construction always has: settling cracks, builder-grade parts, and a list of installs the builder never included.</p>
+<p>For a handyman, those are three different trades' worth of habits. Patching plaster is not patching drywall; easing a hundred-year-old door is not adjusting a hollow-core slab. We quote from photos partly because in Boise the photo tells us which century we are working in.</p>`,
+    commonRepairs: `<p><strong>In the older neighborhoods the perennials are doors and windows that stick with the seasons, plaster cracks and corner damage, squeaky floors, worn cabinet hardware, and paint that needs regular attention on sun-facing sides.</strong> Mid-century Bench homes call us most for bathroom refresh work, re-caulking, fixture swaps, vanity hardware, running toilets, plus fence and gutter care under big trees. Newer East Boise homes are install country: TV mounting, shelving, ceiling fans, smart devices, and the first round of settling repairs, hairline drywall cracks and doors drifting out of square, usually in years one through three.</p>`,
+    watchOut: `<p><strong>The Boise-specific trap is what old walls hide.</strong> Houses from the first half of the century can carry generations of amateur wiring and plumbing behind their plaster, and a simple fixture swap sometimes opens onto something that needs a licensed electrician or plumber rather than a handyman. We treat that moment honestly: we stop, show you what we found, and help you get the right trade in, rather than improvising on wiring that predates safety codes. It is the reason old-house owners want a handyman with firm scope boundaries.</p>`,
+    seasonal: `<p><strong>Boise’s mature tree canopy makes fall gutter cleaning non-negotiable in the older neighborhoods, once after leaf drop at minimum.</strong> Spring is for checking what freeze-thaw did to fences, walks, and exterior paint; summer’s high-desert UV is hardest on the south-facing paint and trim of the older wood-clad homes, where touch-ups are protective rather than cosmetic. And in any Boise house past its thirtieth birthday, the fall weatherseal pass, caulk, weatherstripping, door sweeps, pays for itself in the first winter heating bill.</p>`,
     faqs: [
       {
-        question: 'Can you still build a new house inside Boise city limits?',
+        question: 'Do you work on older North End homes?',
         answer:
-          'Yes, though the opportunities are mostly infill: a teardown and rebuild, a parcel that has been split, or one of the remaining vacant lots inside an established neighborhood. The building itself is straightforward because the lot is serviced and flat. The work is in confirming what fits inside the setbacks and lot coverage limits before you buy.',
+          'Yes, and they are some of our favorite work: plaster patching, door and window easing, hardware restoration, trim repair, and paint touch-ups suited to older construction. What we do not do is rewire or repipe them. When an old wall reveals wiring or plumbing that needs a licensed trade, we stop, show you, and help you line up the right specialist.',
       },
       {
-        question: 'Is it more expensive to build in the Boise foothills?',
+        question: 'What do handyman services cost in Boise?',
         answer:
-          'Considerably. Foothills sites with real slope and higher detail regularly exceed $450 per finished square foot, against $250 to $400 for a custom home on a valley-floor lot, and that is before site work. Slope drives excavation and foundation cost, access has to meet fire district standards, geotechnical investigation is commonly required, and wildland-urban interface rules affect materials.',
+          'The same bands as the rest of the Treasure Valley: most single repairs run $100 to $500, market hourly rates run $60 to $120, and our services carry flat starting prices from $145. Older-home work sometimes sits toward the top of a range because matching plaster, old trim profiles, or aged paint takes more care than new drywall.',
       },
       {
-        question: 'Who issues the building permit for a new home in Boise?',
+        question: 'Can you handle repairs in newer East Boise homes?',
         answer:
-          'It depends on the address. Parcels inside the city limits go through the City of Boise, and parcels in unincorporated areas go through Ada County. Either way the package includes a site plan, an architectural set, stamped structural engineering, energy compliance documentation, and either utility will-serve letters or well and septic approvals. We handle the submissions.',
+          'Yes. Newer builds mostly need settling repairs, hairline drywall cracks, nail pops, doors drifting out of alignment, plus the install list: TV mounts, shelving, fans, and smart devices. If your builder warranty has expired, a one-visit punch list clears the accumulated small items at far less than booking them separately.',
       },
       {
-        question: 'How long does it take to build a house in Boise?',
+        question: 'Do you do small jobs, or only big lists?',
         answer:
-          'Design and engineering commonly take 8 to 16 weeks, plan review another 4 to 10 weeks, and construction runs from there. The two things that most often stretch that are late finish selections and plan revisions submitted after the permit application, both of which are avoidable. A foothills site with significant excavation adds time at the front of construction.',
+          'Both, though batching saves you money. A single repair is a normal call, but our minimum service charge covers the fixed cost of any visit, so three or four tasks in one trip cost far less per task. Most Boise clients keep a running list and call when it reaches a few items.',
       },
       {
-        question: 'What does site work cost on a Boise infill lot?',
+        question: 'How quickly can you get to a Boise job?',
         answer:
-          'On a serviced infill lot where power, water, and sewer are already at the property line, site work commonly runs $25,000 to $50,000, covering excavation, grading, drainage, the driveway approach, and utility connections. A foothills parcel that needs a well, a septic system, a long driveway, or a power extension moves into the $80,000 to $150,000 range.',
+          'Most small jobs are quoted from photos within a day and scheduled within the week, and we aim to finish in one trip by arriving with the materials the photos told us to bring. Send the list and photos through the contact page and we will reply with a flat quote and the earliest slot.',
       },
     ],
   },
   {
-    slug: 'meridian-home-building-guide',
+    slug: 'meridian-handyman-guide',
     name: 'Meridian',
     citySlug: 'meridian',
     county: 'ada',
     guideType: 'location',
-    title: 'Building a Home in Meridian',
-    seoTitle: 'Building a New Home in Meridian, Idaho',
+    title: 'Handyman Services in Meridian',
+    seoTitle: 'Handyman Services in Meridian, Idaho',
     metaDescription:
-      'Building a new home in Meridian: subdivision lots, HOA design review, Ada County permitting, and what a serviced lot actually costs to build on.',
+      'Handyman services in Meridian: settling repairs and builder-grade part swaps in subdivision homes, HOA-friendly exterior work, and flat upfront pricing.',
     excerpt:
-      'Meridian is the most straightforward place in the valley to build, which is exactly why the constraints that do exist are the ones people miss.',
+      'Meridian is mostly subdivision homes built in the last thirty years, which means whole streets hit the same repair milestones at the same time.',
     quickAnswer:
-      'Meridian is mostly serviced subdivision lots, which makes it the most predictable place in the Treasure Valley to build. Site work commonly runs $25,000 to $50,000, permits route through Ada County or the City of Meridian, and the real constraints are HOA design review and lot coverage rather than utilities.',
+      'We provide handyman services across Meridian: drywall and settling repairs, fixture and fan installs, caulking, fence and gutter care, and punch-list visits, with flat quotes starting at $145. Meridian’s subdivision homes were largely built in the last three decades, so builder-grade parts tend to wear out street by street, on schedule.',
     takeaways: [
-      'Meridian building is dominated by serviced subdivision lots with utilities at the line.',
-      'Site work in the $25,000 to $50,000 band is the norm rather than the exception here.',
-      'HOA architectural review is common and runs in parallel with the building permit.',
-      'Lot coverage limits, not utilities, are what usually constrain the plan.',
-      'Permits route through Ada County or the City of Meridian depending on the address.',
+      'Meridian’s housing stock is dominated by subdivision homes built from the 1990s onward.',
+      'Builder-grade caulk, fixtures, and hardware wear out on a predictable clock, often across a whole street at once.',
+      'Homes under five years old mostly need settling repairs; homes past fifteen need the first real replacement wave.',
+      'HOA standards make fence, paint, and exterior upkeep a compliance matter as well as a maintenance one.',
+      'Batching several small jobs into one visit is the cheapest way to run a newer home’s punch list.',
     ],
-    landscape: `<p><strong>Meridian is the most predictable place in the Treasure Valley to build a house, because almost everything you build on is a serviced subdivision lot.</strong> Power, water, sewer, and gas are at the property line. The street exists. The ground is flat and the soils are generally well understood. Removing the utility and site unknowns removes most of the variance from a construction budget, which is why a Meridian build tends to land closer to its early estimate than one on rural acreage.</p>
-<p>What remains is the design side. A great many Meridian parcels sit in developments with recorded CCRs and an architectural review committee, and that committee has opinions about elevations, materials, roof pitch, colours, and sometimes garage orientation. This is not an obstacle so much as an extra approval track that runs alongside plan review and needs to be started early rather than discovered late.</p>`,
-    lots: `<p><strong>Buying in Meridian usually means buying a finished lot in a platted subdivision, and the question is what the plat and the CCRs allow rather than whether the parcel is buildable.</strong> Read the plat notes, the recorded CCRs, and the design guidelines before the offer. They will tell you minimum and maximum square footage, garage requirements, material palettes, and sometimes required roof pitches, and any of those can rule out a plan you have already fallen in love with.</p>
-<p>Lot coverage is the usual pinch point. A large single-level plan plus a three-car garage plus a covered patio is a big ground footprint, and on a standard subdivision lot it either does not fit inside the buildable envelope or it fits with no useful back yard. That is the arithmetic that pushes a lot of Meridian plans to two storeys.</p>`,
-    watchOut: `<p><strong>The mistake we see most in Meridian is treating HOA design review as a formality that happens after the drawings are done.</strong> It is a separate approval with its own submittal requirements and its own calendar, and a committee that meets monthly can hold a project for weeks if the first submission comes back with comments. Start it in parallel with design development, not after permit submission, and read the design guidelines before the elevations are drawn rather than after.</p>`,
-    budget: `<p>A semi-custom home on a Meridian subdivision lot commonly sits in the $225 to $300 per finished square foot band, excluding land, and a full custom build runs $250 to $400. Because the lot is serviced, site work usually lands in the $25,000 to $50,000 range, which is the low end of what a Treasure Valley build can carry. That predictability is the main financial advantage of building here.</p>`,
+    housingStock: `<p><strong>Meridian grew faster than any city in the valley, and its housing stock shows it: overwhelmingly subdivision homes built from the 1990s through this year, in big coherent phases.</strong> That uniformity has a practical consequence for repairs: houses on the same street were built the same year with the same materials by the same crews, so they hit the same milestones together. The builder-grade kitchen faucet that fails at year twelve fails up and down the block at year twelve. The tan caulk shrinks on schedule. The water heaters age in formation.</p>
+<p>The upside is predictability. If you tell us your Meridian home's age, we can usually guess most of the list before the photos arrive: settling cracks and door adjustments in the first five years, caulk and hardware refresh around year ten, and the first genuine replacement wave, fixtures, disposals, fans, weatherstripping, somewhere past fifteen.</p>`,
+    commonRepairs: `<p><strong>The Meridian workload is the newer-home canon: drywall settling cracks and nail pops, interior doors drifting out of square, builder-grade faucet and fixture swaps, garbage disposals, ceiling fans, and the install list, TV mounts, garage storage, closet systems, smart thermostats and doorbells.</strong> Outside, it is vinyl and cedar fence repairs after wind events, gate adjustments, gutter cleaning on two-story homes, and re-caulking where siding meets trim. Very little of it is over $500 as a single item, which is exactly why one-visit batching is the right way to buy it.</p>`,
+    watchOut: `<p><strong>The Meridian wrinkle is the HOA.</strong> A great many subdivisions here have covenants covering fence condition, exterior paint, and visible modifications, which turns a leaning fence section or peeling trim from a someday item into a letter from the management company. The fix is the same repair it always was, but the deadline is not yours anymore. We do HOA-prompted repairs regularly: matching the approved fence style and paint colors matters, and doing the repair before the second letter is cheaper than after.</p>`,
+    seasonal: `<p><strong>Meridian’s newer subdivisions have young trees, so gutters clog slower than in old Boise, but its open ground means wind, and wind means fences.</strong> Spring fence checks after the windy season are the local ritual: posts loosened by freeze-thaw and gusts, pickets popped, gates dragging. Fall is for the weatherseal pass and hose-bib protection, and for sprinkler blowouts before the first hard freeze, standard across the valley. Summer UV works fastest on south-facing trim and vinyl, worth an annual walk-around.</p>`,
     faqs: [
       {
-        question: 'Is Meridian in Ada County?',
+        question: 'My Meridian home is only a few years old: what will it need?',
         answer:
-          'Yes. Meridian is in Ada County, and residential building permits route through either the City of Meridian or Ada County depending on whether the parcel is inside the city limits. Both use Ada County processes rather than the Canyon County portals that Nampa, Caldwell, and Middleton use, which matters because the two counties run on different review cadences.',
+          'Settling work, mostly: hairline drywall cracks at corners and above openings, nail pops, doors that no longer latch cleanly, and builder-grade caulk shrinking at tubs and trim. All normal, all small. Document anything your builder warranty covers before it expires, then put the rest on a punch list for one visit.',
       },
       {
-        question: 'Do I need HOA approval to build in Meridian?',
+        question: 'Can you match my HOA’s fence style and colors?',
         answer:
-          'In most Meridian subdivisions, yes. The recorded CCRs typically establish an architectural review committee with authority over elevations, exterior materials, colours, roof pitch, and sometimes minimum square footage or garage orientation. Read the design guidelines before the elevations are drawn, and start the submission in parallel with design development rather than after permit submission.',
+          'Fence repairs are matched to what is there, same style, same materials, and paint is matched to the existing scheme, which in most subdivisions is what the HOA requires anyway. If your HOA needs prior approval or specific product colors, share the guideline and we will work to it.',
       },
       {
-        question: 'What does it cost to build a house in Meridian?',
+        question: 'What does a handyman visit cost in Meridian?',
         answer:
-          'A semi-custom home commonly runs $225 to $300 per finished square foot and a full custom home $250 to $400, both excluding land. Because Meridian lots are almost always serviced, site work usually sits in the $25,000 to $50,000 band, which is the lower end for this valley and one of the reasons Meridian budgets tend to hold.',
+          'Valley-standard: most single repairs run $100 to $500, and our services start at flat prices from $145. Meridian jobs are often quoted quickly because the housing stock is so consistent, photos of a settling crack or a builder-grade faucet tell us nearly everything.',
       },
       {
-        question: 'Can I build a single-level home on a Meridian subdivision lot?',
+        question: 'Do you do punch-list visits for newer homes?',
         answer:
-          'Sometimes, but the setbacks and lot coverage limits often make it difficult once you add a three-car garage and a covered patio. The ground footprint of a large single level is substantial, and on a standard lot it either exceeds the buildable envelope or leaves no usable back yard. Have the envelope drawn on your specific parcel before choosing a plan.',
+          'Constantly, they are the ideal Meridian booking. A half-day visit typically clears eight to twelve small items: cracks patched and painted, doors adjusted, caulk redone, fixtures swapped, mounts hung. Per task it is far cheaper than separate calls, and the house feels new again by dinner.',
       },
       {
-        question: 'Are there still lots available to build on in Meridian?',
+        question: 'Which parts of Meridian do you cover?',
         answer:
-          'Yes, though most of what is available is a finished lot in a platted subdivision rather than raw ground. That is generally good news for a build budget, because the utilities and the street are already in. The question shifts from whether the parcel is buildable to what the plat notes and CCRs will allow you to put on it.',
+          'All of it, we are based in Meridian, and it is the center of our service area. Quotes come from photos within about a day, and most jobs are scheduled within the week and done in one trip.',
       },
     ],
   },
   {
-    slug: 'eagle-home-building-guide',
+    slug: 'eagle-handyman-guide',
     name: 'Eagle',
     citySlug: 'eagle',
     county: 'ada',
     guideType: 'location',
-    title: 'Building a Home in Eagle',
-    seoTitle: 'Building a New Home in Eagle, Idaho',
+    title: 'Handyman Services in Eagle',
+    seoTitle: 'Handyman Services in Eagle, Idaho',
     metaDescription:
-      'Building in Eagle: valley-floor acreage, foothills sites, strict design review, and why Eagle budgets run higher per square foot than the rest of Ada County.',
+      'Handyman services in Eagle: larger homes with more exterior to maintain, higher finish standards, deck and fence care, and flat upfront pricing.',
     excerpt:
-      'Eagle covers flat valley acreage and steep foothills within the same city, and the two produce completely different construction budgets.',
+      'Eagle homes are larger and more detailed than the valley average, which means more trim, more deck, more fence, and higher standards for how repairs should look when finished.',
     quickAnswer:
-      'Eagle spans flat valley acreage and steep foothills, and the difference between them is the single biggest factor in an Eagle build budget. Valley-floor custom homes run $250 to $400 per finished square foot, excluding land, while foothills sites with slope and high detail regularly exceed $450. Design review here is unusually thorough.',
+      'We provide handyman services across Eagle: carpentry and trim repair, deck and fence care, caulking and maintenance, painting touch-ups, and install work, with flat quotes starting at $145. Eagle’s larger, higher-finish homes simply have more exterior surface and detail per house, and repairs are expected to blend in invisibly.',
     takeaways: [
-      'Eagle contains both flat valley acreage and steep foothills, with very different cost profiles.',
-      'Design standards and architectural review in Eagle are among the most demanding in the valley.',
-      'Larger parcels are common, which often means well and septic rather than municipal services.',
-      'Foothills parcels bring slope, geotechnical work, access standards, and wildland-urban interface rules.',
-      'Permits route through the City of Eagle or Ada County depending on the address.',
+      'Eagle homes run larger and more detailed than the valley average: more trim, more glazing, more deck and fence per house.',
+      'Higher finish standards mean repairs are judged on invisibility: texture, stain, and paint matching matter here.',
+      'Larger lots mean more exterior wood and more irrigation, which together set the maintenance calendar.',
+      'Foothills-edge properties add wind and sun exposure that age south-facing finishes fastest.',
+      'Many Eagle communities have design standards, so exterior repairs should match what is there exactly.',
     ],
-    landscape: `<p><strong>Eagle is two building environments inside one city, and the boundary between them matters more to a budget than anything else about the address.</strong> South and west of the state highway the ground is flat valley floor, frequently in larger parcels, and building there resembles building anywhere else on the valley floor except that the lots are bigger and services are not always at the line. North and east, the ground rises into the foothills, and every cost associated with slope arrives at once: excavation, retaining, engineered foundations, longer driveways to a fire-access standard, and geotechnical investigation.</p>
-<p>Eagle also has a reputation for design standards, and it is deserved. Both the city and the individual communities within it tend to care about elevations, materials, massing, and how a house sits on its parcel. For a custom home that is often aligned with what the owner wants anyway, but it adds an approval track and it rules out value-engineering the exterior late in the process.</p>`,
-    lots: `<p><strong>Eagle parcels are larger on average than the rest of Ada County, and larger parcels frequently mean private utilities.</strong> A property on acreage may need a well, a septic system, and a driveway of real length, which moves site work from the $25,000 to $50,000 serviced-lot band into the $80,000 to $150,000 range. Septic feasibility goes through Central District Health and depends on the soil, so it should be a purchase contingency rather than an assumption.</p>
-<p>On foothills parcels, add slope. The building envelope on a hillside is often much smaller than the parcel suggests, and the practical building site may be determined by where a driveway can reach at an acceptable grade rather than by where the view is best.</p>`,
-    watchOut: `<p><strong>The Eagle-specific trap is budgeting a foothills parcel as though it were a valley lot because both are in the same city.</strong> An Eagle address tells you almost nothing about what a build will cost. A flat, serviced parcel south of the highway and a sloped parcel above it can differ by well over a hundred per square foot on the house alone, before the site work difference, which can itself be six figures. Establish which one you are looking at before you set a budget.</p>`,
-    budget: `<p>A custom home on flat, serviced Eagle ground sits in the $250 to $400 per finished square foot band, excluding land, and the finish expectations here tend to push toward the upper half of it. Foothills sites with meaningful slope and high detail regularly run above $450 per finished square foot. Rural acreage anywhere in Eagle should carry $80,000 to $150,000 of site work for well, septic, and access.</p>`,
+    housingStock: `<p><strong>Eagle's housing stock is the valley's upper band: larger custom and semi-custom homes, most built from the 1990s onward, on larger lots, with more of everything a handyman maintains.</strong> More linear feet of trim and fence, more deck and patio, more windows, more intricate rooflines feeding more gutter. A house like that does not have more kinds of problems than a subdivision home; it has more square footage of the same problems, and its owners have higher standards for what a finished repair should look like. A visible patch is a failed patch here.</p>
+<p>The eastern and northern edges of Eagle climb toward the foothills, where wind and sun exposure age exterior finishes noticeably faster, and where larger view windows mean more glazing-adjacent caulk and trim doing weather duty.</p>`,
+    commonRepairs: `<p><strong>The Eagle list leans exterior and finish-grade: deck board and rail replacement, re-staining, fence and gate repair across long runs, gutter cleaning on complex rooflines, exterior caulk and paint touch-ups, and interior trim and door work where the carpentry is a feature, not an afterthought.</strong> Inside, it is the same fixture, fan, and mounting work as anywhere, plus more of the jobs bigger houses generate: heavier TV and art mounting, closet systems, and tall-ceiling light fixture swaps. Texture, stain, and sheen matching is where this work is won or lost, and it is the part we are most careful about.</p>`,
+    watchOut: `<p><strong>The Eagle trap is scale creep: exterior maintenance that would be an afternoon on a subdivision lot is a project here, and skipping a year compounds across a lot of surface.</strong> Two hundred feet of fence, a wraparound deck, and a complex roofline do not forgive deferral the way smaller properties do; one missed staining cycle or gutter season shows up as real repair work. The counter is a standing seasonal visit that works the whole perimeter at once, which per foot is far cheaper than reacting item by item.</p>`,
+    seasonal: `<p><strong>Spring in Eagle is deck and fence season: screwdriver-test the deck, check every gate and post line after the windy months, and walk the sprinkler zones before summer, on big lots a misaimed head can soak siding or a deck post daily for weeks unnoticed.</strong> Summer is for staining and exterior paint on the sun-hammered south and west faces. Fall means gutter cleaning on rooflines that take real time, the weatherseal pass, and sprinkler blowout across larger systems. Winter is watching: eaves for ice dams, fence lines after wind events.</p>`,
     faqs: [
       {
-        question: 'Why does building in Eagle cost more than Meridian?',
+        question: 'Do you match existing finishes on repairs?',
         answer:
-          'Two reasons, and neither is the postcode. Eagle parcels are more often acreage requiring a well, septic, and a long driveway, which moves site work from the $25,000 to $50,000 band into $80,000 to $150,000. And a meaningful share of Eagle is foothills, where slope, engineered foundations, and access standards regularly push a build above $450 per finished square foot.',
+          'Yes, and in Eagle that is usually the point. Drywall texture, trim profiles, stain color, and paint sheen are matched so the repair disappears. Where an exact profile or color needs sourcing, we say so in the quote rather than improvising with the closest thing on the shelf.',
       },
       {
-        question: 'Do Eagle homes need well and septic?',
+        question: 'Can you maintain a large deck and fence line?',
         answer:
-          'Many do, particularly on acreage and in the foothills. Whether municipal water and sewer are available depends entirely on the parcel, and the answer should be verified in writing before purchase rather than assumed. Septic feasibility goes through Central District Health and depends on the soil, the groundwater depth, and the available drainfield area.',
+          'Yes: board and rail replacement, re-staining, post resetting, and gate work are core services. On larger Eagle properties we usually recommend a standing spring visit that covers the deck, fences, gates, and gutters in one pass, which per foot costs far less than reactive repairs.',
       },
       {
-        question: 'How strict is design review in Eagle?',
+        question: 'What do handyman services cost in Eagle?',
         answer:
-          'More thorough than most of the valley. Both the city and individual communities within Eagle tend to have opinions about elevations, exterior materials, massing, and how a house sits on its site. For a custom home that usually aligns with the owner intent anyway, but it means the exterior cannot be value-engineered late and the review calendar has to be planned into the schedule.',
+          'The same valley bands: most single repairs run $100 to $500 and our services start at flat prices from $145. Eagle jobs sometimes price toward the top of a range for scale and finish-matching reasons, a longer fence run, a taller ceiling, a stain that must be matched, and the quote states that plainly up front.',
       },
       {
-        question: 'What does it cost to build in the Eagle Foothills?',
+        question: 'My home is on acreage with a well: does that change anything?',
         answer:
-          'Foothills sites with real slope and high detail regularly exceed $450 per finished square foot, against $250 to $400 for a custom home on flat ground. On top of that, expect rural site work of $80,000 to $150,000 covering a well, a septic system, a driveway to fire-access standard, power extension, and the earthwork the slope requires.',
+          'Not for our scope, we handle the same repairs and maintenance regardless of water source. Well pumps, pressure systems, and septic are specialist territory, and we will say so if a symptom points that way. Hard water is a valley-wide reality either way, and it is why fixture maintenance schedules matter.',
       },
       {
-        question: 'Is Eagle in Ada County?',
+        question: 'Do you handle community design-standard repairs?',
         answer:
-          'Yes. Eagle is in Ada County, and permits route through either the City of Eagle or Ada County depending on whether the parcel is inside the city limits. Septic permits for parcels on private systems are handled separately through Central District Health, which reviews the soil evaluation and the system design before the building permit work can proceed.',
+          'Yes. Several Eagle communities have design standards for fences, exterior colors, and visible elements, and repairs are matched to what exists, which keeps them compliant by definition. If your community requires approval before exterior work, share the guideline and we will work within it.',
       },
     ],
   },
   {
-    slug: 'kuna-home-building-guide',
+    slug: 'kuna-handyman-guide',
     name: 'Kuna',
     citySlug: 'kuna',
     county: 'ada',
     guideType: 'location',
-    title: 'Building a Home in Kuna',
-    seoTitle: 'Building a New Home in Kuna, Idaho',
+    title: 'Handyman Services in Kuna',
+    seoTitle: 'Handyman Services in Kuna, Idaho',
     metaDescription:
-      'Building a new home in Kuna: acreage parcels, well and septic, irrigation laterals, and how rural site work changes a Treasure Valley build budget.',
+      'Handyman services in Kuna: new-subdivision settling repairs, acreage fence and outbuilding upkeep, wind and hard-water fixes, and flat upfront pricing.',
     excerpt:
-      'Kuna is where a lot of Treasure Valley acreage builds happen, and acreage is where site work stops being a line item and becomes a second budget.',
+      'Kuna splits between brand-new subdivisions and open acreage, and the wind that crosses that open ground is the hardest thing in the valley on fences.',
     quickAnswer:
-      'Kuna is dominated by acreage parcels, which means well and septic rather than municipal services on many sites. Rural site work commonly runs $80,000 to $150,000 before a foundation is poured, on top of $250 to $400 per finished square foot for the house. Permits route through Ada County or the City of Kuna.',
+      'We provide handyman services across Kuna: settling repairs and installs in newer subdivision homes, fence and gate repair after wind, fixture swaps where hard water has done its work, and seasonal maintenance, with flat quotes starting at $145. Kuna’s mix of new builds and acreage produces two distinct repair lists, and we run both.',
     takeaways: [
-      'Much of what is available in Kuna is acreage rather than serviced subdivision lots.',
-      'Rural site work with well, septic, and access commonly runs $80,000 to $150,000, excluding land.',
-      'Septic feasibility depends on soil and goes through Central District Health.',
-      'Irrigation ditches and laterals cross many Kuna parcels and carry delivery obligations.',
-      'Kuna is in Ada County, so permits follow Ada processes rather than Canyon County ones.',
+      'Kuna’s stock splits between very new subdivision homes and rural acreage properties.',
+      'Open ground means wind, and wind means Kuna fences and gates take more abuse than most in the valley.',
+      'New builds need settling repairs and the install list; acreage properties need perimeter and outbuilding upkeep.',
+      'Hard water is at its most noticeable on acreage wells: fixtures and valves scale up faster.',
+      'Batching repairs matters more here: one visit covering a whole list beats multiple trips out.',
     ],
-    landscape: `<p><strong>Kuna is where people go when they want ground, and ground changes the arithmetic of a build.</strong> A serviced subdivision lot hands you utilities at the property line and a street; an acreage parcel hands you a field. Between those two situations sits $80,000 to $150,000 of site work: drilling a well, designing and installing a septic system, building a driveway long enough and solid enough to satisfy the fire district, extending power, and grading for drainage. None of that appears in a per-square-foot figure for the house, and it is the single most common reason a Kuna budget comes apart.</p>
-<p>The upside is real. Acreage in Kuna is the most attainable way in this valley to build the house you want with room around it, and the building itself is straightforward once the site is prepared. The ground is generally flat, which keeps excavation and foundation costs sensible compared with the foothills.</p>`,
-    lots: `<p><strong>Before you buy acreage in Kuna, get three answers in writing: whether the septic will perc, where the power is, and whether the access is legally recorded.</strong> Septic feasibility is decided by the soil and reviewed by Central District Health, and a parcel that requires an engineered rather than a conventional gravity system costs materially more and takes longer to permit. Power that is a quarter mile away is a real number, not a formality. And access that everyone has always used is not the same thing as access recorded on the title.</p>
-<p>A written lot evaluation at $950 to $3,500 answers all three before the inspection period closes, and it is credited toward design if you build with us.</p>`,
-    watchOut: `<p><strong>Irrigation is the Kuna-specific surprise.</strong> A great many parcels here are crossed by irrigation district ditches or laterals, and those carry easements, maintenance access, and sometimes an obligation to deliver water to a neighbour downstream. You cannot build over them, you often cannot pipe them without district approval, and they can sit exactly where the driveway wants to go. Find out which district has an interest in the parcel and what it requires before the offer, not after.</p>`,
-    budget: `<p>The house itself follows the same bands as the rest of the valley: $225 to $300 per finished square foot for semi-custom, $250 to $400 for custom, excluding land. What distinguishes a Kuna acreage build is the $80,000 to $150,000 of rural site work sitting underneath that, against $25,000 to $50,000 on a serviced lot. Budget the site separately and early, because the range on it is wide and it is decided by conditions rather than by choices.</p>`,
+    housingStock: `<p><strong>Kuna is two housing stocks sharing a zip code: fast-growing subdivisions full of homes under fifteen years old, and the acreage properties that were here first.</strong> The subdivision half generates the newer-home canon, settling cracks, door adjustments, builder-grade part swaps, and a long install wishlist. The acreage half generates perimeter work: long fence runs, gates that see daily use, outbuildings and shop doors, deck and porch upkeep, and the general wear of properties that work for a living.</p>
+<p>What both halves share is exposure. Kuna sits on open ground, and the wind that crosses it tests every fence, gate, screen door, and patio umbrella in town. If there is one repair Kuna generates more reliably than anywhere else we work, it is the fence call after a spring windstorm.</p>`,
+    commonRepairs: `<p><strong>Subdivision Kuna calls us for drywall settling repairs, interior door adjustments, fixture and fan swaps, TV mounting and garage storage, and first-round caulk refresh.</strong> Acreage Kuna calls for fence sections and post resets, gate rebuilds and re-hangs, deck and porch board replacement, screen and storm door repair, and hardware that outdoor life wears through. Hard well water on acreage adds a faster fixture-maintenance clock: aerators, fill valves, and showerheads scale up ahead of their city-water cousins, and swaps are routine work.</p>`,
+    watchOut: `<p><strong>The Kuna-specific wrinkle is wind deferral: a fence that leans after one windstorm is a one-post repair, and a fence that waits for the next windstorm is a three-section rebuild.</strong> Wind finds whatever is already loose and finishes it. The economic answer is the same as everywhere but more so here: fix the first leaning post the season it leans, and have gates adjusted while they still latch, because a swinging, dragging gate levers its post looser with every gust.</p>`,
+    seasonal: `<p><strong>Spring is fence season in Kuna: walk the perimeter after the windy months, catch heaved posts and popped pickets, and get gates re-hung true.</strong> Summer is for exterior paint and stain, and for keeping sprinkler heads aimed at grass rather than fence posts and siding. Fall means the standard valley pre-freeze list, weatherseal, hose bibs, sprinkler blowout, plus securing anything on open ground that winter wind can throw. Gutters on newer homes with young trees are quick work, but they still need the annual fall look.</p>`,
     faqs: [
       {
-        question: 'Do I need a well and septic to build in Kuna?',
+        question: 'Do you come out to rural Kuna properties?',
         answer:
-          'On acreage, usually yes, though it depends entirely on the parcel and whether municipal services reach it. Verify in writing before purchase rather than assuming. A well and septic together with a driveway and power extension put rural site work in the $80,000 to $150,000 range, which is separate from and additional to the cost of the house.',
+          'Yes, acreage properties around Kuna are inside our normal service area. Because the drive is longer, batching matters more: send the whole list with photos and we will quote it as one visit, bringing materials for everything at once. Per task, that is much cheaper than piecemeal calls.',
       },
       {
-        question: 'Is Kuna in Ada County or Canyon County?',
+        question: 'Can you fix wind-damaged fences?',
         answer:
-          'Kuna is in Ada County. That matters more than it sounds, because Ada and Canyon County use different permit portals and run on different review cadences, so a builder who works mostly in Nampa or Caldwell is working in a different system. Septic permits are separate again and go through Central District Health.',
+          'It is one of our most common Kuna jobs: resetting or replacing heaved posts, rebuilding leaning sections, re-screwing pickets, and re-hanging gates. Sections typically run $150 to $450. The best money in fencing here is fixing the first leaning post before the next windstorm converts it into a section rebuild.',
       },
       {
-        question: 'What is an irrigation lateral and why does it matter?',
+        question: 'My new Kuna home has drywall cracks: is that normal?',
         answer:
-          'It is a channel that carries irrigation water across a parcel, usually with a recorded easement, maintenance access rights, and sometimes an obligation to deliver water downstream. You cannot build over it and generally cannot pipe or relocate it without the district agreeing. Many Kuna parcels have one, and it can sit exactly where you wanted the driveway or the house.',
+          'Almost always, yes: new homes settle for a year or two, producing hairline cracks at corners and above doors, nail pops, and doors that drift out of alignment. Check what your builder warranty covers before it expires, then have the rest patched, textured, and painted in one visit once the main settling has happened.',
       },
       {
-        question: 'How much does it cost to build a house in Kuna?',
+        question: 'Does well water change my fixture maintenance?',
         answer:
-          'The house follows the valley bands: $225 to $300 per finished square foot for semi-custom and $250 to $400 for custom, excluding land. The difference in Kuna is underneath it. Acreage site work with a well, septic, driveway, and power extension commonly runs $80,000 to $150,000, against $25,000 to $50,000 on a serviced lot.',
+          'It speeds up the clock. Mineral-heavy water scales aerators, showerheads, and toilet fill valves faster, so expect swaps and cleanings more often than city-water schedules suggest. Water softener and pump service are specialist trades; the fixtures they protect are standard work for us.',
       },
       {
-        question: 'Can a well come in dry in Kuna?',
+        question: 'What do handyman services cost in Kuna?',
         answer:
-          'Wells are priced by the foot and nobody knows the depth until the drilling stops, so the honest answer is that the cost is a range rather than a number. Most parcels in developed rural areas of the Treasure Valley produce water, but no driller can promise a depth or a flow rate in advance, which is why we budget the well as a range.',
+          'Valley-standard bands: most single repairs run $100 to $500, and our services carry flat starting prices from $145. Every job gets a firm quote from photos before we arrive, and one-visit batching spreads the trip cost across the whole list.',
       },
     ],
   },
   {
-    slug: 'star-home-building-guide',
+    slug: 'star-handyman-guide',
     name: 'Star',
     citySlug: 'star',
     county: 'ada',
     guideType: 'location',
-    title: 'Building a Home in Star',
-    seoTitle: 'Building a New Home in Star, Idaho',
+    title: 'Handyman Services in Star',
+    seoTitle: 'Handyman Services in Star, Idaho',
     metaDescription:
-      'Building in Star, Idaho: new subdivisions alongside working acreage, Ada County permitting, and what each type of parcel does to a build budget.',
+      'Handyman services in Star: settling repairs in new subdivisions, upkeep for older farmhouse-era properties, wind-tested fences, and flat upfront pricing.',
     excerpt:
-      'Star has both new platted subdivisions and working agricultural acreage, sometimes on the same road, and the two are different builds entirely.',
+      'Star is mid-transition from farmland to subdivisions, so brand-new homes and decades-old properties sit a mile apart and need entirely different lists.',
     quickAnswer:
-      'Star mixes new platted subdivisions with agricultural acreage, so two parcels a mile apart can have completely different site costs. A serviced subdivision lot carries $25,000 to $50,000 of site work; acreage needing well, septic, and access carries $80,000 to $150,000. Star is in Ada County.',
+      'We provide handyman services across Star: settling repairs and installs in the new subdivisions, honest upkeep for the older properties that predate them, and fence, gate, and exterior work everywhere, with flat quotes starting at $145. Star’s housing runs from this year’s builds to farmhouse-era homes, often on the same road.',
     takeaways: [
-      'Star has both finished subdivision lots and working acreage, with very different site costs.',
-      'Star is in Ada County, so permits follow Ada processes.',
-      'Agricultural parcels here commonly carry irrigation easements and water delivery obligations.',
-      'Newer subdivisions usually have CCRs with architectural review.',
-      'Confirm whether municipal water and sewer reach a parcel before assuming a serviced-lot budget.',
+      'Star mixes brand-new subdivision homes with older properties from its small-town and agricultural past.',
+      'New builds need settling repairs and installs; older properties need genuine repair carpentry and catch-up maintenance.',
+      'Open western exposure means wind, and wind means fences and gates lead the exterior list.',
+      'Fast growth means many owners are new to their houses: a punch-list visit after move-in finds what inspections skim.',
+      'Batching several jobs into one visit is the cheapest way to buy small work here.',
     ],
-    landscape: `<p><strong>Star is in the middle of turning from farmland into subdivisions, and that transition is the defining fact about building here.</strong> On one road you have a newly platted development with utilities stubbed to each lot, CCRs, and an architectural committee. A mile away you have working acreage with an irrigation ditch along the boundary and no municipal service within reach. Both are Star addresses. Both are Ada County. They are not the same project and they should not carry the same budget.</p>
-<p>For a buyer this is mostly good news, because it means Star still offers both options at a time when much of Ada County offers only one. It does mean that any general statement about what building in Star costs is useless until you have established which of the two you are looking at.</p>`,
-    lots: `<p><strong>The first question on any Star parcel is whether municipal water and sewer actually reach it, and the answer should come from the provider rather than the listing.</strong> A parcel described as being near services may still need a well and a septic system, and that difference is worth tens of thousands of dollars. Where services are available, connection and impact fees apply and should be confirmed with the jurisdiction rather than estimated.</p>
-<p>On agricultural ground, expect the same checks that apply anywhere rural here: septic feasibility through Central District Health, soils, legal recorded access, and whatever the irrigation district requires. A written lot evaluation at $950 to $3,500 covers all of it before the inspection period closes.</p>`,
-    watchOut: `<p><strong>Land in transition carries obligations that outlast the farming.</strong> A parcel that has been irrigated for decades may have water rights, delivery duties to neighbouring parcels, and ditch easements recorded against it, and those do not disappear because the crop did. They constrain where you can build, where the driveway goes, and occasionally what you must continue to do for someone downstream. Read the title work properly and ask the irrigation district directly.</p>`,
-    budget: `<p>House costs follow the valley bands: $225 to $300 per finished square foot semi-custom, $250 to $400 custom, excluding land. The variable in Star is entirely the site. A finished subdivision lot carries $25,000 to $50,000 of site work. Acreage needing a well, a septic system, a driveway, and power carries $80,000 to $150,000. Establish which one applies before setting a total budget.</p>`,
+    housingStock: `<p><strong>Star is in the middle of the same transition Meridian finished a decade ago: farmland becoming subdivisions, fast.</strong> The result is a housing stock with a barbell shape. One end is brand-new: homes a few years old at most, full of settling repairs waiting to be noticed and installs waiting to be wanted. The other end is the older Star, small-town homes and farm properties that have seen decades of weather and a few generations of owner improvements, where the work is real repair carpentry: porches, older doors and windows, outbuildings, and the accumulated list that older houses keep.</p>
+<p>Between them sits a practical difference in how we quote: new-build work is predictable from photos alone, while older-property work earns a few extra questions, because what a 1970s porch post needs depends on what is under the paint.</p>`,
+    commonRepairs: `<p><strong>In the subdivisions: drywall settling cracks, nail pops, door adjustments, builder-grade fixture swaps, ceiling fans, TV mounts, closet and garage storage, and first-round caulk refresh.</strong> On the older properties: porch and step repairs, door and window easing, siding and trim patching, screen doors, gate and fence rebuilds, and paint that protects rather than decorates. Everywhere in Star: wind-tested fences, sprinkler-season fixes, and the pre-winter seal-up. It is two different trades' rhythms, and we run both weekly.</p>`,
+    watchOut: `<p><strong>The Star wrinkle is move-in blindness: most owners here are new to their specific house, and a home inspection is a snapshot, not a punch list.</strong> The first months in any house, new or old, surface the truth: the door that sticks in July, the outlet on a mystery switch, the gate that never latched. The efficient response is to keep the list and book one visit at the three-month mark rather than reacting item by item, it is cheaper, and it turns settling-in annoyances into an afternoon's work.</p>`,
+    seasonal: `<p><strong>Star’s seasonal rhythm is the valley standard with a wind emphasis: spring fence and gate checks after the windy months, summer paint and stain on sun-facing surfaces, and the fall pre-freeze list, weatherseal, hose bibs, sprinkler blowout, gutters.</strong> Older properties add a spring porch-and-step check, freeze-thaw is hardest on the oldest wood, and newer subdivisions add the annual walk for settling cracks worth patching once movement slows.</p>`,
     faqs: [
       {
-        question: 'Is Star in Ada County?',
+        question: 'Do you serve both new subdivisions and older Star properties?',
         answer:
-          'Yes, Star is in Ada County, so residential permits route through Ada County or the City of Star rather than through the Canyon County system used by Nampa, Caldwell, and Middleton. If a parcel is on a private septic system, that permit is separate again and goes through Central District Health, which reviews the soil evaluation and system design.',
+          'Yes, and they are genuinely different work: settling repairs and installs on the new end, repair carpentry and catch-up maintenance on the old end. Both are standard for us. Photos with your list tell us which rhythm your house needs, and the quote reflects the actual work rather than an average.',
       },
       {
-        question: 'Are there still acreage parcels available in Star?',
+        question: 'We just moved to Star: what should we do first?',
         answer:
-          'Yes. Star is mid-transition from agricultural land to subdivisions, so both finished lots and working acreage are available, sometimes within a mile of each other. That is increasingly unusual in Ada County. It also means you cannot assume anything about services, soils, or easements from the town name alone.',
+          'Keep a list for your first three months, the house will write it for you: sticking doors, mystery switches, worn caulk, a gate that will not latch. Then book one visit to clear it. That beats reacting item by item on both cost and sanity, and it gives you a baseline of a house where everything works.',
       },
       {
-        question: 'What does site work cost on a Star acreage parcel?',
+        question: 'Can you repair older porches and outbuildings?',
         answer:
-          'If the parcel needs its own well and septic system plus a driveway and a power extension, budget $80,000 to $150,000 before a foundation is poured, excluding land. A finished subdivision lot with utilities at the line is a different situation entirely, commonly $25,000 to $50,000. Confirm which one you have in writing before making an offer.',
+          'Board, rail, step, and trim-level repairs, yes: that is core carpentry scope. Structural rebuilds, failed foundations, or full re-roofs on outbuildings are contractor territory, and we will say so plainly if that is what the photos show. Most older-property calls land squarely in repair scope.',
       },
       {
-        question: 'Do Star subdivisions have HOA design review?',
+        question: 'What does handyman work cost in Star?',
         answer:
-          'Newer platted subdivisions in Star generally do. The recorded CCRs typically govern elevations, exterior materials, minimum square footage, and sometimes roof pitch and garage orientation. Read the design guidelines before the elevations are drawn, and treat architectural review as a parallel approval track with its own calendar rather than a formality at the end.',
+          'Valley-standard: most single repairs run $100 to $500, market hourly rates run $60 to $120, and our services start at flat prices from $145. Older-property work occasionally uncovers more than the surface showed; when that happens, work pauses and you approve any change before it is billed.',
       },
       {
-        question: 'What about irrigation rights on former farmland in Star?',
+        question: 'How far out from Star do you go?',
         answer:
-          'They frequently transfer with the parcel, along with ditch easements and sometimes an obligation to deliver water to a neighbour. Those constraints do not end when the farming does. They affect where the house and driveway can go and occasionally impose ongoing duties, so review the title work carefully and speak to the irrigation district before the offer rather than after.',
+          'Star and the surrounding rural roads are inside our normal Treasure Valley service area, which covers Ada and Canyon County. For properties outside town, batching the list into one quoted visit is the economical pattern, and it is how most of our rural clients book.',
       },
     ],
   },
   {
-    slug: 'middleton-home-building-guide',
+    slug: 'middleton-handyman-guide',
     name: 'Middleton',
     citySlug: 'middleton',
     county: 'canyon',
     guideType: 'location',
-    title: 'Building a Home in Middleton',
-    seoTitle: 'Building a New Home in Middleton, Idaho',
+    title: 'Handyman Services in Middleton',
+    seoTitle: 'Handyman Services in Middleton, Idaho',
     metaDescription:
-      'Building in Middleton: Canyon County permitting, acreage and subdivision lots, irrigation easements, and realistic site work costs for a new home.',
+      'Handyman services in Middleton: new-subdivision repairs, acreage and small-town home upkeep, fence and exterior work, and flat upfront pricing.',
     excerpt:
-      'Middleton offers acreage at prices Ada County no longer does, and it runs on Canyon County permitting, which is a different system with a different rhythm.',
+      'Middleton pairs a small-town core and working acreage with a ring of new subdivisions, and we run repair lists for all three.',
     quickAnswer:
-      'Middleton sits in Canyon County, which uses different permit portals and a different review cadence from Ada County. It offers both subdivision lots and acreage, with rural site work at $80,000 to $150,000 and serviced lots at $25,000 to $50,000. House costs follow the standard valley bands.',
+      'We provide handyman services across Middleton: settling repairs and installs in the newer subdivisions, repair carpentry and upkeep for small-town and acreage properties, and fence, deck, and gutter work everywhere, with flat quotes starting at $145. Middleton is in Canyon County and sits fully inside our Treasure Valley service area.',
     takeaways: [
-      'Middleton is in Canyon County, not Ada, so the permit path differs from Boise and Meridian.',
-      'Both subdivision lots and acreage are available, with very different site costs.',
-      'Irrigation district ditches and laterals cross many parcels here.',
-      'Septic permitting on rural parcels goes through Central District Health.',
-      'Acreage is more attainable here than in comparable Ada County locations.',
+      'Middleton combines a small-town core, working acreage, and a growing ring of new subdivisions.',
+      'Newer subdivision homes need settling repairs and installs; older town and farm properties need repair carpentry.',
+      'Acreage properties bring long fence runs, outbuildings, and well-water fixture wear.',
+      'Middleton is Canyon County, and it is fully inside our regular service area.',
+      'One-visit batching matters most where the drive is longest: send the whole list at once.',
     ],
-    landscape: `<p><strong>Middleton is the practical answer for people who want acreage in the Treasure Valley and have found Ada County prices unworkable.</strong> The ground is flat, the soils are generally agricultural and well drained, and the building itself is as straightforward as anywhere on the valley floor. What changes is the administrative side: Middleton is in Canyon County, and Canyon County runs its own portals and its own review cadence. A build here is not harder, but it is a different process from a build in Meridian, and a builder who has only worked in Ada County is learning it on your project.</p>
-<p>There is a mix of parcel types. Newer platted subdivisions offer serviced lots with CCRs, and outside them there is genuine acreage, much of it still farmed or recently so.</p>`,
-    lots: `<p><strong>On Middleton acreage the checklist is the standard rural one, and every item on it is worth money.</strong> Septic feasibility depends on the soil and is reviewed by Central District Health, so it belongs in the purchase contingencies. Confirm whether municipal water and sewer reach the parcel or whether a well is required. Verify that access is legally recorded rather than customary. Check what the irrigation district has recorded against the title, because ditches and laterals here are common and they constrain siting.</p>
-<p>Where those questions come back well, Middleton acreage is one of the better value propositions in this valley for someone building a house with room around it.</p>`,
-    watchOut: `<p><strong>Do not assume Ada County timelines and processes apply.</strong> Canyon County is a separate jurisdiction with its own submission requirements and its own review rhythm, and the gap between the two catches out both homeowners and out-of-area builders. Plan the permit stage against Canyon County's process specifically, and make sure whoever is submitting has actually done it there before.</p>`,
-    budget: `<p>The house follows the valley bands: $225 to $300 per finished square foot for semi-custom, $250 to $400 for custom, excluding land. Site work is the variable. Serviced subdivision lots carry $25,000 to $50,000; acreage with a well, a septic system, a driveway, and a power extension carries $80,000 to $150,000. Middleton's advantage is usually in the land price rather than the build cost, which is the same here as anywhere on the valley floor.</p>`,
+    housingStock: `<p><strong>Middleton's housing stock has three layers: the small-town core of older homes, the farm and acreage properties around it, and the newer subdivisions that growth has added in rings.</strong> Each layer has its own list. The older town homes need what older homes need everywhere, doors eased, porches kept sound, caulk and paint kept ahead of the weather. The acreage properties add perimeter and outbuilding work, plus the faster fixture wear that comes with hard well water. The new subdivisions run the standard newer-home program: settling repairs in the early years, builder-grade part swaps as the first decade closes.</p>
+<p>Middleton owners chose the town partly for value, and the same logic applies to keeping a house here: small repairs done on time are the cheapest ownership strategy there is.</p>`,
+    commonRepairs: `<p><strong>The Middleton mix: drywall settling repairs and door adjustments in the subdivisions, fixture and fan swaps everywhere, fence sections and gates across town and acreage alike, deck and porch board replacement, gutter cleaning and minor repair, and the caulk-and-weatherseal work that Canyon County winters reward.</strong> Acreage properties add screen doors, shop-door hardware, and the long-run fence repairs that open ground and wind produce. Most items are one-visit work, and most Middleton bookings are lists rather than single tasks, which is exactly how the economics work best out here.</p>`,
+    watchOut: `<p><strong>The Middleton wrinkle is distance math: for any pro, a trip here costs the same whether it fixes one thing or nine, and homeowners who book single small jobs pay that overhead every time.</strong> The fix is entirely in your control: keep the running list, photograph it, and book it as one visit. Our flat quotes price the list as a package, we arrive with materials for all of it, and the per-task cost drops sharply. It is the single best cost lever for anyone living west of the county line.</p>`,
+    seasonal: `<p><strong>Middleton’s calendar is the valley standard: spring fence and gate checks after wind and freeze-thaw, summer exterior paint and stain in the long dry window, fall gutter cleaning, weatherseal, hose-bib protection, and sprinkler blowout before the first hard freeze.</strong> Acreage adds a spring walk of outbuildings and gates, and well-water homes should expect the faster fixture-scale clock that mineral-heavy water sets everywhere in this valley.</p>`,
     faqs: [
       {
-        question: 'Is Middleton in Ada County or Canyon County?',
+        question: 'Do you cover Middleton?',
         answer:
-          'Middleton is in Canyon County. That is a practical difference rather than a trivial one, because Canyon County uses different permit portals and runs on a different review cadence from Ada County. A builder whose experience is mostly in Boise and Meridian is working in an unfamiliar system, and it is worth asking directly how many Canyon County permits they have pulled.',
+          'Yes, Middleton is fully inside our Treasure Valley service area, which spans Ada and Canyon County. Quotes come from photos within about a day, and most jobs are scheduled within the week. Because of the drive, we encourage sending the whole list at once so one visit clears it.',
       },
       {
-        question: 'Is it cheaper to build in Middleton than in Meridian?',
+        question: 'Can you handle acreage and farm-property repairs?',
         answer:
-          'The house is not cheaper. Labour and materials are the same across the valley, so the per-square-foot bands apply equally. What is usually cheaper is the land, and that is where the saving comes from. If the parcel is acreage rather than a serviced lot, some of that saving goes back into $80,000 to $150,000 of rural site work.',
+          'Repair-scope work, yes: fences, gates, decks and porches, screen and shop doors, fixtures, and general carpentry. Barn structural work, roofing, and anything electrical beyond minor repairs belong with specialty contractors, and we will tell you which items on your list are which.',
       },
       {
-        question: 'Do Middleton parcels need well and septic?',
+        question: 'What do handyman services cost in Middleton?',
         answer:
-          'Many acreage parcels do, though it depends on whether municipal services reach the property. Confirm it in writing with the provider before purchase. Septic feasibility is decided by the soil and reviewed by Central District Health, and a parcel needing an engineered rather than a conventional gravity system costs materially more and takes longer to permit.',
+          'The same bands as the rest of the valley: most single repairs run $100 to $500 and our services start at flat prices from $145. Batching matters more here than anywhere: a one-visit list is quoted as a package and costs meaningfully less per task than separate calls.',
       },
       {
-        question: 'How long does a Canyon County permit take?',
+        question: 'My subdivision home is new: what should I expect?',
         answer:
-          'Plan review commonly runs 4 to 10 weeks once a complete package is submitted, following 8 to 16 weeks of design and engineering, but the honest answer is that it depends on the completeness of the submission and the review load at the time. The most reliable way to shorten it is to submit a complete set and avoid revising the plans afterwards.',
+          'The standard settling program: hairline drywall cracks, nail pops, doors drifting out of square, and shrinking builder-grade caulk over the first year or two. Note what the builder warranty covers before it expires, then batch the rest into one patch-texture-paint visit once movement slows.',
       },
       {
-        question: 'What should I check before buying acreage in Middleton?',
+        question: 'Does well water affect my fixtures?',
         answer:
-          'Septic feasibility, water source, legally recorded access, soils, and what the irrigation district has recorded against the parcel. Ditches and laterals are common here and they constrain where the house and driveway can go. A written lot evaluation runs $950 to $3,500, answers all of it inside a normal inspection period, and is credited toward design if you build with us.',
+          'Yes, it accelerates scale in aerators, showerheads, and toilet valves, so cleaning and swap cycles run shorter than on city water. The fixtures are standard work for us; softener systems and well equipment are specialist trades, and we will say so if the symptoms point there.',
       },
     ],
   },
   {
-    slug: 'nampa-home-building-guide',
+    slug: 'nampa-handyman-guide',
     name: 'Nampa',
     citySlug: 'nampa',
     county: 'canyon',
     guideType: 'location',
-    title: 'Building a Home in Nampa',
-    seoTitle: 'Building a New Home in Nampa, Idaho',
+    title: 'Handyman Services in Nampa',
+    seoTitle: 'Handyman Services in Nampa, Idaho',
     metaDescription:
-      'Building a new home in Nampa: Canyon County permitting, serviced subdivision lots, nearby acreage, and what each does to a construction budget.',
+      'Handyman services in Nampa: repairs for historic downtown homes and new subdivisions alike, seasonal maintenance, and flat upfront pricing.',
     excerpt:
-      'Nampa is the largest city in Canyon County and has the widest range of buildable parcels, from serviced infill to acreage on the edge of town.',
+      'Nampa has the widest housing-stock range in Canyon County, from early-1900s homes near downtown to subdivisions finished this year, and the repair lists differ as much as the houses.',
     quickAnswer:
-      'Nampa offers the widest range of buildable parcels in Canyon County, from serviced subdivision and infill lots to acreage at the edges. Permits route through the City of Nampa or Canyon County, which runs a different system from Ada County. House costs follow the standard valley bands of $225 to $400 per finished square foot.',
+      'We provide handyman services across Nampa: plaster-era repairs in the historic core, settling fixes and installs in the new subdivisions, and fence, gutter, and maintenance work everywhere, with flat quotes starting at $145. Nampa is Canyon County’s largest city and sits fully inside our service area.',
     takeaways: [
-      'Nampa is in Canyon County, with a different permit path from Boise and Meridian.',
-      'Both serviced lots and acreage are available, so site work costs vary widely.',
-      'Serviced lots carry $25,000 to $50,000 of site work; acreage carries $80,000 to $150,000.',
-      'Infill parcels exist inside the established city and are usually fully serviced.',
-      'Construction labour and material costs are the same here as elsewhere in the valley.',
+      'Nampa’s housing runs from early-1900s homes near downtown to subdivisions still being built.',
+      'Older-core homes bring plaster, original doors and windows, and mature-tree gutter duty.',
+      'Newer subdivision homes need settling repairs and builder-grade part swaps on a predictable clock.',
+      'Old-house wiring and plumbing surprises are handled honestly: minor repairs are ours, licensed-trade work gets referred.',
+      'Nampa is fully inside our Ada-and-Canyon service area, with the same flat pricing as everywhere else.',
     ],
-    landscape: `<p><strong>Nampa is the largest city in Canyon County and it offers more variety of buildable parcel than anywhere else on that side of the valley.</strong> There are serviced subdivision lots in newer developments, infill parcels inside the established city where utilities are already at the line, and acreage at the edges where a well and septic system may be required. Because those three situations produce very different site costs, the useful question in Nampa is never what it costs to build here but what it costs to build on this parcel.</p>
-<p>Permitting runs through the City of Nampa or Canyon County depending on the address. Canyon County uses different portals from Ada County and works to a different cadence, and that is worth confirming your builder has actually navigated rather than assuming.</p>`,
-    lots: `<p><strong>A serviced Nampa lot is one of the more economical places to build in the Treasure Valley, because the land is more attainable than Ada County and the site work is the same low band.</strong> Utilities at the property line put site work in the $25,000 to $50,000 range covering excavation, grading, drainage, the driveway approach, and connections. Connection and impact fees apply and should be confirmed with the jurisdiction rather than estimated from another city's schedule.</p>
-<p>At the edges of town, ordinary rural diligence applies: septic feasibility through Central District Health, water source, recorded access, soils, and irrigation easements.</p>`,
-    watchOut: `<p><strong>The thing to verify in Nampa is which jurisdiction actually reviews your parcel, because city and county boundaries here are not intuitive.</strong> A parcel that looks like it is in town may be in unincorporated Canyon County, and that changes the submission path, the fee schedule, and sometimes whether municipal services are available at all. Establish it at the start of design rather than discovering it at submission.</p>`,
-    budget: `<p>House costs are the same as the rest of the valley, because labour and materials are: $225 to $300 per finished square foot for semi-custom, $250 to $400 for custom, excluding land. There is no Canyon County discount on construction. Where Nampa is more attainable is the land, and on a serviced lot the site work stays in the $25,000 to $50,000 band, so the total lands lower without the house being built any differently.</p>`,
+    housingStock: `<p><strong>Nampa is Canyon County's largest city and its most varied housing stock by a wide margin.</strong> The blocks around downtown hold homes from the early 1900s onward: plaster walls, original wood doors and windows, mature trees, and the accumulated modifications of a century of owners. Mid-century neighborhoods ring that core. And the city's edges are new-subdivision country, phases finishing this year, homes under warranty, streets where the trees are still staked. The same afternoon can put us in a 1915 four-square easing a swollen door and a 2022 build patching settling cracks, and the toolbag changes between them.</p>
+<p>That range is worth naming because it changes the advice: what is normal for one Nampa house is a symptom in another. A sticking door in a new build is settling; in a century home it might be seasonal swelling or a hinge a hundred years tired.</p>`,
+    commonRepairs: `<p><strong>Older-core Nampa calls us for plaster patching, door and window easing, hardware and trim repair, porch upkeep, paint touch-ups, and gutter care under real trees.</strong> Newer Nampa runs the settling-and-installs program: drywall cracks, door adjustments, fixture and fan swaps, TV mounts, storage systems, caulk refresh. Citywide, fences after wind, sprinkler-season fixes, and the fall weatherseal pass. Hard water does its slow work across the whole valley, so fixture cleaning and swaps are perennial on both sides of town.</p>`,
+    watchOut: `<p><strong>Nampa's wrinkle is the same one every older housing core has: what previous decades left behind the walls.</strong> Century homes here can carry layered wiring and plumbing from several eras, and a routine swap sometimes opens onto something that needs a licensed electrician or plumber instead of a handyman. Our policy is to stop at that line, show you what we found, and help you get the right trade in. In a city with this much older stock, a handyman's most valuable habit is knowing exactly where his scope ends.</p>`,
+    seasonal: `<p><strong>Fall gutter cleaning is serious business in Nampa's older neighborhoods, where mature trees fill gutters fast, once after leaf drop at minimum, and the fall weatherseal pass earns its keep in homes of every age.</strong> Spring is for fence and gate checks and sprinkler startup fixes; summer's UV is hardest on the painted wood of the older stock, where south-facing touch-ups are protective maintenance. Sprinkler blowouts and hose-bib protection close the season before Canyon County's first hard freeze.</p>`,
     faqs: [
       {
-        question: 'Is it cheaper to build a house in Nampa?',
+        question: 'Do you work on Nampa’s older homes?',
         answer:
-          'The construction is not cheaper. Labour and materials cost the same across the Treasure Valley, so the per-square-foot bands are identical to Boise and Meridian. What is usually more attainable is the land. On a serviced Nampa lot, site work stays in the $25,000 to $50,000 band, so the total project cost lands lower without any compromise in how the house is built.',
+          'Yes: plaster repair, door and window easing, trim and hardware work, porch and step repairs, and paint touch-ups appropriate to older construction are all standard scope. Rewiring and repiping are not, when an old wall reveals licensed-trade work, we stop, show you, and help you find the right specialist.',
       },
       {
-        question: 'Which county handles Nampa building permits?',
+        question: 'What do handyman services cost in Nampa?',
         answer:
-          'Canyon County, through either the City of Nampa or Canyon County depending on whether the parcel is inside the city limits. Canyon uses different portals and a different review cadence from Ada County, so it is worth asking a prospective builder how many permits they have actually pulled on that side of the valley rather than assuming the experience transfers.',
+          'The same as the rest of the Treasure Valley: most single repairs run $100 to $500, market hourly rates run $60 to $120, and our services carry flat starting prices from $145. There is no cross-county premium; Nampa is core service area for us.',
       },
       {
-        question: 'Are there acreage parcels near Nampa?',
+        question: 'Can you do a punch list on my new Nampa build?',
         answer:
-          'Yes, mostly at the edges of the city and in unincorporated Canyon County beyond them. Those parcels commonly need a well and a septic system, which puts site work in the $80,000 to $150,000 range rather than $25,000 to $50,000. Septic feasibility is decided by the soil and reviewed by Central District Health, so it belongs in the purchase contingencies.',
+          'Yes, it is one of our standard visits: settling cracks patched, textured, and painted, doors re-adjusted, caulk redone, fixtures and mounts installed, all in one trip. Check your builder warranty first and let it cover what it covers; we handle what it does not.',
       },
       {
-        question: 'Can I build on an infill lot in Nampa?',
+        question: 'How fast can you get to a Nampa job?',
         answer:
-          'Yes, and infill inside the established city is often the most economical way to build here, because the utilities and the street already exist. The constraint is spatial rather than technical: setbacks and lot coverage limits carve a buildable envelope that is frequently smaller than the parcel suggests, and that envelope should be drawn before you choose a plan.',
+          'Photo quotes usually come back within a day, and most jobs are scheduled within the week. One-trip completion is the goal, which is why we quote from photos: they tell us what materials to have on the truck before we cross the county line.',
       },
       {
-        question: 'How long does it take to build a house in Nampa?',
+        question: 'Which Nampa areas do you serve?',
         answer:
-          'Design and engineering commonly take 8 to 16 weeks, Canyon County plan review another 4 to 10 weeks, and construction follows from there. The two most common causes of delay are the same everywhere: finish selections made late, and plan revisions submitted after the permit application, which push the project back into the review queue.',
+          'All of Nampa, from the historic core to the newest phases at the edges, plus the unincorporated areas around it. Our service area covers Ada and Canyon County: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell.',
       },
     ],
   },
   {
-    slug: 'caldwell-home-building-guide',
+    slug: 'caldwell-handyman-guide',
     name: 'Caldwell',
     citySlug: 'caldwell',
     county: 'canyon',
     guideType: 'location',
-    title: 'Building a Home in Caldwell',
-    seoTitle: 'Building a New Home in Caldwell, Idaho',
+    title: 'Handyman Services in Caldwell',
+    seoTitle: 'Handyman Services in Caldwell, Idaho',
     metaDescription:
-      'Building in Caldwell, Idaho: Canyon County permitting, serviced lots and agricultural acreage, irrigation easements, and realistic site work budgets.',
+      'Handyman services in Caldwell: older-home repairs near the historic core, new-subdivision fixes, acreage upkeep, and flat upfront pricing.',
     excerpt:
-      'Caldwell puts serviced city lots and working agricultural ground within a few miles of each other, and the site work difference between them is six figures.',
+      'Caldwell runs from a historic core through mid-century neighborhoods to new subdivisions and working acreage, and each layer keeps its own repair list.',
     quickAnswer:
-      'Caldwell offers serviced city lots and agricultural acreage within a short distance of each other, and the site work difference between them is substantial: $25,000 to $50,000 versus $80,000 to $150,000. Permits route through the City of Caldwell or Canyon County. House costs follow the standard valley bands.',
+      'We provide handyman services across Caldwell: repairs for the older homes near the historic core, settling fixes and installs in newer subdivisions, and fence, deck, and maintenance work on town lots and acreage alike, with flat quotes starting at $145. Caldwell is fully inside our Ada-and-Canyon service area.',
     takeaways: [
-      'Caldwell is in Canyon County, with its own permit portals and review cadence.',
-      'Serviced city lots and agricultural acreage are both available and cost very differently to build on.',
-      'Irrigation ditches and water delivery obligations are common on former farmland here.',
-      'Septic permitting on rural parcels goes through Central District Health.',
-      'Construction costs match the rest of the valley; the land is where Caldwell differs.',
+      'Caldwell’s stock spans a historic core, mid-century neighborhoods, new subdivisions, and surrounding acreage.',
+      'Older homes need repair carpentry and paint kept ahead of the weather; new builds need settling fixes and installs.',
+      'Acreage around Caldwell brings long fences, outbuildings, and well-water fixture wear.',
+      'Value-minded ownership works best here: small repairs done on time are the cheapest strategy.',
+      'One-visit batching keeps trip costs low across the west valley.',
     ],
-    landscape: `<p><strong>Caldwell offers the clearest example in the valley of how much the parcel matters and how little the town name does.</strong> Inside the city you can buy a serviced lot with utilities at the line and build for the same site work budget as a Meridian subdivision. A few miles out you can buy agricultural acreage that needs a well, a septic system, a driveway, and a power extension, and the site work alone is six figures. Same city, same builder, same house, wildly different total.</p>
-<p>The building itself is straightforward in both cases. The ground is flat, the soils are agricultural and generally well understood, and there is no foothills factor here. The variation is entirely in what the site requires before the foundation.</p>`,
-    lots: `<p><strong>On agricultural ground around Caldwell, irrigation is the first thing to investigate and often the most consequential.</strong> This is long-established farmland, and ditches, laterals, easements, and water delivery obligations are recorded against a great many parcels. They constrain where a house and a driveway can go, they cannot generally be piped or moved without district approval, and they do not lapse because the field is no longer farmed.</p>
-<p>After that, the standard rural checks: septic feasibility through Central District Health, water source, legally recorded access, soils, and floodplain status. A written lot evaluation at $950 to $3,500 covers all of it inside a normal inspection period.</p>`,
-    watchOut: `<p><strong>Verify whether a parcel is inside the city limits or in unincorporated Canyon County before design starts.</strong> It determines the submission path, the fee schedule, and frequently whether municipal water and sewer are available at all, which is the difference between a $25,000 to $50,000 site budget and an $80,000 to $150,000 one. It is a five minute question at the beginning and an expensive surprise later.</p>`,
-    budget: `<p>Construction costs match the valley: $225 to $300 per finished square foot semi-custom, $250 to $400 custom, excluding land. There is no discount for being in Canyon County, because the trades and the materials are the same. The Caldwell advantage is land price, and whether it survives depends entirely on whether the parcel is serviced or needs a well, a septic system, and access.</p>`,
+    housingStock: `<p><strong>Caldwell's housing tells the same layered story as Nampa's, at a slightly smaller scale: a historic core of early-1900s homes, mid-century rings around it, new subdivisions at the edges, and working acreage beyond them.</strong> The older blocks bring the older-home program, plaster, original doors and windows, porches, mature trees, and the newer edges bring the settling-and-installs program. The acreage adds perimeter work: long fence lines, gates, outbuildings, and the faster fixture wear of well water.</p>
+<p>Caldwell owners tend to be practical about their houses, and the practical playbook is the one this whole guide argues for: catch things small, batch the list, and spend on the repairs that prevent bigger ones.</p>`,
+    commonRepairs: `<p><strong>Near the core: plaster and drywall repair, door and window easing, trim and hardware work, porch and step repairs, and gutter duty under mature trees.</strong> At the edges: settling cracks, door adjustments, builder-grade fixture swaps, fans, mounts, and storage installs. On acreage: fence sections and gates, deck and porch boards, screen and shop doors. Everywhere: the caulk, weatherstrip, and seasonal-seal work that a true four-season climate demands, and the sprinkler-season fixes that summer irrigation brings.</p>`,
+    watchOut: `<p><strong>Caldwell's wrinkle is deferred-maintenance compounding in the older stock: a fair number of the century homes here have had stretches of easier and harder decades, and small problems that waited now sit under newer surfaces.</strong> Practically, that means an older-home repair sometimes uncovers the previous one, softer wood behind the trim, an older patch behind the paint. Our approach is to quote what the photos show, pause when something more appears, and let you approve the difference before it is billed. No surprises on the invoice, even when there are surprises in the wall.</p>`,
+    seasonal: `<p><strong>The Caldwell calendar is the valley standard with an old-tree emphasis near the core: fall gutter cleaning after leaf drop, the pre-freeze weatherseal pass, hose-bib protection, and sprinkler blowout by late October.</strong> Spring means fence and gate checks after wind and freeze-thaw, porch and step checks on the older homes, and sprinkler startup fixes. Summer's long dry window is the time for exterior paint and stain, especially the sun-facing sides of painted older homes.</p>`,
     faqs: [
       {
-        question: 'Which county issues building permits in Caldwell?',
+        question: 'Do you serve Caldwell?',
         answer:
-          'Canyon County, through either the City of Caldwell or Canyon County depending on whether the parcel is inside the city limits. Canyon runs different portals and a different review cadence from Ada County, so establishing which jurisdiction has your parcel is one of the first questions at the start of design rather than something to sort out at submission.',
+          'Yes, Caldwell is fully inside our Treasure Valley service area, which covers Ada and Canyon County. Photo quotes usually come back within a day, most jobs are scheduled within the week, and batching your list into one visit keeps the per-task cost down across the west valley.',
       },
       {
-        question: 'What should I check before buying farmland in Caldwell to build on?',
+        question: 'Can you repair older Caldwell homes?',
         answer:
-          'Irrigation first, because this is long-established farmland and ditches, laterals, easements, and water delivery obligations are recorded against many parcels and constrain where you can build. Then septic feasibility through Central District Health, water source, legally recorded access, soils, and floodplain status. A written lot evaluation at $950 to $3,500 covers all of it.',
+          'Yes: plaster patching, door and window easing, porch and step repair, trim and hardware work, and protective paint touch-ups are core scope. When an older wall reveals wiring or plumbing that needs a licensed trade, we stop, show you what we found, and help you get the right specialist in.',
       },
       {
-        question: 'Is building in Caldwell cheaper than Boise?',
+        question: 'What do handyman services cost in Caldwell?',
         answer:
-          'The house is not. Labour and material costs are the same across the Treasure Valley, so a custom home runs $250 to $400 per finished square foot in either place, excluding land. Caldwell land is generally more attainable, which is where the difference comes from, though on acreage some of that goes back into rural site work.',
+          'The same valley bands: most single repairs run $100 to $500 and our services start at flat prices from $145. Older-home work occasionally uncovers prior deferred repairs; when it does, work pauses and you approve any change before it is billed.',
       },
       {
-        question: 'Do Caldwell acreage parcels need a well and septic?',
+        question: 'Do you handle acreage properties around Caldwell?',
         answer:
-          'Many do, though it depends on whether municipal services reach the parcel, which should be confirmed in writing with the provider. Where they are required, expect rural site work of $80,000 to $150,000 covering the well, the septic system and its permitting through Central District Health, the driveway, power extension, and grading, all before a foundation is poured.',
+          'Yes: fences, gates, decks, porches, screen and shop doors, and fixtures are all standard scope on rural properties. Send the whole list with photos, one quoted visit with materials on the truck is the economical way to buy small work outside town.',
       },
       {
-        question: 'Is there a floodplain concern building near the river in Caldwell?',
+        question: 'My new Caldwell home is cracking at the corners: is something wrong?',
         answer:
-          'FEMA floodplain designation is worth checking on any parcel near a waterway anywhere in the valley, and it is a straightforward thing to verify before an offer. A floodplain designation does not necessarily prevent building, but it affects foundation design, elevation requirements, insurance, and cost, so it needs to be known during the inspection period rather than after closing.',
+          'Almost certainly just settling, which new homes do for a year or two: hairline cracks at corners and above openings, nail pops, and doors drifting slightly are all normal. Let the builder warranty cover what it covers, then have the rest patched, textured, and painted in one visit once movement slows.',
       },
     ],
   },
   {
-    slug: 'eagle-foothills-home-building-guide',
+    slug: 'eagle-foothills-handyman-guide',
     name: 'the Eagle Foothills',
     citySlug: 'eagle',
     county: 'ada',
     guideType: 'neighborhood',
-    title: 'Building in the Eagle Foothills',
-    seoTitle: 'Building a Home in the Eagle Foothills',
+    title: 'Handyman Services in the Eagle Foothills',
+    seoTitle: 'Handyman Services in the Eagle Foothills',
     metaDescription:
-      'Building in the Eagle Foothills: slope, access, geotechnical work, wildland-urban interface, and why these sites regularly exceed $450 per square foot.',
+      'Handyman services in the Eagle Foothills: wind- and sun-exposed exteriors, deck and fence care on sloped lots, sealing and maintenance, and flat pricing.',
     excerpt:
-      'Foothills sites buy you the view and charge you for the ground. Here is where the money actually goes on a sloped Eagle parcel.',
+      'Foothills homes trade valley shelter for exposure: more wind, more sun, and exteriors that age faster on the weather side than anywhere on the valley floor.',
     quickAnswer:
-      'Eagle Foothills sites regularly exceed $450 per finished square foot, against $250 to $400 for a custom home on flat ground, and that is before site work. Slope drives excavation and foundation cost, access must meet fire district standards, geotechnical investigation is common, and wildland-urban interface rules affect materials.',
+      'We provide handyman services in the Eagle Foothills: deck and rail care, fence and gate repair, exterior caulk and paint upkeep, and interior repairs and installs, with flat quotes starting at $145. Foothills exteriors face more wind and sun than valley homes, and the weather side of the house sets the maintenance clock.',
     takeaways: [
-      'Foothills sites with slope and high detail regularly exceed $450 per finished square foot.',
-      'Rural site work here commonly runs $80,000 to $150,000 for well, septic, and access.',
-      'Geotechnical investigation is frequently required before foundation design.',
-      'Driveway grade and fire district access standards can decide the building site.',
-      'Wildland-urban interface considerations affect exterior materials and defensible space.',
+      'Foothills homes take more wind and sun exposure than valley-floor homes, and exteriors age accordingly.',
+      'Decks, rails, and view-side finishes are the fastest-wearing assets: inspect them every spring.',
+      'Exterior caulk and paint on the weather side runs a shorter cycle than the sheltered sides.',
+      'Sloped lots concentrate water: keep drainage paths, gutters, and downspout extensions working.',
+      'Larger custom homes mean finish-matched repairs: visible patches are failed patches here.',
     ],
-    landscape: `<p><strong>A foothills parcel costs more to build on for reasons that are all physical and all predictable, which means they can be budgeted rather than discovered.</strong> Slope is the first. Getting a level building platform out of a hillside means excavation, engineered retaining, and often a stepped or deepened foundation, and all three scale with how steep the ground is. Second is access: a driveway on a slope has to hold a grade the fire district will accept, which frequently means a longer route than the direct one and real structural work to hold it.</p>
-<p>Third is what is under the surface. Geotechnical investigation is commonly required before the foundation can be engineered, and the report sometimes changes the foundation type. Fourth is wildland-urban interface: exterior materials, roof assemblies, vents, and defensible space around the structure all carry requirements that a valley-floor build does not.</p>`,
-    lots: `<p><strong>On a foothills parcel, the buildable area is usually a small fraction of the acreage, and its location is decided by the driveway rather than by the view.</strong> The best outlook is often somewhere a driveway cannot reasonably reach at an acceptable grade. Have the access route and the building platform established before purchase, because a parcel where those two things do not resolve is not a building site regardless of what it costs.</p>
-<p>Services are usually private: a well, a septic system sized to soils that may be thin or rocky, and frequently a power extension. That is the $80,000 to $150,000 rural site work band, and on a difficult foothills parcel it can sit at the top of it.</p>`,
-    watchOut: `<p><strong>The single most common foothills mistake is buying the view and discovering the access.</strong> Everything else on a sloped site is expensive but solvable with money. Access can be genuinely unsolvable if the grade, the geometry, or a neighbour's property makes a compliant driveway impossible. Establish the route first, in writing, before anything else about the parcel matters.</p>`,
-    budget: `<p>Expect above $450 per finished square foot for a foothills home with meaningful slope and high detail, against $250 to $400 on flat ground. Add $80,000 to $150,000 of site work for well, septic, driveway, and power. Design and engineering also run toward the upper end of the 5 to 12 percent band here, because the structural and geotechnical work is genuinely more involved than a valley-floor build.</p>`,
+    housingStock: `<p><strong>Eagle Foothills homes are mostly larger custom builds from the last few decades, sited for views, which means sited for exposure.</strong> Wind that valley subdivisions never feel is routine up here, and the sun that makes the views glow works full-time on south- and west-facing decks, rails, trim, and paint. The houses are well built; the physics are simply harder. A deck rail or a caulk line on the weather side of a foothills home lives a visibly shorter life than its twin on the sheltered side, and the maintenance calendar has to respect that.</p>
+<p>Sloped lots add the water dimension: rain and snowmelt move across these properties with intent, and gutters, downspout extensions, and drainage paths are doing structural protection, not tidying.</p>`,
+    commonRepairs: `<p><strong>The foothills list leans hard to the exterior: deck board and rail replacement, re-staining on a shorter cycle, fence and gate repair after wind events, exterior caulk renewal on the weather side, paint touch-ups where UV works fastest, and gutter and downspout upkeep that sloped lots make consequential.</strong> Inside, the work matches the housing stock: finish-grade drywall and trim repairs, tall-ceiling fixture and fan swaps, heavy mounting on stone and tall walls, and the general punch lists larger homes generate. Matching texture, stain, and sheen is the standard everything gets judged by.</p>`,
+    watchOut: `<p><strong>The foothills trap is assuming valley maintenance cycles apply: they do not, and the weather side of the house is the tell.</strong> A stain job that lasts five years down in the valley may want attention in three up here; caulk lines crack a season or two sooner; wind finds any fence post or picket that was already marginal. The efficient rhythm is a standing spring visit that walks the whole exposure: deck, rails, fence line, caulk, paint, gutters, and catches the weather side's wear while each item is still small.</p>`,
+    seasonal: `<p><strong>Spring up here is inspection season: screwdriver-test the deck, check every rail, walk the fence line after the windy months, and confirm winter runoff did not carve new paths near the foundation.</strong> Summer is the work window, staining, painting, caulking, in the long dry heat. Fall matters doubly on sloped lots: gutters and downspout extensions must be clear and connected before snowmelt season, along with the standard valley pre-freeze list. Winter is for watching eaves and drainage during melt cycles.</p>`,
     faqs: [
       {
-        question: 'Why is building in the Eagle Foothills so much more expensive?',
+        question: 'Why does my foothills deck wear faster than my old valley home’s deck?',
         answer:
-          'Slope, access, ground conditions, and fire requirements, in roughly that order. Getting a level platform out of a hillside means excavation and engineered retaining. A compliant driveway on a grade costs real money. Geotechnical investigation is commonly required and can change the foundation type. Wildland-urban interface rules affect exterior materials. Together these push builds above $450 per finished square foot.',
+          'Exposure. Foothills sites take more direct sun and more wind than sheltered valley lots, and UV plus wind-driven weather ages horizontal surfaces and finishes fastest. It is normal, and the answer is a shorter inspection and re-stain cycle on the weather side, plus prompt board and rail replacement when the screwdriver test finds soft wood.',
       },
       {
-        question: 'Do I need a geotechnical report to build in the foothills?',
+        question: 'Do you do finish-matched repairs in custom homes?',
         answer:
-          'Commonly, yes. The soils and the slope determine what foundation the structural engineer can design, and on hillside ground that is not something anyone can assume. The report is ordered early because the foundation design depends on it, and occasionally it changes the answer enough to affect where on the parcel the house should sit.',
+          'Yes, and in the foothills that is the expectation we work to: drywall texture, trim profiles, stain, and paint sheen matched so the repair disappears. Where an exact material or color needs sourcing, the quote says so up front rather than substituting the closest shelf item.',
       },
       {
-        question: 'What is wildland-urban interface and how does it affect my build?',
+        question: 'Can you maintain drainage-related items?',
         answer:
-          'It refers to areas where development meets undeveloped wildland and wildfire risk is a design consideration. Practically it affects exterior materials, roof assemblies, eave and vent details, and the defensible space maintained around the structure. None of it is difficult to build, but it constrains material choices and adds cost relative to a valley-floor house.',
+          'The handyman-scope parts, yes: gutter cleaning and repair, downspout extensions, splash management, and keeping water directed away from the house. Regrading, retaining walls, and engineered drainage are contractor and specialist territory, and we will say so if that is what your slope actually needs.',
       },
       {
-        question: 'Can any foothills lot be built on?',
+        question: 'What does handyman work cost in the foothills?',
         answer:
-          'No, and access is usually the reason rather than slope. A parcel where a driveway cannot reach a building platform at a grade the fire district will accept is not a building site, and no amount of budget fixes it. Establish the access route and the platform location in writing before purchase, because everything else is secondary to those two questions.',
+          'The same valley bands, most single repairs $100 to $500, services from $99, with scale and finish-matching sometimes placing jobs toward the top of a range. A standing spring exterior visit is the best value on sloped, exposed lots: per item it beats reactive repairs comfortably.',
       },
       {
-        question: 'What does site work cost on a foothills parcel?',
+        question: 'Do you handle wind-damage repairs?',
         answer:
-          'Budget $80,000 to $150,000 for the rural package: a well, a septic system with its own permitting through Central District Health, a driveway built to fire access standards, power extension, and grading. On a steep or awkward parcel it sits at the upper end of that band, and the earthwork alone can be a substantial share of it.',
+          'Routinely: fence sections and posts, gates, popped pickets and boards, and the assorted exterior items wind loosens. After a significant wind event, walk the property and photograph anything leaning or moving, one visit usually puts the lot right, and quickly, before the next front finishes what the last one started.',
       },
     ],
   },
   {
-    slug: 'hidden-springs-home-building-guide',
+    slug: 'hidden-springs-handyman-guide',
     name: 'Hidden Springs',
     citySlug: 'eagle',
     county: 'ada',
     guideType: 'neighborhood',
-    title: 'Building in Hidden Springs',
-    seoTitle: 'Building a Home in Hidden Springs, Idaho',
+    title: 'Handyman Services in Hidden Springs',
+    seoTitle: 'Handyman Services in Hidden Springs, Idaho',
     metaDescription:
-      'Building in Hidden Springs: design guidelines, architectural review, foothills access, and what a master-planned community expects from a new home.',
+      'Handyman services in Hidden Springs: repairs matched to community standards, maintenance for homes entering their third decade, and flat upfront pricing.',
     excerpt:
-      'Hidden Springs is a master-planned community with real design standards, which is a constraint if you fight it and an advantage if you plan around it.',
+      'Hidden Springs homes are entering their third decade, which means original fixtures, caulk, and hardware are aging in unison, and repairs must match a community that cares how things look.',
     quickAnswer:
-      'Hidden Springs is a master-planned community with genuine architectural standards, so design review is a substantive approval rather than a formality. Building here means designing to the community guidelines from the first sketch. Construction costs follow the custom band of $250 to $400 per finished square foot, excluding land.',
+      'We provide handyman services in Hidden Springs: repairs and maintenance matched to the community’s design standards, fixture and hardware updates for homes entering their third decade, and seasonal exterior care, with flat quotes starting at $145. The neighborhood’s coherent look means repairs are matched to what exists, exactly.',
     takeaways: [
-      'Design review in Hidden Springs is substantive and governs elevations, materials, and massing.',
-      'Read the design guidelines before elevations are drawn, not after.',
-      'The community sits north of Boise with foothills access considerations.',
-      'Architectural review runs in parallel with Ada County plan review, on its own calendar.',
-      'Custom builds here follow the $250 to $400 per finished square foot band, excluding land.',
+      'Hidden Springs homes largely date from the community’s founding era, and their original components are aging together.',
+      'Fixtures, caulk, hardware, and exterior finishes from the same build years reach replacement age in unison.',
+      'The community’s design coherence means exterior repairs must match materials and colors exactly.',
+      'A foothills-edge setting adds wind and sun exposure on the weather sides.',
+      'One punch-list visit a season is the natural maintenance rhythm here.',
     ],
-    landscape: `<p><strong>Hidden Springs was planned as a coherent community rather than a collection of lots, and that shows up in how a new house gets approved.</strong> The design guidelines cover things that in most subdivisions are left to the builder: massing, roof form, material palette, window proportion, how the house addresses the street, and how outbuildings and fences relate to the main structure. The review committee applies them seriously.</p>
-<p>For an owner building a considered custom home, this is usually a benefit rather than a burden, because it protects the setting they are buying into. It does mean the exterior design is not a place to save money late in the process, and it means the review calendar is a real item in the schedule rather than a rubber stamp at the end.</p>`,
-    lots: `<p><strong>Lots here are within a planned community, so the infrastructure question is largely settled and the design question is the live one.</strong> What varies is the individual parcel: its slope, its orientation, how it sits relative to neighbours, and what the guidelines require of a house in that specific position. Get the guidelines and the plat notes before making an offer, and read them with the plan you actually want to build in mind.</p>`,
-    watchOut: `<p><strong>The failure mode here is designing the house first and reading the guidelines second.</strong> A plan that would be uncontroversial in a Meridian subdivision can require substantial exterior rework to pass review here, and that rework arrives after the drawings are done and the budget is set. Design to the guidelines from the first sketch and the approval is uneventful.</p>`,
-    budget: `<p>Construction follows the custom band of $250 to $400 per finished square foot, excluding land, and the material and detail expectations that come with the design guidelines tend to place a Hidden Springs build in the upper half of it. Design and engineering at 5 to 12 percent of construction cost should be budgeted toward the higher end, because the exterior needs more design attention than a standard subdivision elevation.</p>`,
+    housingStock: `<p><strong>Hidden Springs was built as a planned community with a deliberately coherent look, and most of its homes date from the same founding era, which puts them in their second and third decades now.</strong> That shared age is the defining maintenance fact: original faucets, fans, water heaters, caulk lines, weatherstripping, and hardware across the neighborhood are reaching the end of their design lives on roughly the same schedule. None of it is failure; it is what twenty-plus years does to consumable components, all at once.</p>
+<p>The community's setting at the edge of the Boise foothills adds a mild exposure factor, more wind and sun than the valley floor, and its design coherence adds a standard: exterior repairs are expected to match what exists, precisely.</p>`,
+    commonRepairs: `<p><strong>The Hidden Springs list is the twenty-year refresh: faucet and fixture swaps, toilet internals, ceiling fans, re-caulking baths and exterior joints, weatherstripping renewal, cabinet hardware and hinge adjustments, and paint touch-ups where two decades of sun have worked.</strong> Exterior work runs to fence and gate repair, deck and porch upkeep, and gutter care, matched to the community's materials and colors. Interior finish repairs, drywall, trim, doors, are held to the same blend-in standard as everywhere we work in higher-finish neighborhoods.</p>`,
+    watchOut: `<p><strong>The wrinkle here is simultaneity: when components age in unison, owners face a scatter of small failures across a year or two and can end up booking a dozen separate reactive calls.</strong> The better pattern is the planned refresh: one or two scheduled visits that swap the aging faucets, valves, fans, caulk, and weatherstripping in batches before they fail individually. Per item it is far cheaper, and it converts a drizzle of annoyances into an afternoon of upgrades.</p>`,
+    seasonal: `<p><strong>Seasonally, Hidden Springs follows the valley calendar with a foothills-edge accent: spring checks of fences, gates, and decks after wind and freeze-thaw, summer for exterior paint and stain, and the full fall pre-freeze list, gutters, weatherseal, hose bibs, sprinkler blowout.</strong> Homes this age reward the fall weatherstrip check especially: original door seals from the founding era are usually past their best, and renewing them is one of the cheapest comfort upgrades available.</p>`,
     faqs: [
       {
-        question: 'How strict is architectural review in Hidden Springs?',
+        question: 'Do you match community design standards on repairs?',
         answer:
-          'Substantive rather than nominal. The guidelines address massing, roof form, material palette, window proportion, how the house meets the street, and outbuildings, and the committee applies them. This is not an obstacle if you design to the guidelines from the beginning, but it is a real approval with its own calendar and it should not be treated as a formality at the end of design.',
+          'Yes: repairs are matched to existing materials, styles, and colors, which in a design-coherent community is both the standard and the point. If a repair type requires community approval first, share the guideline and we will work within it.',
       },
       {
-        question: 'What does it cost to build in Hidden Springs?',
+        question: 'What should a twenty-year-old Hidden Springs home expect?',
         answer:
-          'Construction follows the custom band of $250 to $400 per finished square foot, excluding land. The design standards and material expectations here tend to place a build in the upper half of that band. Budget design and engineering at the higher end of the 5 to 12 percent range too, because the exterior requires genuine design work rather than a stock elevation.',
+          'The unified aging of its original components: faucets, toilet internals, fans, water heaters, caulk, weatherstripping, and hardware all reaching replacement age within a few years of each other. It is normal and predictable. A planned refresh visit or two beats a year of scattered reactive calls on both cost and convenience.',
       },
       {
-        question: 'Does Hidden Springs review run at the same time as the county permit?',
+        question: 'What do handyman services cost in Hidden Springs?',
         answer:
-          'It can and it should. Architectural review and Ada County plan review are separate approvals on separate calendars, and running them in parallel is how you avoid adding weeks to the schedule. What causes delay is submitting to the county and then discovering that review comments require exterior changes that invalidate the submitted set.',
+          'Valley-standard bands: most single repairs run $100 to $500, and our services carry flat starting prices from $145. Batch pricing is where this neighborhood wins: a planned-refresh list quoted as one visit costs meaningfully less per item than reactive one-off calls.',
       },
       {
-        question: 'Which county handles permits for Hidden Springs?',
+        question: 'Do you handle exterior work here?',
         answer:
-          'Ada County. The building permit package includes the site plan, architectural set, stamped structural engineering, and energy compliance documentation, the same as anywhere else in the county. The community architectural review is entirely separate from that and is administered by the community rather than by any government body.',
+          'Yes: fence and gate repair, deck and porch upkeep, gutter cleaning and repair, exterior caulk, and paint touch-ups, matched to the community’s materials and palette. Larger exterior projects like full repaints or roof work belong with specialty contractors, and we will say so when a job crosses that line.',
       },
       {
-        question: 'Can I bring my own plan to Hidden Springs?',
+        question: 'How do I get a quote?',
         answer:
-          'Yes, but expect it to need adaptation. A plan drawn for a standard subdivision lot frequently needs exterior rework to satisfy the community guidelines on massing, materials, and street presence. The cheapest time to do that is before the plan is finalised, which is why we read the guidelines at the start of design rather than treating review as a later hurdle.',
+          'Send your list with photos through the contact page. Most Hidden Springs quotes come back flat within a day, and most visits are scheduled within the week, with materials brought for the whole list so one trip finishes it.',
       },
     ],
   },
   {
-    slug: 'harris-ranch-home-building-guide',
+    slug: 'harris-ranch-handyman-guide',
     name: 'Harris Ranch',
     citySlug: 'boise',
     county: 'ada',
     guideType: 'neighborhood',
-    title: 'Building in Harris Ranch',
-    seoTitle: 'Building a Home in Harris Ranch, Boise',
+    title: 'Handyman Services in Harris Ranch',
+    seoTitle: 'Handyman Services in Harris Ranch, Boise',
     metaDescription:
-      'Building in Harris Ranch: planned community design standards, serviced lots at the edge of the Boise foothills, and what a new home there involves.',
+      'Handyman services in Harris Ranch: settling repairs and installs in newer East Boise homes, HOA-conscious exterior work, and flat upfront pricing.',
     excerpt:
-      'Harris Ranch is a planned community on the east edge of Boise where the lots are serviced and the design standards are the constraint that matters.',
+      'Harris Ranch is newer East Boise: homes mostly under twenty years old, community standards for how exteriors look, and repair lists dominated by settling fixes and installs.',
     quickAnswer:
-      'Harris Ranch is a planned community on the east side of Boise with serviced lots and community design standards. Site work sits in the $25,000 to $50,000 serviced band, permits route through the City of Boise, and the real constraint on a plan is the architectural guidelines rather than the utilities.',
+      'We provide handyman services in Harris Ranch: settling repairs, fixture and fan installs, mounting and storage, caulking, and exterior upkeep matched to community standards, with flat quotes starting at $145. Harris Ranch homes are mostly newer builds, so the work is the newer-home canon done to a visible-neighborhood standard.',
     takeaways: [
-      'Harris Ranch lots are serviced, so site work sits in the $25,000 to $50,000 band.',
-      'Community design standards govern elevations, materials, and how homes address the street.',
-      'Permits route through the City of Boise as part of Ada County.',
-      'Lot coverage and setbacks are usually what constrain a plan here, not utilities.',
-      'Custom builds follow the $250 to $400 per finished square foot band, excluding land.',
+      'Harris Ranch homes are mostly newer construction, from the 2000s to current phases.',
+      'The repair list is the newer-home canon: settling fixes, builder-grade swaps, and installs.',
+      'Community design standards make exterior repairs a match-what-exists exercise.',
+      'East-end proximity to the foothills adds sun and some wind exposure on facing sides.',
+      'Punch-list batching is the natural booking pattern for homes this age.',
     ],
-    landscape: `<p><strong>Harris Ranch is a planned community, which means the hard infrastructure questions are already answered and the design questions are the live ones.</strong> Lots are serviced, streets exist, and the ground at the valley-floor end of the community is straightforward to build on. Site work therefore sits in the $25,000 to $50,000 band that applies to any serviced lot, covering excavation, grading, drainage, the driveway approach, and connections.</p>
-<p>What governs the build is the community's design framework: elevations, materials, how the house meets the street, and the general coherence the community is built around. As with any planned community, that is an approval track running alongside the city permit, and it needs to start early.</p>`,
-    lots: `<p><strong>Because the parcels are serviced and platted, the useful diligence here is documentary rather than physical.</strong> Read the plat notes, the recorded CCRs, and the design guidelines before an offer. They set the envelope, the material expectations, and often minimum or maximum square footage. Combined with setbacks and lot coverage, they will tell you fairly precisely what can be built on a given lot, which is more useful than any general statement about the community.</p>`,
-    watchOut: `<p><strong>Toward the eastern edge of the area the ground begins to rise, and a sloped parcel is a different build from a flat one even inside the same community.</strong> Slope brings excavation, retaining, and potentially a geotechnical report, and it can move a build meaningfully up from the flat-lot cost. Establish which kind of parcel you are looking at rather than assuming the community average applies to it.</p>`,
-    budget: `<p>A custom home here follows the $250 to $400 per finished square foot band, excluding land, with serviced-lot site work of $25,000 to $50,000. Where a parcel has real slope, expect the excavation, retaining, and foundation work to move the number up, and on genuinely steep ground the foothills band above $450 per finished square foot becomes the right reference instead.</p>`,
+    housingStock: `<p><strong>Harris Ranch is one of Boise's newest large neighborhoods, a planned community in the Barber Valley on the city's east side, with homes running from the 2000s through phases still building.</strong> The stock is therefore young: the oldest homes are entering the age where builder-grade components begin their first replacement wave, and the newest are still settling. Density and design coherence are part of the neighborhood's character, front porches, alleys, consistent palettes, which means exterior repairs are visible to the street and expected to match.</p>
+<p>The setting at the mouth of the foothills adds a mild exposure gradient: east-side and foothill-facing surfaces take more sun and weather than the sheltered sides, and age a little ahead of them.</p>`,
+    commonRepairs: `<p><strong>The Harris Ranch workload is the newer-home program: drywall settling cracks and nail pops, doors drifting out of square, builder-grade faucet and fixture swaps as the first wave ages, ceiling fans, TV mounting, closet and garage storage, and smart-device installs.</strong> Exterior work runs to porch and railing upkeep, fence and gate repairs matched to community styles, gutter care, and re-caulking where siding meets trim. It is one-visit work almost without exception, which makes list-batching the economical way to book it.</p>`,
+    watchOut: `<p><strong>The Harris Ranch wrinkle is street visibility: in a porch-forward, design-coherent neighborhood, exterior wear shows early and repairs are expected to match exactly.</strong> A weathered rail or a mismatched fence board reads from the sidewalk here in a way it would not on a half-acre lot. Practically that means exterior repairs are match-what-exists work, materials, profiles, colors, and that small exterior upkeep done promptly is what keeps a house looking like it belongs to the street it is on.</p>`,
+    seasonal: `<p><strong>Seasonally Harris Ranch runs the standard valley calendar, young-tree edition: gutters are quick work but still need the fall look, the pre-freeze weatherseal pass and hose-bib protection matter as everywhere, and sprinkler blowout closes October.</strong> Spring means porch, rail, fence, and gate checks, plus sprinkler startup fixes; summer UV works hardest on foothill-facing paint and any south-facing porch detail, where touch-ups are worth an annual look.</p>`,
     faqs: [
       {
-        question: 'What does it cost to build in Harris Ranch?',
+        question: 'What do Harris Ranch homes typically need?',
         answer:
-          'A custom home follows the standard band of $250 to $400 per finished square foot, excluding land, with serviced-lot site work of $25,000 to $50,000. Parcels toward the eastern edge with real slope cost more, because excavation, retaining, and foundation work all scale with grade, and on steep ground the foothills reference above $450 becomes more accurate.',
+          'The newer-home canon: settling drywall repairs, door adjustments, builder-grade fixture swaps as components hit their first replacement age, fans, mounts, storage installs, and caulk refresh. Exteriors need porch, rail, fence, and gutter upkeep matched to community styles. Nearly all of it is one-visit work.',
       },
       {
-        question: 'Are there design guidelines in Harris Ranch?',
+        question: 'Do you match community styles on exterior repairs?',
         answer:
-          'Yes. As a planned community it has a design framework governing elevations, exterior materials, and how homes address the street, administered through an architectural review process separate from the city building permit. Read the guidelines before the elevations are drawn, and run the review in parallel with plan review rather than sequentially.',
+          'Yes, repairs are matched to existing materials, profiles, and colors, which in a design-coherent neighborhood is the requirement anyway. If your specific repair type needs community approval first, share the guideline and we will work to it.',
       },
       {
-        question: 'Who issues building permits in Harris Ranch?',
+        question: 'What does handyman work cost in Harris Ranch?',
         answer:
-          'The City of Boise, as part of Ada County. The permit package is the standard one for a new home: site plan, architectural set, stamped structural engineering, energy compliance documentation, and utility will-serve confirmation. Community architectural review is separate and is administered by the community rather than by the city.',
+          'Valley-standard: most single repairs run $100 to $500 and our services carry flat starting prices from $145. Punch-list batching is the money move for homes this age, one visit clearing eight or ten small items costs far less per item than separate calls.',
       },
       {
-        question: 'Are Harris Ranch lots serviced?',
+        question: 'My home is still under builder warranty: should I call you or the builder?',
         answer:
-          'Yes. As a planned community the utilities are in and at the property line, which puts site work in the $25,000 to $50,000 band covering excavation, grading, drainage, the driveway approach, and connections. That predictability is one of the main practical advantages of building in a planned community rather than on raw ground.',
+          'The builder first, for anything the warranty covers, document settling items and submit them before the warranty window closes, typically at one year. We handle what the warranty does not cover, and everything after it expires, which is when the punch-list pattern begins.',
       },
       {
-        question: 'What usually limits the plan on a Harris Ranch lot?',
+        question: 'How do I book?',
         answer:
-          'Setbacks, lot coverage, and the design guidelines, in combination. Utilities are not the constraint because they are already there. Have the buildable envelope drawn on the specific parcel and read the guidelines with your intended plan in mind, because between them they determine footprint, storey count, and often garage placement more decisively than preference does.',
+          'Send your list with photos through the contact page. Quotes come back flat, usually within a day, and most Harris Ranch visits are scheduled within the week and completed in one trip with materials in hand.',
       },
     ],
   },
@@ -650,31 +644,30 @@ const PLACES: PlaceGuide[] = [
 
 function buildLocationGuide(p: PlaceGuide): GuidePageData {
   const county = countyLabel(p.county);
-  const otherCounty = p.county === 'ada' ? 'Canyon County' : 'Ada County';
 
-  const permitCallout =
-    `<div class="callout note"><p class="callout-label">${p.name}: permit snapshot</p>` +
-    `<p>New home permits for ${p.name} route through <strong>${county}</strong>, which uses different portals and a different review cadence from ${otherCounty}. ` +
-    `The package includes a site plan, an architectural set, stamped structural engineering, energy compliance documentation, and either utility will-serve letters or well and septic approvals. ` +
-    `Septic permits for parcels on private systems go through Central District Health. See <a href="/blog/ada-vs-canyon-county-permit-timelines">Ada vs Canyon County permit timelines</a>.</p></div>`;
+  const coverageCallout =
+    `<div class="callout note"><p class="callout-label">${p.name}: service snapshot</p>` +
+    `<p>${p.name} is in <strong>${county}</strong> and sits fully inside our Treasure Valley service area. ` +
+    `We handle drywall repair, minor plumbing and electrical, carpentry and trim, painting, mounting and assembly, fence, deck, and gutter repair, and seasonal maintenance, with flat quotes from photos and one-trip completion as the goal. ` +
+    `Jobs that need a licensed specialty trade or a major permit get named as such at the quote, see <a href="/resources/ada-canyon-permit-flow">when a home repair needs a permit</a>.</p></div>`;
 
   const content = [
-    permitCallout,
-    `<h2 id="building-here">What building in ${p.name} actually involves</h2>`,
-    p.landscape,
-    `<h2 id="lots">Lots and land in ${p.name}</h2>`,
-    p.lots,
-    `<p>Our <a href="/guides/buying-land-to-build-boise">guide to buying land to build on</a> covers the full diligence list, and a written <a href="/services/lot-evaluation">lot evaluation</a> at $950 to $3,500 documents it for a specific parcel before your inspection period closes.</p>`,
+    coverageCallout,
+    `<h2 id="housing-stock">What ${p.name} homes are like, and why it matters</h2>`,
+    p.housingStock,
+    `<h2 id="common-repairs">The repairs ${p.name} homes actually need</h2>`,
+    p.commonRepairs,
+    `<p>For typical prices on all of this, see the <a href="/guides/boise-home-repair-cost-guide">Boise home repair cost guide</a>, most single repairs across the valley land between $100 and $500, and our services carry flat starting prices from $145.</p>`,
     `<h2 id="watch-out">The thing that catches people out here</h2>`,
     p.watchOut,
-    `<h2 id="budget">What a ${p.name} build costs</h2>`,
-    p.budget,
-    `<p>For the full picture of what moves a construction budget, see the <a href="/guides/boise-home-building-cost-guide">Boise home building cost guide</a>, or run your size and finish level through the <a href="/#calculator">estimator</a> for a starting range.</p>`,
-    `<h2 id="how-we-build">How we work in ${p.name}</h2>`,
-    `<p><strong>We handle design, engineering, permitting, and construction under one contract, which means one accountable team from the first drawing to handover.</strong> That includes the ${county} submissions and inspections, the utility applications, and where relevant the septic approval through Central District Health. You get a line-item budget before we break ground, a published draw schedule, a written progress update every week, and a one-year workmanship warranty after possession. Our <a href="/guides/boise-home-building-process-guide">process guide</a> walks through every stage in order.</p>`,
-    `<p>Services relevant here: <a href="/services/custom-home-builder">custom home building</a>, <a href="/services/semi-custom-homes">semi-custom homes</a>, <a href="/services/build-on-your-lot">build on your lot</a>, and <a href="/services/home-plans-design">home plans and design</a>. See also <a href="/areas/${p.citySlug}">our ${p.citySlug === p.name.toLowerCase() ? p.name : p.citySlug} service area page</a> and the <a href="/guides/treasure-valley-home-building-guide">Treasure Valley home building guide</a>.</p>`,
-    `<h2 id="next-steps">Start with the parcel</h2>`,
-    `<p>The fastest way to get a real answer about building in ${p.name} is to tell us about the specific parcel, because that is what determines the site budget and frequently the plan. <a href="/contact">Send us the address or parcel number</a> and we will tell you what we see, or start with the <a href="/#calculator">build cost estimator</a> for a planning range.</p>`,
+    `<h2 id="seasonal">Seasonal maintenance in ${p.name}</h2>`,
+    p.seasonal,
+    `<p>The full season-by-season checklist for Treasure Valley homes is in <a href="/guides/boise-home-maintenance-guide">the complete Boise home maintenance guide</a>, with a printable version on the <a href="/resources">resources page</a>.</p>`,
+    `<h2 id="how-we-work">How we work in ${p.name}</h2>`,
+    `<p><strong>Send the list with photos, get a flat quote, and we aim to finish in one trip.</strong> The quote names the scope and the price before we arrive, and it does not move unless the scope does, in which case you approve the change first. Batching several small jobs into one visit spreads the trip cost and is the cheapest way to buy this kind of work anywhere in the valley, and especially outside the core cities. Our labor carries a workmanship guarantee, and anything on your list that belongs with a licensed specialty trade gets said plainly at the quote stage.</p>`,
+    `<p>Services relevant here: <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing</a>, <a href="/services/electrical-repairs">minor electrical</a>, <a href="/services/carpentry-trim-repair">carpentry and trim</a>, <a href="/services/painting-touch-ups">painting</a>, <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/fence-deck-gutter-repair">fence, deck, and gutter repair</a>, and <a href="/services/home-maintenance">home maintenance</a>. See also <a href="/areas/${p.citySlug}">our ${p.citySlug} service area page</a> and <a href="/guides/hire-a-handyman-treasure-valley">how to hire a handyman in the Treasure Valley</a>.</p>`,
+    `<h2 id="next-steps">Start with the list</h2>`,
+    `<p>The fastest way to get a real answer about a repair in ${p.name} is to show it to us: <a href="/contact">send the list and a few photos</a> and we will reply with a flat quote and the earliest slot, usually within a day. No site-visit fee, no obligation, and if something on the list is not a handyman job, we will tell you whose job it is.</p>`,
   ].join('\n');
 
   return {
@@ -684,11 +677,12 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     metaDescription: p.metaDescription,
     excerpt: p.excerpt,
     content,
-    author: 'Boise Construction Co',
-    hubSlug: 'treasure-valley-locations',
+    author: 'Boise Handyman Co',
+    hubSlug: 'costs-and-hiring',
     guideType: p.guideType,
-    tags: [p.citySlug, p.name.toLowerCase(), 'idaho', 'new construction'],
+    tags: [p.citySlug, p.name.toLowerCase(), 'idaho', 'handyman'],
     publishedAt: '2026-06-20',
+    updatedAt: '2026-08-13',
     // Hero imagery comes from the blog image registry (see
     // scripts/generate-blog-image-registry.ts), which maps each location guide
     // to its own city streetscape. An explicit override here used to point at
@@ -699,13 +693,13 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     faqs: p.faqs,
     linkedCities: [p.citySlug],
     relatedLinks: [
-      { url: '/guides/treasure-valley-home-building-guide', anchor: 'Treasure Valley Home Building Guide' },
-      { url: `/areas/${p.citySlug}`, anchor: `Building in ${p.name}` },
-      { url: '/guides/boise-home-building-cost-guide', anchor: 'Home building costs' },
-      { url: '/guides/buying-land-to-build-boise', anchor: 'Buying land to build on' },
-      { url: '/services/custom-home-builder', anchor: 'Custom home building' },
+      { url: `/areas/${p.citySlug}`, anchor: `Handyman services in ${p.name}` },
+      { url: '/guides/boise-home-repair-cost-guide', anchor: 'Boise Home Repair Cost Guide' },
+      { url: '/guides/hire-a-handyman-treasure-valley', anchor: 'How to hire a handyman' },
+      { url: '/guides/boise-home-maintenance-guide', anchor: 'Boise home maintenance guide' },
+      { url: '/services/home-maintenance', anchor: 'Caulking & home maintenance' },
     ],
-    primaryKeyword: `home builder ${p.name.toLowerCase()}`,
+    primaryKeyword: `handyman ${p.name.toLowerCase()}`,
   };
 }
 

@@ -8,7 +8,7 @@ export interface GalleryProject {
 }
 
 /**
- * Empty until real, photographed homes exist for Boise Construction Co.
+ * Empty until real, photographed homes exist for Boise Handyman Co.
  *
  * The previous entries were placeholder remodeling projects carrying specific
  * factual claims ("a 1990s Eagle home", "600 sq ft master suite addition").

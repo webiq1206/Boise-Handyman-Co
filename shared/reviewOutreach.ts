@@ -13,7 +13,7 @@ export const REVIEW_TARGETS = {
 } as const;
 
 export function buildInPersonAskScript(city: string, projectType: string): string {
-  return `Reviews from ${city} homeowners are how neighbors find us. Would you mind sharing what the ${projectType} was like - especially anything about communication or the timeline?`;
+  return `Reviews from ${city} homeowners are how neighbors find us. Would you mind sharing what the ${projectType} was like - especially anything about communication or how the visit went?`;
 }
 
 export function buildReviewResponseTemplate(params: {
@@ -23,7 +23,7 @@ export function buildReviewResponseTemplate(params: {
   detailTheyMentioned: string;
 }): string {
   const { customerName, city, projectType, detailTheyMentioned } = params;
-  return `Thank you, ${customerName}. We enjoyed your ${city} ${projectType} - especially ${detailTheyMentioned}. Glad the weekly updates and written scope kept things clear. - The ${GBP_NAP.name} team`;
+  return `Thank you, ${customerName}. We enjoyed your ${city} ${projectType} - especially ${detailTheyMentioned}. Glad the upfront quote and clear scope kept things simple. - The ${GBP_NAP.name} team`;
 }
 
 export function getReviewLink(): string {
@@ -53,9 +53,9 @@ export function buildDay1ReviewEmail(params: ReviewEmailParams): {
 
   const bodyText = `Hi ${customerFirstName},
 
-Thank you again for trusting us with your ${projectType} in ${city}. We hope the final walkthrough left everything clear and complete.
+Thank you again for trusting us with your ${projectType} in ${city}. We hope everything was left finished, clean, and working the way it should.
 
-If you have a moment, a Google review helps other ${city} families find a builder they can trust. No script needed - whatever stood out to you (communication, schedule, workmanship) is perfect.
+If you have a moment, a Google review helps other ${city} families find a handyman they can trust. No script needed - whatever stood out to you (communication, scheduling, workmanship) is perfect.
 
 Leave a review: ${reviewLink}
 
@@ -68,8 +68,8 @@ ${GBP_NAP.website}`;
 
   const bodyHtml = `
 <p>Hi ${customerFirstName},</p>
-<p>Thank you again for trusting us with your ${projectType} in ${city}. We hope the final walkthrough left everything clear and complete.</p>
-<p>If you have a moment, a Google review helps other ${city} families find a builder they can trust. No script needed - whatever stood out to you (communication, schedule, workmanship) is perfect.</p>
+<p>Thank you again for trusting us with your ${projectType} in ${city}. We hope everything was left finished, clean, and working the way it should.</p>
+<p>If you have a moment, a Google review helps other ${city} families find a handyman they can trust. No script needed - whatever stood out to you (communication, scheduling, workmanship) is perfect.</p>
 <p><a href="${reviewLink}">Leave a review on Google</a></p>
 <p>Questions? Call or text <a href="tel:2084771169">${GBP_NAP.phone}</a> anytime.</p>
 <p>- The ${GBP_NAP.name} team<br>${GBP_NAP.name}<br>${GBP_NAP.phone}<br><a href="${GBP_NAP.website}">${GBP_NAP.website.replace(/^https?:\/\//, '')}</a></p>`;
@@ -90,7 +90,7 @@ export function buildDay7ReviewReminderEmail(params: ReviewEmailParams): {
 
   const bodyText = `Hi ${customerFirstName},
 
-Just a gentle follow-up from your ${city} ${projectType}. If you are willing to share a quick Google review, it genuinely helps families researching builders in the Treasure Valley.
+Just a gentle follow-up from your ${city} ${projectType}. If you are willing to share a quick Google review, it genuinely helps families looking for a reliable handyman in the Treasure Valley.
 
 ${reviewLink}
 
@@ -101,7 +101,7 @@ ${GBP_NAP.phone}`;
 
   const bodyHtml = `
 <p>Hi ${customerFirstName},</p>
-<p>Just a gentle follow-up from your ${city} ${projectType}. If you are willing to share a quick Google review, it genuinely helps families researching builders in the Treasure Valley.</p>
+<p>Just a gentle follow-up from your ${city} ${projectType}. If you are willing to share a quick Google review, it genuinely helps families looking for a reliable handyman in the Treasure Valley.</p>
 <p><a href="${reviewLink}">Leave a review on Google</a></p>
 <p>Either way, thank you again for choosing ${GBP_NAP.name}.</p>
 <p>- The ${GBP_NAP.name} team<br>${GBP_NAP.phone}</p>`;
@@ -109,7 +109,7 @@ ${GBP_NAP.phone}`;
   return { subject, preview, bodyText, bodyHtml };
 }
 
-/** SMS closeout text for project manager to send same evening as walkthrough. */
+/** SMS closeout text to send the same evening the job wraps up. */
 export function buildCloseoutSmsText(city: string, projectType: string): string {
   return `Thanks again for trusting us with your ${projectType} in ${city}. If you have 2 minutes, a Google review helps neighbors find us: ${getReviewLink()}`;
 }

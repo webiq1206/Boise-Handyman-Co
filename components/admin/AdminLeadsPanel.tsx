@@ -145,14 +145,17 @@ interface Lead {
   }>;
 }
 
-// Priority services data for service names
+// Priority services data for service names. Mirrors the live handyman catalog
+// in shared/contentData.ts; anything not listed falls back to a title-cased slug.
 const PRIORITY_SERVICES = [
-  { slug: "kitchen-remodel", name: "Kitchen Remodel" },
-  { slug: "bathroom-remodel", name: "Bathroom Remodel" },
-  { slug: "whole-home-remodel", name: "Whole-Home Remodel" },
-  { slug: "room-addition", name: "Room Addition" },
-  { slug: "basement-finish", name: "Basement Finish" },
-  { slug: "outdoor-living", name: "Outdoor Living" },
+  { slug: "drywall-repair", name: "Drywall Repair & Patching" },
+  { slug: "painting-touch-ups", name: "Interior & Exterior Painting" },
+  { slug: "plumbing-repairs", name: "Minor Plumbing Repairs" },
+  { slug: "electrical-repairs", name: "Minor Electrical Repairs" },
+  { slug: "carpentry-trim-repair", name: "Carpentry & Trim Repair" },
+  { slug: "mounting-assembly", name: "Mounting & Assembly" },
+  { slug: "fence-deck-gutter-repair", name: "Fence, Deck & Gutter Repair" },
+  { slug: "home-maintenance", name: "Caulking & Home Maintenance" },
 ];
 
 function formatMeasurement(serviceId: string, data: ServiceDataEntry | undefined): string {
@@ -197,7 +200,7 @@ function useEnvironment() {
   return useMemo(() => {
     if (typeof window === 'undefined') return { isProduction: false, environmentLabel: 'Development', hostname: '' };
     const hostname = window.location.hostname;
-    const isProduction = hostname === 'boiseconstruction.co' || hostname === 'www.boiseconstruction.co';
+    const isProduction = hostname === 'boisehandyman.co' || hostname === 'www.boisehandyman.co';
     return {
       isProduction,
       environmentLabel: isProduction ? 'Production' : 'Development',
@@ -1617,12 +1620,12 @@ function AdminDashboardContent({ embedded = false }: { embedded?: boolean }) {
               <p className="text-sm text-amber-700 dark:text-amber-300">
                 You&apos;re viewing the development database. For production leads, visit{" "}
                 <a 
-                  href="https://boiseconstruction.co/admin" 
+                  href="https://boisehandyman.co/admin" 
                   className="underline font-medium hover:no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  boiseconstruction.co/admin
+                  boisehandyman.co/admin
                 </a>
               </p>
             </div>

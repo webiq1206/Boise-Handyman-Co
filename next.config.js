@@ -4,6 +4,7 @@ const {
   GUIDE_REDIRECTS,
   HUB_REDIRECTS,
   SERVICE_SLUG_REDIRECTS,
+  SERVICE_INDEX_REDIRECTS,
 } = require('./shared/content/contentRedirects');
 
 process.env.WS_NO_BUFFER_UTIL = '1';
@@ -144,9 +145,14 @@ const nextConfig = {
 
     // Renamed downloads. A PDF URL is the kind of link that gets pasted into an
     // email and clicked a year later, so the old filenames keep resolving.
+    // Remodeling-era and construction-era names both point straight at the
+    // current handyman resources (one hop, no chains).
     redirects.push(
-      ...r('/downloads/remodel-budget-worksheet.pdf', '/downloads/new-home-budget-worksheet.pdf'),
-      ...r('/downloads/kitchen-bath-planning-checklist.pdf', '/downloads/lot-evaluation-checklist.pdf'),
+      ...r('/downloads/remodel-budget-worksheet.pdf', '/downloads/home-maintenance-checklist.pdf'),
+      ...r('/downloads/kitchen-bath-planning-checklist.pdf', '/downloads/home-repair-priority-worksheet.pdf'),
+      ...r('/downloads/new-home-budget-worksheet.pdf', '/downloads/home-maintenance-checklist.pdf'),
+      ...r('/downloads/lot-evaluation-checklist.pdf', '/downloads/home-repair-priority-worksheet.pdf'),
+      ...r('/downloads/ada-canyon-permit-guide.pdf', '/downloads/home-repair-permit-guide.pdf'),
     );
 
     // Retired service slugs, both the service page and every city variant. The
@@ -158,6 +164,18 @@ const nextConfig = {
       redirects.push({
         source: `/services/${oldSlug}/:city`,
         destination: `/services/${newSlug}/:city`,
+        permanent: true,
+      });
+    }
+
+    // Retired services with no honest handyman equivalent: the base URL lands
+    // on the services index (which states scope plainly) and city children
+    // land on the matching area page so the local intent survives.
+    for (const oldSlug of SERVICE_INDEX_REDIRECTS) {
+      redirects.push(...r(`/services/${oldSlug}`, '/services'));
+      redirects.push({
+        source: `/services/${oldSlug}/:city`,
+        destination: '/areas/:city',
         permanent: true,
       });
     }

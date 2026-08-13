@@ -37,6 +37,8 @@ import {
   finishLevelSchema,
   projectTypeSchema,
   refinementsSchema,
+  PROJECT_TYPE_VALUES,
+  FINISH_LEVEL_VALUES,
 } from "@/shared/estimatePayload";
 import { SERVICES, CITIES } from "@/shared/contentData";
 import { HOW_WE_BUILD_STEPS } from "@/shared/siteContent";
@@ -141,32 +143,23 @@ export const ASSISTANT_TOOLS: Anthropic.Messages.Tool[] = [
   {
     name: "calculate_estimate",
     description:
-      "Calculate the planning price range for a construction project using Boise Construction Co's line-item cost engine - the same engine behind the on-page estimator. Call this EVERY time you need a price, and call it again whenever the visitor changes any detail. Never state, estimate or adjust a dollar figure yourself. Works for new construction (custom-home, semi-custom-home, build-on-your-lot, shop-home) and remodels (kitchen, bathroom, whole-home, addition, adu, basement).",
+      "Calculate a planning price range using the site's legacy project cost engine - the same engine behind the on-page estimator. Call this EVERY time you need a price for one of its project types, and call it again whenever the visitor changes any detail. Never state, estimate or adjust a dollar figure yourself. NOTE: this engine prices larger project types that Boise Handyman Co does NOT take on itself; use it only when a visitor explicitly wants budget context for one of those, and make clear the company refers that scale of work out. For repair and small-job pricing use price_re10_repairs or the planning-from figures in get_business_info.",
     input_schema: {
       type: "object",
       properties: {
         project: {
           type: "string",
-          enum: [
-            "custom-home",
-            "semi-custom-home",
-            "build-on-your-lot",
-            "shop-home",
-            "kitchen",
-            "bathroom",
-            "whole-home",
-            "addition",
-            "adu",
-            "basement",
-          ],
+          // Kept in lockstep with the shared engine so this list can never
+          // drift from what resolveQuotedRange can actually price.
+          enum: [...PROJECT_TYPE_VALUES],
         },
         finish: {
           type: "string",
-          enum: ["refresh", "mid-range", "high-end", "luxury"],
+          enum: [...FINISH_LEVEL_VALUES],
           description:
-            "Finish level. 'mid-range' is the typical default when the visitor is unsure. 'refresh' is not offered for additions, ADUs or basements.",
+            "Finish level. 'mid-range' is the typical default when the visitor is unsure.",
         },
-        sqft: { type: "integer", description: "Project square footage (finished living space)." },
+        sqft: { type: "integer", description: "Project square footage the engine should price." },
         refinements: REFINEMENTS_JSON_SCHEMA,
       },
       required: ["project", "finish", "sqft"],
@@ -175,7 +168,7 @@ export const ASSISTANT_TOOLS: Anthropic.Messages.Tool[] = [
   {
     name: "price_re10_repairs",
     description:
-      "Price an RE-10 repair list (Idaho real-estate transaction repairs) using the company's per-item repair engine. Items whose kind is not in the priced catalog are returned as 'needs review' - tell the visitor those items need a human look rather than guessing a price.",
+      "Price a repair list using the company's per-item repair engine. Built for RE-10 (Idaho real-estate transaction) repair lists, and equally correct for any homeowner's list of small repairs of the kinds in the catalog. Items whose kind is not in the priced catalog are returned as 'needs review' - tell the visitor those items need a human look rather than guessing a price.",
     input_schema: {
       type: "object",
       properties: {
@@ -212,7 +205,7 @@ export const ASSISTANT_TOOLS: Anthropic.Messages.Tool[] = [
   {
     name: "get_business_info",
     description:
-      "Look up verified facts about Boise Construction Co: services offered with planning-from prices, service areas, the build process, and contact details. Use this instead of recalling facts from memory.",
+      "Look up verified facts about Boise Handyman Co: services offered with planning-from prices, service areas, how the process works, and contact details. Use this instead of recalling facts from memory.",
     input_schema: {
       type: "object",
       properties: {
@@ -227,7 +220,7 @@ export const ASSISTANT_TOOLS: Anthropic.Messages.Tool[] = [
   {
     name: "submit_lead",
     description:
-      "Submit the visitor's contact details (and their estimate, if one was calculated in this conversation) to the Boise Construction Co team. Only call this after the visitor has explicitly agreed to be contacted AND has given you their name and email. Never invent or assume contact details.",
+      "Submit the visitor's contact details (and their estimate, if one was calculated in this conversation) to the Boise Handyman Co team. Only call this after the visitor has explicitly agreed to be contacted AND has given you their name and email. Never invent or assume contact details.",
     input_schema: {
       type: "object",
       properties: {
@@ -235,7 +228,7 @@ export const ASSISTANT_TOOLS: Anthropic.Messages.Tool[] = [
         email: { type: "string" },
         phone: { type: "string", description: "Optional. 10-digit US phone if provided." },
         zip: { type: "string" },
-        buildArea: { type: "string", description: "City or area they plan to build in." },
+        buildArea: { type: "string", description: "City or area where the work is needed." },
         notes: { type: "string", description: "Anything else the visitor asked to pass along." },
         estimate: {
           type: "object",
@@ -377,7 +370,7 @@ function executeGetBusinessInfo(input: unknown): string {
           description: s.shortDescription,
           page: `/services/${s.slug}`,
         })),
-        note: "planningFrom figures are budget floors for a modest build of that type, not bids.",
+        note: "planningFrom figures are per-visit starting points for a small job of that type, not bids.",
       });
     case "service_areas":
       return JSON.stringify({
@@ -404,7 +397,7 @@ function executeGetBusinessInfo(input: unknown): string {
         location: SITE_CONFIG.address.cityState,
         serviceArea: SITE_CONFIG.address.serviceArea,
         summary:
-          "Custom home builder serving the Treasure Valley. Line-item budgets before construction, written change orders only, weekly written updates, workmanship warranty.",
+          "Local handyman service for small repair, maintenance, and install jobs across the Treasure Valley. Upfront quotes before work starts, an agreed arrival time rather than a half-day window, most jobs done in one trip, and workmanship made right if it ever falls short. Licensing and insurance details available on request.",
       });
   }
 }
@@ -464,7 +457,7 @@ async function executeSubmitLead(input: unknown, origin: string): Promise<string
         zip: data.zip,
         message: [
           "Submitted via assistant chat",
-          data.buildArea ? `Planned build area: ${data.buildArea}` : null,
+          data.buildArea ? `Job location: ${data.buildArea}` : null,
           data.notes ?? null,
         ]
           .filter(Boolean)

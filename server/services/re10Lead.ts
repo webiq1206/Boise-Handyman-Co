@@ -26,7 +26,7 @@ import {
  * WHICH CRM, AND WHY. This site has two lead stores that look similar and are
  * not. `leads` is the Lead Marketplace - leads get priced, admin-reviewed, and
  * bought by outside contractors through Stripe. An RE-10 belongs in neither
- * half of that: the whole page exists so Boise Construction Co does the work, so
+ * half of that: the whole page exists so Boise Handyman Co does the work, so
  * selling the lead on would be the opposite of the point. `consultationRequests`
  * is where every estimator and consultation lead on this site already lands,
  * and the lead dashboard is where the team actually works them. An RE-10 goes
@@ -282,7 +282,7 @@ export async function deliverRe10Lead(input: Re10DeliveryInput): Promise<Re10Del
     // The dashboard requires an email. Someone who chose phone or text has not
     // given one, and dropping the lead over that would be worse than a
     // placeholder that is obviously a placeholder.
-    email: contact.email || `no-email+${encodeURIComponent(contact.phone || contact.name)}@boiseconstruction.co`,
+    email: contact.email || `no-email+${encodeURIComponent(contact.phone || contact.name)}@boisehandyman.co`,
     phone: contact.phone || undefined,
     propertyAddress: contact.propertyAddress,
     projectTypes: ["RE-10 repairs"],
@@ -298,7 +298,7 @@ export async function deliverRe10Lead(input: Re10DeliveryInput): Promise<Re10Del
     // Passthrough: the dashboard stores this whole object as JSON rather than
     // stripping fields it does not recognise.
     estimate: buildRe10CrmRecord(input) as never,
-    source: "boiseconstruction.co/re-10-repairs-boise",
+    source: "boisehandyman.co/re-10-repairs-boise",
   });
 
   /* 3. Both emails. */
