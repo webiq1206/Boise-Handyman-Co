@@ -2,6 +2,7 @@ import { BLOG_POSTS } from '@/shared/blogContent';
 import { GUIDE_PAGES } from '@/shared/guideContent';
 import { GALLERY_PROJECTS } from '@/shared/galleryData';
 import { guidePath } from '@/shared/contentHubs';
+import { getBlogImageEntry } from '@/shared/blogImages';
 import { getBaseUrl } from '@/lib/seo';
 
 /**
@@ -63,21 +64,26 @@ export async function GET() {
     });
   }
 
+  // Hero imagery lives in the generated registry (shared/blogImageRegistry),
+  // not on the content objects, so resolve each slug through the same lookup
+  // the pages themselves use; an explicit heroImage still wins when present.
   for (const guide of GUIDE_PAGES) {
-    if (!guide.heroImage) continue;
+    const hero = guide.heroImage ?? getBlogImageEntry(guide.slug)?.hero;
+    if (!hero) continue;
     add(`${baseUrl}${guidePath(guide.slug)}`, {
-      loc: absolute(guide.heroImage, baseUrl),
+      loc: absolute(hero, baseUrl),
       title: guide.title,
-      caption: guide.excerpt,
+      caption: getBlogImageEntry(guide.slug)?.alt ?? guide.excerpt,
     });
   }
 
   for (const post of BLOG_POSTS) {
-    if (!post.heroImage) continue;
+    const hero = post.heroImage ?? getBlogImageEntry(post.slug)?.hero;
+    if (!hero) continue;
     add(`${baseUrl}/blog/${post.slug}`, {
-      loc: absolute(post.heroImage, baseUrl),
+      loc: absolute(hero, baseUrl),
       title: post.title,
-      caption: post.excerpt,
+      caption: getBlogImageEntry(post.slug)?.alt ?? post.excerpt,
     });
   }
 
