@@ -66,8 +66,11 @@ function rangeLine(estimate: HandymanEstimate): string {
   return `${formatHandymanCurrency(estimate.priceLow)} to ${formatHandymanCurrency(estimate.priceHigh)}`;
 }
 
-function breakdownTable(estimate: HandymanEstimate): string {
-  const rows = estimate.lines
+function breakdownTable(estimate: HandymanEstimate, hideInternalLines = false): string {
+  const lines = hideInternalLines
+    ? estimate.lines.filter((l) => l.id !== "trip-fee")
+    : estimate.lines;
+  const rows = lines
     .map(
       (line) =>
         `<tr><td style="padding:4px 12px 4px 0;color:#444;">${escapeHtml(line.label)}</td>` +
@@ -141,7 +144,6 @@ export function buildHandymanCustomerEmailHtml(
     <h2 style="color:#111;">Your estimate from ${escapeHtml(SITE_CONFIG.name)}</h2>
     <p style="font-size:14px;">Hi ${escapeHtml(lead.name)}, thanks for telling us about your job. Here is the starting range for the work you described:</p>
     <p style="font-size:22px;color:#111;margin:8px 0;"><strong>${rangeLine(estimate)}</strong></p>
-    ${breakdownTable(estimate)}
     <h3 style="color:#111;margin-bottom:2px;">What you told us</h3>
     ${selectionsList(input)}
     <p style="font-size:13px;color:#444;">Scheduling: ${escapeHtml(`${urgency.label}, ${urgency.sub.toLowerCase()}`)}. City: ${escapeHtml(lead.city)}.</p>

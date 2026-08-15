@@ -16,11 +16,7 @@ import {
 import { CONSTRUCTION_IMAGES } from "@/shared/siteImages";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { Button } from "@/components/ui/button";
-import {
-  HOURLY_RATE_USD,
-  TRIP_FEE_USD,
-  HANDYMAN_RATE_DISCLAIMER,
-} from "@/shared/estimateEngine";
+import { HANDYMAN_RATE_DISCLAIMER } from "@/shared/estimateEngine";
 
 const EstimateCalculator = dynamic(
   () =>
@@ -37,7 +33,7 @@ const EstimateCalculator = dynamic(
 // 25 chars; the branded title lands at 45 with the 20-char suffix.
 const TITLE = "Instant Handyman Estimate";
 const DESCRIPTION =
-  "See a real price range for your repair in about a minute. Pick your tasks, get a trip fee plus hourly breakdown for Boise and the Treasure Valley, then book your visit.";
+  "See a real price range for your repair in about a minute. Pick your tasks and get an instant estimate for Boise and the Treasure Valley, then book your visit.";
 
 /*
  * The rates below render the pricing model on-page. They come straight from
@@ -47,7 +43,7 @@ const DESCRIPTION =
 const FAQS = [
   {
     question: "How does handyman pricing work here?",
-    answer: `Simple math you can check: a $${TRIP_FEE_USD} trip fee once per visit, labor at $${HOURLY_RATE_USD} per hour with a one hour minimum, and a surcharge only if you pick priority (+15%) or same-week emergency (+30%) scheduling. Materials are billed at cost with the receipt. ${HANDYMAN_RATE_DISCLAIMER}`,
+    answer: `Every job is priced the same way: time on the job with a one-hour minimum. Priority scheduling adds 15% and same-week emergency adds 30%. Materials are billed at cost with the receipt. ${HANDYMAN_RATE_DISCLAIMER}`,
   },
   {
     question: "Is the online number a quote?",
@@ -121,9 +117,8 @@ export default function EstimatePage() {
         {/* Direct answer block: what this is, where, and how pricing works. */}
         <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed">
           Boise Handyman Co prices small repairs across Boise and the Treasure
-          Valley the same way every time: a ${TRIP_FEE_USD} trip fee, labor at $
-          {HOURLY_RATE_USD} per hour with a one hour minimum, and materials at
-          cost. Pick your tasks below and see your range in about a minute.
+          Valley the same way every time. Pick your tasks below and see your
+          range in about a minute.
         </p>
         <p className="mt-3 text-sm text-inverse-muted max-w-2xl">
           {HANDYMAN_RATE_DISCLAIMER}
@@ -156,7 +151,7 @@ export default function EstimatePage() {
             <ul className="space-y-3">
               {[
                 "A firm written quote before any work begins",
-                "One trip fee, no matter how many small tasks we knock out",
+                "One visit, no matter how many small tasks we knock out",
                 "Materials billed at cost, receipt included",
                 "A tidy work area and a walkthrough when we finish",
               ].map((bullet) => (

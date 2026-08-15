@@ -287,10 +287,10 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput): Handyma
   const urgencyUpcharge = (baseLabor + baseSupplyRun) * (multiplier - 1);
 
   const lines: HandymanLine[] = [
-    { id: "trip-fee", label: "Trip fee, one visit", amount: TRIP_FEE_USD },
+    { id: "trip-fee", label: "Visit fee", amount: TRIP_FEE_USD },
     {
       id: "labor",
-      label: `Labor, ${formatHours(laborHours)} at $${HOURLY_RATE_USD}/hr`,
+      label: `Labor, ${formatHours(laborHours)}`,
       amount: round2(baseLabor),
     },
   ];
@@ -369,7 +369,7 @@ export const HANDYMAN_RATE_DISCLAIMER =
 
 /** Shown with every estimate: the range is labor only. */
 export const MATERIALS_COST_NOTE =
-  "This estimate covers labor and the trip fee only. Materials are billed at cost with your receipt, whether you supply them or we pick them up.";
+  "This estimate covers your selected tasks only. Materials are billed at cost with your receipt, whether you supply them or we pick them up.";
 
 /** Shown when totalHours exceeds MAX_REASONABLE_HOURS. */
 export const OVERSIZED_JOB_NOTE =

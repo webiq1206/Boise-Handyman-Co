@@ -511,7 +511,7 @@ export function EstimateCalculator({
           </div>
           <p className="mt-2 text-[11.5px] text-inverse-muted/90">
             Either way, materials are billed at cost with the receipt. The
-            estimate itself covers labor and the trip fee only.
+            estimate itself covers your selected tasks only.
           </p>
         </div>
 

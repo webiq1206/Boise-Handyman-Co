@@ -147,7 +147,7 @@ export function EstimateResultPanel({
         <div className="brc-label text-inverse-muted">Estimated range</div>
         {estimate && (
           <div className="text-[10px] tracking-wide uppercase px-2 py-1 rounded-sm bg-inverse-foreground/15 text-inverse-foreground/90">
-            Labor only
+            Before materials
           </div>
         )}
       </div>
@@ -172,24 +172,11 @@ export function EstimateResultPanel({
             {HANDYMAN_RATE_DISCLAIMER}
           </p>
 
-          {/* The breakdown IS the pricing model; showing it is the trust move. */}
           <div
-            className="border-y border-inverse-foreground/10 py-3 mb-4 space-y-2"
+            className="border-y border-inverse-foreground/10 py-3 mb-4"
             data-testid="estimate-breakdown"
           >
-            {estimate.lines.map((line) => (
-              <div
-                key={line.id}
-                className="flex items-baseline justify-between gap-3 text-xs text-inverse-muted"
-                data-testid={`estimate-line-${line.id}`}
-              >
-                <span>{line.label}</span>
-                <span className="brc-display-num tabular-nums text-inverse-foreground/90">
-                  {formatHandymanCurrency(line.amount)}
-                </span>
-              </div>
-            ))}
-            <div className="flex items-baseline justify-between gap-3 pt-1 text-xs text-inverse-foreground border-t border-inverse-foreground/10">
+            <div className="flex items-baseline justify-between gap-3 text-xs text-inverse-foreground">
               <span>Estimated visit total</span>
               <span className="brc-display-num tabular-nums">
                 {formatHandymanCurrency(estimate.total)}
