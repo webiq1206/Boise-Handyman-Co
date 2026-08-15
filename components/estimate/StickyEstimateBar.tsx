@@ -24,6 +24,8 @@ export interface StickyEstimateBarProps {
   ctaLabel: string;
   ctaDisabled?: boolean;
   onCta: () => void;
+  /** When false, dollar amounts are blurred until the customer submits contact info. */
+  revealRange?: boolean;
 }
 
 /**
@@ -39,6 +41,7 @@ export function StickyEstimateBar({
   ctaLabel,
   ctaDisabled = false,
   onCta,
+  revealRange = true,
 }: StickyEstimateBarProps) {
   const [expanded, setExpanded] = useState(false);
   const isInline = mode === "inline";
@@ -85,12 +88,16 @@ export function StickyEstimateBar({
                 className="flex items-baseline justify-between gap-3 text-xs leading-snug text-muted-foreground"
               >
                 <span>{line.label}</span>
-                <span className="tabular-nums">{formatHandymanCurrency(line.amount)}</span>
+                <span className={cn("tabular-nums", !revealRange && "blur-sm select-none")} aria-hidden={!revealRange}>
+                  {formatHandymanCurrency(line.amount)}
+                </span>
               </li>
             ))}
             <li className="flex items-baseline justify-between gap-3 text-xs leading-snug text-foreground border-t border-border pt-1.5">
               <span>Estimated visit total</span>
-              <span className="tabular-nums">{formatHandymanCurrency(estimate.total)}</span>
+              <span className={cn("tabular-nums", !revealRange && "blur-sm select-none")} aria-hidden={!revealRange}>
+                {formatHandymanCurrency(estimate.total)}
+              </span>
             </li>
           </ul>
           <p className="text-[10px] leading-snug text-muted-foreground">
@@ -115,10 +122,11 @@ export function StickyEstimateBar({
             </span>
             {estimate ? (
               <span
-                className="block text-lg leading-tight brc-display-num tabular-nums text-foreground"
+                className={cn("block text-lg leading-tight brc-display-num tabular-nums text-foreground", !revealRange && "blur-sm select-none")}
                 data-testid="mobile-estimate-range"
                 aria-live="polite"
                 aria-atomic="true"
+                aria-hidden={!revealRange}
               >
                 <AnimatedPrice value={estimate.priceLow} />
                 <span aria-hidden="true"> to </span>

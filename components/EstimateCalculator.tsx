@@ -545,8 +545,8 @@ export function EstimateCalculator({
     <WizardStep
       tone="inverse"
       eyebrow="Your estimate"
-      heading="Here is your starting range"
-      instructions="Tell us where the work is and how to reach you, and we will email this estimate and follow up with a firm written quote."
+      heading="One last step"
+      instructions="Tell us where the work is and how to reach you, and we will email your range and follow up with a firm written quote."
       data-testid="step-contact"
     >
       <div className="space-y-5">
@@ -554,6 +554,7 @@ export function EstimateCalculator({
           estimate={estimate}
           summary={summary}
           progress={{ job: true, tasks: true, details: true }}
+          revealRange={submitted}
         />
 
         <form
@@ -728,7 +729,7 @@ export function EstimateCalculator({
           {!inModal && wizStep !== "contact" && (
             <div className="hidden lg:block">
               <div className="sticky top-24">
-                <EstimateResultPanel estimate={estimate} summary={summary} progress={progress} />
+                <EstimateResultPanel estimate={estimate} summary={summary} progress={progress} revealRange={submitted} />
               </div>
             </div>
           )}
@@ -765,6 +766,7 @@ export function EstimateCalculator({
             ctaLabel="Finish up"
             ctaDisabled={!hasWork}
             onCta={() => goTo(stepDone("details") ? "contact" : "details")}
+            revealRange={submitted}
           />
         )}
       </div>
@@ -813,6 +815,7 @@ export function EstimateCalculator({
           ctaLabel="Finish up"
           ctaDisabled={!hasWork}
           onCta={() => goTo(stepDone("details") ? "contact" : "details")}
+          revealRange={submitted}
         />
       )}
     </>
