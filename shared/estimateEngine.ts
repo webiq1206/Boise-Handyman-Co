@@ -213,6 +213,17 @@ export interface HandymanLine {
   amount: number;
 }
 
+/**
+ * A customer-facing line item. The visit fee and hourly rate are absorbed
+ * silently; each entry shows a task name (or urgency/supply-run) with a
+ * pre-computed price.
+ */
+export interface CustomerTaskLine {
+  id: string;
+  label: string;
+  amount: number;
+}
+
 export interface HandymanEstimate {
   /** Task hours after the one-hour minimum, before the supply run. */
   laborHours: number;
@@ -221,6 +232,11 @@ export interface HandymanEstimate {
   urgency: UrgencyLevel;
   materials: MaterialsPlan;
   lines: HandymanLine[];
+  /**
+   * Customer-facing breakdown: one line per selected task (visit fee and hourly
+   * rate folded in), plus optional urgency and supply-run lines.
+   */
+  customerLines: CustomerTaskLine[];
   /** Trip fee + labor at the urgency-adjusted rate, unrounded midpoint. */
   total: number;
   /** The quoted band shown to the visitor. */
@@ -315,12 +331,71 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput): Handyma
   const taskCount =
     input.tasks.filter((t) => findTaskOption(t.taskId) !== null).length + (otherHours > 0 ? 1 : 0);
 
+  // ── Customer-facing lines: task names with prices baked in ──────────────
+  // All amounts are whole dollars so the sum of displayed line amounts always
+  // equals the displayed total (formatHandymanCurrency rounds to whole dollars).
+  // We use the largest-remainder method to distribute each pool exactly.
+  const displayTotal = Math.round(total);
+  const urgencyDollars = multiplier > 1 ? Math.round(urgencyUpcharge) : 0;
+  const supplyRunDollars = supplyRunHours > 0 ? Math.round(baseSupplyRun) : 0;
+  // The task pool is whatever remains after urgency and supply-run are claimed.
+  const taskPoolDollars = displayTotal - urgencyDollars - supplyRunDollars;
+
+  // Collect per-task entries with their raw unrounded hours for proportional split.
+  const perTaskEntries: { id: string; label: string; rawHrs: number }[] = [];
+  for (const sel of input.tasks) {
+    const task = findTaskOption(sel.taskId);
+    if (!task) continue;
+    const qty = clampQuantity(sel.quantity, task);
+    const label = qty > 1 ? `${task.label} \u00d7${qty}` : task.label;
+    perTaskEntries.push({ id: task.id, label, rawHrs: task.hours * qty });
+  }
+  if (otherHours > 0 && input.otherJob) {
+    const desc = input.otherJob.description.trim();
+    perTaskEntries.push({
+      id: "other-job",
+      label: desc.length > 0 ? desc : OTHER_JOB_SIZES[input.otherJob.size].label,
+      rawHrs: otherHours,
+    });
+  }
+
+  // Distribute taskPoolDollars across task entries proportionally, using the
+  // largest-remainder method so integer amounts sum exactly to taskPoolDollars.
+  const totalRawHrs = perTaskEntries.reduce((s, e) => s + e.rawHrs, 0);
+  const exactShares = perTaskEntries.map((e) =>
+    totalRawHrs > 0 ? taskPoolDollars * (e.rawHrs / totalRawHrs) : taskPoolDollars / perTaskEntries.length
+  );
+  const floorShares = exactShares.map(Math.floor);
+  const remainder = taskPoolDollars - floorShares.reduce((s, v) => s + v, 0);
+  const fractionals = exactShares
+    .map((v, i) => ({ i, frac: v - Math.floor(v) }))
+    .sort((a, b) => b.frac - a.frac);
+  for (let k = 0; k < remainder; k++) floorShares[fractionals[k].i]++;
+
+  const customerLines: CustomerTaskLine[] = perTaskEntries.map((entry, i) => ({
+    id: entry.id,
+    label: entry.label,
+    amount: floorShares[i],
+  }));
+  if (supplyRunHours > 0) {
+    customerLines.push({ id: "supply-run", label: "Materials pickup", amount: supplyRunDollars });
+  }
+  if (multiplier > 1) {
+    const surcharge = URGENCY_LEVELS[input.urgency].surchargeLabel ?? "";
+    customerLines.push({
+      id: "urgency",
+      label: `${URGENCY_LEVELS[input.urgency].label} scheduling${surcharge ? ` (${surcharge})` : ""}`,
+      amount: urgencyDollars,
+    });
+  }
+
   return {
     laborHours,
     totalHours,
     urgency: input.urgency,
     materials: input.materials,
     lines,
+    customerLines,
     total,
     priceLow: roundToStep(total * RANGE_LOW_FACTOR, RANGE_ROUNDING_USD),
     priceHigh: roundToStep(total * RANGE_HIGH_FACTOR, RANGE_ROUNDING_USD),

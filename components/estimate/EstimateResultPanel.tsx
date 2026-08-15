@@ -173,10 +173,22 @@ export function EstimateResultPanel({
           </p>
 
           <div
-            className="border-y border-inverse-foreground/10 py-3 mb-4"
+            className="border-y border-inverse-foreground/10 py-3 mb-4 space-y-2"
             data-testid="estimate-breakdown"
           >
-            <div className="flex items-baseline justify-between gap-3 text-xs text-inverse-foreground">
+            {estimate.customerLines.map((line) => (
+              <div
+                key={line.id}
+                className="flex items-baseline justify-between gap-3 text-xs text-inverse-muted"
+                data-testid={`estimate-line-${line.id}`}
+              >
+                <span>{line.label}</span>
+                <span className="brc-display-num tabular-nums text-inverse-foreground/90">
+                  {formatHandymanCurrency(line.amount)}
+                </span>
+              </div>
+            ))}
+            <div className="flex items-baseline justify-between gap-3 pt-1 text-xs text-inverse-foreground border-t border-inverse-foreground/10">
               <span>Estimated visit total</span>
               <span className="brc-display-num tabular-nums">
                 {formatHandymanCurrency(estimate.total)}

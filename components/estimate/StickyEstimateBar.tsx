@@ -78,10 +78,21 @@ export function StickyEstimateBar({
           <p className="text-[11px] uppercase tracking-wide text-muted-foreground mb-2">
             {summary}
           </p>
-          <div className="flex items-baseline justify-between gap-3 text-xs leading-snug text-muted-foreground mb-2">
-            <span>Estimated visit total</span>
-            <span className="tabular-nums">{formatHandymanCurrency(estimate.total)}</span>
-          </div>
+          <ul className="space-y-1.5 mb-2">
+            {estimate.customerLines.map((line) => (
+              <li
+                key={line.id}
+                className="flex items-baseline justify-between gap-3 text-xs leading-snug text-muted-foreground"
+              >
+                <span>{line.label}</span>
+                <span className="tabular-nums">{formatHandymanCurrency(line.amount)}</span>
+              </li>
+            ))}
+            <li className="flex items-baseline justify-between gap-3 text-xs leading-snug text-foreground border-t border-border pt-1.5">
+              <span>Estimated visit total</span>
+              <span className="tabular-nums">{formatHandymanCurrency(estimate.total)}</span>
+            </li>
+          </ul>
           <p className="text-[10px] leading-snug text-muted-foreground">
             {HANDYMAN_RATE_DISCLAIMER}
           </p>
