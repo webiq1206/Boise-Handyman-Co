@@ -69,7 +69,7 @@ export const howLongDoCommonHomeRepairsTake: BlogPostData = {
     {
       question: 'Can several repairs be done in one visit?',
       answer:
-        'Yes, and it is the best way to buy handyman work. A half-day visit comfortably clears four to six typical items, and one trip fee covers all of them. Send the whole list with photos when you book so parts can be staged in advance; that preparation, more than anything on the day, is what keeps a long list inside a single visit.',
+        'Yes, and it is the best way to buy handyman work. A half-day visit comfortably clears four to six typical items, and one visit covers all of them. Send the whole list with photos when you book so parts can be staged in advance; that preparation, more than anything on the day, is what keeps a long list inside a single visit.',
     },
   ],
   content: `

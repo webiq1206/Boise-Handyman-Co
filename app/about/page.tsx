@@ -28,7 +28,7 @@ import { GRAIN_URL } from '@/lib/grain';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 
 const SPEAKABLE_SUMMARY =
-  'We are a locally owned handyman service for the Treasure Valley: small repairs, installs, and home maintenance across Boise, Meridian, Eagle, Nampa, and the surrounding Ada and Canyon County communities. Our focus is simplicity: an upfront quote before any work starts, hourly pricing with a flat trip fee, and most jobs finished in a single visit.';
+  'We are a locally owned handyman service for the Treasure Valley: small repairs, installs, and home maintenance across Boise, Meridian, Eagle, Nampa, and the surrounding Ada and Canyon County communities. Our focus is simplicity: one upfront written price before any work starts, and most jobs finished in a single visit.';
 
 function HeroBreadcrumbs() {
   const items = [
@@ -139,8 +139,8 @@ export default function AboutPage() {
               message to the finished job.
             </p>
             <p className="text-base md:text-lg text-inverse-foreground/75 max-w-2xl leading-relaxed mb-8">
-              Our focus is simplicity: an upfront quote before any work starts, a simple hourly
-              rate plus one flat trip fee, an agreed arrival time, and a clean home when we leave.
+              Our focus is simplicity: an upfront written quote before any work starts, one clear
+              price for the visit, an agreed arrival time, and a clean home when we leave.
               The point of all of it is simple - you always know what the job costs and when it
               will be done.
             </p>
@@ -199,7 +199,7 @@ export default function AboutPage() {
                       How we <em className="brc-accent">work</em>
                     </>
                   }
-                  description="Three steps, no mystery. You send the task, ideally with photos. We reply with an upfront quote: the hourly rate, the flat trip fee, and the expected time. Then we arrive at the agreed time with the right materials and finish the job, in one trip whenever the work allows it."
+                  description="Three steps, no mystery. You send the task, ideally with photos. We reply with an upfront quote: one written price and the expected time. Then we arrive at the agreed time with the right materials and finish the job, in one trip whenever the work allows it."
                   className="mb-8 max-w-none"
                 />
                 <p className="text-sm text-muted-foreground leading-relaxed mb-8">
@@ -317,7 +317,7 @@ export default function AboutPage() {
                   Service <em className="brc-accent">areas</em>
                 </>
               }
-              description={`We handle repairs, installs, and maintenance for homeowners in ${TREASURE_VALLEY_CITIES}, and surrounding communities. One flat trip fee applies across the whole area.`}
+              description={`We handle repairs, installs, and maintenance for homeowners in ${TREASURE_VALLEY_CITIES}, and surrounding communities. Where you live never inflates the quote.`}
               className="max-w-3xl"
             />
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">

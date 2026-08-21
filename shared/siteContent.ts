@@ -14,9 +14,9 @@ export const HERO_EYEBROW = "Boise Handyman · Treasure Valley";
 
 // The hero subhead doubles as the homepage's extractable answer block: what we
 // do, where, and how pricing works, in one readable sentence pair. Pricing
-// model figures are placeholders: [NEEDS: real pricing confirmation].
+// figures are placeholders: [NEEDS: real pricing confirmation].
 export const HERO_SUBHEAD =
-  "Boise Handyman Co handles small repairs, installs, and maintenance for homes in Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley. Simple hourly rates plus a flat trip fee, an upfront quote before any work starts, and most jobs finished in a single visit.";
+  "Boise Handyman Co handles small repairs, installs, and maintenance for homes in Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley. One upfront written quote before any work starts, and most jobs finished in a single visit.";
 
 export const HERO_STATS = [
   { num: "60 sec", label: "Instant online estimate" },
@@ -42,7 +42,7 @@ export const DIFFERENTIATORS: Differentiator[] = [
   {
     title: "An upfront quote before any work starts",
     contrast: "Instead of a vague ballpark that quietly grows once the tools come out,",
-    body: "you get a written quote before we start: the hourly rate, the trip fee, and what the job should take. If we open something up and find more than expected, we stop and talk to you before the price changes.",
+    body: "you get a written quote before we start: one clear price for the work and what the job should take. If we open something up and find more than expected, we stop and talk to you before the price changes.",
   },
   {
     title: "Small jobs treated as real jobs",
@@ -122,7 +122,7 @@ export const PROMISE_ITEMS = [
   {
     num: "01",
     title: "A quote you can actually read",
-    body: "An upfront quote before work starts: the hourly rate, the trip fee, and any materials as their own line, so you know what the job costs before we touch a tool.",
+    body: "An upfront quote before work starts: one clear price for the work, with any materials as their own line, so you know what the job costs before we touch a tool.",
   },
   {
     num: "02",
@@ -165,7 +165,7 @@ export const CLIENT_PRIORITIES: ClientPriority[] = [
   },
   {
     title: "Honest pricing",
-    body: "Hourly rate plus a flat trip fee, quoted upfront. Materials listed as their own line, never a hidden markup.",
+    body: "One written price, quoted upfront before work starts. Materials listed as their own line, never a hidden markup.",
     icon: Wallet,
   },
   {
@@ -189,7 +189,7 @@ export const HOW_WE_BUILD_STEPS = [
   {
     number: "02",
     title: "Get an upfront quote",
-    desc: "We reply within one business day with a clear quote: hourly rate, trip fee, and expected time. No surprises, no obligation.",
+    desc: "We reply within one business day with a clear quote: one written price and the expected time. No surprises, no obligation.",
   },
   {
     number: "03",
@@ -237,7 +237,7 @@ export const PRINCIPLES = [
 
 export const STANDARD_INCLUSIONS = [
   "An upfront quote before any work starts",
-  "A flat trip fee, stated in advance",
+  "One written price for the whole visit",
   "Materials listed as their own line on the quote",
   "An agreed arrival time, confirmed beforehand",
   "Cleanup and small-debris haul-away",
@@ -246,7 +246,7 @@ export const STANDARD_INCLUSIONS = [
 
 export const OPTIONAL_ENHANCEMENTS = {
   title: "Add to the list while we are there",
-  body: "Once the trip fee is paid, extra tasks in the same visit only cost the additional time. Many customers keep a running punch list, the loose handle, the slow drain, the picture that never got hung, and clear the whole thing in one appointment.",
+  body: "Extra tasks in the same visit only add the time they take. Many customers keep a running punch list, the loose handle, the slow drain, the picture that never got hung, and clear the whole thing in one appointment.",
   note: "Mention your extra tasks when you book so we bring the right materials.",
 };
 
@@ -256,8 +256,8 @@ export const BUDGET_GUIDANCE_POINTS = [
     body: "The online estimator gives you an instant planning range for your kind of job. Once we see photos or the task itself, that range becomes a firm upfront quote you approve before work starts.",
   },
   {
-    title: "Hourly rate plus a flat trip fee",
-    body: "You pay for the time the job takes plus one flat trip fee that covers travel and setup. Book several tasks in one visit and the trip fee is paid once, which is why a list is the best value.",
+    title: "Priced by the time the job takes",
+    body: "Your quote reflects the time the work takes, with a one-hour minimum per visit. Book several tasks in one visit and each extra task only adds its own time, which is why a list is the best value.",
   },
   {
     title: "Materials as their own line",
@@ -275,7 +275,7 @@ export const LEADERSHIP_COPY = {
   paragraphs: [
     "Boise Handyman Co was built on a simple observation: Treasure Valley homeowners can find someone to build a house or gut a kitchen, but getting a door adjusted, a faucet replaced, or a fence panel fixed means calls that never get returned.",
     "We know how that feels, and we know why it happens. Small jobs do not fit the way big contractors price and schedule, so those jobs get ignored or quoted absurdly.",
-    "So we built a company around them instead. Simple hourly pricing with a flat trip fee, quotes before work starts, one scheduled visit with the right materials, and a clean home when we leave.",
+    "So we built a company around them instead. One written price before work starts, one scheduled visit with the right materials, and a clean home when we leave.",
   ],
   closing: "That is not a slogan. It is how we would want the job handled if the house were ours.",
 };
@@ -283,7 +283,7 @@ export const LEADERSHIP_COPY = {
 export const FINANCING_BULLETS = [
   "Card, check, and electronic payments accepted",
   "Pay when the work is done, not before",
-  "One trip fee per visit, however many tasks",
+  "One visit covers the whole list, however many tasks",
   "Written quote to keep, whatever you decide",
   "No deposits on standard small jobs",
 ];
@@ -322,7 +322,7 @@ export const VALUE_MODEL = {
   costs: "A franchise fee. A call center in another state. Wrapped trucks and a dispatcher who has never held a drill.",
   costsBody: "None of it is free. It gets folded into a minimum charge and an inflated hourly rate, whether your job needed any of it or not.",
   reframe:
-    "We built the company to leave that out. A small local operation keeps our costs low, so what you pay goes into the time and materials your repair actually takes - a fair hourly rate, one flat trip fee, and nothing padding the invoice.",
+    "We built the company to leave that out. A small local operation keeps our costs low, so what you pay goes into the time and materials your repair actually takes - one fair written price and nothing padding the invoice.",
   taglineLead: "Fair rates,",
   taglineAccent: "honest invoices",
 } as const;

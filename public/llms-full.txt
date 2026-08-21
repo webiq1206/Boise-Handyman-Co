@@ -7,7 +7,7 @@
 Boise Handyman Co is a locally owned handyman service for the Treasure Valley. We handle the small jobs that keep a home working: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, door and window adjustment, TV, shelf and furniture mounting and assembly, fence, deck and gutter repair, caulking and weatherproofing, and general punch-list work. Every job gets a written quote before work starts, and most jobs are finished in one visit. Full remodels, additions, and anything that requires a general contractor or a licensed trade are out of scope and referred out.
 
 - Business type: Handyman service (home repairs, installs, and maintenance)
-- Service model: Upfront written quotes, one-trip fixes, hourly rate plus flat trip fee
+- Service model: Upfront written quotes, one clear price per visit, one-trip fixes
 - Contact: https://boisehandyman.co/contact
 - Instant estimator: https://boisehandyman.co/estimate
 
@@ -80,7 +80,7 @@ Neighborhood guides:
 
 ## Common questions
 
-- What does a handyman visit cost in Boise? Market rates in the Treasure Valley typically run $60 to $120 per hour. Our model is a flat trip fee plus an hourly rate, quoted as a written flat price before work starts, with a single small repair starting around $145.
+- What does a handyman visit cost in Boise? Market rates in the Treasure Valley typically run $60 to $120 per hour. Every job with us is quoted upfront as one written price before work starts, with a single small repair starting around $145 and materials billed at cost as their own line.
 - How fast can a repair be scheduled? Standard visits book at the next available slot, usually within the week; priority scheduling within two business days is available for an added fee. Most small repairs are finished in a single one-to-three-hour visit.
 - Who supplies the materials? Either works. You can have parts on the counter when we arrive, or we pick them up and bill materials at cost with a supply-run line on the quote.
 - What is out of scope? Full remodels, additions, structural work, repipes, panel or service upgrades, gas lines, and re-roofs. Those need a general contractor or a licensed trade, and we say so and refer out rather than take the job.
@@ -102,4 +102,4 @@ Neighborhood guides:
 
 Boise Handyman Co also completes RE-10 and home inspection repairs for real estate agents, buyers and sellers across Boise and the Treasure Valley. An RE-10 is the Idaho inspection response form: after a home inspection the buyer requests specific repairs before closing. We review the RE-10 and inspection report, provide a written scope and pricing, coordinate access, complete the approved work across multiple trades, and supply photo documentation, invoices and receipts for the transaction file. Structural, foundation, mold and asbestos abatement, main electrical service, sewer and septic, HVAC replacement, gas lines and full roof replacement are coordinated to licensed specialists rather than performed in house. Inspection repair lists are exactly the small, defined jobs a handyman does every day, and we sequence them against a closing date that will not move. Details: https://boisehandyman.co/re-10-repairs-boise
 
-Last updated: 2026-08-13. Full sitemap: https://boisehandyman.co/sitemap.xml
+Last updated: 2026-08-21. Full sitemap: https://boisehandyman.co/sitemap.xml

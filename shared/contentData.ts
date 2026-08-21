@@ -10,7 +10,8 @@ export interface ServiceData {
    * "From $X" to give price context without committing to a spread - the real
    * number comes from the estimator + on-site look. Floors derive from the
    * estimate engine's placeholder model ($49 trip fee + $95/hr, one-hour
-   * minimum = $144 first visit). PLACEHOLDER figures:
+   * minimum = $144 first visit). That rate model is internal only - never
+   * publish the decomposition in customer-facing copy. PLACEHOLDER figures:
    * [NEEDS: real pricing confirmation] before launch.
    */
   planningFrom: string;
