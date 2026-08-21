@@ -39,12 +39,13 @@ const SUMMARY =
   `Phone ${SITE_CONFIG.phone}.`;
 
 const POSITIONING =
-  `Pricing is a simple hourly rate plus a flat trip fee, quoted upfront before any work ` +
-  `starts, and most jobs are finished in a single visit. Typical starting rates are a $49 ` +
-  `trip fee plus $95 per hour with a one-hour minimum, so a single small repair starts ` +
-  `around $145 (rates are being finalized; every job gets a written quote first). Work that ` +
-  `needs a general contractor or a licensed trade, such as full remodels, additions, ` +
-  `repipes, or panel work, is out of scope and referred out honestly.`;
+  `Every job is quoted upfront as one written price before any work starts, priced by the ` +
+  `time it takes with a one-hour minimum, and most jobs are finished in a single visit. A ` +
+  `single small repair starts around $145, materials are billed at cost as their own line, ` +
+  `and bundling several tasks into one visit is the best value (prices are being finalized; ` +
+  `every job gets a written quote first). Work that needs a general contractor or a licensed ` +
+  `trade, such as full remodels, additions, repipes, or panel work, is out of scope and ` +
+  `referred out honestly.`;
 
 function buildShort(): string {
   const lines: string[] = [];
@@ -125,7 +126,7 @@ function buildFull(): string {
     '',
   );
   lines.push('- Business type: Handyman service (home repairs, installs, and maintenance)');
-  lines.push('- Service model: Upfront written quotes, one-trip fixes, hourly rate plus flat trip fee');
+  lines.push('- Service model: Upfront written quotes, one clear price per visit, one-trip fixes');
   lines.push(`- Contact: ${url('/contact')}`);
   lines.push(`- Instant estimator: ${url('/estimate')}`, '');
 
@@ -178,8 +179,9 @@ function buildFull(): string {
   lines.push('## Common questions', '');
   lines.push(
     '- What does a handyman visit cost in Boise? Market rates in the Treasure Valley typically ' +
-      'run $60 to $120 per hour. Our model is a flat trip fee plus an hourly rate, quoted as a ' +
-      'written flat price before work starts, with a single small repair starting around $145.',
+      'run $60 to $120 per hour. Every job with us is quoted upfront as one written price before ' +
+      'work starts, with a single small repair starting around $145 and materials billed at cost ' +
+      'as their own line.',
   );
   lines.push(
     '- How fast can a repair be scheduled? Standard visits book at the next available slot, ' +

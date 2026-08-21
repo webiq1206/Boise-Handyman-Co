@@ -25,7 +25,7 @@ export const metadata = buildPageMetadata({
   path: "/areas",
   titleOverride: "Treasure Valley Service Areas",
   descriptionOverride:
-    "Handyman service across the Treasure Valley: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho. Upfront quotes and one flat trip fee everywhere.",
+    "Handyman service across the Treasure Valley: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho. Upfront quotes and the same fair pricing everywhere.",
 });
 
 export default function AreasHubPage() {
@@ -57,7 +57,7 @@ export default function AreasHubPage() {
           </h1>
           <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-4">
             We handle small repairs, installs, and home maintenance across {TREASURE_VALLEY_CITIES},
-            and the surrounding communities, with upfront quotes and the same flat trip fee
+            and the surrounding communities, with upfront quotes and the same fair pricing
             everywhere we work.
           </p>
           <p className="sr-only" data-speakable="summary">
@@ -99,7 +99,7 @@ export default function AreasHubPage() {
               <em className="brc-accent">city</em>?
             </>
           }
-          description="The same upfront quotes and flat trip fee apply across Ada and Canyon County. Get an instant estimate for your job, then book a handyman visit when you're ready."
+          description="The same upfront quotes and fair pricing apply across Ada and Canyon County. Get an instant estimate for your job, then book a handyman visit when you're ready."
           variant="tint"
         />
 

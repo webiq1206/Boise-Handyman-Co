@@ -76,7 +76,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
     {
       heading: `${service.name} across the Treasure Valley`,
       paragraphs: [
-        `We provide ${serviceLC} throughout the Treasure Valley, with dedicated local pages for each city we serve. The same upfront quotes and flat trip fee apply everywhere in Ada and Canyon County, so where you live never inflates the price.`,
+        `We provide ${serviceLC} throughout the Treasure Valley, with dedicated local pages for each city we serve. The same upfront quotes apply everywhere in Ada and Canyon County, so where you live never inflates the price.`,
         `Choose your city below for local ${serviceLC} details, or send photos of the job for an upfront quote.`,
       ],
       links: CITIES.map((c) => ({

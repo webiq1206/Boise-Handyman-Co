@@ -29,8 +29,9 @@ export interface ServiceSEOContent {
   /**
    * Server-rendered cost copy. The estimator's price bands are client-side JS
    * and invisible to crawlers and AI engines; this section puts the pricing
-   * model (hourly + trip fee, upfront quotes) in static HTML. All our own
-   * dollar figures are placeholders: [NEEDS: real pricing confirmation].
+   * story (upfront written quotes, per-visit starting prices) in static HTML.
+   * All our own dollar figures are placeholders: [NEEDS: real pricing
+   * confirmation].
    */
   costGuidance?: { heading: string; paragraphs: string[] };
   /** Examples of jobs this service covers, rendered as a "typical jobs" section. */
@@ -43,12 +44,14 @@ export interface ServiceSEOContent {
 }
 
 /**
- * Pricing model used across every service below, stated once so pages stay
- * consistent: a flat trip fee of $49 per visit plus $95 per hour of labor,
- * with an upfront quote before any work starts. Market context: Treasure
- * Valley handyman rates typically run $60 to $120 per hour. Our own figures
- * (trip fee, hourly rate, and every "from" price) are PLACEHOLDERS pending
- * owner confirmation: [NEEDS: real pricing confirmation].
+ * Pricing story used across every service below, stated once so pages stay
+ * consistent: every job gets one upfront written quote before any work
+ * starts, with per-visit starting prices as the public anchors. The internal
+ * rate model (trip fee + hourly, see estimateEngine) is deliberately NOT
+ * published anywhere customer-facing. Market context: Treasure Valley
+ * handyman rates typically run $60 to $120 per hour. Our own figures (every
+ * "from" price) are PLACEHOLDERS pending owner confirmation:
+ * [NEEDS: real pricing confirmation].
  */
 export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
   'drywall-repair': {
@@ -81,7 +84,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       },
       {
         title: 'Upfront quote',
-        description: 'You approve the price, hourly labor plus the trip fee, before any work starts.',
+        description: 'You approve one written price before any work starts.',
       },
       {
         title: 'Patch and texture',
@@ -103,7 +106,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does drywall repair cost in Boise?',
         answer:
-          'Small drywall repairs with Boise Handyman Co start around $149 per visit, which covers our flat trip fee and the first stretch of labor. Most single patches land between $149 and $350 depending on size and texture matching, and larger water-damage repairs with multiple patches typically run $350 to $650. We quote the exact price upfront from photos before any work starts.',
+          'Small drywall repairs with Boise Handyman Co start around $149 per visit. Most single patches land between $149 and $350 depending on size and texture matching, and larger water-damage repairs with multiple patches typically run $350 to $650. We quote the exact price upfront from photos before any work starts.',
       },
       {
         question: 'Can you match my wall texture?',
@@ -129,7 +132,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     costGuidance: {
       heading: 'Drywall repair cost in the Treasure Valley',
       paragraphs: [
-        'Drywall repair with Boise Handyman Co starts around $149 per visit. That covers a flat $49 trip fee plus labor at $95 per hour, quoted upfront. A typical single patch lands between $149 and $350, and multi-patch or water-damage repairs usually run $350 to $650 including texture matching and paint blending. For context, Treasure Valley handyman rates generally run $60 to $120 per hour.',
+        'Drywall repair with Boise Handyman Co starts around $149 per visit, quoted upfront from photos as one written price. A typical single patch lands between $149 and $350, and multi-patch or water-damage repairs usually run $350 to $650 including texture matching and paint blending. For context, Treasure Valley handyman rates generally run $60 to $120 per hour.',
         'These are planning figures, not a bid. Send photos of the damage and we reply with a firm upfront quote, usually within one business day, before any work is scheduled.',
       ],
     },
@@ -171,7 +174,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       },
       {
         title: 'Upfront quote',
-        description: 'A firm price for labor, the trip fee, and materials, with paint either supplied by you or picked up by us.',
+        description: 'A firm written price for the work, with paint either supplied by you or picked up by us and billed at cost.',
       },
       {
         title: 'Prep and protect',
@@ -193,7 +196,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does it cost to paint a room in Boise?',
         answer:
-          'Painting jobs with Boise Handyman Co start around $199 per visit. A typical bedroom, walls only with paint supplied, usually lands between $250 and $450 in labor, and trim or door repaints are quoted per piece. That reflects our flat trip fee plus hourly labor, quoted upfront. Whole-house repaints are better suited to a dedicated painting contractor, and we will say so.',
+          'Painting jobs with Boise Handyman Co start around $199 per visit. A typical bedroom, walls only with paint supplied, usually lands between $250 and $450 in labor, and trim or door repaints are quoted per piece. Every job gets one written price upfront. Whole-house repaints are better suited to a dedicated painting contractor, and we will say so.',
       },
       {
         question: 'Do I supply the paint or do you?',
@@ -219,7 +222,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     costGuidance: {
       heading: 'Painting cost in the Treasure Valley',
       paragraphs: [
-        'Painting with Boise Handyman Co starts around $199 per visit, which covers a flat $49 trip fee plus labor at $95 per hour, quoted upfront. A typical single room, walls only, lands between $250 and $450 in labor with paint billed separately or supplied by you. Treasure Valley handyman rates for this kind of work generally run $60 to $120 per hour.',
+        'Painting with Boise Handyman Co starts around $199 per visit, quoted upfront as one written price. A typical single room, walls only, lands between $250 and $450 in labor with paint billed separately or supplied by you. Treasure Valley handyman rates for this kind of work generally run $60 to $120 per hour.',
         'These are planning figures, not a bid. Tell us the rooms and surfaces, send a photo or two, and we reply with a firm upfront quote before anything is scheduled.',
       ],
     },
@@ -261,7 +264,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       },
       {
         title: 'Upfront quote',
-        description: 'A firm price for the fix or the swap, labor plus trip fee, with parts listed separately.',
+        description: 'A firm written price for the fix or the swap, with parts listed separately.',
       },
       {
         title: 'One-trip repair',
@@ -283,7 +286,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much do minor plumbing repairs cost in Boise?',
         answer:
-          'Minor plumbing visits with Boise Handyman Co start around $129, covering our flat trip fee and the first stretch of labor. Simple fixes like a fill valve or flapper usually land between $145 and $220, and faucet, toilet, or disposal replacements typically run $180 to $350 in labor with the fixture billed separately or supplied by you. Every job is quoted upfront.',
+          'Minor plumbing visits with Boise Handyman Co start around $129. Simple fixes like a fill valve or flapper usually land between $145 and $220, and faucet, toilet, or disposal replacements typically run $180 to $350 in labor with the fixture billed separately or supplied by you. Every job is quoted upfront.',
       },
       {
         question: 'When do I need a licensed plumber instead of a handyman?',
@@ -309,7 +312,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     costGuidance: {
       heading: 'Minor plumbing repair cost in the Treasure Valley',
       paragraphs: [
-        'Minor plumbing repairs with Boise Handyman Co start around $145 per visit: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. Simple internal repairs land between $145 and $220, and fixture replacements typically run $180 to $350 in labor plus the fixture. Treasure Valley handyman rates generally run $60 to $120 per hour, while licensed plumber call-outs often start well above that for the same small jobs.',
+        'Minor plumbing repairs with Boise Handyman Co start around $145 per visit, quoted upfront as one written price. Simple internal repairs land between $145 and $220, and fixture replacements typically run $180 to $350 in labor plus the fixture. Treasure Valley handyman rates generally run $60 to $120 per hour, while licensed plumber call-outs often start well above that for the same small jobs.',
         'These are planning figures, not a bid. Describe the problem, send a photo, and we reply with a firm upfront quote before scheduling.',
       ],
     },
@@ -351,7 +354,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       },
       {
         title: 'Upfront quote',
-        description: 'A firm per-fixture price, labor plus trip fee, before anything is scheduled.',
+        description: 'A firm per-fixture written price before anything is scheduled.',
       },
       {
         title: 'Safe swap',
@@ -373,7 +376,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much do minor electrical repairs cost in Boise?',
         answer:
-          'Minor electrical visits with Boise Handyman Co start around $129, covering our flat trip fee and the first stretch of labor. Outlet and switch swaps land around $129 to $180 each visit, light fixture replacements typically run $150 to $250, and ceiling fan swaps $200 to $350 in labor. Fixtures are billed separately or supplied by you, and every job is quoted upfront.',
+          'Minor electrical visits with Boise Handyman Co start around $129. Outlet and switch swaps land around $129 to $180 each visit, light fixture replacements typically run $150 to $250, and ceiling fan swaps $200 to $350 in labor. Fixtures are billed separately or supplied by you, and every job is quoted upfront.',
       },
       {
         question: 'When do I need a licensed electrician instead of a handyman?',
@@ -399,7 +402,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     costGuidance: {
       heading: 'Minor electrical repair cost in the Treasure Valley',
       paragraphs: [
-        'Minor electrical work with Boise Handyman Co starts around $145 per visit: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. Typical jobs land between $145 and $350 in labor depending on the fixture, with the device itself billed separately or supplied by you. Treasure Valley handyman rates generally run $60 to $120 per hour for this class of work.',
+        'Minor electrical work with Boise Handyman Co starts around $145 per visit, quoted upfront as one written price. Typical jobs land between $145 and $350 in labor depending on the fixture, with the device itself billed separately or supplied by you. Treasure Valley handyman rates generally run $60 to $120 per hour for this class of work.',
         'These are planning figures, not a bid. Send a photo of the fixture and we confirm the job is handyman scope and reply with a firm upfront quote.',
       ],
     },
@@ -441,7 +444,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       },
       {
         title: 'Upfront quote',
-        description: 'A firm price for the repair, labor plus trip fee, with any lumber or hardware listed separately.',
+        description: 'A firm written price for the repair, with any lumber or hardware listed separately.',
       },
       {
         title: 'Repair in one trip',
@@ -463,7 +466,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does carpentry or trim repair cost in Boise?',
         answer:
-          'Carpentry visits with Boise Handyman Co start around $149, covering our flat trip fee and the first stretch of labor. Door adjustments usually land between $149 and $250, trim repairs $150 to $350 depending on length, and interior door replacements $250 to $400 in labor with the door billed separately. Everything is quoted upfront before work starts.',
+          'Carpentry visits with Boise Handyman Co start around $149. Door adjustments usually land between $149 and $250, trim repairs $150 to $350 depending on length, and interior door replacements $250 to $400 in labor with the door billed separately. Everything is quoted upfront before work starts.',
       },
       {
         question: 'Why do doors stick in Treasure Valley homes?',
@@ -489,7 +492,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     costGuidance: {
       heading: 'Carpentry and trim repair cost in the Treasure Valley',
       paragraphs: [
-        'Carpentry and trim repair with Boise Handyman Co starts around $149 per visit: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. Most door, trim, and rail repairs land between $149 and $400 in labor, with lumber and hardware listed separately on the quote. Treasure Valley handyman rates generally run $60 to $120 per hour.',
+        'Carpentry and trim repair with Boise Handyman Co starts around $149 per visit, quoted upfront as one written price. Most door, trim, and rail repairs land between $149 and $400 in labor, with lumber and hardware listed separately on the quote. Treasure Valley handyman rates generally run $60 to $120 per hour.',
         'These are planning figures, not a bid. Send photos of the repair and we reply with a firm upfront quote, usually within one business day.',
       ],
     },
@@ -531,7 +534,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       },
       {
         title: 'Upfront quote',
-        description: 'A firm per-item price, labor plus one trip fee, so a list of tasks shares a single visit.',
+        description: 'A firm per-item written price, and a list of tasks shares a single visit.',
       },
       {
         title: 'Mount and assemble',
@@ -553,7 +556,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does TV mounting cost in Boise?',
         answer:
-          'Mounting and assembly visits with Boise Handyman Co start around $145, covering our flat trip fee and the first hour of labor. A standard TV mount typically lands between $145 and $220 in labor with your bracket, and furniture assembly runs $95 per hour after the trip fee. Multiple items share one trip fee, which makes a list the best value.',
+          'Mounting and assembly visits with Boise Handyman Co start around $145. A standard TV mount typically lands between $145 and $220 in labor with your bracket, and furniture assembly is billed on the time it takes, with most single pieces finished inside an hour. Multiple items share one visit, which makes a list the best value.',
       },
       {
         question: 'Do I need to supply the TV mount or shelf hardware?',
@@ -573,13 +576,13 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'Is there a minimum job size?',
         answer:
-          'The flat trip fee applies to every visit, so a single small task starts around $145 all-in. Most customers bundle two or three items into the same visit, which spreads that trip fee across the list.',
+          'A single small task starts around $145 all-in. Most customers bundle two or three items into the same visit, because extra tasks only add the time they take.',
       },
     ],
     costGuidance: {
       heading: 'Mounting and assembly cost in the Treasure Valley',
       paragraphs: [
-        'Mounting and assembly with Boise Handyman Co starts around $145 per visit: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. A standard TV mount lands between $145 and $220 in labor, and flat-pack assembly is billed on time, with most single pieces finished inside an hour. Treasure Valley rates for this work generally run $60 to $120 per hour.',
+        'Mounting and assembly with Boise Handyman Co starts around $145 per visit, quoted upfront as one written price. A standard TV mount lands between $145 and $220 in labor, and flat-pack assembly is billed on time, with most single pieces finished inside an hour. Treasure Valley rates for this work generally run $60 to $120 per hour.',
         'These are planning figures, not a bid. Send your list and photos, and we reply with a firm per-item quote before scheduling.',
       ],
     },
@@ -621,7 +624,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       },
       {
         title: 'Upfront quote',
-        description: 'A firm price for labor and the trip fee, with lumber, hardware, and sealant listed separately.',
+        description: 'A firm written price for the work, with lumber, hardware, and sealant listed separately.',
       },
       {
         title: 'Repair visit',
@@ -643,7 +646,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does fence repair cost in Boise?',
         answer:
-          'Exterior repair visits with Boise Handyman Co start around $149, covering our flat trip fee and the first stretch of labor. A single post reset typically lands between $150 and $300 in labor plus materials, gate repairs $150 to $250, and gutter cleaning $149 to $300 depending on house size. Wind-damage repairs are quoted upfront from photos.',
+          'Exterior repair visits with Boise Handyman Co start around $149. A single post reset typically lands between $150 and $300 in labor plus materials, gate repairs $150 to $250, and gutter cleaning $149 to $300 depending on house size. Wind-damage repairs are quoted upfront from photos.',
       },
       {
         question: 'Can you fix a leaning fence or does it need replacing?',
@@ -669,7 +672,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     costGuidance: {
       heading: 'Fence, deck, and gutter repair cost in the Treasure Valley',
       paragraphs: [
-        'Exterior repairs with Boise Handyman Co start around $149 per visit: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. Typical repairs land between $150 and $450 in labor depending on scope, with lumber, hardware, and sealant listed separately. Treasure Valley handyman rates generally run $60 to $120 per hour for exterior repair work.',
+        'Exterior repairs with Boise Handyman Co start around $149 per visit, quoted upfront as one written price. Typical repairs land between $150 and $450 in labor depending on scope, with lumber, hardware, and sealant listed separately. Treasure Valley handyman rates generally run $60 to $120 per hour for exterior repair work.',
         'These are planning figures, not a bid. Send photos of the damage and we reply with a firm upfront quote before anything is scheduled.',
       ],
     },
@@ -691,7 +694,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     benefits: [
       'Old caulk cut out fully, not smeared over',
       'Draft sealing that shows up on your winter heating bill',
-      'Punch lists cleared in one visit under a single trip fee',
+      'Punch lists cleared in a single visit with one written price',
       'Seasonal reminders of what your home needs before the weather turns',
     ],
     inclusions: [
@@ -711,7 +714,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       },
       {
         title: 'Upfront quote',
-        description: 'One trip fee, hourly labor, and materials listed separately, so the whole list has a clear price.',
+        description: 'One written price for the visit, with materials listed separately, so the whole list has a clear number.',
       },
       {
         title: 'Work the list',
@@ -733,7 +736,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does recaulking or a maintenance visit cost in Boise?',
         answer:
-          'Maintenance visits with Boise Handyman Co start around $145, covering our flat trip fee and the first hour of labor. A tub and shower recaulk typically lands between $150 and $300, draft sealing a whole home $200 to $350, and punch lists are billed on quoted time at $95 per hour. One trip fee covers the entire visit.',
+          'Maintenance visits with Boise Handyman Co start around $145. A tub and shower recaulk typically lands between $150 and $300, draft sealing a whole home $200 to $350, and punch lists are quoted upfront from your list. One visit covers the entire list, however many tasks are on it.',
       },
       {
         question: 'How often should caulk be replaced?',
@@ -748,7 +751,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'Can you handle a whole punch list in one visit?',
         answer:
-          'Yes, that is the point of the service. Send the full list, however small the items feel, and we quote it as one visit with one trip fee. Most lists of eight to twelve small tasks fit inside half a day.',
+          'Yes, that is the point of the service. Send the full list, however small the items feel, and we quote it as one visit with one written price. Most lists of eight to twelve small tasks fit inside half a day.',
       },
       {
         question: 'Do you do pre-listing repairs for home sales?',
@@ -759,7 +762,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     costGuidance: {
       heading: 'Home maintenance cost in the Treasure Valley',
       paragraphs: [
-        'Maintenance visits with Boise Handyman Co start around $145: a flat $49 trip fee plus labor at $95 per hour, quoted upfront. Most caulking, weatherproofing, and punch-list visits land between $145 and $400 depending on the list, with materials listed separately. Treasure Valley handyman rates generally run $60 to $120 per hour.',
+        'Maintenance visits with Boise Handyman Co start around $145, quoted upfront as one written price. Most caulking, weatherproofing, and punch-list visits land between $145 and $400 depending on the list, with materials listed separately. Treasure Valley handyman rates generally run $60 to $120 per hour.',
         'These are planning figures, not a bid. Send your list with photos and we reply with a firm quote for the whole visit, usually within one business day.',
       ],
     },
@@ -774,7 +777,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
 export function getAreaIntro(city: CityData): string {
   const county = getCountyLabel(city.county);
-  return `Boise Handyman Co provides handyman services for homes in ${city.name}, Idaho and throughout ${county}: small repairs, installs, and maintenance with upfront quotes, a flat trip fee, and most jobs finished in a single visit.`;
+  return `Boise Handyman Co provides handyman services for homes in ${city.name}, Idaho and throughout ${county}: small repairs, installs, and maintenance with upfront quotes and most jobs finished in a single visit.`;
 }
 
 export function getCityServiceIntro(
@@ -786,7 +789,7 @@ export function getCityServiceIntro(
   const fact = localFact
     ? ` ${localFact}`
     : ` We work throughout ${city.name} and the surrounding ${county} area, so scheduling is local and travel never balloons the bill.`;
-  return `Need ${service.name.toLowerCase()} in ${city.name}, Idaho?${fact} Boise Handyman Co quotes every job upfront, charges a simple hourly rate plus one flat trip fee, and finishes most jobs in a single visit. Get an instant estimate online or book a handyman visit.`;
+  return `Need ${service.name.toLowerCase()} in ${city.name}, Idaho?${fact} Boise Handyman Co quotes every job upfront as one written price and finishes most jobs in a single visit. Get an instant estimate online or book a handyman visit.`;
 }
 
 export function getCityServiceFaqs(service: ServiceSEOContent, city: CityData): FAQItem[] {
@@ -808,7 +811,7 @@ export function getCityServiceFaqs(service: ServiceSEOContent, city: CityData): 
     ...service.faqs.slice(0, 2),
     {
       question: `Do you serve ${city.name}?`,
-      answer: `Yes. ${city.name} is part of our core service area, along with the rest of ${county} and the Treasure Valley. The same flat trip fee applies across the whole area.`,
+      answer: `Yes. ${city.name} is part of our core service area, along with the rest of ${county} and the Treasure Valley. Where you live in the service area never inflates the quote.`,
     },
     {
       question: `How do I get a quote for ${service.name.toLowerCase()} in ${city.name}?`,
@@ -870,14 +873,14 @@ export function getCityServiceSections(
           ? `We serve homes throughout ${city.name}, including ${neighborhoods.join(', ')}. Housing stock varies between these areas, from newer subdivision builds to older homes with settled doors and original fixtures, so we ask the right questions up front and arrive with materials that suit the house.`
           : `We serve homes throughout ${city.name}, from newer subdivision builds to older houses with settled doors and original fixtures, and we arrive with materials that suit the house.`,
         landmarks.length
-          ? `As a local team that knows ${city.name} landmarks like ${landmarks.slice(0, 3).join(', ')}, scheduling is straightforward: we quote a real arrival time, confirm before heading out, and one flat trip fee covers the visit.`
-          : `As a local team, scheduling is straightforward: we quote a real arrival time, confirm before heading out, and one flat trip fee covers the visit.`,
+          ? `As a local team that knows ${city.name} landmarks like ${landmarks.slice(0, 3).join(', ')}, scheduling is straightforward: we quote a real arrival time, confirm before heading out, and never add a travel surcharge.`
+          : `As a local team, scheduling is straightforward: we quote a real arrival time, confirm before heading out, and never add a travel surcharge.`,
       ],
     },
     {
       heading: `Scheduling ${serviceLC} in ${county}`,
       paragraphs: [
-        `We take bookings across ${county} and typically reply to new requests within one business day. Most ${serviceLC} jobs are quoted from photos, scheduled within the week, and finished in a single visit, and bundling several small tasks into the same appointment spreads the trip fee across the list.`,
+        `We take bookings across ${county} and typically reply to new requests within one business day. Most ${serviceLC} jobs are quoted from photos, scheduled within the week, and finished in a single visit, and bundling several small tasks into the same appointment is the best value because extra tasks only add the time they take.`,
         seo?.climate
           ? `The local ${seo.climate} is hard on homes: caulk and exterior seals crack with freeze-thaw cycles, doors swell and shrink with the seasons, and gutters need attention before winter. We plan the work, and the materials, around that reality.`
           : `The Treasure Valley climate is hard on homes: caulk cracks with freeze-thaw cycles, doors swell and shrink with the seasons, and gutters need attention before winter. We plan the work around that reality.`,
@@ -909,7 +912,7 @@ export const AREA_PAGE_FAQS: FAQItem[] = [
   {
     question: 'How does pricing work?',
     answer:
-      'A simple hourly rate plus one flat trip fee per visit, with an upfront quote before any work starts. Materials appear as their own line, and bundling several tasks into one visit spreads the trip fee across the list.',
+      'Every job gets one upfront written quote before any work starts, priced by the time it takes with a one-hour minimum. Materials appear as their own line at cost, and bundling several tasks into one visit is the best value.',
   },
   {
     question: 'Do you handle remodels or large projects?',
@@ -927,7 +930,7 @@ export const HOMEPAGE_FAQS_FOR_SCHEMA: FAQItem[] = [
   {
     question: 'What does a handyman cost in the Treasure Valley?',
     answer:
-      'Treasure Valley handyman rates typically run $60 to $120 per hour. Boise Handyman Co charges a simple hourly rate plus a flat trip fee, with visits starting around $145 and every job quoted upfront before work starts.',
+      'Treasure Valley handyman rates typically run $60 to $120 per hour. Boise Handyman Co quotes every job upfront as one written price, with visits starting around $145 and no work scheduled before you approve the number.',
   },
   {
     question: 'What services do you offer?',

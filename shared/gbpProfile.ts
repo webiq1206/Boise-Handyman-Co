@@ -59,7 +59,7 @@ export const GBP_CATEGORIES = {
 } as const;
 
 export const GBP_DESCRIPTION =
-  'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with an hourly rate plus a flat trip fee, an upfront quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to trusted specialty contractors. Get an instant estimate online or book a handyman visit.';
+  'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to trusted specialty contractors. Get an instant estimate online or book a handyman visit.';
 
 export const GBP_LINKS = {
   website: SITE,
@@ -160,7 +160,7 @@ export const GBP_SERVICES: GbpService[] = [
   {
     name: 'Punch list and to-do list visits',
     description:
-      'Bundle small tasks into one visit under a single trip fee. Send the list with photos for an upfront quote.',
+      'Bundle small tasks into one visit with one written price. Send the list with photos for an upfront quote.',
   },
   {
     name: 'Free upfront quotes',
@@ -240,11 +240,11 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'What areas do you serve?',
     answer:
-      'Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho - all of Ada and Canyon County in the Treasure Valley. The same flat trip fee applies across the whole area.',
+      'Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho - all of Ada and Canyon County in the Treasure Valley. Where you live in the service area never inflates the quote.',
   },
   {
     question: 'How much does a handyman cost in Boise?',
-    answer: `Treasure Valley handyman rates typically run $60 to $120 per hour. We charge a simple hourly rate plus one flat trip fee per visit, quoted upfront, with most single-task visits starting around $99 to $149.`,
+    answer: `Treasure Valley handyman rates typically run $60 to $120 per hour. We quote every job upfront as one written price, with most single-task visits starting around $99 to $149.`,
   },
   {
     question: 'What services do you offer?',
@@ -258,7 +258,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'Is there a minimum charge?',
     answer:
-      'Every visit carries one flat trip fee, so a single small task starts around $99. Bundling several tasks into one visit spreads that fee across the list, which is the best value.',
+      'Every visit carries a practical minimum, so a single small task starts around $99. Bundling several tasks into one visit is the best value, because extra tasks only add the time they take.',
   },
   {
     question: 'Are you licensed and insured?',
@@ -309,7 +309,7 @@ export const GBP_POSTS_STARTER: GbpPost[] = [
   {
     week: 2,
     headline: 'Know the price before you book',
-    body: 'Simple hourly rate plus a flat trip fee, quoted upfront from photos. Get an instant planning range online in about a minute.',
+    body: 'One written price, quoted upfront from photos before any work starts. Get an instant planning range online in about a minute.',
     buttonLabel: 'Get an estimate',
     buttonUrl: `${SITE}/estimate`,
     photoHint: 'Estimator screenshot or quote example',
@@ -317,7 +317,7 @@ export const GBP_POSTS_STARTER: GbpPost[] = [
   {
     week: 3,
     headline: 'One visit, whole to-do list',
-    body: 'One trip fee covers the visit, however many tasks. Send your list with photos and clear the whole thing in one appointment.',
+    body: 'One visit covers the whole list, however many tasks. Send your list with photos and clear the whole thing in one appointment.',
     buttonLabel: 'Send your list',
     buttonUrl: `${SITE}/contact`,
     photoHint: 'Punch-list style photo: tools and task list',

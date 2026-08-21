@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   // the brand, which the suffix carries anyway.
   title: { absolute: `Handyman in Boise, ID | ${SITE_CONFIG.name}` },
   description:
-    "Handyman service for Boise, Meridian, Eagle, Nampa & the Treasure Valley. Small repairs, installs & maintenance with hourly plus trip-fee pricing and upfront quotes. Book a visit today.",
+    "Handyman service for Boise, Meridian, Eagle, Nampa & the Treasure Valley. Small repairs, installs & maintenance with one upfront written quote before work starts. Book a visit today.",
   alternates: {
     canonical: buildCanonical("/"),
     // Setting `alternates` replaces the root declaration, so the feed link has

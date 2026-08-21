@@ -16,14 +16,15 @@ export const INITIAL_FAQ_COUNT = 8;
  * Homepage FAQ set. These feed FAQPage schema, so answers lead with the direct
  * response before adding context.
  *
- * Our own dollar figures (trip fee, hourly rate, visit minimums) are
- * placeholders pending owner sign-off: [NEEDS: real pricing confirmation].
- * Market ranges ($60-$120/hour) are editorial context, not our quote.
+ * Our own dollar figures (visit minimums, starting prices) are placeholders
+ * pending owner sign-off: [NEEDS: real pricing confirmation]. Market ranges
+ * ($60-$120/hour) are editorial context, not our quote. The internal rate
+ * model (trip fee + hourly) is deliberately not published.
  */
 export const HOMEPAGE_FAQS: HomepageFaq[] = [
   {
     q: "How much does a handyman cost in Boise and the Treasure Valley?",
-    a: "Treasure Valley handyman rates typically run $60 to $120 per hour, with many companies adding a service call or minimum charge on top. We keep it simple: a flat trip fee per visit plus an hourly labor rate, quoted upfront before any work starts. Most single-task visits start around $99 to $149, and materials appear on the quote as their own line at what they cost. Because the trip fee is paid once per visit, bundling several small tasks into one appointment is the best value.",
+    a: "Treasure Valley handyman rates typically run $60 to $120 per hour, with many companies adding a service call or minimum charge on top. We keep it simple: one written price for the visit, quoted upfront before any work starts. Most single-task visits start around $99 to $149, and materials appear on the quote as their own line at what they cost. Because extra tasks only add the time they take, bundling several small tasks into one appointment is the best value.",
   },
   {
     q: "How quickly can you get to my job?",
@@ -31,19 +32,19 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "What areas do you serve?",
-    a: "We serve the Treasure Valley: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, along with the surrounding areas of Ada and Canyon County. The same flat trip fee applies across the whole service area, so where you live never inflates the quote. If you sit just outside these areas, reach out anyway and we will tell you honestly whether we can take the job.",
+    a: "We serve the Treasure Valley: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, along with the surrounding areas of Ada and Canyon County. The same pricing applies across the whole service area, so where you live never inflates the quote. If you sit just outside these areas, reach out anyway and we will tell you honestly whether we can take the job.",
   },
   {
     q: "How do quotes work?",
-    a: "Send us the task, ideally with a photo or two, and we reply with a written upfront quote: the hourly rate, the flat trip fee, the expected time, and any materials as their own line. You approve the number before anything is scheduled. If we open something up and find more than expected, we stop and agree a revised price with you before continuing, so the final bill is never a surprise.",
+    a: "Send us the task, ideally with a photo or two, and we reply with a written upfront quote: one clear price for the work, the expected time, and any materials as their own line. You approve the number before anything is scheduled. If we open something up and find more than expected, we stop and agree a revised price with you before continuing, so the final bill is never a surprise.",
   },
   {
     q: "Who supplies the materials?",
     a: "Either of us, whichever you prefer. Many customers buy their own fixture, paint, or hardware and have it ready when we arrive, which works perfectly. If you would rather not, we pick up materials on the way and list them on the invoice at store cost plus the pickup time. We also carry common parts on the truck, washers, anchors, caulk, supply lines, and fasteners, so small jobs rarely wait on a store run.",
   },
   {
-    q: "Is there a minimum job size or trip fee?",
-    a: "Yes. Every visit carries one flat trip fee that covers travel and setup, so the practical minimum for a single small task is around $99. No job is too small, the trip fee just means a lone picture-hanging costs more per minute than a morning of tasks. That is why we encourage a list: the second, third, and fourth tasks in the same visit only cost the additional time.",
+    q: "Is there a minimum job size?",
+    a: "Yes. Every visit carries a practical minimum, so a single small task starts around $99. No job is too small, the minimum just means a lone picture-hanging costs more per minute than a morning of tasks. That is why we encourage a list: the second, third, and fourth tasks in the same visit only cost the additional time.",
   },
   {
     // Deliberately claims nothing: [NEEDS: confirm insurance/bond status and

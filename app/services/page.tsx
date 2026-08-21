@@ -82,8 +82,8 @@ export default function ServicesIndexPage() {
           <em className="brc-accent">maintain</em>
         </h1>
         <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed">
-          Small repairs, installs, and maintenance for Treasure Valley homes, quoted upfront with a
-          simple hourly rate plus one flat trip fee. Most jobs run one to eight hours and are
+          Small repairs, installs, and maintenance for Treasure Valley homes, quoted upfront as
+          one written price. Most jobs run one to eight hours and are
           finished in a single visit; anything bigger gets an honest referral to a specialty
           contractor.
         </p>
@@ -139,7 +139,7 @@ export default function ServicesIndexPage() {
                   Tell us about your <em className="brc-accent">list</em>
                 </h2>
                 <p className="text-sm leading-relaxed mb-5 text-muted-foreground">
-                  Every job starts with an upfront quote from your photos, with no obligation. One trip fee covers the whole visit.
+                  Every job starts with an upfront quote from your photos, with no obligation. One visit covers your whole list.
                 </p>
                 <ConsultCTA variant="brand" className="self-start">
                   {CTA_PRIMARY}
@@ -172,7 +172,7 @@ export default function ServicesIndexPage() {
                 <em className="brc-accent">valley</em>
               </>
             }
-            description="We serve every Ada and Canyon County community below with the same flat trip fee. Choose your city for local details and scheduling."
+            description="We serve every Ada and Canyon County community below with the same fair pricing. Choose your city for local details and scheduling."
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
             {CITIES.map((city, i) => (

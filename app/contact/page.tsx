@@ -48,7 +48,7 @@ const CONTACT_FAQS = [
   {
     question: 'Are quotes really free?',
     answer:
-      'Yes. Send your task list with photos and we quote it at no charge and with no obligation. The quote states the hourly rate, the flat trip fee, and the expected time, so you know the price before anything is scheduled.',
+      'Yes. Send your task list with photos and we quote it at no charge and with no obligation. The quote states one clear price and the expected time, so you know the cost before anything is scheduled.',
   },
   {
     question: 'What should I include when I reach out?',
@@ -57,12 +57,12 @@ const CONTACT_FAQS = [
   },
   {
     question: 'What areas do you serve?',
-    answer: `We work in ${TREASURE_VALLEY_CITIES}, and surrounding Treasure Valley communities across Ada and Canyon County. The same flat trip fee applies everywhere in the service area.`,
+    answer: `We work in ${TREASURE_VALLEY_CITIES}, and surrounding Treasure Valley communities across Ada and Canyon County. Where you live in the service area never inflates the quote.`,
   },
   {
     question: 'Can I book more than one task in a visit?',
     answer:
-      'Please do. One trip fee covers the whole visit, so the second and third tasks only cost the additional time. Send the full list when you book so we bring the right materials.',
+      'Please do. One visit covers the whole list, and the second and third tasks only cost the additional time. Send the full list when you book so we bring the right materials.',
   },
   {
     question: 'How do I get a cost estimate for my job?',
@@ -351,7 +351,7 @@ export default function ContactPage() {
                 <ContactChannel
                   icon={<MapPin className="h-5 w-5" strokeWidth={1.5} />}
                   label="Service area"
-                  subtext="One flat trip fee across the whole Treasure Valley"
+                  subtext="The same fair pricing across the whole Treasure Valley"
                 >
                   <span className="text-sm leading-relaxed">{TREASURE_VALLEY_CITIES}</span>
                 </ContactChannel>
@@ -396,7 +396,7 @@ export default function ContactPage() {
                       <em className="brc-accent">Just answers.</em>
                     </>
                   }
-                  description="Your quote states what the job will actually cost and how long it will take - the hourly rate, the flat trip fee, and the expected time - not a commission-driven pitch."
+                  description="Your quote states what the job will actually cost and how long it will take - one written price and the expected time - not a commission-driven pitch."
                   className="mb-8 max-w-none"
                 />
                 <ul className="flex flex-col gap-0 mb-8">
@@ -434,7 +434,7 @@ export default function ContactPage() {
                   </h2>
                   <p className="text-base leading-relaxed mb-8 text-muted-foreground">
                     Send a few details, photos help, and we will reach out within one business day
-                    with an upfront quote and a time that works - price, trip fee, and expected
+                    with an upfront quote and a time that works - one clear price and the expected
                     duration, with no obligation.
                   </p>
                 </Reveal>
