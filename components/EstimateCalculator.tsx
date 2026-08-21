@@ -496,7 +496,7 @@ export function EstimateCalculator({
           </div>
           <p className="mt-2 text-xs text-inverse-muted/90">
             Either way, materials are billed at cost with the receipt. The
-            estimate itself covers labor and the trip fee only.
+            estimate itself covers your selected tasks only.
           </p>
         </div>
 
@@ -530,8 +530,8 @@ export function EstimateCalculator({
     <WizardStep
       tone="inverse"
       eyebrow="Your estimate"
-      heading="Here is your starting range"
-      instructions="Tell us where the work is and how to reach you, and we will email this estimate and follow up with a firm written quote."
+      heading="One last step"
+      instructions="Tell us where the work is and how to reach you, and we will email your range and follow up with a firm written quote."
       data-testid="step-contact"
     >
       <div className="space-y-5">
@@ -539,6 +539,7 @@ export function EstimateCalculator({
           estimate={estimate}
           summary={summary}
           progress={{ job: true, tasks: true, details: true }}
+          revealRange={submitted}
         />
 
         <form
@@ -713,7 +714,12 @@ export function EstimateCalculator({
           {!inModal && wizStep !== "contact" && (
             <div className="hidden lg:block">
               <div className="sticky top-24">
-                <EstimateResultPanel estimate={estimate} summary={summary} progress={progress} />
+                <EstimateResultPanel
+                  estimate={estimate}
+                  summary={summary}
+                  progress={progress}
+                  revealRange={submitted}
+                />
               </div>
             </div>
           )}
@@ -730,7 +736,12 @@ export function EstimateCalculator({
         topAccessory={
           wizStep !== "contact" ? (
             <div className="lg:hidden">
-              <StickyEstimateBar estimate={estimate} summary={summary} tone="inverse" />
+              <StickyEstimateBar
+                estimate={estimate}
+                summary={summary}
+                tone="inverse"
+                revealRange={submitted}
+              />
             </div>
           ) : undefined
         }

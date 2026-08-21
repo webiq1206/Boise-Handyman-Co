@@ -127,6 +127,12 @@ export interface EstimateResultPanelProps {
   /** One-line summary of what was selected. */
   summary: string;
   progress: EstimateProgress;
+  /**
+   * When false the dollar range and line-item amounts are blurred so the
+   * customer must submit their details before seeing the actual numbers.
+   * Defaults to true (fully visible).
+   */
+  revealRange?: boolean;
   className?: string;
 }
 
@@ -139,6 +145,7 @@ export function EstimateResultPanel({
   estimate,
   summary,
   progress,
+  revealRange = true,
   className,
 }: EstimateResultPanelProps) {
   const [notesOpen, setNotesOpen] = useState(false);
@@ -158,7 +165,7 @@ export function EstimateResultPanel({
         <div className="brc-label text-inverse-muted">Estimated range</div>
         {estimate && (
           <div className="text-caption tracking-wide uppercase px-2 py-1 rounded-sm bg-inverse-foreground/15 text-inverse-foreground/90">
-            Labor only
+            Before materials
           </div>
         )}
       </div>
@@ -173,36 +180,62 @@ export function EstimateResultPanel({
             aria-live="polite"
             aria-atomic="true"
           >
-            <span className="sr-only">{rangeAnnouncement}</span>
-            <AnimatedPrice value={estimate.priceLow} />
-            <span aria-hidden="true"> to </span>
-            <AnimatedPrice value={estimate.priceHigh} />
+            {revealRange ? (
+              <>
+                <span className="sr-only">{rangeAnnouncement}</span>
+                <AnimatedPrice value={estimate.priceLow} />
+                <span aria-hidden="true"> to </span>
+                <AnimatedPrice value={estimate.priceHigh} />
+              </>
+            ) : (
+              <span className="brc-display-num select-none blur-sm" aria-hidden="true">
+                {formatHandymanCurrency(estimate.priceLow)} to{" "}
+                {formatHandymanCurrency(estimate.priceHigh)}
+              </span>
+            )}
           </div>
 
-          <p className="text-caption text-inverse-muted mb-4" data-testid="rate-disclaimer">
-            {HANDYMAN_RATE_DISCLAIMER}
-          </p>
+          {revealRange ? (
+            <p className="text-caption text-inverse-muted mb-4" data-testid="rate-disclaimer">
+              {HANDYMAN_RATE_DISCLAIMER}
+            </p>
+          ) : (
+            <p className="text-caption text-inverse-muted/80 mb-4" data-testid="range-gate-note">
+              Submit your details below to see your range.
+            </p>
+          )}
 
-          {/* The breakdown IS the pricing model; showing it is the trust move. */}
           <div
             className="border-y border-inverse-foreground/10 py-3 mb-4 space-y-2"
             data-testid="estimate-breakdown"
           >
-            {estimate.lines.map((line) => (
+            {estimate.customerLines.map((line) => (
               <div
                 key={line.id}
                 className="flex items-baseline justify-between gap-3 text-xs text-inverse-muted"
                 data-testid={`estimate-line-${line.id}`}
               >
                 <span>{line.label}</span>
-                <span className="brc-display-num tabular-nums text-inverse-foreground/90">
+                <span
+                  className={cn(
+                    "brc-display-num tabular-nums text-inverse-foreground/90",
+                    !revealRange && "blur-sm select-none",
+                  )}
+                  aria-hidden={!revealRange}
+                >
                   {formatHandymanCurrency(line.amount)}
                 </span>
               </div>
             ))}
             <div className="flex items-baseline justify-between gap-3 pt-1 text-xs text-inverse-foreground border-t border-inverse-foreground/10">
               <span>Estimated visit total</span>
-              <span className="brc-display-num tabular-nums">
+              <span
+                className={cn(
+                  "brc-display-num tabular-nums",
+                  !revealRange && "blur-sm select-none",
+                )}
+                aria-hidden={!revealRange}
+              >
                 {formatHandymanCurrency(estimate.total)}
               </span>
             </div>

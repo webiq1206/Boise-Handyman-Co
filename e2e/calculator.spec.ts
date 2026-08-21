@@ -56,17 +56,23 @@ test.describe("Handyman estimator wizard", () => {
     await page.locator('[data-testid="urgency-standard"]').click();
     await page.locator('[data-testid="wizard-continue"]').click();
 
-    // Step 4: the estimate range and breakdown are visible.
+    // Step 4: the customer-facing breakdown renders, but the dollar amounts
+    // stay gated (blurred) until contact details are submitted.
     await expect(page.locator('[data-testid="estimate-range"]')).toBeVisible();
-    await expect(page.locator('[data-testid="estimate-line-trip-fee"]')).toBeVisible();
-    await expect(page.locator('[data-testid="estimate-line-labor"]')).toBeVisible();
-    await expect(page.locator('[data-testid="rate-disclaimer"]')).toContainText(
-      "written quote",
+    await expect(
+      page.locator('[data-testid="estimate-line-electrical-outlet-switch"]'),
+    ).toContainText("Outlet or switch replacement");
+    await expect(page.locator('[data-testid="range-gate-note"]')).toContainText(
+      "Submit your details",
     );
 
     await fillContact(page);
     await page.locator('[data-testid="wizard-continue"]').click();
     await expect(page.locator('[data-testid="estimate-success"]')).toBeVisible();
+    // After submitting, the success panel reveals the range and disclaimer.
+    await expect(page.locator('[data-testid="rate-disclaimer"]')).toContainText(
+      "written quote",
+    );
   });
 
   test("plumbing flow: supply run and priority scheduling appear as lines", async ({ page }) => {
@@ -82,8 +88,10 @@ test.describe("Handyman estimator wizard", () => {
     await page.locator('[data-testid="urgency-priority"]').click();
     await page.locator('[data-testid="wizard-continue"]').click();
 
-    // The choices show up as their own lines in the breakdown.
-    await expect(page.locator('[data-testid="estimate-line-supply-run"]')).toBeVisible();
+    // The choices show up as their own lines in the customer breakdown.
+    await expect(page.locator('[data-testid="estimate-line-supply-run"]')).toContainText(
+      "Materials pickup",
+    );
     await expect(page.locator('[data-testid="estimate-line-urgency"]')).toContainText("+15%");
 
     await fillContact(page);
