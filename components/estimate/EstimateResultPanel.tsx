@@ -60,7 +60,18 @@ export function AnimatedPrice({ value }: { value: number }) {
     };
 
     rafRef.current = requestAnimationFrame(tick);
+    // rAF is paused while the tab is hidden (backgrounded phone, app switch),
+    // which would leave a stale price on screen until the next repaint. This
+    // timer guarantees the displayed number settles on the real target even
+    // when no frame ever fires; it is a no-op when the tween finished.
+    const settle = window.setTimeout(() => {
+      if (displayRef.current !== to) {
+        displayRef.current = to;
+        setDisplay(to);
+      }
+    }, ANIM_DURATION + 100);
     return () => {
+      window.clearTimeout(settle);
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
@@ -146,7 +157,7 @@ export function EstimateResultPanel({
       <div className="flex items-center justify-between mb-3">
         <div className="brc-label text-inverse-muted">Estimated range</div>
         {estimate && (
-          <div className="text-[10px] tracking-wide uppercase px-2 py-1 rounded-sm bg-inverse-foreground/15 text-inverse-foreground/90">
+          <div className="text-caption tracking-wide uppercase px-2 py-1 rounded-sm bg-inverse-foreground/15 text-inverse-foreground/90">
             Labor only
           </div>
         )}
@@ -168,7 +179,7 @@ export function EstimateResultPanel({
             <AnimatedPrice value={estimate.priceHigh} />
           </div>
 
-          <p className="text-[11px] text-inverse-muted mb-4" data-testid="rate-disclaimer">
+          <p className="text-caption text-inverse-muted mb-4" data-testid="rate-disclaimer">
             {HANDYMAN_RATE_DISCLAIMER}
           </p>
 
@@ -199,7 +210,7 @@ export function EstimateResultPanel({
 
           {estimate.oversized && (
             <p
-              className="text-[11px] leading-relaxed text-inverse-muted mb-3"
+              className="text-caption leading-relaxed text-inverse-muted mb-3"
               data-testid="oversized-note"
             >
               {OVERSIZED_JOB_NOTE}
@@ -211,7 +222,7 @@ export function EstimateResultPanel({
             onClick={() => setNotesOpen((prev) => !prev)}
             aria-expanded={notesOpen}
             aria-controls="estimate-materials-note"
-            className="flex w-full items-center justify-center gap-1 text-[11px] text-inverse-muted/80 hover:text-inverse-muted"
+            className="flex w-full items-center justify-center gap-1 text-caption text-inverse-muted/80 hover:text-inverse-muted"
           >
             What about materials?
             <ChevronDown className={cn("h-3 w-3 transition-transform", notesOpen && "rotate-180")} />
@@ -219,7 +230,7 @@ export function EstimateResultPanel({
           {notesOpen && (
             <p
               id="estimate-materials-note"
-              className="text-[11px] leading-relaxed text-inverse-muted mt-2"
+              className="text-caption leading-relaxed text-inverse-muted mt-2"
               data-testid="materials-note"
             >
               {MATERIALS_COST_NOTE}
@@ -247,7 +258,7 @@ export function EstimateResultPanel({
 
           <ProgressChecklist progress={progress} />
 
-          <p className="text-[11px] leading-relaxed text-inverse-muted border-t border-inverse-foreground/10 pt-4">
+          <p className="text-caption leading-relaxed text-inverse-muted border-t border-inverse-foreground/10 pt-4">
             Takes about a minute. {HANDYMAN_RATE_DISCLAIMER}
           </p>
         </>

@@ -395,19 +395,19 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
 
         <ol className="space-y-2.5 text-sm text-muted-foreground">
           <li className="flex gap-3">
-            <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-[11px] font-normal text-foreground">
+            <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-caption font-normal text-foreground">
               1
             </span>
             <span className="pt-0.5">We review your request and any planning range you attached.</span>
           </li>
           <li className="flex gap-3">
-            <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-[11px] font-normal text-foreground">
+            <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-caption font-normal text-foreground">
               2
             </span>
             <span className="pt-0.5">We reply within one business day with an upfront quote and a time that works.</span>
           </li>
           <li className="flex gap-3">
-            <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-[11px] font-normal text-foreground">
+            <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-caption font-normal text-foreground">
               3
             </span>
             <span className="pt-0.5">

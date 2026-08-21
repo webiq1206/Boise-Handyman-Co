@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,12 @@ export interface WizardActionBarProps {
   primaryIcon?: "arrow" | "none";
   /** Optional secondary control rendered between Back and Primary (e.g. Exit). */
   children?: React.ReactNode;
+  /**
+   * Optional strip rendered inside the sticky container, above the buttons -
+   * e.g. the estimator's live price readout. Keeping it in the same sticky
+   * element means one bottom cluster on a phone instead of stacked bars.
+   */
+  topAccessory?: React.ReactNode;
   tone?: "inverse" | "default";
   /** Hide the global mobile Call/Text bar while this bar owns the bottom edge. */
   ownsBottomEdge?: boolean;
@@ -49,24 +55,50 @@ export function WizardActionBar({
   busyLabel,
   primaryIcon = "arrow",
   children,
+  topAccessory,
   tone = "default",
   ownsBottomEdge = true,
   className,
   "data-testid": testId = "wizard-action-bar",
 }: WizardActionBarProps) {
   const keyboardInset = useKeyboardInset();
+  const barRef = useRef<HTMLDivElement | null>(null);
 
-  // While the bar owns the bottom edge, hide the global Call/Text bar rather
-  // than stacking two competing bars at the bottom of a phone.
+  // While the bar is actually on screen it owns the bottom edge, so the global
+  // Call/Text bar and the assistant launcher step aside rather than stacking
+  // under or over Back/Continue. Scoped to visibility (not mount) so pages that
+  // embed a wizard mid-page - the homepage calculator - get their global bar
+  // back as soon as the visitor scrolls away from the wizard.
   useEffect(() => {
     if (!ownsBottomEdge) return;
-    return requestHideMobileNavBar();
+    const node = barRef.current;
+    if (!node || typeof IntersectionObserver === "undefined") {
+      return requestHideMobileNavBar();
+    }
+    let release: (() => void) | null = null;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!release) release = requestHideMobileNavBar();
+        } else {
+          release?.();
+          release = null;
+        }
+      },
+      { threshold: 0 },
+    );
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      release?.();
+    };
   }, [ownsBottomEdge]);
 
   const inverse = tone === "inverse";
 
   return (
     <div
+      ref={barRef}
       data-testid={testId}
       style={keyboardInset > 0 ? { transform: `translateY(-${keyboardInset}px)` } : undefined}
       className={cn(
@@ -77,14 +109,18 @@ export function WizardActionBar({
         className,
       )}
     >
-      <div className="mx-auto flex max-w-3xl items-center gap-3 pb-3">
+      {topAccessory && <div className="mx-auto max-w-3xl">{topAccessory}</div>}
+      {/* Phones stack the controls - full-width Continue on top, Back beneath -
+          because a long primary label ("Email me my estimate") next to Back
+          overflows a 375px viewport. sm and up returns to the single row. */}
+      <div className="mx-auto flex max-w-3xl flex-col-reverse gap-2.5 pb-3 sm:flex-row sm:items-center sm:gap-3">
         {onBack ? (
           <Button
             type="button"
             variant={inverse ? "heroGhost" : "brandOutline"}
             onClick={onBack}
             disabled={busy}
-            className="min-h-12 flex-shrink-0 px-4"
+            className="min-h-12 w-full flex-shrink-0 px-4 sm:w-auto"
             data-testid="wizard-back"
           >
             <ArrowLeft className="mr-1.5 h-4 w-4" aria-hidden="true" />
@@ -100,7 +136,7 @@ export function WizardActionBar({
           onClick={onPrimary}
           disabled={primaryDisabled || busy}
           aria-busy={busy}
-          className="min-h-12 flex-1 text-[15px]"
+          className="min-h-12 w-full text-base sm:w-auto sm:flex-1"
           data-testid="wizard-continue"
         >
           {busy ? (

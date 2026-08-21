@@ -23,7 +23,7 @@ function StatCard({ num, label }: { num: string; label: string }) {
       {/* Was text-inverse-muted. At 10-11px over the photo that measured 3.4:1,
           already under the 4.5:1 AA needs before the scrim above it was
           lightened, which would have taken it lower still. */}
-      <div className="mt-1 md:mt-1.5 text-[10px] md:text-[11px] tracking-[0.06em] md:tracking-[0.1em] uppercase text-inverse-foreground/85 leading-snug">
+      <div className="mt-1 md:mt-1.5 text-caption tracking-[0.06em] md:tracking-[0.1em] uppercase text-inverse-foreground/85 leading-snug">
         {label}
       </div>
     </div>

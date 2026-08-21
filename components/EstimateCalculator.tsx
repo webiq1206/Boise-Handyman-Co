@@ -136,21 +136,6 @@ export function EstimateCalculator({
     if (prefill.phone) setPhone((v) => v || prefill.phone || "");
   }, []);
 
-  /* Inline sticky bar visibility: only while the section is on screen. */
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const [sectionVisible, setSectionVisible] = useState(false);
-  useEffect(() => {
-    if (inModal || typeof IntersectionObserver === "undefined") return;
-    const node = sectionRef.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setSectionVisible(entry.isIntersecting),
-      { threshold: 0.05 },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [inModal]);
-
   /* ───────────────────────────────────────────────── derived estimate */
 
   const otherJob =
@@ -386,7 +371,7 @@ export function EstimateCalculator({
               />
               {selected && max > 1 && (
                 <div className="mt-1.5 flex items-center justify-between rounded-sm border border-inverse-foreground/15 bg-inverse-foreground/[0.04] px-4 py-2.5">
-                  <span className="text-[12.5px] text-inverse-muted">
+                  <span className="text-xs text-inverse-muted">
                     How many {task.unitLabel ?? "of these"}?
                   </span>
                   <div className="flex items-center gap-2">
@@ -394,13 +379,13 @@ export function EstimateCalculator({
                       type="button"
                       onClick={() => setQty(task.id, qty - 1, max)}
                       aria-label={`Fewer ${task.unitLabel ?? "items"}`}
-                      className="flex h-9 w-9 items-center justify-center rounded-sm border border-inverse-foreground/25 text-inverse-foreground hover:border-inverse-foreground/50"
+                      className="flex h-11 w-11 items-center justify-center rounded-sm border border-inverse-foreground/25 text-inverse-foreground hover:border-inverse-foreground/50"
                       data-testid={`qty-minus-${task.id}`}
                     >
                       <Minus className="h-4 w-4" aria-hidden="true" />
                     </button>
                     <span
-                      className="w-8 text-center text-[15px] tabular-nums text-inverse-foreground"
+                      className="w-8 text-center text-sm tabular-nums text-inverse-foreground"
                       data-testid={`qty-value-${task.id}`}
                       aria-live="polite"
                     >
@@ -411,7 +396,7 @@ export function EstimateCalculator({
                       onClick={() => setQty(task.id, qty + 1, max)}
                       disabled={qty >= max}
                       aria-label={`More ${task.unitLabel ?? "items"}`}
-                      className="flex h-9 w-9 items-center justify-center rounded-sm border border-inverse-foreground/25 text-inverse-foreground hover:border-inverse-foreground/50 disabled:opacity-40"
+                      className="flex h-11 w-11 items-center justify-center rounded-sm border border-inverse-foreground/25 text-inverse-foreground hover:border-inverse-foreground/50 disabled:opacity-40"
                       data-testid={`qty-plus-${task.id}`}
                     >
                       <Plus className="h-4 w-4" aria-hidden="true" />
@@ -456,7 +441,7 @@ export function EstimateCalculator({
               data-testid="input-other-description"
             />
             <div role="radiogroup" aria-label="About how big is it?">
-              <p className="mb-1.5 text-[12.5px] text-inverse-muted">
+              <p className="mb-1.5 text-xs text-inverse-muted">
                 About how big is it?
               </p>
               <div className="grid grid-cols-3 gap-2">
@@ -473,7 +458,7 @@ export function EstimateCalculator({
                   />
                 ))}
               </div>
-              <p className="mt-2 text-[11.5px] text-inverse-muted/90">
+              <p className="mt-2 text-xs text-inverse-muted/90">
                 Your guess only sets the starting range. We confirm the real
                 scope with you before any work begins.
               </p>
@@ -494,7 +479,7 @@ export function EstimateCalculator({
     >
       <div className="space-y-6">
         <div role="radiogroup" aria-label="Who supplies materials?">
-          <p className="mb-2 text-[12.5px] text-inverse-muted">Who supplies materials?</p>
+          <p className="mb-2 text-xs text-inverse-muted">Who supplies materials?</p>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {MATERIALS_PLAN_VALUES.map((plan) => (
               <SelectableCard
@@ -509,14 +494,14 @@ export function EstimateCalculator({
               />
             ))}
           </div>
-          <p className="mt-2 text-[11.5px] text-inverse-muted/90">
+          <p className="mt-2 text-xs text-inverse-muted/90">
             Either way, materials are billed at cost with the receipt. The
             estimate itself covers labor and the trip fee only.
           </p>
         </div>
 
         <div role="radiogroup" aria-label="How soon do you need it?">
-          <p className="mb-2 text-[12.5px] text-inverse-muted">How soon do you need it?</p>
+          <p className="mb-2 text-xs text-inverse-muted">How soon do you need it?</p>
           <div className="grid grid-cols-1 gap-2.5">
             {URGENCY_LEVEL_VALUES.map((level) => (
               <SelectableCard
@@ -600,7 +585,7 @@ export function EstimateCalculator({
           <div>
             <label
               htmlFor={cityFieldId}
-              className="mb-1.5 block text-[12.5px] text-inverse-muted"
+              className="mb-1.5 block text-xs text-inverse-muted"
             >
               City the work is in <span className="text-accent-legible">*</span>
             </label>
@@ -610,7 +595,7 @@ export function EstimateCalculator({
               onChange={(e) => setCity(e.target.value)}
               aria-invalid={fieldErrors.city ? true : undefined}
               className={cn(
-                "w-full min-h-12 rounded-sm border px-3.5 text-[16px] transition-colors focus:outline-none focus:ring-2 focus:ring-accent-legible",
+                "w-full min-h-12 rounded-sm border px-3.5 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-accent-legible",
                 "border-inverse-foreground/25 bg-inverse-foreground/5 text-inverse-foreground",
                 fieldErrors.city && "border-red-400 ring-1 ring-red-400/60",
               )}
@@ -626,7 +611,7 @@ export function EstimateCalculator({
               ))}
             </select>
             {fieldErrors.city && (
-              <p className="mt-1.5 text-[12.5px] leading-snug text-red-300">
+              <p className="mt-1.5 text-xs leading-snug text-red-300">
                 {fieldErrors.city}
               </p>
             )}
@@ -645,7 +630,7 @@ export function EstimateCalculator({
           {submitError && (
             <div
               role="alert"
-              className="rounded-md border border-red-400/40 bg-red-400/10 px-3.5 py-3 text-[13px] text-red-300"
+              className="rounded-md border border-red-400/40 bg-red-400/10 px-3.5 py-3 text-xs text-red-300"
               data-testid="submit-error"
             >
               {submitError}
@@ -666,7 +651,7 @@ export function EstimateCalculator({
     <div ref={topRef} className="scroll-mt-20" data-testid="estimate-success">
       <div className="mb-2 flex items-center justify-between gap-3">
         <p className="brc-label text-inverse-muted">Your estimate</p>
-        <span className="inline-flex items-center gap-1.5 text-[11.5px] tracking-[0.08em] uppercase text-accent-legible">
+        <span className="inline-flex items-center gap-1.5 text-xs tracking-[0.08em] uppercase text-accent-legible">
           <Check className="h-3.5 w-3.5" aria-hidden="true" />
           On its way
         </span>
@@ -742,31 +727,27 @@ export function EstimateCalculator({
         primaryDisabled={!stepDone(wizStep)}
         busy={submitting}
         busyLabel="Sending..."
+        topAccessory={
+          wizStep !== "contact" ? (
+            <div className="lg:hidden">
+              <StickyEstimateBar estimate={estimate} summary={summary} tone="inverse" />
+            </div>
+          ) : undefined
+        }
       />
-      <p className="mt-3 text-center text-[11.5px] text-inverse-muted/90">
+      <p className="mt-3 text-center text-xs text-inverse-muted/90">
         {HANDYMAN_RATE_DISCLAIMER}
       </p>
     </div>
   );
 
   const surface = submitted ? successSurface : wizardSurface;
-  const showStickyBar = !submitted && wizStep !== "contact";
 
   /* inModal: compact card without full-viewport constraint. */
   if (inModal) {
     return (
       <div className="relative bg-inverse text-inverse-foreground rounded-lg p-5 sm:p-6">
         {surface}
-        {showStickyBar && (
-          <StickyEstimateBar
-            mode="modal"
-            estimate={estimate}
-            summary={summary}
-            ctaLabel="Finish up"
-            ctaDisabled={!hasWork}
-            onCta={() => goTo(stepDone("details") ? "contact" : "details")}
-          />
-        )}
       </div>
     );
   }
@@ -791,7 +772,7 @@ export function EstimateCalculator({
           style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat" }}
           aria-hidden
         />
-        <div ref={sectionRef} className="container px-4 sm:px-6 py-2 md:py-4 relative z-[1]">
+        <div className="container px-4 sm:px-6 py-2 md:py-4 relative z-[1]">
           <div className="mx-auto w-full max-w-4xl">
             <div className="relative rounded-sm border border-accent-legible/45 bg-inverse-foreground/[0.04] shadow-[0_0_0_1px_hsl(var(--accent-legible)/0.1),0_24px_60px_-20px_rgba(0,0,0,0.55)]">
               <div className="absolute inset-y-0 left-0 w-1 bg-accent-legible/80 rounded-l-sm" aria-hidden />
@@ -804,17 +785,6 @@ export function EstimateCalculator({
           </div>
         </div>
       </Section>
-      {showStickyBar && (
-        <StickyEstimateBar
-          mode="inline"
-          visible={sectionVisible}
-          estimate={estimate}
-          summary={summary}
-          ctaLabel="Finish up"
-          ctaDisabled={!hasWork}
-          onCta={() => goTo(stepDone("details") ? "contact" : "details")}
-        />
-      )}
     </>
   );
 }
