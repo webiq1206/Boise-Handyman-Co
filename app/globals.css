@@ -404,7 +404,9 @@ html, body {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 11px;
+  /* 12px readability floor for the eyebrow - wide tracking + uppercase
+     needs this much to stay legible on the dark ground. */
+  font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: hsl(var(--muted-foreground));
@@ -499,12 +501,12 @@ html, body {
 .blog-content {
   color: hsl(var(--foreground));
   line-height: 1.8;
-  font-size: 1rem;
+  font-size: 1.0625rem;
 }
 /* Long-form body reads more comfortably a step above UI text on larger
-   screens; 16px stays correct on phones. */
+   screens; 17px keeps phone reading comfortable too. */
 @media (min-width: 768px) {
-  .blog-content { font-size: 1.0625rem; }
+  .blog-content { font-size: 1.125rem; }
 }
 /* Jump links and the sidebar TOC target these headings - the scroll margin
    keeps each one from landing hidden behind the 60px sticky header. */
@@ -632,7 +634,7 @@ html, body {
 }
 .blog-content .summary-block p {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: hsl(var(--muted-foreground));
 }
 
@@ -659,13 +661,13 @@ html, body {
 }
 .blog-content .callout > *:first-child { margin-top: 0; }
 .blog-content .callout > *:last-child { margin-bottom: 0; }
-.blog-content .callout p { margin: 0.5rem 0; font-size: 0.98rem; }
+.blog-content .callout p { margin: 0.5rem 0; font-size: 1rem; }
 .blog-content .callout .callout-label {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   margin: 0 0 0.55rem;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -856,6 +858,16 @@ html, body {
    (estimator sticky bar or a modal) owns the bottom of the viewport. */
 body[data-hide-mobile-nav-bar="true"] [data-mobile-nav-bar] {
   display: none;
+}
+
+/* Same protocol for the assistant launcher on phones: while a wizard's sticky
+   action bar owns the bottom edge, the floating chat bubble would sit directly
+   on top of the Continue button. Desktop keeps the launcher (the action bar is
+   narrower than the viewport there). */
+@media (max-width: 1023px) {
+  body[data-hide-mobile-nav-bar="true"] [data-assistant-launcher] {
+    display: none;
+  }
 }
 
 /* ─── Print: a clean, black-on-white estimate ───

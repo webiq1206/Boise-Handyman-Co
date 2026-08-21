@@ -48,7 +48,7 @@ export function WizardProgress({
   return (
     <div className={cn("mb-7", className)} data-testid="wizard-progress">
       <div className="flex items-center justify-between gap-3 mb-2">
-        <p className={cn("text-[12px] tracking-[0.08em] uppercase", strong)}>
+        <p className={cn("text-caption tracking-[0.08em] uppercase", strong)}>
           <span className="brc-display-num">{humanStep}</span>
           <span className={muted}> of </span>
           <span className="brc-display-num">{total}</span>
@@ -57,7 +57,7 @@ export function WizardProgress({
           </span>
           {current?.label}
         </p>
-        <p className={cn("text-[11px] tabular-nums", muted)} aria-hidden="true">
+        <p className={cn("text-caption tabular-nums", muted)} aria-hidden="true">
           {pct}%
         </p>
       </div>
@@ -78,6 +78,20 @@ export function WizardProgress({
         />
       </div>
 
+      {/* Phones hide the full rail (it wraps badly), so orient with just the
+          upcoming step: the user always knows what Continue leads to. */}
+      {clamped < total - 1 && (
+        <p
+          className={cn(
+            "mt-2 text-caption tracking-[0.06em] uppercase sm:hidden",
+            muted,
+          )}
+          aria-hidden="true"
+        >
+          Next: {steps[clamped + 1]?.label}
+        </p>
+      )}
+
       {/* Named steps. Announced politely so a screen reader hears the change of
           step without the bar's raw percentage. */}
       <ol
@@ -88,7 +102,7 @@ export function WizardProgress({
           <li
             key={s.id}
             className={cn(
-              "flex items-center text-[11px] tracking-[0.06em] uppercase",
+              "flex items-center text-caption tracking-[0.06em] uppercase",
               i === clamped
                 ? strong
                 : i < clamped

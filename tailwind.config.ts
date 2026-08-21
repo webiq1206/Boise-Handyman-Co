@@ -134,6 +134,15 @@ export default {
         mono: ["Menlo", "Monaco", "monospace"],
       },
       fontSize: {
+        // Readability-tuned overrides of Tailwind's stock scale. The three
+        // body-adjacent sizes run one notch larger than the defaults so
+        // secondary copy stays legible on the dark ground; xl and up keep
+        // Tailwind defaults. `caption` is the 12px floor for meta text -
+        // nothing user-facing should render below it.
+        caption: ["0.75rem", { lineHeight: "1.1rem", letterSpacing: "0.01em" }],
+        xs: ["0.8125rem", { lineHeight: "1.35rem" }],
+        sm: ["0.9375rem", { lineHeight: "1.55rem" }],
+        base: ["1rem", { lineHeight: "1.7rem" }],
         display: ["clamp(2.5rem,6vw,5rem)", { lineHeight: "1.04", letterSpacing: "-0.025em" }],
         "section-title": ["1.875rem", { lineHeight: "1.15", letterSpacing: "-0.025em" }],
         "section-title-lg": ["2.25rem", { lineHeight: "1.15", letterSpacing: "-0.025em" }],

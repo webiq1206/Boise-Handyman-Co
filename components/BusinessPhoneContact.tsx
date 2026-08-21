@@ -79,7 +79,10 @@ export function BusinessPhoneContact({
   return (
     <Wrapper
       className={cn(
-        !inline && layout === "stack" && "space-y-1",
+        /* flex-col, not space-y: the children are inline anchors, and space-y
+           has no effect on inline boxes - the phone and the save link were
+           rendering glued together on one line. */
+        !inline && layout === "stack" && "flex flex-col items-start gap-1",
         !inline && layout === "inline" && "flex flex-wrap items-center gap-x-3 gap-y-1",
         !inline && layout === "compact" && "flex flex-col items-start gap-0.5 sm:flex-row sm:items-center sm:gap-3",
         inline && "inline-flex flex-wrap items-center gap-x-2 gap-y-0.5 align-baseline",

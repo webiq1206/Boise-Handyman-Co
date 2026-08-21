@@ -2,151 +2,108 @@
 
 import { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { AnimatedPrice } from "@/components/estimate/EstimateResultPanel";
-import { requestHideMobileNavBar } from "@/lib/mobileNavBar";
 import type { HandymanEstimate } from "@/shared/estimateEngine";
 import { formatHandymanCurrency, HANDYMAN_RATE_DISCLAIMER } from "@/shared/estimateEngine";
 
 export interface StickyEstimateBarProps {
-  /**
-   * inline: fixed to the bottom of the viewport (replaces the global mobile
-   * nav bar while active). modal: sticky to the bottom of the dialog scroll
-   * area so it never floats mid-page.
-   */
-  mode: "inline" | "modal";
-  /** Inline only: whether the estimator section is currently on screen. */
-  visible?: boolean;
   estimate: HandymanEstimate | null;
   /** Short selections summary, or a hint when nothing is selected yet. */
   summary: string;
-  ctaLabel: string;
-  ctaDisabled?: boolean;
-  onCta: () => void;
+  /** "inverse" when rendered on the dark estimator band. */
+  tone?: "inverse" | "default";
 }
 
 /**
- * Bottom-anchored estimate bar for mobile. Always pinned to the bottom of the
- * viewport (inline) or dialog (modal), safe-area aware, with a tap-to-expand
- * breakdown sheet once a range exists.
+ * The live estimate readout for phones, rendered INSIDE the wizard's sticky
+ * action bar (via WizardActionBar's topAccessory slot) rather than as its own
+ * fixed bar. One bottom cluster - range on top, Back/Continue beneath - is the
+ * app pattern; the previous design stacked a second fixed bar over the action
+ * bar and buried the Continue button behind it on phones.
+ *
+ * Tapping the range expands the same line-item breakdown the desktop rail
+ * shows, so no information is lost on mobile.
  */
 export function StickyEstimateBar({
-  mode,
-  visible = true,
   estimate,
   summary,
-  ctaLabel,
-  ctaDisabled = false,
-  onCta,
+  tone = "inverse",
 }: StickyEstimateBarProps) {
   const [expanded, setExpanded] = useState(false);
-  const isInline = mode === "inline";
-
-  // While the inline bar owns the bottom edge, hide the global Call/Text bar
-  // instead of stacking two bars (modal visibility is handled by ModalProvider).
-  // Ref-counted so overlapping requests release cleanly.
-  useEffect(() => {
-    if (!isInline || !visible) return;
-    return requestHideMobileNavBar();
-  }, [isInline, visible]);
+  const inverse = tone === "inverse";
 
   // Collapse the sheet when the range goes away (e.g. user changed the job).
   useEffect(() => {
     if (!estimate) setExpanded(false);
   }, [estimate]);
 
-  if (isInline && !visible) return null;
+  const mutedText = inverse ? "text-inverse-muted" : "text-muted-foreground";
+  const strongText = inverse ? "text-inverse-foreground" : "text-foreground";
+  const hairline = inverse ? "border-inverse-foreground/15" : "border-border";
 
-  const sheetId = `estimate-bar-sheet-${mode}`;
+  const sheetId = "estimate-bar-sheet";
 
   return (
-    <div
-      className={cn(
-        isInline
-          ? "fixed left-0 right-0 pb-safe border-t bottom-0 z-[120] lg:hidden bg-background/97 backdrop-blur-md border-border"
-          : "sticky bottom-0 z-20 -mx-6 -mb-6 mt-4 border-t border-border bg-background/97 backdrop-blur-md pb-safe md:hidden"
-      )}
-      data-testid="mobile-estimate-bar"
-    >
+    <div data-testid="mobile-estimate-bar" className={`border-b ${hairline} mb-3`}>
       {expanded && estimate && (
-        <div
-          id={sheetId}
-          className="px-4 pt-4 pb-2 border-b border-border"
-          data-testid="estimate-bar-sheet"
-        >
-          <p className="text-[11px] uppercase tracking-wide text-muted-foreground mb-2">
-            {summary}
-          </p>
+        <div id={sheetId} className={`border-b ${hairline} pb-3 pt-1`} data-testid="estimate-bar-sheet">
           <ul className="space-y-1.5 mb-2">
             {estimate.lines.map((line) => (
               <li
                 key={line.id}
-                className="flex items-baseline justify-between gap-3 text-xs leading-snug text-muted-foreground"
+                className={`flex items-baseline justify-between gap-3 text-xs leading-snug ${mutedText}`}
               >
                 <span>{line.label}</span>
                 <span className="tabular-nums">{formatHandymanCurrency(line.amount)}</span>
               </li>
             ))}
           </ul>
-          <p className="text-[10px] leading-snug text-muted-foreground">
+          <p className={`text-caption leading-snug ${mutedText}`}>
             {HANDYMAN_RATE_DISCLAIMER}
           </p>
         </div>
       )}
 
-      <div className="flex items-center justify-between gap-3 px-4 py-2.5 max-w-6xl mx-auto">
-        <button
-          type="button"
-          onClick={() => estimate && setExpanded((prev) => !prev)}
-          disabled={!estimate}
-          aria-expanded={estimate ? expanded : undefined}
-          aria-controls={estimate ? sheetId : undefined}
-          className="min-w-0 flex-1 text-left min-h-11 flex items-center gap-2"
-          data-testid="estimate-bar-toggle"
-        >
-          <span className="min-w-0">
-            <span className="block text-[10px] uppercase tracking-wide truncate text-muted-foreground">
-              {estimate ? summary : "Your estimated range"}
+      <button
+        type="button"
+        onClick={() => estimate && setExpanded((prev) => !prev)}
+        disabled={!estimate}
+        aria-expanded={estimate ? expanded : undefined}
+        aria-controls={estimate ? sheetId : undefined}
+        className="flex min-h-11 w-full items-center justify-between gap-3 py-1.5 text-left"
+        data-testid="estimate-bar-toggle"
+      >
+        <span className={`text-caption uppercase tracking-wide ${mutedText}`}>
+          {estimate ? "Estimated range" : "Your estimated range"}
+        </span>
+        <span className="flex items-center gap-2">
+          {estimate ? (
+            <span
+              className={`brc-display-num text-lg leading-tight tabular-nums ${strongText}`}
+              data-testid="mobile-estimate-range"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <AnimatedPrice value={estimate.priceLow} />
+              <span aria-hidden="true"> to </span>
+              <AnimatedPrice value={estimate.priceHigh} />
             </span>
-            {estimate ? (
-              <span
-                className="block text-lg leading-tight brc-display-num tabular-nums text-foreground"
-                data-testid="mobile-estimate-range"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <AnimatedPrice value={estimate.priceLow} />
-                <span aria-hidden="true"> to </span>
-                <AnimatedPrice value={estimate.priceHigh} />
-              </span>
-            ) : (
-              <span
-                className="block text-sm leading-tight text-foreground"
-                data-testid="mobile-estimate-placeholder"
-              >
-                Make your selections to see it
-              </span>
-            )}
-          </span>
+          ) : (
+            <span
+              className={`text-sm leading-tight ${strongText}`}
+              data-testid="mobile-estimate-placeholder"
+            >
+              Make your selections to see it
+            </span>
+          )}
           {estimate &&
             (expanded ? (
-              <ChevronDown className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+              <ChevronDown className={`h-4 w-4 flex-shrink-0 ${mutedText}`} aria-hidden="true" />
             ) : (
-              <ChevronUp className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+              <ChevronUp className={`h-4 w-4 flex-shrink-0 ${mutedText}`} aria-hidden="true" />
             ))}
-        </button>
-
-        <Button
-          variant="brand"
-          onClick={onCta}
-          disabled={ctaDisabled}
-          className="flex-shrink-0 px-5 py-2.5 text-xs"
-          data-testid="mobile-button-get-estimate"
-        >
-          {ctaLabel}
-        </Button>
-      </div>
+        </span>
+      </button>
     </div>
   );
 }
