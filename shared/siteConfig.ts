@@ -17,7 +17,15 @@ export const SITE_CONFIG = {
   name: "Boise Handyman Co",
   // NEEDS: confirm the registered legal entity name for Boise Handyman before
   // launch. Set to the brand name (no invented "LLC" suffix) until confirmed.
-  legalName: "Boise Handyman Co",
+  /**
+   * The registered legal entity. This brand is an Idaho assumed business name
+   * (DBA) of P5 Home Co LLC - there is no separate "Boise Handyman Co" company.
+   * `name` above stays the DBA, which is what customers know and what belongs
+   * in a GBP business-name field; `legalName` is the entity that actually
+   * signs contracts, holds the registration and gets verified against state
+   * records, so the two are deliberately different values.
+   */
+  legalName: "P5 Home Co LLC",
   phone: process.env.NEXT_PUBLIC_PHONE ?? DEFAULT_PHONE,
   phoneTel: process.env.NEXT_PUBLIC_PHONE_TEL ?? DEFAULT_PHONE_TEL,
   phoneHref: `tel:${process.env.NEXT_PUBLIC_PHONE_TEL ?? DEFAULT_PHONE_TEL}`,
