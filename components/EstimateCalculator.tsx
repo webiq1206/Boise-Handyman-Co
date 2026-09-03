@@ -657,7 +657,7 @@ export function EstimateCalculator({
           On its way
         </span>
       </div>
-      <h2 className="font-sans font-light text-2xl md:text-3xl tracking-tight text-inverse-foreground mb-3">
+      <h2 className="font-serif text-2xl md:text-3xl tracking-tight text-inverse-foreground mb-3">
         Estimate sent. Check your inbox.
       </h2>
       <p className="text-sm leading-relaxed text-inverse-foreground/85 mb-5 max-w-xl">

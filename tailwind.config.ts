@@ -129,8 +129,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["var(--font-montserrat)", "Helvetica Neue", "system-ui", "sans-serif"],
-        serif: ["var(--font-libre-baskerville)", "Georgia", "serif"],
+        sans: ["var(--font-manrope)", "Helvetica Neue", "system-ui", "sans-serif"],
+        serif: ["var(--font-cormorant)", "Georgia", "serif"],
         mono: ["Menlo", "Monaco", "monospace"],
       },
       fontSize: {
@@ -143,7 +143,7 @@ export default {
         xs: ["0.8125rem", { lineHeight: "1.35rem" }],
         sm: ["0.9375rem", { lineHeight: "1.55rem" }],
         base: ["1rem", { lineHeight: "1.7rem" }],
-        display: ["clamp(2.5rem,6vw,5rem)", { lineHeight: "1.04", letterSpacing: "-0.025em" }],
+        display: ["clamp(3.25rem,6.4vw,6.25rem)", { lineHeight: "0.96", letterSpacing: "-0.04em" }],
         "section-title": ["1.875rem", { lineHeight: "1.15", letterSpacing: "-0.025em" }],
         "section-title-lg": ["2.25rem", { lineHeight: "1.15", letterSpacing: "-0.025em" }],
       },
