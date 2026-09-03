@@ -5,10 +5,10 @@ import Script from 'next/script';
 // hardcoded fallback on this site (a leftover from when boisehandyman.co was
 // duplicated from boiseremodeling.co), so every Handyman session, event and
 // conversion was landing in the Remodeling company's reports and inflating
-// its numbers. boisehandyman.co has no GA4 property of its own yet (see
-// .env.example). Until one exists and NEXT_PUBLIC_GA_MEASUREMENT_ID is set to
-// it, this component renders nothing - sending no data is correct; sending to
-// the wrong property is not. The moment the real ID is provided, GA loads.
+// its numbers. boisehandyman.co's own property is 549906676 (measurement ID
+// G-4WQQ639LR1, set in .replit). If NEXT_PUBLIC_GA_MEASUREMENT_ID is ever
+// missing or set to the wrong property, this component renders nothing -
+// sending no data is correct; sending to the wrong property is not.
 const WRONG_PROPERTY_IDS = new Set(['G-NGE449QF9Y']);
 
 const configuredId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
