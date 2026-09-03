@@ -47,7 +47,10 @@ integrations = ["javascript_mem_db:1.0.0", "javascript_openai_ai_integrations:1.
 ADMIN_EMAILS = "webiq.co@gmail.com,info@webiq.co,hello@boisecabinet.co,hello@boiseremodeling.co,hello@p5homeco.com,hello@boisehandyman.co"
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = "pk_live_51LGm9XKmgtIDVx8lrH27gaoWAdwf1F0O7Gxx2RkNqICfBvPslxV7IJCdufiFDHnNxaCKgr3IcOZokNdmNaxy3z6z000ipOzjOv"
 NODE_OPTIONS = "--max-old-space-size=1536"
-NEXT_PUBLIC_GA_MEASUREMENT_ID = "G-NGE449QF9Y"
+# Was "G-NGE449QF9Y" - Boise Remodeling Co's GA4 property, not this site's.
+# Blanked so Handyman stops reporting into the wrong property. Set this to
+# boisehandyman.co's own GA4 measurement ID once that property is created.
+NEXT_PUBLIC_GA_MEASUREMENT_ID = ""
 NEXT_PUBLIC_META_PIXEL_ID = "2461987544292871"
 
 [postMerge]
