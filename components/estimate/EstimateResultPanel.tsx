@@ -152,6 +152,12 @@ export function EstimateResultPanel({
   const rangeAnnouncement = estimate
     ? `${formatHandymanCurrency(estimate.priceLow)} to ${formatHandymanCurrency(estimate.priceHigh)} estimated range`
     : "Make your selections to see your estimated range";
+  // Placeholder shown wherever a dollar figure would appear before the visitor
+  // has given us their contact details. It is a mask, not the real number under
+  // a CSS blur: a blur is one devtools click from readable and the figure is
+  // still in the DOM text, so the price was never actually gated. Dashes keep
+  // the teased "there is a number here" look with nothing recoverable.
+  const MASKED_AMOUNT = "$–––";
 
   return (
     <div
@@ -189,8 +195,7 @@ export function EstimateResultPanel({
               </>
             ) : (
               <span className="brc-display-num select-none blur-sm" aria-hidden="true">
-                {formatHandymanCurrency(estimate.priceLow)} to{" "}
-                {formatHandymanCurrency(estimate.priceHigh)}
+                {MASKED_AMOUNT} to {MASKED_AMOUNT}
               </span>
             )}
           </div>
@@ -223,7 +228,7 @@ export function EstimateResultPanel({
                   )}
                   aria-hidden={!revealRange}
                 >
-                  {formatHandymanCurrency(line.amount)}
+                  {revealRange ? formatHandymanCurrency(line.amount) : MASKED_AMOUNT}
                 </span>
               </div>
             ))}
@@ -236,7 +241,7 @@ export function EstimateResultPanel({
                 )}
                 aria-hidden={!revealRange}
               >
-                {formatHandymanCurrency(estimate.total)}
+                {revealRange ? formatHandymanCurrency(estimate.total) : MASKED_AMOUNT}
               </span>
             </div>
           </div>
