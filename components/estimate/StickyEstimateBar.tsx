@@ -35,6 +35,10 @@ export function StickyEstimateBar({
 }: StickyEstimateBarProps) {
   const [expanded, setExpanded] = useState(false);
   const inverse = tone === "inverse";
+  // See EstimateResultPanel: before contact capture the real figure must be
+  // absent from the DOM, not merely blurred (a blur is trivially removed), so
+  // dollar amounts are replaced by a mask until reveal.
+  const MASKED_AMOUNT = "$–––";
 
   // Collapse the sheet when the range goes away (e.g. user changed the job).
   useEffect(() => {
@@ -62,7 +66,7 @@ export function StickyEstimateBar({
                   className={cn("tabular-nums", !revealRange && "blur-sm select-none")}
                   aria-hidden={!revealRange}
                 >
-                  {formatHandymanCurrency(line.amount)}
+                  {revealRange ? formatHandymanCurrency(line.amount) : MASKED_AMOUNT}
                 </span>
               </li>
             ))}
@@ -74,7 +78,7 @@ export function StickyEstimateBar({
                 className={cn("tabular-nums", !revealRange && "blur-sm select-none")}
                 aria-hidden={!revealRange}
               >
-                {formatHandymanCurrency(estimate.total)}
+                {revealRange ? formatHandymanCurrency(estimate.total) : MASKED_AMOUNT}
               </span>
             </li>
           </ul>
@@ -108,9 +112,15 @@ export function StickyEstimateBar({
               aria-atomic="true"
               aria-hidden={!revealRange}
             >
-              <AnimatedPrice value={estimate.priceLow} />
-              <span aria-hidden="true"> to </span>
-              <AnimatedPrice value={estimate.priceHigh} />
+              {revealRange ? (
+                <>
+                  <AnimatedPrice value={estimate.priceLow} />
+                  <span aria-hidden="true"> to </span>
+                  <AnimatedPrice value={estimate.priceHigh} />
+                </>
+              ) : (
+                <>{MASKED_AMOUNT} to {MASKED_AMOUNT}</>
+              )}
             </span>
           ) : (
             <span
