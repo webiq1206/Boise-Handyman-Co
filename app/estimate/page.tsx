@@ -111,7 +111,7 @@ export default function EstimatePage() {
       >
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Instant Estimate" }]} />
         <div className="brc-label text-inverse-muted mt-6 mb-4">Free, no obligation</div>
-        <h1 className="font-sans font-light text-display tracking-tight text-inverse-foreground max-w-3xl mb-4">
+        <h1 className="font-serif text-display tracking-tight text-inverse-foreground max-w-3xl mb-4">
           Instant handyman <em className="brc-accent">estimate</em>
         </h1>
         {/* Direct answer block: what this is, where, and how pricing works. */}
@@ -131,7 +131,7 @@ export default function EstimatePage() {
         <div className="container px-4 max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-start">
           <div>
             <div className="brc-label mb-4">What happens next</div>
-            <h2 className="font-sans font-light text-2xl md:text-3xl tracking-tight text-foreground mb-4">
+            <h2 className="font-serif text-2xl md:text-3xl tracking-tight text-foreground mb-4">
               Your range is a starting point, your quote is in writing
             </h2>
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
@@ -168,7 +168,7 @@ export default function EstimatePage() {
       <Section variant="canvas" divider>
         <div className="container px-4 max-w-3xl mx-auto">
           <div className="brc-label mb-4">Estimate questions</div>
-          <h2 className="font-sans font-light text-2xl md:text-3xl tracking-tight text-foreground mb-8">
+          <h2 className="font-serif text-2xl md:text-3xl tracking-tight text-foreground mb-8">
             How the estimate works
           </h2>
           <div className="space-y-8">

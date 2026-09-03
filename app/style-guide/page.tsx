@@ -29,7 +29,7 @@ export default function StyleGuidePage() {
 
       <Section variant="greige" divider>
         <div className="container px-4 max-w-4xl space-y-8">
-          <h2 className="text-section-title font-sans font-light">Brand kit (placeholder)</h2>
+          <h2 className="text-section-title font-serif">Brand kit (placeholder)</h2>
           <p className="text-sm text-muted-foreground max-w-prose">
             PLACEHOLDER kit generated programmatically pending real brand assets. Charcoal
             #2C302F, bone #F7F5F3, and the brand accent steel blue #8FAEC4 (5.74:1 on
@@ -81,7 +81,7 @@ export default function StyleGuidePage() {
 
       <Section variant="greige" divider>
         <div className="container px-4 max-w-4xl space-y-8">
-          <h2 className="text-section-title font-sans font-light">Colors</h2>
+          <h2 className="text-section-title font-serif">Colors</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { name: "Canvas", class: "bg-background border" },
@@ -99,12 +99,12 @@ export default function StyleGuidePage() {
 
       <Section divider>
         <div className="container px-4 max-w-4xl space-y-6">
-          <h2 className="text-section-title font-sans font-light">Typography</h2>
+          <h2 className="text-section-title font-serif">Typography</h2>
           <p className="brc-label">Eyebrow label</p>
-          <h1 className="text-display font-sans font-light">
+          <h1 className="text-display font-serif">
             Display with <em className="brc-accent">accent</em>
           </h1>
-          <h2 className="text-3xl md:text-4xl font-sans font-light">Section title</h2>
+          <h2 className="text-3xl md:text-4xl font-serif">Section title</h2>
           <p className="text-base leading-relaxed text-foreground max-w-prose">
             Body copy uses foreground color at comfortable line height. Meta lines use muted
             foreground only.
@@ -115,7 +115,7 @@ export default function StyleGuidePage() {
 
       <Section divider>
         <div className="container px-4 max-w-4xl space-y-6">
-          <h2 className="text-section-title font-sans font-light">Buttons & links</h2>
+          <h2 className="text-section-title font-serif">Buttons & links</h2>
           <div className="flex flex-wrap gap-3">
             <Button variant="brand">Primary (brand)</Button>
             <Button variant="brandOutline">Secondary (outline)</Button>
@@ -126,7 +126,7 @@ export default function StyleGuidePage() {
 
       <Section divider>
         <div className="container px-4 max-w-4xl space-y-6">
-          <h2 className="text-section-title font-sans font-light">Cards & chips</h2>
+          <h2 className="text-section-title font-serif">Cards & chips</h2>
           <MarketingCard>
             <p className="text-sm text-muted-foreground">Marketing card - rounded-sm, border, shadow-sm.</p>
           </MarketingCard>
