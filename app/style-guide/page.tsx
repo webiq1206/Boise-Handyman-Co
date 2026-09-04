@@ -158,11 +158,7 @@ export default function StyleGuidePage() {
         </div>
       </Section>
 
-      <Section>
-        <div className="container px-4">
-          <BlogEndCta />
-        </div>
-      </Section>
+      <BlogEndCta />
     </div>
   );
 }

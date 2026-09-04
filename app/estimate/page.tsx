@@ -130,7 +130,7 @@ export default function EstimatePage() {
       <Section variant="greige" divider>
         <div className="container px-4 max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-start">
           <div>
-            <div className="brc-label mb-4">What happens next</div>
+            <p className="ed-eyebrow">What happens next</p>
             <h2 className="font-serif text-2xl md:text-3xl tracking-tight text-foreground mb-4">
               Your range is a starting point, your quote is in writing
             </h2>
@@ -167,7 +167,7 @@ export default function EstimatePage() {
 
       <Section variant="canvas" divider>
         <div className="container px-4 max-w-3xl mx-auto">
-          <div className="brc-label mb-4">Estimate questions</div>
+          <p className="ed-eyebrow">Estimate questions</p>
           <h2 className="font-serif text-2xl md:text-3xl tracking-tight text-foreground mb-8">
             How the estimate works
           </h2>
