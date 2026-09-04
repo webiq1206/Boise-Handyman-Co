@@ -205,7 +205,7 @@ export function EstimateResultPanel({
               {HANDYMAN_RATE_DISCLAIMER}
             </p>
           ) : (
-            <p className="text-caption text-inverse-muted/80 mb-4" data-testid="range-gate-note">
+            <p className="text-caption text-inverse-muted mb-4" data-testid="range-gate-note">
               Submit your details below to see your range.
             </p>
           )}
@@ -260,7 +260,7 @@ export function EstimateResultPanel({
             onClick={() => setNotesOpen((prev) => !prev)}
             aria-expanded={notesOpen}
             aria-controls="estimate-materials-note"
-            className="flex w-full items-center justify-center gap-1 text-caption text-inverse-muted/80 hover:text-inverse-muted"
+            className="flex w-full items-center justify-center gap-1 text-caption text-inverse-muted hover:text-inverse-muted"
           >
             What about materials?
             <ChevronDown className={cn("h-3 w-3 transition-transform", notesOpen && "rotate-180")} />
