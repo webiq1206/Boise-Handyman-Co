@@ -182,7 +182,7 @@ export default function ServicesIndexPage() {
         description="Use our Treasure Valley estimator to see a realistic range for your repair, install or maintenance job - then book a handyman visit when you're ready."
       />
 
-      <Section surface="deep" spacing="xl" edge>
+      <Section surface="bone" spacing="xl" edge>
         <div className="ed-shell">
           <div className="ed-split ed-split-end">
             <Reveal>
@@ -220,7 +220,7 @@ export default function ServicesIndexPage() {
               <p className="ed-body">
                 Get an instant estimate online, or book a handyman visit with an upfront quote.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
                 <ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA>
                 <Button variant="brandOutline" asChild><a href="/#consult">{CTA_SECONDARY}</a></Button>
               </div>
