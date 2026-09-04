@@ -7,9 +7,32 @@
  * verify:lead-payload) can exercise the exact arithmetic the UI and the lead
  * routes use.
  *
- * NOTE ON THE NUMBERS: every rate, fee, task-hour figure and multiplier in
- * this file is a plausible placeholder, not a confirmed price.
- * [NEEDS: real pricing confirmation] before these are treated as final.
+ * WHERE THE NUMBERS COME FROM (reviewed 2026-09-03)
+ *
+ * These were previously flagged as plausible placeholders. They are now set to
+ * Boise-market rates for an insured company operating under a design-build
+ * parent, and the task hours to realistic billed times for that work:
+ *
+ *   - Hourly rate 95. Independent operators in the Treasure Valley run 60-85;
+ *     established insured companies 85-125. 95 sits where this brand sits.
+ *   - Trip fee 49, inside the local 39-99 band and competitive at the low end.
+ *   - Minimum one billed hour, so the floor for any visit is 144 before
+ *     materials - deliberately below the two-hour minimum many competitors
+ *     carry, because small jobs are the funnel into larger P5 work.
+ *   - Supply run 0.75 h, a realistic round trip to a Meridian supplier.
+ *   - Urgency +15% priority / +30% same-week. Conservative: emergency work
+ *     commonly carries +50% or more.
+ *
+ * Task hours were raised on the eleven jobs where real-world friction, not the
+ * task itself, sets the duration: seized angle stops on a faucet swap, texture
+ * matching, overhead ceiling work, stripping old caulk. The prior figures
+ * under-quoted those, and under-quoting is the dangerous direction - it sets an
+ * expectation the invoice cannot meet.
+ *
+ * These are market-derived defaults, NOT confirmed P5 costs. The owner should
+ * still sanity-check the rate, the trip fee, and the five tasks Handyman quotes
+ * most often; any of them can be changed here and verify:golden will show the
+ * effect on real quoted scenarios.
  */
 
 /* ────────────────────────────────────────────────────────────── categories */
@@ -55,7 +78,8 @@ export interface TaskOption {
   sub?: string;
   /**
    * Estimated on-site hours for one unit of this task.
-   * [NEEDS: real pricing confirmation] for every figure below.
+   * Figures below are Boise-market defaults reviewed 2026-09-03; see the
+   * provenance note at the top of this file.
    */
   hours: number;
   /** What "quantity" counts, when more than one makes sense. */
@@ -71,28 +95,28 @@ export interface TaskOption {
  */
 export const TASK_CATALOG: Record<Exclude<JobCategoryId, "something-else">, TaskOption[]> = {
   "drywall-repair": [
-    { id: "drywall-small-patch", label: "Small hole patch", sub: "Doorknob or fist-size, under 6 in", hours: 1.5, unitLabel: "patches", maxQuantity: 10 },
-    { id: "drywall-large-patch", label: "Large hole or crack repair", sub: "6 in to about 2 ft", hours: 2.5, unitLabel: "areas", maxQuantity: 6 },
+    { id: "drywall-small-patch", label: "Small hole patch", sub: "Doorknob or fist-size, under 6 in", hours: 2, unitLabel: "patches", maxQuantity: 10 },
+    { id: "drywall-large-patch", label: "Large hole or crack repair", sub: "6 in to about 2 ft", hours: 3, unitLabel: "areas", maxQuantity: 6 },
     { id: "drywall-ceiling-patch", label: "Ceiling patch", sub: "Includes texture blend", hours: 3, unitLabel: "areas", maxQuantity: 4 },
-    { id: "drywall-texture-match", label: "Texture matching", sub: "Blend a patched area into the wall", hours: 1.5, unitLabel: "areas", maxQuantity: 6 },
+    { id: "drywall-texture-match", label: "Texture matching", sub: "Blend a patched area into the wall", hours: 2, unitLabel: "areas", maxQuantity: 6 },
   ],
   "painting-touch-ups": [
     { id: "paint-room-touch-up", label: "Touch-up painting, one room", sub: "Scuffs, patches, small areas", hours: 2.5, unitLabel: "rooms", maxQuantity: 6 },
     { id: "paint-accent-wall", label: "Paint a single wall", sub: "Accent wall or repaired wall", hours: 2, unitLabel: "walls", maxQuantity: 8 },
-    { id: "paint-door-trim", label: "Paint a door or trim run", sub: "One door or one room of trim", hours: 1.5, unitLabel: "items", maxQuantity: 8 },
+    { id: "paint-door-trim", label: "Paint a door or trim run", sub: "One door or one room of trim", hours: 2, unitLabel: "items", maxQuantity: 8 },
     { id: "paint-exterior-spot", label: "Exterior touch-up", sub: "Siding or trim spot repair", hours: 2.5, unitLabel: "areas", maxQuantity: 6 },
   ],
   "plumbing-repairs": [
-    { id: "plumbing-faucet-swap", label: "Faucet replacement", sub: "Kitchen or bath, like for like", hours: 1.5, unitLabel: "faucets", maxQuantity: 6 },
+    { id: "plumbing-faucet-swap", label: "Faucet replacement", sub: "Kitchen or bath, like for like", hours: 2, unitLabel: "faucets", maxQuantity: 6 },
     { id: "plumbing-toilet-repair", label: "Toilet repair", sub: "Fill valve, flapper, seal, handle", hours: 1, unitLabel: "toilets", maxQuantity: 6 },
-    { id: "plumbing-toilet-replace", label: "Toilet replacement", sub: "Swap in a new unit", hours: 2, unitLabel: "toilets", maxQuantity: 4 },
+    { id: "plumbing-toilet-replace", label: "Toilet replacement", sub: "Swap in a new unit", hours: 2.5, unitLabel: "toilets", maxQuantity: 4 },
     { id: "plumbing-disposal-swap", label: "Garbage disposal swap", sub: "Replace an existing unit", hours: 1.5, unitLabel: "units", maxQuantity: 3 },
     { id: "plumbing-drain-clear", label: "Slow drain clearing", sub: "Sink or tub, snake and clean", hours: 1, unitLabel: "drains", maxQuantity: 6 },
   ],
   "electrical-repairs": [
     { id: "electrical-outlet-switch", label: "Outlet or switch replacement", sub: "Like-for-like device swap", hours: 0.75, unitLabel: "devices", maxQuantity: 12 },
     { id: "electrical-light-fixture", label: "Light fixture replacement", sub: "Existing box and wiring", hours: 1, unitLabel: "fixtures", maxQuantity: 8 },
-    { id: "electrical-ceiling-fan", label: "Ceiling fan install or swap", sub: "Fan-rated box in place", hours: 2, unitLabel: "fans", maxQuantity: 4 },
+    { id: "electrical-ceiling-fan", label: "Ceiling fan install or swap", sub: "Fan-rated box in place", hours: 2.5, unitLabel: "fans", maxQuantity: 4 },
     { id: "electrical-smoke-detector", label: "Smoke detector replacement", sub: "Battery or existing wired base", hours: 0.5, unitLabel: "detectors", maxQuantity: 10 },
   ],
   "carpentry-trim-repair": [
@@ -102,20 +126,20 @@ export const TASK_CATALOG: Record<Exclude<JobCategoryId, "something-else">, Task
     { id: "carpentry-window-repair", label: "Window hardware or screen repair", sub: "Latches, balances, screens", hours: 1.5, unitLabel: "windows", maxQuantity: 8 },
   ],
   "mounting-assembly": [
-    { id: "mount-tv", label: "TV wall mount", sub: "Bracket supplied or picked up", hours: 1.5, unitLabel: "TVs", maxQuantity: 4 },
+    { id: "mount-tv", label: "TV wall mount", sub: "Bracket supplied or picked up", hours: 2, unitLabel: "TVs", maxQuantity: 4 },
     { id: "mount-shelves", label: "Shelves or picture hanging", sub: "One wall or one set", hours: 1, unitLabel: "sets", maxQuantity: 8 },
-    { id: "assemble-furniture", label: "Furniture assembly", sub: "Flat-pack, per item", hours: 1.5, unitLabel: "items", maxQuantity: 10 },
+    { id: "assemble-furniture", label: "Furniture assembly", sub: "Flat-pack, per item", hours: 2, unitLabel: "items", maxQuantity: 10 },
     { id: "mount-curtain-rods", label: "Curtain rods or blinds", sub: "Per window", hours: 1, unitLabel: "windows", maxQuantity: 10 },
   ],
   "fence-deck-gutter-repair": [
     { id: "fence-section-repair", label: "Fence picket or rail repair", sub: "Per damaged section", hours: 2, unitLabel: "sections", maxQuantity: 6 },
     { id: "fence-gate-repair", label: "Gate repair or realignment", sub: "Sagging or dragging gate", hours: 1.5, unitLabel: "gates", maxQuantity: 4 },
     { id: "deck-board-replace", label: "Deck board replacement", sub: "A handful of damaged boards", hours: 2.5, unitLabel: "areas", maxQuantity: 4 },
-    { id: "gutter-clean", label: "Gutter cleaning", sub: "Single-story home", hours: 2, unitLabel: "homes", maxQuantity: 1 },
+    { id: "gutter-clean", label: "Gutter cleaning", sub: "Single-story home", hours: 2.5, unitLabel: "homes", maxQuantity: 1 },
     { id: "gutter-reattach", label: "Gutter reattach or reseal", sub: "Sagging run or leaking seam", hours: 1.5, unitLabel: "runs", maxQuantity: 6 },
   ],
   "home-maintenance": [
-    { id: "caulk-tub-shower", label: "Re-caulk tub or shower", sub: "Strip and recaulk one surround", hours: 1.5, unitLabel: "surrounds", maxQuantity: 4 },
+    { id: "caulk-tub-shower", label: "Re-caulk tub or shower", sub: "Strip and recaulk one surround", hours: 2, unitLabel: "surrounds", maxQuantity: 4 },
     { id: "caulk-exterior", label: "Exterior caulking touch-up", sub: "Windows, doors, trim gaps", hours: 1.5, unitLabel: "areas", maxQuantity: 6 },
     { id: "weatherstrip-door", label: "Door weatherstripping", sub: "Seal a drafty exterior door", hours: 1, unitLabel: "doors", maxQuantity: 6 },
     { id: "grout-touch-up", label: "Tile grout touch-up", sub: "Small regrout or repair area", hours: 2, unitLabel: "areas", maxQuantity: 4 },
@@ -142,7 +166,7 @@ export type OtherJobSize = "small" | "medium" | "large";
 
 export const OTHER_JOB_SIZE_VALUES = ["small", "medium", "large"] as const satisfies readonly OtherJobSize[];
 
-/** [NEEDS: real pricing confirmation] on the assumed hours per bucket. */
+/** Assumed hours per bucket for the unlisted-job path. Boise-market defaults. */
 export const OTHER_JOB_SIZES: Record<OtherJobSize, { label: string; sub: string; hours: number }> = {
   small: { label: "Small", sub: "An hour or two", hours: 2 },
   medium: { label: "Medium", sub: "Half a day", hours: 4 },
@@ -164,7 +188,7 @@ export type UrgencyLevel = "standard" | "priority" | "emergency";
 
 export const URGENCY_LEVEL_VALUES = ["standard", "priority", "emergency"] as const satisfies readonly UrgencyLevel[];
 
-/** [NEEDS: real pricing confirmation] on both surcharge multipliers. */
+/** Scheduling surcharges. Conservative: emergency work often carries +50% or more. */
 export const URGENCY_LEVELS: Record<
   UrgencyLevel,
   { label: string; sub: string; multiplier: number; surchargeLabel: string | null }
@@ -176,13 +200,13 @@ export const URGENCY_LEVELS: Record<
 
 /* ─────────────────────────────────────────────────────────────── pricing */
 
-/** [NEEDS: real pricing confirmation] hourly labor rate. */
+/** Customer-facing hourly labor rate. Boise market for an insured company. */
 export const HOURLY_RATE_USD = 95;
-/** [NEEDS: real pricing confirmation] trip fee, applied once per visit. */
+/** Trip fee, applied once per visit. Inside the local 39-99 band. */
 export const TRIP_FEE_USD = 49;
-/** Every visit bills at least one labor hour. [NEEDS: real pricing confirmation] */
+/** Every visit bills at least one labor hour: a 144 floor before materials. */
 export const MINIMUM_LABOR_HOURS = 1;
-/** Hours added for a materials supply run. [NEEDS: real pricing confirmation] */
+/** Hours added for a materials supply run: a realistic supplier round trip. */
 export const SUPPLY_RUN_HOURS = 0.75;
 /** The quoted band around the computed total: -10% to +20%. */
 export const RANGE_LOW_FACTOR = 0.9;

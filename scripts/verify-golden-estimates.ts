@@ -44,7 +44,7 @@ type Scenario = {
 
 const SCENARIOS: Scenario[] = [
   {
-    /* Quantity math: two patches at 1.5 hrs each. */
+    /* Quantity math: two patches at 2 hrs each. */
     id: "drywall-two-small-patches-standard",
     input: {
       category: "drywall-repair",
@@ -53,7 +53,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 300, high: 400, laborHours: 3 },
+    golden: { low: 385, high: 515, laborHours: 4 },
   },
   {
     /* Priority tier: +15% on labor. */
@@ -80,7 +80,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "standard",
     },
-    golden: { low: 320, high: 430, laborHours: 2.5 },
+    golden: { low: 365, high: 485, laborHours: 3 },
   },
   {
     /* One-hour minimum: a 0.75 hr task bills a full hour. */
@@ -131,7 +131,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 430, high: 570, laborHours: 4.5 },
+    golden: { low: 555, high: 745, laborHours: 6 },
   },
   {
     /* Priority + supply run interacting (urgency applies to both). */
@@ -143,7 +143,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "priority",
     },
-    golden: { low: 315, high: 420, laborHours: 2 },
+    golden: { low: 365, high: 485, laborHours: 2.5 },
   },
   {
     /* Emergency tier on a maintenance task. */
@@ -155,7 +155,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "emergency",
     },
-    golden: { low: 210, high: 280, laborHours: 1.5 },
+    golden: { low: 265, high: 355, laborHours: 2 },
   },
   {
     /* The free-text path: a medium job is 4 assumed hours. */
