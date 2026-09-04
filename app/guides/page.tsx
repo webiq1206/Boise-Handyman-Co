@@ -77,11 +77,11 @@ export default function GuidesIndexPage() {
         imageSrc={getBlogHeroImage('boise-home-repair-cost-guide')}
         imageAlt={getBlogImageAlt('boise-home-repair-cost-guide')}
       >
-        <div className="brc-label text-inverse-muted mb-3">Treasure Valley know-how</div>
-        <h1 className="font-serif text-display tracking-tight text-inverse-foreground max-w-3xl mb-4">
+        <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Treasure Valley know-how</p>
+        <h1 className="ed-display ed-statement-display text-inverse-foreground">
           Home Repair &amp; Maintenance Guides
         </h1>
-        <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-4">
+        <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
           In-depth guides for Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley.
           What small repairs cost here, how to hire well, what each season demands, and which
           fixes to do before they get expensive.

@@ -50,12 +50,12 @@ export default function AreasHubPage() {
           imageAlt="Well-kept Treasure Valley home interior"
         >
           <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Service Areas" }]} />
-          <div className="brc-label text-inverse-muted mt-6 mb-4">Treasure Valley</div>
-          <h1 className="font-serif text-display tracking-tight text-inverse-foreground max-w-3xl mb-4">
+          <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Treasure Valley</p>
+          <h1 className="ed-display ed-statement-display text-inverse-foreground">
             Treasure Valley service{" "}
             <em className="brc-accent">areas</em>
           </h1>
-          <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-4">
+          <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
             We handle small repairs, installs, and home maintenance across {TREASURE_VALLEY_CITIES},
             and the surrounding communities, with upfront quotes and the same fair pricing
             everywhere we work.
