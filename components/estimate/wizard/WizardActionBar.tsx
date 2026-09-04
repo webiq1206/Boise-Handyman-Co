@@ -31,6 +31,12 @@ export interface WizardActionBarProps {
   tone?: "inverse" | "default";
   /** Hide the global mobile Call/Text bar while this bar owns the bottom edge. */
   ownsBottomEdge?: boolean;
+  /**
+   * Inside the one-screen AppFrame the frame's own footer is the bottom edge,
+   * so the bar renders in flow: no sticky, no negative margins, no keyboard
+   * translate (the frame is fixed and the keyboard shrinks it instead).
+   */
+  pinned?: boolean;
   className?: string;
   "data-testid"?: string;
 }
@@ -58,6 +64,7 @@ export function WizardActionBar({
   topAccessory,
   tone = "default",
   ownsBottomEdge = true,
+  pinned = true,
   className,
   "data-testid": testId = "wizard-action-bar",
 }: WizardActionBarProps) {
@@ -100,12 +107,14 @@ export function WizardActionBar({
     <div
       ref={barRef}
       data-testid={testId}
-      style={keyboardInset > 0 ? { transform: `translateY(-${keyboardInset}px)` } : undefined}
+      style={pinned && keyboardInset > 0 ? { transform: `translateY(-${keyboardInset}px)` } : undefined}
       className={cn(
-        "sticky bottom-0 z-30 -mx-4 mt-8 border-t px-4 pb-safe pt-3 backdrop-blur-md transition-transform duration-150",
-        inverse
+        pinned
+          ? "sticky bottom-0 z-30 -mx-4 mt-8 border-t px-4 pb-safe pt-3 backdrop-blur-md transition-transform duration-150"
+          : "pt-1",
+        pinned && (inverse
           ? "border-inverse-foreground/15 bg-[hsl(var(--inverse))]/95"
-          : "border-border bg-background/95",
+          : "border-border bg-background/95"),
         className,
       )}
     >
@@ -113,7 +122,7 @@ export function WizardActionBar({
       {/* Phones stack the controls - full-width Continue on top, Back beneath -
           because a long primary label ("Email me my estimate") next to Back
           overflows a 375px viewport. sm and up returns to the single row. */}
-      <div className="mx-auto flex max-w-3xl flex-col-reverse gap-2.5 pb-3 sm:flex-row sm:items-center sm:gap-3">
+      <div className={cn("mx-auto flex max-w-3xl flex-col-reverse gap-2.5 sm:flex-row sm:items-center sm:gap-3", pinned ? "pb-3" : "pb-2")}>
         {onBack ? (
           <Button
             type="button"

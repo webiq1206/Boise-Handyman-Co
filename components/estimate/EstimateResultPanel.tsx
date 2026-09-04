@@ -133,6 +133,8 @@ export interface EstimateResultPanelProps {
    * Defaults to true (fully visible).
    */
   revealRange?: boolean;
+  /** One-screen contact step: tighter padding and a smaller range figure. */
+  compact?: boolean;
   className?: string;
 }
 
@@ -146,6 +148,7 @@ export function EstimateResultPanel({
   summary,
   progress,
   revealRange = true,
+  compact = false,
   className,
 }: EstimateResultPanelProps) {
   const [notesOpen, setNotesOpen] = useState(false);
@@ -162,12 +165,13 @@ export function EstimateResultPanel({
   return (
     <div
       className={cn(
-        "rounded-sm bg-inverse text-inverse-foreground shadow-xl p-6 sm:p-7 border border-inverse-foreground/10",
+        "rounded-sm bg-inverse text-inverse-foreground shadow-xl border border-inverse-foreground/10",
+        compact ? "p-3.5" : "p-6 sm:p-7",
         className
       )}
       data-testid="estimate-result-panel"
     >
-      <div className="flex items-center justify-between mb-3">
+      <div className={cn("flex items-center justify-between", compact ? "mb-1.5" : "mb-3")}>
         <div className="brc-label text-inverse-muted">Estimated range</div>
         {estimate && (
           <div className="text-caption tracking-wide uppercase px-2 py-1 rounded-sm bg-inverse-foreground/15 text-inverse-foreground/90">
@@ -181,7 +185,7 @@ export function EstimateResultPanel({
           <p className="text-xs mb-2 text-inverse-muted">{summary}</p>
 
           <div
-            className="leading-none text-inverse-foreground text-[clamp(28px,3.4vw,42px)] mb-3"
+            className={cn("leading-none text-inverse-foreground", compact ? "text-[1.5rem] mb-1.5" : "text-[clamp(28px,3.4vw,42px)] mb-3")}
             data-testid="estimate-range"
             aria-live="polite"
             aria-atomic="true"
@@ -205,13 +209,13 @@ export function EstimateResultPanel({
               {HANDYMAN_RATE_DISCLAIMER}
             </p>
           ) : (
-            <p className="text-caption text-inverse-muted mb-4" data-testid="range-gate-note">
+            <p className={cn("text-caption text-inverse-muted", compact ? "mb-2" : "mb-4")} data-testid="range-gate-note">
               Submit your details below to see your range.
             </p>
           )}
 
           <div
-            className="border-y border-inverse-foreground/10 py-3 mb-4 space-y-2"
+            className={cn("border-y border-inverse-foreground/10", compact ? "py-2 mb-2 space-y-1" : "py-3 mb-4 space-y-2")}
             data-testid="estimate-breakdown"
           >
             {estimate.customerLines.map((line) => (

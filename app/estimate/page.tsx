@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { Section } from "@/components/marketing/Section";
-import { MarketingCard } from "@/components/marketing/MarketingCard";
-import { PageHeroBand } from "@/components/sections/PageHeroBand";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildCanonical } from "@/lib/page-metadata";
 import {
@@ -13,9 +7,7 @@ import {
   generateFAQSchema,
   generateWebPageSchema,
 } from "@/lib/schema";
-import { CONSTRUCTION_IMAGES } from "@/shared/siteImages";
 import { SITE_CONFIG } from "@/shared/siteConfig";
-import { Button } from "@/components/ui/button";
 import { HANDYMAN_RATE_DISCLAIMER } from "@/shared/estimateEngine";
 
 const EstimateCalculator = dynamic(
@@ -104,85 +96,13 @@ export default function EstimatePage() {
     <>
       <JsonLd data={schemas} />
 
-      <PageHeroBand
-        imageSrc={CONSTRUCTION_IMAGES.plans}
-        imageAlt="Written handyman estimate on a clipboard with a calculator and tape measure"
-        scrim={0.85}
-      >
-        <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Instant Estimate" }]} />
-        <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Free, no obligation</p>
-        <h1 className="ed-display ed-statement-display text-inverse-foreground">
-          Instant handyman <em className="brc-accent">estimate</em>
-        </h1>
-        {/* Direct answer block: what this is, where, and how pricing works. */}
-        <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
-          Boise Handyman Co prices small repairs across Boise and the Treasure
-          Valley the same way every time. Pick your tasks below and see your
-          range in about a minute.
-        </p>
-        <p className="mt-3 text-sm text-inverse-muted max-w-2xl">
-          {HANDYMAN_RATE_DISCLAIMER}
-        </p>
-      </PageHeroBand>
-
-      <EstimateCalculator />
-
-      <Section variant="greige" divider>
-        <div className="container px-4 max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-start">
-          <div>
-            <p className="ed-eyebrow">What happens next</p>
-            <h2 className="font-serif text-2xl md:text-3xl tracking-tight text-foreground mb-4">
-              Your range is a starting point, your quote is in writing
-            </h2>
-            <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
-              The estimator prices the tasks you pick at our standard rates. A
-              real person reviews every request, confirms the scope with you,
-              and sends a firm written quote before anything goes on the
-              calendar. Most small jobs are done in a single trip.
-            </p>
-            <Button variant="brandOutline" asChild>
-              <Link href="/contact#consult">
-                Ask a question first <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-          <MarketingCard padding="lg">
-            <p className="text-sm font-normal text-foreground mb-4">Every visit includes</p>
-            <ul className="space-y-3">
-              {[
-                "A firm written quote before any work begins",
-                "One visit, no matter how many small tasks we knock out",
-                "Materials billed at cost, receipt included",
-                "A tidy work area and a walkthrough when we finish",
-              ].map((bullet) => (
-                <li key={bullet} className="flex items-start gap-3 text-sm text-muted-foreground">
-                  <Check className="h-4 w-4 text-accent-legible flex-shrink-0 mt-0.5" />
-                  {bullet}
-                </li>
-              ))}
-            </ul>
-          </MarketingCard>
-        </div>
-      </Section>
-
-      <Section variant="canvas" divider>
-        <div className="container px-4 max-w-3xl mx-auto">
-          <p className="ed-eyebrow">Estimate questions</p>
-          <h2 className="font-serif text-2xl md:text-3xl tracking-tight text-foreground mb-8">
-            How the estimate works
-          </h2>
-          <div className="space-y-8">
-            {FAQS.map((faq) => (
-              <div key={faq.question}>
-                <h3 className="text-base font-normal text-foreground mb-2">{faq.question}</h3>
-                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  {faq.answer}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Section>
+      {/* ONE SCREEN. The estimator is the page: it mounts as a fixed app frame
+          beneath the site header and owns everything below it - the H1, the
+          step rail, the question and Back/Continue - so nothing here scrolls.
+          The hero and the "what happens next" band that used to sit around it
+          put the first choice 558px down a phone screen; that copy lives on
+          /contact and the service pages, where reading is the point. */}
+      <EstimateCalculator fitViewport />
     </>
   );
 }

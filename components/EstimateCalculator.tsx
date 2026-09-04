@@ -39,6 +39,7 @@ import {
   WizardStep,
   WizardTextArea,
   type WizardStepMeta,
+  AppFrame,
 } from "@/components/estimate/wizard";
 import {
   EstimateResultPanel,
@@ -97,16 +98,26 @@ const STEP_META: WizardStepMeta[] = [
 
 export interface EstimateCalculatorProps {
   inModal?: boolean;
+  /**
+   * One-screen app mode for the standalone /estimate page: the wizard renders
+   * inside AppFrame, fixed to the viewport below the site header, with the step
+   * rail in the header and Back/Continue pinned in the footer. No page scroll.
+   */
+  fitViewport?: boolean;
   onBookVisit?: () => void;
 }
 
 export function EstimateCalculator({
   inModal = false,
+  fitViewport = false,
   onBookVisit,
 }: EstimateCalculatorProps) {
   /* Selections. Nothing is pre-selected. */
   const [category, setCategory] = useState<JobCategoryId | null>(null);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
+  /* One-screen contact step: the optional note starts folded so the required
+     fields and the breakdown share the screen with Continue. */
+  const [noteOpen, setNoteOpen] = useState(false);
   const [otherOpen, setOtherOpen] = useState(false);
   const [otherText, setOtherText] = useState("");
   const [otherSize, setOtherSize] = useState<OtherJobSize | null>(null);
@@ -306,12 +317,13 @@ export function EstimateCalculator({
     <WizardStep
       tone="inverse"
       eyebrow="Instant estimate"
+      compact={fitViewport}
       heading="What kind of job is it?"
-      instructions="Pick the closest match. If it spans a few trades, pick the biggest part; you can describe the rest later."
+      instructions={fitViewport ? "Pick the closest match; you can describe the rest later." : "Pick the closest match. If it spans a few trades, pick the biggest part; you can describe the rest later."}
       data-testid="step-job"
     >
       <div
-        className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"
+        className={fitViewport ? "grid grid-cols-2 gap-2" : "grid grid-cols-1 gap-2.5 sm:grid-cols-2"}
         role="radiogroup"
         aria-label="Type of job"
       >
@@ -325,6 +337,7 @@ export function EstimateCalculator({
               selected={category === id}
               onSelect={() => pickCategory(id)}
               icon={<Icon />}
+              dense={fitViewport}
               title={JOB_CATEGORY_LABELS[id].label}
               description={JOB_CATEGORY_LABELS[id].sub}
               data-testid={`job-card-${id}`}
@@ -351,9 +364,10 @@ export function EstimateCalculator({
           ? "A sentence or two is plenty. Then take a guess at the size; we confirm the real scope before any work starts."
           : "Pick everything on the list, and set how many. Anything not listed can go under \"something not listed\"."
       }
+      compact={fitViewport}
       data-testid="step-tasks"
     >
-      <div className="space-y-2.5">
+      <div className={fitViewport ? "space-y-2" : "space-y-2.5"}>
         {categoryTasks.map((task) => {
           const qty = quantities[task.id] ?? 0;
           const selected = qty > 0;
@@ -364,6 +378,7 @@ export function EstimateCalculator({
                 control="checkbox"
                 tone="inverse"
                 selected={selected}
+                dense={fitViewport}
                 onSelect={() => setQty(task.id, selected ? 0 : 1, max)}
                 title={task.label}
                 description={task.sub}
@@ -473,20 +488,22 @@ export function EstimateCalculator({
     <WizardStep
       tone="inverse"
       eyebrow="Almost there"
+      compact={fitViewport}
       heading="Materials and timing"
-      instructions="Two quick choices that change the estimate, so you see them now instead of on the invoice."
+      instructions={fitViewport ? "Two quick choices that change the estimate." : "Two quick choices that change the estimate, so you see them now instead of on the invoice."}
       data-testid="step-details"
     >
-      <div className="space-y-6">
+      <div className={fitViewport ? "space-y-4" : "space-y-6"}>
         <div role="radiogroup" aria-label="Who supplies materials?">
           <p className="mb-2 text-xs text-inverse-muted">Who supplies materials?</p>
-          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+          <div className={fitViewport ? "grid grid-cols-2 gap-2" : "grid grid-cols-1 gap-2.5 sm:grid-cols-2"}>
             {MATERIALS_PLAN_VALUES.map((plan) => (
               <SelectableCard
                 key={plan}
                 control="radio"
                 tone="inverse"
                 selected={materials === plan}
+                dense={fitViewport}
                 onSelect={() => setMaterials(plan)}
                 title={MATERIALS_PLANS[plan].label}
                 description={MATERIALS_PLANS[plan].sub}
@@ -494,21 +511,24 @@ export function EstimateCalculator({
               />
             ))}
           </div>
-          <p className="mt-2 text-xs text-inverse-muted/90">
-            Either way, materials are billed at cost with the receipt. The
-            estimate itself covers your selected tasks only.
-          </p>
+          {!fitViewport && (
+            <p className="mt-2 text-xs text-inverse-muted/90">
+              Either way, materials are billed at cost with the receipt. The
+              estimate itself covers your selected tasks only.
+            </p>
+          )}
         </div>
 
         <div role="radiogroup" aria-label="How soon do you need it?">
           <p className="mb-2 text-xs text-inverse-muted">How soon do you need it?</p>
-          <div className="grid grid-cols-1 gap-2.5">
+          <div className={fitViewport ? "grid grid-cols-1 gap-2" : "grid grid-cols-1 gap-2.5"}>
             {URGENCY_LEVEL_VALUES.map((level) => (
               <SelectableCard
                 key={level}
                 control="radio"
                 tone="inverse"
                 selected={urgency === level}
+                dense={fitViewport}
                 onSelect={() => setUrgency(level)}
                 title={
                   URGENCY_LEVELS[level].surchargeLabel
@@ -530,20 +550,26 @@ export function EstimateCalculator({
     <WizardStep
       tone="inverse"
       eyebrow="Your estimate"
+      compact={fitViewport}
       heading="One last step"
-      instructions="Tell us where the work is and how to reach you, and we will email your range and follow up with a firm written quote."
+      instructions={fitViewport ? undefined : "Tell us where the work is and how to reach you, and we will email your range and follow up with a firm written quote."}
       data-testid="step-contact"
     >
-      <div className="space-y-5">
+      <div className={fitViewport ? "space-y-3" : "space-y-5"}>
+        {/* The itemised (still masked) breakdown stays on the contact step in
+            every mode: it is what the visitor is being asked to unlock, and the
+            e2e suite asserts it. A first cut dropped it here to save height,
+            which was a product regression dressed up as a layout fix. */}
         <EstimateResultPanel
           estimate={estimate}
           summary={summary}
           progress={{ job: true, tasks: true, details: true }}
           revealRange={submitted}
+          compact={fitViewport}
         />
 
         <form
-          className="space-y-4"
+          className={fitViewport ? "grid grid-cols-2 gap-2.5" : "space-y-4"}
           onSubmit={(e) => {
             e.preventDefault();
             void submitLead();
@@ -569,7 +595,7 @@ export function EstimateCalculator({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             error={fieldErrors.email}
-            hint="We email your estimate here. No spam, ever."
+            hint={fitViewport ? undefined : "We email your estimate here. No spam, ever."}
             data-testid="input-email"
           />
           <WizardField
@@ -580,7 +606,7 @@ export function EstimateCalculator({
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             error={fieldErrors.phone}
-            hint="Fastest way to lock in a time, if you want a call or text."
+            hint={fitViewport ? undefined : "Fastest way to lock in a time, if you want a call or text."}
             data-testid="input-phone"
           />
           <div>
@@ -617,16 +643,30 @@ export function EstimateCalculator({
               </p>
             )}
           </div>
+          <div className={fitViewport ? "col-span-2" : undefined}>
+          {fitViewport && !noteOpen ? (
+            <button
+              type="button"
+              onClick={() => setNoteOpen(true)}
+              className="inline-flex min-h-10 items-center gap-1.5 text-sm text-accent-legible"
+              data-testid="button-add-note"
+            >
+              <Plus className="h-4 w-4" aria-hidden="true" />
+              Add a note (optional)
+            </button>
+          ) : (
           <WizardTextArea
             tone="inverse"
             label="Anything else we should know? (optional)"
-            rows={3}
+            rows={fitViewport ? 2 : 3}
             maxLength={1000}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Gate codes, pets, parking, photos you want to text us later..."
             data-testid="input-notes"
           />
+          )}
+          </div>
 
           {submitError && (
             <div
@@ -753,6 +793,47 @@ export function EstimateCalculator({
   );
 
   const surface = submitted ? successSurface : wizardSurface;
+
+  /* fitViewport: the estimator as a one-screen app. The frame carries the H1,
+     the step counter and the progress rail; the live range and the action bar
+     sit in the frame's pinned footer in flow. */
+  if (fitViewport) {
+    if (submitted) {
+      return (
+        <AppFrame title="Your estimate is on its way" eyebrow="Estimate sent" steps={STEP_META} currentIndex={STEP_META.length - 1} hideProgress>
+          {successSurface}
+        </AppFrame>
+      );
+    }
+    return (
+      <AppFrame
+        title={<>Handyman <em className="not-italic" style={{ color: "var(--ed-accent)" }}>estimate</em></>}
+        eyebrow="Free · One minute · No obligation"
+        steps={STEP_META}
+        currentIndex={wizIndex}
+        footerAccessory={
+          wizStep !== "contact" ? (
+            <StickyEstimateBar estimate={estimate} summary={summary} tone="inverse" revealRange={submitted} />
+          ) : undefined
+        }
+        footer={
+          <WizardActionBar
+            tone="inverse"
+            pinned={false}
+            ownsBottomEdge={false}
+            onBack={wizIndex > 0 ? back : undefined}
+            onPrimary={advance}
+            primaryLabel={wizStep === "contact" ? "Email me my estimate" : "Continue"}
+            primaryDisabled={!stepDone(wizStep)}
+            busy={submitting}
+            busyLabel="Sending..."
+          />
+        }
+      >
+        <div key={wizStep}>{stepBody}</div>
+      </AppFrame>
+    );
+  }
 
   /* inModal: compact card without full-viewport constraint. */
   if (inModal) {

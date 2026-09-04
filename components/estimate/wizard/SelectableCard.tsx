@@ -13,6 +13,8 @@ export interface SelectableCardProps {
   control?: "radio" | "checkbox" | "button";
   disabled?: boolean;
   tone?: "inverse" | "default";
+  /** One-screen steps: shorter card, tighter padding, description only from sm up. */
+  dense?: boolean;
   className?: string;
   "data-testid"?: string;
   "aria-label"?: string;
@@ -34,6 +36,7 @@ export function SelectableCard({
   control = "button",
   disabled = false,
   tone = "default",
+  dense = false,
   className,
   "data-testid": testId,
   "aria-label": ariaLabel,
@@ -57,7 +60,9 @@ export function SelectableCard({
       aria-label={ariaLabel}
       {...ariaProps}
       className={cn(
-        "group relative flex min-h-14 w-full items-center gap-3 rounded-sm border p-4 text-left transition-colors",
+        dense
+          ? "group relative flex min-h-12 w-full items-center gap-2.5 rounded-sm border px-3 py-2.5 text-left transition-colors"
+          : "group relative flex min-h-14 w-full items-center gap-3 rounded-sm border p-4 text-left transition-colors",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-legible focus-visible:ring-offset-2",
         inverse
           ? "focus-visible:ring-offset-[hsl(var(--inverse))]"
@@ -76,7 +81,7 @@ export function SelectableCard({
       {icon && (
         <span
           className={cn(
-            "flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-sm [&_svg]:h-5 [&_svg]:w-5",
+            dense ? "flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-sm [&_svg]:h-4 [&_svg]:w-4" : "flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-sm [&_svg]:h-5 [&_svg]:w-5",
             inverse ? "text-inverse-foreground/80" : "text-foreground/70",
           )}
           aria-hidden="true"
@@ -88,7 +93,7 @@ export function SelectableCard({
       <span className="min-w-0 flex-1">
         <span
           className={cn(
-            "block text-sm leading-tight",
+            dense ? "block text-[0.9375rem] leading-tight" : "block text-sm leading-tight",
             inverse ? "text-inverse-foreground" : "text-foreground",
           )}
         >
@@ -98,6 +103,7 @@ export function SelectableCard({
           <span
             className={cn(
               "mt-1 block text-xs leading-snug",
+              dense && "hidden sm:block",
               inverse ? "text-inverse-muted" : "text-muted-foreground",
             )}
           >
