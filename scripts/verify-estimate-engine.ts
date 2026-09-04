@@ -256,6 +256,94 @@ assert(
 assert(RANGE_LOW_FACTOR < 1 && RANGE_HIGH_FACTOR > 1, "range brackets the total");
 assert(TRIP_FEE_USD > 0 && HOURLY_RATE_USD > 0, "rates are positive");
 
+/*
+ * SHOWN MUST MEAN WIRED.
+ *
+ * Every "never costs less" check above permits EQUAL, so an input the wizard
+ * asks about can be collected, validated and displayed while changing nothing
+ * about the price, and the suite still passes. Asking someone a question that
+ * cannot affect their answer is the defect, so each dimension the wizard shows
+ * must produce distinct prices across its own range of values.
+ */
+{
+  const probeCategories = JOB_CATEGORY_IDS.filter(
+    (c) => c !== "something-else" && getTasksForCategory(c).length > 0,
+  );
+  const baseCategory = probeCategories[0];
+  const baseTask = baseCategory ? getTasksForCategory(baseCategory)[0] : undefined;
+  if (!baseCategory || !baseTask) {
+    assert(false, "task catalog has no priceable task to probe with");
+  } else {
+    const base: HandymanEstimateInput = {
+      category: baseCategory,
+      tasks: [{ taskId: baseTask.id, quantity: 1 }],
+      otherJob: null,
+      materials: "customer",
+      urgency: "standard",
+    };
+    const total = (i: HandymanEstimateInput) => calculateHandymanEstimate(i)?.total ?? null;
+
+    const urgencyPrices = new Set(URGENCY_LEVEL_VALUES.map((urgency) => total({ ...base, urgency })));
+    assert(
+      urgencyPrices.size === URGENCY_LEVEL_VALUES.length,
+      `urgency is shown to the visitor but its ${URGENCY_LEVEL_VALUES.length} levels produce only ${urgencyPrices.size} distinct prices - collected and ignored`,
+    );
+
+    const materialsPrices = new Set(MATERIALS_PLAN_VALUES.map((materials) => total({ ...base, materials })));
+    assert(
+      materialsPrices.size === MATERIALS_PLAN_VALUES.length,
+      `the materials plan is shown but its ${MATERIALS_PLAN_VALUES.length} options produce only ${materialsPrices.size} distinct prices - collected and ignored`,
+    );
+
+    const quantityPrices = new Set(
+      [1, 2, 3].map((quantity) => total({ ...base, tasks: [{ taskId: baseTask.id, quantity }] })),
+    );
+    assert(
+      quantityPrices.size === 3,
+      `task quantity is shown but 1, 2 and 3 of "${baseTask.id}" produce only ${quantityPrices.size} distinct prices - collected and ignored`,
+    );
+
+    const sizePrices = new Set(
+      OTHER_JOB_SIZE_VALUES.map((size) =>
+        total({
+          ...base,
+          category: "something-else",
+          tasks: [],
+          otherJob: { description: "probe", size },
+        }),
+      ),
+    );
+    assert(
+      sizePrices.size === OTHER_JOB_SIZE_VALUES.length,
+      `the other-job size is shown but its ${OTHER_JOB_SIZE_VALUES.length} buckets produce only ${sizePrices.size} distinct prices - collected and ignored`,
+    );
+
+    /*
+     * And every task on the menu must carry its own hours into the total: a task
+     * that costs the same however many you order is a menu entry that does
+     * nothing.
+     *
+     * Compared at 1 against the task's OWN maximum rather than at 1 against 2,
+     * because the one-hour minimum legitimately absorbs small quantities of a
+     * short task - two smoke detectors really are one hour of work, and flagging
+     * that would be reporting the minimum as a bug.
+     */
+    const flat: string[] = [];
+    for (const category of probeCategories) {
+      for (const task of getTasksForCategory(category)) {
+        if (task.maxQuantity < 2) continue;
+        const one = total({ ...base, category, tasks: [{ taskId: task.id, quantity: 1 }] });
+        const many = total({ ...base, category, tasks: [{ taskId: task.id, quantity: task.maxQuantity }] });
+        if (one !== null && one === many) flat.push(task.id);
+      }
+    }
+    assert(
+      flat.length === 0,
+      `${flat.length} task(s) price identically at quantity 1 and 2, so their hours never reach the total: ${flat.join(", ")}`,
+    );
+  }
+}
+
 if (failures > 0) {
   console.error(`\nverify-estimate-engine: ${failures} of ${checks} checks FAILED`);
   process.exit(1);
