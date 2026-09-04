@@ -73,9 +73,15 @@ export function HeroSection() {
                   business, in plain words a contractor would not use. The
                   subhead below doubles as the homepage's extractable answer
                   block: what we do, where, and how pricing works. */}
-              <h1 className="font-serif text-inverse-foreground text-display tracking-tight mb-6">
+              {/* Display scale from the family layer: up to 92px, tight leading,
+                  negative tracking. The hero heading is the one line the whole
+                  site is judged on in the first second. */}
+              <h1 className="ed-display text-inverse-foreground mb-8 max-w-[14ch]">
                 Boise home repairs,{" "}
-                <em className="brc-accent">fixed right in one trip</em>.
+                <em className="not-italic" style={{ color: "var(--ed-accent)" }}>
+                  fixed right in one trip
+                </em>
+                .
               </h1>
               {/* Full opacity, not /90: over the lightened scrim the subhead
                   measured 4.28:1 against the 4.5:1 minimum. Buying the
