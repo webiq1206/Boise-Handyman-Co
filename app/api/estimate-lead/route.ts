@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { db } from "@/server/db";
 import { consultationRequests } from "@/shared/schema";
+import { saveAcceptedLead } from "@/server/services/acceptedLead";
+import { clientKeyFrom, rateLimit } from "@/lib/rateLimit";
+import { classifyLeadSpam } from "@/server/services/leadSpam";
 import { getUncachableEmailClient } from "@/server/services/emailTransport";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import {
@@ -45,6 +48,9 @@ const bodySchema = z.object({
     }),
   city: z.string().min(1).max(80),
   notes: z.string().max(1000).optional(),
+  inquiryId: z.string().uuid(),
+  website: z.string().max(0).optional(),
+  attribution: z.record(z.string().max(100)).optional(),
   estimate: handymanEstimateSchema,
 });
 
@@ -89,6 +95,10 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data;
+    if (classifyLeadSpam({ honeypot: data.website, name: data.name, notes: data.notes }).spam)
+      return NextResponse.json({ success: true, accepted: false, duplicate: true });
+    const limit = rateLimit(clientKeyFrom(request.headers, "estimate-lead"), 8, 10 * 60 * 1000);
+    if (!limit.ok) return NextResponse.json({ message: "Please wait a few minutes before trying again." }, { status: 429 });
     const verified = verifyEstimate(data.estimate);
     if (!verified) {
       return NextResponse.json(
@@ -103,9 +113,14 @@ export async function POST(request: NextRequest) {
     const rangeText = `${formatHandymanCurrency(estimate.priceLow)} to ${formatHandymanCurrency(estimate.priceHigh)}`;
     const workLines = describeSelections(input);
 
-    if (db) {
-      try {
-        await db.insert(consultationRequests).values({
+    const accepted = await saveAcceptedLead(db, {
+      inquiryId: data.inquiryId,
+      route: "estimate-lead",
+      contact: { email: data.email, phone: data.phone },
+      scope: `${input.category}|${data.city}`,
+      metadata: { hasAttribution: Boolean(data.attribution) },
+      saveLead: async (tx) => {
+        await tx.insert(consultationRequests).values({
           name: data.name,
           phone: data.phone,
           email: data.email,
@@ -129,9 +144,11 @@ export async function POST(request: NextRequest) {
           estimateSqft: null,
           estimateConfidence: `${urgencyLabel} scheduling, ${formatHours(estimate.totalHours)} est.`,
         });
-      } catch (dbErr) {
-        console.error("[estimate-lead] DB insert failed:", dbErr);
-      }
+      },
+    });
+    if (!accepted.accepted) {
+      if (accepted.duplicate) return NextResponse.json({ success: true, accepted: false, duplicate: true });
+      return NextResponse.json({ message: "We could not save your request. Please try again." }, { status: 503 });
     }
 
     forwardToLeadDashboard({
@@ -208,7 +225,7 @@ export async function POST(request: NextRequest) {
       console.error("[estimate-lead] Email send failed:", emailErr);
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, accepted: true, duplicate: false });
   } catch (err) {
     console.error("[estimate-lead] Error:", err);
     return NextResponse.json({ message: "Server error" }, { status: 500 });

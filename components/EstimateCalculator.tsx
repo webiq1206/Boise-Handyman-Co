@@ -13,6 +13,7 @@
  */
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { inquiryId } from "@/lib/leadInquiry";
 import {
   ClipboardList,
   Droplets,
@@ -67,7 +68,7 @@ import {
   type UrgencyLevel,
 } from "@/shared/estimateEngine";
 import { CITIES } from "@/shared/contentData";
-import { trackEvent, trackMetaEvent } from "@/lib/analytics";
+import { trackAcceptedLeadConversion, trackEvent, trackMetaEvent } from "@/lib/analytics";
 import { GRAIN_URL } from "@/lib/grain";
 import { readStoredPrefill, writeStoredPrefill } from "@/lib/leadPrefill";
 
@@ -130,6 +131,8 @@ export function EstimateCalculator({
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
   const [notes, setNotes] = useState("");
+  // Hidden bot trap. Real visitors never interact with this field.
+  const [website, setWebsite] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -276,6 +279,8 @@ export function EstimateCalculator({
           phone: phone.trim(),
           city: city.trim(),
           notes: notes.trim() || undefined,
+          inquiryId: inquiryId("primary"),
+          website,
           estimate: {
             category: estimateInput.category,
             tasks: estimateInput.tasks,
@@ -292,12 +297,16 @@ export function EstimateCalculator({
         const data = (await res.json().catch(() => null)) as { message?: string } | null;
         throw new Error(data?.message || "Something went wrong sending your estimate.");
       }
+      const response = await res.json() as { accepted?: boolean };
       writeStoredPrefill({ name: name.trim(), email: email.trim(), phone: phone.trim() });
-      trackEvent("handyman_estimate_submitted", {
-        category: estimateInput.category,
-        urgency: estimateInput.urgency,
-      });
-      trackMetaEvent("Lead", { content_name: "handyman-estimate" });
+      if (response.accepted) {
+        trackAcceptedLeadConversion();
+        trackEvent("handyman_estimate_submitted", {
+          category: estimateInput.category,
+          urgency: estimateInput.urgency,
+        });
+        trackMetaEvent("Lead", { content_name: "handyman-estimate" });
+      }
       setSubmitted(true);
       scrollToTop();
     } catch (err) {
@@ -576,6 +585,15 @@ export function EstimateCalculator({
           }}
           noValidate
         >
+          <input
+            name="website"
+            value={website}
+            onChange={(event) => setWebsite(event.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="hidden"
+          />
           <WizardField
             tone="inverse"
             label="Your name"

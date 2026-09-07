@@ -1,5 +1,6 @@
-import { db } from "@/lib/db";
+import { db } from "@/server/db";
 import { consultationRequests } from "@/shared/schema";
+import { saveAcceptedLead } from "@/server/services/acceptedLead";
 import { getUncachableEmailClient } from "@/server/services/emailTransport";
 import {
   htmlToPlainText,
@@ -45,6 +46,7 @@ import {
  */
 
 export interface Re10DeliveryInput {
+  inquiryId: string;
   contact: Re10Contact;
   estimate: Re10Estimate;
   /** Customer-safe view, already built by the route. */
@@ -68,6 +70,8 @@ export interface Re10DeliveryResult {
   customerEmailed: boolean;
   adminEmailed: boolean;
   stored: boolean;
+  accepted: boolean;
+  duplicate: boolean;
 }
 
 const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
@@ -251,13 +255,18 @@ function buildRe10CrmRecord(input: Re10DeliveryInput) {
 
 export async function deliverRe10Lead(input: Re10DeliveryInput): Promise<Re10DeliveryResult> {
   const { contact, estimate } = input;
-  const result: Re10DeliveryResult = { customerEmailed: false, adminEmailed: false, stored: false };
+  const result: Re10DeliveryResult = { customerEmailed: false, adminEmailed: false, stored: false, accepted: false, duplicate: false };
   const notes = buildRe10Notes(input);
 
   /* 1. Database, on the same table every other site lead uses. */
-  if (db) {
-    try {
-      await db.insert(consultationRequests).values({
+  const durable = await saveAcceptedLead(db, {
+    inquiryId: input.inquiryId,
+    route: "re10",
+    contact: { email: contact.email, phone: contact.phone },
+    scope: `re10|${contact.propertyAddress}`,
+    metadata: { preferredContact: contact.preferredContact },
+    saveLead: async (tx) => {
+      await tx.insert(consultationRequests).values({
         name: contact.name,
         phone: contact.phone || "",
         email: contact.email || "",
@@ -270,10 +279,15 @@ export async function deliverRe10Lead(input: Re10DeliveryInput): Promise<Re10Del
         estimateHigh: String(estimate.quotedPrice),
         estimateConfidence: estimate.confidence,
       });
-      result.stored = true;
-    } catch (err) {
-      console.error("[re10Lead] DB insert failed:", err);
-    }
+    },
+  });
+  result.accepted = durable.accepted;
+  result.duplicate = durable.duplicate;
+  result.stored = durable.accepted;
+  // A duplicate is a successful replay, but must never redeliver CRM or email.
+  if (!durable.accepted) {
+    if (durable.duplicate) return result;
+    throw new Error("RE-10 lead could not be saved");
   }
 
   /* 2. The CRM the team actually works leads in. Fire-and-forget by design. */

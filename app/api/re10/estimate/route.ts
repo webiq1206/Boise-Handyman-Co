@@ -12,6 +12,8 @@ import { EXTRACTABLE_KINDS, EXTRACTION_REVIEW_REASONS } from "@/shared/re10/extr
 import { isStoredDocumentUrl } from "@/shared/re10/uploads";
 import { deliverRe10Lead } from "@/server/services/re10Lead";
 import type { Re10Contact } from "@/server/services/re10Email";
+import { clientKeyFrom, rateLimit } from "@/lib/rateLimit";
+import { classifyLeadSpam } from "@/server/services/leadSpam";
 
 /**
  * The gated step: contact details in, planning range out.
@@ -103,6 +105,8 @@ const bodySchema = z
       .optional(),
     /** Extractor observations worth putting in front of the estimator. */
     documentNotes: z.array(z.string().max(1000)).max(20).optional(),
+    inquiryId: z.string().uuid(),
+    website: z.string().max(0).optional(),
   })
   .refine((b) => (b.preferredContact === "email" ? Boolean(b.email) : true), {
     message: "An email address is required when email is the preferred contact method.",
@@ -136,6 +140,10 @@ export async function POST(request: NextRequest) {
     );
   }
   const body = parsed.data;
+  if (classifyLeadSpam({ honeypot: body.website, name: body.name, notes: body.notes }).spam)
+    return NextResponse.json({ message: "Invalid request" }, { status: 400 });
+  const limit = rateLimit(clientKeyFrom(request.headers, "re10"), 6, 10 * 60 * 1000);
+  if (!limit.ok) return NextResponse.json({ message: "Please wait a few minutes before trying again." }, { status: 429 });
 
   const items: RepairItemInput[] = body.repairs.map((r) => ({
     id: r.id,
@@ -212,6 +220,7 @@ export async function POST(request: NextRequest) {
   // that is true. Delivery never throws; a failure is logged and reported as
   // false rather than surfaced as an error on a request that already succeeded.
   const delivery = await deliverRe10Lead({
+    inquiryId: body.inquiryId,
     contact,
     estimate,
     customerView,
@@ -234,5 +243,7 @@ export async function POST(request: NextRequest) {
     priced: estimate.priced.length,
     unpriced: customerView.needsOnsite.length,
     emailed: delivery.customerEmailed,
+    accepted: delivery.accepted,
+    duplicate: delivery.duplicate,
   });
 }

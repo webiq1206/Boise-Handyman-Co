@@ -30,7 +30,8 @@ import { CTA_FORM_SEND } from "@/shared/ctaCopy";
 import { CONSULT_BULLETS } from "@/shared/siteContent";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { BusinessPhoneContact } from "@/components/BusinessPhoneContact";
-import { trackEvent, trackMetaEvent } from "@/lib/analytics";
+import { trackEvent, trackMetaEvent, trackAcceptedLeadConversion } from "@/lib/analytics";
+import { inquiryId } from "@/lib/leadInquiry";
 import { readStoredPrefill, PREFILL_UPDATED_EVENT, hasPassedGate } from "@/lib/leadPrefill";
 import type { PropertyProfile } from "@/shared/propertyProfile";
 import {
@@ -70,6 +71,7 @@ const formSchema = z
     address: z.string(),
     projectType: z.string().min(1, "Please select a project type"),
     message: z.string().optional(),
+    website: z.string().max(0).optional(),
   })
   .superRefine((data, ctx) => {
     if (data.preferredContact === "email") {
@@ -300,6 +302,8 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
            and customer confirmation emails were already sent by /api/estimate-lead.
            Sending them again from /api/consultation would be a duplicate. */
         skipEmail: hasPassedGate() ? true : undefined,
+        inquiryId: inquiryId("primary"),
+        website: data.website,
         estimate: estimate && attached
           ? {
               project: estimate.project,
@@ -329,23 +333,22 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
       }
       return res.json();
     },
-    onSuccess: (_data, variables) => {
+    onSuccess: (response: { accepted?: boolean }, variables) => {
       setSuccess(true);
       sessionStorage.removeItem("brc_estimate");
       // Conversion event: a submitted consultation request is the PRIMARY lead
       // (estimate on the site, then submit). GA generate_lead + Meta Lead. The
       // Meta Lead carries the visitor's email + phone, which the server-side
       // Conversions API hashes for high match quality (best cost-per-result).
-      trackEvent("generate_lead", {
-        form: "consultation",
-        project_type: variables.projectType,
-        has_estimate: !!estimate && attached,
-      });
-      trackMetaEvent(
-        "Lead",
-        { content_name: variables.projectType, content_category: "consultation_request" },
-        { email: variables.email, phone: variables.phone },
-      );
+      if (response.accepted) {
+        trackAcceptedLeadConversion();
+        trackEvent("generate_lead", {
+          form: "consultation",
+          project_type: variables.projectType,
+          has_estimate: !!estimate && attached,
+        });
+        trackMetaEvent("Lead", { content_name: variables.projectType, content_category: "consultation_request" });
+      }
     },
     onError: () => {
       trackEvent("form_error", { form: "consultation", reason: "submit_failed" });
@@ -460,6 +463,13 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
         onFocusCapture={trackFormStart}
         className="space-y-4"
       >
+        <input
+          {...form.register("website")}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="hidden"
+        />
         {showTrust && (
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5" data-testid="consult-trust-bullets">
             {CONSULT_BULLETS.map((item) => (

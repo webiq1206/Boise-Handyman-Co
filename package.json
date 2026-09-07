@@ -43,7 +43,9 @@
     "verify:re10": "tsx scripts/verify-re10-estimator.ts",
     "verify:re10-delivery": "tsx scripts/verify-re10-delivery.ts",
     "check:re10-extraction": "tsx --env-file-if-exists=.env.local scripts/check-re10-extraction.ts",
-    "verify:contrast": "node scripts/verify-contrast.mjs"
+    "verify:contrast": "node scripts/verify-contrast.mjs",
+    "test:accepted-lead": "tsx scripts/test-accepted-lead.ts",
+    "test:assistant-lead-payload": "tsx scripts/test-assistant-lead-payload.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",

@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { db } from "@/server/db";
 import { consultationRequests } from "@/shared/schema";
+import { saveAcceptedLead } from "@/server/services/acceptedLead";
+import { clientKeyFrom, rateLimit } from "@/lib/rateLimit";
+import { classifyLeadSpam } from "@/server/services/leadSpam";
 import { getUncachableEmailClient } from "@/server/services/emailTransport";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import {
@@ -86,6 +89,9 @@ const bodySchema = z
        which already sent admin + customer emails via /api/estimate-lead.
        Prevents duplicate email sends when the same person submits both forms. */
     skipEmail: z.boolean().optional(),
+    inquiryId: z.string().uuid(),
+    website: z.string().max(0).optional(),
+    attribution: z.record(z.string().max(100)).optional(),
   })
   .superRefine((data, ctx) => {
     if (data.preferredContact === "email") {
@@ -175,14 +181,23 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data;
+    if (classifyLeadSpam({ honeypot: data.website, name: data.name, message: data.message }).spam)
+      return NextResponse.json({ success: true, accepted: false, duplicate: true });
+    const limit = rateLimit(clientKeyFrom(request.headers, "consultation"), 8, 10 * 60 * 1000);
+    if (!limit.ok) return NextResponse.json({ message: "Please wait a few minutes before trying again." }, { status: 429 });
 
     // Server-side verification: never trust client-supplied dollar amounts.
     const estimate = data.estimate ? verifyEstimate(data.estimate) : null;
 
-    if (db) {
-      try {
+    const accepted = await saveAcceptedLead(db, {
+      inquiryId: data.inquiryId,
+      route: "consultation",
+      contact: { email: data.email, phone: data.phone },
+      scope: `${data.projectType}|${data.address || data.zip || (data.propertyProfile as { city?: string } | null)?.city || ""}`,
+      metadata: { hasAttribution: Boolean(data.attribution), preferredContact: data.preferredContact },
+      saveLead: async (tx) => {
         const profile = data.propertyProfile as Record<string, unknown> | null | undefined;
-        await db.insert(consultationRequests).values({
+        await tx.insert(consultationRequests).values({
           name: data.name,
           phone: data.phone,
           email: data.email,
@@ -199,9 +214,11 @@ export async function POST(request: NextRequest) {
           estimateSqft: estimate?.sqft ?? null,
           estimateConfidence: estimate?.confidence || null,
         });
-      } catch (dbErr) {
-        console.error("[consultation] DB insert failed:", dbErr);
-      }
+      },
+    });
+    if (!accepted.accepted) {
+      if (accepted.duplicate) return NextResponse.json({ success: true, accepted: false, duplicate: true });
+      return NextResponse.json({ message: "We could not save your request. Please try again." }, { status: 503 });
     }
 
     // Same complete record as the estimate-gate path, so a lead looks identical
@@ -323,7 +340,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, accepted: true, duplicate: false });
   } catch (err) {
     console.error("[consultation] Error:", err);
     return NextResponse.json({ message: "Server error" }, { status: 500 });

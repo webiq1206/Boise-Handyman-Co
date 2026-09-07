@@ -431,6 +431,25 @@ export const consultationRequests = pgTable("consultation_requests", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+/**
+ * Non-PII acceptance record. This is deliberately separate from the workable
+ * lead record: it is the durable source of truth for conversion counting and
+ * idempotent downstream delivery.
+ */
+export const inquiryLedger = pgTable("inquiry_ledger", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  inquiryId: varchar("inquiry_id", { length: 100 }).notNull(),
+  contactFingerprint: varchar("contact_fingerprint", { length: 128 }).notNull(),
+  duplicateKey: varchar("duplicate_key", { length: 128 }).notNull(),
+  route: varchar("route", { length: 40 }).notNull(),
+  acceptedAt: timestamp("accepted_at").defaultNow().notNull(),
+  metadata: jsonb("metadata").notNull().default({}),
+}, (table) => ({
+  inquiryIdUnique: uniqueIndex("inquiry_ledger_inquiry_id_unique").on(table.inquiryId),
+  duplicateKeyUnique: uniqueIndex("inquiry_ledger_duplicate_key_unique").on(table.duplicateKey),
+  contactFingerprintIndex: index("inquiry_ledger_contact_fingerprint_idx").on(table.contactFingerprint),
+}));
+
 export const insertConsultationRequestSchema = createInsertSchema(consultationRequests).omit({
   id: true,
   createdAt: true,
