@@ -102,6 +102,9 @@ export async function POST(request: NextRequest) {
     const urgencyLabel = URGENCY_LEVELS[input.urgency].label;
     const rangeText = `${formatHandymanCurrency(estimate.priceLow)} to ${formatHandymanCurrency(estimate.priceHigh)}`;
     const workLines = describeSelections(input);
+    let leadSaved = false;
+    let adminEmailAccepted = false;
+    let customerEmailAccepted = false;
 
     if (db) {
       try {
@@ -129,12 +132,13 @@ export async function POST(request: NextRequest) {
           estimateSqft: null,
           estimateConfidence: `${urgencyLabel} scheduling, ${formatHours(estimate.totalHours)} est.`,
         });
+        leadSaved = true;
       } catch (dbErr) {
         console.error("[estimate-lead] DB insert failed:", dbErr);
       }
     }
 
-    forwardToLeadDashboard({
+    const dashboardDelivery = forwardToLeadDashboard({
       fullName: data.name,
       email: data.email,
       phone: data.phone,
@@ -158,6 +162,8 @@ export async function POST(request: NextRequest) {
 
     try {
       const { client, fromEmail } = await getUncachableEmailClient();
+      // A development no-op client does not deliver or retain a lead.
+      if (client.__noop) throw new Error("Email delivery is not configured.");
       const from = formatFromAddress(fromEmail);
 
       const lead: HandymanLeadDetails = {
@@ -173,42 +179,63 @@ export async function POST(request: NextRequest) {
          comes from shared/siteConfig.ts and nowhere else. */
       const adminEmails = await getAdminRecipientEmails(SITE_CONFIG.email);
       for (const adminEmail of adminEmails) {
-        const adminResult = await client.emails.send({
-          from,
-          replyTo: formatLeadReplyTo(data.name, data.email),
-          to: adminEmail,
-          subject: buildHandymanAdminSubject(lead, input, estimate),
-          html: adminHtml,
-          text: htmlToPlainText(adminHtml),
-        });
-        if (adminResult?.error) {
-          console.error(
-            `[estimate-lead] Admin email to ${adminEmail} failed:`,
-            JSON.stringify(adminResult.error),
-          );
+        try {
+          const adminResult = await client.emails.send({
+            from,
+            replyTo: formatLeadReplyTo(data.name, data.email),
+            to: adminEmail,
+            subject: buildHandymanAdminSubject(lead, input, estimate),
+            html: adminHtml,
+            text: htmlToPlainText(adminHtml),
+          });
+          if (adminResult?.error) {
+            console.error(
+              `[estimate-lead] Admin email to ${adminEmail} failed:`,
+              JSON.stringify(adminResult.error),
+            );
+          } else if (adminResult?.data?.id) {
+            adminEmailAccepted = true;
+          }
+        } catch (error) {
+          // One failed recipient must not prevent the remaining deliveries.
+          console.error("[estimate-lead] Admin email request failed:", error);
         }
       }
 
-      const customerHtml = buildHandymanCustomerEmailHtml(lead, input, estimate);
-      const customerResult = await client.emails.send({
-        from,
-        replyTo: getReplyToAddress(),
-        to: data.email,
-        subject: buildHandymanCustomerSubject(estimate),
-        html: customerHtml,
-        text: htmlToPlainText(customerHtml),
-      });
-      if (customerResult?.error) {
-        console.error(
-          `[estimate-lead] Customer email to ${data.email} failed:`,
-          JSON.stringify(customerResult.error),
-        );
+      // Do not email a quote that the business has no record of receiving.
+      const dashboardAccepted = await dashboardDelivery;
+      if (leadSaved || adminEmailAccepted || dashboardAccepted) {
+        const customerHtml = buildHandymanCustomerEmailHtml(lead, input, estimate);
+        const customerResult = await client.emails.send({
+          from,
+          replyTo: getReplyToAddress(),
+          to: data.email,
+          subject: buildHandymanCustomerSubject(estimate),
+          html: customerHtml,
+          text: htmlToPlainText(customerHtml),
+        });
+        if (customerResult?.error) {
+          console.error(
+            `[estimate-lead] Customer email to ${data.email} failed:`,
+            JSON.stringify(customerResult.error),
+          );
+        } else if (customerResult?.data?.id) {
+          customerEmailAccepted = true;
+        }
       }
     } catch (emailErr) {
       console.error("[estimate-lead] Email send failed:", emailErr);
     }
 
-    return NextResponse.json({ success: true });
+    const dashboardAccepted = await dashboardDelivery;
+    if (!leadSaved && !adminEmailAccepted && !dashboardAccepted) {
+      return NextResponse.json(
+        { message: "We could not save or send your request. Your selections are still here. Please try again, or call or text us." },
+        { status: 503 },
+      );
+    }
+
+    return NextResponse.json({ success: true, customerEmailAccepted });
   } catch (err) {
     console.error("[estimate-lead] Error:", err);
     return NextResponse.json({ message: "Server error" }, { status: 500 });

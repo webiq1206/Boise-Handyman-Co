@@ -294,8 +294,8 @@ export function EstimateResultPanel({
           </div>
 
           <p className="text-sm leading-relaxed text-inverse-muted mb-5">
-            Nothing is pre-selected. Your estimated range appears as soon as you
-            pick what needs doing, and it reflects only what you tell us.
+            Nothing is pre-selected. Choose your tasks, then submit your contact
+            details to see your estimated range. It reflects only what you tell us.
           </p>
 
           <ProgressChecklist progress={progress} />
