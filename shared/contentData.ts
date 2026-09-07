@@ -105,10 +105,16 @@ export const CITIES: CityData[] = [
   { slug: 'kuna', name: 'Kuna', county: 'ada', isPrimary: false },
   { slug: 'star', name: 'Star', county: 'ada', isPrimary: false },
   { slug: 'middleton', name: 'Middleton', county: 'canyon', isPrimary: false },
+  { slug: 'garden-city', name: 'Garden City', county: 'ada', isPrimary: false },
   { slug: 'caldwell', name: 'Caldwell', county: 'canyon', isPrimary: false },
 ];
 
+export const SERVICE_AREA_CITY_NAMES = CITIES.map((c) => c.name);
 export const TREASURE_VALLEY_CITIES = CITIES.map((c) => c.name).join(', ');
+
+export function isServiceAreaCity(value: string): boolean {
+  return SERVICE_AREA_CITY_NAMES.includes(value);
+}
 
 export function getServiceBySlug(slug: string): ServiceData | undefined {
   return SERVICES.find((s) => s.slug === slug);

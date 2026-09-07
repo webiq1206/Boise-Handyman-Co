@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { db } from "@/server/db";
 import { consultationRequests } from "@/shared/schema";
+import { saveAcceptedLead } from "@/server/services/acceptedLead";
+import { clientKeyFrom, rateLimit } from "@/lib/rateLimit";
+import { classifyLeadSpam } from "@/server/services/leadSpam";
 import { getUncachableEmailClient } from "@/server/services/emailTransport";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import {
@@ -20,6 +23,7 @@ import {
   type HandymanEstimate,
   type HandymanEstimateInput,
 } from "@/shared/estimateEngine";
+import { isServiceAreaCity } from "@/shared/contentData";
 import { handymanEstimateSchema } from "@/shared/estimatePayload";
 import {
   buildHandymanAdminEmailHtml,
@@ -43,8 +47,13 @@ const bodySchema = z.object({
     .refine((v) => v === "" || v.replace(/\D/g, "").length >= 10, {
       message: "Phone must be a valid 10-digit number when provided",
     }),
-  city: z.string().min(1).max(80),
+  city: z.string().min(1).max(80).refine(isServiceAreaCity, {
+    message: "Choose a city in our service area",
+  }),
   notes: z.string().max(1000).optional(),
+  inquiryId: z.string().uuid(),
+  website: z.string().max(0).optional(),
+  attribution: z.record(z.string().max(100)).optional(),
   estimate: handymanEstimateSchema,
 });
 
@@ -89,6 +98,10 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data;
+    if (classifyLeadSpam({ honeypot: data.website, name: data.name, notes: data.notes }).spam)
+      return NextResponse.json({ success: true, accepted: false, duplicate: true });
+    const limit = rateLimit(clientKeyFrom(request.headers, "estimate-lead"), 8, 10 * 60 * 1000);
+    if (!limit.ok) return NextResponse.json({ message: "Please wait a few minutes before trying again." }, { status: 429 });
     const verified = verifyEstimate(data.estimate);
     if (!verified) {
       return NextResponse.json(
@@ -102,13 +115,16 @@ export async function POST(request: NextRequest) {
     const urgencyLabel = URGENCY_LEVELS[input.urgency].label;
     const rangeText = `${formatHandymanCurrency(estimate.priceLow)} to ${formatHandymanCurrency(estimate.priceHigh)}`;
     const workLines = describeSelections(input);
-    let leadSaved = false;
-    let adminEmailAccepted = false;
     let customerEmailAccepted = false;
 
-    if (db) {
-      try {
-        await db.insert(consultationRequests).values({
+    const accepted = await saveAcceptedLead(db, {
+      inquiryId: data.inquiryId,
+      route: "estimate-lead",
+      contact: { email: data.email, phone: data.phone },
+      scope: `${input.category}|${data.city}`,
+      metadata: { hasAttribution: Boolean(data.attribution) },
+      saveLead: async (tx) => {
+        await tx.insert(consultationRequests).values({
           name: data.name,
           phone: data.phone,
           email: data.email,
@@ -132,10 +148,11 @@ export async function POST(request: NextRequest) {
           estimateSqft: null,
           estimateConfidence: `${urgencyLabel} scheduling, ${formatHours(estimate.totalHours)} est.`,
         });
-        leadSaved = true;
-      } catch (dbErr) {
-        console.error("[estimate-lead] DB insert failed:", dbErr);
-      }
+      },
+    });
+    if (!accepted.accepted) {
+      if (accepted.duplicate) return NextResponse.json({ success: true, accepted: false, duplicate: true });
+      return NextResponse.json({ message: "We could not save your request. Your selections are still here. Please try again, or call or text us." }, { status: 503 });
     }
 
     const dashboardDelivery = forwardToLeadDashboard({
@@ -193,8 +210,6 @@ export async function POST(request: NextRequest) {
               `[estimate-lead] Admin email to ${adminEmail} failed:`,
               JSON.stringify(adminResult.error),
             );
-          } else if (adminResult?.data?.id) {
-            adminEmailAccepted = true;
           }
         } catch (error) {
           // One failed recipient must not prevent the remaining deliveries.
@@ -202,40 +217,27 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      // Do not email a quote that the business has no record of receiving.
-      const dashboardAccepted = await dashboardDelivery;
-      if (leadSaved || adminEmailAccepted || dashboardAccepted) {
-        const customerHtml = buildHandymanCustomerEmailHtml(lead, input, estimate);
-        const customerResult = await client.emails.send({
-          from,
-          replyTo: getReplyToAddress(),
-          to: data.email,
-          subject: buildHandymanCustomerSubject(estimate),
-          html: customerHtml,
-          text: htmlToPlainText(customerHtml),
-        });
-        if (customerResult?.error) {
-          console.error(
-            `[estimate-lead] Customer email to ${data.email} failed:`,
-            JSON.stringify(customerResult.error),
-          );
-        } else if (customerResult?.data?.id) {
-          customerEmailAccepted = true;
-        }
+      // The inquiry and lead were saved together before any notifications.
+      const customerHtml = buildHandymanCustomerEmailHtml(lead, input, estimate);
+      const customerResult = await client.emails.send({
+        from,
+        replyTo: getReplyToAddress(),
+        to: data.email,
+        subject: buildHandymanCustomerSubject(estimate),
+        html: customerHtml,
+        text: htmlToPlainText(customerHtml),
+      });
+      if (customerResult?.error) {
+        console.error("[estimate-lead] Customer email was not accepted by the provider.");
+      } else if (customerResult?.data?.id) {
+        customerEmailAccepted = true;
       }
     } catch (emailErr) {
       console.error("[estimate-lead] Email send failed:", emailErr);
     }
 
-    const dashboardAccepted = await dashboardDelivery;
-    if (!leadSaved && !adminEmailAccepted && !dashboardAccepted) {
-      return NextResponse.json(
-        { message: "We could not save or send your request. Your selections are still here. Please try again, or call or text us." },
-        { status: 503 },
-      );
-    }
-
-    return NextResponse.json({ success: true, customerEmailAccepted });
+    await dashboardDelivery;
+    return NextResponse.json({ success: true, accepted: true, duplicate: false, customerEmailAccepted });
   } catch (err) {
     console.error("[estimate-lead] Error:", err);
     return NextResponse.json({ message: "Server error" }, { status: 500 });

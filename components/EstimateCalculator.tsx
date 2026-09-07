@@ -13,6 +13,7 @@
  */
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { inquiryId } from "@/lib/leadInquiry";
 import {
   ClipboardList,
   Droplets,
@@ -67,7 +68,7 @@ import {
   type UrgencyLevel,
 } from "@/shared/estimateEngine";
 import { CITIES } from "@/shared/contentData";
-import { trackEvent, trackMetaEvent } from "@/lib/analytics";
+import { trackAcceptedLeadConversion, trackEvent, trackMetaEvent } from "@/lib/analytics";
 import { GRAIN_URL } from "@/lib/grain";
 import { readStoredPrefill, writeStoredPrefill } from "@/lib/leadPrefill";
 import { SITE_CONFIG } from "@/shared/siteConfig";
@@ -131,11 +132,13 @@ export function EstimateCalculator({
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
   const [notes, setNotes] = useState("");
+  // Hidden bot trap. Real visitors never interact with this field.
+  const [website, setWebsite] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [customerEmailAccepted, setCustomerEmailAccepted] = useState(false);
+  const [customerEmailAccepted, setCustomerEmailAccepted] = useState<boolean | null>(null);
   const submissionInFlight = useRef(false);
 
   const [wizStep, setWizStep] = useState<WizStep>("job");
@@ -281,6 +284,8 @@ export function EstimateCalculator({
           phone: phone.trim(),
           city: city.trim(),
           notes: notes.trim() || undefined,
+          inquiryId: inquiryId("primary"),
+          website,
           estimate: {
             category: estimateInput.category,
             tasks: estimateInput.tasks,
@@ -295,19 +300,23 @@ export function EstimateCalculator({
       });
       const data = (await res.json().catch(() => null)) as {
         success?: boolean;
+        accepted?: boolean;
         message?: string;
         customerEmailAccepted?: boolean;
       } | null;
       if (!res.ok || data?.success !== true) {
         throw new Error(data?.message || "Something went wrong sending your estimate.");
       }
-      setCustomerEmailAccepted(data.customerEmailAccepted === true);
+      setCustomerEmailAccepted(typeof data.customerEmailAccepted === "boolean" ? data.customerEmailAccepted : null);
       writeStoredPrefill({ name: name.trim(), email: email.trim(), phone: phone.trim() });
-      trackEvent("handyman_estimate_submitted", {
-        category: estimateInput.category,
-        urgency: estimateInput.urgency,
-      });
-      trackMetaEvent("Lead", { content_name: "handyman-estimate" });
+      if (data.accepted === true) {
+        trackAcceptedLeadConversion();
+        trackEvent("handyman_estimate_submitted", {
+          category: estimateInput.category,
+          urgency: estimateInput.urgency,
+        });
+        trackMetaEvent("Lead", { content_name: "handyman-estimate" });
+      }
       setSubmitted(true);
       scrollToTop();
     } catch (err) {
@@ -587,6 +596,15 @@ export function EstimateCalculator({
           }}
           noValidate
         >
+          <input
+            name="website"
+            value={website}
+            onChange={(event) => setWebsite(event.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="hidden"
+          />
           <WizardField
             tone="inverse"
             label="Your name"
@@ -716,13 +734,15 @@ export function EstimateCalculator({
         Your estimate is ready.
       </h2>
       <p className="text-sm leading-relaxed text-inverse-foreground/85 mb-5 max-w-xl">
-        {customerEmailAccepted
+        {customerEmailAccepted === null
+          ? "We already received this request. Your range and breakdown are below."
+          : customerEmailAccepted
           ? "Your request reached our team, and an email copy of your estimate is on its way."
           : "Your request reached our team, but we could not email your estimate. Your range and breakdown are below."}
         {" "}A real person reviews every request and follows up with a firm
         written quote before any work is scheduled.
       </p>
-      {!customerEmailAccepted && (
+      {customerEmailAccepted === false && (
         <p className="mb-5 text-sm text-inverse-foreground" role="status" data-testid="estimate-email-warning">
           Need a copy? <a href={SITE_CONFIG.phoneHref} className="underline">Call {SITE_CONFIG.phone}</a>
           {" or "}<a href={SITE_CONFIG.phoneSmsHref} className="underline">text us</a>.

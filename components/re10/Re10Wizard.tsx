@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { inquiryId } from "@/lib/leadInquiry";
+import { trackAcceptedLeadConversion } from "@/lib/analytics";
 import {
   Upload,
   Check,
@@ -116,6 +118,9 @@ interface EstimateResponse {
   unpriced: number;
   /** True only when the server confirms the customer copy actually sent. */
   emailed: boolean;
+  /** True only for a newly saved, unique inquiry. */
+  accepted: boolean;
+  duplicate: boolean;
 }
 
 const usd = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
@@ -190,6 +195,8 @@ export function Re10Wizard() {
   const [repairDeadline, setRepairDeadline] = useState("");
   const [occupancy, setOccupancy] = useState<"occupied" | "vacant" | "unknown">("unknown");
   const [notes, setNotes] = useState("");
+  // Bot-only trap; hidden from people and autofill tools.
+  const [website, setWebsite] = useState("");
 
   const [result, setResult] = useState<EstimateResponse | null>(null);
   /**
@@ -620,6 +627,8 @@ export function Re10Wizard() {
           unmapped: extraction?.unmapped ?? [],
           documentNotes: extraction?.documentNotes ?? [],
           notes: notes.trim() || undefined,
+          inquiryId: inquiryId("re10"),
+          website,
         }),
       });
       const data = await res.json();
@@ -643,18 +652,17 @@ export function Re10Wizard() {
       setResult(estimate);
       setReturnTo(null);
 
-      trackEvent(RE10_EVENTS.estimateGenerated, {
-        value: estimate.price,
-        currency: "USD",
-        confidence: estimate.confidence,
-        priced_items: estimate.priced,
-        onsite_items: estimate.unpriced,
-      });
-      trackMetaEvent(
-        "Lead",
-        { content_name: "RE-10 repair estimate", value: estimate.price, currency: "USD" },
-        { email: email.trim() || undefined, phone: phone.trim() || undefined },
-      );
+      if (estimate.accepted) {
+        trackAcceptedLeadConversion();
+        trackEvent(RE10_EVENTS.estimateGenerated, {
+          value: estimate.price,
+          currency: "USD",
+          confidence: estimate.confidence,
+          priced_items: estimate.priced,
+          onsite_items: estimate.unpriced,
+        });
+        trackMetaEvent("Lead", { content_name: "RE-10 repair estimate", value: estimate.price, currency: "USD" });
+      }
       if (estimate.emailed) trackEvent(RE10_EVENTS.estimateEmailed);
 
       goTo("result");
@@ -838,6 +846,15 @@ export function Re10Wizard() {
           behind the navigation. The regex-guarded scroll-mt must sit on the
           element carrying ref={topRef}. */}
       <div className="container px-4 max-w-3xl mx-auto scroll-mt-24" ref={topRef}>
+        <input
+          name="website"
+          value={website}
+          onChange={(event) => setWebsite(event.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="hidden"
+        />
         {step !== "result" && (
           <>
             <WizardProgress steps={STEP_META} currentIndex={currentIndex} tone="inverse" />

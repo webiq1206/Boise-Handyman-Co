@@ -1,7 +1,7 @@
 /**
  * Execute the actual estimate POST handler with isolated delivery boundaries.
  * No database, email provider, or CRM is contacted, even if secrets are set.
- * A confirmation requires a business receipt; a customer email alone is not one.
+ * A new acceptance requires a saved inquiry and lead; delivery cannot bypass it.
  */
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -14,13 +14,14 @@ import { calculateHandymanEstimate, type HandymanEstimateInput } from "../shared
 type MailOutcome = "accepted" | "rejected" | "throws" | "empty";
 type Scenario = {
   name: string;
-  db: "absent" | "saved" | "throws";
+  db: "absent" | "saved" | "throws" | "duplicate";
   dashboard: boolean;
   transport?: "noop" | "throws";
   admin: MailOutcome;
   customer: MailOutcome;
   status: number;
   customerAccepted?: boolean;
+  duplicate?: boolean;
 };
 
 const input: HandymanEstimateInput = {
@@ -35,23 +36,28 @@ const payload = {
   name: "Delivery Test",
   email: "delivery-test@example.com",
   city: "Boise",
+  inquiryId: "00000000-0000-4000-8000-000000000001",
   estimate: { ...input, priceLow: estimate.priceLow, priceHigh: estimate.priceHigh, laborHours: estimate.laborHours },
 };
 
 const scenarios: Scenario[] = [
-  { name: "unconfigured delivery cannot confirm", db: "absent", dashboard: false, transport: "noop", admin: "accepted", customer: "accepted", status: 503 },
-  { name: "all destinations reject", db: "throws", dashboard: false, admin: "rejected", customer: "accepted", status: 503 },
-  { name: "admin network exception", db: "absent", dashboard: false, admin: "throws", customer: "accepted", status: 503 },
-  { name: "empty provider response is not a receipt", db: "absent", dashboard: false, admin: "empty", customer: "accepted", status: 503 },
-  { name: "database receipt survives unavailable mail", db: "saved", dashboard: false, transport: "throws", admin: "rejected", customer: "rejected", status: 200, customerAccepted: false },
-  { name: "database receipt with development transport", db: "saved", dashboard: false, transport: "noop", admin: "accepted", customer: "accepted", status: 200, customerAccepted: false },
-  { name: "CRM receipt survives unavailable mail", db: "throws", dashboard: true, transport: "throws", admin: "rejected", customer: "rejected", status: 200, customerAccepted: false },
-  { name: "admin email alone retains the lead", db: "absent", dashboard: false, admin: "accepted", customer: "rejected", status: 200, customerAccepted: false },
-  { name: "customer network failure does not lose a saved lead", db: "saved", dashboard: false, admin: "accepted", customer: "throws", status: 200, customerAccepted: false },
-  { name: "customer acceptance is reported separately", db: "absent", dashboard: false, admin: "accepted", customer: "accepted", status: 200, customerAccepted: true },
-  { name: "CRM receipt permits the customer copy after admin exception", db: "absent", dashboard: true, admin: "throws", customer: "accepted", status: 200, customerAccepted: true },
-  { name: "database receipt permits the customer copy after admin rejection", db: "saved", dashboard: false, admin: "rejected", customer: "accepted", status: 200, customerAccepted: true },
+  { name: "unconfigured persistence cannot confirm", db: "absent", dashboard: false, transport: "noop", admin: "accepted", customer: "accepted", status: 503 },
+  { name: "database failure cannot use CRM as an acceptance fallback", db: "throws", dashboard: true, admin: "accepted", customer: "accepted", status: 503 },
+  { name: "email cannot substitute for durable persistence", db: "absent", dashboard: false, admin: "accepted", customer: "accepted", status: 503 },
+  { name: "duplicate does not redeliver or count again", db: "duplicate", dashboard: true, admin: "accepted", customer: "accepted", status: 200, duplicate: true },
+  { name: "saved lead survives unavailable transport", db: "saved", dashboard: false, transport: "throws", admin: "rejected", customer: "rejected", status: 200, customerAccepted: false },
+  { name: "development transport is not email acceptance", db: "saved", dashboard: false, transport: "noop", admin: "accepted", customer: "accepted", status: 200, customerAccepted: false },
+  { name: "saved lead survives customer rejection", db: "saved", dashboard: false, admin: "accepted", customer: "rejected", status: 200, customerAccepted: false },
+  { name: "saved lead survives customer exception", db: "saved", dashboard: false, admin: "accepted", customer: "throws", status: 200, customerAccepted: false },
+  { name: "empty email response is not acceptance", db: "saved", dashboard: false, admin: "accepted", customer: "empty", status: 200, customerAccepted: false },
+  { name: "customer acceptance is reported separately", db: "saved", dashboard: false, admin: "accepted", customer: "accepted", status: 200, customerAccepted: true },
+  { name: "admin rejection does not stop customer copy", db: "saved", dashboard: false, admin: "rejected", customer: "accepted", status: 200, customerAccepted: true },
+  { name: "admin exception does not stop customer copy", db: "saved", dashboard: true, admin: "throws", customer: "accepted", status: 200, customerAccepted: true },
+  { name: "empty admin response does not lose saved lead", db: "saved", dashboard: false, admin: "empty", customer: "accepted", status: 200, customerAccepted: true },
 ];
+
+// The real acceptance service uses this test-only secret with a fake transaction.
+process.env.LEAD_FINGERPRINT_SECRET = "isolated-delivery-test-secret";
 
 async function main() {
   const routePath = path.resolve("app/api/estimate-lead/route.ts");
@@ -60,17 +66,23 @@ async function main() {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
   }).outputText;
 
-  for (const scenario of scenarios) {
+  for (const [index, scenario] of scenarios.entries()) {
     const mailCalls: string[] = [];
     const savedRows: Record<string, unknown>[] = [];
     let dashboardCalls = 0;
     const mockRequire = (id: string) => {
-      if (id === "@/lib/db") return {
+      if (id === "@/server/db") return {
         db: scenario.db === "absent" ? null : {
-          insert: () => ({ values: async (row: Record<string, unknown>) => {
-            if (scenario.db === "throws") throw new Error("simulated database failure");
-            savedRows.push(row);
-          } }),
+          transaction: async (work: (tx: unknown) => Promise<unknown>) => work({
+            insert: () => ({ values: (row: Record<string, unknown>) => {
+              if (row.duplicateKey) return {
+                onConflictDoNothing: () => ({ returning: async () => scenario.db === "duplicate" ? [] : [{ id: payload.inquiryId }] }),
+              };
+              if (scenario.db === "throws") throw new Error("simulated database failure");
+              savedRows.push(row);
+              return Promise.resolve();
+            } }),
+          }),
         },
       };
       if (id === "@/server/services/leadDashboardForward") return {
@@ -101,20 +113,29 @@ async function main() {
     let response: Response;
     try {
       response = await route.exports.POST(new NextRequest("http://localhost/api/estimate-lead", {
-        method: "POST", body: JSON.stringify(payload), headers: { "Content-Type": "application/json" },
+        method: "POST", body: JSON.stringify(payload), headers: { "Content-Type": "application/json", "x-forwarded-for": `192.0.2.${index + 1}` },
       }));
     } finally {
       console.error = oldError;
     }
     const body = await response.json();
     assert.equal(response.status, scenario.status, scenario.name);
-    assert.equal(dashboardCalls, 1, `${scenario.name}: forward exactly once`);
+    assert.equal(dashboardCalls, scenario.db === "saved" ? 1 : 0, `${scenario.name}: only forward newly saved leads`);
     if (scenario.status === 503) {
       assert.notEqual(body.success, true, scenario.name);
       assert.ok(body.message, `${scenario.name}: actionable error`);
-      assert.ok(!mailCalls.includes(payload.email), `${scenario.name}: do not quote an unreceived request`);
+      assert.equal(mailCalls.length, 0, `${scenario.name}: no delivery before persistence`);
+    } else if (scenario.duplicate) {
+      assert.equal(body.success, true, scenario.name);
+      assert.equal(body.accepted, false, scenario.name);
+      assert.equal(body.duplicate, true, scenario.name);
+      assert.equal(body.customerEmailAccepted, undefined, scenario.name);
+      assert.equal(mailCalls.length, 0, `${scenario.name}: do not redeliver`);
+      assert.equal(savedRows.length, 0, `${scenario.name}: do not save again`);
     } else {
       assert.equal(body.success, true, scenario.name);
+      assert.equal(body.accepted, true, scenario.name);
+      assert.equal(body.duplicate, false, scenario.name);
       assert.equal(body.customerEmailAccepted, scenario.customerAccepted, scenario.name);
     }
     if (scenario.db === "saved") {

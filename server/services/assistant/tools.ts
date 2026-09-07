@@ -15,6 +15,7 @@
  * answers.
  */
 import { z } from "zod";
+import { randomUUID } from "crypto";
 import type Anthropic from "@anthropic-ai/sdk";
 import { resolveQuotedRange } from "@/shared/costs/resolve";
 import {
@@ -402,6 +403,36 @@ function executeGetBusinessInfo(input: unknown): string {
   }
 }
 
+export function buildAssistantLeadRequest(
+  data: z.infer<typeof submitLeadSchema>,
+  projectType: string,
+  estimate: z.infer<typeof estimateSchema> | undefined,
+  inquiryId = randomUUID(),
+) {
+  // The consultation endpoint is the shared-estimate endpoint. The instant
+  // estimator endpoint has a deliberately different handyman task payload.
+  return {
+    endpoint: "/api/consultation",
+    body: {
+      name: data.name,
+      email: data.email,
+      phone: data.phone ?? "",
+      preferredContact: "email" as const,
+      address: "",
+      zip: data.zip,
+      projectType,
+      message: [
+        "Submitted via assistant chat",
+        data.buildArea ? `Job location: ${data.buildArea}` : null,
+        data.notes ?? null,
+      ].filter(Boolean).join(" | "),
+      estimate: estimate ?? null,
+      inquiryId,
+      website: "",
+    },
+  };
+}
+
 async function executeSubmitLead(input: unknown, origin: string): Promise<string> {
   const parsed = submitLeadSchema.safeParse(input);
   if (!parsed.success) {
@@ -435,34 +466,7 @@ async function executeSubmitLead(input: unknown, origin: string): Promise<string
     }
   }
 
-  /* No estimate yet is still a lead: the route stores it without one. But the
-     route requires an `estimate` object, so a contact-only lead goes through
-     the consultation body shape instead. */
-  const endpoint = estimatePayload ? "/api/estimate-lead" : "/api/consultation";
-  const body = estimatePayload
-    ? {
-        name: data.name,
-        email: data.email,
-        phone: data.phone ?? "",
-        projectType: projectTypeLabel,
-        zip: data.zip,
-        buildArea: data.buildArea,
-        estimate: estimatePayload,
-      }
-    : {
-        name: data.name,
-        email: data.email,
-        phone: data.phone ?? "",
-        projectType: projectTypeLabel,
-        zip: data.zip,
-        message: [
-          "Submitted via assistant chat",
-          data.buildArea ? `Job location: ${data.buildArea}` : null,
-          data.notes ?? null,
-        ]
-          .filter(Boolean)
-          .join(" | "),
-      };
+  const { endpoint, body } = buildAssistantLeadRequest(data, projectTypeLabel, estimatePayload);
 
   try {
     const res = await fetch(`${origin}${endpoint}`, {
@@ -478,8 +482,11 @@ async function executeSubmitLead(input: unknown, origin: string): Promise<string
         message: `The submission did not go through. Apologize and give the visitor the phone number ${SITE_CONFIG.phone} or the consultation page /consultation instead.`,
       });
     }
+    const outcome = await res.json().catch(() => ({})) as { accepted?: boolean; duplicate?: boolean };
     return JSON.stringify({
       success: true,
+      accepted: outcome.accepted === true,
+      duplicate: outcome.duplicate === true,
       message: `Lead submitted. The visitor will get a confirmation email at ${data.email}, and the team follows up within one business day.`,
     });
   } catch (err) {

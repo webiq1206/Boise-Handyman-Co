@@ -1,6 +1,6 @@
 # Boise Handyman Co - Full Reference
 
-> Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, and maintenance. Drywall repair, interior and exterior painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, caulking and punch-list work. Serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell. Phone (208) 477-1169.
+> Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, and maintenance. Drywall repair, interior and exterior painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, caulking and punch-list work. Serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, Caldwell. Phone (208) 477-1169.
 
 ## About
 
@@ -15,7 +15,7 @@ Boise Handyman Co is a locally owned handyman service for the Treasure Valley. W
 
 We serve the following Treasure Valley cities across Ada and Canyon County:
 
-- Ada County: Boise, Meridian, Eagle, Kuna, Star
+- Ada County: Boise, Meridian, Eagle, Kuna, Star, Garden City
 - Canyon County: Nampa, Middleton, Caldwell
 
 Most handyman-scope repairs do not require a permit in Ada or Canyon County, and we flag the exceptions (structural, gas, major electrical or plumbing alterations) before work begins so the right licensed trade handles them.
@@ -31,7 +31,7 @@ Most handyman-scope repairs do not require a permit in Ada or Canyon County, and
 - Fence, Deck & Gutter Repair: /services/fence-deck-gutter-repair - Leaning fence panels, loose deck boards and rails, gutter cleaning, and minor exterior repairs.
 - Caulking & Home Maintenance: /services/home-maintenance - Caulking and weatherproofing, tile and grout touch-ups, and punch-list work knocked out in one trip.
 
-Each service has a dedicated page per city at /services/{service-slug}/{city-slug} for boise, meridian, eagle, nampa, kuna, star, middleton, caldwell. City service-area hubs live at /areas/{city-slug}.
+Each service has a dedicated page per city at /services/{service-slug}/{city-slug} for boise, meridian, eagle, nampa, kuna, star, middleton, garden-city, caldwell. City service-area hubs live at /areas/{city-slug}.
 
 ## Authoritative guides (https://boisehandyman.co/guides)
 
@@ -102,4 +102,4 @@ Neighborhood guides:
 
 Boise Handyman Co also completes RE-10 and home inspection repairs for real estate agents, buyers and sellers across Boise and the Treasure Valley. An RE-10 is the Idaho inspection response form: after a home inspection the buyer requests specific repairs before closing. We review the RE-10 and inspection report, provide a written scope and pricing, coordinate access, complete the approved work across multiple trades, and supply photo documentation, invoices and receipts for the transaction file. Structural, foundation, mold and asbestos abatement, main electrical service, sewer and septic, HVAC replacement, gas lines and full roof replacement are coordinated to licensed specialists rather than performed in house. Inspection repair lists are exactly the small, defined jobs a handyman does every day, and we sequence them against a closing date that will not move. Details: https://boisehandyman.co/re-10-repairs-boise
 
-Last updated: 2026-08-21. Full sitemap: https://boisehandyman.co/sitemap.xml
+Last updated: 2026-09-07. Full sitemap: https://boisehandyman.co/sitemap.xml

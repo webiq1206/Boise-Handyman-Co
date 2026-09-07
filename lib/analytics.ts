@@ -12,6 +12,19 @@ export function trackEvent(name: string, params: GtagParams = {}): void {
   gtag('event', name, params);
 }
 
+/** Google Ads conversion: only call after the API confirms a new durable lead. */
+export function trackAcceptedLeadConversion(): void {
+  if (typeof window === "undefined") return;
+  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+  if (typeof gtag !== "function") return;
+  gtag("event", "conversion", googleAdsConversionPayload());
+}
+
+/** Kept pure so the conversion contract can be tested without a browser. */
+export function googleAdsConversionPayload(): { send_to: string } {
+  return { send_to: "AW-18354188204/LE2vCPXstO8cEKzf-q9E" };
+}
+
 /** Optional first-party identifiers for Conversions API match quality. */
 export interface MetaUserData {
   email?: string;
