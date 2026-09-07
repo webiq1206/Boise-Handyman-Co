@@ -23,6 +23,7 @@ import {
   type HandymanEstimate,
   type HandymanEstimateInput,
 } from "@/shared/estimateEngine";
+import { isServiceAreaCity } from "@/shared/contentData";
 import { handymanEstimateSchema } from "@/shared/estimatePayload";
 import {
   buildHandymanAdminEmailHtml,
@@ -46,7 +47,9 @@ const bodySchema = z.object({
     .refine((v) => v === "" || v.replace(/\D/g, "").length >= 10, {
       message: "Phone must be a valid 10-digit number when provided",
     }),
-  city: z.string().min(1).max(80),
+  city: z.string().min(1).max(80).refine(isServiceAreaCity, {
+    message: "Choose a city in our service area",
+  }),
   notes: z.string().max(1000).optional(),
   inquiryId: z.string().uuid(),
   website: z.string().max(0).optional(),

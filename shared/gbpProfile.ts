@@ -66,7 +66,7 @@ export const GBP_CATEGORIES = {
 } as const;
 
 export const GBP_DESCRIPTION =
-  'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to trusted specialty contractors. Get an instant estimate online or book a handyman visit.';
+  'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to trusted specialty contractors. Get an instant estimate online or book a handyman visit.';
 
 export const GBP_LINKS = {
   website: SITE,
@@ -247,7 +247,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'What areas do you serve?',
     answer:
-      'Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho - all of Ada and Canyon County in the Treasure Valley. Where you live in the service area never inflates the quote.',
+      'Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho - all of Ada and Canyon County in the Treasure Valley. Where you live in the service area never inflates the quote.',
   },
   {
     question: 'How much does a handyman cost in Boise?',

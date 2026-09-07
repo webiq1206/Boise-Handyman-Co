@@ -55,7 +55,7 @@ const FAQS = [
   {
     question: "What areas do you cover?",
     answer:
-      "Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell. If you are elsewhere in the Treasure Valley, send the estimate through anyway and we will tell you straight away whether we can get to you.",
+      "Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell. If you are elsewhere in the Treasure Valley, send the estimate through anyway and we will tell you straight away whether we can get to you.",
   },
 ];
 

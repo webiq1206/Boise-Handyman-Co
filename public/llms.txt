@@ -1,6 +1,6 @@
 # Boise Handyman Co
 
-> Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, and maintenance. Drywall repair, interior and exterior painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, caulking and punch-list work. Serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell. Phone (208) 477-1169.
+> Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, and maintenance. Drywall repair, interior and exterior painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, caulking and punch-list work. Serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, Caldwell. Phone (208) 477-1169.
 
 Every job is quoted upfront as one written price before any work starts, priced by the time it takes with a one-hour minimum, and most jobs are finished in a single visit. A single small repair starts around $145, materials are billed at cost as their own line, and bundling several tasks into one visit is the best value (prices are being finalized; every job gets a written quote first). Work that needs a general contractor or a licensed trade, such as full remodels, additions, repipes, or panel work, is out of scope and referred out honestly.
 
@@ -58,4 +58,4 @@ Every job is quoted upfront as one written price before any work starts, priced 
 - [RSS feed](https://boisehandyman.co/feed.xml): guides and articles, newest first, with publication and revision dates.
 - [Full text for LLMs](https://boisehandyman.co/llms-full.txt): expanded reference copy of the core facts.
 
-Last updated: 2026-08-21.
+Last updated: 2026-09-07.

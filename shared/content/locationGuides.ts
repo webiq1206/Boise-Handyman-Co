@@ -420,7 +420,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'Which Nampa areas do you serve?',
         answer:
-          'All of Nampa, from the historic core to the newest phases at the edges, plus the unincorporated areas around it. Our service area covers Ada and Canyon County: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell.',
+          'All of Nampa, from the historic core to the newest phases at the edges, plus the unincorporated areas around it. Our service area covers Ada and Canyon County: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell.',
       },
     ],
   },
