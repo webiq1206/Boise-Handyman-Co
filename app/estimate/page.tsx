@@ -9,6 +9,7 @@ import {
 } from "@/lib/schema";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { HANDYMAN_RATE_DISCLAIMER } from "@/shared/estimateEngine";
+import { fitDescription } from '@/lib/page-metadata';
 
 const EstimateCalculator = dynamic(
   () =>
@@ -25,7 +26,7 @@ const EstimateCalculator = dynamic(
 // 25 chars; the branded title lands at 45 with the 20-char suffix.
 const TITLE = "Instant Handyman Estimate";
 const DESCRIPTION =
-  "See a real price range for your repair in about a minute. Pick your tasks and get an instant estimate for Boise and the Treasure Valley, then book your visit.";
+  fitDescription("See a real price range for your repair in about a minute. Pick your tasks and get an instant estimate for Boise and the Treasure Valley, then book your visit.");
 
 /*
  * The rates below render the pricing model on-page. They come straight from

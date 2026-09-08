@@ -1,5 +1,8 @@
 "use client";
 
+import { EstimatorRecovery } from "@/components/estimate/recovery/EstimatorRecovery";
+import { markEstimatorCompleted } from "@/lib/estimatorSession";
+
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -341,6 +344,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
       // Meta Lead carries the visitor's email + phone, which the server-side
       // Conversions API hashes for high match quality (best cost-per-result).
       if (response.accepted) {
+        markEstimatorCompleted("consultation");
         trackAcceptedLeadConversion();
         trackEvent("generate_lead", {
           form: "consultation",
@@ -446,6 +450,17 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
 
   return (
     <Form {...form}>
+      <EstimatorRecovery
+        flow="consultation"
+        currentStep={form.formState.isDirty ? "filling" : "form"}
+        currentStepIndex={form.formState.isDirty ? 1 : 0}
+        totalSteps={2}
+        lastCompletedStep={form.formState.isDirty ? "form" : undefined}
+        selections={{ project_type: String(form.watch("projectType") ?? "") || null }}
+        validationErrors={Object.keys(form.formState.errors)}
+        engaged={form.formState.isDirty}
+        submitted={success}
+      />
       <form
         onSubmit={form.handleSubmit(
           (data) => {

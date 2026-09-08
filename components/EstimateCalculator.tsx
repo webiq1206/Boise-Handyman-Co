@@ -30,6 +30,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Section } from "@/components/marketing";
+import { EstimatorRecovery } from "@/components/estimate/recovery/EstimatorRecovery";
+import { markEstimatorCompleted } from "@/lib/estimatorSession";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
@@ -141,6 +143,47 @@ export function EstimateCalculator({
   const [wizStep, setWizStep] = useState<WizStep>("job");
   const wizIndex = STEP_META.findIndex((s) => s.id === wizStep);
   const topRef = useRef<HTMLDivElement | null>(null);
+
+  /* Progress survives a refresh or an accidental tab switch. Contact fields
+     are deliberately left out (they are prefilled from the durable store
+     only after a submit); everything else about the job is restored, and the
+     draft is cleared the moment the estimate is sent. */
+  const DRAFT_KEY = "bh_estimate_wizard_v1";
+  const draftRestored = useRef(false);
+  useEffect(() => {
+    if (draftRestored.current) return;
+    draftRestored.current = true;
+    try {
+      const raw = sessionStorage.getItem(DRAFT_KEY);
+      if (!raw) return;
+      const d = JSON.parse(raw) as Partial<{
+        v: number; wizStep: WizStep; category: JobCategoryId; quantities: Record<string, number>;
+        otherOpen: boolean; otherText: string; otherSize: OtherJobSize; materials: MaterialsPlan; urgency: UrgencyLevel; city: string;
+      }>;
+      if (d.v !== 1 || !d.category) return;
+      setCategory(d.category);
+      if (d.quantities && typeof d.quantities === "object") setQuantities(d.quantities);
+      if (d.otherOpen) setOtherOpen(true);
+      if (typeof d.otherText === "string") setOtherText(d.otherText.slice(0, 1000));
+      if (d.otherSize) setOtherSize(d.otherSize);
+      if (d.materials) setMaterials(d.materials);
+      if (d.urgency) setUrgency(d.urgency);
+      if (typeof d.city === "string") setCity(d.city);
+      const allowed: WizStep[] = ["job", "tasks", "details", "contact"];
+      if (d.wizStep && allowed.includes(d.wizStep)) setWizStep(d.wizStep);
+    } catch {
+      /* a corrupt draft is simply ignored */
+    }
+  }, []);
+  useEffect(() => {
+    if (!draftRestored.current) return;
+    try {
+      if (submitted || !category) { sessionStorage.removeItem(DRAFT_KEY); return; }
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ v: 1, wizStep, category, quantities, otherOpen, otherText, otherSize, materials, urgency, city }));
+    } catch {
+      /* private mode: the draft just does not persist */
+    }
+  }, [submitted, wizStep, category, quantities, otherOpen, otherText, otherSize, materials, urgency, city]);
 
   /* Prefill returning visitors' contact details. */
   useEffect(() => {
@@ -300,6 +343,7 @@ export function EstimateCalculator({
       const response = await res.json() as { accepted?: boolean };
       writeStoredPrefill({ name: name.trim(), email: email.trim(), phone: phone.trim() });
       if (response.accepted) {
+        markEstimatorCompleted("estimate");
         trackAcceptedLeadConversion();
         trackEvent("handyman_estimate_submitted", {
           category: estimateInput.category,
@@ -815,11 +859,28 @@ export function EstimateCalculator({
   /* fitViewport: the estimator as a one-screen app. The frame carries the H1,
      the step counter and the progress rail; the live range and the action bar
      sit in the frame's pinned footer in flow. */
+  /* Partial-completion tracking and the leave-prompt (docs/estimator-recovery.md). */
+  const stepIds = STEP_META.map((s) => s.id);
+  const stepIdx = Math.max(0, stepIds.indexOf(wizStep));
+  const recovery = (
+    <EstimatorRecovery
+      flow="estimate"
+      currentStep={wizStep}
+      currentStepIndex={stepIdx}
+      totalSteps={stepIds.length}
+      lastCompletedStep={stepIdx > 0 ? stepIds[stepIdx - 1] : undefined}
+      selections={{ category, urgency }}
+      engaged={stepIdx > 0 || category !== null}
+      submitted={submitted}
+    />
+  );
+
   if (fitViewport) {
     if (submitted) {
       return (
         <AppFrame title="Your estimate is on its way" eyebrow="Estimate sent" steps={STEP_META} currentIndex={STEP_META.length - 1} hideProgress>
           {successSurface}
+          {recovery}
         </AppFrame>
       );
     }
@@ -849,6 +910,7 @@ export function EstimateCalculator({
         }
       >
         <div key={wizStep}>{stepBody}</div>
+        {recovery}
       </AppFrame>
     );
   }
@@ -895,6 +957,7 @@ export function EstimateCalculator({
           </div>
         </div>
       </Section>
+      {recovery}
     </>
   );
 }

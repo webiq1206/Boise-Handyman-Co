@@ -14,7 +14,6 @@ import { buildPageMetadata } from '@/lib/page-metadata';
 import {
   generateBreadcrumbSchema,
   generateOrganizationSchema,
-  generateSpeakableSchema,
   generateWebPageSchema,
 } from '@/lib/schema';
 import { CITIES, TREASURE_VALLEY_CITIES } from '@/shared/contentData';
@@ -94,12 +93,12 @@ export default function AboutPage() {
       description:
         'Locally owned Treasure Valley handyman service committed to upfront quotes, one-trip fixes, and clear communication.',
       url: '/about',
+      speakable: true,
     }),
     generateBreadcrumbSchema([
       { name: 'Home', url: '/' },
       { name: 'About', url: '/about' },
     ]),
-    generateSpeakableSchema({ path: '/about', name: `About ${SITE_CONFIG.name}` }),
   ];
 
   return (

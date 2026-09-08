@@ -5,6 +5,7 @@ import {
   isServiceAreaCity,
 } from "../shared/contentData";
 import { RE10_SERVICE_AREAS } from "../shared/content/re10Content";
+import { BUSINESS_INFO } from "../lib/seo";
 
 const expected = [
   "Boise",
@@ -21,6 +22,11 @@ const expected = [
 assert.deepEqual(SERVICE_AREA_CITY_NAMES, expected, "handyman selector exposes all nine cities");
 assert.deepEqual(RE10_SERVICE_AREAS, expected, "RE-10 service areas expose the same nine cities");
 assert.equal(CITIES.length, 9, "there are exactly nine customer service-area options");
+assert.deepEqual(
+  [...BUSINESS_INFO.serviceArea].sort(),
+  [...expected].sort(),
+  "LocalBusiness.areaServed (BUSINESS_INFO.serviceArea) lists the same nine cities the pages do",
+);
 
 for (const city of expected) {
   assert.equal(isServiceAreaCity(city), true, `${city} is accepted by estimate lead validation`);

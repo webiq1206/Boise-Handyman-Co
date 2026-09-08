@@ -87,8 +87,15 @@ export const GBP_LINKS = {
  * both read from this.
  */
 export const GBP_SOCIAL = {
-  facebook: 'https://www.facebook.com/boiseremodeling',
-  instagram: 'https://www.instagram.com/boiseremodeling',
+  /**
+   * Empty until Boise Handyman Co has its own profiles. The previous values
+   * were Boise Remodeling Co's handles, which published a `sameAs` that told
+   * search engines the two companies were one entity. Set
+   * NEXT_PUBLIC_FACEBOOK_URL / NEXT_PUBLIC_INSTAGRAM_URL once the real
+   * profiles exist; every consumer renders nothing for an empty value.
+   */
+  facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? '',
+  instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? '',
 } as const;
 
 export const GBP_ATTRIBUTES = {

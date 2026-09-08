@@ -21,7 +21,6 @@ import {
   generateBreadcrumbSchema,
   generateFAQSchema,
   generateLocalBusinessSchema,
-  generateSpeakableSchema,
   generateWebPageSchema,
 } from '@/lib/schema';
 import { EmailLink } from '@/components/EmailLink';
@@ -204,13 +203,13 @@ export default function ContactPage() {
       description:
         'Book a handyman visit or get an upfront quote from our Treasure Valley handyman team.',
       url: '/contact',
+      speakable: true,
     }),
     generateBreadcrumbSchema([
       { name: 'Home', url: '/' },
       { name: 'Contact', url: '/contact' },
     ]),
     generateFAQSchema(CONTACT_FAQS),
-    generateSpeakableSchema({ path: '/contact', name: `Contact ${SITE_CONFIG.name}` }),
   ];
 
   return (

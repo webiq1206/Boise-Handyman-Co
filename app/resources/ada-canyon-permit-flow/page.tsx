@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Download } from 'lucide-react';
-import { buildPageMetadata } from '@/lib/page-metadata';
+import { buildPageMetadata, fitDescription } from '@/lib/page-metadata';
 import { Section } from '@/components/marketing/Section';
 import { PermitFlowGraphic } from './PermitFlowGraphic';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
@@ -14,7 +14,7 @@ import {
 } from '@/lib/schema';
 
 const PERMIT_FLOW_DESCRIPTION =
-  'When a home repair needs a permit in Ada and Canyon County: what a handyman can do without one, what triggers a permit, and who to call to check.';
+  fitDescription('When a home repair needs a permit in Ada and Canyon County: what a handyman can do without one, what triggers a permit, and who to call to check.');
 
 export const metadata: Metadata = buildPageMetadata({
   kind: 'blog',

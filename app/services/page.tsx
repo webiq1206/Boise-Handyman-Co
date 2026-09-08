@@ -21,10 +21,11 @@ import { buildCanonical, FEED_ALTERNATES } from '@/lib/page-metadata';
 import { getBaseUrl } from '@/lib/seo';
 import { generateBreadcrumbSchema } from '@/lib/schema';
 import { CTA_PRIMARY, CTA_SECONDARY } from '@/shared/ctaCopy';
+import { fitDescription } from '@/lib/page-metadata';
 
 const TITLE = 'Handyman Services | Treasure Valley';
 const DESCRIPTION =
-  'Handyman services in Boise, Meridian, Eagle, Nampa and the Treasure Valley: drywall repair, painting, minor plumbing and electrical, carpentry, mounting, and home maintenance, quoted upfront.';
+  fitDescription('Handyman services in Boise, Meridian, Eagle, Nampa and the Treasure Valley: drywall repair, painting, minor plumbing and electrical, carpentry, mounting, and home maintenance, quoted upfront.');
 
 export const metadata: Metadata = {
   title: { absolute: `${TITLE} | ${SITE_CONFIG.name}` },

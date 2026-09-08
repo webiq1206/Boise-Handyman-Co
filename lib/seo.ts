@@ -516,7 +516,7 @@ export const BUSINESS_INFO = {
   // brand's date would fabricate a years-in-business claim. Schema gates
   // foundingDate on this being non-empty. [NEEDS: real founding year]
   founded: '',
-  serviceArea: ['Boise', 'Meridian', 'Eagle', 'Nampa', 'Kuna', 'Star', 'Middleton', 'Caldwell'],
+  serviceArea: ['Boise', 'Meridian', 'Eagle', 'Nampa', 'Kuna', 'Star', 'Middleton', 'Caldwell', 'Garden City'],
   serviceRadius: '35 miles',
   licenses: ['Registration details available upon request'],
   // No certification or insured/bonded claims are published until confirmed
@@ -532,7 +532,7 @@ export const BUSINESS_INFO = {
   sameAs: [
     GBP_SOCIAL.facebook,
     ...getExternalProfileUrls(),
-  ],
+  ].filter((url): url is string => Boolean(url)),
 };
 
 export type { SEOMetaData, ServiceSEOParams };

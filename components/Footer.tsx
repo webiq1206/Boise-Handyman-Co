@@ -100,6 +100,7 @@ export function Footer() {
               </div>
               {/* Facebook only, as an icon in the brand accent. Instagram removed. */}
               <div className="flex gap-4 pt-3">
+                {GBP_SOCIAL.facebook && (
                 <a
                   href={GBP_SOCIAL.facebook}
                   className="text-accent-legible hover:text-inverse-foreground transition-colors"
@@ -109,6 +110,7 @@ export function Footer() {
                 >
                   <Facebook className="h-5 w-5" strokeWidth={1.75} aria-hidden />
                 </a>
+                )}
               </div>
             </div>
           </div>
@@ -290,6 +292,7 @@ export function Footer() {
             <div className="mt-6 pt-6 border-t border-inverse-foreground/10">
               <a
                 href="/api/login"
+                rel="nofollow"
                 className="text-xs text-inverse-muted hover:text-inverse-foreground transition-colors"
               >
                 Subcontractor Login

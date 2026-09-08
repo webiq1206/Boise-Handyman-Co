@@ -4,16 +4,16 @@
  * Fetches sitemap(s), extracts URLs, and submits them to IndexNow API.
  *
  * Environment (or defaults):
- *   INDEXNOW_KEY    (default: f9e329f80c1a4609bd70d590f64e0544)
+ *   INDEXNOW_KEY    (default: 9e89d20492d96d9f284ac07ca15508f1)
  *   HOST            (default: boisehandyman.co)
  *   SITEMAP_URL     (default: https://boisehandyman.co/sitemap.xml)
- *   KEY_LOCATION    (default: https://boisehandyman.co/f9e329f80c1a4609bd70d590f64e0544.txt)
+ *   KEY_LOCATION    (default: https://boisehandyman.co/9e89d20492d96d9f284ac07ca15508f1.txt)
  */
 
-const INDEXNOW_KEY = process.env.INDEXNOW_KEY ?? 'f9e329f80c1a4609bd70d590f64e0544';
+const INDEXNOW_KEY = process.env.INDEXNOW_KEY ?? '9e89d20492d96d9f284ac07ca15508f1';
 const HOST = process.env.HOST ?? 'boisehandyman.co';
 const SITEMAP_URL = process.env.SITEMAP_URL ?? 'https://boisehandyman.co/sitemap.xml';
-const KEY_LOCATION = process.env.KEY_LOCATION ?? 'https://boisehandyman.co/f9e329f80c1a4609bd70d590f64e0544.txt';
+const KEY_LOCATION = process.env.KEY_LOCATION ?? 'https://boisehandyman.co/9e89d20492d96d9f284ac07ca15508f1.txt';
 const INDEXNOW_API = 'https://api.indexnow.org/indexnow';
 
 /**
