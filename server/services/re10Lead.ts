@@ -1,4 +1,4 @@
-import { db } from "@/server/db";
+import { db } from "@/lib/db";
 import { consultationRequests } from "@/shared/schema";
 import { saveAcceptedLead } from "@/server/services/acceptedLead";
 import { getUncachableEmailClient } from "@/server/services/emailTransport";
