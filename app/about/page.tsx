@@ -289,7 +289,7 @@ export default function AboutPage() {
               className="mb-0 max-w-3xl"
             />
             <Hairline inverse className="mt-8 mb-12" />
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="ed-cards-3 gap-6">
               {PRINCIPLES.map(({ title, desc }, i) => (
                 <Reveal key={title} delay={Math.min(i, 5) * 60}>
                   <div className="h-full">
@@ -321,7 +321,7 @@ export default function AboutPage() {
               description={`We handle repairs, installs, and maintenance for homeowners in ${TREASURE_VALLEY_CITIES}, and surrounding communities. Where you live never inflates the quote.`}
               className="max-w-3xl"
             />
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid sm:grid-cols-3 gap-4">
               {CITIES.map((city, i) => (
                 <Reveal key={city.slug} delay={Math.min(i, 7) * 50}>
                   <AreaCard city={city} imageSrc={CITY_HERO_IMAGES[city.slug]} />
