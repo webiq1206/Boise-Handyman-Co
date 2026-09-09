@@ -1,0 +1,40 @@
+name: Address autocomplete focus regression
+on:
+  push:
+    branches: [codex/p5-address-focus]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.60.0-noble
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - run: npm ci --no-audit --no-fund
+      - name: Add temporary interaction fixture
+        run: |
+          mkdir -p app/p5-address-fixture
+          cat > app/p5-address-fixture/page.tsx <<'FIXTURE'
+          "use client";
+          import {useState} from "react";
+          import {AddressAutocomplete} from "@/components/AddressAutocomplete";
+          export default function Fixture(){const [value,setValue]=useState("");return <main style={{padding:"100px 20px",maxWidth:700}}><AddressAutocomplete value={value} onChange={setValue} onProfileResolved={()=>{}}/><button type="button">Continue</button></main>}
+          FIXTURE
+      - run: npm run build
+      - name: Browser checks
+        run: |
+          npx next start -p 5000 > /tmp/p5-address-server.log 2>&1 &
+          node -e 'let n=0;const t=setInterval(async()=>{try{await fetch("http://127.0.0.1:5000");clearInterval(t)}catch{if(++n>60)process.exit(1)}},1000)'
+          node scripts/p5-address-regression.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: address-focus
+          path: p5-address-results/
+          retention-days: 7
