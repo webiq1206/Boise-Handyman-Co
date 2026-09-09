@@ -85,7 +85,7 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
     name: BUSINESS_INFO.name,
     legalName: BUSINESS_INFO.legalName,
     description: `Handyman service for ${city || 'Boise'} and the Treasure Valley, Idaho. Small repairs, installs, and home maintenance: drywall, painting, minor plumbing and electrical, carpentry, and mounting.`,
-    image: `${baseUrl}/images/handyman/hero-door-repair.webp`,
+    image: `${baseUrl}/images/handyman/hero-door-repair-branded-v2.webp`,
     logo: LOGO_URL,
     '@id': LOCALBUSINESS_ID,
     url: baseUrl,

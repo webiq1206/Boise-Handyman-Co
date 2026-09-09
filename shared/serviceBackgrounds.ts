@@ -7,7 +7,7 @@ export interface ServiceBackgroundConfig {
 /** AI-generated handyman photo library (2026-08). Swap for real job photos when available. */
 const h = (name: string) => `/images/handyman/${name}.webp`;
 
-const DEFAULT_BACKGROUND = h("hero-door-repair");
+const DEFAULT_BACKGROUND = h("hero-door-repair-branded-v2");
 
 /**
  * Hero background per service, keyed by the handyman service slugs in
@@ -18,7 +18,7 @@ export const SERVICE_BACKGROUNDS: ServiceBackgroundConfig = {
   "painting-touch-ups": h("service-painting"),
   "plumbing-repairs": h("service-plumbing"),
   "electrical-repairs": h("service-electrical"),
-  "carpentry-trim-repair": h("service-carpentry-trim"),
+  "carpentry-trim-repair": h("service-carpentry-trim-branded-v2"),
   "mounting-assembly": h("service-mounting"),
   "fence-deck-gutter-repair": h("service-fence-repair"),
   "home-maintenance": h("service-caulking"),
@@ -68,7 +68,7 @@ const SERVICE_IMAGE_SETS: Record<string, LandingImageSet> = {
     process: h("estimate-clipboard"),
   },
   "carpentry-trim-repair": {
-    hero: h("service-carpentry-trim"),
+    hero: h("service-carpentry-trim-branded-v2"),
     breather: h("door-hinge-fix"),
     process: h("toolbag-ready"),
   },
@@ -94,7 +94,7 @@ export function getServiceImageSet(serviceSlug: string): LandingImageSet {
     SERVICE_IMAGE_SETS[serviceSlug] ?? {
       hero: DEFAULT_SERVICE_BACKGROUND,
       breather: h("toolbag-ready"),
-      process: h("consult-doorstep"),
+      process: h("consult-doorstep-branded-v2"),
     }
   );
 }

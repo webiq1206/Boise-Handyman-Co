@@ -1727,7 +1727,7 @@ function ResultView({
       {/* -------- sticky next-step actions: one primary, one scope edit.
           Phones stack them (primary on top) - side by side, the pair is wider
           than a 375px viewport and the primary clips off screen. */}
-      <div className="sticky bottom-0 z-30 -mx-4 mt-8 border-t border-inverse-foreground/15 bg-[hsl(var(--inverse))]/95 px-4 pb-safe pt-3 backdrop-blur-md">
+      <div className="sticky bottom-0 z-30 -mx-4 mt-8 border-t border-inverse-foreground/15 bg-inverse px-4 pb-safe pt-3 shadow-[0_-4px_20px_rgba(0,0,0,0.18)]">
         <div className="mx-auto flex max-w-3xl flex-col-reverse gap-2.5 pb-3 sm:flex-row sm:items-center sm:gap-3">
           <Button
             variant="heroGhost"
