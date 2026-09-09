@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        site: [p5homeco.com, boiseconstruction.co, boiseremodeling.co, boisehandyman.co, boisecabinet.co]
+        site: [boiseconstruction.co]
     steps:
       - uses: actions/checkout@v6
         with:

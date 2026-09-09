@@ -19,7 +19,7 @@ try {
    if(url.pathname==='/api/property/enrich')return route.fulfill({contentType:'application/json',body:'{"profile":null}'});
    if(req.method()==='POST'&&url.pathname.startsWith('/api/')){
     requests.push({path:url.pathname,body:req.postDataJSON()});
-    if(url.pathname==='/api/consultation'||url.pathname==='/api/leads/intake')return route.fulfill({status:success?(parent?201:200):503,contentType:'application/json',body:JSON.stringify(success?{success:true,accepted:true,duplicate:false}:{message:'Audit: service temporarily unavailable',error:'Audit: service temporarily unavailable'})});
+    if(url.pathname==='/api/consultation'||url.pathname==='/api/leads/intake')return route.fulfill({status:success?(parent?201:200):503,contentType:'application/json',body:JSON.stringify(success?{success:true,accepted:true,duplicate:false,inquiryKey:"audit-inquiry",conversionId:"audit-conversion"}:{message:'Audit: service temporarily unavailable',error:'Audit: service temporarily unavailable'})});
     return route.fulfill({status:200,contentType:'application/json',body:'{"success":true}'});
    }
    return route.continue();
