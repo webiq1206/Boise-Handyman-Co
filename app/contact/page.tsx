@@ -219,7 +219,7 @@ export default function ContactPage() {
         <section className="relative min-h-[520px] md:min-h-[72vh] flex items-end overflow-hidden bg-inverse">
           <Image
             src={SITE_IMAGES.hero}
-            alt="Well-kept home interior in Boise, Idaho"
+            alt="Representative repair work: a Boise Handyman Co worker adjusts an interior door hinge"
             fill
             className="object-cover opacity-[0.82] img-brand-grade"
             sizes="100vw"
