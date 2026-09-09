@@ -41,6 +41,14 @@ try{
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
    results.push({width,slug,test:'centered-guide-layout',ok:!overflow&&Math.abs(bounds.x+bounds.width/2-width/2)<2});
   }
+  if(width<1024){
+   await page.goto('http://127.0.0.1:5000/contact',{waitUntil:'networkidle'});
+   await page.getByTestId('input-name').first().scrollIntoViewIfNeeded();await page.waitForTimeout(200);
+   const hidden=!(await page.locator('[data-mobile-nav-bar]').isVisible());
+   await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));await page.waitForTimeout(200);
+   const returns=await page.locator('[data-mobile-nav-bar]').isVisible();
+   results.push({width,test:'mobile-bar-form-clearance',ok:hidden&&returns});
+  }
   await page.close();
  }
 }finally{await browser.close();await fs.writeFile('p5-address-results/results.json',JSON.stringify(results,null,2));}
