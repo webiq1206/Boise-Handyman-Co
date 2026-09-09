@@ -1,0 +1,35 @@
+name: P5 full route responsive audit
+on:
+  push:
+    branches: [codex/p5-route-audit]
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.60.0-noble
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        site: [p5homeco.com, boiseconstruction.co, boiseremodeling.co, boisehandyman.co, boisecabinet.co]
+        width: [1920, 1440, 1024, 768, 430, 390, 320]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node scripts/p5-route-audit.mjs
+        env:
+          AUDIT_SITE: ${{ matrix.site }}
+          AUDIT_WIDTH: ${{ matrix.width }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: p5-${{ matrix.site }}-${{ matrix.width }}
+          path: p5-route-results/
+          retention-days: 7
