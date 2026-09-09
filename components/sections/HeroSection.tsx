@@ -36,7 +36,7 @@ export function HeroSection() {
       <section className="relative min-h-[85vh] md:min-h-screen flex items-center overflow-hidden bg-inverse">
         <Image
           src={SITE_IMAGES.hero}
-          alt="Bright, well-kept living space in a Treasure Valley, Idaho home"
+          alt="Representative service image: a handyman wearing Boise Handyman Co workwear adjusts an interior door hinge"
           fill
           priority
           sizes="(max-width: 768px) 100vw, 1400px"

@@ -8,7 +8,7 @@
 
 export const SITE_IMAGES = {
   /** Homepage hero: a handyman adjusting a sticking interior door in a bright home. */
-  hero: "/images/handyman/hero-door-repair.webp",
+  hero: "/images/handyman/hero-door-hinge-branded.webp",
   /** "How we work" split panels: a written quote on a clipboard with a tape measure. */
   process: "/images/handyman/estimate-clipboard.webp",
   /** "Where your money goes" value band: careful trim carpentry up close. */
@@ -42,7 +42,7 @@ export const CONSTRUCTION_IMAGES = {
   foundation: h("service-fence-repair"),
   roughIn: h("service-plumbing"),
   insulation: h("weatherstripping"),
-  interior: h("hero-door-repair"),
+  interior: h("hero-door-hinge-branded"),
   kitchen: h("cabinet-hardware-upgrade"),
   lot: h("deck-board-replacement"),
   foothills: h("winterize-spigot"),
