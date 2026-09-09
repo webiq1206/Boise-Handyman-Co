@@ -1,0 +1,32 @@
+name: P5 live form and navigation checks
+on:
+  push:
+    branches: [codex/p5-catalog-search]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.60.0-noble
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        site: [boisecabinet.co]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node scripts/p5-catalog-search.mjs
+        env:
+          AUDIT_SITE: ${{ matrix.site }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: interactions-${{ matrix.site }}
+          path: p5-interactions/
+          retention-days: 7
