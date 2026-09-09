@@ -16,9 +16,9 @@ for(const width of [320,390,430,768,1024,1440,1920]){
   
   const search=page.getByPlaceholder('Search the catalog (e.g. shaker, walnut, hardware)…');
   await search.press('Enter');
-  const found=page.getByText(/^Found on page \\d+$/).filter({visible:true});
+  const found=page.getByText(/^Found on page [0-9]+$/).filter({visible:true});
   await found.waitFor({timeout:90000});
-  const matched=Number((await found.innerText()).match(/\\d+/)[0]);
+  const matched=Number((await found.innerText()).match(/[0-9]+/)[0]);
   await page.waitForTimeout(500);
   const landed=Number(await input.inputValue());
   if(Math.abs(matched-landed)>1)throw new Error('Search did not navigate to matching page');
