@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        site: [boiseconstruction.co]
+        site: [boisecabinet.co]
     steps:
       - uses: actions/checkout@v6
         with:
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node scripts/p5-live-interactions.mjs
+      - run: node scripts/p5-catalog-interactions.mjs
         env:
           AUDIT_SITE: ${{ matrix.site }}
       - uses: actions/upload-artifact@v4
