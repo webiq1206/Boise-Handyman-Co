@@ -1,7 +1,7 @@
 name: P5 final linked-page and visible-image verification
 on:
   push:
-    branches: [codex/p5-final-triage]
+    branches: [codex/p5-cabinet-triage]
 permissions:
   contents: read
 jobs:
