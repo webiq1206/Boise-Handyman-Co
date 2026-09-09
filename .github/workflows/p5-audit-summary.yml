@@ -1,0 +1,46 @@
+name: Summarize P5 route audit
+on:
+  push:
+    branches: [codex/p5-audit-summary]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 34357605727
+          path: captures
+      - name: Analyze captures
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, collections
+          report={'sites':{},'issues':[],'unloadedImages':0,'brokenImages':[]}
+          for f in Path('captures').rglob('results.json'):
+            rows=json.loads(f.read_text())
+            for x in rows:
+              from urllib.parse import urlparse
+              site=urlparse(x['url']).netloc
+              info=report['sites'].setdefault(site,{'captures':0,'widths':set(),'urls':set()})
+              info['captures']+=1;info['widths'].add(x['width']);info['urls'].add(x['url'])
+              d=x.get('dom',{})
+              if x.get('error') or x.get('errors') or x.get('requestFailures') or x.get('status',200)>=400 or d.get('scrollWidth',0)>d.get('width',0)+1:
+                report['issues'].append({k:x.get(k) for k in ['url','width','error','errors','requestFailures','status']}|{'scrollWidth':d.get('scrollWidth'),'overflow':d.get('overflow',[])})
+              for i in d.get('images',[]):
+                if not i.get('complete'):report['unloadedImages']+=1
+                elif not i.get('width'):report['brokenImages'].append({'url':x['url'],'width':x['width'],**i})
+          for site,info in report['sites'].items():
+            info['pages']=len(info.pop('urls'));info['widths']=sorted(info['widths'])
+          Path('audit-summary.json').write_text(json.dumps(report,indent=2))
+          print(json.dumps({**report,'issues':len(report['issues']),'brokenImages':len(report['brokenImages'])},indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: p5-audit-summary
+          path: audit-summary.json
+          retention-days: 7
