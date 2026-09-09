@@ -41,6 +41,16 @@ try{
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
    results.push({width,slug,test:'centered-guide-layout',ok:!overflow&&Math.abs(bounds.x+bounds.width/2-width/2)<2});
   }
+  await page.goto('http://127.0.0.1:5000/estimate',{waitUntil:'networkidle'});
+  const cards=page.locator('[data-testid^="job-card-"]');
+  await cards.last().scrollIntoViewIfNeeded();
+  const labelGeometry=await cards.evaluateAll(cards=>cards.map(c=>({width:c.clientWidth,scroll:c.scrollWidth})));
+  await cards.first().click();
+  const next=page.getByRole('button',{name:'Continue',exact:true});
+  results.push({width,test:'estimate-job-choice',ok:await next.isEnabled()&&labelGeometry.every(c=>c.scroll<=c.width+1)});
+  await page.screenshot({path:`p5-address-results/estimate-${width}.png`});
+  await next.click();
+  results.push({width,test:'estimate-next-step',ok:!(await page.getByTestId('step-job').isVisible())});
   if(width<1024){
    await page.goto('http://127.0.0.1:5000/contact',{waitUntil:'networkidle'});
    await page.getByTestId('input-name').first().scrollIntoViewIfNeeded();await page.waitForTimeout(200);

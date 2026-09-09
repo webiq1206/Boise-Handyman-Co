@@ -376,7 +376,7 @@ export function EstimateCalculator({
       data-testid="step-job"
     >
       <div
-        className={fitViewport ? "ed-grid-balance grid grid-cols-2 gap-2" : "ed-grid-balance grid grid-cols-1 gap-2.5 sm:grid-cols-2"}
+        className={fitViewport ? "ed-grid-balance grid grid-cols-1 gap-2 min-[480px]:grid-cols-2" : "ed-grid-balance grid grid-cols-1 gap-2.5 sm:grid-cols-2"}
         role="radiogroup"
         aria-label="Type of job"
       >
