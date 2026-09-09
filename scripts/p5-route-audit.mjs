@@ -6,7 +6,7 @@ const site = process.env.AUDIT_SITE;
 const width = Number(process.env.AUDIT_WIDTH);
 let urls = JSON.parse(await readFile('scripts/p5-audit-routes.json', 'utf8'))[site];
 // Include public entry pages not present in the marketing sitemap.
-if (site === 'p5homeco.com') urls = [...new Set([...urls, ...['/quote','/quote/handyman','/quote/re10','/quote/cabinets','/quote/remodeling','/quote/construction','/quote/adu'].map(p => `https://${site}${p}`)])];
+if (site === 'p5homeco.com') urls = [...new Set([...urls, ...['/quote','/quote/handyman','/quote/kitchen-remodel','/quote/bathroom-remodel','/quote/custom-cabinets','/quote/custom-home','/quote/home-addition','/quote/adu'].map(p => `https://${site}${p}`)])];
 if (!urls || !Number.isFinite(width)) throw new Error('AUDIT_SITE and AUDIT_WIDTH are required');
 // Wait for the expected publication before collecting evidence.
 const marker = {'boisehandyman.co':'hero-door-hinge-branded','boiseconstruction.co':'framing-in-progress-branded','boisecabinet.co':'hero-about-branded','boiseremodeling.co':'Design inspiration'}[site];
@@ -48,7 +48,12 @@ try {
         await page.evaluate(y => window.scrollTo({ top: y, behavior: 'instant' }), y);
         await page.waitForTimeout(60);
       }
-      await page.waitForTimeout(650);
+      await page.evaluate(async () => {
+        const images = [...document.images].filter(i => i.getClientRects().length);
+        images.forEach(i => { i.loading = 'eager'; });
+        await Promise.race([Promise.allSettled(images.map(i => i.decode())), new Promise(r => setTimeout(r, 15000))]);
+      });
+      await page.waitForTimeout(200);
       const sliders = page.getByRole('slider');
       for (let i = 0; i < await sliders.count(); i++) {
         const slider = sliders.nth(i);

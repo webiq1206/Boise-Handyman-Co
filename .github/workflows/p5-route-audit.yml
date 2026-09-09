@@ -1,7 +1,6 @@
 name: P5 full route responsive audit
 on:
-  push:
-    branches: [codex/p5-route-audit]
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
