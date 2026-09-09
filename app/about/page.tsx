@@ -109,7 +109,7 @@ export default function AboutPage() {
         <section className="relative min-h-[540px] md:min-h-[78vh] flex items-end overflow-hidden bg-inverse">
           <Image
             src={SITE_IMAGES.leadership}
-            alt={`${SITE_CONFIG.name} team at work on a Treasure Valley home repair`}
+            alt="Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner"
             fill
             className="object-cover opacity-[0.82] img-brand-grade"
             sizes="100vw"

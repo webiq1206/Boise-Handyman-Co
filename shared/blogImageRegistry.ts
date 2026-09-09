@@ -96,7 +96,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'handyman-red-flags': {
-    hero: '/images/handyman/consult-doorstep.webp',
+    hero: '/images/handyman/consult-doorstep-branded.webp',
     alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
     topicTags: ["hiring a handyman","boise","quotes","home repairs","costs"],
     source: 'handyman',
@@ -168,7 +168,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'questions-to-ask-a-handyman': {
-    hero: '/images/handyman/consult-doorstep.webp',
+    hero: '/images/handyman/consult-doorstep-branded.webp',
     alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
     topicTags: ["hiring a handyman","boise","handyman costs","home repair","costs"],
     source: 'handyman',
@@ -204,7 +204,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'what-to-expect-first-handyman-visit': {
-    hero: '/images/handyman/consult-doorstep.webp',
+    hero: '/images/handyman/consult-doorstep-branded.webp',
     alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
     topicTags: ["hiring a handyman","boise","home repairs","quotes","costs"],
     source: 'handyman',
@@ -240,7 +240,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'hire-a-handyman-treasure-valley': {
-    hero: '/images/handyman/consult-doorstep.webp',
+    hero: '/images/handyman/consult-doorstep-branded.webp',
     alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
     topicTags: ["hiring","handyman","vetting","quotes","boise"],
     source: 'handyman',

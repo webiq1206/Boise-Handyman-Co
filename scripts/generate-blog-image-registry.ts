@@ -53,7 +53,7 @@ const LIBRARY = {
     alt: 'Hands replacing a white electrical outlet with a screwdriver, faceplate and voltage tester nearby',
   },
   carpentry: {
-    src: img('service-carpentry-trim'),
+    src: img('service-carpentry-trim-branded'),
     alt: 'Carpenter fitting a new piece of white baseboard trim along a wood floor in a modern home',
   },
   mounting: {
@@ -69,7 +69,7 @@ const LIBRARY = {
     alt: 'Caulk gun applying a clean white silicone bead where a bathtub meets white subway tile',
   },
   consult: {
-    src: img('consult-doorstep'),
+    src: img('consult-doorstep-branded'),
     alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
   },
   toolbag: {

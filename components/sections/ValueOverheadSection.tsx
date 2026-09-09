@@ -71,7 +71,7 @@ export function ValueOverheadSection() {
                 <Image
                   src={SITE_IMAGES.valueCraft}
                   loading="lazy"
-                  alt="Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home"
+                  alt="Representative service image: a Boise Handyman Co worker fits white baseboard trim"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover img-brand-grade"

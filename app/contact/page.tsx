@@ -367,7 +367,7 @@ export default function ContactPage() {
             <div className="relative min-h-[260px] md:min-h-[520px] overflow-hidden bg-inverse order-2 md:order-1">
               <Image
                 src={SITE_IMAGES.leadership}
-                alt={`${SITE_CONFIG.name} team at work on a home repair`}
+                alt="Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover img-brand-grade"

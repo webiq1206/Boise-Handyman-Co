@@ -12,13 +12,13 @@ export const SITE_IMAGES = {
   /** "How we work" split panels: a written quote on a clipboard with a tape measure. */
   process: "/images/handyman/estimate-clipboard.webp",
   /** "Where your money goes" value band: careful trim carpentry up close. */
-  valueCraft: "/images/handyman/service-carpentry-trim.webp",
+  valueCraft: "/images/handyman/service-carpentry-trim-branded.webp",
   /** Process sections: a tidy tool bag staged on a drop cloth for a repair visit. */
   processInProgress: "/images/handyman/toolbag-ready.webp",
   /** Full-bleed brand statement band: crisp cut-in paint lines on trim. */
   statementBand: "/images/handyman/service-painting.webp",
   /** About/contact split panels and about hero: a doorstep walkthrough with a homeowner. */
-  leadership: "/images/handyman/consult-doorstep.webp",
+  leadership: "/images/handyman/consult-doorstep-branded.webp",
   /** Consultation section background (homepage): a freshly repainted front door. */
   consultBg: "/images/handyman/front-door-repaint.webp",
   /** Pricing section subtle texture: new cabinet hardware going on. */
@@ -49,7 +49,7 @@ export const CONSTRUCTION_IMAGES = {
   ruralSite: h("service-fence-repair"),
   plans: h("estimate-clipboard"),
   budget: h("repair-materials"),
-  meeting: h("consult-doorstep"),
+  meeting: h("consult-doorstep-branded"),
   outdoor: h("deck-board-replacement"),
   shopHome: h("toolbag-ready"),
 } as const;
