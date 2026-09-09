@@ -28,5 +28,20 @@ try{
   }catch(e){results.push({width,ok:false,error:String(e)});}
   await page.close();
  }
+ for(const width of [320,390,430,768,1024,1440,1920]){
+  const page=await browser.newPage({viewport:{width,height:900}});
+  for(const slug of ['drywall-repair','carpentry-trim-repair/boise']){
+   await page.goto('http://127.0.0.1:5000/services/'+slug,{waitUntil:'networkidle'});
+   for(let y=0;y<await page.evaluate(()=>document.body.scrollHeight);y+=700){await page.evaluate(y=>window.scrollTo(0,y),y);await page.waitForTimeout(80);}
+   await page.evaluate(()=>window.scrollTo(0,0));await page.waitForTimeout(250);
+   const aside=page.getByRole('complementary',{name:'In this guide'});
+   const section=aside.locator('..');
+   await section.screenshot({path:`p5-address-results/layout-${width}-${slug.replaceAll('/','_')}.png`});
+   const bounds=await section.boundingBox();
+   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
+   results.push({width,slug,test:'centered-guide-layout',ok:!overflow&&Math.abs(bounds.x+bounds.width/2-width/2)<2});
+  }
+  await page.close();
+ }
 }finally{await browser.close();await fs.writeFile('p5-address-results/results.json',JSON.stringify(results,null,2));}
 console.log(JSON.stringify(results));if(results.some(x=>!x.ok))process.exitCode=1;
