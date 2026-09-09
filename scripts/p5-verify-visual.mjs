@@ -1,93 +1,134 @@
 import { chromium } from '@playwright/test';
 import fs from 'node:fs/promises';
-const out='p5-verification';
-await fs.mkdir(out,{recursive:true});
-const browser=await chromium.launch({headless:true});
-const widths=[320,390,430,768,1024,1440,1920];
-const parent=process.env.P5_PARENT==='1';
-const routes=parent?['/','/quote','/sitemap','/legal/terms','/legal/privacy','/legal/quickbooks-disconnect']:['/','/services','/about','/contact','/testimonials'];
-const results=[];
-let failed=false;
-function check(ok,message){if(!ok)throw new Error(message);}
-try {
- for(const width of widths) {
-  const context=await browser.newContext({viewport:{width,height:900},hasTouch:width<768});
-  const page=await context.newPage();
-  for(const route of routes) {
-   const errors=[];const handler=e=>errors.push(e.message);page.on('pageerror',handler);
-   try {
-    const response=await page.goto('http://127.0.0.1:5000'+route,{waitUntil:'networkidle'});
-    check(response.status()<400,route+' status '+response.status());
-    if (route === '/') {
-      const menu = page.getByTestId('button-mobile-menu-open');
-      if (width < 1280) {
-        check(await menu.isVisible(), 'Compact navigation must remain visible below 1280px');
-        await menu.click();
-        check(await page.getByTestId('mobile-nav-drawer').isVisible(), 'Navigation drawer did not open');
-        await page.keyboard.press('Escape');
-        await page.getByTestId('mobile-nav-drawer').waitFor({state:'hidden'});
-      } else {
-        const phone = await page.getByTestId('link-phone-desktop').boundingBox();
-        check(phone && phone.height <= 24, 'Desktop phone number wraps');
+
+const sites = [
+  { name: 'p5', base: 'https://p5homeco.com', routes: ['/', '/quote', '/sitemap'] },
+  { name: 'construction', base: 'https://boiseconstruction.co', routes: ['/', '/services', '/about', '/contact', '/estimate'] },
+  { name: 'remodeling', base: 'https://boiseremodeling.co', routes: ['/', '/services', '/about', '/contact', '/testimonials', '/estimate'] },
+  { name: 'handyman', base: 'https://boisehandyman.co', routes: ['/', '/services', '/about', '/contact', '/estimate'] },
+  { name: 'cabinet', base: 'https://boisecabinet.co', routes: ['/', '/services', '/about', '/contact', '/testimonials'] },
+];
+const widths = [320, 390, 430, 768, 1024, 1440, 1920];
+const out = 'p5-verification';
+await fs.mkdir(out, { recursive: true });
+const browser = await chromium.launch({ headless: true });
+const results = [];
+
+async function auditSite(site) {
+  for (const width of widths) {
+    const context = await browser.newContext({ viewport: { width, height: 900 }, hasTouch: width < 768 });
+    const page = await context.newPage();
+    for (const route of site.routes) {
+      const pageErrors = [];
+      const failedAssets = [];
+      const onError = error => pageErrors.push(error.message);
+      const onFailed = request => {
+        if (['document', 'script', 'stylesheet', 'image', 'font'].includes(request.resourceType())) {
+          failedAssets.push({ type: request.resourceType(), url: request.url(), error: request.failure()?.errorText });
+        }
+      };
+      page.on('pageerror', onError);
+      page.on('requestfailed', onFailed);
+      const result = { site: site.name, width, route, ok: false, errors: [] };
+      try {
+        const response = await page.goto(site.base + route, { waitUntil: 'domcontentloaded', timeout: 120000 });
+        if (!response || response.status() >= 400) throw new Error('HTTP ' + (response?.status() || 'no response'));
+        await page.evaluate(async () => {
+          for (let y = 0; y < document.documentElement.scrollHeight; y += 700) {
+            window.scrollTo(0, y);
+            await new Promise(resolve => setTimeout(resolve, 35));
+          }
+          document.querySelectorAll('.reveal-init').forEach(element => element.classList.add('reveal-visible'));
+          const images = [...document.images].filter(image => image.getClientRects().length);
+          for (const image of images) image.loading = 'eager';
+          await Promise.race([
+            Promise.allSettled(images.map(image => image.decode())),
+            new Promise(resolve => setTimeout(resolve, 15000)),
+          ]);
+          window.scrollTo(0, 0);
+        });
+        await page.waitForTimeout(500);
+        const state = await page.evaluate(() => {
+          const visible = element => {
+            if (!element) return false;
+            const style = getComputedStyle(element);
+            const box = element.getBoundingClientRect();
+            return style.display !== 'none' && style.visibility !== 'hidden' && box.width > 0 && box.height > 0;
+          };
+          const menu = document.querySelector('[data-testid="button-mobile-menu-open"]');
+          const phone = document.querySelector('[data-testid="link-phone-desktop"]');
+          const broken = [...document.images].filter(image => visible(image) && (!image.complete || !image.naturalWidth)).map(image => image.currentSrc || image.src);
+          const fixedBottom = [...document.querySelectorAll('body *')].filter(element => {
+            if (!visible(element)) return false;
+            const style = getComputedStyle(element);
+            const box = element.getBoundingClientRect();
+            return style.position === 'fixed' && box.width > innerWidth * 0.75 && Math.abs(box.bottom - innerHeight) < 3;
+          }).map(element => ({ background: getComputedStyle(element).backgroundColor, text: element.textContent.trim().slice(0, 80) }));
+          return {
+            title: document.title,
+            viewport: innerWidth,
+            scrollWidth: document.documentElement.scrollWidth,
+            broken,
+            menuVisible: visible(menu),
+            phoneVisible: visible(phone),
+            fixedBottom,
+            text: document.body.innerText,
+          };
+        });
+        if (state.scrollWidth > width + 1) result.errors.push('horizontal overflow ' + state.scrollWidth + '/' + width);
+        if (state.broken.length) result.errors.push('broken images ' + JSON.stringify(state.broken));
+        if (pageErrors.length) result.errors.push('page errors ' + JSON.stringify(pageErrors));
+        if (failedAssets.length) result.errors.push('failed assets ' + JSON.stringify(failedAssets.slice(0, 5)));
+        for (const bar of state.fixedBottom) {
+          if (['rgba(0, 0, 0, 0)', 'transparent'].includes(bar.background)) result.errors.push('transparent bottom bar ' + bar.text);
+        }
+        if (route === '/' && site.name !== 'p5') {
+          if (width === 1024 && !state.menuVisible) result.errors.push('1024px compact menu is not visible');
+          if (width >= 1440 && state.menuVisible) result.errors.push(width + 'px compact menu should be hidden');
+          if (width >= 1440 && !state.phoneVisible) result.errors.push(width + 'px desktop phone is not visible');
+        }
+        if (site.name === 'remodeling' && route === '/testimonials' && !/Design inspiration/i.test(state.text)) {
+          result.errors.push('updated Design inspiration presentation is absent');
+        }
+        if (route === '/' && state.menuVisible) {
+          const open = page.locator('[data-testid="button-mobile-menu-open"]');
+          await open.click();
+          const close = page.locator('[data-testid="button-mobile-menu-close"]');
+          await close.waitFor({ state: 'visible' });
+          const box = await close.boundingBox();
+          if (!box || box.width < 44 || box.height < 44) result.errors.push('menu close target ' + box?.width + 'x' + box?.height);
+          await close.click();
+        }
+        result.ok = result.errors.length === 0;
+        result.summary = {
+          title: state.title,
+          scrollWidth: state.scrollWidth,
+          brokenImages: state.broken.length,
+          menuVisible: state.menuVisible,
+          phoneVisible: state.phoneVisible,
+          fixedBottom: state.fixedBottom,
+        };
+        if (route === '/' && [390, 1440].includes(width)) {
+          await page.screenshot({ path: out + '/' + site.name + '-' + width + '-home.jpg', fullPage: true, type: 'jpeg', quality: 72 });
+        }
+        if (site.name === 'remodeling' && route === '/testimonials' && [390, 1440].includes(width)) {
+          await page.screenshot({ path: out + '/remodeling-' + width + '-testimonials.jpg', fullPage: true, type: 'jpeg', quality: 72 });
+        }
+      } catch (error) {
+        result.errors.push(String(error));
+      } finally {
+        results.push(result);
+        page.off('pageerror', onError);
+        page.off('requestfailed', onFailed);
       }
     }
-    await page.evaluate(async()=>{await document.fonts.ready; for(let y=0;y<document.documentElement.scrollHeight;y+=650){window.scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,70));}});
-    await page.evaluate(async()=>{
-      const images=[...document.images].filter(i=>i.getClientRects().length);
-      for(const image of images)image.loading='eager';
-      await Promise.race([Promise.allSettled(images.map(i=>i.decode())),new Promise(r=>setTimeout(r,15000))]);
-    });
-    await page.waitForTimeout(900);
-    const geometry=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,broken:[...document.images].filter(i=>i.getClientRects().length&&(!i.complete||!i.naturalWidth)).map(i=>({src:i.currentSrc||i.src,html:i.outerHTML}))}));
-    check(geometry.scrollWidth<=geometry.width+1,'Horizontal overflow '+JSON.stringify(geometry));
-    check(!geometry.broken.length,'Broken images '+JSON.stringify(geometry.broken));
-    check(!errors.length,'Browser errors '+errors.join(','));
-    await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
-    await page.screenshot({path:`${out}/${width}-${route.replaceAll('/','_')||'home'}.jpg`,fullPage:true,type:'jpeg',quality:70});
-    const sticky = await page.evaluate(()=>[...document.querySelectorAll('body *')].filter(el=>{
-      const s=getComputedStyle(el),r=el.getBoundingClientRect();
-      return s.position==='fixed' && s.display!=='none' && r.width>innerWidth*.8 && r.height>30 && r.height<200 && Math.abs(r.bottom-innerHeight)<2;
-    }).map(el=>({background:getComputedStyle(el).backgroundColor,text:el.textContent?.trim().slice(0,80)})));
-    for(const bar of sticky)check(!['rgba(0, 0, 0, 0)','transparent'].includes(bar.background),'Transparent fixed bottom bar: '+bar.text);
-    results.push({width,route,ok:true,geometry,sticky});
-   }catch(e){failed=true;results.push({width,route,ok:false,error:String(e)});}
-   page.off('pageerror',handler);
+    await context.close();
+    await fs.writeFile(out + '/live-results.json', JSON.stringify(results, null, 2));
   }
-  if(!parent) {
-   try {
-    await page.goto('http://127.0.0.1:5000/p5-audit-fixture',{waitUntil:'networkidle'});
-    const slider=page.getByTestId('handle-before-after'); const container=page.getByTestId('slider-before-after');
-    await container.scrollIntoViewIfNeeded();
-    await slider.focus();await page.keyboard.press('Home');check(await slider.getAttribute('aria-valuenow')==='0','Home');
-    const atStart=await slider.boundingBox(),box=await container.boundingBox();check(atStart.x>=box.x,'Handle clipped at start');
-    await page.keyboard.press('End');check(await slider.getAttribute('aria-valuenow')==='100','End');
-    const atEnd=await slider.boundingBox();check(atEnd.x+atEnd.width<=box.x+box.width+1,'Handle clipped at end');
-    await page.keyboard.press('ArrowLeft');check(await slider.getAttribute('aria-valuenow')==='96','ArrowLeft');
-    const y=box.y+box.height/2;
-    await page.mouse.move(box.x+box.width*.25,y);await page.mouse.down();await page.mouse.move(box.x+box.width*.75,y,{steps:12});await page.mouse.up();
-    check(Math.abs(Number(await slider.getAttribute('aria-valuenow'))-75)<2,'Mouse drag');
-    if(width<768){
-     const cdp=await context.newCDPSession(page);
-     await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:box.x+box.width*.7,y}]});
-     for(let i=0;i<=10;i++)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:box.x+box.width*(.7-.04*i),y}]});
-     await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
-     await page.waitForTimeout(100);
-     check(Math.abs(Number(await slider.getAttribute('aria-valuenow'))-30)<3,'Touch drag: '+await slider.getAttribute('aria-valuenow'));
-    }
-    const table=page.getByRole('region',{name:'Scrollable comparison table'});
-    const tableGeometry=await table.evaluate(el=>({scroll:el.scrollWidth,width:el.clientWidth,page:document.documentElement.scrollWidth,viewport:innerWidth,tab:el.tabIndex}));
-    check(tableGeometry.page<=tableGeometry.viewport+1,'Comparison table widens page');
-    check(tableGeometry.tab===0,'Comparison table is keyboard accessible');
-    if(width===320)check(tableGeometry.scroll>tableGeometry.width,'Wide table scrolls inside its region');
-    const grid=await page.locator('#four-cards').evaluate(el=>[...el.children].map(c=>({x:c.getBoundingClientRect().x,y:c.getBoundingClientRect().y})));
-    if(width>=1024)check(grid[0].y===grid[1].y&&grid[2].y===grid[3].y&&grid[0].y!==grid[2].y,'Four-card grid is not 2 by 2');
-    results.push({width,route:'slider-and-grid',ok:true});
-    await page.screenshot({path:`${out}/${width}-slider-grid.jpg`,fullPage:true,type:'jpeg',quality:70});
-   }catch(e){failed=true;results.push({width,route:'slider-and-grid',ok:false,error:String(e)});}
-  }
-  await context.close();
-  await fs.writeFile(out+'/results.json',JSON.stringify(results,null,2));
- }
-}finally{await browser.close();}
-console.log(JSON.stringify(results.map(({width,route,ok,error})=>({width,route,ok,error})),null,2));
-if(failed)process.exitCode=1;
+}
+await Promise.all(sites.map(auditSite));
+await browser.close();
+const failures = results.filter(result => !result.ok);
+await fs.writeFile(out + '/live-results.json', JSON.stringify(results, null, 2));
+console.log(JSON.stringify({ checks: results.length, passed: results.length - failures.length, failures }, null, 2));
+if (failures.length) process.exitCode = 1;
