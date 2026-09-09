@@ -1,0 +1,29 @@
+name: Complete Cabinet 430px route coverage
+on:
+  push:
+    branches: [codex/p5-closeout-cabinet]
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.60.0-noble
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node scripts/p5-route-audit.mjs
+        env:
+          AUDIT_SITE: boisecabinet.co
+          AUDIT_WIDTH: '430'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cabinet-final-six
+          path: p5-route-results/
+          retention-days: 14
