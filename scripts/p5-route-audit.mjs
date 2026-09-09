@@ -4,8 +4,21 @@ import { createHash } from 'node:crypto';
 
 const site = process.env.AUDIT_SITE;
 const width = Number(process.env.AUDIT_WIDTH);
-const urls = JSON.parse(await readFile('scripts/p5-audit-routes.json', 'utf8'))[site];
+let urls = JSON.parse(await readFile('scripts/p5-audit-routes.json', 'utf8'))[site];
+// Include public entry pages not present in the marketing sitemap.
+if (site === 'p5homeco.com') urls = [...new Set([...urls, ...['/quote','/quote/handyman','/quote/re10','/quote/cabinets','/quote/remodeling','/quote/construction','/quote/adu'].map(p => `https://${site}${p}`)])];
 if (!urls || !Number.isFinite(width)) throw new Error('AUDIT_SITE and AUDIT_WIDTH are required');
+// Wait for the expected publication before collecting evidence.
+const marker = {'boisehandyman.co':'hero-door-hinge-branded','boiseconstruction.co':'framing-in-progress-branded','boisecabinet.co':'hero-about-branded','boiseremodeling.co':'Design inspiration'}[site];
+if (marker) {
+ let deployed=false;
+ for(let attempt=0;attempt<60;attempt++) {
+  const html=await fetch('https://'+site+(site==='boisecabinet.co'?'/about':'/')).then(r=>r.text());
+  if(html.toLowerCase().includes(marker.toLowerCase())) {deployed=true;break;}
+  console.log('Waiting for published audit changes: '+site); await new Promise(r=>setTimeout(r,15000));
+ }
+ if(!deployed)throw new Error('Expected publication was not observed; refusing to certify old pages');
+}
 const out = 'p5-route-results';
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch();
@@ -58,9 +71,11 @@ try {
         images: [...document.images].map(i => ({ src: i.currentSrc || i.src, alt: i.alt, width: i.naturalWidth, complete: i.complete })),
         overflow: [...document.querySelectorAll('main *')].filter(e => { const r=e.getBoundingClientRect();const s=getComputedStyle(e);return r.width>0 && s.position!=='absolute' && s.position!=='fixed' && (r.right>innerWidth+2 || r.left < -2); }).slice(0,20).map(e => ({ tag:e.tagName, class:e.className, text:e.textContent.slice(0,100) })),
         hiddenReveals: [...document.querySelectorAll('.reveal-init')].filter(e => getComputedStyle(e).opacity==='0').length,
+        forms: [...document.forms].map(f => ({action:f.action, fields:[...f.querySelectorAll('input,select,textarea')].map(e=>({tag:e.tagName,name:e.name,type:e.type,required:e.required,label:e.labels?.[0]?.textContent?.trim()}))})),
+        buttons: [...document.querySelectorAll('button')].filter(e=>e.getClientRects().length).map(e=>({text:e.textContent.trim(),label:e.getAttribute('aria-label'),type:e.type})),
         links: [...new Set([...document.querySelectorAll('a[href]')].map(a => a.href))],
       }));
-      await page.screenshot({ path: `${out}/${id}.jpg`, type: 'jpeg', quality: 50, fullPage: true });
+      await page.screenshot({ path: `${out}/${id}.jpg`, type: 'jpeg', quality: 70, fullPage: true });
     } catch (error) { result.error = error.message; }
     finally { await context.close(); }
     results.push(result);
