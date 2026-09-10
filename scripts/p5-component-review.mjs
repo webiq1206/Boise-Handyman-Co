@@ -21,6 +21,8 @@ try {
  for(const width of widths){
   const context=await browser.newContext({viewport:{width,height:900},hasTouch:width<=1024});
   await context.route('**/api/**',r=>{
+   // Isolate automatic analytics writes without creating artificial HTTP errors.
+   if(['/api/estimator-session','/api/meta-capi'].includes(new URL(r.request().url()).pathname))return r.fulfill({status:200,contentType:'application/json',body:'{"ok":true,"auditPreview":true}'});
    if(!['GET','HEAD'].includes(r.request().method()))return r.fulfill({status:503,contentType:'application/json',body:'{"error":"Audit preview: submission disabled."}'});
    if(r.request().url().includes('/api/assistant/chat'))return r.fulfill({contentType:'application/json',body:'{"available":true}'});
    return r.continue();
@@ -33,9 +35,13 @@ try {
     await page.evaluate(async()=>{await document.fonts.ready;for(let y=0;y<document.documentElement.scrollHeight;y+=600){window.scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,80));}});
     await page.locator('article details:not([open]) > summary').evaluateAll(es=>es.forEach(e=>e.click()));
     await page.evaluate(async()=>{const is=[...document.images].filter(i=>i.getClientRects().length);is.forEach(i=>i.loading='eager');await Promise.race([Promise.allSettled(is.map(i=>i.decode())),new Promise(r=>setTimeout(r,15000))]);});
+    await page.evaluate(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=750){window.scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,35));}});
     await page.waitForTimeout(700);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Horizontal overflow');
-    assert(await page.evaluate(()=>[...document.images].filter(i=>i.getClientRects().length).every(i=>i.complete&&i.naturalWidth>0)),'Broken image');
+    const missingGradients=await page.evaluate(()=>[...document.querySelectorAll('[class*="bg-gradient-to-"]')].filter(e=>e.getClientRects().length&&getComputedStyle(e).backgroundImage==='none').map(e=>e.className));
+    assert.equal(missingGradients.length,0,'Missing gradient overlays: '+JSON.stringify(missingGradients));
+    const brokenImages=await page.evaluate(()=>[...document.images].filter(i=>i.getClientRects().length&&(!i.complete||!i.naturalWidth)).map(i=>({src:i.currentSrc||i.src,complete:i.complete})));
+    assert.equal(brokenImages.length,0,'Broken images: '+JSON.stringify(brokenImages));
     await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
     await page.screenshot({path:`${out}/${width}-${route.replaceAll('/','_')}.jpg`,fullPage:true,type:'jpeg',quality:72});
     if(route==='/'){
@@ -43,6 +49,7 @@ try {
      if(width<1440){
       await menu.click();const dialog=page.getByRole('dialog').filter({visible:true}).first();await dialog.waitFor();
       const close=dialog.getByRole('button',{name:/close/i}).first();const rect=await close.boundingBox();assert(rect&&rect.width>=44&&rect.height>=44,'Menu close target');
+      await page.waitForTimeout(450);
       await page.screenshot({path:`${out}/${width}-menu.jpg`});
       await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});
       await menu.click();await dialog.waitFor();await page.setViewportSize({width:1440,height:900});await dialog.waitFor({state:'hidden'});
@@ -67,6 +74,9 @@ try {
       assert(!style.background.startsWith('rgba')&&!['transparent',''].includes(style.background),'Sticky CTA must be opaque');
       const boxes=await sticky.locator('a,button').evaluateAll(es=>es.filter(e=>e.getClientRects().length).map(e=>({w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height})));
       assert(boxes.every(b=>b.w>=44&&b.h>=44),'Sticky tap target');
+      const barBox=await sticky.boundingBox();
+      const footerBottom=await page.locator('footer a').evaluateAll(es=>Math.max(...es.filter(e=>e.getClientRects().length).map(e=>e.getBoundingClientRect().bottom)));
+      assert(footerBottom<=barBox.y-8,'Last footer links must clear the sticky CTA');
       rec.sticky=style;
      }
      await page.screenshot({path:`${out}/${width}-footer-cta.jpg`});

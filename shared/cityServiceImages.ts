@@ -1,18 +1,5 @@
-/**
- * Imagery for service pages, service-in-city pages, and area pages.
- *
- * Keys follow the handyman service catalog in shared/contentData.ts. Values
- * point at the AI-generated handyman photo library in public/images/handyman
- * (2026-08); swap for real job photography when it exists.
- *
- * City variants rotate through a per-service shortlist so that no two city
- * pages for the same service open with the same photograph, which keeps the
- * eight variants of a service page from looking like one page printed eight
- * times. The rotation is deterministic, so a given city always gets the same
- * image and the pages are stable between builds.
- *
- * Key format for CITY_SERVICE_IMAGES: "service-slug/city-slug"
- */
+/** Representative service imagery. Reuse within the same service is intentional;
+ * city pages must never substitute an unrelated trade merely for variety. */
 
 import { SITE_IMAGES } from "./siteImages";
 import { type LandingImageSet } from "./serviceBackgrounds";
@@ -34,90 +21,17 @@ const h = (name: string) => `/images/handyman/${name}.webp`;
 /**
  * Per-service rotation. The first entry is the service's primary image and is
  * what the service overview page uses; the rest supply the city variants.
- * Every shortlist is at least as long as it needs to be to avoid repeats
- * within a service.
+ * Shortlists contain only that service; relevant reuse is intentional.
  */
 const SERVICE_ROTATION: Record<string, readonly string[]> = {
-  "drywall-repair": [
-    h("service-drywall-repair"),
-    h("punch-list-markers"),
-    h("service-painting"),
-    h("toolbag-ready"),
-    h("repair-materials"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("hero-door-hinge-branded"),
-  ],
-  "painting-touch-ups": [
-    h("service-painting"),
-    h("front-door-repaint"),
-    h("punch-list-markers"),
-    h("service-drywall-repair"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("hero-door-hinge-branded"),
-  ],
-  "plumbing-repairs": [
-    h("service-plumbing"),
-    h("toilet-repair"),
-    h("service-caulking"),
-    h("repair-materials"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("hero-door-hinge-branded"),
-  ],
-  "electrical-repairs": [
-    h("service-electrical"),
-    h("service-mounting"),
-    h("repair-materials"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("hero-door-hinge-branded"),
-    h("door-hinge-fix"),
-  ],
-  "carpentry-trim-repair": [
-    h("service-carpentry-trim-branded"),
-    h("hero-door-hinge-branded"),
-    h("door-hinge-fix"),
-    h("service-fence-repair"),
-    h("toolbag-ready"),
-    h("repair-materials"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-  ],
-  "mounting-assembly": [
-    h("service-mounting"),
-    h("cabinet-hardware-upgrade"),
-    h("grab-bar-install"),
-    h("repair-materials"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("hero-door-hinge-branded"),
-  ],
-  "fence-deck-gutter-repair": [
-    h("service-fence-repair"),
-    h("deck-board-replacement"),
-    h("hero-gutter-cleaning"),
-    h("winterize-spigot"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("repair-materials"),
-  ],
-  "home-maintenance": [
-    h("service-caulking"),
-    h("weatherstripping"),
-    h("winterize-spigot"),
-    h("punch-list-markers"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("hero-gutter-cleaning"),
-  ],
+  "drywall-repair": [h("service-drywall-repair"), h("punch-list-markers")],
+  "painting-touch-ups": [h("service-painting"), h("front-door-repaint")],
+  "plumbing-repairs": [h("service-plumbing"), h("toilet-repair")],
+  "electrical-repairs": [h("service-electrical")],
+  "carpentry-trim-repair": [h("service-carpentry-trim-branded"), h("hero-door-hinge-branded"), h("door-hinge-fix")],
+  "mounting-assembly": [h("service-mounting"), h("cabinet-hardware-upgrade"), h("grab-bar-install")],
+  "fence-deck-gutter-repair": [h("service-fence-repair"), h("deck-board-replacement"), h("hero-gutter-cleaning")],
+  "home-maintenance": [h("service-caulking"), h("weatherstripping"), h("winterize-spigot"), h("punch-list-markers")],
 };
 
 function buildCityServiceImages(): Record<string, string> {
@@ -164,9 +78,8 @@ export function getCityServiceBackground(
 }
 
 /**
- * Three distinct images for a service-in-city page: the city variant as the
- * hero, a different image from the same service rotation for the breather
- * band, and the service primary for the process panel.
+ * A relevant service hero, a complementary detail, and a quote-planning
+ * image for the process panel. These do not represent one customer project.
  */
 export function getCityServiceImageSet(
   serviceSlug: string,
@@ -185,10 +98,10 @@ export function getCityServiceImageSet(
 
   return {
     hero,
-    // Offset by three rather than one so the two images on a page are visually
-    // unrelated instead of adjacent shots of the same subject.
-    breather: rotation[(cityIndex + 3) % rotation.length],
-    process: rotation[0],
+    breather: rotation.length > 1
+      ? rotation[(cityIndex + 1) % rotation.length]
+      : h("repair-materials"),
+    process: h("estimate-clipboard"),
   };
 }
 

@@ -18,6 +18,8 @@ try {
   const blockedWrites = new Set();
   // Audit reads must never create real inquiries or send messages.
   await context.route('**/api/**',route=>{
+   // Isolate automatic analytics writes without creating artificial HTTP errors.
+   if(['/api/estimator-session','/api/meta-capi'].includes(new URL(route.request().url()).pathname))return route.fulfill({status:200,contentType:'application/json',body:'{"ok":true,"auditPreview":true}'});
    if(!['GET','HEAD'].includes(route.request().method())){blockedWrites.add(route.request().url());return route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'Audit preview: submission is disabled.'})});}
    return route.continue();
   });
@@ -35,6 +37,8 @@ try {
     // Expand all article bodies so hidden lower sections also receive coverage.
     await page.locator('article details:not([open]) > summary').evaluateAll(els=>els.forEach(el=>el.click()));
     await page.evaluate(async()=>{const images=[...document.images].filter(i=>i.getClientRects().length);for(const i of images)i.loading='eager';await Promise.race([Promise.allSettled(images.map(i=>i.decode())),new Promise(r=>setTimeout(r,15000))]);});
+    // Expanding article sections moves lower content. Scroll again to reveal it in the merged build.
+    await page.evaluate(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=750){window.scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,35));}});
     await page.waitForTimeout(250);
     const state=await page.evaluate(()=>({
      width:innerWidth,scrollWidth:document.documentElement.scrollWidth,
