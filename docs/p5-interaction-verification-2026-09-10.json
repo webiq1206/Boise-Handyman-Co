@@ -1,0 +1,5170 @@
+{
+  "route_source_commit": "cd2d80098182be9fa7a2c49fc0aa347e931a8914",
+  "route_workflow_run": 34520563359,
+  "final_product_commit": "d9eb245e027642fa98c114d591bdc4dd34ea23bc",
+  "component_source_commit": "d9eb245e027642fa98c114d591bdc4dd34ea23bc",
+  "component_workflow_run": 34522968053,
+  "links": [
+    {
+      "shard": "links-0",
+      "workflow_run": 34520563359,
+      "checked": 133,
+      "failures": []
+    },
+    {
+      "shard": "links-1",
+      "workflow_run": 34520563359,
+      "checked": 136,
+      "failures": []
+    },
+    {
+      "shard": "links-2",
+      "workflow_run": 34520563359,
+      "checked": 133,
+      "failures": []
+    },
+    {
+      "shard": "links-3",
+      "workflow_run": 34520563359,
+      "checked": 141,
+      "failures": []
+    },
+    {
+      "shard": "links-4",
+      "workflow_run": 34520563359,
+      "checked": 159,
+      "failures": []
+    },
+    {
+      "shard": "links-5",
+      "workflow_run": 34520563359,
+      "checked": 125,
+      "failures": []
+    },
+    {
+      "shard": "links-6",
+      "workflow_run": 34520563359,
+      "checked": 127,
+      "failures": []
+    },
+    {
+      "shard": "links-7",
+      "workflow_run": 34520563359,
+      "checked": 131,
+      "failures": []
+    },
+    {
+      "shard": "links-8",
+      "workflow_run": 34520563359,
+      "checked": 130,
+      "failures": []
+    },
+    {
+      "shard": "links-0",
+      "workflow_run": 34522530177,
+      "checked": 48,
+      "failures": []
+    }
+  ],
+  "components": [
+    {
+      "width": 320,
+      "route": "/",
+      "scrollWidth": 320,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative service image: a handyman wearing Boise Handyman Co workwear adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=384&q=75",
+          "alt": "Representative service image: a Boise Handyman Co worker fits white baseboard trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fcabinet-hardware-upgrade.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=828&q=72",
+          "alt": "Drywall Repair & Patching representative handyman service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=384&q=75",
+          "alt": "Boise Handyman Co repair work in progress at a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 320,
+      "route": "/estimate/scope",
+      "scrollWidth": 320,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 320,
+      "route": "/contact",
+      "scrollWidth": 320,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative repair work: a Boise Handyman Co worker adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=384&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "sticky": {
+        "background": "rgb(29, 32, 31)",
+        "padding": "0px"
+      },
+      "ok": true
+    },
+    {
+      "width": 320,
+      "route": "/about",
+      "scrollWidth": 320,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=384&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=384&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=384&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=384&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=384&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=384&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=384&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=384&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=384&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=384&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 320,
+      "route": "/testimonials",
+      "scrollWidth": 320,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=384&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=384&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=384&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=384&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=384&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=384&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=384&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=384&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=384&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=384&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 320,
+      "route": "/services",
+      "scrollWidth": 320,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=384&q=72",
+          "alt": "Representative drywall repair & patching service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=384&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=384&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=384&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=384&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=384&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=384&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=384&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=384&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=384&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 320,
+      "route": "/services/carpentry-trim-repair",
+      "scrollWidth": 320,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=384&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 320,
+      "route": "/services/carpentry-trim-repair/boise",
+      "scrollWidth": 320,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=384&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 320,
+      "route": "/guides/boise-handyman-guide",
+      "scrollWidth": 320,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 320,
+      "route": "/blog/ada-vs-canyon-county-permit-timelines",
+      "scrollWidth": 320,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fpermit-paperwork.webp&w=640&q=75",
+          "alt": "Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 320,
+      "route": "/services/painting-touch-ups/eagle",
+      "scrollWidth": 320,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=384&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 320,
+      "route": "component-fixture",
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "/",
+      "scrollWidth": 390,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "Representative service image: a handyman wearing Boise Handyman Co workwear adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Representative service image: a Boise Handyman Co worker fits white baseboard trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fcabinet-hardware-upgrade.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=828&q=72",
+          "alt": "Drywall Repair & Patching representative handyman service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "Boise Handyman Co repair work in progress at a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "/estimate/scope",
+      "scrollWidth": 390,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "/contact",
+      "scrollWidth": 390,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative repair work: a Boise Handyman Co worker adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "sticky": {
+        "background": "rgb(29, 32, 31)",
+        "padding": "0px"
+      },
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "/about",
+      "scrollWidth": 390,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "/testimonials",
+      "scrollWidth": 390,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "/services",
+      "scrollWidth": 390,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=640&q=72",
+          "alt": "Representative drywall repair & patching service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "/services/carpentry-trim-repair",
+      "scrollWidth": 390,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "/services/carpentry-trim-repair/boise",
+      "scrollWidth": 390,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "/guides/boise-handyman-guide",
+      "scrollWidth": 390,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "/blog/ada-vs-canyon-county-permit-timelines",
+      "scrollWidth": 390,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fpermit-paperwork.webp&w=640&q=75",
+          "alt": "Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "/services/painting-touch-ups/eagle",
+      "scrollWidth": 390,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 390,
+      "route": "component-fixture",
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "/",
+      "scrollWidth": 430,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "Representative service image: a handyman wearing Boise Handyman Co workwear adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Representative service image: a Boise Handyman Co worker fits white baseboard trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fcabinet-hardware-upgrade.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=828&q=72",
+          "alt": "Drywall Repair & Patching representative handyman service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "Boise Handyman Co repair work in progress at a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "/estimate/scope",
+      "scrollWidth": 430,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "/contact",
+      "scrollWidth": 430,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative repair work: a Boise Handyman Co worker adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "sticky": {
+        "background": "rgb(29, 32, 31)",
+        "padding": "0px"
+      },
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "/about",
+      "scrollWidth": 430,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "/testimonials",
+      "scrollWidth": 430,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "/services",
+      "scrollWidth": 430,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=640&q=72",
+          "alt": "Representative drywall repair & patching service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "/services/carpentry-trim-repair",
+      "scrollWidth": 430,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "/services/carpentry-trim-repair/boise",
+      "scrollWidth": 430,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "/guides/boise-handyman-guide",
+      "scrollWidth": 430,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "/blog/ada-vs-canyon-county-permit-timelines",
+      "scrollWidth": 430,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fpermit-paperwork.webp&w=640&q=75",
+          "alt": "Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "/services/painting-touch-ups/eagle",
+      "scrollWidth": 430,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 430,
+      "route": "component-fixture",
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "/",
+      "scrollWidth": 600,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "Representative service image: a handyman wearing Boise Handyman Co workwear adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Representative service image: a Boise Handyman Co worker fits white baseboard trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fcabinet-hardware-upgrade.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=828&q=72",
+          "alt": "Drywall Repair & Patching representative handyman service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "Boise Handyman Co repair work in progress at a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "/estimate/scope",
+      "scrollWidth": 600,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "/contact",
+      "scrollWidth": 600,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative repair work: a Boise Handyman Co worker adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "sticky": {
+        "background": "rgb(29, 32, 31)",
+        "padding": "0px"
+      },
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "/about",
+      "scrollWidth": 600,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "/testimonials",
+      "scrollWidth": 600,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "/services",
+      "scrollWidth": 600,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=640&q=72",
+          "alt": "Representative drywall repair & patching service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "/services/carpentry-trim-repair",
+      "scrollWidth": 600,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "/services/carpentry-trim-repair/boise",
+      "scrollWidth": 600,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "/guides/boise-handyman-guide",
+      "scrollWidth": 600,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "/blog/ada-vs-canyon-county-permit-timelines",
+      "scrollWidth": 600,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fpermit-paperwork.webp&w=640&q=75",
+          "alt": "Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "/services/painting-touch-ups/eagle",
+      "scrollWidth": 600,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 600,
+      "route": "component-fixture",
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "/",
+      "scrollWidth": 768,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "Representative service image: a handyman wearing Boise Handyman Co workwear adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=828&q=75",
+          "alt": "Representative service image: a Boise Handyman Co worker fits white baseboard trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fcabinet-hardware-upgrade.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=828&q=72",
+          "alt": "Drywall Repair & Patching representative handyman service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=828&q=75",
+          "alt": "Boise Handyman Co repair work in progress at a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "/estimate/scope",
+      "scrollWidth": 768,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "/contact",
+      "scrollWidth": 768,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=828&q=75",
+          "alt": "Representative repair work: a Boise Handyman Co worker adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=828&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "sticky": {
+        "background": "rgb(29, 32, 31)",
+        "padding": "0px"
+      },
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "/about",
+      "scrollWidth": 768,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=828&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=384&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=384&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=384&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=384&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=384&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=384&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=384&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=384&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=384&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "/testimonials",
+      "scrollWidth": 768,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=828&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=384&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=384&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=384&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=384&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=384&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=384&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=384&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=384&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=384&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "/services",
+      "scrollWidth": 768,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=828&q=72",
+          "alt": "Representative drywall repair & patching service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=384&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=384&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=384&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=384&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=384&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=384&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=384&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=384&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=384&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "/services/carpentry-trim-repair",
+      "scrollWidth": 768,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=828&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=828&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=828&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "/services/carpentry-trim-repair/boise",
+      "scrollWidth": 768,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=828&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=828&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=828&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "/guides/boise-handyman-guide",
+      "scrollWidth": 768,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=828&q=75",
+          "alt": "Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "/blog/ada-vs-canyon-county-permit-timelines",
+      "scrollWidth": 768,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fpermit-paperwork.webp&w=828&q=75",
+          "alt": "Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "/services/painting-touch-ups/eagle",
+      "scrollWidth": 768,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 768,
+      "route": "component-fixture",
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "/",
+      "scrollWidth": 1024,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "Representative service image: a handyman wearing Boise Handyman Co workwear adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=1080&q=75",
+          "alt": "Representative service image: a Boise Handyman Co worker fits white baseboard trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fcabinet-hardware-upgrade.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=1080&q=72",
+          "alt": "Drywall Repair & Patching representative handyman service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=1080&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "Boise Handyman Co repair work in progress at a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "/estimate/scope",
+      "scrollWidth": 1024,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "/contact",
+      "scrollWidth": 1024,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1080&q=75",
+          "alt": "Representative repair work: a Boise Handyman Co worker adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=640&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "/about",
+      "scrollWidth": 1024,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=1080&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "/testimonials",
+      "scrollWidth": 1024,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=1080&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "/services",
+      "scrollWidth": 1024,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=1080&q=72",
+          "alt": "Representative drywall repair & patching service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=640&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=640&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=640&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=640&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=640&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=640&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=640&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=640&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=640&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "/services/carpentry-trim-repair",
+      "scrollWidth": 1024,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=1080&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=1080&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "/services/carpentry-trim-repair/boise",
+      "scrollWidth": 1024,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=1080&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1080&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "/guides/boise-handyman-guide",
+      "scrollWidth": 1024,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=1080&q=75",
+          "alt": "Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "/blog/ada-vs-canyon-county-permit-timelines",
+      "scrollWidth": 1024,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fpermit-paperwork.webp&w=1080&q=75",
+          "alt": "Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "/services/painting-touch-ups/eagle",
+      "scrollWidth": 1024,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1024,
+      "route": "component-fixture",
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "/",
+      "scrollWidth": 1366,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "Representative service image: a handyman wearing Boise Handyman Co workwear adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Representative service image: a Boise Handyman Co worker fits white baseboard trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fcabinet-hardware-upgrade.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=828&q=72",
+          "alt": "Drywall Repair & Patching representative handyman service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "Boise Handyman Co repair work in progress at a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "/estimate/scope",
+      "scrollWidth": 1366,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "/contact",
+      "scrollWidth": 1366,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "Representative repair work: a Boise Handyman Co worker adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=828&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "/about",
+      "scrollWidth": 1366,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=1920&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=828&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=828&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=828&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=828&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=828&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=828&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=828&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=828&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=828&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "/testimonials",
+      "scrollWidth": 1366,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=1920&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=828&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=828&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=828&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=828&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=828&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=828&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=828&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=828&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=828&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "/services",
+      "scrollWidth": 1366,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=828&q=72",
+          "alt": "Representative drywall repair & patching service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=828&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=828&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=828&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=828&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=828&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=828&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=828&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=828&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=828&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "/services/carpentry-trim-repair",
+      "scrollWidth": 1366,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "/services/carpentry-trim-repair/boise",
+      "scrollWidth": 1366,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "/guides/boise-handyman-guide",
+      "scrollWidth": 1366,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=1920&q=75",
+          "alt": "Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "/blog/ada-vs-canyon-county-permit-timelines",
+      "scrollWidth": 1366,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fpermit-paperwork.webp&w=1920&q=75",
+          "alt": "Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "/services/painting-touch-ups/eagle",
+      "scrollWidth": 1366,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1366,
+      "route": "component-fixture",
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "/",
+      "scrollWidth": 1440,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "Representative service image: a handyman wearing Boise Handyman Co workwear adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Representative service image: a Boise Handyman Co worker fits white baseboard trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fcabinet-hardware-upgrade.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=828&q=72",
+          "alt": "Drywall Repair & Patching representative handyman service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "Boise Handyman Co repair work in progress at a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "/estimate/scope",
+      "scrollWidth": 1440,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "/contact",
+      "scrollWidth": 1440,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "Representative repair work: a Boise Handyman Co worker adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=828&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "/about",
+      "scrollWidth": 1440,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=1920&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=828&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=828&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=828&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=828&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=828&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=828&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=828&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=828&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=828&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "/testimonials",
+      "scrollWidth": 1440,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=1920&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=640&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=828&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=828&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=828&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=828&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=828&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=828&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=828&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=828&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=828&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "/services",
+      "scrollWidth": 1440,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=828&q=72",
+          "alt": "Representative drywall repair & patching service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=828&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=828&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=828&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=828&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=828&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=828&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=828&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=828&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=828&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "/services/carpentry-trim-repair",
+      "scrollWidth": 1440,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "/services/carpentry-trim-repair/boise",
+      "scrollWidth": 1440,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "/guides/boise-handyman-guide",
+      "scrollWidth": 1440,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=1920&q=75",
+          "alt": "Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "/blog/ada-vs-canyon-county-permit-timelines",
+      "scrollWidth": 1440,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fpermit-paperwork.webp&w=1920&q=75",
+          "alt": "Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "/services/painting-touch-ups/eagle",
+      "scrollWidth": 1440,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=640&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1440,
+      "route": "component-fixture",
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "/",
+      "scrollWidth": 1920,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "Representative service image: a handyman wearing Boise Handyman Co workwear adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=828&q=75",
+          "alt": "Representative service image: a Boise Handyman Co worker fits white baseboard trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fcabinet-hardware-upgrade.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=1080&q=72",
+          "alt": "Drywall Repair & Patching representative handyman service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=828&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=828&q=75",
+          "alt": "Boise Handyman Co repair work in progress at a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "/estimate/scope",
+      "scrollWidth": 1920,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "/contact",
+      "scrollWidth": 1920,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "Representative repair work: a Boise Handyman Co worker adjusts an interior door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=1080&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "/about",
+      "scrollWidth": 1920,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=1920&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=1080&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=828&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=1080&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=1080&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=1080&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=1080&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=1080&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=1080&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=1080&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1080&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=1080&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "/testimonials",
+      "scrollWidth": 1920,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fconsult-doorstep-branded.webp&w=1920&q=75",
+          "alt": "Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=1080&q=75",
+          "alt": "Quoting and planning a home repair task list in the Treasure Valley",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=828&q=75",
+          "alt": "Boise Handyman Co tradesperson doing careful finish work in a Treasure Valley home",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/icon/boise-handyman-co-icon-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=1080&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=1080&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=1080&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=1080&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=1080&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=1080&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=1080&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1080&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=1080&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "/services",
+      "scrollWidth": 1920,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "Representative service image of a Boise Handyman Co worker painting window trim",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-drywall-repair.webp&w=1080&q=72",
+          "alt": "Representative drywall repair & patching service imagery",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=1080&q=75",
+          "alt": "Homes in Boise, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmeridian.webp&w=1080&q=75",
+          "alt": "Homes in Meridian, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Feagle.webp&w=1080&q=75",
+          "alt": "Homes in Eagle, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fnampa.webp&w=1080&q=75",
+          "alt": "Homes in Nampa, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fkuna.webp&w=1080&q=75",
+          "alt": "Homes in Kuna, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fstar.webp&w=1080&q=75",
+          "alt": "Homes in Star, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fmiddleton.webp&w=1080&q=75",
+          "alt": "Homes in Middleton, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1080&q=75",
+          "alt": "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fcaldwell.webp&w=1080&q=75",
+          "alt": "Homes in Caldwell, Idaho served by Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "/services/carpentry-trim-repair",
+      "scrollWidth": 1920,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Ftoolbag-ready.webp&w=828&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "/services/carpentry-trim-repair/boise",
+      "scrollWidth": 1920,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fservice-carpentry-trim-branded.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fhero-door-hinge-branded.webp&w=1920&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fdoor-hinge-fix.webp&w=828&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "/guides/boise-handyman-guide",
+      "scrollWidth": 1920,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fareas%2Fboise.webp&w=1920&q=75",
+          "alt": "Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "/blog/ada-vs-canyon-county-permit-timelines",
+      "scrollWidth": 1920,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Fpermit-paperwork.webp&w=1920&q=75",
+          "alt": "Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "/services/painting-touch-ups/eagle",
+      "scrollWidth": 1920,
+      "images": [
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/service-painting-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/_next/image?url=%2Fimages%2Fhandyman%2Festimate-clipboard.webp&w=828&q=75",
+          "alt": "",
+          "ok": true
+        },
+        {
+          "src": "http://127.0.0.1:5000/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg",
+          "alt": "Boise Handyman Co",
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "width": 1920,
+      "route": "component-fixture",
+      "ok": true
+    }
+  ],
+  "route_workflows": [
+    {
+      "commit": "cd2d80098182be9fa7a2c49fc0aa347e931a8914",
+      "run": 34520563359
+    },
+    {
+      "commit": "6c5a9a22fd8f42af386d2f65a4d37ec15955f459",
+      "run": 34522530177
+    }
+  ],
+  "earlier_failed_checks": [
+    {
+      "width": 390,
+      "route": "/blog/who-supplies-materials-handyman-jobs",
+      "stage": "fonts-and-first-scroll",
+      "ok": false,
+      "error": "Error: fonts-and-first-scroll timed out after 45000ms",
+      "source_commit": "cd2d80098182be9fa7a2c49fc0aa347e931a8914",
+      "workflow_run": 34520563359
+    },
+    {
+      "width": 320,
+      "route": "/services/drywall-repair/caldwell",
+      "stage": "expanded-scroll",
+      "ok": false,
+      "error": "Error: expanded-scroll timed out after 45000ms",
+      "source_commit": "cd2d80098182be9fa7a2c49fc0aa347e931a8914",
+      "workflow_run": 34520563359
+    }
+  ],
+  "browser-results": {
+    "externalServices": "simulated",
+    "results": [
+      {
+        "width": 320,
+        "passed": true,
+        "capturePosition": {
+          "scrollY": 0,
+          "headers": [
+            {
+              "top": 0,
+              "bottom": 61,
+              "position": "fixed"
+            }
+          ],
+          "contentTop": 112
+        },
+        "checks": [
+          "speech API simulation",
+          "typed scope",
+          "upload failure and IndexedDB recovery",
+          "extraction review",
+          "optional location",
+          "long mobile content",
+          "viewport resizing",
+          "back navigation",
+          "contact preservation",
+          "submission restoration",
+          "single submission",
+          "no page errors",
+          "item quantities and unit pricing",
+          "item privacy",
+          "result overflow"
+        ]
+      },
+      {
+        "width": 390,
+        "passed": true,
+        "capturePosition": {
+          "scrollY": 0,
+          "headers": [
+            {
+              "top": 0,
+              "bottom": 61,
+              "position": "fixed"
+            }
+          ],
+          "contentTop": 112
+        },
+        "checks": [
+          "speech API simulation",
+          "typed scope",
+          "upload failure and IndexedDB recovery",
+          "extraction review",
+          "optional location",
+          "long mobile content",
+          "viewport resizing",
+          "back navigation",
+          "contact preservation",
+          "submission restoration",
+          "single submission",
+          "no page errors",
+          "item quantities and unit pricing",
+          "item privacy",
+          "result overflow"
+        ]
+      },
+      {
+        "width": 430,
+        "passed": true,
+        "capturePosition": {
+          "scrollY": 0,
+          "headers": [
+            {
+              "top": 0,
+              "bottom": 61,
+              "position": "fixed"
+            }
+          ],
+          "contentTop": 112
+        },
+        "checks": [
+          "speech API simulation",
+          "typed scope",
+          "upload failure and IndexedDB recovery",
+          "extraction review",
+          "optional location",
+          "long mobile content",
+          "viewport resizing",
+          "back navigation",
+          "contact preservation",
+          "submission restoration",
+          "single submission",
+          "no page errors",
+          "item quantities and unit pricing",
+          "item privacy",
+          "result overflow"
+        ]
+      },
+      {
+        "width": 600,
+        "passed": true,
+        "capturePosition": {
+          "scrollY": 0,
+          "headers": [
+            {
+              "top": 0,
+              "bottom": 61,
+              "position": "fixed"
+            }
+          ],
+          "contentTop": 112
+        },
+        "checks": [
+          "speech API simulation",
+          "typed scope",
+          "upload failure and IndexedDB recovery",
+          "extraction review",
+          "optional location",
+          "long mobile content",
+          "viewport resizing",
+          "back navigation",
+          "contact preservation",
+          "submission restoration",
+          "single submission",
+          "no page errors",
+          "item quantities and unit pricing",
+          "item privacy",
+          "result overflow"
+        ]
+      },
+      {
+        "width": 768,
+        "passed": true,
+        "capturePosition": {
+          "scrollY": 0,
+          "headers": [
+            {
+              "top": 0,
+              "bottom": 61,
+              "position": "fixed"
+            }
+          ],
+          "contentTop": 112
+        },
+        "checks": [
+          "speech API simulation",
+          "typed scope",
+          "upload failure and IndexedDB recovery",
+          "extraction review",
+          "optional location",
+          "long mobile content",
+          "viewport resizing",
+          "back navigation",
+          "contact preservation",
+          "submission restoration",
+          "single submission",
+          "no page errors",
+          "item quantities and unit pricing",
+          "item privacy",
+          "result overflow"
+        ]
+      },
+      {
+        "width": 1024,
+        "passed": true,
+        "capturePosition": {
+          "scrollY": 0,
+          "headers": [
+            {
+              "top": 0,
+              "bottom": 61,
+              "position": "fixed"
+            }
+          ],
+          "contentTop": 112
+        },
+        "checks": [
+          "speech API simulation",
+          "typed scope",
+          "upload failure and IndexedDB recovery",
+          "extraction review",
+          "optional location",
+          "long mobile content",
+          "viewport resizing",
+          "back navigation",
+          "contact preservation",
+          "submission restoration",
+          "single submission",
+          "no page errors",
+          "item quantities and unit pricing",
+          "item privacy",
+          "result overflow"
+        ]
+      },
+      {
+        "width": 1366,
+        "passed": true,
+        "capturePosition": {
+          "scrollY": 0,
+          "headers": [
+            {
+              "top": 0,
+              "bottom": 61,
+              "position": "fixed"
+            }
+          ],
+          "contentTop": 112
+        },
+        "checks": [
+          "speech API simulation",
+          "typed scope",
+          "upload failure and IndexedDB recovery",
+          "extraction review",
+          "optional location",
+          "long mobile content",
+          "viewport resizing",
+          "back navigation",
+          "contact preservation",
+          "submission restoration",
+          "single submission",
+          "no page errors",
+          "item quantities and unit pricing",
+          "item privacy",
+          "result overflow"
+        ]
+      },
+      {
+        "width": 1440,
+        "passed": true,
+        "capturePosition": {
+          "scrollY": 0,
+          "headers": [
+            {
+              "top": 0,
+              "bottom": 61,
+              "position": "fixed"
+            }
+          ],
+          "contentTop": 112
+        },
+        "checks": [
+          "speech API simulation",
+          "typed scope",
+          "upload failure and IndexedDB recovery",
+          "extraction review",
+          "optional location",
+          "long mobile content",
+          "viewport resizing",
+          "back navigation",
+          "contact preservation",
+          "submission restoration",
+          "single submission",
+          "no page errors",
+          "item quantities and unit pricing",
+          "item privacy",
+          "result overflow"
+        ]
+      },
+      {
+        "width": 1920,
+        "passed": true,
+        "capturePosition": {
+          "scrollY": 0,
+          "headers": [
+            {
+              "top": 0,
+              "bottom": 61,
+              "position": "fixed"
+            }
+          ],
+          "contentTop": 112
+        },
+        "checks": [
+          "speech API simulation",
+          "typed scope",
+          "upload failure and IndexedDB recovery",
+          "extraction review",
+          "optional location",
+          "long mobile content",
+          "viewport resizing",
+          "back navigation",
+          "contact preservation",
+          "submission restoration",
+          "single submission",
+          "no page errors",
+          "item quantities and unit pricing",
+          "item privacy",
+          "result overflow"
+        ]
+      }
+    ]
+  },
+  "launcher-results": [
+    {
+      "width": 320,
+      "ok": true,
+      "checks": [
+        "launcher returns below form",
+        "chat opens",
+        "44px close target",
+        "launcher hidden near form"
+      ]
+    },
+    {
+      "width": 390,
+      "ok": true,
+      "checks": [
+        "launcher returns below form",
+        "chat opens",
+        "44px close target",
+        "launcher hidden near form"
+      ]
+    },
+    {
+      "width": 430,
+      "ok": true,
+      "checks": [
+        "launcher returns below form",
+        "chat opens",
+        "44px close target",
+        "launcher hidden near form"
+      ]
+    },
+    {
+      "width": 600,
+      "ok": true,
+      "checks": [
+        "launcher returns below form",
+        "chat opens",
+        "44px close target",
+        "launcher hidden near form"
+      ]
+    },
+    {
+      "width": 768,
+      "ok": true,
+      "checks": [
+        "launcher returns below form",
+        "chat opens",
+        "44px close target",
+        "launcher hidden near form"
+      ]
+    },
+    {
+      "width": 1024,
+      "ok": true,
+      "checks": [
+        "launcher returns below form",
+        "chat opens",
+        "44px close target",
+        "launcher hidden near form"
+      ]
+    },
+    {
+      "width": 1366,
+      "ok": true,
+      "checks": [
+        "launcher returns below form",
+        "chat opens",
+        "44px close target",
+        "launcher hidden near form"
+      ]
+    },
+    {
+      "width": 1440,
+      "ok": true,
+      "checks": [
+        "launcher returns below form",
+        "chat opens",
+        "44px close target",
+        "launcher hidden near form"
+      ]
+    },
+    {
+      "width": 1920,
+      "ok": true,
+      "checks": [
+        "launcher returns below form",
+        "chat opens",
+        "44px close target",
+        "launcher hidden near form"
+      ]
+    }
+  ],
+  "mobile-navigation": [
+    {
+      "width": 320,
+      "route": "/estimate",
+      "passed": true
+    },
+    {
+      "width": 320,
+      "route": "/",
+      "passed": true
+    },
+    {
+      "width": 320,
+      "route": "/re-10-repairs-boise",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/estimate",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/re-10-repairs-boise",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/estimate",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/re-10-repairs-boise",
+      "passed": true
+    },
+    {
+      "width": 1024,
+      "route": "/estimate",
+      "passed": true
+    },
+    {
+      "width": 1024,
+      "route": "/",
+      "passed": true
+    },
+    {
+      "width": 1024,
+      "route": "/re-10-repairs-boise",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/estimate",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/re-10-repairs-boise",
+      "passed": true
+    }
+  ]
+}
