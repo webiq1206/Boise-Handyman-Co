@@ -63,6 +63,10 @@ try {
      await page.locator('.ed-panel-media').first().scrollIntoViewIfNeeded();await page.waitForTimeout(400);
      await page.screenshot({path:`${out}/${width}-painting-panel.jpg`});
     }
+    if(route.startsWith('/guides/')){
+     const related=page.getByRole('heading',{name:'Related resources',exact:true});
+     if(await related.count()){await related.scrollIntoViewIfNeeded();await page.waitForTimeout(350);await page.screenshot({path:`${out}/${width}-related-resources.jpg`});}
+    }
     if(route==='/contact'){
      const form=page.getByTestId('input-name').filter({visible:true}).first();
      await form.scrollIntoViewIfNeeded();await form.focus();await page.waitForTimeout(400);
