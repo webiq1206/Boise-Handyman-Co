@@ -21,6 +21,8 @@ try {
  for(const width of widths){
   const context=await browser.newContext({viewport:{width,height:900},hasTouch:width<=1024});
   await context.route('**/api/**',r=>{
+   // Isolate automatic analytics writes without creating artificial HTTP errors.
+   if(['/api/estimator-session','/api/meta-capi'].includes(new URL(r.request().url()).pathname))return r.fulfill({status:200,contentType:'application/json',body:'{"ok":true,"auditPreview":true}'});
    if(!['GET','HEAD'].includes(r.request().method()))return r.fulfill({status:503,contentType:'application/json',body:'{"error":"Audit preview: submission disabled."}'});
    if(r.request().url().includes('/api/assistant/chat'))return r.fulfill({contentType:'application/json',body:'{"available":true}'});
    return r.continue();
@@ -35,7 +37,8 @@ try {
     await page.evaluate(async()=>{const is=[...document.images].filter(i=>i.getClientRects().length);is.forEach(i=>i.loading='eager');await Promise.race([Promise.allSettled(is.map(i=>i.decode())),new Promise(r=>setTimeout(r,15000))]);});
     await page.waitForTimeout(700);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Horizontal overflow');
-    assert(await page.evaluate(()=>[...document.images].filter(i=>i.getClientRects().length).every(i=>i.complete&&i.naturalWidth>0)),'Broken image');
+    const brokenImages=await page.evaluate(()=>[...document.images].filter(i=>i.getClientRects().length&&(!i.complete||!i.naturalWidth)).map(i=>({src:i.currentSrc||i.src,complete:i.complete})));
+    assert.equal(brokenImages.length,0,'Broken images: '+JSON.stringify(brokenImages));
     await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
     await page.screenshot({path:`${out}/${width}-${route.replaceAll('/','_')}.jpg`,fullPage:true,type:'jpeg',quality:72});
     if(route==='/'){
