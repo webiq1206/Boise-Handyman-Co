@@ -4,31 +4,8 @@ import { Button } from "@/components/ui/button";
 import { HERO_EYEBROW, HERO_SUBHEAD, HERO_STATS, TRUST_ITEMS } from "@/shared/siteContent";
 import { SITE_IMAGES } from "@/shared/siteImages";
 import { CTA_PRIMARY, CTA_SECONDARY } from "@/shared/ctaCopy";
-import { DisplayNum } from "@/components/marketing";
-import { GRAIN_URL } from "@/lib/grain";
 
-function StatCard({ num, label }: { num: string; label: string }) {
-  return (
-    /* A DARK translucent panel, not a light one. These cards carry light text,
-       and they sit on the right of the hero where the horizontal scrim is at
-       its weakest, directly over the brightest part of the kitchen photo. A 10%
-       WHITE fill lightened that background further and pushed the small
-       uppercase labels close to invisible. Tinting with the dark inverse colour
-       instead gives the light text something to sit on wherever the photo
-       happens to be bright. */
-    <div className="px-3 py-3 md:px-6 md:py-5 rounded-sm bg-inverse/55 border border-inverse-foreground/20 backdrop-blur-md">
-      <DisplayNum className="text-inverse-foreground text-lg md:text-3xl leading-none">
-        {num}
-      </DisplayNum>
-      {/* Was text-inverse-muted. At 10-11px over the photo that measured 3.4:1,
-          already under the 4.5:1 AA needs before the scrim above it was
-          lightened, which would have taken it lower still. */}
-      <div className="mt-1 md:mt-1.5 text-caption tracking-[0.06em] md:tracking-[0.1em] uppercase text-inverse-foreground/85 leading-snug">
-        {label}
-      </div>
-    </div>
-  );
-}
+import { GRAIN_URL } from "@/lib/grain";
 
 export function HeroSection() {
   return (
@@ -59,11 +36,11 @@ export function HeroSection() {
         <div className="absolute inset-x-0 bottom-0 h-32 pointer-events-none bg-gradient-to-t from-background via-background/50 to-transparent" />
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", opacity: 0.13 }}
+          style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", opacity: 0.025 }}
         />
 
         <div className="relative z-10 container px-4 md:px-8 py-20 md:py-32 pb-16 md:pb-28">
-          <div className="grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-16 items-center">
+          <div className="ed-hero-copy">
             <Reveal>
               {/* Not text-inverse-muted: at 11px over the photo it measured
                   3.15:1, under the 4.5:1 AA needs, and lightening the scrim
@@ -76,7 +53,7 @@ export function HeroSection() {
               {/* Display scale from the family layer: up to 92px, tight leading,
                   negative tracking. The hero heading is the one line the whole
                   site is judged on in the first second. */}
-              <h1 className="ed-display text-inverse-foreground mb-8 max-w-[14ch]">
+              <h1 className="ed-display text-inverse-foreground mb-8 max-w-[17ch]">
                 Boise home repairs,{" "}
                 <em className="not-italic" style={{ color: "var(--ed-accent)" }}>
                   fixed right in one trip
@@ -105,27 +82,15 @@ export function HeroSection() {
                 </Button>
               </div>
 
-              {/* Phones: one translucent strip with three hairline-divided
-                  cells, not three boxes wrapping their labels onto three lines. */}
-              <div className="grid grid-cols-3 divide-x divide-inverse-foreground/15 rounded-sm bg-inverse/55 border border-inverse-foreground/20 backdrop-blur-md md:hidden">
+              <dl className="ed-hero-facts">
                 {HERO_STATS.map((stat) => (
-                  <div key={stat.num} className="px-2 py-3 text-center">
-                    <DisplayNum className="text-inverse-foreground text-lg leading-none">{stat.num}</DisplayNum>
-                    <div className="mt-1.5 text-[0.625rem] leading-tight tracking-[0.08em] uppercase text-inverse-foreground/85">
-                      {stat.label}
-                    </div>
+                  <div key={stat.num} className="flex flex-col">
+                    <dt className="order-2">{stat.label}</dt>
+                    <dd className="order-1">{stat.num}</dd>
                   </div>
                 ))}
-              </div>
+              </dl>
             </Reveal>
-
-            <div className="hidden md:flex flex-col gap-3">
-              {HERO_STATS.map((stat, i) => (
-                <Reveal key={stat.num} delay={i * 90}>
-                  <StatCard num={stat.num} label={stat.label} />
-                </Reveal>
-              ))}
-            </div>
           </div>
         </div>
       </section>

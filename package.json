@@ -36,7 +36,7 @@
     "brand:generate": "node scripts/brand/generate-brand-assets.mjs",
     "brand:preview": "node scripts/brand/generate-brand-assets.mjs --preview",
     "images:optimize": "node scripts/optimize-marketing-images-sharp.mjs",
-    "prebuild": "npm run verify:no-em-dash && npm run verify:service-areas && npm run verify:estimate && npm run verify:golden && npm run verify:lead-payload && npm run verify:re10 && npm run verify:re10-delivery && npm run links:generate && npm run audit:links && npm run verify:section-links && npm run verify:redirect-collisions && npm run resources:generate && npm run verify:content && npm run verify:images && npm run verify:image-paths && npm run verify:llms && npm run verify:estimator-recovery && npm run verify:accepted-lead",
+    "prebuild": "npm run verify:no-em-dash && npm run verify:service-areas && npm run verify:estimate && npm run verify:golden && npm run verify:lead-payload && npm run verify:estimate-delivery && npm run verify:re10 && npm run verify:re10-delivery && npm run links:generate && npm run audit:links && npm run verify:section-links && npm run verify:redirect-collisions && npm run resources:generate && npm run verify:content && npm run verify:images && npm run verify:image-paths && npm run verify:llms && npm run verify:estimator-recovery && npm run verify:accepted-lead",
     "backlink:score": "node backlink-engine/src/score.mjs",
     "backlink:run": "node backlink-engine/src/run.mjs",
     "backlink:preflight": "node backlink-engine/src/preflight.mjs",
@@ -48,7 +48,8 @@
     "verify:contrast": "node scripts/verify-contrast.mjs",
     "verify:service-areas": "tsx scripts/verify-service-area-cities.ts",
     "test:accepted-lead": "tsx scripts/test-accepted-lead.ts",
-    "test:assistant-lead-payload": "tsx scripts/test-assistant-lead-payload.ts"
+    "test:assistant-lead-payload": "tsx scripts/test-assistant-lead-payload.ts",
+    "verify:estimate-delivery": "tsx scripts/verify-estimate-delivery.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",

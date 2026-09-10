@@ -33,7 +33,7 @@ function Logo() {
 export function Navigation() {
   const pathname = usePathname();
   const formInView = useFormInView(pathname);
-  // P5's header: transparent over the hero, gaining ground, blur and a hairline once scrolled.
+  // Solid contrast over every hero; a shadow separates the header while scrolling.
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -42,6 +42,13 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   const [mobileOpen, setMobileOpen] = useState(false);
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1440px)");
+    const closeOnDesktop = () => { if (desktop.matches) setMobileOpen(false); };
+    closeOnDesktop();
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, []);
   const isActivePath = (href: string) =>
     href === "/" ? pathname === "/" : Boolean(pathname?.startsWith(href));
   const isPortal =
@@ -69,13 +76,14 @@ export function Navigation() {
       <header
         className={cn(
           "fixed top-0 z-[100] w-full transition-[background-color,border-color] duration-300",
-          scrolled ? "bg-background/95 backdrop-blur border-b border-border" : "bg-transparent border-b border-transparent",
+          "bg-background/95 backdrop-blur border-b border-border",
+          scrolled && "shadow-sm",
         )}
       >
         <nav className="container flex h-[60px] items-center justify-between gap-4 px-4 md:px-6">
           <Logo />
 
-          <div className="hidden xl:flex items-center gap-0">
+          <div className="hidden min-[1440px]:flex items-center gap-0">
             {NAV_LINKS.map((link) => {
               const active = isActivePath(link.href);
               return (
@@ -97,7 +105,7 @@ export function Navigation() {
             })}
           </div>
 
-          <div className="hidden xl:flex items-center gap-3">
+          <div className="hidden min-[1440px]:flex shrink-0 items-center gap-3">
               <a
                 href={SITE_CONFIG.phoneHref}
                 className="flex shrink-0 items-center gap-2 whitespace-nowrap text-xs font-normal transition-colors text-muted-foreground hover:text-foreground"
@@ -115,7 +123,7 @@ export function Navigation() {
             <div className="flex items-center" aria-label="More ways to reach us">
               <a
                 href={SITE_CONFIG.phoneSmsHref}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
                 aria-label="Text us"
                 title="Text us"
                 data-testid="link-text-desktop"
@@ -123,7 +131,7 @@ export function Navigation() {
                 <MessageSquare className="h-[18px] w-[18px]" strokeWidth={1.5} aria-hidden />
               </a>
               <SaveContactLink
-                className="inline-flex h-10 w-10 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
                 aria-label="Save to contacts"
                 title="Save to contacts"
               >
@@ -137,7 +145,7 @@ export function Navigation() {
 
           {/* Mobile menu - Radix Dialog gives focus trap, Escape, scroll-lock,
               inert background, and auto aria-expanded/aria-controls on the trigger. */}
-          <div className="flex xl:hidden items-center gap-2">
+          <div className="flex min-[1440px]:hidden items-center gap-2">
             <Dialog.Root open={mobileOpen} onOpenChange={setMobileOpen}>
               <Dialog.Trigger asChild>
                 {/* The shared icon size is 36px, which suits dense admin
@@ -146,7 +154,7 @@ export function Navigation() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-11 w-11"
+                  className="h-11 w-11 shrink-0"
                   aria-label="Open navigation menu"
                   data-testid="button-mobile-menu-open"
                 >
@@ -155,9 +163,9 @@ export function Navigation() {
               </Dialog.Trigger>
 
               <Dialog.Portal>
-                <Dialog.Overlay className="fixed inset-0 z-[190] bg-background/80 backdrop-blur-sm xl:hidden" />
+                <Dialog.Overlay className="fixed inset-0 z-[190] bg-background/80 backdrop-blur-sm min-[1440px]:hidden" />
                 <Dialog.Content
-                  className="fixed inset-0 z-[200] bg-background flex flex-col xl:hidden focus:outline-none"
+                  className="fixed inset-0 z-[200] bg-background flex flex-col min-[1440px]:hidden focus:outline-none"
                   data-testid="mobile-nav-drawer"
                 >
                   <Dialog.Title className="sr-only">Navigation menu</Dialog.Title>
@@ -166,13 +174,13 @@ export function Navigation() {
                   </Dialog.Description>
 
                   {/* Header row */}
-                  <div className="flex items-center justify-between px-6 h-[60px] border-b border-border/40 shrink-0">
+                  <div className="flex items-center justify-between gap-3 px-4 h-[60px] border-b border-border/40 shrink-0 [&_img]:max-w-[65vw] [&_img]:h-auto">
                     <Logo />
                     <Dialog.Close asChild>
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-11 w-11"
+                        className="h-11 w-11 shrink-0"
                         aria-label="Close navigation menu"
                         data-testid="button-mobile-menu-close"
                       >

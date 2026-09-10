@@ -1,8 +1,8 @@
 import type { LeadEstimateRecord, LeadPropertyRecord } from "@/server/services/leadRecord";
 
 /**
- * Fire-and-forget forwarding to the Boise Handyman lead dashboard.
- * Never throws or awaits -- a failure here must never affect the API response.
+ * Forward to the Boise Handyman lead dashboard without throwing. Callers may
+ * await the result when their success response depends on a confirmed receipt.
  *
  * FIELD NAMES ARE A CONTRACT. The dashboard validates with a plain zod object,
  * which strips unknown keys, so a field named even slightly differently is
@@ -73,13 +73,13 @@ interface ForwardPayload {
   estimateRange?: string;
 }
 
-export function forwardToLeadDashboard(payload: ForwardPayload): void {
+export async function forwardToLeadDashboard(payload: ForwardPayload): Promise<boolean> {
   const key = process.env.LEAD_DASHBOARD_KEY;
   if (!key) {
     console.warn(
       "[lead-dashboard] LEAD_DASHBOARD_KEY is not set; lead was NOT forwarded to the CRM."
     );
-    return;
+    return false;
   }
 
   const body: ForwardPayload = {
@@ -94,13 +94,14 @@ export function forwardToLeadDashboard(payload: ForwardPayload): void {
       : undefined,
   };
 
-  fetch("https://leads.boisehandyman.co/api/external/leads", {
+  return fetch("https://leads.boisehandyman.co/api/external/leads", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${key}`,
     },
     body: JSON.stringify(body),
+    signal: AbortSignal.timeout(10_000),
   })
     .then(async (res) => {
       // A rejected forward means the lead reached the inbox but not the CRM.
@@ -108,14 +109,19 @@ export function forwardToLeadDashboard(payload: ForwardPayload): void {
       // visitor submits twice, so it is noted rather than flagged as an error.
       if (res.status === 409) {
         console.info("[lead-dashboard] Duplicate within 60s; CRM kept the existing lead.");
-        return;
+        return true;
       }
       if (!res.ok) {
         const detail = await res.text().catch(() => "");
         console.error(
           `[lead-dashboard] Forward rejected: ${res.status} ${res.statusText} ${detail.slice(0, 300)}`
         );
+        return false;
       }
+      return true;
     })
-    .catch((err) => console.error("[lead-dashboard] Forward failed:", err));
+    .catch((err) => {
+      console.error("[lead-dashboard] Forward failed:", err);
+      return false;
+    });
 }

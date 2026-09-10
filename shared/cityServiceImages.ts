@@ -46,7 +46,7 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("repair-materials"),
     h("estimate-clipboard"),
     h("consult-doorstep-branded"),
-    h("hero-door-repair"),
+    h("hero-door-hinge-branded"),
   ],
   "painting-touch-ups": [
     h("service-painting"),
@@ -56,7 +56,7 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("toolbag-ready"),
     h("estimate-clipboard"),
     h("consult-doorstep-branded"),
-    h("hero-door-repair"),
+    h("hero-door-hinge-branded"),
   ],
   "plumbing-repairs": [
     h("service-plumbing"),
@@ -66,7 +66,7 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("toolbag-ready"),
     h("estimate-clipboard"),
     h("consult-doorstep-branded"),
-    h("hero-door-repair"),
+    h("hero-door-hinge-branded"),
   ],
   "electrical-repairs": [
     h("service-electrical"),
@@ -75,12 +75,12 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("toolbag-ready"),
     h("estimate-clipboard"),
     h("consult-doorstep-branded"),
-    h("hero-door-repair"),
+    h("hero-door-hinge-branded"),
     h("door-hinge-fix"),
   ],
   "carpentry-trim-repair": [
     h("service-carpentry-trim-branded"),
-    h("hero-door-repair"),
+    h("hero-door-hinge-branded"),
     h("door-hinge-fix"),
     h("service-fence-repair"),
     h("toolbag-ready"),
@@ -96,7 +96,7 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("toolbag-ready"),
     h("estimate-clipboard"),
     h("consult-doorstep-branded"),
-    h("hero-door-repair"),
+    h("hero-door-hinge-branded"),
   ],
   "fence-deck-gutter-repair": [
     h("service-fence-repair"),
