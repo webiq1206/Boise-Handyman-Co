@@ -31,13 +31,15 @@ try {
    const rec={width,route};
    try{
     await page.goto(origin+route,{waitUntil:'domcontentloaded'});
+    await page.waitForLoadState('load',{timeout:20000}).catch(()=>{});
     await page.evaluate(async()=>{await document.fonts.ready;for(let y=0;y<document.documentElement.scrollHeight;y+=600){window.scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,80));}});
     await page.locator('article details:not([open]) > summary').evaluateAll(es=>es.forEach(e=>e.click()));
     await page.evaluate(async()=>{const is=[...document.images].filter(i=>i.getClientRects().length);is.forEach(i=>i.loading='eager');await Promise.race([Promise.allSettled(is.map(i=>i.decode())),new Promise(r=>setTimeout(r,15000))]);});
     await page.evaluate(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=750){window.scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,35));}});
     await page.waitForTimeout(700);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Horizontal overflow');
-    assert(await page.evaluate(()=>[...document.images].filter(i=>i.getClientRects().length).every(i=>i.complete&&i.naturalWidth>0)),'Broken image');
+    const broken=await page.evaluate(()=>[...document.images].filter(i=>i.getClientRects().length&&(!i.complete||!i.naturalWidth)).map(i=>({src:i.currentSrc,complete:i.complete,naturalWidth:i.naturalWidth})));
+    assert(!broken.length,'Broken image '+JSON.stringify(broken));
     await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
     await page.screenshot({path:`${out}/${width}-${route.replaceAll('/','_')}.jpg`,fullPage:true,type:'jpeg',quality:72});
     if(route==='/'){
@@ -56,6 +58,10 @@ try {
      assert(await page.locator('h1.ed-display').evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=32),'Display typography must override element resets');
      assert(await page.locator('h2.ed-h2').first().evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=30),'Section typography must override element resets');
      assert.equal(await page.locator('dl.ed-hero-facts').count(),1,'Single facts group');
+    }
+    if(route==='/services/painting-touch-ups/eagle'){
+     await page.locator('.ed-panel-media').first().scrollIntoViewIfNeeded();await page.waitForTimeout(400);
+     await page.screenshot({path:`${out}/${width}-painting-panel.jpg`});
     }
     if(route==='/contact'){
      const form=page.getByTestId('input-name').filter({visible:true}).first();

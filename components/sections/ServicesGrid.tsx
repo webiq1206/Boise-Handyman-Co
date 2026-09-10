@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { Section } from "@/components/marketing/Section";
 import { Button } from "@/components/ui/button";

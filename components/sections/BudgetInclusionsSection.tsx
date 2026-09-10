@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { ArrowRight, Check } from "lucide-react";
 import { Section } from "@/components/marketing/Section";

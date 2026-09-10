@@ -1,7 +1,7 @@
 import { ArrowRight, Check, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { JsonLd } from '@/components/seo/JsonLd';
-import Image from 'next/image';
+import Image from '@/components/MarketingImage';
 import { DisplayNum, formatStepNumber, Section } from '@/components/marketing';
 import { SectionHeader } from '@/components/marketing/SectionHeader';
 import { Hairline } from '@/components/marketing/Hairline';
