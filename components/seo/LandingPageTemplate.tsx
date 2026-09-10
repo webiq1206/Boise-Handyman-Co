@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from '@/components/MarketingImage';
 import Link from 'next/link';
 import { ArrowRight, Check, ChevronRight, Star } from 'lucide-react';
 import { Section } from '@/components/marketing';
