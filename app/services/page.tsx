@@ -73,7 +73,7 @@ export default function ServicesIndexPage() {
 
       <PageHeroBand
         imageSrc={SITE_IMAGES.statementBand}
-        imageAlt="Well-maintained Treasure Valley home interior after a handyman visit"
+        imageAlt="Representative service image of a Boise Handyman Co worker painting window trim"
       >
         <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Services' }]} />
         <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>Our services</p>
@@ -104,7 +104,7 @@ export default function ServicesIndexPage() {
                 <div className="relative min-h-[clamp(280px,38vw,460px)] overflow-hidden">
                   <Image
                     src={getServiceBackground(lead.slug)}
-                    alt={`${lead.name} handyman service by ${SITE_CONFIG.name}`}
+                    alt={`Representative ${lead.name.toLowerCase()} service imagery`}
                     fill
                     sizes="(max-width: 1024px) 100vw, 55vw"
                     quality={72}
