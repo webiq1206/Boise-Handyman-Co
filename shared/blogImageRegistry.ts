@@ -126,8 +126,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'how-long-do-common-home-repairs-take': {
-    hero: '/images/handyman/hero-door-repair.webp',
-    alt: 'Handyman adjusting a sticking white interior door in a bright Idaho home with a tool bag on a drop cloth nearby',
+    hero: '/images/handyman/hero-door-hinge-branded.webp',
+    alt: 'Representative Boise Handyman Co worker adjusting an interior door hinge',
     topicTags: ["home repairs","boise","drywall repair","plumbing repairs","repairs"],
     source: 'handyman',
   },
@@ -234,8 +234,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'first-time-homeowner-repair-handbook': {
-    hero: '/images/handyman/hero-door-repair.webp',
-    alt: 'Handyman adjusting a sticking white interior door in a bright Idaho home with a tool bag on a drop cloth nearby',
+    hero: '/images/handyman/hero-door-hinge-branded.webp',
+    alt: 'Representative Boise Handyman Co worker adjusting an interior door hinge',
     topicTags: ["first-time homeowner","repairs","diy","basics","boise"],
     source: 'handyman',
   },
