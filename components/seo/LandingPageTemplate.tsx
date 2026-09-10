@@ -582,8 +582,8 @@ export function LandingPageTemplate({
               </h2>
             </Reveal>
             <Reveal delay={60}>
-              <p className="ed-lede">Free 60 to 90 minute in-home visit.</p>
-              <p className="ed-body mt-3">Planning guidance, design direction, no obligation.</p>
+              <p className="ed-lede">Send your task list and photos.</p>
+              <p className="ed-body mt-3">Get an upfront quote and arrange a handyman visit, with no obligation.</p>
               <div className="mt-8"><ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA></div>
             </Reveal>
           </div>

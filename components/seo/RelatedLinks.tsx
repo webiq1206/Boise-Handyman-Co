@@ -31,9 +31,9 @@ function ExploreFurther({ serviceSlug }: { serviceSlug?: string }) {
      audits for. */
   const links: { href: string; label: string }[] = [
     guide ?? { href: '/guides/hire-a-handyman-treasure-valley', label: 'Hiring a Handyman in the Treasure Valley' },
-    { href: '/services', label: 'Compare how we build' },
-    { href: '/resources', label: 'Free home building planning worksheets' },
-    { href: '/estimate', label: 'Estimate your build cost' },
+    { href: '/services', label: 'Explore repair and installation services' },
+    { href: '/resources', label: 'Free home maintenance planning worksheets' },
+    { href: '/estimate', label: 'Estimate your repair cost' },
   ];
   return (
     <div className="border-t pt-10" style={{ borderColor: "var(--ed-line)" }}>
@@ -85,7 +85,7 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
       <div className="space-y-10">
         <div>
           <h2 className="ed-h2-sm ed-statement-wide mb-8">
-            Home building services in {city?.name}
+            Handyman services in {city?.name}
           </h2>
           <div className="ed-grid-balance grid sm:grid-cols-2 gap-4">
             {SERVICES.map((service) => (
@@ -147,7 +147,7 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
               All {SERVICES.find((s) => s.slug === serviceSlug)?.name} areas →
             </Link>
             <Link href={areaPath(citySlug)} className="ed-link mt-4 block w-fit">
-              Home building in {CITIES.find((c) => c.slug === citySlug)?.name} →
+              Handyman services in {CITIES.find((c) => c.slug === citySlug)?.name} →
             </Link>
           </div>
         </div>
