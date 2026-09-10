@@ -78,7 +78,7 @@ export function ValueOverheadSection() {
                 />
               </div>
               <figcaption className="ed-small mt-4 border-t pt-4" style={{ borderColor: "var(--ed-line)" }}>
-                On site, Treasure Valley
+                Trim installation · Representative imagery
               </figcaption>
             </figure>
           </Reveal>

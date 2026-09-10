@@ -220,7 +220,7 @@ export function LandingPageTemplate({
             <p className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-inverse-foreground/80">
               <span className="ed-eyebrow !mb-0" style={{ color: 'rgb(255 255 255 / 0.72)' }}>Planning from</span>
               <span className="brc-display-num text-inverse-foreground text-[1.5rem] leading-none">{planningFrom}</span>
-              <span className="ed-small text-inverse-foreground/70">Your exact range is confirmed at the free in-home visit</span>
+              <span className="ed-small text-inverse-foreground/70">Send photos for an upfront written quote</span>
             </p>
           )}
         </div>
@@ -582,8 +582,8 @@ export function LandingPageTemplate({
               </h2>
             </Reveal>
             <Reveal delay={60}>
-              <p className="ed-lede">Free 60 to 90 minute in-home visit.</p>
-              <p className="ed-body mt-3">Planning guidance, design direction, no obligation.</p>
+              <p className="ed-lede">Send your task list and photos.</p>
+              <p className="ed-body mt-3">Get an upfront quote and arrange a handyman visit, with no obligation.</p>
               <div className="mt-8"><ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA></div>
             </Reveal>
           </div>

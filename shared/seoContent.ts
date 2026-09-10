@@ -808,7 +808,7 @@ export function getCityServiceFaqs(service: ServiceSEOContent, city: CityData): 
           },
         ]
       : []),
-    ...service.faqs.slice(0, 2),
+    ...service.faqs.filter((faq) => !costSentence || !/^how much\b/i.test(faq.question)).slice(0, 2),
     {
       question: `Do you serve ${city.name}?`,
       answer: `Yes. ${city.name} is part of our core service area, along with the rest of ${county} and the Treasure Valley. Where you live in the service area never inflates the quote.`,
