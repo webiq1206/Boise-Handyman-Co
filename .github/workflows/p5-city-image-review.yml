@@ -43,7 +43,7 @@ jobs:
           node - <<'NODE'
           const fs = require('fs');
           const routes = JSON.parse(fs.readFileSync('scripts/p5-visual-routes.json', 'utf8'));
-          const selected = routes.filter(route => new RegExp('^/services/[^/]+/[^/]+$').test(route));
+          const selected = routes.filter(route => new RegExp('^/(services/[^/]+|areas)/[^/]+$').test(route));
           if (!selected.length) throw new Error('No affected city routes selected');
           fs.writeFileSync('scripts/p5-visual-routes.json', JSON.stringify(selected));
           console.log(selected.length + ' affected routes at nine widths');
