@@ -71,7 +71,7 @@ try {
      await page.screenshot({path:`${out}/${width}-painting-panel.jpg`});
     }
     Object.assign(rec,await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,images:[...document.images].filter(i=>i.getClientRects().length).map(i=>({src:i.currentSrc,alt:i.alt,ok:i.complete&&i.naturalWidth>0}))})));
-    const sidebar=page.locator('[data-article-sidebar-cta]').first();
+    const sidebar=page.locator('[data-article-sidebar-cta]').filter({visible:true}).first();
     if(await sidebar.count()){
      const clipped=await sidebar.evaluate(card=>[...card.querySelectorAll('a,button')].filter(a=>a.getClientRects().length).some(a=>{const c=card.getBoundingClientRect(),b=a.getBoundingClientRect();return b.left<c.left||b.right>c.right||b.height<44||a.scrollWidth>a.clientWidth+1;}));
      assert(!clipped,'Sidebar actions must fit and have 44px targets');
