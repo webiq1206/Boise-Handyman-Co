@@ -106,6 +106,7 @@ export function WizardActionBar({
   return (
     <div
       ref={barRef}
+      data-wizard-action-bar=""
       data-testid={testId}
       style={pinned && keyboardInset > 0 ? { transform: `translateY(-${keyboardInset}px)` } : undefined}
       className={cn(
