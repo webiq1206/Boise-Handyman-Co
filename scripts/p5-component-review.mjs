@@ -10,11 +10,12 @@ const records=[];
 const origin='http://127.0.0.1:5000';
 const cabinet=process.env.P5_SITE==='cabinet';
 const remodeling=process.env.P5_SITE==='remodeling';
-const selected=[...new Set(['/', '/contact','/about','/testimonials',...(routes.includes('/services')?['/services']:[]),
+const selected=[...new Set(['/', '/estimate/scope', '/contact','/about','/testimonials',...(routes.includes('/services')?['/services']:[]),
  routes.find(r=>/^\/(services|cabinets)\/[^/]+$/.test(r)),
  routes.find(r=>/^\/services\/[^/]+\/[^/]+$/.test(r)),
  routes.find(r=>/^\/guides\/[^/]+$/.test(r)),
  routes.find(r=>/^\/blog\/[^/]+$/.test(r)),
+ ...(process.env.P5_SITE==='handyman'?['/services/painting-touch-ups/eagle']:[]),
  ...(cabinet?['/catalog','/cabinets','/compare','/construction','/builders','/warranty']:[])
 ].filter(Boolean))];
 try {
@@ -32,6 +33,7 @@ try {
    const rec={width,route};
    try{
     await page.goto(origin+route,{waitUntil:'domcontentloaded'});
+    await page.waitForLoadState('load',{timeout:20000}).catch(()=>{});
     await page.evaluate(async()=>{await document.fonts.ready;for(let y=0;y<document.documentElement.scrollHeight;y+=600){window.scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,80));}});
     await page.locator('article details:not([open]) > summary').evaluateAll(es=>es.forEach(e=>e.click()));
     await page.evaluate(async()=>{const is=[...document.images].filter(i=>i.getClientRects().length);is.forEach(i=>i.loading='eager');await Promise.race([Promise.allSettled(is.map(i=>i.decode())),new Promise(r=>setTimeout(r,15000))]);});
@@ -63,6 +65,22 @@ try {
      assert(await page.locator('h1.ed-display').evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=32),'Display typography must override element resets');
      assert(await page.locator('h2.ed-h2').first().evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=30),'Section typography must override element resets');
      assert.equal(await page.locator('dl.ed-hero-facts').count(),1,'Single facts group');
+    }
+    if(route==='/services/painting-touch-ups/eagle'){
+     await page.locator('.ed-panel-media').first().scrollIntoViewIfNeeded();await page.waitForTimeout(400);
+     await page.screenshot({path:`${out}/${width}-painting-panel.jpg`});
+    }
+    Object.assign(rec,await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,images:[...document.images].filter(i=>i.getClientRects().length).map(i=>({src:i.currentSrc,alt:i.alt,ok:i.complete&&i.naturalWidth>0}))})));
+    const sidebar=page.locator('[data-article-sidebar-cta]').filter({visible:true}).first();
+    if(await sidebar.count()){
+     const clipped=await sidebar.evaluate(card=>[...card.querySelectorAll('a,button')].filter(a=>a.getClientRects().length).some(a=>{const c=card.getBoundingClientRect(),b=a.getBoundingClientRect();return b.left<c.left||b.right>c.right||b.height<44||a.scrollWidth>a.clientWidth+1;}));
+     assert(!clipped,'Sidebar actions must fit and have 44px targets');
+     await sidebar.scrollIntoViewIfNeeded();await page.waitForTimeout(250);
+     await page.screenshot({path:`${out}/${width}-article-sidebar.jpg`});
+    }
+    if(route.startsWith('/guides/')){
+     const related=page.getByRole('heading',{name:'Related resources',exact:true});
+     if(await related.count()){await related.scrollIntoViewIfNeeded();await page.waitForTimeout(350);await page.screenshot({path:`${out}/${width}-related-resources.jpg`});}
     }
     if(route==='/contact'){
      const form=page.getByTestId('input-name').filter({visible:true}).first();

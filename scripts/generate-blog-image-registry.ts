@@ -41,7 +41,7 @@ const LIBRARY = {
     alt: 'Hands spreading joint compound over a drywall patch with a taping knife in a bright room',
   },
   painting: {
-    src: img('service-painting'),
+    src: img('service-painting-p5-reviewed-20260910'),
     alt: 'Representative Boise Handyman Co worker painting white window trim over a protective drop cloth',
   },
   plumbing: {
@@ -117,7 +117,7 @@ const LIBRARY = {
     alt: 'Assorted screws, wall anchors, and picture hangers organized in a small parts tray on a workbench',
   },
   frontDoor: {
-    src: img('front-door-repaint'),
+    src: img('front-door-repaint-p5-reviewed-20260910'),
     alt: 'Representative freshly repainted sage-green front door with white trim and black hardware',
   },
   permits: {

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/MarketingImage";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
 import { MarketingCard } from "./MarketingCard";

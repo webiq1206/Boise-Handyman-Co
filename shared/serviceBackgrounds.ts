@@ -15,7 +15,7 @@ const DEFAULT_BACKGROUND = h("hero-door-hinge-branded");
  */
 export const SERVICE_BACKGROUNDS: ServiceBackgroundConfig = {
   "drywall-repair": h("service-drywall-repair"),
-  "painting-touch-ups": h("service-painting"),
+  "painting-touch-ups": h("service-painting-p5-reviewed-20260910"),
   "plumbing-repairs": h("service-plumbing"),
   "electrical-repairs": h("service-electrical"),
   "carpentry-trim-repair": h("service-carpentry-trim-branded"),
@@ -53,8 +53,8 @@ const SERVICE_IMAGE_SETS: Record<string, LandingImageSet> = {
     process: SITE_IMAGES.processInProgress,
   },
   "painting-touch-ups": {
-    hero: h("service-painting"),
-    breather: h("front-door-repaint"),
+    hero: h("service-painting-p5-reviewed-20260910"),
+    breather: h("front-door-repaint-p5-reviewed-20260910"),
     process: h("estimate-clipboard"),
   },
   "plumbing-repairs": {
