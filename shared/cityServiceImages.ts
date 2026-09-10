@@ -5,17 +5,15 @@
  * point at the AI-generated handyman photo library in public/images/handyman
  * (2026-08); swap for real job photography when it exists.
  *
- * City variants rotate through a per-service shortlist so that no two city
- * pages for the same service open with the same photograph, which keeps the
- * eight variants of a service page from looking like one page printed eight
- * times. The rotation is deterministic, so a given city always gets the same
- * image and the pages are stable between builds.
+ * City variants use a trade-specific shortlist. Relevant representative
+ * images may repeat across cities; unrelated work must never fill a slot.
+ * The rotation is deterministic between builds.
  *
  * Key format for CITY_SERVICE_IMAGES: "service-slug/city-slug"
  */
 
 import { SITE_IMAGES } from "./siteImages";
-import { type LandingImageSet } from "./serviceBackgrounds";
+import { getServiceImageSet, type LandingImageSet } from "./serviceBackgrounds";
 
 const CITY_SLUGS = [
   "boise",
@@ -26,6 +24,7 @@ const CITY_SLUGS = [
   "star",
   "middleton",
   "caldwell",
+  "garden-city",
 ] as const;
 
 /** AI-generated handyman photo library (2026-08). */
@@ -34,88 +33,43 @@ const h = (name: string) => `/images/handyman/${name}.webp`;
 /**
  * Per-service rotation. The first entry is the service's primary image and is
  * what the service overview page uses; the rest supply the city variants.
- * Every shortlist is at least as long as it needs to be to avoid repeats
- * within a service.
+ * Reuse within a service is intentional when only one suitable trade image exists.
  */
 const SERVICE_ROTATION: Record<string, readonly string[]> = {
   "drywall-repair": [
     h("service-drywall-repair"),
     h("punch-list-markers"),
-    h("service-painting-p5-reviewed-20260910"),
-    h("toolbag-ready"),
-    h("repair-materials"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("hero-door-hinge-branded"),
   ],
   "painting-touch-ups": [
     h("service-painting-p5-reviewed-20260910"),
     h("front-door-repaint-p5-reviewed-20260910"),
-    h("punch-list-markers"),
-    h("service-drywall-repair"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("hero-door-hinge-branded"),
   ],
   "plumbing-repairs": [
     h("service-plumbing"),
     h("toilet-repair"),
-    h("service-caulking"),
-    h("repair-materials"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("hero-door-hinge-branded"),
   ],
   "electrical-repairs": [
     h("service-electrical"),
-    h("service-mounting"),
-    h("repair-materials"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("hero-door-hinge-branded"),
-    h("door-hinge-fix"),
   ],
   "carpentry-trim-repair": [
     h("service-carpentry-trim-branded"),
     h("hero-door-hinge-branded"),
     h("door-hinge-fix"),
-    h("service-fence-repair"),
-    h("toolbag-ready"),
-    h("repair-materials"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
   ],
   "mounting-assembly": [
     h("service-mounting"),
-    h("cabinet-hardware-upgrade"),
     h("grab-bar-install"),
-    h("repair-materials"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("hero-door-hinge-branded"),
+    h("cabinet-hardware-upgrade"),
   ],
   "fence-deck-gutter-repair": [
     h("service-fence-repair"),
     h("deck-board-replacement"),
     h("hero-gutter-cleaning"),
-    h("winterize-spigot"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
-    h("repair-materials"),
   ],
   "home-maintenance": [
     h("service-caulking"),
     h("weatherstripping"),
     h("winterize-spigot"),
-    h("punch-list-markers"),
-    h("toolbag-ready"),
-    h("estimate-clipboard"),
-    h("consult-doorstep-branded"),
     h("hero-gutter-cleaning"),
   ],
 };
@@ -185,10 +139,13 @@ export function getCityServiceImageSet(
 
   return {
     hero,
-    // Offset by three rather than one so the two images on a page are visually
-    // unrelated instead of adjacent shots of the same subject.
-    breather: rotation[(cityIndex + 3) % rotation.length],
-    process: rotation[0],
+    // Keep the visible work within this trade. Related city pages may share
+    // a suitable representative photo when a distinct job image is unavailable.
+    breather: rotation.length > 1
+      ? rotation[(cityIndex + 1) % rotation.length]
+      : getServiceImageSet(serviceSlug).breather,
+    process: rotation.find(src => src !== hero && src !== rotation[(cityIndex + 1) % rotation.length])
+      ?? getServiceImageSet(serviceSlug).process,
   };
 }
 
