@@ -12,10 +12,14 @@ for(const width of [320,390,430,600,768,1024,1366,1440,1920]){
    await page.waitForTimeout(700);
    if(await page.locator('[data-assistant-launcher]').isVisible())throw new Error('Assistant launcher overlaps mobile hero');
   }
-  const assistantReady=page.waitForResponse(r=>r.url().includes('/api/assistant/chat')&&r.request().method()==='GET');
   await page.goto('http://127.0.0.1:5000/contact',{waitUntil:'load'});
-  await assistantReady;
   await page.evaluate(async()=>{await document.fonts.ready;await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));});
+  // An actual form interaction confirms hydration without assuming a chat availability API.
+  const addressInfo=page.getByTestId('button-address-info').filter({visible:true}).first();
+  await addressInfo.click();
+  await page.locator('#address-info').waitFor({state:'visible'});
+  await addressInfo.click();
+  await page.locator('#address-info').waitFor({state:'hidden'});
   const launcher=page.locator('[data-testid="button-assistant-open"],[data-testid="assistant-launcher"]');
   await page.locator('footer').scrollIntoViewIfNeeded();
   await page.evaluate(()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'}));
