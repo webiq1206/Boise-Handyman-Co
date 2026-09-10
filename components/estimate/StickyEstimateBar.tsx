@@ -127,7 +127,7 @@ export function StickyEstimateBar({
               className={`text-sm leading-tight ${strongText}`}
               data-testid="mobile-estimate-placeholder"
             >
-              Make your selections to see it
+              Choose tasks, then submit your details
             </span>
           )}
           {estimate &&

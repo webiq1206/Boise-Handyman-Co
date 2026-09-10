@@ -1,4 +1,5 @@
 "use client";
+import { ScopeEstimateOption } from "@/components/ScopeEstimateOption";
 
 /**
  * The Boise Handyman Co instant estimator.
@@ -73,6 +74,7 @@ import { CITIES } from "@/shared/contentData";
 import { trackAcceptedLeadConversion, trackEvent, trackMetaEvent } from "@/lib/analytics";
 import { GRAIN_URL } from "@/lib/grain";
 import { readStoredPrefill, writeStoredPrefill } from "@/lib/leadPrefill";
+import { SITE_CONFIG } from "@/shared/siteConfig";
 
 /* ────────────────────────────────────────────────────────────── constants */
 
@@ -139,6 +141,8 @@ export function EstimateCalculator({
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [customerEmailAccepted, setCustomerEmailAccepted] = useState<boolean | null>(null);
+  const submissionInFlight = useRef(false);
 
   const [wizStep, setWizStep] = useState<WizStep>("job");
   const wizIndex = STEP_META.findIndex((s) => s.id === wizStep);
@@ -300,6 +304,7 @@ export function EstimateCalculator({
   /* ────────────────────────────────────────────────────── submission */
 
   async function submitLead() {
+    if (submissionInFlight.current || submitted) return;
     const errors: Record<string, string> = {};
     if (name.trim().length < 2) errors.name = "Please tell us your name.";
     if (!/.+@.+\..+/.test(email.trim()))
@@ -310,6 +315,7 @@ export function EstimateCalculator({
     setFieldErrors(errors);
     if (Object.keys(errors).length > 0 || !estimate || !estimateInput) return;
 
+    submissionInFlight.current = true;
     setSubmitting(true);
     setSubmitError(null);
     try {
@@ -336,13 +342,18 @@ export function EstimateCalculator({
           },
         }),
       });
-      if (!res.ok) {
-        const data = (await res.json().catch(() => null)) as { message?: string } | null;
+      const data = (await res.json().catch(() => null)) as {
+        success?: boolean;
+        accepted?: boolean;
+        message?: string;
+        customerEmailAccepted?: boolean;
+      } | null;
+      if (!res.ok || data?.success !== true) {
         throw new Error(data?.message || "Something went wrong sending your estimate.");
       }
-      const response = await res.json() as { accepted?: boolean };
+      setCustomerEmailAccepted(typeof data.customerEmailAccepted === "boolean" ? data.customerEmailAccepted : null);
       writeStoredPrefill({ name: name.trim(), email: email.trim(), phone: phone.trim() });
-      if (response.accepted) {
+      if (data.accepted === true) {
         markEstimatorCompleted("estimate");
         trackAcceptedLeadConversion();
         trackEvent("handyman_estimate_submitted", {
@@ -360,6 +371,7 @@ export function EstimateCalculator({
           : "Something went wrong sending your estimate. Please try again.",
       );
     } finally {
+      submissionInFlight.current = false;
       setSubmitting(false);
     }
   }
@@ -375,6 +387,7 @@ export function EstimateCalculator({
       instructions={fitViewport ? "Pick the closest match; you can describe the rest later." : "Pick the closest match. If it spans a few trades, pick the biggest part; you can describe the rest later."}
       data-testid="step-job"
     >
+      <ScopeEstimateOption />
       <div
         className={fitViewport ? "ed-grid-balance grid grid-cols-1 gap-2 min-[480px]:grid-cols-2" : "ed-grid-balance grid grid-cols-1 gap-2.5 sm:grid-cols-2"}
         role="radiogroup"
@@ -737,6 +750,10 @@ export function EstimateCalculator({
               data-testid="submit-error"
             >
               {submitError}
+              <p className="mt-2">
+                <a href={SITE_CONFIG.phoneHref} className="underline">Call {SITE_CONFIG.phone}</a>
+                {" or "}<a href={SITE_CONFIG.phoneSmsHref} className="underline">text us</a> for help.
+              </p>
             </div>
           )}
 
@@ -756,17 +773,27 @@ export function EstimateCalculator({
         <p className="brc-label text-inverse-muted">Your estimate</p>
         <span className="inline-flex items-center gap-1.5 text-xs tracking-[0.08em] uppercase text-accent-legible">
           <Check className="h-3.5 w-3.5" aria-hidden="true" />
-          On its way
+          Request received
         </span>
       </div>
       <h2 className="font-serif text-2xl md:text-3xl tracking-tight text-inverse-foreground mb-3">
-        Estimate sent. Check your inbox.
+        Your estimate is ready.
       </h2>
       <p className="text-sm leading-relaxed text-inverse-foreground/85 mb-5 max-w-xl">
-        We emailed your range and the breakdown behind it. A real person reviews
-        every request and follows up with a firm written quote before any work
-        is scheduled.
+        {customerEmailAccepted === null
+          ? "We already received this request. Your range and breakdown are below."
+          : customerEmailAccepted
+          ? "Your request reached our team, and an email copy of your estimate is on its way."
+          : "Your request reached our team, but we could not email your estimate. Your range and breakdown are below."}
+        {" "}A real person reviews every request and follows up with a firm
+        written quote before any work is scheduled.
       </p>
+      {customerEmailAccepted === false && (
+        <p className="mb-5 text-sm text-inverse-foreground" role="status" data-testid="estimate-email-warning">
+          Need a copy? <a href={SITE_CONFIG.phoneHref} className="underline">Call {SITE_CONFIG.phone}</a>
+          {" or "}<a href={SITE_CONFIG.phoneSmsHref} className="underline">text us</a>.
+        </p>
+      )}
       {estimate && (
         <div className="mb-6 max-w-md">
           <EstimateResultPanel
@@ -878,7 +905,7 @@ export function EstimateCalculator({
   if (fitViewport) {
     if (submitted) {
       return (
-        <AppFrame title="Your estimate is on its way" eyebrow="Estimate sent" steps={STEP_META} currentIndex={STEP_META.length - 1} hideProgress>
+        <AppFrame title="Your estimate is ready" eyebrow="Request received" steps={STEP_META} currentIndex={STEP_META.length - 1} hideProgress>
           {successSurface}
           {recovery}
         </AppFrame>

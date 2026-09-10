@@ -115,6 +115,7 @@ export async function POST(request: NextRequest) {
     const urgencyLabel = URGENCY_LEVELS[input.urgency].label;
     const rangeText = `${formatHandymanCurrency(estimate.priceLow)} to ${formatHandymanCurrency(estimate.priceHigh)}`;
     const workLines = describeSelections(input);
+    let customerEmailAccepted = false;
 
     const accepted = await saveAcceptedLead(db, {
       inquiryId: data.inquiryId,
@@ -151,10 +152,10 @@ export async function POST(request: NextRequest) {
     });
     if (!accepted.accepted) {
       if (accepted.duplicate) return NextResponse.json({ success: true, accepted: false, duplicate: true });
-      return NextResponse.json({ message: "We could not save your request. Please try again." }, { status: 503 });
+      return NextResponse.json({ message: "We could not save your request. Your selections are still here. Please try again, or call or text us." }, { status: 503 });
     }
 
-    forwardToLeadDashboard({
+    const dashboardDelivery = forwardToLeadDashboard({
       fullName: data.name,
       email: data.email,
       phone: data.phone,
@@ -178,6 +179,8 @@ export async function POST(request: NextRequest) {
 
     try {
       const { client, fromEmail } = await getUncachableEmailClient();
+      // A development no-op client does not deliver or retain a lead.
+      if (client.__noop) throw new Error("Email delivery is not configured.");
       const from = formatFromAddress(fromEmail);
 
       const lead: HandymanLeadDetails = {
@@ -193,22 +196,28 @@ export async function POST(request: NextRequest) {
          comes from shared/siteConfig.ts and nowhere else. */
       const adminEmails = await getAdminRecipientEmails(SITE_CONFIG.email);
       for (const adminEmail of adminEmails) {
-        const adminResult = await client.emails.send({
-          from,
-          replyTo: formatLeadReplyTo(data.name, data.email),
-          to: adminEmail,
-          subject: buildHandymanAdminSubject(lead, input, estimate),
-          html: adminHtml,
-          text: htmlToPlainText(adminHtml),
-        });
-        if (adminResult?.error) {
-          console.error(
-            `[estimate-lead] Admin email to ${adminEmail} failed:`,
-            JSON.stringify(adminResult.error),
-          );
+        try {
+          const adminResult = await client.emails.send({
+            from,
+            replyTo: formatLeadReplyTo(data.name, data.email),
+            to: adminEmail,
+            subject: buildHandymanAdminSubject(lead, input, estimate),
+            html: adminHtml,
+            text: htmlToPlainText(adminHtml),
+          });
+          if (adminResult?.error) {
+            console.error(
+              `[estimate-lead] Admin email to ${adminEmail} failed:`,
+              JSON.stringify(adminResult.error),
+            );
+          }
+        } catch (error) {
+          // One failed recipient must not prevent the remaining deliveries.
+          console.error("[estimate-lead] Admin email request failed:", error);
         }
       }
 
+      // The inquiry and lead were saved together before any notifications.
       const customerHtml = buildHandymanCustomerEmailHtml(lead, input, estimate);
       const customerResult = await client.emails.send({
         from,
@@ -219,16 +228,16 @@ export async function POST(request: NextRequest) {
         text: htmlToPlainText(customerHtml),
       });
       if (customerResult?.error) {
-        console.error(
-          `[estimate-lead] Customer email to ${data.email} failed:`,
-          JSON.stringify(customerResult.error),
-        );
+        console.error("[estimate-lead] Customer email was not accepted by the provider.");
+      } else if (customerResult?.data?.id) {
+        customerEmailAccepted = true;
       }
     } catch (emailErr) {
       console.error("[estimate-lead] Email send failed:", emailErr);
     }
 
-    return NextResponse.json({ success: true, accepted: true, duplicate: false });
+    await dashboardDelivery;
+    return NextResponse.json({ success: true, accepted: true, duplicate: false, customerEmailAccepted });
   } catch (err) {
     console.error("[estimate-lead] Error:", err);
     return NextResponse.json({ message: "Server error" }, { status: 500 });
