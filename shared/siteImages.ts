@@ -16,11 +16,11 @@ export const SITE_IMAGES = {
   /** Process sections: a tidy tool bag staged on a drop cloth for a repair visit. */
   processInProgress: "/images/handyman/toolbag-ready.webp",
   /** Full-bleed brand statement band: crisp cut-in paint lines on trim. */
-  statementBand: "/images/handyman/service-painting.webp",
+  statementBand: "/images/handyman/service-painting-p5-reviewed-20260910.webp",
   /** About/contact split panels and about hero: a doorstep walkthrough with a homeowner. */
   leadership: "/images/handyman/consult-doorstep-branded.webp",
   /** Consultation section background (homepage): a freshly repainted front door. */
-  consultBg: "/images/handyman/front-door-repaint.webp",
+  consultBg: "/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
   /** Pricing section subtle texture: new cabinet hardware going on. */
   budgetDetail: "/images/handyman/cabinet-hardware-upgrade.webp",
 } as const;
@@ -37,7 +37,7 @@ const h = (name: string) => `/images/handyman/${name}.webp`;
 
 export const CONSTRUCTION_IMAGES = {
   customHome: h("hero-gutter-cleaning"),
-  semiCustom: h("front-door-repaint"),
+  semiCustom: h("front-door-repaint-p5-reviewed-20260910"),
   framing: h("service-drywall-repair"),
   foundation: h("service-fence-repair"),
   roughIn: h("service-plumbing"),

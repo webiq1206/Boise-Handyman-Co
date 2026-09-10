@@ -41,7 +41,7 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
   "drywall-repair": [
     h("service-drywall-repair"),
     h("punch-list-markers"),
-    h("service-painting"),
+    h("service-painting-p5-reviewed-20260910"),
     h("toolbag-ready"),
     h("repair-materials"),
     h("estimate-clipboard"),
@@ -49,8 +49,8 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("hero-door-hinge-branded"),
   ],
   "painting-touch-ups": [
-    h("service-painting"),
-    h("front-door-repaint"),
+    h("service-painting-p5-reviewed-20260910"),
+    h("front-door-repaint-p5-reviewed-20260910"),
     h("punch-list-markers"),
     h("service-drywall-repair"),
     h("toolbag-ready"),
