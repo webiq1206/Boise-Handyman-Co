@@ -1,4 +1,5 @@
 "use client";
+import { ScopeEstimateOption } from "@/components/ScopeEstimateOption";
 
 /**
  * The Boise Handyman Co instant estimator.
@@ -386,6 +387,7 @@ export function EstimateCalculator({
       instructions={fitViewport ? "Pick the closest match; you can describe the rest later." : "Pick the closest match. If it spans a few trades, pick the biggest part; you can describe the rest later."}
       data-testid="step-job"
     >
+      <ScopeEstimateOption />
       <div
         className={fitViewport ? "ed-grid-balance grid grid-cols-1 gap-2 min-[480px]:grid-cols-2" : "ed-grid-balance grid grid-cols-1 gap-2.5 sm:grid-cols-2"}
         role="radiogroup"
