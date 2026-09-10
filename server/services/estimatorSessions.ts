@@ -208,7 +208,7 @@ export async function recordProgress(report: ProgressReport, now = new Date()): 
     clickedText: Boolean(recovery.text),
     dismissedPrompt: Boolean(recovery.dismissed),
     status: completed ? "completed" : "active",
-    completedAt: completed ? now : null,
+    ...(completed ? { completedAt: now } : {}),
     updatedAt: now,
   }).onConflictDoUpdate({
     target: estimatorSessions.id,
