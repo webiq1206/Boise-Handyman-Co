@@ -7,7 +7,7 @@ export interface ServiceBackgroundConfig {
 /** AI-generated handyman photo library (2026-08). Swap for real job photos when available. */
 const h = (name: string) => `/images/handyman/${name}.webp`;
 
-const DEFAULT_BACKGROUND = h("hero-door-repair");
+const DEFAULT_BACKGROUND = h("hero-door-hinge-branded");
 
 /**
  * Hero background per service, keyed by the handyman service slugs in
