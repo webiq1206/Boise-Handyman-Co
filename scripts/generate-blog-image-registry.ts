@@ -29,8 +29,8 @@ const area = (name: string) => `/images/areas/${name}.webp`;
 /** The handyman image library, with the alt text each image warrants. */
 const LIBRARY = {
   doorRepair: {
-    src: img('hero-door-repair'),
-    alt: 'Handyman adjusting a sticking white interior door in a bright Idaho home with a tool bag on a drop cloth nearby',
+    src: img('hero-door-hinge-branded'),
+    alt: 'Representative Boise Handyman Co worker adjusting an interior door hinge',
   },
   gutterCleaning: {
     src: img('hero-gutter-cleaning'),
@@ -42,7 +42,7 @@ const LIBRARY = {
   },
   painting: {
     src: img('service-painting'),
-    alt: 'Painter cutting in crisp paint along white window trim with an angled brush and painter\'s tape',
+    alt: 'Representative Boise Handyman Co worker painting white window trim over a protective drop cloth',
   },
   plumbing: {
     src: img('service-plumbing'),
@@ -118,7 +118,7 @@ const LIBRARY = {
   },
   frontDoor: {
     src: img('front-door-repaint'),
-    alt: 'Freshly repainted sage green craftsman front door with painter\'s tape being peeled away',
+    alt: 'Representative freshly repainted sage-green front door with white trim and black hardware',
   },
   permits: {
     src: img('permit-paperwork'),
