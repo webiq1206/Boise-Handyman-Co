@@ -115,7 +115,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   },
   'home-repairs-before-selling-boise': {
     hero: '/images/handyman/front-door-repaint.webp',
-    alt: 'Freshly repainted sage green craftsman front door with painter\'s tape being peeled away',
+    alt: 'Representative freshly repainted sage-green front door with white trim and black hardware',
     topicTags: ["home repairs","selling a house","boise","punch list","repairs"],
     source: 'handyman',
   },
@@ -126,8 +126,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'how-long-do-common-home-repairs-take': {
-    hero: '/images/handyman/hero-door-repair.webp',
-    alt: 'Handyman adjusting a sticking white interior door in a bright Idaho home with a tool bag on a drop cloth nearby',
+    hero: '/images/handyman/hero-door-hinge-branded.webp',
+    alt: 'Representative Boise Handyman Co worker adjusting an interior door hinge',
     topicTags: ["home repairs","boise","drywall repair","plumbing repairs","repairs"],
     source: 'handyman',
   },
@@ -151,7 +151,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   },
   'interior-paint-touch-up-guide': {
     hero: '/images/handyman/service-painting.webp',
-    alt: 'Painter cutting in crisp paint along white window trim with an angled brush and painter\'s tape',
+    alt: 'Representative Boise Handyman Co worker painting white window trim over a protective drop cloth',
     topicTags: ["painting","paint touch-up","repairs","boise"],
     source: 'handyman',
   },
@@ -234,8 +234,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'first-time-homeowner-repair-handbook': {
-    hero: '/images/handyman/hero-door-repair.webp',
-    alt: 'Handyman adjusting a sticking white interior door in a bright Idaho home with a tool bag on a drop cloth nearby',
+    hero: '/images/handyman/hero-door-hinge-branded.webp',
+    alt: 'Representative Boise Handyman Co worker adjusting an interior door hinge',
     topicTags: ["first-time homeowner","repairs","diy","basics","boise"],
     source: 'handyman',
   },

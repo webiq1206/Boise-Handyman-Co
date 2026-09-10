@@ -7,7 +7,7 @@ export function StatementBandSection() {
     <section className="relative h-48 md:h-64 overflow-hidden">
       <Image
         src={SITE_IMAGES.statementBand}
-        alt="Warm, well-maintained living space in a Treasure Valley, Idaho home"
+        alt="Representative service image of a Boise Handyman Co worker painting window trim"
         fill
         loading="lazy"
         quality={65}

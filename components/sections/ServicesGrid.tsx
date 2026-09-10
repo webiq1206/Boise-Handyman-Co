@@ -68,7 +68,7 @@ export function ServicesGrid() {
               <div className="relative min-h-[clamp(280px,38vw,460px)] overflow-hidden">
                 <Image
                   src={getServiceBackground(lead.slug)}
-                  alt={`${lead.name} handyman service by ${SITE_CONFIG.name} in the Treasure Valley, Idaho`}
+                  alt={`${lead.name} representative handyman service imagery`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 55vw"
                   quality={72}
@@ -120,9 +120,11 @@ export function ServicesGrid() {
                   >
                     {service.planningFrom}
                   </span>
-                  <svg className="ed-arrow ml-3 self-center md:hidden" viewBox="0 0 22 15" fill="none" aria-hidden="true">
-                    <path d="M0 7.5h20M14 1.5l6 6-6 6" />
-                  </svg>
+                  <span className="ml-3 self-center md:hidden" aria-hidden="true">
+                    <svg className="ed-arrow" viewBox="0 0 22 15" fill="none">
+                      <path d="M0 7.5h20M14 1.5l6 6-6 6" />
+                    </svg>
+                  </span>
                 </p>
                 <span className="hidden md:block">
                   <svg

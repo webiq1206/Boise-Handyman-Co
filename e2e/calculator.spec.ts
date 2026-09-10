@@ -19,7 +19,7 @@ const stubLeadEndpoint = async (page: Page) => {
     route.fulfill({
       status: 200,
       contentType: "application/json",
-      body: JSON.stringify({ success: true }),
+      body: JSON.stringify({ success: true, accepted: true, duplicate: false, customerEmailAccepted: true }),
     }),
   );
 };
