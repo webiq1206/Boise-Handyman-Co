@@ -15,6 +15,7 @@ const selected=[...new Set(['/', '/contact','/about','/testimonials',...(routes.
  routes.find(r=>/^\/services\/[^/]+\/[^/]+$/.test(r)),
  routes.find(r=>/^\/guides\/[^/]+$/.test(r)),
  routes.find(r=>/^\/blog\/[^/]+$/.test(r)),
+ ...(process.env.P5_SITE==='handyman'?['/services/painting-touch-ups/eagle']:[]),
  ...(cabinet?['/catalog','/cabinets','/compare','/construction','/builders','/warranty']:[])
 ].filter(Boolean))];
 try {

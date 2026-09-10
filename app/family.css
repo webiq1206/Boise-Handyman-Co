@@ -660,3 +660,6 @@ main > div:first-of-type > div:first-of-type:not(section ~ div):not(.pt-0):not(.
   line-height: 1.5;
   letter-spacing: 0.08em;
 }
+
+/* Keep the sleeve branding and painting action inside both wide and tall crops. */
+img[src*="service-painting"] { object-position: 15% 15%; }
