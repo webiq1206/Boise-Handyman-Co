@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/MarketingImage";
 import dynamic from "next/dynamic";
 import { FAQSection } from "@/components/FAQSection";
 import { ConsultationForm } from "@/components/ConsultationForm";

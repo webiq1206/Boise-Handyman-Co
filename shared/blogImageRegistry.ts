@@ -114,7 +114,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'home-repairs-before-selling-boise': {
-    hero: '/images/handyman/front-door-repaint.webp',
+    hero: '/images/handyman/front-door-repaint-p5-reviewed-20260910.webp',
     alt: 'Representative freshly repainted sage-green front door with white trim and black hardware',
     topicTags: ["home repairs","selling a house","boise","punch list","repairs"],
     source: 'handyman',
@@ -150,7 +150,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'interior-paint-touch-up-guide': {
-    hero: '/images/handyman/service-painting.webp',
+    hero: '/images/handyman/service-painting-p5-reviewed-20260910.webp',
     alt: 'Representative Boise Handyman Co worker painting white window trim over a protective drop cloth',
     topicTags: ["painting","paint touch-up","repairs","boise"],
     source: 'handyman',

@@ -1,8 +1,19 @@
-/** Representative service imagery. Reuse within the same service is intentional;
- * city pages must never substitute an unrelated trade merely for variety. */
+/**
+ * Imagery for service pages, service-in-city pages, and area pages.
+ *
+ * Keys follow the handyman service catalog in shared/contentData.ts. Values
+ * point at the AI-generated handyman photo library in public/images/handyman
+ * (2026-08); swap for real job photography when it exists.
+ *
+ * City variants use a trade-specific shortlist. Relevant representative
+ * images may repeat across cities; unrelated work must never fill a slot.
+ * The rotation is deterministic between builds.
+ *
+ * Key format for CITY_SERVICE_IMAGES: "service-slug/city-slug"
+ */
 
 import { SITE_IMAGES } from "./siteImages";
-import { type LandingImageSet } from "./serviceBackgrounds";
+import { getServiceImageSet, type LandingImageSet } from "./serviceBackgrounds";
 
 const CITY_SLUGS = [
   "boise",
@@ -13,6 +24,7 @@ const CITY_SLUGS = [
   "star",
   "middleton",
   "caldwell",
+  "garden-city",
 ] as const;
 
 /** AI-generated handyman photo library (2026-08). */
@@ -21,17 +33,45 @@ const h = (name: string) => `/images/handyman/${name}.webp`;
 /**
  * Per-service rotation. The first entry is the service's primary image and is
  * what the service overview page uses; the rest supply the city variants.
- * Shortlists contain only that service; relevant reuse is intentional.
+ * Reuse within a service is intentional when only one suitable trade image exists.
  */
 const SERVICE_ROTATION: Record<string, readonly string[]> = {
-  "drywall-repair": [h("service-drywall-repair"), h("punch-list-markers")],
-  "painting-touch-ups": [h("service-painting"), h("front-door-repaint")],
-  "plumbing-repairs": [h("service-plumbing"), h("toilet-repair")],
-  "electrical-repairs": [h("service-electrical")],
-  "carpentry-trim-repair": [h("service-carpentry-trim-branded"), h("hero-door-hinge-branded"), h("door-hinge-fix")],
-  "mounting-assembly": [h("service-mounting"), h("cabinet-hardware-upgrade"), h("grab-bar-install")],
-  "fence-deck-gutter-repair": [h("service-fence-repair"), h("deck-board-replacement"), h("hero-gutter-cleaning")],
-  "home-maintenance": [h("service-caulking"), h("weatherstripping"), h("winterize-spigot"), h("punch-list-markers")],
+  "drywall-repair": [
+    h("service-drywall-repair"),
+    h("punch-list-markers"),
+  ],
+  "painting-touch-ups": [
+    h("service-painting-p5-reviewed-20260910"),
+    h("front-door-repaint-p5-reviewed-20260910"),
+  ],
+  "plumbing-repairs": [
+    h("service-plumbing"),
+    h("toilet-repair"),
+  ],
+  "electrical-repairs": [
+    h("service-electrical"),
+  ],
+  "carpentry-trim-repair": [
+    h("service-carpentry-trim-branded"),
+    h("hero-door-hinge-branded"),
+    h("door-hinge-fix"),
+  ],
+  "mounting-assembly": [
+    h("service-mounting"),
+    h("grab-bar-install"),
+    h("cabinet-hardware-upgrade"),
+  ],
+  "fence-deck-gutter-repair": [
+    h("service-fence-repair"),
+    h("deck-board-replacement"),
+    h("hero-gutter-cleaning"),
+  ],
+  "home-maintenance": [
+    h("service-caulking"),
+    h("weatherstripping"),
+    h("winterize-spigot"),
+    h("hero-gutter-cleaning"),
+  ],
 };
 
 function buildCityServiceImages(): Record<string, string> {
@@ -98,10 +138,13 @@ export function getCityServiceImageSet(
 
   return {
     hero,
+    // Keep the visible work within this trade. Related city pages may share
+    // a suitable representative photo when a distinct job image is unavailable.
     breather: rotation.length > 1
       ? rotation[(cityIndex + 1) % rotation.length]
-      : h("repair-materials"),
-    process: h("estimate-clipboard"),
+      : getServiceImageSet(serviceSlug).breather,
+    process: rotation.find(src => src !== hero && src !== rotation[(cityIndex + 1) % rotation.length])
+      ?? getServiceImageSet(serviceSlug).process,
   };
 }
 
