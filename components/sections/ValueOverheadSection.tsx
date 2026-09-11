@@ -66,21 +66,18 @@ export function ValueOverheadSection() {
             instead of as two equal columns.
           */}
           <Reveal delay={80}>
-            <figure className="ed-zoom relative m-0 lg:-mt-[clamp(60px,7vw,120px)]">
+            <div className="ed-zoom relative m-0 lg:-mt-[clamp(60px,7vw,120px)]">
               <div className="relative aspect-[4/5] overflow-hidden">
                 <Image
                   src={SITE_IMAGES.valueCraft}
                   loading="lazy"
-                  alt="Representative service image: a Boise Handyman Co worker fits white baseboard trim"
+                  alt="A Boise Handyman Co worker fitting white baseboard trim"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover img-brand-grade"
                 />
               </div>
-              <figcaption className="ed-small mt-4 border-t pt-4" style={{ borderColor: "var(--ed-line)" }}>
-                Trim installation · Representative imagery
-              </figcaption>
-            </figure>
+            </div>
           </Reveal>
         </div>
       </div>

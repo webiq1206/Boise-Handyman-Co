@@ -7,36 +7,36 @@ import { googleAdsConversionPayload } from "../lib/analytics";
 
 process.env.LEAD_FINGERPRINT_SECRET = "test-only-secret";
 const committed = new Set<string>();
+const inquiryToKeys = new Map<string, string[]>();
 let leadWrites = 0;
 const fakeDb = {
-  transaction: async (work: (tx: any) => Promise<unknown>) => {
-    let staged: string[] | undefined;
-    const tx = {
-      insert: () => ({
-        values: (row: { inquiryId?: string; duplicateKey?: string }) => {
-          // Ledger is the only insert that asks for conflict handling.
-          if (row.duplicateKey) return {
-            onConflictDoNothing: () => ({
-              returning: async () => {
-                if (committed.has(row.inquiryId!) || committed.has(row.duplicateKey!)) return [];
-                staged = [row.inquiryId!, row.duplicateKey!];
-                return [{ id: row.inquiryId }];
-              },
-            }),
-          };
-          return Promise.resolve(undefined); // PII lead insert is intentionally not retained.
-        },
-      }),
-    };
-    try {
-      const output = await work(tx);
-      staged?.forEach((key) => committed.add(key));
-      return output;
-    } catch (error) {
-      // Staged ledger entry is discarded, modeling transaction rollback.
-      throw error;
-    }
-  },
+  execute: async () => undefined,
+  insert: () => ({
+    values: (row: { inquiryId?: string; duplicateKey?: string }) => {
+      if (!row.duplicateKey) return Promise.resolve(undefined);
+      return {
+        onConflictDoNothing: () => ({
+          returning: async () => {
+            if (committed.has(row.inquiryId!) || committed.has(row.duplicateKey!)) return [];
+            const keys = [row.inquiryId!, row.duplicateKey!];
+            keys.forEach((key) => committed.add(key));
+            inquiryToKeys.set(row.inquiryId!, keys);
+            return [{ id: row.inquiryId }];
+          },
+        }),
+      };
+    },
+  }),
+  delete: () => ({
+    where: () => {
+      const pending = [...inquiryToKeys.entries()].at(-1);
+      if (pending) {
+        pending[1].forEach((key) => committed.delete(key));
+        inquiryToKeys.delete(pending[0]);
+      }
+      return Promise.resolve(undefined);
+    },
+  }),
 };
 const contact = { email: "person@example.test", phone: "2085550100" };
 async function save(id: string, scope = "painting|boise", fail = false) {

@@ -53,6 +53,21 @@ export function installEstimatorSessionsTestAdapter(opts: { db: Db; mailer: (ema
 function getDb(): Db | null {
   return dbOverride ?? appDb;
 }
+
+async function neonEmptyRowsAsArray<T>(query: Promise<T[]>): Promise<T[]> {
+  try {
+    return await query;
+  } catch (error) {
+    const cause = error && typeof error === "object" && "cause" in error
+      ? (error as { cause?: unknown }).cause
+      : null;
+    if (cause instanceof TypeError && cause.message === "Cannot read properties of null (reading 'map')") {
+      return [];
+    }
+    throw error;
+  }
+}
+
 const STEP_RE = /^[a-z0-9_. -]{1,60}$/i;
 
 /** Allow-listed selection keys. Anything else a client sends is dropped. */
@@ -208,7 +223,7 @@ export async function recordProgress(report: ProgressReport, now = new Date()): 
     clickedText: Boolean(recovery.text),
     dismissedPrompt: Boolean(recovery.dismissed),
     status: completed ? "completed" : "active",
-    completedAt: completed ? now : null,
+    ...(completed ? { completedAt: now } : {}),
     updatedAt: now,
   }).onConflictDoUpdate({
     target: estimatorSessions.id,
@@ -367,7 +382,7 @@ export async function sweepAbandonedSessions(opts: { now?: Date; limit?: number 
 
   const idleBefore = new Date(now.getTime() - INACTIVITY_MS);
   const lockExpired = new Date(now.getTime() - NOTIFY_LOCK_MS);
-  const candidates = await db.select({ id: estimatorSessions.id }).from(estimatorSessions)
+  const candidates = await neonEmptyRowsAsArray(db.select({ id: estimatorSessions.id }).from(estimatorSessions)
     .where(and(
       eq(estimatorSessions.status, "active"),
       eq(estimatorSessions.engaged, true),
@@ -376,13 +391,13 @@ export async function sweepAbandonedSessions(opts: { now?: Date; limit?: number 
       lt(estimatorSessions.notifyAttemptCount, MAX_NOTIFY_ATTEMPTS),
       or(isNull(estimatorSessions.notifyLockedAt), lt(estimatorSessions.notifyLockedAt, lockExpired)),
     ))
-    .limit(limit);
+    .limit(limit));
   result.considered = candidates.length;
 
   for (const { id } of candidates) {
     // Atomic claim: re-checks eligibility inside the UPDATE so a concurrent
     // worker or a completion that just landed cannot race us.
-    const claimed = await db.update(estimatorSessions)
+    const claimed = await neonEmptyRowsAsArray(db.update(estimatorSessions)
       .set({ notifyLockedAt: now, notifyAttemptCount: sql`${estimatorSessions.notifyAttemptCount} + 1`, updatedAt: now })
       .where(and(
         eq(estimatorSessions.id, id),
@@ -391,7 +406,7 @@ export async function sweepAbandonedSessions(opts: { now?: Date; limit?: number 
         lt(estimatorSessions.lastActivityAt, idleBefore),
         or(isNull(estimatorSessions.notifyLockedAt), lt(estimatorSessions.notifyLockedAt, lockExpired)),
       ))
-      .returning();
+      .returning());
     if (claimed.length === 0) continue;
     const session = claimed[0];
     try {
@@ -413,7 +428,9 @@ export async function sweepAbandonedSessions(opts: { now?: Date; limit?: number 
 
   // Sessions that were never engaged expire quietly; everything is purged after retention.
   const retentionCutoff = new Date(now.getTime() - RETENTION_DAYS * 24 * 3600 * 1000);
-  const purged = await db.delete(estimatorSessions).where(lt(estimatorSessions.createdAt, retentionCutoff)).returning({ id: estimatorSessions.id });
+  const purged = await neonEmptyRowsAsArray(
+    db.delete(estimatorSessions).where(lt(estimatorSessions.createdAt, retentionCutoff)).returning({ id: estimatorSessions.id }),
+  );
   result.purged = purged.length;
   const staleCutoff = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
   await db.update(estimatorSessions)

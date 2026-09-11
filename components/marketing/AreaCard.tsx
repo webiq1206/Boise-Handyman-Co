@@ -24,7 +24,7 @@ export function AreaCard({ city, imageSrc }: AreaCardProps) {
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={imageSrc || "/images/handyman/hero-door-hinge-branded.webp"}
-          alt={imageSrc ? `Homes in ${city.name}, Idaho served by Boise Handyman Co` : "Representative handyman service imagery: a Boise Handyman Co worker adjusts a door hinge"}
+          alt={imageSrc ? `Homes in ${city.name}, Idaho served by Boise Handyman Co` : "A Boise Handyman Co worker adjusting a door hinge"}
           fill
           sizes="(max-width: 640px) 100vw, 50vw"
           className="object-cover img-brand-grade transition-transform duration-300 ease-out group-hover:scale-[1.02]"

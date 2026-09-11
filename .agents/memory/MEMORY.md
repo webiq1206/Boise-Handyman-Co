@@ -5,3 +5,4 @@
 - [Catalog per-SF basis](catalog-per-sf-basis.md) — catalog SF rates are sometimes whole-dwelling per-finished-SF budgets and sometimes real per-surface trade rates; mixing them up silently triples a trade.
 - [Playwright on Nix](playwright-on-nix.md) — downloaded chromium can't load shared libs; run e2e with PLAYWRIGHT_CHROMIUM_PATH pointing at the Nix-built chrome.
 - [Accepted lead conversions](accepted-lead-conversions.md) — Ads/GA/Meta lead events require a new transactional inquiry-ledger acceptance; attempts, duplicates, and delivery retries never count.
+- [Neon HTTP result handling](neon-nullable-timestamps.md) — omit unset timestamps and narrowly normalize the adapter's null empty-row response.
