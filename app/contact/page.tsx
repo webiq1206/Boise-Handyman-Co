@@ -204,7 +204,7 @@ export default function ContactPage() {
         <section className="relative min-h-[520px] md:min-h-[72vh] flex items-end overflow-hidden bg-inverse">
           <Image
             src={SITE_IMAGES.hero}
-            alt="Representative repair work: a Boise Handyman Co worker adjusts an interior door hinge"
+            alt="A Boise Handyman Co worker adjusting an interior door hinge"
             fill
             className="object-cover opacity-[0.82] img-brand-grade"
             sizes="100vw"
@@ -379,7 +379,7 @@ export default function ContactPage() {
             <div className="relative min-h-[260px] md:min-h-[520px] overflow-hidden bg-inverse order-2 md:order-1">
               <Image
                 src={SITE_IMAGES.leadership}
-                alt="Representative consultation: a Boise Handyman Co worker reviews a repair list with a homeowner"
+                alt="A Boise Handyman Co worker reviewing a repair list with a homeowner"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover img-brand-grade"

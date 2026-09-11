@@ -24,7 +24,7 @@ export function getBlogImageForSlug(
 }
 
 export function getBlogImageAlt(slug: string): string {
-  return BLOG_IMAGE_REGISTRY[slug]?.alt ?? 'Representative handyman repair work';
+  return BLOG_IMAGE_REGISTRY[slug]?.alt ?? 'Handyman repair work';
 }
 
 export function getBlogHeroImage(
@@ -72,10 +72,10 @@ export interface ArticleInlineFigurePlacement {
  */
 const INLINE_HUB_ALTS: Record<string, string> = {
   "repairs-and-fixes": "Handyman tools arranged in a ready-to-go tool bag",
-  "installs-and-upgrades": "Representative handyman mounting work inside a home",
-  "home-maintenance": "Representative caulking work at an interior joint",
+  "installs-and-upgrades": "Handyman mounting work inside a home",
+  "home-maintenance": "Caulking work at an interior joint",
   "costs-and-hiring": "Calculator, blank clipboard and tape measure for repair planning",
-  "exterior-and-outdoor": "Representative gutter cleaning at a residential roof edge"
+  "exterior-and-outdoor": "Gutter cleaning at a residential roof edge"
 };
 
 export function getArticleInlineFigures(
@@ -98,8 +98,7 @@ export function getArticleInlineFigures(
         afterSectionIndex: Math.floor(sectionCount / 2),
         src: hubHero,
         alt: Object.values(BLOG_IMAGE_REGISTRY).find((image) => image.hero === hubHero)?.alt
-          ?? INLINE_HUB_ALTS[hubSlug] ?? `Representative ${hubSlug.replace(/-/g, ' ')} imagery`,
-        caption: 'Representative imagery for this guide.',
+          ?? INLINE_HUB_ALTS[hubSlug] ?? `${hubSlug.replace(/-/g, ' ')} project work`,
       });
     }
   }

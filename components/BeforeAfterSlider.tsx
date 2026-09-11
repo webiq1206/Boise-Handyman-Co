@@ -21,7 +21,6 @@ export function BeforeAfterSlider({
   afterSrc,
   beforeAlt,
   afterAlt,
-  caption,
   className = "",
   aspectClass = "aspect-[4/3]",
   sizes = "(max-width: 768px) 100vw, 1200px",
@@ -158,14 +157,6 @@ export function BeforeAfterSlider({
         />
       </div>
 
-      {/* Corner labels */}
-      <div className="absolute top-3 left-3 md:top-4 md:left-4 px-2.5 py-1 rounded-sm bg-inverse text-inverse-foreground text-caption tracking-[0.12em] uppercase font-normal pointer-events-none max-w-[43%] whitespace-normal break-words text-center">
-        Before
-      </div>
-      <div className="absolute top-3 right-3 md:top-4 md:right-4 px-2.5 py-1 rounded-sm bg-inverse text-inverse-foreground text-caption tracking-[0.12em] uppercase font-normal pointer-events-none max-w-[43%] whitespace-normal break-words text-center">
-        After
-      </div>
-
       {/* Divider line + drag handle */}
       <div
         className="absolute inset-y-0 z-10 w-px bg-inverse-foreground/90 pointer-events-none"
@@ -205,15 +196,6 @@ export function BeforeAfterSlider({
           <MoveHorizontal className="h-4 w-4" />
         </button>
 
-      {/* Caption */}
-      {caption && (
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-inverse/70 via-inverse/20 to-transparent pointer-events-none" />
-      )}
-      {caption && (
-        <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8 pointer-events-none">
-          {caption}
-        </div>
-      )}
     </div>
   );
 }

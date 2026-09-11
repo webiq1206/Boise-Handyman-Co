@@ -31,7 +31,12 @@ async function analyzeBatch(text: string, files: AnalysisFile[], previous: Scope
       messages: [{ role: "user", content }], output_config: { format: { type:"json_schema", schema:EXTRACTION_JSON_SCHEMA } },
     }),
   });
-  if (!response.ok) throw new Error(response.status === 429 ? "analysis-busy" : "analysis-failed");
+  if (!response.ok) {
+    if (response.status === 401 || response.status === 403) throw new Error("analysis-unconfigured");
+    if (response.status === 404) throw new Error("analysis-model-unavailable");
+    if (response.status === 408 || response.status === 429 || response.status >= 500) throw new Error("analysis-busy");
+    throw new Error("analysis-invalid-request");
+  }
   const body = await response.json();
   if (body.stop_reason !== "end_turn") throw new Error("analysis-incomplete");
   const resultText = body.content?.find((part: {type:string}) => part.type === "text")?.text;
@@ -61,7 +66,11 @@ export async function analyzeScope(text:string,files:AnalysisFile[],previous:Sco
   await Promise.all(Array.from({length:Math.min(3,units.length)},async()=>{
     while(position<units.length){const index=position++;const unit=units[index];
       try{const remaining=deadline-Date.now();if(remaining<1000)throw new Error("analysis-time-budget");const value=await analyzeBatch(text,unit,previous,request,Math.min(120000,remaining));parts[index]=value.extraction;last=value;}
-      catch(error){failed.push(`${unit[0].name}: automatic read failed. Review this page before publishing a price.`);}
+       catch(error){
+         const code=error instanceof Error?error.message:"analysis-failed";
+         if(["analysis-unconfigured","analysis-model-unavailable","analysis-busy"].includes(code))throw error;
+         failed.push(`${unit[0].name}: automatic read failed. Review this page before publishing a price.`);
+       }
     }
   }));
   if(!last)throw new Error("analysis-failed");
