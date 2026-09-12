@@ -10,6 +10,7 @@ import { SCOPE_BATCH_LIMIT,SCOPE_TEXT_LIMIT,SCOPE_FILE_COUNT,SCOPE_UPLOAD_HELP }
 import { draftCredentials,readDraft,readUploads,saveUpload,saveDraft,DraftError } from "./store";
 import { failed,json,limitedBody,protectRequest } from "./http";
 import { ESTIMATOR_BRAND } from "./brand";
+import {withoutInstructionAnswers} from './clarifications';
 export async function postScope(request:Request){
   try{
     protectRequest(request,1000);const {id,key}=draftCredentials(request);let draft=await readDraft(id,key);
@@ -34,8 +35,10 @@ export async function postScope(request:Request){
     const checkpointed=form.get("resumable")==="true"&&process.env.P5_OBJECT_STORAGE_ENABLED==="true";
     const stored=checkpointed?[]:await readUploads(id,key);if(stored.reduce((n,f)=>n+f.data.length,0)>SCOPE_BATCH_LIMIT)throw new DraftError(SCOPE_UPLOAD_HELP,413);
     const version=createHash("sha256").update(JSON.stringify([text,draft.uploads.map(f=>f.sha256)])).digest("hex");
-    const resolutions=draft.wizard?.sourceVersion===version?draft.wizard.resolutions:{};
-    const visitorAnswers=applyCabinetIntent(text,ESTIMATOR_BRAND.services,manualScopeAnswers(draft.answers,draft.extraction,draft.wizard?.resolutions)).answers;
+    const sameSource=draft.wizard?.sourceVersion===version;
+    const resolutions=sameSource?draft.wizard?.resolutions||{}:{};
+    const sourceAnswers=sameSource?draft.answers:{...draft.answers,estimatingInstructions:withoutInstructionAnswers(draft.answers.estimatingInstructions,draft.wizard?.instructionAnswers)};
+    const visitorAnswers=applyCabinetIntent(text,ESTIMATOR_BRAND.services,manualScopeAnswers(sourceAnswers,draft.extraction,draft.wizard?.resolutions)).answers;
     let analysis=null;let warning="";
     try{
       if(checkpointed){
@@ -59,13 +62,13 @@ export async function postScope(request:Request){
     }
     if(analysis)analysis.extraction=applyCabinetIntent(text,ESTIMATOR_BRAND.services,visitorAnswers,analysis.extraction).extraction!;
     const extraction=analysis?.extraction||draft.extraction;
-    const merged=analysis?reconcileScope(visitorAnswers,analysis.extraction,resolutions):{answers:draft.answers,conflicts:[]};
-    const wizard={instructionAnswers:draft.wizard?.instructionAnswers||[],skipped:draft.wizard?.skipped||[],resolutions,sourceVersion:analysis?version:draft.wizard?.sourceVersion};
+    const merged=analysis?reconcileScope(visitorAnswers,analysis.extraction,resolutions):{answers:sourceAnswers,conflicts:[]};
+    const wizard={instructionAnswers:sameSource?draft.wizard?.instructionAnswers||[]:[],skipped:sameSource?draft.wizard?.skipped||[]:[],resolutions,sourceVersion:analysis?version:draft.wizard?.sourceVersion};
     // Partial analysis is visible and prevents unread documents from being priced.
     const safeExtraction=warning?{...extraction,summary:extraction?.summary||text,facts:extraction?.facts||[],conflicts:extraction?.conflicts||[],missingInformation:extraction?.missingInformation||[],reviewNotes:[...new Set([...(extraction?.reviewNotes||[]),warning])]}:extraction;
     const saved=await saveDraft(id,key,ESTIMATOR_BRAND.id,{text,answers:merged.answers,extraction:safeExtraction,reviewed:null,contact:draft.contact,wizard},draft.revision);
     if(requested.some(digest=>!saved.uploads.some(file=>file.sha256===digest)))throw new DraftError("Some files could not be confirmed. Please retry; duplicate files will not be added twice.",503);
     const pricedFields=await costQuestionFields(saved.answers);
-    return json({draft:saved,analysis,warning,conflicts:merged.conflicts,pricedFields,questions:scopeQuestions(saved.answers,safeExtraction,merged.conflicts,wizard.skipped,pricedFields)});
+    return json({draft:saved,analysis,warning,conflicts:merged.conflicts,pricedFields,questions:scopeQuestions(saved.answers,safeExtraction,merged.conflicts,wizard.skipped,pricedFields,wizard.instructionAnswers)});
   }catch(error){return failed(error);}
 }

@@ -63,3 +63,14 @@
 @media(max-width:580px){.actions .primary{flex:1 1 100%;width:100%}.root .question h2{font-size:22px}.choices{grid-template-columns:1fr}.loadingCard .processingActivity{margin-top:14px}}
 
 .inputTools[data-dragging=true] .attach{outline:3px solid var(--p5-accent);outline-offset:3px;background:#46584e}
+
+/* The final action stays part of the form, but remains reachable while a long
+   review is being read on a phone. The opaque rail also gives the focused
+   contact controls a reliable visual boundary above it. */
+.finalActions{scroll-margin-bottom:140px}
+@media(max-width:767px){
+ .formBody{scroll-padding-bottom:calc(112px + env(safe-area-inset-bottom,0px));padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+ .finalActions{position:sticky!important;bottom:0;z-index:4;margin:24px -18px 0;padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));background:#2c302f;border-top:1px solid #65706a;box-shadow:0 -8px 18px #2c302f}
+ .finalActions .primary{width:100%;min-height:54px}
+ .formBody:has(input:not([type=checkbox]):focus,textarea:focus,select:focus) .finalActions{position:static!important;margin-left:0;margin-right:0;padding-left:0;padding-right:0;border-top:0;box-shadow:none}
+}

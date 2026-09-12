@@ -8,7 +8,8 @@ import {emptyInstructions} from '../lib/p5/instructions.ts';
 import {ESTIMATOR_BRAND as brand} from '../lib/p5/brand.ts';
 const base=process.env.P5_TEST_BASE_URL||'http://127.0.0.1:5000';
 await mkdir('p5-verification',{recursive:true});
-const browser=await (process.env.P5_TEST_BROWSER==='webkit'?webkit:chromium).launch();const results=[];
+const browserType=process.env.P5_TEST_BROWSER==='webkit'?webkit:chromium;
+const browser=await browserType.launch(process.env.PLAYWRIGHT_CHROMIUM_PATH&&browserType===chromium?{executablePath:process.env.PLAYWRIGHT_CHROMIUM_PATH}:{});const results=[];
 const service=brand.services.includes('bathroom')?'bathroom':brand.services.includes('handyman')?'handyman':brand.services.includes('cabinet-install')?'cabinet-install':'new-construction';
 const fullAnswers={service,taskList:'Complete the specified work. Repair three interior doors.',...(service.startsWith('cabinet-')?{cabinetRoom:'kitchen',cabinetBaseLf:'20',cabinetUpperLf:'0'}:service==='handyman'?{}:{sqft:'80',materials:'Porcelain tile',demolition:'Remove old finishes'})};
 const result={status:'preliminary',range:{low:1000,high:1800},categoryRanges:[{category:'Carpentry',low:1000,high:1800}],lineItems:[{id:'repair',category:'Carpentry',description:'Repair three interior doors',quantity:3,unit:'EA',low:1000,high:1800,unitLow:1000/3,unitHigh:600}],summary:'Synthetic fixture scope.',includedCategories:[],allowances:[],assumptions:[],exclusions:[],factors:[],nextStep:'Schedule a scope review.',message:'Synthetic planning range.',disclaimer:'This is not a bid, quote, offer or guaranteed price.'};
@@ -27,11 +28,12 @@ async function mock(context,{interruptions=false,scenario='full'}={}){
    const input=request.postDataJSON();const old=state.saved;
    if(input.clarification){
     if(state.failClarification){state.failClarification=false;return send({error:'Temporary answer-save interruption. Please retry.'},503);}
-    const prompt=instructionPrompts(old.extraction,old.answers).find(q=>q.id===input.clarification.id);
+     const prompt=instructionPrompts(old.extraction,old.answers,old.wizard?.instructionAnswers).find(q=>q.id===input.clarification.id);
+     input.wizard={...input.wizard,instructionAnswers:[...(old.wizard?.instructionAnswers||[]),{id:prompt.id,question:prompt.detail||prompt.question,answer:input.clarification.answer}]};
     old.extraction={...old.extraction,instructions:{...old.extraction.instructions,questions:old.extraction.instructions.questions.filter(q=>q!==(prompt.detail||prompt.question))}};
    }state.saved={...old,...input,revision:(old?.revision||0)+1,status:'draft',extraction:old?.extraction||null,uploads:old?.uploads||[]};
    const conflicts=state.saved.extraction?reconcileScope(state.saved.answers,state.saved.extraction,state.saved.wizard?.resolutions).conflicts:[];
-   return send({draft:state.saved,conflicts,pricedFields:[],questions:scopeQuestions(state.saved.answers,state.saved.extraction,conflicts,state.saved.wizard?.skipped)});
+    return send({draft:state.saved,conflicts,pricedFields:[],questions:scopeQuestions(state.saved.answers,state.saved.extraction,conflicts,state.saved.wizard?.skipped,[],state.saved.wizard?.instructionAnswers)});
   }
   if(endpoint==='scope'){
    state.scopeCalls++;if(state.failUpload){state.failUpload=false;return send({error:'Synthetic upload interruption. Your saved work is intact.'},503);}
@@ -58,6 +60,28 @@ async function mock(context,{interruptions=false,scenario='full'}={}){
  });return state;
 }
 async function overflow(page){assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Horizontal page overflow');}
+async function assertMobileFinalAction(page,width){
+ const action=page.locator('[data-p5-final-action]');assert.equal(await action.count(),1,'One final estimate action is rendered');
+ const position=await action.evaluate(el=>getComputedStyle(el).position);
+ if(width<768){
+  assert.equal(position,'sticky','Final estimate action is sticky on mobile');
+  await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
+  const visible=await action.evaluate(el=>{const r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom<=innerHeight+1;});
+  assert.ok(visible,'Sticky action remains within the mobile viewport');
+  const focused=page.getByLabel('Email',{exact:true});await focused.focus();await focused.scrollIntoViewIfNeeded();
+  assert.equal(await action.evaluate(el=>getComputedStyle(el).position),'static','Contact keyboard focus returns the action to document flow');
+  const clear=await page.evaluate(()=>{
+   const input=document.querySelector('[data-p5-estimator] input[type=email]');const bar=document.querySelector('[data-p5-final-action]');
+   if(!input||!bar)return false;const a=input.getBoundingClientRect(),b=bar.getBoundingClientRect();
+   return a.bottom<=b.top+1||a.top>=b.bottom-1;
+  });
+  assert.ok(clear,'Focused contact field does not sit beneath the sticky action');
+  await page.getByText('Add or edit project information',{exact:true}).click();
+  const scope=page.getByLabel('Tell us about your project',{exact:true});await scope.focus();await scope.scrollIntoViewIfNeeded();
+  assert.equal(await action.evaluate(el=>getComputedStyle(el).position),'static','Project editing also returns the action to document flow');
+  await scope.blur();assert.equal(await action.evaluate(el=>getComputedStyle(el).position),'sticky','Sticky action returns after keyboard editing');
+ }else assert.equal(position,'static','Final estimate action remains in document flow on wider screens');
+}
 async function capture(page,name){await page.evaluate(async()=>{await document.fonts.ready;document.documentElement.style.scrollBehavior='auto';if(document.activeElement instanceof HTMLElement)document.activeElement.blur();window.scrollTo(0,0);});await page.screenshot({path:`p5-verification/${name}.png`,fullPage:true,animations:'disabled'});}
 for(const width of [320,390,430,768,1024,1440,1920]){
  const context=await browser.newContext({viewport:{width,height:900},hasTouch:width<768});const state=await mock(context,{interruptions:true});
@@ -75,6 +99,10 @@ for(const width of [320,390,430,768,1024,1440,1920]){
   await page.evaluate(()=>{const key='p5-project-draft-v2';const draft=JSON.parse(localStorage.getItem(key));draft.step=1;localStorage.setItem(key,JSON.stringify(draft));});
   await page.reload();await estimator.getByRole('button',{name:'Get my estimate',exact:true}).waitFor();await estimator.getByRole('checkbox').waitFor();
   assert.equal(await estimator.getByRole('region',{name:'Project question'}).count(),0,'Restored known facts were asked again');
+   await assertMobileFinalAction(page,width);
+   await estimator.getByRole('button',{name:'Get my estimate',exact:true}).click();
+   await estimator.getByRole('alert').filter({hasText:'Please confirm your project details before continuing.'}).waitFor();
+   assert.equal(state.submissions,0,'Confirmation is required before submission');
   await estimator.getByLabel('Your name',{exact:true}).fill('Synthetic Test');await estimator.getByLabel('Email',{exact:true}).fill('customer@example.invalid');
   await estimator.getByRole('button',{name:'Back to my project',exact:true}).click();await estimator.getByText('Uploaded',{exact:true}).waitFor();assert.match(await description.inputValue(),/LongUnbroken/);
   const calls=state.scopeCalls;await estimator.getByRole('button',{name:'Continue',exact:true}).click();await estimator.getByLabel('Email',{exact:true}).waitFor();assert.equal(await estimator.getByLabel('Email',{exact:true}).inputValue(),'customer@example.invalid');assert.equal(state.scopeCalls,calls,'Going back unnecessarily repeated analysis');
@@ -85,7 +113,7 @@ for(const width of [320,390,430,768,1024,1440,1920]){
   await estimator.getByRole('heading',{name:'Carpentry',exact:true}).waitFor();await estimator.getByText('Repair three interior doors',{exact:true}).waitFor();await overflow(page);
   assert.ok(!/overheadRecovery|operatingProfit|unitCost/.test(await estimator.innerText()));await capture(page,`${width}-result`);
   await page.waitForTimeout(2100);assert.equal(state.postSubmissionSaves,0);await page.reload();await estimator.getByText('Schedule a scope review.',{exact:true}).waitFor();assert.equal(state.submissions,1);assert.deepEqual(errors,[]);
-  results.push({width,passed:true,checks:['null receipt preserves files','single input and native keyboard dictation','typed and uploaded mixed input','failed upload and reload recovery','known facts skipped','back and contact preservation','manual text reanalysis','line-item privacy','single submission','result restoration','overflow']});
+   results.push({width,passed:true,checks:['null receipt preserves files','single input and native keyboard dictation','typed and uploaded mixed input','failed upload and reload recovery','known facts skipped','mobile sticky action and focused-field clearance','back and contact preservation','manual text reanalysis','line-item privacy','single submission','result restoration','overflow']});
  }catch(error){results.push({width,passed:false,error:String(error),pageErrors:errors});await capture(page,`${width}-failure`).catch(()=>{});}await context.close();
 }
 // Reproduce two clarification questions, a failed save, same-answer retry and reload.

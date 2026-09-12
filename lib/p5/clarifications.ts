@@ -3,18 +3,24 @@ import type {ScopeAnswers,ScopeExtraction} from './scope.ts';
 export interface InstructionAnswer {id:string;question:string;answer:string}
 export interface InstructionPrompt {id:string;question:string;detail?:string;values?:string[]}
 export const questionKey=(text:string)=>text.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+export function withoutInstructionAnswers(value:string|undefined,prior:InstructionAnswer[]=[]){
+  if(!value||!prior.length)return value||'';
+  const answered=new Set(prior.map(item=>`Question: ${item.question}\nAnswer: ${item.answer}`));
+  return value.split(/\n{2,}/).map(part=>part.trim()).filter(part=>part&&!answered.has(part)).join('\n\n');
+}
 const serviceQuestion=(text:string)=>/which .*services|what .*remodel.*service|company.s scope|typical .*services|offered.*services|services.*offered|residential remodel|boise .*estimate|requested subset/i.test(text);
 
 /** One question per card, including older extractions that stored paragraphs. */
-export function instructionPrompts(extraction:ScopeExtraction|null,answers:ScopeAnswers):InstructionPrompt[]{
+export function instructionPrompts(extraction:ScopeExtraction|null,answers:ScopeAnswers,prior:InstructionAnswer[]=[]):InstructionPrompt[]{
   const result:InstructionPrompt[]=[];
+  const answered=new Set(prior.map(item=>item.id));
   for(const raw of extraction?.instructions?.questions||[]){
     for(const part of raw.match(/[^?]+\??/g)||[]){
       const full=part.replace(/\s+/g,' ').trim();if(!full)continue;
       // Filter each question separately so a legacy paragraph cannot lose a real scope decision.
       if(serviceQuestion(full))continue;
       const id=questionKey(full);
-      if(result.some(q=>q.id===id))continue;
+      if(answered.has(id)||result.some(q=>q.id===id))continue;
       const question=full.length<=240?full:'What should we include for this part of your project?';
       const values=/labor.only/i.test(full)&&/materials.only/i.test(full)?['Labor only','Materials only','Labor and materials']:
         /include or exclude|include.*or.*exclude/i.test(full)?['Include it','Exclude it']:undefined;

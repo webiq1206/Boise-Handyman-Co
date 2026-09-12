@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {instructionPrompts} from '../lib/p5/clarifications.ts';
+import {instructionPrompts,withoutInstructionAnswers} from '../lib/p5/clarifications.ts';
 import {require as tsxRequire} from 'tsx/cjs/api';
 import {pathToFileURL} from 'node:url';
 const resolver=()=>tsxRequire('../lib/p5/clarificationAnswer.ts',pathToFileURL(`${process.cwd()}/tests/p5-clarifications.test.ts`).href) as typeof import('../lib/p5/clarificationAnswer.ts');
@@ -18,6 +18,18 @@ test('legacy company-fit questions use the service picker instead of an instruct
   const q=scopeQuestions({},e);assert.equal(q.some(q=>q.instructionId),false);assert.ok(q.find(q=>q.field==='service')?.values?.length);
   e.instructions!.questions=['Which of the following services does your estimate cover? Should we include or exclude painting?'];
   assert.deepEqual(instructionPrompts(e,{}).map(q=>q.question),['Should we include or exclude painting?']);
+});
+test('answered questions stay resolved for the same scope without hiding changed questions',()=>{
+  const e=scope();const answered=instructionPrompts(e,{})[1];
+  const history=[{id:answered.id,question:answered.question,answer:'Exclude it'}];
+  assert.deepEqual(instructionPrompts(e,{},history).map(q=>q.question),['Labor only or materials only?']);
+  e.instructions!.questions=['Should we include or exclude flooring?'];
+  assert.deepEqual(instructionPrompts(e,{},history).map(q=>q.question),['Should we include or exclude flooring?']);
+});
+test('replacement scopes discard prior clarification transcripts but preserve typed instructions',()=>{
+  const history=[{id:'painting',question:'Should we include painting?',answer:'Exclude it'}];
+  const value='Keep the first-floor trim.\n\nQuestion: Should we include painting?\nAnswer: Exclude it';
+  assert.equal(withoutInstructionAnswers(value,history),'Keep the first-floor trim.');
 });
 test('clarification updates instructions without sending documents or changing page coverage',async()=>{
   const {resolveInstructionAnswer}=await resolver();

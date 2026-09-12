@@ -34,7 +34,7 @@ export function P5Estimator({defaultService='',headingAs='h1',projectSource}:{de
   const apply=(next:BrowserDraft)=>{current.current=next;setDraft(next);if(!persistBrowserDraft(next))setStatus('Keep this page open. This browser cannot save your work on this device.');};
   const change=(update:Partial<BrowserDraft>)=>{if(!current.current)return;apply({...current.current,...update,dirty:true,updatedAt:Date.now()});setConfirmed(false);};
   const changeContact=(key:keyof BrowserDraft['contact'],value:string)=>{const latest=current.current;if(latest)change({contact:{...latest.contact,[key]:value}});};
-  const questions=(d:BrowserDraft)=>scopeQuestions(d.answers,d.extraction,d.conflicts||[],d.wizard?.skipped||[],d.pricedFields||[]);
+  const questions=(d:BrowserDraft)=>scopeQuestions(d.answers,d.extraction,d.conflicts||[],d.wizard?.skipped||[],d.pricedFields||[],d.wizard?.instructionAnswers||[]);
   const resume=(d:BrowserDraft)=>{const next=questions(d)[0]||null;setActive(next);setClarificationReply(d.pendingReply?.id===next?.instructionId?d.pendingReply?.answer||'':'');apply(resumeWizardDraft(d,Boolean(next)));};
   const focus=()=>requestAnimationFrame(()=>{heading.current?.focus({preventScroll:true});heading.current?.scrollIntoView({block:'start',behavior:'instant'});});
   const showQuestions=(d:BrowserDraft)=>{const next=questions(d)[0]||null;setActive(next);if(!next){trackScopeEvent('repairsConfirmed',d.answers.service);trackScopeEvent('contactViewed',d.answers.service);}apply({...d,step:next?1:2});setInputOpen(false);setConfirmed(false);focus();};
@@ -205,7 +205,7 @@ export function P5Estimator({defaultService='',headingAs='h1',projectSource}:{de
           {draft.extraction?.instructions&&<P5EstimateDetails result={{instructions:draft.extraction.instructions,documentCoverage:draft.extraction.documentCoverage}}/>}
           {scopeAssumptions(draft.answers,draft.wizard?.skipped).length>0&&<details><summary>Assumptions and details to confirm</summary><ul>{scopeAssumptions(draft.answers,draft.wizard?.skipped).map(note=><li key={note}>{note}</li>)}</ul></details>}
           <label className={styles.check}><input type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)}/><span>These details reflect my project. I understand this is a preliminary estimate, subject to confirmed scope, selections and site conditions.</span></label>
-          <div className={styles.actions}><button className={styles.primary} type="submit">Get my estimate</button></div>
+          <div className={`${styles.actions} ${styles.finalActions}`} data-p5-final-action><button className={styles.primary} type="submit">Get my estimate</button></div>
         </>}
         <button className={styles.back} type="button" onClick={()=>{change({step:0});setError('');focus();}}>Back to my project</button>
       </>}
