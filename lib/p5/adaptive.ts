@@ -3,6 +3,9 @@ import {ESTIMATOR_BRAND} from './brand.ts';
 import {SCOPE_FIELDS,mergeScopeFacts,requiredScopeQuestions,validateAnswer,type ScopeAnswers,type ScopeField,type ScopeExtraction,type ScopeConflict} from './scope.ts';
 
 export interface ScopeQuestion {field:ScopeField;label:string;reason:string;values?:string[];conflict?:boolean;instructionId?:string;detail?:string}
+export const isExplicitProjectReplacement=(text:string)=>/\b(?:replace|replacing)\s+(?:the\s+)?(?:old|previous|existing)\b.{0,40}\b(?:project|scope)\b|\b(?:start|begin)(?:ing)?\s+(?:a\s+)?(?:completely\s+)?new\s+project\b|\bthis\s+is\s+a\s+new\s+project\b|\bstart\s+over\b/i.test(text);
+export const activeReplacementDigests=(persisted:readonly string[],requested:readonly string[],replace:boolean)=>new Set(replace?requested:[...persisted,...requested]);
+export const replacementUploadIds=<T extends {id:string;sha256:string}>(uploads:T[],activeDigests:ReadonlySet<string>)=>new Set(uploads.filter(file=>activeDigests.has(file.sha256)).map(file=>file.id));
 export function sameAnswer(field:ScopeField,a:string,b:string){
   if(SCOPE_FIELDS[field].kind==='number')return Number(a.replaceAll(',',''))===Number(b.replaceAll(',',''));
   return a.trim().toLowerCase()===b.trim().toLowerCase();

@@ -16,7 +16,7 @@ const result={status:'preliminary',range:{low:1000,high:1800},categoryRanges:[{c
 async function mock(context,{interruptions=false,scenario='full'}={}){
  // Keep synthetic estimator sessions out of production analytics and isolate third-party network failures.
  await context.route(/^https:\/\/([a-z0-9-]+\.)*clarity\.ms\//, route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
- const state={saved:null,nullReceipt:interruptions,failUpload:interruptions,submissions:0,postSubmissionSaves:0,scopeCalls:0,pricingPolls:0,readStage:1,finishReading:false,pricingStage:'mapping',failClarification:scenario==='instructions'};
+ const state={saved:null,nullReceipt:interruptions,failUpload:interruptions,submissions:0,postSubmissionSaves:0,scopeCalls:0,pricingPolls:0,readStage:1,finishReading:false,pricingStage:'mapping',failClarification:scenario==='instructions',lastReplace:null,lastActive:[]};
  await context.addInitScript(()=>{window.SpeechRecognition=class{start(){this.onresult?.({resultIndex:0,results:[Object.assign([{transcript:'Repair three interior doors.'}],{isFinal:true})]});this.onend?.();}stop(){this.onend?.();}};});
  await context.route('**/api/p5-estimator/**',async route=>{
   const request=route.request();const endpoint=new URL(request.url()).pathname.split('/').at(-1);
@@ -30,7 +30,9 @@ async function mock(context,{interruptions=false,scenario='full'}={}){
     if(state.failClarification){state.failClarification=false;return send({error:'Temporary answer-save interruption. Please retry.'},503);}
      const prompt=instructionPrompts(old.extraction,old.answers,old.wizard?.instructionAnswers).find(q=>q.id===input.clarification.id);
      input.wizard={...input.wizard,instructionAnswers:[...(old.wizard?.instructionAnswers||[]),{id:prompt.id,question:prompt.detail||prompt.question,answer:input.clarification.answer}]};
+      if(scenario==='cabinet-choice')input.answers={...input.answers,laborHours:'14',materials:'Matching painted MDF/wood',fixtureCount:'9',taskList:'Install two cabinet units, 9 knobs/pulls and selected bench top'};
     old.extraction={...old.extraction,instructions:{...old.extraction.instructions,questions:old.extraction.instructions.questions.filter(q=>q!==(prompt.detail||prompt.question))}};
+      if(scenario==='cabinet-choice'){old.extraction.facts=old.extraction.facts.filter(f=>f.field!=='laborHours');old.extraction.instructions={...old.extraction.instructions,inclusions:['Matching painted MDF/wood'],exclusions:['Butcher block','Laminate','Quartz']};}
    }state.saved={...old,...input,revision:(old?.revision||0)+1,status:'draft',extraction:old?.extraction||null,uploads:old?.uploads||[]};
    const conflicts=state.saved.extraction?reconcileScope(state.saved.answers,state.saved.extraction,state.saved.wizard?.resolutions).conflicts:[];
     return send({draft:state.saved,conflicts,pricedFields:[],questions:scopeQuestions(state.saved.answers,state.saved.extraction,conflicts,state.saved.wizard?.skipped,[],state.saved.wizard?.instructionAnswers)});
@@ -42,12 +44,14 @@ async function mock(context,{interruptions=false,scenario='full'}={}){
     const files=await Promise.all(form.getAll('files').map(async file=>({id:'test-upload',name:file.name,size:file.size,type:file.type,sha256:createHash('sha256').update(Buffer.from(await file.arrayBuffer())).digest('hex'),status:'stored'})));
     state.saved={...state.saved,uploads:files};return send({draft:state.saved,analysis:null});
    }
+    state.lastReplace=form.get('replace');state.lastActive=form.getAll('activeUploadSha256');
    if(scenario==='progress'&&!state.finishReading)return send({pending:true,progress:'Reading original plan pages',processing:{phase:'reading',message:'Reading the next eight original pages.',readPages:state.readStage*8,totalPages:256,readSections:state.readStage,totalSections:32,currentItems:['Plans.pdf (pages '+(state.readStage*8+1)+' to '+(state.readStage*8+8)+')'],updatedAt:new Date().toISOString()}});
-   const desired=scenario==='unavailable'?{}:scenario==='manual'?{service,taskList:state.saved.answers.taskList||'Repair three interior doors',...(service.startsWith('cabinet-')?{cabinetRoom:'kitchen',cabinetBaseLf:'20',cabinetUpperLf:'0'}:{})}:fullAnswers;
-   const extraction={summary:'Synthetic project',facts:Object.entries(desired).map(([field,value])=>({field,value,confidence:.98,source:'scope.txt',evidence:value})),conflicts:scenario==='conflict'?[{field:'taskList',values:['Repair three doors','Replace three doors'],explanation:'The documents disagree. Which work should be included?'}]:[],missingInformation:[],reviewNotes:[],clarifications:[]};
+    const desired=scenario==='unavailable'?{}:scenario==='cabinet-choice'?{service,laborHours:'10'}:scenario==='manual'?{service,taskList:state.saved.answers.taskList||'Repair three interior doors',...(service.startsWith('cabinet-')?{cabinetRoom:'kitchen',cabinetBaseLf:'20',cabinetUpperLf:'0'}:{})}:fullAnswers;
+    const extraction={summary:scenario==='cabinet-choice'?'Option 1: butcher block; Option 2: matching painted MDF/wood; Option 3: laminate; Option 4: quartz.':'Synthetic project',facts:Object.entries(desired).map(([field,value])=>({field,value,confidence:.98,source:'scope.txt',evidence:value})),conflicts:scenario==='conflict'?[{field:'taskList',values:['Repair three doors','Replace three doors'],explanation:'The documents disagree. Which work should be included?'}]:[],missingInformation:[],reviewNotes:[],clarifications:[]};
    if(scenario==='instructions')extraction.instructions={...emptyInstructions(),questions:['Labor only or materials only?','Should we include or exclude painting?']};
+    if(scenario==='cabinet-choice')extraction.instructions={...emptyInstructions(),questions:['Which bench top option should be included in the estimate?']};
    const merged=reconcileScope(state.saved.answers,extraction,state.saved.wizard?.resolutions||{});
-   state.saved={...state.saved,revision:state.saved.revision+1,answers:merged.answers,uploads:scenario==='manual'?[]:[{id:'test-upload',name:'scope.txt',size:30,type:'text/plain',sha256:'test',status:'stored'}],extraction};
+    state.saved={...state.saved,revision:state.saved.revision+1,answers:merged.answers,uploads:scenario==='manual'?[]:[{id:'test-upload',name:'scope.txt',size:30,type:'text/plain',sha256:'test',status:'stored'}],extraction,wizard:scenario==='cabinet-choice'?{...state.saved.wizard,replacementActive:true,activeUploadSha256:['test']}:state.saved.wizard};
    return send({draft:state.saved,analysis:{extraction},conflicts:merged.conflicts,pricedFields:[],warning:scenario==='unavailable'?'Your files are saved, but automatic reading could not finish. Retry or add the key details.':''});
   }
   if(endpoint==='submit'){
@@ -133,6 +137,32 @@ for(const width of [390,1440]){
   await est.getByLabel('Your name',{exact:true}).waitFor();assert.equal(state.scopeCalls,1,'Clarification answers never reread documents');await overflow(page);
   results.push({scenario:'sequential-instructions',width,passed:true});
  }catch(error){results.push({scenario:'sequential-instructions',width,passed:false,error:String(error)});await capture(page,`${width}-instructions-failure`).catch(()=>{});}await context.close();
+}
+
+// Exact retained four-option cabinet question applies selected scope without rereading documents.
+{
+ const context=await browser.newContext({viewport:{width:390,height:844}});const state=await mock(context,{scenario:'cabinet-choice'});const page=await context.newPage();
+ try{
+  await page.goto(base+'/estimate/p5-preview');const est=page.locator('[data-p5-estimator]');
+  await est.getByLabel('Tell us about your project',{exact:true}).fill('Price the retained cabinet document.');await est.getByRole('button',{name:'Continue',exact:true}).click();
+  const question=est.getByRole('region',{name:'Project question'});await question.getByText('Which bench top option should be included in the estimate?',{exact:true}).waitFor();
+  for(const value of ['Butcher block','Matching painted MDF/wood','Laminate','Quartz'])assert.equal(await question.getByRole('button',{name:value,exact:true}).count(),1);
+  await question.getByRole('button',{name:'Matching painted MDF/wood',exact:true}).click();
+  await question.getByLabel('Your answer',{exact:true}).fill('Option 2: matching painted MDF/wood bench top only. Exclude butcher block, laminate and quartz alternatives. Include the two cabinet units and 9 knobs/pulls. Assembly 2 hours + cabinet installation 8 hours + selected top fabrication/install 4 hours = 14 labor hours.');
+  await question.getByRole('button',{name:'Continue',exact:true}).click();await est.getByLabel('Your name',{exact:true}).waitFor();
+  assert.equal(state.scopeCalls,1,'Cabinet clarification does not reread the retained document');
+  assert.equal(state.saved.answers.laborHours,'14');assert.equal(state.saved.answers.materials,'Matching painted MDF/wood');assert.equal(state.saved.answers.fixtureCount,'9');
+  assert.deepEqual(state.saved.extraction.instructions.exclusions,['Butcher block','Laminate','Quartz']);
+  await est.getByRole('button',{name:'Back to my project',exact:true}).click();await est.getByRole('button',{name:'Start a different project',exact:true}).waitFor();
+  page.once('dialog',dialog=>dialog.accept());await est.getByRole('button',{name:'Start a different project',exact:true}).click();
+  await est.getByLabel('Tell us about your project',{exact:true}).fill('Paint the kitchen.');
+  await est.getByLabel('Upload project files',{exact:true}).setInputFiles({name:'paint.txt',mimeType:'text/plain',buffer:Buffer.from('Paint kitchen walls only.')});
+  await est.getByRole('button',{name:'Continue',exact:true}).click();
+  for(let attempt=0;attempt<100&&state.lastReplace===null;attempt++)await page.waitForTimeout(50);
+  assert.equal(state.lastReplace,'confirmed','Confirmed second project is an atomic replacement without magic wording');
+  assert.equal(state.lastActive.length,1,'Second project sends only its newly attached active source');
+  results.push({scenario:'cabinet-four-option',width:390,passed:true});
+ }catch(error){results.push({scenario:'cabinet-four-option',width:390,passed:false,error:String(error)});await capture(page,'390-cabinet-choice-failure').catch(()=>{});}await context.close();
 }
 
 // Project-specific missing questions and a single conflicting fact.

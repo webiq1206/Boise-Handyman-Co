@@ -1,7 +1,7 @@
 import {applyCabinetIntent} from "./projectIntent";
 import {advanceAnalysis} from "./analysisWork";
 import {queuedJob} from './backgroundJobs';
-import {reconcileScope,scopeQuestions,manualScopeAnswers} from "./adaptive";
+import {activeReplacementDigests,reconcileScope,scopeQuestions,manualScopeAnswers,isExplicitProjectReplacement,replacementUploadIds} from "./adaptive";
 import {costQuestionFields} from "./questionPolicy";
 import {createHash} from "node:crypto";
 import { analyzeScope } from "./extraction.ts";
@@ -32,20 +32,27 @@ export async function postScope(request:Request){
     for(const file of incoming)await saveUpload(id,key,file);
     if(incoming.length){draft=await readDraft(id,key);if(!draft)throw new DraftError("Saved project could not be restored. Please retry.",503);}
     if(form.get("analyze")==="false")return json({draft:await readDraft(id,key),analysis:null});
+    const replacementRequested=form.get('replace')==='confirmed'||form.get('replace')==='true'&&isExplicitProjectReplacement(text);
+    const requestedActive=form.getAll('activeUploadSha256').filter((value):value is string=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value));
+    const replacementActive=replacementRequested||draft.wizard?.replacementActive===true;
+    const activeDigests=replacementActive?activeReplacementDigests(draft.wizard?.activeUploadSha256||[],requestedActive,replacementRequested):new Set(draft.uploads.map(file=>file.sha256));
+    const activeIds=replacementActive?replacementUploadIds(draft.uploads,activeDigests):new Set(draft.uploads.map(file=>file.id));
+    const activeDraft=replacementActive?{...draft,uploads:draft.uploads.filter(file=>activeIds.has(file.id))}:draft;
     const checkpointed=form.get("resumable")==="true"&&process.env.P5_OBJECT_STORAGE_ENABLED==="true";
-    const stored=checkpointed?[]:await readUploads(id,key);if(stored.reduce((n,f)=>n+f.data.length,0)>SCOPE_BATCH_LIMIT)throw new DraftError(SCOPE_UPLOAD_HELP,413);
-    const version=createHash("sha256").update(JSON.stringify([text,draft.uploads.map(f=>f.sha256)])).digest("hex");
+    const stored=checkpointed?[]:(await readUploads(id,key)).filter(file=>activeIds.has(file.id));if(stored.reduce((n,f)=>n+f.data.length,0)>SCOPE_BATCH_LIMIT)throw new DraftError(SCOPE_UPLOAD_HELP,413);
+    const version=createHash("sha256").update(JSON.stringify([text,activeDraft.uploads.map(f=>f.sha256)])).digest("hex");
     const sameSource=draft.wizard?.sourceVersion===version;
+    const replacing=!sameSource&&replacementRequested;
     const resolutions=sameSource?draft.wizard?.resolutions||{}:{};
-    const sourceAnswers=sameSource?draft.answers:{...draft.answers,estimatingInstructions:withoutInstructionAnswers(draft.answers.estimatingInstructions,draft.wizard?.instructionAnswers)};
-    const visitorAnswers=applyCabinetIntent(text,ESTIMATOR_BRAND.services,manualScopeAnswers(sourceAnswers,draft.extraction,draft.wizard?.resolutions)).answers;
+    const sourceAnswers=replacing?{}:sameSource?draft.answers:{...draft.answers,estimatingInstructions:withoutInstructionAnswers(draft.answers.estimatingInstructions,draft.wizard?.instructionAnswers)};
+    const visitorAnswers=applyCabinetIntent(text,ESTIMATOR_BRAND.services,manualScopeAnswers(sourceAnswers,replacing?null:draft.extraction,resolutions)).answers;
     let analysis=null;let warning="";
     try{
       if(checkpointed){
         const background=form.get('background')==='true';
-        const job=background?await queuedJob({kind:'analysis',draft,text,answers:visitorAnswers},form.get('retry')==='true'):null;
+        const job=background?await queuedJob({kind:'analysis',draft:activeDraft,text,answers:visitorAnswers},form.get('retry')==='true'):null;
         if(job&&job.state!=='complete')return json({pending:job.state!=='failed',progress:job.progress,processing:job.processing,...(job.state==='failed'?{error:job.progress}:{})},job.state==='failed'?503:200);
-        const step=job?job.result:await advanceAnalysis(draft,text,visitorAnswers,fetch,form.get("retry")==="true");
+        const step=job?job.result:await advanceAnalysis(activeDraft,text,visitorAnswers,fetch,form.get("retry")==="true");
         if(step.pending)return json(step);
         analysis=step.analysis;
       }else{
@@ -61,9 +68,9 @@ export async function postScope(request:Request){
       warning="Your files are saved, but automatic reading could not finish. You can retry without uploading again, or add the key details below. Unread documents will need review before pricing.";
     }
     if(analysis)analysis.extraction=applyCabinetIntent(text,ESTIMATOR_BRAND.services,visitorAnswers,analysis.extraction).extraction!;
-    const extraction=analysis?.extraction||draft.extraction;
+    const extraction=analysis?.extraction||(replacing?null:draft.extraction);
     const merged=analysis?reconcileScope(visitorAnswers,analysis.extraction,resolutions):{answers:sourceAnswers,conflicts:[]};
-    const wizard={instructionAnswers:sameSource?draft.wizard?.instructionAnswers||[]:[],skipped:sameSource?draft.wizard?.skipped||[]:[],resolutions,sourceVersion:analysis?version:draft.wizard?.sourceVersion};
+    const wizard={instructionAnswers:sameSource?draft.wizard?.instructionAnswers||[]:[],skipped:sameSource?draft.wizard?.skipped||[]:[],resolutions,sourceVersion:analysis?version:draft.wizard?.sourceVersion,activeUploadSha256:replacementActive?[...activeDigests]:undefined,replacementActive};
     // Partial analysis is visible and prevents unread documents from being priced.
     const safeExtraction=warning?{...extraction,summary:extraction?.summary||text,facts:extraction?.facts||[],conflicts:extraction?.conflicts||[],missingInformation:extraction?.missingInformation||[],reviewNotes:[...new Set([...(extraction?.reviewNotes||[]),warning])]}:extraction;
     const saved=await saveDraft(id,key,ESTIMATOR_BRAND.id,{text,answers:merged.answers,extraction:safeExtraction,reviewed:null,contact:draft.contact,wizard},draft.revision);

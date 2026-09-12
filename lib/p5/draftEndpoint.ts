@@ -24,7 +24,7 @@ export async function putDraft(request:Request){
     let answers=deriveScopeAnswers(parseAnswers(raw.answers));const existing=await readDraft(id,key);
     const skipped=Array.isArray(raw.wizard?.skipped)?raw.wizard.skipped.filter((k:unknown)=>typeof k==="string"&&Object.hasOwn(SCOPE_FIELDS,k)&&k!=="service"):[];
     const resolutions=parseAnswers(raw.wizard?.resolutions||{});
-    const wizard={skipped,resolutions,sourceVersion:existing?.wizard?.sourceVersion,instructionAnswers:existing?.wizard?.instructionAnswers||[]};
+    const wizard={skipped,resolutions,sourceVersion:existing?.wizard?.sourceVersion,instructionAnswers:existing?.wizard?.instructionAnswers||[],activeUploadSha256:existing?.wizard?.activeUploadSha256,replacementActive:existing?.wizard?.replacementActive};
     // Provider extraction is immutable to public clients. Corrections live in answers.
     let extraction=existing?.extraction||null;
     if(raw.clarification){

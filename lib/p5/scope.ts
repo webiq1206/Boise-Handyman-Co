@@ -143,6 +143,8 @@ const NUMERIC_EVIDENCE:Partial<Record<ScopeField,RegExp>>={
   length:/\b(?:length|long)\b/i,width:/\b(?:width|wide)\b/i,rooms:/\brooms?\b/i,bathrooms:/\bbathrooms?\b/i,stories:/\b(?:stories|story)\b/i,
   cabinetBaseLf:/\b(?:base|lower)\b.{0,40}\b(?:linear feet|linear foot|lf)\b|\b(?:linear feet|linear foot|lf)\b.{0,40}\b(?:base|lower)\b/i,
   cabinetUpperLf:/\b(?:upper|wall)\b.{0,40}\b(?:linear feet|linear foot|lf)\b|\b(?:linear feet|linear foot|lf)\b.{0,40}\b(?:upper|wall)\b/i,
+  cabinetTallLf:/\btall\b.{0,40}\b(?:linear feet|linear foot|lf)\b|\b(?:linear feet|linear foot|lf)\b.{0,40}\btall\b/i,
+  countertopSqft:/\b(?:countertop|counter top|bench top|benchtop)\b.{0,40}\b(?:square feet|square foot|sq\.?\s*ft|sf)\b|\b(?:square feet|square foot|sq\.?\s*ft|sf)\b.{0,40}\b(?:countertop|counter top|bench top|benchtop)\b/i,
 };
 /** Keep model interpretation available for review without turning it into a pricing input. */
 export function protectPricingFacts(extraction: ScopeExtraction): ScopeExtraction {

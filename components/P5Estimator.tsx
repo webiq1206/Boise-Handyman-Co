@@ -6,7 +6,7 @@ import type {ProcessingStatus} from '@/lib/p5/processingStatus';
 import {useEffect,useId,useRef,useState} from 'react';
 import {ESTIMATOR_BRAND as brand} from '@/lib/p5/brand';
 import {SCOPE_FIELDS,SCOPE_TEXT_LIMIT,SCOPE_FILE_LIMIT,SCOPE_BATCH_LIMIT,SCOPE_FILE_COUNT,SCOPE_UPLOAD_HELP,type ScopeField,type ScopeAnswers,type ScopeUpload} from '@/lib/p5/scope';
-import {deriveScopeAnswers,reconcileScope,scopeQuestions,scopeAssumptions,validateScopeAnswer,type ScopeQuestion} from '@/lib/p5/adaptive';
+import {deriveScopeAnswers,isExplicitProjectReplacement,reconcileScope,scopeQuestions,scopeAssumptions,validateScopeAnswer,type ScopeQuestion} from '@/lib/p5/adaptive';
 import {loadBrowserDraft,newBrowserDraft,persistBrowserDraft,draftHeaders,cacheFiles,loadCachedFiles,clearCachedFiles,requireDraftReceipt,type BrowserDraft} from '@/lib/p5/browserDraft';
 import {mergeProjectSource,type ProjectSource} from '@/lib/p5/projectSource';
 import {resumeWizardDraft} from '@/lib/p5/wizardResume';
@@ -107,6 +107,7 @@ export function P5Estimator({defaultService='',headingAs='h1',projectSource}:{de
   async function analyze(){
     await ensureSourcePhoto();
     setBusy('Saving your project...');await save();const d=current.current!;const pending=[...filesRef.current];
+    const activeUploadSha256=[...(d.pendingActiveUploadSha256||[])];
     if(pending.length){
       setBusy('Uploading your files...');setUploadPercent(0);
       const large=pending.some(f=>f.size>10*1024*1024)||pending.reduce((n,f)=>n+f.size,0)>22*1024*1024;
@@ -114,10 +115,13 @@ export function P5Estimator({defaultService='',headingAs='h1',projectSource}:{de
       if(large)uploaded=await transferLargeFiles(pending,draftHeaders(d),setUploadPercent);
       else{const upload=new FormData();upload.set('analyze','false');for(const f of pending)upload.append('files',new Blob([await f.arrayBuffer()],{type:f.type}),f.name);uploaded=await transferProjectFiles(upload,draftHeaders(d),setUploadPercent);}
       const receipt=requireDraftReceipt(uploaded);
-      for(const f of pending){const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',await f.arrayBuffer()))).map(b=>b.toString(16).padStart(2,'0')).join('');if(!receipt.uploads.some(stored=>stored.sha256===digest))throw new Error(`${f.name}: upload was not confirmed. Please retry.`);}
-      apply({...current.current!,uploads:receipt.uploads,revision:receipt.revision});filesRef.current=[];setFiles([]);await clearCachedFiles(d.id).catch(()=>undefined);setUploadPercent(null);setStatus('Files uploaded and saved.');
+      for(const f of pending){const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',await f.arrayBuffer()))).map(b=>b.toString(16).padStart(2,'0')).join('');activeUploadSha256.push(digest);if(!receipt.uploads.some(stored=>stored.sha256===digest))throw new Error(`${f.name}: upload was not confirmed. Please retry.`);}
+      apply({...current.current!,uploads:receipt.uploads,revision:receipt.revision,pendingActiveUploadSha256:[...new Set(activeUploadSha256)]});filesRef.current=[];setFiles([]);await clearCachedFiles(d.id).catch(()=>undefined);setUploadPercent(null);setStatus('Files uploaded and saved.');
     }
     setBusy('Reading your documents and project details...');const form=new FormData();form.set('text',d.text);form.set('resumable','true');form.set('background','true');form.set('retry',d.analysisWarning?'true':'false');
+    if(d.pendingReplacement)form.set('replace','confirmed');
+    else if(isExplicitProjectReplacement(d.text)&&!d.wizard?.replacementActive)form.set('replace','true');
+    for(const digest of activeUploadSha256)form.append('activeUploadSha256',digest);
     let data:any;
     do{
     const response=await fetch('/api/p5-estimator/scope',{method:'POST',headers:draftHeaders(d),body:form,signal:AbortSignal.timeout(200000)});data=await response.json();form.set('retry','false');
@@ -125,7 +129,7 @@ export function P5Estimator({defaultService='',headingAs='h1',projectSource}:{de
     if(data.pending){setBusy(data.progress||'Reading your project...');if(data.processing)setProcessing(data.processing);await new Promise(r=>setTimeout(r,1000));}
     }while(data.pending);
     const saved=requireDraftReceipt(data);
-    const next={...current.current!,...saved,key:d.key,step:1,updatedAt:Date.now(),dirty:false,conflicts:data.conflicts||[],pricedFields:data.pricedFields||[],analysisWarning:data.warning||"",sourceImageUrl:projectSource?.imageUrl,analyzedText:d.text,analyzedAnswers:textAnswers(saved.answers)} as BrowserDraft;
+    const next={...current.current!,...saved,key:d.key,step:1,updatedAt:Date.now(),dirty:false,pendingReplacement:false,pendingActiveUploadSha256:[],conflicts:data.conflicts||[],pricedFields:data.pricedFields||[],analysisWarning:data.warning||"",sourceImageUrl:projectSource?.imageUrl,analyzedText:d.text,analyzedAnswers:textAnswers(saved.answers)} as BrowserDraft;
     apply(next);setWarning(data.warning||'');if(pending.length)trackScopeEvent(d.uploads?.length?'additionalDocuments':'documentUploaded',saved.answers.service);trackScopeEvent(data.warning?'analysisFailed':'analysisCompleted',saved.answers.service);filesRef.current=[];setFiles([]);
     try{await clearCachedFiles(d.id);}catch{setStatus('Files are uploaded. Local file cleanup will retry later.');}
     setStatus(data.warning?'Files uploaded. Some details still need review.':'Project details saved. We will only ask about what is missing.');showQuestions(next);
@@ -171,6 +175,11 @@ export function P5Estimator({defaultService='',headingAs='h1',projectSource}:{de
     await run('Preparing your estimate...',async()=>{trackScopeEvent('contactSubmitted',d.answers.service);const saved=await save(true);let retry=true;const data=await completeSubmission(()=>{const shouldRetry=retry;retry=false;return fetch('/api/p5-estimator/submit',{method:'POST',headers:{...draftHeaders(current.current!),'Content-Type':'application/json'},body:JSON.stringify({revision:saved.revision,background:true,retry:shouldRetry})});},(message,detail)=>{setBusy(message);setProcessing(detail||null);});setResult(data.result);setDelivery(data.delivery||[]);if(data.result?.range)trackScopeEvent('estimateGenerated',d.answers.service);if(data.delivery?.some((v:any)=>v.channel==='customer'&&v.status==='sent'))trackScopeEvent('estimateEmailed',d.answers.service);setStatus('');focus();});
   }
   const reply=(value:string)=>{setClarificationReply(value);if(active?.instructionId)change({pendingReply:{id:active.instructionId,answer:value}});};
+  const startDifferentProject=()=>{
+    if(!confirm('Start a different project? Your current answers will be cleared. Saved files remain in history but will not be reused unless you add them again.'))return;
+    const d=current.current!;filesRef.current=[];setFiles([]);void clearCachedFiles(d.id).catch(()=>undefined);
+    change({pendingReplacement:true,pendingActiveUploadSha256:[],text:'',answers:defaultService?{service:defaultService}:{},extraction:null,conflicts:[],analysisWarning:'',analyzedText:undefined,analyzedAnswers:undefined,wizard:{skipped:[],resolutions:{},replacementActive:false}});
+  };
   const field=(key:ScopeField)=>{const definition=SCOPE_FIELDS[key];const value=draft?.answers[key]||'';const fieldId=`${id}-${key}`;
     return <div key={key} className={styles.field}><label htmlFor={fieldId}>{definition.label}</label>{definition.kind==='choice'?<select id={fieldId} value={value} onChange={e=>answer(key,e.target.value)}><option value="">Choose an answer</option>{definition.options.filter(v=>key!=='service'||(brand.services as readonly string[]).includes(v)).map(v=><option key={v} value={v}>{key==='cabinetRoom'?v.replaceAll('-',' '):labels[v]||v.replaceAll('-',' ')}</option>)}</select>:definition.kind==='number'?<input id={fieldId} inputMode="decimal" value={value} onChange={e=>answer(key,e.target.value)} placeholder="Approximate is fine"/>:<textarea id={fieldId} rows={3} value={value} onChange={e=>answer(key,e.target.value)} />}</div>;};
   if(!draft)return <div className={styles.root} role="status">Loading your project...</div>;
@@ -179,6 +188,7 @@ export function P5Estimator({defaultService='',headingAs='h1',projectSource}:{de
     <div className={styles.inputTools} data-dragging={dragging} onDragEnter={e=>{e.preventDefault();setDragging(true);}} onDragOver={e=>e.preventDefault()} onDragLeave={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node|null))setDragging(false);}} onDrop={e=>{e.preventDefault();setDragging(false);void addFiles(e.dataTransfer.files);}}><label className={styles.attach} htmlFor={`${id}-files`}><span aria-hidden="true">↑</span><span><strong>Upload project files</strong><small>Scopes, blueprints, plans, notes, photos and more</small></span><input id={`${id}-files`} type="file" accept={accept} multiple aria-label="Upload project files" onChange={e=>{const input=e.currentTarget;const selected=Array.from(input.files||[]);void addFiles(selected).then(()=>{input.value='';});}}/></label></div>
     <p className={styles.hint}>Choose files or drag them here. PDFs, images, Word, spreadsheets and text. {SCOPE_UPLOAD_HELP}</p>
     {Boolean(files.length||draft.uploads?.length)&&<ul className={styles.files}>{draft.uploads?.map(f=><li key={f.id}><span>{f.name}</span><span className={styles.hint}>Uploaded</span></li>)}{files.map((f,i)=><li key={`${f.name}-${i}`}><span>{f.name}<small>Ready to upload</small></span><button type="button" aria-label={`Remove ${f.name}`} onClick={async()=>{const next=filesRef.current.filter((_,index)=>i!==index);filesRef.current=next;setFiles(next);try{await cacheFiles(draft.id,next);}catch{setStatus('File removed from this session. Local storage could not be updated.');}}}>Remove</button></li>)}</ul>}
+    {draft.wizard?.replacementActive&&!draft.pendingReplacement&&<button type="button" className={styles.secondary} onClick={startDifferentProject}>Start a different project</button>}
   </>;
   const known=Object.keys(draft.answers).filter(k=>draft.answers[k as ScopeField]?.trim()) as ScopeField[];
   const review=<details className={styles.known} open={knownOpen}><summary onClick={e=>{e.preventDefault();setKnownOpen(v=>!v);}}>{known.length?`${known.length} project details saved`:'Project details'}</summary><dl>{known.map(k=><div key={k}><dt>{SCOPE_FIELDS[k].label}</dt><dd>{labels[draft.answers[k]!]||draft.answers[k]} <button type="button" aria-label={`Edit ${SCOPE_FIELDS[k].label}`} onClick={()=>setEditField(k)}>Edit</button></dd></div>)}</dl>{editField&&<div>{field(editField)}<button type="button" onClick={()=>{const issue=validateScopeAnswer(editField,draft.answers[editField]||'');if(issue){setError(issue);return;}setEditField('');}}>Done</button></div>}</details>;

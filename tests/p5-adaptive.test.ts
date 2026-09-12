@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {deriveScopeAnswers,reconcileScope,scopeQuestions,scopeAssumptions,validateScopeAnswer} from '../lib/p5/adaptive.ts';
+import {activeReplacementDigests,deriveScopeAnswers,isExplicitProjectReplacement,reconcileScope,replacementUploadIds,scopeQuestions,scopeAssumptions,validateScopeAnswer} from '../lib/p5/adaptive.ts';
 import {requireDraftReceipt} from '../lib/p5/browserDraft.ts';
 import {validateExtraction,type ScopeAnswers,type ScopeExtraction} from '../lib/p5/scope.ts';
 const extracted=(answers:ScopeAnswers,confidence=.98):ScopeExtraction=>({summary:'Synthetic scope',facts:Object.entries(answers).map(([field,value])=>({field:field as keyof ScopeAnswers,value:value!,confidence,source:'scope.pdf',evidence:value!})),conflicts:[],reviewNotes:[],missingInformation:[]});
@@ -112,4 +112,13 @@ test("reanalysis replaces source facts while preserving visitor corrections",asy
  assert.deepEqual(manualScopeAnswers({demolition:"Remove flooring",sqft:"80",location:"Eagle"},previous),{location:"Eagle"});
  assert.equal(manualScopeAnswers({demolition:"Only remove vanity",sqft:"80"},previous).demolition,"Only remove vanity");
  assert.equal(manualScopeAnswers({sqft:"80"},previous,{sqft:"80"}).sqft,"80");
+  assert.equal(manualScopeAnswers({service:'bathroom',sqft:'80',taskList:'Old bathroom work'},previous,{}).sqft,undefined);
+  assert.equal(isExplicitProjectReplacement('This is a new project. Replace the old scope with drywall and painting only.'),true);
+  assert.equal(isExplicitProjectReplacement('Replacing the old bathroom scope with drywall and painting only.'),true);
+  assert.equal(isExplicitProjectReplacement('Add painting to the existing bathroom scope.'),false);
+  assert.equal(isExplicitProjectReplacement('Add a new project phase with a different project manager.'),false);
+  assert.deepEqual([...replacementUploadIds([{id:'old-pdf',sha256:'a'},{id:'new-pdf',sha256:'b'}],new Set(['b']))],['new-pdf']);
+  assert.deepEqual([...replacementUploadIds([{id:'old-pdf',sha256:'a'}],new Set())],[]);
+  assert.deepEqual([...activeReplacementDigests(['replacement-a'],['added-b'],false)],['replacement-a','added-b']);
+  assert.deepEqual([...activeReplacementDigests(['replacement-a','added-b'],['second-c'],true)],['second-c']);
 });
