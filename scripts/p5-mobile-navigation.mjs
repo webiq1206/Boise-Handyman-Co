@@ -1,7 +1,7 @@
 import {chromium} from '@playwright/test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-const parent=process.env.P5_PARENT==='1';const browser=await chromium.launch();
+const parent=process.env.P5_PARENT==='1';const browser=await chromium.launch(process.env.PLAYWRIGHT_CHROMIUM_PATH?{executablePath:process.env.PLAYWRIGHT_CHROMIUM_PATH}:{});
 const extraRoutes=[];
 if(await fs.stat('components/re10/Re10Wizard.tsx').catch(()=>null))extraRoutes.push('/re-10-repairs-boise');
 if(await fs.stat('components/plans/PlansWizard.tsx').catch(()=>null))extraRoutes.push('/remodel-plans-boise');

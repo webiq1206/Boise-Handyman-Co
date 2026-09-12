@@ -24,7 +24,7 @@ export async function putDraft(request:Request){
     let answers=deriveScopeAnswers(parseAnswers(raw.answers));const existing=await readDraft(id,key);
     const skipped=Array.isArray(raw.wizard?.skipped)?raw.wizard.skipped.filter((k:unknown)=>typeof k==="string"&&Object.hasOwn(SCOPE_FIELDS,k)&&k!=="service"):[];
     const resolutions=parseAnswers(raw.wizard?.resolutions||{});
-    const wizard={skipped,resolutions,sourceVersion:existing?.wizard?.sourceVersion,instructionAnswers:existing?.wizard?.instructionAnswers||[]};
+    const wizard={skipped,resolutions,sourceVersion:existing?.wizard?.sourceVersion,instructionAnswers:existing?.wizard?.instructionAnswers||[],activeUploadSha256:existing?.wizard?.activeUploadSha256,replacementActive:existing?.wizard?.replacementActive};
     // Provider extraction is immutable to public clients. Corrections live in answers.
     let extraction=existing?.extraction||null;
     if(raw.clarification){
@@ -33,7 +33,7 @@ export async function putDraft(request:Request){
       extraction=resolved.extraction;answers=resolved.answers;wizard.instructionAnswers=resolved.history;
       wizard.resolutions.estimatingInstructions=answers.estimatingInstructions;
     }
-    if(extraction?.instructions)extraction={...extraction,instructions:{...extraction.instructions,questions:instructionPrompts(extraction,answers).map(q=>q.detail||q.question)}};
+    if(extraction?.instructions)extraction={...extraction,instructions:{...extraction.instructions,questions:instructionPrompts(extraction,answers,wizard.instructionAnswers).map(q=>q.detail||q.question)}};
     const contact={name:String(raw.contact?.name||"").trim(),email:String(raw.contact?.email||"").trim().toLowerCase(),phone:String(raw.contact?.phone||"").trim()};
     if(contact.name.length>120||contact.email.length>200||contact.phone.length>40)throw new DraftError("Contact details are too long.");
     let reviewed:ReviewedScope|null=null;
@@ -49,6 +49,6 @@ export async function putDraft(request:Request){
     const draft=await saveDraft(id,key,ESTIMATOR_BRAND.id,{text:raw.text,answers,extraction,reviewed,contact,wizard},raw.revision);
     const pricedFields=await costQuestionFields(answers);
     const conflicts=extraction?reconcileScope(answers,extraction,resolutions).conflicts:[];
-    return json({draft,conflicts,questions:scopeQuestions(answers,extraction,conflicts,skipped,pricedFields),pricedFields});
+    return json({draft,conflicts,questions:scopeQuestions(answers,extraction,conflicts,skipped,pricedFields,wizard.instructionAnswers),pricedFields});
   }catch(error){return failed(error);}
 }
