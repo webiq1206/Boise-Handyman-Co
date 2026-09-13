@@ -1,84 +1,87 @@
 import {atomicInstructionQuestions,textBenchTopChoices,cabinetQuestionField} from './atomicQuestions.ts';
 import type {ScopeAnswers,ScopeExtraction,ScopeField} from './scope.ts';
+import type {ScopeInstructions} from './instructions.ts';
+import {isBenchTopClarificationQuestion,retainedBenchTopChoices,retainedChoiceValue} from './retainedClarification.ts';
 
 export interface InstructionAnswer {id:string;question:string;answer:string}
 export interface InstructionPrompt {id:string;question:string;detail?:string;values?:string[];field?:ScopeField}
 export const questionKey=(text:string)=>text.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
-const choiceText=(extraction:ScopeExtraction)=>[
-  extraction.summary,
-  ...Object.values(extraction.instructions||{}).flatMap(value=>Array.isArray(value)?value:[]),
-  ...(extraction.facts||[]).flatMap(f=>[f.value,f.evidence]),
-  ...(extraction.takeoffs||[]).flatMap(t=>[t.description,t.evidence,...t.issues]),
-  ...extraction.missingInformation,
-].filter(Boolean).join('\n');
-export function retainedChoiceValues(extraction:ScopeExtraction|null,question:string){
-  if(!extraction)return [];
-  const source=choiceText(extraction);
-  if(/\bbench\s*top\b|\bbenchtop\b|\bcounter\s*top\b|\bcountertop\b/i.test(question)){
-    const choices=[
-      {label:'Butcher block',pattern:/\bbutcher\s+block(?:\s+bench\s*top)?\b/i},
-      {label:'Matching painted MDF/wood',pattern:/\b(?:matching\s+)?painted\s+(?:mdf(?:\s*\/\s*wood)?|wood(?:\s*\/\s*mdf)?)(?:\s+bench\s*top)?\b/i},
-      {label:'Laminate',pattern:/\blaminate(?:\s+bench\s*top)?\b/i},
-      {label:'Quartz',pattern:/\bquartz(?:\s+bench\s*top)?\b/i},
-    ].map(choice=>({...choice,index:source.search(choice.pattern)})).filter(choice=>choice.index>=0).sort((a,b)=>a.index-b.index);
-    if(choices.length>=2)return choices.map(choice=>choice.label);
-  }
-  const numbered=[...source.matchAll(/\b(?:option|alternate)\s*(\d+)\s*[:.)-]\s*([^;\n|]{2,120})/gi)]
-    .sort((a,b)=>Number(a[1])-Number(b[1]))
-    .map(match=>match[2].trim().replace(/[.,]$/,''));
-  return numbered.length>=2?[...new Set(numbered)]:[];
-}
-const choiceTokens=(value:string)=>questionKey(value).split(' ').filter(token=>token.length>2&&!['bench','top','option','matching'].includes(token));
-const mentionsChoice=(text:string,value:string)=>choiceTokens(value).every(token=>questionKey(text).split(' ').includes(token));
-export function resolveInstructionChoice(values:string[]|undefined,answer:string){
-  if(!values?.length)return {selected:undefined as string|undefined,excluded:[] as string[],ambiguous:false};
-  const clauses=answer.split(/[.;\n]+/).map(part=>part.trim()).filter(Boolean);
-  const excludedByName=values.filter(value=>clauses.some(clause=>/\b(?:exclude|omit|not included|do not include)\b/i.test(clause)&&mentionsChoice(clause,value)));
-  const excludedByNumber=clauses.flatMap(clause=>/\b(?:exclude|omit|not included|do not include)\b/i.test(clause)?[...clause.matchAll(/\boption\s*(\d+)\b/gi)].map(match=>values[Number(match[1])-1]).filter(Boolean):[]);
-  const excluded=[...new Set([...excludedByName,...excludedByNumber])];
-  const option=[...answer.matchAll(/\boption\s*(\d+)\b/gi)]
-    .filter(match=>!/\b(?:exclude|omit|not included|do not include)\b/i.test(answer.slice(Math.max(0,match.index!-24),match.index!)))
-    .map(match=>values[Number(match[1])-1]).filter((value):value is string=>Boolean(value)&&!excluded.includes(value));
-  const named=values.filter(value=>!excluded.includes(value)&&clauses.some(clause=>mentionsChoice(clause,value)&&!/\b(?:exclude|omit|not included|do not include)\b/i.test(clause)));
-  const selected=[...new Set([...option,...named])];
-  return {selected:selected.length===1?selected[0]:undefined,excluded,ambiguous:selected.length>1};
-}
-export const contradictsChoices=(text:string,selected:string|undefined,excluded:string[])=>excluded.some(value=>mentionsChoice(text,value))||
-  Boolean(selected&&/\b(?:all|every|four|4)\b.{0,30}\b(?:options?|tops?|alternatives?)\b/i.test(text));
-export function withoutInstructionAnswers(value:string|undefined,prior:InstructionAnswer[]=[]){
-  if(!value||!prior.length)return value||'';
-  const answered=new Set(prior.map(item=>`Question: ${item.question}\nAnswer: ${item.answer}`));
-  return value.split(/\n{2,}/).map(part=>part.trim()).filter(part=>part&&!answered.has(part)).join('\n\n');
-}
 const serviceQuestion=(text:string)=>/which .*services|what .*remodel.*service|company.s scope|typical .*services|offered.*services|services.*offered|residential remodel|boise .*estimate|requested subset/i.test(text);
+const RESPONSIBILITY_CHOICES=['Labor only','Materials only','Labor and materials'] as const;
+
+const questionParts=(raw:string)=>raw.match(/[^?]+\??/g)||[];
+const normalizeQuestionPart=(part:string)=>part.replace(/\s+/g,' ').trim();
 
 /** One question per card, including older extractions that stored paragraphs. */
-export function instructionPrompts(extraction:ScopeExtraction|null,answers:ScopeAnswers,prior:InstructionAnswer[]=[]):InstructionPrompt[]{
+export function instructionPrompts(extraction:ScopeExtraction|null,answers:ScopeAnswers):InstructionPrompt[]{
   const result:InstructionPrompt[]=[];
-  const answered=new Set(prior.map(item=>item.id));
   for(const raw of extraction?.instructions?.questions||[]){
-    for(const part of (raw.match(/[^?]+\??/g)||[]).flatMap(part=>atomicInstructionQuestions(part,answers,extraction?.conflicts))){
-      const full=part.replace(/\s+/g,' ').trim();if(!full)continue;
+    for(const part of questionParts(raw).flatMap(part=>atomicInstructionQuestions(part,answers,extraction?.conflicts))){
+      const full=normalizeQuestionPart(part);if(!full)continue;
       // Filter each question separately so a legacy paragraph cannot lose a real scope decision.
       if(serviceQuestion(full))continue;
       const field=cabinetQuestionField(full);
       if(field&&answers[field]?.trim()&&!extraction?.conflicts.some(conflict=>conflict.field===field))continue;
       const id=questionKey(full);
-      if(answered.has(id)||result.some(q=>q.id===id))continue;
+      if(result.some(q=>q.id===id))continue;
       const question=full.length<=240?full:'What should we include for this part of your project?';
-      const retained=retainedChoiceValues(extraction,full);
-      const values=retained.length?retained:/labor.only/i.test(full)&&/materials.only/i.test(full)?['Labor only','Materials only','Labor and materials']:
+      const values=/labor.only/i.test(full)&&/materials.only/i.test(full)?['Labor only','Materials only','Labor and materials']:
         /include or exclude|include.*or.*exclude/i.test(full)?['Include it','Exclude it']:undefined;
-      result.push({id,question,...(field?{field}:{}),...(question!==full?{detail:full}:{}),values:/^Who should install the /i.test(full)?['Include installation in this estimate','Owner handles installation']:values?.length?values:textBenchTopChoices(extraction,full)});
+       // A retained-document choice card is built from extraction evidence,
+       // not from the wording of the question.  In particular, do not
+       // hard-code material options into a generic "bench top" question.
+       const retainedValues=isBenchTopClarificationQuestion(full)
+         ?(extraction?retainedBenchTopChoices(extraction):[]).map(retainedChoiceValue)
+         :undefined;
+       result.push({id,question,...(field?{field}:{}),...(question!==full?{detail:full}:{}),values:/^Who should install the /i.test(full)?['Include installation in this estimate','Owner handles installation']:retainedValues?.length?retainedValues:values?.length?values:textBenchTopChoices(extraction,full)});
     }
   }
   return result;
 }
 
+/** Only the three exact responsibility choices have a deterministic meaning. */
+export function exactResponsibilityChoice(value:string):{laborOnly:boolean;materialsOnly:boolean}|null{
+  if(value==='Labor only')return {laborOnly:true,materialsOnly:false};
+  if(value==='Materials only')return {laborOnly:false,materialsOnly:true};
+  if(value==='Labor and materials')return {laborOnly:false,materialsOnly:false};
+  return null;
+}
+
+const SCOPED_RESPONSIBILITY_MARKER=/\b(?:kitchen|bath(?:room)?|cabinet(?:ry|s)?|trim|floor(?:ing)?|first|second|third|fourth|upper|lower|main|garage|building|wing|unit|room|bedroom|addition|adu|new construction|scope item|trade|component|section|phase|area|part|fixture|vanity|countertop|tile|plumbing|electrical|mechanical|structural|roof|door|window)\b/i;
+const PROJECT_WIDE_RESPONSIBILITY_MARKER=/\b(?:project[- ]wide|whole project|entire project|overall project|for (?:the )?project|project responsibility|scope as a whole|overall scope)\b/i;
+
+/** Local flags apply only to an unscoped canonical question or an explicit
+ * project-wide question. A question that names a trade, building, floor or
+ * component still needs provider interpretation before any global flag moves. */
+export function isResponsibilityPrompt(prompt:InstructionPrompt){
+  if(!(prompt.values?.length===RESPONSIBILITY_CHOICES.length
+    && RESPONSIBILITY_CHOICES.every((choice,index)=>prompt.values?.[index]===choice)))return false;
+  const text=(prompt.detail||prompt.question).replace(/\s+/g,' ').trim();
+  const canonical=text.replace(/[?.!]+$/,'').toLowerCase();
+  const exactCanonical=canonical==='labor only or materials only'
+    ||canonical==='labor only, materials only, or labor and materials';
+  if(SCOPED_RESPONSIBILITY_MARKER.test(text))return false;
+  return exactCanonical||PROJECT_WIDE_RESPONSIBILITY_MARKER.test(text);
+}
+
+/** Remove one answered question while retaining unrelated clauses in a legacy
+ * paragraph. Duplicate copies are removed together so retries cannot revive it. */
+export function removeInstructionPrompt(instructions:ScopeInstructions,id:string):ScopeInstructions{
+  const questions:string[]=[];
+  for(const raw of instructions.questions){
+    const remaining=questionParts(raw)
+      .filter(part=>questionKey(normalizeQuestionPart(part))!==id)
+      .map(normalizeQuestionPart)
+      .filter(Boolean);
+    if(remaining.length)questions.push(remaining.join(' '));
+  }
+  return {...instructions,questions:[...new Set(questions)]};
+}
+
 /** Answers remain scope data for the pricing audit, with original pages intact. */
-export function clarificationContext(extraction:ScopeExtraction,question:string,answer:string,choices:string[]=[],selected?:string,excluded:string[]=[]){
+export function clarificationContext(extraction:ScopeExtraction,question:string,answer:string,answers:ScopeAnswers={}){
   return JSON.stringify({
-    task:'Resolve only this answered scope question using the answer below. Apply every relevant stated quantity, included task, material, fixture and explicitly complete labor total as facts, as well as the complete updated instructions. An option named in an explicit exclusion is never selected. Preserve every unrelated inclusion, exclusion, responsibility, building and floor. Remove this question when answered. Never ask it again because a page was not reuploaded. This is a clarification of a document review already completed; do not reread documents or produce page records, takeoffs, or unreadable-file notes. Preserve distinct additive trade labor, but do not turn a partial subtotal into a complete project total. A countertop or bench-top length is not cabinet length, and a missing tall-cabinet length is not zero. If the selection is genuinely ambiguous, return one short, specific follow-up explaining the missing decision.',
-    previousInstructions:extraction.instructions,question,choices,selectedChoice:selected,explicitlyExcludedChoices:excluded,answer,
+    task:'Resolve only this answered scope question using the answer below. Return the complete updated instructions and any directly changed structured facts, preserving every unrelated inclusion, exclusion, responsibility, building and floor. Remove this question when answered. Never ask it again because a page was not reuploaded. This is a clarification of a document review already completed. Do not reread or recreate pages or takeoffs, and do not return unreadable-file notes. If the answer is insufficient, return one short, specific follow-up explaining the missing decision. A fact update must be supported by the typed answer; retain source-backed facts that the answer did not change.',
+    previousInstructions:extraction.instructions,previousFacts:extraction.facts,previousAnswers:answers,question,answer,
   });
 }

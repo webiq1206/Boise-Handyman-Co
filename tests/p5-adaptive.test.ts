@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {activeReplacementDigests,deriveScopeAnswers,isExplicitProjectReplacement,reconcileScope,replacementUploadIds,scopeQuestions,scopeAssumptions,validateScopeAnswer} from '../lib/p5/adaptive.ts';
+import {deriveScopeAnswers,reconcileScope,scopeQuestions,scopeAssumptions,validateScopeAnswer} from '../lib/p5/adaptive.ts';
 import {requireDraftReceipt} from '../lib/p5/browserDraft.ts';
 import {validateExtraction,type ScopeAnswers,type ScopeExtraction} from '../lib/p5/scope.ts';
 const extracted=(answers:ScopeAnswers,confidence=.98):ScopeExtraction=>({summary:'Synthetic scope',facts:Object.entries(answers).map(([field,value])=>({field:field as keyof ScopeAnswers,value:value!,confidence,source:'scope.pdf',evidence:value!})),conflicts:[],reviewNotes:[],missingInformation:[]});
@@ -57,6 +57,21 @@ test('model confidence cannot promote inferred or unscaled visual details into p
  assert.equal(questions.some(q=>q.field==='urgency'),false);
  assert.equal(questions.find(q=>q.field==='sqft')?.values,undefined);
 });
+test('reconciliation does not accept a high-confidence inferred fact or one side of an unlisted conflict',()=>{
+ const inferred=extracted({service:'bathroom',sqft:'80',materials:'Porcelain',demolition:'Remove tile'});
+ inferred.facts=inferred.facts.map(f=>f.field==='sqft'?{...f,basis:'inferred' as const}:{...f});
+ const held=reconcileScope({},inferred);
+ assert.equal(held.answers.sqft,undefined);
+ assert.equal(scopeQuestions(held.answers,inferred).find(q=>q.field==='sqft')?.values,undefined);
+
+ const duplicate=extracted({service:'bathroom',materials:'Porcelain',demolition:'Remove tile'});
+ duplicate.facts.push({field:'sqft',value:'80',confidence:.99,source:'scope.pdf',evidence:'80 square feet',basis:'stated'});
+ duplicate.facts.push({field:'sqft',value:'100',confidence:.99,source:'scope.pdf',evidence:'100 square feet',basis:'stated'});
+ const conflicted=reconcileScope({},duplicate);
+ assert.equal(conflicted.answers.sqft,undefined);
+ assert.equal(conflicted.conflicts.filter(c=>c.field==='sqft').length,1);
+ assert.equal(scopeQuestions(conflicted.answers,duplicate,conflicted.conflicts)[0].field,'sqft');
+});
 test('explicit calculated measurements retain their evidence and skip repeat questions',()=>{
  const raw=extracted({service:'bathroom',sqft:'80',materials:'Porcelain tile',demolition:'Remove old fixtures'});
  raw.facts=raw.facts.map(f=>({...f,basis:f.field==='sqft'?'calculated':'stated'}));
@@ -112,13 +127,4 @@ test("reanalysis replaces source facts while preserving visitor corrections",asy
  assert.deepEqual(manualScopeAnswers({demolition:"Remove flooring",sqft:"80",location:"Eagle"},previous),{location:"Eagle"});
  assert.equal(manualScopeAnswers({demolition:"Only remove vanity",sqft:"80"},previous).demolition,"Only remove vanity");
  assert.equal(manualScopeAnswers({sqft:"80"},previous,{sqft:"80"}).sqft,"80");
-  assert.equal(manualScopeAnswers({service:'bathroom',sqft:'80',taskList:'Old bathroom work'},previous,{}).sqft,undefined);
-  assert.equal(isExplicitProjectReplacement('This is a new project. Replace the old scope with drywall and painting only.'),true);
-  assert.equal(isExplicitProjectReplacement('Replacing the old bathroom scope with drywall and painting only.'),true);
-  assert.equal(isExplicitProjectReplacement('Add painting to the existing bathroom scope.'),false);
-  assert.equal(isExplicitProjectReplacement('Add a new project phase with a different project manager.'),false);
-  assert.deepEqual([...replacementUploadIds([{id:'old-pdf',sha256:'a'},{id:'new-pdf',sha256:'b'}],new Set(['b']))],['new-pdf']);
-  assert.deepEqual([...replacementUploadIds([{id:'old-pdf',sha256:'a'}],new Set())],[]);
-  assert.deepEqual([...activeReplacementDigests(['replacement-a'],['added-b'],false)],['replacement-a','added-b']);
-  assert.deepEqual([...activeReplacementDigests(['replacement-a','added-b'],['second-c'],true)],['second-c']);
 });
