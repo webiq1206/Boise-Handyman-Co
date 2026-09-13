@@ -18,3 +18,13 @@ test("countertop length cannot become cabinet length and undocumented tall cabin
   const extraction=validateExtraction({summary:"Cabinet options",facts,conflicts:[],missingInformation:[],reviewNotes:[]});
   assert.deepEqual(protectPricingFacts(extraction).facts,[]);
 });
+
+test('blank optional facts remain unknown while stated quantities survive',()=>{
+ const result=validateExtraction({summary:'600 square foot addition',facts:[
+  {field:'sqft',value:'600',confidence:1,source:'typed scope',evidence:'600 square foot addition',basis:'stated'},
+  {field:'countertopSqft',value:'',confidence:1,source:'typed scope',evidence:'',basis:'inferred'},
+  {field:'cabinetTallLf',value:null,confidence:1,source:'typed scope',evidence:'',basis:'inferred'},
+ ],conflicts:[],missingInformation:[],reviewNotes:[]});
+ assert.deepEqual(result.facts.map(f=>[f.field,f.value]),[['sqft','600']]);
+ assert.equal(result.missingInformation.length,2);
+});
