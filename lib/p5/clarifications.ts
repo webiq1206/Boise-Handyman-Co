@@ -1,8 +1,8 @@
-import {atomicInstructionQuestions,textBenchTopChoices} from './atomicQuestions.ts';
-import type {ScopeAnswers,ScopeExtraction} from './scope.ts';
+import {atomicInstructionQuestions,textBenchTopChoices,cabinetQuestionField} from './atomicQuestions.ts';
+import type {ScopeAnswers,ScopeExtraction,ScopeField} from './scope.ts';
 
 export interface InstructionAnswer {id:string;question:string;answer:string}
-export interface InstructionPrompt {id:string;question:string;detail?:string;values?:string[]}
+export interface InstructionPrompt {id:string;question:string;detail?:string;values?:string[];field?:ScopeField}
 export const questionKey=(text:string)=>text.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const choiceText=(extraction:ScopeExtraction)=>[
   extraction.summary,
@@ -61,13 +61,15 @@ export function instructionPrompts(extraction:ScopeExtraction|null,answers:Scope
       const full=part.replace(/\s+/g,' ').trim();if(!full)continue;
       // Filter each question separately so a legacy paragraph cannot lose a real scope decision.
       if(serviceQuestion(full))continue;
+      const field=cabinetQuestionField(full);
+      if(field&&answers[field]?.trim()&&!extraction?.conflicts.some(conflict=>conflict.field===field))continue;
       const id=questionKey(full);
       if(answered.has(id)||result.some(q=>q.id===id))continue;
       const question=full.length<=240?full:'What should we include for this part of your project?';
       const retained=retainedChoiceValues(extraction,full);
       const values=retained.length?retained:/labor.only/i.test(full)&&/materials.only/i.test(full)?['Labor only','Materials only','Labor and materials']:
         /include or exclude|include.*or.*exclude/i.test(full)?['Include it','Exclude it']:undefined;
-      result.push({id,question,...(question!==full?{detail:full}:{}),values:values?.length?values:textBenchTopChoices(extraction,full)});
+      result.push({id,question,...(field?{field}:{}),...(question!==full?{detail:full}:{}),values:values?.length?values:textBenchTopChoices(extraction,full)});
     }
   }
   return result;
