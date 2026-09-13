@@ -1,3 +1,4 @@
+import {atomicInstructionQuestions,textBenchTopChoices} from './atomicQuestions.ts';
 import type {ScopeAnswers,ScopeExtraction} from './scope.ts';
 
 export interface InstructionAnswer {id:string;question:string;answer:string}
@@ -16,7 +17,7 @@ export function retainedChoiceValues(extraction:ScopeExtraction|null,question:st
   if(/\bbench\s*top\b|\bbenchtop\b|\bcounter\s*top\b|\bcountertop\b/i.test(question)){
     const choices=[
       {label:'Butcher block',pattern:/\bbutcher\s+block(?:\s+bench\s*top)?\b/i},
-      {label:'Matching painted MDF/wood',pattern:/\bmatching\s+painted\s+(?:mdf(?:\s*\/\s*wood)?|wood(?:\s*\/\s*mdf)?)(?:\s+bench\s*top)?\b/i},
+      {label:'Matching painted MDF/wood',pattern:/\b(?:matching\s+)?painted\s+(?:mdf(?:\s*\/\s*wood)?|wood(?:\s*\/\s*mdf)?)(?:\s+bench\s*top)?\b/i},
       {label:'Laminate',pattern:/\blaminate(?:\s+bench\s*top)?\b/i},
       {label:'Quartz',pattern:/\bquartz(?:\s+bench\s*top)?\b/i},
     ].map(choice=>({...choice,index:source.search(choice.pattern)})).filter(choice=>choice.index>=0).sort((a,b)=>a.index-b.index);
@@ -56,7 +57,7 @@ export function instructionPrompts(extraction:ScopeExtraction|null,answers:Scope
   const result:InstructionPrompt[]=[];
   const answered=new Set(prior.map(item=>item.id));
   for(const raw of extraction?.instructions?.questions||[]){
-    for(const part of raw.match(/[^?]+\??/g)||[]){
+    for(const part of (raw.match(/[^?]+\??/g)||[]).flatMap(part=>atomicInstructionQuestions(part,answers,extraction?.conflicts))){
       const full=part.replace(/\s+/g,' ').trim();if(!full)continue;
       // Filter each question separately so a legacy paragraph cannot lose a real scope decision.
       if(serviceQuestion(full))continue;
@@ -66,7 +67,7 @@ export function instructionPrompts(extraction:ScopeExtraction|null,answers:Scope
       const retained=retainedChoiceValues(extraction,full);
       const values=retained.length?retained:/labor.only/i.test(full)&&/materials.only/i.test(full)?['Labor only','Materials only','Labor and materials']:
         /include or exclude|include.*or.*exclude/i.test(full)?['Include it','Exclude it']:undefined;
-      result.push({id,question,...(question!==full?{detail:full}:{}),values});
+      result.push({id,question,...(question!==full?{detail:full}:{}),values:values?.length?values:textBenchTopChoices(extraction,full)});
     }
   }
   return result;
