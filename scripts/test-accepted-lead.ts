@@ -78,8 +78,13 @@ async function main() {
   assert.equal(rateLimit(rateKey, 2, 60_000).ok, true);
   assert.equal(rateLimit(rateKey, 2, 60_000).ok, true);
   assert.equal(rateLimit(rateKey, 2, 60_000).ok, false);
-  assert.deepEqual(googleAdsConversionPayload(), { send_to: "AW-18354188204/LE2vCPXstO8cEKzf-q9E" });
-  assert.deepEqual(Object.keys(googleAdsConversionPayload()), ["send_to"], "analytics has no PII");
+  assert.deepEqual(googleAdsConversionPayload(), {
+    send_to: "AW-18354188204/LE2vCPXstO8cEKzf-q9E",
+    value: 50,
+    currency: "USD",
+  });
+  assert.deepEqual(googleAdsConversionPayload({ service: "re10" }).value, 75, "RE-10 leads are valued higher");
+  assert.deepEqual(Object.keys(googleAdsConversionPayload()), ["send_to", "value", "currency"], "analytics has no PII");
   assert.equal(leadWrites, 3);
   console.log("accepted-lead fake-ledger checks passed");
 }

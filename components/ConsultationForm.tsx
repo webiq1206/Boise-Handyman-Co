@@ -345,7 +345,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
       // Conversions API hashes for high match quality (best cost-per-result).
       if (response.accepted) {
         markEstimatorCompleted("consultation");
-        trackAcceptedLeadConversion();
+        trackAcceptedLeadConversion({ projectType: variables.projectType });
         trackEvent("generate_lead", {
           form: "consultation",
           project_type: variables.projectType,

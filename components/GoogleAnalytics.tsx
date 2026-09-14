@@ -38,7 +38,9 @@ export function GoogleAnalytics() {
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_MEASUREMENT_ID}');
-gtag('config', 'AW-18354188204');`}
+gtag('config', 'AW-18354188204');
+gtag('config', 'AW-18354188204/YHR0CIaPz_ccEKzf-q9E', { 'phone_conversion_number': '(208) 477-1169' });
+try { if (!sessionStorage.getItem('p5_entry_path')) sessionStorage.setItem('p5_entry_path', location.pathname); } catch (e) {}`}
       </Script>
     </>
   );

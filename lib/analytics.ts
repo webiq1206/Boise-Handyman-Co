@@ -3,6 +3,8 @@
  * @next/third-parties, which exposes window.gtag once ready; if it is not
  * present (GA disabled, blocked, or SSR) the call is a no-op.
  */
+import { googleAdsLeadParams, type GoogleAdsLeadParams, type LeadContext } from "@/lib/googleAdsConversion";
+
 type GtagParams = Record<string, string | number | boolean | undefined>;
 
 export function trackEvent(name: string, params: GtagParams = {}): void {
@@ -13,16 +15,17 @@ export function trackEvent(name: string, params: GtagParams = {}): void {
 }
 
 /** Google Ads conversion: only call after the API confirms a new durable lead. */
-export function trackAcceptedLeadConversion(): void {
+export function trackAcceptedLeadConversion(context: LeadContext = {}): void {
   if (typeof window === "undefined") return;
   const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
   if (typeof gtag !== "function") return;
-  gtag("event", "conversion", googleAdsConversionPayload());
+  gtag("event", "conversion", googleAdsConversionPayload(context));
 }
 
 /** Kept pure so the conversion contract can be tested without a browser. */
-export function googleAdsConversionPayload(): { send_to: string } {
-  return { send_to: "AW-18354188204/LE2vCPXstO8cEKzf-q9E" };
+export function googleAdsConversionPayload(context: LeadContext = {}): GoogleAdsLeadParams {
+  // Per-lead value for ROAS reporting (lib/googleAdsConversion.ts); no PII.
+  return googleAdsLeadParams(context);
 }
 
 /** Optional first-party identifiers for Conversions API match quality. */
