@@ -1,3 +1,4 @@
+import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
 import type { Metadata } from 'next';
 import Image from '@/components/MarketingImage';
 import Link from 'next/link';
@@ -27,7 +28,7 @@ const TITLE = 'Handyman Services | Treasure Valley';
 const DESCRIPTION =
   fitDescription('Handyman services in Boise, Meridian, Eagle, Nampa and the Treasure Valley: drywall repair, painting, minor plumbing and electrical, carpentry, mounting, and home maintenance, quoted upfront.');
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withBrandPageMetadata(({
   title: { absolute: `${TITLE} | ${SITE_CONFIG.name}` },
   description: DESCRIPTION,
   alternates: { canonical: buildCanonical('/services'), types: FEED_ALTERNATES },
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: ['/images/og-default.png'],
   },
-};
+}), "/services");
 
 export default function ServicesIndexPage() {
   const base = getBaseUrl().replace(/\/$/, '');

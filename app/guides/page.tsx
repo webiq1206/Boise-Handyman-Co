@@ -1,3 +1,4 @@
+import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from '@/components/MarketingImage';
@@ -33,13 +34,13 @@ function GuideCardStats({ guide }: { guide: GuidePageData }) {
   );
 }
 
-export const metadata: Metadata = buildPageMetadata({
+export const metadata: Metadata = withBrandPageMetadata((buildPageMetadata({
   kind: 'blog',
   path: '/guides',
   titleOverride: 'Home Repair & Maintenance Guides | Boise Handyman Co',
   descriptionOverride:
     'In-depth Treasure Valley home repair guides: what small repairs cost, how to hire a handyman, seasonal maintenance, smart small upgrades, and exterior care.',
-});
+})), "/guides");
 
 const PILLAR_TYPES = new Set(['hub-pillar', 'master']);
 
