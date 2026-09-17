@@ -11,6 +11,8 @@ export function HeroSection() {
   return (
     <>
       <section className="relative min-h-[85vh] md:min-h-screen flex items-center overflow-hidden bg-inverse">
+      {/* Marks the hero's foot so the sticky mobile bar waits until the hero has scrolled away. */}
+      <div id="hero-sentinel" className="absolute bottom-0 left-0 h-px w-full" aria-hidden="true" />
         <Image
           src={SITE_IMAGES.hero}
           alt="A handyman wearing Boise Handyman Co workwear adjusting an interior door hinge"
