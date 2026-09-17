@@ -1,3 +1,4 @@
+import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -60,7 +61,7 @@ const FAQS = [
   },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withBrandPageMetadata(({
   title: { absolute: `${TITLE} | ${SITE_CONFIG.name}` },
   description: DESCRIPTION,
   alternates: { canonical: buildCanonical("/estimate") },
@@ -77,7 +78,7 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: ["/images/og-default.png"],
   },
-};
+}), "/estimate");
 
 export default function EstimatePage() {
   const schemas = [

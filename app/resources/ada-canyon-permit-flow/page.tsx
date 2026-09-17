@@ -1,3 +1,4 @@
+import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Download } from 'lucide-react';
@@ -16,12 +17,12 @@ import {
 const PERMIT_FLOW_DESCRIPTION =
   fitDescription('When a home repair needs a permit in Ada and Canyon County: what a handyman can do without one, what triggers a permit, and who to call to check.');
 
-export const metadata: Metadata = buildPageMetadata({
+export const metadata: Metadata = withBrandPageMetadata((buildPageMetadata({
   kind: 'blog',
   path: '/resources/ada-canyon-permit-flow',
   titleOverride: 'When Does a Home Repair Need a Permit? Ada & Canyon County | Boise Handyman Co',
   descriptionOverride: PERMIT_FLOW_DESCRIPTION,
-});
+})), "/resources/ada-canyon-permit-flow");
 
 export default function AdaCanyonPermitFlowPage() {
   const schemas = [
