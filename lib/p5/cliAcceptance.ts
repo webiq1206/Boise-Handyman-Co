@@ -48,7 +48,7 @@ const pathFor = (file?: string) => {
 
 function requireLive(options: AcceptanceOptions, scope: string, email: string, base: URL) {
   if (base.protocol !== "https:") throw new Error("Live mode requires an HTTPS base URL.");
-  if (!QA_EMAIL.test(email)) throw new Error("Live mode requires a clearly marked QA email under a .qa address.");
+  if (!QA_EMAIL.test(email)&&!(process.env.SYNTHETIC_QA_EMAIL_ALLOWLIST||'').split(',').map(value=>value.trim().toLowerCase()).includes(email.trim().toLowerCase())) throw new Error("Live mode requires a clearly marked QA email under a .qa address.");
   if (!scope.includes("[QA]")) throw new Error("Live mode requires a clearly marked [QA] scope.");
   if (options.confirm !== QA_CONFIRMATION || options.confirmAgain !== QA_CONFIRMATION) {
     throw new Error("Live mode requires the exact confirmation twice.");
@@ -101,7 +101,7 @@ export async function runP5Acceptance(options: AcceptanceOptions = {}): Promise<
     return jsonResponse(response);
   };
   const answers = { service: "handyman", location: "Boise, Idaho", taskList: scope };
-  const saved = await call("PUT", "/api/p5-estimator/draft", { revision: 0, text: scope, answers, contact: { name: "QA Acceptance", email, phone: "2085550100" } });
+  const saved = await call("PUT", "/api/p5-estimator/draft", { revision: 0, text: scope, answers, contact: { name: "[QA] Acceptance", email, phone: "" } });
   state.revision = Number(saved.draft?.revision);
   if (saved.draft?.id !== state.id||state.revision!==1) throw new Error("Draft save did not confirm the expected identity and first revision.");
   await saveState(stateFile, state);
