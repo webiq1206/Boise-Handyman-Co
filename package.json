@@ -49,7 +49,8 @@
     "verify:service-areas": "node --import tsx scripts/verify-service-area-cities.ts",
     "test:accepted-lead": "node --import tsx scripts/test-accepted-lead.ts",
     "test:assistant-lead-payload": "node --import tsx scripts/test-assistant-lead-payload.ts",
-    "verify:estimate-delivery": "node --import tsx scripts/verify-estimate-delivery.ts"
+    "verify:estimate-delivery": "node --import tsx scripts/verify-estimate-delivery.ts",
+    "p5:acceptance": "node --import tsx scripts/p5-cli-acceptance.mts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",

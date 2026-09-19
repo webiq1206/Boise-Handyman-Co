@@ -1,4 +1,5 @@
 import {tradeForLine,apportionAmount,type TradeCategory} from "./trades.ts";
+import {customerSafeText,customerSafeValue} from "./customerSafety.ts";
 /** Internal policy. Import only from server entry points, never client components. */
 export const POLICY_VERSION = "p5-2026-09-10-unified-overhead";
 export const STANDARD_OVERHEAD_RATE = .20;
@@ -261,7 +262,7 @@ export function calculateP5Estimate(input: PricingInput, finance: FinancePolicy,
     else if (contractPrice < input.benchmark.low || contractPrice > input.benchmark.high) warn("benchmark-outlier", "This estimate is outside the documented project benchmark. Review scope and costs; do not automatically reduce profit.");
   } else warn("benchmark-missing", "Add a current, scope-comparable project benchmark for administrator review.");
   for (const a of input.manualAdjustments ?? []) if (!ids.has(a.costLineId) || !a.reason.trim()) throw new Error("Every manual adjustment needs a valid cost line and written reason");
-  return {
+  return customerSafeValue({
     policyVersion: POLICY_VERSION, revision: input.revision, evaluatedAt: now.toISOString(),
     estimatePurpose: input.estimatePurpose||'verified-cost-review',
     currentCostsConfirmed: !lines.some(line=>['owner-estimating-schedule','sourced-market-average','regional-planning-average'].includes(line.evidence.basis)),
@@ -276,7 +277,7 @@ export function calculateP5Estimate(input: PricingInput, finance: FinancePolicy,
     publishable: !warnings.some(w => w.severity === "block"),
     contractMethod: matrix.method,
     reconciliation: riskAdjustedDirectCost + sum(Object.values(allocationDollars)) + operatingProfit - contractPrice,
-  };
+  });
 }
 export type P5Estimate = ReturnType<typeof calculateP5Estimate>;
 export const PLANNING_DISCLAIMER = "Preliminary planning information only. This is not a bid, quote, offer or guaranteed price. A site or plan review, confirmed scope, current supplier and trade pricing, and written agreement are required before work proceeds.";
@@ -290,8 +291,8 @@ export function customerEstimate(estimate: P5Estimate, summary: string) {
   const highWeights=estimate.lines.some(l=>l.unitCostRange||l.quantityRange)?estimate.lines.map((line,i)=>Math.max(0,(line.quantityRange?.high??line.quantity)*(line.unitCostRange?.high??line.unitCost)*(1+estimate.contingencyRate)/estimate.divisor-lows[i])):weights;
   const increases=apportionAmount(estimate.planningRange.high-estimate.planningRange.low,highWeights.some(n=>n>0)?highWeights:weights);
   const highs=lows.map((low,i)=>low+increases[i]);
-  const lineItems=estimate.publishable?estimate.lines.map((line,i)=>({id:line.id,category:tradeForLine(line),description:line.description,quantity:line.quantity,unit:line.unit,low:lows[i],high:highs[i],unitLow:lows[i]/line.quantity,unitHigh:highs[i]/line.quantity,...(line.building?{building:line.building}:{}),...(line.floor?{floor:line.floor}:{}),...(line.quantityRange?{quantityRange:line.quantityRange}:{}),pricingStatus:line.allowance||line.estimatingBasis==='sourced-market-average'||line.estimatingBasis==='regional-planning-average'?'estimated-allowance':line.evidence.basis==='owner-estimating-schedule'?'owner-planning-rate':'verified-cost',...(line.estimatingBasis==='regional-planning-average'?{verification:'Regional planning average, not verified local pricing. Confirm current local rates, quantities and selections before a firm proposal.'}:line.allowance||line.estimatingBasis==='sourced-market-average'||line.evidence.basis==='owner-estimating-schedule'?{verification:'Confirm quantities, selections and current supplier/trade pricing before a firm proposal.'}:{}),...(line.evidence.provenance?{rateLocation:line.evidence.provenance.location,rateDate:line.evidence.provenance.retrievedAt,rateSources:line.evidence.provenance.sources.map(s=>s.url)}:{})})):[];
-  return {
+  const lineItems=estimate.publishable?estimate.lines.map((line,i)=>({id:line.id,category:tradeForLine(line),description:customerSafeText(line.description),quantity:line.quantity,unit:line.unit,low:lows[i],high:highs[i],unitLow:lows[i]/line.quantity,unitHigh:highs[i]/line.quantity,...(line.building?{building:line.building}:{}),...(line.floor?{floor:line.floor}:{}),...(line.quantityRange?{quantityRange:line.quantityRange}:{}),pricingStatus:line.allowance||line.estimatingBasis==='sourced-market-average'||line.estimatingBasis==='regional-planning-average'?'estimated-allowance':line.evidence.basis==='owner-estimating-schedule'?'owner-planning-rate':'verified-cost',...(line.estimatingBasis==='regional-planning-average'?{verification:'Regional planning average, not verified local pricing. Confirm current local rates, quantities and selections before a firm proposal.'}:line.allowance||line.estimatingBasis==='sourced-market-average'||line.evidence.basis==='owner-estimating-schedule'?{verification:'Confirm quantities, selections and current supplier/trade pricing before a firm proposal.'}:{}),...(line.evidence.provenance?{rateLocation:line.evidence.provenance.location,rateDate:line.evidence.provenance.retrievedAt}:{})})):[];
+  return customerSafeValue({
     status: estimate.publishable ? "planning-range" as const : "review-required" as const,
     range: estimate.publishable ? estimate.planningRange : null,
     summary,
@@ -306,10 +307,10 @@ export function customerEstimate(estimate: P5Estimate, summary: string) {
       selectionDeadline: a.selectionDeadline,
       adjustment: "Selection increases and decreases receive the same project pricing treatment. Confirm changes in writing before ordering.",
     })),
-    assumptions: estimate.assumptions, exclusions: estimate.exclusions,
+    assumptions: estimate.assumptions.map(customerSafeText), exclusions: estimate.exclusions.map(customerSafeText),
     factors: estimate.riskFactors.map(r => r.replaceAll("-", " ")),
     nextStep: estimate.contractMethod,
     message: estimate.publishable ? "Schedule a consultation to confirm the scope and refine this range." : "Your scope needs a pricing review before we can provide a reliable range. Schedule a consultation or plan review.",
     disclaimer: PLANNING_DISCLAIMER,
-  };
+  });
 }

@@ -7,3 +7,4 @@
 - [Accepted lead conversions](accepted-lead-conversions.md) — Ads/GA/Meta lead events require a new transactional inquiry-ledger acceptance; attempts, duplicates, and delivery retries never count.
 - [Neon HTTP result handling](neon-nullable-timestamps.md) — omit unset timestamps and narrowly normalize the adapter's null empty-row response.
 - [Estimator replacement sources](estimator-replacement-sources.md) — keep stored file history separate from the active source generation; replacement, append, and retry have different merge rules.
+- [CRM receiver contract](crm-receiver-contract.md) — external lead receiver has a 100 KiB body limit and only a 60-second email duplicate window; sender-side uniqueness is authoritative.
