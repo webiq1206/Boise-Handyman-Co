@@ -9,7 +9,7 @@ await prepareQualificationBudget(run,allowance,execute);
 const one=qualificationRequestKey(run,'openai','test-model',{stage:1});
 const first=await reserveQualificationCall({runId:run,provider:'openai',model:'test-model',...one,reservedMicrousd:reserve},execute);
 await beginQualificationCall(first.idempotencyKey,execute);
-await settleQualificationCall(first.idempotencyKey,null,execute);
+await settleQualificationCall({idempotencyKey:first.idempotencyKey,provider:'openai',model:'test-model',requestHash:one.requestHash,providerRequestId:'offline-request-1'},execute);
 await assert.rejects(()=>reserveQualificationCall({runId:run,provider:'openai',model:'test-model',...one,reservedMicrousd:reserve},execute),/already consumed/);
 const two=qualificationRequestKey(run,'openai','test-model',{stage:2});
 await reserveQualificationCall({runId:run,provider:'openai',model:'test-model',...two,reservedMicrousd:reserve},execute);

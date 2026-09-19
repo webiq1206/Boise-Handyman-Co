@@ -93,6 +93,8 @@ export async function reserveQualificationCall(input:{runId:string;provider:stri
  }
  const row=rows[0];
  if(!row)throw new Error('Qualification stopped before provider contact: documented allowance is exhausted.');
+ const [stored]=await execute('SELECT run_id,provider,model,request_hash,reserved_microusd,status FROM p5_provider_qualification_reservations WHERE idempotency_key=$1',[input.idempotencyKey]);
+ if(!stored||stored.run_id!==input.runId||stored.provider!==input.provider||stored.model!==input.model||stored.request_hash!==input.requestHash||Number(stored.reserved_microusd)!==input.reservedMicrousd)throw new Error('Qualification stopped before provider contact: reservation identity does not match.');
  if(row.status!=='reserved')throw new Error(`Qualification stopped before provider contact: this stage is already ${row.status}.`);
  return {idempotencyKey:String(row.idempotency_key),status:row.status,reservedMicrousd:Number(row.reserved_microusd)};
 }
@@ -101,9 +103,11 @@ export async function beginQualificationCall(idempotencyKey:string,execute:Execu
    WHERE idempotency_key=$1 AND status='reserved' RETURNING idempotency_key`,[idempotencyKey]);
  if(rows.length!==1)throw new Error('Qualification reservation could not enter the provider boundary.');
 }
-export async function settleQualificationCall(idempotencyKey:string,providerRequestId:string|null=null,execute:Execute=query){
+export async function settleQualificationCall(input:{idempotencyKey:string;provider:string;model:string;requestHash:string;providerRequestId:string},execute:Execute=query){
+ if(!input.providerRequestId.trim())throw new Error('Qualification charge could not be settled without a provider request ID.');
  const rows=await execute(`UPDATE p5_provider_qualification_reservations SET status='consumed',provider_request_id=$2,settled_at=now()
-   WHERE idempotency_key=$1 AND status='in_flight' RETURNING idempotency_key`,[idempotencyKey,providerRequestId]);
+   WHERE idempotency_key=$1 AND status='in_flight' AND provider=$3 AND model=$4 AND request_hash=$5 RETURNING idempotency_key`,
+   [input.idempotencyKey,input.providerRequestId,input.provider,input.model,input.requestHash]);
  if(rows.length!==1)throw new Error('Qualification charge could not be settled.');
 }
 export async function markQualificationUnknown(runId:string,idempotencyKey:string,execute:Execute=query){

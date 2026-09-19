@@ -210,7 +210,7 @@ for(const width of [320,390,1440]){
   await est.getByRole('button',{name:'Continue',exact:true}).click({timeout:120000});
   await page.getByText('8 of 250 pages checked',{exact:true}).waitFor();
   assert.equal(await page.getByRole('progressbar',{name:'Original pages checked'}).getAttribute('value'),'8');
-  await page.getByRole('heading',{name:'Reading your plans',exact:true}).waitFor();await overflow(page);await capture(page,`${width}-live-reading`);
+  await page.getByRole('heading',{name:'Reading your documents',exact:true}).waitFor();await overflow(page);await capture(page,`${width}-live-reading`);
   progressState.readStage=2;
   await page.getByText('16 of 250 pages checked',{exact:true}).waitFor();
   progressState.finishReading=true;

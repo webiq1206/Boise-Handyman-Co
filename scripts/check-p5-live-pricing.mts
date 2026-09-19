@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {query} from '../lib/p5/database';
-import {priceCompleteScope,requestPricing,type PricingRequest} from '../lib/p5/scopePricing';
+import {priceCompleteScope,requestPricingWith,type PricingRequest} from '../lib/p5/scopePricing';
 import {ESTIMATOR_BRAND as brand} from '../lib/p5/brand';
 import type {EstimatorConfiguration} from '../lib/p5/costBook';
 import type {ReviewedScope} from '../lib/p5/scope';
@@ -20,16 +20,17 @@ async function main(){
  await prepareQualificationBudget(runId,allowance);
  const integrated=Boolean(process.env.AI_INTEGRATIONS_OPENAI_API_KEY&&process.env.AI_INTEGRATIONS_OPENAI_BASE_URL);
  const openai=Boolean(integrated?process.env.AI_INTEGRATIONS_OPENAI_API_KEY:process.env.OPENAI_API_KEY);
- const provider=openai&&(process.env.P5_PRICING_PROVIDER||'openai')!=='anthropic'?'openai':'anthropic';
- const model=provider==='openai'?(process.env.P5_PRICING_OPENAI_MODEL||process.env.P5_SCOPE_OPENAI_MODEL||'gpt-4.1'):(process.env.P5_PRICING_MODEL||'claude-sonnet-5');
+  const provider='openai' as const;
+  if(!openai)throw new Error('The approved OpenAI qualification provider is not configured.');
+  if(process.env.P5_PRICING_PROVIDER==='anthropic')throw new Error('This qualification is OpenAI-only so every provider request has one pre-reserved charge boundary.');
  const [policy]=await query("SELECT payload FROM p5_estimator_policy WHERE id='current'");
  assert.ok(policy?.payload?.planningCatalog?.rates?.length,'The approved catalog must be populated');
  const configuration=policy.payload as EstimatorConfiguration,before=fingerprint(configuration),reports:any[]=[];
  const services=brand.services as readonly string[],cabinet=String(brand.id)==='cabinet';
  const baseService=services.includes('handyman')?'handyman':services.includes('kitchen')?'kitchen':services[0];
- const selected=process.env.P5_LIVE_PRICING_SCENARIO||'both';assert.ok(['both','mapping','missing'].includes(selected));
+  const selected=process.env.P5_LIVE_PRICING_SCENARIO||'mapping';assert.equal(selected,'mapping','Only the tool-free approved-rate mapping qualification is permitted.');
  await mkdir('p5-verification',{recursive:true});
- for(const scenario of ['mapping','missing'].filter(s=>selected==='both'||s===selected)){
+  for(const scenario of ['mapping']){
   const missing=scenario==='missing';
   const text=missing?'Supply 100 linear feet of standard paint-grade wood crown moulding for kitchen cabinets in Boise, Idaho. Materials only; owner installs it. Price the moulding by linear foot using a preliminary average material cost for the area.':cabinet?'Install 20 linear feet of owner-supplied, assembled paint-grade Shaker base cabinets on the first floor of Building Alpha. Installation labor only, including normal leveling, fastening and adjustment.':'Fit and fasten 100 linear feet of paint-grade interior base moulding on the first floor of Building Alpha. Baseboard installation labor only. Owner supplies all materials.';
   const instructions=missing?'Price only the 100 linear feet of crown moulding material. Exclude installation, painting, cabinet casework and all other work. Use sourced regional average material costs per linear foot, or a clearly labeled broader benchmark. Do not shop suppliers or require an exact SKU.':'Price only the specified first-floor installation labor in Building Alpha. Owner supplies all materials. Exclude all plumbing, electrical and second-floor work. Do not charge owner-supplied materials.';
@@ -39,10 +40,12 @@ async function main(){
   // the research path. The owner's saved185-rate catalog remains untouched.
   if(missing)config.planningCatalog!.rates=config.planningCatalog!.rates.filter(rate=>rate.type!=='Material');
    const stages:any[]=[];const request:PricingRequest=async(instructions,input,search,remaining)=>{
-    const identity=qualificationRequestKey(runId,provider,model,{scenario,instructions,input,search});
-    const reservation=await reserveQualificationCall({runId,provider,model,...identity,reservedMicrousd:perCall});
+     if(search)throw new Error('The approved-rate mapping qualification cannot use provider tools or research.');
+     const model=process.env.P5_PRICING_OPENAI_MODEL||process.env.P5_SCOPE_OPENAI_MODEL||'gpt-4.1';
+     const identity=qualificationRequestKey(runId,provider,model,{scenario,instructions,input,search});
+     const reservation=await reserveQualificationCall({runId,provider,model,...identity,reservedMicrousd:perCall});
     await beginQualificationCall(reservation.idempotencyKey);
-    const start=performance.now();try{const result=await requestPricing(instructions,input,search,remaining);await settleQualificationCall(reservation.idempotencyKey);stages.push({search,milliseconds:Math.round(performance.now()-start),sourceUrls:result.sourceUrls,value:result.value,reservationMicrousd:reservation.reservedMicrousd});return result;}catch(error){await markQualificationUnknown(runId,reservation.idempotencyKey);stages.push({search,milliseconds:Math.round(performance.now()-start),error:error instanceof Error?error.message:'failed',charge:'unknown'});throw error;}finally{await writeFile(`p5-verification/live-pricing-${scenario}-stages.json`,JSON.stringify(stages,null,2));}
+     const start=performance.now();try{const result=await requestPricingWith(provider,instructions,input,search,remaining);if(result.provider!==provider||result.model!==model||result.providerRequestIds?.length!==1)throw new Error('Qualification provider identity was ambiguous.');await settleQualificationCall({idempotencyKey:reservation.idempotencyKey,provider,model,requestHash:identity.requestHash,providerRequestId:result.providerRequestIds[0]});stages.push({provider,model,providerRequestId:result.providerRequestIds[0],search,milliseconds:Math.round(performance.now()-start),sourceUrls:result.sourceUrls,value:result.value,reservationMicrousd:reservation.reservedMicrousd});return result;}catch(error){await markQualificationUnknown(runId,reservation.idempotencyKey);stages.push({provider,model,search,milliseconds:Math.round(performance.now()-start),error:error instanceof Error?error.message:'failed',charge:'unknown'});throw error;}finally{await writeFile(`p5-verification/live-pricing-${scenario}-stages.json`,JSON.stringify(stages,null,2));}
   };
   const start=performance.now();const result=await priceCompleteScope(scope,config,request);const internal=result.internal as any;
   const issues=internal.scopePricing?.issues||[];const lines=internal.lines||[];
