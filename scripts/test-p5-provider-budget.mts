@@ -30,4 +30,11 @@ assert.equal(concurrentResults.filter(result=>result.status==='fulfilled').lengt
 assert.equal(concurrentResults.filter(result=>result.status==='rejected'&&/allowance is exhausted/.test(String(result.reason))).length,1);
 const [concurrentBudget]=await execute('SELECT committed_microusd FROM p5_provider_qualification_budgets WHERE run_id=$1',[concurrentRun]);
 assert.equal(Number(concurrentBudget.committed_microusd),concurrentReserve);
+const boundaryRun='offline-concurrent-boundary-test';
+await prepareQualificationBudget(boundaryRun,allowance,execute);
+const boundaryIdentity=qualificationRequestKey(boundaryRun,'openai','test-model',{stage:1});
+const boundary=await reserveQualificationCall({runId:boundaryRun,provider:'openai',model:'test-model',...boundaryIdentity,reservedMicrousd:reserve},execute);
+const boundaryResults=await Promise.allSettled([beginQualificationCall(boundary.idempotencyKey,execute),beginQualificationCall(boundary.idempotencyKey,execute)]);
+assert.equal(boundaryResults.filter(result=>result.status==='fulfilled').length,1);
+assert.equal(boundaryResults.filter(result=>result.status==='rejected'&&/could not enter/.test(String(result.reason))).length,1);
 console.log('P5 provider qualification budget checks passed: durable allowance, idempotency, concurrent cap and unknown-charge stop.');

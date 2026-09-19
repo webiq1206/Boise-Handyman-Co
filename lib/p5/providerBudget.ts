@@ -1,4 +1,4 @@
-import {createHash} from 'node:crypto';
+import {createHash,randomUUID} from 'node:crypto';
 import {query} from './database.ts';
 
 type Execute=(statement:string,values?:unknown[])=>Promise<Record<string,any>[]>;
@@ -22,6 +22,7 @@ const TABLES=[
    reserved_microusd bigint NOT NULL CHECK(reserved_microusd>0),
    status text NOT NULL CHECK(status IN ('reserved','in_flight','consumed','released','unknown')),
    provider_request_id text,
+   boundary_token text,
    created_at timestamptz NOT NULL DEFAULT now(),
    started_at timestamptz,
    settled_at timestamptz
@@ -65,6 +66,7 @@ export async function prepareQualificationBudget(runId:string,allowanceMicrousd:
  if(!/^[a-zA-Z0-9][a-zA-Z0-9._:-]{5,120}$/.test(runId))throw new Error('Set a stable P5_LIVE_PRICING_RUN_ID before qualification.');
  for(const statement of TABLES)await execute(statement);
  await execute('ALTER TABLE p5_provider_qualification_budgets ADD COLUMN IF NOT EXISTS committed_microusd bigint NOT NULL DEFAULT 0 CHECK(committed_microusd>=0)');
+ await execute('ALTER TABLE p5_provider_qualification_reservations ADD COLUMN IF NOT EXISTS boundary_token text');
  await execute(`INSERT INTO p5_provider_qualification_budgets(run_id,allowance_microusd) VALUES($1,$2)
    ON CONFLICT(run_id) DO UPDATE SET updated_at=now()
    WHERE p5_provider_qualification_budgets.allowance_microusd=EXCLUDED.allowance_microusd`,[runId,allowanceMicrousd]);
@@ -99,16 +101,23 @@ export async function reserveQualificationCall(input:{runId:string;provider:stri
  return {idempotencyKey:String(row.idempotency_key),status:row.status,reservedMicrousd:Number(row.reserved_microusd)};
 }
 export async function beginQualificationCall(idempotencyKey:string,execute:Execute=query){
- const rows=await execute(`UPDATE p5_provider_qualification_reservations SET status='in_flight',started_at=now()
-   WHERE idempotency_key=$1 AND status='reserved' RETURNING idempotency_key`,[idempotencyKey]);
- if(rows.length!==1)throw new Error('Qualification reservation could not enter the provider boundary.');
+ const boundaryToken=randomUUID();
+ const rows=await execute(`UPDATE p5_provider_qualification_reservations SET status='in_flight',started_at=now(),boundary_token=$2
+   WHERE idempotency_key=$1 AND status='reserved' RETURNING idempotency_key`,[idempotencyKey,boundaryToken]);
+ if(rows.length!==1){
+   const [stored]=await execute('SELECT status,boundary_token FROM p5_provider_qualification_reservations WHERE idempotency_key=$1',[idempotencyKey]);
+   if(stored?.status!=='in_flight'||stored.boundary_token!==boundaryToken)throw new Error('Qualification reservation could not enter the provider boundary.');
+ }
 }
 export async function settleQualificationCall(input:{idempotencyKey:string;provider:string;model:string;requestHash:string;providerRequestId:string},execute:Execute=query){
  if(!input.providerRequestId.trim())throw new Error('Qualification charge could not be settled without a provider request ID.');
  const rows=await execute(`UPDATE p5_provider_qualification_reservations SET status='consumed',provider_request_id=$2,settled_at=now()
    WHERE idempotency_key=$1 AND status='in_flight' AND provider=$3 AND model=$4 AND request_hash=$5 RETURNING idempotency_key`,
    [input.idempotencyKey,input.providerRequestId,input.provider,input.model,input.requestHash]);
- if(rows.length!==1)throw new Error('Qualification charge could not be settled.');
+ if(rows.length!==1){
+   const [stored]=await execute('SELECT status,provider_request_id FROM p5_provider_qualification_reservations WHERE idempotency_key=$1',[input.idempotencyKey]);
+   if(stored?.status!=='consumed'||stored.provider_request_id!==input.providerRequestId)throw new Error('Qualification charge could not be settled.');
+ }
 }
 export async function markQualificationUnknown(runId:string,idempotencyKey:string,execute:Execute=query){
  await execute(`WITH changed AS (
