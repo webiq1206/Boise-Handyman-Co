@@ -32,14 +32,14 @@ export async function postUpload(request:Request){
       if(!gate)throw new DraftError('Another file is being prepared. Please retry.',409);
       try{
         const existing=await query('SELECT payload FROM p5_estimator_work WHERE draft_id=$1 AND work_key=$2',[id,workKey]);
-        if(existing.length){const t=existing[0].payload as Transfer;if(t.size!==input.size)throw new DraftError('This file changed. Select it again.',409);return json({chunkSize:SCOPE_CHUNK_SIZE,chunks:t.chunks,complete:Boolean(t.complete)});}
+        if(existing.length){const t=existing[0].payload as Transfer,name=input.name.replace(/[\u0000-\u001f/\\]/g,'_');if(t.size!==input.size||t.name!==name)throw new DraftError('This file changed. Select it again.',409);return json({chunkSize:SCOPE_CHUNK_SIZE,chunks:t.chunks,complete:Boolean(t.complete),name:t.name});}
         const pending=await query("SELECT payload FROM p5_estimator_work WHERE draft_id=$1 AND work_key LIKE 'upload:%'",[id]);
         const fresh=await readDraft(id,key);
         const unfinished=pending.map(r=>r.payload as Transfer).filter(t=>!fresh!.uploads.some(f=>f.sha256===t.digest));
         if(fresh!.uploads.length+unfinished.length>=SCOPE_FILE_COUNT||fresh!.uploads.reduce((n,f)=>n+f.size,0)+unfinished.reduce((n,t)=>n+t.size,0)+input.size>SCOPE_BATCH_LIMIT)throw new DraftError(SCOPE_UPLOAD_HELP,413);
         const name=input.name.replace(/[\u0000-\u001f/\\]/g,'_');
         await query('INSERT INTO p5_estimator_work(draft_id,work_key,payload) VALUES($1,$2,$3::jsonb) ON CONFLICT DO NOTHING',[id,workKey,JSON.stringify({name,size:input.size,digest,chunks:{}})]);
-        return json({chunkSize:SCOPE_CHUNK_SIZE,chunks:{},complete:false});
+        return json({chunkSize:SCOPE_CHUNK_SIZE,chunks:{},complete:false,name});
       }finally{await releaseWork(id,'upload-admission',gate.token);}
     }
     const [row]=await query('SELECT payload FROM p5_estimator_work WHERE draft_id=$1 AND work_key=$2',[id,workKey]);

@@ -6,12 +6,22 @@ import {priceCompleteScope,requestPricing,type PricingRequest} from '../lib/p5/s
 import {ESTIMATOR_BRAND as brand} from '../lib/p5/brand';
 import type {EstimatorConfiguration} from '../lib/p5/costBook';
 import type {ReviewedScope} from '../lib/p5/scope';
+import {beginQualificationCall,dollarsToMicrousd,markQualificationUnknown,prepareQualificationBudget,qualificationRequestKey,reserveQualificationCall,settleQualificationCall} from '../lib/p5/providerBudget';
 
 // Opt-in paid inference with synthetic scope and read-only approved pricing.
 // No draft, rate, lead, CRM, outbox or email write is called by this script.
 if(process.env.P5_RUN_LIVE_PRICING!=='true')throw new Error('Explicit live pricing test authorization is required.');
 const fingerprint=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 async function main(){
+ const runId=process.env.P5_LIVE_PRICING_RUN_ID||'';
+ const allowance=dollarsToMicrousd(process.env.P5_LIVE_PRICING_ALLOWANCE_DOLLARS||'');
+ const perCall=dollarsToMicrousd(process.env.P5_LIVE_PRICING_RESERVE_PER_CALL_DOLLARS||'');
+ if(perCall>allowance)throw new Error('The per-call reservation exceeds the documented remaining allowance.');
+ await prepareQualificationBudget(runId,allowance);
+ const integrated=Boolean(process.env.AI_INTEGRATIONS_OPENAI_API_KEY&&process.env.AI_INTEGRATIONS_OPENAI_BASE_URL);
+ const openai=Boolean(integrated?process.env.AI_INTEGRATIONS_OPENAI_API_KEY:process.env.OPENAI_API_KEY);
+ const provider=openai&&(process.env.P5_PRICING_PROVIDER||'openai')!=='anthropic'?'openai':'anthropic';
+ const model=provider==='openai'?(process.env.P5_PRICING_OPENAI_MODEL||process.env.P5_SCOPE_OPENAI_MODEL||'gpt-4.1'):(process.env.P5_PRICING_MODEL||'claude-sonnet-5');
  const [policy]=await query("SELECT payload FROM p5_estimator_policy WHERE id='current'");
  assert.ok(policy?.payload?.planningCatalog?.rates?.length,'The approved catalog must be populated');
  const configuration=policy.payload as EstimatorConfiguration,before=fingerprint(configuration),reports:any[]=[];
@@ -28,8 +38,11 @@ async function main(){
   // A deliberately missing material category in an in-memory test copy forces
   // the research path. The owner's saved185-rate catalog remains untouched.
   if(missing)config.planningCatalog!.rates=config.planningCatalog!.rates.filter(rate=>rate.type!=='Material');
-  const stages:any[]=[];const request:PricingRequest=async(instructions,input,search,remaining)=>{
-   const start=performance.now();try{const result=await requestPricing(instructions,input,search,remaining);stages.push({search,milliseconds:Math.round(performance.now()-start),sourceUrls:result.sourceUrls,value:result.value});return result;}catch(error){stages.push({search,milliseconds:Math.round(performance.now()-start),error:error instanceof Error?error.message:'failed'});throw error;}finally{await writeFile(`p5-verification/live-pricing-${scenario}-stages.json`,JSON.stringify(stages,null,2));}
+   const stages:any[]=[];const request:PricingRequest=async(instructions,input,search,remaining)=>{
+    const identity=qualificationRequestKey(runId,provider,model,{scenario,instructions,input,search});
+    const reservation=await reserveQualificationCall({runId,provider,model,...identity,reservedMicrousd:perCall});
+    await beginQualificationCall(reservation.idempotencyKey);
+    const start=performance.now();try{const result=await requestPricing(instructions,input,search,remaining);await settleQualificationCall(reservation.idempotencyKey);stages.push({search,milliseconds:Math.round(performance.now()-start),sourceUrls:result.sourceUrls,value:result.value,reservationMicrousd:reservation.reservedMicrousd});return result;}catch(error){await markQualificationUnknown(runId,reservation.idempotencyKey);stages.push({search,milliseconds:Math.round(performance.now()-start),error:error instanceof Error?error.message:'failed',charge:'unknown'});throw error;}finally{await writeFile(`p5-verification/live-pricing-${scenario}-stages.json`,JSON.stringify(stages,null,2));}
   };
   const start=performance.now();const result=await priceCompleteScope(scope,config,request);const internal=result.internal as any;
   const issues=internal.scopePricing?.issues||[];const lines=internal.lines||[];

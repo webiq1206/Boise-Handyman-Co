@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import {PGlite} from '@electric-sql/pglite';
+import {beginQualificationCall,markQualificationUnknown,prepareQualificationBudget,qualificationRequestKey,reserveQualificationCall,settleQualificationCall} from '../lib/p5/providerBudget.ts';
+
+const pg=new PGlite();
+const execute=async(statement:string,values:unknown[]=[])=>((await pg.query(statement,values)).rows as Record<string,any>[]);
+const run='offline-budget-test',allowance=1_000_000,reserve=400_000;
+await prepareQualificationBudget(run,allowance,execute);
+const one=qualificationRequestKey(run,'openai','test-model',{stage:1});
+const first=await reserveQualificationCall({runId:run,provider:'openai',model:'test-model',...one,reservedMicrousd:reserve},execute);
+await beginQualificationCall(first.idempotencyKey,execute);
+await settleQualificationCall(first.idempotencyKey,null,execute);
+await assert.rejects(()=>reserveQualificationCall({runId:run,provider:'openai',model:'test-model',...one,reservedMicrousd:reserve},execute),/already consumed/);
+const two=qualificationRequestKey(run,'openai','test-model',{stage:2});
+await reserveQualificationCall({runId:run,provider:'openai',model:'test-model',...two,reservedMicrousd:reserve},execute);
+const three=qualificationRequestKey(run,'openai','test-model',{stage:3});
+await assert.rejects(()=>reserveQualificationCall({runId:run,provider:'openai',model:'test-model',...three,reservedMicrousd:reserve},execute),/allowance is exhausted/);
+await beginQualificationCall(two.idempotencyKey,execute);
+await markQualificationUnknown(run,two.idempotencyKey,execute);
+await assert.rejects(()=>prepareQualificationBudget(run,allowance,execute),/charge is unknown/);
+await assert.rejects(()=>prepareQualificationBudget(run,allowance+1,execute),/allowance.*cannot change/);
+const concurrentRun='offline-concurrent-budget-test',concurrentAllowance=400_000,concurrentReserve=300_000;
+await prepareQualificationBudget(concurrentRun,concurrentAllowance,execute);
+const concurrentRequests=[1,2].map(stage=>{
+  const identity=qualificationRequestKey(concurrentRun,'openai','test-model',{stage});
+  return reserveQualificationCall({runId:concurrentRun,provider:'openai',model:'test-model',...identity,reservedMicrousd:concurrentReserve},execute);
+});
+const concurrentResults=await Promise.allSettled(concurrentRequests);
+assert.equal(concurrentResults.filter(result=>result.status==='fulfilled').length,1);
+assert.equal(concurrentResults.filter(result=>result.status==='rejected'&&/allowance is exhausted/.test(String(result.reason))).length,1);
+const [concurrentBudget]=await execute('SELECT committed_microusd FROM p5_provider_qualification_budgets WHERE run_id=$1',[concurrentRun]);
+assert.equal(Number(concurrentBudget.committed_microusd),concurrentReserve);
+console.log('P5 provider qualification budget checks passed: durable allowance, idempotency, concurrent cap and unknown-charge stop.');

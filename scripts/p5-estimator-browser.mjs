@@ -9,7 +9,8 @@ import {emptyInstructions} from '../lib/p5/instructions.ts';
 import {ESTIMATOR_BRAND as brand} from '../lib/p5/brand.ts';
 const base=process.env.P5_TEST_BASE_URL||'http://127.0.0.1:5000';
 await mkdir('p5-verification',{recursive:true});
-const browser=await (process.env.P5_TEST_BROWSER==='webkit'?webkit:chromium).launch();const results=[];
+const browserType=process.env.P5_TEST_BROWSER==='webkit'?webkit:chromium;
+const browser=await browserType.launch(process.env.PLAYWRIGHT_CHROMIUM_PATH&&browserType===chromium?{executablePath:process.env.PLAYWRIGHT_CHROMIUM_PATH}:{});const results=[];
 const fixturePdf=await PDFDocument.create();fixturePdf.addPage().drawText('Synthetic estimate PDF download.');
 const pdfBytes=Buffer.from(await fixturePdf.save());
 // Brands ask their own extra questions before review (finish level for cabinets, trim length when trim is priced).
@@ -54,7 +55,7 @@ async function mock(context,{interruptions=false,scenario='full'}={}){
     const files=await Promise.all(form.getAll('files').map(async file=>({id:'test-upload',name:file.name,size:file.size,type:file.type,sha256:createHash('sha256').update(Buffer.from(await file.arrayBuffer())).digest('hex'),status:'stored'})));
     state.saved={...state.saved,uploads:files};return send({draft:state.saved,analysis:null});
    }
-   if(scenario==='progress'&&!state.finishReading)return send({pending:true,progress:'Reading original plan pages',processing:{phase:'reading',message:'Reading the next eight original pages.',readPages:state.readStage*8,totalPages:256,readSections:state.readStage,totalSections:32,currentItems:['Plans.pdf (pages '+(state.readStage*8+1)+' to '+(state.readStage*8+8)+')'],updatedAt:new Date().toISOString()}});
+   if(scenario==='progress'&&!state.finishReading)return send({pending:true,progress:'Reading original plan pages',processing:{phase:'reading',message:'Reading the next eight original pages.',readPages:state.readStage*8,totalPages:250,readSections:state.readStage,totalSections:32,currentItems:['Plans.pdf (pages '+(state.readStage*8+1)+' to '+Math.min(250,state.readStage*8+8)+')'],updatedAt:new Date().toISOString()}},202);
    const desired=scenario==='unavailable'?{}:scenario==='manual'?{service,taskList:state.saved.answers.taskList||'Repair three interior doors',...(service.startsWith('cabinet-')?{cabinetRoom:'kitchen',cabinetBaseLf:'20',cabinetUpperLf:'0'}:{})}:fullAnswers;
    const extraction={summary:'Synthetic project',facts:Object.entries(desired).map(([field,value])=>({field,value,confidence:.98,source:'scope.txt',evidence:value})),conflicts:scenario==='conflict'?[{field:'taskList',values:['Repair three doors','Replace three doors'],explanation:'The documents disagree. Which work should be included?'}]:[],missingInformation:[],reviewNotes:[],clarifications:[]};
    if(scenario==='instructions')extraction.instructions={...emptyInstructions(),questions:['Labor only or materials only?','Should we include or exclude painting?']};
@@ -204,13 +205,14 @@ for(const width of [320,390,1440]){
  try{
   await page.goto(base+'/estimate/p5-preview');const est=page.locator('[data-p5-estimator]');
   await est.getByLabel('Tell us about your project',{exact:true}).fill('Synthetic progress test: repair three interior doors.');
-  // The 256-page fixture is prepared in the browser before Continue enables; WebKit on a loaded runner needs more than the default wait.
+  await est.getByLabel('Upload project files',{exact:true}).setInputFiles({name:'Plans.pdf',mimeType:'application/pdf',buffer:pdfBytes});
+  // The maximum supported 250-page fixture is prepared in the browser before Continue enables; WebKit on a loaded runner needs more than the default wait.
   await est.getByRole('button',{name:'Continue',exact:true}).click({timeout:120000});
-  await page.getByText('8 of 256 pages checked',{exact:true}).waitFor();
-  assert.equal(await page.getByRole('progressbar',{name:'Original pages fully read'}).getAttribute('value'),'8');
+  await page.getByText('8 of 250 pages checked',{exact:true}).waitFor();
+  assert.equal(await page.getByRole('progressbar',{name:'Original pages checked'}).getAttribute('value'),'8');
   await page.getByRole('heading',{name:'Reading your plans',exact:true}).waitFor();await overflow(page);await capture(page,`${width}-live-reading`);
   progressState.readStage=2;
-  await page.getByText('16 of 256 pages checked',{exact:true}).waitFor();
+  await page.getByText('16 of 250 pages checked',{exact:true}).waitFor();
   progressState.finishReading=true;
   await answerBrandQuestions(page,est,est.getByLabel('Your name',{exact:true}));
   assert.equal(await est.getByRole('button',{name:'Download your project summary',exact:true}).count(),0,'No PDF before contact capture');

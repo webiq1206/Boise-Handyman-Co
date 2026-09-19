@@ -3,23 +3,24 @@ import {query} from './database.ts';
 import {readStoredBytes} from './objectStorage.ts';
 import {claimWork,writeWork,releaseWork} from './workStore.ts';
 import {ESTIMATOR_BRAND} from './brand.ts';
-import {validateExtraction,type ScopeAnswers,type ScopeUpload} from './scope.ts';
+import {SCOPE_PAGE_LIMIT,validateExtraction,type ScopeAnswers,type ScopeUpload} from './scope.ts';
 import {type Draft,DraftError} from './store.ts';
 import {fetchWithinDeadline,remainingBudget} from './processingBudget.ts';
 import type {ProcessingStatus} from './processingStatus.ts';
 const VERSION='p5-documents-2026-09-17-v1';
 const digest=(value:string|Buffer)=>createHash('sha256').update(value).digest('hex');
-export function documentServiceEligible(uploads:ScopeUpload[],env:Readonly<Record<string,string|undefined>>=process.env){
+export function documentServiceUploads(uploads:ScopeUpload[],env:Readonly<Record<string,string|undefined>>=process.env){
  const limit=Number(env.P5_DOCUMENT_SERVICE_MAX_BYTES||50*1024*1024);
  if(env.P5_DOCUMENT_SERVICE_MODE==='remote'&&(!Number.isSafeInteger(limit)||limit<=0))throw new DraftError('The document size limit needs configuration. Your files are saved.',503);
- return env.P5_DOCUMENT_SERVICE_MODE==='remote'&&uploads.length>0&&uploads.every(u=>u.status==='stored'&&u.type==='application/pdf'&&u.size>0&&u.size<=limit);
+ return env.P5_DOCUMENT_SERVICE_MODE==='remote'?uploads.filter(u=>u.status==='stored'&&u.type==='application/pdf'&&u.size>0&&u.size<=limit):[];
 }
+export function documentServiceEligible(uploads:ScopeUpload[],env:Readonly<Record<string,string|undefined>>=process.env){return documentServiceUploads(uploads,env).length>0;}
 export function documentServiceHeaders(method:string,path:string,tenant:string,secret:string,body:Buffer,now=Date.now(),nonce:string=randomUUID()){
  const timestamp=String(now),bodyHash=digest(body);
  return {'x-p5-tenant':tenant,'x-p5-time':timestamp,'x-p5-nonce':nonce,'x-p5-body-sha256':bodyHash,'x-p5-signature':createHmac('sha256',secret).update([method,path,tenant,timestamp,nonce,bodyHash].join('\n')).digest('hex')};
 }
 export function remoteDocumentId(tenant:string,project:string,sha256:string){return digest(JSON.stringify([VERSION,tenant,project,sha256]));}
-export async function advanceDocumentService(draft:Draft,text:string,answers:ScopeAnswers,workKey:string,request:typeof fetch,retryFailed:boolean,deadline:number){
+export async function advanceDocumentService(draft:Draft,text:string,answers:ScopeAnswers,workKey:string,request:typeof fetch,retryFailed:boolean,deadline:number,pageLimit=SCOPE_PAGE_LIMIT){
  const tenant=ESTIMATOR_BRAND.domain;
  const secret=process.env.P5_DOCUMENT_SERVICE_KEY||'',configured=process.env.P5_DOCUMENT_SERVICE_URL||'';
  let origin:URL;try{origin=new URL(configured);}catch{throw new DraftError('The document service is not configured. Your files are saved.',503);}
@@ -56,7 +57,8 @@ export async function advanceDocumentService(draft:Draft,text:string,answers:Sco
     if(retryFailed){const retried=await send('POST',path+'/retry');if(!retried.ok)throw new DraftError('The document retry could not start. Your files are saved.',503);return pending('Retrying only the interrupted document stages.',{phase:'retrying'});}
     throw new DraftError(`Document processing needs attention (${response.value.error||'reader failure'}). Completed work is saved. Use Retry to resume.`,422);
    }
-   complete&&=response.value.state==='complete';readPages+=Number(response.value.progress?.checkedPages||0);totalPages+=Number(response.value.progress?.totalPages||0);
+    complete&&=response.value.state==='complete';readPages+=Number(response.value.progress?.checkedPages||0);totalPages+=Number(response.value.progress?.totalPages||0);
+    if(totalPages>pageLimit)throw new DraftError(`Plans can contain up to ${SCOPE_PAGE_LIMIT} pages per saved scope. Split this project into separate scopes before pricing.`,413);
    const source=draft.uploads.filter(u=>u.name===upload.name).length>1?`${upload.name} [${upload.id.slice(0,8)}]`:upload.name;
    // Duplicate bytes in the same project are one physical source, even when
    // uploaded twice under different names. They must not multiply quantities.

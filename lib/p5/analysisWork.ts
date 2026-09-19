@@ -1,11 +1,11 @@
-import {documentServiceEligible,advanceDocumentService} from './documentServiceClient.ts';
+import {documentServiceUploads,advanceDocumentService} from './documentServiceClient.ts';
 import {ANALYSIS_PASS_MS,READ_ALLOWANCE_MS,READ_START_MARGIN_MS,remainingBudget,ProcessingDeadlineError,isProcessingDeadline} from './processingBudget.ts';
 import {createHash} from 'node:crypto';
 import {PDFDocument} from 'pdf-lib';
 import {Client} from '@replit/object-storage';
 import {analyzeBatch,AnalysisBusyError,type AnalysisFile,type AnalysisResult} from './extraction.ts';
 import {prepareAnalysisFiles} from './documents.ts';
-import {combineScopeExtractions,type ScopeAnswers,type ScopeExtraction} from './scope.ts';
+import {SCOPE_PAGE_LIMIT,combineScopeExtractions,type ScopeAnswers,type ScopeExtraction} from './scope.ts';
 import {query} from './database.ts';
 import {readStoredBytes,ESTIMATOR_BUCKETS} from './objectStorage.ts';
 import {ESTIMATOR_BRAND} from './brand.ts';
@@ -20,8 +20,8 @@ import {analysisMessage,type ProcessingStatus} from './processingStatus.ts';
 export {analysisSegments} from './analysisSegments.ts';
 import {analysisSegments} from './analysisSegments.ts';
 
-type Unit={name:string;type:string;object:string;pages?:AnalysisFile['pages'];text?:string;context?:string;detailViews?:boolean;detailRegions?:AnalysisFile['detailRegions'];result?:AnalysisResult;attempts?:number;rateLimitRetries?:number;error?:string;lastCode?:string;retryAt?:number;active?:boolean};
-type Job={prepared:number;units:Unit[];notes:string[];textDone?:AnalysisResult;textPrepared?:boolean;cursor?:number;expected?:{source:string;page:number}[];progress?:string;processing?:ProcessingStatus;concurrency?:number;cooldownUntil?:number};
+type Unit={name:string;type:string;object:string;uploadId?:string;pages?:AnalysisFile['pages'];text?:string;context?:string;detailViews?:boolean;detailRegions?:AnalysisFile['detailRegions'];result?:AnalysisResult;attempts?:number;rateLimitRetries?:number;error?:string;lastCode?:string;retryAt?:number;active?:boolean};
+type Job={prepared:number;units:Unit[];notes:string[];preparationFailures?:string[];textDone?:AnalysisResult;textPrepared?:boolean;cursor?:number;expected?:{source:string;page:number}[];progress?:string;processing?:ProcessingStatus;concurrency?:number;cooldownUntil?:number};
 /** Reads of one section before it is reported as unread. Each attempt may use
  * a different provider or the page's text layer, so this is several distinct
  * strategies, not the same call repeated. */
@@ -53,9 +53,21 @@ export function unreadNotes(units:Unit[]):string[]{
 }
 /** Each request checkpoints work before returning. Reloading resumes the same source fingerprint. */
 type DocumentAnalysisStep={pending:true;progress:string;retryAfterMs?:number}|{pending:false;version:string;analysis:AnalysisResult};
-export async function advanceAnalysis(draft:Draft,text:string,answers:ScopeAnswers,request=fetch,retryFailed=false,absoluteDeadline=Date.now()+ANALYSIS_PASS_MS):Promise<DocumentAnalysisStep>{
+export async function advanceAnalysis(draft:Draft,text:string,answers:ScopeAnswers,request=fetch,retryFailed=false,absoluteDeadline=Date.now()+ANALYSIS_PASS_MS,localOnly=false,pageLimit=SCOPE_PAGE_LIMIT):Promise<DocumentAnalysisStep>{
   remainingBudget(absoluteDeadline);
-  if(documentServiceEligible(draft.uploads))return advanceDocumentService(draft,text,answers,analysisWorkKey(draft,text,answers),request,retryFailed,absoluteDeadline);
+  const remoteUploads=localOnly?[]:documentServiceUploads(draft.uploads);
+  if(remoteUploads.length){
+    const remoteDraft={...draft,uploads:remoteUploads};
+    const remote=await advanceDocumentService(remoteDraft,text,answers,analysisWorkKey(remoteDraft,text,answers)+':remote',request,retryFailed,absoluteDeadline,pageLimit);
+    if(remote.pending)return remote;
+    const remoteIds=new Set(remoteUploads.map(upload=>upload.id)),localUploads=draft.uploads.filter(upload=>!remoteIds.has(upload.id));
+    if(!localUploads.length)return remote;
+    const remotePages=remote.analysis.extraction.documentCoverage?.expectedPages||0;
+    const local=await advanceAnalysis({...draft,uploads:localUploads},text,answers,request,retryFailed,absoluteDeadline,true,pageLimit-remotePages);
+    if(local.pending)return local;
+    const extraction=combineScopeExtractions([remote.analysis.extraction,local.analysis.extraction]);
+    return {pending:false,version:createHash('sha256').update(JSON.stringify([remote.version,local.version])).digest('hex'),analysis:{extraction,provider:`${remote.analysis.provider} + ${local.analysis.provider}`,model:`${remote.analysis.model} + ${local.analysis.model}`,analyzedAt:new Date().toISOString()}};
+  }
   const version=createHash('sha256').update(JSON.stringify([text,answers,draft.uploads.map(f=>[f.id,f.sha256])])).digest('hex');
   const workKey=analysisWorkKey(draft,text,answers),bucketId=ESTIMATOR_BUCKETS[ESTIMATOR_BRAND.domain],client=new Client({bucketId});
   const lease=await claimWork(draft.id,workKey,{prepared:0,units:[],notes:[]},300);
@@ -63,6 +75,17 @@ export async function advanceAnalysis(draft:Draft,text:string,answers:ScopeAnswe
   const job=lease.payload as Job;
   const event=(stage:string,outcome:'ok'|'failed'|'retry',extra:Partial<Parameters<typeof recordEvent>[0]>={})=>void recordEvent({draftId:draft.id,estimator:answers.service||null,kind:'analysis',stage,outcome,...extra});
   if(retryFailed)delete job.cooldownUntil;
+  if(retryFailed){
+    const failedIds=new Set(job.units.filter(unit=>unit.lastCode==='preparation'&&!unit.object&&unit.uploadId).map(unit=>unit.uploadId!));
+    const failedIndexes=draft.uploads.map((upload,index)=>failedIds.has(upload.id)?index:-1).filter(index=>index>=0);
+    if(failedIndexes.length){
+      const rewind=Math.min(...failedIndexes),rewoundIds=new Set(draft.uploads.slice(rewind).map(upload=>upload.id)),rewoundNames=new Set(draft.uploads.slice(rewind).map(upload=>upload.name));
+      job.units=job.units.filter(unit=>!unit.uploadId||!rewoundIds.has(unit.uploadId));
+      job.expected=(job.expected||[]).filter(page=>!rewoundNames.has(page.source));
+      job.notes=job.notes.filter(note=>![...rewoundNames].some(name=>note.startsWith(`${name}:`)));
+      job.prepared=rewind;job.cursor=0;job.preparationFailures=(job.preparationFailures||[]).filter(name=>!rewoundNames.has(name));
+    }
+  }
   if(retryFailed)for(const unit of job.units)if(unit.object&&(!unit.result||unit.result.extraction.documentCoverage?.complete===false)){unit.attempts=0;unit.rateLimitRetries=0;delete unit.error;delete unit.lastCode;delete unit.result;delete unit.retryAt;}
   // Serialize writes from concurrent readers so a late database response cannot
   // overwrite a more recent completed section.
@@ -97,29 +120,30 @@ export async function advanceAnalysis(draft:Draft,text:string,answers:ScopeAnswe
       if(!row)throw new DraftError('A saved project file could not be located. Please retry.',503);
       const name=draft.uploads.filter(u=>u.name===row.name).length>1?`${row.name} [${upload.id.slice(0,8)}]`:String(row.name);
       const file={name,type:String(row.mime_type),data:await readStoredBytes(row)};
-      const preparing=Date.now();
+      const preparing=Date.now();let fileFailed=false;
       if(file.type==='application/pdf'){
-        try{const pdf=await PDFDocument.load(file.data);job.expected=[...(job.expected||[]).filter(p=>p.source!==file.name),...Array.from({length:pdf.getPageCount()},(_,i)=>({source:file.name,page:i+1}))];}
-        catch(error){job.notes.push(`${file.name}: unreadable or encrypted PDF. No pages can be claimed as analyzed.`);event('prepare','failed',{file:file.name,code:'unreadable-pdf',message:error instanceof Error?error.message:String(error),durationMs:Date.now()-preparing});job.prepared++;await checkpoint();return {pending:true as const,progress:`Saved an unreadable-file exception for ${file.name}. Continuing remaining files.`};}
+        try{const pdf=await PDFDocument.load(file.data),pages=pdf.getPageCount();if((job.expected?.length||0)+pages>pageLimit)throw new DraftError(`Plans can contain up to ${SCOPE_PAGE_LIMIT} pages per saved scope. Split this project into separate scopes before pricing.`,413);job.expected=[...(job.expected||[]).filter(p=>p.source!==file.name),...Array.from({length:pages},(_,i)=>({source:file.name,page:i+1}))];}
+        catch(error){if(error instanceof DraftError)throw error;const message=`${file.name}: unreadable or encrypted PDF. No pages can be claimed as analyzed.`;job.notes.push(message);job.preparationFailures=[...new Set([...(job.preparationFailures||[]),file.name])];job.units.push({name:file.name,type:file.type,object:'',uploadId:upload.id,error:message,lastCode:'preparation',attempts:MAX_READ_ATTEMPTS});event('prepare','failed',{file:file.name,code:'unreadable-pdf',message:error instanceof Error?error.message:String(error),durationMs:Date.now()-preparing});job.prepared++;await checkpoint();return {pending:true as const,progress:`Saved an unreadable-file exception for ${file.name}. Continuing remaining files.`};}
       }
       const {readable,manualReview}=await prepareAnalysisFiles([file]);job.notes.push(...manualReview);
       for(const note of manualReview)event('prepare','failed',{file:file.name,code:'manual-review',message:note,durationMs:Date.now()-preparing});
+      if(!readable.length&&manualReview.length){fileFailed=true;job.preparationFailures=[...new Set([...(job.preparationFailures||[]),file.name])];job.units.push({name:file.name,type:file.type,object:'',uploadId:upload.id,error:manualReview.join(' '),lastCode:'preparation',attempts:MAX_READ_ATTEMPTS});}
       const preparedAt=Date.now();let finished=true;
       for(const converted of readable){
         try{
           for await(const segment of analysisSegments(converted,job.cursor||0)){
             remainingBudget(absoluteDeadline);
             const object=`analysis/${ESTIMATOR_BRAND.domain}/${draft.id}/${version}/${job.units.length}`;
-            if(segment.preparationError){job.units.push({name:segment.name,type:segment.type,object:'',pages:segment.pages,error:segment.preparationError,lastCode:'preparation',attempts:MAX_READ_ATTEMPTS});event('prepare','failed',{file:segment.name,code:'preparation',message:segment.preparationError});job.cursor=segment.nextPage;await checkpoint();continue;}
+            if(segment.preparationError){fileFailed=true;job.preparationFailures=[...new Set([...(job.preparationFailures||[]),file.name])];job.units.push({name:segment.name,type:segment.type,object:'',uploadId:upload.id,pages:segment.pages,error:segment.preparationError,lastCode:'preparation',attempts:MAX_READ_ATTEMPTS});event('prepare','failed',{file:segment.name,code:'preparation',message:segment.preparationError});job.cursor=segment.nextPage;await checkpoint();continue;}
             const saved=await client.uploadFromBytes(object,segment.data,{compress:false});
             if(!saved.ok)throw new DraftError('Document preparation was interrupted. Retry to resume.',503);
-            job.units.push({name:segment.name,type:segment.type,object,pages:segment.pages,text:segment.text,context:segment.context,detailViews:segment.detailViews,detailRegions:segment.detailRegions});
+            job.units.push({name:segment.name,type:segment.type,object,uploadId:upload.id,pages:segment.pages,text:segment.text,context:segment.context,detailViews:segment.detailViews,detailRegions:segment.detailRegions});
             if(segment.nextPage!==undefined){job.cursor=segment.nextPage;await checkpoint();if(Date.now()-preparedAt>4000||job.units.filter(pending).length>=analysisConcurrency()*2){finished=false;break;}}
           }
-        }catch(error){if(error instanceof DraftError||isProcessingDeadline(error))throw error;job.notes.push(`${file.name}: ${error instanceof Error?error.message:'Could not read this file.'} Review the original before pricing.`);event('prepare','failed',{file:file.name,code:'prepare-error',message:error instanceof Error?error.message:String(error),durationMs:Date.now()-preparing});}
+        }catch(error){if(error instanceof DraftError||isProcessingDeadline(error))throw error;fileFailed=true;const message=`${file.name}: ${error instanceof Error?error.message:'Could not read this file.'} Review the original before pricing.`;job.notes.push(message);job.preparationFailures=[...new Set([...(job.preparationFailures||[]),file.name])];job.units.push({name:file.name,type:file.type,object:'',uploadId:upload.id,error:message,lastCode:'preparation',attempts:MAX_READ_ATTEMPTS});event('prepare','failed',{file:file.name,code:'prepare-error',message:error instanceof Error?error.message:String(error),durationMs:Date.now()-preparing});}
         if(!finished)break;
       }
-      if(finished){job.prepared++;job.cursor=0;event('prepare','ok',{file:file.name,durationMs:Date.now()-preparing,meta:{sections:job.units.length}});}
+      if(finished){job.prepared++;job.cursor=0;if(!fileFailed)job.preparationFailures=(job.preparationFailures||[]).filter(name=>name!==file.name);event('prepare',fileFailed?'failed':'ok',{file:file.name,durationMs:Date.now()-preparing,meta:{sections:job.units.length}});}
       await checkpoint();
       // Prepared sections are read right away in this same pass.
     }
@@ -191,6 +215,7 @@ export async function advanceAnalysis(draft:Draft,text:string,answers:ScopeAnswe
     const unprocessed=job.units.filter(u=>!u.result).flatMap(u=>(u.pages||[]).map(p=>({...p,sheet:'',revision:'',status:'unreadable' as const,notes:[u.error||'Page analysis did not finish.']})));
     if(unprocessed.length){const c=extraction.documentCoverage||{pages:[],expectedPages:0,complete:false};extraction.documentCoverage={pages:[...c.pages,...unprocessed],expectedPages:c.expectedPages+unprocessed.length,complete:false};}
     if(job.expected?.length)extraction.documentCoverage=combineCoverage(extraction.documentCoverage?[extraction.documentCoverage]:[],job.expected);
+    if(job.preparationFailures?.length){const coverage=extraction.documentCoverage||{pages:[],expectedPages:job.expected?.length||0,complete:false};extraction.documentCoverage={...coverage,complete:false};}
     // Unread sections are reported once per document with their page ranges.
     // Pages the reader did open but found partly illegible keep their own notes.
     const failedPages=new Set(unprocessed.map(p=>JSON.stringify([p.source,p.page])));

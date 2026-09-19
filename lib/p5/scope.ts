@@ -92,6 +92,7 @@ export const SCOPE_FILE_LIMIT = 250 * 1024 * 1024;
 export const SCOPE_BATCH_LIMIT = 1024 * 1024 * 1024;
 export const SCOPE_FILE_COUNT = 50;
 export const SCOPE_CHUNK_SIZE = 4 * 1024 * 1024;
+export const SCOPE_PAGE_LIMIT = 250;
 export const SCOPE_UPLOAD_HELP = "Up to 50 files, 250 MB each and 1 GB total. Large uploads resume after interruptions.";
 /** Map a model's wording for a choice field onto one of its options, or
  * null when no option is a clear match. Providers answer "Standard finishes"
@@ -271,7 +272,7 @@ export function validateExtraction(raw: unknown): ScopeExtraction {
   const hasPages=r.pages!==undefined||savedCoverage!==undefined;
   const pages=hasPages?readPageRecords(r.pages??savedCoverage?.pages):[];
   const expectedPages=savedCoverage?.expectedPages??pages.length;
-  if(!Number.isSafeInteger(expectedPages)||expectedPages<pages.length||expectedPages>10000)throw new Error('Invalid document page coverage');
+  if(!Number.isSafeInteger(expectedPages)||expectedPages<pages.length||expectedPages>SCOPE_PAGE_LIMIT)throw new Error('Invalid document page coverage');
   if(laborCoverage&&laborCoverage.components.some(component=>{
     const row=takeoffs?.find(item=>item.id===component.id);
     return !row||!/^(?:h|hr|hrs|hour|hours)$/i.test(row.unit)||row.quantity!==component.hours;

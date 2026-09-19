@@ -1,11 +1,13 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {documentServiceEligible,documentServiceHeaders,remoteDocumentId} from '../lib/p5/documentServiceClient.ts';
+import {documentServiceEligible,documentServiceHeaders,documentServiceUploads,remoteDocumentId} from '../lib/p5/documentServiceClient.ts';
 const pdf:any={id:'file',name:'scope.pdf',type:'application/pdf',size:1000,sha256:'a'.repeat(64),status:'stored'};
-test('shared service is off by default and never changes legacy mixed-format inputs',()=>{
+test('shared service is off by default and partitions eligible PDFs from mixed inputs',()=>{
  assert.equal(documentServiceEligible([pdf],{}),false);
  assert.equal(documentServiceEligible([pdf],{P5_DOCUMENT_SERVICE_MODE:'remote'}),true);
- assert.equal(documentServiceEligible([pdf,{...pdf,type:'image/png'}],{P5_DOCUMENT_SERVICE_MODE:'remote'}),false);
+ const photo={...pdf,id:'photo',name:'photo.png',type:'image/png'};
+ assert.equal(documentServiceEligible([pdf,photo],{P5_DOCUMENT_SERVICE_MODE:'remote'}),true);
+ assert.deepEqual(documentServiceUploads([pdf,photo],{P5_DOCUMENT_SERVICE_MODE:'remote'}),[pdf]);
  assert.equal(documentServiceEligible([{...pdf,size:60*1024*1024}],{P5_DOCUMENT_SERVICE_MODE:'remote'}),false);
  assert.equal(documentServiceEligible([{...pdf,size:0}],{P5_DOCUMENT_SERVICE_MODE:'remote'}),false);
  assert.throws(()=>documentServiceEligible([pdf],{P5_DOCUMENT_SERVICE_MODE:'remote',P5_DOCUMENT_SERVICE_MAX_BYTES:'invalid'}),/configuration/);
