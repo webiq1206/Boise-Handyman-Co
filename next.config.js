@@ -11,7 +11,15 @@ process.env.WS_NO_BUFFER_UTIL = '1';
 process.env.WS_NO_UTF_8_VALIDATE = '1';
 
 /** @type {import('next').NextConfig} */
+const { execSync } = require("node:child_process");
+// Release identity: the commit, its tree (unchanged by Replit's empty "Published
+// your App" marker commits) and whether the build ran from a modified workspace.
+function p5Release() {
+  const git = (args) => { try { return execSync("git " + args, { stdio: ["ignore", "pipe", "ignore"] }).toString().trim(); } catch { return ""; } };
+  return JSON.stringify({ sha: git("rev-parse HEAD"), tree: git("log -1 --format=%T"), dirty: git("status --porcelain --untracked-files=no") !== "", builtAt: new Date().toISOString() });
+}
 const nextConfig = {
+  env: { NEXT_PUBLIC_P5_RELEASE: p5Release() },
   serverExternalPackages:['pdfjs-dist','@napi-rs/canvas'],
   typescript: {
     ignoreBuildErrors: true,
