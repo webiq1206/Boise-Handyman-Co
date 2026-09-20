@@ -44,32 +44,18 @@ test('measured labor-only trim is recognized without another project type or roo
  assert.deepEqual(scopeQuestions(a,x,[],[],[],text),[]);
  for(const suffix of [' New home construction.',' Part of a kitchen remodel.',' RE-10 inspection repairs.',' This is a change order.'])assert.equal(retainExplicitSelections(empty,text+suffix).facts.length,0);
 });
-test('owner-supplied measured trim keeps the saved repair details and skips project type',()=>{
- const text='QA TEST ONLY: Repair 3 interior door hinges and install 20 linear feet of owner-supplied trim in Nampa. No painting.';
- const supplied='Trim material owner-supplied; contractor installs';
- const seeded:ScopeExtraction={...empty,facts:[
-  {field:'location',value:'Nampa',source:'typed scope',evidence:'in Nampa',confidence:.9,basis:'stated'},
-  {field:'trimLf',value:'20',source:'typed scope',evidence:'install 20 linear feet of owner-supplied trim',confidence:.9,basis:'stated'},
-  {field:'ownerSupplied',value:supplied,source:'typed scope',evidence:'owner-supplied trim',confidence:.85,basis:'stated'},
-  {field:'exclusions',value:'No painting',source:'typed scope',evidence:'No painting',confidence:.9,basis:'stated'},
-  {field:'installation',value:'Repair 3 door hinges; install 20 LF owner-supplied trim',source:'typed scope',evidence:text,confidence:.85,basis:'stated'},
-  {field:'taskList',value:'Door hinge repair x3; trim install 20 LF (owner-supplied material)',source:'typed scope',evidence:text,confidence:.85,basis:'stated'},
- ]};
- const x=retainExplicitSelections(seeded,text);
- const a=mergeScopeFacts({},x).answers;
- assert.equal(a.service,'handyman');
- assert.equal(a.trimLf,'20');
- assert.equal(a.location,'Nampa');
- assert.equal(a.ownerSupplied,supplied);
- assert.equal(a.exclusions,'No painting');
- assert.equal(a.installation,'Repair 3 door hinges; install 20 LF owner-supplied trim');
- assert.equal(a.taskList,'Door hinge repair x3; trim install 20 LF (owner-supplied material)');
- assert.equal(scopeQuestions(a,x,[],[],[],text).some(question=>question.field==='service'),false);
- for(const ambiguous of [
-  'Maybe install 20 linear feet of owner-supplied trim.',
-  'Install 20 linear feet of owner-supplied trim as part of a kitchen remodel.',
-  'Install 20 linear feet of owner-supplied trim for an RE-10 inspection.',
- ])assert.equal(retainExplicitSelections(empty,ambiguous).facts.some(fact=>fact.field==='service'),false,ambiguous);
+test('owner-supplied measured baseboard retains explicit scope and skips only the redundant project-type question',()=>{
+ const text='Install 100 linear feet of owner-supplied baseboard in Caldwell. Labor only. Exclude painting, plumbing and electrical.';
+ const supplied:ScopeExtraction={...empty,
+  facts:[{field:'trimLf',value:'100',source:'qa-scope.txt',evidence:'100 linear feet of owner-supplied baseboard',confidence:1,basis:'stated'}],
+  instructions:{inclusions:['Install baseboard'],exclusions:['Painting','Plumbing','Electrical'],responsibilities:['Owner supplies baseboard'],buildings:[],floors:[],separateBuildings:false,laborOnly:true,materialsOnly:false,questions:[]}};
+ const x=retainExplicitSelections(supplied,text),a=mergeScopeFacts({taskList:text},x).answers;
+ assert.equal(a.service,'handyman');assert.equal(a.trimLf,'100');
+ assert.deepEqual(x.instructions,supplied.instructions);
+ assert.deepEqual(scopeQuestions(a,x,[],[],[],text),[]);
+ for(const context of ['Kitchen remodel.','New construction.','RE-10 inspection repairs.','Rush emergency work.','This is a change order.']){
+  assert.equal(retainExplicitSelections(supplied,`${text} ${context}`).facts.some(f=>f.field==='service'),false,context);
+ }
 });
 test('painted shaker vanity specifications replace the generic finish tier without choosing box construction',()=>{
  const text='Supply and install one 48-inch-wide bathroom vanity cabinet in Nampa. Painted shaker cabinet, standard hardware. Existing vanity removal is already completed. Exclude countertop, sink, plumbing and electrical.';

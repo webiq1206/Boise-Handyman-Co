@@ -2,6 +2,7 @@ import { randomBytes, randomUUID } from "node:crypto";
 import { chmod, readFile, writeFile } from "node:fs/promises";
 import { isAbsolute, join, relative, resolve } from "node:path";
 import { tmpdir } from "node:os";
+import { ESTIMATOR_BRAND as brand } from "./brand.ts";
 
 export type AcceptanceMode = "prepare" | "live";
 export type RunnerFetch = (input: string | URL, init?: RequestInit) => Promise<Response>;
@@ -10,6 +11,8 @@ export interface AcceptanceOptions {
   baseUrl?: string;
   email?: string;
   scope?: string;
+  /** Scope answers saved with the draft. Defaults to the smallest valid set for this brand. */
+  answers?: Record<string, string>;
   confirm?: string;
   confirmAgain?: string;
   stateFile?: string;
@@ -100,7 +103,9 @@ export async function runP5Acceptance(options: AcceptanceOptions = {}): Promise<
     const response = await fetcher(new URL(path, base).toString(), { method, headers: headers(state), body: body === undefined ? undefined : JSON.stringify(body) });
     return jsonResponse(response);
   };
-  const answers = { service: "handyman", location: "Boise, Idaho", taskList: scope };
+  const answers = options.answers || ((brand.id as string) === "handyman"
+    ? { service: "handyman", location: "Boise, Idaho", taskList: scope }
+    : { service: String(brand.defaultService || brand.services[0]), location: "Boise, Idaho" });
   const saved = await call("PUT", "/api/p5-estimator/draft", { revision: 0, text: scope, answers, contact: { name: "[QA] Acceptance", email, phone: "" } });
   state.revision = Number(saved.draft?.revision);
   if (saved.draft?.id !== state.id||state.revision!==1) throw new Error("Draft save did not confirm the expected identity and first revision.");

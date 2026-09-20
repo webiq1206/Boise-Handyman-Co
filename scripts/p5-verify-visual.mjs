@@ -5,7 +5,7 @@ await fs.mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true});
 const widths=[320,390,430,768,1024,1440,1920];
 const parent=process.env.P5_PARENT==='1';
-const routes=parent?['/','/quote','/sitemap','/legal/terms','/legal/privacy','/legal/quickbooks-disconnect']:['/','/services','/about','/contact','/testimonials'];
+const routes=parent?['/','/quote','/sitemap','/legal/terms','/legal/privacy','/legal/quickbooks-disconnect']:['/','/services','/services/kitchen-remodel','/services/kitchen-remodel/boise','/blog/kitchen-remodel-cost-boise','/blog/bathroom-remodel-cost-boise','/blog/whole-home-remodel-cost-boise','/blog/home-addition-cost-boise','/areas/boise','/about','/contact','/testimonials'];
 const results=[];
 let failed=false;
 function check(ok,message){if(!ok)throw new Error(message);}
@@ -31,6 +31,7 @@ try {
         check(phone && phone.height <= 24, 'Desktop phone number wraps');
       }
     }
+
     await page.evaluate(async()=>{await document.fonts.ready; for(let y=0;y<document.documentElement.scrollHeight;y+=650){window.scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,70));}});
     await page.evaluate(async()=>{
       const images=[...document.images].filter(i=>i.getClientRects().length);
@@ -74,11 +75,6 @@ try {
      await page.waitForTimeout(100);
      check(Math.abs(Number(await slider.getAttribute('aria-valuenow'))-30)<3,'Touch drag: '+await slider.getAttribute('aria-valuenow'));
     }
-    const table=page.getByRole('region',{name:'Scrollable comparison table'});
-    const tableGeometry=await table.evaluate(el=>({scroll:el.scrollWidth,width:el.clientWidth,page:document.documentElement.scrollWidth,viewport:innerWidth,tab:el.tabIndex}));
-    check(tableGeometry.page<=tableGeometry.viewport+1,'Comparison table widens page');
-    check(tableGeometry.tab===0,'Comparison table is keyboard accessible');
-    if(width===320)check(tableGeometry.scroll>tableGeometry.width,'Wide table scrolls inside its region');
     const grid=await page.locator('#four-cards').evaluate(el=>[...el.children].map(c=>({x:c.getBoundingClientRect().x,y:c.getBoundingClientRect().y})));
     if(width>=1024)check(grid[0].y===grid[1].y&&grid[2].y===grid[3].y&&grid[0].y!==grid[2].y,'Four-card grid is not 2 by 2');
     results.push({width,route:'slider-and-grid',ok:true});

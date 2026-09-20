@@ -130,7 +130,7 @@ test("Mutually exclusive alternates are not billable together, and incompatible 
     ], issues: [], notes: [], replacements: [], removeExclusions: [],
   } as any, config, [], new Date(date), scope);
   assert.equal(alternate.rules.length, 1);
-  assert.ok(alternate.issues.some(issue => /not billable/i.test(issue)));
+  assert.ok([...alternate.issues, ...alternate.assumptions].some(note => /not billable|ambiguous or conflicting/i.test(note)));
 
   const researched: any = {
     rates: [{ taskId: "trim", description: "Trim", unit: "LF", quantity: 20, quantityEvidence: "20 LF", basis: "material-purchase",

@@ -2,6 +2,7 @@ import { chromium } from '@playwright/test';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const routes=JSON.parse(await fs.readFile('scripts/p5-visual-routes.json','utf8'));
+// Includes the directly served, compressed process photograph.
 const out='p5-visual-review';
 await fs.mkdir(out,{recursive:true});
 const widths=[320,390,430,600,768,1024,1366,1440,1920];
@@ -23,6 +24,7 @@ try {
   const blockedWrites = new Set();
   // Audit reads must never create real inquiries or send messages.
   await context.route('**/api/**',route=>{
+   if(['/api/estimator-session','/api/meta-capi'].includes(new URL(route.request().url()).pathname))return route.fulfill({status:200,contentType:'application/json',body:'{"ok":true,"auditPreview":true}'});
    if(!['GET','HEAD'].includes(route.request().method())){blockedWrites.add(route.request().url());return route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'Audit preview: submission is disabled.'})});}
    return route.continue();
   });

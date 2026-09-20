@@ -3,7 +3,7 @@ import {mkdir,writeFile} from 'node:fs/promises';
 await mkdir('p5-verification',{recursive:true});const browser=await chromium.launch();const results=[];
 for(const width of [320,390,430,768,1024,1440,1920]){
  const page=await browser.newPage({viewport:{width,height:900}});const r={kind:'hub',width,passed:false};
- try{await page.goto('http://127.0.0.1:5000/blog/category/exterior-and-outdoor');
+ try{await page.goto('http://127.0.0.1:5000/blog/category/treasure-valley-locations');await expect(page).toHaveURL(/\/areas$/);
  await expect(page.locator('body')).not.toContainText('More articles in this topic are publishing soon');
  await expect(page.locator('h1')).toBeVisible();await page.screenshot({path:'p5-verification/hub-'+width+'.jpg',fullPage:true});await page.goto('http://127.0.0.1:5000/p5-audit-fixture');
  const points=page.locator('ul.ed-matrix');await points.scrollIntoViewIfNeeded();await page.waitForTimeout(850);

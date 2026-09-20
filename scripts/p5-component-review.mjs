@@ -15,7 +15,6 @@ const selected=[...new Set(['/', '/estimate/scope', '/contact','/about','/testim
  routes.find(r=>/^\/services\/[^/]+\/[^/]+$/.test(r)),
  routes.find(r=>/^\/guides\/[^/]+$/.test(r)),
  routes.find(r=>/^\/blog\/[^/]+$/.test(r)),
- ...(process.env.P5_SITE==='handyman'?['/services/painting-touch-ups/eagle']:[]),
  ...(cabinet?['/catalog','/cabinets','/compare','/construction','/builders','/warranty']:[])
 ].filter(Boolean))];
 try {
@@ -33,17 +32,18 @@ try {
    const rec={width,route};
    try{
     await page.goto(origin+route,{waitUntil:'domcontentloaded'});
-    await page.waitForLoadState('load',{timeout:20000}).catch(()=>{});
     await page.evaluate(async()=>{await document.fonts.ready;for(let y=0;y<document.documentElement.scrollHeight;y+=600){window.scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,80));}});
     await page.locator('article details:not([open]) > summary').evaluateAll(es=>es.forEach(e=>e.click()));
     await page.evaluate(async()=>{const is=[...document.images].filter(i=>i.getClientRects().length);is.forEach(i=>i.loading='eager');await Promise.race([Promise.allSettled(is.map(i=>i.decode())),new Promise(r=>setTimeout(r,15000))]);});
     await page.evaluate(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=750){window.scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,35));}});
+    // Scrolling can mount new carousel images after the first decode pass.
+    await page.evaluate(async()=>{const images=[...document.images].filter(i=>i.getClientRects().length);images.forEach(i=>i.loading='eager');await Promise.race([Promise.allSettled(images.map(i=>i.decode())),new Promise(r=>setTimeout(r,15000))]);});
     await page.waitForTimeout(700);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Horizontal overflow');
+    const unloadedImages=await page.evaluate(()=>[...document.images].filter(i=>i.getClientRects().length&&(!i.complete||!i.naturalWidth)).map(i=>({src:i.currentSrc||i.src,loading:i.loading,complete:i.complete,rect:i.getBoundingClientRect().toJSON()})));
+    assert.equal(unloadedImages.length,0,'Unloaded images: '+JSON.stringify(unloadedImages));
     const missingGradients=await page.evaluate(()=>[...document.querySelectorAll('[class*="bg-gradient-to-"]')].filter(e=>e.getClientRects().length&&getComputedStyle(e).backgroundImage==='none').map(e=>e.className));
     assert.equal(missingGradients.length,0,'Missing gradient overlays: '+JSON.stringify(missingGradients));
-    const brokenImages=await page.evaluate(()=>[...document.images].filter(i=>i.getClientRects().length&&(!i.complete||!i.naturalWidth)).map(i=>({src:i.currentSrc||i.src,complete:i.complete})));
-    assert.equal(brokenImages.length,0,'Broken images: '+JSON.stringify(brokenImages));
     await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
     await page.screenshot({path:`${out}/${width}-${route.replaceAll('/','_')}.jpg`,fullPage:true,type:'jpeg',quality:72});
     if(route==='/'){
@@ -65,10 +65,6 @@ try {
      assert(await page.locator('h1.ed-display').evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=32),'Display typography must override element resets');
      assert(await page.locator('h2.ed-h2').first().evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=30),'Section typography must override element resets');
      assert.equal(await page.locator('dl.ed-hero-facts').count(),1,'Single facts group');
-    }
-    if(route==='/services/painting-touch-ups/eagle'){
-     await page.locator('.ed-panel-media').first().scrollIntoViewIfNeeded();await page.waitForTimeout(400);
-     await page.screenshot({path:`${out}/${width}-painting-panel.jpg`});
     }
     Object.assign(rec,await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,images:[...document.images].filter(i=>i.getClientRects().length).map(i=>({src:i.currentSrc,alt:i.alt,ok:i.complete&&i.naturalWidth>0}))})));
     const sidebar=page.locator('[data-article-sidebar-cta]').filter({visible:true}).first();
@@ -112,6 +108,9 @@ try {
      assert(await slider.locator('..').locator('img').evaluateAll(es=>es.every(i=>i.naturalWidth>0&&i.complete)),'Both comparison images decode');
      await page.waitForTimeout(500);
      await page.screenshot({path:`${out}/${width}-kitchen-comparison.jpg`});
+     const originalLabel=await slider.locator('..').getByText('Original concept',{exact:true}).boundingBox();
+     const refreshLabel=await slider.locator('..').getByText('Refresh concept',{exact:true}).boundingBox();
+     assert(originalLabel.x+originalLabel.width+4<=refreshLabel.x,'Comparison labels must remain separate');
      const imgs=await slider.locator('..').locator('img').evaluateAll(es=>es.map(i=>({w:i.getBoundingClientRect().width,h:i.getBoundingClientRect().height,nw:i.naturalWidth,nh:i.naturalHeight})));
      assert(imgs.length===2&&imgs.every(i=>Math.abs(i.w/i.h-1.5)<.01),'Comparison aspect ratio');
     }

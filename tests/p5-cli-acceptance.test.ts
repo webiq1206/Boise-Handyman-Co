@@ -34,8 +34,9 @@ test("live runner saves, reloads, reviews, then submits once without logging cre
   assert.deepEqual(calls.map(item => item.split(" ")[0]), ["PUT", "GET", "PUT", "POST"]);
   assert.equal(result.accepted, true);
   assert.ok(result.stateFile);
+  // Windows has no POSIX permission bits; the owner-only mode is asserted where the host enforces it.
   const mode = (await stat(result.stateFile)).mode & 0o777;
-  assert.equal(mode, 0o600);
+  if (process.platform !== "win32") assert.equal(mode, 0o600);
   const saved = await readFile(result.stateFile, "utf8");
   assert.match(saved, /"revision": 2/);
   await unlink(stateFile);
