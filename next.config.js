@@ -20,7 +20,7 @@ function p5Release() {
 }
 const nextConfig = {
   env: { NEXT_PUBLIC_P5_RELEASE: p5Release() },
-  serverExternalPackages:['pdfjs-dist','@napi-rs/canvas'],
+  serverExternalPackages:['ws','@neondatabase/serverless','bufferutil','utf-8-validate','pdfjs-dist','@napi-rs/canvas'],
   typescript: {
     ignoreBuildErrors: true,
   },
