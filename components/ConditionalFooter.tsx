@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Footer } from "@/components/Footer";
+import { isEstimatorPath } from "@/lib/p5/estimatorRoutes";
 
 export function ConditionalFooter() {
   const pathname = usePathname();
@@ -17,6 +18,6 @@ export function ConditionalFooter() {
 
   // The estimator owns the whole screen as a one-page app; a footer below it
   // would be the one thing on the page that forces a scroll.
-  if (hideFooter || (pathname === "/estimate" || pathname === "/estimate/p5-preview")) return null;
+  if (hideFooter || isEstimatorPath(pathname)) return null;
   return <Footer />;
 }
