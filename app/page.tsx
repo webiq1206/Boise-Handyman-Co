@@ -1,29 +1,19 @@
-import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
-import type { Metadata } from "next";
-import Image from "@/components/MarketingImage";
-import dynamic from "next/dynamic";
-import { FAQSection } from "@/components/FAQSection";
+import { ApprovedHome } from "@/components/approved/ApprovedHome";
 import { ConsultationForm } from "@/components/ConsultationForm";
-import { Reveal } from "@/components/Reveal";
-import { HeroSection } from "@/components/sections/HeroSection";
-import { ValueOverheadSection } from "@/components/sections/ValueOverheadSection";
-import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
-import { ServicesGrid } from "@/components/sections/ServicesGrid";
-import { ProcessSection } from "@/components/sections/ProcessSection";
-import { BudgetInclusionsSection } from "@/components/sections/BudgetInclusionsSection";
-import { ProjectGallerySection } from "@/components/sections/ProjectGallerySection";
-import { BrandStatementBand } from "@/components/sections/BrandStatementBand";
-import { EstimatePromptBand } from "@/components/marketing/EstimatePromptBand";
-import { Section } from "@/components/marketing/Section";
 import { MarketingCard } from "@/components/marketing/MarketingCard";
-import { Check } from "lucide-react";
-import { CONSULT_BULLETS, SITE_TAGLINE } from "@/shared/siteContent";
-import { CTA_PRIMARY } from "@/shared/ctaCopy";
+import { Section } from "@/components/marketing/Section";
+import Image from "@/components/MarketingImage";
+import { Reveal } from "@/components/Reveal";
+import { BudgetInclusionsSection } from "@/components/sections/BudgetInclusionsSection";
 import { HomePageSchema } from "@/components/seo/HomePageSchema";
-import { buildCanonical } from "@/lib/page-metadata";
-import { SITE_IMAGES } from "@/shared/siteImages";
+import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
+import { buildCanonical,fitDescription } from "@/lib/page-metadata";
 import { SITE_CONFIG } from "@/shared/siteConfig";
-import { fitDescription } from '@/lib/page-metadata';
+import { CONSULT_BULLETS,SITE_TAGLINE } from "@/shared/siteContent";
+import { SITE_IMAGES } from "@/shared/siteImages";
+import { Check } from "lucide-react";
+import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 
 const EstimateCalculator = dynamic(
   () =>
@@ -91,38 +81,8 @@ export default function HomePage() {
           Everything above it now exists only to make the number land well;
           everything below it answers what the number raised. */}
       <HomePageSchema />
-      <HeroSection />
-      <ValueOverheadSection />
-      <EstimateCalculator />
+      <ApprovedHome />
       <BudgetInclusionsSection />
-      <ServicesGrid />
-      {/* Renders nothing while GALLERY_PROJECTS is empty; returns automatically
-          once real, photographed handyman jobs are added. No fabricated proof
-          ships in the meantime - the services grid above and the process
-          section below carry the page instead. */}
-      <ProjectGallerySection limit={6} showViewAll={true} />
-
-      <EstimatePromptBand
-        eyebrow="Still comparing handymen"
-        title={
-          <>
-            Find out what your fix will{' '}
-            <em className="brc-accent">cost</em>
-          </>
-        }
-        description="Missed the estimator higher up the page? It stays open whenever you are ready - or send your task list with photos and we will reply with a firm upfront quote within one business day."
-        variant="tint"
-        bullets={[
-          "A ballpark range built from current Treasure Valley job costs",
-          "A firm upfront quote when you send photos",
-          "No strings - a copy of whatever the estimator returns lands in your inbox",
-        ]}
-      />
-
-      <WhyChooseUsSection limit={5} />
-      <ProcessSection />
-      <BrandStatementBand />
-      <FAQSection />
       <Section id="consult" divider className="relative overflow-hidden scroll-mt-16 pb-28 md:pb-28">
         {/* Warm, dimmed lifestyle photo grounds the closing section. Directional
             scrims keep the left-column copy legible and fade the edges into the
