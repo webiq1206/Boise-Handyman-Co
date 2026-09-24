@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 import { useFormInView } from "@/hooks/use-form-in-view";
 import Link from "next/link";
 import { MessageCircle, Send, X } from "lucide-react";
+import { continueAssistantProject } from "@/lib/p5/assistantContinuation";
 import { trackEvent } from "@/lib/analytics";
 
 interface ChatMessage {
@@ -105,6 +106,11 @@ export function AssistantWidget() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open, close]);
 
+  const continueProject = () => {
+    try { continueAssistantProject(messages,input); window.location.assign('/estimate'); }
+    catch(error) { setMessages(cur=>[...cur,{role:'assistant',content:error instanceof Error?error.message:'Your project could not be saved. Please retry.'}]); }
+  };
+
   const send = useCallback(async () => {
     const text = input.trim();
     if (!text || sending) return;
@@ -191,7 +197,7 @@ export function AssistantWidget() {
           <div className="flex items-center justify-between gap-3 border-b border-card-border bg-card px-4 py-3">
             <div className="min-w-0">
               <p className="truncate text-sm font-normal text-foreground">Boise Handyman Co</p>
-              <p className="text-xs text-muted-foreground">Virtual assistant · instant estimates</p>
+              <p className="text-xs text-muted-foreground">Virtual assistant · project help</p>
             </div>
             <button
               type="button"
@@ -235,6 +241,7 @@ export function AssistantWidget() {
             )}
           </div>
 
+          <button type="button" onClick={continueProject} disabled={sending} data-testid="button-assistant-continue" className="mx-3 mb-2 min-h-11 rounded-sm border border-card-border px-3 py-2 text-sm text-foreground disabled:opacity-40">Continue project</button>
           {/* Composer */}
           <form
             onSubmit={(e) => {
