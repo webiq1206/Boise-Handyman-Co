@@ -1,18 +1,19 @@
-import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
+import { InteriorDocument,InteriorPage } from '@/components/approved/InteriorLayout';
+import { Section } from '@/components/marketing/Section';
+import { ConsultCTA } from '@/components/modals/ConsultCTA';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
+import { buildPageMetadata,fitDescription } from '@/lib/page-metadata';
+import {
+generateArticleSchema,
+generateBreadcrumbSchema,
+generateHowToSchema,
+} from '@/lib/schema';
+import { CTA_PRIMARY } from '@/shared/ctaCopy';
+import { ArrowLeft,ArrowRight,Download } from 'lucide-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Download } from 'lucide-react';
-import { buildPageMetadata, fitDescription } from '@/lib/page-metadata';
-import { Section } from '@/components/marketing/Section';
 import { PermitFlowGraphic } from './PermitFlowGraphic';
-import { ConsultCTA } from '@/components/modals/ConsultCTA';
-import { CTA_PRIMARY } from '@/shared/ctaCopy';
-import { JsonLd } from '@/components/seo/JsonLd';
-import {
-  generateArticleSchema,
-  generateBreadcrumbSchema,
-  generateHowToSchema,
-} from '@/lib/schema';
 
 const PERMIT_FLOW_DESCRIPTION =
   fitDescription('When a home repair needs a permit in Ada and Canyon County: what a handyman can do without one, what triggers a permit, and who to call to check.');
@@ -54,10 +55,12 @@ export default function AdaCanyonPermitFlowPage() {
   ];
 
   return (
-    <div className="flex flex-col pb-20">
+    <InteriorPage kind="resources"><div className="flex flex-col pb-20">
       <JsonLd data={schemas} />
       <Section spacing="lg" className="pt-28 md:pt-32">
-        <div className="container px-4 max-w-4xl mx-auto">
+        <InteriorDocument heading={<h1 className="text-3xl md:text-4xl font-serif tracking-tight text-foreground mb-4">
+            When does a home repair need a permit in Ada &amp; Canyon County?
+          </h1>} contents={[]}>
           <Link
             href="/resources"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-8"
@@ -69,9 +72,7 @@ export default function AdaCanyonPermitFlowPage() {
           <p className="text-xs font-normal uppercase tracking-wider text-accent-legible mb-3">
             Visual guide
           </p>
-          <h1 className="text-3xl md:text-4xl font-serif tracking-tight text-foreground mb-4">
-            When does a home repair need a permit in Ada &amp; Canyon County?
-          </h1>
+
           <p className="text-lg text-muted-foreground mb-4 max-w-2xl">
             Most handyman-scope repairs, patching, painting, caulking, and like-for-like fixture
             swaps, need no permit at all. Permits enter the picture when work moves or adds
@@ -133,8 +134,8 @@ export default function AdaCanyonPermitFlowPage() {
               How to hire a handyman
             </Link>
           </div>
-        </div>
+        </InteriorDocument>
       </Section>
-    </div>
+    </div></InteriorPage>
   );
 }

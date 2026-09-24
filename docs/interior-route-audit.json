@@ -1,0 +1,92 @@
+[
+  {
+    "route": "/about",
+    "file": "app/about/page.tsx",
+    "seoSignature": "82e962ca1c4cadb134f5eff9f0ac5ce2e65234216e29fa6f372361f421a363f6"
+  },
+  {
+    "route": "/areas/[city]",
+    "file": "app/areas/[city]/page.tsx",
+    "seoSignature": "5172a19ae232e3b7aab05dbe75f403e3ff70325043de5a3cb9bb8c91e5393d45"
+  },
+  {
+    "route": "/areas",
+    "file": "app/areas/page.tsx",
+    "seoSignature": "8c878697830795063ee9f17de05a65e54a4937c42518db8ac9def3f063d07c65"
+  },
+  {
+    "route": "/blog/[slug]",
+    "file": "app/blog/[slug]/page.tsx",
+    "seoSignature": "42c8d8dac802c5766af23b518406f3461f427595890768912a8206ec011dc21b"
+  },
+  {
+    "route": "/blog/category/[hubSlug]",
+    "file": "app/blog/category/[hubSlug]/page.tsx",
+    "seoSignature": "f7036e8e2b03eae1e3ab75c4402816b307248cf3311a3fc5babf0ad5069e00b4"
+  },
+  {
+    "route": "/blog",
+    "file": "app/blog/page.tsx",
+    "seoSignature": "a1b9be98bfc6fed3c3dfd915624fa6626280f10559b5f69071185e1fc3293d17"
+  },
+  {
+    "route": "/contact",
+    "file": "app/contact/page.tsx",
+    "seoSignature": "2d7f7e2f772828497b1b5813a451c3181d6a7a7c4e8fa89d10f99ecd4d4c4884"
+  },
+  {
+    "route": "/guides/[slug]",
+    "file": "app/guides/[slug]/page.tsx",
+    "seoSignature": "91d425cde77318b2d7556f838bb6612f47c242cf6969201aba0bcea4c17d2253"
+  },
+  {
+    "route": "/guides",
+    "file": "app/guides/page.tsx",
+    "seoSignature": "baf9cd8632673278365ebd03783871a8b0ee9c17ee2088bd51d5487a54723664"
+  },
+  {
+    "route": "/privacy-policy",
+    "file": "app/privacy-policy/page.tsx",
+    "seoSignature": "91002260220d39acccde31c06a45c907fc8ce8cf112500a1135c730238bc5afe"
+  },
+  {
+    "route": "/re-10-repairs-boise",
+    "file": "app/re-10-repairs-boise/page.tsx",
+    "seoSignature": "4ae5cc4766879aea55839c52511d3f519ffffb713298dd1de83f9d040952a6d8"
+  },
+  {
+    "route": "/resources/ada-canyon-permit-flow",
+    "file": "app/resources/ada-canyon-permit-flow/page.tsx",
+    "seoSignature": "e09c80f1c1088cd1d445d6c3a0e73941fec9275066d5f019ae8e82e9e5817239"
+  },
+  {
+    "route": "/resources",
+    "file": "app/resources/page.tsx",
+    "seoSignature": "de93ab99e6055f1f993db9058585b9f36e84ba96f7518f63c110d0873ff0f8ef"
+  },
+  {
+    "route": "/services/[slug]/[city]",
+    "file": "app/services/[slug]/[city]/page.tsx",
+    "seoSignature": "eb620ab9852ed4f22be79db083370229dfa287f6195bc4fa8701f4edd7d4f5d7"
+  },
+  {
+    "route": "/services/[slug]",
+    "file": "app/services/[slug]/page.tsx",
+    "seoSignature": "318beae477771bc2876f65ae6807c61df7005010369a4fbe79c06576f587900a"
+  },
+  {
+    "route": "/services",
+    "file": "app/services/page.tsx",
+    "seoSignature": "768e26131a9d560225fd4f001b3f4dfaf04d5a7cac4080ff7b327e9045cd5790"
+  },
+  {
+    "route": "/sitemap",
+    "file": "app/sitemap/page.tsx",
+    "seoSignature": "3c30961ef2d9eeb8621883e39f53a4395ef97820330be25c36143517d24f30de"
+  },
+  {
+    "route": "/terms-of-service",
+    "file": "app/terms-of-service/page.tsx",
+    "seoSignature": "4f8b5ce85df0a2146818949ea1bd5e3f212050b1a321dec5162ee40545133e55"
+  }
+]
