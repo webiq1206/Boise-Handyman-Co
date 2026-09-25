@@ -1,6 +1,6 @@
 import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
+import { EstimateCalculator } from "@/components/EstimateCalculator";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildCanonical } from "@/lib/page-metadata";
 import {
@@ -12,17 +12,7 @@ import { SITE_CONFIG } from "@/shared/siteConfig";
 import { HANDYMAN_RATE_DISCLAIMER } from "@/shared/estimateEngine";
 import { fitDescription } from '@/lib/page-metadata';
 
-const EstimateCalculator = dynamic(
-  () =>
-    import("@/components/EstimateCalculator").then((mod) => mod.EstimateCalculator),
-  {
-    loading: () => (
-      <div className="container px-4 py-16 text-center text-sm text-muted-foreground">
-        Loading the estimator...
-      </div>
-    ),
-  },
-);
+
 
 // 25 chars; the branded title lands at 45 with the 20-char suffix.
 const TITLE = "Instant Handyman Estimate";
