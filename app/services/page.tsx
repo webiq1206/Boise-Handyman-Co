@@ -130,7 +130,7 @@ export default function ServicesIndexPage() {
             </h2>
             <div>
               <p className="ed-body">
-                Get an instant estimate online, or book a handyman visit with an upfront quote.
+                Get a preliminary estimate online, or book a handyman visit with an upfront quote.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
                 <ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA>

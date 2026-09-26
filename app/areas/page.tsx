@@ -100,7 +100,7 @@ export default function AreasHubPage() {
               <em className="brc-accent">city</em>?
             </>
           }
-          description="The same upfront quotes and fair pricing apply across Ada and Canyon County. Get an instant estimate for your job, then book a handyman visit when you're ready."
+          description="The same upfront quotes and fair pricing apply across Ada and Canyon County. Get a preliminary estimate for your job, then book a handyman visit when you're ready."
           variant="tint"
         />
 
