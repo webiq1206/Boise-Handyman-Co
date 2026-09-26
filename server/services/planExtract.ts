@@ -1,3 +1,4 @@
+import {createEstimatorModelClient,estimatorConnection} from "@/lib/p5/estimatorModelClient";
 import Anthropic from "@anthropic-ai/sdk";
 import {
   PLAN_EXTRACTION_SCHEMA,
@@ -52,7 +53,7 @@ const PDF_TYPE = "application/pdf";
 export { MAX_TOTAL_UPLOAD_BYTES };
 
 export function isPlanExtractionConfigured(): boolean {
-  return Boolean(process.env.ANTHROPIC_API_KEY);
+  return Boolean(estimatorConnection().key);
 }
 
 function buildContent(files: PlanExtractionInput[]): Anthropic.ContentBlockParam[] {
@@ -127,13 +128,13 @@ export async function extractPlan(files: PlanExtractionInput[]): Promise<PlanExt
     };
   }
 
-  const client = new Anthropic();
+  const client = (createEstimatorModelClient() as unknown as Anthropic);
 
   try {
     // Streaming: a full permit set runs to dozens of large sheets and reading it
     // comfortably outlasts a plain HTTP timeout.
     const stream = client.beta.messages.stream({
-      model: "claude-opus-5",
+      model: "gpt-4.1",
       max_tokens: 8000,
       betas: ["server-side-fallback-2026-07-01"],
       fallbacks: "default",

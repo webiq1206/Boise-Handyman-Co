@@ -88,11 +88,11 @@ test("Handyman customer/admin delivery keeps direct cost confidential and ranges
   assert.match(adminEmail.html, /Direct project cost/);
 
   const customerText = (await pdfTextLayers(await customerPdf("handyman-fixture", customer as any))).join("\n");
-  const adminText = (await pdfTextLayers(await administrativePdf("handyman-fixture", internal))).join("\n");
+  const adminText = (await pdfTextLayers(await administrativePdf("handyman-fixture", {...internal,customer}))).join("\n");
   assert.ok(!customerText.includes(leak));
   assert.ok(!customerText.includes("direct cost"));
   assert.match(adminText, /Direct project cost/);
-  assert.match(adminText, /\$200\.00/);
+  assert.match(adminText, /Direct project cost \$200(?:\.00)?\b/);
   assert.match(customerText, /\$300 to \$400/);
   assert.match(adminText, /\$300 to \$400/);
   assert.match(customerText, /20 LF/);
@@ -141,5 +141,5 @@ test("Mutually exclusive alternates are not billable together, and incompatible 
       ] }],
     issues: [],
   };
-  assert.throws(() => marketResolution({ ...researched, rates: [{ ...researched.rates[0], sources: researched.rates[0].sources.map((source: any) => ({ ...source, unit: "HR" })) }] }, ["https://fixture-a.invalid", "https://fixture-b.invalid"], [{ id: "trim", description: "Trim", evidence: "20 LF" }], new Date(date)));
+  assert.throws(() => marketResolution({ ...researched, rates: [{ ...researched.rates[0], sources: researched.rates[0].sources.map((source: any) => ({ ...source, unit: "HR" })) }] }, ["https://fixture-a.invalid", "https://fixture-b.invalid"], [{ id: "trim", description: "Trim", researchDescription: "Trim material", evidence: "20 LF" }], new Date(date)), /Incompatible benchmark unit or cost basis/);
 });
