@@ -67,7 +67,7 @@ const CONTACT_FAQS = [
   {
     question: 'How do I get a cost estimate for my job?',
     answer:
-      'Use the online estimator for an instant planning range, then send photos for a firm upfront quote. Nothing is scheduled until you approve the price.',
+      'Use the online estimator for a preliminary planning range, then send photos for a firm upfront quote. Nothing is scheduled until you approve the price.',
   },
 ];
 
@@ -443,7 +443,7 @@ export default function ContactPage() {
               <em className="brc-accent">call</em>?
             </>
           }
-          description="Use our online estimator for an instant Treasure Valley range - then book your handyman visit when you're ready for a firm, written quote."
+          description="Use our online estimator for a preliminary Treasure Valley range - then book your handyman visit when you're ready for a firm, written quote."
           variant="canvas"
         />
 

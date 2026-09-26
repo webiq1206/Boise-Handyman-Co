@@ -253,7 +253,7 @@ export const OPTIONAL_ENHANCEMENTS = {
 export const BUDGET_GUIDANCE_POINTS = [
   {
     title: "A range first, then a firm quote",
-    body: "The online estimator gives you an instant planning range for your kind of job. Once we see photos or the task itself, that range becomes a firm upfront quote you approve before work starts.",
+    body: "The online estimator gives you a preliminary planning range for your kind of job. Once we see photos or the task itself, that range becomes a firm upfront quote you approve before work starts.",
   },
   {
     title: "Priced by the time the job takes",

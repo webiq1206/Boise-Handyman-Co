@@ -59,7 +59,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
         heading: content.costGuidance.heading,
         paragraphs: content.costGuidance.paragraphs,
         links: [
-          { label: 'Get an instant estimate', href: '/estimate' },
+          { label: 'Get a preliminary estimate', href: '/estimate' },
           { label: 'Book a handyman visit', href: '/contact#consult' },
         ],
       }

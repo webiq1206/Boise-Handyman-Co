@@ -66,7 +66,7 @@ export const GBP_CATEGORIES = {
 } as const;
 
 export const GBP_DESCRIPTION =
-  'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to trusted specialty contractors. Get an instant estimate online or book a handyman visit.';
+  'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to trusted specialty contractors. Get a preliminary estimate online or book a handyman visit.';
 
 export const GBP_LINKS = {
   website: SITE,
@@ -108,7 +108,7 @@ export const GBP_ATTRIBUTES = {
 
 export const GBP_MESSAGING = {
   welcomeMessage:
-    'Thanks for reaching out to Boise Handyman Co. We respond within one business day. For faster help, call or text (208) 477-1169, or get an instant estimate at boisehandyman.co/estimate',
+    'Thanks for reaching out to Boise Handyman Co. We respond within one business day. For faster help, call or text (208) 477-1169, or get a preliminary estimate at boisehandyman.co/estimate',
 } as const;
 
 export interface GbpService {
@@ -249,7 +249,7 @@ export interface GbpQaEntry {
 export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'Do you provide free estimates?',
-    answer: `Yes. Send your task list with photos and we reply with an upfront quote within one business day - no pressure, no obligation. You can also get an instant planning range online at ${SITE}/estimate`,
+    answer: `Yes. Send your task list with photos and we reply with an upfront quote within one business day - no pressure, no obligation. You can also get a preliminary planning range online at ${SITE}/estimate`,
   },
   {
     question: 'What areas do you serve?',
@@ -323,7 +323,7 @@ export const GBP_POSTS_STARTER: GbpPost[] = [
   {
     week: 2,
     headline: 'Know the price before you book',
-    body: 'One written price, quoted upfront from photos before any work starts. Get an instant planning range online in about a minute.',
+    body: 'One written price, quoted upfront from photos before any work starts. Get a preliminary planning range online.',
     buttonLabel: 'Get an estimate',
     buttonUrl: `${SITE}/estimate`,
     photoHint: 'Estimator screenshot or quote example',

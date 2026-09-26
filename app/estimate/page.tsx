@@ -17,7 +17,7 @@ import { fitDescription } from '@/lib/page-metadata';
 // 25 chars; the branded title lands at 45 with the 20-char suffix.
 const TITLE = "Instant Handyman Estimate";
 const DESCRIPTION =
-  fitDescription("See a real price range for your repair in about a minute. Pick your tasks and get an instant estimate for Boise and the Treasure Valley, then book your visit.");
+  fitDescription("See a real price range for your repair. Pick your tasks and get a preliminary estimate for Boise and the Treasure Valley, then book your visit.");
 
 /*
  * The rates below render the pricing model on-page. They come straight from

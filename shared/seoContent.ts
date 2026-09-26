@@ -789,7 +789,7 @@ export function getCityServiceIntro(
   const fact = localFact
     ? ` ${localFact}`
     : ` We work throughout ${city.name} and the surrounding ${county} area, so scheduling is local and travel never balloons the bill.`;
-  return `Need ${service.name.toLowerCase()} in ${city.name}, Idaho?${fact} Boise Handyman Co quotes every job upfront as one written price and finishes most jobs in a single visit. Get an instant estimate online or book a handyman visit.`;
+  return `Need ${service.name.toLowerCase()} in ${city.name}, Idaho?${fact} Boise Handyman Co quotes every job upfront as one written price and finishes most jobs in a single visit. Get a preliminary estimate online or book a handyman visit.`;
 }
 
 export function getCityServiceFaqs(service: ServiceSEOContent, city: CityData): FAQItem[] {
@@ -815,7 +815,7 @@ export function getCityServiceFaqs(service: ServiceSEOContent, city: CityData): 
     },
     {
       question: `How do I get a quote for ${service.name.toLowerCase()} in ${city.name}?`,
-      answer: `Use the online estimator for an instant planning range, or send photos of the job by text or through the contact form. We reply with a firm upfront quote, usually within one business day, before anything is scheduled.`,
+      answer: `Use the online estimator for a preliminary planning range, or send photos of the job by text or through the contact form. We reply with a firm upfront quote, usually within one business day, before anything is scheduled.`,
     },
   ];
 }
@@ -849,7 +849,7 @@ export function getCityServiceSections(
             ],
             links: [
               {
-                label: 'Get an instant estimate',
+                label: 'Get a preliminary estimate',
                 href: '/estimate',
               },
             ],
@@ -922,7 +922,7 @@ export const AREA_PAGE_FAQS: FAQItem[] = [
   {
     question: 'How do I get started?',
     answer:
-      'Call or text us, use the online estimator for an instant planning range, or send your task list with photos through the contact form. We reply within one business day with an upfront quote.',
+      'Call or text us, use the online estimator for a preliminary planning range, or send your task list with photos through the contact form. We reply within one business day with an upfront quote.',
   },
 ];
 
