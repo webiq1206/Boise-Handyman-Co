@@ -15,7 +15,7 @@ import { fitDescription } from '@/lib/page-metadata';
 
 
 // 25 chars; the branded title lands at 45 with the 20-char suffix.
-const TITLE = "Instant Handyman Estimate";
+const TITLE = "Online Handyman Estimate";
 const DESCRIPTION =
   fitDescription("See a real price range for your repair. Pick your tasks and get a preliminary estimate for Boise and the Treasure Valley, then book your visit.");
 
@@ -42,7 +42,7 @@ const FAQS = [
   {
     question: "Do you charge for the estimate itself?",
     answer:
-      "No. The online estimate is free and takes about a minute, and the written quote that follows is free too. You only ever pay for work you have approved.",
+      "No. Get a free preliminary estimate online in a few minutes, with no call or appointment needed. Detailed scopes may take longer. The written quote that follows is free too. You only ever pay for work you have approved.",
   },
   {
     question: "What areas do you cover?",
@@ -73,13 +73,13 @@ export const metadata: Metadata = withBrandPageMetadata(({
 export default function EstimatePage() {
   const schemas = [
     generateWebPageSchema({
-      title: "Instant Handyman Estimate",
+      title: "Online Handyman Estimate",
       description: DESCRIPTION,
       url: "/estimate",
     }),
     generateBreadcrumbSchema([
       { name: "Home", url: "/" },
-      { name: "Instant Estimate", url: "/estimate" },
+      { name: "Online Estimate", url: "/estimate" },
     ]),
     generateFAQSchema(FAQS),
   ];

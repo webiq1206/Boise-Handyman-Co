@@ -63,7 +63,7 @@ export function BudgetInclusionsSection() {
           </Reveal>
           <Reveal delay={60}>
             <p className="ed-body">
-              An instant range upfront, a firm quote before any work starts, and
+              A preliminary range upfront, a firm quote before any work starts, and
               the same standard inclusions on every visit - so you always know
               where things stand.
             </p>
