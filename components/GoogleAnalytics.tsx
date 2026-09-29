@@ -1,3 +1,4 @@
+import { googleTagBootstrap } from '@/lib/analyticsBootstrap';
 import Script from 'next/script';
 
 // Measurement IDs that belong to a DIFFERENT P5 property and must never be
@@ -15,33 +16,18 @@ const configuredId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
 const GA_MEASUREMENT_ID =
   configuredId && !WRONG_PROPERTY_IDS.has(configuredId) ? configuredId : null;
 
-/**
- * Loads GA4 with strategy="lazyOnload" so the ~150KB gtag payload stays off the
- * mobile critical path (a Speed Index / LCP win on throttled connections) while
- * still defining window.gtag before any user interaction. Conversion events fire
- * from lib/analytics.ts on click, which always happens after idle, so nothing is
- * lost; lib/analytics guards on gtag existing anyway.
- */
+/** Load only for real visitors on this brand's live hostname. */
 export function GoogleAnalytics() {
-  // Only load analytics in production so local/dev traffic never pollutes the
-  // real GA property (and dev network stays quiet for tooling/screenshots).
-  if (process.env.NODE_ENV !== 'production') return null;
-  if (!GA_MEASUREMENT_ID) return null;
+  if (process.env.NODE_ENV !== 'production' || !GA_MEASUREMENT_ID) return null;
   return (
-    <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="lazyOnload"
-      />
-      <Script id="ga-init" strategy="lazyOnload">
-        {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA_MEASUREMENT_ID}');
-gtag('config', 'AW-18354188204');
-gtag('config', 'AW-18354188204/YHR0CIaPz_ccEKzf-q9E', { 'phone_conversion_number': '(208) 477-1169' });
-try { if (!sessionStorage.getItem('p5_entry_path')) sessionStorage.setItem('p5_entry_path', location.pathname); } catch (e) {}`}
-      </Script>
-    </>
+    <Script id="ga-init" strategy="lazyOnload">
+      {googleTagBootstrap({
+        hostname: 'boisehandyman.co',
+        measurementId: GA_MEASUREMENT_ID,
+        adsId: 'AW-18354188204',
+        phoneConversionLabel: 'YHR0CIaPz_ccEKzf-q9E',
+        phoneNumber: '(208) 477-1169',
+      })}
+    </Script>
   );
 }
