@@ -3,7 +3,7 @@ import type { GuidePageData } from '../../guideContent';
 export const boiseHomeMaintenanceGuide: GuidePageData = {
   slug: 'boise-home-maintenance-guide',
   title: 'The Complete Boise Home Maintenance Guide',
-  seoTitle: 'Boise Home Maintenance Guide: Season by Season',
+  seoTitle: 'Boise Home Maintenance Guide',
   metaDescription:
     'A season-by-season maintenance plan for Treasure Valley homes: what to check in spring, summer, fall, and winter, what to DIY, and what to hand to a pro.',
   excerpt:
