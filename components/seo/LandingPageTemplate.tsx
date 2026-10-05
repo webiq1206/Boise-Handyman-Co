@@ -500,6 +500,7 @@ export function LandingPageTemplate({
       {/* ─── Estimator prompt ─── */}
       {showEstimatePrompt && (
         <EstimatePromptBand
+          href={manifestPath === '/services/drywall-repair' ? '/estimate' : undefined}
           title={<>What might your <em className="not-italic" style={accent}>project</em> cost?</>}
           description="Get a preliminary planning range based on typical Treasure Valley repair costs, with no obligation."
         />

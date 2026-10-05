@@ -12,6 +12,7 @@ interface EstimatePromptBandProps {
   variant?: "greige" | "tint" | "canvas";
   /** Optional bullet trust points shown beside the CTA on md+. */
   bullets?: string[];
+  href?: string;
 }
 
 /**
@@ -32,6 +33,7 @@ export function EstimatePromptBand({
   eyebrow = "Planning your budget",
   title,
   description,
+  href = "#calculator",
   bullets = [
     "Based on real Treasure Valley handyman job costs",
     "A preliminary estimate in a few minutes",
@@ -51,7 +53,7 @@ export function EstimatePromptBand({
             <div className="flex flex-col items-start gap-6">
               <p className="ed-body">{description}</p>
               <Button variant="brand" size="lg" className="w-full sm:w-auto" asChild>
-                <a href="#calculator">
+                <a href={href}>
                   {CTA_PRIMARY}
                   <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                 </a>
