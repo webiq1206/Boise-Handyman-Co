@@ -42,7 +42,7 @@ const FAQS = [
   {
     question: "Do you charge for the estimate itself?",
     answer:
-      "No. Get a free preliminary estimate online in a few minutes, with no call or appointment needed. Detailed scopes may take longer. The written quote that follows is free too. You only ever pay for work you have approved.",
+      "No. Send your project details for a free team review. We may need more information or a site visit before preparing your estimate. The written quote that follows is free too. You only ever pay for work you have approved.",
   },
   {
     question: "What areas do you cover?",

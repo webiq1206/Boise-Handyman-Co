@@ -36,8 +36,8 @@ export function EstimatePromptBand({
   href = "#calculator",
   bullets = [
     "Based on real Treasure Valley handyman job costs",
-    "A preliminary estimate in a few minutes",
-    "No call or appointment needed",
+    "Project details reviewed by our team",
+    "Additional details or a site visit may be needed",
   ],
 }: EstimatePromptBandProps) {
   return (
