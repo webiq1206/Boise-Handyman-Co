@@ -301,7 +301,7 @@ export function EstimateResultPanel({
           <ProgressChecklist progress={progress} />
 
           <p className="text-caption leading-relaxed text-inverse-muted border-t border-inverse-foreground/10 pt-4">
-            Allow a few minutes. No call or appointment needed. Detailed scopes may take longer. {HANDYMAN_RATE_DISCLAIMER}
+            Timing depends on the project details. Additional details or a site visit may be needed. Detailed scopes may take longer. {HANDYMAN_RATE_DISCLAIMER}
           </p>
         </>
       )}
