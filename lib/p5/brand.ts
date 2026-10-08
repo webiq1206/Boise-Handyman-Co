@@ -5,5 +5,5 @@ export const ESTIMATOR_BRAND = {
   logo:"/brand/png/wordmark/light/boise-handyman-co-wordmark-charcoal-accent-1200w.png",
   font:"/fonts/p5-estimator-sans.ttf", headingFont:"/fonts/p5-estimator-serif.ttf",
   services:["handyman","re10","change-order","rush"], defaultService:"handyman",
-  consultationPath:"/contact", crmUrl:"https://leads.boiseremodeling.co/api/external/leads",
+  consultationPath:"/contact", crmUrl:"https://leads.boiseremodeling.co/api/external/leads", estimatorProvider:"openai",
 } as const;
