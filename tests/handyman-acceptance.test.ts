@@ -37,7 +37,7 @@ const task = (description: string, evidence: string, additions: any[]) => ({
 test("customer API projection removes adversarial direct-cost wording without changing selling totals or allowance disclosure",()=>{
   const result=customerEstimate({
     publishable:true,planningRange:{low:300,high:400},contingencyRate:0,divisor:.5,
-    lines:[{id:"trim",description:"Install 20 LF trim $2.00/LF ($200.00 direct cost)",quantity:20,unit:"LF",cost:200,unitCost:10,category:"field-labor",evidence:{basis:"owner-estimating-schedule"},allowance:true}],
+    lines:[{id:"trim",description:"Install 20 LF trim $2.00/LF ($200.00 direct cost)",quantity:20,unit:"LF",cost:200,unitCost:10,sellingAmount:400,category:"field-labor",evidence:{basis:"owner-estimating-schedule"},allowance:true}],
     allowances:[],assumptions:[
       "Labor direct cost is $200. Preliminary allowance; verify quantity.",
       "$2/LF direct cost. Direct costs: $200. direct-cost: $200. our direct cost was $200.",
