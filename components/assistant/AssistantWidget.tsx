@@ -28,7 +28,7 @@ const MAX_INPUT_CHARS = 2_000;
 const GREETING: ChatMessage = {
   role: "assistant",
   content:
-    "Hey - I can price out a repair or install for you right here, or answer anything about our handyman service in the Treasure Valley. What needs doing?",
+    "I can help you describe a repair or installation and answer questions about our handyman service in the Treasure Valley. Our team reviews your project before confirming an estimate. What needs doing?",
 };
 
 /** Paths the widget must never appear on. */
