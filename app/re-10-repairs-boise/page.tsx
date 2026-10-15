@@ -6,7 +6,6 @@ import { SectionHeader } from "@/components/marketing/SectionHeader";
 import { Re10ContactTracking } from "@/components/re10/Re10ContactTracking";
 import { Re10Faqs } from "@/components/re10/Re10Faqs";
 import { Re10Wizard } from "@/components/re10/Re10Wizard";
-import { PageHeroBand } from "@/components/sections/PageHeroBand";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/button";
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
@@ -95,38 +94,22 @@ export default function Re10RepairsPage() {
       <JsonLd data={schemas} />
       <Re10ContactTracking />
 
-      {/* ------------------------------------------------------------ hero */}
-      <PageHeroBand
-        imageSrc={SITE_IMAGES.processInProgress}
-        imageAlt={`${SITE_CONFIG.name} carpenter completing inspection repairs in a Treasure Valley home before closing`}
-        scrim={0.86}
-      >
+      <section className="re10-intro">
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "RE-10 Repairs" }]} />
-        <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>
-          For agents, buyers and sellers
-        </p>
-        <h1 className="ed-display ed-statement-display text-inverse-foreground">
-          RE-10 repairs completed correctly and{" "}
-          <em className="brc-accent">on schedule</em>
-        </h1>
-        <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
-          We complete inspection-related repairs for Boise-area real estate transactions, with one
-          point of contact, clear scheduling against your closing date, and documentation you can
-          put straight in the file.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Button variant="brand" asChild>
-            <Link href="#re10-wizard">
-              Upload your RE-10 <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-          <Button variant="brandInverseOutline" asChild>
-            <a href={SITE_CONFIG.phoneHref} data-testid="link-re10-call">
-              <Phone className="mr-2 h-4 w-4" /> {SITE_CONFIG.phone}
-            </a>
-          </Button>
+        <div className="re10-intro-grid">
+          <div>
+            <p className="ed-eyebrow">For agents, buyers and sellers</p>
+            <h1>Start your <em>RE-10 repair estimate.</em></h1>
+            <p>Share your inspection repair list, photos, and closing date below. Our team will review the scope, pricing, and availability with you.</p>
+            <a className="re10-phone" href={SITE_CONFIG.phoneHref} data-testid="link-re10-call"><Phone size={18} aria-hidden="true" /> Prefer to talk? {SITE_CONFIG.phone}</a>
+          </div>
+          <figure>
+            <img src={SITE_IMAGES.processInProgress} alt="Illustration of a tool bag and levels ready for home repairs" width={1200} height={896} />
+            <figcaption>Service illustration</figcaption>
+          </figure>
         </div>
-      </PageHeroBand>
+      </section>
+      <Re10Wizard />
 
       {/* ------------------------------- direct answer, above everything else */}
       <Section spacing="sm">
@@ -140,8 +123,6 @@ export default function Re10RepairsPage() {
           </p>
         </div>
       </Section>
-
-      <Re10Wizard />
 
       {/* ------------------------------------------- realtor trust statement */}
       <Section variant="greige" divider>

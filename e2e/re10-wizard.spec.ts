@@ -1,104 +1,22 @@
-import { test, expect, type Page } from "@playwright/test";
+import {test,expect} from '@playwright/test';
 
-/**
- * RE-10 wizard: auto-advance behaviour.
- *
- * The extractor needs an API key we do not have in CI, so the analyze call is
- * stubbed with a canned repair list. That lets the test reach the short contact
- * steps and prove the one thing worth proving about auto-advance: it fires when
- * a single-choice tap completes the step, and it stays put when a required field
- * is still empty.
- */
-
-const CANNED_ANALYZE = {
-  repairs: [
-    { verbatim: "Repair leaking kitchen faucet", kind: "plumbing-fixture", confidence: "high" },
-    { verbatim: "Replace missing GFCI outlet cover", kind: "electrical-device", confidence: "high" },
-  ],
-  unmapped: [],
-  propertyAddress: "123 Main St, Boise, ID 83702",
-  closingDate: null,
-  repairDeadline: null,
-  looksLikeRe10: true,
-  documentNotes: [],
-  stored: [{ filename: "re10.pdf", url: "/uploads/re10/test.pdf" }],
-  attachedOnly: [],
-};
-
-async function reachReview(page: Page) {
-  await page.route("**/api/re10/analyze", (route) =>
-    route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify(CANNED_ANALYZE),
-    }),
-  );
-
-  await page.goto("/re-10-repairs-boise");
-  await page.locator("#re10-estimator").scrollIntoViewIfNeeded();
-
-  // Attach a file so analyze() clears its "no files" guard, then continue.
-  await page.locator("#re10-files").setInputFiles({
-    name: "re10.pdf",
-    mimeType: "application/pdf",
-    buffer: Buffer.from("%PDF-1.4 test document"),
-  });
-  await page.locator('[data-testid="wizard-continue"]').click();
-
-  // Review step.
-  await expect(page.locator('[data-testid="list-re10-repairs"]')).toBeVisible();
-}
-
-test.use({ viewport: { width: 390, height: 844 } });
-
-test.describe("RE-10 wizard auto-advance", () => {
-  test("selecting a role auto-advances to the contact step once a name is present", async ({ page }) => {
-    await reachReview(page);
-
-    // Review -> About you.
-    await page.locator('[data-testid="wizard-continue"]').click();
-    await expect(page.locator('[data-testid="input-re10-name"]')).toBeVisible();
-
-    // Name filled first, then a single role tap should carry us forward with no
-    // Continue press.
-    await page.locator('[data-testid="input-re10-name"]').fill("Jane Doe");
-    await page.getByRole("radio", { name: "Buyer's agent" }).click();
-
-    // The contact (email/phone) step arrives on its own.
-    await expect(page.locator('[data-testid="input-re10-email"]')).toBeVisible({ timeout: 3000 });
-  });
-
-  test("a role tap does NOT advance while the required name is empty", async ({ page }) => {
-    await reachReview(page);
-    await page.locator('[data-testid="wizard-continue"]').click();
-    await expect(page.locator('[data-testid="input-re10-name"]')).toBeVisible();
-
-    // No name yet: tapping a role must not move on.
-    await page.getByRole("radio", { name: "Seller's agent" }).click();
-    await page.waitForTimeout(900);
-    await expect(page.locator('[data-testid="input-re10-name"]')).toBeVisible();
-    await expect(page.locator('[data-testid="input-re10-email"]')).toHaveCount(0);
-  });
-
-  test("occupancy auto-advances from the property step once an address is present", async ({ page }) => {
-    await reachReview(page);
-    // Review -> About; fill name + role auto-advances to Contact.
-    await page.locator('[data-testid="wizard-continue"]').click();
-    await page.locator('[data-testid="input-re10-name"]').fill("Jane Doe");
-    await page.getByRole("radio", { name: "Buyer's agent" }).click();
-
-    // Contact -> Property (email is valid, then Continue).
-    await expect(page.locator('[data-testid="input-re10-email"]')).toBeVisible();
-    await page.locator('[data-testid="input-re10-email"]').fill("jane@example.com");
-    await page.locator('[data-testid="wizard-continue"]').click();
-
-    // Property step: address prefilled from the stubbed extraction.
-    const address = page.locator('[data-testid="input-re10-address"]');
-    await expect(address).toBeVisible();
-    await expect(address).not.toHaveValue("");
-
-    // A single occupancy tap advances to Timeline.
-    await page.getByRole("radio", { name: "Vacant" }).click();
-    await expect(page.getByText("What are your dates?")).toBeVisible({ timeout: 3000 });
-  });
+// The retired RE-10-specific wizard has been replaced by the shared intake.
+// Keep this public entry point covered without calling extraction or submitting a lead.
+for(const width of [320,390,1440])test(`RE-10 intake and callback preserve scope at ${width}px`,async({page})=>{
+ await page.setViewportSize({width,height:900});
+ await page.route('**/api/**',route=>route.fulfill({status:503,contentType:'application/json',body:'{"error":"Local test: persistence unavailable"}'}));
+ await page.goto('/re-10-repairs-boise');
+ const estimator=page.locator('#re10-wizard');
+ await expect(estimator.getByText('This page is for Inspection and RE-10 repairs.',{exact:false})).toBeVisible();
+ const scope=estimator.getByRole('textbox',{name:'Tell us about your project',exact:true});
+ await scope.fill('TEST ONLY: Repair the inspection-listed door. Preserve the existing trim.');
+ const shortcut=estimator.getByRole('button',{name:'Just contact me',exact:true});
+ await shortcut.click();
+ const dialog=page.getByRole('dialog');await expect(dialog).toBeVisible();
+ await expect(dialog.getByText('This does not sign you up for marketing.',{exact:false})).toBeVisible();
+ await page.keyboard.press('Escape');await expect(dialog).not.toBeVisible();
+ await expect(shortcut).toBeFocused();
+ await expect(scope).toHaveValue('TEST ONLY: Repair the inspection-listed door. Preserve the existing trim.');
+ await expect(estimator.getByRole('button',{name:'Attach files',exact:true})).toBeVisible();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
