@@ -1,4 +1,3 @@
-import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { ArrowRight, Check } from "lucide-react";
 import { Section } from "@/components/marketing/Section";
@@ -8,7 +7,6 @@ import {
   STANDARD_INCLUSIONS,
   OPTIONAL_ENHANCEMENTS,
 } from "@/shared/siteContent";
-import { SITE_IMAGES } from "@/shared/siteImages";
 import { CTA_SECONDARY } from "@/shared/ctaCopy";
 
 /**
@@ -29,27 +27,11 @@ export function BudgetInclusionsSection() {
   return (
     <Section
       id="budget"
-      surface="deep"
+      surface="bone"
       spacing="xl"
       edge
-      className="ed-photo-copy relative overflow-hidden"
+      className="budget-inclusions"
     >
-      {/* Photographic ground behind the dark band. Previously the image sat at
-          10% opacity under a flat 75% scrim AND a 90% gradient - effectively
-          invisible. One gradient over a somewhat-present image keeps the copy
-          fully legible while letting the photograph actually read as a photo. */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <Image
-          src={SITE_IMAGES.budgetDetail}
-          alt=""
-          fill
-          loading="lazy"
-          sizes="100vw"
-          className="object-cover opacity-[0.34] img-brand-grade"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-inverse/[0.72] via-inverse/[0.38] to-inverse/[0.72]" />
-      </div>
-
       <div className="ed-shell relative z-10">
         <div className="ed-split ed-split-end">
           <Reveal>
