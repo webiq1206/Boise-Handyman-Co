@@ -5,51 +5,16 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { buildCanonical } from "@/lib/page-metadata";
 import {
   generateBreadcrumbSchema,
-  generateFAQSchema,
   generateWebPageSchema,
 } from "@/lib/schema";
 import { SITE_CONFIG } from "@/shared/siteConfig";
-import { HANDYMAN_RATE_DISCLAIMER } from "@/shared/estimateEngine";
 import { fitDescription } from '@/lib/page-metadata';
 
 
 
-// 25 chars; the branded title lands at 45 with the 20-char suffix.
-const TITLE = "Online Handyman Estimate";
+const TITLE = "Request a Handyman Estimate";
 const DESCRIPTION =
-  fitDescription("See a real price range for your repair. Pick your tasks and get a preliminary estimate for Boise and the Treasure Valley, then book your visit.");
-
-/*
- * The rates below render the pricing model on-page. They come straight from
- * shared/estimateEngine.ts, which is flagged [NEEDS: real pricing confirmation]
- * at every constant; the visible disclaimer keeps the page honest meanwhile.
- */
-const FAQS = [
-  {
-    question: "How does handyman pricing work here?",
-    answer: `Every job is priced the same way: time on the job with a one-hour minimum. Priority scheduling adds 15% and same-week emergency adds 30%. Materials are billed at cost with the receipt. ${HANDYMAN_RATE_DISCLAIMER}`,
-  },
-  {
-    question: "Is the online number a quote?",
-    answer:
-      "No, it is a starting range based on typical hours for the tasks you pick. Every job gets a firm written quote before any work begins, and the final price never changes without your OK first.",
-  },
-  {
-    question: "What if my job is not on the list?",
-    answer:
-      "Choose \"Something else\" and describe it in a sentence or two, then guess whether it is a small, medium, or large job. We confirm the real scope by phone or at the door before work starts.",
-  },
-  {
-    question: "Do you charge for the estimate itself?",
-    answer:
-      "No. Send your project details for a free team review. We may need more information or a site visit before preparing your estimate. The written quote that follows is free too. You only ever pay for work you have approved.",
-  },
-  {
-    question: "What areas do you cover?",
-    answer:
-      "Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell. If you are elsewhere in the Treasure Valley, send the estimate through anyway and we will tell you straight away whether we can get to you.",
-  },
-];
+  fitDescription("Need repairs in Boise or the Treasure Valley? Send your task list, photos or plans. Our team will review the details before preparing your estimate.");
 
 export const metadata: Metadata = withBrandPageMetadata(({
   title: { absolute: `${TITLE} | ${SITE_CONFIG.name}` },
@@ -73,7 +38,7 @@ export const metadata: Metadata = withBrandPageMetadata(({
 export default function EstimatePage() {
   const schemas = [
     generateWebPageSchema({
-      title: "Online Handyman Estimate",
+      title: "Request a Handyman Estimate",
       description: DESCRIPTION,
       url: "/estimate",
     }),
@@ -81,7 +46,6 @@ export default function EstimatePage() {
       { name: "Home", url: "/" },
       { name: "Online Estimate", url: "/estimate" },
     ]),
-    generateFAQSchema(FAQS),
   ];
 
   return (

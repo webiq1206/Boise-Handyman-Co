@@ -162,6 +162,10 @@ export function generateMetaDescription(params: ServiceSEOParams): string {
     return `Handyman services in Boise, Meridian, Eagle & the Treasure Valley. Repairs, installs & maintenance with upfront quotes. Call ${phone} to book a visit!`;
   }
 
+  if (params.serviceSlug === 'drywall-repair') {
+    return `Drywall repair and patching in ${city || 'Boise & the Treasure Valley'}. Share photos for a scope review. Drying and finishing may require more than one visit.`;
+  }
+
   if (city && serviceName) {
     const serviceLC = serviceName.toLowerCase();
     const cityVariant = CITY_DESCRIPTION_VARIANTS[city] || `${city}'s trusted`;
