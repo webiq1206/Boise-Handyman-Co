@@ -53,16 +53,30 @@ function trimAtWord(text:string,max:number):string{
  const cut=(space>=Math.min(24,Math.max(8,max-8))?slice.slice(0,space):clean.slice(0,max)).replace(/[\s|,;:-]+$/,'');
  return cut||clean.slice(0,max).trim();
 }
+const PROTECTED_CLAIM=/\$\s?\d[\d,]*(?:\.\d+)?|written quote first|RE-10|guarante|upfront quotes?|one written price|one-trip|one trip|one visit|locally owned|free quotes?|workmanship|same-week|photo quotes?|satisfaction/gi;
+function protectedClaims(text:string):string[]{
+ return Array.from(text.matchAll(PROTECTED_CLAIM),match=>match[0].toLowerCase());
+}
+function dropsProtectedClaim(source:string,fitted:string):boolean{
+ const left=protectedClaims(fitted);
+ for(const claim of protectedClaims(source)){
+  const index=left.indexOf(claim);
+  if(index<0)return true;
+  left.splice(index,1);
+ }
+ return false;
+}
 function fitAbsoluteTitle(title:string):string{
- return trimAtWord(title,TITLE_LIMIT);
+ const fitted=trimAtWord(title,TITLE_LIMIT);
+ return dropsProtectedClaim(title,fitted)?title:fitted;
 }
 function fitDescriptionText(description:string):string{
  const clean=description.replace(/\s+/g,' ').trim();
  if(clean.length<=DESCRIPTION_LIMIT)return clean;
  const window=clean.slice(0,DESCRIPTION_LIMIT+1);
  const sentence=Math.max(window.lastIndexOf('. '),window.lastIndexOf('! '),window.lastIndexOf('? '));
- if(sentence>=70)return clean.slice(0,sentence+1).trim();
- return trimAtWord(clean,DESCRIPTION_LIMIT);
+ const fitted=sentence>=70?clean.slice(0,sentence+1).trim():trimAtWord(clean,DESCRIPTION_LIMIT);
+ return dropsProtectedClaim(clean,fitted)?clean:fitted;
 }
 function resolveDocumentTitle(meta:Metadata,overrideTitle?:string):{document:Metadata['title'];plain:string}{
  if(overrideTitle){
@@ -79,7 +93,11 @@ function resolveDocumentTitle(meta:Metadata,overrideTitle?:string):{document:Met
    return {document:fitted,plain:fitted};
   }
   const topic=trimAtWord(original,TITLE_LIMIT-BRAND_SUFFIX.length);
-  return {document:topic,plain:`${topic}${BRAND_SUFFIX}`};
+  const fittedPlain=`${topic}${BRAND_SUFFIX}`;
+  if(dropsProtectedClaim(original,topic)||dropsProtectedClaim(`${original}${BRAND_SUFFIX}`,fittedPlain)){
+   return {document:meta.title,plain:`${original}${BRAND_SUFFIX}`};
+  }
+  return {document:topic,plain:fittedPlain};
  }
  const plain=original.includes(brand.name)?fitAbsoluteTitle(original):fitAbsoluteTitle(`${original}${BRAND_SUFFIX}`);
  return {document:meta.title,plain};

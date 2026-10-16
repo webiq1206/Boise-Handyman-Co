@@ -46,18 +46,6 @@ export const P5_PARENT_ORGANIZATION = {
   url: P5_ORIGIN,
 } as const;
 
-/**
- * Identity URLs the published fact sheets actually list for this company.
- * Those sheets name the parent site and the sister companies. They do not
- * list a Handyman social profile. sameAs means "this is the same entity",
- * so sister sites stay on parentOrganization and are not copied in here.
- */
-const FACT_SHEET_IDENTITY_URLS = new Set<string>([]);
-
-function publishedIdentitySameAs(): { sameAs: string[] } | Record<string, never> {
-  const sameAs = BUSINESS_INFO.sameAs.filter((url) => FACT_SHEET_IDENTITY_URLS.has(url));
-  return sameAs.length > 0 ? { sameAs } : {};
-}
 // Organization logo for knowledge-panel / rich-result use. The approved seal on
 // a charcoal disc (bone lettering, ochre ring) is square and stays legible on
 // any background, unlike the reverse wordmark which vanished on Google's white
@@ -167,7 +155,7 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
         },
       })),
     },
-    ...publishedIdentitySameAs(),
+    sameAs: BUSINESS_INFO.sameAs,
   };
 }
 
@@ -297,7 +285,7 @@ export function generateOrganizationSchema(): SchemaContext {
       'tile and grout repair',
       'home maintenance and punch-list work',
     ],
-    ...publishedIdentitySameAs(),
+    sameAs: BUSINESS_INFO.sameAs,
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: BUSINESS_INFO.phone,

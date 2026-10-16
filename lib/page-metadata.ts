@@ -41,12 +41,21 @@ export interface PageMetaInput {
 }
 
 /**
- * City x service pages kept out of the index. Empty on purpose: every live
- * city page, including mounting and home-maintenance in Caldwell, Kuna,
- * Middleton, and Star, is indexable and belongs in the sitemap.
- * Keyed as `${serviceSlug}/${citySlug}` if a combo has to be held back later.
+ * City x service combos flagged as doorway risk. These are the secondary
+ * services in the smallest markets, where the copy is most generic and there
+ * is no local proof or pillar support yet. Toggle entries off here once a
+ * combo earns unique local content. Keyed as `${serviceSlug}/${citySlug}`.
  */
-export const NOINDEX_CITY_SERVICE = new Set<string>([]);
+export const NOINDEX_CITY_SERVICE = new Set<string>([
+  'mounting-assembly/kuna',
+  'mounting-assembly/star',
+  'mounting-assembly/middleton',
+  'mounting-assembly/caldwell',
+  'home-maintenance/kuna',
+  'home-maintenance/star',
+  'home-maintenance/middleton',
+  'home-maintenance/caldwell',
+]);
 
 export function isCityServiceNoindex(serviceSlug: string, citySlug: string): boolean {
   return NOINDEX_CITY_SERVICE.has(`${serviceSlug}/${citySlug}`);

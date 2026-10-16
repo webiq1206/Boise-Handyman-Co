@@ -1,6 +1,8 @@
 export interface HomepageFaq {
   q: string;
   a: string;
+  /** Anchor for answers that point at this question. */
+  id?: string;
 }
 
 /**
@@ -24,9 +26,10 @@ export const INITIAL_FAQ_COUNT = 9;
 export const HOMEPAGE_FAQS: HomepageFaq[] = [
   {
     q: "How is a Boise handyman visit priced?",
-    a: "Every job is quoted upfront as one written price before any work starts, priced by the time it takes with a one-hour minimum, and most jobs are finished in a single visit. A single small repair starts around $145, materials are billed at cost as their own line, and bundling several tasks into one visit is the best value (prices are being finalized; every job gets a written quote first). Work that needs a general contractor or a licensed trade, such as full remodels, additions, repipes, or panel work, is out of scope and referred out honestly.",
+    a: "Every job is quoted upfront as one written price before any work starts, priced by the time it takes with a one-hour minimum, and most jobs are finished in a single visit. Pricing comes as a written quote first. See how much a handyman costs in Boise and the Treasure Valley. Materials are billed at cost as their own line, and bundling several tasks into one visit is the best value. Work that needs a general contractor or a licensed trade, such as full remodels, additions, repipes, or panel work, is out of scope and referred out honestly.",
   },
   {
+    id: "handyman-cost",
     q: "How much does a handyman cost in Boise and the Treasure Valley?",
     a: "Treasure Valley handyman rates typically run $60 to $120 per hour, with many companies adding a service call or minimum charge on top. We keep it simple: one written price for the visit, quoted upfront before any work starts. Most single-task visits start around $99 to $149, and materials appear on the quote as their own line at what they cost. Because extra tasks only add the time they take, bundling several small tasks into one appointment is the best value.",
   },
