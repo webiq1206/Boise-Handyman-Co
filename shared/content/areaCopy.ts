@@ -41,7 +41,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Boise, Idaho?',
         answer:
-          'Yes. Boise is core Treasure Valley territory for us, Downtown, the East End, and Southwest Boise included. We handle small repairs, installs, and maintenance anywhere in the city, and upfront quotes and pricing match everywhere else we work.',
+          'Yes. Boise is core Treasure Valley territory for us, Downtown, the East End, and Southwest Boise included. We handle small repairs, installs, and maintenance anywhere in the city, and quotes and pricing match everywhere else we work.',
       },
       {
         question: 'Which small jobs need a permit in Boise?',
@@ -51,7 +51,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Anything special about older and historic Boise homes?',
         answer:
-          'Two things. Roughly four in ten Boise homes (42%) predate 1980, and older houses tend to show settled doors, aging caulk, and original fixtures. And in a Boise historic district, the city requires a Certificate of Appropriateness from Planning for many exterior changes, including windows and siding, before that work starts.',
+          'Two things. Roughly four in ten Boise homes (42%) predate 1980, and older houses tend to show doors that have settled, caulk that has aged, and original fixtures. And in a Boise historic district, the city requires a Certificate of Appropriateness from Planning for many exterior changes, including windows and siding, before that work starts.',
       },
     ],
   },
@@ -82,7 +82,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Meridian, Idaho?',
         answer:
-          'Yes, Meridian is a core part of our Treasure Valley service area, from Paramount to Meridian Ranch. Small repairs, installs, and maintenance anywhere in town get the same upfront quoting and the same rates we use everywhere else we work.',
+          'Yes, Meridian is a core part of our service area, from Paramount to Meridian Ranch. Small repairs, installs, and maintenance anywhere in town get the same upfront quoting and the same rates we use across the Treasure Valley.',
       },
       {
         question: 'Do I need a permit for a fence or shed in Meridian?',
@@ -103,7 +103,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'What kinds of jobs do you take on?',
         answer:
-          'In Nampa we handle small repairs, installs, and maintenance that fit in one to eight hours: sticking doors and carpentry, drywall holes, minor plumbing and electrical fixes, paint touch-ups, furniture assembly, wall-mounted TVs, fences, gutters, and decks, and caulking and weatherproofing.',
+          'In Nampa we handle repairs, installs, and upkeep that fit in one to eight hours: sticking doors and carpentry, drywall holes, minor plumbing and electrical fixes, paint touch-ups, furniture assembly, wall-mounted TVs, fences, gutters, and decks, and caulking and weatherproofing.',
       },
       {
         question: 'How does pricing work?',
@@ -123,7 +123,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Nampa, Idaho?',
         answer:
-          'Yes. Nampa is one of our core Treasure Valley cities, with Greenhurst and Columbia Village on the map. Every small repair, install, or maintenance job here is quoted upfront and priced exactly as it would be anywhere else we work.',
+          'Yes. Nampa is one of our core Treasure Valley cities, with Greenhurst and Columbia Village on the map. Every small repair, install, or maintenance job here is quoted and priced exactly as it would be anywhere else we work.',
       },
       {
         question: 'Does Nampa require a permit to replace or repair a fence?',
@@ -164,7 +164,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Eagle, Idaho?',
         answer:
-          'Yes. Eagle is in our core Treasure Valley coverage, Shadow Valley and The Estates included. We do small repairs, installs, and maintenance throughout Eagle, at the same upfront quotes and pricing as everywhere else we work. Our Eagle Foothills guide covers hillside homes.',
+          "Yes. Eagle is in our core coverage, Shadow Valley and The Estates included. We do small repairs, installs, and maintenance throughout Eagle, at the same upfront quotes and pricing you'd get elsewhere in the valley. Our Eagle Foothills guide covers hillside homes.",
       },
       {
         question: "What are Eagle's rules for a front-yard fence?",
@@ -205,7 +205,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Kuna, Idaho?',
         answer:
-          'Yes. Kuna sits in our core Treasure Valley area, Indian Creek and Ten Mile Creek included. Small repairs, installs, and maintenance in Kuna are quoted upfront the same way, and priced the same, as every other place we work.',
+          'Yes. Kuna sits in our core Treasure Valley area, Ten Mile Creek included. Indian Creek runs through both Kuna and Caldwell, and Indian Creek Plaza is in Caldwell. Repairs, installs, and maintenance in Kuna are quoted the same way, and priced the same, as every other place we work.',
       },
       {
         question: 'What does a Kuna fence permit cost?',
@@ -246,7 +246,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Caldwell, Idaho?',
         answer:
-          'Yes. Caldwell is core Treasure Valley service territory, Indian Creek and Wilson among its neighborhoods. Small repairs, installs, and maintenance throughout Caldwell carry identical upfront quoting and pricing to anywhere else in our service area.',
+          'Yes. Caldwell is core service territory, with Wilson among its neighborhoods. Indian Creek runs through both Kuna and Caldwell, and Indian Creek Plaza is in Caldwell. Small repairs, installs, and upkeep throughout Caldwell carry identical upfront quoting and pricing to anywhere else in our service area.',
       },
       {
         question: 'Is a permit needed for a fence in Caldwell?',
@@ -287,7 +287,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Star, Idaho?',
         answer:
-          'Yes, Star is part of our core Treasure Valley coverage, including Hillsdale and Paramount. Small repairs, installs, and maintenance across Star are quoted upfront and priced just as everywhere else we work.',
+          'Yes, Star is part of our core coverage, including Hillsdale and Paramount. Small repairs, installs, and maintenance across Star are quoted and priced just as in the rest of the Treasure Valley.',
       },
       {
         question: 'When does a Star home project need a permit?',
@@ -298,6 +298,88 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
         question: 'When should Star homeowners schedule exterior work?',
         answer:
           'Between freezes. The Boise Airport station, the official weather site closest to Star, has a median last spring freeze near April 24 and a first fall freeze near October 21 in NOAA\'s 1991-2020 normals. Gutters are best cleaned in late fall, before that first freeze.',
+      },
+    ],
+  },
+  middleton: {
+    intro:
+      "Middleton's housing is newer than most: the median home was built in 2009, and about one in eight went up in 2020 or later (Census ACS 2020-2024). Boise Handyman Co handles the small repairs, installs, and maintenance those homes need across Middleton and Canyon County, quoting each job upfront and finishing most of them in one visit.",
+    faqs: [
+      {
+        question: 'What kinds of jobs do you take on?',
+        answer:
+          "Mounting a TV, assembling furniture, patching drywall, touching up paint, fixing a minor plumbing or electrical problem, repairing a door or other carpentry, mending fences, decks, and gutters, refreshing caulk and weatherproofing: that's the Middleton work we do. It's all small repairs, installs, and maintenance, and most jobs need one to eight hours.",
+      },
+      {
+        question: 'How does pricing work?',
+        answer:
+          "First you get a written quote, one upfront price before anything starts. It reflects the job's time, subject to a one-hour minimum; materials go on a separate line at cost; and lining up several tasks for one visit gives you the best value.",
+      },
+      {
+        question: 'Do you handle remodels or large projects?',
+        answer:
+          "No. A full remodel, an addition, or a job that calls for a general contractor or major permits is outside our lane, because doing small jobs well is the point. If your Middleton project is bigger, we'll refer you to contractors we trust.",
+      },
+      {
+        question: 'How do I get started?',
+        answer:
+          'Text or call (208) 477-1169, see a preliminary planning range in our estimator, or send your to-do list and a few photos through the contact form. Expect an upfront quote from us within one business day.',
+      },
+      {
+        question: 'Do you serve Middleton, Idaho?',
+        answer:
+          'Yes, we cover Middleton as part of our core Treasure Valley area, Purple Sage and Puckett Estates included. Same-week scheduling is typical, and every small repair, install, or maintenance job in town carries the same upfront quotes and pricing as the rest of our area.',
+      },
+      {
+        question: 'Does a fence in Middleton need a permit?',
+        answer:
+          'Not if it follows the code. Middleton exempts residential fencing that complies with city code from the building permit requirement. That code caps residential fences at 6 feet, allows a 3-foot privacy fence or a 4-foot see-through fence in front and side-street setbacks, and prohibits electric and barbed wire fences except when containing animals or in an industrial zone.',
+      },
+      {
+        question: 'When do freezes start and stop around Middleton?',
+        answer:
+          "Using 1991-2020 NOAA data from the long-term Nampa Sugar Factory station, which lies roughly 7 miles south-southeast, the typical last frost of spring falls near April 29 and the first of fall near October 13, a growing season of roughly 164 days. Exterior caulk, paint, and fence repairs fit best inside that window.",
+      },
+    ],
+  },
+  'garden-city': {
+    intro:
+      "Garden City is about 6 miles from the Boise Airport weather station, where NOAA's 1991-2020 normals record about 17.6 inches of snow a season and average December and January lows near 25°F. Boise Handyman Co provides handyman services for Garden City homes and the rest of Ada County: small repairs, installs, and maintenance, quoted upfront and usually finished in one visit.",
+    faqs: [
+      {
+        question: 'What kinds of jobs do you take on?',
+        answer:
+          'Garden City jobs we handle include fence, gutter, and deck repair, minor electrical and plumbing fixes, drywall patching and painting touch-ups, door and carpentry fixes, assembling furniture and mounting TVs, and caulking and weatherproofing. Small repairs, installs, and maintenance, in other words, typically one to eight hours each.',
+      },
+      {
+        question: 'How does pricing work?',
+        answer:
+          'Time-based pricing with a one-hour minimum, written up as one upfront quote that you approve before work starts. Materials are billed separately at cost, and putting several jobs on one visit is the best value.',
+      },
+      {
+        question: 'Do you handle remodels or large projects?',
+        answer:
+          'No, not those. We skip full remodels and additions, plus any job requiring a general contractor or major permits, so we can focus on small jobs done well. Larger Garden City work gets referred to contractors we trust.',
+      },
+      {
+        question: 'How do I get started?',
+        answer:
+          "Call or text us, check our online estimator for a preliminary number, or use the contact form to send your list with photos. We'll reply with an upfront quote within one business day.",
+      },
+      {
+        question: 'Do you serve Garden City, Idaho?',
+        answer:
+          'Yes. Garden City falls within our core Treasure Valley coverage. We take care of small repairs, installs, and maintenance throughout the city, and quotes and prices are identical to anywhere else we go.',
+      },
+      {
+        question: 'Which small jobs skip the permit in Garden City?',
+        answer:
+          "Garden City's building code exempts painting, papering, tiling, carpeting, cabinets, and countertops; work with a total value of $500 or less; fences up to 7 feet; decks no more than 12 inches above grade that don't serve the required exit door; and one-story sheds up to 200 sq ft. Exempt work still has to meet code and zoning rules.",
+      },
+      {
+        question: 'Are there fence rules near the Greenbelt in Garden City?',
+        answer:
+          'Yes. The city prohibits fences and retaining walls within 5 feet of the Greenbelt or Nature Path travel way, and fences 5 to 15 feet from it, or next to a public park, are limited to 3.5 feet unless screening conditions are met. Fences along a public street or in a front setback are limited to 3.5 feet unless they sit behind a building or are set back at least 10 feet for landscaping, and rear or side yard fences between homes top out at 6 feet.',
       },
     ],
   },
