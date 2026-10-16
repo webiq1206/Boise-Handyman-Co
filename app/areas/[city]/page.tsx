@@ -58,7 +58,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
   const landmarks = seo?.landmarks ?? [];
   const indianCreekNote =
     city.slug === 'kuna' || city.slug === 'caldwell'
-      ? 'Indian Creek runs through both Kuna and Caldwell. Indian Creek Plaza is in Caldwell.'
+      ? 'Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell. Indian Creek Plaza is in Caldwell.'
       : undefined;
 
   const sections: LandingSection[] = [

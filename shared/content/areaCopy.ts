@@ -205,7 +205,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Kuna, Idaho?',
         answer:
-          'Yes. Kuna sits in our core Treasure Valley area, Ten Mile Creek included. Indian Creek runs through both Kuna and Caldwell, and Indian Creek Plaza is in Caldwell. Repairs, installs, and maintenance in Kuna are quoted the same way, and priced the same, as every other place we work.',
+          'Yes. Kuna sits in our core Treasure Valley area, Ten Mile Creek included. Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell, and Indian Creek Plaza is in Caldwell. Repairs, installs, and maintenance in Kuna are quoted the same way, and priced the same, as every other place we work.',
       },
       {
         question: 'What does a Kuna fence permit cost?',
@@ -246,7 +246,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Caldwell, Idaho?',
         answer:
-          'Yes. Caldwell is core service territory, with Wilson among its neighborhoods. Indian Creek runs through both Kuna and Caldwell, and Indian Creek Plaza is in Caldwell. Small repairs, installs, and upkeep throughout Caldwell carry identical upfront quoting and pricing to anywhere else in our service area.',
+          'Yes. Caldwell is core service territory, with Wilson among its neighborhoods. Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell, and Indian Creek Plaza is in Caldwell. Small repairs, installs, and upkeep throughout Caldwell carry identical upfront quoting and pricing to anywhere else in our service area.',
       },
       {
         question: 'Is a permit needed for a fence in Caldwell?',

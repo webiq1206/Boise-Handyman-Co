@@ -876,7 +876,7 @@ export function getCityServiceSections(
           ? `We serve homes throughout ${city.name}, including ${neighborhoods.join(', ')}. Housing stock varies between these areas, from newer subdivision builds to older homes with settled doors and original fixtures, so we ask the right questions up front and arrive with materials that suit the house.`
           : `We serve homes throughout ${city.name}, from newer subdivision builds to older houses with settled doors and original fixtures, and we arrive with materials that suit the house.`,
         ...(city.slug === 'kuna' || city.slug === 'caldwell'
-          ? ['Indian Creek runs through both Kuna and Caldwell. Indian Creek Plaza is in Caldwell.']
+          ? ['Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell. Indian Creek Plaza is in Caldwell.']
           : []),
         landmarks.length
           ? `As a local team that knows ${city.name} landmarks like ${landmarks.slice(0, 3).join(', ')}, scheduling is straightforward: we quote a real arrival time, confirm before heading out, and never add a travel surcharge.`
