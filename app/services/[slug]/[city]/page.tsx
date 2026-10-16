@@ -21,7 +21,7 @@ import { getCityServiceImageSet } from '@/shared/cityServiceImages';
 import { getCountyLabel } from '@/shared/contentData';
 import { getGalleryProjectsFor } from '@/shared/galleryData';
 import {
-getCityServiceFaqs,
+cityServicePageFaqs,
 getCityServiceIntro,
 getCityServiceSections,
 SERVICE_SEO_CONTENT,
@@ -73,7 +73,7 @@ export default async function CityServicePage(
 
   const overview = getCityServiceIntro(content, city, localFact);
   const h1 = `${service.name} in ${city.name}, Idaho`;
-  const faqs = getCityServiceFaqs(content, city);
+  const faqs = cityServicePageFaqs(content, city);
   const localNote = `${city.name} sits inside our core ${county} service area, so ${content.name.toLowerCase()} jobs are quoted from photos, scheduled locally, and priced the same as everywhere else we work.`;
   const images = getCityServiceImageSet(service.slug, city.slug);
   const sections = getCityServiceSections(content, city, seo);

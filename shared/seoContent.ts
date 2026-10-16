@@ -2,6 +2,7 @@ import type { ServiceData, CityData } from './contentData';
 import { getCountyLabel } from './contentData';
 import { getAreaCityCopy } from './content/areaCopy';
 import { getCityServiceCopy } from './content/cityServiceCopy';
+import { getCityLocalSection, getCityOnlyFaqs } from './cityPageFacts';
 import type { LandingSection } from '@/components/seo/LandingPageTemplate';
 
 export interface FAQItem {
@@ -909,6 +910,7 @@ export function getCityServiceSections(
           },
         ]
       : []),
+    getCityLocalSection(city, service.name),
   ];
 
   return sections;
@@ -936,6 +938,33 @@ export const AREA_PAGE_FAQS: FAQItem[] = [
       'Call or text us, use the online estimator for a preliminary planning range, or send your task list with photos through the contact form. We reply within one business day with an upfront quote.',
   },
 ];
+
+function appendNewFaqs(base: FAQItem[], extra: FAQItem[]): FAQItem[] {
+  const seen = new Set(base.map((faq) => faq.question));
+  return [...base, ...extra.filter((faq) => !seen.has(faq.question))];
+}
+
+/**
+ * Visible area-page FAQs. Published city copy stays first, in its original
+ * order. The two city-only questions are appended. FAQPage schema must use
+ * this same array.
+ */
+export function areaPageFaqs(city: CityData): FAQItem[] {
+  const published = getAreaCityCopy(city.slug)?.faqs;
+  const base = published ?? [
+    ...AREA_PAGE_FAQS,
+    {
+      question: `Do you serve ${city.name}, Idaho?`,
+      answer: `Yes. ${city.name} is part of our core Treasure Valley service area. We handle small repairs, installs, and maintenance across the city, with the same upfront quotes and pricing as everywhere else we work.`,
+    },
+  ];
+  return appendNewFaqs(base, getCityOnlyFaqs(city));
+}
+
+/** Visible service-city FAQs. Published service copy stays first; city-only questions follow. */
+export function cityServicePageFaqs(service: ServiceSEOContent, city: CityData): FAQItem[] {
+  return appendNewFaqs(getCityServiceFaqs(service, city), getCityOnlyFaqs(city, service.name));
+}
 
 export const HOMEPAGE_FAQS_FOR_SCHEMA: FAQItem[] = [
   {

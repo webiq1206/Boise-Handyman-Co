@@ -643,6 +643,13 @@ const PLACES: PlaceGuide[] = [
   },
 ];
 
+/** Page-2 city guides get one extra link to the matching service-area page. */
+function priorityAreaLink(p: PlaceGuide, county: string): string {
+  if (p.guideType !== 'location') return '';
+  if (p.citySlug !== 'meridian' && p.citySlug !== 'nampa' && p.citySlug !== 'caldwell') return '';
+  return `<p>The dedicated service-area page is <a href="/areas/${p.citySlug}">handyman services in ${p.name}, Idaho</a>. It covers ${p.name} scheduling, ${county} permit jurisdiction, and the nearby cities served with ${p.name}.</p>`;
+}
+
 function buildLocationGuide(p: PlaceGuide): GuidePageData {
   const county = countyLabel(p.county);
 
@@ -667,6 +674,7 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     `<h2 id="how-we-work">How we work in ${p.name}</h2>`,
     `<p><strong>Send the list with photos, get a flat quote, and we aim to finish in one trip.</strong> The quote names the scope and the price before we arrive, and it does not move unless the scope does, in which case you approve the change first. Batching several small jobs into one visit spreads the trip cost and is the cheapest way to buy this kind of work anywhere in the valley, and especially outside the core cities. Our labor carries a workmanship guarantee, and anything on your list that belongs with a licensed specialty trade gets said plainly at the quote stage.</p>`,
     `<p>Services relevant here: <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing</a>, <a href="/services/electrical-repairs">minor electrical</a>, <a href="/services/carpentry-trim-repair">carpentry and trim</a>, <a href="/services/painting-touch-ups">painting</a>, <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/fence-deck-gutter-repair">fence, deck, and gutter repair</a>, and <a href="/services/home-maintenance">home maintenance</a>. See also <a href="/areas/${p.citySlug}">our ${p.citySlug} service area page</a> and <a href="/guides/hire-a-handyman-treasure-valley">how to hire a handyman in the Treasure Valley</a>.</p>`,
+    priorityAreaLink(p, county),
     `<h2 id="next-steps">Start with the list</h2>`,
     `<p>The fastest way to get a real answer about a repair in ${p.name} is to show it to us: <a href="/contact">send the list and a few photos</a> and we will reply with a flat quote and the earliest slot, usually within a day. No site-visit fee, no obligation, and if something on the list is not a handyman job, we will tell you whose job it is.</p>`,
   ].join('\n');
@@ -705,3 +713,34 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
 }
 
 export const LOCATION_GUIDES: GuidePageData[] = PLACES.map(buildLocationGuide);
+
+/** Published place prose, keyed for city pages. No new facts. */
+export interface PublishedPlaceFacts {
+  slug: string;
+  name: string;
+  title: string;
+  excerpt: string;
+  guideType: 'location' | 'neighborhood';
+  citySlug: string;
+  housingStock: string;
+  commonRepairs: string;
+  watchOut: string;
+  seasonal: string;
+  takeaways: string[];
+}
+
+export function publishedPlaceFacts(citySlug: string): PublishedPlaceFacts[] {
+  return PLACES.filter((p) => p.citySlug === citySlug).map((p) => ({
+    slug: p.slug,
+    name: p.name,
+    title: p.title,
+    excerpt: p.excerpt,
+    guideType: p.guideType,
+    citySlug: p.citySlug,
+    housingStock: p.housingStock,
+    commonRepairs: p.commonRepairs,
+    watchOut: p.watchOut,
+    seasonal: p.seasonal,
+    takeaways: p.takeaways,
+  }));
+}

@@ -11,11 +11,13 @@ import { PageHeroBand } from "@/components/sections/PageHeroBand";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/button";
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
+import { landingFAQSchema } from "@/lib/landing-schema";
 import { buildPageMetadata } from "@/lib/page-metadata";
 import {
 generateBreadcrumbSchema,
 generateWebPageSchema,
 } from "@/lib/schema";
+import { AREA_PAGE_FAQS } from "@/shared/seoContent";
 import { CITY_HERO_IMAGES } from "@/shared/cityServiceImages";
 import { CITIES,TREASURE_VALLEY_CITIES } from "@/shared/contentData";
 import { CTA_PRIMARY,CTA_SECONDARY } from "@/shared/ctaCopy";
@@ -41,6 +43,7 @@ export default function AreasHubPage() {
       { name: "Home", url: "/" },
       { name: "Service Areas", url: "/areas" },
     ]),
+    landingFAQSchema(AREA_PAGE_FAQS),
   ];
 
   return (
@@ -90,6 +93,21 @@ export default function AreasHubPage() {
                 </Reveal>
               ))}
             </div>
+          </div>
+        </Section>
+
+        <Section surface="bone" spacing="xl">
+          <div className="ed-shell max-w-3xl">
+            <p className="ed-eyebrow">Common questions</p>
+            <h2 className="ed-h2 ed-statement">Questions about Treasure Valley handyman service</h2>
+            <dl className="mt-8 border-t" style={{ borderColor: "var(--ed-line)" }}>
+              {AREA_PAGE_FAQS.map((faq) => (
+                <div key={faq.question} className="border-b py-6" style={{ borderColor: "var(--ed-line)" }}>
+                  <dt className="ed-h4">{faq.question}</dt>
+                  <dd className="ed-body mt-3">{faq.answer}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </Section>
 
