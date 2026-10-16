@@ -942,6 +942,14 @@ export const p5EstimatorDeliveryReviews = pgTable("p5_estimator_delivery_reviews
  * drizzle-kit proposed DROP TABLE "p5_estimator_policy_imports" against the
  * row recording a real planning-book import. It records what a price policy
  * was before it changed, which is exactly the thing not to lose. */
+// Durable customer-facing request references, reserved at intake by lib/p5/intakeReferenceStore.ts
+// and created at runtime by lib/p5/store.ts ensureSchema. Declared so publishing never proposes DROP TABLE.
+export const p5ProjectReferences = pgTable("p5_project_references", {
+  projectId: text("project_id").primaryKey(),
+  reference: text("reference").notNull().unique(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const p5EstimatorPolicyImports = pgTable("p5_estimator_policy_imports", {
   id: text("id").primaryKey(),
   priorPayload: jsonb("prior_payload"),
