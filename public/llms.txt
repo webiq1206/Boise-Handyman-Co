@@ -21,6 +21,7 @@ Every job is quoted upfront as one written price before any work starts, priced 
 
 - [The Complete Boise Home Maintenance Guide](https://boisehandyman.co/guides/boise-home-maintenance-guide)
 - [Boise Home Repair Cost Guide](https://boisehandyman.co/guides/boise-home-repair-cost-guide)
+- [Ember-ready: a fall checklist for Treasure Valley homes](https://boisehandyman.co/guides/ember-ready-home-checklist-treasure-valley)
 - [The First-Time Homeowner's Repair Handbook](https://boisehandyman.co/guides/first-time-homeowner-repair-handbook)
 - [How to Hire a Handyman in the Treasure Valley](https://boisehandyman.co/guides/hire-a-handyman-treasure-valley)
 - [Small Home Upgrades That Pay Off](https://boisehandyman.co/guides/small-home-upgrades-that-pay-off)
@@ -58,4 +59,4 @@ Every job is quoted upfront as one written price before any work starts, priced 
 - [RSS feed](https://boisehandyman.co/feed.xml): guides and articles, newest first, with publication and revision dates.
 - [Full text for LLMs](https://boisehandyman.co/llms-full.txt): expanded reference copy of the core facts.
 
-Last updated: 2026-09-07.
+Last updated: 2026-10-16.

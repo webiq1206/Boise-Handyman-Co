@@ -233,6 +233,12 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     topicTags: ["cost","handyman rates","home repair","pricing","boise"],
     source: 'handyman',
   },
+  'ember-ready-home-checklist-treasure-valley': {
+    hero: '/images/handyman/hero-gutter-cleaning.webp',
+    alt: 'Worker on a ladder clearing autumn leaves from the rain gutter of a single-story suburban Boise home',
+    topicTags: ["wildfire","embers","exterior","gutters","boise"],
+    source: 'handyman',
+  },
   'first-time-homeowner-repair-handbook': {
     hero: '/images/handyman/hero-door-hinge-branded.webp',
     alt: 'Representative Boise Handyman Co worker adjusting an interior door hinge',

@@ -165,6 +165,7 @@ export const CONTENT_MANIFEST: ContentManifestEntry[] = [
   { slug: 'small-home-upgrades-that-pay-off', title: 'Small Home Upgrades That Pay Off', ...hubPillar('installs-and-upgrades'), status: PUBLISHED, replacesSlug: 'custom-home-design-guide' },
   { slug: 'first-time-homeowner-repair-handbook', title: "The First-Time Homeowner's Repair Handbook", ...hubPillar('repairs-and-fixes'), status: PUBLISHED, replacesSlug: 'buying-land-to-build-boise' },
   { slug: 'treasure-valley-exterior-home-care-guide', title: 'The Treasure Valley Exterior Home Care Guide', ...hubPillar('exterior-and-outdoor'), status: PUBLISHED, replacesSlug: 'treasure-valley-home-building-guide' },
+  { slug: 'ember-ready-home-checklist-treasure-valley', title: 'Ember-ready: a fall checklist for Treasure Valley homes', hubSlug: 'exterior-and-outdoor', contentType: 'pillar', route: 'guide', status: PUBLISHED, primaryKeyword: 'ember ready home checklist treasure valley' },
 
   // City and neighborhood handyman guides (under costs-and-hiring: local
   // hiring intent is what a "handyman in {city}" search expresses).
