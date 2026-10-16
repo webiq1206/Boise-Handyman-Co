@@ -17,7 +17,7 @@ import path from 'path';
 import { SITE_CONFIG } from '../shared/siteConfig';
 import { SERVICES, CITIES } from '../shared/contentData';
 import { GUIDE_PAGES } from '../shared/guideContent';
-import { CONTENT_HUBS } from '../shared/contentHubs';
+import { CONTENT_HUBS, isCategoryHubIndexable } from '../shared/contentHubs';
 import { BLOG_POSTS } from '../shared/blogContent';
 
 const BASE = SITE_CONFIG.siteUrl.replace(/\/$/, '');
@@ -38,6 +38,18 @@ const SUMMARY =
   `caulking and punch-list work. Serving ${CITIES.map((c) => c.name).join(', ')}. ` +
   `Phone ${SITE_CONFIG.phone}.`;
 
+const indexableHubs = CONTENT_HUBS.filter((h) =>
+  isCategoryHubIndexable(
+    h.hubSlug,
+    BLOG_POSTS.filter((p) => p.hubSlug === h.hubSlug).length,
+  ),
+);
+
+const CONTACT =
+  `Public representative: ${SITE_CONFIG.publicRepresentative}. Service-area business based at ` +
+  `${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.state} ${SITE_CONFIG.address.postalCode} ` +
+  `(not a staffed storefront). Phone ${SITE_CONFIG.phone}. Email ${SITE_CONFIG.email}.`;
+
 const POSITIONING =
   `Every job is quoted upfront as one written price before any work starts, priced by the ` +
   `time it takes with a one-hour minimum, and most jobs are finished in a single visit. A ` +
@@ -52,6 +64,7 @@ function buildShort(): string {
   lines.push(`# ${SITE_CONFIG.name}`, '');
   lines.push(`> ${SUMMARY}`, '');
   lines.push(POSITIONING, '');
+  lines.push('## Contact', '', CONTACT, '');
 
   lines.push('## Services', '');
   for (const s of SERVICES) {
@@ -84,7 +97,7 @@ function buildShort(): string {
   lines.push('');
 
   lines.push('## Blog category hubs', '');
-  for (const h of CONTENT_HUBS) lines.push(`- [${h.title}](${url(`/blog/category/${h.hubSlug}`)})`);
+  for (const h of indexableHubs) lines.push(`- [${h.title}](${url(`/blog/category/${h.hubSlug}`)})`);
   lines.push('');
 
   lines.push('## About and contact', '');
@@ -112,6 +125,7 @@ function buildFull(): string {
   const lines: string[] = [];
   lines.push(`# ${SITE_CONFIG.name} - Full Reference`, '');
   lines.push(`> ${SUMMARY}`, '');
+  lines.push('## Contact', '', CONTACT, '');
 
   lines.push('## About', '');
   lines.push(
@@ -167,7 +181,7 @@ function buildFull(): string {
   lines.push('');
 
   lines.push('## Blog category hubs (long-tail questions support the pillars)', '');
-  for (const h of CONTENT_HUBS) lines.push(`- ${h.title}: /blog/category/${h.hubSlug}`);
+  for (const h of indexableHubs) lines.push(`- ${h.title}: /blog/category/${h.hubSlug}`);
   lines.push('', `${BLOG_POSTS.length} articles across these hubs. Index: /blog`, '');
 
   lines.push('## Planning resources', '');

@@ -43,7 +43,7 @@ export function buildBusinessVCard(): string {
     "Treasure Valley handyman service. Repairs, installs, and home maintenance.",
     `Public representative: ${SITE_CONFIG.publicRepresentative}`,
     SITE_CONFIG.address.serviceArea,
-    "Service area, not a staffed storefront.",
+    "Service-area business, not a staffed storefront.",
     `Hours: ${hoursSummary}`,
   ].join("\n");
 

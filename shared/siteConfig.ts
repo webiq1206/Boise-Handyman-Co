@@ -48,6 +48,25 @@ export const SITE_CONFIG = {
   },
 } as const;
 
+/**
+ * One visible NAP line for footers and contact surfaces.
+ * Wording matches the family string: public representative, street address,
+ * then the service-area disclaimer. No extra facts.
+ */
+export const PUBLIC_NAP_LINE =
+  `Public representative: ${SITE_CONFIG.publicRepresentative} · ${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.state} ${SITE_CONFIG.address.postalCode} · Service-area business, not a staffed storefront.`;
+
+/** Storefront disclaimer used wherever the shorter NAP phrase is published. */
+export const SERVICE_AREA_DISCLAIMER = "Service-area business, not a staffed storefront.";
+
+/**
+ * Answer-first entity sentence already published in LocalBusiness schema.
+ * City pages may name another city; the homepage uses Boise.
+ */
+export function handymanServiceSentence(city = "Boise"): string {
+  return `Handyman service for ${city} and the Treasure Valley, Idaho. Small repairs, installs, and home maintenance: drywall, painting, minor plumbing and electrical, carpentry, and mounting.`;
+}
+
 export function formatPhoneDisplay(tel: string = SITE_CONFIG.phoneTel): string {
   const digits = tel.replace(/\D/g, "");
   if (digits.length === 10) {

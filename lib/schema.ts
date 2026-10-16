@@ -4,9 +4,9 @@ import {schemaTime} from './schemaTime';
  * Creates structured data for Google rich snippets and search features
  */
 
-import { BUSINESS_INFO, CITY_SEO_DATA, getBaseUrl } from './seo';
+import { BUSINESS_INFO, getBaseUrl } from './seo';
 import { SERVICES } from '@/shared/contentData';
-import { SITE_CONFIG } from '@/shared/siteConfig';
+import { SITE_CONFIG, handymanServiceSentence } from '@/shared/siteConfig';
 
 interface SchemaContext {
   '@context': string;
@@ -70,7 +70,39 @@ const CITY_WIKIPEDIA: Record<string, string> = {
   Star: 'https://en.wikipedia.org/wiki/Star,_Idaho',
   Middleton: 'https://en.wikipedia.org/wiki/Middleton,_Idaho',
   Caldwell: 'https://en.wikipedia.org/wiki/Caldwell,_Idaho',
+  'Garden City': 'https://en.wikipedia.org/wiki/Garden_City,_Idaho',
 };
+
+/** Schema-only E.164. Visible pages keep SITE_CONFIG.phone. */
+function schemaTelephone(tel: string = SITE_CONFIG.phoneTel): string {
+  const digits = tel.replace(/\D/g, '');
+  const national = digits.length === 11 && digits.startsWith('1') ? digits.slice(1) : digits;
+  if (national.length === 10) {
+    return `+1-${national.slice(0, 3)}-${national.slice(3, 6)}-${national.slice(6)}`;
+  }
+  return '+1-208-477-1169';
+}
+
+const SCHEMA_TELEPHONE = schemaTelephone();
+
+/**
+ * Shared Person node. The @id lives on p5homeco.com so Handyman, Construction,
+ * and P5 resolve to one Nick Perkins entity. worksFor points at the parent
+ * organization, which is the same @id parentOrganization uses.
+ */
+const publicRepresentativePerson = {
+  '@type': 'Person' as const,
+  '@id': `${P5_ORIGIN}/#nick-perkins`,
+  name: SITE_CONFIG.publicRepresentative,
+  jobTitle: 'Public representative',
+  worksFor: { '@id': P5_ORG_ID },
+};
+
+/**
+ * Nominatim point for 4031 W Wapoot St, Meridian, ID 83646.
+ * Not the Meridian city centroid.
+ */
+const HQ_GEO = { latitude: 43.6515, longitude: -116.4444 } as const;
 
 /**
  * Public JSON-LD address for this service-area business.
@@ -93,8 +125,8 @@ export function publicPostalAddress() {
 const publicRepresentativeContact = {
   '@type': 'ContactPoint' as const,
   name: SITE_CONFIG.publicRepresentative,
-  telephone: BUSINESS_INFO.phone,
-  contactType: 'Customer Service',
+  contactType: 'customer service',
+  telephone: SCHEMA_TELEPHONE,
   areaServed: 'US-ID',
   availableLanguage: 'English',
 };
@@ -104,9 +136,6 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
   // per-city coordinates under one @id confuses entity disambiguation, so geo
   // is always the HQ; the service area is expressed via `areaServed`. The
   // optional `city` only customizes the human-readable description.
-  // HQ geo matches the NAP locality (Meridian) - previously pointed at Kuna.
-  const coordinates = CITY_SEO_DATA.Meridian.coordinates;
-
   return {
     '@context': 'https://schema.org',
     // Schema.org has no dedicated Handyman type; HomeAndConstructionBusiness is
@@ -114,25 +143,22 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
     '@type': 'HomeAndConstructionBusiness',
     name: BUSINESS_INFO.name,
     legalName: BUSINESS_INFO.legalName,
-    description: `Handyman service for ${city || 'Boise'} and the Treasure Valley, Idaho. Small repairs, installs, and home maintenance: drywall, painting, minor plumbing and electrical, carpentry, and mounting.`,
+    description: handymanServiceSentence(city || 'Boise'),
     image: `${baseUrl}/images/handyman/hero-door-repair.webp`,
     logo: LOGO_URL,
     '@id': LOCALBUSINESS_ID,
     url: baseUrl,
+    // parentOrganization stays on https://p5homeco.com/#organization.
     parentOrganization: P5_PARENT_ORGANIZATION,
-    telephone: BUSINESS_INFO.phone,
+    telephone: SCHEMA_TELEPHONE,
     email: BUSINESS_INFO.email,
-    employee: {
-      '@type': 'Person',
-      name: SITE_CONFIG.publicRepresentative,
-      jobTitle: 'Public representative',
-    },
+    employee: publicRepresentativePerson,
     contactPoint: publicRepresentativeContact,
     address: publicPostalAddress(),
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: coordinates.lat,
-      longitude: coordinates.lng,
+      latitude: HQ_GEO.latitude,
+      longitude: HQ_GEO.longitude,
     },
     openingHoursSpecification: Object.entries(BUSINESS_INFO.hours).map(([day, hours]) => ({
       '@type': 'OpeningHoursSpecification',
@@ -211,10 +237,11 @@ export function generateServiceSchema(serviceName: string, serviceDescription: s
       '@type': 'HomeAndConstructionBusiness',
       '@id': LOCALBUSINESS_ID,
       name: BUSINESS_INFO.name,
-      telephone: BUSINESS_INFO.phone,
+      telephone: SCHEMA_TELEPHONE,
       email: BUSINESS_INFO.email,
       priceRange: '$$',
       parentOrganization: P5_PARENT_ORGANIZATION,
+      employee: publicRepresentativePerson,
       contactPoint: publicRepresentativeContact,
       // Served cities stay on areaServed. The provider address is the authorized
       // Meridian postal address, never a per-city PostalAddress.
@@ -288,7 +315,7 @@ export function generateOrganizationSchema(): SchemaContext {
           },
         }
       : {}),
-    telephone: BUSINESS_INFO.phone,
+    telephone: SCHEMA_TELEPHONE,
     email: BUSINESS_INFO.email,
     address: publicPostalAddress(),
     contactPoint: publicRepresentativeContact,

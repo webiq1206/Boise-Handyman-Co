@@ -451,7 +451,7 @@ export default function Re10RepairsPage() {
             {SITE_CONFIG.address.cityState} and work across the Treasure Valley. Public
             representative: {SITE_CONFIG.publicRepresentative}. Authorized address:{" "}
             {SITE_CONFIG.address.street}, {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state}{" "}
-            {SITE_CONFIG.address.postalCode}. Not a staffed storefront.
+            {SITE_CONFIG.address.postalCode}. Service-area business, not a staffed storefront.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
             More on how we work:{" "}

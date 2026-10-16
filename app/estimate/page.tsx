@@ -52,11 +52,11 @@ export default function EstimatePage() {
     <>
       <JsonLd data={schemas} />
 
-      {/* ONE SCREEN. The estimator is the page: the conversational app frame
-          mounts beneath the site header and owns everything below it, with its
-          own scroll area and a bottom-anchored input, so nothing here scrolls
-          into unrelated content. */}
-      <EstimateCalculator fitViewport />
+      {/* Static page-shell heading. The estimator is a client component, so its
+          own heading is not in the server HTML. headingAs stays h2 so the tool
+          does not emit a second h1. Estimator logic is unchanged. */}
+      <h1 className="sr-only">Boise Handyman Co instant estimate</h1>
+      <EstimateCalculator fitViewport headingAs="h2" />
     </>
   );
 }

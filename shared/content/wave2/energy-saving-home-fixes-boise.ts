@@ -5,7 +5,7 @@ export const energySavingHomeFixesBoise: BlogPostData = {
   title: 'Energy-Saving Fixes a Handyman Can Do in an Afternoon',
   seoTitle: 'Energy-Saving Home Fixes for Boise Houses',
   metaDescription:
-    'Weatherstripping, caulking, door sweeps, attic hatch insulation and other small fixes that cut Boise energy bills. What each one does and costs. Book them all in one visit.',
+    'Weatherstripping, caulking, door sweeps, attic hatch insulation and other small fixes that cut Boise energy bills, and what each costs.',
   excerpt:
     'Boise summers and winters both punish a leaky house. These are the small, cheap air-sealing fixes that actually move a utility bill, and all of them fit in one handyman visit.',
   category: 'Home Maintenance',

@@ -33,7 +33,7 @@ import { BUSINESS_INFO } from '@/lib/seo';
 import { areaPath } from '@/lib/seo-routes';
 import { CITIES,TREASURE_VALLEY_CITIES } from '@/shared/contentData';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
-import { SITE_CONFIG } from '@/shared/siteConfig';
+import { PUBLIC_NAP_LINE, SITE_CONFIG } from '@/shared/siteConfig';
 import { CONSULT_BULLETS,HERO_STATS } from '@/shared/siteContent';
 import { SITE_IMAGES } from '@/shared/siteImages';
 import { ArrowRight,Check,ChevronRight,Mail,MapPin,MessageSquare,Phone } from 'lucide-react';
@@ -326,15 +326,7 @@ export default function ContactPage() {
                   subtext={SITE_CONFIG.address.serviceArea}
                 >
                   <address className="not-italic leading-relaxed">
-                    {SITE_CONFIG.publicRepresentative}, public representative
-                    <br />
-                    {SITE_CONFIG.address.street}
-                    <br />
-                    {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state} {SITE_CONFIG.address.postalCode}
-                    <br />
-                    Based in {SITE_CONFIG.address.cityState}
-                    <br />
-                    Serving the Treasure Valley. Not a staffed storefront.
+                    {PUBLIC_NAP_LINE}
                   </address>
                 </ContactChannel>
               </Reveal>
