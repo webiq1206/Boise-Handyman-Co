@@ -70,6 +70,21 @@ const CITY_WIKIPEDIA: Record<string, string> = {
   Caldwell: 'https://en.wikipedia.org/wiki/Caldwell,_Idaho',
 };
 
+/**
+ * Public JSON-LD address for this service-area business.
+ * Locality only: no street, no postal code, and no storefront.
+ * Region and country stay ISO codes (ID / US), not "Idaho" / "United States".
+ * A city page must not mint its own PostalAddress; the city belongs on areaServed.
+ */
+export function publicPostalAddress() {
+  return {
+    '@type': 'PostalAddress' as const,
+    addressLocality: 'Meridian',
+    addressRegion: 'ID',
+    addressCountry: 'US',
+  };
+}
+
 export function generateLocalBusinessSchema(city?: string): SchemaContext {
   // A single-location business has ONE set of coordinates (its HQ). Emitting
   // per-city coordinates under one @id confuses entity disambiguation, so geo
@@ -93,12 +108,7 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
     parentOrganization: { '@id': ORG_ID },
     telephone: BUSINESS_INFO.phone,
     email: BUSINESS_INFO.email,
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: BUSINESS_INFO.address.city,
-      addressRegion: BUSINESS_INFO.address.state,
-      addressCountry: BUSINESS_INFO.address.country,
-    },
+    address: publicPostalAddress(),
     geo: {
       '@type': 'GeoCoordinates',
       latitude: coordinates.lat,
@@ -183,12 +193,9 @@ export function generateServiceSchema(serviceName: string, serviceDescription: s
       telephone: BUSINESS_INFO.phone,
       email: BUSINESS_INFO.email,
       priceRange: '$$',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: city || BUSINESS_INFO.address.city,
-        addressRegion: BUSINESS_INFO.address.state,
-        addressCountry: BUSINESS_INFO.address.country,
-      },
+      // Served cities stay on areaServed. The provider address is always the
+      // Meridian service-area locality, never a per-city PostalAddress.
+      address: publicPostalAddress(),
     },
     areaServed: city ? {
       '@type': 'City',
@@ -260,12 +267,7 @@ export function generateOrganizationSchema(): SchemaContext {
       : {}),
     telephone: BUSINESS_INFO.phone,
     email: BUSINESS_INFO.email,
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: BUSINESS_INFO.address.city,
-      addressRegion: BUSINESS_INFO.address.state,
-      addressCountry: BUSINESS_INFO.address.country,
-    },
+    address: publicPostalAddress(),
     knowsAbout: [
       'drywall repair and patching',
       'interior and exterior painting',
