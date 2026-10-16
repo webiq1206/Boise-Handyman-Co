@@ -45,6 +45,19 @@ export const P5_PARENT_ORGANIZATION = {
   name: 'P5 Home Co',
   url: P5_ORIGIN,
 } as const;
+
+/**
+ * Identity URLs the published fact sheets actually list for this company.
+ * Those sheets name the parent site and the sister companies. They do not
+ * list a Handyman social profile. sameAs means "this is the same entity",
+ * so sister sites stay on parentOrganization and are not copied in here.
+ */
+const FACT_SHEET_IDENTITY_URLS = new Set<string>([]);
+
+function publishedIdentitySameAs(): { sameAs: string[] } | Record<string, never> {
+  const sameAs = BUSINESS_INFO.sameAs.filter((url) => FACT_SHEET_IDENTITY_URLS.has(url));
+  return sameAs.length > 0 ? { sameAs } : {};
+}
 // Organization logo for knowledge-panel / rich-result use. The approved seal on
 // a charcoal disc (bone lettering, ochre ring) is square and stays legible on
 // any background, unlike the reverse wordmark which vanished on Google's white
@@ -105,7 +118,7 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
     logo: LOGO_URL,
     '@id': LOCALBUSINESS_ID,
     url: baseUrl,
-    parentOrganization: { '@id': ORG_ID },
+    parentOrganization: P5_PARENT_ORGANIZATION,
     telephone: BUSINESS_INFO.phone,
     email: BUSINESS_INFO.email,
     address: publicPostalAddress(),
@@ -154,7 +167,7 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
         },
       })),
     },
-    sameAs: BUSINESS_INFO.sameAs,
+    ...publishedIdentitySameAs(),
   };
 }
 
@@ -189,10 +202,12 @@ export function generateServiceSchema(serviceName: string, serviceDescription: s
     description: serviceDescription,
     provider: {
       '@type': 'HomeAndConstructionBusiness',
+      '@id': LOCALBUSINESS_ID,
       name: BUSINESS_INFO.name,
       telephone: BUSINESS_INFO.phone,
       email: BUSINESS_INFO.email,
       priceRange: '$$',
+      parentOrganization: P5_PARENT_ORGANIZATION,
       // Served cities stay on areaServed. The provider address is always the
       // Meridian service-area locality, never a per-city PostalAddress.
       address: publicPostalAddress(),
@@ -282,7 +297,7 @@ export function generateOrganizationSchema(): SchemaContext {
       'tile and grout repair',
       'home maintenance and punch-list work',
     ],
-    sameAs: BUSINESS_INFO.sameAs,
+    ...publishedIdentitySameAs(),
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: BUSINESS_INFO.phone,

@@ -4,6 +4,7 @@ import {ArrowUpRight,ArrowRight} from 'lucide-react';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import {Accordion,AccordionItem,AccordionTrigger,AccordionContent} from '@/components/ui/accordion';
 import {FAQSection} from '@/components/FAQSection';
+import {HandymanServicesAnswer} from '@/components/seo/HandymanServicesAnswer';
 import {brands,cities} from './family-content';
 import {ApprovedEstimate} from './ApprovedEstimate';
 const Arrow=()=> <ArrowUpRight size={18} aria-hidden="true"/>;
@@ -18,6 +19,7 @@ export function ApprovedHome(){const b=brands['handyman'];const home='';const pr
 return <div className={`family-site family-${b.id}`} style={{'--f-accent':b.accent} as CSSProperties}>
  <section className="f-hero"><img src={b.hero} alt={b.id==='construction'?'White home with a welcoming covered porch':b.id==='remodeling'?'Open kitchen and living space with warm wood and stone':b.id==='handyman'?'Careful adjustment of an interior door hinge':'Compact detached dwelling with cedar accents and a covered entrance'} fetchPriority="high" width="1600" height="1000"/><div className="f-hero-shade"/><div className="f-hero-copy"><p className="f-eyebrow">{b.kicker}</p><h1>Boise handyman.<br/><em>Your list, handled.</em></h1><p>{b.title.join(" ")} {b.intro}</p><div className="f-actions"><a className="f-button" href={primary}>{b.action}<Arrow/></a><a className="f-link" href="/contact">Send photos or contact us<ArrowRight size={18}/></a></div><span className="estimator-promise">Describe your project. Our team will review it and prepare your estimate.</span></div></section>
  <div className="f-proof">{b.proof.map((p,i)=><div key={p}><span>0{i+1}</span><p>{p}</p></div>)}</div>
+ <HandymanServicesAnswer/>
  <section className="f-section f-container" id="services"><div className="f-section-top"><div><p className="f-eyebrow">FIND YOUR STARTING POINT</p><h2><Title lines={b.serviceTitle}/></h2></div><p>{b.serviceIntro}</p></div><Tabs defaultValue={b.services[0].slug} className="f-explorer"><TabsList className="f-tabs">{b.services.slice(0,3).map(s=><TabsTrigger value={s.slug} key={s.slug}>{s.name}</TabsTrigger>)}</TabsList>{b.services.slice(0,3).map((s,i)=><TabsContent key={s.slug} value={s.slug}><div className="f-scene"><a className="f-scene-image" href={s.live || `/services/${s.slug}`} aria-label={`Explore ${s.name.toLowerCase()}`}><img src={s.image} alt={s.name} loading="lazy" width="1000" height="750"/></a><div className="f-scene-copy"><p className="f-eyebrow">0{i+1} / {b.name.replace('Boise ','')}</p><h3>{s.name}</h3><p>{s.summary}</p><ul>{s.includes.slice(0,2).map(t=><li key={t}>{t}</li>)}</ul><a className="f-link" href={s.live || `/services/${s.slug}`}>Explore this service <Arrow/></a></div></div></TabsContent>)}</Tabs><a className="f-link f-browse-all" href={`${home}/services`}>View all services <Arrow/></a></section>
  <ApprovedEstimate/>
 

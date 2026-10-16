@@ -14,6 +14,7 @@ import { MetaPixel } from '@/components/MetaPixel'
 import { MicrosoftClarity } from '@/components/MicrosoftClarity'
 import { ConversionTracking } from '@/components/ConversionTracking'
 import { AssistantWidget } from '@/components/assistant/AssistantWidget'
+import { SiteBusinessSchema } from '@/components/seo/SiteBusinessSchema'
 import './globals.css'
 // The shared P5 family editorial layer. Imported after globals so it can build
 // on the site's tokens; identical file in all four brand repositories.
@@ -135,6 +136,7 @@ export default function RootLayout({
         <noscript>
           <style>{`.reveal-init{opacity:1!important;transform:none!important}`}</style>
         </noscript>
+        <SiteBusinessSchema />
         <Providers>
           <ScrollToTop />
           <a

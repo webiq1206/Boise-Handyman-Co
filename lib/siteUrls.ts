@@ -7,9 +7,9 @@
  * and a page the HTML sitemap forgets is a page the crawler may never reach
  * through internal links. One list, two renderings.
  *
- * Rules mirror the XML sitemap exactly - noindexed city×service combos and
- * thin category hubs are excluded here for the same reasons they are excluded
- * there (see local-seo-audit/12-technical-plan.md T1).
+ * Rules mirror the XML sitemap exactly. Every live city page is included.
+ * Thin category hubs stay out for the same reason they stay out of the XML
+ * sitemap (see local-seo-audit/12-technical-plan.md T1).
  */
 import { BLOG_POSTS } from '@/shared/blogContent';
 import { CITIES, SERVICES } from '@/shared/contentData';
@@ -73,7 +73,7 @@ export function getSiteUrlGroups(): SiteUrlGroup[] {
     priority: 0.8,
   }));
 
-  // Noindexed doorway-risk combos are excluded, exactly as in the XML sitemap.
+  // Every live city page is listed. A combo is omitted only while it is noindex.
   const cityServices: SiteUrlEntry[] = SERVICES.flatMap((s) =>
     CITIES.filter((c) => !isCityServiceNoindex(s.slug, c.slug)).map((c) => ({
       path: `/services/${s.slug}/${c.slug}`,

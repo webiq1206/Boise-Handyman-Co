@@ -90,7 +90,7 @@ export default function HomePage() {
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <Image
             src={SITE_IMAGES.consultBg}
-            alt=""
+            alt="A freshly painted sage-green front door with white trim and black hardware"
             fill
             loading="lazy"
             sizes="100vw"

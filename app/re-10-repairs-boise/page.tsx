@@ -13,6 +13,7 @@ import { buildCanonical,fitDescription } from '@/lib/page-metadata';
 import {
 generateBreadcrumbSchema,
 generateFAQSchema,
+generateHowToSchema,
 generateServiceSchema,
 generateWebPageSchema,
 } from "@/lib/schema";
@@ -84,6 +85,12 @@ export default function Re10RepairsPage() {
       "Handyman inspection response repairs for real estate transactions: review of the RE-10 and inspection report, written scope and pricing, coordination across the repair list, access scheduling, completion, and photo documentation for the transaction file.",
     ),
     generateFAQSchema(RE10_FAQS),
+    generateHowToSchema({
+      name: "How RE-10 inspection repairs are handled",
+      description: RE10_DIRECT_ANSWER,
+      url: PATH,
+      steps: RE10_PROCESS.map((step) => ({ name: step.title, text: step.body })),
+    }),
     generateBreadcrumbSchema([
       { name: "Home", url: "/" },
       { name: "RE-10 Repairs", url: PATH },
