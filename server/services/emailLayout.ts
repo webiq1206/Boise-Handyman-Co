@@ -213,6 +213,8 @@ export function buildEmailFooter(): string {
   return `
     <div class="footer" style="background-color:${EMAIL_BRAND.bg};padding:30px;text-align:center;border-top:1px solid ${EMAIL_BRAND.hairline};">
       ${buildTextLogo()}
+      <p class="footer-contact" style="font-size:13px;color:${EMAIL_BRAND.textMuted};margin:5px 0;">${escapeHtml(`${SITE_CONFIG.publicRepresentative}, public representative`)}</p>
+      <p class="footer-contact" style="font-size:13px;color:${EMAIL_BRAND.textMuted};margin:5px 0;">${escapeHtml(`${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.state} ${SITE_CONFIG.address.postalCode}`)}. Service area, not a staffed storefront.</p>
       <p class="footer-contact" style="font-size:13px;color:${EMAIL_BRAND.textMuted};margin:5px 0;">${escapeHtml(`${SITE_CONFIG.address.cityState} · ${SITE_CONFIG.address.serviceArea}`)}</p>
       <p class="footer-contact" style="font-size:13px;color:${EMAIL_BRAND.textMuted};margin:5px 0;">Phone: <a href="${SITE_CONFIG.phoneHref}" style="color:${EMAIL_BRAND.text};text-decoration:none;">${escapeHtml(SITE_CONFIG.phone)}</a></p>
       <p class="footer-contact" style="font-size:13px;color:${EMAIL_BRAND.textMuted};margin:5px 0;">Text: <a href="${SITE_CONFIG.phoneSmsHref}" style="color:${EMAIL_BRAND.text};text-decoration:none;">${escapeHtml(SITE_CONFIG.phone)}</a></p>

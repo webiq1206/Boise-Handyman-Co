@@ -13,6 +13,7 @@ import { buildCanonical,fitDescription } from '@/lib/page-metadata';
 import {
 generateBreadcrumbSchema,
 generateFAQSchema,
+generateHowToSchema,
 generateServiceSchema,
 generateWebPageSchema,
 } from "@/lib/schema";
@@ -84,6 +85,12 @@ export default function Re10RepairsPage() {
       "Handyman inspection response repairs for real estate transactions: review of the RE-10 and inspection report, written scope and pricing, coordination across the repair list, access scheduling, completion, and photo documentation for the transaction file.",
     ),
     generateFAQSchema(RE10_FAQS),
+    generateHowToSchema({
+      name: "How RE-10 inspection repairs are handled",
+      description: RE10_DIRECT_ANSWER,
+      url: PATH,
+      steps: RE10_PROCESS.map((step) => ({ name: step.title, text: step.body })),
+    }),
     generateBreadcrumbSchema([
       { name: "Home", url: "/" },
       { name: "RE-10 Repairs", url: PATH },
@@ -441,7 +448,10 @@ export default function Re10RepairsPage() {
             {SITE_CONFIG.name} provides RE-10 and home inspection repair services for real estate
             agents, buyers and sellers in {RE10_SERVICE_AREAS.slice(0, -1).join(", ")} and{" "}
             {RE10_SERVICE_AREAS[RE10_SERVICE_AREAS.length - 1]}. We are based in{" "}
-            {SITE_CONFIG.address.cityState} and work across the Treasure Valley.
+            {SITE_CONFIG.address.cityState} and work across the Treasure Valley. Public
+            representative: {SITE_CONFIG.publicRepresentative}. Authorized address:{" "}
+            {SITE_CONFIG.address.street}, {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state}{" "}
+            {SITE_CONFIG.address.postalCode}. Not a staffed storefront.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
             More on how we work:{" "}
@@ -499,7 +509,9 @@ export default function Re10RepairsPage() {
             </Button>
           </div>
           <p className="mt-7 text-xs text-inverse-foreground/60 leading-relaxed">
-            {SITE_CONFIG.name} &middot; {SITE_CONFIG.address.cityState} &middot;{" "}
+            {SITE_CONFIG.name} &middot; {SITE_CONFIG.publicRepresentative} &middot;{" "}
+            {SITE_CONFIG.address.street}, {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state}{" "}
+            {SITE_CONFIG.address.postalCode} &middot; {SITE_CONFIG.address.cityState} &middot;{" "}
             {SITE_CONFIG.address.serviceArea}
           </p>
         </div>

@@ -133,6 +133,11 @@ export default function TermsOfServicePage() {
                 <span className="text-muted-foreground">·</span>{" "}
                 <SaveContactLink className="text-primary hover:underline">Save to contacts</SaveContactLink>
               </li>
+              <li>Public representative: {SITE_CONFIG.publicRepresentative}</li>
+              <li>
+                Address: {SITE_CONFIG.address.street}, {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state}{" "}
+                {SITE_CONFIG.address.postalCode}. Not a staffed storefront.
+              </li>
               <li>Service area: {SITE_CONFIG.address.cityState} · {SITE_CONFIG.address.serviceArea}</li>
             </ul>
           </InteriorDocument>

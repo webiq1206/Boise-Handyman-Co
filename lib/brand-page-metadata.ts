@@ -42,6 +42,66 @@ function titleText(meta:Metadata):string{
  const value=meta.title;
  return typeof value==='string'?value:value&&'absolute' in value?value.absolute||brand.name:value&&'default' in value?value.default||brand.name:brand.name;
 }
+const TITLE_LIMIT=60;
+const DESCRIPTION_LIMIT=155;
+const BRAND_SUFFIX=` | ${brand.name}`;
+function trimAtWord(text:string,max:number):string{
+ const clean=text.replace(/\s+/g,' ').trim();
+ if(clean.length<=max)return clean;
+ const slice=clean.slice(0,max+1);
+ const space=slice.lastIndexOf(' ');
+ const cut=(space>=Math.min(24,Math.max(8,max-8))?slice.slice(0,space):clean.slice(0,max)).replace(/[\s|,;:-]+$/,'');
+ return cut||clean.slice(0,max).trim();
+}
+const PROTECTED_CLAIM=/\$\s?\d[\d,]*(?:\.\d+)?|written quote first|RE-10|guarante|upfront quotes?|one written price|one-trip|one trip|one visit|locally owned|free quotes?|workmanship|same-week|photo quotes?|satisfaction/gi;
+function protectedClaims(text:string):string[]{
+ return Array.from(text.matchAll(PROTECTED_CLAIM),match=>match[0].toLowerCase());
+}
+function dropsProtectedClaim(source:string,fitted:string):boolean{
+ const left=protectedClaims(fitted);
+ for(const claim of protectedClaims(source)){
+  const index=left.indexOf(claim);
+  if(index<0)return true;
+  left.splice(index,1);
+ }
+ return false;
+}
+function fitAbsoluteTitle(title:string):string{
+ const fitted=trimAtWord(title,TITLE_LIMIT);
+ return dropsProtectedClaim(title,fitted)?title:fitted;
+}
+function fitDescriptionText(description:string):string{
+ const clean=description.replace(/\s+/g,' ').trim();
+ if(clean.length<=DESCRIPTION_LIMIT)return clean;
+ const window=clean.slice(0,DESCRIPTION_LIMIT+1);
+ const sentence=Math.max(window.lastIndexOf('. '),window.lastIndexOf('! '),window.lastIndexOf('? '));
+ const fitted=sentence>=70?clean.slice(0,sentence+1).trim():trimAtWord(clean,DESCRIPTION_LIMIT);
+ return dropsProtectedClaim(clean,fitted)?clean:fitted;
+}
+function resolveDocumentTitle(meta:Metadata,overrideTitle?:string):{document:Metadata['title'];plain:string}{
+ if(overrideTitle){
+  const plain=fitAbsoluteTitle(`${overrideTitle}${BRAND_SUFFIX}`);
+  return {document:{absolute:plain},plain};
+ }
+ const original=titleText(meta);
+ if(typeof meta.title==='string'){
+  const alreadyBranded=original.includes(brand.name);
+  const plain=alreadyBranded?original:`${original}${BRAND_SUFFIX}`;
+  if(plain.length<=TITLE_LIMIT)return {document:meta.title,plain};
+  if(alreadyBranded){
+   const fitted=fitAbsoluteTitle(original);
+   return {document:fitted,plain:fitted};
+  }
+  const topic=trimAtWord(original,TITLE_LIMIT-BRAND_SUFFIX.length);
+  const fittedPlain=`${topic}${BRAND_SUFFIX}`;
+  if(dropsProtectedClaim(original,topic)||dropsProtectedClaim(`${original}${BRAND_SUFFIX}`,fittedPlain)){
+   return {document:meta.title,plain:`${original}${BRAND_SUFFIX}`};
+  }
+  return {document:topic,plain:fittedPlain};
+ }
+ const plain=original.includes(brand.name)?fitAbsoluteTitle(original):fitAbsoluteTitle(`${original}${BRAND_SUFFIX}`);
+ return {document:meta.title,plain};
+}
 function pagePath(meta:Metadata,hint?:string):string{
  const canonical=meta.alternates?.canonical;
  const value=typeof canonical==='string'?canonical:canonical instanceof URL?canonical.toString():canonical&&typeof canonical==='object'&&'url' in canonical?String(canonical.url):'';
@@ -50,9 +110,10 @@ function pagePath(meta:Metadata,hint?:string):string{
 }
 export function withBrandPageMetadata(meta:Metadata,routeHint?:string):Metadata{
  const override=routeHint==='__layout__'?undefined:COPY[brand.id]?.[pagePath(meta,routeHint)];
- const original=titleText(meta);
- const title=override?`${override.title} | ${brand.name}`:original.includes(brand.name)?original:`${original} | ${brand.name}`;
- const description=override?.description||meta.description||undefined;
+ const resolved=resolveDocumentTitle(meta,override?.title);
+ const title=resolved.plain;
+ const rawDescription=override?.description||(typeof meta.description==='string'?meta.description:undefined);
+ const description=rawDescription?fitDescriptionText(rawDescription):undefined;
  const image={url:BRAND_PAGE_IMAGE,width:1200,height:630,alt:`${brand.name} brand seal`};
  const icons=routeHint==='__layout__'?{
   ...(typeof meta.icons==='object'&&!Array.isArray(meta.icons)&&!(meta.icons instanceof URL)?meta.icons:{}),
@@ -61,7 +122,8 @@ export function withBrandPageMetadata(meta:Metadata,routeHint?:string):Metadata{
  }:meta.icons;
  return {
   ...meta,
-  ...(override?{title:{absolute:title},description}:{}),
+  title:resolved.document,
+  ...(description?{description}:{}),
   ...(icons?{icons}:{}),
   openGraph:{...meta.openGraph,title,description,siteName:brand.name,images:[image]},
   twitter:{...meta.twitter,card:'summary_large_image',title,description,images:[BRAND_PAGE_IMAGE]},

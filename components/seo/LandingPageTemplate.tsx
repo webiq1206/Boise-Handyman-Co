@@ -14,6 +14,7 @@ AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { GRAIN_URL } from '@/lib/grain';
+import { altForImage } from '@/shared/imageAlts';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import type { GalleryProject } from '@/shared/galleryData';
 import type { FAQItem } from '@/shared/seoContent';
@@ -71,6 +72,8 @@ interface LandingPageTemplateProps {
   /** Show contextual estimator prompt band (default true on service/area pages). */
   showEstimatePrompt?: boolean;
   faqs: FAQItem[];
+  /** Visible answer-first block, using copy already on the page. */
+  answerFirst?: { heading: string; paragraphs: string[] };
   related: {
     variant: 'service' | 'area' | 'city-service';
     serviceSlug?: string;
@@ -178,6 +181,7 @@ export function LandingPageTemplate({
   featuredProject,
   showEstimatePrompt = false,
   faqs,
+  answerFirst,
   related,
 }: LandingPageTemplateProps) {
   const eyebrow = breadcrumbs[breadcrumbs.length - 2]?.name;
@@ -185,12 +189,15 @@ export function LandingPageTemplate({
     !!proof && ((proof.testimonials?.length ?? 0) > 0 || (proof.projects?.length ?? 0) > 0);
   const breatherImage = breatherImageUrl ?? heroImageUrl;
   const processImage = processImageUrl ?? heroImageUrl;
+  const heroAlt = altForImage(heroImageUrl) ?? '';
+  const breatherAlt = altForImage(breatherImage) ?? '';
+  const processAlt = altForImage(processImage) ?? '';
   const showTimelineBelow = !!timeline && !costGuidance;
 
   return (
     <div className="flex flex-col pb-20 md:pb-0">
       {/* Approved editorial hero */}
-      <InteriorHero imageSrc={heroImageUrl} imageAlt="" layout="split">
+      <InteriorHero imageSrc={heroImageUrl} imageAlt={heroAlt} layout="split">
           <HeroBreadcrumbs items={breadcrumbs} />
           <p data-speakable="summary" className="sr-only">{speakableSummary}</p>
           {eyebrow && (
@@ -214,6 +221,16 @@ export function LandingPageTemplate({
             </p>
           )}
         </InteriorHero>
+      {answerFirst && (
+        <Section surface="bone" spacing="lg">
+          <div className="ed-shell max-w-3xl">
+            <h2 className="ed-h2 ed-statement">{answerFirst.heading}</h2>
+            {answerFirst.paragraphs.map((paragraph) => (
+              <p key={paragraph} className="ed-lede mt-6">{paragraph}</p>
+            ))}
+          </div>
+        </Section>
+      )}
 <div className="interior-detail-body"><div><p className="interior-eyebrow">A CLEAR SCOPE</p><h2>Plan the details.<br/><em>Know the next step.</em></h2>{inclusions&&inclusions.length>0&&<ul className="interior-scope-list">{inclusions.map((item,i)=><li key={item}><span>{String(i+1).padStart(2,'0')}</span>{item}</li>)}</ul>}</div><InteriorProjectAside>{timeline&&<p className="ed-body mt-6">{timeline}</p>}</InteriorProjectAside></div>
 
       {/* ─── Cost and timeline expectation ───
@@ -289,8 +306,8 @@ export function LandingPageTemplate({
 
       {/* ─── Full-bleed image breather ─── */}
       {breatherImage && (
-        <section className="relative h-[clamp(220px,32vw,400px)] overflow-hidden" aria-hidden>
-          <Image src={breatherImage} alt="" fill sizes="100vw" className="object-cover img-brand-grade" />
+        <section className="relative h-[clamp(220px,32vw,400px)] overflow-hidden" aria-hidden={breatherAlt ? undefined : true}>
+          <Image src={breatherImage} alt={breatherAlt} fill sizes="100vw" className="object-cover img-brand-grade" />
           <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-inverse/10 to-background/80" />
           <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: GRAIN_URL, backgroundRepeat: 'repeat', opacity: 0.03 }} />
         </section>
@@ -308,7 +325,7 @@ export function LandingPageTemplate({
           <div className="ed-panel ed-panel-reverse">
             <div className="ed-panel-media">
               {processImage && (
-                <Image src={processImage} alt="" fill className="object-cover img-brand-grade" sizes="(max-width: 820px) 100vw, 43vw" />
+                <Image src={processImage} alt={processAlt} fill className="object-cover img-brand-grade" sizes="(max-width: 820px) 100vw, 43vw" />
               )}
               <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: GRAIN_URL, backgroundRepeat: 'repeat', opacity: 0.03 }} />
             </div>

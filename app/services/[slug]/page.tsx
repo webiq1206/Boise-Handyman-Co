@@ -47,6 +47,29 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
 
   const path = servicePath(service.slug);
   const faqs = content.faqs;
+  const answerFirst =
+    service.slug === 'drywall-repair' || service.slug === 'carpentry-trim-repair'
+      ? {
+          heading:
+            service.slug === 'drywall-repair'
+              ? 'Drywall repair in Boise, Idaho'
+              : 'Carpentry and trim repair in Boise, Idaho',
+          paragraphs: [service.shortDescription, content.overview],
+        }
+      : undefined;
+  const pageFaqs =
+    answerFirst
+      ? [
+          ...faqs,
+          {
+            question:
+              service.slug === 'drywall-repair'
+                ? 'What does drywall repair in Boise include?'
+                : 'What does carpentry and trim repair in Boise include?',
+            answer: `${service.shortDescription} ${content.overview}`,
+          },
+        ]
+      : faqs;
   const images = getServiceImageSet(service.slug);
   const featuredProject = getFeaturedGalleryProject(service.slug);
   const serviceLC = service.name.toLowerCase();
@@ -114,7 +137,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
       { name: service.name, url: path },
     ]),
     landingServiceSchema(service.name, content.overview),
-    landingFAQSchema(faqs),
+    landingFAQSchema(pageFaqs),
     generateSpeakableSchema({ path, name: content.headline }),
   ];
 
@@ -143,7 +166,8 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
         sections={sections}
         featuredProject={featuredProject}
         showEstimatePrompt
-        faqs={faqs}
+        answerFirst={answerFirst}
+        faqs={pageFaqs}
         related={{ variant: 'service', serviceSlug: service.slug }}
       />
     </></InteriorPage>

@@ -128,7 +128,15 @@ export function Footer() {
               </a>
               <EmailLink className="flex min-h-[44px] items-center text-left text-sm text-inverse-muted transition-colors hover:text-inverse-foreground" />
               <p className="py-2 text-sm text-inverse-muted">
+                {SITE_CONFIG.publicRepresentative}, public representative
+                <br />
+                {SITE_CONFIG.address.street}
+                <br />
+                {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state} {SITE_CONFIG.address.postalCode}
+                <br />
                 {SITE_CONFIG.address.cityState} · {SITE_CONFIG.address.serviceArea}
+                <br />
+                Service area, not a staffed storefront.
               </p>
             </div>
             <div className="mt-4 flex flex-wrap items-center gap-4">

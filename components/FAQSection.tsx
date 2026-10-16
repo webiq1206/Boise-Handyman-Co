@@ -14,6 +14,22 @@ import { HOMEPAGE_FAQS, INITIAL_FAQ_COUNT } from "@/shared/homepageFaqs";
 
 export { HOMEPAGE_FAQS };
 
+const COST_ANSWER_LINK = "See how much a handyman costs in Boise and the Treasure Valley.";
+
+function FaqAnswer({ faq }: { faq: { q: string; a: string } }) {
+  if (faq.q !== "How is a Boise handyman visit priced?" || !faq.a.includes(COST_ANSWER_LINK)) {
+    return faq.a;
+  }
+  const [before, after] = faq.a.split(COST_ANSWER_LINK);
+  return (
+    <>
+      {before}
+      <a href="#handyman-cost">{COST_ANSWER_LINK}</a>
+      {after}
+    </>
+  );
+}
+
 /**
  * Common questions.
  *
@@ -64,6 +80,7 @@ export function FAQSection() {
                 <AccordionItem
                   key={i}
                   value={`faq-${i}`}
+                  id={faq.id}
                   className="border-0 border-b"
                   style={{ borderColor: "var(--ed-line)" }}
                 >
@@ -71,7 +88,7 @@ export function FAQSection() {
                     {faq.q}
                   </AccordionTrigger>
                   <AccordionContent className="ed-body pb-7 text-[0.9375rem]">
-                    {faq.a}
+                    <FaqAnswer faq={faq} />
                   </AccordionContent>
                 </AccordionItem>
               ))}
