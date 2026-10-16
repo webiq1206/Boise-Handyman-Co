@@ -12,7 +12,7 @@ export const treasureValleyExteriorHomeCareGuide: GuidePageData = {
   guideType: 'hub-pillar',
   author: 'Boise Handyman Co',
   publishedAt: '2026-06-20',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-10-16',
   tags: ['exterior', 'fence', 'deck', 'gutters', 'siding', 'boise', 'treasure valley'],
   primaryKeyword: 'fence deck gutter repair boise',
   quickAnswer:
@@ -33,6 +33,7 @@ export const treasureValleyExteriorHomeCareGuide: GuidePageData = {
     { url: '/services/painting-touch-ups', anchor: 'Interior & Exterior Painting' },
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
     { url: '/guides/boise-home-maintenance-guide', anchor: 'The Complete Boise Home Maintenance Guide' },
+    { url: '/guides/ember-ready-home-checklist-treasure-valley', anchor: 'Ember-Ready Home Checklist' },
     { url: '/blog/category/exterior-and-outdoor', anchor: 'Exterior & Outdoor articles' },
     { url: '/contact', anchor: 'Contact' },
   ],
@@ -90,6 +91,7 @@ export const treasureValleyExteriorHomeCareGuide: GuidePageData = {
 <h2 id="gutters">Gutters: cheap insurance for the foundation</h2>
 <p><strong>Gutters exist to move roof water away from the foundation, and everything bad they do, they do when clogged.</strong> A blocked gutter overflows at the eave, soaking fascia boards until they rot, and dumps concentrated roof water in a line beside the foundation, exactly where you least want it. In winter, clogged and overflowing gutters contribute to ice dams. The whole failure chain is prevented by cleaning, once each fall after leaf drop, twice yearly under Boise's mature-tree neighborhoods, at $100 to $250 for a typical single-story home. Two-story homes and complex rooflines cost more for the honest reason that ladder time is the job, which is also why gutters are the classic hand-it-to-a-pro task even for committed DIY households.</p>
 <p>While the ladder is up, the five-minute inspection: hangers tight, seams not dripping, downspouts connected and discharging at least a few feet from the house, extensions where splash blocks have wandered off. Sagging runs, separated seams, and rotted fascia behind the gutter are all repairable at the section level through our <a href="/services/fence-deck-gutter-repair">gutter repair service</a>, and fascia caught before rot spreads is a trim repair rather than a carpentry project.</p>
+<p>That fall gutter cleaning sits inside a larger ember checklist for the outside of the house: <a href="/guides/ember-ready-home-checklist-treasure-valley">ember-ready: a fall checklist for Treasure Valley homes</a>.</p>
 <p>Downspout extensions are the cheapest structural protection in this entire guide and the most commonly missing. A downspout that ends at the foundation concentrates an entire roof plane's water into one spot beside the house, every storm, every melt. Extensions that carry discharge even a few feet out, onto splash blocks or into buried drain lines where they exist, change the water's destination for less than the cost of a tank of gas. While checking them, glance at winter behavior too: a downspout that discharges across a walkway becomes an ice sheet in January, and rerouting it in October is a five-minute job that prevents a season of hazard.</p>
 
 <h2 id="decks">Decks: gray is fine, soft is not</h2>
