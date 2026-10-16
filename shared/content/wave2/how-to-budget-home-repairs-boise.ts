@@ -5,7 +5,7 @@ export const howToBudgetHomeRepairsBoise: BlogPostData = {
   title: 'How to Budget a Home Repair Punch List in Boise',
   seoTitle: 'Budgeting Home Repairs in Boise',
   metaDescription:
-    'How to turn a pile of nagging home repairs into a punch list with a realistic budget: market rates, batching, materials, and a sane priority order. Plan one visit, not ten.',
+    'Turn nagging home repairs into a punch list with a realistic budget: market rates, batching, materials, and a sane priority order.',
   excerpt:
     'The cheapest way to handle home repairs is to budget them as one list instead of ten emergencies. Here is how to build the list, price it, and sequence it.',
   category: 'Costs & Hiring',

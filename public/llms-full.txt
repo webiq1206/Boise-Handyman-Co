@@ -2,6 +2,10 @@
 
 > Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, and maintenance. Drywall repair, interior and exterior painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, caulking and punch-list work. Serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, Caldwell. Phone (208) 477-1169.
 
+## Contact
+
+Public representative: Nick Perkins. Service-area business based at 4031 W Wapoot St, Meridian, ID 83646 (not a staffed storefront). Phone (208) 477-1169. Email hello@boisehandyman.co.
+
 ## About
 
 Boise Handyman Co is a locally owned handyman service for the Treasure Valley. We handle the small jobs that keep a home working: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, door and window adjustment, TV, shelf and furniture mounting and assembly, fence, deck and gutter repair, caulking and weatherproofing, and general punch-list work. Every job gets a written quote before work starts, and most jobs are finished in one visit. Full remodels, additions, and anything that requires a general contractor or a licensed trade are out of scope and referred out.
@@ -68,7 +72,6 @@ Neighborhood guides:
 - Installs & Upgrades: /blog/category/installs-and-upgrades
 - Home Maintenance: /blog/category/home-maintenance
 - Costs & Hiring: /blog/category/costs-and-hiring
-- Exterior & Outdoor: /blog/category/exterior-and-outdoor
 
 34 articles across these hubs. Index: /blog
 

@@ -182,7 +182,8 @@ export function generateMetaDescription(params: ServiceSEOParams): string {
   }
 
   const serviceLC = serviceName.toLowerCase();
-  return `${serviceLC} in Boise & the Treasure Valley. Upfront quotes and one-trip fixes from a local handyman. Call ${phone} to book a visit!`;
+  const serviceLead = serviceLC.charAt(0).toUpperCase() + serviceLC.slice(1);
+  return `${serviceLead} in Boise & the Treasure Valley. Upfront quotes and one-trip fixes from a local handyman. Call ${phone} to book a visit!`;
 }
 
 /**
@@ -256,7 +257,8 @@ export function generateCityServiceDescription(
   const base = `${cityVariant} ${serviceLC} in ${cityName}, ID. Upfront quotes. Call ${phone} to book a visit!`;
   if (base.length <= 160) return base;
 
-  return `${serviceLC} in ${cityName}, ID. Upfront quotes from a local handyman. Call ${phone} to book a visit!`;
+  const serviceLead = serviceLC.charAt(0).toUpperCase() + serviceLC.slice(1);
+  return `${serviceLead} in ${cityName}, ID. Upfront quotes from a local handyman. Call ${phone} to book a visit!`;
 }
 
 /** Keep complete authored titles; an optional secondary label may be omitted. */

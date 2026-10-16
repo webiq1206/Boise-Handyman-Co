@@ -10,7 +10,7 @@ import { CITIES,SERVICES } from "@/shared/contentData";
 import { CONTENT_HUBS,guidePath } from "@/shared/contentHubs";
 import { GBP_SOCIAL } from "@/shared/gbpProfile";
 import { GUIDE_PAGES } from "@/shared/guideContent";
-import { SITE_CONFIG } from "@/shared/siteConfig";
+import { PUBLIC_NAP_LINE, SITE_CONFIG } from "@/shared/siteConfig";
 import { SITE_TAGLINE } from "@/shared/siteContent";
 import { ChevronDown,Facebook } from "lucide-react";
 import Link from "next/link";
@@ -127,17 +127,7 @@ export function Footer() {
                 Text us
               </a>
               <EmailLink className="flex min-h-[44px] items-center text-left text-sm text-inverse-muted transition-colors hover:text-inverse-foreground" />
-              <p className="py-2 text-sm text-inverse-muted">
-                {SITE_CONFIG.publicRepresentative}, public representative
-                <br />
-                {SITE_CONFIG.address.street}
-                <br />
-                {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state} {SITE_CONFIG.address.postalCode}
-                <br />
-                {SITE_CONFIG.address.cityState} · {SITE_CONFIG.address.serviceArea}
-                <br />
-                Service area, not a staffed storefront.
-              </p>
+              <p className="py-2 text-sm text-inverse-muted">{PUBLIC_NAP_LINE}</p>
             </div>
             <div className="mt-4 flex flex-wrap items-center gap-4">
               <Button variant="brandInverseOutline" size="sm" asChild>
@@ -174,6 +164,25 @@ export function Footer() {
           </div>
         </div>
 
+        <div className="border-b border-inverse-foreground/10 py-6">
+          <p className="text-sm leading-relaxed text-inverse-muted">
+            Part of{" "}
+            <a href="https://p5homeco.com" className="underline underline-offset-2 transition-colors hover:text-inverse-foreground">
+              P5 Home Co
+            </a>
+            :{" "}
+            <a href="https://boiseconstruction.co" className="underline underline-offset-2 transition-colors hover:text-inverse-foreground">Boise Construction Co</a>
+            {" · "}
+            <a href="https://boiseremodeling.co" className="underline underline-offset-2 transition-colors hover:text-inverse-foreground">Boise Remodeling Co</a>
+            {" · "}
+            <a href="https://boisehandyman.co" className="underline underline-offset-2 transition-colors hover:text-inverse-foreground">Boise Handyman Co</a>
+            {" · "}
+            <a href="https://boisecabinet.co" className="underline underline-offset-2 transition-colors hover:text-inverse-foreground">Boise Cabinet Co</a>
+            {" · "}
+            Boise ADU Co (launching soon)
+          </p>
+        </div>
+
         <div className="flex flex-col gap-4 pt-5 text-xs text-inverse-muted sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             <span>&copy; {currentYear} {SITE_CONFIG.name}. All rights reserved.</span>
@@ -191,7 +200,7 @@ export function Footer() {
             <Link href="/sitemap" className="transition-colors hover:text-inverse-foreground">Site Map</Link>
             <Link href="/privacy-policy" className="transition-colors hover:text-inverse-foreground">Privacy Policy</Link>
             <Link href="/terms-of-service" className="transition-colors hover:text-inverse-foreground">Terms of Service</Link>
-            <a href="/api/login" rel="nofollow" className="transition-colors hover:text-inverse-foreground">Subcontractor Login</a>
+            <a href="/subcontractor" rel="nofollow" className="transition-colors hover:text-inverse-foreground">Subcontractor Login</a>
           </div>
         </div>
       </div>
