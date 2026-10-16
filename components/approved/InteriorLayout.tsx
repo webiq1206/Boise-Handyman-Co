@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react';
+import { preload } from 'react-dom';
 import type { ReactNode } from 'react';
 
 /** Public-page layout. Application routes retain their dedicated interfaces. */
@@ -12,6 +13,7 @@ export function InteriorEstimateLink({label='Get my online estimate'}:{label?:st
 
 /** The approved split-detail and editorial-introduction compositions. */
 export function InteriorHero({children,imageSrc,imageAlt='',layout='split',estimateAction=false}:{children:ReactNode;imageSrc?:string;imageAlt?:string;layout?:'split'|'editorial'|'contact';estimateAction?:boolean}) {
+  if (imageSrc) preload(imageSrc, { as: 'image', fetchPriority: 'high' });
   return <section className={`interior-hero interior-hero-${layout}${imageSrc?'':' interior-hero-text'}`}>
     <div className="interior-hero-copy">{children}{estimateAction&&<div className="interior-hero-action"><InteriorEstimateLink/></div>}</div>
     {imageSrc&&<div className="interior-hero-image"><img src={imageSrc} alt={imageAlt} width={1400} height={1100} fetchPriority="high"/></div>}

@@ -1,11 +1,8 @@
 'use client';
-import {type CSSProperties} from 'react';
-import {ArrowUpRight,ArrowRight} from 'lucide-react';
+import {ArrowUpRight} from 'lucide-react';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import {Accordion,AccordionItem,AccordionTrigger,AccordionContent} from '@/components/ui/accordion';
 import {FAQSection} from '@/components/FAQSection';
-import {HandymanServicesAnswer} from '@/components/seo/HandymanServicesAnswer';
-import {handymanServiceSentence} from '@/shared/siteConfig';
 import {brands,cities} from './family-content';
 import {ApprovedEstimate} from './ApprovedEstimate';
 const Arrow=()=> <ArrowUpRight size={18} aria-hidden="true"/>;
@@ -17,10 +14,7 @@ export function ApprovedHome(){const b=brands['handyman'];const home='';const pr
  const processBlock=<section className="f-section f-container f-two" id="how-we-build"><div className="f-sticky"><p className="f-eyebrow">KNOW WHAT HAPPENS NEXT</p><h2>A clear plan.<br/><em>At every step.</em></h2><p>Good work starts with a shared understanding of the scope, the decisions, and the next step.</p></div><Rows items={b.process} numbered/></section>;
  const approachBlock=<section className="f-section f-container f-two" id="why-choose-us"><div className="f-sticky"><p className="f-eyebrow">THE WAY WE WORK</p><h2>Good work.<br/><em>A better experience.</em></h2><p>{b.id==='handyman'?'Small jobs deserve a clear quote, a dependable visit, and a tidy finish.':'Clear expectations, thoughtful decisions, and someone accountable for the work. That is the P5 standard.'}</p></div><Rows items={b.approach}/></section>;
 
-return <div className={`family-site family-${b.id}`} style={{'--f-accent':b.accent} as CSSProperties}>
- <section className="f-hero"><img src={b.hero} alt={b.id==='construction'?'White home with a welcoming covered porch':b.id==='remodeling'?'Open kitchen and living space with warm wood and stone':b.id==='handyman'?'Careful adjustment of an interior door hinge':'Compact detached dwelling with cedar accents and a covered entrance'} fetchPriority="high" width="1600" height="1000"/><div className="f-hero-shade"/><div className="f-hero-copy"><p className="f-eyebrow">{b.kicker}</p><h1>Boise handyman.<br/><em>Your list, handled.</em></h1><p>{handymanServiceSentence()} {b.intro}</p><div className="f-actions"><a className="f-button" href={primary}>{b.action}<Arrow/></a><a className="f-link" href="/contact">Send photos or contact us<ArrowRight size={18}/></a></div><span className="estimator-promise">Describe your project. Our team will review it and prepare your estimate.</span></div></section>
- <div className="f-proof">{b.proof.map((p,i)=><div key={p}><span aria-hidden="true">{String(i+1).padStart(2,"0")}</span><p>{p}</p></div>)}</div>
- <HandymanServicesAnswer/>
+return <>
  <section className="f-section f-container" id="services"><div className="f-section-top"><div><p className="f-eyebrow">FIND YOUR STARTING POINT</p><h2><Title lines={b.serviceTitle}/></h2></div><p>{b.serviceIntro}</p></div><Tabs defaultValue={b.services[0].slug} className="f-explorer"><TabsList className="f-tabs">{b.services.slice(0,3).map(s=><TabsTrigger value={s.slug} key={s.slug}>{s.name}</TabsTrigger>)}</TabsList>{b.services.slice(0,3).map((s,i)=><TabsContent key={s.slug} value={s.slug}><div className="f-scene"><a className="f-scene-image" href={s.live || `/services/${s.slug}`} aria-label={`Explore ${s.name.toLowerCase()}`}><img src={s.image} alt={s.name} loading="lazy" width="1000" height="750"/></a><div className="f-scene-copy"><p className="f-eyebrow"><span aria-hidden="true" style={{letterSpacing:0}}>{String(i+1).padStart(2,"0")}</span>{" / "}{b.name.replace("Boise ","")}</p><h3>{s.name}</h3><p>{s.summary}</p><ul>{s.includes.slice(0,2).map(t=><li key={t}>{t}</li>)}</ul><a className="f-link" href={s.live || `/services/${s.slug}`}>Explore this service <Arrow/></a></div></div></TabsContent>)}</Tabs><a className="f-link f-browse-all" href={`${home}/services`}>View all services <Arrow/></a></section>
  <ApprovedEstimate/>
 
@@ -30,4 +24,4 @@ return <div className={`family-site family-${b.id}`} style={{'--f-accent':b.acce
  <section className="f-image-pair f-container"><img src={b.services[1].image} alt={b.services[1].name} loading="lazy" width="1000" height="800"/><div><img src={b.services[2].image} alt={b.services[2].name} loading="lazy" width="900" height="675"/><p className="f-eyebrow">{b.id==='handyman'?'CARE IN THE SMALL DETAILS.':'A HOME THAT WORKS FOR YOU.'}</p><h3>{b.id==='handyman'?'You notice the difference. Every day.':'Thoughtful spaces. Everyday living.'}</h3></div></section>
  <section className="f-area f-section f-container"><p className="f-eyebrow">AT HOME IN IDAHO</p><h2>Local people.<br/><em>Valley-wide reach.</em></h2><p>Serving homeowners throughout the Treasure Valley.</p><div>{cities.map(city=><a key={city} href={b.id==='adu'?`${home}/contact`:`/areas/${city.toLowerCase().replaceAll(" ","-")}`}>{city}<Arrow/></a>)}</div></section>
  <FAQSection/>{contactBlock}
- </div>;}
+ </>;}

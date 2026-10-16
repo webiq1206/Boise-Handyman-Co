@@ -1,4 +1,6 @@
 import { ApprovedHome } from "@/components/approved/ApprovedHome";
+import { ApprovedFamilyFrame, ApprovedHomeHero } from "@/components/approved/ApprovedHomeHero";
+import { HandymanServicesAnswer } from "@/components/seo/HandymanServicesAnswer";
 import { ConsultationForm } from "@/components/ConsultationForm";
 import { MarketingCard } from "@/components/marketing/MarketingCard";
 import { Section } from "@/components/marketing/Section";
@@ -13,22 +15,6 @@ import { CONSULT_BULLETS,SITE_TAGLINE } from "@/shared/siteContent";
 import { SITE_IMAGES } from "@/shared/siteImages";
 import { Check } from "lucide-react";
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
-
-const EstimateCalculator = dynamic(
-  () =>
-    import("@/components/EstimateCalculator").then((mod) => mod.EstimateCalculator),
-  {
-    loading: () => (
-      <div
-        id="calculator"
-        className="container scroll-mt-20 px-4 py-16 text-center text-sm text-muted-foreground"
-      >
-        Loading estimate calculator...
-      </div>
-    ),
-  },
-);
 
 export const metadata: Metadata = withBrandPageMetadata(({
   // 49 chars. Leads with the primary term ("handyman in Boise") rather than
@@ -81,7 +67,11 @@ export default function HomePage() {
           Everything above it now exists only to make the number land well;
           everything below it answers what the number raised. */}
       <HomePageSchema />
-      <ApprovedHome />
+      <ApprovedFamilyFrame>
+        <ApprovedHomeHero />
+        <HandymanServicesAnswer />
+        <ApprovedHome />
+      </ApprovedFamilyFrame>
       <BudgetInclusionsSection />
       <Section id="consult" divider className="relative overflow-hidden scroll-mt-16 pb-28 md:pb-28">
         {/* Warm, dimmed lifestyle photo grounds the closing section. Directional

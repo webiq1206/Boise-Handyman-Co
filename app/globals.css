@@ -21,11 +21,8 @@ html, body {
 }
 
 .js .reveal-init {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.75s cubic-bezier(.2, .7, .2, 1),
-    transform 0.75s cubic-bezier(.2, .7, .2, 1);
-  will-change: opacity, transform;
+  opacity: 1;
+  transform: none;
 }
 
 .js .reveal-init.reveal-visible {
@@ -308,7 +305,7 @@ html, body {
   }
 
   @keyframes hero-reveal { from { transform: scale(1.06); opacity: .6; } to { transform: scale(1); opacity: 1; } }
-  .animate-hero-reveal { animation: hero-reveal 1300ms ease both; }
+  .animate-hero-reveal { animation: none; }
   @media (prefers-reduced-motion: reduce) { .animate-hero-reveal { animation: none; } }
 
   @keyframes fade-up {

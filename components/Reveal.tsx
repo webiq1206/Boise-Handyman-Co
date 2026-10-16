@@ -19,9 +19,13 @@ export function Reveal({ children, className = "", style, delay = 0, threshold =
     if (!el) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setVisible(true);
       return;
     }
+
+    // Already in the first viewport: leave it painted. An entrance animation
+    // here would hold the largest element until this effect runs.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) return;
 
     const obs = new IntersectionObserver(
       ([entry]) => {
