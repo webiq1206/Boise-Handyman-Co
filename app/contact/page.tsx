@@ -326,9 +326,15 @@ export default function ContactPage() {
                   subtext={SITE_CONFIG.address.serviceArea}
                 >
                   <address className="not-italic leading-relaxed">
+                    {SITE_CONFIG.publicRepresentative}, public representative
+                    <br />
+                    {SITE_CONFIG.address.street}
+                    <br />
+                    {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state} {SITE_CONFIG.address.postalCode}
+                    <br />
                     Based in {SITE_CONFIG.address.cityState}
                     <br />
-                    Serving the Treasure Valley
+                    Serving the Treasure Valley. Not a staffed storefront.
                   </address>
                 </ContactChannel>
               </Reveal>

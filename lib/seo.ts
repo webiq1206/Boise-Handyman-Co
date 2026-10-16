@@ -471,9 +471,9 @@ export const BUSINESS_INFO = {
   founderName: '',
   phone: SITE_CONFIG.phone,
   email: SITE_CONFIG.email,
-  // Off-site citation NAP (GBP and directories). Street and ZIP stay here for
-  // those submissions only. Public JSON-LD does not read them: it emits a
-  // locality-only service-area address (Meridian, ID, US) from lib/schema.ts.
+  // Authorized public address. Schema reads the street, city, region code,
+  // and postal code from SITE_CONFIG. State is spelled out here for citation
+  // copy; JSON-LD uses the ID region code.
   address: {
     street: SITE_CONFIG.address.street,
     city: SITE_CONFIG.address.city,

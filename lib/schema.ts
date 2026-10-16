@@ -6,6 +6,7 @@ import {schemaTime} from './schemaTime';
 
 import { BUSINESS_INFO, CITY_SEO_DATA, getBaseUrl } from './seo';
 import { SERVICES } from '@/shared/contentData';
+import { SITE_CONFIG } from '@/shared/siteConfig';
 
 interface SchemaContext {
   '@context': string;
@@ -73,18 +74,30 @@ const CITY_WIKIPEDIA: Record<string, string> = {
 
 /**
  * Public JSON-LD address for this service-area business.
- * Locality only: no street, no postal code, and no storefront.
- * Region and country stay ISO codes (ID / US), not "Idaho" / "United States".
- * A city page must not mint its own PostalAddress; the city belongs on areaServed.
+ * Street, locality, region, and postal code come from the site constants,
+ * which match the authorized P5 address. Region and country stay ISO codes
+ * (ID / US). areaServed still lists the cities. This address is not a
+ * staffed storefront, and a city page must not mint its own PostalAddress.
  */
 export function publicPostalAddress() {
   return {
     '@type': 'PostalAddress' as const,
-    addressLocality: 'Meridian',
-    addressRegion: 'ID',
+    streetAddress: SITE_CONFIG.address.street,
+    addressLocality: SITE_CONFIG.address.city,
+    addressRegion: SITE_CONFIG.address.state,
+    postalCode: SITE_CONFIG.address.postalCode,
     addressCountry: 'US',
   };
 }
+
+const publicRepresentativeContact = {
+  '@type': 'ContactPoint' as const,
+  name: SITE_CONFIG.publicRepresentative,
+  telephone: BUSINESS_INFO.phone,
+  contactType: 'Customer Service',
+  areaServed: 'US-ID',
+  availableLanguage: 'English',
+};
 
 export function generateLocalBusinessSchema(city?: string): SchemaContext {
   // A single-location business has ONE set of coordinates (its HQ). Emitting
@@ -109,6 +122,12 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
     parentOrganization: P5_PARENT_ORGANIZATION,
     telephone: BUSINESS_INFO.phone,
     email: BUSINESS_INFO.email,
+    employee: {
+      '@type': 'Person',
+      name: SITE_CONFIG.publicRepresentative,
+      jobTitle: 'Public representative',
+    },
+    contactPoint: publicRepresentativeContact,
     address: publicPostalAddress(),
     geo: {
       '@type': 'GeoCoordinates',
@@ -196,8 +215,9 @@ export function generateServiceSchema(serviceName: string, serviceDescription: s
       email: BUSINESS_INFO.email,
       priceRange: '$$',
       parentOrganization: P5_PARENT_ORGANIZATION,
-      // Served cities stay on areaServed. The provider address is always the
-      // Meridian service-area locality, never a per-city PostalAddress.
+      contactPoint: publicRepresentativeContact,
+      // Served cities stay on areaServed. The provider address is the authorized
+      // Meridian postal address, never a per-city PostalAddress.
       address: publicPostalAddress(),
     },
     areaServed: city ? {
@@ -271,6 +291,7 @@ export function generateOrganizationSchema(): SchemaContext {
     telephone: BUSINESS_INFO.phone,
     email: BUSINESS_INFO.email,
     address: publicPostalAddress(),
+    contactPoint: publicRepresentativeContact,
     knowsAbout: [
       'drywall repair and patching',
       'interior and exterior painting',
@@ -286,13 +307,6 @@ export function generateOrganizationSchema(): SchemaContext {
       'home maintenance and punch-list work',
     ],
     sameAs: BUSINESS_INFO.sameAs,
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: BUSINESS_INFO.phone,
-      contactType: 'Customer Service',
-      areaServed: 'US-ID',
-      availableLanguage: 'English',
-    },
   };
 }
 
