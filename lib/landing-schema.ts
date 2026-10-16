@@ -4,6 +4,7 @@ import {
   generateLocalBusinessSchema,
   generateServiceSchema,
   generateSpeakableSchema,
+  publicPostalAddress,
 } from './schema';
 
 export function landingBreadcrumbs(
@@ -27,7 +28,32 @@ export function landingServiceSchema(
 }
 
 export function landingAreaBusinessSchema(cityName: string) {
-  return generateLocalBusinessSchema(cityName);
+  const business = generateLocalBusinessSchema(cityName);
+  const served = Array.isArray(business.areaServed) ? business.areaServed : [];
+  const listed = served.some(
+    (area) =>
+      !!area &&
+      typeof area === 'object' &&
+      'name' in area &&
+      (area as { name?: string }).name === cityName,
+  );
+  // Area pages name the city with areaServed. They do not add a PostalAddress
+  // for that city, and the business address stays the Meridian locality.
+  return {
+    ...business,
+    address: publicPostalAddress(),
+    areaServed: listed
+      ? served
+      : [
+          ...served,
+          {
+            '@type': 'City',
+            name: cityName,
+            addressRegion: 'ID',
+            addressCountry: 'US',
+          },
+        ],
+  };
 }
 
 export function landingSpeakable(path: string, name: string) {

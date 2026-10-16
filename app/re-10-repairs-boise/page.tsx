@@ -53,6 +53,7 @@ const DESCRIPTION =
 export const metadata: Metadata = withBrandPageMetadata(({
   title: { absolute: TITLE_WITH_BRAND },
   description: DESCRIPTION,
+  // This path is the canonical copy on this site. Keep the tag self-referential.
   alternates: { canonical: buildCanonical(PATH) },
   openGraph: {
     title: TITLE,
