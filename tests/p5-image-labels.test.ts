@@ -31,4 +31,13 @@ test("photo alt text describes the picture and does not label it as our work", (
   const re10 = read("app/re-10-repairs-boise/page.tsx");
   assert.match(re10, /alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth"/);
   assert.equal(re10.includes("<figcaption>"), false);
+  for (const file of [
+    "components/BeforeAfterSlider.tsx",
+    "components/sections/FeaturedBeforeAfterSection.tsx",
+    "components/sections/ProjectGallerySection.tsx",
+    "components/seo/LandingPageTemplate.tsx",
+  ]) {
+    const visible = read(file).replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+    assert.equal(/before\s*\/\s*after|before and after|>Before<|>After<| - before| - after/i.test(visible), false, file);
+  }
 });

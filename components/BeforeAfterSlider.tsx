@@ -167,13 +167,13 @@ export function BeforeAfterSlider({
           style={{ left: `clamp(24px, ${pos}%, calc(100% - 24px))` }}
           type="button"
           role="slider"
-          aria-label="Compare before and after"
+          aria-label="Compare the two photos"
           aria-orientation="horizontal"
           aria-describedby={instructionsId}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={Math.round(pos)}
-          aria-valuetext={`${Math.round(pos)}% before image visible`}
+          aria-valuetext={`${Math.round(pos)}% of the left photo visible`}
           onKeyDown={(e) => {
             if (["ArrowLeft", "ArrowDown", "ArrowRight", "ArrowUp", "Home", "End"].includes(e.key)) trackInteraction();
             if (e.key === "ArrowLeft" || e.key === "ArrowDown") {

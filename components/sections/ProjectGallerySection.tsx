@@ -76,8 +76,8 @@ export function ProjectGallerySection({
               <BeforeAfterSlider
                 beforeSrc={lead.beforeImageUrl}
                 afterSrc={lead.afterImageUrl}
-                beforeAlt={`Before: ${lead.title} in ${cityDisplayName(lead.city)}, Idaho`}
-                afterAlt={`After: ${lead.title} in ${cityDisplayName(lead.city)}, Idaho`}
+                beforeAlt={`${lead.title} in ${cityDisplayName(lead.city)}, Idaho`}
+                afterAlt={`${lead.title} in ${cityDisplayName(lead.city)}, Idaho`}
                 aspectClass="aspect-[4/3]"
               />
             </div>
@@ -98,7 +98,7 @@ export function ProjectGallerySection({
               className="ed-rail mt-6 [scrollbar-color:var(--ed-line)_transparent]"
               tabIndex={0} role="region"
               style={{ ["--ed-rail-w" as string]: "31%" }}
-              aria-label="More before and after photos"
+              aria-label="More photos"
             >
               {rest.map((project) => (
                 <article
@@ -109,8 +109,8 @@ export function ProjectGallerySection({
                   <BeforeAfterSlider
                     beforeSrc={project.beforeImageUrl}
                     afterSrc={project.afterImageUrl}
-                    beforeAlt={`Before: ${project.title} in ${cityDisplayName(project.city)}, Idaho`}
-                    afterAlt={`After: ${project.title} in ${cityDisplayName(project.city)}, Idaho`}
+                    beforeAlt={`${project.title} in ${cityDisplayName(project.city)}, Idaho`}
+                    afterAlt={`${project.title} in ${cityDisplayName(project.city)}, Idaho`}
                     aspectClass="aspect-[4/3]"
                   />
                   <div className="p-6">
