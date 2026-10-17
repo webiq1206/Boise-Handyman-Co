@@ -99,18 +99,24 @@ test("a suppressed contact skips user_data and still fires the conversion", () =
       name: "Ada Lovelace",
       service: "handyman",
       allowEnhancedConversions: false,
+      acceptedLead: true,
     }, "estimator:suppressed"), true);
     assert.equal(calls.some((call) => call[0] === "set"), false);
-    assert.deepEqual(calls[0], ["event", "conversion", { send_to: "AW-18354188204/LE2vCPXstO8cEKzf-q9E", value: 50, currency: "USD", transaction_id: "estimator:suppressed" }]);
+    assert.deepEqual(calls[0], ["event", "conversion", { send_to: "AW-18354188204/cEzmCPOagKAdEKzf-q9E", transaction_id: "estimator:suppressed" }]);
+    assert.deepEqual(calls[1], ["event", "conversion", { send_to: "AW-18354188204/LE2vCPXstO8cEKzf-q9E", value: 50, currency: "USD", transaction_id: "estimator:suppressed" }]);
+    assert.equal(Object.hasOwn(calls[0][2] as object, "user_data"), false);
+    assert.equal(Object.hasOwn(calls[1][2] as object, "user_data"), false);
     calls.length = 0;
     assert.equal(trackGoogleAdsLeadConversion({
       email: "ada@example.com",
       name: "Ada Lovelace",
       service: "handyman",
+      acceptedLead: true,
     }, "estimator:cookie-block"), true);
     assert.equal(calls.some((call) => call[0] === "set"), false);
-    assert.equal((calls[0] as [string, string])[1], "conversion");
+    assert.equal(calls.length, 2);
     assert.equal(Object.hasOwn(calls[0][2] as object, "user_data"), false);
+    assert.equal(Object.hasOwn(calls[1][2] as object, "user_data"), false);
     calls.length = 0;
     assert.equal(trackGoogleAdsLeadConversion({
       email: "ada@example.com",

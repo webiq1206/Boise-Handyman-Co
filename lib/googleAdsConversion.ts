@@ -1,16 +1,18 @@
 /**
  * Google Ads conversion helpers shared by every lead path on this site.
  *
- * One Google Ads conversion action ("P5 Raw Form Submitted") receives every
- * accepted lead, with a per-lead value so Google Ads can report ROAS by
- * campaign. Values are the per-lead estimates agreed with P5 on 14 Sept 2026
- * (form fallback in Google Ads is $50). The conversion parameters stay limited
- * to a service category and an opaque transaction id. Enhanced conversions
- * attach user_data to that Ads conversion event only. There is no global
- * gtag('set','user_data'), so the GA4 tag cannot collect it.
+ * The contact form sends "P5 Raw Form Submitted" only. An estimator finish
+ * sends "P5 Estimator Completed" once for that key, and also sends the form
+ * label once for the same key when the finish created a lead. Values are the
+ * per-lead estimates agreed with P5 on 14 Sept 2026 (form fallback in Google
+ * Ads is $50). Enhanced user_data is a field on those Ads conversion events
+ * only, and only when the finish created a lead that is not suppressed.
+ * There is no global gtag('set','user_data'), so the GA4 tag cannot collect it.
  */
 export const GOOGLE_ADS_ID = "AW-18354188204";
 export const GOOGLE_ADS_LEAD_LABEL = "AW-18354188204/LE2vCPXstO8cEKzf-q9E";
+/** Estimator submit and intake completion. */
+export const GOOGLE_ADS_ESTIMATOR_LABEL = "AW-18354188204/cEzmCPOagKAdEKzf-q9E";
 /** "P5 Website Call (60s+)": swaps the visible number for a Google forwarding number. */
 export const GOOGLE_ADS_WEBSITE_CALL_LABEL = "AW-18354188204/YHR0CIaPz_ccEKzf-q9E";
 export const GOOGLE_ADS_PHONE_DISPLAY = "(208) 477-1169";
@@ -29,6 +31,12 @@ export interface LeadContext {
   postalCode?: string;
   /** Server decision from the submit response. False skips user_data only. */
   allowEnhancedConversions?: boolean;
+  /**
+   * Estimator finishes only. True sends the form label as well. False or
+   * omitted sends only the estimator label. The shared estimator does not
+   * pass this flag, and a missing flag is not an accepted lead.
+   */
+  acceptedLead?: boolean;
 }
 
 export interface EnhancedConversionUserData {
@@ -82,20 +90,74 @@ export function googleAdsLeadParams(
 }
 
 const sentLeadKeys = new Set<string>();
+const pendingGtagRetries = new Set<string>();
 const DRAFT_STORAGE_PREFIX = "p5-project-draft-v2";
 
-/** Same gates as the tag bootstrap: no tag, a webdriver, or an explicit QA disable. */
-export function googleTagAllowed(): boolean {
-  if (typeof window === "undefined") return false;
-  const gtag = (window as unknown as { gtag?: unknown }).gtag;
-  if (typeof gtag !== "function") return false;
-  if (typeof navigator !== "undefined" && navigator.webdriver === true) return false;
+/** Twenty attempts, 500ms apart: 10 seconds. */
+export const GTAG_RETRY_LIMIT = 20;
+export const GTAG_RETRY_MS = 500;
+
+type GtagFn = (...args: unknown[]) => void;
+
+export function readGtag(): GtagFn | null {
+  if (typeof window === "undefined") return null;
+  const gtag = (window as unknown as { gtag?: GtagFn }).gtag;
+  return typeof gtag === "function" ? gtag : null;
+}
+
+/**
+ * Returns gtag when it is already loaded. Otherwise schedules one retry chain
+ * for this key and returns null. The sent marker must not be written by the caller
+ * until this returns a function. A second call with the same key does not start
+ * another timer. Storage and timer failures are ignored.
+ */
+export function gtagOrRetry(key: string, retryCount: number, again: (nextRetry: number) => void): GtagFn | null {
   try {
-    if (window.sessionStorage.getItem("p5_analytics_disabled") === "1") return false;
+    const gtag = readGtag();
+    if (gtag) {
+      pendingGtagRetries.delete(key);
+      return gtag;
+    }
+    if (retryCount >= GTAG_RETRY_LIMIT) {
+      pendingGtagRetries.delete(key);
+      return null;
+    }
+    if (retryCount === 0 && pendingGtagRetries.has(key)) return null;
+    pendingGtagRetries.add(key);
+    window.setTimeout(() => {
+      try {
+        pendingGtagRetries.delete(key);
+        again(retryCount + 1);
+      } catch {
+        pendingGtagRetries.delete(key);
+      }
+    }, GTAG_RETRY_MS);
+    return null;
   } catch {
-    // The bootstrap still loads the tag when storage throws.
+    return null;
   }
-  return true;
+}
+
+function isEstimatorFinishKey(dedupeKey: string | undefined): dedupeKey is string {
+  return !!dedupeKey && (dedupeKey.startsWith("intake:") || dedupeKey.startsWith("estimator:"));
+}
+
+function alreadySent(storageKey: string): boolean {
+  if (sentLeadKeys.has(storageKey)) return true;
+  try {
+    return window.sessionStorage.getItem(storageKey) === "sent";
+  } catch {
+    return false;
+  }
+}
+
+function markSent(storageKey: string) {
+  sentLeadKeys.add(storageKey);
+  try {
+    window.sessionStorage.setItem(storageKey, "sent");
+  } catch {
+    // Ignore; the in-memory guard covers this page load.
+  }
 }
 
 /** US phone as E.164. Anything that is not 10 digits is omitted. */
@@ -180,7 +242,7 @@ function resolveEnhancedContact(ctx: LeadContext, transactionId?: string): Pick<
 }
 
 /** user_data rides on the AW conversion event. It is never a global gtag set. */
-function scopedAdsConversion(params: GoogleAdsLeadParams, userData: EnhancedConversionUserData | null): GoogleAdsLeadParams & { user_data?: EnhancedConversionUserData } {
+function scopedAdsConversion<T extends Record<string, unknown>>(params: T, userData: EnhancedConversionUserData | null): T & { user_data?: EnhancedConversionUserData } {
   return userData ? { ...params, user_data: userData } : params;
 }
 
@@ -198,36 +260,70 @@ function userDataAllowed(ctx: LeadContext): boolean {
   return allowEnhancedConversionsFromCookie();
 }
 
-function fireEnhancedLead(ctx: LeadContext, transactionId?: string): void {
-  const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag;
-  const userData = userDataAllowed(ctx) ? enhancedConversionUserData(resolveEnhancedContact(ctx, transactionId)) : null;
-  gtag("event", "conversion", scopedAdsConversion(googleAdsLeadParams(ctx, transactionId), userData));
+/** Webdriver and the QA disable flag block tracking. A missing gtag does not: that path waits. */
+function adsTrackingBlocked(): boolean {
+  if (typeof navigator !== "undefined" && navigator.webdriver === true) return true;
+  try {
+    if (window.sessionStorage.getItem("p5_analytics_disabled") === "1") return true;
+  } catch {
+    // The bootstrap still loads the tag when storage throws.
+  }
+  return false;
 }
 
 /**
- * Fires the Google Ads lead conversion once per dedupe key (per page load and,
- * where storage allows, per browser session). Returns true when it was sent.
+ * Fires the Google Ads conversion for this key. Estimator finish keys
+ * ("intake:" or "estimator:") send the estimator label once per key. They also
+ * send the form label once per key, with transaction_id equal to the key,
+ * only when acceptedLead is true. A two-argument engine call omits that flag
+ * and sends the estimator label only. Every other key sends the form label
+ * only. user_data is copied onto each of those Ads events only when the finish
+ * created a lead and the server allows it. If gtag is not ready, waits up to
+ * 10 seconds and writes the sent marker only after gtag runs. Returns true
+ * when at least one label was sent.
  */
-export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string): boolean {
-  if (typeof window === "undefined") return false;
-  const storageKey = dedupeKey ? `google_ads_lead:${dedupeKey}` : undefined;
-  if (storageKey) {
-    if (sentLeadKeys.has(storageKey)) return false;
-    try {
-      if (window.sessionStorage.getItem(storageKey) === "sent") return false;
-    } catch {
-      // Storage can be unavailable under strict privacy settings; the in-memory guard still applies.
+export function trackGoogleAdsLeadConversion(
+  ctx: LeadContext = {},
+  dedupeKey?: string,
+  retryCount = 0,
+): boolean {
+  if (typeof window === "undefined" || adsTrackingBlocked()) return false;
+  try {
+    const retryKey = dedupeKey ?? "google_ads_lead:conversion";
+    const pending: { storageKey: string; params: Record<string, unknown> }[] = [];
+    if (isEstimatorFinishKey(dedupeKey)) {
+      const estimatorStorage = `google_ads_estimator:${dedupeKey}`;
+      if (!alreadySent(estimatorStorage)) {
+        pending.push({
+          storageKey: estimatorStorage,
+          params: { send_to: GOOGLE_ADS_ESTIMATOR_LABEL, transaction_id: dedupeKey },
+        });
+      }
+      if (ctx.acceptedLead === true) {
+        const leadStorage = `google_ads_lead:${dedupeKey}`;
+        if (!alreadySent(leadStorage)) {
+          pending.push({ storageKey: leadStorage, params: googleAdsLeadParams(ctx, dedupeKey) });
+        }
+      }
+    } else {
+      const leadStorage = dedupeKey ? `google_ads_lead:${dedupeKey}` : "google_ads_lead:conversion";
+      if (!alreadySent(leadStorage)) {
+        pending.push({ storageKey: leadStorage, params: googleAdsLeadParams(ctx, dedupeKey) });
+      }
     }
-  }
-  if (!googleTagAllowed()) return false;
-  if (storageKey) {
-    sentLeadKeys.add(storageKey);
-    try {
-      window.sessionStorage.setItem(storageKey, "sent");
-    } catch {
-      // Ignore; in-memory guard is enough for this page load.
+    if (!pending.length) return false;
+    const gtag = gtagOrRetry(retryKey, retryCount, (next) => {
+      trackGoogleAdsLeadConversion(ctx, dedupeKey, next);
+    });
+    if (!gtag) return false;
+    const accepted = !isEstimatorFinishKey(dedupeKey) || ctx.acceptedLead === true;
+    const userData = accepted && userDataAllowed(ctx) ? enhancedConversionUserData(resolveEnhancedContact(ctx, dedupeKey)) : null;
+    for (const label of pending) {
+      gtag("event", "conversion", scopedAdsConversion(label.params, userData));
+      markSent(label.storageKey);
     }
+    return true;
+  } catch {
+    return false;
   }
-  fireEnhancedLead(ctx, dedupeKey);
-  return true;
 }
