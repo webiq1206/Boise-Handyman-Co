@@ -150,6 +150,16 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
     url: baseUrl,
     // parentOrganization stays on https://p5homeco.com/#organization.
     parentOrganization: P5_PARENT_ORGANIZATION,
+    hasCredential: {
+      '@type': ['EducationalOccupationalCredential', 'GovernmentPermit'],
+      credentialCategory: 'license',
+      name: 'Idaho contractor registration',
+      identifier: '8381215',
+      issuedBy: {
+        '@type': 'GovernmentOrganization',
+        name: 'Idaho Division of Occupational and Professional Licenses',
+      },
+    },
     telephone: SCHEMA_TELEPHONE,
     email: BUSINESS_INFO.email,
     employee: publicRepresentativePerson,
