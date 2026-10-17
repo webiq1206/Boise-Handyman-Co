@@ -78,7 +78,7 @@ function neighborhoodFaq(city: CityData, serviceName?: string): CityFaq {
     const names = neighborhoods.map((place) => place.name);
     const detail = neighborhoods.map((place) => `${place.name} is covered. ${place.excerpt}`).join(' ');
     const listed = seo?.neighborhoods?.length
-      ? ` Other parts of ${city.name} on our service list include ${seo.neighborhoods.join(', ')}.`
+      ? ` Other areas on our ${city.name} service list include ${seo.neighborhoods.join(', ')}.`
       : '';
     return {
       question: `Does Boise Handyman Co serve ${joinNames(names)}?`,

@@ -88,13 +88,14 @@ test('published city claims and the Kuna and Caldwell neighborhood order stay',(
  const boiseFaqs=areaPageFaqs(boise);
  assert.ok(boiseFaqs.some((faq)=>faq.answer.includes('Certificate of Appropriateness')));
  assert.ok(boiseFaqs.some((faq)=>faq.question==='Which permit office handles a handyman repair in Boise?'));
- assert.ok(boiseFaqs.some((faq)=>faq.question==='Does Boise Handyman Co serve Harris Ranch?'));
+ assert.ok(boiseFaqs.some((faq)=>faq.question==='Does Boise Handyman Co serve Hidden Springs and Harris Ranch?'));
+ assert.ok(boiseFaqs.some((faq)=>faq.answer.includes('Other areas on our Boise service list include North End, Bench, Downtown, East End, Southwest Boise.')));
  const kunaFaqs=areaPageFaqs(kuna);
  assert.ok(kunaFaqs.some((faq)=>faq.answer.includes('Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell, and Indian Creek Plaza is in Caldwell.')));
- assert.ok(kunaFaqs.some((faq)=>faq.answer.includes('Crimson Point, Black Cat')));
+ assert.ok(kunaFaqs.some((faq)=>faq.answer.includes('including Crimson Point')));
  const caldwellFaqs=areaPageFaqs(caldwell);
  assert.ok(caldwellFaqs.some((faq)=>faq.answer.includes('Wilson, Ustick, Cleveland Blvd')));
- assert.deepEqual(CITY_SEO_DATA.Kuna.neighborhoods,['Crimson Point','Black Cat']);
+ assert.deepEqual(CITY_SEO_DATA.Kuna.neighborhoods,['Crimson Point']);
  assert.deepEqual(CITY_SEO_DATA.Caldwell.neighborhoods,['Wilson','Ustick','Cleveland Blvd']);
  const drywall=SERVICE_SEO_CONTENT['drywall-repair'];
  assert.match(getCityServiceIntro(drywall,boise),/North End/);
