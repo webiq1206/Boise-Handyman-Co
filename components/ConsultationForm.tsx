@@ -339,13 +339,19 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
     onSuccess: (response: { accepted?: boolean }, variables) => {
       setSuccess(true);
       sessionStorage.removeItem("brc_estimate");
-      // Conversion event: a submitted consultation request is the PRIMARY lead
-      // (estimate on the site, then submit). GA generate_lead + Meta Lead. The
-      // Meta Lead carries the visitor's email + phone, which the server-side
-      // Conversions API hashes for high match quality (best cost-per-result).
+      // A submitted consultation is the primary lead. Google Ads receives the
+      // inquiry id as transaction_id so the lead is counted once. GA4
+      // generate_lead records the project type only. Meta Lead does not
+      // receive the visitor's email or phone.
       if (response.accepted) {
         markEstimatorCompleted("consultation");
-        trackAcceptedLeadConversion({ projectType: variables.projectType });
+        trackAcceptedLeadConversion({
+          projectType: variables.projectType,
+          email: variables.email,
+          phone: variables.phone,
+          name: variables.name,
+          postalCode: deriveZip(variables.address),
+        }, inquiryId("primary"));
         trackEvent("generate_lead", {
           form: "consultation",
           project_type: variables.projectType,
