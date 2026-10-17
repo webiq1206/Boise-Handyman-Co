@@ -7,6 +7,9 @@
 import { publishedFoundingYear } from '@/shared/foundingYear';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { GBP_SOCIAL, getExternalProfileUrls } from '@/shared/gbpProfile';
+import { SHOW_TRUST_CLAIMS } from '@/shared/trustClaims';
+
+export { SHOW_TRUST_CLAIMS };
 
 interface SEOMetaData {
   title: string;
@@ -127,12 +130,6 @@ export function generatePageTitle(params: ServiceSEOParams): string {
   const truncatedService = truncateServiceName(serviceName, maxServiceLength);
   return `${truncatedService} | ${BRAND}`;
 }
-
-/**
- * Unproven marketing claims. The phrases stay in this file. Flip this on only
- * after there is a documented basis for them.
- */
-export const SHOW_TRUST_CLAIMS = false;
 
 const SATISFACTION_GUARANTEED_CTA = "Satisfaction guaranteed";
 const NEUTRAL_FALLBACK_CTA = "Free quotes from photos";
