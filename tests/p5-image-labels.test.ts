@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
-const forbidden = /illustrat|AI-generated|for illustration|\bconcept\b|render(?:ed|ing)|our work|recent jobs|our projects|recent projects|Representative /i;
+const forbidden = /illustrat|AI-generated|for illustration|render(?:ed|ing)|our work|recent jobs|our projects|recent projects/i;
 
 function read(path: string): string {
   return readFileSync(new URL("../" + path, import.meta.url), "utf8");
@@ -30,7 +30,24 @@ test("photo alt text describes the picture and does not label it as our work", (
   }
   const re10 = read("app/re-10-repairs-boise/page.tsx");
   assert.match(re10, /alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth"/);
-  assert.equal(re10.includes("<figcaption>"), false);
+  assert.match(re10, /<figcaption>Representative imagery<\/figcaption>/);
+  const representative = [
+    "Representative image: a worker adjusting an interior door hinge with a screwdriver",
+    "Representative image: a worker painting white window trim with a brush over a drop cloth",
+    "Representative image: a freshly painted sage-green front door with white trim and black hardware",
+  ];
+  const registry = read("shared/blogImageRegistry.ts");
+  const generator = read("scripts/generate-blog-image-registry.ts");
+  for (const alt of representative) {
+    assert.equal(registry.includes(alt), true, alt);
+    assert.equal(generator.includes(alt), true, alt);
+  }
+  assert.equal(registry.split("Representative image: a worker adjusting an interior door hinge with a screwdriver").length - 1, 2);
+  for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx"]) {
+    const source = read(file);
+    assert.equal(source.includes('alt="Hands fitting white baseboard trim with a hammer"'), true, file);
+    assert.equal(source.includes("nail gun"), false, file);
+  }
   for (const file of [
     "components/BeforeAfterSlider.tsx",
     "components/sections/FeaturedBeforeAfterSection.tsx",

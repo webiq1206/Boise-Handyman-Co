@@ -30,7 +30,7 @@ const area = (name: string) => `/images/areas/${name}.webp`;
 const LIBRARY = {
   doorRepair: {
     src: img('hero-door-hinge-branded'),
-    alt: 'A worker adjusting an interior door hinge with a screwdriver',
+    alt: 'Representative image: a worker adjusting an interior door hinge with a screwdriver',
   },
   gutterCleaning: {
     src: img('hero-gutter-cleaning'),
@@ -42,7 +42,7 @@ const LIBRARY = {
   },
   painting: {
     src: img('service-painting-p5-reviewed-20260910'),
-    alt: 'A worker painting white window trim with a brush over a drop cloth',
+    alt: 'Representative image: a worker painting white window trim with a brush over a drop cloth',
   },
   plumbing: {
     src: img('service-plumbing'),
@@ -118,7 +118,7 @@ const LIBRARY = {
   },
   frontDoor: {
     src: img('front-door-repaint-p5-reviewed-20260910'),
-    alt: 'A freshly painted sage-green front door with white trim and black hardware',
+    alt: 'Representative image: a freshly painted sage-green front door with white trim and black hardware',
   },
   permits: {
     src: img('permit-paperwork'),

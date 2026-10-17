@@ -115,7 +115,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   },
   'home-repairs-before-selling-boise': {
     hero: '/images/handyman/front-door-repaint-p5-reviewed-20260910.webp',
-    alt: 'A freshly painted sage-green front door with white trim and black hardware',
+    alt: 'Representative image: a freshly painted sage-green front door with white trim and black hardware',
     topicTags: ["home repairs","selling a house","boise","punch list","repairs"],
     source: 'handyman',
   },
@@ -127,7 +127,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   },
   'how-long-do-common-home-repairs-take': {
     hero: '/images/handyman/hero-door-hinge-branded.webp',
-    alt: 'A worker adjusting an interior door hinge with a screwdriver',
+    alt: 'Representative image: a worker adjusting an interior door hinge with a screwdriver',
     topicTags: ["home repairs","boise","drywall repair","plumbing repairs","repairs"],
     source: 'handyman',
   },
@@ -151,7 +151,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   },
   'interior-paint-touch-up-guide': {
     hero: '/images/handyman/service-painting-p5-reviewed-20260910.webp',
-    alt: 'A worker painting white window trim with a brush over a drop cloth',
+    alt: 'Representative image: a worker painting white window trim with a brush over a drop cloth',
     topicTags: ["painting","paint touch-up","repairs","boise"],
     source: 'handyman',
   },
@@ -241,7 +241,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   },
   'first-time-homeowner-repair-handbook': {
     hero: '/images/handyman/hero-door-hinge-branded.webp',
-    alt: 'A worker adjusting an interior door hinge with a screwdriver',
+    alt: 'Representative image: a worker adjusting an interior door hinge with a screwdriver',
     topicTags: ["first-time homeowner","repairs","diy","basics","boise"],
     source: 'handyman',
   },
