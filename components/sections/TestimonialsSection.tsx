@@ -7,7 +7,7 @@ import { Section } from "@/components/marketing/Section";
 import { SectionHeader } from "@/components/marketing/SectionHeader";
 import { MarketingCard } from "@/components/marketing/MarketingCard";
 import { Button } from "@/components/ui/button";
-import { TESTIMONIALS } from "@/shared/testimonialsData";
+import { publishedTestimonials } from "@/shared/testimonialsData";
 import { CITIES, SERVICES } from "@/shared/contentData";
 
 function serviceLabel(slug: string) {
@@ -34,7 +34,7 @@ interface TestimonialsSectionProps {
 }
 
 export function TestimonialsSection({ limit = 4, showViewAll = true }: TestimonialsSectionProps) {
-  const items = TESTIMONIALS.slice(0, limit);
+  const items = publishedTestimonials().slice(0, limit);
   const [featured, ...rest] = items;
 
   // TESTIMONIALS is empty until real, attributable reviews exist. Without this
