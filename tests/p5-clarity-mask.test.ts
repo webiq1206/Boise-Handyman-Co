@@ -166,6 +166,44 @@ test('the root layout installs the Clarity mask before the Clarity tag', () => {
   assert.equal(clarityFormMaskScript.includes('onMutations(function(){ mask'), false);
 });
 
+test('the choice-input parent guard does not mark body or html', () => {
+  const checkbox = el('input', [], 'checkbox');
+  const body = el('body', [checkbox]);
+  const root = el('html', [body]);
+  run(root);
+  assert.equal(masked(body), false);
+  assert.equal(masked(root), false);
+  assert.equal(masked(checkbox), true);
+
+  const radio = el('input', [], 'radio');
+  const html = el('html', [radio]);
+  run(html);
+  assert.equal(masked(html), false);
+  assert.equal(masked(radio), true);
+
+  const nested = el('input', [], 'checkbox');
+  const form = el('form', [nested]);
+  const pageBody = el('body', [form]);
+  const page = el('html', [pageBody]);
+  run(page);
+  assert.equal(masked(form), true);
+  assert.equal(masked(pageBody), false);
+  assert.equal(masked(page), false);
+});
+
+test('the consultation success screen masks the echoed name and address', () => {
+  const source = readFileSync(new URL('../components/ConsultationForm.tsx', import.meta.url), 'utf8');
+  const successAt = source.indexOf('data-testid="consultation-success"');
+  assert.ok(successAt > 0);
+  assert.match(source.slice(successAt, successAt + 80), /data-clarity-mask="True"/);
+  const nameAt = source.indexOf('submitted.name.split(" ")[0]');
+  const addressAt = source.indexOf('submitted?.address');
+  assert.ok(nameAt > successAt);
+  assert.ok(addressAt > nameAt);
+  assert.match(source.slice(nameAt - 280, nameAt), /data-clarity-mask="True"/);
+  assert.match(source.slice(addressAt - 220, addressAt), /data-clarity-mask="True"/);
+});
+
 test('the assistant transcript is masked', () => {
   const source = readFileSync(new URL('../components/assistant/AssistantWidget.tsx', import.meta.url), 'utf8');
   const logAt = source.indexOf('role="log"');

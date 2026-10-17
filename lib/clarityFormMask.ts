@@ -35,7 +35,8 @@ export const clarityFormMaskScript = `(function(){
       if(CHOICE[type]){
         if(!hasMaskedAncestor(el)){
           var parent=el.parentElement;
-          if(parent&&typeof parent.setAttribute==="function") parent.setAttribute(ATTR, VALUE);
+          var parentTag=parent&&parent.tagName?String(parent.tagName).toLowerCase():"";
+          if(parent&&typeof parent.setAttribute==="function"&&parentTag!=="body"&&parentTag!=="html") parent.setAttribute(ATTR, VALUE);
           else el.setAttribute(ATTR, VALUE);
         }
         return;
