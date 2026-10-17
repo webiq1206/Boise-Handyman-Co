@@ -113,7 +113,6 @@ export default function Re10RepairsPage() {
           </div>
           <figure>
             <img src={SITE_IMAGES.processInProgress} alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth" width={1200} height={896} />
-            <figcaption>Representative imagery</figcaption>
           </figure>
         </div>
       </section>

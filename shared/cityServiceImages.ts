@@ -37,7 +37,7 @@ const h = (name: string) => `/images/handyman/${name}.webp`;
  */
 const SERVICE_ROTATION: Record<string, readonly string[]> = {
   "drywall-repair": [
-    h("service-drywall-repair"),
+    h("drywall-patch-coat"),
     h("punch-list-markers"),
   ],
   "painting-touch-ups": [
@@ -46,13 +46,13 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
   ],
   "plumbing-repairs": [
     h("service-plumbing"),
-    h("toilet-repair"),
+    h("toilet-tank-service"),
   ],
   "electrical-repairs": [
     h("service-electrical"),
   ],
   "carpentry-trim-repair": [
-    h("service-carpentry-trim-branded"),
+    h("baseboard-trim-fit"),
     h("hero-door-hinge-branded"),
     h("door-hinge-fix"),
   ],
@@ -69,7 +69,7 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
   "home-maintenance": [
     h("service-caulking"),
     h("weatherstripping"),
-    h("winterize-spigot"),
+    h("spigot-winterize"),
     h("hero-gutter-cleaning"),
   ],
 };

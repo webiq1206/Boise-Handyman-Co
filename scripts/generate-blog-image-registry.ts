@@ -37,8 +37,8 @@ const LIBRARY = {
     alt: 'Worker on a ladder clearing autumn leaves from the rain gutter of a single-story suburban Boise home',
   },
   drywall: {
-    src: img('service-drywall-repair'),
-    alt: 'Hands spreading joint compound over a drywall patch with a taping knife in a bright room',
+    src: img('drywall-patch-coat'),
+    alt: 'Taped drywall patch with a first coat of compound, and a knife on a mud pan',
   },
   painting: {
     src: img('service-painting-p5-reviewed-20260910'),
@@ -53,8 +53,8 @@ const LIBRARY = {
     alt: 'Hands replacing a white electrical outlet with a screwdriver, faceplate and voltage tester nearby',
   },
   carpentry: {
-    src: img('service-carpentry-trim-branded'),
-    alt: 'Carpenter fitting a new piece of white baseboard trim along a wood floor in a modern home',
+    src: img('baseboard-trim-fit'),
+    alt: 'New white baseboard with a loose square-cut piece, a hammer and a coping saw on an oak floor',
   },
   mounting: {
     src: img('service-mounting'),
@@ -69,16 +69,16 @@ const LIBRARY = {
     alt: 'Caulk gun applying a clean white silicone bead where a bathtub meets white subway tile',
   },
   consult: {
-    src: img('consult-doorstep-branded'),
-    alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
+    src: img('front-porch-toolbag'),
+    alt: 'Canvas tool bag set down on a front porch beside a wood door',
   },
   toolbag: {
     src: img('toolbag-ready'),
     alt: 'Neatly organized canvas tool bag with drill, levels, and tape measure staged on a drop cloth in a living room',
   },
   toilet: {
-    src: img('toilet-repair'),
-    alt: 'Plumber lifting the porcelain lid off a toilet tank to service the fill valve in a clean bathroom',
+    src: img('toilet-tank-service'),
+    alt: 'Toilet with a chrome shutoff valve and supply line, and a wrench on a towel',
   },
   weatherstrip: {
     src: img('weatherstripping'),
@@ -101,8 +101,8 @@ const LIBRARY = {
     alt: 'Gloved hands replacing a weathered deck board with a new cedar board on a backyard deck',
   },
   winterSpigot: {
-    src: img('winterize-spigot'),
-    alt: 'Insulated faucet cover being fitted over an outdoor hose spigot with frost on the grass',
+    src: img('spigot-winterize'),
+    alt: 'Outdoor spigot with the hose disconnected and coiled on frosty grass',
   },
   hinge: {
     src: img('door-hinge-fix'),
@@ -113,8 +113,8 @@ const LIBRARY = {
     alt: 'Blue painter\'s tape markers on a wall and window trim marking touch-up spots, notepad on the windowsill',
   },
   materials: {
-    src: img('repair-materials'),
-    alt: 'Assorted screws, wall anchors, and picture hangers organized in a small parts tray on a workbench',
+    src: img('parts-tray'),
+    alt: 'Washers, hex nuts and cabinet knobs sorted in a parts tray',
   },
   frontDoor: {
     src: img('front-door-repaint-p5-reviewed-20260910'),
