@@ -164,7 +164,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Eagle, Idaho?',
         answer:
-          "Yes. Eagle is in our core coverage, Shadow Valley and The Estates included. We do small repairs, installs, and maintenance throughout Eagle, at the same upfront quotes and pricing you'd get elsewhere in the valley. Our Eagle Foothills guide covers hillside homes.",
+          "Yes. Eagle is in our core coverage, Banbury and Floating Feather included. We do small repairs, installs, and maintenance throughout Eagle, at the same upfront quotes and pricing you'd get elsewhere in the valley. Our Eagle Foothills guide covers hillside homes.",
       },
       {
         question: "What are Eagle's rules for a front-yard fence?",

@@ -535,6 +535,8 @@ const PLACES: PlaceGuide[] = [
   {
     slug: 'hidden-springs-handyman-guide',
     name: 'Hidden Springs',
+    // Hidden Springs is its own community near Eagle, not a City of Eagle neighborhood.
+    // The slug stays eagle only so the guide can link to the nearest published area page.
     citySlug: 'eagle',
     county: 'ada',
     guideType: 'neighborhood',
@@ -645,9 +647,17 @@ const PLACES: PlaceGuide[] = [
 function buildLocationGuide(p: PlaceGuide): GuidePageData {
   const county = countyLabel(p.county);
 
+  const nearEagle = p.slug === 'hidden-springs-handyman-guide';
+  const placeLine = nearEagle
+    ? `${p.name} is its own community near Eagle, in <strong>${county}</strong>, and sits fully inside our Treasure Valley service area. `
+    : `${p.name} is in <strong>${county}</strong> and sits fully inside our Treasure Valley service area. `;
+  const areaLink = nearEagle
+    ? `<a href="/areas/eagle">handyman service near Eagle</a>`
+    : `<a href="/areas/${p.citySlug}">our ${p.citySlug} service area page</a>`;
+
   const coverageCallout =
     `<div class="callout note"><p class="callout-label">${p.name}: service snapshot</p>` +
-    `<p>${p.name} is in <strong>${county}</strong> and sits fully inside our Treasure Valley service area. ` +
+    `<p>${placeLine}` +
     `We handle drywall repair, minor plumbing and electrical, carpentry and trim, painting, mounting and assembly, fence, deck, and gutter repair, and seasonal maintenance, with flat quotes from photos and one-trip completion as the goal. ` +
     `Jobs that need a licensed specialty trade or a major permit get named as such at the quote, see <a href="/resources/ada-canyon-permit-flow">when a home repair needs a permit</a>.</p></div>`;
 
@@ -665,7 +675,7 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     `<p>The full season-by-season checklist for Treasure Valley homes is in <a href="/guides/boise-home-maintenance-guide">the complete Boise home maintenance guide</a>, with a printable version on the <a href="/resources">resources page</a>.</p>`,
     `<h2 id="how-we-work">How we work in ${p.name}</h2>`,
     `<p><strong>Send the list with photos, get a flat quote, and we aim to finish in one trip.</strong> The quote names the scope and the price before we arrive, and it does not move unless the scope does, in which case you approve the change first. Batching several small jobs into one visit spreads the trip cost and is the cheapest way to buy this kind of work anywhere in the valley, and especially outside the core cities. Our labor carries a workmanship guarantee, and anything on your list that belongs with a licensed specialty trade gets said plainly at the quote stage.</p>`,
-    `<p>Services relevant here: <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing</a>, <a href="/services/electrical-repairs">minor electrical</a>, <a href="/services/carpentry-trim-repair">carpentry and trim</a>, <a href="/services/painting-touch-ups">painting</a>, <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/fence-deck-gutter-repair">fence, deck, and gutter repair</a>, and <a href="/services/home-maintenance">home maintenance</a>. See also <a href="/areas/${p.citySlug}">our ${p.citySlug} service area page</a> and <a href="/guides/hire-a-handyman-treasure-valley">how to hire a handyman in the Treasure Valley</a>.</p>`,
+    `<p>Services relevant here: <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing</a>, <a href="/services/electrical-repairs">minor electrical</a>, <a href="/services/carpentry-trim-repair">carpentry and trim</a>, <a href="/services/painting-touch-ups">painting</a>, <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/fence-deck-gutter-repair">fence, deck, and gutter repair</a>, and <a href="/services/home-maintenance">home maintenance</a>. See also ${areaLink} and <a href="/guides/hire-a-handyman-treasure-valley">how to hire a handyman in the Treasure Valley</a>.</p>`,
     `<h2 id="next-steps">Start with the list</h2>`,
     `<p>The fastest way to get a real answer about a repair in ${p.name} is to show it to us: <a href="/contact">send the list and a few photos</a> and we will reply with a flat quote and the earliest slot, usually within a day. No site-visit fee, no obligation, and if something on the list is not a handyman job, we will tell you whose job it is.</p>`,
   ].join('\n');
@@ -680,7 +690,9 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     author: 'Boise Handyman Co',
     hubSlug: 'costs-and-hiring',
     guideType: p.guideType,
-    tags: [p.citySlug, p.name.toLowerCase(), 'idaho', 'handyman'],
+    tags: nearEagle
+      ? ['near eagle', p.name.toLowerCase(), 'idaho', 'handyman']
+      : [p.citySlug, p.name.toLowerCase(), 'idaho', 'handyman'],
     publishedAt: '2026-06-20',
     updatedAt: '2026-08-13',
     // Hero imagery comes from the blog image registry (see
@@ -691,9 +703,11 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     quickAnswer: p.quickAnswer,
     keyTakeaways: p.takeaways,
     faqs: p.faqs,
-    linkedCities: [p.citySlug],
+    linkedCities: nearEagle ? [] : [p.citySlug],
     relatedLinks: [
-      { url: `/areas/${p.citySlug}`, anchor: `Handyman services in ${p.name}` },
+      nearEagle
+        ? { url: '/areas/eagle', anchor: 'Handyman service near Eagle' }
+        : { url: `/areas/${p.citySlug}`, anchor: `Handyman services in ${p.name}` },
       { url: '/guides/boise-home-repair-cost-guide', anchor: 'Boise Home Repair Cost Guide' },
       { url: '/guides/hire-a-handyman-treasure-valley', anchor: 'How to hire a handyman' },
       { url: '/guides/boise-home-maintenance-guide', anchor: 'Boise home maintenance guide' },
