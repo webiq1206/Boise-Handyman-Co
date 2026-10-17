@@ -128,16 +128,29 @@ export function generatePageTitle(params: ServiceSEOParams): string {
   return `${truncatedService} | ${BRAND}`;
 }
 
+/**
+ * Unproven marketing claims. The phrases stay in this file. Flip this on only
+ * after there is a documented basis for them.
+ */
+export const SHOW_TRUST_CLAIMS = false;
+
+const SATISFACTION_GUARANTEED_CTA = "Satisfaction guaranteed";
+const NEUTRAL_FALLBACK_CTA = "Free upfront quotes";
+
 const CITY_DESCRIPTION_VARIANTS: Record<string, string> = {
-  Kuna: "Kuna's trusted local",
+  Kuna: SHOW_TRUST_CLAIMS ? "Kuna's trusted local" : "Kuna",
   Boise: "Boise's local",
-  Meridian: "Meridian's trusted",
+  Meridian: SHOW_TRUST_CLAIMS ? "Meridian's trusted" : "Meridian",
   Eagle: "Eagle's preferred",
   Star: "Star's reliable",
   Middleton: "Middleton's expert",
-  Nampa: "Nampa's trusted",
-  Caldwell: "Caldwell's trusted",
+  Nampa: SHOW_TRUST_CLAIMS ? "Nampa's trusted" : "Nampa",
+  Caldwell: SHOW_TRUST_CLAIMS ? "Caldwell's trusted" : "Caldwell",
 };
+
+function cityDescriptionLead(city: string, unmappedFallback: string): string {
+  return CITY_DESCRIPTION_VARIANTS[city] || (SHOW_TRUST_CLAIMS ? `${city}'s trusted` : unmappedFallback);
+}
 
 const CITY_CTA_VARIANTS: Record<string, string> = {
   Kuna: "Free upfront quotes",
@@ -169,8 +182,8 @@ export function generateMetaDescription(params: ServiceSEOParams): string {
 
   if (city && serviceName) {
     const serviceLC = serviceName.toLowerCase();
-    const cityVariant = CITY_DESCRIPTION_VARIANTS[city] || `${city}'s trusted`;
-    const ctaVariant = CITY_CTA_VARIANTS[city] || "Satisfaction guaranteed";
+    const cityVariant = cityDescriptionLead(city, city);
+    const ctaVariant = CITY_CTA_VARIANTS[city] || (SHOW_TRUST_CLAIMS ? SATISFACTION_GUARANTEED_CTA : NEUTRAL_FALLBACK_CTA);
     return `${cityVariant} ${serviceLC} team. Upfront quotes. ${ctaVariant}. Call ${phone} to book a visit!`;
   }
 
@@ -241,7 +254,7 @@ export function generateCityServiceDescription(
 ): string {
   const phone = SITE_CONFIG.phone;
   const serviceLC = serviceName.toLowerCase();
-  const cityVariant = CITY_DESCRIPTION_VARIANTS[cityName] || `${cityName}'s trusted`;
+  const cityVariant = cityDescriptionLead(cityName, "Local");
   const cityData = CITY_SEO_DATA[cityName as keyof typeof CITY_SEO_DATA];
   const neighborhood = cityData?.neighborhoods?.[0];
 
