@@ -4,22 +4,39 @@ import assert from 'node:assert/strict';
 import { clarityFormMaskScript } from '../lib/clarityFormMask.ts';
 
 type FakeEl = {
+  nodeType: number;
   tag: string;
+  tagName: string;
+  type: string;
   attrs: Record<string, string>;
   children: FakeEl[];
+  parentElement: FakeEl | null;
+  append: (child: FakeEl) => void;
+  getAttribute: (name: string) => string | null;
   setAttribute: (name: string, value: string) => void;
   querySelectorAll: (selector: string) => FakeEl[];
 };
 
-function el(tag: string, children: FakeEl[] = []): FakeEl {
-  const node: FakeEl = {
+function el(tag: string, children: FakeEl[] = [], type = ''): FakeEl {
+  const node = {
+    nodeType: 1,
     tag,
-    attrs: {},
-    children,
-    setAttribute(name, value) {
+    tagName: tag.toUpperCase(),
+    type: type || (tag === 'input' ? 'text' : ''),
+    attrs: {} as Record<string, string>,
+    children: [] as FakeEl[],
+    parentElement: null as FakeEl | null,
+    append(child: FakeEl) {
+      child.parentElement = this;
+      this.children.push(child);
+    },
+    getAttribute(name: string) {
+      return Object.prototype.hasOwnProperty.call(this.attrs, name) ? this.attrs[name] : null;
+    },
+    setAttribute(name: string, value: string) {
       this.attrs[name] = value;
     },
-    querySelectorAll(selector) {
+    querySelectorAll(selector: string) {
       const tags = selector.split(',').map((part) => part.trim().toLowerCase());
       const out: FakeEl[] = [];
       const walk = (current: FakeEl) => {
@@ -30,57 +47,108 @@ function el(tag: string, children: FakeEl[] = []): FakeEl {
       return out;
     },
   };
+  if (type) node.attrs.type = type;
+  children.forEach((child) => node.append(child));
   return node;
 }
 
-test('the Clarity mask script marks every input, textarea, and select', () => {
-  const name = el('input');
-  const email = el('input');
-  const phone = el('input');
-  const notes = el('textarea');
-  const service = el('select');
-  const submit = el('button');
-  const heading = el('div');
-  const body = el('body', [
-    el('form', [name, email, heading]),
-    el('form', [phone, notes, service, submit]),
-  ]);
-  const root = el('html', [body]);
-  const observers: Array<{ callback: () => void }> = [];
+function masked(node: FakeEl): boolean {
+  return node.attrs['data-clarity-mask'] === 'True';
+}
 
+type Observer = { callback: (mutations: Array<{ addedNodes?: FakeEl[] }>) => void };
+
+function run(root: FakeEl) {
+  const observers: Observer[] = [];
+  const documentQueries: unknown[] = [];
   class MutationObserver {
-    callback: () => void;
-    constructor(callback: () => void) {
+    callback: Observer['callback'];
+    constructor(callback: Observer['callback']) {
       this.callback = callback;
       observers.push(this);
     }
     observe() {}
   }
-
   const document = {
+    nodeType: 9,
     readyState: 'complete',
     documentElement: root,
     addEventListener() {},
-    querySelectorAll: (selector: string) => root.querySelectorAll(selector),
+    querySelectorAll(selector: string) {
+      documentQueries.push(document);
+      return root.querySelectorAll(selector);
+    },
   };
-
   new Function('document', 'MutationObserver', clarityFormMaskScript)(document, MutationObserver);
+  return { observers, documentQueries };
+}
 
-  for (const field of [name, email, phone, notes, service]) {
-    assert.equal(field.attrs['data-clarity-mask'], 'True');
+test('a masked form covers nested project text and leaves a checkbox parent unmarked', () => {
+  const projectCopy = el('div');
+  const checkbox = el('input', [], 'checkbox');
+  const label = el('label', [checkbox]);
+  const address = el('input');
+  const preferred = el('button');
+  const form = el('form', [projectCopy, label, address, preferred]);
+  const root = el('html', [el('body', [form])]);
+
+  run(root);
+
+  assert.equal(masked(form), true);
+  assert.equal(masked(projectCopy), false);
+  assert.equal(masked(label), false);
+  assert.equal(masked(checkbox), false);
+  assert.equal(masked(address), true);
+  assert.equal(masked(preferred), false);
+  assert.equal(checkbox.parentElement, label);
+});
+
+test('a checkbox, radio, range, or button input with no masked ancestor marks its parent', () => {
+  const checkbox = el('input', [], 'checkbox');
+  const checkboxParent = el('div', [checkbox]);
+  const radio = el('input', [], 'radio');
+  const radioParent = el('label', [radio]);
+  const range = el('input', [], 'range');
+  const rangeParent = el('div', [range]);
+  const buttonInput = el('input', [], 'button');
+  const buttonParent = el('div', [buttonInput]);
+  const typed = el('input');
+  const typedParent = el('div', [typed]);
+  const root = el('html', [el('body', [checkboxParent, radioParent, rangeParent, buttonParent, typedParent])]);
+
+  run(root);
+
+  for (const parent of [checkboxParent, radioParent, rangeParent, buttonParent]) {
+    assert.equal(masked(parent), true);
   }
-  assert.equal(submit.attrs['data-clarity-mask'], undefined);
-  assert.equal(heading.attrs['data-clarity-mask'], undefined);
+  assert.equal(masked(checkbox), false);
+  assert.equal(masked(radio), false);
+  assert.equal(masked(range), false);
+  assert.equal(masked(buttonInput), false);
+  assert.equal(masked(typed), true);
+  assert.equal(masked(typedParent), false);
+});
 
-  const intake = el('input');
-  const estimateNotes = el('textarea');
-  const estimateService = el('select');
-  body.children.push(el('form', [intake, estimateNotes, estimateService]));
-  assert.equal(observers.length, 1);
-  observers[0].callback();
-  assert.equal(intake.attrs['data-clarity-mask'], 'True');
-  assert.equal(estimateNotes.attrs['data-clarity-mask'], 'True');
-  assert.equal(estimateService.attrs['data-clarity-mask'], 'True');
+test('a mutation masks only the added node', () => {
+  const existing = el('input');
+  const untouched = el('div');
+  const body = el('body', [existing, untouched]);
+  const root = el('html', [body]);
+  const { observers, documentQueries } = run(root);
+
+  assert.equal(masked(existing), true);
+  assert.equal(documentQueries.length, 1);
+
+  const addedChoice = el('input', [], 'checkbox');
+  const addedParent = el('div', [addedChoice]);
+  const addedForm = el('form', [el('p'), addedParent]);
+  observers[0].callback([{ addedNodes: [addedForm] }]);
+
+  assert.equal(documentQueries.length, 1);
+  assert.equal(masked(addedForm), true);
+  assert.equal(masked(addedParent), false);
+  assert.equal(masked(untouched), false);
+  assert.equal(masked(existing), true);
 });
 
 test('the root layout installs the Clarity mask before the Clarity tag', () => {
@@ -90,9 +158,17 @@ test('the root layout installs the Clarity mask before the Clarity tag', () => {
   assert.ok(maskAt > 0);
   assert.ok(clarityAt > maskAt);
   assert.match(layout, /strategy="beforeInteractive"/);
-  assert.match(clarityFormMaskScript, /"input, textarea, select"/);
-  assert.match(clarityFormMaskScript, /"data-clarity-mask"/);
-  assert.match(clarityFormMaskScript, /"True"/);
-  assert.match(clarityFormMaskScript, /querySelectorAll\(SELECTOR\)/);
-  assert.match(clarityFormMaskScript, /setAttribute\(ATTR, VALUE\)/);
+  assert.match(clarityFormMaskScript, /"form,input,textarea,select"/);
+  assert.match(clarityFormMaskScript, /function maskOne/);
+  assert.match(clarityFormMaskScript, /function maskForms/);
+  assert.match(clarityFormMaskScript, /maskForms\(added\[j\]\)/);
+  assert.equal(clarityFormMaskScript.includes('maskForms(document)'), true);
+  assert.equal(clarityFormMaskScript.includes('onMutations(function(){ mask'), false);
+});
+
+test('the assistant transcript is masked', () => {
+  const source = readFileSync(new URL('../components/assistant/AssistantWidget.tsx', import.meta.url), 'utf8');
+  const logAt = source.indexOf('role="log"');
+  assert.ok(logAt > 0);
+  assert.match(source.slice(logAt, logAt + 220), /data-clarity-mask="True"/);
 });
