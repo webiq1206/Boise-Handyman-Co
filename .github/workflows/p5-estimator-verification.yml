@@ -1,8 +1,8 @@
 name: P5 estimator policy and workflow verification
 on:
   pull_request:
+    types: [opened, synchronize, labeled, reopened]
     branches: [main]
-    paths: ['components/P5Estimator.tsx', 'scripts/p5-estimator-browser.mjs', '.github/workflows/p5-estimator-verification.yml']
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -11,6 +11,7 @@ permissions:
   contents: read
 jobs:
   verify:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'full-ci')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     container: mcr.microsoft.com/playwright:v1.60.0-noble
