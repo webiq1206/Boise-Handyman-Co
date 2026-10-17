@@ -49,8 +49,14 @@ function filesIn(dir) {
   return files;
 }
 
+const files = filesIn(root);
+if (files.length === 0) {
+  console.error(`scanned 0 files in ${root}`);
+  process.exit(1);
+}
+
 const hits = [];
-for (const file of filesIn(root)) {
+for (const file of files) {
   let text;
   try {
     text = readFileSync(file);

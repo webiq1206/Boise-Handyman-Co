@@ -1,6 +1,7 @@
 import { ApprovedShell } from "@/components/approved/ApprovedShell";
 import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import localFont from 'next/font/local'
 import { Navigation } from '@/components/Navigation'
 import { ConditionalFooter } from '@/components/ConditionalFooter'
@@ -13,6 +14,7 @@ import { SITE_CONFIG } from '@/shared/siteConfig'
 import { GoogleAnalytics } from '@/components/GoogleAnalytics'
 import { MetaPixel } from '@/components/MetaPixel'
 import { MicrosoftClarity } from '@/components/MicrosoftClarity'
+import { clarityFormMaskScript } from '@/lib/clarityFormMask'
 import { ConversionTracking } from '@/components/ConversionTracking'
 import { AssistantWidget } from '@/components/assistant/AssistantWidget'
 import { SiteBusinessSchema } from '@/components/seo/SiteBusinessSchema'
@@ -160,6 +162,11 @@ export default function RootLayout({
         </Providers>
         <GoogleAnalytics />
         <MetaPixel />
+        <Script
+          id="clarity-form-mask"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: clarityFormMaskScript }}
+        />
         <MicrosoftClarity />
         <ConversionTracking />
       </body>

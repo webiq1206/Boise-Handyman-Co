@@ -46,16 +46,15 @@ export function BlogIndexClient() {
   const [activeHub, setActiveHub] = useState<string | null>(null);
   const [query, setQuery] = useState("");
 
-  /* Debounced search analytics: the query text is content search terms, not
-     personal data, but only settled queries (600ms idle, 2+ chars) are worth
-     an event. */
+  /* Debounced search analytics. The typed words stay on the page: the event
+     records only that a search settled, not the form input. */
   const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
     if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
     const q = query.trim();
     if (q.length < 2) return;
     searchTimerRef.current = setTimeout(() => {
-      trackEvent("resource_searched", { query: q.slice(0, 60).toLowerCase() });
+      trackEvent("resource_searched", { characters: q.length });
     }, 600);
     return () => {
       if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
