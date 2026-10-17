@@ -10,7 +10,7 @@
  */
 export const GOOGLE_ADS_ID = "AW-18354188204";
 export const GOOGLE_ADS_LEAD_LABEL = "AW-18354188204/LE2vCPXstO8cEKzf-q9E";
-/** "P5 Estimator Completed" (7851740531). Not an accepted-lead conversion. */
+/** "P5 Estimator Completed" (7851740531). Sent with the form label when an estimator finish also submits a lead. */
 export const GOOGLE_ADS_ESTIMATOR_LABEL = "AW-18354188204/cEzmCPOagKAdEKzf-q9E";
 /** "P5 Website Call (60s+)": swaps the visible number for a Google forwarding number. */
 export const GOOGLE_ADS_WEBSITE_CALL_LABEL = "AW-18354188204/YHR0CIaPz_ccEKzf-q9E";
@@ -116,7 +116,11 @@ function sendConversion(storageKey: string | undefined, payload: () => Record<st
       // Ignore; in-memory guard is enough for this page load.
     }
   }
-  gtag("event", "conversion", payload());
+  try {
+    gtag("event", "conversion", payload());
+  } catch {
+    // A tracking failure must not break the form or the estimator.
+  }
   return true;
 }
 
@@ -140,36 +144,29 @@ function queueConversion(storageKey: string | undefined, payload: () => Record<s
   return false;
 }
 
-/** Shared estimator completion keys. The shared component cannot be edited per brand. */
+/** Intake confirm and estimate submit both create a lead, and both use these key prefixes. */
 export function isEstimatorCompletionKey(dedupeKey?: string): boolean {
   return !!dedupeKey && (dedupeKey.startsWith("estimator:") || dedupeKey.startsWith("intake:"));
 }
 
 /**
- * Fires "P5 Estimator Completed". When this finish also created an accepted
- * lead, pass that lead's dedupe key and the form label fires once for it too.
- */
-export function trackEstimatorCompleted(ctx: LeadContext = {}, dedupeKey?: string, acceptedLeadKey?: string): boolean {
-  const sent = queueConversion(
-    dedupeKey ? `google_ads_estimator:${dedupeKey}` : undefined,
-    () => ({ send_to: GOOGLE_ADS_ESTIMATOR_LABEL }),
-  );
-  if (acceptedLeadKey) {
-    queueConversion(`google_ads_lead:${acceptedLeadKey}`, () => googleAdsLeadParams(ctx, acceptedLeadKey));
-  }
-  return sent;
-}
-
-/**
  * Fires one Google Ads conversion once per dedupe key (per page load and,
- * where storage allows, per browser session). Estimator completion keys send
- * "P5 Estimator Completed". Any other key is a real accepted lead and sends
- * the form label. Returns true when the primary conversion was sent.
- * If gtag is not loaded yet, one retry waits about five seconds and still
- * fires at most once. The sent marker is written only when gtag is ready.
+ * where storage allows, per browser session). An `estimator:` or `intake:`
+ * key sends P5 Estimator Completed and the form label, each with
+ * transaction_id set to that key. Any other key is a consultation lead and
+ * sends only the form label. If gtag is not loaded yet, one retry waits
+ * about five seconds and still fires at most once. The sent marker is written
+ * only when gtag is ready.
  */
-export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string, acceptedLeadKey?: string): boolean {
-  if (isEstimatorCompletionKey(dedupeKey)) return trackEstimatorCompleted(ctx, dedupeKey, acceptedLeadKey);
+export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string): boolean {
+  if (isEstimatorCompletionKey(dedupeKey)) {
+    const estimatorSent = queueConversion(`google_ads_estimator:${dedupeKey}`, () => ({
+      send_to: GOOGLE_ADS_ESTIMATOR_LABEL,
+      transaction_id: dedupeKey,
+    }));
+    queueConversion(`google_ads_lead:${dedupeKey}`, () => googleAdsLeadParams(ctx, dedupeKey));
+    return estimatorSent;
+  }
   const storageKey = dedupeKey ? `google_ads_lead:${dedupeKey}` : undefined;
   return queueConversion(storageKey, () => googleAdsLeadParams(ctx, dedupeKey));
 }

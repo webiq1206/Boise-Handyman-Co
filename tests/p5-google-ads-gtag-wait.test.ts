@@ -92,31 +92,69 @@ test('the accepted-lead wait stops after about five seconds', () => {
   }
 });
 
-test('estimator completion fires the estimator label and waits once', () => {
+test('an estimator key fires both labels once and a repeat fires nothing', () => {
   const previous = (globalThis as { window?: unknown }).window;
   const harness = installWindow();
   try {
-    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:one');
-    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:one');
-    assert.equal(harness.calls.length, 0);
-    assert.equal(harness.timers.length, 1);
     harness.setGtag();
-    harness.timers.shift()?.();
     trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:one');
-    assert.equal(harness.calls.length, 1);
-    assert.deepEqual(harness.calls[0], ['event', 'conversion', { send_to: GOOGLE_ADS_ESTIMATOR_LABEL }]);
+    assert.deepEqual(harness.calls, [
+      ['event', 'conversion', { send_to: GOOGLE_ADS_ESTIMATOR_LABEL, transaction_id: 'estimator:one' }],
+      ['event', 'conversion', {
+        send_to: GOOGLE_ADS_LEAD_LABEL,
+        value: 50,
+        currency: 'USD',
+        transaction_id: 'estimator:one',
+      }],
+    ]);
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:one');
+    assert.equal(harness.calls.length, 2);
     assert.equal(harness.timers.length, 0);
   } finally {
     Object.assign(globalThis, { window: previous });
   }
 });
 
-test('a lead created with the estimator waits on the same path and fires once', () => {
+test('an intake key fires both labels once', () => {
   const previous = (globalThis as { window?: unknown }).window;
   const harness = installWindow();
   try {
-    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:wait', 'lead:wait');
-    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:wait', 'lead:wait');
+    harness.setGtag();
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'intake:project-1');
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'intake:project-1');
+    assert.deepEqual(harness.calls.map((call) => (call[2] as { send_to: string; transaction_id?: string }).send_to), [
+      GOOGLE_ADS_ESTIMATOR_LABEL,
+      GOOGLE_ADS_LEAD_LABEL,
+    ]);
+    assert.equal((harness.calls[0]?.[2] as { transaction_id?: string }).transaction_id, 'intake:project-1');
+    assert.equal((harness.calls[1]?.[2] as { transaction_id?: string }).transaction_id, 'intake:project-1');
+    assert.equal(harness.calls.length, 2);
+  } finally {
+    Object.assign(globalThis, { window: previous });
+  }
+});
+
+test('a stored estimator key fires nothing', () => {
+  const previous = (globalThis as { window?: unknown }).window;
+  const harness = installWindow();
+  try {
+    harness.setGtag();
+    const win = (globalThis as { window: { sessionStorage: { setItem: (key: string, value: string) => void } } }).window;
+    win.sessionStorage.setItem('google_ads_estimator:estimator:stored', 'sent');
+    win.sessionStorage.setItem('google_ads_lead:estimator:stored', 'sent');
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:stored');
+    assert.equal(harness.calls.length, 0);
+  } finally {
+    Object.assign(globalThis, { window: previous });
+  }
+});
+
+test('estimator labels wait once for gtag and still fire once', () => {
+  const previous = (globalThis as { window?: unknown }).window;
+  const harness = installWindow();
+  try {
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:wait');
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:wait');
     assert.equal(harness.calls.length, 0);
     assert.equal(harness.timers.length, 2);
     harness.setGtag();
@@ -126,46 +164,43 @@ test('a lead created with the estimator waits on the same path and fires once', 
       GOOGLE_ADS_ESTIMATOR_LABEL,
       GOOGLE_ADS_LEAD_LABEL,
     ]);
-    assert.equal(harness.timers.length, 0);
-  } finally {
-    Object.assign(globalThis, { window: previous });
-  }
-});
-
-test('estimator completion also fires the form label once when a lead is created', () => {
-  const previous = (globalThis as { window?: unknown }).window;
-  const harness = installWindow();
-  try {
-    harness.setGtag();
-    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'intake:lead', 'lead:one');
-    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'intake:lead', 'lead:one');
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:wait');
     assert.equal(harness.calls.length, 2);
-    assert.deepEqual(harness.calls[0], ['event', 'conversion', { send_to: GOOGLE_ADS_ESTIMATOR_LABEL }]);
-    assert.deepEqual(harness.calls[1], ['event', 'conversion', {
-      send_to: GOOGLE_ADS_LEAD_LABEL,
-      value: 50,
-      currency: 'USD',
-      transaction_id: 'lead:one',
-    }]);
     assert.equal(harness.timers.length, 0);
   } finally {
     Object.assign(globalThis, { window: previous });
   }
 });
 
-test('a non-estimator lead key fires only the form label', () => {
+test('a form key fires the form label only', () => {
   const previous = (globalThis as { window?: unknown }).window;
   const harness = installWindow();
   try {
     harness.setGtag();
     trackGoogleAdsLeadConversion({ projectType: 'drywall' }, 'consultation:one');
-    assert.deepEqual(harness.calls[0], ['event', 'conversion', {
+    trackGoogleAdsLeadConversion({ projectType: 'drywall' }, 'consultation:one');
+    assert.deepEqual(harness.calls, [['event', 'conversion', {
       send_to: GOOGLE_ADS_LEAD_LABEL,
       value: 50,
       currency: 'USD',
       transaction_id: 'consultation:one',
-    }]);
-    assert.equal(harness.calls.length, 1);
+    }]]);
+  } finally {
+    Object.assign(globalThis, { window: previous });
+  }
+});
+
+test('a gtag failure does not escape the conversion call', () => {
+  const previous = (globalThis as { window?: unknown }).window;
+  const harness = installWindow();
+  try {
+    const win = (globalThis as { window: { gtag?: () => void } }).window;
+    win.gtag = () => { throw new Error('gtag down'); };
+    assert.doesNotThrow(() => trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:throws'));
+    assert.equal(harness.calls.length, 0);
+    win.gtag = (...args: unknown[]) => { harness.calls.push(args); };
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:throws');
+    assert.equal(harness.calls.length, 0);
   } finally {
     Object.assign(globalThis, { window: previous });
   }
@@ -178,6 +213,6 @@ test('the consultation form fires only the form label', () => {
   assert.match(estimator, /trackGoogleAdsLeadConversion\(\{service:d\.answers\.service\},`estimator:\$\{d\.id\}`\)/);
   assert.equal(estimator.includes('cEzmCPOagKAdEKzf-q9E'), false);
   assert.equal(estimator.includes('LE2vCPXstO8cEKzf-q9E'), false);
-  assert.match(form, /trackAcceptedLeadConversion\(\{ projectType: variables\.projectType \}\)/);
+  assert.match(form, /trackAcceptedLeadConversion\(\{ projectType: variables\.projectType \}, inquiryId\("primary"\)\)/);
   assert.equal(form.includes('cEzmCPOagKAdEKzf-q9E'), false);
 });
