@@ -6,7 +6,8 @@
  * campaign. Values are the per-lead estimates agreed with P5 on 14 Sept 2026
  * (form fallback in Google Ads is $50). The conversion parameters stay limited
  * to a service category and an opaque transaction id. Enhanced conversions
- * send a separate user_data object with email, phone, name, and ZIP only.
+ * attach user_data to that Ads conversion event only. There is no global
+ * gtag('set','user_data'), so the GA4 tag cannot collect it.
  */
 export const GOOGLE_ADS_ID = "AW-18354188204";
 export const GOOGLE_ADS_LEAD_LABEL = "AW-18354188204/LE2vCPXstO8cEKzf-q9E";
@@ -176,11 +177,15 @@ function resolveEnhancedContact(ctx: LeadContext, transactionId?: string): Pick<
   };
 }
 
+/** user_data rides on the AW conversion event. It is never a global gtag set. */
+function scopedAdsConversion(params: GoogleAdsLeadParams, userData: EnhancedConversionUserData | null): GoogleAdsLeadParams & { user_data?: EnhancedConversionUserData } {
+  return userData ? { ...params, user_data: userData } : params;
+}
+
 function fireEnhancedLead(ctx: LeadContext, transactionId?: string): void {
   const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag;
   const userData = enhancedConversionUserData(resolveEnhancedContact(ctx, transactionId));
-  if (userData) gtag("set", "user_data", userData);
-  gtag("event", "conversion", googleAdsLeadParams(ctx, transactionId));
+  gtag("event", "conversion", scopedAdsConversion(googleAdsLeadParams(ctx, transactionId), userData));
 }
 
 /**
