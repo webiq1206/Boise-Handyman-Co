@@ -7,14 +7,19 @@ const policy = readFileSync(new URL('../app/privacy-policy/page.tsx', import.met
 test('the privacy policy discloses cookies, analytics and advertising', () => {
   assert.match(policy, /Last updated: October 17, 2026/);
   assert.match(policy, /Cookies, analytics and advertising\. We use Google Analytics 4 \(GA4\) to understand how visitors use this site, such as pages viewed, referring site, approximate location, browser and device type\./);
-  assert.match(policy, /Google may use cookies to show our ads to people who have visited this site \(remarketing\)\./);
-  assert.match(policy, /We do not send your name, email, phone number or project details to Google\./);
+  assert.match(policy, /Google's tag also adds visitors to remarketing lists, and Google may use this data to show you relevant ads on other websites \(remarketing\)\./);
+  assert.match(policy, /We do not currently send your name, email, phone number, address or project description to Google; Google Analytics receives only the type of project you choose \(for example, a drywall repair or a small plumbing repair\) when you use the estimator or send an inquiry, and the words you type into our blog search\./);
+  assert.match(policy, /Calls from our site or ads may be routed through a Google forwarding number so we can measure which ads lead to calls\./);
   assert.match(policy, /href="https:\/\/policies\.google\.com\/privacy"/);
   assert.match(policy, /href="https:\/\/adssettings\.google\.com"/);
   assert.match(policy, /href="https:\/\/tools\.google\.com\/dlpage\/gaoptout"/);
-  assert.match(policy, /We also use the Meta Pixel to measure visits and inquiries that come from our Facebook and Instagram ads\./);
+  assert.match(policy, /This site and Boise Remodeling Co use the same Meta Pixel\./);
+  assert.match(policy, /The pixel records a page view, and Meta may record automatic events such as button clicks and page metadata\./);
+  assert.match(policy, /We do not send your name, email or phone number to Meta\./);
+  assert.match(policy, /the type of project you chose and the consultation category, the page address, the event time, a matching event id, your IP address, your browser user agent, and the Meta cookies _fbp and _fbc/);
+  assert.match(policy, /href="https:\/\/www\.facebook\.com\/privacy\/policy"/);
   assert.equal(policy.includes('personalise ads'), false);
-  assert.equal(policy.includes('optout.networkadvertising.org'), false);
+  assert.equal(policy.includes('an addition or an ADU'), false);
   assert.equal(policy.includes('hashed email'), false);
-  assert.equal(policy.includes('We do not currently send'), false);
+  assert.equal(policy.includes('We do not send your name, email, phone number or project details to Google'), false);
 });
