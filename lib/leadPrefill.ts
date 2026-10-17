@@ -26,18 +26,12 @@ export interface LeadPrefill {
   zip?: string;
 }
 
-/** Sources that mean "this person already gave us their contact info." */
-const PREFILLED_SOURCES = new Set([
-  "fb", "facebook", "ig", "instagram", "meta", "lead", "leadform", "leadad",
-]);
-
 const PII_PARAM_KEYS = [
   "name", "first_name", "last_name", "fname", "lname",
   "email", "phone", "zip", "postal",
 ];
 
 const STORAGE_PREFILL = "brc_prefill";
-const STORAGE_SOURCE = "brc_lead_source";
 
 /**
  * Contact details persist in localStorage, not sessionStorage, so a visitor who
@@ -130,7 +124,6 @@ export function applyLeadParams(): { prefill: LeadPrefill } {
     const url = new URL(window.location.href);
     const p = url.searchParams;
 
-    const src = (p.get("src") || p.get("utm_source") || "").toLowerCase();
     const first = (p.get("first_name") || p.get("fname") || "").trim();
     const last = (p.get("last_name") || p.get("lname") || "").trim();
     const name = (p.get("name") || [first, last].filter(Boolean).join(" ")).trim();
@@ -146,9 +139,6 @@ export function applyLeadParams(): { prefill: LeadPrefill } {
 
     if (Object.keys(prefill).length > 0) {
       durableSet(STORAGE_PREFILL, JSON.stringify(prefill));
-    }
-    if (PREFILLED_SOURCES.has(src)) {
-      durableSet(STORAGE_SOURCE, src);
     }
 
     // Privacy: never leave a phone/email sitting in the address bar (URLs get

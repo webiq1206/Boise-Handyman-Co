@@ -198,8 +198,13 @@ test("Meta autoConfig is off before init and the privacy wording matches Cabinet
     "If your call goes through a Google forwarding number, Google connects the call and can see the calling number and call length, but not what's said.",
     "We also use Microsoft Clarity to see how visitors use our pages through heatmaps and session recordings; form fields are masked so what you type is not recorded.",
     "We also use the Meta Pixel and Meta's Conversions API to measure visits and inquiries from our Facebook and Instagram ads. The pixel records a page view. Meta's pixel may also record which buttons you click and basic information about the page, such as its title. Depending on Meta's settings, the pixel may also collect contact details you type into a form, in hashed form. When you submit an inquiry, our server may send Meta the Lead event with the type of project you chose and an inquiry category, the page address, the event time, a matching event id, your IP address, your browser user agent, and the Meta cookies _fbp and _fbc, so it can match the inquiry to an ad.",
+    "If you arrive from one of our ads or a link with campaign tags, our site keeps the ad click identifier and campaign tags from that link in your browser only until you close the tab.",
   ];
   for (const sentence of sentences) assert.ok(privacy.includes(sentence), sentence.slice(0, 48));
+  const metaAt = privacy.indexOf(sentences[3]);
+  const tabAt = privacy.indexOf(sentences[4]);
+  assert.ok(tabAt > metaAt);
+  assert.ok(tabAt < privacy.indexOf('id="document-section-5"'));
   const analytics = readFileSync(new URL("../lib/analytics.ts", import.meta.url), "utf8");
   assert.equal(analytics.includes("userData"), false);
   const consult = readFileSync(new URL("../components/ConsultationForm.tsx", import.meta.url), "utf8");
