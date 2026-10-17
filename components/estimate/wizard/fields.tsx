@@ -50,7 +50,7 @@ export const WizardField = forwardRef<HTMLInputElement, WizardFieldProps>(
     const errorId = error ? `${id}-error` : undefined;
 
     return (
-      <div className={cn("min-w-0", className)}>
+      <div className={cn("min-w-0", className)} data-clarity-mask="true">
         <label htmlFor={id} className={cn("mb-1.5 block text-xs", toneLabel(tone))}>
           {label}
           {required && <span className="text-accent-legible"> *</span>}
@@ -106,7 +106,7 @@ export function WizardTextArea({
   const id = fieldId ?? generated;
   const hintId = hint ? `${id}-hint` : undefined;
   return (
-    <div className={cn("min-w-0", className)}>
+    <div className={cn("min-w-0", className)} data-clarity-mask="true">
       <label htmlFor={id} className={cn("mb-1.5 block text-xs", toneLabel(tone))}>
         {label}
       </label>
@@ -158,7 +158,7 @@ export function WizardChoiceGroup<T extends string>({
 }: WizardChoiceGroupProps<T>) {
   const inverse = tone === "inverse";
   return (
-    <div className={cn("min-w-0", className)}>
+    <div className={cn("min-w-0", className)} data-clarity-mask="true">
       <span className={cn("mb-1.5 block text-xs", toneLabel(tone))}>{label}</span>
       <div role="radiogroup" aria-label={label} className="flex flex-wrap gap-2">
         {options.map((o) => {

@@ -93,11 +93,11 @@ export const P5ExitOffer = forwardRef<ExitOfferHandle, Props>(function P5ExitOff
     finally {clearTimeout(timeout);submitting.current=false;}
   }
   const number = callbackPhone(brand.phone);
-  return <dialog ref={dialog} className={styles.dialog} aria-labelledby={`${id}-title`} aria-describedby={`${id}-desc`} onCancel={event=>{event.preventDefault();stay();}} onClick={event=>{if(event.target===dialog.current){const rect=dialog.current.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)stay();}}}>
+  return <dialog ref={dialog} className={styles.dialog} data-clarity-mask="true" aria-labelledby={`${id}-title`} aria-describedby={`${id}-desc`} onCancel={event=>{event.preventDefault();stay();}} onClick={event=>{if(event.target===dialog.current){const rect=dialog.current.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)stay();}}}>
     <h2 id={`${id}-title`}>Prefer to talk about your project?</h2>
     <p id={`${id}-desc`}>Call us, or leave your number and we’ll call you.</p>
     {number && <a href={`tel:+1${number}`} aria-label={`Call ${brand.name} at ${brand.phone}`}>Call us</a>}
-    {state==='saved' ? <p role="status">Your callback request is saved. {notified?'The team notification was accepted.':'The team notification has not been confirmed.'} You can continue your form or leave.</p> : <form onSubmit={event=>void requestCallback(event)} noValidate>
+    {state==='saved' ? <p role="status">Your callback request is saved. {notified?'The team notification was accepted.':'The team notification has not been confirmed.'} You can continue your form or leave.</p> : <form data-clarity-mask="true" onSubmit={event=>void requestCallback(event)} noValidate>
       <label htmlFor={`${id}-phone`}>Your phone number</label>
       <input ref={phoneInput} id={`${id}-phone`} type="tel" inputMode="tel" autoComplete="tel" value={phone} readOnly={Boolean(requestPhone.current)} onChange={event=>{setPhone(event.target.value);setError('');}} aria-invalid={Boolean(error)} aria-describedby={`${id}-consent${error?` ${id}-error`:''}`} required maxLength={30}/>
       <p id={`${id}-consent`} className={styles.consent}>By requesting a call, you ask {brand.name} to call this number about your project. This does not sign you up for marketing.</p>
