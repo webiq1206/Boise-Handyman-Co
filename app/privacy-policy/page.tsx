@@ -54,10 +54,10 @@ export default function PrivacyPolicyPage() {
       />
       <section className="py-16 md:py-24">
         <div className="container px-4">
-          <InteriorDocument heading={<h1>Privacy Policy for Boise Handyman Co Handyman Services</h1>} contents={[{"id":"document-section-1","label":"Introduction"},{"id":"document-section-2","label":"Information We Collect"},{"id":"document-section-3","label":"How We Use Your Information"},{"id":"document-section-4","label":"Information Sharing"},{"id":"document-section-5","label":"Data Security"},{"id":"document-section-6","label":"Your Rights"},{"id":"document-section-7","label":"Contact Us"}]}>
+          <InteriorDocument heading={<h1>Privacy Policy for Boise Handyman Co Handyman Services</h1>} contents={[{"id":"document-section-1","label":"Introduction"},{"id":"document-section-2","label":"Information We Collect"},{"id":"document-section-3","label":"How We Use Your Information"},{"id":"document-section-4","label":"Information Sharing"},{"id":"document-section-ads","label":"Advertising"},{"id":"document-section-5","label":"Data Security"},{"id":"document-section-6","label":"Your Rights"},{"id":"document-section-7","label":"Contact Us"}]}>
 
             <p className="lead text-muted-foreground">
-              Last updated: January 2024
+              Last updated: October 17, 2026
             </p>
 
             <h2 id="document-section-1">Introduction</h2>
@@ -94,6 +94,14 @@ export default function PrivacyPolicyPage() {
               <li>Professional advisors as needed</li>
               <li>Law enforcement when required by law</li>
             </ul>
+
+            <h2 id="document-section-ads">Advertising</h2>
+            <p>
+              We use the Google tag to measure visits and advertising results. We do not currently send your name, email, phone number or project details to Google. Google's tag also adds visitors to remarketing lists, and Google may use this data to show you relevant ads on other websites (remarketing). You can opt out of Google's use of cookies or device identifiers in <a href="https://adssettings.google.com">Google Ads Settings</a>, or opt out of a third-party vendor's use of cookies on the <a href="https://optout.networkadvertising.org/">Network Advertising Initiative opt-out page</a>.
+            </p>
+            <p>
+              We also use the Meta Pixel and Meta's Conversions API to measure visits and inquiries from our Facebook and Instagram ads. When you submit an inquiry, we may send Meta the Lead event name and time, a matching event id, the page address, the project type, the consultation category, your IP address, your browser user agent, and the Meta browser cookies _fbp and _fbc so it can match the inquiry to an ad. Meta processes this under its own privacy policy (<a href="https://www.facebook.com/privacy/policy">https://www.facebook.com/privacy/policy</a>).
+            </p>
 
             <h2 id="document-section-5">Data Security</h2>
             <p>
