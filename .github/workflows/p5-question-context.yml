@@ -1,9 +1,12 @@
 name: P5 question context verification
 on:
-  push:
-    branches: [fix/p5-question-context-20260916]
+  pull_request:
+    types: [opened, synchronize, labeled, reopened]
+    branches: [main]
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
   verify:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'full-ci')
     uses: webiq1206/boise-remodeling-co/.github/workflows/p5-question-context.yml@a0c7e1d2b6bc54a5584a1193da98009719ca5a32

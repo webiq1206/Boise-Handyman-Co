@@ -1,11 +1,14 @@
 name: Address autocomplete focus regression
 on:
-  push:
-    branches: [codex/p5-address-focus]
+  pull_request:
+    types: [opened, synchronize, labeled, reopened]
+    branches: [main]
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
   verify:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'full-ci')
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/playwright:v1.60.0-noble
     timeout-minutes: 20
