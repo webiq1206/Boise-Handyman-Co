@@ -1,36 +1,17 @@
 'use client';
 
 import { useEffect } from 'react';
-import { trackEvent } from '@/lib/analytics';
+import { bindContactClicks } from '@/lib/contactClicks';
 
 /**
  * Site-wide conversion tracking for call/text/email intent. Uses a single
  * delegated click listener so every tel:/sms:/mailto: link across the site
  * (nav, hero, footer, sticky bar, contact page) fires a GA event without
  * instrumenting each one. Form submits are tracked at the form (generate_lead).
+ * The same listener sends the Google Ads call and text click conversions.
  */
 export function ConversionTracking() {
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
-      const link = target?.closest('a[href]') as HTMLAnchorElement | null;
-      if (!link) return;
-      const href = link.getAttribute('href') || '';
-      if (href.startsWith('tel:')) {
-        trackEvent('contact_click', { method: 'phone', link_url: href });
-      } else if (href.startsWith('sms:')) {
-        trackEvent('contact_click', { method: 'sms', link_url: href });
-      } else if (href.startsWith('mailto:')) {
-        trackEvent('contact_click', { method: 'email', link_url: href });
-      } else if (href === '#consult' || href.endsWith('/#consult')) {
-        // The secondary CTA ("Schedule a consultation") is a plain anchor in
-        // several sections; one delegated branch covers every instance.
-        trackEvent('cta_click', { cta: 'secondary', location: window.location.pathname });
-      }
-    };
-    document.addEventListener('click', onClick, { capture: true });
-    return () => document.removeEventListener('click', onClick, { capture: true });
-  }, []);
+  useEffect(() => bindContactClicks(document), []);
 
   return null;
 }

@@ -9,12 +9,18 @@
  * only, and only when the finish created a lead that is not suppressed.
  * There is no global gtag('set','user_data'), so the GA4 tag cannot collect it.
  */
+import { SITE_CONFIG } from "@/shared/siteConfig";
+
 export const GOOGLE_ADS_ID = "AW-18354188204";
 export const GOOGLE_ADS_LEAD_LABEL = "AW-18354188204/LE2vCPXstO8cEKzf-q9E";
 /** Estimator submit and intake completion. */
 export const GOOGLE_ADS_ESTIMATOR_LABEL = "AW-18354188204/cEzmCPOagKAdEKzf-q9E";
 /** "P5 Website Call (60s+)": swaps the visible number for a Google forwarding number. */
 export const GOOGLE_ADS_WEBSITE_CALL_LABEL = "AW-18354188204/YHR0CIaPz_ccEKzf-q9E";
+/** Click on a tel: link to the published number. One conversion per click. */
+export const GOOGLE_ADS_CALL_CLICK_LABEL = "AW-18354188204/ng9fCPiOhaAdEKzf-q9E";
+/** Click on an sms: link to the published number. One conversion per click. */
+export const GOOGLE_ADS_TEXT_CLICK_LABEL = "AW-18354188204/lTxsCOqahaAdEKzf-q9E";
 export const GOOGLE_ADS_PHONE_DISPLAY = "(208) 477-1169";
 /** sessionStorage key written by GoogleAnalytics.tsx on the first page view. */
 export const ENTRY_PATH_KEY = "p5_entry_path";
@@ -326,4 +332,46 @@ export function trackGoogleAdsLeadConversion(
   } catch {
     return false;
   }
+}
+
+function nationalDigits(value: string): string {
+  const digits = value.replace(/\D/g, "");
+  return digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+}
+
+/** Same visitor gates as the tag bootstrap: no tag, a webdriver, or the QA disable flag. */
+function adsClickAllowed(): boolean {
+  if (typeof window === "undefined") return false;
+  if (typeof navigator !== "undefined" && navigator.webdriver === true) return false;
+  try {
+    if (window.sessionStorage.getItem("p5_analytics_disabled") === "1") return false;
+  } catch {
+    // The bootstrap still loads the tag when storage throws.
+  }
+  const gtag = (window as unknown as { gtag?: unknown }).gtag;
+  return typeof gtag === "function";
+}
+
+/**
+ * Ads label for a tel: or sms: href to this site's published number.
+ * A customer's number on an admin screen is not an ad click.
+ */
+export function googleAdsContactClickLabel(href: string): string | null {
+  const bare = href.trim().split("?")[0].toLowerCase();
+  const kind = bare.startsWith("tel:") ? "call" : bare.startsWith("sms:") ? "text" : null;
+  if (!kind) return null;
+  if (nationalDigits(bare) !== nationalDigits(SITE_CONFIG.phoneTel)) return null;
+  return kind === "call" ? GOOGLE_ADS_CALL_CLICK_LABEL : GOOGLE_ADS_TEXT_CLICK_LABEL;
+}
+
+/**
+ * One conversion for this click. The next click fires again. No session dedupe.
+ * No-op when the tag bootstrap would not have loaded gtag.
+ */
+export function trackGoogleAdsContactClick(href: string): boolean {
+  const sendTo = googleAdsContactClickLabel(href);
+  if (!sendTo || !adsClickAllowed()) return false;
+  const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag;
+  gtag("event", "conversion", { send_to: sendTo });
+  return true;
 }
