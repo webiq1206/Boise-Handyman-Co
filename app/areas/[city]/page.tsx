@@ -13,10 +13,10 @@ import { generateSpeakableSchema } from '@/lib/schema';
 import { CITY_SEO_DATA } from '@/lib/seo';
 import { areaPath,CITY_SLUGS,getCityBySlug } from '@/lib/seo-routes';
 import { getAreaImageSet } from '@/shared/cityServiceImages';
-import { getAreaCityCopy } from '@/shared/content/areaCopy';
 import { getCountyLabel,SERVICES } from '@/shared/contentData';
 import { getGalleryProjectsForCity } from '@/shared/galleryData';
-import { AREA_PAGE_FAQS,getAreaIntro } from '@/shared/seoContent';
+import { getCityLocalSection } from '@/shared/cityPageFacts';
+import { areaPageFaqs,getAreaIntro } from '@/shared/seoContent';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { notFound } from 'next/navigation';
 
@@ -94,6 +94,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
           : `The Treasure Valley climate is hard on the small stuff - caulk lines crack with freeze-thaw cycles, doors swell and shrink, and exterior finishes fade - which is exactly the work a scheduled handyman visit keeps ahead of.`,
       ],
     },
+    getCityLocalSection(city),
   ];
 
   // Real before/after projects only - no seeded testimonials or star ratings
@@ -112,13 +113,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
       : undefined;
 
   const h1 = `Handyman in ${city.name}, Idaho`;
-  const faqs = getAreaCityCopy(city.slug)?.faqs ?? [
-    ...AREA_PAGE_FAQS,
-    {
-      question: `Do you serve ${city.name}, Idaho?`,
-      answer: `Yes. ${city.name} is part of our core Treasure Valley service area. We handle small repairs, installs, and maintenance across the city, with the same upfront quotes and pricing as everywhere else we work.`,
-    },
-  ];
+  const faqs = areaPageFaqs(city);
 
   const schemas = [
     landingBreadcrumbs([
