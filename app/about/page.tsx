@@ -92,7 +92,7 @@ export default function AboutPage() {
       <JsonLd data={schemas} />
       <div className="flex flex-col pb-20 md:pb-0">
         {/* Approved editorial hero */}
-        <InteriorHero layout="editorial" imageSrc={SITE_IMAGES.leadership} imageAlt="A Boise Handyman Co worker reviewing a repair list with a homeowner">
+        <InteriorHero layout="editorial" imageSrc={SITE_IMAGES.leadership} imageAlt="A handyman and a homeowner reviewing a clipboard at a front door">
             <HeroBreadcrumbs />
             <p data-speakable="summary" className="sr-only">
               {SPEAKABLE_SUMMARY}
