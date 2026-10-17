@@ -4,6 +4,7 @@
  * Operator checklists: local-seo-audit/02-gbp-plan.md
  */
 
+import { publishedFoundingYear } from '@/shared/foundingYear';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { CITIES, SERVICES } from '@/shared/contentData';
 
@@ -25,10 +26,8 @@ export const GBP_NAP = {
   website: SITE,
   publicLocality: SITE_CONFIG.address.cityState,
   serviceAreaLabel: SITE_CONFIG.address.serviceArea,
-  // Intentionally blank: the previous '2020' belonged to the prior
-  // construction brand and would fabricate a years-in-business claim here.
-  // [NEEDS: real founding year for Boise Handyman Co]
-  founded: '',
+  // Same gate as BUSINESS_INFO.founded. The 2020 phrases stay in foundingClaims.ts.
+  founded: publishedFoundingYear(),
   // America/Boise. Sunday is closed.
   hours: {
     monday: '9:00 AM - 6:00 PM',
