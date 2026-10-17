@@ -4,8 +4,9 @@
  * One Google Ads conversion action ("P5 Raw Form Submitted") receives every
  * accepted lead, with a per-lead value so Google Ads can report ROAS by
  * campaign. Values are the per-lead estimates agreed with P5 on 14 Sept 2026
- * (form fallback in Google Ads is $50). Never pass PII here: no names, phones,
- * emails or free text - only a service/project category and an opaque id.
+ * (form fallback in Google Ads is $50). The conversion parameters stay limited
+ * to a service category and an opaque transaction id. Enhanced conversions
+ * send a separate user_data object with email, phone, name, and ZIP only.
  */
 export const GOOGLE_ADS_ID = "AW-18354188204";
 export const GOOGLE_ADS_LEAD_LABEL = "AW-18354188204/LE2vCPXstO8cEKzf-q9E";
@@ -20,6 +21,22 @@ export interface LeadContext {
   service?: string;
   /** Consultation form project type. */
   projectType?: string;
+  /** Collected contact fields. Street address and free text are never accepted. */
+  email?: string;
+  phone?: string;
+  name?: string;
+  postalCode?: string;
+}
+
+export interface EnhancedConversionUserData {
+  email?: string;
+  phone_number?: string;
+  address?: {
+    first_name?: string;
+    last_name?: string;
+    postal_code?: string;
+    country: "US";
+  };
 }
 
 export type GoogleAdsLeadParams = {
@@ -62,6 +79,109 @@ export function googleAdsLeadParams(
 }
 
 const sentLeadKeys = new Set<string>();
+const DRAFT_STORAGE_PREFIX = "p5-project-draft-v2";
+
+/** Same gates as the tag bootstrap: no tag, a webdriver, or an explicit QA disable. */
+export function googleTagAllowed(): boolean {
+  if (typeof window === "undefined") return false;
+  const gtag = (window as unknown as { gtag?: unknown }).gtag;
+  if (typeof gtag !== "function") return false;
+  if (typeof navigator !== "undefined" && navigator.webdriver === true) return false;
+  try {
+    if (window.sessionStorage.getItem("p5_analytics_disabled") === "1") return false;
+  } catch {
+    // The bootstrap still loads the tag when storage throws.
+  }
+  return true;
+}
+
+/** US phone as E.164. Anything that is not 10 digits is omitted. */
+export function enhancedPhoneNumber(phone?: string): string | undefined {
+  const digits = (phone ?? "").replace(/\D/g, "");
+  const national = digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+  if (national.length !== 10) return undefined;
+  return `+1${national}`;
+}
+
+/** Trim and lowercase. Empty mail is omitted. */
+export function enhancedEmail(email?: string): string | undefined {
+  const normalized = email?.trim().toLowerCase() ?? "";
+  return normalized || undefined;
+}
+
+function postalCode(value?: string): string | undefined {
+  const match = (value ?? "").trim().match(/^(\d{5})(?:-\d{4})?$/);
+  return match?.[1];
+}
+
+function splitName(name?: string): { first_name?: string; last_name?: string } {
+  const cleaned = (name ?? "").trim().replace(/\s+/g, " ");
+  if (!cleaned) return {};
+  const [first, ...rest] = cleaned.split(" ");
+  return rest.length ? { first_name: first, last_name: rest.join(" ") } : { first_name: first };
+}
+
+/** Fields the lead actually collected. No street, city, description, or message. */
+export function enhancedConversionUserData(input: Pick<LeadContext, "email" | "phone" | "name" | "postalCode"> = {}): EnhancedConversionUserData | null {
+  const data: EnhancedConversionUserData = {};
+  const email = enhancedEmail(input.email);
+  const phone = enhancedPhoneNumber(input.phone);
+  if (email) data.email = email;
+  if (phone) data.phone_number = phone;
+  const address: NonNullable<EnhancedConversionUserData["address"]> = { country: "US" };
+  const name = splitName(input.name);
+  if (name.first_name) address.first_name = name.first_name;
+  if (name.last_name) address.last_name = name.last_name;
+  const zip = postalCode(input.postalCode);
+  if (zip) address.postal_code = zip;
+  if (address.first_name || address.last_name || address.postal_code) data.address = address;
+  return data.email || data.phone_number || data.address ? data : null;
+}
+
+function draftIdFromTransaction(transactionId?: string): string | undefined {
+  return transactionId?.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i)?.[0];
+}
+
+/** Estimator submits do not pass contact fields. Read the saved draft contact only. */
+function contactFromStoredDraft(transactionId?: string): Pick<LeadContext, "email" | "phone" | "name"> {
+  const id = draftIdFromTransaction(transactionId);
+  const storage = typeof window === "undefined" ? undefined : window.localStorage;
+  if (!id || !storage) return {};
+  try {
+    for (let index = 0; index < storage.length; index += 1) {
+      const key = storage.key(index);
+      if (!key?.startsWith(DRAFT_STORAGE_PREFIX)) continue;
+      const draft = JSON.parse(storage.getItem(key) || "null") as { id?: string; contact?: { name?: unknown; email?: unknown; phone?: unknown } } | null;
+      if (!draft || draft.id !== id || !draft.contact) continue;
+      const { name, email, phone } = draft.contact;
+      return {
+        name: typeof name === "string" ? name : undefined,
+        email: typeof email === "string" ? email : undefined,
+        phone: typeof phone === "string" ? phone : undefined,
+      };
+    }
+  } catch {
+    // A bad draft must not block the conversion.
+  }
+  return {};
+}
+
+function resolveEnhancedContact(ctx: LeadContext, transactionId?: string): Pick<LeadContext, "email" | "phone" | "name" | "postalCode"> {
+  const stored = contactFromStoredDraft(transactionId);
+  return {
+    email: ctx.email ?? stored.email,
+    phone: ctx.phone ?? stored.phone,
+    name: ctx.name ?? stored.name,
+    postalCode: ctx.postalCode,
+  };
+}
+
+function fireEnhancedLead(ctx: LeadContext, transactionId?: string): void {
+  const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag;
+  const userData = enhancedConversionUserData(resolveEnhancedContact(ctx, transactionId));
+  if (userData) gtag("set", "user_data", userData);
+  gtag("event", "conversion", googleAdsLeadParams(ctx, transactionId));
+}
 
 /**
  * Fires the Google Ads lead conversion once per dedupe key (per page load and,
@@ -78,8 +198,7 @@ export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: 
       // Storage can be unavailable under strict privacy settings; the in-memory guard still applies.
     }
   }
-  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
-  if (typeof gtag !== "function") return false;
+  if (!googleTagAllowed()) return false;
   if (storageKey) {
     sentLeadKeys.add(storageKey);
     try {
@@ -88,6 +207,6 @@ export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: 
       // Ignore; in-memory guard is enough for this page load.
     }
   }
-  gtag("event", "conversion", googleAdsLeadParams(ctx, dedupeKey));
+  fireEnhancedLead(ctx, dedupeKey);
   return true;
 }

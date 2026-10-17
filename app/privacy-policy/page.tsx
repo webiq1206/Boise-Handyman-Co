@@ -54,10 +54,10 @@ export default function PrivacyPolicyPage() {
       />
       <section className="py-16 md:py-24">
         <div className="container px-4">
-          <InteriorDocument heading={<h1>Privacy Policy for Boise Handyman Co Handyman Services</h1>} contents={[{"id":"document-section-1","label":"Introduction"},{"id":"document-section-2","label":"Information We Collect"},{"id":"document-section-3","label":"How We Use Your Information"},{"id":"document-section-4","label":"Information Sharing"},{"id":"document-section-5","label":"Data Security"},{"id":"document-section-6","label":"Your Rights"},{"id":"document-section-7","label":"Contact Us"}]}>
+          <InteriorDocument heading={<h1>Privacy Policy for Boise Handyman Co Handyman Services</h1>} contents={[{"id":"document-section-1","label":"Introduction"},{"id":"document-section-2","label":"Information We Collect"},{"id":"document-section-3","label":"How We Use Your Information"},{"id":"document-section-4","label":"Information Sharing"},{"id":"document-section-ads","label":"Cookies, analytics and advertising"},{"id":"document-section-5","label":"Data Security"},{"id":"document-section-6","label":"Your Rights"},{"id":"document-section-7","label":"Contact Us"}]}>
 
             <p className="lead text-muted-foreground">
-              Last updated: January 2024
+              Last updated: October 17, 2026
             </p>
 
             <h2 id="document-section-1">Introduction</h2>
@@ -94,6 +94,17 @@ export default function PrivacyPolicyPage() {
               <li>Professional advisors as needed</li>
               <li>Law enforcement when required by law</li>
             </ul>
+
+            <h2 id="document-section-ads">Cookies, analytics and advertising</h2>
+            <p>
+              Cookies, analytics and advertising. We use Google Analytics 4 (GA4) to understand how visitors use this site, such as pages viewed, referring site, approximate location, browser and device type. We use Google Ads conversion tracking to measure which of our ads lead to calls, form submissions and completed estimates. Google's tag also adds visitors to remarketing lists, and Google may use this data to show you relevant ads on other websites (remarketing). These tools set cookies and receive information about your visit, including your IP address, which Google processes under its own privacy policy (<a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>). [TODO, pending Priya's exact wording.] Google Analytics receives only the type of project you choose (for example, drywall repair or plumbing repairs) when you use the estimator or send an inquiry, and the words you type into our blog search. Google Ads receives a random reference number for your inquiry so each lead is counted only once. Calls from our site or ads may be routed through a Google forwarding number so we can measure which ads lead to calls. You can opt out of personalized Google ads at <a href="https://adssettings.google.com">https://adssettings.google.com</a>, use the Google Analytics opt-out add-on at <a href="https://tools.google.com/dlpage/gaoptout">https://tools.google.com/dlpage/gaoptout</a>, or block or delete cookies in your browser; the site will still work.
+            </p>
+            <p>
+              We also use the Meta Pixel and Meta's Conversions API to measure visits and inquiries from our Facebook and Instagram ads. This site and Boise Remodeling Co use the same Meta Pixel. The pixel records a page view. Meta's pixel may also record which buttons you click and basic information about the page, such as its title. We do not send your name, email or phone number to Meta. When you submit an inquiry, we may send Meta the Lead event with the type of project you chose and the consultation category, the page address, the event time, a matching event id, your IP address, your browser user agent, and the Meta cookies _fbp and _fbc, so it can match the inquiry to an ad. Meta processes this under its own privacy policy (<a href="https://www.facebook.com/privacy/policy">https://www.facebook.com/privacy/policy</a>).
+            </p>
+            <p>
+              We also use Microsoft Clarity to see how visitors use our pages through heatmaps and session recordings; form fields are masked so what you type is not recorded. Microsoft processes this under its own privacy statement (<a href="https://privacy.microsoft.com/privacystatement">https://privacy.microsoft.com/privacystatement</a>).
+            </p>
 
             <h2 id="document-section-5">Data Security</h2>
             <p>
