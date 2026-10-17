@@ -7,6 +7,7 @@ import {
   HeartHandshake,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { publishedFoundingYear } from "@/shared/foundingClaims";
 
 export const SITE_TAGLINE = "Treasure Valley handyman service, built on upfront quotes and tidy work";
 
@@ -92,16 +93,13 @@ export const DIFFERENTIATORS: Differentiator[] = [
 ];
 
 /**
- * Headline credibility stats. Owner-provided facts about the business - keep
- * these accurate and update in one place.
- *
- * `established` is intentionally blank: the previous "2020" figure belonged to
- * the prior construction business, and publishing it for Boise Handyman Co
- * would fabricate a years-in-business claim. [NEEDS: real founding year]
+ * Headline credibility stats. `established` is the published founding year.
+ * It is empty while SHOW_FOUNDING_YEAR is false. The unproven 2020 source
+ * stays in shared/foundingClaims.ts.
  */
 export const PROOF_STATS = {
-  established: "",
-} as const;
+  established: publishedFoundingYear(),
+};
 
 /**
  * Post-hero proof bar. Only claims the business genuinely carries: no bonded
@@ -117,6 +115,16 @@ export const TRUST_ITEMS = [
   "Tidy Job Sites",
   "Ada & Canyon County",
 ];
+
+/**
+ * Trust strip. The full founding-phrase list stays in publicFoundingClaims
+ * for the guard test. This strip adds at most one badge, "Est. YYYY", and
+ * only while SHOW_FOUNDING_YEAR is on.
+ */
+export function visibleTrustItems(): string[] {
+  const year = publishedFoundingYear();
+  return year ? [`Est. ${year}`, ...TRUST_ITEMS] : TRUST_ITEMS;
+}
 
 export const PROMISE_ITEMS = [
   {

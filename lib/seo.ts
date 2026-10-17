@@ -4,6 +4,7 @@
  * for service and location pages
  */
 
+import { publishedFoundingYear } from '@/shared/foundingClaims';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { GBP_SOCIAL, getExternalProfileUrls } from '@/shared/gbpProfile';
 
@@ -496,10 +497,10 @@ export const BUSINESS_INFO = {
     saturday: '9:00 AM - 4:00 PM',
     sunday: 'Closed',
   },
-  // Founding year intentionally blank for Boise Handyman Co: emitting the old
-  // brand's date would fabricate a years-in-business claim. Schema gates
-  // foundingDate on this being non-empty. [NEEDS: real founding year]
-  founded: '',
+  // Published year only. The unproven 2020 source stays in shared/foundingClaims.ts
+  // and is omitted while SHOW_FOUNDING_YEAR is false. Schema emits foundingDate
+  // only when this string is non-empty.
+  founded: publishedFoundingYear(),
   serviceArea: ['Boise', 'Meridian', 'Eagle', 'Nampa', 'Kuna', 'Star', 'Middleton', 'Caldwell', 'Garden City'],
   serviceRadius: '35 miles',
   licenses: ['Registration details available upon request'],
