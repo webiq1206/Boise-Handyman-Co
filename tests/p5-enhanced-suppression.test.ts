@@ -55,6 +55,24 @@ test("suppression stores only SHA-256 hashes of a trimmed email and an E.164 pho
   });
 });
 
+test("a suppression lookup error skips user_data and a missing contact stays allowed", async () => {
+  const previous = (globalThis as { __p5Pool?: unknown }).__p5Pool;
+  (globalThis as { __p5Pool?: { query: () => Promise<never> } }).__p5Pool = {
+    query: async () => {
+      throw new Error("db down");
+    },
+  };
+  clearEnhancedConversionSuppressionReady();
+  try {
+    assert.equal(await allowEnhancedConversions({ email: "ada@example.com" }), false);
+    assert.equal(await allowEnhancedConversions({}), true);
+  } finally {
+    clearEnhancedConversionSuppressionReady();
+    if (previous === undefined) delete (globalThis as { __p5Pool?: unknown }).__p5Pool;
+    else (globalThis as { __p5Pool?: unknown }).__p5Pool = previous;
+  }
+});
+
 test("a matching email or phone hash blocks enhanced data and leaves everyone else allowed", async () => {
   await withDatabase(async () => {
     await addEnhancedConversionSuppression({ email: "ada@example.com" });

@@ -63,8 +63,8 @@ export async function addEnhancedConversionSuppression(contact: { email?: string
 }
 
 /**
- * False when either normalized hash is on the list. A missing contact or an
- * unavailable table does not block the lead or the conversion; user_data stays allowed.
+ * False when either normalized hash is on the list, or when the lookup fails.
+ * A missing contact stays allowed. The lead and the conversion still proceed.
  */
 export async function allowEnhancedConversions(contact: { email?: string | null; phone?: string | null }): Promise<boolean> {
   const hashes = suppressionHashes(contact);
@@ -78,7 +78,7 @@ export async function allowEnhancedConversions(contact: { email?: string | null;
     return rows.length === 0;
   } catch (error) {
     console.error("[enhanced-conversion] suppression check unavailable", error instanceof Error ? error.message : error);
-    return true;
+    return false;
   }
 }
 
