@@ -415,7 +415,8 @@ export const CITY_SEO_DATA: Record<string, {
     population: '30,346',
     founded: '1864',
     zipCodes: ['83616'],
-    neighborhoods: ['Banbury', 'The Estates', 'Floating Feather'],
+    // "The Estates" is the Dry Creek Ranch product, outside Eagle.
+    neighborhoods: ['Banbury', 'Floating Feather'],
     landmarks: ['Eagle Island State Park', 'Heritage Park', 'Eagle Hills Golf Course'],
     climate: 'semi-arid with distinct four seasons',
     coordinates: { lat: 43.6954, lng: -116.3540 },
@@ -434,7 +435,8 @@ export const CITY_SEO_DATA: Record<string, {
     founded: '1909',
     zipCodes: ['83644'],
     neighborhoods: ['Middleton Heights'],
-    landmarks: ['Boise River', 'Middleton City Park'],
+    // The city does not list a park named Middleton City Park.
+    landmarks: ['the Boise River'],
     climate: 'semi-arid high desert climate with warm summers and cool winters',
     coordinates: { lat: 43.7068, lng: -116.6209 },
   },
@@ -443,7 +445,8 @@ export const CITY_SEO_DATA: Record<string, {
     founded: '1886',
     zipCodes: ['83651', '83653', '83686', '83687'],
     neighborhoods: ['Downtown Nampa', 'Karcher', 'Greenhurst'],
-    landmarks: ['Ford Idaho Center', 'Lake Lowell', 'Nampa Train Depot'],
+    // Lake Lowell is the Deer Flat refuge outside Nampa city limits.
+    landmarks: ['Ford Idaho Center', 'Nampa Train Depot'],
     climate: 'semi-arid with hot summers and cold winters',
     coordinates: { lat: 43.5407, lng: -116.5635 },
   },

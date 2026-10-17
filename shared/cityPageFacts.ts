@@ -106,7 +106,7 @@ function neighborhoodFaq(city: CityData, serviceName?: string): CityFaq {
 
 /** Two city-only questions, appended after the published FAQs on the same page. */
 export function getCityOnlyFaqs(city: CityData, serviceName?: string): CityFaq[] {
-  const work = serviceName ? serviceName.toLowerCase() : 'a handyman repair';
+  const work = serviceName ? serviceName.toLowerCase() : 'handyman repairs';
   return [
     {
       question: `Which permit office handles ${work} in ${city.name}?`,

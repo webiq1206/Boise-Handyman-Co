@@ -87,7 +87,8 @@ test('published city claims and the Kuna and Caldwell neighborhood order stay',(
  assert.match(getAreaIntro(boise),/Census ACS 2020-2024/);
  const boiseFaqs=areaPageFaqs(boise);
  assert.ok(boiseFaqs.some((faq)=>faq.answer.includes('Certificate of Appropriateness')));
- assert.ok(boiseFaqs.some((faq)=>faq.question==='Which permit office handles a handyman repair in Boise?'));
+ assert.ok(boiseFaqs.some((faq)=>faq.question==='Which permit office handles handyman repairs in Boise?'));
+ assert.ok(boiseFaqs.some((faq)=>faq.answer.includes('reviews permitted handyman repairs.')));
  assert.ok(boiseFaqs.some((faq)=>faq.question==='Does Boise Handyman Co serve Hidden Springs and Harris Ranch?'));
  assert.ok(boiseFaqs.some((faq)=>faq.answer.includes('Other areas on our Boise service list include North End, Bench, Downtown, East End, Southwest Boise.')));
  const kunaFaqs=areaPageFaqs(kuna);
