@@ -99,6 +99,7 @@ test("a suppressed contact skips user_data and still fires the conversion", () =
       name: "Ada Lovelace",
       service: "handyman",
       allowEnhancedConversions: false,
+      acceptedLead: true,
     }, "estimator:suppressed"), true);
     assert.equal(calls.some((call) => call[0] === "set"), false);
     assert.deepEqual(calls[0], ["event", "conversion", { send_to: "AW-18354188204/cEzmCPOagKAdEKzf-q9E", transaction_id: "estimator:suppressed" }]);
@@ -110,6 +111,7 @@ test("a suppressed contact skips user_data and still fires the conversion", () =
       email: "ada@example.com",
       name: "Ada Lovelace",
       service: "handyman",
+      acceptedLead: true,
     }, "estimator:cookie-block"), true);
     assert.equal(calls.some((call) => call[0] === "set"), false);
     assert.equal(calls.length, 2);

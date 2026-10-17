@@ -32,9 +32,9 @@ export interface LeadContext {
   /** Server decision from the submit response. False skips user_data only. */
   allowEnhancedConversions?: boolean;
   /**
-   * Estimator finishes only. False is a finish that did not create a lead, so
-   * only the estimator label is sent and user_data is omitted. Omitted still
-   * sends the form label: the shared estimator does not pass this flag.
+   * Estimator finishes only. True sends the form label as well. False or
+   * omitted sends only the estimator label. The shared estimator does not
+   * pass this flag, and a missing flag is not an accepted lead.
    */
   acceptedLead?: boolean;
 }
@@ -275,10 +275,12 @@ function adsTrackingBlocked(): boolean {
  * Fires the Google Ads conversion for this key. Estimator finish keys
  * ("intake:" or "estimator:") send the estimator label once per key. They also
  * send the form label once per key, with transaction_id equal to the key,
- * unless acceptedLead is false. Every other key sends the form label only.
- * user_data is copied onto each of those Ads events only when the finish
+ * only when acceptedLead is true. A two-argument engine call omits that flag
+ * and sends the estimator label only. Every other key sends the form label
+ * only. user_data is copied onto each of those Ads events only when the finish
  * created a lead and the server allows it. If gtag is not ready, waits up to
- * 10 seconds. Returns true when at least one label was sent.
+ * 10 seconds and writes the sent marker only after gtag runs. Returns true
+ * when at least one label was sent.
  */
 export function trackGoogleAdsLeadConversion(
   ctx: LeadContext = {},
@@ -297,7 +299,7 @@ export function trackGoogleAdsLeadConversion(
           params: { send_to: GOOGLE_ADS_ESTIMATOR_LABEL, transaction_id: dedupeKey },
         });
       }
-      if (ctx.acceptedLead !== false) {
+      if (ctx.acceptedLead === true) {
         const leadStorage = `google_ads_lead:${dedupeKey}`;
         if (!alreadySent(leadStorage)) {
           pending.push({ storageKey: leadStorage, params: googleAdsLeadParams(ctx, dedupeKey) });
@@ -314,7 +316,7 @@ export function trackGoogleAdsLeadConversion(
       trackGoogleAdsLeadConversion(ctx, dedupeKey, next);
     });
     if (!gtag) return false;
-    const accepted = !isEstimatorFinishKey(dedupeKey) || ctx.acceptedLead !== false;
+    const accepted = !isEstimatorFinishKey(dedupeKey) || ctx.acceptedLead === true;
     const userData = accepted && userDataAllowed(ctx) ? enhancedConversionUserData(resolveEnhancedContact(ctx, dedupeKey)) : null;
     for (const label of pending) {
       gtag("event", "conversion", scopedAdsConversion(label.params, userData));
