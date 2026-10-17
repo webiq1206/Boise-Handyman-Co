@@ -50,14 +50,15 @@ const CONTACT =
   `${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.state} ${SITE_CONFIG.address.postalCode} ` +
   `(not a staffed storefront). Phone ${SITE_CONFIG.phone}. Email ${SITE_CONFIG.email}.`;
 
+const smallRepairFrom = SERVICES.find((service) => service.slug === 'plumbing-repairs')!.planningFrom;
+
 const POSITIONING =
   `Every job is quoted upfront as one written price before any work starts, priced by the ` +
   `time it takes with a one-hour minimum, and most jobs are finished in a single visit. A ` +
-  `single small repair starts around $145, materials are billed at cost as their own line, ` +
-  `and bundling several tasks into one visit is the best value (prices are being finalized; ` +
-  `every job gets a written quote first). Work that needs a general contractor or a licensed ` +
-  `trade, such as full remodels, additions, repipes, or panel work, is out of scope and ` +
-  `referred out honestly.`;
+  `single small repair starts around ${smallRepairFrom}, materials are billed at cost as their own line, ` +
+  `and bundling several tasks into one visit is the best value (every job gets a written quote first). ` +
+  `Work that needs a general contractor or a licensed trade, such as full remodels, additions, ` +
+  `repipes, or panel work, is out of scope and referred out honestly.`;
 
 function buildShort(): string {
   const lines: string[] = [];
@@ -68,7 +69,9 @@ function buildShort(): string {
 
   lines.push('## Services', '');
   for (const s of SERVICES) {
-    lines.push(`- [${s.name}](${url(`/services/${s.slug}`)}): ${s.shortDescription}`);
+    lines.push(
+      `- [${s.name}](${url(`/services/${s.slug}`)}): ${s.shortDescription} Planning from ${s.planningFrom}.`,
+    );
   }
   lines.push(
     `- [RE-10 / Inspection Repairs](${url('/re-10-repairs-boise')}): repairs from an Idaho RE-10 inspection response, completed and documented before closing, for real estate agents, buyers and sellers.`,
