@@ -75,11 +75,21 @@ test("one click fires one call or text conversion, and the next click fires agai
     click(SITE_CONFIG.phoneSmsHref);
     assert.equal(GOOGLE_ADS_CALL_CLICK_LABEL, CALL);
     assert.equal(GOOGLE_ADS_TEXT_CLICK_LABEL, TEXT);
-    assert.deepEqual(page.calls.filter((call) => call[1] === "conversion"), [
+    const conversions = page.calls.filter((call) => call[1] === "conversion");
+    assert.deepEqual(conversions, [
       ["event", "conversion", { send_to: CALL }],
       ["event", "conversion", { send_to: CALL }],
       ["event", "conversion", { send_to: TEXT }],
     ]);
+    assert.equal(page.calls.some((call) => call[0] === "set" || call[1] === "user_data"), false);
+    for (const call of conversions) {
+      assert.deepEqual(Object.keys(call[2] as object), ["send_to"]);
+      const payload = JSON.stringify(call);
+      assert.equal(payload.includes("email"), false);
+      assert.equal(payload.includes("phone"), false);
+      assert.equal(payload.includes("name"), false);
+      assert.equal(payload.includes("@"), false);
+    }
     assert.deepEqual(page.calls.filter((call) => call[1] === "contact_click").map((call) => (call[2] as { method: string }).method), ["phone", "phone", "sms"]);
   } finally {
     page.restore();
