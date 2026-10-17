@@ -190,6 +190,7 @@ export function AssistantWidget() {
         <div
           role="dialog"
           aria-label="Estimating assistant chat"
+          data-clarity-mask="true"
           data-testid="panel-assistant"
           className="fixed inset-x-0 bottom-0 z-[150] flex h-[85dvh] flex-col overflow-hidden rounded-t-md border border-card-border bg-background shadow-2xl sm:inset-x-auto sm:bottom-5 sm:right-5 sm:h-[560px] sm:max-h-[calc(100dvh-6rem)] sm:w-[380px] sm:rounded-md"
         >
@@ -243,7 +244,7 @@ export function AssistantWidget() {
 
           <button type="button" onClick={continueProject} disabled={sending} data-testid="button-assistant-continue" className="mx-3 mb-2 min-h-11 rounded-sm border border-card-border px-3 py-2 text-sm text-foreground disabled:opacity-40">Continue project</button>
           {/* Composer */}
-          <form
+          <form data-clarity-mask="true"
             onSubmit={(e) => {
               e.preventDefault();
               void send();

@@ -1,4 +1,5 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { join } from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -21,13 +22,61 @@ test('the privacy policy discloses cookies, analytics and advertising', () => {
   assert.match(policy, /href="https:\/\/adssettings\.google\.com"/);
   assert.match(policy, /href="https:\/\/tools\.google\.com\/dlpage\/gaoptout"/);
   assert.match(policy, /This site and Boise Remodeling Co use the same Meta Pixel\./);
-  assert.match(policy, /The pixel records a page view\. Meta's pixel may also record which buttons you click and basic information about the page, such as its title\./);
+  assert.match(policy, /The pixel records a page view\. Meta's pixel may also record which buttons you click and basic information about the page, such as its title\. Depending on Meta's settings, the pixel may also collect contact details you type into a form, in hashed form\./);
   assert.equal(policy.includes('automatic events such as button clicks and page metadata'), false);
-  assert.match(policy, /We do not send your name, email or phone number to Meta\./);
+  assert.equal(policy.includes('We do not send your name, email or phone number to Meta.'), false);
+  assert.equal(policy.includes("we don't send"), false);
+  assert.match(policy, /When you submit an inquiry, our server may send Meta the Lead event with/);
+  assert.equal(policy.includes('we may send Meta the Lead event'), false);
   assert.match(policy, /the type of project you chose and the consultation category, the page address, the event time, a matching event id, your IP address, your browser user agent, and the Meta cookies _fbp and _fbc/);
   assert.match(policy, /href="https:\/\/www\.facebook\.com\/privacy\/policy"/);
   assert.equal(policy.includes('personalise ads'), false);
   assert.equal(policy.includes('an addition or an ADU'), false);
   assert.equal(policy.includes('hashed email'), false);
   assert.equal(policy.includes('We do not send your name, email, phone number or project details to Google'), false);
+});
+
+test('Meta automatic advanced matching is turned off before the pixel initializes', () => {
+  const pixel = readFileSync(new URL('../components/MetaPixel.tsx', import.meta.url), 'utf8');
+  const off = pixel.indexOf("fbq('set','autoConfig',false,");
+  const init = pixel.indexOf("fbq('init',");
+  assert.ok(off >= 0 && init > off);
+});
+
+function sourceFiles(dir: string): string[] {
+  const files: string[] = [];
+  for (const name of readdirSync(dir)) {
+    if (name === 'node_modules' || name === '.next') continue;
+    const path = join(dir, name);
+    if (statSync(path).isDirectory()) files.push(...sourceFiles(path));
+    else if (name.endsWith('.tsx')) files.push(path);
+  }
+  return files;
+}
+
+test('every form, estimator, intake, address, modal and chat container is masked for Clarity', () => {
+  const root = new URL('..', import.meta.url);
+  const unmasked: string[] = [];
+  for (const file of sourceFiles(root.pathname)) {
+    const source = readFileSync(file, 'utf8');
+    const forms = source.match(/<form\b[^>]*>/g) ?? [];
+    forms.forEach((tag, index) => {
+      if (!tag.includes('data-clarity-mask="true"')) unmasked.push(`${file} form ${index + 1}`);
+    });
+  }
+  assert.deepEqual(unmasked, []);
+  const consultation = readFileSync(new URL('../components/ConsultationForm.tsx', import.meta.url), 'utf8');
+  assert.match(consultation, /data-testid="consultation-success"[^>]*data-clarity-mask="true"|data-clarity-mask="true"[^>]*data-testid="consultation-success"/);
+  for (const file of [
+    'components/AddressAutocomplete.tsx',
+    'components/P5AddressInput.tsx',
+    'components/P5Estimator.tsx',
+    'components/P5ExitOffer.tsx',
+    'components/P5IntakeReview.tsx',
+    'components/P5ReviewRequest.tsx',
+    'components/assistant/AssistantWidget.tsx',
+    'components/estimate/recovery/AbandonmentPrompt.tsx',
+  ]) {
+    assert.equal(readFileSync(new URL('../' + file, import.meta.url), 'utf8').includes('data-clarity-mask="true"'), true, file);
+  }
 });

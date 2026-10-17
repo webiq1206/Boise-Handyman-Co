@@ -105,7 +105,7 @@ function PaymentFormContent({
   const showFinalizing = stripeDone && !finalizationError && (isFinalizing ?? false);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form data-clarity-mask="true" onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-4">
         <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
           <span className="text-sm text-muted-foreground">{description || "Payment"}</span>

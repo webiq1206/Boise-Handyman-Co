@@ -14,7 +14,7 @@ const TEXT = "AW-18354188204/lTxsCOqahaAdEKzf-q9E";
 
 type ClickFn = (event: { target: unknown }) => void;
 
-function browser(options: { disabled?: boolean; webdriver?: boolean } = {}) {
+function browser(options: { disabled?: boolean; webdriver?: boolean; path?: string } = {}) {
   const calls: unknown[][] = [];
   const storage = new Map<string, string>();
   if (options.disabled) storage.set("p5_analytics_disabled", "1");
@@ -23,7 +23,7 @@ function browser(options: { disabled?: boolean; webdriver?: boolean } = {}) {
   Object.assign(globalThis, {
     window: {
       gtag: (...args: unknown[]) => calls.push(args),
-      location: { pathname: "/contact" },
+      location: { pathname: options.path ?? "/contact" },
       sessionStorage: { getItem: (key: string) => storage.get(key) ?? null, setItem: (key: string, value: string) => storage.set(key, value) },
     },
   });
@@ -93,6 +93,31 @@ test("one click fires one call or text conversion, and the next click fires agai
     assert.deepEqual(page.calls.filter((call) => call[1] === "contact_click").map((call) => (call[2] as { method: string }).method), ["phone", "phone", "sms"]);
   } finally {
     page.restore();
+  }
+});
+
+test("a forwarded number still fires, and admin and portal taps do not", () => {
+  const page = browser();
+  try {
+    click("tel:+12085550199");
+    click("sms:+18015551212?body=Hi");
+    assert.deepEqual(page.calls.filter((call) => call[1] === "conversion"), [
+      ["event", "conversion", { send_to: CALL }],
+      ["event", "conversion", { send_to: TEXT }],
+    ]);
+  } finally {
+    page.restore();
+  }
+  for (const path of ["/admin", "/admin/leads", "/portal", "/portal/jobs"]) {
+    const blocked = browser({ path });
+    try {
+      click("tel:+12085550199");
+      click(SITE_CONFIG.phoneSmsHref);
+      assert.equal(blocked.calls.some((call) => call[1] === "conversion"), false, path);
+      assert.equal(blocked.calls.some((call) => call[1] === "contact_click"), true, path);
+    } finally {
+      blocked.restore();
+    }
   }
 });
 

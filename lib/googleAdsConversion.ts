@@ -9,8 +9,6 @@
  * only, and only when the finish created a lead that is not suppressed.
  * There is no global gtag('set','user_data'), so the GA4 tag cannot collect it.
  */
-import { SITE_CONFIG } from "@/shared/siteConfig";
-
 export const GOOGLE_ADS_ID = "AW-18354188204";
 export const GOOGLE_ADS_LEAD_LABEL = "AW-18354188204/LE2vCPXstO8cEKzf-q9E";
 /** Estimator submit and intake completion. */
@@ -334,11 +332,6 @@ export function trackGoogleAdsLeadConversion(
   }
 }
 
-function nationalDigits(value: string): string {
-  const digits = value.replace(/\D/g, "");
-  return digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
-}
-
 /** Same visitor gates as the tag bootstrap: no tag, a webdriver, or the QA disable flag. */
 function adsClickAllowed(): boolean {
   if (typeof window === "undefined") return false;
@@ -352,15 +345,21 @@ function adsClickAllowed(): boolean {
   return typeof gtag === "function";
 }
 
+/** Admin and portal screens dial customers, so those taps are not ad clicks. */
+function staffContactPath(): boolean {
+  if (typeof window === "undefined") return true;
+  const path = window.location.pathname;
+  return path === "/admin" || path.startsWith("/admin/") || path === "/portal" || path.startsWith("/portal/");
+}
+
 /**
- * Ads label for a tel: or sms: href to this site's published number.
- * A customer's number on an admin screen is not an ad click.
+ * Ads label for any tel: or sms: tap on a public page.
+ * A Google forwarding number still counts: the visible number is not required to match the published one.
  */
 export function googleAdsContactClickLabel(href: string): string | null {
   const bare = href.trim().split("?")[0].toLowerCase();
   const kind = bare.startsWith("tel:") ? "call" : bare.startsWith("sms:") ? "text" : null;
-  if (!kind) return null;
-  if (nationalDigits(bare) !== nationalDigits(SITE_CONFIG.phoneTel)) return null;
+  if (!kind || staffContactPath()) return null;
   return kind === "call" ? GOOGLE_ADS_CALL_CLICK_LABEL : GOOGLE_ADS_TEXT_CLICK_LABEL;
 }
 
