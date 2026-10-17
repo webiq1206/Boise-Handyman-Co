@@ -1,14 +1,17 @@
 /**
  * Google Ads conversion helpers shared by every lead path on this site.
  *
- * One Google Ads conversion action ("P5 Raw Form Submitted") receives every
- * accepted lead, with a per-lead value so Google Ads can report ROAS by
- * campaign. Values are the per-lead estimates agreed with P5 on 14 Sept 2026
- * (form fallback in Google Ads is $50). Never pass PII here: no names, phones,
- * emails or free text - only a service/project category and an opaque id.
+ * "P5 Raw Form Submitted" receives real accepted leads only, with a per-lead
+ * value so Google Ads can report ROAS by campaign. Values are the per-lead
+ * estimates agreed with P5 on 14 Sept 2026 (form fallback in Google Ads is
+ * $50). "P5 Estimator Completed" is a separate action for finishing the
+ * estimator. Never pass PII here: no names, phones, emails or free text -
+ * only a service/project category and an opaque id.
  */
 export const GOOGLE_ADS_ID = "AW-18354188204";
 export const GOOGLE_ADS_LEAD_LABEL = "AW-18354188204/LE2vCPXstO8cEKzf-q9E";
+/** "P5 Estimator Completed" (7851740531). Not an accepted-lead conversion. */
+export const GOOGLE_ADS_ESTIMATOR_LABEL = "AW-18354188204/cEzmCPOagKAdEKzf-q9E";
 /** "P5 Website Call (60s+)": swaps the visible number for a Google forwarding number. */
 export const GOOGLE_ADS_WEBSITE_CALL_LABEL = "AW-18354188204/YHR0CIaPz_ccEKzf-q9E";
 export const GOOGLE_ADS_PHONE_DISPLAY = "(208) 477-1169";
@@ -101,7 +104,7 @@ function leadAlreadySent(storageKey?: string): boolean {
   }
 }
 
-function sendLeadConversion(ctx: LeadContext, dedupeKey: string | undefined, storageKey: string | undefined): boolean {
+function sendConversion(storageKey: string | undefined, payload: () => Record<string, unknown>): boolean {
   if (leadAlreadySent(storageKey)) return false;
   const gtag = readGtag();
   if (!gtag) return false;
@@ -113,8 +116,28 @@ function sendLeadConversion(ctx: LeadContext, dedupeKey: string | undefined, sto
       // Ignore; in-memory guard is enough for this page load.
     }
   }
-  gtag("event", "conversion", googleAdsLeadParams(ctx, dedupeKey));
+  gtag("event", "conversion", payload());
   return true;
+}
+
+/**
+ * Fires one conversion once per storage key. A missing gtag retries for about
+ * five seconds and still fires at most once. The sent marker is written only
+ * when gtag is ready.
+ */
+function queueConversion(storageKey: string | undefined, payload: () => Record<string, unknown>): boolean {
+  if (typeof window === "undefined") return false;
+  if (leadAlreadySent(storageKey) || (storageKey && waitingLeadKeys.has(storageKey))) return false;
+  if (readGtag()) return sendConversion(storageKey, payload);
+  if (storageKey) waitingLeadKeys.add(storageKey);
+  let fired = false;
+  whenGtagReady(() => {
+    if (storageKey) waitingLeadKeys.delete(storageKey);
+    if (fired) return;
+    fired = true;
+    sendConversion(storageKey, payload);
+  });
+  return false;
 }
 
 /**
@@ -124,17 +147,18 @@ function sendLeadConversion(ctx: LeadContext, dedupeKey: string | undefined, sto
  * fires at most once. The sent marker is written only when gtag is ready.
  */
 export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string): boolean {
-  if (typeof window === "undefined") return false;
   const storageKey = dedupeKey ? `google_ads_lead:${dedupeKey}` : undefined;
-  if (leadAlreadySent(storageKey) || (storageKey && waitingLeadKeys.has(storageKey))) return false;
-  if (readGtag()) return sendLeadConversion(ctx, dedupeKey, storageKey);
-  if (storageKey) waitingLeadKeys.add(storageKey);
-  let fired = false;
-  whenGtagReady(() => {
-    if (storageKey) waitingLeadKeys.delete(storageKey);
-    if (fired) return;
-    fired = true;
-    sendLeadConversion(ctx, dedupeKey, storageKey);
-  });
-  return false;
+  return queueConversion(storageKey, () => googleAdsLeadParams(ctx, dedupeKey));
+}
+
+/**
+ * Fires "P5 Estimator Completed". When this finish also created an accepted
+ * lead, pass that lead's dedupe key and the form label fires once for it too.
+ */
+export function trackEstimatorCompleted(ctx: LeadContext = {}, dedupeKey?: string, acceptedLeadKey?: string): void {
+  queueConversion(
+    dedupeKey ? `google_ads_estimator:${dedupeKey}` : undefined,
+    () => ({ send_to: GOOGLE_ADS_ESTIMATOR_LABEL }),
+  );
+  if (acceptedLeadKey) trackGoogleAdsLeadConversion(ctx, acceptedLeadKey);
 }
