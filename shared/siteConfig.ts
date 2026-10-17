@@ -5,6 +5,13 @@
 
 const DEFAULT_PHONE = "(208) 477-1169";
 const DEFAULT_PHONE_TEL = "2084771169";
+
+/** Call links use E.164. Visible copy stays on SITE_CONFIG.phone. */
+function businessTelHref(raw: string): string {
+  const digits = raw.replace(/\D/g, "");
+  const national = digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+  return national.length === 10 ? `tel:+1${national}` : "tel:+12084771169";
+}
 const DEFAULT_EMAIL = "hello@boisehandyman.co";
 // This site now lives on its own domain. The old general-contractor site was
 // duplicated and rebuilt as Boise Handyman Co, which runs at boisehandyman.co;
@@ -28,7 +35,7 @@ export const SITE_CONFIG = {
   legalName: "P5 Home Co LLC",
   phone: process.env.NEXT_PUBLIC_PHONE ?? DEFAULT_PHONE,
   phoneTel: process.env.NEXT_PUBLIC_PHONE_TEL ?? DEFAULT_PHONE_TEL,
-  phoneHref: `tel:${process.env.NEXT_PUBLIC_PHONE_TEL ?? DEFAULT_PHONE_TEL}`,
+  phoneHref: businessTelHref(process.env.NEXT_PUBLIC_PHONE_TEL ?? DEFAULT_PHONE_TEL),
   phoneSmsHref: `sms:${process.env.NEXT_PUBLIC_PHONE_TEL ?? DEFAULT_PHONE_TEL}`,
   email: process.env.NEXT_PUBLIC_EMAIL ?? DEFAULT_EMAIL,
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL,
