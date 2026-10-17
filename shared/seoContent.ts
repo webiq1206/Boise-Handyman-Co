@@ -1,5 +1,6 @@
 import type { ServiceData, CityData } from './contentData';
 import { getCountyLabel } from './contentData';
+import { getCityServiceCopy } from './content/cityServiceCopy';
 import type { LandingSection } from '@/components/seo/LandingPageTemplate';
 
 export interface FAQItem {
@@ -785,6 +786,8 @@ export function getCityServiceIntro(
   city: CityData,
   localFact?: string,
 ): string {
+  const override = getCityServiceCopy(service.slug, city.slug);
+  if (override) return override.intro;
   const county = getCountyLabel(city.county);
   const fact = localFact
     ? ` ${localFact}`
@@ -793,6 +796,8 @@ export function getCityServiceIntro(
 }
 
 export function getCityServiceFaqs(service: ServiceSEOContent, city: CityData): FAQItem[] {
+  const override = getCityServiceCopy(service.slug, city.slug);
+  if (override) return override.faqs;
   const county = getCountyLabel(city.county);
   // First sentence of the cost band, reused as a direct city-level answer for
   // "{service} cost in {city}" queries (voice/AI extractable).
@@ -872,6 +877,9 @@ export function getCityServiceSections(
         neighborhoods.length
           ? `We serve homes throughout ${city.name}, including ${neighborhoods.join(', ')}. Housing stock varies between these areas, from newer subdivision builds to older homes with settled doors and original fixtures, so we ask the right questions up front and arrive with materials that suit the house.`
           : `We serve homes throughout ${city.name}, from newer subdivision builds to older houses with settled doors and original fixtures, and we arrive with materials that suit the house.`,
+        ...(city.slug === 'kuna' || city.slug === 'caldwell'
+          ? ['Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell. Indian Creek Plaza is in Caldwell.']
+          : []),
         landmarks.length
           ? `As a local team that knows ${city.name} landmarks like ${landmarks.slice(0, 3).join(', ')}, scheduling is straightforward: we quote a real arrival time, confirm before heading out, and never add a travel surcharge.`
           : `As a local team, scheduling is straightforward: we quote a real arrival time, confirm before heading out, and never add a travel surcharge.`,

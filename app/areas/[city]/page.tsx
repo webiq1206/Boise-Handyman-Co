@@ -55,6 +55,10 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
 
   const neighborhoods = seo?.neighborhoods ?? [];
   const landmarks = seo?.landmarks ?? [];
+  const indianCreekNote =
+    city.slug === 'kuna' || city.slug === 'caldwell'
+      ? 'Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell. Indian Creek Plaza is in Caldwell.'
+      : undefined;
 
   const sections: LandingSection[] = [
     {
@@ -74,6 +78,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
         neighborhoods.length
           ? `We work throughout ${city.name}, including ${neighborhoods.join(', ')}. Housing stock varies between these areas, from newer subdivision builds to older homes with settled doors, aging caulk, and original fixtures, so we ask the right questions up front and arrive with materials that suit the house.`
           : `We work throughout ${city.name}, from newer subdivision builds to older homes with settled doors, aging caulk, and original fixtures, and we arrive with materials that suit the house.`,
+        ...(indianCreekNote ? [indianCreekNote] : []),
         landmarks.length
           ? `As a local team familiar with ${city.name} landmarks like ${landmarks.slice(0, 3).join(', ')}, scheduling is genuinely local: a real arrival time, a confirmation before we head out, and never a travel surcharge.`
           : `As a local team, scheduling is genuinely local: a real arrival time, a confirmation before we head out, and never a travel surcharge.`,
