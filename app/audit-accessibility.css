@@ -29,6 +29,9 @@
   max-height:100%;
   min-width:0;
   align-self:stretch;
+  animation:none;
+  opacity:1;
+  transform:none;
 }
 .approved-shell .family-handyman .f-hero-copy {
   min-width:0;
@@ -82,3 +85,17 @@
 .approved-shell .brc-text-link,
 .approved-shell a[href$="contact.vcf"] { display:inline-flex; align-items:center; min-height:32px; }
 .approved-shell .blog-content .callout.warning .callout-label { color:var(--audit-accent-ink); }
+
+/* Interior and home heroes paint from server HTML. No entrance fade or shift. */
+.approved-shell .family-handyman .f-hero,
+.approved-shell .family-handyman .f-hero-copy,
+.approved-shell .family-handyman .f-hero h1,
+.approved-interior .interior-hero,
+.approved-interior .interior-hero-copy,
+.approved-interior .interior-hero-copy h1,
+.approved-interior .interior-hero-image,
+.approved-interior .interior-hero-image img {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}

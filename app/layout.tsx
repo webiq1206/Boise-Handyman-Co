@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 import { Navigation } from '@/components/Navigation'
 import { ConditionalFooter } from '@/components/ConditionalFooter'
+import { Footer } from '@/components/Footer'
 import { Toaster } from '@/components/ui/toaster'
 import { Providers } from '@/components/Providers'
 import { ScrollToTop } from '@/components/ScrollToTop'
@@ -150,7 +151,9 @@ export default function RootLayout({
             <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
               {children}
             </main>
-            <ConditionalFooter />
+            <ConditionalFooter>
+              <Footer />
+            </ConditionalFooter>
           </div></ApprovedShell>
           <Toaster />
           <AssistantWidget />
