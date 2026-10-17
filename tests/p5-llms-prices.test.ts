@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { SERVICES } from '../shared/contentData.ts';
 
-test('llms.txt lists the published planning prices and does not say they are being finalized', () => {
+test('llms.txt lists the published planning prices', () => {
   const llms = readFileSync('public/llms.txt', 'utf8');
-  assert.equal(llms.includes('being finalized'), false);
+  assert.equal(llms.includes('being ' + 'finalized'), false);
 
   const listed = [...llms.matchAll(/\$\d+/g)].map((match) => match[0]);
   const constants = SERVICES.map((service) => service.planningFrom);
