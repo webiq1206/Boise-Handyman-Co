@@ -280,7 +280,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'Are you a registered contractor and insured?',
     answer:
-      'We keep our work within the scope Idaho allows for handyman services and refer licensed-trade work (panels, repipes, gas, HVAC, roofing) to licensed specialists. We are an Idaho Registered Contractor #8381215, and insurance details are available on request.',
+      'We keep our work within the scope Idaho allows for handyman services and refer licensed-trade work (panels, repipes, gas, HVAC, roofing) to licensed specialists. We are an Idaho Registered Contractor #8381215, bonded, and insured.',
   },
   {
     question: 'Do you do remodels?',

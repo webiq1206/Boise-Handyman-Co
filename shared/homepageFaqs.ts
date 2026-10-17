@@ -55,7 +55,7 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "Are you a registered contractor and insured?",
-    a: "We keep our work within the scope Idaho allows for handyman services and refer anything that requires a licensed plumbing, electrical, or HVAC contractor to licensed specialists we trust. We are an Idaho Registered Contractor #8381215. Insurance details are available on request, and we are happy to answer any question about coverage before you book.",
+    a: "We keep our work within the scope Idaho allows for handyman services and refer anything that requires a licensed plumbing, electrical, or HVAC contractor to licensed specialists we trust. We are an Idaho Registered Contractor #8381215, bonded, and insured.",
   },
   {
     q: "Do you handle big remodels or additions?",
