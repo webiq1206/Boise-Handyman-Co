@@ -58,7 +58,9 @@ export function buildBusinessVCard(): string {
     foldLine(
       `ADR;TYPE=WORK:;;${escapeVCard(SITE_CONFIG.address.street)};${escapeVCard(SITE_CONFIG.address.city)};${escapeVCard(SITE_CONFIG.address.state)};${escapeVCard(SITE_CONFIG.address.postalCode)};US`,
     ),
-    foldLine(`LABEL;TYPE=WORK:${escapeVCard(`${SITE_CONFIG.address.cityState} · ${SITE_CONFIG.address.serviceArea}`)}`),
+    foldLine(
+      `LABEL;TYPE=WORK:${escapeVCard(`${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.state} ${SITE_CONFIG.address.postalCode}`)}`,
+    ),
     foldLine(`NOTE:${escapeVCard(note)}`),
     "END:VCARD",
   ];
