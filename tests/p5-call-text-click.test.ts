@@ -159,4 +159,10 @@ test("the site listener is the only ads click binding and the shared estimator i
   assert.equal(re10.includes("trackGoogleAdsContactClick"), false);
   const privacy = readFileSync(new URL("../app/privacy-policy/page.tsx", import.meta.url), "utf8");
   assert.equal(privacy.includes("ng9fCPiOhaAdEKzf-q9E"), false);
+  assert.equal(
+    privacy.includes(
+      "When you tap Call or Text on our site, Google Ads is told that the tap happened and on which page, so we can count calls and texts that come from our ads. The tap itself doesn't include your name, phone number or the content of your call or message.",
+    ),
+    true,
+  );
 });
