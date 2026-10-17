@@ -108,6 +108,9 @@ export default function PrivacyPolicyPage() {
             <p>
               We also use the Meta Pixel and Meta's Conversions API to measure visits and inquiries from our Facebook and Instagram ads. The pixel records a page view. Meta's pixel may also record which buttons you click and basic information about the page, such as its title. Depending on Meta's settings, the pixel may also collect contact details you type into a form, in hashed form. When you submit an inquiry, our server may send Meta the Lead event with the type of project you chose and an inquiry category, the page address, the event time, a matching event id, your IP address, your browser user agent, and the Meta cookies _fbp and _fbc, so it can match the inquiry to an ad. Meta processes this under its own privacy policy (<a href="https://www.facebook.com/privacy/policy">https://www.facebook.com/privacy/policy</a>).
             </p>
+            <p>
+              If you arrive from one of our ads or a link with campaign tags, our site keeps the ad click identifier and campaign tags from that link in your browser only until you close the tab.
+            </p>
 
             <h2 id="document-section-5">Data Security</h2>
             <p>
