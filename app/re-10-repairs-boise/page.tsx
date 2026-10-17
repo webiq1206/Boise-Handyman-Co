@@ -112,8 +112,7 @@ export default function Re10RepairsPage() {
             <a className="re10-phone" href={SITE_CONFIG.phoneHref} data-testid="link-re10-call"><Phone size={18} aria-hidden="true" /> Prefer to talk? {SITE_CONFIG.phone}</a>
           </div>
           <figure>
-            <img src={SITE_IMAGES.processInProgress} alt="Illustration of a tool bag and levels ready for home repairs" width={1200} height={896} />
-            <figcaption>Service illustration</figcaption>
+            <img src={SITE_IMAGES.processInProgress} alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth" width={1200} height={896} />
           </figure>
         </div>
       </section>

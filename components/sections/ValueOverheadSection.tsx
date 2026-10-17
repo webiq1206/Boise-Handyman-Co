@@ -71,7 +71,7 @@ export function ValueOverheadSection() {
                 <Image
                   src={SITE_IMAGES.valueCraft}
                   loading="lazy"
-                  alt="A Boise Handyman Co worker fitting white baseboard trim"
+                  alt="Hands fitting white baseboard trim with a nail gun"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover img-brand-grade"

@@ -31,7 +31,7 @@ interface ProjectGallerySectionProps {
 }
 
 /**
- * Our work.
+ * Photo gallery.
  *
  * WAS six equal before/after cards in a three-column grid with 14px titles.
  * The slider - the one genuinely interactive, genuinely persuasive thing on
@@ -63,14 +63,9 @@ export function ProjectGallerySection({
         {/* LEAD: the slider at the size it deserves, heading alongside. */}
         <div className="grid gap-[var(--ed-gutter)] lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
           <Reveal>
-            <p className="ed-eyebrow">Our work</p>
             <h2 className="ed-h2 ed-statement">
               Repairs across the Treasure Valley
             </h2>
-            <p className="ed-body mt-7">
-              Recent repairs and installs we have completed across Boise, Meridian,
-              Eagle, Nampa and the surrounding valley.
-            </p>
             <div className="mt-10 hidden lg:block">
               <ProjectMeta project={lead} lead />
             </div>
@@ -96,14 +91,14 @@ export function ProjectGallerySection({
         {rest.length > 0 && (
           <Reveal delay={120}>
             <div className="mt-[clamp(48px,6vw,88px)] flex items-end justify-between gap-6">
-              <p className="ed-eyebrow !mb-0">More projects</p>
+              <p className="ed-eyebrow !mb-0">More photos</p>
               <p className="ed-small hidden sm:block">Scroll sideways</p>
             </div>
             <div
               className="ed-rail mt-6 [scrollbar-color:var(--ed-line)_transparent]"
               tabIndex={0} role="region"
               style={{ ["--ed-rail-w" as string]: "31%" }}
-              aria-label="More before and after projects"
+              aria-label="More before and after photos"
             >
               {rest.map((project) => (
                 <article

@@ -202,7 +202,7 @@ export default function ContactPage() {
       <JsonLd data={schemas} />
       <div className="flex flex-col pb-20 md:pb-0">
         {/* Approved editorial hero */}
-        <InteriorHero layout="contact" imageSrc={SITE_IMAGES.hero} imageAlt="A Boise Handyman Co worker adjusting an interior door hinge">
+        <InteriorHero layout="contact" imageSrc={SITE_IMAGES.hero} imageAlt="A worker adjusting an interior door hinge with a screwdriver">
             <HeroBreadcrumbs />
             <p data-speakable="summary" className="sr-only">
               {SPEAKABLE_SUMMARY}
@@ -349,7 +349,7 @@ export default function ContactPage() {
             <div className="relative min-h-[260px] md:min-h-[520px] overflow-hidden bg-inverse order-2 md:order-1">
               <Image
                 src={SITE_IMAGES.leadership}
-                alt="A Boise Handyman Co worker reviewing a repair list with a homeowner"
+                alt="A handyman and a homeowner reviewing a clipboard at a front door"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover img-brand-grade"
