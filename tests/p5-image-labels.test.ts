@@ -46,8 +46,14 @@ test("photo alt text describes the picture and does not label it as our work", (
   for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx"]) {
     const source = read(file);
     assert.equal(source.includes('alt="Hands fitting white baseboard trim with a hammer"'), true, file);
-    assert.equal(source.includes("nail gun"), false, file);
   }
+  for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx", "shared/imageAlts.ts"]) {
+    assert.equal(read(file).includes("nail gun"), false, file);
+  }
+  assert.equal(
+    read("shared/imageAlts.ts").includes("Hands fitting white baseboard trim with a hammer during a repair"),
+    true,
+  );
   for (const file of [
     "components/BeforeAfterSlider.tsx",
     "components/sections/FeaturedBeforeAfterSection.tsx",
