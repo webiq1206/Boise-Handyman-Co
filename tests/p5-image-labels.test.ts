@@ -30,7 +30,8 @@ test("photo alt text describes the picture and does not label it as our work", (
   }
   const re10 = read("app/re-10-repairs-boise/page.tsx");
   assert.match(re10, /alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth"/);
-  assert.match(re10, /<figcaption>Representative imagery<\/figcaption>/);
+  assert.equal(re10.includes("Representative imagery"), false);
+  assert.equal(re10.includes("<figcaption>"), false);
   const representative = [
     "Representative image: a worker adjusting an interior door hinge with a screwdriver",
     "Representative image: a worker painting white window trim with a brush over a drop cloth",
@@ -45,13 +46,13 @@ test("photo alt text describes the picture and does not label it as our work", (
   assert.equal(registry.split("Representative image: a worker adjusting an interior door hinge with a screwdriver").length - 1, 2);
   for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx"]) {
     const source = read(file);
-    assert.equal(source.includes('alt="Hands fitting white baseboard trim with a hammer"'), true, file);
+    assert.equal(source.includes('alt="New white baseboard with a loose piece, a hammer, a nail set and a coping saw on an oak floor"'), true, file);
   }
   for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx", "shared/imageAlts.ts"]) {
     assert.equal(read(file).includes("nail gun"), false, file);
   }
   assert.equal(
-    read("shared/imageAlts.ts").includes("Hands fitting white baseboard trim with a hammer during a repair"),
+    read("shared/imageAlts.ts").includes("New white baseboard with a loose piece, a hammer, a nail set and a coping saw on an oak floor"),
     true,
   );
   for (const file of [

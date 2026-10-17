@@ -42,8 +42,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'common-toilet-problems-and-fixes': {
-    hero: '/images/handyman/toilet-repair.webp',
-    alt: 'Plumber lifting the porcelain lid off a toilet tank to service the fill valve in a clean bathroom',
+    hero: '/images/handyman/toilet-tank-service.webp',
+    alt: 'Toilet with a chrome shutoff valve and supply line, and a wrench on a towel',
     topicTags: ["plumbing","toilet repair","boise","repairs"],
     source: 'handyman',
   },
@@ -60,8 +60,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'drywall-repair-cost-boise': {
-    hero: '/images/handyman/service-drywall-repair.webp',
-    alt: 'Hands spreading joint compound over a drywall patch with a taping knife in a bright room',
+    hero: '/images/handyman/drywall-patch-coat.webp',
+    alt: 'Taped drywall patch with a first coat of compound, and a knife on a mud pan',
     topicTags: ["drywall","cost","boise","repairs","costs"],
     source: 'handyman',
   },
@@ -144,8 +144,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'how-to-patch-drywall': {
-    hero: '/images/handyman/service-drywall-repair.webp',
-    alt: 'Hands spreading joint compound over a drywall patch with a taping knife in a bright room',
+    hero: '/images/handyman/drywall-patch-coat.webp',
+    alt: 'Taped drywall patch with a first coat of compound, and a knife on a mud pan',
     topicTags: ["drywall repair","repairs","boise","diy"],
     source: 'handyman',
   },
@@ -162,8 +162,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'preparing-your-boise-home-for-winter': {
-    hero: '/images/handyman/winterize-spigot.webp',
-    alt: 'Insulated faucet cover being fitted over an outdoor hose spigot with frost on the grass',
+    hero: '/images/handyman/spigot-winterize.webp',
+    alt: 'Outdoor spigot with the hose disconnected and coiled on frosty grass',
     topicTags: ["winterizing","home maintenance","boise","seasonal","home"],
     source: 'handyman',
   },

@@ -14,11 +14,11 @@ const DEFAULT_BACKGROUND = h("hero-door-hinge-branded");
  * shared/contentData.ts. Each service leads with its own trade's photograph.
  */
 export const SERVICE_BACKGROUNDS: ServiceBackgroundConfig = {
-  "drywall-repair": h("service-drywall-repair"),
+  "drywall-repair": h("drywall-patch-coat"),
   "painting-touch-ups": h("service-painting-p5-reviewed-20260910"),
   "plumbing-repairs": h("service-plumbing"),
   "electrical-repairs": h("service-electrical"),
-  "carpentry-trim-repair": h("service-carpentry-trim-branded"),
+  "carpentry-trim-repair": h("baseboard-trim-fit"),
   "mounting-assembly": h("service-mounting"),
   "fence-deck-gutter-repair": h("service-fence-repair"),
   "home-maintenance": h("service-caulking"),
@@ -48,7 +48,7 @@ export interface LandingImageSet {
  */
 const SERVICE_IMAGE_SETS: Record<string, LandingImageSet> = {
   "drywall-repair": {
-    hero: h("service-drywall-repair"),
+    hero: h("drywall-patch-coat"),
     breather: h("punch-list-markers"),
     process: SITE_IMAGES.processInProgress,
   },
@@ -59,7 +59,7 @@ const SERVICE_IMAGE_SETS: Record<string, LandingImageSet> = {
   },
   "plumbing-repairs": {
     hero: h("service-plumbing"),
-    breather: h("toilet-repair"),
+    breather: h("toilet-tank-service"),
     process: h("toolbag-ready"),
   },
   "electrical-repairs": {
@@ -68,7 +68,7 @@ const SERVICE_IMAGE_SETS: Record<string, LandingImageSet> = {
     process: h("estimate-clipboard"),
   },
   "carpentry-trim-repair": {
-    hero: h("service-carpentry-trim-branded"),
+    hero: h("baseboard-trim-fit"),
     breather: h("door-hinge-fix"),
     process: h("toolbag-ready"),
   },

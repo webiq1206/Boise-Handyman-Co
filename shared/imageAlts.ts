@@ -4,10 +4,10 @@
  * the existing alt alone (or empty, if it was already empty).
  */
 const IMAGE_ALTS: Record<string, string> = {
-  '/images/handyman/service-drywall-repair.webp':
-    'Hands spreading joint compound over a drywall patch with a taping knife',
-  '/images/handyman/service-carpentry-trim-branded.webp':
-    'Hands fitting white baseboard trim with a hammer during a repair',
+  '/images/handyman/drywall-patch-coat.webp':
+    'Taped drywall patch with a first coat of compound, and a knife on a mud pan',
+  '/images/handyman/baseboard-trim-fit.webp':
+    'New white baseboard with a loose piece, a hammer, a nail set and a coping saw on an oak floor',
   '/images/handyman/service-painting-p5-reviewed-20260910.webp':
     'A worker painting white window trim with a brush over a drop cloth',
   '/images/handyman/service-painting.webp':
@@ -36,8 +36,8 @@ const IMAGE_ALTS: Record<string, string> = {
     'A freshly painted sage-green front door with white trim and black hardware',
   '/images/handyman/front-door-repaint.webp':
     'A freshly painted sage-green front door with white trim and black hardware',
-  '/images/handyman/toilet-repair.webp':
-    'Hands lifting a toilet tank lid to reach the fill valve',
+  '/images/handyman/toilet-tank-service.webp':
+    'Toilet with a chrome shutoff valve and supply line, and a wrench on a towel',
   '/images/handyman/repair-materials.webp':
     'Screws, wall anchors, and picture hangers sorted in a parts tray',
   '/images/handyman/door-hinge-fix.webp':
@@ -50,8 +50,8 @@ const IMAGE_ALTS: Record<string, string> = {
     'A worker on a ladder clearing leaves from a house gutter',
   '/images/handyman/weatherstripping.webp':
     'Hands applying foam weatherstripping to a white exterior door frame',
-  '/images/handyman/winterize-spigot.webp':
-    'An insulated cover fitted over an outdoor faucet, with frost on the grass',
+  '/images/handyman/spigot-winterize.webp':
+    'Outdoor spigot with the hose disconnected and coiled on frosty grass',
   '/images/handyman/grab-bar-install.webp':
     'A brushed-nickel grab bar installed on subway tile in a shower',
   '/images/areas/boise.webp':

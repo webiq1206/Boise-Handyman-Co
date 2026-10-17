@@ -12,7 +12,7 @@ export const SITE_IMAGES = {
   /** "How we work" split panels: a written quote on a clipboard with a tape measure. */
   process: "/images/handyman/estimate-clipboard.webp",
   /** "Where your money goes" value band: careful trim carpentry up close. */
-  valueCraft: "/images/handyman/service-carpentry-trim-branded.webp",
+  valueCraft: "/images/handyman/baseboard-trim-fit.webp",
   /** Process sections: a tidy tool bag staged on a drop cloth for a repair visit. */
   processInProgress: "/images/handyman/toolbag-ready.webp",
   /** Full-bleed brand statement band: crisp cut-in paint lines on trim. */
@@ -38,14 +38,14 @@ const h = (name: string) => `/images/handyman/${name}.webp`;
 export const CONSTRUCTION_IMAGES = {
   customHome: h("hero-gutter-cleaning"),
   semiCustom: h("front-door-repaint-p5-reviewed-20260910"),
-  framing: h("service-drywall-repair"),
+  framing: h("drywall-patch-coat"),
   foundation: h("service-fence-repair"),
   roughIn: h("service-plumbing"),
   insulation: h("weatherstripping"),
   interior: h("hero-door-hinge-branded"),
   kitchen: h("cabinet-hardware-upgrade"),
   lot: h("deck-board-replacement"),
-  foothills: h("winterize-spigot"),
+  foothills: h("spigot-winterize"),
   ruralSite: h("service-fence-repair"),
   plans: h("estimate-clipboard"),
   budget: h("repair-materials"),
