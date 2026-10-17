@@ -8,7 +8,9 @@ test('the privacy policy discloses cookies, analytics and advertising', () => {
   assert.match(policy, /Last updated: October 17, 2026/);
   assert.match(policy, /Cookies, analytics and advertising\. We use Google Analytics 4 \(GA4\) to understand how visitors use this site, such as pages viewed, referring site, approximate location, browser and device type\./);
   assert.match(policy, /Google's tag also adds visitors to remarketing lists, and Google may use this data to show you relevant ads on other websites \(remarketing\)\./);
-  assert.match(policy, /We do not currently send your name, email, phone number, address or project description to Google; Google Analytics receives only the type of project you choose \(for example, a drywall repair or a small plumbing repair\) when you use the estimator or send an inquiry, and the words you type into our blog search\./);
+  assert.match(policy, /We do not currently send your name, email, phone number, address or project description to Google; Google Analytics receives only the type of project you choose \(for example, drywall-repair or plumbing-repairs\) when you use the estimator or send an inquiry, and the words you type into our blog search\./);
+  assert.match(policy, /\[Placeholder, pending Larry's OK\.\] Microsoft Clarity loads on this live site\./);
+  assert.equal(policy.includes('a drywall repair or a small plumbing repair'), false);
   assert.match(policy, /Calls from our site or ads may be routed through a Google forwarding number so we can measure which ads lead to calls\./);
   assert.match(policy, /href="https:\/\/policies\.google\.com\/privacy"/);
   assert.match(policy, /href="https:\/\/adssettings\.google\.com"/);
