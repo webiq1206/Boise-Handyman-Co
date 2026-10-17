@@ -1,3 +1,5 @@
+import { SITE_CONFIG } from "@/shared/siteConfig";
+
 /**
  * Google Ads conversion helpers shared by every lead path on this site.
  *
@@ -11,6 +13,10 @@ export const GOOGLE_ADS_ID = "AW-18354188204";
 export const GOOGLE_ADS_LEAD_LABEL = "AW-18354188204/LE2vCPXstO8cEKzf-q9E";
 /** "P5 Website Call (60s+)": swaps the visible number for a Google forwarding number. */
 export const GOOGLE_ADS_WEBSITE_CALL_LABEL = "AW-18354188204/YHR0CIaPz_ccEKzf-q9E";
+/** Click on a tel: link to the published P5 number. One conversion per click. */
+export const GOOGLE_ADS_CALL_CLICK_LABEL = "AW-18354188204/ng9fCPiOhaAdEKzf-q9E";
+/** Click on an sms: link to the published P5 number. One conversion per click. */
+export const GOOGLE_ADS_TEXT_CLICK_LABEL = "AW-18354188204/lTxsCOqahaAdEKzf-q9E";
 export const GOOGLE_ADS_PHONE_DISPLAY = "(208) 477-1169";
 /** sessionStorage key written by GoogleAnalytics.tsx on the first page view. */
 export const ENTRY_PATH_KEY = "p5_entry_path";
@@ -89,5 +95,37 @@ export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: 
     }
   }
   gtag("event", "conversion", googleAdsLeadParams(ctx, dedupeKey));
+  return true;
+}
+
+function nationalDigits(value: string): string {
+  const digits = value.replace(/\D/g, "");
+  return digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+}
+
+/**
+ * Ads click label for a tel: or sms: href to this site's published number.
+ * Other numbers (a customer's phone on an admin screen) are not ad clicks.
+ */
+export function googleAdsContactClickLabel(href: string): string | null {
+  const bare = href.trim().split("?")[0].toLowerCase();
+  const kind = bare.startsWith("tel:") ? "call" : bare.startsWith("sms:") ? "text" : null;
+  if (!kind) return null;
+  if (nationalDigits(bare) !== nationalDigits(SITE_CONFIG.phoneTel)) return null;
+  return kind === "call" ? GOOGLE_ADS_CALL_CLICK_LABEL : GOOGLE_ADS_TEXT_CLICK_LABEL;
+}
+
+/**
+ * Fires once for this click. A later click fires again. No session dedupe:
+ * each tap is its own call or text conversion. No-op when gtag is absent,
+ * which is the same gate trackEvent already uses.
+ */
+export function trackGoogleAdsContactClick(href: string): boolean {
+  if (typeof window === "undefined") return false;
+  const sendTo = googleAdsContactClickLabel(href);
+  if (!sendTo) return false;
+  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+  if (typeof gtag !== "function") return false;
+  gtag("event", "conversion", { send_to: sendTo });
   return true;
 }

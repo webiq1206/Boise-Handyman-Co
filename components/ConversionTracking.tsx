@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { trackEvent } from '@/lib/analytics';
+import { trackGoogleAdsContactClick } from '@/lib/googleAdsConversion';
 
 /**
  * Site-wide conversion tracking for call/text/email intent. Uses a single
@@ -18,8 +19,10 @@ export function ConversionTracking() {
       const href = link.getAttribute('href') || '';
       if (href.startsWith('tel:')) {
         trackEvent('contact_click', { method: 'phone', link_url: href });
+        trackGoogleAdsContactClick(href);
       } else if (href.startsWith('sms:')) {
         trackEvent('contact_click', { method: 'sms', link_url: href });
+        trackGoogleAdsContactClick(href);
       } else if (href.startsWith('mailto:')) {
         trackEvent('contact_click', { method: 'email', link_url: href });
       } else if (href === '#consult' || href.endsWith('/#consult')) {
