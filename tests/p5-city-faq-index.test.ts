@@ -87,7 +87,22 @@ test('published city claims and the Kuna and Caldwell neighborhood order stay',(
  assert.match(getAreaIntro(boise),/Census ACS 2020-2024/);
  const boiseFaqs=areaPageFaqs(boise);
  assert.ok(boiseFaqs.some((faq)=>faq.answer.includes('Certificate of Appropriateness')));
- assert.ok(boiseFaqs.some((faq)=>faq.question==='Which permit office handles a handyman repair in Boise?'));
+ const station='the Deer Flat Dam station by Lake Lowell, southwest of Caldwell';
+ for(const city of CITIES){
+  const text=areaPageFaqs(city).map((faq)=>`${faq.question}\n${faq.answer}`).join('\n');
+  assert.ok(text.includes('reviews permitted handyman repairs'),`${city.slug} permit answer`);
+  assert.equal(text.includes('permitted a handyman repair'),false,`${city.slug} drops the old permit grammar`);
+ }
+ assert.deepEqual(CITY_SEO_DATA.Eagle.neighborhoods,['Banbury','Floating Feather']);
+ assert.equal(CITY_SEO_DATA.Eagle.neighborhoods.includes('The Estates'),false);
+ assert.deepEqual(CITY_SEO_DATA.Nampa.landmarks,['Ford Idaho Center','Nampa Train Depot']);
+ assert.equal(CITY_SEO_DATA.Nampa.landmarks.includes('Lake Lowell'),false);
+ assert.deepEqual(CITY_SEO_DATA.Middleton.landmarks,['the Boise River']);
+ assert.equal(CITY_SEO_DATA.Middleton.landmarks.join(' ').includes('Middleton City Park'),false);
+ assert.ok(areaPageFaqs(caldwell).some((faq)=>faq.answer.includes(station)));
+ assert.ok(CITY_SERVICE_COPY['home-maintenance/caldwell'].faqs.some((faq)=>faq.answer.includes(station)));
+ assert.ok(CITY_SERVICE_COPY['painting-touch-ups/caldwell'].faqs.some((faq)=>faq.answer.includes(station)));
+ assert.equal(CITY_SERVICE_COPY['home-maintenance/caldwell'].faqs.some((faq)=>faq.answer.includes('on Lake Lowell')),false);
  assert.ok(boiseFaqs.some((faq)=>faq.question==='Does Boise Handyman Co serve Hidden Springs and Harris Ranch?'));
  assert.ok(boiseFaqs.some((faq)=>faq.answer.includes('Other areas on our Boise service list include North End, Bench, Downtown, East End, Southwest Boise.')));
  const kunaFaqs=areaPageFaqs(kuna);

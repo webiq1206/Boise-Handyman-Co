@@ -256,7 +256,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'When do freezes start and end around Caldwell?',
         answer:
-          "NOAA's 1991-2020 normals for the Deer Flat Dam station at Lake Lowell, southwest of Caldwell, put the median last spring freeze around April 23 and the first fall freeze around October 18. That window is the best time for exterior caulking, deck, and fence repairs, while interior work runs all year.",
+          "NOAA's 1991-2020 normals for the Deer Flat Dam station by Lake Lowell, southwest of Caldwell, put the median last spring freeze around April 23 and the first fall freeze around October 18. That window is the best time for exterior caulking, deck, and fence repairs, while interior work runs all year.",
       },
     ],
   },

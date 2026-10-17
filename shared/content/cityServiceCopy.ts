@@ -422,7 +422,7 @@ export const CITY_SERVICE_COPY: Record<string, CityServiceCopy> = {
       { question: "When should I weatherproof my home in Idaho?", answer: "Early fall, in September or October, while the hard freeze is still weeks off. Draft-proofing doors, windows, and penetrations at that point repays itself over the heating season and keeps summer heat out." },
       { question: "Do you serve Caldwell?", answer: "Yes. Our maintenance work covers Caldwell as a core city, and from there we serve Canyon County and the greater Treasure Valley. No Caldwell address pays extra for a maintenance visit." },
       { question: "How do I get a quote for caulking & home maintenance in Caldwell?", answer: "Text the list and photos, or use the contact form. Most firm prices are back within a business day, and our estimator shows a preliminary planning range before then if that helps. Nothing is scheduled until you approve." },
-      { question: "How many freezing nights does Caldwell get?", answer: "About 106 a year at Deer Flat Dam, the NOAA station near Lake Lowell southwest of Caldwell (1991-2020 normals). Roughly 16 to 17 of those land in November, and summer brings about 41 days hitting 90\u00b0F. That swing is hard on exterior caulk, so a fall check pays off." },
+      { question: "How many freezing nights does Caldwell get?", answer: "About 106 a year at the Deer Flat Dam station by Lake Lowell, southwest of Caldwell (1991-2020 normals). Roughly 16 to 17 of those land in November, and summer brings about 41 days hitting 90\u00b0F. That swing is hard on exterior caulk, so a fall check pays off." },
     ],
   },
   "home-maintenance/eagle": {
@@ -620,7 +620,7 @@ export const CITY_SERVICE_COPY: Record<string, CityServiceCopy> = {
       { question: "Can you match my existing wall color?", answer: "Yes. A coin-size chip is all a paint store needs to scan a color. We'll cut the sample and handle the match ourselves." },
       { question: "Do you serve Caldwell?", answer: "Yes. We list Caldwell as a core city, and our painting coverage spans Canyon County and the greater Treasure Valley. Your address in Caldwell has no effect on a painting quote." },
       { question: "How do I get a quote for interior & exterior painting in Caldwell?", answer: "Text us pictures of the rooms or trim, or send them through the contact form, and you'll typically have a firm price inside one business day. If you're planning ahead, our estimator gives a preliminary planning range. We don't schedule until you've approved." },
-      { question: "How hot do Caldwell summers get for exterior painting?", answer: "Hot, but a little milder than Boise. NOAA's 1991-2020 normals for Deer Flat Dam, near Lake Lowell southwest of Caldwell, show July highs averaging about 90\u00b0F and roughly 41 days a year hitting 90\u00b0F, while July rainfall averages just 0.29 inches. We plan exterior paint for mornings and cooler days to keep it from drying too fast." },
+      { question: "How hot do Caldwell summers get for exterior painting?", answer: "Hot, but a little milder than Boise. NOAA's 1991-2020 normals for the Deer Flat Dam station by Lake Lowell, southwest of Caldwell, show July highs averaging about 90\u00b0F and roughly 41 days a year hitting 90\u00b0F, while July rainfall averages just 0.29 inches. We plan exterior paint for mornings and cooler days to keep it from drying too fast." },
     ],
   },
   "painting-touch-ups/eagle": {
