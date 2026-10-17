@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import test from 'node:test';
-import { generateLocalBusinessSchema } from '../lib/schema.ts';
+import { generateLocalBusinessSchema, generateReviewSchema, generateServiceSchema } from '../lib/schema.ts';
 import { HOW_P5_WORKS } from '../shared/siteContent.ts';
 
 const credential = readFileSync('components/ContractorCredential.tsx', 'utf8');
@@ -35,7 +35,7 @@ function sourceFiles(dir: string): string[] {
     if (name === 'node_modules' || name === '.next') continue;
     const path = join(dir, name);
     if (statSync(path).isDirectory()) files.push(...sourceFiles(path));
-    else if (name.endsWith('.tsx') || name.endsWith('.ts')) files.push(path);
+    else if (name.endsWith('.tsx') || name.endsWith('.ts') || name.endsWith('.md')) files.push(path);
   }
   return files;
 }
@@ -77,16 +77,36 @@ test('How P5 works is six selling points plus Nick', () => {
   assert.match(about, /HOW_P5_WORKS\.map/);
 });
 
-test('the business JSON-LD carries the registration credential', () => {
-  assert.deepEqual(generateLocalBusinessSchema().hasCredential, {
-    '@type': 'EducationalOccupationalCredential',
-    credentialCategory: 'registration',
-    name: 'Idaho Registered Contractor',
-    identifier: '8381215',
-    recognizedBy: {
-      '@type': 'GovernmentOrganization',
-      name: 'Idaho Division of Occupational and Professional Licenses',
-      url: 'https://dopl.idaho.gov/con/',
-    },
-  });
+const contractorCredential = {
+  '@type': 'EducationalOccupationalCredential',
+  credentialCategory: 'registration',
+  name: 'Idaho Registered Contractor',
+  identifier: '8381215',
+  recognizedBy: {
+    '@type': 'GovernmentOrganization',
+    name: 'Idaho Division of Occupational and Professional Licenses',
+    url: 'https://dopl.idaho.gov/con/',
+  },
+};
+
+test('every business JSON-LD node carries the registration credential', () => {
+  assert.deepEqual(generateLocalBusinessSchema().hasCredential, contractorCredential);
+  assert.deepEqual(generateLocalBusinessSchema('Caldwell').hasCredential, contractorCredential);
+  const provider = generateServiceSchema('Drywall repair', 'Patch a wall', 'Meridian').provider as { hasCredential?: unknown };
+  assert.deepEqual(provider.hasCredential, contractorCredential);
+  assert.deepEqual(generateReviewSchema([]).hasCredential, contractorCredential);
+  const layout = readFileSync('app/layout.tsx', 'utf8');
+  assert.match(layout, /<SiteBusinessSchema \/>/);
+});
+
+test('Handyman copy does not say Workmanship made right', () => {
+  const hits: string[] = [];
+  for (const root of ['app', 'components', 'shared', 'server', 'lib', '.agents', 'public']) {
+    for (const file of sourceFiles(root)) {
+      if (file.startsWith('tests/')) continue;
+      const text = readFileSync(file, 'utf8');
+      if (/workmanship made right/i.test(text)) hits.push(file);
+    }
+  }
+  assert.deepEqual(hits, []);
 });

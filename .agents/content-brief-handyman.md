@@ -30,8 +30,7 @@ wrong.)
 - Most repairs and installs finished in a single visit ("one-trip fixes").
 - If the scope grows once something is opened up, work stops and the price is
   agreed before it changes.
-- Walkthrough and cleanup at the end of the job; workmanship made right if it
-  ever falls short.
+- Walkthrough and cleanup at the end of the job.
 - Larger jobs (anything needing a general contractor or major permits) are
   referred out honestly.
 

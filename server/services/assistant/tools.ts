@@ -395,7 +395,7 @@ function executeGetBusinessInfo(input: unknown): string {
         location: SITE_CONFIG.address.cityState,
         serviceArea: SITE_CONFIG.address.serviceArea,
         summary:
-          "Local handyman service for small repair, maintenance, and install jobs across the Treasure Valley. Upfront quotes before work starts, an agreed arrival time rather than a half-day window, most jobs done in one trip, and workmanship made right if it ever falls short. Idaho Registered Contractor #8381215, bonded and insured.",
+          "Local handyman service for small repair, maintenance, and install jobs across the Treasure Valley. Upfront quotes before work starts, an agreed arrival time rather than a half-day window, most jobs done in one trip. Idaho Registered Contractor #8381215, bonded and insured.",
       });
   }
 }
