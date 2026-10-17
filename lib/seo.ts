@@ -7,6 +7,9 @@
 import { publishedFoundingYear } from '@/shared/foundingYear';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { GBP_SOCIAL, getExternalProfileUrls } from '@/shared/gbpProfile';
+import { SHOW_TRUST_CLAIMS } from '@/shared/trustClaims';
+
+export { SHOW_TRUST_CLAIMS };
 
 interface SEOMetaData {
   title: string;
@@ -128,16 +131,23 @@ export function generatePageTitle(params: ServiceSEOParams): string {
   return `${truncatedService} | ${BRAND}`;
 }
 
+const SATISFACTION_GUARANTEED_CTA = "Satisfaction guaranteed";
+const NEUTRAL_FALLBACK_CTA = "Free quotes from photos";
+
 const CITY_DESCRIPTION_VARIANTS: Record<string, string> = {
-  Kuna: "Kuna's trusted local",
+  Kuna: SHOW_TRUST_CLAIMS ? "Kuna's trusted local" : "Kuna's local",
   Boise: "Boise's local",
-  Meridian: "Meridian's trusted",
+  Meridian: SHOW_TRUST_CLAIMS ? "Meridian's trusted" : "Meridian's local",
   Eagle: "Eagle's preferred",
   Star: "Star's reliable",
   Middleton: "Middleton's expert",
-  Nampa: "Nampa's trusted",
-  Caldwell: "Caldwell's trusted",
+  Nampa: SHOW_TRUST_CLAIMS ? "Nampa's trusted" : "Nampa's local",
+  Caldwell: SHOW_TRUST_CLAIMS ? "Caldwell's trusted" : "Caldwell's local",
 };
+
+function cityDescriptionLead(city: string): string {
+  return CITY_DESCRIPTION_VARIANTS[city] || (SHOW_TRUST_CLAIMS ? `${city}'s trusted` : `${city}'s local`);
+}
 
 const CITY_CTA_VARIANTS: Record<string, string> = {
   Kuna: "Free upfront quotes",
@@ -169,8 +179,8 @@ export function generateMetaDescription(params: ServiceSEOParams): string {
 
   if (city && serviceName) {
     const serviceLC = serviceName.toLowerCase();
-    const cityVariant = CITY_DESCRIPTION_VARIANTS[city] || `${city}'s trusted`;
-    const ctaVariant = CITY_CTA_VARIANTS[city] || "Satisfaction guaranteed";
+    const cityVariant = cityDescriptionLead(city);
+    const ctaVariant = CITY_CTA_VARIANTS[city] || (SHOW_TRUST_CLAIMS ? SATISFACTION_GUARANTEED_CTA : NEUTRAL_FALLBACK_CTA);
     return `${cityVariant} ${serviceLC} team. Upfront quotes. ${ctaVariant}. Call ${phone} to book a visit!`;
   }
 
@@ -241,7 +251,7 @@ export function generateCityServiceDescription(
 ): string {
   const phone = SITE_CONFIG.phone;
   const serviceLC = serviceName.toLowerCase();
-  const cityVariant = CITY_DESCRIPTION_VARIANTS[cityName] || `${cityName}'s trusted`;
+  const cityVariant = cityDescriptionLead(cityName);
   const cityData = CITY_SEO_DATA[cityName as keyof typeof CITY_SEO_DATA];
   const neighborhood = cityData?.neighborhoods?.[0];
 
@@ -503,9 +513,9 @@ export const BUSINESS_INFO = {
   founded: publishedFoundingYear(),
   serviceArea: ['Boise', 'Meridian', 'Eagle', 'Nampa', 'Kuna', 'Star', 'Middleton', 'Caldwell', 'Garden City'],
   serviceRadius: '35 miles',
-  licenses: ['Registration details available upon request'],
-  // No certification or insured/bonded claims are published until confirmed
-  // for the handyman entity. [NEEDS: confirm insurance/bond status]
+  licenses: ['Idaho Registered Contractor #8381215'],
+  // Bonded and insured is confirmed for the operating company, P5 Home Co LLC.
+  // Insurance details stay available on request.
   certifications: [] as string[],
   insurance: 'Insurance details available upon request',
   rating: 0,

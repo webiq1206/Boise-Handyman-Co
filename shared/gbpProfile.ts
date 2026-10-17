@@ -7,6 +7,7 @@
 import { publishedFoundingYear } from '@/shared/foundingYear';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { CITIES, SERVICES } from '@/shared/contentData';
+import { SHOW_TRUST_CLAIMS } from '@/shared/trustClaims';
 
 const SITE = SITE_CONFIG.siteUrl.replace(/\/$/, '');
 
@@ -66,7 +67,9 @@ export const GBP_CATEGORIES = {
 } as const;
 
 export const GBP_DESCRIPTION =
-  'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to trusted specialty contractors. Get a preliminary estimate online or book a handyman visit.';
+  'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to ' +
+  (SHOW_TRUST_CLAIMS ? 'trusted specialty contractors' : 'specialty contractors') +
+  '. Get a preliminary estimate online or book a handyman visit.';
 
 export const GBP_LINKS = {
   website: SITE,
@@ -275,9 +278,9 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
       'Every visit carries a practical minimum, so a single small task starts around $99. Bundling several tasks into one visit is the best value, because extra tasks only add the time they take.',
   },
   {
-    question: 'Are you licensed and insured?',
+    question: 'Are you a registered contractor and insured?',
     answer:
-      'We keep our work within the scope Idaho allows for handyman services and refer licensed-trade work (panels, repipes, gas, HVAC, roofing) to licensed specialists. Business registration and insurance details are available on request.',
+      'We keep our work within the scope Idaho allows for handyman services and refer licensed-trade work (panels, repipes, gas, HVAC, roofing) to licensed specialists. We are an Idaho Registered Contractor #8381215, bonded, and insured.',
   },
   {
     question: 'Do you do remodels?',

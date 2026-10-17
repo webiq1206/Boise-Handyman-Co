@@ -102,10 +102,10 @@ export const PROOF_STATS = {
 };
 
 /**
- * Post-hero proof bar. Only claims the business genuinely carries: no bonded
- * or insured claims, review counts, ratings, or job counters until real ones
- * are confirmed for the handyman entity. Keep at six entries so the strip
- * fills the six-column desktop grid in HeroSection.
+ * Post-hero proof bar. Bonded and insured is stated in HOW_P5_WORKS, because
+ * the operating company is P5 Home Co LLC. This strip stays free of review
+ * counts, ratings, and job counters. Keep at six entries so the strip fills
+ * the six-column desktop grid in HeroSection.
  */
 export const TRUST_ITEMS = [
   "Locally Owned",
@@ -115,6 +115,17 @@ export const TRUST_ITEMS = [
   "Tidy Job Sites",
   "Ada & Canyon County",
 ];
+
+export const HOW_P5_WORKS_TITLE = "How P5 works";
+export const HOW_P5_WORKS = [
+  "Own install crew",
+  "Bonded & insured",
+  "Manufacturer warranties passed through on parts we supply",
+  "Arrival time agreed and confirmed before we head out",
+  "Upfront quote before work starts",
+  "Free quotes from photos, no pressure",
+  "Public representative: Nick Perkins",
+] as const;
 
 export const PROMISE_ITEMS = [
   {

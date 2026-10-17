@@ -1,5 +1,6 @@
 import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
 import type { Metadata } from "next";
+import { ContractorCredential } from "@/components/ContractorCredential";
 import { EstimateCalculator } from "@/components/EstimateCalculator";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildCanonical } from "@/lib/page-metadata";
@@ -57,6 +58,9 @@ export default function EstimatePage() {
           does not emit a second h1. Estimator logic is unchanged. */}
       <h1 className="sr-only">Boise Handyman Co instant estimate</h1>
       <EstimateCalculator fitViewport headingAs="h2" />
+      <p className="px-4 py-3 text-center text-xs text-muted-foreground">
+        <ContractorCredential showVerifyLink={false} />
+      </p>
     </>
   );
 }

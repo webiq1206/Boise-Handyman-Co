@@ -131,6 +131,18 @@ const publicRepresentativeContact = {
   availableLanguage: 'English',
 };
 
+const CONTRACTOR_CREDENTIAL = {
+  '@type': 'EducationalOccupationalCredential' as const,
+  credentialCategory: 'registration',
+  name: 'Idaho Registered Contractor',
+  identifier: '8381215',
+  recognizedBy: {
+    '@type': 'GovernmentOrganization' as const,
+    name: 'Idaho Division of Occupational and Professional Licenses',
+    url: 'https://dopl.idaho.gov/con/',
+  },
+};
+
 export function generateLocalBusinessSchema(city?: string): SchemaContext {
   // A single-location business has ONE set of coordinates (its HQ). Emitting
   // per-city coordinates under one @id confuses entity disambiguation, so geo
@@ -150,6 +162,7 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
     url: baseUrl,
     // parentOrganization stays on https://p5homeco.com/#organization.
     parentOrganization: P5_PARENT_ORGANIZATION,
+    hasCredential: CONTRACTOR_CREDENTIAL,
     telephone: SCHEMA_TELEPHONE,
     email: BUSINESS_INFO.email,
     employee: publicRepresentativePerson,
@@ -241,6 +254,7 @@ export function generateServiceSchema(serviceName: string, serviceDescription: s
       email: BUSINESS_INFO.email,
       priceRange: '$$',
       parentOrganization: P5_PARENT_ORGANIZATION,
+      hasCredential: CONTRACTOR_CREDENTIAL,
       employee: publicRepresentativePerson,
       contactPoint: publicRepresentativeContact,
       // Served cities stay on areaServed. The provider address is the authorized
@@ -352,6 +366,7 @@ export function generateReviewSchema(reviews: Array<{
     '@type': 'HomeAndConstructionBusiness',
     '@id': LOCALBUSINESS_ID,
     name: BUSINESS_INFO.name,
+    hasCredential: CONTRACTOR_CREDENTIAL,
     // AggregateRating is gated on a real, populated review count. Emitting a
     // zero/empty rating would publish a misleading 0-star signal, so it is only
     // included once BUSINESS_INFO.rating/reviewCount reflect genuine reviews.
