@@ -13,6 +13,12 @@ import { GBP_NAP } from "../shared/gbpProfile.ts";
 import { PROOF_STATS, visibleTrustItems } from "../shared/siteContent.ts";
 
 const HIDDEN = ["Est. 2020", "founded in 2020", "since 2020", "years in business", "foundingDate"];
+const GUARD_PHRASES = [
+  "Est. ${year}",
+  "founded in ${year}",
+  "since ${year}",
+  "${years} years in business",
+];
 
 test("the unproven 2020 founding year stays in source and does not render", () => {
   assert.equal(UNPROVEN_FOUNDING_YEAR, "2020");
@@ -31,6 +37,16 @@ test("the unproven 2020 founding year stays in source and does not render", () =
   for (const phrase of HIDDEN) {
     assert.equal(rendered.includes(phrase), false, phrase);
   }
+
+  const claims = readFileSync(new URL("../shared/foundingClaims.ts", import.meta.url), "utf8");
+  for (const phrase of GUARD_PHRASES) {
+    assert.equal(claims.includes(phrase), true, phrase);
+  }
+  const strip = readFileSync(new URL("../shared/siteContent.ts", import.meta.url), "utf8");
+  const trustFn = strip.slice(strip.indexOf("export function visibleTrustItems"));
+  assert.match(trustFn, /`Est\. \$\{year\}`/);
+  assert.equal(trustFn.includes("publicFoundingClaims"), false);
+  assert.equal(visibleTrustItems().length, 6);
 
   const hero = readFileSync(new URL("../components/sections/HeroSection.tsx", import.meta.url), "utf8");
   const about = readFileSync(new URL("../app/about/page.tsx", import.meta.url), "utf8");

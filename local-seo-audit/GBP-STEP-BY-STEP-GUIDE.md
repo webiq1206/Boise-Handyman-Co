@@ -18,7 +18,7 @@ Use these exact details everywhere — on Google, Yelp, Facebook, Instagram, Bin
 | Email | hello@boiseremodeling.co |
 | Website | https://boiseremodeling.co |
 | Public location | Meridian, ID (do not show a street address publicly) |
-| Year founded | 2017 |
+| Year founded | leave blank until documented |
 
 **Hours**
 
@@ -146,7 +146,7 @@ Plan about 2 hours. Have project photos ready on your computer.
 
 ### Step 3.1 — Opening date and contact links
 
-1. Set **year opened** to **2017**.
+1. Set **year opened** to **leave blank until documented**.
 2. Confirm phone: **(208) 477-1169**
 3. Set **website** to: `https://boiseremodeling.co`
 4. Set **appointment link** to: `https://boiseremodeling.co/contact`
@@ -175,9 +175,9 @@ Add categories in this exact order:
 
 ### Step 3.4 — Paste your business description
 
-Go to **Edit profile → Business description**. Paste this exactly (748 characters):
+Go to **Edit profile → Business description**. Paste this exactly (734 characters):
 
-> Boise Remodeling Co is a design-build remodeling contractor serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho. One accountable team handles design, Ada and Canyon County permits, and construction for kitchen remodels, bathroom remodels, whole-home renovations, room additions, ADUs, garage conversions, and basement finishing. Every project includes a written scope before construction, a dedicated project manager, weekly written progress updates, and a written workmanship guarantee. Founded in 2017. Bonded and insured. Schedule a free 60 to 90 minute in-home visit and leave with a planning range and design direction - no pressure, no obligation.
+> Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to trusted specialty contractors. Idaho Registered Contractor #8381215. Get a preliminary estimate online or book a handyman visit.
 
 ### Step 3.5 — Add all services
 

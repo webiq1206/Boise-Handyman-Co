@@ -7,7 +7,7 @@ import {
   HeartHandshake,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { publicFoundingClaims, publishedFoundingYear } from "@/shared/foundingClaims";
+import { publishedFoundingYear } from "@/shared/foundingClaims";
 
 export const SITE_TAGLINE = "Treasure Valley handyman service, built on upfront quotes and tidy work";
 
@@ -116,9 +116,14 @@ export const TRUST_ITEMS = [
   "Ada & Canyon County",
 ];
 
-/** Trust strip plus any founding phrases the flag currently allows. */
-export function visibleTrustItems(now: Date = new Date()): string[] {
-  return [...publicFoundingClaims(now), ...TRUST_ITEMS];
+/**
+ * Trust strip. The full founding-phrase list stays in publicFoundingClaims
+ * for the guard test. This strip adds at most one badge, "Est. YYYY", and
+ * only while SHOW_FOUNDING_YEAR is on.
+ */
+export function visibleTrustItems(): string[] {
+  const year = publishedFoundingYear();
+  return year ? [`Est. ${year}`, ...TRUST_ITEMS] : TRUST_ITEMS;
 }
 
 export const PROMISE_ITEMS = [
