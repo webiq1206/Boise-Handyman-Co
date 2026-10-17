@@ -22,6 +22,7 @@ import { CITY_HERO_IMAGES } from '@/shared/cityServiceImages';
 import { CITIES,TREASURE_VALLEY_CITIES } from '@/shared/contentData';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import { SITE_CONFIG } from '@/shared/siteConfig';
+import { CONTRACTOR_REGISTRATION_SEARCH_URL } from '@/shared/trustClaims';
 import { HERO_STATS,PRINCIPLES,TRUST_ITEMS } from '@/shared/siteContent';
 import { SITE_IMAGES } from '@/shared/siteImages';
 import { ArrowRight,Check,ChevronRight } from 'lucide-react';
@@ -175,8 +176,10 @@ export default function AboutPage() {
                 />
                 <p className="text-sm text-muted-foreground leading-relaxed mb-8">
                   We keep our work within the scope Idaho allows for handyman services and refer
-                  licensed trade work to specialists we trust. Business registration and insurance
-                  details are available on request.
+                  licensed trade work to specialists we trust.{" "}
+                  <a href={CONTRACTOR_REGISTRATION_SEARCH_URL} rel="noopener" target="_blank" className="underline underline-offset-2">
+                    Idaho Registered Contractor #8381215
+                  </a>.
                 </p>
                 <ul className="grid sm:grid-cols-2 gap-3">
                   {TRUST_ITEMS.map((item) => (

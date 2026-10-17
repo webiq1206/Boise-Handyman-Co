@@ -10,6 +10,7 @@ import { CONTENT_HUBS,guidePath } from "@/shared/contentHubs";
 import { GBP_SOCIAL } from "@/shared/gbpProfile";
 import { GUIDE_PAGES } from "@/shared/guideContent";
 import { PUBLIC_NAP_LINE, SITE_CONFIG } from "@/shared/siteConfig";
+import { CONTRACTOR_REGISTRATION_SEARCH_URL } from "@/shared/trustClaims";
 import { SITE_TAGLINE } from "@/shared/siteContent";
 import { ChevronDown,Facebook } from "lucide-react";
 import Link from "next/link";
@@ -191,7 +192,16 @@ export function Footer() {
         <div className="flex flex-col gap-4 pt-5 text-xs text-inverse-muted sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             <span>&copy; {currentYear} {SITE_CONFIG.name}. All rights reserved.</span>
-            <span>Idaho contractor registration information is available upon request</span>
+            <span>
+              <a
+                href={CONTRACTOR_REGISTRATION_SEARCH_URL}
+                rel="noopener"
+                target="_blank"
+                className="underline underline-offset-2 transition-colors hover:text-inverse-foreground"
+              >
+                Idaho Registered Contractor #8381215
+              </a>
+            </span>
             {/* Required parent-company disclosure. This brand is a DBA of
                 P5 Home Co LLC, not a separate company. */}
             <span>

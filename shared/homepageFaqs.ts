@@ -56,8 +56,8 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   {
     // Deliberately claims nothing: [NEEDS: confirm insurance/bond status and
     // Idaho registration details before strengthening this answer].
-    q: "Are you licensed and insured?",
-    a: "We keep our work within the scope Idaho allows for handyman services and refer anything that requires a licensed plumbing, electrical, or HVAC contractor to licensed specialists we trust. Business registration and insurance details are available on request, and we are happy to answer any question about coverage before you book.",
+    q: "Are you a registered contractor and insured?",
+    a: "Idaho Registered Contractor #8381215. We keep our work within the scope Idaho allows for handyman services and refer anything that requires a licensed plumbing, electrical, or HVAC contractor to licensed specialists we trust, and we are happy to answer any question about coverage before you book.",
   },
   {
     q: "Do you handle big remodels or additions?",

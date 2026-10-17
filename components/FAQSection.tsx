@@ -11,21 +11,36 @@ import { Section } from "@/components/marketing/Section";
 import { Button } from "@/components/ui/button";
 import { CTA_PRIMARY, CTA_SECONDARY } from "@/shared/ctaCopy";
 import { HOMEPAGE_FAQS, INITIAL_FAQ_COUNT } from "@/shared/homepageFaqs";
+import { CONTRACTOR_REGISTRATION, CONTRACTOR_REGISTRATION_SEARCH_URL } from "@/shared/trustClaims";
 
 export { HOMEPAGE_FAQS };
 
 const COST_ANSWER_LINK = "See how much a handyman costs in Boise and the Treasure Valley.";
 
+function withRegistrationLink(text: string) {
+  if (!text.includes(CONTRACTOR_REGISTRATION)) return text;
+  const [before, after] = text.split(CONTRACTOR_REGISTRATION);
+  return (
+    <>
+      {before}
+      <a href={CONTRACTOR_REGISTRATION_SEARCH_URL} rel="noopener" target="_blank">
+        {CONTRACTOR_REGISTRATION}
+      </a>
+      {after}
+    </>
+  );
+}
+
 function FaqAnswer({ faq }: { faq: { q: string; a: string } }) {
   if (faq.q !== "How is a Boise handyman visit priced?" || !faq.a.includes(COST_ANSWER_LINK)) {
-    return faq.a;
+    return withRegistrationLink(faq.a);
   }
   const [before, after] = faq.a.split(COST_ANSWER_LINK);
   return (
     <>
       {before}
       <a href="#handyman-cost">{COST_ANSWER_LINK}</a>
-      {after}
+      {withRegistrationLink(after)}
     </>
   );
 }

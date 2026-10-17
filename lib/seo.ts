@@ -6,6 +6,7 @@
 
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { GBP_SOCIAL, getExternalProfileUrls } from '@/shared/gbpProfile';
+import { CONTRACTOR_REGISTRATION, publishedTrustCopy } from '@/shared/trustClaims';
 
 interface SEOMetaData {
   title: string;
@@ -169,8 +170,8 @@ export function generateMetaDescription(params: ServiceSEOParams): string {
   if (city && serviceName) {
     const serviceLC = serviceName.toLowerCase();
     const cityVariant = CITY_DESCRIPTION_VARIANTS[city] || `${city}'s trusted`;
-    const ctaVariant = CITY_CTA_VARIANTS[city] || "Satisfaction guaranteed";
-    return `${cityVariant} ${serviceLC} team. Upfront quotes. ${ctaVariant}. Call ${phone} to book a visit!`;
+    const ctaVariant = publishedTrustCopy(CITY_CTA_VARIANTS[city] || "Satisfaction guaranteed") || "Upfront quotes";
+    return publishedTrustCopy(`${cityVariant} ${serviceLC} team. Upfront quotes. ${ctaVariant}. Call ${phone} to book a visit!`);
   }
 
   if (city) {
@@ -501,7 +502,7 @@ export const BUSINESS_INFO = {
   founded: '',
   serviceArea: ['Boise', 'Meridian', 'Eagle', 'Nampa', 'Kuna', 'Star', 'Middleton', 'Caldwell', 'Garden City'],
   serviceRadius: '35 miles',
-  licenses: ['Registration details available upon request'],
+  licenses: [CONTRACTOR_REGISTRATION],
   // No certification or insured/bonded claims are published until confirmed
   // for the handyman entity. [NEEDS: confirm insurance/bond status]
   certifications: [] as string[],

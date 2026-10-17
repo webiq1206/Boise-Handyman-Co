@@ -275,9 +275,9 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
       'Every visit carries a practical minimum, so a single small task starts around $99. Bundling several tasks into one visit is the best value, because extra tasks only add the time they take.',
   },
   {
-    question: 'Are you licensed and insured?',
+    question: 'Are you a registered contractor and insured?',
     answer:
-      'We keep our work within the scope Idaho allows for handyman services and refer licensed-trade work (panels, repipes, gas, HVAC, roofing) to licensed specialists. Business registration and insurance details are available on request.',
+      'Idaho Registered Contractor #8381215. We keep our work within the scope Idaho allows for handyman services and refer licensed-trade work (panels, repipes, gas, HVAC, roofing) to licensed specialists.',
   },
   {
     question: 'Do you do remodels?',
