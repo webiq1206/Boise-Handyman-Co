@@ -73,4 +73,12 @@ test("the post-build static grep catches Lawn Care and Kuna review text only", (
   });
   assert.equal(clean.status, 0, clean.stderr);
   assert.match(clean.stdout, /no matches/);
+
+  const empty = mkdtempSync(join(tmpdir(), "reviews-empty-"));
+  const none = spawnSync(process.execPath, [script], {
+    env: { ...process.env, STATIC_REVIEW_GREP_ROOT: empty },
+    encoding: "utf8",
+  });
+  assert.equal(none.status, 1, none.stdout);
+  assert.match(none.stderr, /scanned 0 files/);
 });

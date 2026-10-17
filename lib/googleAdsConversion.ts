@@ -11,6 +11,10 @@ export const GOOGLE_ADS_ID = "AW-18354188204";
 export const GOOGLE_ADS_LEAD_LABEL = "AW-18354188204/LE2vCPXstO8cEKzf-q9E";
 /** "P5 Website Call (60s+)": swaps the visible number for a Google forwarding number. */
 export const GOOGLE_ADS_WEBSITE_CALL_LABEL = "AW-18354188204/YHR0CIaPz_ccEKzf-q9E";
+/** Click on a tel: link, including a Google forwarding number. Separate from the 60-second call action. */
+export const GOOGLE_ADS_CALL_CLICK_LABEL = "AW-18354188204/ng9fCPiOhaAdEKzf-q9E";
+/** Click on an sms: link. */
+export const GOOGLE_ADS_TEXT_CLICK_LABEL = "AW-18354188204/lTxsCOqahaAdEKzf-q9E";
 export const GOOGLE_ADS_PHONE_DISPLAY = "(208) 477-1169";
 /** sessionStorage key written by GoogleAnalytics.tsx on the first page view. */
 export const ENTRY_PATH_KEY = "p5_entry_path";
@@ -89,5 +93,48 @@ export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: 
     }
   }
   gtag("event", "conversion", googleAdsLeadParams(ctx, dedupeKey));
+  return true;
+}
+
+/** Same visitor gates as the tag bootstrap: no tag, a webdriver, or the QA disable flag. */
+function adsClickAllowed(): boolean {
+  if (typeof window === "undefined") return false;
+  if (typeof navigator !== "undefined" && navigator.webdriver === true) return false;
+  try {
+    if (window.sessionStorage.getItem("p5_analytics_disabled") === "1") return false;
+  } catch {
+    // The bootstrap still loads the tag when storage throws.
+  }
+  const gtag = (window as unknown as { gtag?: unknown }).gtag;
+  return typeof gtag === "function";
+}
+
+/** Admin and portal screens dial customers, so those taps are not ad clicks. */
+function staffContactPath(): boolean {
+  if (typeof window === "undefined") return true;
+  const path = window.location.pathname;
+  return path === "/admin" || path.startsWith("/admin/") || path === "/portal" || path.startsWith("/portal/");
+}
+
+/**
+ * Ads label for any tel: or sms: tap on a public page.
+ * A Google forwarding number still counts: the href is not compared with the published number.
+ */
+export function googleAdsContactClickLabel(href: string): string | null {
+  const bare = href.trim().split("?")[0].toLowerCase();
+  const kind = bare.startsWith("tel:") ? "call" : bare.startsWith("sms:") ? "text" : null;
+  if (!kind || staffContactPath()) return null;
+  return kind === "call" ? GOOGLE_ADS_CALL_CLICK_LABEL : GOOGLE_ADS_TEXT_CLICK_LABEL;
+}
+
+/**
+ * One conversion for this click. The next click fires again. No session dedupe.
+ * The payload is only the send_to label: no name, phone, email, or form text.
+ */
+export function trackGoogleAdsContactClick(href: string): boolean {
+  const sendTo = googleAdsContactClickLabel(href);
+  if (!sendTo || !adsClickAllowed()) return false;
+  const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag;
+  gtag("event", "conversion", { send_to: sendTo });
   return true;
 }
