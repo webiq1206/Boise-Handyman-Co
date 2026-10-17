@@ -7,7 +7,7 @@ import {
   GTAG_READY_WAIT_MS,
   GOOGLE_ADS_ESTIMATOR_LABEL,
   GOOGLE_ADS_LEAD_LABEL,
-  trackEstimatorCompleted,
+  trackGoogleAdsLeadConversion,
 } from '../lib/googleAdsConversion.ts';
 
 type Harness = {
@@ -96,13 +96,13 @@ test('estimator completion fires the estimator label and waits once', () => {
   const previous = (globalThis as { window?: unknown }).window;
   const harness = installWindow();
   try {
-    trackEstimatorCompleted({ service: 'drywall-repair' }, 'estimator:one');
-    trackEstimatorCompleted({ service: 'drywall-repair' }, 'estimator:one');
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:one');
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:one');
     assert.equal(harness.calls.length, 0);
     assert.equal(harness.timers.length, 1);
     harness.setGtag();
     harness.timers.shift()?.();
-    trackEstimatorCompleted({ service: 'drywall-repair' }, 'estimator:one');
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:one');
     assert.equal(harness.calls.length, 1);
     assert.deepEqual(harness.calls[0], ['event', 'conversion', { send_to: GOOGLE_ADS_ESTIMATOR_LABEL }]);
     assert.equal(harness.timers.length, 0);
@@ -115,8 +115,8 @@ test('a lead created with the estimator waits on the same path and fires once', 
   const previous = (globalThis as { window?: unknown }).window;
   const harness = installWindow();
   try {
-    trackEstimatorCompleted({ service: 'drywall-repair' }, 'estimator:wait', 'lead:wait');
-    trackEstimatorCompleted({ service: 'drywall-repair' }, 'estimator:wait', 'lead:wait');
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:wait', 'lead:wait');
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'estimator:wait', 'lead:wait');
     assert.equal(harness.calls.length, 0);
     assert.equal(harness.timers.length, 2);
     harness.setGtag();
@@ -137,8 +137,8 @@ test('estimator completion also fires the form label once when a lead is created
   const harness = installWindow();
   try {
     harness.setGtag();
-    trackEstimatorCompleted({ service: 'drywall-repair' }, 'estimator:lead', 'lead:one');
-    trackEstimatorCompleted({ service: 'drywall-repair' }, 'estimator:lead', 'lead:one');
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'intake:lead', 'lead:one');
+    trackGoogleAdsLeadConversion({ service: 'drywall-repair' }, 'intake:lead', 'lead:one');
     assert.equal(harness.calls.length, 2);
     assert.deepEqual(harness.calls[0], ['event', 'conversion', { send_to: GOOGLE_ADS_ESTIMATOR_LABEL }]);
     assert.deepEqual(harness.calls[1], ['event', 'conversion', {
@@ -153,14 +153,31 @@ test('estimator completion also fires the form label once when a lead is created
   }
 });
 
+test('a non-estimator lead key fires only the form label', () => {
+  const previous = (globalThis as { window?: unknown }).window;
+  const harness = installWindow();
+  try {
+    harness.setGtag();
+    trackGoogleAdsLeadConversion({ projectType: 'drywall' }, 'consultation:one');
+    assert.deepEqual(harness.calls[0], ['event', 'conversion', {
+      send_to: GOOGLE_ADS_LEAD_LABEL,
+      value: 50,
+      currency: 'USD',
+      transaction_id: 'consultation:one',
+    }]);
+    assert.equal(harness.calls.length, 1);
+  } finally {
+    Object.assign(globalThis, { window: previous });
+  }
+});
+
 test('the consultation form fires only the form label', () => {
   const estimator = readFileSync(new URL('../components/P5Estimator.tsx', import.meta.url), 'utf8');
   const form = readFileSync(new URL('../components/ConsultationForm.tsx', import.meta.url), 'utf8');
-  assert.match(estimator, /trackEstimatorCompleted\(\{service:latest\.answers\.service\},`intake:\$\{receipt\.projectId\}`\)/);
-  assert.match(estimator, /trackEstimatorCompleted\(\{service:d\.answers\.service\},`estimator:\$\{d\.id\}`\)/);
-  assert.equal(estimator.includes('GOOGLE_ADS_LEAD_LABEL'), false);
+  assert.match(estimator, /trackGoogleAdsLeadConversion\(\{service:latest\.answers\.service\},`intake:\$\{receipt\.projectId\}`\)/);
+  assert.match(estimator, /trackGoogleAdsLeadConversion\(\{service:d\.answers\.service\},`estimator:\$\{d\.id\}`\)/);
+  assert.equal(estimator.includes('cEzmCPOagKAdEKzf-q9E'), false);
   assert.equal(estimator.includes('LE2vCPXstO8cEKzf-q9E'), false);
   assert.match(form, /trackAcceptedLeadConversion\(\{ projectType: variables\.projectType \}\)/);
   assert.equal(form.includes('cEzmCPOagKAdEKzf-q9E'), false);
-  assert.equal(form.includes('trackEstimatorCompleted'), false);
 });

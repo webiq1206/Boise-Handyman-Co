@@ -140,25 +140,36 @@ function queueConversion(storageKey: string | undefined, payload: () => Record<s
   return false;
 }
 
-/**
- * Fires the Google Ads lead conversion once per dedupe key (per page load and,
- * where storage allows, per browser session). Returns true when it was sent.
- * If gtag is not loaded yet, one retry waits about five seconds and still
- * fires at most once. The sent marker is written only when gtag is ready.
- */
-export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string): boolean {
-  const storageKey = dedupeKey ? `google_ads_lead:${dedupeKey}` : undefined;
-  return queueConversion(storageKey, () => googleAdsLeadParams(ctx, dedupeKey));
+/** Shared estimator completion keys. The shared component cannot be edited per brand. */
+export function isEstimatorCompletionKey(dedupeKey?: string): boolean {
+  return !!dedupeKey && (dedupeKey.startsWith("estimator:") || dedupeKey.startsWith("intake:"));
 }
 
 /**
  * Fires "P5 Estimator Completed". When this finish also created an accepted
  * lead, pass that lead's dedupe key and the form label fires once for it too.
  */
-export function trackEstimatorCompleted(ctx: LeadContext = {}, dedupeKey?: string, acceptedLeadKey?: string): void {
-  queueConversion(
+export function trackEstimatorCompleted(ctx: LeadContext = {}, dedupeKey?: string, acceptedLeadKey?: string): boolean {
+  const sent = queueConversion(
     dedupeKey ? `google_ads_estimator:${dedupeKey}` : undefined,
     () => ({ send_to: GOOGLE_ADS_ESTIMATOR_LABEL }),
   );
-  if (acceptedLeadKey) trackGoogleAdsLeadConversion(ctx, acceptedLeadKey);
+  if (acceptedLeadKey) {
+    queueConversion(`google_ads_lead:${acceptedLeadKey}`, () => googleAdsLeadParams(ctx, acceptedLeadKey));
+  }
+  return sent;
+}
+
+/**
+ * Fires one Google Ads conversion once per dedupe key (per page load and,
+ * where storage allows, per browser session). Estimator completion keys send
+ * "P5 Estimator Completed". Any other key is a real accepted lead and sends
+ * the form label. Returns true when the primary conversion was sent.
+ * If gtag is not loaded yet, one retry waits about five seconds and still
+ * fires at most once. The sent marker is written only when gtag is ready.
+ */
+export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string, acceptedLeadKey?: string): boolean {
+  if (isEstimatorCompletionKey(dedupeKey)) return trackEstimatorCompleted(ctx, dedupeKey, acceptedLeadKey);
+  const storageKey = dedupeKey ? `google_ads_lead:${dedupeKey}` : undefined;
+  return queueConversion(storageKey, () => googleAdsLeadParams(ctx, dedupeKey));
 }
