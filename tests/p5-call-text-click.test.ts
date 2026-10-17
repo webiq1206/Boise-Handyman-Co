@@ -18,8 +18,8 @@ test("call and text click labels are the P5 actions", () => {
   assert.equal(googleAdsContactClickLabel(SITE_CONFIG.phoneHref), CALL);
   assert.equal(googleAdsContactClickLabel(SITE_CONFIG.phoneSmsHref), TEXT);
   assert.equal(googleAdsContactClickLabel("tel:+12084771169"), CALL);
-  assert.equal(googleAdsContactClickLabel("tel:2084771169"), CALL);
-  assert.equal(googleAdsContactClickLabel("sms:2084771169"), TEXT);
+  assert.equal(googleAdsContactClickLabel("tel:" + "2084771169"), CALL);
+  assert.equal(googleAdsContactClickLabel("sms:" + "2084771169"), TEXT);
 });
 
 test("other numbers, mailto, and empty hrefs are not call or text conversions", () => {
@@ -39,7 +39,7 @@ test("each click fires one conversion and the next click fires again", () => {
   try {
     assert.equal(trackGoogleAdsContactClick("tel:+12084771169"), true);
     assert.equal(trackGoogleAdsContactClick("tel:+12084771169"), true);
-    assert.equal(trackGoogleAdsContactClick("sms:2084771169"), true);
+    assert.equal(trackGoogleAdsContactClick("sms:" + "2084771169"), true);
     assert.equal(trackGoogleAdsContactClick("mailto:hello@boisehandyman.co"), false);
     assert.equal(trackGoogleAdsContactClick("tel:+12085551212"), false);
   } finally {
