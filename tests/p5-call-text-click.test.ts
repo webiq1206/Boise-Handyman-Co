@@ -159,10 +159,11 @@ test("the site listener is the only ads click binding and the shared estimator i
   assert.equal(re10.includes("trackGoogleAdsContactClick"), false);
   const privacy = readFileSync(new URL("../app/privacy-policy/page.tsx", import.meta.url), "utf8");
   assert.equal(privacy.includes("ng9fCPiOhaAdEKzf-q9E"), false);
-  assert.equal(
-    privacy.includes(
-      "When you tap Call or Text on our site, Google Ads is told that the tap happened and on which page, so we can count calls and texts that come from our ads. The tap itself doesn't include your name, phone number or the content of your call or message.",
-    ),
-    true,
-  );
+  const tapDisclosure =
+    "When you tap Call or Text on our site, Google Ads is told that the tap happened, on which page, and the ad click identifier Google's tag saved if you arrived from one of our ads, so we can count calls and texts that come from our ads. The tap itself doesn't send Google your name, phone number or what you say or write. Google Analytics also records the tap, including the number tapped, which is our business number. If your call goes through a Google forwarding number, Google connects the call and can see the calling number and call length, but not what's said.";
+  const routed = "Calls from our site or ads may be routed through a Google forwarding number so we can measure which ads lead to calls.";
+  const at = privacy.indexOf(tapDisclosure);
+  assert.ok(at > 0);
+  assert.equal(privacy.slice(at + tapDisclosure.length, at + tapDisclosure.length + routed.length + 1), ` ${routed}`);
+  assert.equal(privacy.includes("The tap itself doesn't include your name, phone number or the content of your call or message."), false);
 });
