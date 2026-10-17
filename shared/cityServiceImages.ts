@@ -38,7 +38,7 @@ const h = (name: string) => `/images/handyman/${name}.webp`;
 const SERVICE_ROTATION: Record<string, readonly string[]> = {
   "drywall-repair": [
     h("service-drywall-repair"),
-    h("punch-list-markers"),
+    h("punch-list-tape-trim"),
   ],
   "painting-touch-ups": [
     h("service-painting-p5-reviewed-20260910"),
@@ -67,7 +67,7 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("hero-gutter-cleaning"),
   ],
   "home-maintenance": [
-    h("service-caulking"),
+    h("service-caulk-bead"),
     h("weatherstripping"),
     h("winterize-spigot"),
     h("hero-gutter-cleaning"),

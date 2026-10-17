@@ -73,7 +73,7 @@ export interface ArticleInlineFigurePlacement {
 const INLINE_HUB_ALTS: Record<string, string> = {
   "repairs-and-fixes": "Handyman tools arranged in a ready-to-go tool bag",
   "installs-and-upgrades": "Handyman mounting work inside a home",
-  "home-maintenance": "Caulking work at an interior joint",
+  "home-maintenance": "Fresh white caulk bead where a bathtub meets subway tile",
   "costs-and-hiring": "Calculator, blank clipboard and tape measure for repair planning",
   "exterior-and-outdoor": "Gutter cleaning at a residential roof edge"
 };

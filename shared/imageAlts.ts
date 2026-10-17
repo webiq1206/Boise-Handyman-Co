@@ -20,8 +20,8 @@ const IMAGE_ALTS: Record<string, string> = {
     'A worker leveling a TV wall-mount bracket with a drill',
   '/images/handyman/service-fence-repair.webp':
     'Gloved hands fastening a cedar fence picket to a rail with a cordless drill',
-  '/images/handyman/service-caulking.webp':
-    'A caulk gun laying a white bead where a bathtub meets subway tile',
+  '/images/handyman/service-caulk-bead.webp':
+    'Fresh white caulk bead where a bathtub meets subway tile',
   '/images/handyman/hero-door-hinge-branded.webp':
     'A worker adjusting an interior door hinge with a screwdriver',
   '/images/handyman/toolbag-ready.webp':
@@ -30,8 +30,8 @@ const IMAGE_ALTS: Record<string, string> = {
     'A clipboard, calculator, pencil, and tape measure on a wood table',
   '/images/handyman/consult-doorstep-branded.webp':
     'A handyman and a homeowner reviewing a clipboard at a front door',
-  '/images/handyman/punch-list-markers.webp':
-    "Blue painter's tape marking touch-up spots on a wall and window trim",
+  '/images/handyman/punch-list-tape-trim.webp':
+    "Painter's tape along window trim with a can of white trim paint and a brush",
   '/images/handyman/front-door-repaint-p5-reviewed-20260910.webp':
     'A freshly painted sage-green front door with white trim and black hardware',
   '/images/handyman/front-door-repaint.webp':

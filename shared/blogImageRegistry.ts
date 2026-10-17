@@ -36,8 +36,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'caulking-guide-boise-homes': {
-    hero: '/images/handyman/service-caulking.webp',
-    alt: 'Caulk gun applying a clean white silicone bead where a bathtub meets white subway tile',
+    hero: '/images/handyman/service-caulk-bead.webp',
+    alt: 'Fresh white caulk bead where a bathtub meets subway tile',
     topicTags: ["caulking","home maintenance","sealing","boise","home"],
     source: 'handyman',
   },
@@ -156,8 +156,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'new-home-punch-list-handyman': {
-    hero: '/images/handyman/punch-list-markers.webp',
-    alt: 'Blue painter\'s tape markers on a wall and window trim marking touch-up spots, notepad on the windowsill',
+    hero: '/images/handyman/punch-list-tape-trim.webp',
+    alt: 'Painter\'s tape along window trim with a can of white trim paint and a brush',
     topicTags: ["punch list","home maintenance","boise","new home","home"],
     source: 'handyman',
   },
@@ -334,7 +334,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
 export const HUB_HERO_IMAGES: Record<string, string> = {
   'repairs-and-fixes': '/images/handyman/toolbag-ready.webp',
   'installs-and-upgrades': '/images/handyman/service-mounting.webp',
-  'home-maintenance': '/images/handyman/service-caulking.webp',
+  'home-maintenance': '/images/handyman/service-caulk-bead.webp',
   'costs-and-hiring': '/images/handyman/estimate-clipboard.webp',
   'exterior-and-outdoor': '/images/handyman/hero-gutter-cleaning.webp',
 };
