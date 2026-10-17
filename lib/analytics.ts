@@ -1,9 +1,9 @@
 /**
  * Thin, safe wrapper over gtag for conversion events. GA is loaded via
- * @next/third-parties, which exposes window.gtag once ready; if it is not
- * present (GA disabled, blocked, or SSR) the call is a no-op.
+ * @next/third-parties, which exposes window.gtag once ready. Ordinary events
+ * stay a no-op until then. The accepted-lead conversion waits briefly for gtag.
  */
-import { googleAdsLeadParams, type GoogleAdsLeadParams, type LeadContext } from "@/lib/googleAdsConversion";
+import { googleAdsLeadParams, whenGtagReady, type GoogleAdsLeadParams, type LeadContext } from "@/lib/googleAdsConversion";
 
 type GtagParams = Record<string, string | number | boolean | undefined>;
 
@@ -17,9 +17,12 @@ export function trackEvent(name: string, params: GtagParams = {}): void {
 /** Google Ads conversion: only call after the API confirms a new durable lead. */
 export function trackAcceptedLeadConversion(context: LeadContext = {}): void {
   if (typeof window === "undefined") return;
-  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
-  if (typeof gtag !== "function") return;
-  gtag("event", "conversion", googleAdsConversionPayload(context));
+  let sent = false;
+  whenGtagReady((gtag) => {
+    if (sent) return;
+    sent = true;
+    gtag("event", "conversion", googleAdsConversionPayload(context));
+  });
 }
 
 /** Kept pure so the conversion contract can be tested without a browser. */

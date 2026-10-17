@@ -62,24 +62,49 @@ export function googleAdsLeadParams(
 }
 
 const sentLeadKeys = new Set<string>();
+const waitingLeadKeys = new Set<string>();
+
+type GtagFn = (...args: unknown[]) => void;
+
+/** Ten half-second checks: about five seconds for lazy gtag, then give up. */
+export const GTAG_READY_WAIT_MS = 500;
+export const GTAG_READY_ATTEMPTS = 10;
+
+function readGtag(): GtagFn | undefined {
+  if (typeof window === "undefined") return undefined;
+  const gtag = (window as unknown as { gtag?: GtagFn }).gtag;
+  return typeof gtag === "function" ? gtag : undefined;
+}
 
 /**
- * Fires the Google Ads lead conversion once per dedupe key (per page load and,
- * where storage allows, per browser session). Returns true when it was sent.
+ * Calls fire once gtag exists. A missing library retries for about five
+ * seconds and then drops the call. The marker is not written by this waiter.
  */
-export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string): boolean {
-  if (typeof window === "undefined") return false;
-  const storageKey = dedupeKey ? `google_ads_lead:${dedupeKey}` : undefined;
-  if (storageKey) {
-    if (sentLeadKeys.has(storageKey)) return false;
-    try {
-      if (window.sessionStorage.getItem(storageKey) === "sent") return false;
-    } catch {
-      // Storage can be unavailable under strict privacy settings; the in-memory guard still applies.
-    }
+export function whenGtagReady(fire: (gtag: GtagFn) => void, attempt = 0): void {
+  if (typeof window === "undefined") return;
+  const gtag = readGtag();
+  if (gtag) {
+    fire(gtag);
+    return;
   }
-  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
-  if (typeof gtag !== "function") return false;
+  if (attempt >= GTAG_READY_ATTEMPTS) return;
+  window.setTimeout(() => whenGtagReady(fire, attempt + 1), GTAG_READY_WAIT_MS);
+}
+
+function leadAlreadySent(storageKey?: string): boolean {
+  if (!storageKey) return false;
+  if (sentLeadKeys.has(storageKey)) return true;
+  try {
+    return window.sessionStorage.getItem(storageKey) === "sent";
+  } catch {
+    return false;
+  }
+}
+
+function sendLeadConversion(ctx: LeadContext, dedupeKey: string | undefined, storageKey: string | undefined): boolean {
+  if (leadAlreadySent(storageKey)) return false;
+  const gtag = readGtag();
+  if (!gtag) return false;
   if (storageKey) {
     sentLeadKeys.add(storageKey);
     try {
@@ -90,4 +115,26 @@ export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: 
   }
   gtag("event", "conversion", googleAdsLeadParams(ctx, dedupeKey));
   return true;
+}
+
+/**
+ * Fires the Google Ads lead conversion once per dedupe key (per page load and,
+ * where storage allows, per browser session). Returns true when it was sent.
+ * If gtag is not loaded yet, one retry waits about five seconds and still
+ * fires at most once. The sent marker is written only when gtag is ready.
+ */
+export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string): boolean {
+  if (typeof window === "undefined") return false;
+  const storageKey = dedupeKey ? `google_ads_lead:${dedupeKey}` : undefined;
+  if (leadAlreadySent(storageKey) || (storageKey && waitingLeadKeys.has(storageKey))) return false;
+  if (readGtag()) return sendLeadConversion(ctx, dedupeKey, storageKey);
+  if (storageKey) waitingLeadKeys.add(storageKey);
+  let fired = false;
+  whenGtagReady(() => {
+    if (storageKey) waitingLeadKeys.delete(storageKey);
+    if (fired) return;
+    fired = true;
+    sendLeadConversion(ctx, dedupeKey, storageKey);
+  });
+  return false;
 }
