@@ -160,10 +160,21 @@ test("the site listener is the only ads click binding and the shared estimator i
   const privacy = readFileSync(new URL("../app/privacy-policy/page.tsx", import.meta.url), "utf8");
   assert.equal(privacy.includes("ng9fCPiOhaAdEKzf-q9E"), false);
   const tapDisclosure =
-    "When you tap Call or Text on our site, Google Ads is told that the tap happened, on which page, and the ad click identifier Google's tag saved if you arrived from one of our ads, so we can count calls and texts that come from our ads. The tap itself doesn't send Google your name, your own phone number or what you say or write. Google Analytics also records the tap, including the number tapped, which is our business number. If your call goes through a Google forwarding number, Google connects the call and can see the calling number and call length, but not what's said.";
+    "When you tap Call or Text on our site, Google Ads is told that the tap happened, on which page, and the ad click identifier Google's tag saved if you arrived from one of our ads, so we can count calls and texts that come from our ads. The tap itself doesn't send Google your name, your own phone number or what you say or write. Google Analytics also records the tap, including the number tapped, which is our business number. Calls from our site or ads may be routed through a Google forwarding number so we can measure which ads lead to calls; when that happens, Google connects the call and can see the calling number and call length, but not what's said.";
   const at = privacy.indexOf(tapDisclosure);
   assert.ok(at > 0);
-  assert.equal(privacy.includes("Calls from our site or ads may be routed through a Google forwarding number so we can measure which ads lead to calls."), false);
+  assert.equal(privacy.includes("If your call goes through a Google forwarding number, Google connects the call and can see the calling number and call length, but not what's said."), false);
   assert.equal(privacy.includes("The tap itself doesn't include your name, phone number or the content of your call or message."), false);
   assert.equal(privacy.includes("The tap itself doesn't send Google your name, phone number or what you say or write."), false);
+});
+
+test("the forwarding disclosure matches whether the Google tag is given a phone conversion label", () => {
+  const analytics = readFileSync(new URL("../components/GoogleAnalytics.tsx", import.meta.url), "utf8");
+  const privacy = readFileSync(new URL("../app/privacy-policy/page.tsx", import.meta.url), "utf8");
+  const merged =
+    "Calls from our site or ads may be routed through a Google forwarding number so we can measure which ads lead to calls; when that happens, Google connects the call and can see the calling number and call length, but not what's said.";
+  const labelConfigured = analytics.includes("phoneConversionLabel:");
+  assert.equal(labelConfigured, true);
+  assert.equal(privacy.includes(merged), labelConfigured);
+  assert.equal((privacy.match(/Google forwarding number/g) ?? []).length, 1);
 });

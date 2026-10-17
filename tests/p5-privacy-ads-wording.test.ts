@@ -15,8 +15,8 @@ test('the privacy policy discloses cookies, analytics and advertising', () => {
   assert.match(policy, /We also use Microsoft Clarity to see how visitors use our pages through heatmaps and session recordings; form fields are masked so what you type is not recorded\. Microsoft processes this under its own privacy statement \(<a href="https:\/\/privacy\.microsoft\.com\/privacystatement">https:\/\/privacy\.microsoft\.com\/privacystatement<\/a>\)\./);
   assert.equal(policy.includes("[Placeholder, pending Larry's OK.]"), false);
   assert.equal(policy.includes('a drywall repair or a small plumbing repair'), false);
-  assert.match(policy, /If your call goes through a Google forwarding number, Google connects the call and can see the calling number and call length, but not what's said\./);
-  assert.equal(policy.includes("Calls from our site or ads may be routed through a Google forwarding number so we can measure which ads lead to calls."), false);
+  assert.match(policy, /Calls from our site or ads may be routed through a Google forwarding number so we can measure which ads lead to calls; when that happens, Google connects the call and can see the calling number and call length, but not what's said\./);
+  assert.equal(policy.includes("If your call goes through a Google forwarding number, Google connects the call and can see the calling number and call length, but not what's said."), false);
   assert.match(policy, /href="https:\/\/policies\.google\.com\/privacy"/);
   assert.match(policy, /href="https:\/\/adssettings\.google\.com"/);
   assert.match(policy, /href="https:\/\/tools\.google\.com\/dlpage\/gaoptout"/);
