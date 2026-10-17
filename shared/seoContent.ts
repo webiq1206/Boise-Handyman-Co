@@ -1,5 +1,6 @@
 import type { ServiceData, CityData } from './contentData';
 import { getCountyLabel } from './contentData';
+import { getAreaCityCopy } from './content/areaCopy';
 import { getCityServiceCopy } from './content/cityServiceCopy';
 import type { LandingSection } from '@/components/seo/LandingPageTemplate';
 
@@ -778,7 +779,9 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
 export function getAreaIntro(city: CityData): string {
   const county = getCountyLabel(city.county);
-  return `Boise Handyman Co provides handyman services for homes in ${city.name}, Idaho and throughout ${county}: small repairs, installs, and maintenance with upfront quotes and most jobs finished in a single visit.`;
+  const base = `Boise Handyman Co provides handyman services for homes in ${city.name}, Idaho and throughout ${county}: small repairs, installs, and maintenance with upfront quotes and most jobs finished in a single visit.`;
+  const added = getAreaCityCopy(city.slug)?.intro;
+  return added ? `${added} ${base}` : base;
 }
 
 export function getCityServiceIntro(

@@ -13,6 +13,7 @@ import { generateSpeakableSchema } from '@/lib/schema';
 import { CITY_SEO_DATA } from '@/lib/seo';
 import { areaPath,CITY_SLUGS,getCityBySlug } from '@/lib/seo-routes';
 import { getAreaImageSet } from '@/shared/cityServiceImages';
+import { getAreaCityCopy } from '@/shared/content/areaCopy';
 import { getCountyLabel,SERVICES } from '@/shared/contentData';
 import { getGalleryProjectsForCity } from '@/shared/galleryData';
 import { AREA_PAGE_FAQS,getAreaIntro } from '@/shared/seoContent';
@@ -111,7 +112,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
       : undefined;
 
   const h1 = `Handyman in ${city.name}, Idaho`;
-  const faqs = [
+  const faqs = getAreaCityCopy(city.slug)?.faqs ?? [
     ...AREA_PAGE_FAQS,
     {
       question: `Do you serve ${city.name}, Idaho?`,
