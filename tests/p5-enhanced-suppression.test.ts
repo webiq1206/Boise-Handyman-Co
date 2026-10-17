@@ -110,6 +110,17 @@ test("a suppressed contact skips user_data and still fires the conversion", () =
     }, "estimator:cookie-block"), true);
     assert.equal(calls.some((call) => call[0] === "set"), false);
     assert.equal((calls[0] as [string, string])[1], "conversion");
+    assert.equal(Object.hasOwn(calls[0][2] as object, "user_data"), false);
+    calls.length = 0;
+    assert.equal(trackGoogleAdsLeadConversion({
+      email: "ada@example.com",
+      name: "Ada Lovelace",
+      allowEnhancedConversions: true,
+    }, "form:allowed"), true);
+    assert.equal(calls.some((call) => call[0] === "set"), false);
+    const allowed = calls[0] as [string, string, { send_to?: string; user_data?: { email?: string } }];
+    assert.equal(allowed[2].send_to, "AW-18354188204/LE2vCPXstO8cEKzf-q9E");
+    assert.equal(allowed[2].user_data?.email, "ada@example.com");
   } finally {
     if (previousWindow === undefined) delete (globalThis as { window?: unknown }).window;
     else Object.assign(globalThis, { window: previousWindow });
