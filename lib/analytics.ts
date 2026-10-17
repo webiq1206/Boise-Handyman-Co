@@ -15,8 +15,8 @@ export function trackEvent(name: string, params: GtagParams = {}): void {
 }
 
 /** Google Ads conversion: only call after the API confirms a new durable lead. */
-export function trackAcceptedLeadConversion(context: LeadContext = {}): void {
-  trackGoogleAdsLeadConversion(context);
+export function trackAcceptedLeadConversion(context: LeadContext = {}, dedupeKey?: string): void {
+  trackGoogleAdsLeadConversion(context, dedupeKey);
 }
 
 /** Kept pure so the conversion contract can be tested without a browser. */

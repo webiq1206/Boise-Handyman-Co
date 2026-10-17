@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { trackAcceptedLeadConversion } from '../lib/analytics.ts';
 import { enhancedConversionUserData, trackGoogleAdsLeadConversion } from '../lib/googleAdsConversion.ts';
 
 type Call = unknown[];
@@ -102,6 +103,19 @@ test('user_data is set only when the tag is allowed, and the conversion follows 
   live.restore();
 });
 
+test('the form LE2v conversion carries the inquiry id as transaction_id', () => {
+  const live = install();
+  trackAcceptedLeadConversion({ projectType: 'drywall', email: 'ada@example.com', name: 'Ada Lovelace' }, 'inquiry-primary-1');
+  const conversion = live.calls.find((call) => call[1] === 'conversion') as [string, string, { send_to?: string; transaction_id?: string; value?: number; currency?: string }];
+  assert.deepEqual(conversion, ['event', 'conversion', {
+    send_to: 'AW-18354188204/LE2vCPXstO8cEKzf-q9E',
+    value: 50,
+    currency: 'USD',
+    transaction_id: 'inquiry-primary-1',
+  }]);
+  live.restore();
+});
+
 test('consultation sends enhanced fields only after the server accepts the lead', () => {
   const source = readFileSync(new URL('../components/ConsultationForm.tsx', import.meta.url), 'utf8');
   const accepted = source.indexOf('if (response.accepted)');
@@ -115,6 +129,8 @@ test('consultation sends enhanced fields only after the server accepts the lead'
   assert.match(block, /postalCode: deriveZip\(variables\.address\)/);
   assert.equal(block.includes('message:'), false);
   assert.equal(block.includes('address: variables.address'), false);
+  assert.match(source, /trackAcceptedLeadConversion\(\{[\s\S]*?\}, inquiryId\("primary"\)\)/);
+  assert.equal(source.includes("Meta Lead carries the visitor's email"), false);
   assert.equal(source.slice(error, error + 220).includes('trackAcceptedLeadConversion'), false);
 
   const estimator = readFileSync(new URL('../components/P5Estimator.tsx', import.meta.url), 'utf8');
