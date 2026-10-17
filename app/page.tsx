@@ -17,9 +17,9 @@ import { Check } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = withBrandPageMetadata(({
-  // The brand helper's home override is what ships. This matches it: "Boise"
-  // is added in front of "Handyman & Home Repairs in Boise, ID | Boise Handyman Co".
-  title: { absolute: `Boise Handyman & Home Repairs in Boise, ID | ${SITE_CONFIG.name}` },
+  // 49 chars. Leads with the primary term ("handyman in Boise") rather than
+  // the brand, which the suffix carries anyway.
+  title: { absolute: `Handyman in Boise, ID | ${SITE_CONFIG.name}` },
   description:
     fitDescription("Handyman service for Boise, Meridian, Eagle, Nampa & the Treasure Valley. Small repairs, installs & maintenance with one upfront written quote before work starts. Book a visit today."),
   alternates: {

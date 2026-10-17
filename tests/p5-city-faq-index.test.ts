@@ -13,7 +13,7 @@ import {getCityOnlyFaqs} from '../shared/cityPageFacts.ts';
 import {AREA_PAGE_FAQS,SERVICE_SEO_CONTENT,areaPageFaqs,cityServicePageFaqs,getAreaIntro,getCityServiceFaqs,getCityServiceIntro,getCityServiceSections} from '../shared/seoContent.ts';
 import {CITY_SEO_DATA} from '../lib/seo.ts';
 
-const HOME_TITLE='Boise Handyman & Home Repairs in Boise, ID | Boise Handyman Co';
+const HOME_TITLE='Handyman & Home Repairs in Boise, ID | Boise Handyman Co';
 const HOME_DESCRIPTION='Get help with repairs, installations and home maintenance in Boise and the Treasure Valley. Describe your project or send a repair list for an estimate.';
 const NOINDEX_TODAY=[
  'mounting-assembly/kuna',
@@ -142,7 +142,7 @@ test('noindex pages stay noindex and robots and sitemap rules are unchanged',()=
  assert.match(read('app/blog/category/[hubSlug]/page.tsx'),/indexable \? undefined : \{ index: false, follow: true \}/);
 });
 
-test('home document, Open Graph, and Twitter titles name Boise handyman without changing the description',()=>{
+test('home document, Open Graph, and Twitter titles stay on the published handyman title',()=>{
  const result=withBrandPageMetadata({
   title:{absolute:'Handyman in Boise, ID | Boise Handyman Co'},
   description:'Handyman service for Boise, Meridian, Eagle, Nampa & the Treasure Valley. Small repairs, installs & maintenance with one upfront written quote before work starts. Book a visit today.',
@@ -153,5 +153,5 @@ test('home document, Open Graph, and Twitter titles name Boise handyman without 
  assert.equal((result.openGraph as {title?:string}).title,HOME_TITLE);
  assert.equal((result.twitter as {title?:string}).title,HOME_TITLE);
  assert.equal(result.description,HOME_DESCRIPTION);
- assert.equal(HOME_TITLE.length,62);
+ assert.equal(HOME_TITLE.length,56);
 });
