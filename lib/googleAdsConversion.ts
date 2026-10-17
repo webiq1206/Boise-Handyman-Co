@@ -27,6 +27,8 @@ export interface LeadContext {
   phone?: string;
   name?: string;
   postalCode?: string;
+  /** Server decision from the submit response. False skips user_data only. */
+  allowEnhancedConversions?: boolean;
 }
 
 export interface EnhancedConversionUserData {
@@ -182,9 +184,23 @@ function scopedAdsConversion(params: GoogleAdsLeadParams, userData: EnhancedConv
   return userData ? { ...params, user_data: userData } : params;
 }
 
+/** The submit response cookie is how the shared estimator learns the server decision. */
+export function allowEnhancedConversionsFromCookie(): boolean {
+  const header = typeof document === "undefined" ? "" : document.cookie;
+  const match = header.match(/(?:^|; )p5_allow_enhanced=([^;]*)/);
+  if (!match) return true;
+  return decodeURIComponent(match[1]) !== "0";
+}
+
+function userDataAllowed(ctx: LeadContext): boolean {
+  if (ctx.allowEnhancedConversions === false) return false;
+  if (ctx.allowEnhancedConversions === true) return true;
+  return allowEnhancedConversionsFromCookie();
+}
+
 function fireEnhancedLead(ctx: LeadContext, transactionId?: string): void {
   const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag;
-  const userData = enhancedConversionUserData(resolveEnhancedContact(ctx, transactionId));
+  const userData = userDataAllowed(ctx) ? enhancedConversionUserData(resolveEnhancedContact(ctx, transactionId)) : null;
   gtag("event", "conversion", scopedAdsConversion(googleAdsLeadParams(ctx, transactionId), userData));
 }
 

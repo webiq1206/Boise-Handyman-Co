@@ -336,7 +336,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
       }
       return res.json();
     },
-    onSuccess: (response: { accepted?: boolean }, variables) => {
+    onSuccess: (response: { accepted?: boolean; allowEnhancedConversions?: boolean }, variables) => {
       setSuccess(true);
       sessionStorage.removeItem("brc_estimate");
       // A submitted consultation is the primary lead. Google Ads receives the
@@ -351,6 +351,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
           phone: variables.phone,
           name: variables.name,
           postalCode: deriveZip(variables.address),
+          allowEnhancedConversions: response.allowEnhancedConversions,
         }, inquiryId("primary"));
         trackEvent("generate_lead", {
           form: "consultation",

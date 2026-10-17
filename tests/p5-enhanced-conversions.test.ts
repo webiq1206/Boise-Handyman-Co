@@ -160,11 +160,12 @@ test('consultation sends enhanced fields only after the server accepts the lead'
   const call = source.indexOf('trackAcceptedLeadConversion({');
   const error = source.indexOf('onError:');
   assert.ok(accepted > 0 && call > accepted && call < error);
-  const block = source.slice(call, call + 280);
+  const block = source.slice(call, call + 420);
   assert.match(block, /email: variables\.email/);
   assert.match(block, /phone: variables\.phone/);
   assert.match(block, /name: variables\.name/);
   assert.match(block, /postalCode: deriveZip\(variables\.address\)/);
+  assert.match(block, /allowEnhancedConversions: response\.allowEnhancedConversions/);
   assert.equal(block.includes('message:'), false);
   assert.equal(block.includes('address: variables.address'), false);
   assert.match(source, /trackAcceptedLeadConversion\(\{[\s\S]*?\}, inquiryId\("primary"\)\)/);
