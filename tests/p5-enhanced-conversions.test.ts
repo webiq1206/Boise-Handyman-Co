@@ -85,7 +85,7 @@ test('user_data is set only when the tag is allowed, and the conversion follows 
   }));
   assert.equal(trackGoogleAdsLeadConversion({ service: 'handyman' }, `estimator:${id}`), true);
   assert.equal(trackGoogleAdsLeadConversion({ service: 'handyman' }, `intake:handyman:${id}`), true);
-  assert.equal(live.calls.length, 2);
+  assert.equal(live.calls.length, 4);
   assert.equal(live.calls.some((call) => call[0] === 'set'), false);
   const expectedUserData = {
     email: 'ada@example.com',
@@ -95,17 +95,22 @@ test('user_data is set only when the tag is allowed, and the conversion follows 
   const conversion = live.calls[0] as [string, string, { send_to?: string; transaction_id?: string; user_data?: unknown }];
   assert.equal(conversion[0], 'event');
   assert.equal(conversion[1], 'conversion');
-  assert.equal(conversion[2].send_to, 'AW-18354188204/LE2vCPXstO8cEKzf-q9E');
+  assert.equal(conversion[2].send_to, 'AW-18354188204/cEzmCPOagKAdEKzf-q9E');
   assert.equal(conversion[2].transaction_id, `estimator:${id}`);
   assert.deepEqual(conversion[2].user_data, expectedUserData);
-  assert.equal(JSON.stringify(conversion).includes('123 Main St'), false);
-  assert.equal(JSON.stringify(conversion).includes('faucet'), false);
-  const intake = live.calls[1] as [string, string, { transaction_id?: string; user_data?: unknown }];
+  const estimatorLead = live.calls[1] as [string, string, { send_to?: string; transaction_id?: string; user_data?: unknown }];
+  assert.equal(estimatorLead[2].send_to, 'AW-18354188204/LE2vCPXstO8cEKzf-q9E');
+  assert.equal(estimatorLead[2].transaction_id, `estimator:${id}`);
+  assert.deepEqual(estimatorLead[2].user_data, expectedUserData);
+  assert.equal(JSON.stringify(estimatorLead).includes('123 Main St'), false);
+  assert.equal(JSON.stringify(estimatorLead).includes('faucet'), false);
+  const intake = live.calls[2] as [string, string, { send_to?: string; transaction_id?: string; user_data?: unknown }];
+  assert.equal(intake[2].send_to, 'AW-18354188204/cEzmCPOagKAdEKzf-q9E');
   assert.equal(intake[2].transaction_id, `intake:handyman:${id}`);
   assert.deepEqual(intake[2].user_data, expectedUserData);
 
   assert.equal(trackGoogleAdsLeadConversion({ service: 'handyman', email: 'other@example.com' }, `estimator:${id}`), false);
-  assert.equal(live.calls.length, 2);
+  assert.equal(live.calls.length, 4);
   live.restore();
 });
 
@@ -151,6 +156,61 @@ test('user_data stays on the Ads event and never reaches the GA4 tag', () => {
     assert.equal(encoded.includes(key), false, key);
   }
   assert.equal(String(live.calls[0][2] && (live.calls[0][2] as { send_to?: string }).send_to || '').startsWith('G-'), false);
+  live.restore();
+});
+
+test('an accepted estimator finish fires both labels once', () => {
+  const live = install();
+  const key = 'estimator:accepted-finish';
+  assert.equal(trackGoogleAdsLeadConversion({ service: 'handyman', email: 'ada@example.com' }, key), true);
+  const events = live.calls.filter((call) => call[1] === 'conversion');
+  assert.equal(events.length, 2);
+  assert.equal((events[0][2] as { send_to?: string; user_data?: { email?: string } }).send_to, 'AW-18354188204/cEzmCPOagKAdEKzf-q9E');
+  assert.equal((events[1][2] as { send_to?: string; user_data?: { email?: string } }).send_to, 'AW-18354188204/LE2vCPXstO8cEKzf-q9E');
+  assert.equal((events[0][2] as { user_data?: { email?: string } }).user_data?.email, 'ada@example.com');
+  assert.equal((events[1][2] as { user_data?: { email?: string } }).user_data?.email, 'ada@example.com');
+  assert.equal(live.calls.some((call) => call[0] === 'set'), false);
+  live.restore();
+});
+
+test('a finish without a lead fires the estimator label only', () => {
+  const live = install();
+  const key = 'intake:handyman:no-lead';
+  assert.equal(trackGoogleAdsLeadConversion({ service: 'handyman', email: 'ada@example.com', acceptedLead: false }, key), true);
+  assert.deepEqual(live.calls, [
+    ['event', 'conversion', { send_to: 'AW-18354188204/cEzmCPOagKAdEKzf-q9E', transaction_id: key }],
+  ]);
+  live.restore();
+});
+
+test('a second finish does not send either label again', () => {
+  const live = install();
+  const key = 'estimator:refire-guard';
+  assert.equal(trackGoogleAdsLeadConversion({ service: 'handyman' }, key), true);
+  assert.equal(trackGoogleAdsLeadConversion({ service: 'handyman' }, key), false);
+  const labels = live.calls.filter((call) => call[1] === 'conversion').map((call) => (call[2] as { send_to?: string }).send_to);
+  assert.deepEqual(labels, ['AW-18354188204/cEzmCPOagKAdEKzf-q9E', 'AW-18354188204/LE2vCPXstO8cEKzf-q9E']);
+  live.restore();
+});
+
+test('a missing gtag waits up to ten seconds and then fires both labels once', () => {
+  const live = install({ gtag: false });
+  const timers: Array<() => void> = [];
+  (globalThis.window as unknown as { setTimeout: (fn: () => void, delay: number) => number }).setTimeout = (fn, delay) => {
+    assert.equal(delay, 500);
+    timers.push(fn);
+    return timers.length;
+  };
+  const key = 'estimator:wait-for-gtag';
+  assert.equal(trackGoogleAdsLeadConversion({ service: 'handyman' }, key), false);
+  assert.equal(timers.length, 1);
+  timers.shift()?.();
+  (globalThis.window as unknown as { gtag: (...args: unknown[]) => void }).gtag = (...args) => { live.calls.push(args); };
+  timers.shift()?.();
+  const labels = live.calls.filter((call) => call[1] === 'conversion').map((call) => (call[2] as { send_to?: string }).send_to);
+  assert.deepEqual(labels, ['AW-18354188204/cEzmCPOagKAdEKzf-q9E', 'AW-18354188204/LE2vCPXstO8cEKzf-q9E']);
+  assert.equal(trackGoogleAdsLeadConversion({ service: 'handyman' }, key), false);
+  assert.equal(live.calls.filter((call) => call[1] === 'conversion').length, 2);
   live.restore();
 });
 
