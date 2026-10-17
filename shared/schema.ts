@@ -450,6 +450,19 @@ export const inquiryLedger = pgTable("inquiry_ledger", {
   contactFingerprintIndex: index("inquiry_ledger_contact_fingerprint_idx").on(table.contactFingerprint),
 }));
 
+/**
+ * SHA-256 hashes of normalized emails and E.164 phones whose owners must not
+ * be sent as Google Ads user_data. The raw address and phone are not stored.
+ */
+export const enhancedConversionSuppressions = pgTable("enhanced_conversion_suppressions", {
+  id: varchar("id").primaryKey(),
+  kind: varchar("kind", { length: 16 }).notNull(),
+  valueHash: varchar("value_hash", { length: 64 }).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => ({
+  kindHashUnique: uniqueIndex("enhanced_conversion_suppressions_kind_hash_unique").on(table.kind, table.valueHash),
+}));
+
 export const insertConsultationRequestSchema = createInsertSchema(consultationRequests).omit({
   id: true,
   createdAt: true,

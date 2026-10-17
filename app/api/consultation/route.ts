@@ -3,6 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { consultationRequests } from "@/shared/schema";
 import { saveAcceptedLead } from "@/server/services/acceptedLead";
+import { allowEnhancedConversions, enhancedConversionCookie } from "@/server/services/enhancedConversionSuppression";
 import { clientKeyFrom, rateLimit } from "@/lib/rateLimit";
 import { classifyLeadSpam } from "@/server/services/leadSpam";
 import { getUncachableEmailClient } from "@/server/services/emailTransport";
@@ -340,7 +341,10 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ success: true, accepted: true, duplicate: false });
+    const allowUserData = await allowEnhancedConversions({ email: data.email, phone: data.phone });
+    const acceptedResponse = NextResponse.json({ success: true, accepted: true, duplicate: false, allowEnhancedConversions: allowUserData });
+    acceptedResponse.headers.append("set-cookie", enhancedConversionCookie(allowUserData));
+    return acceptedResponse;
   } catch (err) {
     console.error("[consultation] Error:", err);
     return NextResponse.json({ message: "Server error" }, { status: 500 });
