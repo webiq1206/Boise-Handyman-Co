@@ -46,13 +46,13 @@ test("photo alt text describes the picture and does not label it as our work", (
   assert.equal(registry.split("Representative image: a worker adjusting an interior door hinge with a screwdriver").length - 1, 2);
   for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx"]) {
     const source = read(file);
-    assert.equal(source.includes('alt="New white baseboard with a loose piece, a hammer, a nail set and a coping saw on an oak floor"'), true, file);
+    assert.equal(source.includes('alt="New white baseboard with a loose square-cut piece, a hammer and a coping saw on an oak floor"'), true, file);
   }
   for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx", "shared/imageAlts.ts"]) {
     assert.equal(read(file).includes("nail gun"), false, file);
   }
   assert.equal(
-    read("shared/imageAlts.ts").includes("New white baseboard with a loose piece, a hammer, a nail set and a coping saw on an oak floor"),
+    read("shared/imageAlts.ts").includes("New white baseboard with a loose square-cut piece, a hammer and a coping saw on an oak floor"),
     true,
   );
   for (const file of [

@@ -17,8 +17,8 @@ export const SITE_IMAGES = {
   processInProgress: "/images/handyman/toolbag-ready.webp",
   /** Full-bleed brand statement band: crisp cut-in paint lines on trim. */
   statementBand: "/images/handyman/service-painting-p5-reviewed-20260910.webp",
-  /** About/contact split panels and about hero: a doorstep walkthrough with a homeowner. */
-  leadership: "/images/handyman/consult-doorstep-branded.webp",
+  /** About/contact split panels and about hero: a tool bag on a front porch. */
+  leadership: "/images/handyman/front-porch-toolbag.webp",
   /** Consultation section background (homepage): a freshly repainted front door. */
   consultBg: "/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
   /** Pricing section subtle texture: new cabinet hardware going on. */
@@ -48,8 +48,8 @@ export const CONSTRUCTION_IMAGES = {
   foothills: h("spigot-winterize"),
   ruralSite: h("service-fence-repair"),
   plans: h("estimate-clipboard"),
-  budget: h("repair-materials"),
-  meeting: h("consult-doorstep-branded"),
+  budget: h("parts-tray"),
+  meeting: h("front-porch-toolbag"),
   outdoor: h("deck-board-replacement"),
   shopHome: h("toolbag-ready"),
 } as const;

@@ -54,7 +54,7 @@ const LIBRARY = {
   },
   carpentry: {
     src: img('baseboard-trim-fit'),
-    alt: 'New white baseboard with a loose piece, a hammer, a nail set and a coping saw on an oak floor',
+    alt: 'New white baseboard with a loose square-cut piece, a hammer and a coping saw on an oak floor',
   },
   mounting: {
     src: img('service-mounting'),
@@ -69,8 +69,8 @@ const LIBRARY = {
     alt: 'Caulk gun applying a clean white silicone bead where a bathtub meets white subway tile',
   },
   consult: {
-    src: img('consult-doorstep-branded'),
-    alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
+    src: img('front-porch-toolbag'),
+    alt: 'Canvas tool bag set down on a front porch beside a wood door',
   },
   toolbag: {
     src: img('toolbag-ready'),
@@ -113,8 +113,8 @@ const LIBRARY = {
     alt: 'Blue painter\'s tape markers on a wall and window trim marking touch-up spots, notepad on the windowsill',
   },
   materials: {
-    src: img('repair-materials'),
-    alt: 'Assorted screws, wall anchors, and picture hangers organized in a small parts tray on a workbench',
+    src: img('parts-tray'),
+    alt: 'Washers, hex nuts and cabinet knobs sorted in a parts tray',
   },
   frontDoor: {
     src: img('front-door-repaint-p5-reviewed-20260910'),

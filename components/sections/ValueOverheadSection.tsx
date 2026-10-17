@@ -71,7 +71,7 @@ export function ValueOverheadSection() {
                 <Image
                   src={SITE_IMAGES.valueCraft}
                   loading="lazy"
-                  alt="New white baseboard with a loose piece, a hammer, a nail set and a coping saw on an oak floor"
+                  alt="New white baseboard with a loose square-cut piece, a hammer and a coping saw on an oak floor"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover img-brand-grade"

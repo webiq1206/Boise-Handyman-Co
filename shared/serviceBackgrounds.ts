@@ -64,7 +64,7 @@ const SERVICE_IMAGE_SETS: Record<string, LandingImageSet> = {
   },
   "electrical-repairs": {
     hero: h("service-electrical"),
-    breather: h("repair-materials"),
+    breather: h("parts-tray"),
     process: h("estimate-clipboard"),
   },
   "carpentry-trim-repair": {
@@ -94,7 +94,7 @@ export function getServiceImageSet(serviceSlug: string): LandingImageSet {
     SERVICE_IMAGE_SETS[serviceSlug] ?? {
       hero: DEFAULT_SERVICE_BACKGROUND,
       breather: h("toolbag-ready"),
-      process: h("consult-doorstep-branded"),
+      process: h("front-porch-toolbag"),
     }
   );
 }

@@ -7,7 +7,7 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/handyman/drywall-patch-coat.webp':
     'Taped drywall patch with a first coat of compound, and a knife on a mud pan',
   '/images/handyman/baseboard-trim-fit.webp':
-    'New white baseboard with a loose piece, a hammer, a nail set and a coping saw on an oak floor',
+    'New white baseboard with a loose square-cut piece, a hammer and a coping saw on an oak floor',
   '/images/handyman/service-painting-p5-reviewed-20260910.webp':
     'A worker painting white window trim with a brush over a drop cloth',
   '/images/handyman/service-painting.webp':
@@ -28,8 +28,8 @@ const IMAGE_ALTS: Record<string, string> = {
     'An open canvas tool bag with a drill, level, and tape measure on a drop cloth',
   '/images/handyman/estimate-clipboard.webp':
     'A clipboard, calculator, pencil, and tape measure on a wood table',
-  '/images/handyman/consult-doorstep-branded.webp':
-    'A handyman and a homeowner reviewing a clipboard at a front door',
+  '/images/handyman/front-porch-toolbag.webp':
+    'Canvas tool bag set down on a front porch beside a wood door',
   '/images/handyman/punch-list-markers.webp':
     "Blue painter's tape marking touch-up spots on a wall and window trim",
   '/images/handyman/front-door-repaint-p5-reviewed-20260910.webp':
@@ -38,8 +38,8 @@ const IMAGE_ALTS: Record<string, string> = {
     'A freshly painted sage-green front door with white trim and black hardware',
   '/images/handyman/toilet-tank-service.webp':
     'Toilet with a chrome shutoff valve and supply line, and a wrench on a towel',
-  '/images/handyman/repair-materials.webp':
-    'Screws, wall anchors, and picture hangers sorted in a parts tray',
+  '/images/handyman/parts-tray.webp':
+    'Washers, hex nuts and cabinet knobs sorted in a parts tray',
   '/images/handyman/door-hinge-fix.webp':
     'A hand tightening an interior door hinge screw with a screwdriver',
   '/images/handyman/cabinet-hardware-upgrade.webp':
