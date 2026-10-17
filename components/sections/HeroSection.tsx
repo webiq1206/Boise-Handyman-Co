@@ -1,6 +1,7 @@
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
+import { visibleTrustItems } from "@/shared/foundingClaims";
 import { HERO_EYEBROW, HERO_SUBHEAD, HERO_STATS, TRUST_ITEMS } from "@/shared/siteContent";
 import { SITE_IMAGES } from "@/shared/siteImages";
 import { CTA_PRIMARY, CTA_SECONDARY } from "@/shared/ctaCopy";
@@ -106,7 +107,7 @@ export function HeroSection() {
       <div className="border-y border-accent-legible/25 bg-gradient-to-b from-accent/[0.14] to-accent/[0.05] py-8 md:py-10">
         <div className="container px-4">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 max-w-5xl mx-auto border-l border-t border-border/60">
-            {TRUST_ITEMS.map((item) => (
+            {visibleTrustItems(TRUST_ITEMS).map((item) => (
               <div
                 key={item}
                 className="flex items-center justify-start gap-2.5 px-3.5 py-3.5 text-left md:justify-center md:px-4 md:py-4 md:text-center border-r border-b border-border/60"

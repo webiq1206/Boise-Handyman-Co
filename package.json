@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "next build",
+    "postbuild": "node scripts/grep-static-reviews.mjs",
     "start": "next start -p 5000",
     "lint": "next lint",
     "test:e2e": "playwright test",
@@ -32,7 +33,7 @@
     "images:blog": "node --import tsx scripts/generate-blog-image-registry.ts",
     "images:generate": "node scripts/generate-blog-images.mjs",
     "images:placeholders": "node scripts/generate-placeholder-images.mjs",
-    "images:marketing": "node scripts/generate-marketing-images.mjs",
+    "images:marketing": "node --import tsx scripts/generate-marketing-images.mjs",
     "brand:generate": "node scripts/brand/generate-brand-assets.mjs",
     "brand:preview": "node scripts/brand/generate-brand-assets.mjs --preview",
     "images:optimize": "node scripts/optimize-marketing-images-sharp.mjs",

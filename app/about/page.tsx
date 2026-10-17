@@ -22,6 +22,7 @@ import { CITY_HERO_IMAGES } from '@/shared/cityServiceImages';
 import { CITIES,TREASURE_VALLEY_CITIES } from '@/shared/contentData';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import { SITE_CONFIG } from '@/shared/siteConfig';
+import { visibleTrustItems } from '@/shared/foundingClaims';
 import { HERO_STATS,PRINCIPLES,TRUST_ITEMS } from '@/shared/siteContent';
 import { SITE_IMAGES } from '@/shared/siteImages';
 import { ArrowRight,Check,ChevronRight } from 'lucide-react';
@@ -179,7 +180,7 @@ export default function AboutPage() {
                   details are available on request.
                 </p>
                 <ul className="grid sm:grid-cols-2 gap-3">
-                  {TRUST_ITEMS.map((item) => (
+                  {visibleTrustItems(TRUST_ITEMS).map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <Check className="h-4 w-4 text-accent-legible flex-shrink-0 mt-0.5" />
                       <span>{item}</span>
