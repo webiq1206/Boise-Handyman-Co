@@ -84,6 +84,9 @@ export default function PrivacyPolicyPage() {
               <li>Respond to your inquiries and support requests</li>
               <li>Send marketing communications (with your consent)</li>
             </ul>
+            <p>
+              We use Google Analytics 4 to measure how visitors use this website, and Google Ads conversion tracking to measure whether an ad leads to an inquiry, a completed estimate, or a phone call. Those tags do not receive your name, email, phone number, or project details.
+            </p>
 
             <h2 id="document-section-4">Information Sharing</h2>
             <p>

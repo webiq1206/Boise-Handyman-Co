@@ -144,27 +144,50 @@ function queueConversion(storageKey: string | undefined, payload: () => Record<s
   return false;
 }
 
-/** Intake confirm and estimate submit both create a lead, and both use these key prefixes. */
+/** Intake confirm and estimate submit both use these key prefixes. */
 export function isEstimatorCompletionKey(dedupeKey?: string): boolean {
   return !!dedupeKey && (dedupeKey.startsWith("estimator:") || dedupeKey.startsWith("intake:"));
 }
 
 /**
+ * The draft id both finishes can name. Intake keys look like
+ * `intake:handyman:<draftId>` (the projectId). Estimate keys look like
+ * `estimator:<draftId>`. The form label dedupes on that shared id.
+ */
+export function sharedLeadIdentity(dedupeKey: string): string {
+  const body = dedupeKey.replace(/^(?:intake|estimator):/, "");
+  return body.split(":").at(-1) || body;
+}
+
+export type LeadConversionOptions = {
+  /** False when this finish was a server duplicate or was rejected. */
+  acceptedLead?: boolean;
+};
+
+/**
  * Fires one Google Ads conversion once per dedupe key (per page load and,
  * where storage allows, per browser session). An `estimator:` or `intake:`
- * key sends P5 Estimator Completed and the form label, each with
- * transaction_id set to that key. Any other key is a consultation lead and
- * sends only the form label. If gtag is not loaded yet, one retry waits
- * about five seconds and still fires at most once. The sent marker is written
- * only when gtag is ready.
+ * key sends P5 Estimator Completed once for that completion key. The form
+ * label fires once for the shared project id across both finishes, and only
+ * when this finish created an accepted lead. Any other key is a consultation
+ * lead and sends only the form label. If gtag is not loaded yet, one retry
+ * waits about five seconds and still fires at most once. The sent marker is
+ * written only when gtag is ready.
  */
-export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string): boolean {
-  if (isEstimatorCompletionKey(dedupeKey)) {
+export function trackGoogleAdsLeadConversion(
+  ctx: LeadContext = {},
+  dedupeKey?: string,
+  options?: LeadConversionOptions,
+): boolean {
+  if (isEstimatorCompletionKey(dedupeKey) && dedupeKey) {
     const estimatorSent = queueConversion(`google_ads_estimator:${dedupeKey}`, () => ({
       send_to: GOOGLE_ADS_ESTIMATOR_LABEL,
       transaction_id: dedupeKey,
     }));
-    queueConversion(`google_ads_lead:${dedupeKey}`, () => googleAdsLeadParams(ctx, dedupeKey));
+    if (options?.acceptedLead !== false) {
+      const leadId = sharedLeadIdentity(dedupeKey);
+      queueConversion(`google_ads_lead:project:${leadId}`, () => googleAdsLeadParams(ctx, leadId));
+    }
     return estimatorSent;
   }
   const storageKey = dedupeKey ? `google_ads_lead:${dedupeKey}` : undefined;
