@@ -7,6 +7,7 @@ import { Section } from "@/components/marketing/Section";
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { BudgetInclusionsSection } from "@/components/sections/BudgetInclusionsSection";
+import { HowP5Works } from "@/components/sections/HowP5Works";
 import { HomePageSchema } from "@/components/seo/HomePageSchema";
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { buildCanonical,fitDescription } from "@/lib/page-metadata";
@@ -73,6 +74,7 @@ export default function HomePage() {
         <ApprovedHome />
       </ApprovedFamilyFrame>
       <BudgetInclusionsSection />
+      <HowP5Works />
       <Section id="consult" divider className="relative overflow-hidden scroll-mt-16 pb-28 md:pb-28">
         {/* Warm, dimmed lifestyle photo grounds the closing section. Directional
             scrims keep the left-column copy legible and fade the edges into the

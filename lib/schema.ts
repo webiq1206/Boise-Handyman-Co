@@ -150,6 +150,17 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
     url: baseUrl,
     // parentOrganization stays on https://p5homeco.com/#organization.
     parentOrganization: P5_PARENT_ORGANIZATION,
+    hasCredential: {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'registration',
+      name: 'Idaho Registered Contractor',
+      identifier: '8381215',
+      recognizedBy: {
+        '@type': 'GovernmentOrganization',
+        name: 'Idaho Division of Occupational and Professional Licenses',
+        url: 'https://dopl.idaho.gov/con/',
+      },
+    },
     telephone: SCHEMA_TELEPHONE,
     email: BUSINESS_INFO.email,
     employee: publicRepresentativePerson,

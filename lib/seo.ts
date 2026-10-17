@@ -516,9 +516,9 @@ export const BUSINESS_INFO = {
   founded: publishedFoundingYear(),
   serviceArea: ['Boise', 'Meridian', 'Eagle', 'Nampa', 'Kuna', 'Star', 'Middleton', 'Caldwell', 'Garden City'],
   serviceRadius: '35 miles',
-  licenses: ['Registration details available upon request'],
-  // No certification or insured/bonded claims are published until confirmed
-  // for the handyman entity. [NEEDS: confirm insurance/bond status]
+  licenses: ['Idaho Registered Contractor #8381215'],
+  // Bonded and insured is confirmed for the operating company, P5 Home Co LLC.
+  // Insurance details stay available on request.
   certifications: [] as string[],
   insurance: 'Insurance details available upon request',
   rating: 0,
