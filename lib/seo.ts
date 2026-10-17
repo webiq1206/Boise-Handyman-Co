@@ -135,21 +135,21 @@ export function generatePageTitle(params: ServiceSEOParams): string {
 export const SHOW_TRUST_CLAIMS = false;
 
 const SATISFACTION_GUARANTEED_CTA = "Satisfaction guaranteed";
-const NEUTRAL_FALLBACK_CTA = "Free upfront quotes";
+const NEUTRAL_FALLBACK_CTA = "Free quotes from photos";
 
 const CITY_DESCRIPTION_VARIANTS: Record<string, string> = {
-  Kuna: SHOW_TRUST_CLAIMS ? "Kuna's trusted local" : "Kuna",
+  Kuna: SHOW_TRUST_CLAIMS ? "Kuna's trusted local" : "Kuna's local",
   Boise: "Boise's local",
-  Meridian: SHOW_TRUST_CLAIMS ? "Meridian's trusted" : "Meridian",
+  Meridian: SHOW_TRUST_CLAIMS ? "Meridian's trusted" : "Meridian's local",
   Eagle: "Eagle's preferred",
   Star: "Star's reliable",
   Middleton: "Middleton's expert",
-  Nampa: SHOW_TRUST_CLAIMS ? "Nampa's trusted" : "Nampa",
-  Caldwell: SHOW_TRUST_CLAIMS ? "Caldwell's trusted" : "Caldwell",
+  Nampa: SHOW_TRUST_CLAIMS ? "Nampa's trusted" : "Nampa's local",
+  Caldwell: SHOW_TRUST_CLAIMS ? "Caldwell's trusted" : "Caldwell's local",
 };
 
-function cityDescriptionLead(city: string, unmappedFallback: string): string {
-  return CITY_DESCRIPTION_VARIANTS[city] || (SHOW_TRUST_CLAIMS ? `${city}'s trusted` : unmappedFallback);
+function cityDescriptionLead(city: string): string {
+  return CITY_DESCRIPTION_VARIANTS[city] || (SHOW_TRUST_CLAIMS ? `${city}'s trusted` : `${city}'s local`);
 }
 
 const CITY_CTA_VARIANTS: Record<string, string> = {
@@ -182,7 +182,7 @@ export function generateMetaDescription(params: ServiceSEOParams): string {
 
   if (city && serviceName) {
     const serviceLC = serviceName.toLowerCase();
-    const cityVariant = cityDescriptionLead(city, city);
+    const cityVariant = cityDescriptionLead(city);
     const ctaVariant = CITY_CTA_VARIANTS[city] || (SHOW_TRUST_CLAIMS ? SATISFACTION_GUARANTEED_CTA : NEUTRAL_FALLBACK_CTA);
     return `${cityVariant} ${serviceLC} team. Upfront quotes. ${ctaVariant}. Call ${phone} to book a visit!`;
   }
@@ -254,7 +254,7 @@ export function generateCityServiceDescription(
 ): string {
   const phone = SITE_CONFIG.phone;
   const serviceLC = serviceName.toLowerCase();
-  const cityVariant = cityDescriptionLead(cityName, "Local");
+  const cityVariant = cityDescriptionLead(cityName);
   const cityData = CITY_SEO_DATA[cityName as keyof typeof CITY_SEO_DATA];
   const neighborhood = cityData?.neighborhoods?.[0];
 
