@@ -200,6 +200,19 @@ const nextConfig = {
 
     return redirects;
   },
+
+  async rewrites() {
+    // The shared estimator route files are byte-locked. beforeFiles runs
+    // before those filesystem routes, so the public submit and intake URLs
+    // reach site-owned handlers. Those handlers call the same endpoints and
+    // attach the enhanced-conversion decision.
+    return {
+      beforeFiles: [
+        { source: '/api/p5-estimator/submit', destination: '/api/p5-estimator/enhanced-submit' },
+        { source: '/api/p5-estimator/intake', destination: '/api/p5-estimator/enhanced-intake' },
+      ],
+    };
+  },
 }
 
 module.exports = nextConfig

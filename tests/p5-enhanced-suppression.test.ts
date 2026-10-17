@@ -5,6 +5,7 @@ import test from "node:test";
 import { PGlite } from "@electric-sql/pglite";
 import { trackGoogleAdsLeadConversion } from "../lib/googleAdsConversion.ts";
 import { assertAdditiveSql } from "../scripts/p5-schema-safety.mjs";
+import { decorateEstimatorLead } from "../server/services/enhancedConversionLead.ts";
 import {
   addEnhancedConversionSuppression,
   allowEnhancedConversions,
@@ -115,6 +116,32 @@ test("the lead response keeps its result and adds the server decision", async ()
   });
 });
 
+test("a pending submit is unchanged and a suppressed customer keeps the lead", async () => {
+  const pending = Response.json({ pending: true }, { status: 202 });
+  const untouched = await decorateEstimatorLead(new Request("https://boisehandyman.co/api/p5-estimator/submit", { method: "POST" }), pending);
+  assert.equal(untouched, pending);
+  await withDatabase(async () => {
+    await addEnhancedConversionSuppression({ email: "ada@example.com" });
+    const lead = { accepted: true, duplicate: false, id: "draft-1", result: { total: 50 }, document: { customer: { email: "Ada@Example.com", phone: "2085550000" } } };
+    const response = await decorateEstimatorLead(new Request("https://boisehandyman.co/api/p5-estimator/submit", { method: "POST" }), Response.json(lead));
+    const body = await response.json();
+    assert.equal(body.accepted, true);
+    assert.equal(body.id, "draft-1");
+    assert.deepEqual(body.result, { total: 50 });
+    assert.equal(body.document.customer.email, "Ada@Example.com");
+    assert.equal(body.allowEnhancedConversions, false);
+    assert.match(response.headers.get("set-cookie") || "", /p5_allow_enhanced=0/);
+    const intake = await decorateEstimatorLead(
+      new Request("https://boisehandyman.co/api/p5-estimator/intake", { method: "POST" }),
+      Response.json({ accepted: true, projectId: "intake-1" }),
+    );
+    const intakeBody = await intake.json();
+    assert.equal(intakeBody.accepted, true);
+    assert.equal(intakeBody.projectId, "intake-1");
+    assert.equal(intakeBody.allowEnhancedConversions, true);
+  });
+});
+
 test("the suppression table migration is additive and the shared estimator is unchanged", () => {
   const sql = readFileSync(new URL("../migrations/0003_enhanced_conversion_suppressions.sql", import.meta.url), "utf8");
   assert.doesNotThrow(() => assertAdditiveSql(sql, "0003"));
@@ -122,6 +149,26 @@ test("the suppression table migration is additive and the shared estimator is un
   assert.equal(sql.includes("email varchar"), false);
   const estimator = readFileSync(new URL("../components/P5Estimator.tsx", import.meta.url), "utf8");
   assert.equal(estimator.includes("allowEnhancedConversions"), false);
+  const submitRoute = readFileSync(new URL("../app/api/p5-estimator/submit/route.ts", import.meta.url), "utf8");
+  const intakeRoute = readFileSync(new URL("../app/api/p5-estimator/intake/route.ts", import.meta.url), "utf8");
+  assert.equal(submitRoute.includes("allowEnhancedConversions"), false);
+  assert.equal(intakeRoute.includes("allowEnhancedConversions"), false);
+  const manifest = JSON.parse(readFileSync(new URL("../lib/p5/shared-manifest.json", import.meta.url), "utf8")) as { files: Record<string, string> };
+  const hash = (file: string) => createHash("sha256").update(readFileSync(new URL("../" + file, import.meta.url), "utf8").replace(/\r\n/g, "\n")).digest("hex");
+  assert.equal(hash("app/api/p5-estimator/submit/route.ts"), manifest.files["app/api/p5-estimator/submit/route.ts"]);
+  assert.equal(hash("app/api/p5-estimator/intake/route.ts"), manifest.files["app/api/p5-estimator/intake/route.ts"]);
+  const config = readFileSync(new URL("../next.config.js", import.meta.url), "utf8");
+  assert.match(config, /beforeFiles/);
+  assert.match(config, /source: '\/api\/p5-estimator\/submit', destination: '\/api\/p5-estimator\/enhanced-submit'/);
+  assert.match(config, /source: '\/api\/p5-estimator\/intake', destination: '\/api\/p5-estimator\/enhanced-intake'/);
+  const enhancedSubmit = readFileSync(new URL("../app/api/p5-estimator/enhanced-submit/route.ts", import.meta.url), "utf8");
+  const enhancedIntake = readFileSync(new URL("../app/api/p5-estimator/enhanced-intake/route.ts", import.meta.url), "utf8");
+  assert.match(enhancedSubmit, /postSubmission/);
+  assert.match(enhancedSubmit, /decorateEstimatorLead/);
+  assert.match(enhancedSubmit, /maxDuration=300/);
+  assert.match(enhancedIntake, /postIntake/);
+  assert.match(enhancedIntake, /decorateEstimatorLead/);
+  assert.match(readFileSync(new URL("../server/services/enhancedConversionLead.ts", import.meta.url), "utf8"), /readDraft/);
   const consultation = readFileSync(new URL("../app/api/consultation/route.ts", import.meta.url), "utf8");
   assert.match(consultation, /allowEnhancedConversions: allowUserData/);
   const privacy = readFileSync(new URL("../app/privacy-policy/page.tsx", import.meta.url), "utf8");
