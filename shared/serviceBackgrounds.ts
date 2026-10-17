@@ -21,7 +21,7 @@ export const SERVICE_BACKGROUNDS: ServiceBackgroundConfig = {
   "carpentry-trim-repair": h("service-carpentry-trim-branded"),
   "mounting-assembly": h("service-mounting"),
   "fence-deck-gutter-repair": h("service-fence-repair"),
-  "home-maintenance": h("service-caulking"),
+  "home-maintenance": h("service-caulk-bead"),
 };
 
 export const DEFAULT_SERVICE_BACKGROUND = DEFAULT_BACKGROUND;
@@ -49,7 +49,7 @@ export interface LandingImageSet {
 const SERVICE_IMAGE_SETS: Record<string, LandingImageSet> = {
   "drywall-repair": {
     hero: h("service-drywall-repair"),
-    breather: h("punch-list-markers"),
+    breather: h("punch-list-tape-trim"),
     process: SITE_IMAGES.processInProgress,
   },
   "painting-touch-ups": {
@@ -83,9 +83,9 @@ const SERVICE_IMAGE_SETS: Record<string, LandingImageSet> = {
     process: h("hero-gutter-cleaning"),
   },
   "home-maintenance": {
-    hero: h("service-caulking"),
+    hero: h("service-caulk-bead"),
     breather: h("weatherstripping"),
-    process: h("punch-list-markers"),
+    process: h("punch-list-tape-trim"),
   },
 };
 

@@ -65,8 +65,8 @@ const LIBRARY = {
     alt: 'Gloved hands screwing a new cedar picket onto a backyard fence rail with a cordless drill',
   },
   caulking: {
-    src: img('service-caulking'),
-    alt: 'Caulk gun applying a clean white silicone bead where a bathtub meets white subway tile',
+    src: img('service-caulk-bead'),
+    alt: 'Fresh white caulk bead where a bathtub meets subway tile',
   },
   consult: {
     src: img('consult-doorstep-branded'),
@@ -109,8 +109,8 @@ const LIBRARY = {
     alt: 'Hand tightening the hinge screws of a white interior door with a screwdriver',
   },
   punchList: {
-    src: img('punch-list-markers'),
-    alt: 'Blue painter\'s tape markers on a wall and window trim marking touch-up spots, notepad on the windowsill',
+    src: img('punch-list-tape-trim'),
+    alt: 'Painter\'s tape along window trim with a can of white trim paint and a brush',
   },
   materials: {
     src: img('repair-materials'),
