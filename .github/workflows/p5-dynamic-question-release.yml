@@ -1,9 +1,12 @@
 name: P5 dynamic question release verification
 on:
-  push:
-    branches: [fix/p5-dynamic-questions-20260915]
+  pull_request:
+    types: [opened, synchronize, labeled, reopened]
+    branches: [main]
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
   verify:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'full-ci')
     uses: webiq1206/boise-remodeling-co/.github/workflows/p5-dynamic-question-release.yml@36b54938a1727df82c726727f2dc251d2123ae0a
