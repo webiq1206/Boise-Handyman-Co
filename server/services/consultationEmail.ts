@@ -4,6 +4,7 @@ import {
   EMAIL_BRAND,
 } from "@/server/services/emailLayout";
 import { SITE_CONFIG } from "@/shared/siteConfig";
+import { TEXT_REPLY_HOURS, TEXT_SMS_HREF } from "@/shared/textReply";
 import {
   takeoffForRange,
   takeoffForClient,
@@ -829,10 +830,12 @@ export function buildCustomerEmailHtml(
       ${buildEstimateSectionsHtml(estimate, overrides)}
       ${budgetNote}
       <p style="color:${EMAIL_BRAND.text};line-height:1.6;">We will reach out within one business day to confirm the scope, give you a firm number, and get your repair visit on the schedule. Until then, reply here or call <a href="${SITE_CONFIG.phoneHref}" style="color:${EMAIL_BRAND.accent};">${escapeHtml(SITE_CONFIG.phone)}</a> with any questions.</p>
+      <p style="color:${EMAIL_BRAND.text};line-height:1.6;">Prefer to text? Text <a href="${TEXT_SMS_HREF}" style="color:${EMAIL_BRAND.accent};">${escapeHtml(SITE_CONFIG.phone)}</a>. We reply in minutes during business hours (${TEXT_REPLY_HOURS}).</p>
       <p style="margin-top:24px;color:${EMAIL_BRAND.text};">The ${escapeHtml(SITE_CONFIG.name)} team</p>
     `
     : `
       <p class="greeting" style="font-size:18px;color:${EMAIL_BRAND.text};margin:0 0 20px;">We received your request and will reach out within one business day to talk through the job and get your visit scheduled.</p>
+      <p style="color:${EMAIL_BRAND.text};line-height:1.6;">Prefer to text? Text <a href="${TEXT_SMS_HREF}" style="color:${EMAIL_BRAND.accent};">${escapeHtml(SITE_CONFIG.phone)}</a>. We reply in minutes during business hours (${TEXT_REPLY_HOURS}).</p>
       <p style="color:${EMAIL_BRAND.text};line-height:1.6;">In the meantime, feel free to call us at <a href="${SITE_CONFIG.phoneHref}" style="color:${EMAIL_BRAND.accent};">${escapeHtml(SITE_CONFIG.phone)}</a>, <a href="${SITE_CONFIG.phoneSmsHref}" style="color:${EMAIL_BRAND.accent};">send us a text</a>, or reply to this email with any questions.</p>
       <p style="margin-top:24px;color:${EMAIL_BRAND.text};">The ${escapeHtml(SITE_CONFIG.name)} team</p>
     `;

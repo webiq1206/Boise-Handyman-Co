@@ -1,4 +1,5 @@
 import { InteriorPage } from '@/components/approved/InteriorLayout';
+import { WithTextReplyLink } from "@/components/PreferToTextLine";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AreaCard } from "@/components/marketing/AreaCard";
 import { BlogEndCta } from "@/components/marketing/BlogEndCta";
@@ -104,7 +105,7 @@ export default function AreasHubPage() {
               {AREA_PAGE_FAQS.map((faq) => (
                 <div key={faq.question} className="border-b py-6" style={{ borderColor: "var(--ed-line)" }}>
                   <dt className="ed-h4">{faq.question}</dt>
-                  <dd className="ed-body mt-3">{faq.answer}</dd>
+                  <dd className="ed-body mt-3"><WithTextReplyLink text={faq.answer} /></dd>
                 </div>
               ))}
             </dl>

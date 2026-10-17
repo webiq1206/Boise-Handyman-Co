@@ -11,6 +11,7 @@ import { HomePageSchema } from "@/components/seo/HomePageSchema";
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { buildCanonical,fitDescription } from "@/lib/page-metadata";
 import { SITE_CONFIG } from "@/shared/siteConfig";
+import { PreferToTextLine, WithTextReplyLink } from "@/components/PreferToTextLine";
 import { CONSULT_BULLETS,SITE_TAGLINE } from "@/shared/siteContent";
 import { SITE_IMAGES } from "@/shared/siteImages";
 import { Check } from "lucide-react";
@@ -108,7 +109,8 @@ export default function HomePage() {
                 </h2>
                 <p className="ed-lede mt-8 max-w-[40ch]">
                   Send a few details - photos help - and we will reply within one
-                  business day with an upfront quote and a time that works.
+                  business day with an upfront quote and a time that works.{" "}
+                  <PreferToTextLine />
                 </p>
                 <p className="ed-body mt-4">
                   No pressure, and no expectation to go any further.
@@ -124,7 +126,7 @@ export default function HomePage() {
                         style={{ color: "var(--ed-accent)" }}
                         aria-hidden="true"
                       />
-                      {item}
+                      <WithTextReplyLink text={item} />
                     </li>
                   ))}
                 </ul>

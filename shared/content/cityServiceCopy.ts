@@ -1,4 +1,5 @@
 import type { FAQItem } from '../seoContent';
+import { TEXT_REPLY_LINE } from '../textReply';
 
 export interface CityServiceCopy {
   intro: string;
@@ -564,7 +565,7 @@ export const CITY_SERVICE_COPY: Record<string, CityServiceCopy> = {
       { question: "Do I need to supply the TV mount or shelf hardware?", answer: "If you already have the item and its bracket or hardware, set them out. If you don't, let us know the TV size and the type of wall, and we'll bring a mount that fits, listed on the quote at the store price." },
       { question: "Can you hide the TV cables in the wall?", answer: "On most interior drywall, yes. The in-wall concealment kit we use is rated for both power and low-voltage cable, so the cords between the TV and the outlet disappear. Fire blocking, exterior walls, and masonry sometimes limit that, and you'll hear about it on site before we cut." },
       { question: "Do you serve Meridian?", answer: "Yes. Meridian is a core city in our coverage, alongside its Ada County neighbors and most of the Treasure Valley, and a TV mount or furniture build costs the same in every part of it." },
-      { question: "How do I get a quote for mounting & assembly in Meridian?", answer: "Our online estimator gives a preliminary planning range for a TV or shelf install. For a firm price, text photos of the wall and the item, or upload them through the contact form; we normally reply within one business day, and nothing goes on the calendar until you approve it." },
+      { question: "How do I get a quote for mounting & assembly in Meridian?", answer: `Our online estimator gives a preliminary planning range for a TV or shelf install. For a firm price, text photos of the wall and the item, or upload them through the contact form; we normally reply within one business day, and nothing goes on the calendar until you approve it. ${TEXT_REPLY_LINE}` },
       { question: "What kind of walls do Meridian homes have for TV mounting?", answer: "Mostly drywall over wood studs. Census ACS 2020-2024 estimates show about 82% of Meridian homes are single-family detached houses, and half were built in 2007 or later, so masonry and plaster walls are uncommon. That usually means we can find the studs quickly and hang a TV securely, though fireplace surrounds can still differ." },
     ],
   },

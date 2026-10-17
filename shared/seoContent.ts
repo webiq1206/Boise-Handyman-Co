@@ -4,6 +4,7 @@ import { getAreaCityCopy } from './content/areaCopy';
 import { getCityServiceCopy } from './content/cityServiceCopy';
 import { getCityLocalSection, getCityOnlyFaqs } from './cityPageFacts';
 import type { LandingSection } from '@/components/seo/LandingPageTemplate';
+import { TEXT_REPLY_LINE } from './textReply';
 
 export interface FAQItem {
   question: string;
@@ -935,7 +936,7 @@ export const AREA_PAGE_FAQS: FAQItem[] = [
   {
     question: 'How do I get started?',
     answer:
-      'Call or text us, use the online estimator for a preliminary planning range, or send your task list with photos through the contact form. We reply within one business day with an upfront quote.',
+      `Call or text us, use the online estimator for a preliminary planning range, or send your task list with photos through the contact form. We reply within one business day with an upfront quote. ${TEXT_REPLY_LINE}`,
   },
 ];
 

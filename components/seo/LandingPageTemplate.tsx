@@ -1,4 +1,5 @@
 import { InteriorHero,InteriorProjectAside } from '@/components/approved/InteriorLayout';
+import { WithTextReplyLink } from '@/components/PreferToTextLine';
 import { Section } from '@/components/marketing';
 import { EstimatePromptBand } from '@/components/marketing/EstimatePromptBand';
 import { RelatedPostCards } from '@/components/marketing/RelatedPostCards';
@@ -539,7 +540,7 @@ export function LandingPageTemplate({
                   <AccordionTrigger className="ed-h4 py-6 text-left hover:no-underline [&[data-state=open]]:[color:var(--ed-accent)]">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="ed-body pb-7 text-[0.9375rem]">{faq.answer}</AccordionContent>
+                  <AccordionContent className="ed-body pb-7 text-[0.9375rem]"><WithTextReplyLink text={faq.answer} /></AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
