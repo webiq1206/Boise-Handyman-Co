@@ -1,6 +1,7 @@
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { Section } from "@/components/marketing";
+import { WithTextReplyLink } from "@/components/PreferToTextLine";
 import { HOW_WE_BUILD_STEPS } from "@/shared/siteContent";
 import { SITE_IMAGES } from "@/shared/siteImages";
 import { GRAIN_URL } from "@/lib/grain";
@@ -54,7 +55,7 @@ export function ProcessSection() {
                   <span className="ed-step-n">{step.number}</span>
                   <div>
                     <h3 className="ed-h4">{step.title}</h3>
-                    <p className="ed-body mt-2 text-[0.875rem]">{step.desc}</p>
+                    <p className="ed-body mt-2 text-[0.875rem]"><WithTextReplyLink text={step.desc} /></p>
                   </div>
                 </div>
               </Reveal>

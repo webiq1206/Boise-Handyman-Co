@@ -5,6 +5,7 @@
  */
 
 import { SITE_CONFIG } from '@/shared/siteConfig';
+import { TEXT_REPLY_LINE } from '@/shared/textReply';
 import { CITIES, SERVICES } from '@/shared/contentData';
 
 const SITE = SITE_CONFIG.siteUrl.replace(/\/$/, '');
@@ -108,7 +109,7 @@ export const GBP_ATTRIBUTES = {
 
 export const GBP_MESSAGING = {
   welcomeMessage:
-    'Thanks for reaching out to Boise Handyman Co. We respond within one business day. For faster help, call or text (208) 477-1169, or get a preliminary estimate at boisehandyman.co/estimate',
+    `Thanks for reaching out to Boise Handyman Co. We respond within one business day. ${TEXT_REPLY_LINE} For faster help, call or text (208) 477-1169, or get a preliminary estimate at boisehandyman.co/estimate`,
 } as const;
 
 export interface GbpService {
@@ -267,7 +268,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'How quickly can you come out?',
     answer:
-      'We reply within one business day and most jobs are scheduled within the week. Because we quote from photos first, the visit is spent doing the work, not estimating it.',
+      `We reply within one business day and most jobs are scheduled within the week. ${TEXT_REPLY_LINE} Because we quote from photos first, the visit is spent doing the work, not estimating it.`,
   },
   {
     question: 'Is there a minimum charge?',
@@ -298,7 +299,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   },
   {
     question: 'How do I get started?',
-    answer: `Call or text (208) 477-1169, or book online: ${SITE}/contact. We respond within one business day.`,
+    answer: `Call or text (208) 477-1169, or book online: ${SITE}/contact. We respond within one business day. ${TEXT_REPLY_LINE}`,
   },
 ];
 

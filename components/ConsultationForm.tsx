@@ -30,6 +30,7 @@ import { DisplayNum } from "@/components/marketing";
 import { AddressAutocomplete } from "@/components/AddressAutocomplete";
 import { EstimateCTA } from "@/components/modals/EstimateCTA";
 import { CTA_FORM_SEND } from "@/shared/ctaCopy";
+import { PreferToTextLine, WithTextReplyLink } from "@/components/PreferToTextLine";
 import { CONSULT_BULLETS } from "@/shared/siteContent";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { BusinessPhoneContact } from "@/components/BusinessPhoneContact";
@@ -411,7 +412,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
             <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-caption font-normal text-foreground">
               2
             </span>
-            <span className="pt-0.5">We reply within one business day with an upfront quote and a time that works.</span>
+            <span className="pt-0.5">We reply within one business day with an upfront quote and a time that works. <PreferToTextLine /></span>
           </li>
           <li className="flex gap-3">
             <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-caption font-normal text-foreground">
@@ -490,7 +491,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
             {CONSULT_BULLETS.map((item) => (
               <li key={item} className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Check className="h-3.5 w-3.5 flex-shrink-0 text-foreground/60" />
-                {item}
+                <WithTextReplyLink text={item} />
               </li>
             ))}
           </ul>
@@ -844,7 +845,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
             {!mutation.isPending && <ArrowRight className="h-4 w-4" />}
           </Button>
           <p className="text-xs text-muted-foreground sm:min-w-[14rem] sm:flex-1">
-            No spam. We respond within one business day.
+            No spam. We respond within one business day. <PreferToTextLine />
           </p>
         </div>
       </form>

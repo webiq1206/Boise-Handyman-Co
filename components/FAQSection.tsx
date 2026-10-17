@@ -10,6 +10,7 @@ import {
 import { Section } from "@/components/marketing/Section";
 import { Button } from "@/components/ui/button";
 import { CTA_PRIMARY, CTA_SECONDARY } from "@/shared/ctaCopy";
+import { WithTextReplyLink } from "@/components/PreferToTextLine";
 import { HOMEPAGE_FAQS, INITIAL_FAQ_COUNT } from "@/shared/homepageFaqs";
 
 export { HOMEPAGE_FAQS };
@@ -18,7 +19,7 @@ const COST_ANSWER_LINK = "See how much a handyman costs in Boise and the Treasur
 
 function FaqAnswer({ faq }: { faq: { q: string; a: string } }) {
   if (faq.q !== "How is a Boise handyman visit priced?" || !faq.a.includes(COST_ANSWER_LINK)) {
-    return faq.a;
+    return <WithTextReplyLink text={faq.a} />;
   }
   const [before, after] = faq.a.split(COST_ANSWER_LINK);
   return (
