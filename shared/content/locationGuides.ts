@@ -535,7 +535,8 @@ const PLACES: PlaceGuide[] = [
   {
     slug: 'hidden-springs-handyman-guide',
     name: 'Hidden Springs',
-    citySlug: 'eagle',
+    // Its own community on the Boise side of Ada County, not an Eagle neighborhood.
+    citySlug: 'boise',
     county: 'ada',
     guideType: 'neighborhood',
     title: 'Handyman Services in Hidden Springs',

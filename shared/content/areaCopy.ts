@@ -82,7 +82,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Meridian, Idaho?',
         answer:
-          'Yes, Meridian is a core part of our service area, from Paramount to Meridian Ranch. Small repairs, installs, and maintenance anywhere in town get the same upfront quoting and the same rates we use across the Treasure Valley.',
+          'Yes, Meridian is a core part of our service area, from Paramount to Lochsa Falls. Small repairs, installs, and maintenance anywhere in town get the same upfront quoting and the same rates we use across the Treasure Valley.',
       },
       {
         question: 'Do I need a permit for a fence or shed in Meridian?',
@@ -123,7 +123,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Nampa, Idaho?',
         answer:
-          'Yes. Nampa is one of our core Treasure Valley cities, with Greenhurst and Columbia Village on the map. Every small repair, install, or maintenance job here is quoted and priced exactly as it would be anywhere else we work.',
+          'Yes. Nampa is one of our core Treasure Valley cities, with Greenhurst on the map. Every small repair, install, or maintenance job here is quoted and priced exactly as it would be anywhere else we work.',
       },
       {
         question: 'Does Nampa require a permit to replace or repair a fence?',
@@ -164,7 +164,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Eagle, Idaho?',
         answer:
-          "Yes. Eagle is in our core coverage, Shadow Valley and The Estates included. We do small repairs, installs, and maintenance throughout Eagle, at the same upfront quotes and pricing you'd get elsewhere in the valley. Our Eagle Foothills guide covers hillside homes.",
+          "Yes. Eagle is in our core coverage, Banbury and Floating Feather included. We do small repairs, installs, and maintenance throughout Eagle, at the same upfront quotes and pricing you'd get elsewhere in the valley. Our Eagle Foothills guide covers hillside homes.",
       },
       {
         question: "What are Eagle's rules for a front-yard fence?",
@@ -205,7 +205,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Kuna, Idaho?',
         answer:
-          'Yes. Kuna sits in our core Treasure Valley area, Ten Mile Creek included. Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell, and Indian Creek Plaza is in Caldwell. Repairs, installs, and maintenance in Kuna are quoted the same way, and priced the same, as every other place we work.',
+          'Yes. Kuna sits in our core Treasure Valley area. Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell, and Indian Creek Plaza is in Caldwell. Repairs, installs, and maintenance in Kuna are quoted the same way, and priced the same, as every other place we work.',
       },
       {
         question: 'What does a Kuna fence permit cost?',
@@ -287,7 +287,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Star, Idaho?',
         answer:
-          'Yes, Star is part of our core coverage, including Hillsdale and Paramount. Small repairs, installs, and maintenance across Star are quoted and priced just as in the rest of the Treasure Valley.',
+          'Yes, Star is part of our core coverage, including Star River Ranch. Small repairs, installs, and maintenance across Star are quoted and priced just as in the rest of the Treasure Valley.',
       },
       {
         question: 'When does a Star home project need a permit?',
@@ -328,7 +328,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'Do you serve Middleton, Idaho?',
         answer:
-          'Yes, we cover Middleton as part of our core Treasure Valley area, Purple Sage and Puckett Estates included. Same-week scheduling is typical, and every small repair, install, or maintenance job in town carries the same upfront quotes and pricing as the rest of our area.',
+          'Yes, we cover Middleton as part of our core Treasure Valley area, Middleton Heights included. Same-week scheduling is typical, and every small repair, install, or maintenance job in town carries the same upfront quotes and pricing as the rest of our area.',
       },
       {
         question: 'Does a fence in Middleton need a permit?',

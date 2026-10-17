@@ -855,11 +855,11 @@
           "score": 999
         },
         {
-          "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "url": "/guides/hidden-springs-handyman-guide",
+          "anchor": "Handyman Services in Hidden Springs",
+          "title": "Handyman Services in Hidden Springs",
           "type": "guide",
-          "score": 0.651
+          "score": 0.678
         }
       ]
     },
@@ -969,11 +969,11 @@
           "score": 999
         },
         {
-          "url": "/guides/boise-handyman-guide",
-          "anchor": "Handyman Services in Boise",
-          "title": "Handyman Services in Boise",
+          "url": "/guides/harris-ranch-handyman-guide",
+          "anchor": "Handyman Services in Harris Ranch",
+          "title": "Handyman Services in Harris Ranch",
           "type": "guide",
-          "score": 0.224
+          "score": 0.242
         }
       ]
     },
@@ -1030,7 +1030,7 @@
           "anchor": "Handyman Services in Boise",
           "title": "Handyman Services in Boise",
           "type": "guide",
-          "score": 0.624
+          "score": 0.664
         }
       ]
     },
@@ -1144,7 +1144,7 @@
           "anchor": "Handyman Services in Boise",
           "title": "Handyman Services in Boise",
           "type": "guide",
-          "score": 0.622
+          "score": 0.662
         }
       ]
     },
@@ -1197,11 +1197,11 @@
           "score": 999
         },
         {
-          "url": "/guides/meridian-handyman-guide",
-          "anchor": "Handyman Services in Meridian",
-          "title": "Handyman Services in Meridian",
+          "url": "/guides/hidden-springs-handyman-guide",
+          "anchor": "Handyman Services in Hidden Springs",
+          "title": "Handyman Services in Hidden Springs",
           "type": "guide",
-          "score": 0.599
+          "score": 0.613
         }
       ]
     },
@@ -1482,11 +1482,11 @@
           "score": 999
         },
         {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Handyman Services in Nampa",
-          "title": "Handyman Services in Nampa",
+          "url": "/guides/boise-handyman-guide",
+          "anchor": "Handyman Services in Boise",
+          "title": "Handyman Services in Boise",
           "type": "guide",
-          "score": 0.581
+          "score": 0.588
         }
       ]
     },
@@ -1543,7 +1543,7 @@
           "anchor": "Handyman Services in Hidden Springs",
           "title": "Handyman Services in Hidden Springs",
           "type": "guide",
-          "score": 0.14
+          "score": 0.161
         }
       ]
     },
@@ -6895,6 +6895,13 @@
           "score": 0.46
         },
         {
+          "url": "/guides/meridian-handyman-guide",
+          "anchor": "Handyman Services in Meridian",
+          "title": "Handyman Services in Meridian",
+          "type": "guide",
+          "score": 0.37
+        },
+        {
           "url": "/services/carpentry-trim-repair/meridian",
           "anchor": "Carpentry & Trim Repair in Meridian",
           "title": "Carpentry & Trim Repair in Meridian, Idaho",
@@ -6926,13 +6933,6 @@
           "url": "/areas/eagle",
           "anchor": "Remodeling in Eagle",
           "title": "Remodeling Services in Eagle, Idaho",
-          "type": "city",
-          "score": 0.333
-        },
-        {
-          "url": "/areas/star",
-          "anchor": "Remodeling in Star",
-          "title": "Remodeling Services in Star, Idaho",
           "type": "city",
           "score": 0.333
         }
@@ -7023,6 +7023,13 @@
           "score": 0.373
         },
         {
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Handyman Services in Nampa",
+          "title": "Handyman Services in Nampa",
+          "type": "guide",
+          "score": 0.368
+        },
+        {
           "url": "/services/carpentry-trim-repair/nampa",
           "anchor": "Carpentry & Trim Repair in Nampa",
           "title": "Carpentry & Trim Repair in Nampa, Idaho",
@@ -7049,13 +7056,6 @@
           "title": "Drywall Repair & Patching in Nampa, Idaho",
           "type": "city-service",
           "score": 0.343
-        },
-        {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Handyman Services in Nampa",
-          "title": "Handyman Services in Nampa",
-          "type": "guide",
-          "score": 0.328
         },
         {
           "url": "/areas/boise",
@@ -7279,18 +7279,18 @@
           "score": 999
         },
         {
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Handyman Services in Nampa",
+          "title": "Handyman Services in Nampa",
+          "type": "guide",
+          "score": 0.855
+        },
+        {
           "url": "/guides/eagle-foothills-handyman-guide",
           "anchor": "Handyman Services in the Eagle Foothills",
           "title": "Handyman Services in the Eagle Foothills",
           "type": "guide",
           "score": 0.845
-        },
-        {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Handyman Services in Eagle",
-          "title": "Handyman Services in Eagle",
-          "type": "guide",
-          "score": 0.835
         },
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
@@ -7418,14 +7418,7 @@
           "anchor": "Handyman Services in Eagle",
           "title": "Handyman Services in Eagle",
           "type": "guide",
-          "score": 1.257
-        },
-        {
-          "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
-          "type": "guide",
-          "score": 1.205
+          "score": 1.297
         },
         {
           "url": "/guides/meridian-handyman-guide",
@@ -7447,6 +7440,13 @@
           "title": "How to Budget for Home Maintenance in Idaho",
           "type": "blog",
           "score": 0.258
+        },
+        {
+          "url": "/blog/diy-vs-hiring-a-handyman",
+          "anchor": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "type": "blog",
+          "score": 0.209
         }
       ]
     },
@@ -7478,18 +7478,18 @@
           "score": 999
         },
         {
-          "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "url": "/guides/eagle-foothills-handyman-guide",
+          "anchor": "Handyman Services in the Eagle Foothills",
+          "title": "Handyman Services in the Eagle Foothills",
           "type": "guide",
-          "score": 1.272
+          "score": 1.197
         },
         {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Handyman Services in Nampa",
-          "title": "Handyman Services in Nampa",
+          "url": "/guides/star-handyman-guide",
+          "anchor": "Handyman Services in Star",
+          "title": "Handyman Services in Star",
           "type": "guide",
-          "score": 1.126
+          "score": 1.088
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
@@ -7556,11 +7556,11 @@
           "score": 0.27
         },
         {
-          "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
+          "url": "/guides/hidden-springs-handyman-guide",
+          "anchor": "Handyman Services in Hidden Springs",
+          "title": "Handyman Services in Hidden Springs",
           "type": "guide",
-          "score": 0.147
+          "score": 0.139
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
@@ -7713,9 +7713,9 @@
       "url": "/guides/hidden-springs-handyman-guide",
       "links": [
         {
-          "url": "/areas/eagle",
+          "url": "/areas/boise",
           "anchor": "Handyman services in Hidden Springs",
-          "title": "Remodeling Services in Eagle, Idaho",
+          "title": "Remodeling Services in Boise, Idaho",
           "type": "city",
           "score": 999
         },
@@ -7738,35 +7738,35 @@
           "anchor": "Handyman Services in Eagle",
           "title": "Handyman Services in Eagle",
           "type": "guide",
-          "score": 1.292
+          "score": 1.102
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
           "anchor": "Handyman Services in the Eagle Foothills",
           "title": "Handyman Services in the Eagle Foothills",
           "type": "guide",
-          "score": 1.205
-        },
-        {
-          "url": "/blog/who-supplies-materials-handyman-jobs",
-          "anchor": "Who Supplies Materials on a Handyman Job?",
-          "title": "Who Supplies Materials on a Handyman Job?",
-          "type": "blog",
-          "score": 0.223
-        },
-        {
-          "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
-          "type": "blog",
-          "score": 0.193
+          "score": 1.078
         },
         {
           "url": "/blog/handyman-red-flags",
           "anchor": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
           "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
           "type": "blog",
-          "score": 0.184
+          "score": 0.286
+        },
+        {
+          "url": "/blog/handyman-vs-contractor",
+          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
+          "title": "Handyman vs Contractor: Which Does Your Job Need?",
+          "type": "blog",
+          "score": 0.278
+        },
+        {
+          "url": "/blog/what-to-expect-first-handyman-visit",
+          "anchor": "What to Expect at Your First Handyman Visit",
+          "title": "What to Expect at Your First Handyman Visit",
+          "type": "blog",
+          "score": 0.268
         }
       ]
     },
@@ -7798,25 +7798,18 @@
           "score": 0.927
         },
         {
+          "url": "/guides/hidden-springs-handyman-guide",
+          "anchor": "Handyman Services in Hidden Springs",
+          "title": "Handyman Services in Hidden Springs",
+          "type": "guide",
+          "score": 0.915
+        },
+        {
           "url": "/guides/meridian-handyman-guide",
           "anchor": "Handyman Services in Meridian",
           "title": "Handyman Services in Meridian",
           "type": "guide",
           "score": 0.908
-        },
-        {
-          "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
-          "type": "guide",
-          "score": 0.893
-        },
-        {
-          "url": "/blog/what-to-expect-first-handyman-visit",
-          "anchor": "What to Expect at Your First Handyman Visit",
-          "title": "What to Expect at Your First Handyman Visit",
-          "type": "blog",
-          "score": 0.409
         },
         {
           "url": "/blog/why-handyman-quotes-vary",
@@ -7831,6 +7824,13 @@
           "title": "What a Handyman Costs in Boise (2026)",
           "type": "blog",
           "score": 0.384
+        },
+        {
+          "url": "/blog/what-to-expect-first-handyman-visit",
+          "anchor": "What to Expect at Your First Handyman Visit",
+          "title": "What to Expect at Your First Handyman Visit",
+          "type": "blog",
+          "score": 0.369
         }
       ]
     },
@@ -7883,18 +7883,18 @@
           "score": 1.09
         },
         {
+          "url": "/blog/who-supplies-materials-handyman-jobs",
+          "anchor": "Who Supplies Materials on a Handyman Job?",
+          "title": "Who Supplies Materials on a Handyman Job?",
+          "type": "blog",
+          "score": 0.216
+        },
+        {
           "url": "/blog/how-to-compare-handyman-quotes",
           "anchor": "How to Compare Handyman Quotes",
           "title": "How to Compare Handyman Quotes",
           "type": "blog",
           "score": 0.177
-        },
-        {
-          "url": "/blog/diy-vs-hiring-a-handyman",
-          "anchor": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
-          "type": "blog",
-          "score": 0.176
         }
       ]
     },
@@ -7954,11 +7954,11 @@
           "score": 0.185
         },
         {
-          "url": "/blog/boise-building-permit-guide",
-          "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
-          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "url": "/blog/home-maintenance-budget-idaho",
+          "anchor": "How to Budget for Home Maintenance in Idaho",
+          "title": "How to Budget for Home Maintenance in Idaho",
           "type": "blog",
-          "score": 0.173
+          "score": 0.176
         }
       ]
     },
@@ -8011,16 +8011,16 @@
           "score": 1.17
         },
         {
-          "url": "/guides/star-handyman-guide",
-          "anchor": "Handyman Services in Star",
-          "title": "Handyman Services in Star",
-          "type": "guide",
-          "score": 1.164
-        },
-        {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
           "anchor": "Ada vs Canyon County: Permits for Small Home Projects",
           "title": "Ada vs Canyon County: Permits for Small Home Projects",
+          "type": "blog",
+          "score": 0.181
+        },
+        {
+          "url": "/blog/boise-building-permit-guide",
+          "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
           "type": "blog",
           "score": 0.181
         }
@@ -8054,18 +8054,18 @@
           "score": 999
         },
         {
+          "url": "/guides/eagle-handyman-guide",
+          "anchor": "Handyman Services in Eagle",
+          "title": "Handyman Services in Eagle",
+          "type": "guide",
+          "score": 1.126
+        },
+        {
           "url": "/guides/meridian-handyman-guide",
           "anchor": "Handyman Services in Meridian",
           "title": "Handyman Services in Meridian",
           "type": "guide",
           "score": 1.117
-        },
-        {
-          "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
-          "type": "guide",
-          "score": 1.07
         },
         {
           "url": "/guides/star-handyman-guide",
@@ -8146,11 +8146,11 @@
           "score": 0.084
         },
         {
-          "url": "/services/carpentry-trim-repair/boise",
-          "anchor": "Carpentry & Trim Repair in Boise",
-          "title": "Carpentry & Trim Repair in Boise, Idaho",
+          "url": "/services/painting-touch-ups/boise",
+          "anchor": "Interior & Exterior Painting in Boise",
+          "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": -0.109
+          "score": -0.11
         }
       ]
     },
@@ -8189,6 +8189,13 @@
           "score": 1.164
         },
         {
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Handyman Services in Nampa",
+          "title": "Handyman Services in Nampa",
+          "type": "guide",
+          "score": 1.141
+        },
+        {
           "url": "/guides/caldwell-handyman-guide",
           "anchor": "Handyman Services in Caldwell",
           "title": "Handyman Services in Caldwell",
@@ -8208,13 +8215,6 @@
           "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
           "type": "blog",
           "score": 0.165
-        },
-        {
-          "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
-          "type": "blog",
-          "score": 0.161
         }
       ]
     },
@@ -8253,18 +8253,18 @@
           "score": 0.133
         },
         {
+          "url": "/guides/eagle-handyman-guide",
+          "anchor": "Handyman Services in Eagle",
+          "title": "Handyman Services in Eagle",
+          "type": "guide",
+          "score": 0.121
+        },
+        {
           "url": "/guides/boise-handyman-guide",
           "anchor": "Handyman Services in Boise",
           "title": "Handyman Services in Boise",
           "type": "guide",
           "score": 0.096
-        },
-        {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Handyman Services in Eagle",
-          "title": "Handyman Services in Eagle",
-          "type": "guide",
-          "score": 0.081
         },
         {
           "url": "/services/fence-deck-gutter-repair/star",
@@ -8417,9 +8417,9 @@
       "url": "/services/electrical-repairs",
       "links": [
         {
-          "url": "/services/electrical-repairs/eagle",
-          "anchor": "Minor Electrical Repairs in Eagle",
-          "title": "Minor Electrical Repairs in Eagle, Idaho",
+          "url": "/services/electrical-repairs/nampa",
+          "anchor": "Minor Electrical Repairs in Nampa",
+          "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
           "score": 1.829
         },
@@ -8452,6 +8452,13 @@
           "score": 1.669
         },
         {
+          "url": "/services/electrical-repairs/eagle",
+          "anchor": "Minor Electrical Repairs in Eagle",
+          "title": "Minor Electrical Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.669
+        },
+        {
           "url": "/services/electrical-repairs/meridian",
           "anchor": "Minor Electrical Repairs in Meridian",
           "title": "Minor Electrical Repairs in Meridian, Idaho",
@@ -8462,13 +8469,6 @@
           "url": "/services/electrical-repairs/middleton",
           "anchor": "Minor Electrical Repairs in Middleton",
           "title": "Minor Electrical Repairs in Middleton, Idaho",
-          "type": "city-service",
-          "score": 1.669
-        },
-        {
-          "url": "/services/electrical-repairs/nampa",
-          "anchor": "Minor Electrical Repairs in Nampa",
-          "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
           "score": 1.669
         }
@@ -8680,13 +8680,6 @@
           "score": 1.673
         },
         {
-          "url": "/services/painting-touch-ups/boise",
-          "anchor": "Interior & Exterior Painting in Boise",
-          "title": "Interior & Exterior Painting in Boise, Idaho",
-          "type": "city-service",
-          "score": 1.66
-        },
-        {
           "url": "/services/painting-touch-ups/kuna",
           "anchor": "Interior & Exterior Painting in Kuna",
           "title": "Interior & Exterior Painting in Kuna, Idaho",
@@ -8711,6 +8704,13 @@
           "url": "/services/painting-touch-ups/meridian",
           "anchor": "Interior & Exterior Painting in Meridian",
           "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.633
+        },
+        {
+          "url": "/services/painting-touch-ups/middleton",
+          "anchor": "Interior & Exterior Painting in Middleton",
+          "title": "Interior & Exterior Painting in Middleton, Idaho",
           "type": "city-service",
           "score": 1.633
         },
@@ -8786,11 +8786,11 @@
           "score": -0.256
         },
         {
-          "url": "/blog/what-to-expect-first-handyman-visit",
-          "anchor": "What to Expect at Your First Handyman Visit",
-          "title": "What to Expect at Your First Handyman Visit",
+          "url": "/blog/common-toilet-problems-and-fixes",
+          "anchor": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+          "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
           "type": "blog",
-          "score": -0.263
+          "score": -0.267
         }
       ]
     }
@@ -8800,7 +8800,7 @@
     "/blog/aging-in-place-home-design": 6,
     "/blog/boise-building-permit-guide": 8,
     "/blog/caulking-guide-boise-homes": 9,
-    "/blog/common-toilet-problems-and-fixes": 8,
+    "/blog/common-toilet-problems-and-fixes": 9,
     "/blog/deck-maintenance-boise": 10,
     "/blog/diy-vs-hiring-a-handyman": 9,
     "/blog/drywall-repair-cost-boise": 9,
@@ -8810,8 +8810,8 @@
     "/blog/gutter-cleaning-schedule-boise": 11,
     "/blog/handyman-prices-boise": 8,
     "/blog/handyman-red-flags": 9,
-    "/blog/handyman-vs-contractor": 7,
-    "/blog/home-maintenance-budget-idaho": 10,
+    "/blog/handyman-vs-contractor": 8,
+    "/blog/home-maintenance-budget-idaho": 9,
     "/blog/home-repairs-before-selling-boise": 7,
     "/blog/hourly-rate-vs-flat-rate-handyman": 9,
     "/blog/how-long-do-common-home-repairs-take": 9,
@@ -8856,12 +8856,12 @@
     "/services/mounting-assembly": 18,
     "/services/fence-deck-gutter-repair": 18,
     "/services/home-maintenance": 17,
-    "/areas/boise": 17,
+    "/areas/boise": 18,
     "/areas/meridian": 12,
-    "/areas/eagle": 14,
+    "/areas/eagle": 13,
     "/areas/nampa": 11,
     "/areas/kuna": 15,
-    "/areas/star": 12,
+    "/areas/star": 11,
     "/areas/middleton": 11,
     "/areas/garden-city": 9,
     "/areas/caldwell": 11,
@@ -8880,7 +8880,7 @@
     "/services/painting-touch-ups/nampa": 5,
     "/services/painting-touch-ups/kuna": 7,
     "/services/painting-touch-ups/star": 5,
-    "/services/painting-touch-ups/middleton": 5,
+    "/services/painting-touch-ups/middleton": 6,
     "/services/painting-touch-ups/garden-city": 5,
     "/services/painting-touch-ups/caldwell": 6,
     "/services/plumbing-repairs/boise": 7,
@@ -8901,7 +8901,7 @@
     "/services/electrical-repairs/middleton": 5,
     "/services/electrical-repairs/garden-city": 5,
     "/services/electrical-repairs/caldwell": 5,
-    "/services/carpentry-trim-repair/boise": 7,
+    "/services/carpentry-trim-repair/boise": 6,
     "/services/carpentry-trim-repair/meridian": 5,
     "/services/carpentry-trim-repair/eagle": 5,
     "/services/carpentry-trim-repair/nampa": 5,
