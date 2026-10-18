@@ -1,14 +1,18 @@
 /**
  * Google Ads conversion helpers shared by every lead path on this site.
  *
- * One Google Ads conversion action ("P5 Raw Form Submitted") receives every
- * accepted lead, with a per-lead value so Google Ads can report ROAS by
- * campaign. Values are the per-lead estimates agreed with P5 on 14 Sept 2026
- * (form fallback in Google Ads is $50). Never pass PII here: no names, phones,
- * emails or free text - only a service/project category and an opaque id.
+ * "P5 Raw Form Submitted" receives an accepted lead, with a per-lead value so
+ * Google Ads can report ROAS by campaign. Values are the per-lead estimates
+ * agreed with P5 on 14 Sept 2026 (form fallback in Google Ads is $50). An
+ * intake: or estimator: key also sends "P5 Estimator Completed" once for that
+ * key. A conv_ or contact key sends the form label only. Never pass PII here:
+ * no names, phones, emails or free text - only a service/project category and
+ * an opaque id.
  */
 export const GOOGLE_ADS_ID = "AW-18354188204";
 export const GOOGLE_ADS_LEAD_LABEL = "AW-18354188204/LE2vCPXstO8cEKzf-q9E";
+/** "P5 Estimator Completed" (conversion action 7851740531). */
+export const GOOGLE_ADS_ESTIMATOR_LABEL = "AW-18354188204/cEzmCPOagKAdEKzf-q9E";
 /** "P5 Website Call (60s+)": swaps the visible number for a Google forwarding number. */
 export const GOOGLE_ADS_WEBSITE_CALL_LABEL = "AW-18354188204/YHR0CIaPz_ccEKzf-q9E";
 /** Click on a tel: link, including a Google forwarding number. Separate from the 60-second call action. */
@@ -24,6 +28,12 @@ export interface LeadContext {
   service?: string;
   /** Consultation form project type. */
   projectType?: string;
+  /**
+   * Estimator finishes only. False sends the estimator label and skips the
+   * form label. Omitted still sends both: the shared estimator does not pass
+   * this flag.
+   */
+  acceptedLead?: boolean;
 }
 
 export type GoogleAdsLeadParams = {
@@ -67,32 +77,76 @@ export function googleAdsLeadParams(
 
 const sentLeadKeys = new Set<string>();
 
+function alreadySent(storageKey: string): boolean {
+  if (sentLeadKeys.has(storageKey)) return true;
+  try {
+    return window.sessionStorage.getItem(storageKey) === "sent";
+  } catch {
+    // Storage can be unavailable under strict privacy settings; the in-memory guard still applies.
+    return false;
+  }
+}
+
+function markSent(storageKey: string): void {
+  sentLeadKeys.add(storageKey);
+  try {
+    window.sessionStorage.setItem(storageKey, "sent");
+  } catch {
+    // Ignore; in-memory guard is enough for this page load.
+  }
+}
+
+/** Shared estimator finishes. The component stays on trackGoogleAdsLeadConversion. */
+function isEstimatorFinishKey(dedupeKey?: string): boolean {
+  return !!dedupeKey && (dedupeKey.startsWith("intake:") || dedupeKey.startsWith("estimator:"));
+}
+
+function estimatorParams(ctx: LeadContext, transactionId: string): GoogleAdsLeadParams {
+  return {
+    send_to: GOOGLE_ADS_ESTIMATOR_LABEL,
+    value: googleAdsLeadValue(ctx),
+    currency: "USD",
+    transaction_id: transactionId,
+  };
+}
+
 /**
- * Fires the Google Ads lead conversion once per dedupe key (per page load and,
- * where storage allows, per browser session). Returns true when it was sent.
+ * Fires Google Ads conversions once per key (per page load and, where storage
+ * allows, per browser session). An intake: or estimator: key sends the
+ * estimator label once, with transaction_id equal to that key, and the form
+ * label once for the same key unless acceptedLead is false. A conv_ or contact
+ * key, and any other key, sends the form label only. Returns true when at
+ * least one conversion was sent.
  */
 export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string): boolean {
   if (typeof window === "undefined") return false;
-  const storageKey = dedupeKey ? `google_ads_lead:${dedupeKey}` : undefined;
-  if (storageKey) {
-    if (sentLeadKeys.has(storageKey)) return false;
-    try {
-      if (window.sessionStorage.getItem(storageKey) === "sent") return false;
-    } catch {
-      // Storage can be unavailable under strict privacy settings; the in-memory guard still applies.
-    }
-  }
   const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
   if (typeof gtag !== "function") return false;
-  if (storageKey) {
-    sentLeadKeys.add(storageKey);
-    try {
-      window.sessionStorage.setItem(storageKey, "sent");
-    } catch {
-      // Ignore; in-memory guard is enough for this page load.
+
+  const pending: { storageKey?: string; params: GoogleAdsLeadParams }[] = [];
+  if (isEstimatorFinishKey(dedupeKey) && dedupeKey) {
+    const estimatorKey = `google_ads_estimator:${dedupeKey}`;
+    if (!alreadySent(estimatorKey)) {
+      pending.push({ storageKey: estimatorKey, params: estimatorParams(ctx, dedupeKey) });
+    }
+    if (ctx.acceptedLead !== false) {
+      const leadKey = `google_ads_lead:${dedupeKey}`;
+      if (!alreadySent(leadKey)) {
+        pending.push({ storageKey: leadKey, params: googleAdsLeadParams(ctx, dedupeKey) });
+      }
+    }
+  } else {
+    const leadKey = dedupeKey ? `google_ads_lead:${dedupeKey}` : undefined;
+    if (!leadKey || !alreadySent(leadKey)) {
+      pending.push({ storageKey: leadKey, params: googleAdsLeadParams(ctx, dedupeKey) });
     }
   }
-  gtag("event", "conversion", googleAdsLeadParams(ctx, dedupeKey));
+
+  if (pending.length === 0) return false;
+  for (const item of pending) {
+    if (item.storageKey) markSent(item.storageKey);
+    gtag("event", "conversion", item.params);
+  }
   return true;
 }
 

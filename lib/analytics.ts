@@ -15,17 +15,17 @@ export function trackEvent(name: string, params: GtagParams = {}): void {
 }
 
 /** Google Ads conversion: only call after the API confirms a new durable lead. */
-export function trackAcceptedLeadConversion(context: LeadContext = {}): void {
+export function trackAcceptedLeadConversion(context: LeadContext = {}, transactionId?: string): void {
   if (typeof window === "undefined") return;
   const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
   if (typeof gtag !== "function") return;
-  gtag("event", "conversion", googleAdsConversionPayload(context));
+  gtag("event", "conversion", googleAdsConversionPayload(context, transactionId));
 }
 
 /** Kept pure so the conversion contract can be tested without a browser. */
-export function googleAdsConversionPayload(context: LeadContext = {}): GoogleAdsLeadParams {
+export function googleAdsConversionPayload(context: LeadContext = {}, transactionId?: string): GoogleAdsLeadParams {
   // Per-lead value for ROAS reporting (lib/googleAdsConversion.ts); no PII.
-  return googleAdsLeadParams(context);
+  return googleAdsLeadParams(context, transactionId);
 }
 
 function readCookie(name: string): string | undefined {
