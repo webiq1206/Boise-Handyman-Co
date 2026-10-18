@@ -41,9 +41,8 @@ export function ApprovedHomeHero() {
             <br />
             <em>Your list, handled.</em>
           </h1>
-          <p>
-            {handymanServiceSentence()} {b.intro}
-          </p>
+          <p className="f-hero-summary" data-speakable="summary">{handymanServiceSentence()}</p>
+          <p>{b.intro}</p>
           <div className="f-actions">
             <a className="f-button" href="/estimate">
               {b.action}

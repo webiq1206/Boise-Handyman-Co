@@ -2,7 +2,6 @@ import { InteriorEstimateLink,InteriorHero,InteriorPage } from '@/components/app
 import { BusinessPhoneContact } from '@/components/BusinessPhoneContact';
 import { ConsultationForm } from '@/components/ConsultationForm';
 import { Section } from '@/components/marketing';
-import { EstimatePromptBand } from '@/components/marketing/EstimatePromptBand';
 import { Hairline } from '@/components/marketing/Hairline';
 import { MarketingCard } from '@/components/marketing/MarketingCard';
 import { SectionHeader } from '@/components/marketing/SectionHeader';
@@ -434,16 +433,6 @@ export default function ContactPage() {
 
         <StatementBandSection />
 
-        <EstimatePromptBand
-          title={
-            <>
-              Prefer a number before you{' '}
-              <em className="brc-accent">call</em>?
-            </>
-          }
-          description="Use our online estimator for a preliminary Treasure Valley range - then book your handyman visit when you're ready for a firm, written quote."
-          variant="canvas"
-        />
 
         {/* ─── Service areas ─── */}
         <Section divider>

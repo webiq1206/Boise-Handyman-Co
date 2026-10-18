@@ -1,6 +1,5 @@
 import { InteriorHero,InteriorProjectAside } from '@/components/approved/InteriorLayout';
 import { Section } from '@/components/marketing';
-import { EstimatePromptBand } from '@/components/marketing/EstimatePromptBand';
 import { RelatedPostCards } from '@/components/marketing/RelatedPostCards';
 import Image from '@/components/MarketingImage';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
@@ -184,6 +183,7 @@ export function LandingPageTemplate({
   answerFirst,
   related,
 }: LandingPageTemplateProps) {
+  void showEstimatePrompt;
   const eyebrow = breadcrumbs[breadcrumbs.length - 2]?.name;
   const hasProof =
     !!proof && ((proof.testimonials?.length ?? 0) > 0 || (proof.projects?.length ?? 0) > 0);
@@ -225,8 +225,8 @@ export function LandingPageTemplate({
         <Section surface="bone" spacing="lg">
           <div className="ed-shell max-w-3xl">
             <h2 className="ed-h2 ed-statement">{answerFirst.heading}</h2>
-            {answerFirst.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="ed-lede mt-6">{paragraph}</p>
+            {answerFirst.paragraphs.map((paragraph, i) => (
+              <p key={paragraph} className={i === 0 ? "ed-lede mt-6" : "ed-body mt-5 max-w-[62ch]"}>{paragraph}</p>
             ))}
           </div>
         </Section>
@@ -437,10 +437,10 @@ export function LandingPageTemplate({
                       </div>
                     ))}
                     {section.links && section.links.length > 0 && (
-                      <ul className="mt-6 flex list-none flex-wrap gap-x-8 gap-y-3 p-0">
+                      <ul className="ed-rule-list mt-8">
                         {section.links.map((link) => (
                           <li key={link.href}>
-                            <Link href={link.href} className="ed-link ed-link-accent min-h-11 lg:min-h-0">
+                            <Link href={link.href} className="ed-rule-link">
                               {link.label}
                               <ArrowRight className="h-4 w-4" aria-hidden="true" />
                             </Link>
@@ -512,14 +512,6 @@ export function LandingPageTemplate({
         </Section>
       )}
 
-      {/* ─── Estimator prompt ─── */}
-      {showEstimatePrompt && (
-        <EstimatePromptBand
-          href={manifestPath === '/services/drywall-repair' ? '/estimate' : undefined}
-          title={<>What might your <em className="not-italic" style={accent}>project</em> cost?</>}
-          description="Share your repair list, photos or plans. Our team will review your scope before preparing your estimate."
-        />
-      )}
 
       {/* ─── FAQ: the parent site's split ─── */}
       <Section surface="bone" spacing="xl" edge>
