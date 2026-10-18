@@ -297,6 +297,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
 
   const mutation = useMutation({
     mutationFn: async (data: FormData) => {
+      const leadKey = inquiryId("primary");
       const payload = {
         ...data,
         zip: deriveZip(data.address),
@@ -305,7 +306,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
            and customer confirmation emails were already sent by /api/estimate-lead.
            Sending them again from /api/consultation would be a duplicate. */
         skipEmail: hasPassedGate() ? true : undefined,
-        inquiryId: inquiryId("primary"),
+        inquiryId: leadKey,
         website: data.website,
         estimate: estimate && attached
           ? {
@@ -334,18 +335,19 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
         const err = await res.json().catch(() => ({}));
         throw new Error(err.message || "Something went wrong");
       }
-      return res.json();
+      const body = await res.json();
+      return { ...body, leadKey };
     },
-    onSuccess: (response: { accepted?: boolean }, variables) => {
+    onSuccess: (response: { accepted?: boolean; leadKey: string }, variables) => {
       setSuccess(true);
       sessionStorage.removeItem("brc_estimate");
-      // Conversion event: a submitted consultation request is the PRIMARY lead
-      // (estimate on the site, then submit). GA generate_lead + Meta Lead. The
-      // Meta Lead carries the visitor's email + phone, which the server-side
-      // Conversions API hashes for high match quality (best cost-per-result).
+      // Conversion event: a submitted consultation request is the primary lead
+      // (estimate on the site, then submit). GA generate_lead + Meta Lead.
+      // The Meta Lead is the project type and inquiry category only. It does
+      // not include the visitor's email or phone.
       if (response.accepted) {
         markEstimatorCompleted("consultation");
-        trackAcceptedLeadConversion({ projectType: variables.projectType });
+        trackAcceptedLeadConversion({ projectType: variables.projectType }, response.leadKey);
         trackEvent("generate_lead", {
           form: "consultation",
           project_type: variables.projectType,
