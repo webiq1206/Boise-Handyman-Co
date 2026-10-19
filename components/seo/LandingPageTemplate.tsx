@@ -17,7 +17,8 @@ import { altForImage } from '@/shared/imageAlts';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import type { GalleryProject } from '@/shared/galleryData';
 import type { FAQItem } from '@/shared/seoContent';
-import { ArrowRight,ChevronRight,Star } from 'lucide-react';
+import { SITE_CONFIG } from '@/shared/siteConfig';
+import { ArrowRight,ChevronRight,Phone,Star } from 'lucide-react';
 import Link from 'next/link';
 import { RelatedLinks } from './RelatedLinks';
 
@@ -204,6 +205,17 @@ export function LandingPageTemplate({
             <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>{eyebrow}</p>
           )}
           <h1 className="ed-display ed-statement-display text-inverse-foreground">{h1}</h1>
+          {/* Call sits directly under the heading so it is in the first phone
+              screen; the longer overview and estimate actions follow. */}
+          <a
+            href={SITE_CONFIG.phoneHref}
+            className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm bg-[#2c302f] px-5 text-base font-medium text-[#fbfaf6] transition-colors hover:bg-[#444947] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c302f] focus-visible:ring-offset-2 sm:w-auto"
+            data-testid="button-call-service-hero"
+          >
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Call {SITE_CONFIG.phone}
+          </a>
+          <p className="mt-2 text-sm text-inverse-foreground/80">Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM</p>
           <p className="mt-8 max-w-[60ch] text-base md:text-lg leading-relaxed text-inverse-foreground/95">{overview}</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
             <ConsultCTA variant="brand">

@@ -32,7 +32,8 @@ const GREETING: ChatMessage = {
 };
 
 /** Paths the widget must never appear on. */
-const EXCLUDED_PREFIXES = ["/admin", "/subcontractor"];
+// The ad funnel keeps Call and Text as its only actions.
+const EXCLUDED_PREFIXES = ["/admin", "/subcontractor", "/handyman"];
 
 /**
  * Replies reference internal pages as bare paths ("/consultation",
