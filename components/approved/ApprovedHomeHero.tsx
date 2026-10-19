@@ -1,7 +1,7 @@
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Phone } from 'lucide-react';
 import { preload } from 'react-dom';
 import type { CSSProperties, ReactNode } from 'react';
-import { handymanServiceSentence } from '@/shared/siteConfig';
+import { SITE_CONFIG, handymanServiceSentence } from '@/shared/siteConfig';
 import { brands } from './family-content';
 
 /** Keeps the approved family palette on the server so the hero is not inside a client component. */
@@ -44,6 +44,11 @@ export function ApprovedHomeHero() {
           <p className="f-hero-summary" data-speakable="summary">{handymanServiceSentence()}</p>
           <p>{b.intro}</p>
           <div className="f-actions">
+            {/* Calls are the conversion ads optimize for, so the number leads. */}
+            <a className="f-button" href={SITE_CONFIG.phoneHref} data-testid="button-call-hero">
+              <Phone size={18} aria-hidden="true" />
+              Call {SITE_CONFIG.phone}
+            </a>
             <a className="f-button" href="/estimate">
               {b.action}
               <ArrowUpRight size={18} aria-hidden="true" />
