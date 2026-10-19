@@ -6,7 +6,7 @@ import { ApprovedBrand } from "@/components/approved/ApprovedBrand";
 import { NavEstimateButton } from "@/components/modals/NavEstimateButton";
 import { SaveContactLink } from "@/components/SaveContactLink";
 import { Button } from "@/components/ui/button";
-import { isAdFunnelPath, isAdLandingPath } from "@/lib/adLandingPaths";
+import { isAdFunnelPath } from "@/lib/adLandingPaths";
 import { isEstimatorPath } from "@/lib/p5/estimatorRoutes";
 import { cn } from "@/lib/utils";
 import { CTA_QUOTE } from "@/shared/ctaCopy";
@@ -55,10 +55,9 @@ export function Navigation() {
 
 function MarketingNavigation() {
   const pathname = usePathname();
-  const heroActionsVisible = useP5MobileActions(pathname);
-  // Ad landing pages show the Call bar from the first screen: a visitor from an
-  // ad decides in seconds, before scrolling past the hero.
-  const mobileActionsVisible = heroActionsVisible || isAdLandingPath(pathname);
+  // The sticky bar stays below the hero (scripts/verify-p5-mobile-seo.mjs
+  // asserts it). First-screen Call comes from the header and hero buttons.
+  const mobileActionsVisible = useP5MobileActions(pathname);
   // The estimator is a one-page app with its own brand bar, step progress and exit control.
   // Stacking the marketing header on top of it cost about a third of a phone screen before any
   // content, and gave the customer a hamburger out of the flow they were in (owner 2026-09-23).
