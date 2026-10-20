@@ -56,8 +56,8 @@ export function HeroSection() {
               {/* Display scale from the family layer: up to 92px, tight leading,
                   negative tracking. The hero heading is the one line the whole
                   site is judged on in the first second. */}
-              <h1 className="ed-display text-inverse-foreground mb-8 max-w-[17ch]">
-                Boise home repairs,{" "}
+              <h1 className="ed-display text-inverse-foreground mb-8 max-w-[16ch]">
+                Your Boise handyman,{" "}
                 <em className="not-italic" style={{ color: "var(--ed-accent)" }}>
                   fixed right in one trip
                 </em>

@@ -16,14 +16,22 @@ import {CITY_SEO_DATA} from '../lib/seo.ts';
 const HOME_TITLE='Handyman & Home Repairs in Boise, ID | Boise Handyman Co';
 const HOME_DESCRIPTION='Get help with repairs, installations and home maintenance in Boise and the Treasure Valley. Describe your project or send a repair list for an estimate.';
 const NOINDEX_TODAY=[
- 'mounting-assembly/kuna',
- 'mounting-assembly/star',
- 'mounting-assembly/middleton',
+ 'carpentry-trim-repair/nampa',
+ 'drywall-repair/kuna',
+ 'electrical-repairs/caldwell',
+ 'fence-deck-gutter-repair/eagle',
+ 'home-maintenance/eagle',
  'mounting-assembly/caldwell',
- 'home-maintenance/kuna',
- 'home-maintenance/star',
- 'home-maintenance/middleton',
- 'home-maintenance/caldwell',
+ 'plumbing-repairs/star',
+];
+const INDEXED_TODAY=[
+ 'drywall-repair/boise',
+ 'painting-touch-ups/meridian',
+ 'electrical-repairs/eagle',
+ 'plumbing-repairs/nampa',
+ 'mounting-assembly/nampa',
+ 'home-maintenance/boise',
+ 'fence-deck-gutter-repair/meridian',
 ];
 
 function read(path:string){
@@ -121,7 +129,10 @@ test('published city claims and the Kuna and Caldwell neighborhood order stay',(
 });
 
 test('noindex pages stay noindex and robots and sitemap rules are unchanged',()=>{
- assert.deepEqual([...NOINDEX_CITY_SERVICE],NOINDEX_TODAY);
+ assert.equal(NOINDEX_CITY_SERVICE.size,SERVICES.length*CITIES.length-26);
+ for(const key of INDEXED_TODAY){
+  assert.equal(NOINDEX_CITY_SERVICE.has(key),false,key);
+ }
  for(const key of NOINDEX_TODAY){
   const [serviceSlug,citySlug]=key.split('/');
   assert.equal(isCityServiceNoindex(serviceSlug,citySlug),true,key);
