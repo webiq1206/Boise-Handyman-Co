@@ -72,8 +72,8 @@ export default function StyleGuidePage() {
           <div className="rounded-sm border bg-[#2C302F] p-6">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg"
-              alt="Boise Handyman Co wordmark, bone with terracotta Co."
+              src="/brand/boise-handyman-wordmark-cb633b.svg"
+              alt="Boise Handyman Co wordmark in terracotta"
               className="w-full max-w-xl mx-auto"
             />
           </div>

@@ -553,6 +553,16 @@ for (const rel of [
   write(rel, current.replaceAll("#8FAEC4", accent));
 }
 
+// The live logo is terracotta throughout, not bone with a tiny terracotta "Co.".
+// New color-specific URLs also avoid reusing previously cached logo images.
+const liveWordmark = fs.readFileSync(path.join(root, "public/brand/p5-wordmark-light.svg"), "utf8")
+  .replace(/#[0-9a-f]{6}/gi, accent);
+const liveMark = fs.readFileSync(path.join(root, "public/brand/p5-family-light.svg"), "utf8")
+  .replace(/#[0-9a-f]{6}/gi, accent);
+write("public/brand/boise-handyman-wordmark-cb633b.svg", liveWordmark);
+write("public/brand/boise-handyman-mark-cb633b.svg", liveMark);
+write("public/brand/boise-handyman-wordmark-cb633b-1200w.png", raster(liveWordmark, 1200));
+
 // Keep the published, static brand-kit page in sync with the generated marks.
 const brandKitPath = path.join(root, "public/brand/brand-kit.html");
 const brandKit = fs.readFileSync(brandKitPath, "utf8")

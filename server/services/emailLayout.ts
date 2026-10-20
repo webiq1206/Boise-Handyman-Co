@@ -54,13 +54,13 @@ export function htmlToPlainText(html: string): string {
 }
 
 /**
- * The real brand mark for the dark email header: the reverse (light) wordmark.
+ * The terracotta brand wordmark for the dark email header.
  * Served as PNG because many email clients (Gmail, Outlook) do not render SVG.
  * Uses an absolute URL so it loads from any inbox.
  */
 export function buildLogoImage(width = 210): string {
   return `
-    <img src="${SITE_BASE_URL}/brand/png/wordmark/dark/boise-handyman-co-wordmark-bone-accent-1200w.png"
+    <img src="${SITE_BASE_URL}/brand/boise-handyman-wordmark-cb633b-1200w.png"
       alt="${escapeHtml(SITE_CONFIG.name)}" width="${width}"
       style="display:block;margin:0 auto;width:${width}px;max-width:72%;height:auto;border:0;outline:none;text-decoration:none;" />
   `;
