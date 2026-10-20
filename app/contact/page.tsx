@@ -199,7 +199,7 @@ export default function ContactPage() {
   return (
     <InteriorPage kind="contact"><>
       <JsonLd data={schemas} />
-      <div className="flex flex-col pb-20 md:pb-0">
+      <div className="flex flex-col ">
         {/* Approved editorial hero */}
         <InteriorHero layout="contact" imageSrc={SITE_IMAGES.hero} imageAlt="A worker adjusting an interior door hinge with a screwdriver">
             <HeroBreadcrumbs />
