@@ -42,11 +42,10 @@ const BRAND = {
 const COLOR = {
   ink: "#2C302F",   // charcoal (shared brand ink)
   bone: "#F7F5F3",  // bone (shared brand light)
-  accent: "#8FAEC4", // Steel blue - the one brand-distinct color. It appears
+  accent: "#CB633B", // Terracotta - the one brand-distinct color. It appears
                      // ONLY on the seal's outer ring + dots, the wordmark's
                      // "Co.", the full wordmark's rule, and the icon field.
-                     // WCAG contrast on charcoal 5.74:1 (AA for normal text);
-                     // on bone 2.14:1 (decorative only).
+                      // Decorative only; use derived tones for readable text.
 };
 
 const METADATA =
@@ -537,6 +536,34 @@ console.log("Brand marks (SVG):");
 for (const [rel, contents] of Object.entries(svgs)) {
   write(path.join("public", "brand", rel), contents);
 }
+write(
+  "public/family/handyman-boise-handyman-co-wordmark-bone-accent.svg",
+  svgs[`svg/wordmark/dark/${slug}-wordmark-bone-accent.svg`],
+);
+
+// These Boise-specific logo exports are the current header lockup and icon.
+// Recolor their existing artwork without changing its geometry or endorsement.
+for (const rel of [
+  "public/brand/p5-wordmark-light.svg",
+  "public/brand/p5-wordmark-dark.svg",
+  "public/brand/p5-family-light.svg",
+  "public/brand/p5-family-dark.svg",
+]) {
+  const current = fs.readFileSync(path.join(root, rel), "utf8");
+  write(rel, current.replaceAll("#8FAEC4", accent));
+}
+
+// Keep the published, static brand-kit page in sync with the generated marks.
+const brandKitPath = path.join(root, "public/brand/brand-kit.html");
+const brandKit = fs.readFileSync(brandKitPath, "utf8")
+  .replaceAll("#8FAEC4", accent)
+  .replaceAll("5.74:1", "3.43:1")
+  .replaceAll("2.14:1", "3.58:1")
+  .replaceAll("Passes AA for normal text", "Decorative / large marks")
+  .replaceAll("steel-blue", "terracotta")
+  .replaceAll("Steel blue", "Terracotta")
+  .replaceAll("steel blue", "terracotta");
+write("public/brand/brand-kit.html", brandKit);
 
 /* Raster ladders ---------------------------------------------------- */
 function raster(svg, width) {

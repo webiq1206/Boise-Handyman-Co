@@ -21,7 +21,7 @@ import { useEffect,useState } from "react";
 function Logo() {
   return (
     <Link href="/" className="flex items-center" aria-label={`${SITE_CONFIG.name} - home`}>
-      {/* Bone wordmark with the ochre "Co." for the dark ground. Intrinsic
+      {/* Bone wordmark with the terracotta "Co." for the dark ground. Intrinsic
           size is 1765.71x159.96, so 26px tall renders ~287px wide. */}
       <ApprovedBrand />
     </Link>

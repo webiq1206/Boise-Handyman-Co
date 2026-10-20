@@ -17,7 +17,7 @@ exactly one brand-distinct accent color.
 
 | | |
 |---|---|
-| **Accent color** | `#8FAEC4` - Steel blue |
+| **Accent color** | `#CB633B` - Terracotta |
 | **Seal arc** | `HANDYMAN SERVICES` (top) / `TREASURE VALLEY · IDAHO` (bottom) |
 | **Seal centre** | `BOISE` / *Handyman* / `CO` |
 | **Wordmark** | `BOISE HANDYMAN` *Co.* |
@@ -29,8 +29,9 @@ and minimum sizes, is shared across the family.
 
 | Pairing | Ratio | Verdict |
 |---|---|---|
-| `#8FAEC4` on charcoal `#2C302F` | 5.74:1 | Passes AA for normal text |
-| `#8FAEC4` on bone `#F7F5F3` | 2.14:1 | Decorative only |
+| `#CB633B` on charcoal `#2C302F` | 3.43:1 | Decorative / large marks |
+| `#E48F6D` on charcoal `#2C302F` | 5.38:1 | Passes AA for normal text |
+| `#A9401D` on bone `#F7F5F3` | 5.62:1 | Passes AA for normal text |
 
 The accent appears on the seal's **outer ring and dots**, the wordmark's
 ***Co.***, the full wordmark's **rule**, and the small-size icon's **field**.
@@ -91,5 +92,5 @@ nothing depends on fonts being installed.
 - Wordmark minimum **600px** wide, **2.5in**.
 - Clear space: **8% of seal diameter**; for the wordmark, one cap height of the `B`.
 - Over photography, always use an `any/` disc version.
-- Never recolor outside charcoal, bone, and `#8FAEC4`.
+- Never recolor outside charcoal, bone, and `#CB633B`.
 - No founding-year or "EST" claims appear anywhere in the kit, and none should be added until a real founding year is confirmed.

@@ -98,10 +98,10 @@ export function HeroSection() {
         </div>
       </section>
 
-      {/* Trust bar. A restrained wash of the brand ochre separates it from the
+      {/* Trust bar. A restrained wash of the brand terracotta separates it from the
           hero above and the canvas below - the same accent family the estimator
           band uses (border-accent-legible/40), kept quieter here. Labels sit at
-          12px/0.14em in near-full foreground with an ochre tick each, so the
+          12px/0.14em in near-full foreground with a terracotta tick each, so the
           bar reads as one deliberate branded element rather than six faint
           strings of tracking-blown microtype. */}
       <div className="border-y border-accent-legible/25 bg-gradient-to-b from-accent/[0.14] to-accent/[0.05] py-8 md:py-10">

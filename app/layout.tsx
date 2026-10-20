@@ -72,7 +72,7 @@ export const metadata: Metadata = withBrandPageMetadata(({
   authors: [{ name: SITE_CONFIG.name }],
   creator: SITE_CONFIG.name,
   metadataBase: new URL(SITE_CONFIG.siteUrl),
-  // Favicon set built from the approved small-size brand icon (ochre field, the
+  // Favicon set built from the approved small-size brand icon (terracotta field, the
   // script "C" initial), the mark the brand kit specifies for favicons and app
   // icons, since the seal's arc text stops reading below ~160px.
   icons: {

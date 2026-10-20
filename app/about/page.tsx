@@ -248,7 +248,7 @@ export default function AboutPage() {
         {/* ─── Principles ─── */}
         <Section variant="inverse" divider>
           <div className="container px-4 max-w-5xl">
-            {/* Brand icon (ochre field) - bright badge on the dark band */}
+            {/* Brand icon (terracotta field) - bright badge on the dark band */}
             <img
               src="/brand/svg/icon/boise-handyman-co-icon-accent.svg"
               alt="Boise Handyman Co"

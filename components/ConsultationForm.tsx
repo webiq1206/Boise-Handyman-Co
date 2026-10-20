@@ -376,7 +376,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
 
     return (
       <div className="flex flex-col items-start py-2 space-y-4" data-testid="consultation-success" data-clarity-mask="True">
-        {/* Brand icon (ochre field) confirms the brand on the request-received state */}
+        {/* Brand icon (terracotta field) confirms the brand on the request-received state */}
         <img
           src="/brand/svg/icon/boise-handyman-co-icon-accent.svg"
           alt="Boise Handyman Co"

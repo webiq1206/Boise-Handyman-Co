@@ -48,7 +48,7 @@ export const P5_PARENT_ORGANIZATION = {
 } as const;
 
 // Organization logo for knowledge-panel / rich-result use. The approved seal on
-// a charcoal disc (bone lettering, ochre ring) is square and stays legible on
+// a charcoal disc (bone lettering, terracotta ring) is square and stays legible on
 // any background, unlike the reverse wordmark which vanished on Google's white
 // panels. Served at its native 512px with explicit dimensions.
 const LOGO_URL = `${baseUrl}/brand/png/seal/any/boise-handyman-co-seal-on-charcoal-accent-512px.png`;

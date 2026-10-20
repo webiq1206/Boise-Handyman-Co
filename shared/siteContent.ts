@@ -307,7 +307,7 @@ export const CONSULT_BULLETS = [
 /**
  * Full-bleed cinematic statement band on the homepage - a photographic
  * "breather" that breaks the run of text sections below the estimator.
- * `accentWord` renders as the ochre Libre Baskerville italic accent (keep it to one word).
+ * `accentWord` renders as the terracotta Libre Baskerville italic accent (keep it to one word).
  */
 export const STATEMENT_BAND = {
   eyebrow: "The standard we work to",
