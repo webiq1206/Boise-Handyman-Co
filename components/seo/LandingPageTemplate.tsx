@@ -1,3 +1,5 @@
+import { ConsultationForm } from "@/components/ConsultationForm";
+import { LandingContactActions } from "@/components/marketing/LandingContactActions";
 import { InteriorHero,InteriorProjectAside } from '@/components/approved/InteriorLayout';
 import { Section } from '@/components/marketing';
 import { RelatedPostCards } from '@/components/marketing/RelatedPostCards';
@@ -28,6 +30,7 @@ interface BreadcrumbItem {
 }
 
 interface LandingPageTemplateProps {
+  paidService?: "drywall-repair" | "home-maintenance";
   h1: string;
   speakableSummary: string;
   overview: string;
@@ -144,6 +147,7 @@ function sectionId(heading: string): string {
 }
 
 export function LandingPageTemplate({
+  paidService,
   h1,
   speakableSummary,
   overview,
@@ -189,6 +193,10 @@ export function LandingPageTemplate({
             <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>{eyebrow}</p>
           )}
           <h1 className="ed-display ed-statement-display text-inverse-foreground">{h1}</h1>
+          {paidService ? <>
+            <p className="mt-4 text-base">{paidService === 'drywall-repair' ? 'Have damaged drywall? Call Boise Handyman Co to discuss the repair, or send a description.' : 'Have upkeep projects waiting? Call Boise Handyman Co to discuss the items you want help with.'}</p>
+            <LandingContactActions formId="service-inquiry" formLabel={paidService === 'drywall-repair' ? 'Describe the Damage' : 'Send Your Maintenance List'} />
+          </> : <>
           {/* Call sits directly under the heading so it is in the first phone
               screen; the longer overview and estimate actions follow. */}
           <a
@@ -216,7 +224,13 @@ export function LandingPageTemplate({
               <span className="ed-small text-inverse-foreground/70">Send photos for an upfront written quote</span>
             </p>
           )}
+          </>}
         </InteriorHero>
+      {paidService && <section id="service-inquiry" tabIndex={-1} className="mx-auto w-full max-w-3xl scroll-mt-28 px-6 py-8">
+        <h2 className="text-2xl font-serif">{paidService === 'drywall-repair' ? 'Tell us about the drywall repair' : 'What is on your maintenance list?'}</h2>
+        <p className="my-4">Tell us what needs attention and where the work is located. Photos are optional. Our team will review scope, scheduling and an estimate with you.</p>
+        <ConsultationForm initialProjectType={paidService} />
+      </section>}
       {answerFirst && (
         <Section surface="bone" spacing="lg">
           <div className="ed-shell max-w-3xl">

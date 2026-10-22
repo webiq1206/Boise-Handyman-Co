@@ -102,7 +102,7 @@ const formSchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["address"],
-        message: "Please enter your build site address",
+        message: "Please enter your service address",
       });
       return;
     }
@@ -151,9 +151,10 @@ interface ConsultationFormProps {
   onRevise?: () => void;
   /** Compact trust bullets above the form (used in the modal variant). */
   showTrust?: boolean;
+  initialProjectType?: "drywall-repair" | "home-maintenance";
 }
 
-export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFormProps = {}) {
+export function ConsultationForm({ onRevise, showTrust = false, initialProjectType }: ConsultationFormProps = {}) {
   const [estimate, setEstimate] = useState<StoredEstimate | null>(null);
   const [estimateChecked, setEstimateChecked] = useState(false);
   // The carried-over range is attached by default (no yes/no gate); the user
@@ -179,7 +180,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
       phone: "",
       email: "",
       address: "",
-      projectType: "",
+      projectType: initialProjectType ?? "",
       message: "",
     },
   });
@@ -236,6 +237,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
   useEffect(() => {
     function loadEstimate() {
       setEstimateChecked(true);
+      if (initialProjectType) return; // A prior unrelated estimate must not overwrite this paid service inquiry.
       try {
         const raw = sessionStorage.getItem("brc_estimate");
         if (!raw) {
@@ -257,7 +259,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
     loadEstimate();
     window.addEventListener("brc_estimate_updated", loadEstimate);
     return () => window.removeEventListener("brc_estimate_updated", loadEstimate);
-  }, [form]);
+  }, [form, initialProjectType]);
 
   useEffect(() => {
     if (!success) return;

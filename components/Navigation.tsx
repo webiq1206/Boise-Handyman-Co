@@ -341,6 +341,7 @@ function MarketingNavigation() {
           >
             <Phone className="h-5 w-5" strokeWidth={1.5} /><span className="text-xs font-medium">Call</span>
           </a>
+          {["/services/drywall-repair","/services/home-maintenance"].includes(pathname ?? "") ? <a href={SITE_CONFIG.phoneSmsHref} className="flex min-h-14 w-[76px] shrink-0 items-center justify-center rounded-sm border border-border text-foreground focus-visible:ring-2 focus-visible:ring-ring">Text Us</a> : (
           <button
             type="button"
             onClick={() => window.dispatchEvent(new Event("p5:assistant-open"))}
@@ -350,6 +351,7 @@ function MarketingNavigation() {
           >
             <MessageSquare className="h-5 w-5" strokeWidth={1.5} /><span className="text-xs font-medium">Chat</span>
           </button>
+          )}
           <NavEstimateButton
             variant="brand"
             className="min-h-14 flex-1 text-base"

@@ -1,3 +1,5 @@
+import { LandingMobileActions } from "@/components/marketing/LandingMobileActions";
+import { LandingContactActions } from "@/components/marketing/LandingContactActions";
 import { ConsultationForm } from "@/components/ConsultationForm";
 import { CONTRACTOR_REGISTRATION } from "@/components/ContractorCredential";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -31,7 +33,7 @@ const TILES = [
 
 const TRUST = [
   { icon: FileText, label: "Upfront written quote" },
-  { icon: CalendarCheck, label: "Most jobs done in one visit" },
+  { icon: CalendarCheck, label: "One repair or a list" },
   { icon: ShieldCheck, label: "Bonded & insured" },
 ] as const;
 
@@ -39,12 +41,12 @@ const FAQS = [
   {
     question: "How does pricing work?",
     answer:
-      "Every job is quoted upfront as one written price before any work starts. Small jobs plan from $145 a visit, materials are billed at cost, and bundling several tasks into one visit is the best value.",
+      "Describe one repair or several items together. We review the work, location and materials with you before preparing an estimate.",
   },
   {
     question: "How soon can you come out?",
     answer:
-      "We reply to every new request within one business day, and most jobs are scheduled within the week. Call or text and we will tell you the soonest slot.",
+      "Share your requested dates. We review scope and availability before confirming a schedule.",
   },
   {
     question: "What areas do you serve?",
@@ -81,7 +83,7 @@ function CallTextButtons({ onDark = false }: { onDark?: boolean }) {
   const base =
     "inline-flex min-h-14 w-full items-center justify-center rounded-sm px-5 text-base font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:w-auto sm:min-w-[220px]";
   return (
-    <div className="flex flex-col gap-3 sm:flex-row">
+    <div className="grid grid-cols-2 gap-3">
       <a
         href={SITE_CONFIG.phoneHref}
         className={`${base} ${onDark ? "bg-[#fbfaf6] text-[#2c302f] focus-visible:ring-[#fbfaf6]" : "bg-primary text-primary-foreground focus-visible:ring-ring"}`}
@@ -109,7 +111,7 @@ export default function HandymanLandingPage() {
         .approved-shell .hl-hero p { color: #fbfaf6; }
         .approved-shell .hl-hero h1 { font-size: clamp(32px, 7.6vw, 60px); line-height: 1.05; }
         @media (max-width: 767px) {
-          .approved-shell .hl-hero { min-height: calc(100svh - 140px); }
+          .approved-shell .hl-hero { min-height: 0; }
           .approved-shell .hl-hero h1 { font-size: 32px; }
         }
       `}</style>
@@ -120,7 +122,7 @@ export default function HandymanLandingPage() {
         ]}
       />
 
-      <section className="hl-hero relative flex min-h-[calc(100svh-84px)] items-end overflow-hidden">
+      <section data-p5-hero className="hl-hero relative flex min-h-[32rem] items-end overflow-hidden">
         <Image
           src={HERO_IMAGE}
           alt="A Boise Handyman Co technician adjusting an interior door hinge"
@@ -133,12 +135,12 @@ export default function HandymanLandingPage() {
         <div className="relative z-10 mx-auto w-full max-w-5xl px-5 pb-5 pt-6 sm:px-8 sm:pb-16 sm:pt-16">
           <h1 className="max-w-[16ch] font-serif">Boise handyman for the repairs on your list</h1>
           <p className="mt-4 max-w-[36rem] text-base leading-snug sm:text-lg sm:leading-relaxed">
-            Drywall, doors and trim, caulking, minor plumbing and electrical, and mounting. One upfront written quote.
+            Tell Boise Handyman Co what needs fixing. Call to discuss your repair list, or send the details online.
           </p>
           <div className="mt-5">
-            <CallTextButtons onDark />
+            <LandingContactActions onDark formId="quick-quote" formLabel="Send Your Repair List" />
           </div>
-          <p className="mt-3 text-sm leading-snug">{HOURS}</p>
+          
           <ul className="mt-5 flex flex-wrap gap-2">
             {TRUST.map(({ icon: Icon, label }) => (
               <li
@@ -153,6 +155,12 @@ export default function HandymanLandingPage() {
         </div>
       </section>
 
+        <section tabIndex={-1} id="quick-quote" className="mx-auto w-full max-w-3xl px-6 py-8 scroll-mt-28 space-y-5">
+          <h2 className="font-serif text-3xl text-foreground">Rather write? Send your list</h2>
+          <p>Tell us what needs fixing and where the work is located. Photos are optional; no upload or chat is required.</p>
+          <ConsultationForm />
+        </section>
+
       <section className="mx-auto grid max-w-5xl grid-cols-2 gap-4 px-5 py-10 sm:grid-cols-3 sm:px-8" aria-label="What we fix">
         {TILES.map((tile) => (
           <figure key={tile.label} className="overflow-hidden">
@@ -161,7 +169,7 @@ export default function HandymanLandingPage() {
             </div>
             <figcaption className="pt-2 text-sm leading-snug">
               <span className="block font-medium text-foreground">{tile.label}</span>
-              <span className="text-muted-foreground">Planning from {tile.from}</span>
+              
             </figcaption>
           </figure>
         ))}
@@ -172,21 +180,18 @@ export default function HandymanLandingPage() {
           <h2 className="font-serif text-3xl text-foreground">How it works</h2>
           <ol className="list-decimal space-y-4 pl-5 text-base leading-relaxed">
             <li>
-              <strong>Call or text.</strong> Tell us what needs fixing. Photos help us quote faster.
+              <strong>Call or text.</strong> Tell us what needs fixing. Photos are optional.
             </li>
             <li>
               <strong>Get one written price.</strong> You see the quote before anything is scheduled.
             </li>
             <li>
-              <strong>We do the work.</strong> Most jobs are finished in a single visit.
+              <strong>We do the work.</strong> Scope and scheduling are reviewed with you before work begins.
             </li>
           </ol>
         </section>
 
-        <section id="quick-quote" className="mt-14 scroll-mt-28 space-y-5">
-          <h2 className="font-serif text-3xl text-foreground">Rather write? Send your list</h2>
-          <ConsultationForm />
-        </section>
+
 
         <section className="mt-14 space-y-6">
           <h2 className="font-serif text-3xl text-foreground">Questions</h2>
@@ -200,22 +205,12 @@ export default function HandymanLandingPage() {
 
         <section className="mt-14 space-y-5" data-suppress-sticky-cta="">
           <h2 className="font-serif text-3xl text-foreground">Ready to clear your list?</h2>
-          <p className="leading-relaxed text-muted-foreground">{HOURS}</p>
+          
           <CallTextButtons />
         </section>
       </article>
 
-      <nav
-        aria-label="Call or text"
-        className="fixed inset-x-0 bottom-0 z-[100] grid grid-cols-2 border-t border-border bg-background pb-safe md:hidden"
-      >
-        <a href={SITE_CONFIG.phoneHref} className="flex min-h-14 items-center justify-center border-r border-border font-medium" data-testid="button-call-landing-bar">
-          Call
-        </a>
-        <a href={SITE_CONFIG.phoneSmsHref} className="flex min-h-14 items-center justify-center font-medium" data-testid="button-text-landing-bar">
-          Text
-        </a>
-      </nav>
+      <LandingMobileActions />
     </div>
   );
 }
