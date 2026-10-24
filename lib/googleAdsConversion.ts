@@ -9,8 +9,6 @@
  * only, and only when the finish created a lead that is not suppressed.
  * There is no global gtag('set','user_data'), so the GA4 tag cannot collect it.
  */
-import { SITE_CONFIG } from "@/shared/siteConfig";
-
 export const GOOGLE_ADS_ID = "AW-18354188204";
 export const GOOGLE_ADS_LEAD_LABEL = "AW-18354188204/LE2vCPXstO8cEKzf-q9E";
 /** Estimator submit and intake completion. */
@@ -38,9 +36,9 @@ export interface LeadContext {
   /** Server decision from the submit response. False skips user_data only. */
   allowEnhancedConversions?: boolean;
   /**
-   * Estimator finishes only. False is a finish that did not create a lead, so
-   * only the estimator label is sent and user_data is omitted. Omitted still
-   * sends the form label: the shared estimator does not pass this flag.
+   * Estimator finishes only. True sends the form label as well. False or
+   * omitted sends only the estimator label. The shared estimator does not
+   * pass this flag, and a missing flag is not an accepted lead.
    */
   acceptedLead?: boolean;
 }
@@ -281,10 +279,12 @@ function adsTrackingBlocked(): boolean {
  * Fires the Google Ads conversion for this key. Estimator finish keys
  * ("intake:" or "estimator:") send the estimator label once per key. They also
  * send the form label once per key, with transaction_id equal to the key,
- * unless acceptedLead is false. Every other key sends the form label only.
- * user_data is copied onto each of those Ads events only when the finish
+ * only when acceptedLead is true. A two-argument engine call omits that flag
+ * and sends the estimator label only. Every other key sends the form label
+ * only. user_data is copied onto each of those Ads events only when the finish
  * created a lead and the server allows it. If gtag is not ready, waits up to
- * 10 seconds. Returns true when at least one label was sent.
+ * 10 seconds and writes the sent marker only after gtag runs. Returns true
+ * when at least one label was sent.
  */
 export function trackGoogleAdsLeadConversion(
   ctx: LeadContext = {},
@@ -303,7 +303,7 @@ export function trackGoogleAdsLeadConversion(
           params: { send_to: GOOGLE_ADS_ESTIMATOR_LABEL, transaction_id: dedupeKey },
         });
       }
-      if (ctx.acceptedLead !== false) {
+      if (ctx.acceptedLead === true) {
         const leadStorage = `google_ads_lead:${dedupeKey}`;
         if (!alreadySent(leadStorage)) {
           pending.push({ storageKey: leadStorage, params: googleAdsLeadParams(ctx, dedupeKey) });
@@ -320,7 +320,7 @@ export function trackGoogleAdsLeadConversion(
       trackGoogleAdsLeadConversion(ctx, dedupeKey, next);
     });
     if (!gtag) return false;
-    const accepted = !isEstimatorFinishKey(dedupeKey) || ctx.acceptedLead !== false;
+    const accepted = !isEstimatorFinishKey(dedupeKey) || ctx.acceptedLead === true;
     const userData = accepted && userDataAllowed(ctx) ? enhancedConversionUserData(resolveEnhancedContact(ctx, dedupeKey)) : null;
     for (const label of pending) {
       gtag("event", "conversion", scopedAdsConversion(label.params, userData));
@@ -330,11 +330,6 @@ export function trackGoogleAdsLeadConversion(
   } catch {
     return false;
   }
-}
-
-function nationalDigits(value: string): string {
-  const digits = value.replace(/\D/g, "");
-  return digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
 }
 
 /** Same visitor gates as the tag bootstrap: no tag, a webdriver, or the QA disable flag. */
@@ -350,15 +345,21 @@ function adsClickAllowed(): boolean {
   return typeof gtag === "function";
 }
 
+/** Admin and portal screens dial customers, so those taps are not ad clicks. */
+function staffContactPath(): boolean {
+  if (typeof window === "undefined") return true;
+  const path = window.location.pathname;
+  return path === "/admin" || path.startsWith("/admin/") || path === "/portal" || path.startsWith("/portal/");
+}
+
 /**
- * Ads label for a tel: or sms: href to this site's published number.
- * A customer's number on an admin screen is not an ad click.
+ * Ads label for any tel: or sms: tap on a public page.
+ * A Google forwarding number still counts: the visible number is not required to match the published one.
  */
 export function googleAdsContactClickLabel(href: string): string | null {
   const bare = href.trim().split("?")[0].toLowerCase();
   const kind = bare.startsWith("tel:") ? "call" : bare.startsWith("sms:") ? "text" : null;
-  if (!kind) return null;
-  if (nationalDigits(bare) !== nationalDigits(SITE_CONFIG.phoneTel)) return null;
+  if (!kind || staffContactPath()) return null;
   return kind === "call" ? GOOGLE_ADS_CALL_CLICK_LABEL : GOOGLE_ADS_TEXT_CLICK_LABEL;
 }
 

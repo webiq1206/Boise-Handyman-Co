@@ -14,7 +14,7 @@ const TEXT = "AW-18354188204/lTxsCOqahaAdEKzf-q9E";
 
 type ClickFn = (event: { target: unknown }) => void;
 
-function browser(options: { disabled?: boolean; webdriver?: boolean } = {}) {
+function browser(options: { disabled?: boolean; webdriver?: boolean; path?: string } = {}) {
   const calls: unknown[][] = [];
   const storage = new Map<string, string>();
   if (options.disabled) storage.set("p5_analytics_disabled", "1");
@@ -23,7 +23,7 @@ function browser(options: { disabled?: boolean; webdriver?: boolean } = {}) {
   Object.assign(globalThis, {
     window: {
       gtag: (...args: unknown[]) => calls.push(args),
-      location: { pathname: "/contact" },
+      location: { pathname: options.path ?? "/contact" },
       sessionStorage: { getItem: (key: string) => storage.get(key) ?? null, setItem: (key: string, value: string) => storage.set(key, value) },
     },
   });
@@ -96,6 +96,31 @@ test("one click fires one call or text conversion, and the next click fires agai
   }
 });
 
+test("a forwarded number still fires, and admin and portal taps do not", () => {
+  const page = browser();
+  try {
+    click("tel:+12085550199");
+    click("sms:+18015551212?body=Hi");
+    assert.deepEqual(page.calls.filter((call) => call[1] === "conversion"), [
+      ["event", "conversion", { send_to: CALL }],
+      ["event", "conversion", { send_to: TEXT }],
+    ]);
+  } finally {
+    page.restore();
+  }
+  for (const path of ["/admin", "/admin/leads", "/portal", "/portal/jobs"]) {
+    const blocked = browser({ path });
+    try {
+      click("tel:+12085550199");
+      click(SITE_CONFIG.phoneSmsHref);
+      assert.equal(blocked.calls.some((call) => call[1] === "conversion"), false, path);
+      assert.equal(blocked.calls.some((call) => call[1] === "contact_click"), true, path);
+    } finally {
+      blocked.restore();
+    }
+  }
+});
+
 test("analytics off, a webdriver, a missing tag, and other links send no click conversion", () => {
   const disabled = browser({ disabled: true });
   try {
@@ -159,10 +184,24 @@ test("the site listener is the only ads click binding and the shared estimator i
   assert.equal(re10.includes("trackGoogleAdsContactClick"), false);
   const privacy = readFileSync(new URL("../app/privacy-policy/page.tsx", import.meta.url), "utf8");
   assert.equal(privacy.includes("ng9fCPiOhaAdEKzf-q9E"), false);
-  assert.equal(
-    privacy.includes(
-      "When you tap Call or Text on our site, Google Ads is told that the tap happened and on which page, so we can count calls and texts that come from our ads. The tap itself doesn't include your name, phone number or the content of your call or message.",
-    ),
-    true,
-  );
+  const tapDisclosure =
+    "When you tap Call or Text on our site, Google Ads is told that the tap happened, on which page, and the ad click identifier Google's tag saved if you arrived from one of our ads, so we can count calls and texts that come from our ads. The tap itself doesn't send Google your name, your own phone number or what you say or write. Google Analytics also records the tap, including the number tapped, which is our business number.";
+  const at = privacy.indexOf(tapDisclosure);
+  assert.ok(at > 0);
+  assert.ok(privacy.indexOf("[PLACEHOLDER: merged forwarding sentence. Pending Priya rev 4.]", at) > at);
+  assert.equal(privacy.includes("Calls from our site or ads may be routed through a Google forwarding number so we can measure which ads lead to calls; when that happens, Google connects the call and can see the calling number and call length, but not what's said."), false);
+  assert.equal(privacy.includes("If your call goes through a Google forwarding number, Google connects the call and can see the calling number and call length, but not what's said."), false);
+  assert.equal(privacy.includes("The tap itself doesn't include your name, phone number or the content of your call or message."), false);
+  assert.equal(privacy.includes("The tap itself doesn't send Google your name, phone number or what you say or write."), false);
+});
+
+test("the forwarding disclosure matches whether the Google tag is given a phone conversion label", () => {
+  const analytics = readFileSync(new URL("../components/GoogleAnalytics.tsx", import.meta.url), "utf8");
+  const privacy = readFileSync(new URL("../app/privacy-policy/page.tsx", import.meta.url), "utf8");
+  const placeholder = "[PLACEHOLDER: merged forwarding sentence. Pending Priya rev 4.]";
+  const labelConfigured = analytics.includes("phoneConversionLabel:");
+  assert.equal(labelConfigured, true);
+  assert.equal(privacy.includes(placeholder), labelConfigured);
+  assert.equal(privacy.includes("Calls from our site or ads may be routed through a Google forwarding number so we can measure which ads lead to calls; when that happens, Google connects the call and can see the calling number and call length, but not what's said."), false);
+  assert.equal((privacy.match(/Google forwarding number/g) ?? []).length, 0);
 });
