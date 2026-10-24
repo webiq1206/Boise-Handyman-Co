@@ -1,3 +1,5 @@
+import { TEXT_REPLY_LINE } from "./textReply";
+
 export interface HomepageFaq {
   q: string;
   a: string;
@@ -35,7 +37,7 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "How quickly can you get to my job?",
-    a: "We reply to every new request within one business day, and most jobs are scheduled within the week. Because we quote from photos before we come out, the visit itself is spent doing the work rather than looking at it. If your job is urgent, say so when you reach out and we will tell you honestly what the soonest slot is. We are not an emergency service, so for active water leaks, shut off the supply valve first, and for anything dangerous call the appropriate emergency line before calling us.",
+    a: `We reply to every new request within one business day, and most jobs are scheduled within the week. ${TEXT_REPLY_LINE} Because we quote from photos before we come out, the visit itself is spent doing the work rather than looking at it. If your job is urgent, say so when you reach out and we will tell you honestly what the soonest slot is. We are not an emergency service, so for active water leaks, shut off the supply valve first, and for anything dangerous call the appropriate emergency line before calling us.`,
   },
   {
     q: "What areas do you serve?",

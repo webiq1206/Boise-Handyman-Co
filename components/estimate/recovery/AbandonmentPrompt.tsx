@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { MessageSquare, Phone, PhoneCall } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { PreferToTextLine } from "@/components/PreferToTextLine";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { trackEvent } from "@/lib/analytics";
 import { deviceCategory, getEstimatorSessionId, recordRecoveryAction, type EstimatorFlow } from "@/lib/estimatorSession";
@@ -93,8 +94,8 @@ export function AbandonmentPrompt({ open, flow, method, leaving, onStay, onConti
         </DialogTitle>
         <DialogDescription id="abandonment-prompt-desc" className="ed-body mt-2 text-[0.9375rem] text-inverse-muted">
           {state === "sent"
-            ? "Thanks. Someone from the team will call within one business day. You can keep going here or close this window."
-            : `A quick call or text answers most questions in a minute. Or leave a number and we will call you back within one business day.`}
+            ? <>Thanks. Someone from the team will call within one business day. You can keep going here or close this window. <PreferToTextLine /></>
+            : <>A quick call or text answers most questions in a minute. Or leave a number and we will call you back within one business day. <PreferToTextLine /></>}
         </DialogDescription>
 
         {state !== "sent" && (

@@ -3,6 +3,8 @@
  * Other cities keep the shared template in shared/seoContent.ts.
  * Visible FAQ text and FAQPage schema both read this array, in this order.
  */
+import { TEXT_REPLY_LINE } from "../textReply";
+
 export interface AreaFaq {
   question: string;
   answer: string;
@@ -282,7 +284,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "Call or text, see a preliminary planning range in the online estimator, or attach photos and the task list to the contact form. We'll reply within one business day with your upfront quote.",
+          `Call or text, see a preliminary planning range in the online estimator, or attach photos and the task list to the contact form. We'll reply within one business day with your upfront quote. ${TEXT_REPLY_LINE}`,
       },
       {
         question: 'Do you serve Star, Idaho?',

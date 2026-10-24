@@ -30,6 +30,7 @@ import { DisplayNum } from "@/components/marketing";
 import { AddressAutocomplete } from "@/components/AddressAutocomplete";
 import { EstimateCTA } from "@/components/modals/EstimateCTA";
 import { CTA_FORM_SEND } from "@/shared/ctaCopy";
+import { PreferToTextLine, WithTextReplyLink } from "@/components/PreferToTextLine";
 import { CONSULT_BULLETS } from "@/shared/siteContent";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { BusinessPhoneContact } from "@/components/BusinessPhoneContact";
@@ -494,7 +495,7 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
             {CONSULT_BULLETS.map((item) => (
               <li key={item} className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Check className="h-3.5 w-3.5 flex-shrink-0 text-foreground/60" />
-                {item}
+                <WithTextReplyLink text={item} />
               </li>
             ))}
           </ul>
@@ -848,7 +849,7 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
             {!mutation.isPending && <ArrowRight className="h-4 w-4" />}
           </Button>
           <p className="text-xs text-muted-foreground sm:min-w-[14rem] sm:flex-1">
-            No spam. We respond within one business day.
+            No spam. We respond within one business day. <PreferToTextLine />
           </p>
         </div>
       </form>

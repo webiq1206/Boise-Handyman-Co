@@ -1,6 +1,7 @@
 import { InteriorEstimateLink,InteriorHero,InteriorPage } from '@/components/approved/InteriorLayout';
 import { BusinessPhoneContact } from '@/components/BusinessPhoneContact';
 import { ConsultationForm } from '@/components/ConsultationForm';
+import { PreferToTextLine, WithTextReplyLink } from '@/components/PreferToTextLine';
 import { Section } from '@/components/marketing';
 import { Hairline } from '@/components/marketing/Hairline';
 import { MarketingCard } from '@/components/marketing/MarketingCard';
@@ -32,6 +33,7 @@ import { areaPath } from '@/lib/seo-routes';
 import { CITIES,TREASURE_VALLEY_CITIES } from '@/shared/contentData';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import { PUBLIC_NAP_LINE, SITE_CONFIG } from '@/shared/siteConfig';
+import { TEXT_REPLY_LINE } from '@/shared/textReply';
 import { CONSULT_BULLETS,HERO_STATS } from '@/shared/siteContent';
 import { SITE_IMAGES } from '@/shared/siteImages';
 import { ArrowRight,Check,ChevronRight,Mail,MapPin,MessageSquare,Phone } from 'lucide-react';
@@ -41,7 +43,7 @@ const CONTACT_FAQS = [
   {
     question: 'How quickly will you respond to my inquiry?',
     answer:
-      'We respond within one business day. Call or text during business hours for an immediate conversation, or send the form with photos of the job and we will reply with an upfront quote.',
+      `We respond within one business day. ${TEXT_REPLY_LINE} Call or text during business hours for an immediate conversation, or send the form with photos of the job and we will reply with an upfront quote.`,
   },
   {
     question: 'Are quotes really free?',
@@ -254,7 +256,7 @@ export default function ContactPage() {
                   <p className="text-base leading-relaxed mb-8 text-muted-foreground">
                     Send a few details, photos help, and we will reach out within one business day
                     with an upfront quote and a time that works - one clear price and the expected
-                    duration, with no obligation.
+                    duration, with no obligation. <PreferToTextLine />
                   </p>
                 </Reveal>
               </div>
@@ -277,7 +279,7 @@ export default function ContactPage() {
                   <em className="brc-accent">connect</em>
                 </>
               }
-              description="Call, text, or email - we respond within one business day and never use high-pressure sales tactics."
+              description={<>Call, text, or email - we respond within one business day and never use high-pressure sales tactics. <PreferToTextLine /></>}
               className="max-w-3xl"
             />
             <div className="ed-grid-balance grid sm:grid-cols-2 gap-4">
@@ -314,6 +316,7 @@ export default function ContactPage() {
                   label="Email us"
                   href={`mailto:${BUSINESS_INFO.email}`}
                   subtext="Response within one business day"
+                  companion={<PreferToTextLine className="text-sm text-muted-foreground" />}
                 >
                   <span>{BUSINESS_INFO.email}</span>
                 </ContactChannel>
@@ -386,7 +389,7 @@ export default function ContactPage() {
                     <li key={bullet}>
                       <div className="flex items-start gap-3 py-4">
                         <Check className="h-4 w-4 text-accent-legible flex-shrink-0 mt-0.5" />
-                        <span className="text-base text-foreground">{bullet}</span>
+                        <span className="text-base text-foreground"><WithTextReplyLink text={bullet} /></span>
                       </div>
                       {i < CONSULT_BULLETS.length - 1 && (
                         <Hairline spaced={false} className="my-0" />
@@ -422,7 +425,7 @@ export default function ContactPage() {
                       {faq.question}
                     </AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed pb-6 text-muted-foreground">
-                      {faq.answer}
+                      <WithTextReplyLink text={faq.answer} />
                     </AccordionContent>
                   </AccordionItem>
                 ))}

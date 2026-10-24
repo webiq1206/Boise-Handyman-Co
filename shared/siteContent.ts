@@ -7,6 +7,7 @@ import {
   HeartHandshake,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { TEXT_REPLY_LINE } from "./textReply";
 import { publishedFoundingYear } from "@/shared/foundingYear";
 
 export const SITE_TAGLINE = "Treasure Valley handyman service, built on upfront quotes and tidy work";
@@ -136,7 +137,7 @@ export const PROMISE_ITEMS = [
   {
     num: "02",
     title: "Communication without chasing",
-    body: "We reply within one business day, confirm before we head out, and tell you immediately if a job turns out bigger than quoted.",
+    body: `We reply within one business day, confirm before we head out, and tell you immediately if a job turns out bigger than quoted. ${TEXT_REPLY_LINE}`,
   },
   {
     num: "03",
@@ -169,7 +170,7 @@ export const CLIENT_PRIORITIES: ClientPriority[] = [
   },
   {
     title: "Clear communication",
-    body: "Replies within one business day, a confirmation before we arrive, and a heads-up the moment anything changes.",
+    body: `Replies within one business day, a confirmation before we arrive, and a heads-up the moment anything changes. ${TEXT_REPLY_LINE}`,
     icon: MessageSquare,
   },
   {
@@ -198,7 +199,7 @@ export const HOW_WE_BUILD_STEPS = [
   {
     number: "02",
     title: "Get an upfront quote",
-    desc: "We reply within one business day with a clear quote: one written price and the expected time. No surprises, no obligation.",
+    desc: `We reply within one business day with a clear quote: one written price and the expected time. ${TEXT_REPLY_LINE} No surprises, no obligation.`,
   },
   {
     number: "03",
@@ -301,7 +302,7 @@ export const CONSULT_BULLETS = [
   "Nobody here works on commission",
   "No pressure and no obligation to book",
   "An upfront quote that is yours to keep",
-  "We reply within one business day",
+  `We reply within one business day. ${TEXT_REPLY_LINE}`,
 ];
 
 /**
