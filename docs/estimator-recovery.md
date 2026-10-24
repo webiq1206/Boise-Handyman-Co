@@ -15,20 +15,20 @@ Never on tab close or browser shutdown (browsers do not allow a custom prompt th
 A session counts as engaged once the visitor has completed a step (step index >= 1 or a completed step is recorded) or has spent 20 seconds inside the flow. Below that, nothing is emailed and the row expires silently after 7 days.
 
 ## Partial-completion emails
-`server/services/estimatorSessions.ts` keeps one row per session in `estimator_sessions` (created on first use if `npm run db:push` was not run; also in `migrations/0002_estimator_sessions.sql`). A sweep marks a session abandoned after **30 minutes** without a progress report and sends **one** summary to the site's admin recipients (`getAdminRecipientEmails`, currently `SITE_CONFIG.email`). The claim is an atomic conditional UPDATE, so concurrent workers cannot both send; a failed send records the error and is retried on the next pass, up to 5 attempts.
+Staff email for abandoned or partial sessions is disabled. `ABANDONMENT_EMAILS_ENABLED` in `server/services/estimatorSessions.ts` is false, and `sweepAbandonedSessions` does not select, claim, or mail those rows. There is no retry that can still send a `[Partial]` drop-off. Setting the flag true throws instead of sending.
 
-The sweep runs two ways: opportunistically from the progress endpoint (at most every 5 minutes per instance) and from `POST /api/internal/abandonment-sweep` with `Authorization: Bearer $CRON_SECRET` (or `$LEAD_DASHBOARD_KEY`). Schedule the endpoint every 10 minutes so a quiet site still sends summaries.
+`estimator_sessions` still keeps one row per session (created on first use if `npm run db:push` was not run; also in `migrations/0002_estimator_sessions.sql`). The sweep expires unengaged rows after 7 days and deletes rows after 90 days. It runs from the progress endpoint (at most every 5 minutes per instance) and from `POST /api/internal/abandonment-sweep` with `Authorization: Bearer $CRON_SECRET` (or `$LEAD_DASHBOARD_KEY`). Neither path sends partial-completion mail.
 
-A completed submission (`markEstimatorCompleted`) sets the session to `completed`, which the sweep never emails. A completion after the summary was sent sets `recovered`.
+A completed submission (`markEstimatorCompleted`) sets the session to `completed`. Real lead and estimate emails are sent by the form delivery paths, not by this sweep. A completion of a row that was already `notified` by an older deploy sets `recovered` and does not send another email.
 
-Callback requests (`POST /api/recovery/callback`) are stored on the session and emailed immediately, once; the session is then excluded from the abandonment sweep so nobody gets two emails about one visitor.
+Callback requests (`POST /api/recovery/callback`) are stored on the session and emailed immediately, once. A retried callback request does not send a second email. The abandonment sweep does not send callback mail.
 
 ## Data policy
 - Session id: random, per tab (`sessionStorage`), never linked to cookies or accounts.
 - Stored: site, flow, page path (no query string), device category, timestamps, step positions, completion percent, time in flow, allow-listed selections (keys matching `^[a-z][a-z0-9_]*$`, never anything containing name/email/phone/address), validation error codes, exit method (or `unknown`), prompt interactions.
 - Contact details only from an explicit callback request. Typed-but-unsubmitted contact fields are never captured.
 - Retention: rows are deleted after 90 days.
-- Emails state plainly when no contact information exists ("anonymous partial completion") and that a call/text click shows intent, not a conversation.
+- Callback emails state plainly when no contact information exists, and that a call/text click shows intent, not a conversation. Partial drop-off emails are not sent.
 
 ## Integration
 `<EstimatorRecovery flow=... currentStep=... currentStepIndex=... totalSteps=... selections=... submitted=... />` inside any wizard. On success call `markEstimatorCompleted(flow)`. Analytics event: `estimator_recovery_prompt` with `action` in shown / call / text / callback_requested / stay / continue_leaving.

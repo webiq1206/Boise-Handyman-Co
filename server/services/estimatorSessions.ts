@@ -1,46 +1,55 @@
 /**
- * Partial-completion tracking: durable estimator/lead-form sessions and the
- * inactivity sweep that turns an abandoned one into a single summary email.
+ * Estimator and lead-form session tracking.
+ *
+ * Partial-completion staff emails are off. ABANDONMENT_EMAILS_ENABLED is the
+ * kill switch, and the sweep has no send or retry behind it: idle sessions are
+ * not claimed, not mailed, and not queued for a later `[Partial]` drop-off.
+ * The sweep still expires unengaged rows and deletes rows past RETENTION_DAYS.
  *
  * Policy (also in docs/estimator-recovery.md):
  * - ENGAGEMENT: a session counts once the visitor has completed a step or
- *   spent 20 seconds inside the flow. Brief accidental visits never email.
- * - INACTIVITY: 30 minutes without a progress report. Browser events only
- *   speed this up (an explicit exit is reported immediately); the sweep is the
- *   source of truth, so a closed tab still produces the summary.
- * - ONE email per session. The claim is an atomic conditional UPDATE, so two
- *   workers cannot both send. A failed send leaves the row claimable again
- *   (up to MAX_NOTIFY_ATTEMPTS) with the error recorded.
- * - COMPLETION cancels: a session marked completed is never emailed; a
- *   completion that arrives after the email marks the session `recovered`.
- * - CALLBACK requests are their own notification (sent immediately) and the
- *   session is then excluded from the abandonment sweep, so nobody gets two
- *   emails about one visitor.
+ *   spent 20 seconds inside the flow.
+ * - COMPLETION is stored on the session. Completed submissions are not emailed
+ *   from this module; real lead mail uses the form delivery paths.
+ * - CALLBACK requests are emailed immediately from recordCallbackRequest, once.
+ *   A failed callback send releases its own claim so a retried request can
+ *   send. The abandonment sweep never sends that email.
  * - DATA: pseudonymous session id, step positions, allow-listed selections,
  *   validation error codes, device category. Contact details only from an
  *   explicit callback request. Rows are purged after RETENTION_DAYS.
  */
-import { and, eq, isNull, lt, or, sql } from "drizzle-orm";
+import { and, eq, isNull, lt, sql } from "drizzle-orm";
 import { db as appDb } from "@/lib/db";
 import { estimatorSessions, type EstimatorSession } from "@/shared/schema";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { getUncachableEmailClient } from "./emailTransport";
 import { formatFromAddress, getAdminRecipientEmails, htmlToPlainText } from "./emailLayout";
-import { buildAbandonmentEmail, buildCallbackEmail } from "./estimatorSessionEmail";
+import { buildCallbackEmail } from "./estimatorSessionEmail";
 
 export const ENGAGEMENT_MIN_SECONDS = 20;
+/** Former idle window for partial emails. The sweep no longer mails on it. */
 export const INACTIVITY_MS = 30 * 60 * 1000;
+/** Former retry cap. The sweep does not claim rows or retry a send. */
 export const MAX_NOTIFY_ATTEMPTS = 5;
+/** Former claim lock. The sweep does not lock rows for notification. */
 export const NOTIFY_LOCK_MS = 10 * 60 * 1000;
 export const RETENTION_DAYS = 90;
 export const SWEEP_MIN_INTERVAL_MS = 5 * 60 * 1000;
+
+/**
+ * Kill switch for partial / abandonment staff emails.
+ * Typed as boolean so a future edit that sets it true is still checked.
+ * True does not send mail: the send path was removed, and the sweep throws
+ * instead of claiming rows or retrying a drop-off email.
+ */
+export const ABANDONMENT_EMAILS_ENABLED: boolean = false;
 
 export const SESSION_ID_RE = /^[a-f0-9-]{16,64}$/i;
 
 /*
  * Test seam. The verify script (scripts/verify-estimator-recovery.ts) points
- * the service at a throwaway Postgres and a capturing mailer, so the sweep,
- * claim and retry semantics are exercised for real without Neon or Resend.
+ * the service at a throwaway Postgres and a capturing mailer, so retention,
+ * completion, and callback delivery are exercised without Neon or Resend.
  * Production never calls these.
  */
 type Db = NonNullable<typeof appDb>;
@@ -327,7 +336,8 @@ export async function recordCallbackRequest(req: CallbackRequest, now = new Date
     return { stored: true, notified: true };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    // Release the claim so the sweep (or a retry) can send it later.
+    // Release the claim so a retried callback request can send later.
+    // The abandonment sweep does not send callback or partial emails.
     await db.update(estimatorSessions)
       .set({ callbackNotifiedAt: null, notifyLastError: `callback: ${message}`.slice(0, 500), updatedAt: new Date() })
       .where(eq(estimatorSessions.id, req.sessionId));
@@ -364,9 +374,9 @@ let lastSweepAt = 0;
 let sweepInFlight: Promise<SweepResult> | null = null;
 
 /**
- * Opportunistic sweep: called from the progress endpoint so the feature works
- * with no external scheduler, throttled to once per SWEEP_MIN_INTERVAL_MS per
- * server instance. The internal endpoint calls the unthrottled sweep.
+ * Opportunistic retention sweep: called from the progress endpoint, throttled
+ * to once per SWEEP_MIN_INTERVAL_MS per server instance. It does not send
+ * partial-completion email. The internal endpoint calls the unthrottled sweep.
  */
 export function sweepIfDue(now = new Date()): Promise<SweepResult> {
   if (sweepInFlight) return sweepInFlight;
@@ -380,56 +390,18 @@ export function sweepIfDue(now = new Date()): Promise<SweepResult> {
 
 export async function sweepAbandonedSessions(opts: { now?: Date; limit?: number } = {}): Promise<SweepResult> {
   const now = opts.now ?? new Date();
-  const limit = opts.limit ?? 50;
+  // `limit` used to cap the abandonment email batch. Nothing is emailed, so it
+  // is ignored. Callers may still pass it.
+  void opts.limit;
   const result: SweepResult = { considered: 0, sent: 0, failed: 0, purged: 0, skipped: false };
   const db = getDb();
   if (!db) return { ...result, skipped: true };
   await ensureEstimatorSessionsTable();
 
-  const idleBefore = new Date(now.getTime() - INACTIVITY_MS);
-  const lockExpired = new Date(now.getTime() - NOTIFY_LOCK_MS);
-  const candidates = await neonEmptyRowsAsArray(db.select({ id: estimatorSessions.id }).from(estimatorSessions)
-    .where(and(
-      eq(estimatorSessions.status, "active"),
-      eq(estimatorSessions.engaged, true),
-      eq(estimatorSessions.requestedCallback, false),
-      lt(estimatorSessions.lastActivityAt, idleBefore),
-      lt(estimatorSessions.notifyAttemptCount, MAX_NOTIFY_ATTEMPTS),
-      or(isNull(estimatorSessions.notifyLockedAt), lt(estimatorSessions.notifyLockedAt, lockExpired)),
-    ))
-    .limit(limit));
-  result.considered = candidates.length;
-
-  for (const { id } of candidates) {
-    // Atomic claim: re-checks eligibility inside the UPDATE so a concurrent
-    // worker or a completion that just landed cannot race us.
-    const claimed = await neonEmptyRowsAsArray(db.update(estimatorSessions)
-      .set({ notifyLockedAt: now, notifyAttemptCount: sql`${estimatorSessions.notifyAttemptCount} + 1`, updatedAt: now })
-      .where(and(
-        eq(estimatorSessions.id, id),
-        eq(estimatorSessions.status, "active"),
-        eq(estimatorSessions.requestedCallback, false),
-        lt(estimatorSessions.lastActivityAt, idleBefore),
-        or(isNull(estimatorSessions.notifyLockedAt), lt(estimatorSessions.notifyLockedAt, lockExpired)),
-      ))
-      .returning());
-    if (claimed.length === 0) continue;
-    const session = claimed[0];
-    try {
-      await sendToAdmins(buildAbandonmentEmail(session));
-      // Stamp only on a successful send, and only if still not completed.
-      await db.update(estimatorSessions)
-        .set({ status: sql`CASE WHEN ${estimatorSessions.status} = 'active' THEN 'notified' ELSE ${estimatorSessions.status} END`, notifiedAt: now, notifyLockedAt: null, notifyLastError: null, updatedAt: now })
-        .where(eq(estimatorSessions.id, id));
-      result.sent += 1;
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      await db.update(estimatorSessions)
-        .set({ notifyLastError: message.slice(0, 500), notifyLockedAt: null, updatedAt: now })
-        .where(eq(estimatorSessions.id, id));
-      console.error("[estimator-recovery] abandonment email failed", { sessionId: id, message });
-      result.failed += 1;
-    }
+  // Do not select, lock, or increment notify_attempt_count. A claim that is
+  // released on failure is what used to retry the partial email.
+  if (ABANDONMENT_EMAILS_ENABLED) {
+    throw new Error("Partial-completion staff emails are disabled and the send path has been removed.");
   }
 
   // Sessions that were never engaged expire quietly; everything is purged after retention.

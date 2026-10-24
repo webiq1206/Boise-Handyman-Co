@@ -4,10 +4,10 @@ import { sweepAbandonedSessions } from "@/server/services/estimatorSessions";
 export const dynamic = "force-dynamic";
 
 /**
- * Scheduled sweep for abandoned estimator sessions. The progress endpoint
- * already runs a throttled sweep opportunistically; schedule this every 10
- * minutes (Replit Scheduled Deployment or any cron) so summaries still go out
- * on a quiet site with no new visitors to trigger it.
+ * Retention sweep for estimator sessions. Partial-completion staff emails are
+ * disabled: this does not send drop-off mail and does not retry a send.
+ * It expires unengaged rows and purges old ones. The progress endpoint also
+ * runs a throttled sweep.
  *
  * Auth: Bearer CRON_SECRET (or LEAD_DASHBOARD_KEY, which the delivery retry
  * worker already uses). Refuses to run unauthenticated.

@@ -1,6 +1,6 @@
 /**
- * The two staff emails for estimator recovery. Both carry every non-sensitive
- * fact about the session and say plainly when there is no contact information.
+ * Staff email for an explicit callback request. Partial / abandonment
+ * drop-off mail is not built or sent from here.
  */
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import type { EstimatorSession } from "@/shared/schema";
@@ -46,7 +46,7 @@ function selectionsTable(session: EstimatorSession): string {
 
 function contactBlock(session: EstimatorSession): string {
   if (!session.contactPhone && !session.contactEmail && !session.contactName) {
-    return `<p style="margin:0;font-size:13px;color:${EMAIL_BRAND.text};"><strong>No contact information was provided.</strong> This is an anonymous partial completion; it tells you where the flow lost someone, not who.</p>`;
+    return `<p style="margin:0;font-size:13px;color:${EMAIL_BRAND.text};"><strong>No contact information was provided.</strong></p>`;
   }
   const digits = (session.contactPhone ?? "").replace(/\D/g, "");
   const tel = digits.length === 10 ? `tel:+1${digits}` : `tel:${digits}`;
@@ -81,21 +81,6 @@ function sessionFacts(session: EstimatorSession): string {
     ${row("Requested a callback", yesNo(session.requestedCallback))}
     ${row("Dismissed the prompt", yesNo(session.dismissedPrompt))}
   </table>`;
-}
-
-export function buildAbandonmentEmail(session: EstimatorSession): { subject: string; html: string } {
-  const anonymous = !session.contactPhone && !session.contactEmail;
-  const subject = `[Partial] ${anonymous ? "Anonymous" : "Identified"} ${flowLabel(session.flow)} drop-off at ${session.currentStep ?? "unknown step"} (${session.completionPercent}%)`;
-  const content = `
-    <p style="margin:0 0 18px;font-size:14px;line-height:1.6;">A visitor started the <strong>${escapeHtml(flowLabel(session.flow))}</strong> on ${escapeHtml(SITE_CONFIG.name)} and stopped without submitting. This is a partial completion, not a lead. One summary is sent per session.</p>
-    <h2 style="margin:0 0 8px;font-size:15px;">Contact</h2>
-    ${contactBlock(session)}
-    <h2 style="margin:22px 0 8px;font-size:15px;">Session</h2>
-    ${sessionFacts(session)}
-    <h2 style="margin:22px 0 8px;font-size:15px;">Selections so far</h2>
-    ${selectionsTable(session)}
-    <p style="margin:22px 0 0;font-size:12px;color:${EMAIL_BRAND.textMuted};">A click to call or text shows intent only; it does not confirm a conversation happened. Exit method is reported as unknown when the browser gave no signal.</p>`;
-  return { subject, html: wrapEmailHtml({ title: "Partial completion", subtitle: escapeHtml(flowLabel(session.flow)), content }) };
 }
 
 export function buildCallbackEmail(session: EstimatorSession): { subject: string; html: string } {
