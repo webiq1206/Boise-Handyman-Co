@@ -65,12 +65,12 @@ const CONTACT_FAQS = [
   {
     question: 'How do I get a cost estimate for my job?',
     answer:
-      'Use the online estimator for a preliminary planning range, then send photos for a firm upfront quote. Nothing is scheduled until you approve the price.',
+      'Send photos and your task list for a preliminary planning range, then get a firm upfront quote. Nothing is scheduled until you approve.',
   },
 ];
 
 const SPEAKABLE_SUMMARY =
-  `Contact ${SITE_CONFIG.name} for an upfront handyman quote. Send your task list with photos, call or text our team, or use the online estimator to explore a range for your repair, install, or maintenance job.`;
+  `Contact ${SITE_CONFIG.name} for an upfront handyman quote. Send your task list with photos for an upfront quote, or call or text our team to explore a range for your repair, install, or maintenance job.`;
 
 function HeroBreadcrumbs() {
   const items = [
@@ -212,8 +212,8 @@ export default function ContactPage() {
               <em className="brc-accent">Co</em>
             </h1>
             <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-6">
-              Send your task list with photos for an upfront quote, call or text our team, or use
-              the online estimator to explore a range for your repair, install, or maintenance job.
+              Send your task list with photos for an upfront quote, or call or text our team to
+              explore a range for your repair, install, or maintenance job.
             </p>
             <BusinessPhoneContact
               layout="stack"
@@ -229,7 +229,7 @@ export default function ContactPage() {
             >
               Prefer to text? Message us instead
             </a>
-            <div className="interior-contact-actions"><InteriorEstimateLink/><a href="#consult" className="interior-text-link">Request a handyman visit</a></div>
+            <div className="interior-contact-actions"><InteriorEstimateLink label="Request a quote" href="/contact#consult"/><a href="#consult" className="interior-text-link">Request a handyman visit</a></div>
             <dl className="ed-hero-facts">
               {HERO_STATS.map((stat) => (
                 <div key={stat.label}>
