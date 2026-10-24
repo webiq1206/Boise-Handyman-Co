@@ -1,4 +1,5 @@
 import { InteriorHero,InteriorPage } from '@/components/approved/InteriorLayout';
+import { ContractorCredential } from '@/components/ContractorCredential';
 import { DisplayNum,formatStepNumber,Section } from '@/components/marketing';
 import { AreaCard } from '@/components/marketing/AreaCard';
 import { Hairline } from '@/components/marketing/Hairline';
@@ -22,7 +23,8 @@ import { CITY_HERO_IMAGES } from '@/shared/cityServiceImages';
 import { CITIES,TREASURE_VALLEY_CITIES } from '@/shared/contentData';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import { SITE_CONFIG } from '@/shared/siteConfig';
-import { HERO_STATS,PRINCIPLES,TRUST_ITEMS } from '@/shared/siteContent';
+import { visibleTrustItems } from '@/shared/foundingClaims';
+import { HERO_STATS,HOW_P5_WORKS,HOW_P5_WORKS_TITLE,PRINCIPLES,TRUST_ITEMS } from '@/shared/siteContent';
 import { SITE_IMAGES } from '@/shared/siteImages';
 import { ArrowRight,Check,ChevronRight } from 'lucide-react';
 import Link from 'next/link';
@@ -90,9 +92,9 @@ export default function AboutPage() {
   return (
     <InteriorPage kind="about"><>
       <JsonLd data={schemas} />
-      <div className="flex flex-col pb-20 md:pb-0">
+      <div className="flex flex-col ">
         {/* Approved editorial hero */}
-        <InteriorHero layout="editorial" imageSrc={SITE_IMAGES.leadership} imageAlt="A Boise Handyman Co worker reviewing a repair list with a homeowner">
+        <InteriorHero layout="editorial" imageSrc={SITE_IMAGES.leadership} imageAlt="A handyman and a homeowner reviewing a clipboard at a front door">
             <HeroBreadcrumbs />
             <p data-speakable="summary" className="sr-only">
               {SPEAKABLE_SUMMARY}
@@ -175,14 +177,22 @@ export default function AboutPage() {
                 />
                 <p className="text-sm text-muted-foreground leading-relaxed mb-8">
                   We keep our work within the scope Idaho allows for handyman services and refer
-                  licensed trade work to specialists we trust. Business registration and insurance
+                  licensed trade work to specialists we trust. <ContractorCredential />. Insurance
                   details are available on request.
                 </p>
                 <ul className="grid sm:grid-cols-2 gap-3">
-                  {TRUST_ITEMS.map((item) => (
+                  {visibleTrustItems(TRUST_ITEMS).map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <Check className="h-4 w-4 text-accent-legible flex-shrink-0 mt-0.5" />
                       <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <h3 className="ed-h4 mt-8 mb-4">{HOW_P5_WORKS_TITLE}</h3>
+                <ul className="grid sm:grid-cols-2 gap-3">
+                  {HOW_P5_WORKS.map((item) => (
+                    <li key={item} className="text-sm text-muted-foreground">
+                      {item}
                     </li>
                   ))}
                 </ul>
@@ -238,7 +248,7 @@ export default function AboutPage() {
         {/* ─── Principles ─── */}
         <Section variant="inverse" divider>
           <div className="container px-4 max-w-5xl">
-            {/* Brand icon (ochre field) - bright badge on the dark band */}
+            {/* Brand icon (terracotta field) - bright badge on the dark band */}
             <img
               src="/brand/svg/icon/boise-handyman-co-icon-accent.svg"
               alt="Boise Handyman Co"
@@ -291,7 +301,7 @@ export default function AboutPage() {
               description={`We handle repairs, installs, and maintenance for homeowners in ${TREASURE_VALLEY_CITIES}, and surrounding communities. Where you live never inflates the quote.`}
               className="max-w-3xl"
             />
-            <div className="grid sm:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 min-[1180px]:grid-cols-4 gap-4">
               {CITIES.map((city, i) => (
                 <Reveal key={city.slug} delay={Math.min(i, 7) * 50}>
                   <AreaCard city={city} imageSrc={CITY_HERO_IMAGES[city.slug]} />

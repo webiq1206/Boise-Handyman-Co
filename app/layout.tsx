@@ -1,6 +1,7 @@
 import { ApprovedShell } from "@/components/approved/ApprovedShell";
 import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import localFont from 'next/font/local'
 import { Navigation } from '@/components/Navigation'
 import { ConditionalFooter } from '@/components/ConditionalFooter'
@@ -14,7 +15,6 @@ import { GoogleAnalytics } from '@/components/GoogleAnalytics'
 import { MetaPixel } from '@/components/MetaPixel'
 import { MicrosoftClarity } from '@/components/MicrosoftClarity'
 import { clarityFormMaskScript } from '@/lib/clarityFormMask'
-import Script from 'next/script'
 import { ConversionTracking } from '@/components/ConversionTracking'
 import { AssistantWidget } from '@/components/assistant/AssistantWidget'
 import { SiteBusinessSchema } from '@/components/seo/SiteBusinessSchema'
@@ -26,6 +26,7 @@ import './approved-family.css'
 import './approved-system.css'
 import './approved-interiors.css'
 import './audit-accessibility.css'
+import './design-refresh.css'
 
 // P5 family typefaces, self-hosted from the same two OFL variable files P5 Home Co serves.
 const manrope = localFont({
@@ -71,7 +72,7 @@ export const metadata: Metadata = withBrandPageMetadata(({
   authors: [{ name: SITE_CONFIG.name }],
   creator: SITE_CONFIG.name,
   metadataBase: new URL(SITE_CONFIG.siteUrl),
-  // Favicon set built from the approved small-size brand icon (ochre field, the
+  // Favicon set built from the approved small-size brand icon (terracotta field, the
   // script "C" initial), the mark the brand kit specifies for favicons and app
   // icons, since the seal's arc text stops reading below ~160px.
   icons: {

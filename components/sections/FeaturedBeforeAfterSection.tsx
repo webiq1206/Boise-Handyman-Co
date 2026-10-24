@@ -27,16 +27,16 @@ export function FeaturedBeforeAfterSection({
         <SectionHeader
           eyebrow="Project proof"
           title={title}
-          description="Drag the slider to compare the same spot before and after our repair work."
+          description="Drag the slider to compare the two photos."
           className="mb-8 max-w-3xl"
         />
         <Reveal>
-          <MarketingCard className="overflow-hidden p-0">
+          <MarketingCard padding="none" className="overflow-hidden">
             <BeforeAfterSlider
               beforeSrc={project.beforeImageUrl}
               afterSrc={project.afterImageUrl}
-              beforeAlt={`Before: ${project.title}`}
-              afterAlt={`After: ${project.title}`}
+              beforeAlt={project.title}
+              afterAlt={project.title}
               aspectClass="aspect-[16/10] md:aspect-[21/9]"
             />
             <div className="p-6 md:p-8">

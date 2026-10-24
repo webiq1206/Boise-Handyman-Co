@@ -7,7 +7,7 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/handyman/service-drywall-repair.webp':
     'Hands spreading joint compound over a drywall patch with a taping knife',
   '/images/handyman/service-carpentry-trim-branded.webp':
-    'Hands fitting white baseboard trim with a nail gun during a repair',
+    'Hands fitting white baseboard trim with a hammer during a repair',
   '/images/handyman/service-painting-p5-reviewed-20260910.webp':
     'A worker painting white window trim with a brush over a drop cloth',
   '/images/handyman/service-painting.webp':

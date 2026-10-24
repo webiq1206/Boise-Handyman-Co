@@ -7,6 +7,7 @@ import {
   HeartHandshake,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { publishedFoundingYear } from "@/shared/foundingYear";
 
 export const SITE_TAGLINE = "Treasure Valley handyman service, built on upfront quotes and tidy work";
 
@@ -92,22 +93,19 @@ export const DIFFERENTIATORS: Differentiator[] = [
 ];
 
 /**
- * Headline credibility stats. Owner-provided facts about the business - keep
- * these accurate and update in one place.
- *
- * `established` is intentionally blank: the previous "2020" figure belonged to
- * the prior construction business, and publishing it for Boise Handyman Co
- * would fabricate a years-in-business claim. [NEEDS: real founding year]
+ * Headline credibility stats. `established` is the published founding year.
+ * It is empty while SHOW_FOUNDING_YEAR is false. The unproven 2020 phrases
+ * stay in shared/foundingClaims.ts.
  */
 export const PROOF_STATS = {
-  established: "",
-} as const;
+  established: publishedFoundingYear(),
+};
 
 /**
- * Post-hero proof bar. Only claims the business genuinely carries: no bonded
- * or insured claims, review counts, ratings, or job counters until real ones
- * are confirmed for the handyman entity. Keep at six entries so the strip
- * fills the six-column desktop grid in HeroSection.
+ * Post-hero proof bar. Bonded and insured is stated in HOW_P5_WORKS, because
+ * the operating company is P5 Home Co LLC. This strip stays free of review
+ * counts, ratings, and job counters. Keep at six entries so the strip fills
+ * the six-column desktop grid in HeroSection.
  */
 export const TRUST_ITEMS = [
   "Locally Owned",
@@ -117,6 +115,17 @@ export const TRUST_ITEMS = [
   "Tidy Job Sites",
   "Ada & Canyon County",
 ];
+
+export const HOW_P5_WORKS_TITLE = "How P5 works";
+export const HOW_P5_WORKS = [
+  "Own install crew",
+  "Bonded & insured",
+  "Manufacturer warranties passed through on parts we supply",
+  "Arrival time agreed and confirmed before we head out",
+  "Upfront quote before work starts",
+  "Free quotes from photos, no pressure",
+  "Public representative: Nick Perkins",
+] as const;
 
 export const PROMISE_ITEMS = [
   {
@@ -298,7 +307,7 @@ export const CONSULT_BULLETS = [
 /**
  * Full-bleed cinematic statement band on the homepage - a photographic
  * "breather" that breaks the run of text sections below the estimator.
- * `accentWord` renders as the ochre Libre Baskerville italic accent (keep it to one word).
+ * `accentWord` renders as the terracotta Libre Baskerville italic accent (keep it to one word).
  */
 export const STATEMENT_BAND = {
   eyebrow: "The standard we work to",

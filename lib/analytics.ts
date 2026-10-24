@@ -28,12 +28,6 @@ export function googleAdsConversionPayload(context: LeadContext = {}): GoogleAds
   return googleAdsLeadParams(context);
 }
 
-/** Optional first-party identifiers for Conversions API match quality. */
-export interface MetaUserData {
-  email?: string;
-  phone?: string;
-}
-
 function readCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined;
   const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
@@ -48,11 +42,11 @@ function readCookie(name: string): string | undefined {
  * (lazyOnload). Both paths are best-effort no-ops when unavailable:
  * fbq is guarded, and /api/meta-capi silently skips if the CAPI token is unset.
  *
- * Pass a standard event name (e.g. 'Lead'). `userData` (email/phone) is optional
- * but greatly improves server-side match quality; it is hashed on the server and
- * never sent to the Pixel.
+ * Pass a standard event name (e.g. 'Lead'). Custom data is a project category
+ * only. Names, emails, phones, and typed form fields are not sent to the pixel
+ * or the Conversions API.
  */
-export function trackMetaEvent(name: string, params: GtagParams = {}, userData?: MetaUserData): void {
+export function trackMetaEvent(name: string, params: GtagParams = {}): void {
   if (typeof window === 'undefined') return;
 
   const eventId =
@@ -77,7 +71,6 @@ export function trackMetaEvent(name: string, params: GtagParams = {}, userData?:
         eventSourceUrl: window.location.href,
         actionSource: 'website',
         customData: params,
-        userData,
         fbp: readCookie('_fbp'),
         fbc: readCookie('_fbc'),
       }),

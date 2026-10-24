@@ -513,7 +513,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     headline: 'TV Mounting, Shelving, and Furniture Assembly in Boise',
     primaryKeyword: 'tv mounting boise',
     overview:
-      'Boise Handyman Co mounts TVs, shelves, mirrors, and curtain rods level and anchored into the right structure, and assembles flat-pack furniture without the missing-screw meltdown. Fixed pricing per item, quoted upfront, with most visits finished inside two hours.',
+      'Boise Handyman Co helps with TV mounting, shelves, mirrors, curtain rods and furniture assembly. Send the items, product details and installation locations so our team can review the scope before preparing a quote.',
     benefits: [
       'Anchored into studs or rated anchors, never just drywall',
       'Level lines checked twice before any holes are drilled',

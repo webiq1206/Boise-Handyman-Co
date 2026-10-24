@@ -1,5 +1,6 @@
 import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
 import type { Metadata } from "next";
+import { ContractorCredential } from "@/components/ContractorCredential";
 import { EstimateCalculator } from "@/components/EstimateCalculator";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildCanonical } from "@/lib/page-metadata";
@@ -55,8 +56,11 @@ export default function EstimatePage() {
       {/* Static page-shell heading. The estimator is a client component, so its
           own heading is not in the server HTML. headingAs stays h2 so the tool
           does not emit a second h1. Estimator logic is unchanged. */}
-      <h1 className="sr-only">Boise Handyman Co instant estimate</h1>
+      <h1 className="sr-only">Request a Boise Handyman Co repair estimate</h1>
       <EstimateCalculator fitViewport headingAs="h2" />
+      <p className="px-4 py-3 text-center text-xs text-muted-foreground">
+        <ContractorCredential showVerifyLink={false} />
+      </p>
     </>
   );
 }

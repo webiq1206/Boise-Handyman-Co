@@ -29,7 +29,7 @@ const H = 630;
 const BONE = '#F7F5F3';
 const BODY = '#E6E3DE';
 const MIST = '#9F9C97';
-const ACCENT = '#8FAEC4'; // steel blue, 5.74:1 on charcoal
+const ACCENT = '#CB633B'; // Boise Handyman brand pop
 const CHARCOAL = '#201E1D';
 
 // Company name and its own domain, now that the site runs at boisehandyman.co.

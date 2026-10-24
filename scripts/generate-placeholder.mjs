@@ -18,8 +18,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
 
 const CHARCOAL = '#201E1D';
-const OCHRE = '#4E6B7E';
-const OCHRE_LIGHT = '#8FAEC4';
+const ACCENT = '#CB633B';
+const ACCENT_LIGHT = '#E48F6D';
 const LINE = '#3D3A37';
 
 /** Build a placeholder SVG at the given dimensions (pure shapes, no fonts). */
@@ -32,9 +32,9 @@ function placeholderSvg(w, h) {
   return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
   <rect width="${w}" height="${h}" fill="${CHARCOAL}"/>
   <rect x="${inset}" y="${inset}" width="${w - inset * 2}" height="${h - inset * 2}" fill="none" stroke="${LINE}" stroke-width="2"/>
-  <line x1="${cx - ruleW}" y1="${cy}" x2="${cx - d * 2}" y2="${cy}" stroke="${OCHRE}" stroke-width="2"/>
-  <line x1="${cx + d * 2}" y1="${cy}" x2="${cx + ruleW}" y2="${cy}" stroke="${OCHRE}" stroke-width="2"/>
-  <rect x="${cx - d}" y="${cy - d}" width="${d * 2}" height="${d * 2}" fill="${OCHRE_LIGHT}" transform="rotate(45 ${cx} ${cy})"/>
+  <line x1="${cx - ruleW}" y1="${cy}" x2="${cx - d * 2}" y2="${cy}" stroke="${ACCENT}" stroke-width="2"/>
+  <line x1="${cx + d * 2}" y1="${cy}" x2="${cx + ruleW}" y2="${cy}" stroke="${ACCENT}" stroke-width="2"/>
+  <rect x="${cx - d}" y="${cy - d}" width="${d * 2}" height="${d * 2}" fill="${ACCENT_LIGHT}" transform="rotate(45 ${cx} ${cy})"/>
 </svg>`);
 }
 

@@ -2,7 +2,7 @@ import { PUBLIC_NAP_LINE, SITE_CONFIG } from "@/shared/siteConfig";
 
 /**
  * Dark-brand email tokens - the site's actual palette (app/globals.css). Every
- * outbound email renders on the charcoal ground with bone text and steel blue accents
+ * outbound email renders on the charcoal ground with bone text and terracotta accents
  * so it matches boisehandyman.co. Key names are semantic (bg/surface/text/...)
  * so both the shared CSS here and the inline styles in emailNotifications.ts
  * pull the same colors.
@@ -14,8 +14,8 @@ export const EMAIL_BRAND = {
   hairline: "#454B49",   // borders + dividers
   text: "#F7F5F3",       // primary text (bone)
   textMuted: "#9F9C97",  // secondary text (mist)
-  accent: "#8FAEC4",     // steel blue - links, bars, ticks (AA on charcoal)
-  accentDeep: "#4E6B7E", // deep steel blue fill
+  accent: "#E48F6D",      // lighter terracotta for text links on charcoal (AA)
+  accentDeep: "#CB633B",  // exact brand pop for fills and decorative accents
 } as const;
 
 export const SITE_BASE_URL = SITE_CONFIG.siteUrl;
@@ -54,13 +54,13 @@ export function htmlToPlainText(html: string): string {
 }
 
 /**
- * The real brand mark for the dark email header: the reverse (light) wordmark.
+ * The terracotta brand wordmark for the dark email header.
  * Served as PNG because many email clients (Gmail, Outlook) do not render SVG.
  * Uses an absolute URL so it loads from any inbox.
  */
 export function buildLogoImage(width = 210): string {
   return `
-    <img src="${SITE_BASE_URL}/brand/png/wordmark/dark/boise-handyman-co-wordmark-bone-accent-1200w.png"
+    <img src="${SITE_BASE_URL}/brand/boise-handyman-wordmark-cb633b-1200w.png"
       alt="${escapeHtml(SITE_CONFIG.name)}" width="${width}"
       style="display:block;margin:0 auto;width:${width}px;max-width:72%;height:auto;border:0;outline:none;text-decoration:none;" />
   `;

@@ -145,6 +145,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
     <InteriorPage kind="services"><>
       <JsonLd data={schemas} />
       <LandingPageTemplate
+        paidService={service.slug === "drywall-repair" || service.slug === "home-maintenance" ? service.slug : undefined}
         h1={content.headline}
         speakableSummary={content.overview}
         overview={content.overview}

@@ -83,7 +83,7 @@ function serviceDisplayTitle(s: ServiceData): string {
 }
 
 function cityAnchor(c: CityData): string {
-  return `Remodeling in ${c.name}`;
+  return `Handyman in ${c.name}`;
 }
 
 function cityServiceAnchor(s: ServiceData, c: CityData): string {
