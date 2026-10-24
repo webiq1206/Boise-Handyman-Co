@@ -28,7 +28,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "You get one written quote upfront, before work starts, and it's priced by the time the job takes, with a one-hour minimum. A single small repair starts around $145, materials are billed at cost on their own line, and grouping a few tasks per visit is the best value (prices are being finalized; every job gets a written quote first).",
+          "You get one written quote upfront, before work starts, and it's priced by the time the job takes, with a one-hour minimum. A single small repair starts around $145, materials are billed at cost on their own line, and grouping a few tasks per visit is the best value (every job gets a written quote first).",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -258,7 +258,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'When do freezes start and end around Caldwell?',
         answer:
-          "NOAA's 1991-2020 normals for the Deer Flat Dam station at Lake Lowell, southwest of Caldwell, put the median last spring freeze around April 23 and the first fall freeze around October 18. That window is the best time for exterior caulking, deck, and fence repairs, while interior work runs all year.",
+          "NOAA's 1991-2020 normals for the Deer Flat Dam station by Lake Lowell, southwest of Caldwell, put the median last spring freeze around April 23 and the first fall freeze around October 18. That window is the best time for exterior caulking, deck, and fence repairs, while interior work runs all year.",
       },
     ],
   },

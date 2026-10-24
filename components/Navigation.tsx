@@ -6,6 +6,7 @@ import { ApprovedBrand } from "@/components/approved/ApprovedBrand";
 import { NavEstimateButton } from "@/components/modals/NavEstimateButton";
 import { SaveContactLink } from "@/components/SaveContactLink";
 import { Button } from "@/components/ui/button";
+import { isAdFunnelPath } from "@/lib/adLandingPaths";
 import { isEstimatorPath } from "@/lib/p5/estimatorRoutes";
 import { cn } from "@/lib/utils";
 import { CTA_QUOTE } from "@/shared/ctaCopy";
@@ -20,20 +21,42 @@ import { useEffect,useState } from "react";
 function Logo() {
   return (
     <Link href="/" className="flex items-center" aria-label={`${SITE_CONFIG.name} - home`}>
-      {/* Bone wordmark with the ochre "Co." for the dark ground. Intrinsic
+      {/* Bone wordmark with the terracotta "Co." for the dark ground. Intrinsic
           size is 1765.71x159.96, so 26px tall renders ~287px wide. */}
       <ApprovedBrand />
     </Link>
   );
 }
 
+/** Ad funnel header: brand only, so the page's Call and Text stay the only exits. */
+function FunnelHeader() {
+  return (
+    <header data-approved-navigation className="z-[100] w-full border-b border-border bg-background">
+      <nav className="container flex h-[60px] items-center justify-between gap-4 px-4 md:px-6">
+        <ApprovedBrand />
+        <a
+          href={SITE_CONFIG.phoneHref}
+          className="hidden shrink-0 items-center gap-2 whitespace-nowrap text-sm font-medium md:inline-flex"
+          data-testid="link-phone-funnel"
+        >
+          <Phone className="h-4 w-4" aria-hidden="true" />
+          {SITE_CONFIG.phone}
+        </a>
+      </nav>
+    </header>
+  );
+}
+
 export function Navigation() {
   const pathname=usePathname();
+  if (isAdFunnelPath(pathname)) return <FunnelHeader />;
   return isEstimatorPath(pathname)?null:<MarketingNavigation />;
 }
 
 function MarketingNavigation() {
   const pathname = usePathname();
+  // The sticky bar stays below the hero (scripts/verify-p5-mobile-seo.mjs
+  // asserts it). First-screen Call comes from the header and hero buttons.
   const mobileActionsVisible = useP5MobileActions(pathname);
   // The estimator is a one-page app with its own brand bar, step progress and exit control.
   // Stacking the marketing header on top of it cost about a third of a phone screen before any
@@ -152,6 +175,15 @@ function MarketingNavigation() {
           {/* Mobile menu - Radix Dialog gives focus trap, Escape, scroll-lock,
               inert background, and auto aria-expanded/aria-controls on the trigger. */}
           <div className="flex min-[1180px]:hidden items-center gap-2">
+            <a
+              href={SITE_CONFIG.phoneHref}
+              className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-sm border border-border px-3 text-sm font-medium text-foreground transition-colors hover:bg-foreground/5"
+              aria-label={`Call ${SITE_CONFIG.phone}`}
+              data-testid="link-phone-mobile-header"
+            >
+              <Phone className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+              <span>Call</span>
+            </a>
             <Dialog.Root open={mobileOpen} onOpenChange={setMobileOpen}>
               <Dialog.Trigger asChild>
                 {/* The shared icon size is 36px, which suits dense admin
@@ -309,6 +341,17 @@ function MarketingNavigation() {
           >
             <Phone className="h-5 w-5" strokeWidth={1.5} /><span className="text-xs font-medium">Call</span>
           </a>
+          {["/services/drywall-repair","/services/home-maintenance"].includes(pathname ?? "") ? <a href={SITE_CONFIG.phoneSmsHref} className="flex min-h-14 w-[76px] shrink-0 items-center justify-center rounded-sm border border-border text-foreground focus-visible:ring-2 focus-visible:ring-ring">Text Us</a> : (
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event("p5:assistant-open"))}
+            className="flex min-h-14 w-[76px] shrink-0 flex-col gap-1 items-center justify-center rounded-sm border border-border text-foreground hover-elevate active-elevate-2"
+            aria-label="Chat with our estimating assistant"
+            data-testid="button-chat-mobile"
+          >
+            <MessageSquare className="h-5 w-5" strokeWidth={1.5} /><span className="text-xs font-medium">Chat</span>
+          </button>
+          )}
           <NavEstimateButton
             variant="brand"
             className="min-h-14 flex-1 text-base"

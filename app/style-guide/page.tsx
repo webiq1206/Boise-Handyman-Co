@@ -16,7 +16,7 @@ export const metadata: Metadata = withBrandPageMetadata(({
 
 export default function StyleGuidePage() {
   return (
-    <div className="flex flex-col pb-20">
+    <div className="flex flex-col">
       <Section spacing="sm">
         <div className="container px-4 max-w-4xl">
           <PageHeader
@@ -33,8 +33,8 @@ export default function StyleGuidePage() {
           <h2 className="text-section-title font-serif">Brand kit (placeholder)</h2>
           <p className="text-sm text-muted-foreground max-w-prose">
             PLACEHOLDER kit generated programmatically pending real brand assets. Charcoal
-            #2C302F, bone #F7F5F3, and the brand accent steel blue #8FAEC4 (5.74:1 on
-            charcoal, passes AA; 2.14:1 on bone, decorative only). Full kit and usage rules:{" "}
+            #2C302F, bone #F7F5F3, and the brand accent terracotta #CB633B. Lighter and
+            darker variants are used for readable text on charcoal and bone. Full kit and usage rules:{" "}
             <a href="/brand/brand-kit.html" className="underline underline-offset-4">
               /brand/brand-kit.html
             </a>
@@ -45,7 +45,7 @@ export default function StyleGuidePage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/brand/svg/seal/light/boise-handyman-co-seal-charcoal-accent.svg"
-                alt="Boise Handyman Co seal, charcoal with steel accent"
+                alt="Boise Handyman Co seal, charcoal with terracotta accent"
                 className="w-28 h-28"
               />
             </div>
@@ -53,7 +53,7 @@ export default function StyleGuidePage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/brand/svg/seal/dark/boise-handyman-co-seal-bone-accent.svg"
-                alt="Boise Handyman Co seal, bone with steel accent"
+                alt="Boise Handyman Co seal, bone with terracotta accent"
                 className="w-28 h-28"
               />
             </div>
@@ -61,19 +61,19 @@ export default function StyleGuidePage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/brand/svg/icon/boise-handyman-co-icon-accent.svg"
-                alt="Boise Handyman Co icon, steel field"
+                alt="Boise Handyman Co icon, terracotta field"
                 className="w-20 h-20"
               />
             </div>
-            <div className="rounded-sm border h-full min-h-24 bg-[#8FAEC4] flex items-end p-2">
-              <span className="text-xs text-[#2C302F]">Accent #8FAEC4</span>
+            <div className="rounded-sm border h-full min-h-24 bg-[#CB633B] flex items-end p-2">
+              <span className="text-xs text-[#2C302F]">Accent #CB633B</span>
             </div>
           </div>
           <div className="rounded-sm border bg-[#2C302F] p-6">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg"
-              alt="Boise Handyman Co wordmark, bone with steel Co."
+              src="/brand/boise-handyman-wordmark-cb633b.svg"
+              alt="Boise Handyman Co wordmark in terracotta"
               className="w-full max-w-xl mx-auto"
             />
           </div>

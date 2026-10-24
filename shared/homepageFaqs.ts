@@ -56,10 +56,8 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
     a: "Yes. Every visit carries a practical minimum, so a single small task starts around $99. No job is too small, the minimum just means a lone picture-hanging costs more per minute than a morning of tasks. That is why we encourage a list: the second, third, and fourth tasks in the same visit only cost the additional time.",
   },
   {
-    // Deliberately claims nothing: [NEEDS: confirm insurance/bond status and
-    // Idaho registration details before strengthening this answer].
-    q: "Are you licensed and insured?",
-    a: "We keep our work within the scope Idaho allows for handyman services and refer anything that requires a licensed plumbing, electrical, or HVAC contractor to licensed specialists we trust. Business registration and insurance details are available on request, and we are happy to answer any question about coverage before you book.",
+    q: "Are you a registered contractor and insured?",
+    a: "We keep our work within the scope Idaho allows for handyman services and refer anything that requires a licensed plumbing, electrical, or HVAC contractor to licensed specialists we trust. We are an Idaho Registered Contractor #8381215, bonded, and insured.",
   },
   {
     q: "Do you handle big remodels or additions?",

@@ -2,14 +2,20 @@ import { NextResponse } from "next/server";
 import { db, isDbAvailable } from "@/lib/db";
 import { testimonials } from "@/shared/schema";
 import { storage } from "@/server/storage";
-import { TESTIMONIALS } from "@/shared/testimonialsData";
+import { SHOW_TESTIMONIALS, TESTIMONIALS } from "@/shared/testimonialsData";
+
+export const dynamic = "force-dynamic";
+
+const PRIVATE_JSON = { headers: { "Cache-Control": "no-store" } };
 
 export async function GET() {
+  if (!SHOW_TESTIMONIALS) return NextResponse.json([], PRIVATE_JSON);
+
   if (isDbAvailable() && db) {
     try {
       const dbTestimonials = await db.select().from(testimonials).limit(50);
       if (dbTestimonials.length > 0) {
-        return NextResponse.json(dbTestimonials);
+        return NextResponse.json(dbTestimonials, PRIVATE_JSON);
       }
     } catch (error) {
       console.error("Error fetching testimonials from database:", error);
@@ -19,11 +25,11 @@ export async function GET() {
   try {
     const stored = await storage.getAllTestimonials();
     if (stored.length > 0) {
-      return NextResponse.json(stored);
+      return NextResponse.json(stored, PRIVATE_JSON);
     }
   } catch (error) {
     console.error("Error fetching testimonials from storage:", error);
   }
 
-  return NextResponse.json(TESTIMONIALS);
+  return NextResponse.json(TESTIMONIALS, PRIVATE_JSON);
 }

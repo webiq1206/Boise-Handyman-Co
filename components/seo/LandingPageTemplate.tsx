@@ -1,7 +1,8 @@
+import { ConsultationForm } from "@/components/ConsultationForm";
+import { LandingContactActions } from "@/components/marketing/LandingContactActions";
 import { InteriorHero,InteriorProjectAside } from '@/components/approved/InteriorLayout';
 import { WithTextReplyLink } from '@/components/PreferToTextLine';
 import { Section } from '@/components/marketing';
-import { EstimatePromptBand } from '@/components/marketing/EstimatePromptBand';
 import { RelatedPostCards } from '@/components/marketing/RelatedPostCards';
 import Image from '@/components/MarketingImage';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
@@ -19,7 +20,8 @@ import { altForImage } from '@/shared/imageAlts';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import type { GalleryProject } from '@/shared/galleryData';
 import type { FAQItem } from '@/shared/seoContent';
-import { ArrowRight,ChevronRight,Star } from 'lucide-react';
+import { SITE_CONFIG } from '@/shared/siteConfig';
+import { ArrowRight,ChevronRight,Phone,Star } from 'lucide-react';
 import Link from 'next/link';
 import { RelatedLinks } from './RelatedLinks';
 
@@ -29,6 +31,7 @@ interface BreadcrumbItem {
 }
 
 interface LandingPageTemplateProps {
+  paidService?: "drywall-repair" | "home-maintenance";
   h1: string;
   speakableSummary: string;
   overview: string;
@@ -123,22 +126,6 @@ function HeroBreadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   );
 }
 
-/**
- * Splits a benefit string into a bold lead phrase and a muted supporting caption.
- * Priority: split on first comma; fallback: split after first 4 words if string > 6 words.
- */
-function splitBenefit(text: string): { lead: string; body: string } {
-  const commaIdx = text.indexOf(',');
-  if (commaIdx > 0 && commaIdx < text.length - 1) {
-    return { lead: text.slice(0, commaIdx).trim(), body: text.slice(commaIdx + 1).trim() };
-  }
-  const words = text.split(' ');
-  if (words.length > 6) {
-    return { lead: words.slice(0, 4).join(' '), body: words.slice(4).join(' ') };
-  }
-  return { lead: text, body: '' };
-}
-
 const accent = { color: 'var(--ed-accent)' } as const;
 const line = { borderColor: 'var(--ed-line)' } as const;
 
@@ -161,6 +148,7 @@ function sectionId(heading: string): string {
 }
 
 export function LandingPageTemplate({
+  paidService,
   h1,
   speakableSummary,
   overview,
@@ -185,6 +173,7 @@ export function LandingPageTemplate({
   answerFirst,
   related,
 }: LandingPageTemplateProps) {
+  void showEstimatePrompt;
   const eyebrow = breadcrumbs[breadcrumbs.length - 2]?.name;
   const hasProof =
     !!proof && ((proof.testimonials?.length ?? 0) > 0 || (proof.projects?.length ?? 0) > 0);
@@ -196,7 +185,7 @@ export function LandingPageTemplate({
   const showTimelineBelow = !!timeline && !costGuidance;
 
   return (
-    <div className="flex flex-col pb-20 md:pb-0">
+    <div className="flex flex-col ">
       {/* Approved editorial hero */}
       <InteriorHero imageSrc={heroImageUrl} imageAlt={heroAlt} layout="split">
           <HeroBreadcrumbs items={breadcrumbs} />
@@ -205,6 +194,21 @@ export function LandingPageTemplate({
             <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>{eyebrow}</p>
           )}
           <h1 className="ed-display ed-statement-display text-inverse-foreground">{h1}</h1>
+          {paidService ? <>
+            <p className="mt-4 text-base">{paidService === 'drywall-repair' ? 'Have damaged drywall? Call Boise Handyman Co to discuss the repair, or send a description.' : 'Have upkeep projects waiting? Call Boise Handyman Co to discuss the items you want help with.'}</p>
+            <LandingContactActions formId="service-inquiry" formLabel={paidService === 'drywall-repair' ? 'Describe the Damage' : 'Send Your Maintenance List'} />
+          </> : <>
+          {/* Call sits directly under the heading so it is in the first phone
+              screen; the longer overview and estimate actions follow. */}
+          <a
+            href={SITE_CONFIG.phoneHref}
+            className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm bg-[#2c302f] px-5 text-base font-medium text-[#fbfaf6] transition-colors hover:bg-[#444947] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c302f] focus-visible:ring-offset-2 sm:w-auto"
+            data-testid="button-call-service-hero"
+          >
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Call {SITE_CONFIG.phone}
+          </a>
+          <p className="mt-2 text-sm text-inverse-foreground/80">Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM</p>
           <p className="mt-8 max-w-[60ch] text-base md:text-lg leading-relaxed text-inverse-foreground/95">{overview}</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
             <ConsultCTA variant="brand">
@@ -221,13 +225,19 @@ export function LandingPageTemplate({
               <span className="ed-small text-inverse-foreground/70">Send photos for an upfront written quote</span>
             </p>
           )}
+          </>}
         </InteriorHero>
+      {paidService && <section id="service-inquiry" tabIndex={-1} className="mx-auto w-full max-w-3xl scroll-mt-28 px-6 py-8">
+        <h2 className="text-2xl font-serif">{paidService === 'drywall-repair' ? 'Tell us about the drywall repair' : 'What is on your maintenance list?'}</h2>
+        <p className="my-4">Tell us what needs attention and where the work is located. Photos are optional. Our team will review scope, scheduling and an estimate with you.</p>
+        <ConsultationForm initialProjectType={paidService} />
+      </section>}
       {answerFirst && (
         <Section surface="bone" spacing="lg">
           <div className="ed-shell max-w-3xl">
             <h2 className="ed-h2 ed-statement">{answerFirst.heading}</h2>
-            {answerFirst.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="ed-lede mt-6">{paragraph}</p>
+            {answerFirst.paragraphs.map((paragraph, i) => (
+              <p key={paragraph} className={i === 0 ? "ed-lede mt-6" : "ed-body mt-5 max-w-[62ch]"}>{paragraph}</p>
             ))}
           </div>
         </Section>
@@ -287,18 +297,16 @@ export function LandingPageTemplate({
             <Reveal delay={60}>
               <ul
                 className="ed-matrix mt-[clamp(40px,5vw,72px)] list-none p-0"
-                style={{ ['--ed-cols' as string]: benefits.length === 4 ? 4 : Math.min(benefits.length, 3), ['--ed-cell-h' as string]: '200px' }}
+                style={{ ['--ed-cols' as string]: benefits.length === 4 ? 4 : Math.min(benefits.length, 3), ['--ed-cell-h' as string]: '0' }}
               >
-                {benefits.map((item, i) => {
-                  const { lead, body } = splitBenefit(item);
-                  return (
-                    <li key={item} className="flex flex-col">
-                      <span className="ed-small" style={accent}>{String(i + 1).padStart(2, '0')}</span>
-                      <p className="ed-h4 mt-auto pt-8">{lead}</p>
-                      {body && <p className="ed-body mt-2 text-[0.875rem]">{body}</p>}
-                    </li>
-                  );
-                })}
+                {/* Each benefit is one sentence and renders whole. Splitting it at a
+                    comma or after four words cut titles mid-phrase. (BRC-32, BCONC-06, BHC-12) */}
+                {benefits.map((item, i) => (
+                  <li key={item} className="flex flex-col">
+                    <span className="ed-small" style={accent}>{String(i + 1).padStart(2, '0')}</span>
+                    <p className="ed-h4 mt-5 text-pretty">{item}</p>
+                  </li>
+                ))}
               </ul>
             </Reveal>
           </div>
@@ -307,9 +315,8 @@ export function LandingPageTemplate({
 
       {/* ─── Full-bleed image breather ─── */}
       {breatherImage && (
-        <section className="relative h-[clamp(220px,32vw,400px)] overflow-hidden" aria-hidden={breatherAlt ? undefined : true}>
+        <section className="relative h-[clamp(220px,28vw,360px)] overflow-hidden" aria-hidden={breatherAlt ? undefined : true}>
           <Image src={breatherImage} alt={breatherAlt} fill sizes="100vw" className="object-cover img-brand-grade" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-inverse/10 to-background/80" />
           <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: GRAIN_URL, backgroundRepeat: 'repeat', opacity: 0.03 }} />
         </section>
       )}
@@ -427,7 +434,7 @@ export function LandingPageTemplate({
                   <Reveal key={section.heading} delay={Math.min(i, 4) * 60}>
                     <h2 id={sectionId(section.heading)} className="ed-h2-sm ed-statement-wide scroll-mt-28">{section.heading}</h2>
                     {section.paragraphs?.map((p, j) => (
-                      <p key={j} className={j === 0 ? 'ed-lede mt-6 max-w-[52ch]' : 'ed-body mt-4 max-w-[62ch]'}>{p}</p>
+                      <p key={j} className={i === 0 && j === 0 && !costGuidance ? 'ed-lede mt-6 max-w-[52ch]' : j === 0 ? 'ed-body mt-6 max-w-[62ch]' : 'ed-body mt-4 max-w-[62ch]'}>{p}</p>
                     ))}
                     {section.subsections?.map((sub) => (
                       <div key={sub.heading} className="mt-8 border-t pt-6" style={line}>
@@ -438,10 +445,10 @@ export function LandingPageTemplate({
                       </div>
                     ))}
                     {section.links && section.links.length > 0 && (
-                      <ul className="mt-6 flex list-none flex-wrap gap-x-8 gap-y-3 p-0">
+                      <ul className="ed-rule-list mt-8">
                         {section.links.map((link) => (
                           <li key={link.href}>
-                            <Link href={link.href} className="ed-link ed-link-accent min-h-11 lg:min-h-0">
+                            <Link href={link.href} className="ed-rule-link">
                               {link.label}
                               <ArrowRight className="h-4 w-4" aria-hidden="true" />
                             </Link>
@@ -475,12 +482,10 @@ export function LandingPageTemplate({
                     <article className="flex h-full flex-col" style={{ border: '1px solid var(--ed-line)' }}>
                       <div className="grid grid-cols-2">
                         <div className="relative aspect-[4/3]">
-                          <Image src={project.beforeImageUrl} alt={`${project.title} - before`} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
-                          <span className="absolute bottom-2 left-2 bg-inverse/70 px-2 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-inverse-foreground">Before</span>
+                          <Image src={project.beforeImageUrl} alt={project.title} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
                         </div>
                         <div className="relative aspect-[4/3]">
-                          <Image src={project.afterImageUrl} alt={`${project.title} - after`} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
-                          <span className="absolute bottom-2 left-2 bg-accent px-2 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.18em]" style={{ color: "hsl(var(--accent-foreground))" }}>After</span>
+                          <Image src={project.afterImageUrl} alt={project.title} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
                         </div>
                       </div>
                       <div className="p-6">
@@ -515,14 +520,6 @@ export function LandingPageTemplate({
         </Section>
       )}
 
-      {/* ─── Estimator prompt ─── */}
-      {showEstimatePrompt && (
-        <EstimatePromptBand
-          href={manifestPath === '/services/drywall-repair' ? '/estimate' : undefined}
-          title={<>What might your <em className="not-italic" style={accent}>project</em> cost?</>}
-          description="Share your repair list, photos or plans. Our team will review your scope before preparing your estimate."
-        />
-      )}
 
       {/* ─── FAQ: the parent site's split ─── */}
       <Section surface="bone" spacing="xl" edge>

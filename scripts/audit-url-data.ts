@@ -55,7 +55,7 @@ for (const s of SERVICES) {
 }
 
 for (const c of CITIES) {
-  rows.push({ url: `/areas/${c.slug}`, pageType: 'area', title: `Remodeling in ${c.name}`, city: c.slug });
+  rows.push({ url: `/areas/${c.slug}`, pageType: 'area', title: `Handyman in ${c.name}`, city: c.slug });
 }
 
 for (const s of SERVICES) {

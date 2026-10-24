@@ -19,6 +19,16 @@ export interface TestimonialItem {
 export const TESTIMONIALS: TestimonialItem[] = [];
 
 /**
+ * Public testimonial surfaces stay empty until real Boise Handyman Co reviews
+ * are approved. The source list above is kept either way.
+ */
+export const SHOW_TESTIMONIALS = false;
+
+export function publishedTestimonials(): TestimonialItem[] {
+  return SHOW_TESTIMONIALS ? TESTIMONIALS : [];
+}
+
+/**
  * Return testimonials that match a specific service + city, used to embed
  * local proof on city x service landing pages. City-tagged data only exists
  * for a subset of cities today (Boise, Meridian, Eagle, Nampa).
@@ -27,12 +37,12 @@ export function getTestimonialsFor(
   serviceSlug: string,
   citySlug: string,
 ): TestimonialItem[] {
-  return TESTIMONIALS.filter(
+  return publishedTestimonials().filter(
     (t) => t.serviceType === serviceSlug && t.city === citySlug,
   );
 }
 
 /** Return all testimonials for a city (any service). Used on area pages. */
 export function getTestimonialsForCity(citySlug: string): TestimonialItem[] {
-  return TESTIMONIALS.filter((t) => t.city === citySlug);
+  return publishedTestimonials().filter((t) => t.city === citySlug);
 }

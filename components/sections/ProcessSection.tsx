@@ -25,7 +25,7 @@ export function ProcessSection() {
         <div className="ed-panel-media">
           <Image
             src={SITE_IMAGES.processInProgress}
-            alt="Boise Handyman Co repair work in progress at a Treasure Valley home"
+            alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth"
             fill
             loading="lazy"
             sizes="(max-width: 820px) 100vw, 43vw"

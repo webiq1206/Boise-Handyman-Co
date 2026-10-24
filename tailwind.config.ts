@@ -66,8 +66,8 @@ export default {
           foreground: "hsl(var(--accent-foreground) / <alpha-value>)",
           border: "var(--accent-border)",
         },
-        // Ochre for readable links/hover so they stay AA on the dark ground
-        // (the small-accent --accent is the deeper #7E6344, too dark for text).
+        // The derived lighter terracotta keeps links and hover states readable
+        // on the dark ground; the exact brand accent is reserved for decorative use.
         "accent-legible": "hsl(var(--accent-legible) / <alpha-value>)",
         destructive: {
           DEFAULT: "hsl(var(--destructive) / <alpha-value>)",

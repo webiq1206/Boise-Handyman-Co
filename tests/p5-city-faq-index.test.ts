@@ -16,14 +16,22 @@ import {CITY_SEO_DATA} from '../lib/seo.ts';
 const HOME_TITLE='Handyman & Home Repairs in Boise, ID | Boise Handyman Co';
 const HOME_DESCRIPTION='Get help with repairs, installations and home maintenance in Boise and the Treasure Valley. Describe your project or send a repair list for an estimate.';
 const NOINDEX_TODAY=[
- 'mounting-assembly/kuna',
- 'mounting-assembly/star',
- 'mounting-assembly/middleton',
+ 'carpentry-trim-repair/nampa',
+ 'drywall-repair/kuna',
+ 'electrical-repairs/caldwell',
+ 'fence-deck-gutter-repair/eagle',
+ 'home-maintenance/eagle',
  'mounting-assembly/caldwell',
- 'home-maintenance/kuna',
- 'home-maintenance/star',
- 'home-maintenance/middleton',
- 'home-maintenance/caldwell',
+ 'plumbing-repairs/star',
+];
+const INDEXED_TODAY=[
+ 'drywall-repair/boise',
+ 'painting-touch-ups/meridian',
+ 'electrical-repairs/eagle',
+ 'plumbing-repairs/nampa',
+ 'mounting-assembly/nampa',
+ 'home-maintenance/boise',
+ 'fence-deck-gutter-repair/meridian',
 ];
 
 function read(path:string){
@@ -87,7 +95,22 @@ test('published city claims and the Kuna and Caldwell neighborhood order stay',(
  assert.match(getAreaIntro(boise),/Census ACS 2020-2024/);
  const boiseFaqs=areaPageFaqs(boise);
  assert.ok(boiseFaqs.some((faq)=>faq.answer.includes('Certificate of Appropriateness')));
- assert.ok(boiseFaqs.some((faq)=>faq.question==='Which permit office handles a handyman repair in Boise?'));
+ const station='the Deer Flat Dam station by Lake Lowell, southwest of Caldwell';
+ for(const city of CITIES){
+  const text=areaPageFaqs(city).map((faq)=>`${faq.question}\n${faq.answer}`).join('\n');
+  assert.ok(text.includes('reviews permitted handyman repairs'),`${city.slug} permit answer`);
+  assert.equal(text.includes('permitted a handyman repair'),false,`${city.slug} drops the old permit grammar`);
+ }
+ assert.deepEqual(CITY_SEO_DATA.Eagle.neighborhoods,['Banbury','Floating Feather']);
+ assert.equal(CITY_SEO_DATA.Eagle.neighborhoods.includes('The Estates'),false);
+ assert.deepEqual(CITY_SEO_DATA.Nampa.landmarks,['Ford Idaho Center','Nampa Train Depot']);
+ assert.equal(CITY_SEO_DATA.Nampa.landmarks.includes('Lake Lowell'),false);
+ assert.deepEqual(CITY_SEO_DATA.Middleton.landmarks,['the Boise River']);
+ assert.equal(CITY_SEO_DATA.Middleton.landmarks.join(' ').includes('Middleton City Park'),false);
+ assert.ok(areaPageFaqs(caldwell).some((faq)=>faq.answer.includes(station)));
+ assert.ok(CITY_SERVICE_COPY['home-maintenance/caldwell'].faqs.some((faq)=>faq.answer.includes(station)));
+ assert.ok(CITY_SERVICE_COPY['painting-touch-ups/caldwell'].faqs.some((faq)=>faq.answer.includes(station)));
+ assert.equal(CITY_SERVICE_COPY['home-maintenance/caldwell'].faqs.some((faq)=>faq.answer.includes('on Lake Lowell')),false);
  assert.ok(boiseFaqs.some((faq)=>faq.question==='Does Boise Handyman Co serve Hidden Springs and Harris Ranch?'));
  assert.ok(boiseFaqs.some((faq)=>faq.answer.includes('Other areas on our Boise service list include North End, Bench, Downtown, East End, Southwest Boise.')));
  const kunaFaqs=areaPageFaqs(kuna);
@@ -106,7 +129,10 @@ test('published city claims and the Kuna and Caldwell neighborhood order stay',(
 });
 
 test('noindex pages stay noindex and robots and sitemap rules are unchanged',()=>{
- assert.deepEqual([...NOINDEX_CITY_SERVICE],NOINDEX_TODAY);
+ assert.equal(NOINDEX_CITY_SERVICE.size,SERVICES.length*CITIES.length-26);
+ for(const key of INDEXED_TODAY){
+  assert.equal(NOINDEX_CITY_SERVICE.has(key),false,key);
+ }
  for(const key of NOINDEX_TODAY){
   const [serviceSlug,citySlug]=key.split('/');
   assert.equal(isCityServiceNoindex(serviceSlug,citySlug),true,key);

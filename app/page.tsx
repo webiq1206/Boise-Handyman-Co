@@ -7,6 +7,7 @@ import { Section } from "@/components/marketing/Section";
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { BudgetInclusionsSection } from "@/components/sections/BudgetInclusionsSection";
+import { HowP5Works } from "@/components/sections/HowP5Works";
 import { HomePageSchema } from "@/components/seo/HomePageSchema";
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { buildCanonical,fitDescription } from "@/lib/page-metadata";
@@ -14,15 +15,16 @@ import { SITE_CONFIG } from "@/shared/siteConfig";
 import { PreferToTextLine, WithTextReplyLink } from "@/components/PreferToTextLine";
 import { CONSULT_BULLETS,SITE_TAGLINE } from "@/shared/siteContent";
 import { SITE_IMAGES } from "@/shared/siteImages";
-import { Check } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = withBrandPageMetadata(({
+export const metadata: Metadata = {
+  ...withBrandPageMetadata(({
   // 49 chars. Leads with the primary term ("handyman in Boise") rather than
   // the brand, which the suffix carries anyway.
   title: { absolute: `Handyman in Boise, ID | ${SITE_CONFIG.name}` },
   description:
-    fitDescription("Handyman service for Boise, Meridian, Eagle, Nampa & the Treasure Valley. Small repairs, installs & maintenance with one upfront written quote before work starts. Book a visit today."),
+    fitDescription("Handyman services in Boise for small repairs, installations and maintenance. Send your task list and photos to Boise Handyman Co for a scope review."),
   alternates: {
     canonical: buildCanonical("/"),
     // Setting `alternates` replaces the root declaration, so the feed link has
@@ -42,11 +44,14 @@ export const metadata: Metadata = withBrandPageMetadata(({
     siteName: SITE_CONFIG.name,
     images: [{ url: "/images/og-default.png", width: 1200, height: 630, alt: SITE_CONFIG.name }],
   },
-}), "/");
+}), "/"),
+  // Homepage description is intentionally applied after the shared brand defaults.
+  description: "Handyman services in Boise for small repairs, installations and maintenance. Send your task list and photos to Boise Handyman Co for a scope review.",
+};
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col pb-20 md:pb-0 bg-background">
+    <div className="flex flex-col bg-background">
       {/* PAGE ORDER IS THE SALES CONVERSATION, IN THE ORDER A HOMEOWNER HAS IT.
 
           1. Hero            who we are, where, how pricing works (answer block)
@@ -74,6 +79,8 @@ export default function HomePage() {
         <ApprovedHome />
       </ApprovedFamilyFrame>
       <BudgetInclusionsSection />
+      <HowP5Works />
+      <div id="contact" className="scroll-mt-24" aria-hidden="true" />
       <Section id="consult" divider className="relative overflow-hidden scroll-mt-16 pb-28 md:pb-28">
         {/* Warm, dimmed lifestyle photo grounds the closing section. Directional
             scrims keep the left-column copy legible and fade the edges into the
@@ -130,6 +137,16 @@ export default function HomePage() {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-6 grid border-t" style={{ borderColor: "var(--ed-line)" }}>
+                  <a href={SITE_CONFIG.phoneHref} className="flex min-h-12 items-center justify-between gap-4 border-b text-[0.9375rem] font-medium transition-colors hover:[color:var(--ed-accent)]" style={{ borderColor: "var(--ed-line)" }}>
+                    Call {SITE_CONFIG.phone}
+                    <ArrowUpRight className="h-4 w-4 shrink-0" style={{ color: "var(--ed-accent)" }} aria-hidden="true" />
+                  </a>
+                  <a href={SITE_CONFIG.phoneSmsHref} className="flex min-h-12 items-center justify-between gap-4 border-b text-[0.9375rem] font-medium transition-colors hover:[color:var(--ed-accent)]" style={{ borderColor: "var(--ed-line)" }}>
+                    Send a text
+                    <ArrowUpRight className="h-4 w-4 shrink-0" style={{ color: "var(--ed-accent)" }} aria-hidden="true" />
+                  </a>
+                </div>
               </Reveal>
             </div>
             <MarketingCard className="shadow-2xl" padding="lg">
@@ -141,3 +158,4 @@ export default function HomePage() {
     </div>
   );
 }
+
