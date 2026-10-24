@@ -1,4 +1,4 @@
-import { SHOW_FOUNDING_YEAR } from "@/shared/foundingYear";
+import { SHOW_FOUNDING_YEAR, publishedFoundingYear } from "@/shared/foundingYear";
 
 export {
   SHOW_FOUNDING_YEAR,
@@ -20,9 +20,10 @@ export function publicFoundingClaims(): string[] {
   return ["since 2020", "founded in 2020", "EST 2020"];
 }
 
-/** Trust strip plus any founding phrases the flag currently allows. */
+/** Trust strip adds at most one badge when the documented year is publishable. */
 export function visibleTrustItems(items: readonly string[]): string[] {
-  return [...publicFoundingClaims(), ...items];
+  const year = publishedFoundingYear();
+  return year ? [`Est. ${year}`, ...items] : [...items];
 }
 
 /** Drop hidden founding phrases from a string. The source text stays put. */

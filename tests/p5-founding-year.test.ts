@@ -41,7 +41,11 @@ test("the unproven 2020 founding year stays in source and does not render", () =
   assert.match(hero, /visibleTrustItems\(TRUST_ITEMS\)/);
   assert.match(about, /visibleTrustItems\(TRUST_ITEMS\)/);
   assert.match(imageScript, /omitHiddenFoundingClaims/);
-  assert.equal(prompt.includes("EST 2020"), true);
+  assert.equal(prompt.includes("EST 2020"), false);
+  assert.match(prompt, /No people, no shirts, no text, no logos/);
+  assert.deepEqual(visibleTrustItems(TRUST_ITEMS), TRUST_ITEMS);
+  const claims = readFileSync(new URL("../shared/foundingClaims.ts", import.meta.url), "utf8");
+  assert.match(claims, /`Est\. \$\{year\}`/);
   for (const phrase of ["since 2020", "founded in 2020", "EST 2020", "Est. 2020"]) {
     assert.equal(hero.includes(phrase), false, phrase);
     assert.equal(about.includes(phrase), false, phrase);
