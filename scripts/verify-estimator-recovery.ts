@@ -1,15 +1,14 @@
 /**
- * Exercises partial-completion tracking end to end against an in-process
- * Postgres (pglite) and a capturing mailer, so the claim, retry, completion and
- * callback semantics are proven without Neon or Resend:
+ * Exercises estimator session tracking end to end against an in-process
+ * Postgres (pglite) and a capturing mailer, without Neon or Resend:
  *
  *   1. an un-engaged session never emails
- *   2. an engaged session emails exactly once after 30 minutes idle
- *   3. a second sweep sends nothing
- *   4. a completion after the summary marks the session recovered
- *   5. a completion before the summary cancels it
+ *   2. an engaged idle session does not send a partial / drop-off email
+ *   3. repeated sweeps still send nothing and do not claim the row
+ *   4. completion stores completed; an older notified row becomes recovered
+ *   5. a completion before the sweep is never emailed
  *   6. a callback request emails once, and a retried request does not send again
- *   7. a failed send is retried on the next pass and stops after MAX attempts
+ *   7. a throwing mailer is never called for abandonment, so nothing retries
  *   8. sensitive selection keys are dropped, query strings are stripped
  *
  * Run: npm run verify:estimator-recovery
@@ -20,6 +19,7 @@ import { drizzle } from "drizzle-orm/pglite";
 import { eq } from "drizzle-orm";
 import * as schema from "../shared/schema";
 import {
+  ABANDONMENT_EMAILS_ENABLED,
   INACTIVITY_MS,
   MAX_NOTIFY_ATTEMPTS,
   installEstimatorSessionsTestAdapter,
@@ -43,6 +43,8 @@ async function main() {
     },
   });
 
+  assert.equal(ABANDONMENT_EMAILS_ENABLED, false, "partial staff emails stay off");
+
   const t0 = new Date("2026-09-08T10:00:00Z");
   const later = (ms: number) => new Date(t0.getTime() + ms);
   const idle = INACTIVITY_MS + 5 * 60_000;
@@ -53,7 +55,7 @@ async function main() {
   let r = await sweepAbandonedSessions({ now: later(idle) });
   assert.equal(r.sent, 0, "un-engaged session must not email");
 
-  // 2. Engaged, idle 31 minutes: exactly one email.
+  // 2. Engaged and idle: no partial email, and the row is not claimed for a later send.
   await recordProgress({
     sessionId: "aaaaaaaa-0000-4000-8000-000000000002", flow: "estimate", currentStep: "size", currentStepIndex: 3, totalSteps: 9,
     lastCompletedStep: "layout", startedAt: t0.getTime(), pagePath: "/estimate?gclid=secret&utm_source=x",
@@ -61,25 +63,44 @@ async function main() {
     validationErrors: ["address_required"],
   }, later(120_000));
   r = await sweepAbandonedSessions({ now: later(idle) });
-  assert.equal(r.sent, 1, "engaged idle session emails once");
-  assert.equal(sent.length, 1);
-  assert.match(sent[0].subject, /^\[Partial\] Anonymous/);
-  assert.match(sent[0].html, /No contact information was provided/);
-  assert.doesNotMatch(sent[0].html, /leak@example\.com|2085551234|gclid/, "sensitive keys and query strings never reach the email");
-  assert.match(sent[0].html, /kitchen/);
+  assert.equal(r.sent, 0, "abandoned sessions do not email staff");
+  assert.equal(r.failed, 0, "abandoned sessions are not claimed for a later send");
+  assert.equal(r.considered, 0);
+  assert.equal(sent.length, 0);
   let row = (await db.select().from(estimatorSessions).where(eq(estimatorSessions.id, "aaaaaaaa-0000-4000-8000-000000000002")))[0];
-  assert.equal(row.status, "notified");
+  assert.equal(row.status, "active");
+  assert.equal(row.notifyAttemptCount, 0);
+  assert.equal(row.notifiedAt, null);
+  assert.equal(row.notifyLockedAt, null);
   assert.equal(row.pagePath, "/estimate");
   assert.equal("email" in (row.selections as object), false);
+  assert.equal("contact_phone" in (row.selections as object), false);
+  assert.equal((row.selections as { project?: string }).project, "kitchen");
 
-  // 3. Second sweep: nothing new.
+  // 3. Repeated sweeps, including while the mailer is set to throw: still nothing.
+  failNext = 5;
   r = await sweepAbandonedSessions({ now: later(idle + 600_000) });
-  assert.equal(r.sent, 0, "one summary per session");
+  assert.equal(r.sent, 0, "a later sweep does not retry a partial email");
+  assert.equal(r.failed, 0);
+  assert.equal(sent.length, 0);
+  assert.equal(failNext, 5, "the abandonment sweep does not call the mailer");
+  failNext = 0;
+  row = (await db.select().from(estimatorSessions).where(eq(estimatorSessions.id, "aaaaaaaa-0000-4000-8000-000000000002")))[0];
+  assert.equal(row.notifyAttemptCount, 0);
+  assert.equal(row.status, "active");
 
-  // 4. Completion after the summary: recovered.
+  // 4. Completion after abandon stores completed and does not email.
+  // A row already marked notified by an older deploy becomes recovered, still with no new email.
   await recordProgress({ sessionId: "aaaaaaaa-0000-4000-8000-000000000002", flow: "estimate", currentStep: "result", currentStepIndex: 9, totalSteps: 9, status: "completed" }, later(idle + 700_000));
   row = (await db.select().from(estimatorSessions).where(eq(estimatorSessions.id, "aaaaaaaa-0000-4000-8000-000000000002")))[0];
+  assert.equal(row.status, "completed");
+  assert.equal(sent.length, 0);
+  await recordProgress({ sessionId: "aaaaaaaa-0000-4000-8000-000000000009", flow: "estimate", currentStep: "size", currentStepIndex: 3, totalSteps: 9, startedAt: t0.getTime() }, later(90_000));
+  await db.update(estimatorSessions).set({ status: "notified" }).where(eq(estimatorSessions.id, "aaaaaaaa-0000-4000-8000-000000000009"));
+  await recordProgress({ sessionId: "aaaaaaaa-0000-4000-8000-000000000009", flow: "estimate", currentStep: "result", currentStepIndex: 9, totalSteps: 9, status: "completed" }, later(idle + 800_000));
+  row = (await db.select().from(estimatorSessions).where(eq(estimatorSessions.id, "aaaaaaaa-0000-4000-8000-000000000009")))[0];
   assert.equal(row.status, "recovered");
+  assert.equal(sent.length, 0, "recovering a previously notified session does not send email");
 
   // 5. Completion before the summary: never emailed.
   await recordProgress({ sessionId: "aaaaaaaa-0000-4000-8000-000000000003", flow: "re10", currentStep: "contact", currentStepIndex: 2, totalSteps: 5, startedAt: t0.getTime() }, later(60_000));
@@ -95,31 +116,33 @@ async function main() {
   await recordProgress({ sessionId: "aaaaaaaa-0000-4000-8000-000000000004", flow: "plans", currentStep: "measure", currentStepIndex: 1, totalSteps: 4, startedAt: t0.getTime() }, later(30_000));
   let cb = await recordCallbackRequest({ sessionId: "aaaaaaaa-0000-4000-8000-000000000004", flow: "plans", phone: "(208) 555-0100", name: "Test Caller" }, later(40_000));
   assert.equal(cb.notified, true);
-  assert.equal(sent.length, 2);
-  assert.match(sent[1].subject, /^Callback requested: Test Caller, \(208\) 555-0100/);
+  assert.equal(sent.length, 1);
+  assert.match(sent[0].subject, /^Callback requested: Test Caller, \(208\) 555-0100/);
+  assert.doesNotMatch(sent[0].subject, /\[Partial\]/);
   cb = await recordCallbackRequest({ sessionId: "aaaaaaaa-0000-4000-8000-000000000004", flow: "plans", phone: "2085550100" }, later(41_000));
   assert.equal(cb.notified, false, "a retried callback request does not send twice");
-  assert.equal(sent.length, 2);
+  assert.equal(sent.length, 1);
   r = await sweepAbandonedSessions({ now: later(idle + 2_000_000) });
-  assert.equal(r.sent, 0, "a callback session is excluded from the abandonment sweep");
+  assert.equal(r.sent, 0, "the sweep does not send a second email for a callback session");
+  assert.equal(sent.length, 1);
 
-  // 7. Mailer outage: retried next pass, capped.
+  // 7. Abandonment never calls the mailer, even across the old retry budget.
   await recordProgress({ sessionId: "aaaaaaaa-0000-4000-8000-000000000005", flow: "consultation", currentStep: "filling", currentStepIndex: 1, totalSteps: 2, startedAt: t0.getTime() }, later(50_000));
-  failNext = 1;
-  r = await sweepAbandonedSessions({ now: later(idle + 3_000_000) });
-  assert.equal(r.failed, 1);
-  row = (await db.select().from(estimatorSessions).where(eq(estimatorSessions.id, "aaaaaaaa-0000-4000-8000-000000000005")))[0];
-  assert.equal(row.status, "active");
-  assert.match(row.notifyLastError ?? "", /simulated mailer outage/);
-  r = await sweepAbandonedSessions({ now: later(idle + 3_100_000) });
-  assert.equal(r.sent, 1, "retried on the next pass");
-  await recordProgress({ sessionId: "aaaaaaaa-0000-4000-8000-000000000006", flow: "estimate", currentStep: "size", currentStepIndex: 3, totalSteps: 9, startedAt: t0.getTime() }, later(60_000));
   failNext = MAX_NOTIFY_ATTEMPTS + 2;
   for (let i = 0; i < MAX_NOTIFY_ATTEMPTS + 2; i += 1) {
-    await sweepAbandonedSessions({ now: later(idle + 4_000_000 + i * 700_000) });
+    r = await sweepAbandonedSessions({ now: later(idle + 3_000_000 + i * 700_000) });
+    assert.equal(r.sent, 0);
+    assert.equal(r.failed, 0);
   }
-  row = (await db.select().from(estimatorSessions).where(eq(estimatorSessions.id, "aaaaaaaa-0000-4000-8000-000000000006")))[0];
-  assert.equal(row.notifyAttemptCount, MAX_NOTIFY_ATTEMPTS, "gives up after MAX_NOTIFY_ATTEMPTS");
+  assert.equal(failNext, MAX_NOTIFY_ATTEMPTS + 2, "partial sweeps do not call the mailer");
+  assert.equal(sent.length, 1, "only the callback email was sent");
+  row = (await db.select().from(estimatorSessions).where(eq(estimatorSessions.id, "aaaaaaaa-0000-4000-8000-000000000005")))[0];
+  assert.equal(row.status, "active");
+  assert.equal(row.notifyAttemptCount, 0);
+  assert.equal(row.notifyLockedAt, null);
+  assert.equal(row.notifiedAt, null);
+  assert.equal(row.notifyLastError, null);
+  failNext = 0;
 
   // Explicit estimator-exit callbacks freeze their first phone and share the existing claim.
   failNext = 0;
@@ -140,6 +163,7 @@ async function main() {
   assert.equal((await recordCallbackRequest(retryRequest)).notified, true);
   assert.equal(sent.length, beforeExit + 2);
 
+  assert.equal(sent.some((email) => email.subject.startsWith("[Partial]")), false, "no partial drop-off email was sent");
   console.log(`verify-estimator-recovery: all checks passed (${sent.length} emails captured)`);
   await pg.close();
 }
