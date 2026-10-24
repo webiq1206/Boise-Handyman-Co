@@ -20,7 +20,7 @@ export const HERO_SUBHEAD =
   "Boise Handyman Co handles small repairs, installs, and maintenance for homes in Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley. One upfront written quote before any work starts, and most jobs finished in a single visit.";
 
 export const HERO_STATS = [
-  { num: "60 sec", label: "Instant online estimate" },
+  { num: "Upfront quote", label: "Planning range after photos" },
   { num: "Upfront", label: "Quote before work starts" },
   { num: "1 trip", label: "Most jobs done in one visit" },
 ] as const;
