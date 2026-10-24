@@ -5,28 +5,66 @@ import {approvedBrand} from '../components/approved/brand';
 import {ESTIMATOR_BRAND} from '../lib/p5/brand';
 import {buildLogoImage} from '../server/services/emailLayout';
 
-test('live icon and wordmark are entirely the exact terracotta, with unchanged geometry', () => {
-  for (const [live, original] of [
-    ['boise-handyman-wordmark-cb633b.svg', 'p5-wordmark-light.svg'],
-    ['boise-handyman-mark-cb633b.svg', 'p5-family-light.svg'],
-  ]) {
-    const actual = readFileSync(`public/brand/${live}`, 'utf8');
-    const source = readFileSync(`public/brand/${original}`, 'utf8');
-    assert.deepEqual([...new Set(actual.match(/#[0-9a-f]{6}/gi))], ['#CB633B']);
-    assert.equal(actual, source.replace(/#[0-9a-f]{6}/gi, '#CB633B'));
-  }
+const ACCENT = '#CB633B';
+const BONE = '#F7F5F3';
+const CHARCOAL = '#2C302F';
+
+function colors(rel: string) {
+  return [...new Set(readFileSync(rel, 'utf8').match(/#[0-9a-f]{6}/gi) ?? [])]
+    .map((color) => color.toUpperCase())
+    .sort();
+}
+
+test('header lockup is two-tone: ink wordmark, accent only on Co. and the family 5', () => {
+  assert.deepEqual(colors('public/brand/p5-wordmark-light.svg'), [ACCENT, BONE].sort());
+  assert.deepEqual(colors('public/brand/p5-wordmark-dark.svg'), [ACCENT, CHARCOAL].sort());
+  const familyLight = readFileSync('public/brand/p5-family-light.svg', 'utf8');
+  const familyDark = readFileSync('public/brand/p5-family-dark.svg', 'utf8');
+  assert.equal((familyLight.match(/#CB633B/g) ?? []).length, 1);
+  assert.match(familyLight, /stroke="#FBFAF6"/);
+  assert.equal((familyDark.match(/#CB633B/g) ?? []).length, 1);
+  assert.match(familyDark, /stroke="#2C302F"/);
+  assert.deepEqual(
+    colors('public/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg'),
+    [ACCENT, BONE].sort(),
+  );
+  assert.deepEqual(
+    colors('public/brand/svg/wordmark/light/boise-handyman-co-wordmark-charcoal-accent.svg'),
+    [ACCENT, CHARCOAL].sort(),
+  );
 });
 
-test('site, email and estimate use the new color-specific logo URLs', () => {
-  assert.equal(approvedBrand.wordmarkLight, '/brand/boise-handyman-wordmark-cb633b.svg');
-  assert.equal(approvedBrand.wordmarkDark, approvedBrand.wordmarkLight);
-  assert.equal(ESTIMATOR_BRAND.logo, '/brand/boise-handyman-wordmark-cb633b-1200w.png');
-  assert.ok(buildLogoImage().includes(ESTIMATOR_BRAND.logo));
-  assert.ok(readFileSync(`public${ESTIMATOR_BRAND.logo}`).length > 0);
+test('site, email and estimate use the surface-correct accent wordmarks', () => {
+  assert.equal(approvedBrand.wordmarkLight, '/brand/p5-wordmark-light.svg');
+  assert.equal(approvedBrand.wordmarkDark, '/brand/p5-wordmark-dark.svg');
   const component = readFileSync('components/approved/ApprovedBrand.tsx', 'utf8');
-  assert.ok(component.includes('/brand/boise-handyman-mark-cb633b.svg'));
-  assert.ok(!component.includes('/brand/p5-family-'));
+  assert.match(component, /\/brand\/p5-family-\$\{dark\?'light':'dark'\}\.svg/);
+  assert.ok(!component.includes('cb633b'));
+  assert.equal(
+    ESTIMATOR_BRAND.logo,
+    '/brand/png/wordmark/light/boise-handyman-co-wordmark-charcoal-accent-1200w.png',
+  );
+  assert.ok(readFileSync(`public${ESTIMATOR_BRAND.logo}`).length > 0);
+  const emailLogo = buildLogoImage();
+  assert.ok(emailLogo.includes('/brand/png/wordmark/dark/boise-handyman-co-wordmark-bone-accent-1200w.png'));
+  assert.ok(!emailLogo.includes('cb633b'));
   assert.ok(readFileSync('components/approved/family-content.ts', 'utf8').includes(
-    "logo:'/brand/boise-handyman-wordmark-cb633b.svg'",
+    "logo:asset('handyman-boise-handyman-co-wordmark-bone-accent.svg')",
   ));
+});
+
+test('the solid terracotta wordmark is not wired into the site', () => {
+  for (const file of [
+    'components/approved/brand.ts',
+    'components/approved/ApprovedBrand.tsx',
+    'components/approved/family-content.ts',
+    'lib/p5/brand.ts',
+    'server/services/emailLayout.ts',
+    'app/style-guide/page.tsx',
+    'scripts/brand/generate-brand-assets.mjs',
+  ]) {
+    const text = readFileSync(file, 'utf8');
+    assert.ok(!text.includes('boise-handyman-wordmark-cb633b'), file);
+    assert.ok(!text.includes('boise-handyman-mark-cb633b'), file);
+  }
 });
