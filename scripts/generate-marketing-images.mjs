@@ -17,6 +17,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { omitHiddenFoundingClaims } from "../shared/foundingClaims.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
@@ -30,7 +31,7 @@ if (!apiKey) {
 }
 
 const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
-const styleSuffix = config.styleSuffix;
+const styleSuffix = omitHiddenFoundingClaims(config.styleSuffix);
 const cameraLocks = config.cameraLocks ?? {};
 
 function resolvePrompt(raw) {

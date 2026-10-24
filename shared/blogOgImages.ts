@@ -47,6 +47,7 @@ export const BLOG_OG_IMAGES: Record<string, string> = {
   // Guides
   'boise-home-maintenance-guide': '/images/blog/boise-home-maintenance-guide-og.jpg',
   'boise-home-repair-cost-guide': '/images/blog/boise-home-repair-cost-guide-og.jpg',
+  'ember-ready-home-checklist-treasure-valley': '/images/blog/ember-ready-home-checklist-treasure-valley-og.jpg',
   'first-time-homeowner-repair-handbook': '/images/blog/first-time-homeowner-repair-handbook-og.jpg',
   'hire-a-handyman-treasure-valley': '/images/blog/hire-a-handyman-treasure-valley-og.jpg',
   'small-home-upgrades-that-pay-off': '/images/blog/small-home-upgrades-that-pay-off-og.jpg',

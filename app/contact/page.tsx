@@ -2,7 +2,6 @@ import { InteriorEstimateLink,InteriorHero,InteriorPage } from '@/components/app
 import { BusinessPhoneContact } from '@/components/BusinessPhoneContact';
 import { ConsultationForm } from '@/components/ConsultationForm';
 import { Section } from '@/components/marketing';
-import { EstimatePromptBand } from '@/components/marketing/EstimatePromptBand';
 import { Hairline } from '@/components/marketing/Hairline';
 import { MarketingCard } from '@/components/marketing/MarketingCard';
 import { SectionHeader } from '@/components/marketing/SectionHeader';
@@ -200,7 +199,7 @@ export default function ContactPage() {
   return (
     <InteriorPage kind="contact"><>
       <JsonLd data={schemas} />
-      <div className="flex flex-col pb-20 md:pb-0">
+      <div className="flex flex-col ">
         {/* Approved editorial hero */}
         <InteriorHero layout="contact" imageSrc={SITE_IMAGES.hero} imageAlt="A worker adjusting an interior door hinge with a screwdriver">
             <HeroBreadcrumbs />
@@ -259,7 +258,7 @@ export default function ContactPage() {
                   </p>
                 </Reveal>
               </div>
-              <MarketingCard className="md:col-span-3 p-4 sm:p-7 md:p-10" padding="lg">
+              <MarketingCard className="interior-contact-form p-4 sm:p-7 md:p-10" padding="lg">
                 <ConsultationForm />
               </MarketingCard>
             </div>
@@ -434,16 +433,6 @@ export default function ContactPage() {
 
         <StatementBandSection />
 
-        <EstimatePromptBand
-          title={
-            <>
-              Prefer a number before you{' '}
-              <em className="brc-accent">call</em>?
-            </>
-          }
-          description="Use our online estimator for a preliminary Treasure Valley range - then book your handyman visit when you're ready for a firm, written quote."
-          variant="canvas"
-        />
 
         {/* ─── Service areas ─── */}
         <Section divider>

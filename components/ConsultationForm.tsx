@@ -34,6 +34,7 @@ import { CONSULT_BULLETS } from "@/shared/siteContent";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { BusinessPhoneContact } from "@/components/BusinessPhoneContact";
 import { trackEvent, trackMetaEvent, trackAcceptedLeadConversion } from "@/lib/analytics";
+import { requireConsultationReceipt } from "@/lib/consultationReceipt";
 import { inquiryId } from "@/lib/leadInquiry";
 import { readStoredPrefill, PREFILL_UPDATED_EVENT, hasPassedGate } from "@/lib/leadPrefill";
 import type { PropertyProfile } from "@/shared/propertyProfile";
@@ -102,7 +103,7 @@ const formSchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["address"],
-        message: "Please enter your build site address",
+        message: "Please enter your service address",
       });
       return;
     }
@@ -151,9 +152,10 @@ interface ConsultationFormProps {
   onRevise?: () => void;
   /** Compact trust bullets above the form (used in the modal variant). */
   showTrust?: boolean;
+  initialProjectType?: "drywall-repair" | "home-maintenance";
 }
 
-export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFormProps = {}) {
+export function ConsultationForm({ onRevise, showTrust = false, initialProjectType }: ConsultationFormProps = {}) {
   const [estimate, setEstimate] = useState<StoredEstimate | null>(null);
   const [estimateChecked, setEstimateChecked] = useState(false);
   // The carried-over range is attached by default (no yes/no gate); the user
@@ -179,7 +181,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
       phone: "",
       email: "",
       address: "",
-      projectType: "",
+      projectType: initialProjectType ?? "",
       message: "",
     },
   });
@@ -236,6 +238,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
   useEffect(() => {
     function loadEstimate() {
       setEstimateChecked(true);
+      if (initialProjectType) return; // A prior unrelated estimate must not overwrite this paid service inquiry.
       try {
         const raw = sessionStorage.getItem("brc_estimate");
         if (!raw) {
@@ -257,7 +260,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
     loadEstimate();
     window.addEventListener("brc_estimate_updated", loadEstimate);
     return () => window.removeEventListener("brc_estimate_updated", loadEstimate);
-  }, [form]);
+  }, [form, initialProjectType]);
 
   useEffect(() => {
     if (!success) return;
@@ -334,11 +337,11 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
         const err = await res.json().catch(() => ({}));
         throw new Error(err.message || "Something went wrong");
       }
-      return res.json();
+      return requireConsultationReceipt(await res.json());
     },
     onSuccess: (response: { accepted?: boolean }, variables) => {
       setSuccess(true);
-      sessionStorage.removeItem("brc_estimate");
+      try { sessionStorage.removeItem("brc_estimate"); } catch { /* Optional browser storage must not hide a saved receipt. */ }
       // Conversion event: a submitted consultation request is the PRIMARY lead
       // (estimate on the site, then submit). GA generate_lead + Meta Lead. The
       // Meta Lead carries the visitor's email + phone, which the server-side
@@ -375,8 +378,8 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
       : null;
 
     return (
-      <div className="flex flex-col items-start py-2 space-y-4" data-testid="consultation-success">
-        {/* Brand icon (ochre field) confirms the brand on the request-received state */}
+      <div className="flex flex-col items-start py-2 space-y-4" data-testid="consultation-success" data-clarity-mask="True">
+        {/* Brand icon (terracotta field) confirms the brand on the request-received state */}
         <img
           src="/brand/svg/icon/boise-handyman-co-icon-accent.svg"
           alt="Boise Handyman Co"
@@ -388,12 +391,13 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
           <h3
             ref={successHeadingRef}
             tabIndex={-1}
+            data-clarity-mask="True"
             className="font-serif text-2xl text-foreground outline-none"
           >
             Request received{submitted ? `, ${submitted.name.split(" ")[0]}` : ""}.
           </h3>
           {submittedProject && (
-            <p className="text-sm text-muted-foreground mt-1">
+            <p className="text-sm text-muted-foreground mt-1" data-clarity-mask="True">
               {submittedProject}
               {submitted?.address ? ` · ${submitted.address}` : ""}
             </p>
@@ -411,14 +415,14 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
             <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-caption font-normal text-foreground">
               2
             </span>
-            <span className="pt-0.5">We reply within one business day with an upfront quote and a time that works.</span>
+            <span className="pt-0.5">Our team reviews the scope with you before preparing a quote.</span>
           </li>
           <li className="flex gap-3">
             <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-caption font-normal text-foreground">
               3
             </span>
             <span className="pt-0.5">
-              Your scheduled visit: we arrive with the right materials and finish in one trip whenever the job allows.
+              Scheduling is confirmed after the scope and quote are agreed. This request does not book a visit.
             </span>
           </li>
         </ol>
@@ -436,7 +440,7 @@ export function ConsultationForm({ onRevise, showTrust = false }: ConsultationFo
           </p>
           {submitted?.email && (
             <p className="text-xs text-muted-foreground">
-              A confirmation email is on its way to your inbox.
+              Your request is saved. Email delivery is not confirmed on this page.
             </p>
           )}
         </div>

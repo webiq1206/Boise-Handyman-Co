@@ -1,33 +1,37 @@
-/**
- * Unproven founding year for Boise Handyman Co. Idaho SOS shows P5 Home Co. LLC
- * filed 09/25/2025, so nothing documents 2020. The year stays in this file.
- * SHOW_FOUNDING_YEAR defaults to hidden, and every public phrase is empty
- * until that flag is turned on.
- */
-export const UNPROVEN_FOUNDING_YEAR = "2020";
+import { SHOW_FOUNDING_YEAR, publishedFoundingYear } from "@/shared/foundingYear";
 
-/** Flip only after a documented founding year exists for this company. */
-export const SHOW_FOUNDING_YEAR = false;
+export {
+  SHOW_FOUNDING_YEAR,
+  UNPROVEN_FOUNDING_YEAR,
+  publishedFoundingYear,
+  yearsInBusiness,
+} from "@/shared/foundingYear";
 
-export function publishedFoundingYear(): string {
-  return SHOW_FOUNDING_YEAR ? UNPROVEN_FOUNDING_YEAR : "";
-}
-
-/** Whole years since the unproven year. Null while the claim is hidden. */
-export function yearsInBusiness(now: Date = new Date()): number | null {
-  if (!SHOW_FOUNDING_YEAR) return null;
-  return now.getFullYear() - Number(UNPROVEN_FOUNDING_YEAR);
-}
+const HIDDEN_FOUNDING_PHRASES = [
+  "since 2020",
+  "founded in 2020",
+  "EST 2020",
+  "Est. 2020",
+] as const;
 
 /** Phrases that must not render while SHOW_FOUNDING_YEAR is false. */
-export function publicFoundingClaims(now: Date = new Date()): string[] {
+export function publicFoundingClaims(): string[] {
   if (!SHOW_FOUNDING_YEAR) return [];
-  const year = UNPROVEN_FOUNDING_YEAR;
-  const years = yearsInBusiness(now);
-  return [
-    `Est. ${year}`,
-    `founded in ${year}`,
-    `since ${year}`,
-    ...(years === null ? [] : [`${years} years in business`]),
-  ];
+  return ["since 2020", "founded in 2020", "EST 2020"];
+}
+
+/** Trust strip adds at most one badge when the documented year is publishable. */
+export function visibleTrustItems(items: readonly string[]): string[] {
+  const year = publishedFoundingYear();
+  return year ? [`Est. ${year}`, ...items] : [...items];
+}
+
+/** Drop hidden founding phrases from a string. The source text stays put. */
+export function omitHiddenFoundingClaims(text: string): string {
+  if (SHOW_FOUNDING_YEAR) return text;
+  let next = text;
+  for (const phrase of HIDDEN_FOUNDING_PHRASES) {
+    next = next.split(phrase).join("");
+  }
+  return next;
 }

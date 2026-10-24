@@ -35,7 +35,7 @@ const H = 630;
 // Brand tokens, identical to generate-og-images.mjs.
 const BONE = '#F7F5F3';
 const MIST = '#9F9C97';
-const ACCENT = '#8FAEC4'; // steel blue, 5.74:1 on charcoal
+const ACCENT = '#CB633B'; // Boise Handyman brand pop
 const CHARCOAL = '#201E1D';
 
 const TAGLINE = 'REPAIRS · INSTALLS · HOME MAINTENANCE';
