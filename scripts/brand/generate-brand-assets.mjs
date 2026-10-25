@@ -27,6 +27,13 @@ import path from "path";
 import { fileURLToPath } from "url";
 import opentype from "opentype.js";
 import { Resvg } from "@resvg/resvg-js";
+import {
+  HANDYMAN_ACCENT,
+  assertAccentWordmark,
+  assertFamilyFive,
+  prepareHeaderWordmark,
+  forceAccentWordmark,
+} from "./wordmark-lock.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..", "..");
@@ -532,6 +539,19 @@ const write = (rel, contents) => {
   console.log("  wrote", rel.replace(/\\/g, "/"));
 };
 
+if (accent.toUpperCase() !== HANDYMAN_ACCENT) {
+  throw new Error(`Handyman accent ${accent} drifted from the family terracotta ${HANDYMAN_ACCENT}`);
+}
+
+// Accent lockups: Co. (C, o, period) is terracotta. Letters stay bone or charcoal.
+// A missing Co. group throws, so a rebuild cannot fold Co. back into the letter fill.
+for (const rel of Object.keys(svgs)) {
+  if (!rel.includes("wordmark") || !rel.endsWith("-accent.svg")) continue;
+  const letters = rel.includes("bone") ? bone : ink;
+  svgs[rel] = forceAccentWordmark(svgs[rel], { letters, accent });
+  assertAccentWordmark(svgs[rel], { letters, accent });
+}
+
 console.log("Brand marks (SVG):");
 for (const [rel, contents] of Object.entries(svgs)) {
   write(path.join("public", "brand", rel), contents);
@@ -541,20 +561,22 @@ write(
   svgs[`svg/wordmark/dark/${slug}-wordmark-bone-accent.svg`],
 );
 
-// These Boise-specific logo exports are the current header lockup and icon.
-// Recolor their existing artwork without changing its geometry or endorsement.
-for (const rel of [
+// Header lockups are rebuilt from the accent wordmarks, not from a leftover
+// steel-blue file. Co. stays terracotta. Letters stay bone (dark ground) or
+// charcoal (light ground). Do not flatten these files to a solid accent.
+write(
   "public/brand/p5-wordmark-light.svg",
+  prepareHeaderWordmark(svgs[`svg/wordmark/dark/${slug}-wordmark-bone-accent.svg`], { letters: bone, accent }),
+);
+write(
   "public/brand/p5-wordmark-dark.svg",
-  "public/brand/p5-family-light.svg",
-  "public/brand/p5-family-dark.svg",
-]) {
-  const current = fs.readFileSync(path.join(root, rel), "utf8");
-  write(rel, current.replaceAll("#8FAEC4", accent));
+  prepareHeaderWordmark(svgs[`svg/wordmark/light/${slug}-wordmark-charcoal-accent.svg`], { letters: ink, accent }),
+);
+for (const rel of ["public/brand/p5-family-light.svg", "public/brand/p5-family-dark.svg"]) {
+  const current = fs.readFileSync(path.join(root, rel), "utf8").replaceAll("#8FAEC4", accent);
+  assertFamilyFive(current, accent);
+  write(rel, current);
 }
-
-// Header lockup stays two-tone: bone or charcoal for the wordmark, accent only
-// on "Co." and the family "5". Do not flatten these files to a solid accent.
 
 // Keep the published, static brand-kit page in sync with the generated marks.
 const brandKitPath = path.join(root, "public/brand/brand-kit.html");

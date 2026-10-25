@@ -18,8 +18,9 @@
 - **Deep steel blue `#4E6B7E` (`--accent`) = graphic fills only:** chips, tints,
   slider track, icon grounds (always with bone text on top). Too dark for text.
 
-The seal carries steel blue on its outer ring and dots; the wordmark carries it on
-the italic "Co." only. Never recolor marks outside charcoal, bone, and `#8FAEC4`.
+The wordmark keeps bone or charcoal letters. The italic "Co." and the family "5"
+use the same terracotta `#CB633B`. Do not paint Co. white, bone, charcoal, or steel blue,
+and do not flatten the whole wordmark to terracotta.
 
 ---
 
