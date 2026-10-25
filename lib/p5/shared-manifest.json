@@ -496,11 +496,11 @@
     "components/P5ExitOffer.tsx": "5b5e76460bbee7577cfa8ce092bfb67e31bdc11ba07d7df815b2c7bfbf06fbce",
     "components/P5ExitOffer.module.css": "88f45092817c319fa06ee60b102a8b439412f29747f25bd95ebdf9ea28b99461",
     "tests/p5-exit-callback.test.ts": "fb985b096b8397d0d424d3ec31cd48a444c0546cfbc012736343cd5b94b450a3",
-    "scripts/p5-exit-browser.mjs": "c6897d0453c2b1d2d7840ad84f041130b102162ecc5879098466b62f1f5bf9ee",
+    "scripts/p5-exit-browser.mjs": "16b04b5a8301436b04cfeb4a4bd99f4f0b04862e7a382df22c31b96de11083c8",
     "lib/p5/intakeIntent.ts": "5f77bf876278b307a1fee4e49e8ac4a144e99bd7bd4e5f6b186491fd0888b360",
     "tests/p5-intake-intent.test.ts": "b7be17dd3d8c5a7e7b15f5bbd205ebaa719617ef25791294825570e1679c1513",
     "scripts/test-p5-intake-intent.mts": "cf2ec47bdf7a5cf5cab221991ca2d45c96c479fad9f160427d14d16dc8e95425",
-    "scripts/p5-intake-intent-browser.mjs": "40ba115deb0e6bfadf5c75b402f7c3b324d281a6403f16c325dda7a2c2b0145e",
+    "scripts/p5-intake-intent-browser.mjs": "49df6cc8ae87a97041cbae92792034c7785d8bb1a0294e0f4d22118bb3c24c74",
     "scripts/p5-intake-progression-browser.mjs": "04bad0ff80bb43e9306c09aea428272707e370822d5c03a0a6c9f66bf7b8ae5d",
     "scripts/p5-intake-conflict-browser.mjs": "24baa3da4aafb51b3201622667bee1ec2b6cd41e809dc51d02201c2251763d29",
     "scripts/p5-contact-first-browser.mjs": "92f3646a7736ddf0169e8d700134ae1f4789c6eb01f6d28394deebaa792564f2",
@@ -513,7 +513,7 @@
     "lib/p5/intakeReferenceStore.ts": "2c023fd0c62dd4583021db6f1767df8b8bfe4813cd9d6933d445c4fb31a97216",
     "tests/p5-intake-pdf.test.ts": "cb331ce30787d6df4154885531aaa05c2dec4e29e51cea3315392636bb0d1758",
     "scripts/lib/navigationEntry.mjs": "e6ba5b302d414acd0e067cd7f3ec6a2b6dab5189bdae33e0418d5c2b839cc5f5",
-    "tests/p5-navigation-entry.test.mjs": "3c3c106ca1fb994a61c83d74143d08ae3207ed4fb1fecbc7b89c546ac406e5c7"
+    "tests/p5-navigation-entry.test.mjs": "80bd42e3658f7fa9b9c707dcf52782d3991bd05dd484f29324cbcb99f6477dab"
   },
   "coordinatedIntakeBatch": {
     "base": "e6e125b83468a402264be2f1e82e5c0466baa178",
@@ -638,6 +638,19 @@
           "reason": "The only imported value is intakeScopeReviewed. Its function, intakeReviewFingerprint closure and all following source are identical; existing imports and scope helpers are preserved. The consumer differs only by guided-entry setup. Attribution additions above this block remain canonical-only."
         }
       ]
+    },
+    {
+      "mode": "selected",
+      "source": "p5-home-co",
+      "sourceCommit": "410744af835fe81a1a7ce3e7cc0b0386a45e01f0",
+      "files": {
+        "scripts/p5-intake-intent-browser.mjs": "49df6cc8ae87a97041cbae92792034c7785d8bb1a0294e0f4d22118bb3c24c74",
+        "scripts/p5-exit-browser.mjs": "16b04b5a8301436b04cfeb4a4bd99f4f0b04862e7a382df22c31b96de11083c8",
+        "scripts/lib/navigationEntry.mjs": "e6ba5b302d414acd0e067cd7f3ec6a2b6dab5189bdae33e0418d5c2b839cc5f5",
+        "tests/p5-navigation-entry.test.mjs": "80bd42e3658f7fa9b9c707dcf52782d3991bd05dd484f29324cbcb99f6477dab"
+      },
+      "retired": [],
+      "compatibility": []
     }
   ]
 }
