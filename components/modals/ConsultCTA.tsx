@@ -1,5 +1,5 @@
 /**
  * Alias for EstimateCTA - all sitewide "Get an estimate" buttons share one behavior:
- * homepage scrolls to /#calculator; every other page goes to /estimate.
+ * homepage scrolls to /#quick-request; other short-form pages do the same in place.
  */
 export { EstimateCTA as ConsultCTA } from "./EstimateCTA";
