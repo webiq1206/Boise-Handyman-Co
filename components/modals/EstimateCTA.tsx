@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import type { ButtonProps } from "@/components/ui/button";
 import { trackEvent } from "@/lib/analytics";
+import { requestHref } from "@/lib/requestHref";
 
 interface EstimateCTAProps extends Omit<ButtonProps, "onClick" | "asChild"> {
   onExtraClick?: () => void;
@@ -13,7 +14,7 @@ interface EstimateCTAProps extends Omit<ButtonProps, "onClick" | "asChild"> {
 
 export function EstimateCTA({ onExtraClick, children, trackingLocation, ...props }: EstimateCTAProps) {
   const pathname = usePathname();
-  const href = pathname === "/" ? "/#calculator" : "/estimate";
+  const href = requestHref(pathname);
 
   return (
     <Button {...props} asChild>

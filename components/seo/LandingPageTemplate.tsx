@@ -1,5 +1,5 @@
 import { ConsultationForm } from "@/components/ConsultationForm";
-import { LandingContactActions } from "@/components/marketing/LandingContactActions";
+import { QuickRequest } from "@/components/marketing/QuickRequest";
 import { InteriorHero,InteriorProjectAside } from '@/components/approved/InteriorLayout';
 import { Section } from '@/components/marketing';
 import { RelatedPostCards } from '@/components/marketing/RelatedPostCards';
@@ -13,14 +13,11 @@ AccordionContent,
 AccordionItem,
 AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Button } from '@/components/ui/button';
 import { GRAIN_URL } from '@/lib/grain';
 import { altForImage } from '@/shared/imageAlts';
-import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import type { GalleryProject } from '@/shared/galleryData';
 import type { FAQItem } from '@/shared/seoContent';
-import { SITE_CONFIG } from '@/shared/siteConfig';
-import { ArrowRight,ChevronRight,Phone,Star } from 'lucide-react';
+import { ArrowRight,ChevronRight,Star } from 'lucide-react';
 import Link from 'next/link';
 import { RelatedLinks } from './RelatedLinks';
 
@@ -195,28 +192,10 @@ export function LandingPageTemplate({
           <h1 className="ed-display ed-statement-display text-inverse-foreground">{h1}</h1>
           {paidService ? <>
             <p className="mt-4 text-base">{paidService === 'drywall-repair' ? 'Have damaged drywall? Call Boise Handyman Co to discuss the repair, or send a description.' : 'Have upkeep projects waiting? Call Boise Handyman Co to discuss the items you want help with.'}</p>
-            <LandingContactActions formId="service-inquiry" formLabel={paidService === 'drywall-repair' ? 'Describe the Damage' : 'Send Your Maintenance List'} />
+            <QuickRequest callTestId="button-call-service-hero" />
           </> : <>
-          {/* Call sits directly under the heading so it is in the first phone
-              screen; the longer overview and estimate actions follow. */}
-          <a
-            href={SITE_CONFIG.phoneHref}
-            className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm bg-[#2c302f] px-5 text-base font-medium text-[#fbfaf6] transition-colors hover:bg-[#444947] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c302f] focus-visible:ring-offset-2 sm:w-auto"
-            data-testid="button-call-service-hero"
-          >
-            <Phone className="h-4 w-4" aria-hidden="true" />
-            Call {SITE_CONFIG.phone}
-          </a>
-          <p className="mt-2 text-sm text-inverse-foreground/80">Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM</p>
+          <QuickRequest callTestId="button-call-service-hero" />
           <p className="mt-8 max-w-[60ch] text-base md:text-lg leading-relaxed text-inverse-foreground/95">{overview}</p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
-            <ConsultCTA variant="brand">
-              {CTA_PRIMARY} <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </ConsultCTA>
-            <Button variant="heroOutline" asChild>
-              <a href="/#consult">{CTA_SECONDARY}</a>
-            </Button>
-          </div>
           {planningFrom && (
             <p className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-inverse-foreground/80">
               <span className="ed-eyebrow !mb-0" style={{ color: 'rgb(255 255 255 / 0.72)' }}>Planning from</span>
@@ -565,7 +544,7 @@ export function LandingPageTemplate({
             <Reveal delay={60}>
               <p className="ed-lede">Send your task list and photos.</p>
               <p className="ed-body mt-3">Get an upfront quote and arrange a handyman visit, with no obligation.</p>
-              <div className="mt-8"><ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA></div>
+              <div className="mt-8"><ConsultCTA variant="brand">Send a request</ConsultCTA></div>
             </Reveal>
           </div>
         </div>

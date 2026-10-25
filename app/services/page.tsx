@@ -2,6 +2,7 @@ import { InteriorHero,InteriorPage } from '@/components/approved/InteriorLayout'
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { AreaCard } from '@/components/marketing/AreaCard';
 import { EstimatePromptBand } from '@/components/marketing/EstimatePromptBand';
+import { QuickRequest } from '@/components/marketing/QuickRequest';
 import { Section } from '@/components/marketing/Section';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
 import { Reveal } from '@/components/Reveal';
@@ -14,7 +15,7 @@ import { getBaseUrl } from '@/lib/seo';
 import { servicePath } from '@/lib/seo-routes';
 import { CITY_HERO_IMAGES } from '@/shared/cityServiceImages';
 import { CITIES,SERVICES } from '@/shared/contentData';
-import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
+import { CTA_SECONDARY } from '@/shared/ctaCopy';
 import { altForImage } from '@/shared/imageAlts';
 import { getServiceBackground } from '@/shared/serviceBackgrounds';
 import { SITE_CONFIG } from '@/shared/siteConfig';
@@ -69,13 +70,18 @@ export default function ServicesIndexPage() {
     <InteriorPage kind="services"><>
       <JsonLd data={[breadcrumbSchema, itemListSchema]} />
 
-      <InteriorHero layout="editorial">
+      <InteriorHero
+        layout="editorial"
+        imageSrc="/images/handyman/toolbag-ready.webp"
+        imageAlt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth"
+      >
         <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Services' }]} />
         <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>Our services</p>
         <h1 className="ed-display ed-statement-display text-inverse-foreground">
           Everything we fix, install and{' '}
             <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>maintain</em>
         </h1>
+        <QuickRequest />
         <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
           Small repairs, installs and maintenance for Treasure Valley homes, quoted upfront as one
             written price. Most jobs run one to eight hours and are finished in a single visit.
@@ -92,7 +98,9 @@ export default function ServicesIndexPage() {
               <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>book</em>
           </>
         }
-        description="Use our Treasure Valley estimator to see a realistic range for your repair, install or maintenance job - then book a handyman visit when you're ready."
+        description="Send the repair list and a phone number. We call you back with an upfront quote."
+        href="#quick-request"
+        label="Send a request"
       />
 
       <Section surface="bone" spacing="xl" edge>
@@ -134,7 +142,7 @@ export default function ServicesIndexPage() {
                 Get a preliminary estimate online, or book a handyman visit with an upfront quote.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
-                <ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA>
+                <ConsultCTA variant="brand">Send a request</ConsultCTA>
                 <Button variant="brandOutline" asChild><a href="/#consult">{CTA_SECONDARY}</a></Button>
               </div>
             </div>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import type { ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
+import { requestHref } from "@/lib/requestHref";
 
 interface NavEstimateButtonProps extends Omit<ButtonProps, "onClick" | "asChild"> {
   /** Plain anchor styling for mobile sticky bar text links. */
@@ -17,8 +18,8 @@ interface NavEstimateButtonProps extends Omit<ButtonProps, "onClick" | "asChild"
 }
 
 /**
- * Header and mobile-bar estimate entry: homepage scrolls to #calculator;
- * every other page goes to the dedicated /estimate page.
+ * Header and mobile-bar request entry. Lands on the one-screen request,
+ * not the longer project review.
  */
 export function NavEstimateButton({
   asLink = false,
@@ -29,8 +30,7 @@ export function NavEstimateButton({
   ...props
 }: NavEstimateButtonProps) {
   const pathname = usePathname();
-  const onHome = pathname === "/";
-  const href = onHome ? "/#calculator" : "/estimate";
+  const href = requestHref(pathname);
   const { variant: _v, size: _s, ...linkAttrs } = props as Record<string, unknown>;
 
   const handleClick = () => {

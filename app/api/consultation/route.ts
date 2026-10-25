@@ -92,13 +92,28 @@ const bodySchema = z
     inquiryId: z.string().uuid(),
     website: z.string().max(0).optional(),
     attribution: z.record(z.string().max(100)).optional(),
+    /** Short primary form. Requires a real email in addition to a phone number. */
+    quick: z.literal(true).optional(),
+    /**
+     * Optional photos, plans, or inspection PDFs from the short request form.
+     * Missing or unreadable files never reject the lead.
+     */
+    photos: z
+      .array(
+        z.object({
+          name: z.string().min(1).max(80),
+          type: z.enum(["image/jpeg", "image/png", "image/webp", "application/pdf"]),
+          data: z.string().min(16).max(2_200_000),
+        }),
+      )
+      .max(3)
+      .optional(),
   })
   .superRefine((data, ctx) => {
-    if (data.preferredContact === "email") {
-      if (!z.string().email().safeParse(data.email).success) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["email"], message: "Valid email required" });
-      }
-    } else if (data.phone.replace(/\D/g, "").length < 10) {
+    if ((data.preferredContact === "email" || data.quick) && !z.string().email().safeParse(data.email).success) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["email"], message: "Valid email required" });
+    }
+    if (data.preferredContact !== "email" && data.phone.replace(/\D/g, "").length < 10) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["phone"], message: "Valid phone required" });
     }
   });
@@ -108,6 +123,45 @@ const bodySchema = z
  * stored lead never carries client-tampered or stale numbers. Returns null
  * (estimate rejected) if the inputs themselves are out of bounds.
  */
+function decodeAttachment(file: {
+  name: string;
+  type: "image/jpeg" | "image/png" | "image/webp" | "application/pdf";
+  data: string;
+}): { filename: string; content: Buffer } | null {
+  const cleaned = file.data.replace(/\s/g, "");
+  if (!/^[A-Za-z0-9+/]+={0,2}$/.test(cleaned)) return null;
+  const content = Buffer.from(cleaned, "base64");
+  if (content.length < 8 || content.length > 1_600_000) return null;
+  const safe = file.name.replace(/[^\w.\- ()]+/g, "").slice(0, 80) || "attachment";
+  if (file.type === "application/pdf") {
+    if (content.subarray(0, 4).toString("utf8") !== "%PDF") return null;
+    return { filename: safe.toLowerCase().endsWith(".pdf") ? safe : `${safe}.pdf`, content };
+  }
+  if (file.type === "image/jpeg") {
+    if (content[0] !== 0xff || content[1] !== 0xd8) return null;
+    return { filename: /\.jpe?g$/i.test(safe) ? safe : `${safe}.jpg`, content };
+  }
+  if (file.type === "image/png") {
+    if (content[0] !== 0x89 || content[1] !== 0x50 || content[2] !== 0x4e || content[3] !== 0x47) return null;
+    return { filename: safe.toLowerCase().endsWith(".png") ? safe : `${safe}.png`, content };
+  }
+  if (content.subarray(0, 4).toString("utf8") !== "RIFF" || content.subarray(8, 12).toString("utf8") !== "WEBP") return null;
+  return { filename: safe.toLowerCase().endsWith(".webp") ? safe : `${safe}.webp`, content };
+}
+
+function acceptedAttachments(photos: z.infer<typeof bodySchema>["photos"]) {
+  const attachments: { filename: string; content: Buffer }[] = [];
+  let total = 0;
+  for (const photo of photos ?? []) {
+    const decoded = decodeAttachment(photo);
+    if (!decoded) continue;
+    if (total + decoded.content.length > 3_200_000) break;
+    total += decoded.content.length;
+    attachments.push(decoded);
+  }
+  return attachments;
+}
+
 function verifyEstimate(
   estimate: NonNullable<z.infer<typeof optionalEstimateSchema>>
 ): VerifiedEstimate | null {
@@ -181,6 +235,9 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data;
+    const attachments = acceptedAttachments(data.photos);
+    const fileNote = attachments.length > 0 ? `Files attached: ${attachments.map((file) => file.filename).join(", ")}` : "";
+    const storedMessage = [data.message?.trim(), fileNote].filter(Boolean).join("\n\n");
     if (classifyLeadSpam({ honeypot: data.website, name: data.name, message: data.message }).spam)
       return NextResponse.json({ success: true, accepted: false, duplicate: true });
     const limit = rateLimit(clientKeyFrom(request.headers, "consultation"), 8, 10 * 60 * 1000);
@@ -206,7 +263,7 @@ export async function POST(request: NextRequest) {
           city: (profile?.city as string) || null,
           propertyProfile: (data.propertyProfile as PropertyProfile | null) ?? null,
           projectType: data.projectType,
-          message: data.message || null,
+          message: storedMessage || null,
           estimateProject: estimate?.project || null,
           estimateFinish: estimate?.finish || null,
           estimateLow: estimate?.priceLow?.toString() || null,
@@ -231,7 +288,7 @@ export async function POST(request: NextRequest) {
       address: data.address,
       zip: data.zip,
       projectType: data.projectType,
-      message: data.message,
+      message: storedMessage,
     };
     // Real unit costs entered in the admin pricing panel, applied to every
     // breakdown this request renders so the panel, emails and CRM agree.
@@ -257,7 +314,7 @@ export async function POST(request: NextRequest) {
       projectGoals: buildProjectGoals(estimate),
       // The homeowner's own words stay in finalNotes; the estimate record goes
       // to estimateSummary, which the dashboard sizes for it (20k vs 2k).
-      finalNotes: data.message || undefined,
+      finalNotes: storedMessage || undefined,
       estimate: estimate ? buildLeadEstimateRecord(estimate, unitCostOverrides) : undefined,
       // Zoning, lot size, assessed value, owner and occupancy as structured
       // fields, alongside the same rows the admin email renders.
@@ -286,7 +343,7 @@ export async function POST(request: NextRequest) {
           address: data.address,
           zip: data.zip,
           projectType: data.projectType,
-          message: data.message,
+          message: storedMessage,
         };
         const enrichment = (data.propertyProfile as PropertyEnrichment | null) ?? null;
 
@@ -305,6 +362,7 @@ export async function POST(request: NextRequest) {
             subject: buildAdminSubject(lead, estimate),
             html: adminHtml,
             text: htmlToPlainText(adminHtml),
+            attachments: attachments.length > 0 ? attachments : undefined,
           });
           if (adminResult?.error) {
             console.error(
