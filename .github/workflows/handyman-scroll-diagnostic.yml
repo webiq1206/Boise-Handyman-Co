@@ -1,0 +1,22 @@
+name: Handyman synthetic startup scroll diagnosis
+on:
+  push:
+    branches: [fix/handyman-navigation-wait-20261025]
+    paths: [components/ScrollToTop.tsx, scripts/test-scroll-startup.mjs, .github/workflows/handyman-scroll-diagnostic.yml]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    container: mcr.microsoft.com/playwright:v1.60.0-noble
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify startup interaction, route, history and keyboard behavior
+        run: node scripts/test-scroll-startup.mjs

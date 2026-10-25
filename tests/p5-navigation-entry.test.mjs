@@ -6,7 +6,7 @@ for (const brand of ['boise-handyman-co','handyman','boise-remodeling-co','remod
   for (const route of ['/','/estimate','/estimate/scope','/quote','/re-10-repairs-boise','/remodel-plans-boise']) {
     test(`${brand} ${route} preserves the intended entry`, async () => {
       const actions=[];
-      const page={url:()=> 'http://fixture.test/estimate?review=1',locator(selector){
+      const page={waitForURL:async predicate=>assert.equal(predicate(new URL('http://fixture.test/estimate?review=1')),true),url:()=> 'http://fixture.test/estimate?review=1',locator(selector){
         const locator={first:()=>locator,waitFor:async()=>actions.push(['wait',selector]),click:async()=>actions.push(['click',selector]),scrollIntoViewIfNeeded:async()=>actions.push(['scroll',selector])};return locator;
       }};
       const parent=brand==='p5-home-co-nextjs';
@@ -39,4 +39,10 @@ for(const file of ['p5-intake-intent-browser.mjs','p5-exit-browser.mjs']) test(`
  const next=s.indexOf(file.includes('intent')?"await page.locator('[data-p5-estimator] textarea')":"await page.getByRole('button',{name:'Close the estimator",start);
  assert.ok(start>=0&&entry>start&&next>entry);
  assert.equal((s.match(/page\.goto\(/g)||[]).length,1,'One reviewed entry setup per script');
+});
+
+test('guided entry waits for navigation completion before reading the URL',async()=>{
+ let location='http://fixture.test/',clicked=false,waited=false;
+ const page={url:()=>{assert.equal(waited,true);return location;},waitForURL:async predicate=>{assert.equal(clicked,true);await Promise.resolve();location='http://fixture.test/estimate?review=1';assert.equal(predicate(new URL(location)),true);waited=true;},locator(){const l={first:()=>l,waitFor:async()=>{},click:async()=>{clicked=true;}};return l;}};
+ await enterEstimator(page,{route:'/',brand:'handyman',parent:false});assert.equal(waited,true);
 });
