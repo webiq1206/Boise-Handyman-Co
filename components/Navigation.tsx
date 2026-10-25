@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { isAdFunnelPath } from "@/lib/adLandingPaths";
 import { isEstimatorPath } from "@/lib/p5/estimatorRoutes";
 import { cn } from "@/lib/utils";
+import { CTA_QUOTE } from "@/shared/ctaCopy";
 import { NAV_LINKS } from "@/shared/navConfig";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -176,7 +177,7 @@ function MarketingNavigation() {
               Chat
             </button>
             <NavEstimateButton variant="brand" size="sm" className="min-h-11" trackingLocation="nav_desktop">
-              Send a request
+              {CTA_QUOTE}
             </NavEstimateButton>
           </div>
 
@@ -321,7 +322,7 @@ function MarketingNavigation() {
                       onExtraClick={() => setMobileOpen(false)}
                       trackingLocation="nav_mobile_menu"
                     >
-                      Send a request
+                      {CTA_QUOTE}
                     </NavEstimateButton>
                   </div>
                 </Dialog.Content>
@@ -366,7 +367,7 @@ function MarketingNavigation() {
             data-testid="button-begin-conversation-mobile"
             trackingLocation="mobile_sticky_bar"
           >
-            Send a request
+            {CTA_QUOTE}
           </NavEstimateButton>
         </div>
       </div>

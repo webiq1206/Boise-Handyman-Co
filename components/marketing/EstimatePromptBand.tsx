@@ -13,7 +13,6 @@ interface EstimatePromptBandProps {
   /** Optional bullet trust points shown beside the CTA on md+. */
   bullets?: string[];
   href?: string;
-  label?: string;
 }
 
 /**
@@ -35,7 +34,6 @@ export function EstimatePromptBand({
   title,
   description,
   href = "/estimate",
-  label = CTA_PRIMARY,
   bullets = [
     "Based on real Treasure Valley handyman job costs",
     "Project details reviewed by our team",
@@ -56,7 +54,7 @@ export function EstimatePromptBand({
               <p className="ed-body">{description}</p>
               <Button variant="brand" size="lg" className="w-full sm:w-auto" asChild>
                 <a href={href}>
-                  {label}
+                  {CTA_PRIMARY}
                   <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                 </a>
               </Button>

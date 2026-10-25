@@ -8,14 +8,13 @@
  * labelled "Virtual assistant" so a visitor always knows what they are
  * talking to - the conversation itself does the human part.
  */
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useFormInView } from "@/hooks/use-form-in-view";
 import Link from "next/link";
 import { MessageCircle, Send, X } from "lucide-react";
 import { continueAssistantProject } from "@/lib/p5/assistantContinuation";
 import { trackEvent } from "@/lib/analytics";
-import { requestHideMobileNavBar } from "@/lib/mobileNavBar";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -57,23 +56,17 @@ export function AssistantWidget() {
   const pathname = usePathname();
   const formInView = useFormInView(pathname, true);
   const [open, setOpen] = useState(false);
-  const openedOnce = useRef(false);
-  const logRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
-    const openFromBar = () => {
-      setOpen(true);
-      if (!openedOnce.current) {
-        openedOnce.current = true;
-        trackEvent("assistant_opened", { page: pathname ?? "" });
-      }
-    };
+    const openFromBar = () => setOpen(true);
     window.addEventListener("p5:assistant-open", openFromBar);
     return () => window.removeEventListener("p5:assistant-open", openFromBar);
-  }, [pathname]);
+  }, []);
   const [messages, setMessages] = useState<ChatMessage[]>([GREETING]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
+  const logRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const openedOnce = useRef(false);
 
   /* Restore the session transcript once on mount. */
   useEffect(() => {
@@ -100,73 +93,13 @@ export function AssistantWidget() {
     }
   }, [messages]);
 
-  /* Opening always starts at the welcome. Later turns follow the newest line. */
-  const baselineCount = useRef(0);
-  const messageCount = useRef(messages.length);
-  messageCount.current = messages.length;
-  useLayoutEffect(() => {
-    if (!open) return;
-    baselineCount.current = messageCount.current;
-    if (logRef.current) logRef.current.scrollTop = 0;
-  }, [open]);
+  /* Keep the newest message in view. */
   useEffect(() => {
-    if (!open) return;
-    if (messages.length <= baselineCount.current && !sending) return;
-    const log = logRef.current;
-    if (log) log.scrollTo({ top: log.scrollHeight });
+    if (open) logRef.current?.scrollTo({ top: logRef.current.scrollHeight });
   }, [messages, sending, open]);
 
   useEffect(() => {
-    if (!open) return;
-    const coarse = window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(max-width: 700px)").matches;
-    if (coarse) return;
-    inputRef.current?.focus({ preventScroll: true });
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-    const release = requestHideMobileNavBar();
-    const root = document.documentElement;
-    const prevHtml = root.style.overflow;
-    const prevBody = document.body.style.overflow;
-    root.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-    const sheet = () => document.querySelector<HTMLElement>("[data-testid='panel-assistant']");
-    const pin = () => {
-      const node = sheet();
-      if (!node) return;
-      const narrow = window.matchMedia("(max-width: 700px)").matches;
-      if (!narrow) {
-        node.style.top = "";
-        node.style.height = "";
-        node.style.left = "";
-        node.style.right = "";
-        node.style.bottom = "";
-        node.style.borderRadius = "";
-        return;
-      }
-      const vv = window.visualViewport;
-      const top = vv?.offsetTop ?? 0;
-      const height = vv?.height ?? window.innerHeight;
-      node.style.top = `${top}px`;
-      node.style.left = "0px";
-      node.style.right = "0px";
-      node.style.bottom = "auto";
-      node.style.height = `${height}px`;
-      node.style.borderRadius = "0px";
-    };
-    pin();
-    window.visualViewport?.addEventListener("resize", pin);
-    window.visualViewport?.addEventListener("scroll", pin);
-    window.addEventListener("resize", pin);
-    return () => {
-      release();
-      root.style.overflow = prevHtml;
-      document.body.style.overflow = prevBody;
-      window.visualViewport?.removeEventListener("resize", pin);
-      window.visualViewport?.removeEventListener("scroll", pin);
-      window.removeEventListener("resize", pin);
-    };
+    if (open) inputRef.current?.focus();
   }, [open]);
 
   const close = useCallback(() => setOpen(false), []);
@@ -180,7 +113,7 @@ export function AssistantWidget() {
   }, [open, close]);
 
   const continueProject = () => {
-    try { continueAssistantProject(messages,input); window.location.assign('/estimate?review=1'); }
+    try { continueAssistantProject(messages,input); window.location.assign('/estimate'); }
     catch(error) { setMessages(cur=>[...cur,{role:'assistant',content:error instanceof Error?error.message:'Your project could not be saved. Please retry.'}]); }
   };
 
@@ -217,7 +150,7 @@ export function AssistantWidget() {
       const data = (await res.json().catch(() => null)) as { reply?: string } | null;
       const reply =
         data?.reply ??
-        "I'm having trouble connecting right now. Send a request on this page, or call (208) 477-1169.";
+        "I'm having trouble connecting right now. Try the estimator on the homepage, or call (208) 477-1169.";
       setMessages((cur) => [...cur, { role: "assistant", content: reply }]);
     } catch {
       setMessages((cur) => [
@@ -225,7 +158,7 @@ export function AssistantWidget() {
         {
           role: "assistant",
           content:
-            "I'm having trouble connecting right now. Send a request on this page, or call (208) 477-1169.",
+            "I'm having trouble connecting right now. Try the estimator on the homepage, or call (208) 477-1169.",
         },
       ]);
     } finally {
@@ -233,7 +166,7 @@ export function AssistantWidget() {
     }
   }, [input, sending, messages, pathname]);
 
-  if (pathname && EXCLUDED_PREFIXES.some((p) => pathname.startsWith(p))) return null;
+  if (pathname && (pathname.startsWith("/estimate") || EXCLUDED_PREFIXES.some((p) => pathname.startsWith(p)))) return null;
 
   return (
     <>
@@ -264,7 +197,7 @@ export function AssistantWidget() {
           role="dialog"
           aria-label="Estimating assistant chat"
           data-testid="panel-assistant"
-          className="assistant-sheet fixed inset-x-0 bottom-0 z-[180] flex h-[100dvh] flex-col overflow-hidden border border-card-border bg-background shadow-2xl min-[701px]:inset-x-auto min-[701px]:bottom-5 min-[701px]:right-5 min-[701px]:h-[560px] min-[701px]:max-h-[calc(100dvh-6rem)] min-[701px]:w-[380px] min-[701px]:rounded-md"
+          className="fixed inset-x-0 bottom-0 z-[150] flex h-[85dvh] flex-col overflow-hidden rounded-t-md border border-card-border bg-background shadow-2xl sm:inset-x-auto sm:bottom-5 sm:right-5 sm:h-[560px] sm:max-h-[calc(100dvh-6rem)] sm:w-[380px] sm:rounded-md"
         >
           {/* Header */}
           <div className="flex items-center justify-between gap-3 border-b border-card-border bg-card px-4 py-3">
@@ -289,7 +222,7 @@ export function AssistantWidget() {
             role="log"
             aria-live="polite"
             data-clarity-mask="True"
-            className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4"
+            className="flex-1 space-y-3 overflow-y-auto px-4 py-4"
           >
             {messages.map((m, i) => (
               <div key={i} className={m.role === "user" ? "flex justify-end" : "flex justify-start"}>
@@ -338,9 +271,6 @@ export function AssistantWidget() {
               maxLength={MAX_INPUT_CHARS}
               placeholder="Ask about a repair or install..."
               aria-label="Message"
-              name="assistant-message"
-              autoComplete="off"
-              enterKeyHint="send"
               data-testid="input-assistant-message"
               className="max-h-28 min-h-11 flex-1 resize-none rounded-sm border border-card-border bg-background px-3 py-2.5 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-legible"
             />

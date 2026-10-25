@@ -1,7 +1,6 @@
 import { InteriorEstimateLink,InteriorHero,InteriorPage } from '@/components/approved/InteriorLayout';
 import { BusinessPhoneContact } from '@/components/BusinessPhoneContact';
 import { ConsultationForm } from '@/components/ConsultationForm';
-import { QuickRequest } from '@/components/marketing/QuickRequest';
 import { Section } from '@/components/marketing';
 import { Hairline } from '@/components/marketing/Hairline';
 import { MarketingCard } from '@/components/marketing/MarketingCard';
@@ -212,7 +211,6 @@ export default function ContactPage() {
               Contact Boise Handyman{' '}
               <em className="brc-accent">Co</em>
             </h1>
-            <QuickRequest />
             <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-6">
               Send your task list with photos for an upfront quote, or call or text our team to
               explore a range for your repair, install, or maintenance job.

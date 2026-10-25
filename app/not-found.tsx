@@ -44,7 +44,7 @@ export default function NotFound() {
                 { href: "/services", label: "Our Services" },
                 { href: "/#consult", label: "Free Consultation" },
                 { href: "/blog", label: "Blog and Ideas" },
-                { href: "/estimate", label: "Send a request" },
+                { href: "/#calculator", label: "Project Estimator" },
               ].map((item) => (
                 <Link
                   key={item.href}
