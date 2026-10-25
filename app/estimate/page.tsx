@@ -2,7 +2,6 @@ import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
 import type { Metadata } from "next";
 import { ContractorCredential } from "@/components/ContractorCredential";
 import { EstimateCalculator } from "@/components/EstimateCalculator";
-import { QuickRequest } from "@/components/marketing/QuickRequest";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildCanonical } from "@/lib/page-metadata";
 import {
@@ -37,14 +36,7 @@ export const metadata: Metadata = withBrandPageMetadata(({
   },
 }), "/estimate");
 
-export default async function EstimatePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ review?: string | string[] }>;
-}) {
-  const params = await searchParams;
-  const reviewValue = params.review;
-  const review = reviewValue === "1" || (Array.isArray(reviewValue) && reviewValue.includes("1"));
+export default function EstimatePage() {
   const schemas = [
     generateWebPageSchema({
       title: "Request a Handyman Estimate",
@@ -57,27 +49,15 @@ export default async function EstimatePage({
     ]),
   ];
 
-  if (review) {
-    return (
-      <>
-        <JsonLd data={schemas} />
-
-        {/* Static page-shell heading. The estimator is a client component, so its
-            own heading is not in the server HTML. headingAs stays h2 so the tool
-            does not emit a second h1. Estimator logic is unchanged. */}
-        <h1 className="sr-only">Request a Boise Handyman Co repair estimate</h1>
-        <EstimateCalculator fitViewport headingAs="h2" />
-        <p className="px-4 py-3 text-center text-xs text-muted-foreground">
-          <ContractorCredential showVerifyLink={false} />
-        </p>
-      </>
-    );
-  }
-
   return (
     <>
       <JsonLd data={schemas} />
-      <QuickRequest frame="page" />
+
+      {/* Static page-shell heading. The estimator is a client component, so its
+          own heading is not in the server HTML. headingAs stays h2 so the tool
+          does not emit a second h1. Estimator logic is unchanged. */}
+      <h1 className="sr-only">Request a Boise Handyman Co repair estimate</h1>
+      <EstimateCalculator fitViewport headingAs="h2" />
       <p className="px-4 py-3 text-center text-xs text-muted-foreground">
         <ContractorCredential showVerifyLink={false} />
       </p>

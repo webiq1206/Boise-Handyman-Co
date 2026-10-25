@@ -1,7 +1,7 @@
+import { ArrowRight, ArrowUpRight, Phone } from 'lucide-react';
 import { preload } from 'react-dom';
 import type { CSSProperties, ReactNode } from 'react';
-import { QuickRequest } from '@/components/marketing/QuickRequest';
-import { handymanServiceSentence } from '@/shared/siteConfig';
+import { SITE_CONFIG, handymanServiceSentence } from '@/shared/siteConfig';
 import { brands } from './family-content';
 
 /** Keeps the approved family palette on the server so the hero is not inside a client component. */
@@ -42,8 +42,25 @@ export function ApprovedHomeHero() {
             <em>Your list, handled.</em>
           </h1>
           <p className="f-hero-summary" data-speakable="summary">{handymanServiceSentence()}</p>
-          <p className="f-hero-lede">The sticking door. The damaged drywall. Tell us what is on the list and we will call you back.</p>
-          <QuickRequest callTestId="button-call-hero" />
+          <p>{b.intro}</p>
+          <div className="f-actions">
+            {/* Calls are the conversion ads optimize for, so the number leads. */}
+            <a className="f-button" href={SITE_CONFIG.phoneHref} data-testid="button-call-hero">
+              <Phone size={18} aria-hidden="true" />
+              Call {SITE_CONFIG.phone}
+            </a>
+            <a className="f-button" href="/estimate">
+              {b.action}
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </a>
+            <a className="f-link" href="/contact">
+              Send photos or contact us
+              <ArrowRight size={18} />
+            </a>
+          </div>
+          <span className="estimator-promise">
+            Describe your project. Our team will review it and prepare your estimate.
+          </span>
         </div>
       </section>
       <div className="f-proof">

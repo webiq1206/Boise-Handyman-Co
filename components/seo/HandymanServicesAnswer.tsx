@@ -6,21 +6,12 @@ import { SERVICES } from '@/shared/contentData';
  */
 export function HandymanServicesAnswer() {
   return (
-    <section className="f-section f-container f-services-answer" id="handyman-services-boise">
+    <section className="f-section f-container" id="handyman-services-boise">
       <p className="f-eyebrow">BOISE, IDAHO</p>
       <h2>Handyman services in Boise, Idaho</h2>
       <p data-speakable="summary">
         Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, and maintenance. Drywall repair, interior and exterior painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, caulking and punch-list work. Serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, Caldwell. Phone (208) 477-1169.
       </p>
-      <figure>
-        <img
-          src="/images/handyman/consult-doorstep-branded.webp"
-          alt="A handyman and a homeowner reviewing a clipboard at a front door"
-          width={1000}
-          height={750}
-          loading="lazy"
-        />
-      </figure>
       <p>
         Send the full repair list, clear photos, your Boise-area service address and any date you are working toward. We review the tasks and confirm the scope before scheduling. Work that needs a licensed specialist or a larger remodel is handled separately from a handyman visit.
       </p>
@@ -31,7 +22,7 @@ export function HandymanServicesAnswer() {
         <li>Your requested timing and access considerations</li>
       </ul>
       <p>
-        <a href="#quick-request">Send a request</a>
+        <a href="/contact">Send your repair list and photos</a>
         {" · "}
         <a href="/re-10-repairs-boise">Inspection-related repairs</a>
       </p>
