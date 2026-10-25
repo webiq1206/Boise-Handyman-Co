@@ -193,3 +193,65 @@
 @media (max-width: 700px) {
   .site-cabinet .cabinet-approved .section { padding-block: 56px; }
 }
+
+/* Handyman home: the answer block's rule list. Plain rows had a top rule and
+   no vertical padding, so the type sat a few pixels off the line. Link rows
+   only looked looser because the anchor carried a 48px minimum height.
+   One padding rhythm for both, and the heading plus the two actions get their
+   own air so they are not flush with the rules. The shared fact-block grid
+   pinned every direct list to row 4; later rows (the request heading, the
+   actions, and the service list) then stacked on top of each other. */
+.approved-shell .family-site section#handyman-services-boise > h3 {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  margin-top: 36px;
+}
+.approved-shell .family-site section#handyman-services-boise > ul:first-of-type {
+  grid-column: 1 / -1;
+  grid-row: 5;
+}
+.approved-shell .family-site section#handyman-services-boise > .f-answer-links {
+  grid-column: 1 / -1;
+  grid-row: 6;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 32px;
+  margin-top: 28px;
+  max-width: none;
+}
+.approved-shell .family-site section#handyman-services-boise > .f-answer-links a {
+  color: #2c302f;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-decoration: underline;
+  text-decoration-color: #cb633b;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+.approved-shell .family-site section#handyman-services-boise > .f-answer-links a:hover {
+  text-decoration-color: #a9401d;
+}
+.approved-shell .family-site section#handyman-services-boise > ul:last-of-type {
+  grid-column: 1 / -1;
+  grid-row: 7;
+  margin-top: 36px;
+}
+@media (max-width: 820px) {
+  .approved-shell .family-site section#handyman-services-boise > h3 { margin-top: 32px; }
+  .approved-shell .family-site section#handyman-services-boise > .f-answer-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .approved-shell .family-site section#handyman-services-boise > .f-answer-links a {
+    padding-block: 4px;
+  }
+}
+@media (max-width: 527px) {
+  .approved-shell .family-site section#handyman-services-boise > ul {
+    border-bottom: 1px solid #2c302f26;
+  }
+}
