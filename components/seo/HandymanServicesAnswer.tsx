@@ -21,9 +21,8 @@ export function HandymanServicesAnswer() {
         <li>Photos and any product or material details</li>
         <li>Your requested timing and access considerations</li>
       </ul>
-      <p>
+      <p className="f-answer-links">
         <a href="/contact">Send your repair list and photos</a>
-        {" · "}
         <a href="/re-10-repairs-boise">Inspection-related repairs</a>
       </p>
       <ul>
