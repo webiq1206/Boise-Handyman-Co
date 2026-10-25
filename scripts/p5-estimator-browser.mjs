@@ -1,5 +1,6 @@
 import {chromium,webkit} from '@playwright/test';
 import {enterEstimator} from './lib/navigationEntry.mjs';
+import {startNavigationDiagnostics} from './lib/navigationDiagnostics.mjs';
 import {createHash} from 'node:crypto';
 import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {PDFDocument} from 'pdf-lib';
@@ -543,7 +544,8 @@ for(const width of focusOnly?[]:[320,390,1440]){
 const paths=brand.id==='p5'?['/estimate','/estimate/scope','/quote',...['kitchen-remodel','bathroom-remodel','home-addition','adu','custom-home','custom-cabinets','handyman'].map(s=>'/quote/'+s)]:['/estimate','/estimate/scope','/#calculator',...(brand.services.includes('re10')?['/re-10-repairs-boise']:[]),...(brand.id==='remodeling'?['/remodel-plans-boise']:[])];
 for(const width of progressOnly||focusOnly?[]:[390,768,1440])for(const path of paths){
  const context=await browser.newContext({viewport:{width,height:900}});await mock(context);const page=await context.newPage();
+ const diagnostics=await startNavigationDiagnostics(context,page,{base,width,output,enabled:process.env.P5_NAVIGATION_DIAGNOSTICS==='1'&&process.env.P5_TEST_BROWSER==='webkit'&&brand.id==='handyman'&&path==='/#calculator'&&[768,1440].includes(width)});
  try{const response=await page.goto(base+path);assert.ok(response?.ok(),`HTTP ${response?.status()}`);await enterEstimator(page,{route:new URL(path,base).pathname,brand:brand.id,parent:brand.id==='p5'});const est=page.locator('[data-p5-estimator]').first();await est.getByLabel('Tell us about your project',{exact:true}).waitFor();await overflow(page);assert.ok(!/Continue manually|Upload Scope|Manual Estimate/.test(await est.innerText()));results.push({width,path,passed:true});}
- catch(error){results.push({width,path,passed:false,error:String(error)});await capture(page,`route-${width}-${path.replace(/[^a-z0-9]/gi,'_')}`).catch(()=>{});}await context.close();
+ catch(error){results.push({width,path,passed:false,error:String(error)});await capture(page,`route-${width}-${path.replace(/[^a-z0-9]/gi,'_')}`).catch(()=>{});}if(diagnostics)await diagnostics.finish();await context.close();
 }
 await browser.close();await writeFile(`${output}/browser-results.json`,JSON.stringify({brand:brand.id,externalServices:'simulated',physicalMicrophone:'not tested',results},null,2));console.log(JSON.stringify(results));if(results.some(r=>!r.passed))process.exitCode=1;
