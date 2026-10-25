@@ -265,7 +265,7 @@
     "scripts/p5-build-price-book.mjs": "714a76f8a9f29077d052304456aca38769fc9485022774856eae816b2e847450",
     "scripts/p5-cli-acceptance.mts": "ed5b8fc80231c03b3c2b54de486fb6db7f259947e855ecf4985a9caf6f4ea6b8",
     "scripts/p5-component-review.mjs": "7035921690a6dc0648b1c3142b054ad09d67535c706e108817369e9e6de6ab26",
-    "scripts/p5-estimator-browser.mjs": "72a2e98ff42522f78bb2b4e8ddbbb121a71695c6f2adc6388eb6bac7704f7ca5",
+    "scripts/p5-estimator-browser.mjs": "f27916b52b015c87f8784c22e30f6d0e241a6afc56ff2cb2753e241339b9e7b2",
     "scripts/p5-host-build.mjs": "1d83b593096c24575847b9f290253c7d32e74dfaa640d22ac68b427307599b3f",
     "scripts/p5-hub-notification-check.mjs": "e2d4216777feeb2e4099b93986ca257e4760f671312a6b343014ef7677148f06",
     "scripts/p5-intake-browser-fixture.mts": "438c997dfdf18d8f11383059cdb93df31de0275f79dfb43af845c143a10f0872",
@@ -513,7 +513,7 @@
     "lib/p5/intakeReferenceStore.ts": "2c023fd0c62dd4583021db6f1767df8b8bfe4813cd9d6933d445c4fb31a97216",
     "tests/p5-intake-pdf.test.ts": "cb331ce30787d6df4154885531aaa05c2dec4e29e51cea3315392636bb0d1758",
     "scripts/lib/navigationEntry.mjs": "6a750d82ecdcdfb357a273a123aaf915c2fb0cc115c61363ce664e9da5ad4e4d",
-    "tests/p5-navigation-entry.test.mjs": "7084510f8fa3364e84f956126ca7d9a47b506a51195b2d08fe38903b5e97e17f"
+    "tests/p5-navigation-entry.test.mjs": "11a683547ab7a4771443cbd0d751515c75c9e81cf502f347ffe42f368baeae89"
   },
   "coordinatedIntakeBatch": {
     "base": "e6e125b83468a402264be2f1e82e5c0466baa178",
@@ -575,6 +575,27 @@
         "tests/p5-navigation-entry.test.mjs": "7084510f8fa3364e84f956126ca7d9a47b506a51195b2d08fe38903b5e97e17f"
       },
       "retired": []
+    },
+    {
+      "mode": "selected",
+      "source": "p5-home-co",
+      "sourceCommit": "97393ea8325af5d26205a1b630e92c5f1e715c81",
+      "files": {
+        "scripts/p5-estimator-browser.mjs": "f27916b52b015c87f8784c22e30f6d0e241a6afc56ff2cb2753e241339b9e7b2",
+        "scripts/lib/navigationEntry.mjs": "6a750d82ecdcdfb357a273a123aaf915c2fb0cc115c61363ce664e9da5ad4e4d",
+        "tests/p5-navigation-entry.test.mjs": "11a683547ab7a4771443cbd0d751515c75c9e81cf502f347ffe42f368baeae89"
+      },
+      "retired": [],
+      "compatibility": [
+        {
+          "consumer": "scripts/p5-estimator-browser.mjs",
+          "consumerSha256": "f27916b52b015c87f8784c22e30f6d0e241a6afc56ff2cb2753e241339b9e7b2",
+          "dependency": "lib/p5/intakeContract.ts",
+          "sourceSha256": "9cffbd668fd6799eb117fd51c20fb24c92adc7acf831e1190ffa0601deb0fb96",
+          "targetSha256": "3464a0fb0db61071a9138c258169aae0bb80a1df0dacdf55c8e20ca37ae3555f",
+          "reason": "The only imported value is intakeScopeReviewed. Its function, intakeReviewFingerprint closure and all following source are identical; existing imports and scope helpers are preserved. The consumer differs only by guided-entry setup. Attribution additions above this block remain canonical-only."
+        }
+      ]
     }
   ]
 }

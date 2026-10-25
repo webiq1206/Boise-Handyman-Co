@@ -1,4 +1,5 @@
 import {chromium,webkit} from '@playwright/test';
+import {enterEstimator} from './lib/navigationEntry.mjs';
 import {createHash} from 'node:crypto';
 import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {PDFDocument} from 'pdf-lib';
@@ -164,7 +165,9 @@ for(const width of progressOnly?[]:[320,390,1440]){
   await page.goto(fixture);await page.requestGC();
   assert.equal(await page.evaluate(()=>window.__p5RecoveryFactory===indexedDB&&Object.hasOwn(indexedDB,'open')),true,'The real IndexedDB recovery hook must survive garbage collection');
   await context.unroute(fixture);
-  await page.goto(base+'/estimate');const est=page.locator('[data-p5-estimator]');
+  await page.goto(base+'/estimate');
+  await enterEstimator(page,{route:'/estimate',brand:brand.id,parent:false});
+  const est=page.locator('[data-p5-estimator]');
   await est.getByRole('heading',{name:'Preparing your saved project on this device',exact:true}).waitFor();
   assert.equal(await est.getByRole('heading',{name:'Understanding your project',exact:true}).count(),0);
   assert.equal(await est.locator('[data-testid="p5-processing"]').count(),0,'Local recovery is not provider processing');
