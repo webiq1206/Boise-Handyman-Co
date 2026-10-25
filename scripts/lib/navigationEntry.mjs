@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 // Follow the site's actual entry path before running the shared estimator assertions.
 export async function enterEstimator(page, {route, brand, parent}) {
   if (parent) return;
-  if (brand === 'boise-handyman-co' && (route === '/' || route === '/estimate')) {
+  if (['boise-handyman-co','handyman'].includes(brand) && (route === '/' || route === '/estimate')) {
     await page.locator('#quick-request form').waitFor();
     await page.locator('a[href="/estimate?review=1"]').first().click();
     const destination = new URL(page.url());
