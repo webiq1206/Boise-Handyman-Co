@@ -11,7 +11,9 @@ for (const brand of ['boise-handyman-co','handyman','boise-remodeling-co','remod
       }};
       const parent=brand==='p5-home-co-nextjs';
       await enterEstimator(page,{brand,route,parent});
-      const expected=parent?[]:['boise-remodeling-co','remodeling'].includes(brand) && route==='/'
+      const expected=parent?[]:['boise-handyman-co','handyman'].includes(brand) && ['/', '/estimate'].includes(route)
+        ? [['wait','#quick-request form'],['click','a[href="/estimate?review=1"]']]
+        : ['boise-remodeling-co','remodeling'].includes(brand) && route==='/'
           ? [['click','a[href="/#calculator"]'],['scroll','#calculator']]
           : route==='/' ? [['scroll','#calculator']] : [];
       assert.deepEqual(actions,expected);
@@ -39,9 +41,8 @@ for(const file of ['p5-intake-intent-browser.mjs','p5-exit-browser.mjs']) test(`
  assert.equal((s.match(/page\.goto\(/g)||[]).length,1,'One reviewed entry setup per script');
 });
 
-test('homepage calculator entry stays on the page',async()=>{
- const actions=[];
- const page={url:()=>'http://fixture.test/',waitForURL:async()=>{throw new Error('homepage entry must not navigate');},locator(selector){const l={first:()=>l,waitFor:async()=>actions.push(['wait',selector]),click:async()=>actions.push(['click',selector]),scrollIntoViewIfNeeded:async()=>actions.push(['scroll',selector])};return l;}};
- await enterEstimator(page,{route:'/',brand:'handyman',parent:false});
- assert.deepEqual(actions,[['scroll','#calculator']]);
+test('guided entry waits for navigation completion before reading the URL',async()=>{
+ let location='http://fixture.test/',clicked=false,waited=false;
+ const page={url:()=>{assert.equal(waited,true);return location;},waitForURL:async predicate=>{assert.equal(clicked,true);await Promise.resolve();location='http://fixture.test/estimate?review=1';assert.equal(predicate(new URL(location)),true);waited=true;},locator(){const l={first:()=>l,waitFor:async()=>{},click:async()=>{clicked=true;}};return l;}};
+ await enterEstimator(page,{route:'/',brand:'handyman',parent:false});assert.equal(waited,true);
 });
