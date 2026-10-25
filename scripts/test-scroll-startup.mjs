@@ -20,8 +20,12 @@ for(const [name,engine] of Object.entries({chromium,webkit})){
  await page.evaluate(()=>{scrollTo(0,260);history.pushState({},'','/hash#target');window.changePath('/hash')});assert.equal(await page.evaluate(()=>scrollY),260);passed++;
  await page.evaluate(()=>{history.replaceState({},'','/restored');scrollTo(0,380);dispatchEvent(new PopStateEvent('popstate'));window.changePath('/restored')});assert.equal(await page.evaluate(()=>scrollY),380);passed++;
  await page.evaluate(()=>{history.pushState({},'','/fresh');window.changePath('/fresh')});assert.equal(await page.evaluate(()=>scrollY),0);passed++;
+ // Exercise real browser Back/forward restoration, not only a synthetic pop event.
+ await page.evaluate(()=>{window.addEventListener('popstate',()=>window.changePath(location.pathname));scrollTo(0,210);history.pushState({},'','/history-next');window.changePath('/history-next');scrollTo(0,460);history.back()});
+ await page.waitForFunction(()=>location.pathname==='/fresh'&&scrollY===210);passed++;
+ await page.evaluate(()=>history.forward());await page.waitForFunction(()=>location.pathname==='/history-next'&&scrollY===460);passed++;
  await page.locator('a').focus();await page.keyboard.press('Enter');await page.waitForURL('**/estimate?review=1');passed++;
- console.log(`${name} ${width}: 7 interaction/restoration checks passed`);await context.close();
+ console.log(`${name} ${width}: 9 interaction/restoration checks passed`);await context.close();
  }}finally{await browser.close()}
 }
 console.log(`${passed} passed; no retries, no external requests or submissions`);
