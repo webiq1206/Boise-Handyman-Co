@@ -60,7 +60,7 @@ export function htmlToPlainText(html: string): string {
  */
 export function buildLogoImage(width = 210): string {
   return `
-    <img src="${SITE_BASE_URL}/brand/png/wordmark/dark/boise-handyman-co-wordmark-bone-accent-1200w.png"
+    <img src="${SITE_BASE_URL}/brand/png/wordmark/dark/boise-handyman-co-wordmark-bone-accent-1200w.png?v=co-accent"
       alt="${escapeHtml(SITE_CONFIG.name)}" width="${width}"
       style="display:block;margin:0 auto;width:${width}px;max-width:72%;height:auto;border:0;outline:none;text-decoration:none;" />
   `;
@@ -71,7 +71,7 @@ export function buildTextLogo(): string {
   return `
     <div style="margin-bottom:16px;">
       <div style="font-family:'Libre Baskerville',Georgia,'Times New Roman',serif;font-size:20px;font-weight:400;color:${EMAIL_BRAND.text};line-height:1.2;">
-        Boise Handyman <span style="color:${EMAIL_BRAND.accent};font-style:italic;">Co.</span>
+        Boise Handyman <span style="color:${EMAIL_BRAND.accentDeep};font-style:italic;">Co.</span>
       </div>
       <div style="font-family:Arial,Helvetica,sans-serif;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:${EMAIL_BRAND.textMuted};margin-top:6px;">
         Repairs &amp; Maintenance
