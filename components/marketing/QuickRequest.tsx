@@ -96,6 +96,7 @@ export function QuickRequest({
 }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [project, setProject] = useState("");
   const [website, setWebsite] = useState("");
   const [files, setFiles] = useState<ReadyFile[]>([]);
@@ -138,6 +139,7 @@ export function QuickRequest({
     if (sending) return;
     const trimmedName = name.trim();
     const digits = phone.replace(/\D/g, "");
+    const trimmedEmail = email.trim();
     const trimmedProject = project.trim();
     if (trimmedName.length < 2) {
       setError("Please enter your name.");
@@ -145,6 +147,10 @@ export function QuickRequest({
     }
     if (digits.length < 10) {
       setError("Please enter a phone number we can call.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setError("Please enter a valid email address.");
       return;
     }
     if (trimmedProject.length < 8) {
@@ -161,7 +167,8 @@ export function QuickRequest({
           name: trimmedName,
           preferredContact: "phone",
           phone: phone.trim(),
-          email: "",
+          email: trimmedEmail,
+          quick: true,
           address: "",
           projectType: "task-list",
           message: trimmedProject,
@@ -246,6 +253,20 @@ export function QuickRequest({
             </label>
           </div>
           <label className={styles.field}>
+            Email
+            <input
+              className={styles.input}
+              name="email"
+              type="email"
+              autoComplete="email"
+              inputMode="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
+              data-testid="input-quick-email"
+            />
+          </label>
+          <label className={styles.field}>
             What needs doing?
             <textarea
               className={styles.textarea}
@@ -317,7 +338,7 @@ export function QuickRequest({
         <div>
           <h1>{heading || "Send a request"}</h1>
           <p className={styles.lede}>
-            {lede || "Tell us what needs doing and the best number to reach you. Photos, plans, and inspection reports are optional."}
+            {lede || "Tell us what needs doing, plus your email and phone. Photos, plans, and inspection reports are optional."}
           </p>
           {card}
         </div>

@@ -92,6 +92,8 @@ const bodySchema = z
     inquiryId: z.string().uuid(),
     website: z.string().max(0).optional(),
     attribution: z.record(z.string().max(100)).optional(),
+    /** Short primary form. Requires a real email in addition to a phone number. */
+    quick: z.literal(true).optional(),
     /**
      * Optional photos, plans, or inspection PDFs from the short request form.
      * Missing or unreadable files never reject the lead.
@@ -108,11 +110,10 @@ const bodySchema = z
       .optional(),
   })
   .superRefine((data, ctx) => {
-    if (data.preferredContact === "email") {
-      if (!z.string().email().safeParse(data.email).success) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["email"], message: "Valid email required" });
-      }
-    } else if (data.phone.replace(/\D/g, "").length < 10) {
+    if ((data.preferredContact === "email" || data.quick) && !z.string().email().safeParse(data.email).success) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["email"], message: "Valid email required" });
+    }
+    if (data.preferredContact !== "email" && data.phone.replace(/\D/g, "").length < 10) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["phone"], message: "Valid phone required" });
     }
   });
