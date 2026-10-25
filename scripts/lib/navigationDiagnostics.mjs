@@ -18,10 +18,10 @@ export async function startNavigationDiagnostics(context,page,{base,width,output
  await page.exposeFunction('__p5EntryRecord',record);
  await page.addInitScript(()=>{
   const send=value=>{void window.__p5EntryRecord(value);};
-  const state=()=>{const form=document.querySelector('#quick-request form'),a=document.querySelector('a[href="/estimate?review=1"]'),r=a?.getBoundingClientRect(),hit=r?document.elementFromPoint(r.x+r.width/2,r.y+r.height/2):null;return {ready:document.readyState,fonts:document.fonts.status,reactAttached:!!form&&Object.keys(form).some(k=>k.startsWith('__reactFiber$')),scrollY,link:r?{x:r.x,y:r.y,width:r.width,height:r.height}:null,centerHitsLink:!!a&&!!hit&&(a===hit||a.contains(hit))};};
+  const state=()=>{const calc=document.querySelector('#calculator'),a=document.querySelector('#calculator a, a[href="/estimate"], a[href="/#calculator"]'),r=a?.getBoundingClientRect(),hit=r?document.elementFromPoint(r.x+r.width/2,r.y+r.height/2):null;return {ready:document.readyState,fonts:document.fonts.status,reactAttached:!!calc&&Object.keys(calc).some(k=>k.startsWith('__reactFiber$')),scrollY,link:r?{x:r.x,y:r.y,width:r.width,height:r.height}:null,centerHitsLink:!!a&&!!hit&&(a===hit||a.contains(hit))};};
   for(const type of ['pointerdown','pointerup','click','submit'])document.addEventListener(type,e=>{
    const target=e.target,anchor=target instanceof Element?target.closest('a'):null;
-   const sample={kind:'event',type,at:performance.now(),trusted:e.isTrusted,tag:target instanceof Element?target.tagName:'other',expectedLink:anchor?.getAttribute('href')==='/estimate?review=1',x:Number.isFinite(e.clientX)?e.clientX:null,y:Number.isFinite(e.clientY)?e.clientY:null,...state()};
+   const sample={kind:'event',type,at:performance.now(),trusted:e.isTrusted,tag:target instanceof Element?target.tagName:'other',expectedLink:['/estimate','/#calculator','#calculator'].includes(anchor?.getAttribute('href')||''),x:Number.isFinite(e.clientX)?e.clientX:null,y:Number.isFinite(e.clientY)?e.clientY:null,...state()};
    send({...sample,phase:'capture',prevented:e.defaultPrevented});
    setTimeout(()=>send({...sample,phase:'after-dispatch',prevented:e.defaultPrevented}),0);
   },true);

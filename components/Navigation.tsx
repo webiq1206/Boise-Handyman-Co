@@ -167,6 +167,15 @@ function MarketingNavigation() {
                 <Contact className="h-[18px] w-[18px]" strokeWidth={1.5} aria-hidden />
               </SaveContactLink>
             </div>
+            <button
+              type="button"
+              className="inline-flex h-11 items-center gap-1.5 rounded-sm border border-border px-3 text-sm font-medium text-foreground"
+              onClick={() => window.dispatchEvent(new Event("p5:assistant-open"))}
+              data-testid="button-chat-desktop"
+            >
+              <MessageSquare className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+              Chat
+            </button>
             <NavEstimateButton variant="brand" size="sm" className="min-h-11" trackingLocation="nav_desktop">
               {CTA_QUOTE}
             </NavEstimateButton>
