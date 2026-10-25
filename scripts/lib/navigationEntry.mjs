@@ -9,7 +9,7 @@ export async function enterEstimator(page, {route, brand, parent}) {
     const destination = new URL(page.url());
     assert.equal(destination.pathname, '/estimate');
     assert.equal(destination.searchParams.get('review'), '1');
-  } else if (brand === 'boise-remodeling-co' && route === '/') {
+  } else if (['boise-remodeling-co','remodeling'].includes(brand) && route === '/') {
     await page.locator('a[href="/#calculator"]').first().click();
     await page.locator('#calculator').first().scrollIntoViewIfNeeded();
   } else if (route === '/') {
