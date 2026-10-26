@@ -512,8 +512,8 @@
     "tests/p5-intake-reference.test.ts": "213a0fc884e14971513fe8d0f9d7d7a2571e2a7b650ed157ab8ccab3a59fda23",
     "lib/p5/intakeReferenceStore.ts": "2c023fd0c62dd4583021db6f1767df8b8bfe4813cd9d6933d445c4fb31a97216",
     "tests/p5-intake-pdf.test.ts": "cb331ce30787d6df4154885531aaa05c2dec4e29e51cea3315392636bb0d1758",
-    "scripts/lib/navigationEntry.mjs": "d1ebaddba364aa468d9204f8a026362470ecb9f4f6825789c6880d7049e5e64c",
-    "tests/p5-navigation-entry.test.mjs": "bc02e8127ca751afa4fd0179fd8d548d521b739c27220df12a8afb74cec58764",
+    "scripts/lib/navigationEntry.mjs": "570c630761ee2ceb966c3894650ae68b54e2349aeb7f9b47b4aa5fa82b8ece3e",
+    "tests/p5-navigation-entry.test.mjs": "ed5e8ca0ad9efe4e68bd492a63efcf640c34e47ffa240c4fbc7fee912b1a3cef",
     "scripts/lib/navigationDiagnostics.mjs": "f594d62686447c3935d39857898152746eb7a78cab1945d35abd2c0794332cb7",
     "tests/p5-navigation-diagnostics.test.mjs": "d13257aef933467f032783248d2c3e87708507f719505c0e1d5f893ba43b37da"
   },
@@ -685,6 +685,17 @@
           "reason": "The only imported value is intakeScopeReviewed. Its function, intakeReviewFingerprint closure and all following source are identical; existing imports and scope helpers are preserved. The consumer differs only by guided-entry setup. Attribution additions above this block remain canonical-only."
         }
       ]
+    },
+    {
+      "mode": "selected",
+      "source": "p5-home-co",
+      "sourceCommit": "2ae33abedef4c7a80d5ad07338786479b752a779",
+      "files": {
+        "scripts/lib/navigationEntry.mjs": "570c630761ee2ceb966c3894650ae68b54e2349aeb7f9b47b4aa5fa82b8ece3e",
+        "tests/p5-navigation-entry.test.mjs": "ed5e8ca0ad9efe4e68bd492a63efcf640c34e47ffa240c4fbc7fee912b1a3cef"
+      },
+      "retired": [],
+      "compatibility": []
     }
   ]
 }
