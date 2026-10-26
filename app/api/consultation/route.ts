@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { after, NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { consultationRequests } from "@/shared/schema";
@@ -37,6 +37,7 @@ import {
 import { estimateSchema } from "@/shared/estimatePayload";
 import { resolveQuotedRange } from "@/shared/costs/resolve";
 import { forwardToLeadDashboard } from "@/server/services/leadDashboardForward";
+import { forwardConsultationToP5Intake } from "@/server/services/p5IntakeBridge";
 import { readUnitCostOverrides } from "@/server/services/unitCostOverrides";
 import {
   buildCrmIntakeFields,
@@ -219,6 +220,28 @@ export async function POST(request: NextRequest) {
     if (!accepted.accepted) {
       if (accepted.duplicate) return NextResponse.json({ success: true, accepted: false, duplicate: true });
       return NextResponse.json({ message: "We could not save your request. Please try again." }, { status: 503 });
+    }
+
+    // HubSpot contact + mapped deal + lead_created mail live on p5 intake.
+    // Started as soon as the lead is durable so it overlaps Resend, and kept
+    // alive with after() so the visitor response does not wait on it.
+    // Failures stay inside the bridge and cannot change this status.
+    const location = (data.propertyProfile as PropertyProfile | null) ?? null;
+    try {
+      const bridge = forwardConsultationToP5Intake({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        address: data.address,
+        city: location?.city,
+        zip: data.zip || location?.zip,
+        projectType: data.projectType,
+        message: data.message,
+        inquiryId: data.inquiryId,
+      });
+      after(() => bridge);
+    } catch (bridgeErr) {
+      console.error("[p5-intake] Could not schedule HubSpot bridge:", bridgeErr);
     }
 
     // Same complete record as the estimate-gate path, so a lead looks identical
