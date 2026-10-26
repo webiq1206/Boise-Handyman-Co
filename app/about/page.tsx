@@ -30,7 +30,7 @@ import { ArrowRight,Check,ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 const SPEAKABLE_SUMMARY =
-  'We are a locally owned handyman service for the Treasure Valley: small repairs, installs, and home maintenance across Boise, Meridian, Eagle, Nampa, and the surrounding Ada and Canyon County communities. Our focus is simplicity: one upfront written price before any work starts, and most jobs finished in a single visit.';
+  'Boise Handyman Co is the repair and maintenance specialist in the P5 family, serving the Treasure Valley. Send your repair list for review. Scope, price and timing are agreed before work begins; sending a request does not book a visit.';
 
 function HeroBreadcrumbs() {
   const items = [
@@ -105,15 +105,10 @@ export default function AboutPage() {
               <em className="brc-accent">Co</em>
             </h1>
             <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-4">
-              We are a locally owned handyman service for the Treasure Valley. Small repairs,
-              installs, and maintenance, handled by one accountable local team from your first
-              message to the finished job.
+              Boise Handyman Co is the repair and maintenance specialist in the P5 family, serving the Treasure Valley. Send one task or your full repair list so we can review what help you need.
             </p>
             <p className="text-base md:text-lg text-inverse-foreground/75 max-w-2xl leading-relaxed mb-8">
-              Our focus is simplicity: an upfront written quote before any work starts, one clear
-              price for the visit, an agreed arrival time, and a clean home when we leave.
-              The point of all of it is simple - you always know what the job costs and when it
-              will be done.
+              We review your request and clarify the work before preparing a quote. Scope, price and timing are agreed before work begins; sending a request does not book a visit.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-8">
               <ConsultCTA variant="brand">
@@ -172,7 +167,7 @@ export default function AboutPage() {
                       How we <em className="brc-accent">work</em>
                     </>
                   }
-                  description="Three steps, no mystery. You send the task, ideally with photos. We reply with an upfront quote: one written price and the expected time. Then we arrive at the agreed time with the right materials and finish the job, in one trip whenever the work allows it."
+                  description="Send your repair list, service address and any helpful photos. We review the tasks with you and clarify the scope before preparing a quote. Agree on the work, price and visit timing before scheduling, then review the finished tasks together."
                   className="mb-8 max-w-none"
                 />
                 <p className="text-sm text-muted-foreground leading-relaxed mb-8">
