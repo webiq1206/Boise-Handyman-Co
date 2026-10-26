@@ -25,6 +25,7 @@ import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { visibleTrustItems } from '@/shared/foundingClaims';
 import { HERO_STATS,HOW_P5_WORKS,HOW_P5_WORKS_TITLE,PRINCIPLES,TRUST_ITEMS } from '@/shared/siteContent';
+import { FEATURED_PROPERTY_IMAGES } from '@/shared/galleryData';
 import { SITE_IMAGES } from '@/shared/siteImages';
 import { ArrowRight,Check,ChevronRight } from 'lucide-react';
 import Link from 'next/link';
@@ -237,6 +238,21 @@ export default function AboutPage() {
         </Section>
 
         <WhyChooseUsSection />
+
+        {/* Location-true establishing photo between copy blocks for mobile rhythm */}
+        <section className="relative h-[clamp(220px,32vw,400px)] overflow-hidden" aria-label="Treasure Valley home exterior">
+          <Image
+            src={FEATURED_PROPERTY_IMAGES.boiseBungalowExterior}
+            alt="Boise craftsman bungalow porch with a sage-green front door and white trim"
+            fill
+            sizes="100vw"
+            className="object-cover img-brand-grade"
+          />
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ backgroundImage: GRAIN_URL, backgroundRepeat: 'repeat', opacity: 0.03 }}
+          />
+        </section>
 
         <StatementBandSection />
 

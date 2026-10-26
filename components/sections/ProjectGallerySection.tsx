@@ -63,9 +63,14 @@ export function ProjectGallerySection({
         {/* LEAD: the slider at the size it deserves, heading alongside. */}
         <div className="grid gap-[var(--ed-gutter)] lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
           <Reveal>
+            <p className="ed-eyebrow">Design inspiration</p>
             <h2 className="ed-h2 ed-statement">
-              Repairs across the Treasure Valley
+              Repair ideas across the Treasure Valley
             </h2>
+            <p className="ed-body mt-4 max-w-[42ch]">
+              Representative photography for the kinds of small jobs we quote.
+              Drag each slider to compare two states of the same room or exterior.
+            </p>
             <div className="mt-10 hidden lg:block">
               <ProjectMeta project={lead} lead />
             </div>

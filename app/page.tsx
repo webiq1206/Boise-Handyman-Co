@@ -8,6 +8,7 @@ import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { BudgetInclusionsSection } from "@/components/sections/BudgetInclusionsSection";
 import { HowP5Works } from "@/components/sections/HowP5Works";
+import { ProjectGallerySection } from "@/components/sections/ProjectGallerySection";
 import { HomePageSchema } from "@/components/seo/HomePageSchema";
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { buildCanonical,fitDescription } from "@/lib/page-metadata";
@@ -58,7 +59,7 @@ export default function HomePage() {
           3. Estimator       the number - the question every visitor arrives with
           4. What's included what a quote actually covers
           5. Services        what we fix, install, and maintain
-          6. Our work        proof (renders nothing until real job photos exist)
+          6. Gallery         representative repair photography (design inspiration)
           7. Why us          why this company rather than another
           8. Process         what happens after they say yes
           9. Brand band      the emotional close
@@ -78,6 +79,7 @@ export default function HomePage() {
         <ApprovedHome />
       </ApprovedFamilyFrame>
       <BudgetInclusionsSection />
+      <ProjectGallerySection limit={6} showViewAll />
       <HowP5Works />
       <div id="contact" className="scroll-mt-24" aria-hidden="true" />
       <Section id="consult" divider className="relative overflow-hidden scroll-mt-16 pb-28 md:pb-28">

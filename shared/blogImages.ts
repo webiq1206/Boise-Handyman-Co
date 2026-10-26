@@ -3,6 +3,7 @@ import {
   HUB_HERO_IMAGES,
   type BlogImageEntry,
 } from './blogImageRegistry';
+import { FEATURED_PROPERTY_IMAGES } from './galleryData';
 import { SITE_IMAGES } from './siteImages';
 
 const DEFAULT_BLOG_IMAGE = SITE_IMAGES.hero;
@@ -68,7 +69,7 @@ export interface ArticleInlineFigurePlacement {
 
 /**
  * Editorial inline figures for long articles - inserted after key H2 sections
- * to break up text-heavy content (Phase 4).
+ * to break up text-heavy content (Phase 4), especially on mobile.
  */
 const INLINE_HUB_ALTS: Record<string, string> = {
   "repairs-and-fixes": "Handyman tools arranged in a ready-to-go tool bag",
@@ -77,6 +78,48 @@ const INLINE_HUB_ALTS: Record<string, string> = {
   "costs-and-hiring": "Calculator, blank clipboard and tape measure for repair planning",
   "exterior-and-outdoor": "Gutter cleaning at a residential roof edge"
 };
+
+const INLINE_POOL: { src: string; alt: string; hubs?: string[] }[] = [
+  {
+    src: SITE_IMAGES.processInProgress,
+    alt: "An open canvas tool bag with a drill, level, and tape measure on a drop cloth",
+    hubs: ["repairs-and-fixes", "costs-and-hiring"],
+  },
+  {
+    src: SITE_IMAGES.valueCraft,
+    alt: "Hands fitting white baseboard trim with a hammer during a repair",
+    hubs: ["repairs-and-fixes", "installs-and-upgrades"],
+  },
+  {
+    src: SITE_IMAGES.consultBg,
+    alt: "A freshly painted sage-green front door with white trim and black hardware",
+    hubs: ["exterior-and-outdoor", "home-maintenance"],
+  },
+  {
+    src: FEATURED_PROPERTY_IMAGES.boiseBungalowExterior,
+    alt: "Boise craftsman bungalow porch with a sage-green front door and white trim",
+    hubs: ["exterior-and-outdoor", "home-maintenance", "costs-and-hiring"],
+  },
+  {
+    src: "/images/handyman/service-caulking.webp",
+    alt: "A caulk gun laying a white bead where a bathtub meets subway tile",
+    hubs: ["home-maintenance", "repairs-and-fixes"],
+  },
+  {
+    src: "/images/handyman/cabinet-hardware-upgrade.webp",
+    alt: "Hands installing a brushed-brass knob on a white cabinet door",
+    hubs: ["installs-and-upgrades"],
+  },
+];
+
+function altForSrc(src: string, hubSlug?: string): string {
+  const fromRegistry = Object.values(BLOG_IMAGE_REGISTRY).find((image) => image.hero === src)?.alt;
+  if (fromRegistry) return fromRegistry;
+  const fromPool = INLINE_POOL.find((item) => item.src === src)?.alt;
+  if (fromPool) return fromPool;
+  if (hubSlug && INLINE_HUB_ALTS[hubSlug]) return INLINE_HUB_ALTS[hubSlug];
+  return "Handyman repair work in a Treasure Valley home";
+}
 
 export function getArticleInlineFigures(
   slug: string,
@@ -87,20 +130,48 @@ export function getArticleInlineFigures(
 
   const entry = BLOG_IMAGE_REGISTRY[slug];
   const primarySrc = entry?.hero ?? DEFAULT_BLOG_IMAGE;
-
-  // The article hero already establishes the setting. Avoid repeating it in the body.
+  const used = new Set<string>([primarySrc]);
   const figures: ArticleInlineFigurePlacement[] = [];
 
-  if (sectionCount >= 6 && hubSlug) {
+  const candidates = INLINE_POOL.filter((item) => {
+    if (used.has(item.src)) return false;
+    if (!hubSlug || !item.hubs) return true;
+    return item.hubs.includes(hubSlug);
+  });
+
+  // Prefer hub-tagged photos first, then fill from the rest of the pool.
+  const fallback = INLINE_POOL.filter((item) => !used.has(item.src) && !candidates.includes(item));
+  const queue = [...candidates, ...fallback];
+
+  if (hubSlug) {
     const hubHero = getHubHeroImage(hubSlug);
     if (hubHero !== primarySrc) {
-      figures.push({
-        afterSectionIndex: Math.floor(sectionCount / 2),
+      queue.unshift({
         src: hubHero,
-        alt: Object.values(BLOG_IMAGE_REGISTRY).find((image) => image.hero === hubHero)?.alt
-          ?? INLINE_HUB_ALTS[hubSlug] ?? `${hubSlug.replace(/-/g, ' ')} project work`,
+        alt: altForSrc(hubHero, hubSlug),
+        hubs: [hubSlug],
       });
     }
+  }
+
+  // Place figures after early and mid sections so phone scrollers get relief
+  // between H2 blocks instead of a long text wall.
+  const slots =
+    sectionCount >= 8
+      ? [1, Math.floor(sectionCount / 2), sectionCount - 3]
+      : sectionCount >= 6
+        ? [1, Math.floor(sectionCount / 2)]
+        : [Math.floor(sectionCount / 2)];
+
+  for (const afterSectionIndex of slots) {
+    const next = queue.find((item) => !used.has(item.src));
+    if (!next) break;
+    used.add(next.src);
+    figures.push({
+      afterSectionIndex,
+      src: next.src,
+      alt: next.alt || altForSrc(next.src, hubSlug),
+    });
   }
 
   return figures;
