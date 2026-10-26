@@ -4,12 +4,13 @@ import assert from 'node:assert/strict';
 export async function enterEstimator(page, {route, brand, parent}) {
   if (parent) return;
   if (['boise-handyman-co','handyman'].includes(brand) && (route === '/' || route === '/estimate')) {
-    await page.locator('#quick-request form').waitFor();
-    await page.locator('a[href="/estimate?review=1"]').first().click();
-    await page.waitForURL(url=>url.pathname==='/estimate'&&url.searchParams.get('review')==='1');
-    const destination = new URL(page.url());
-    assert.equal(destination.pathname, '/estimate');
-    assert.equal(destination.searchParams.get('review'), '1');
+    // The homepage links to the direct intake; /estimate already hosts it.
+    if (route === '/') {
+      await page.locator('a[href="/estimate"]').first().click();
+      await page.waitForURL(url => url.pathname === '/estimate');
+      assert.equal(new URL(page.url()).pathname, '/estimate');
+    }
+    await page.locator('[data-p5-estimator]').first().waitFor();
   } else if (['boise-remodeling-co','remodeling'].includes(brand) && route === '/') {
     await page.locator('a[href="/#calculator"]').first().click();
     await page.locator('#calculator').first().scrollIntoViewIfNeeded();
