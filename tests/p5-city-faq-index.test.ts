@@ -122,7 +122,8 @@ test('published city claims and the Kuna and Caldwell neighborhood order stay',(
  assert.deepEqual(CITY_SEO_DATA.Caldwell.neighborhoods,['Wilson','Ustick','Cleveland Blvd']);
  const drywall=SERVICE_SEO_CONTENT['drywall-repair'];
  assert.match(getCityServiceIntro(drywall,boise),/North End/);
- assert.ok(cityServicePageFaqs(drywall,boise).some((faq)=>faq.answer.includes('starts around $149')));
+ assert.ok(cityServicePageFaqs(drywall,boise).some((faq)=>faq.question.startsWith('How much') && faq.answer.includes('scope')));
+ assert.ok(cityServicePageFaqs(drywall,boise).every((faq)=>!faq.answer.includes('starts around $149')));
  const kunaSections=getCityServiceSections(drywall,kuna,CITY_SEO_DATA.Kuna);
  assert.ok(kunaSections.some((section)=>section.paragraphs.some((paragraph)=>paragraph.includes('Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell.'))));
  assert.ok(kunaSections.some((section)=>section.heading.startsWith('Drywall Repair & Patching in Kuna: homes, permits')));
