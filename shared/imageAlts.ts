@@ -70,6 +70,40 @@ const IMAGE_ALTS: Record<string, string> = {
     'A single-story home with an attached garage',
   '/images/areas/caldwell.webp':
     'A residential street lined with houses and trees',
+  '/images/gallery/gallery-painting-boise-before.webp':
+    'Weathered craftsman porch door with peeling blue-gray paint on a Boise bungalow',
+  '/images/gallery/gallery-painting-boise-after.webp':
+    'Freshly painted sage-green craftsman porch door with white trim on a Boise bungalow',
+  '/images/gallery/gallery-drywall-boise-before.webp':
+    'Cream hallway wall with an open drywall scar above white baseboard',
+  '/images/gallery/gallery-drywall-boise-after.webp':
+    'Smooth cream hallway wall after a drywall patch and paint touch-up',
+  '/images/gallery/gallery-carpentry-eagle-before.webp':
+    'White six-panel interior door sticking ajar in an Eagle foothills foyer',
+  '/images/gallery/gallery-carpentry-eagle-after.webp':
+    'White six-panel interior door hanging plumb in an Eagle foothills foyer',
+  '/images/gallery/gallery-fence-meridian-before.webp':
+    'Meridian cedar fence with missing pickets and a gap in the run',
+  '/images/gallery/gallery-fence-meridian-after.webp':
+    'Meridian cedar fence with pickets fastened flush after repair',
+  '/images/gallery/gallery-mounting-nampa-before.webp':
+    'Blank beige living-room wall with faint pencil marks for a TV mount',
+  '/images/gallery/gallery-mounting-nampa-after.webp':
+    'Flat-screen TV mounted level on a beige living-room wall',
+  '/images/gallery/gallery-plumbing-caldwell-before.webp':
+    'Dated chrome kitchen faucet with mineral deposits at a white sink',
+  '/images/gallery/gallery-plumbing-caldwell-after.webp':
+    'Brushed-nickel pull-down kitchen faucet installed at a white sink',
+  '/images/gallery/gallery-electrical-kuna-before.webp':
+    'Yellowed duplex outlet askew on a cream laundry-room wall',
+  '/images/gallery/gallery-electrical-kuna-after.webp':
+    'New white duplex outlet seated level in a neat cover plate',
+  '/images/gallery/gallery-maintenance-star-before.webp':
+    'Daylight gap along a white exterior door jamb before weatherstripping',
+  '/images/gallery/gallery-maintenance-star-after.webp':
+    'White exterior door jamb sealed with fresh foam weatherstripping',
+  '/images/gallery/gallery-boise-bungalow-exterior.webp':
+    'Boise craftsman bungalow porch with a sage-green front door and white trim',
 };
 
 export function altForImage(src: string | undefined | null): string | undefined {

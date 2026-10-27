@@ -429,34 +429,62 @@ export function LandingPageTemplate({
                 </Reveal>
               </aside>
               <div className="space-y-[clamp(48px,6vw,88px)]">
-                {sections.map((section, i) => (
-                  <Reveal key={section.heading} delay={Math.min(i, 4) * 60}>
-                    <h2 id={sectionId(section.heading)} className="ed-h2-sm ed-statement-wide scroll-mt-28">{section.heading}</h2>
-                    {section.paragraphs?.map((p, j) => (
-                      <p key={j} className={i === 0 && j === 0 && !costGuidance ? 'ed-lede mt-6 max-w-[52ch]' : j === 0 ? 'ed-body mt-6 max-w-[62ch]' : 'ed-body mt-4 max-w-[62ch]'}>{p}</p>
-                    ))}
-                    {section.subsections?.map((sub) => (
-                      <div key={sub.heading} className="mt-8 border-t pt-6" style={line}>
-                        <h3 className="ed-h4">{sub.heading}</h3>
-                        {sub.paragraphs.map((p, k) => (
-                          <p key={k} className="ed-body mt-3 max-w-[62ch]">{p}</p>
+                {sections.map((section, i) => {
+                  // Mid-guide photography for mobile scroll rhythm: after the first
+                  // long-form block, and again near the midpoint on longer pages.
+                  const showInlinePhoto =
+                    !!breatherImage &&
+                    (i === 0 || (sections.length >= 4 && i === Math.floor(sections.length / 2) - 1));
+                  const inlineSrc =
+                    i === 0
+                      ? (breatherImage ?? heroImageUrl)
+                      : (processImage ?? breatherImage ?? heroImageUrl);
+                  const inlineAlt =
+                    i === 0 ? breatherAlt : (processAlt || breatherAlt);
+                  return (
+                    <div key={section.heading}>
+                      <Reveal delay={Math.min(i, 4) * 60}>
+                        <h2 id={sectionId(section.heading)} className="ed-h2-sm ed-statement-wide scroll-mt-28">{section.heading}</h2>
+                        {section.paragraphs?.map((p, j) => (
+                          <p key={j} className={i === 0 && j === 0 && !costGuidance ? 'ed-lede mt-6 max-w-[52ch]' : j === 0 ? 'ed-body mt-6 max-w-[62ch]' : 'ed-body mt-4 max-w-[62ch]'}>{p}</p>
                         ))}
-                      </div>
-                    ))}
-                    {section.links && section.links.length > 0 && (
-                      <ul className="ed-rule-list mt-8">
-                        {section.links.map((link) => (
-                          <li key={link.href}>
-                            <Link href={link.href} className="ed-rule-link">
-                              {link.label}
-                              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                            </Link>
-                          </li>
+                        {section.subsections?.map((sub) => (
+                          <div key={sub.heading} className="mt-8 border-t pt-6" style={line}>
+                            <h3 className="ed-h4">{sub.heading}</h3>
+                            {sub.paragraphs.map((p, k) => (
+                              <p key={k} className="ed-body mt-3 max-w-[62ch]">{p}</p>
+                            ))}
+                          </div>
                         ))}
-                      </ul>
-                    )}
-                  </Reveal>
-                ))}
+                        {section.links && section.links.length > 0 && (
+                          <ul className="ed-rule-list mt-8">
+                            {section.links.map((link) => (
+                              <li key={link.href}>
+                                <Link href={link.href} className="ed-rule-link">
+                                  {link.label}
+                                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </Reveal>
+                      {showInlinePhoto && inlineSrc && (
+                        <figure className="mt-10 not-prose">
+                          <div className="relative aspect-[16/10] overflow-hidden" style={{ border: '1px solid var(--ed-line)' }}>
+                            <Image
+                              src={inlineSrc}
+                              alt={inlineAlt}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 720px"
+                              className="object-cover img-brand-grade"
+                            />
+                          </div>
+                        </figure>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -468,9 +496,9 @@ export function LandingPageTemplate({
         <Section surface="deep" spacing="xl" edge>
           <div className="ed-shell">
             <Reveal>
-              <p className="ed-eyebrow">Proof of work</p>
+              <p className="ed-eyebrow">Design inspiration</p>
               <h2 className="ed-h2 ed-statement-wide">
-                {proofHeading ?? (<>Recent <em className="not-italic" style={accent}>local work</em></>)}
+                {proofHeading ?? (<>Local <em className="not-italic" style={accent}>design inspiration</em></>)}
               </h2>
             </Reveal>
 

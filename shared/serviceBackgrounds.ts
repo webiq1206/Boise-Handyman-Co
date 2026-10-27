@@ -1,3 +1,4 @@
+import { FEATURED_PROPERTY_IMAGES } from "./galleryData";
 import { SITE_IMAGES } from "./siteImages";
 
 export interface ServiceBackgroundConfig {
@@ -49,13 +50,13 @@ export interface LandingImageSet {
 const SERVICE_IMAGE_SETS: Record<string, LandingImageSet> = {
   "drywall-repair": {
     hero: h("service-drywall-repair"),
-    breather: h("punch-list-markers"),
+    breather: FEATURED_PROPERTY_IMAGES.boiseBungalowExterior,
     process: SITE_IMAGES.processInProgress,
   },
   "painting-touch-ups": {
     hero: h("service-painting-p5-reviewed-20260910"),
-    breather: h("front-door-repaint-p5-reviewed-20260910"),
-    process: h("estimate-clipboard"),
+    breather: FEATURED_PROPERTY_IMAGES.boiseBungalowExterior,
+    process: h("front-door-repaint-p5-reviewed-20260910"),
   },
   "plumbing-repairs": {
     hero: h("service-plumbing"),

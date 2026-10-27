@@ -97,7 +97,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
     getCityLocalSection(city),
   ];
 
-  // Real before/after projects only - no seeded testimonials or star ratings
+  // Representative design pairs only - no seeded testimonials or star ratings
   // until genuine, verified reviews exist.
   const cityProjects = getGalleryProjectsForCity(city.slug);
   const proof: LandingProof | undefined =
@@ -151,7 +151,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
         localNote={localNote}
         sections={sections}
         proof={proof}
-        proofHeading={`Recent ${city.name} jobs`}
+        proofHeading={`${city.name} design inspiration`}
         showEstimatePrompt
         faqs={faqs}
         related={{ variant: 'area', citySlug: city.slug }}

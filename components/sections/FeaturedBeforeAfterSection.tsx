@@ -11,13 +11,14 @@ interface FeaturedBeforeAfterSectionProps {
 }
 
 /**
- * Single featured before/after slider for service hub pages (Phase 3 proof).
+ * Featured comparison slider for service hub pages. Imagery is representative
+ * design photography, not completed customer projects.
  */
 export function FeaturedBeforeAfterSection({
   project,
   title = (
     <>
-      See the <em className="brc-accent">transformation</em>
+      See the <em className="brc-accent">possibilities</em>
     </>
   ),
 }: FeaturedBeforeAfterSectionProps) {
@@ -25,9 +26,9 @@ export function FeaturedBeforeAfterSection({
     <Section divider>
       <div className="container px-4 max-w-5xl">
         <SectionHeader
-          eyebrow="Project proof"
+          eyebrow="Design inspiration"
           title={title}
-          description="Drag the slider to compare the two photos."
+          description="Explore a representative repair direction for your own home. Final scope and materials are tailored to your property."
           className="mb-8 max-w-3xl"
         />
         <Reveal>
