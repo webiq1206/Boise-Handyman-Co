@@ -149,7 +149,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
         h1={content.headline}
         speakableSummary={content.overview}
         overview={content.overview}
-        heroImageUrl={images.hero}
+        heroImageUrl={service.slug === 'home-maintenance' ? '/images/handyman/toolbag-ready.webp' : images.hero}
         breatherImageUrl={images.breather}
         processImageUrl={images.process}
         manifestPath={path}
