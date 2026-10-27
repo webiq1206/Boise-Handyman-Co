@@ -1,4 +1,5 @@
 import {prepareImages} from "./imagePreparation.ts";
+import {verifyImageSignature} from "./imageSignature.ts";
 import ExcelJS from "exceljs";
 import {canonicalSpreadsheetArchive} from "./spreadsheetXml.ts";
 import {spreadsheetValues} from "./spreadsheetValues.ts";
@@ -31,6 +32,7 @@ export function verifyUpload(name: string, data: Buffer): AnalysisFile {
   if(["jpg","jpeg"].includes(extension) && !(data[0]===255&&data[1]===216&&data[2]===255))throw new Error("This file is not a valid JPEG.");
   if(extension==="webp" && !(data.subarray(0,4).toString()==="RIFF"&&data.subarray(8,12).toString()==="WEBP"))throw new Error("This file is not a valid WebP.");
   if(extension==="gif" && !/^GIF8[79]a$/.test(data.subarray(0,6).toString()))throw new Error("This file is not a valid GIF.");
+  verifyImageSignature(type,data);
   if(["docx","xlsx","ods"].includes(extension))checkOfficeArchive(data);
   return {name:safeName,type,data};
 }

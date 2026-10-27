@@ -49,7 +49,7 @@ const TITLE_WITH_BRAND = "RE-10 and Inspection Repairs Boise | Boise Handyman Co
 const TITLE = "RE-10 and Inspection Repairs in Boise";
 // 154 characters, benefit-led, ends on the action.
 const DESCRIPTION =
-  fitDescription("RE-10 repairs completed before closing. Boise handyman service handling inspection repair lists for agents, buyers and sellers in the Treasure Valley. Send yours.");
+  fitDescription("Request RE-10 repair help from Boise Handyman Co. Send your inspection list, property details and closing date for scope and scheduling review.");
 
 export const metadata: Metadata = withBrandPageMetadata(({
   title: { absolute: TITLE_WITH_BRAND },
@@ -162,7 +162,7 @@ export default function Re10RepairsPage() {
             </p>
             <p>
               So we treat it as coordination first: we ask for the deadline and the closing date
-              before we quote, we confirm access in writing, we tell you the same day if something
+              before we quote, we confirm access in writing, we explain any change if something
               behind a wall changes the scope, and we document what was done so nobody has to take
               anyone&apos;s word for it. Where a line item needs a licensed specialist - panel
               work, sewer, HVAC - we name it up front and help you get the right trade in, rather

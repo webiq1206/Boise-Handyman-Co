@@ -79,7 +79,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       'Priming and paint blending over the finished patch',
     ],
     timeline:
-      'Small patches take 1 to 3 hours of working time. Because joint compound needs to dry between coats, larger repairs are usually split across two short visits a day or two apart, with texture and paint on the second visit.',
+      "Timing depends on the repair list, materials, access and any drying or curing needed. We review the scope and agree scheduling before work begins.",
     processSteps: [
       {
         title: 'Send photos',
@@ -109,7 +109,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does drywall repair cost in Boise?',
         answer:
-          'Small drywall repairs with Boise Handyman Co start around $149 per visit. Most single patches land between $149 and $350 depending on size and texture matching, and larger water-damage repairs with multiple patches typically run $350 to $650. We quote the exact price upfront from photos before any work starts.',
+          "The price depends on your repair list, materials, access and preparation. Send the details and photos for a scope review and written quote before work begins.",
       },
       {
         question: 'Can you match my wall texture?',
@@ -132,13 +132,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
           'We fix minor plumbing leaks like a failed supply line or a dripping trap as part of the same visit. Roof leaks and anything inside walls that needs a licensed plumber get referred out first, because patching over an active leak just ruins the new drywall.',
       },
     ],
-    costGuidance: {
-      heading: 'Drywall repair cost in the Treasure Valley',
-      paragraphs: [
-        'Drywall repair with Boise Handyman Co starts around $149 per visit, quoted upfront from photos as one written price. A typical single patch lands between $149 and $350, and multi-patch or water-damage repairs usually run $350 to $650 including texture matching and paint blending. For context, Treasure Valley handyman rates generally run $60 to $120 per hour.',
-        'These are planning figures, not a bid. Send photos of the damage and we reply with a firm upfront quote, usually within one business day, before any work is scheduled.',
-      ],
-    },
+    costGuidance: {"heading":"Scope and pricing for your project","paragraphs":["Send your repair list and photos. Our team reviews the work, materials and access before preparing a quote.","Scope, price and scheduling are agreed before work begins. A request does not reserve a visit or confirm a price."]},
     outOfScope: {
       heading: 'What drywall work we refer out',
       paragraphs: [
@@ -169,7 +163,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       'Color matching from a chip or sample',
     ],
     timeline:
-      'A single accent wall takes 2 to 3 hours. A standard bedroom, walls only, is typically 3 to 5 hours. A front door refinish runs 2 to 4 hours across coats. We quote the expected time upfront with the price.',
+      "Timing depends on the repair list, materials, access and any drying or curing needed. We review the scope and agree scheduling before work begins.",
     processSteps: [
       {
         title: 'Describe the space',
@@ -199,7 +193,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does it cost to paint a room in Boise?',
         answer:
-          'Painting jobs with Boise Handyman Co start around $199 per visit. A typical bedroom, walls only with paint supplied, usually lands between $250 and $450 in labor, and trim or door repaints are quoted per piece. Every job gets one written price upfront. Whole-house repaints are better suited to a dedicated painting contractor, and we will say so.',
+          "The price depends on your repair list, materials, access and preparation. Send the details and photos for a scope review and written quote before work begins.",
       },
       {
         question: 'Do I supply the paint or do you?',
@@ -222,13 +216,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
           'Late spring through early fall. Exterior paint wants dry surfaces and temperatures reliably above about 50 degrees, so we schedule exterior touch-ups between roughly May and October and handle interior painting year-round.',
       },
     ],
-    costGuidance: {
-      heading: 'Painting cost in the Treasure Valley',
-      paragraphs: [
-        'Painting with Boise Handyman Co starts around $199 per visit, quoted upfront as one written price. A typical single room, walls only, lands between $250 and $450 in labor with paint billed separately or supplied by you. Treasure Valley handyman rates for this kind of work generally run $60 to $120 per hour.',
-        'These are planning figures, not a bid. Tell us the rooms and surfaces, send a photo or two, and we reply with a firm upfront quote before anything is scheduled.',
-      ],
-    },
+    costGuidance: {"heading":"Scope and pricing for your project","paragraphs":["Send your repair list and photos. Our team reviews the work, materials and access before preparing a quote.","Scope, price and scheduling are agreed before work begins. A request does not reserve a visit or confirm a price."]},
     outOfScope: {
       heading: 'What painting work we refer out',
       paragraphs: [
@@ -439,7 +427,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       'Window operation fixes: sticking sashes, locks, and balances',
     ],
     timeline:
-      'A sticking door is usually adjusted in about an hour. Trim repairs run 1 to 3 hours depending on length and profile matching. An interior door swap with hardware takes 2 to 3 hours.',
+      "Timing depends on the repair list, materials, access and any drying or curing needed. We review the scope and agree scheduling before work begins.",
     processSteps: [
       {
         title: 'Show us the problem',
@@ -469,7 +457,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does carpentry or trim repair cost in Boise?',
         answer:
-          'Carpentry visits with Boise Handyman Co start around $149. Door adjustments usually land between $149 and $250, trim repairs $150 to $350 depending on length, and interior door replacements $250 to $400 in labor with the door billed separately. Everything is quoted upfront before work starts.',
+          "The price depends on your repair list, materials, access and preparation. Send the details and photos for a scope review and written quote before work begins.",
       },
       {
         question: 'Why do doors stick in Treasure Valley homes?',
@@ -492,13 +480,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
           'Yes. Exterior doors, thresholds, and weatherstripping are core carpentry work, and wooden gates and their hardware fall under our fence and deck repair service, often handled in the same visit.',
       },
     ],
-    costGuidance: {
-      heading: 'Carpentry and trim repair cost in the Treasure Valley',
-      paragraphs: [
-        'Carpentry and trim repair with Boise Handyman Co starts around $149 per visit, quoted upfront as one written price. Most door, trim, and rail repairs land between $149 and $400 in labor, with lumber and hardware listed separately on the quote. Treasure Valley handyman rates generally run $60 to $120 per hour.',
-        'These are planning figures, not a bid. Send photos of the repair and we reply with a firm upfront quote, usually within one business day.',
-      ],
-    },
+    costGuidance: {"heading":"Scope and pricing for your project","paragraphs":["Send your repair list and photos. Our team reviews the work, materials and access before preparing a quote.","Scope, price and scheduling are agreed before work begins. A request does not reserve a visit or confirm a price."]},
     outOfScope: {
       heading: 'What carpentry work we refer out',
       paragraphs: [
@@ -529,7 +511,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       'Gallery walls, art, and heavy frame hanging',
     ],
     timeline:
-      'A standard TV mount takes 1 to 1.5 hours. Curtain rods and shelves run about 30 to 45 minutes each. Flat-pack furniture varies from 30 minutes for a small bookcase to 2 to 3 hours for a large wardrobe or bed with storage.',
+      "Timing depends on the repair list, materials, access and any drying or curing needed. We review the scope and agree scheduling before work begins.",
     processSteps: [
       {
         title: 'List the items',
@@ -537,7 +519,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       },
       {
         title: 'Upfront quote',
-        description: 'A firm per-item written price, and a list of tasks shares a single visit.',
+        description: 'We review the items, required preparation and materials, then confirm the scope and pricing before work begins.',
       },
       {
         title: 'Mount and assemble',
@@ -559,7 +541,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does TV mounting cost in Boise?',
         answer:
-          'Mounting and assembly visits with Boise Handyman Co start around $145. A standard TV mount typically lands between $145 and $220 in labor with your bracket, and furniture assembly is billed on the time it takes, with most single pieces finished inside an hour. Multiple items share one visit, which makes a list the best value.',
+          "The price depends on your repair list, materials, access and preparation. Send the details and photos for a scope review and written quote before work begins.",
       },
       {
         question: 'Do I need to supply the TV mount or shelf hardware?',
@@ -579,16 +561,10 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'Is there a minimum job size?',
         answer:
-          'A single small task starts around $145 all-in. Most customers bundle two or three items into the same visit, because extra tasks only add the time they take.',
+          "The price depends on your repair list, materials, access and preparation. Send the details and photos for a scope review and written quote before work begins.",
       },
     ],
-    costGuidance: {
-      heading: 'Mounting and assembly cost in the Treasure Valley',
-      paragraphs: [
-        'Mounting and assembly with Boise Handyman Co starts around $145 per visit, quoted upfront as one written price. A standard TV mount lands between $145 and $220 in labor, and flat-pack assembly is billed on time, with most single pieces finished inside an hour. Treasure Valley rates for this work generally run $60 to $120 per hour.',
-        'These are planning figures, not a bid. Send your list and photos, and we reply with a firm per-item quote before scheduling.',
-      ],
-    },
+    costGuidance: {"heading":"Scope and pricing for your project","paragraphs":["Send your repair list and photos. Our team reviews the work, materials and access before preparing a quote.","Scope, price and scheduling are agreed before work begins. A request does not reserve a visit or confirm a price."]},
     outOfScope: {
       heading: 'What mounting work we refer out',
       paragraphs: [
@@ -619,7 +595,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       'Downspout repair, extensions, and splash block placement',
     ],
     timeline:
-      'A fence post reset takes 2 to 3 hours plus concrete cure time before the panel rehangs. Gate repairs run 1 to 2 hours. Deck board swaps take 1 to 3 hours. A full gutter clean on a single-story home takes about 1.5 to 2.5 hours.',
+      "Timing depends on the repair list, materials, access and any drying or curing needed. We review the scope and agree scheduling before work begins.",
     processSteps: [
       {
         title: 'Send photos outside',
@@ -649,7 +625,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does fence repair cost in Boise?',
         answer:
-          'Exterior repair visits with Boise Handyman Co start around $149. A single post reset typically lands between $150 and $300 in labor plus materials, gate repairs $150 to $250, and gutter cleaning $149 to $300 depending on house size. Wind-damage repairs are quoted upfront from photos.',
+          "The price depends on your repair list, materials, access and preparation. Send the details and photos for a scope review and written quote before work begins.",
       },
       {
         question: 'Can you fix a leaning fence or does it need replacing?',
@@ -672,13 +648,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
           'Spring through fall. Concrete for post setting and stains and sealants all want temperatures above roughly 40 to 50 degrees, so we schedule most exterior repairs between March and November and keep winter for interior work.',
       },
     ],
-    costGuidance: {
-      heading: 'Fence, deck, and gutter repair cost in the Treasure Valley',
-      paragraphs: [
-        'Exterior repairs with Boise Handyman Co start around $149 per visit, quoted upfront as one written price. Typical repairs land between $150 and $450 in labor depending on scope, with lumber, hardware, and sealant listed separately. Treasure Valley handyman rates generally run $60 to $120 per hour for exterior repair work.',
-        'These are planning figures, not a bid. Send photos of the damage and we reply with a firm upfront quote before anything is scheduled.',
-      ],
-    },
+    costGuidance: {"heading":"Scope and pricing for your project","paragraphs":["Send your repair list and photos. Our team reviews the work, materials and access before preparing a quote.","Scope, price and scheduling are agreed before work begins. A request does not reserve a visit or confirm a price."]},
     outOfScope: {
       heading: 'What exterior work we refer out',
       paragraphs: [
@@ -693,11 +663,11 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     headline: 'Caulking, Weatherproofing, and Home Maintenance in Boise',
     primaryKeyword: 'home maintenance handyman boise',
     overview:
-      'Boise Handyman Co handles the recurring small maintenance that keeps a Treasure Valley home tight and dry: fresh caulk in kitchens and baths, weatherstripping and draft sealing before winter, tile and grout touch-ups, and whole punch lists of small tasks cleared in a single visit.',
+      'Boise Handyman Co handles the recurring small maintenance that keeps a Treasure Valley home tight and dry: fresh caulk in kitchens and baths, weatherstripping and draft sealing before winter, tile and grout touch-ups, and household punch lists reviewed together.',
     benefits: [
       'Old caulk cut out fully, not smeared over',
       'Draft sealing that shows up on your winter heating bill',
-      'Punch lists cleared in a single visit with one written price',
+      'Send the full punch list for a scope review',
       'Seasonal reminders of what your home needs before the weather turns',
     ],
     inclusions: [
@@ -709,7 +679,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       'Move-in and pre-listing fix-it lists',
     ],
     timeline:
-      'A tub and shower recaulk takes 1.5 to 2.5 hours, plus overnight cure before water use. Draft sealing a typical home runs 2 to 3 hours. Punch lists depend on the list, and we quote the expected time upfront.',
+      "Timing depends on the repair list, materials, access and any drying or curing needed. We review the scope and agree scheduling before work begins.",
     processSteps: [
       {
         title: 'Send your list',
@@ -739,7 +709,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much does recaulking or a maintenance visit cost in Boise?',
         answer:
-          'Maintenance visits with Boise Handyman Co start around $145. A tub and shower recaulk typically lands between $150 and $300, draft sealing a whole home $200 to $350, and punch lists are quoted upfront from your list. One visit covers the entire list, however many tasks are on it.',
+          "The price depends on your repair list, materials, access and preparation. Send the details and photos for a scope review and written quote before work begins.",
       },
       {
         question: 'How often should caulk be replaced?',
@@ -754,7 +724,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'Can you handle a whole punch list in one visit?',
         answer:
-          'Yes, that is the point of the service. Send the full list, however small the items feel, and we quote it as one visit with one written price. Most lists of eight to twelve small tasks fit inside half a day.',
+          'Send the full list so we can review it together. Whether it fits into one visit depends on the tasks, materials, access and preparation. We confirm the scope and schedule with you before work begins.',
       },
       {
         question: 'Do you do pre-listing repairs for home sales?',
@@ -762,13 +732,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
           'Yes. Agents and sellers use us to clear inspection-style lists before photos and showings: caulk, hardware, doors, paint touch-ups, and the small flaws buyers notice. Items on your list that need licensed trades get flagged and referred rather than guessed at.',
       },
     ],
-    costGuidance: {
-      heading: 'Home maintenance cost in the Treasure Valley',
-      paragraphs: [
-        'Maintenance visits with Boise Handyman Co start around $145, quoted upfront as one written price. Most caulking, weatherproofing, and punch-list visits land between $145 and $400 depending on the list, with materials listed separately. Treasure Valley handyman rates generally run $60 to $120 per hour.',
-        'These are planning figures, not a bid. Send your list with photos and we reply with a firm quote for the whole visit, usually within one business day.',
-      ],
-    },
+    costGuidance: {"heading":"Scope and pricing for your project","paragraphs":["Send your repair list and photos. Our team reviews the work, materials and access before preparing a quote.","Scope, price and scheduling are agreed before work begins. A request does not reserve a visit or confirm a price."]},
     outOfScope: {
       heading: 'What maintenance work we refer out',
       paragraphs: [

@@ -82,8 +82,8 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
         heading: content.costGuidance.heading,
         paragraphs: content.costGuidance.paragraphs,
         links: [
-          { label: 'Get a preliminary estimate', href: '/estimate' },
-          { label: 'Book a handyman visit', href: '/contact#consult' },
+          { label: 'Request a repair estimate', href: '/estimate' },
+          { label: 'Discuss your repair list', href: '/contact#consult' },
         ],
       }
     : undefined;
@@ -153,7 +153,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
         breatherImageUrl={images.breather}
         processImageUrl={images.process}
         manifestPath={path}
-        planningFrom={service.planningFrom}
+        planningFrom={undefined}
         costGuidance={costGuidance}
         breadcrumbs={[
           { name: 'Home', href: '/' },
