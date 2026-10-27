@@ -86,7 +86,7 @@ test("intake body uses the fields the p5 route already reads", () => {
     brand: "Boise Handyman Co",
     name: "Ada Example",
     form: P5_CONSULTATION_FORM,
-    source: "Organic Website",
+    source: "Other",
     sourceDetail: "boisehandyman.co consultation",
     projectType: "handyman",
     email: "ada@example.com",

@@ -229,6 +229,7 @@ export async function POST(request: NextRequest) {
     const location = (data.propertyProfile as PropertyProfile | null) ?? null;
     try {
       const bridge = forwardConsultationToP5Intake({
+        attribution: data.attribution,
         name: data.name,
         email: data.email,
         phone: data.phone,
