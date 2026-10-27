@@ -1,3 +1,4 @@
+import { consultationAttribution, consultationSource } from "../../lib/consultationAttribution";
 /**
  * Fire-and-forget bridge from an accepted Handyman consultation to the
  * multi-brand intake on p5homeco.com.
@@ -107,6 +108,7 @@ export const P5_PROJECT_TYPE_BY_VISITOR_LABEL: Readonly<Record<string, string>> 
 };
 
 export type ConsultationBridgeInput = {
+  attribution?: Record<string, unknown>;
   name: string;
   email?: string | null;
   phone?: string | null;
@@ -169,14 +171,17 @@ export function buildP5IntakeBody(input: ConsultationBridgeInput): Record<string
   const rawEmail = input.email?.trim() ?? "";
   const rawPhone = input.phone?.trim() ?? "";
 
+  const attribution = consultationAttribution(input.attribution, input.email);
   const body: Record<string, string> = {
+    ...attribution,
     brand: P5_HANDYMAN_BRAND,
     name: input.name.trim(),
     form: P5_CONSULTATION_FORM,
-    source: "Organic Website",
+    source: consultationSource(attribution),
     sourceDetail: "boisehandyman.co consultation",
   };
 
+  if (attribution.first_utm_campaign || attribution.utm_campaign) body.originalCampaign = attribution.first_utm_campaign || attribution.utm_campaign;
   if (projectType) body.projectType = projectType;
   if (email) body.email = email;
   else if (!phone && rawEmail) body.email = rawEmail;
