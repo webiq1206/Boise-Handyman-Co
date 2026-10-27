@@ -23,6 +23,7 @@ import { SITE_CONFIG } from '@/shared/siteConfig';
 import { ArrowRight,ChevronRight,Phone,Star } from 'lucide-react';
 import Link from 'next/link';
 import { RelatedLinks } from './RelatedLinks';
+import styles from './MaintenanceLanding.module.css';
 
 interface BreadcrumbItem {
   name: string;
@@ -184,7 +185,7 @@ export function LandingPageTemplate({
   const showTimelineBelow = !!timeline && !costGuidance;
 
   return (
-    <div className="flex flex-col ">
+    <div className={`flex flex-col ${paidService === 'home-maintenance' ? styles.maintenance : ''}`}>
       {/* Approved editorial hero */}
       <InteriorHero imageSrc={heroImageUrl} imageAlt={heroAlt} layout="split">
           <HeroBreadcrumbs items={breadcrumbs} />
@@ -192,9 +193,9 @@ export function LandingPageTemplate({
           {eyebrow && (
             <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>{eyebrow}</p>
           )}
-          <h1 className="ed-display ed-statement-display text-inverse-foreground">{h1}</h1>
+          <h1 className="ed-display ed-statement-display text-inverse-foreground">{paidService === 'home-maintenance' ? 'Home maintenance in Boise' : h1}</h1>
           {paidService ? <>
-            <p className="mt-4 text-base">{paidService === 'drywall-repair' ? 'Have damaged drywall? Call Boise Handyman Co to discuss the repair, or send a description.' : 'Have upkeep projects waiting? Call Boise Handyman Co to discuss the items you want help with.'}</p>
+            <p className="mt-4 text-base">{paidService === 'drywall-repair' ? 'Have damaged drywall? Call Boise Handyman Co to discuss the repair, or send a description.' : 'Caulking, weatherproofing and the upkeep on your list. Call Boise Handyman Co to discuss what needs attention.'}</p>
             <LandingContactActions formId="service-inquiry" formLabel={paidService === 'drywall-repair' ? 'Describe the Damage' : 'Send Your Maintenance List'} />
           </> : <>
           {/* Call sits directly under the heading so it is in the first phone
