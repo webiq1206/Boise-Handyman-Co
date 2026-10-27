@@ -200,7 +200,7 @@ export const RE10_FAQS: Re10Faq[] = [
   {
     question: "How quickly can you review a repair request?",
     answer:
-      "Most repair lists are reviewed within one business day of receiving the documents. Send them as early as you can. The earlier we see the list, the more honestly we can tell you what fits inside your deadline.",
+      "Send your repair documents and closing date as early as you can. The earlier we see the list, the more honestly we can tell you what fits inside your deadline.",
   },
   {
     question: "Can you complete repairs before closing?",
@@ -225,7 +225,7 @@ export const RE10_FAQS: Re10Faq[] = [
   {
     question: "What happens if you find additional damage?",
     answer:
-      "Work stops on that item and you hear about it the same day, with photos. Nothing additional is completed until whoever holds authority approves it in writing. Concealed damage behind a finish is the commonest reason an inspection repair changes price.",
+      "Work stops on that item while the change is reviewed with you, with photos where helpful. Nothing additional is completed until whoever holds authority approves it in writing. Concealed damage behind a finish is the commonest reason an inspection repair changes price.",
   },
   {
     question: "Do you handle plumbing and electrical repairs?",
