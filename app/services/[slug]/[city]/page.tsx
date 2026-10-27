@@ -116,7 +116,7 @@ export default async function CityServicePage(
         breatherImageUrl={images.breather}
         processImageUrl={images.process}
         manifestPath={path}
-        planningFrom={service.planningFrom}
+        planningFrom={undefined}
         breadcrumbs={[
           { name: 'Home', href: '/' },
           { name: service.name, href: `/services/${service.slug}` },

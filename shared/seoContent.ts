@@ -231,9 +231,9 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     headline: 'Minor Plumbing Repairs in Boise and the Treasure Valley',
     primaryKeyword: 'minor plumbing repair boise',
     overview:
-      'Boise Handyman Co fixes the everyday plumbing problems that do not need a plumbing company: dripping faucets, running toilets, slow drains, failed garbage disposals, and worn supply lines. Fixture swaps and repairs are quoted upfront and usually finished in a single visit.',
+      'Boise Handyman Co fixes the everyday plumbing problems that do not need a plumbing company: dripping faucets, running toilets, slow drains, failed garbage disposals, and worn supply lines. Fixture swaps and repairs are quoted upfront and scheduled after reviewing the scope.',
     benefits: [
-      'Most fixture repairs and swaps done in one visit',
+      'Fixture scope and parts reviewed before scheduling',
       'Upfront quote before we touch a fitting',
       'We bring common washers, valves, and supply lines on the truck',
       'Straight advice on repair versus replace, with no upsell',
@@ -247,7 +247,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       'Showerhead, sprayer, and drain hardware upgrades',
     ],
     timeline:
-      'A running toilet or dripping faucet is typically fixed in about an hour. Faucet and disposal replacements run 1 to 2 hours. A toilet swap takes 1.5 to 2.5 hours including haul-away of the old unit.',
+      'Timing depends on the reviewed scope, fixture condition, parts and access. The team confirms scheduling after reviewing the work.',
     processSteps: [
       {
         title: 'Describe the problem',
@@ -258,7 +258,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
         description: 'A firm written price for the fix or the swap, with parts listed separately.',
       },
       {
-        title: 'One-trip repair',
+        title: 'Complete the agreed repair',
         description: 'Water off, repair or replacement done, connections tested under pressure before we leave.',
       },
       {
@@ -277,7 +277,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much do minor plumbing repairs cost in Boise?',
         answer:
-          'Minor plumbing visits with Boise Handyman Co start around $129. Simple fixes like a fill valve or flapper usually land between $145 and $220, and faucet, toilet, or disposal replacements typically run $180 to $350 in labor with the fixture billed separately or supplied by you. Every job is quoted upfront.',
+          'Pricing depends on the repair scope, fixture, materials and access. Send the details for review and a written quote before scheduling.',
       },
       {
         question: 'When do I need a licensed plumber instead of a handyman?',
@@ -287,7 +287,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'Can you install a faucet or toilet I already bought?',
         answer:
-          'Yes, that is one of our most common jobs. Have the new fixture on site, and we handle removal, installation, new supply lines if needed, and haul-away of the old unit in one visit.',
+          'Yes, that is one of our most common jobs. Have the new fixture on site, and we handle removal, installation, new supply lines if needed, and haul-away of the old unit as agreed in the scope.',
       },
       {
         question: 'Can you fix a slow drain?',
@@ -303,8 +303,8 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     costGuidance: {
       heading: 'Minor plumbing repair cost in the Treasure Valley',
       paragraphs: [
-        'Minor plumbing repairs with Boise Handyman Co start around $145 per visit, quoted upfront as one written price. Simple internal repairs land between $145 and $220, and fixture replacements typically run $180 to $350 in labor plus the fixture. Treasure Valley handyman rates generally run $60 to $120 per hour, while licensed plumber call-outs often start well above that for the same small jobs.',
-        'These are planning figures, not a bid. Describe the problem, send a photo, and we reply with a firm upfront quote before scheduling.',
+        'Pricing depends on the repair scope, fixture, materials and access. Send the details for review and a written quote before scheduling.',
+        'Describe the problem and send optional photos. The team confirms the scope, quote and scheduling after review.',
       ],
     },
     outOfScope: {
@@ -324,7 +324,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       'Boise Handyman Co handles small, like-for-like electrical jobs across the Treasure Valley: replacing outlets and switches, swapping light fixtures, and installing ceiling fans where wiring already exists. Everything is quoted upfront, done to code, and tested before we leave, and anything bigger goes to a licensed electrician.',
     benefits: [
       'Like-for-like swaps done safely, with power verified off',
-      'Fixtures and fans installed on existing wiring in one visit',
+      'Fixture and fan work reviewed against the existing wiring',
       'Upfront quote per fixture, not an open-ended hourly gamble',
       'Clear line on what belongs with a licensed electrician',
     ],
@@ -337,7 +337,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       'Loose outlet, cover plate, and fixture tightening and repair',
     ],
     timeline:
-      'An outlet or switch swap takes about 30 to 60 minutes. A light fixture replacement runs about an hour. A ceiling fan swap on an existing fan-rated box takes 1.5 to 2.5 hours including balancing and testing.',
+      'Timing depends on the reviewed scope, fixture condition, parts and access. The team confirms scheduling after reviewing the work.',
     processSteps: [
       {
         title: 'Tell us the fixture',
@@ -367,7 +367,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'How much do minor electrical repairs cost in Boise?',
         answer:
-          'Minor electrical visits with Boise Handyman Co start around $129. Outlet and switch swaps land around $129 to $180 each visit, light fixture replacements typically run $150 to $250, and ceiling fan swaps $200 to $350 in labor. Fixtures are billed separately or supplied by you, and every job is quoted upfront.',
+          'Pricing depends on the repair scope, fixture, materials and access. Send the details for review and a written quote before scheduling.',
       },
       {
         question: 'When do I need a licensed electrician instead of a handyman?',
@@ -393,8 +393,8 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     costGuidance: {
       heading: 'Minor electrical repair cost in the Treasure Valley',
       paragraphs: [
-        'Minor electrical work with Boise Handyman Co starts around $145 per visit, quoted upfront as one written price. Typical jobs land between $145 and $350 in labor depending on the fixture, with the device itself billed separately or supplied by you. Treasure Valley handyman rates generally run $60 to $120 per hour for this class of work.',
-        'These are planning figures, not a bid. Send a photo of the fixture and we confirm the job is handyman scope and reply with a firm upfront quote.',
+        'Pricing depends on the repair scope, fixture, materials and access. Send the details for review and a written quote before scheduling.',
+        'Send optional photos of the fixture so the team can review whether the work fits the service and prepare a quote.',
       ],
     },
     outOfScope: {
@@ -759,8 +759,8 @@ export function getCityServiceIntro(
   const county = getCountyLabel(city.county);
   const fact = localFact
     ? ` ${localFact}`
-    : ` We work throughout ${city.name} and the surrounding ${county} area, so scheduling is local and travel never balloons the bill.`;
-  return `Need ${service.name.toLowerCase()} in ${city.name}, Idaho?${fact} Boise Handyman Co quotes every job upfront as one written price and finishes most jobs in a single visit. Get a preliminary estimate online or book a handyman visit.`;
+    : ` We work throughout ${city.name} and the surrounding ${county} area, for the service you are requesting.`;
+  return `Need ${service.name.toLowerCase()} in ${city.name}, Idaho?${fact} Boise Handyman Co reviews your repair details before preparing a quote and discussing scheduling. Call, text or send a repair request.`;
 }
 
 export function getCityServiceFaqs(service: ServiceSEOContent, city: CityData): FAQItem[] {
@@ -788,7 +788,7 @@ export function getCityServiceFaqs(service: ServiceSEOContent, city: CityData): 
     },
     {
       question: `How do I get a quote for ${service.name.toLowerCase()} in ${city.name}?`,
-      answer: `Use the online estimator for a preliminary planning range, or send photos of the job by text or through the contact form. We reply with a firm upfront quote, usually within one business day, before anything is scheduled.`,
+      answer: `Call or text to discuss the repair, or send details and optional photos through the inquiry form. The team reviews the scope and confirms the quote and scheduling before work is agreed.`,
     },
   ];
 }
@@ -822,7 +822,7 @@ export function getCityServiceSections(
             ],
             links: [
               {
-                label: 'Get a preliminary estimate',
+                label: 'Request a repair estimate',
                 href: '/estimate',
               },
             ],
@@ -856,7 +856,7 @@ export function getCityServiceSections(
     {
       heading: `Scheduling ${serviceLC} in ${county}`,
       paragraphs: [
-        `We take bookings across ${county} and typically reply to new requests within one business day. Most ${serviceLC} jobs are quoted from photos, scheduled within the week, and finished in a single visit, and bundling several small tasks into the same appointment is the best value because extra tasks only add the time they take.`,
+        `Send your ${serviceLC} request and service address in ${county}. Timing and the number of visits depend on the scope, materials and access. Include any requested dates; availability is confirmed by the team after review.`,
         seo?.climate
           ? `The local ${seo.climate} is hard on homes: caulk and exterior seals crack with freeze-thaw cycles, doors swell and shrink with the seasons, and gutters need attention before winter. We plan the work, and the materials, around that reality.`
           : `The Treasure Valley climate is hard on homes: caulk cracks with freeze-thaw cycles, doors swell and shrink with the seasons, and gutters need attention before winter. We plan the work around that reality.`,
