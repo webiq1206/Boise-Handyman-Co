@@ -83,7 +83,7 @@
     "lib/p5/deliveryPresentation.ts": "e34eeefb965e1348887cd8125302ad4cc7536e5d80a6e493807521d2e4921910",
     "lib/p5/documentLedger.ts": "65a7f56e4f7953789877cecf31dd1508dc3ca6d5ee95ee0d57ef207cccbc478c",
     "lib/p5/documentServiceClient.ts": "0d833b87fed2bed8543b42d2f2fff223a767e37d9f5b9fa2dd73facb402953fe",
-    "lib/p5/documents.ts": "f388c3f3933448da8021264247d04178e4d4a5a904b80ab262d17ff8258f83ac",
+    "lib/p5/documents.ts": "8a792c63bd359676e360242bd09cc45fbf8dfe8f5634d58f15e7337bf77cdb57",
     "lib/p5/draftEndpoint.ts": "109dbf70515a5c7067ffc47d00e027042978811775a38ca1d78c50d89f8d213f",
     "lib/p5/driveEndpoint.ts": "7ea92a11f464715d5ff7ffe94b4fdb581d099b550726a04934d94edfef328730",
     "lib/p5/duplicateCharges.ts": "d14e035ffbfba9a6ee1d9c383909340b7687cccd67501b3878794566b59c9f68",
@@ -110,7 +110,7 @@
     "lib/p5/handoff.ts": "35b6aa91910c73c24418da8508460fd37de203d4688d4582b776fff066e30d82",
     "lib/p5/handoffEndpoint.ts": "8b905f2dedc785a7794103c76d7c5eabfc5e06b75e8f6672b57c9816777a2f8d",
     "lib/p5/http.ts": "c56b198940f956f15721d0954eac84a0b376cc48e33931c42abe2dba4308051a",
-    "lib/p5/imagePreparation.ts": "777f476474e7ba11199a82b78a9f14f63fa0c41296b344eb9b97423d9ac31364",
+    "lib/p5/imagePreparation.ts": "9a7c083f1b073ccdc1f87364b36b59019ee79529db752420a58a503df5f4d100",
     "lib/p5/includedWork.ts": "f8ee1334dab33fb2c1c17c19ac749f6e18f9e10598fb0a2e3fcdffe84c6a7d31",
     "lib/p5/instructions.ts": "cf47c8082be4c999b072fb5071bd3ae7419ae942c3518bdf584e03481d93188d",
     "lib/p5/intakeAdmin.ts": "e604416fdd6124c45294a11aa82752dbfbf921ded7f369b50f87dd640074ed1a",
@@ -515,7 +515,9 @@
     "scripts/lib/navigationEntry.mjs": "570c630761ee2ceb966c3894650ae68b54e2349aeb7f9b47b4aa5fa82b8ece3e",
     "tests/p5-navigation-entry.test.mjs": "ed5e8ca0ad9efe4e68bd492a63efcf640c34e47ffa240c4fbc7fee912b1a3cef",
     "scripts/lib/navigationDiagnostics.mjs": "f594d62686447c3935d39857898152746eb7a78cab1945d35abd2c0794332cb7",
-    "tests/p5-navigation-diagnostics.test.mjs": "d13257aef933467f032783248d2c3e87708507f719505c0e1d5f893ba43b37da"
+    "tests/p5-navigation-diagnostics.test.mjs": "d13257aef933467f032783248d2c3e87708507f719505c0e1d5f893ba43b37da",
+    "lib/p5/imageSignature.ts": "3bc13ad775f4906c6759c9b17680773f8639875b3a121a342547472ba8c9468a",
+    "tests/p5-image-signature.test.ts": "074c4406271a79525c99afe1970acd0994e97d426c687ca7019c851798201b6f"
   },
   "coordinatedIntakeBatch": {
     "base": "e6e125b83468a402264be2f1e82e5c0466baa178",
@@ -696,6 +698,40 @@
       },
       "retired": [],
       "compatibility": []
+    },
+    {
+      "mode": "selected",
+      "source": "p5-home-co",
+      "sourceCommit": "f42063713ca350dca180e8c773abcd336014b9ad",
+      "files": {
+        "lib/p5/documents.ts": "8a792c63bd359676e360242bd09cc45fbf8dfe8f5634d58f15e7337bf77cdb57",
+        "lib/p5/imagePreparation.ts": "9a7c083f1b073ccdc1f87364b36b59019ee79529db752420a58a503df5f4d100",
+        "lib/p5/imageSignature.ts": "3bc13ad775f4906c6759c9b17680773f8639875b3a121a342547472ba8c9468a",
+        "tests/p5-image-signature.test.ts": "074c4406271a79525c99afe1970acd0994e97d426c687ca7019c851798201b6f"
+      },
+      "retired": [],
+      "compatibility": [
+        {
+          "mode": "reviewed-type-only",
+          "consumer": "lib/p5/documents.ts",
+          "consumerSha256": "8a792c63bd359676e360242bd09cc45fbf8dfe8f5634d58f15e7337bf77cdb57",
+          "dependency": "lib/p5/extraction.ts",
+          "sourceSha256": "4ace7e6d1c2a20013876dae61f4aa94b8f04761f309775673be3a324750b5d3c",
+          "targetSha256": "1b94f8ffa898258cafd7f9300badd7b35b307f95811fcfab816a70e0b688e1a6",
+          "interface": "AnalysisFile",
+          "interfaceSha256": "39b6c25407cc945afcbee6d3c7064c299a8ec37d3e9948ee52176a49087f2e07"
+        },
+        {
+          "mode": "reviewed-type-only",
+          "consumer": "lib/p5/imagePreparation.ts",
+          "consumerSha256": "9a7c083f1b073ccdc1f87364b36b59019ee79529db752420a58a503df5f4d100",
+          "dependency": "lib/p5/extraction.ts",
+          "sourceSha256": "4ace7e6d1c2a20013876dae61f4aa94b8f04761f309775673be3a324750b5d3c",
+          "targetSha256": "1b94f8ffa898258cafd7f9300badd7b35b307f95811fcfab816a70e0b688e1a6",
+          "interface": "AnalysisFile",
+          "interfaceSha256": "39b6c25407cc945afcbee6d3c7064c299a8ec37d3e9948ee52176a49087f2e07"
+        }
+      ]
     }
   ]
 }
