@@ -20,7 +20,7 @@ const g = (name: string) => `/images/gallery/${name}.webp`;
  * pairs belong to the same craftsman bungalow (see also
  * `FEATURED_PROPERTY_IMAGES.boiseBungalowExterior`).
  */
-export const GALLERY_PROJECTS: GalleryProject[] = [
+export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
   {
     serviceType: "painting-touch-ups",
     city: "boise",
@@ -95,7 +95,10 @@ export const GALLERY_PROJECTS: GalleryProject[] = [
   },
 ];
 
-/** Establishing shots that keep featured property sets visually linked. */
+/** Generated comparison assets are retained for provenance, not published as work. */
+export const GALLERY_PROJECTS: GalleryProject[] = [];
+
+/** Standalone service imagery remains available outside project-proof contexts. */
 export const FEATURED_PROPERTY_IMAGES = {
   boiseBungalowExterior: g("gallery-boise-bungalow-exterior"),
 } as const;
