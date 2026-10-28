@@ -1,4 +1,5 @@
 import {build} from 'esbuild';
+import {readFile} from 'node:fs/promises';
 import {chromium,webkit} from '@playwright/test';
 import assert from 'node:assert/strict';
 const baseline=process.argv.includes('--baseline');
@@ -26,6 +27,30 @@ for(const [name,engine] of Object.entries({chromium,webkit})){
  await page.evaluate(()=>history.forward());await page.waitForFunction(()=>location.pathname==='/history-next'&&scrollY===460);passed++;
  await page.locator('a').focus();await page.keyboard.press('Enter');await page.waitForURL('**/estimate?review=1');passed++;
  console.log(`${name} ${width}: 9 interaction/restoration checks passed`);await context.close();
+ }}finally{await browser.close()}
+}
+// Reproduce native viewport scrolling during a real pointer gesture. Read the
+// production html rule rather than replacing a real click with forced navigation.
+const css=await readFile('app/globals.css','utf8');
+const nativeBehavior=css.match(/html\s*\{[^}]*scroll-behavior:\s*([^;]+);/)?.[1].trim();
+assert.ok(nativeBehavior,'production html scroll behavior must be explicit');
+for(const [name,engine] of Object.entries({chromium,webkit})){
+ const browser=await engine.launch();try{for(const width of [390,1440]){
+  const context=await browser.newContext({viewport:{width,height:900}});
+  await context.route('**/*',r=>{assert.equal(new URL(r.request().url()).origin,'http://127.0.0.1:59991');return r.fulfill({contentType:'text/html',body:`<!doctype html><style>html{scroll-behavior:${nativeBehavior}}body{margin:0}a{display:block;margin-top:1000px;height:40px;width:200px}footer{height:2000px}</style><a href="/estimate">Request an estimate</a><footer></footer>`});});
+  const page=await context.newPage();await page.goto('http://127.0.0.1:59991/');
+  const point=await page.evaluate(()=>{
+   window.scrollTo({top:800,behavior:'instant'});
+   window.scrollTo({top:650,behavior:'auto'});
+   const r=document.querySelector('a').getBoundingClientRect();return {x:r.x+50,y:r.y+20};
+  });
+  await page.mouse.move(point.x,point.y);await page.mouse.down();
+  // Let a pending native scroll finish while the button is held. The actual
+  // anchor must still receive pointerup/click; smooth baseline loses that click.
+  await page.waitForFunction(()=>scrollY===650);await page.mouse.up();
+  await page.waitForURL('**/estimate');
+  assert.equal(new URL(page.url()).pathname,'/estimate');passed++;
+  console.log(`${name} ${width}: native scrolling preserves the pointer gesture`);await context.close();
  }}finally{await browser.close()}
 }
 console.log(`${passed} passed; no retries, no external requests or submissions`);
