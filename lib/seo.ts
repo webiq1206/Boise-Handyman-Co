@@ -194,7 +194,7 @@ export function generateMetaDescription(params: ServiceSEOParams): string {
 
   const serviceLC = serviceName.toLowerCase();
   const serviceLead = serviceLC.charAt(0).toUpperCase() + serviceLC.slice(1);
-  return `${serviceLead} in Boise & the Treasure Valley. Upfront quotes and one-trip fixes from a local handyman. Call ${phone} to book a visit!`;
+  return `${serviceLead} in Boise & the Treasure Valley. Scope-based written quotes from a local handyman. Call ${phone} to book a visit!`;
 }
 
 /**

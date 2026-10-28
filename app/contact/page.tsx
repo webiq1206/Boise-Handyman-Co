@@ -41,7 +41,7 @@ const CONTACT_FAQS = [
   {
     question: 'How quickly will you respond to my inquiry?',
     answer:
-      'We respond within one business day. Call or text during business hours for an immediate conversation, or send the form with photos of the job and we will reply with an upfront quote.',
+      'Call or text to discuss your project, or send the form with optional photos. The team reviews the scope, prepares a written quote and confirms availability before scheduling.',
   },
   {
     question: 'Are quotes really free?',
@@ -51,7 +51,7 @@ const CONTACT_FAQS = [
   {
     question: 'What should I include when I reach out?',
     answer:
-      'A short description of each task and a photo or two of each one. Photos are the difference between a guess and a firm quote, and they let us arrive with the right parts so the job finishes in one trip.',
+      'A short description of each task and a photo or two of each one. Photos help us review the scope, identify materials and confirm the visit plan.',
   },
   {
     question: 'What areas do you serve?',
@@ -60,7 +60,7 @@ const CONTACT_FAQS = [
   {
     question: 'Can I book more than one task in a visit?',
     answer:
-      'Please do. One visit covers the whole list, and the second and third tasks only cost the additional time. Send the full list when you book so we bring the right materials.',
+      'Please do. The team reviews the whole list and confirms the number of visits, materials and price. Send the full list when you book so we bring the right materials.',
   },
   {
     question: 'How do I get a cost estimate for my job?',
@@ -252,9 +252,9 @@ export default function ContactPage() {
                     <em className="brc-accent">fixing</em>.
                   </h2>
                   <p className="text-base leading-relaxed mb-8 text-muted-foreground">
-                    Send a few details, photos help, and we will reach out within one business day
-                    with an upfront quote and a time that works - one clear price and the expected
-                    duration, with no obligation.
+                    Send your repair list and optional photos. The team reviews the scope,
+                    prepares a written quote and confirms availability before scheduling,
+                    with no obligation.
                   </p>
                 </Reveal>
               </div>
@@ -277,7 +277,7 @@ export default function ContactPage() {
                   <em className="brc-accent">connect</em>
                 </>
               }
-              description="Call, text, or email - we respond within one business day and never use high-pressure sales tactics."
+              description="Call, text, or email to discuss your repair list and next steps, with no pressure."
               className="max-w-3xl"
             />
             <div className="ed-grid-balance grid sm:grid-cols-2 gap-4">
@@ -313,7 +313,7 @@ export default function ContactPage() {
                   icon={<Mail className="h-5 w-5" strokeWidth={1.5} />}
                   label="Email us"
                   href={`mailto:${BUSINESS_INFO.email}`}
-                  subtext="Response within one business day"
+                  subtext="Scope and availability confirmed after review"
                 >
                   <span>{BUSINESS_INFO.email}</span>
                 </ContactChannel>

@@ -7,7 +7,7 @@ export const newHomePunchListHandyman: BlogPostData = {
   metaDescription:
     'Nail pops, sticking doors, cracked caulk: what to expect in a new home, what stays on builder warranty, and what a handyman knocks out in one visit. Plan your list.',
   excerpt:
-    'Every new home develops a punch list in year one. Some of it belongs to the builder warranty, and the rest is a half-day handyman visit. Knowing which is which saves both money and frustration.',
+    'New homes can develop a punch list in year one. Some tasks belong to the builder warranty; other repairs need a scope review and agreed visit plan. Knowing which is which helps you plan the next step.',
   category: 'Home Maintenance',
   hubSlug: 'home-maintenance',
   author: 'Boise Handyman Co',

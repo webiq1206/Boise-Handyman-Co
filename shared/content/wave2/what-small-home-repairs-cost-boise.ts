@@ -7,7 +7,7 @@ export const whatSmallHomeRepairsCostBoise: BlogPostData = {
   metaDescription:
     'Real Treasure Valley price ranges for drywall patches, faucet swaps, minor electrical, trim and more, plus what moves a handyman bill up or down. Budget before you book.',
   excerpt:
-    'Most small home repairs in Boise land between $100 and $600. The spread inside that band is not random, and knowing what moves it lets you budget before anyone shows up.',
+    'Materials, access and the repair list shape the scope of a small home repair. Gather those details and ask for a written quote before scheduling.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',

@@ -116,8 +116,8 @@ export default function HomePage() {
                   .
                 </h2>
                 <p className="ed-lede mt-8 max-w-[40ch]">
-                  Send a few details - photos help - and we will reply within one
-                  business day with an upfront quote and a time that works.
+                  Send your repair list and optional photos. We review the scope, prepare
+                  a written quote and confirm availability before scheduling.
                 </p>
                 <p className="ed-body mt-4">
                   No pressure, and no expectation to go any further.

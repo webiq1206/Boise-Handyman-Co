@@ -22,7 +22,7 @@ export const HERO_SUBHEAD =
 export const HERO_STATS = [
   { num: "Upfront quote", label: "Planning range after photos" },
   { num: "Upfront", label: "Quote before work starts" },
-  { num: "1 trip", label: "Most jobs done in one visit" },
+  { num: "Your list", label: "Visits planned around the agreed scope" },
 ] as const;
 
 export const DIFFERENTIATORS_HEADLINE = "Built for people whose small jobs keep getting ignored";
@@ -136,7 +136,7 @@ export const PROMISE_ITEMS = [
   {
     num: "02",
     title: "Communication without chasing",
-    body: "We reply within one business day, confirm before we head out, and tell you immediately if a job turns out bigger than quoted.",
+    body: "We confirm the agreed scope before work and discuss any changes before proceeding.",
   },
   {
     num: "03",
@@ -169,7 +169,7 @@ export const CLIENT_PRIORITIES: ClientPriority[] = [
   },
   {
     title: "Clear communication",
-    body: "Replies within one business day, a confirmation before we arrive, and a heads-up the moment anything changes.",
+    body: "A confirmed visit plan and clear communication about changes to the agreed scope.",
     icon: MessageSquare,
   },
   {
@@ -198,7 +198,7 @@ export const HOW_WE_BUILD_STEPS = [
   {
     number: "02",
     title: "Get an upfront quote",
-    desc: "We reply within one business day with a clear quote: one written price and the expected time. No surprises, no obligation.",
+    desc: "We review the scope and prepare a written quote, including the visit plan and materials, before scheduling.",
   },
   {
     number: "03",
@@ -301,7 +301,7 @@ export const CONSULT_BULLETS = [
   "Nobody here works on commission",
   "No pressure and no obligation to book",
   "An upfront quote that is yours to keep",
-  "We reply within one business day",
+  "We review your list before scheduling",
 ];
 
 /**

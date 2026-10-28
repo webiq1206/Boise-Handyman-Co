@@ -848,7 +848,7 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
             {!mutation.isPending && <ArrowRight className="h-4 w-4" />}
           </Button>
           <p className="text-xs text-muted-foreground sm:min-w-[14rem] sm:flex-1">
-            No spam. We respond within one business day.
+            No spam. We review your request and confirm next steps.
           </p>
         </div>
       </form>

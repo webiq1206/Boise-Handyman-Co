@@ -36,3 +36,27 @@ for (const file of ['public/llms.txt','public/llms-full.txt']) test(`${file} exc
  assert.match(text,/written quote/);assert.match(text,/\/estimate/);
 });
 test('service index does not render the placeholder planningFrom field',()=>assert.doesNotMatch(readFileSync('app/services/page.tsx','utf8'),/service.planningFrom|realistic range|preliminary estimate/));
+
+test('Boise maintenance guide body and FAQ schema source have no starting-price placeholder',()=>{
+ const g=getGuideBySlug('boise-home-maintenance-guide');assert(g);
+ assert.doesNotMatch(JSON.stringify(g), /\$145|starts at|starting at/i);
+ const faq=g.faqs?.find(f=>/maintenance visit.*cost/.test(f.question));assert(faq);assert.match(faq.answer,/written quote/);
+ assert.match(g.content,/visit plan/);
+});
+test('homepage FAQ visible and schema source omit unconfirmed prices and reply promises',()=>{
+ assert.doesNotMatch(readFileSync('shared/homepageFaqs.ts','utf8').split('export const HOMEPAGE_FAQS')[1],/\$99|\$149|within one business day|scheduled within the week|most jobs are finished in a single visit/);
+});
+
+for(const slug of ['boise-home-maintenance-guide','treasure-valley-exterior-home-care-guide','boise-handyman-guide','eagle-handyman-guide','harris-ranch-handyman-guide','middleton-handyman-guide','star-handyman-guide']) test(`${slug}: actual guide record has no placeholder price or unconditional completion claim`,()=>{
+ const guide=getGuideBySlug(slug);assert(guide);
+ assert.doesNotMatch(JSON.stringify(guide),/\$\d|one-visit work almost without exception|Nearly all of it is one-visit work|usually within a day|within one business day/);
+});
+test('known full-document boundary includes all 72 agreed URLs and the previously missed guide',()=>{
+ const routes=JSON.parse(readFileSync('scripts/known-claims-routes.json','utf8'));assert.equal(new Set(routes).size,72);
+ for(const route of ['/','/contact','/guides/boise-home-maintenance-guide','/blog','/blog/category/home-maintenance','/areas/middleton','/llms.txt','/llms-full.txt'])assert(routes.includes(route));
+});
+
+test('shared root service metadata cannot promise one-trip fixes',()=>{
+ assert.doesNotMatch(readFileSync('lib/seo.ts','utf8'),/Upfront quotes and one-trip fixes/);
+ assert.match(readFileSync('lib/seo.ts','utf8'),/Scope-based written quotes/);
+});

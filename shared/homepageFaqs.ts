@@ -26,16 +26,16 @@ export const INITIAL_FAQ_COUNT = 9;
 export const HOMEPAGE_FAQS: HomepageFaq[] = [
   {
     q: "How is a Boise handyman visit priced?",
-    a: "Every job is quoted upfront as one written price before any work starts, priced by the time it takes with a one-hour minimum, and most jobs are finished in a single visit. Pricing comes as a written quote first. See how much a handyman costs in Boise and the Treasure Valley. Materials are billed at cost as their own line, and bundling several tasks into one visit is the best value. Work that needs a general contractor or a licensed trade, such as full remodels, additions, repipes, or panel work, is out of scope and referred out honestly.",
+    a: "Every job is quoted upfront as one written price before any work starts, priced by the time it takes with a one-hour minimum, and the visit plan is confirmed after scope review. Pricing comes as a written quote first. See how much a handyman costs in Boise and the Treasure Valley. Materials are billed at cost as their own line, and bundling several tasks into one visit is the best value. Work that needs a general contractor or a licensed trade, such as full remodels, additions, repipes, or panel work, is out of scope and referred out honestly.",
   },
   {
     id: "handyman-cost",
     q: "How much does a handyman cost in Boise and the Treasure Valley?",
-    a: "Treasure Valley handyman rates typically run $60 to $120 per hour, with many companies adding a service call or minimum charge on top. We keep it simple: one written price for the visit, quoted upfront before any work starts. Most single-task visits start around $99 to $149, and materials appear on the quote as their own line at what they cost. Because extra tasks only add the time they take, bundling several small tasks into one appointment is the best value.",
+    a: "The price depends on the tasks, materials and access. Send the full repair list for review. We prepare a written quote before work starts, with materials listed separately, and confirm the visit plan before scheduling.",
   },
   {
     q: "How quickly can you get to my job?",
-    a: "We reply to every new request within one business day, and most jobs are scheduled within the week. Because we quote from photos before we come out, the visit itself is spent doing the work rather than looking at it. If your job is urgent, say so when you reach out and we will tell you honestly what the soonest slot is. We are not an emergency service, so for active water leaks, shut off the supply valve first, and for anything dangerous call the appropriate emergency line before calling us.",
+    a: "Share your requested dates with your repair list. The team reviews the scope and confirms availability before scheduling. If your job is urgent, say so when you reach out and we will tell you honestly what the soonest slot is. We are not an emergency service, so for active water leaks, shut off the supply valve first, and for anything dangerous call the appropriate emergency line before calling us.",
   },
   {
     q: "What areas do you serve?",
@@ -51,7 +51,7 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "Is there a minimum job size?",
-    a: "Yes. Every visit carries a practical minimum, so a single small task starts around $99. No job is too small, the minimum just means a lone picture-hanging costs more per minute than a morning of tasks. That is why we encourage a list: the second, third, and fourth tasks in the same visit only cost the additional time.",
+    a: "Small tasks are welcome. Any applicable visit minimum is included in the written quote before you agree to the work. Send the complete list so we can review the scope and plan the visit.",
   },
   {
     q: "Are you a registered contractor and insured?",
