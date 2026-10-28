@@ -76,6 +76,8 @@ export function buildRe10CustomerEmail(
     validDays: number;
     categories: { trade: string; itemCount: number; items: { description: string; quantityAssumed: boolean; quantity?: number; unit?: string }[] }[];
     needsOnsite: { description: string; why: string }[];
+    /** Repairs the customer removed on the review screen. Named, not vanished. */
+    excluded?: { description: string }[];
     uncertainty: string[];
     assumptions: string[];
   },
@@ -107,6 +109,17 @@ export function buildRe10CustomerEmail(
         </div>`
       : "";
 
+  const excluded =
+    (view.excluded?.length ?? 0) > 0
+      ? `<div style="margin:28px 0;border:1px solid ${EMAIL_BRAND.hairline};border-radius:6px;padding:18px;">
+          <p style="${SECTION_TITLE}">Removed at your request</p>
+          <p style="margin:0 0 10px;color:${EMAIL_BRAND.textMuted};font-size:13px;line-height:1.6;">You took these off the list before pricing, so they are not in the number above. Add any of them back and we will re-price.</p>
+          <ul style="margin:0;padding-left:18px;color:${EMAIL_BRAND.textMuted};font-size:13px;line-height:1.6;">
+            ${(view.excluded ?? []).map((x) => `<li>${escapeHtml(x.description)}</li>`).join("")}
+          </ul>
+        </div>`
+      : "";
+
   const narrowing =
     view.uncertainty.length > 0
       ? `<div style="margin:28px 0;">
@@ -122,7 +135,7 @@ export function buildRe10CustomerEmail(
 
     <div style="background:${EMAIL_BRAND.raised};border-left:3px solid ${EMAIL_BRAND.accent};padding:24px;margin:24px 0;border-radius:4px;">
       <p style="margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:0.14em;color:${EMAIL_BRAND.textMuted};">Price for the repairs below</p>
-      <p style="margin:0;font-family:'Libre Baskerville',Georgia,serif;font-size:30px;line-height:1.15;color:${EMAIL_BRAND.text};">${usd(view.price)}</p>
+      <p style="margin:0;font-family:'Fraunces',Georgia,serif;font-size:30px;line-height:1.15;color:${EMAIL_BRAND.text};">${usd(view.price)}</p>
       <p style="margin:8px 0 0;font-size:13px;color:${EMAIL_BRAND.textMuted};">Held for ${view.validDays} days.</p>
     </div>
 
@@ -137,6 +150,7 @@ export function buildRe10CustomerEmail(
     </div>
 
     ${onsite}
+    ${excluded}
     ${narrowing}
 
     <div style="margin:28px 0;">
@@ -149,7 +163,7 @@ export function buildRe10CustomerEmail(
     </div>
 
     <p style="color:${EMAIL_BRAND.text};line-height:1.6;">Next step is a short onsite visit to confirm the scope, price the items listed below as needing a look, and get you on the schedule. Reply here or call <a href="${SITE_CONFIG.phoneHref}" style="color:${EMAIL_BRAND.accent};">${escapeHtml(SITE_CONFIG.phone)}</a> and we will get it scheduled against your deadline.</p>
-    <p style="margin-top:24px;color:${EMAIL_BRAND.text};">The ${SITE_CONFIG.name} team</p>
+    <p style="margin-top:24px;color:${EMAIL_BRAND.text};">The Boise Handyman Co team</p>
   `;
 
   return wrapEmailHtml({
@@ -180,6 +194,8 @@ export interface Re10AdminExtras {
   missingDocuments?: string[];
   unmapped?: { verbatim: string; reason?: string }[];
   documentNotes?: string[];
+  /** Repairs the customer removed on the review screen. */
+  excluded?: { description: string }[];
 }
 
 export function buildRe10AdminEmail(
@@ -187,6 +203,16 @@ export function buildRe10AdminEmail(
   est: Re10Estimate,
   extras: Re10AdminExtras = {},
 ): string {
+  const excludedBlock =
+    extras.excluded && extras.excluded.length > 0
+      ? `<div style="margin:20px 0;padding:12px 14px;border:1px solid ${EMAIL_BRAND.hairline};">
+          <p style="${SECTION_TITLE}">Removed by the customer on review (${extras.excluded.length})</p>
+          <ul style="margin:0;padding-left:18px;font-size:13px;">
+            ${extras.excluded.map((x) => `<li style="margin:4px 0;color:${EMAIL_BRAND.text};">${escapeHtml(x.description)}</li>`).join("")}
+          </ul>
+        </div>`
+      : "";
+
   const unmappedBlock =
     extras.unmapped && extras.unmapped.length > 0
       ? `<div style="margin:20px 0;padding:12px 14px;border:1px solid #b45309;background:#fffbeb;">
@@ -273,7 +299,7 @@ export function buildRe10AdminEmail(
 
     <div style="background:${EMAIL_BRAND.raised};border-left:3px solid ${EMAIL_BRAND.accent};padding:20px;margin:24px 0;border-radius:4px;">
       <p style="margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:0.14em;color:${EMAIL_BRAND.textMuted};">Quoted range</p>
-      <p style="margin:0;font-family:'Libre Baskerville',Georgia,serif;font-size:26px;line-height:1.15;color:${EMAIL_BRAND.text};">${usd(est.low)} to ${usd(est.high)}</p>
+      <p style="margin:0;font-family:'Fraunces',Georgia,serif;font-size:26px;line-height:1.15;color:${EMAIL_BRAND.text};">${usd(est.low)} to ${usd(est.high)}</p>
       <p style="margin:8px 0 0;font-size:13px;color:${EMAIL_BRAND.textMuted};">
         ${(est.realisedMargin * 100).toFixed(1)}% realised margin &middot; ${est.confidence} confidence
         ${est.worthwhile ? "" : ` &middot; <span style="color:#D98A3A;">below the worthwhile threshold</span>`}
@@ -321,6 +347,7 @@ export function buildRe10AdminEmail(
 
     ${review}
     ${unmappedBlock}
+    ${excludedBlock}
     ${docsBlock}
     ${notesBlock}
     ${warnings}

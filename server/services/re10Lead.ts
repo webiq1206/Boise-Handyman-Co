@@ -1,6 +1,5 @@
 import { db } from "@/lib/db";
 import { consultationRequests } from "@/shared/schema";
-import { saveAcceptedLead } from "@/server/services/acceptedLead";
 import { getUncachableEmailClient } from "@/server/services/emailTransport";
 import {
   htmlToPlainText,
@@ -46,7 +45,6 @@ import {
  */
 
 export interface Re10DeliveryInput {
-  inquiryId: string;
   contact: Re10Contact;
   estimate: Re10Estimate;
   /** Customer-safe view, already built by the route. */
@@ -64,14 +62,33 @@ export interface Re10DeliveryInput {
   unmapped?: { verbatim: string; reason?: string }[];
   /** What the extractor noticed about the document itself. */
   documentNotes?: string[];
+  /** Repairs the customer toggled OFF on the review screen. Named everywhere. */
+  excluded?: { description: string }[];
+  /** Files stored for the team but not machine-readable. */
+  attachedOnly?: string[];
+  /**
+   * Pricing-alert kinds the route raised while computing this estimate
+   * (clamped quantities, a zero or implausible total). Carried onto the CRM
+   * record so the person working the lead sees the price needed attention.
+   */
+  pricingAlerts?: string[];
+  /**
+   * Page-by-page evidence of what was read, and the internal audit trail
+   * showing where each extracted fact came from.
+   *
+   * INTERNAL ONLY. This is what an estimator needs to check a number against
+   * the document without reading a hundred sheets themselves - which sheet a
+   * quantity came from, the text it was read out of, and which pages we could
+   * not read at all. It never goes to the customer.
+   */
+  coverageSummary?: string;
+  auditTrail?: string;
 }
 
 export interface Re10DeliveryResult {
   customerEmailed: boolean;
   adminEmailed: boolean;
   stored: boolean;
-  accepted: boolean;
-  duplicate: boolean;
 }
 
 const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
@@ -134,6 +151,11 @@ async function collectAttachments(
 function buildRe10Notes(input: Re10DeliveryInput): string {
   const { contact, estimate } = input;
   const lines: string[] = [
+    // First line of the notes, above even the price, because a lead whose
+    // price needed attention should not read like a normal one.
+    ...(input.pricingAlerts && input.pricingAlerts.length > 0
+      ? [`*** PRICING ALERTS: ${input.pricingAlerts.join(", ")} - check the logs before quoting further ***`, ``]
+      : []),
     `RE-10 REPAIR ESTIMATE`,
     `Property: ${contact.propertyAddress}`,
     contact.repairDeadline ? `Repair deadline: ${contact.repairDeadline}` : "",
@@ -150,6 +172,10 @@ function buildRe10Notes(input: Re10DeliveryInput): string {
     ),
   ];
 
+  if (input.coverageSummary) {
+    lines.push(``, `DOCUMENT COVERAGE`, `  ${input.coverageSummary}`);
+  }
+
   if (estimate.review.length > 0) {
     lines.push(``, `NEEDS ONSITE`);
     for (const r of estimate.review) lines.push(`  ${r.input.description} - ${r.text}`);
@@ -160,6 +186,16 @@ function buildRe10Notes(input: Re10DeliveryInput): string {
   if (input.unmapped && input.unmapped.length > 0) {
     lines.push(``, `NOT IN THE RANGE - NO CATEGORY MATCHED (${input.unmapped.length})`);
     for (const u of input.unmapped) lines.push(`  ${u.verbatim}${u.reason ? ` - ${u.reason}` : ""}`);
+  }
+
+  if (input.excluded && input.excluded.length > 0) {
+    lines.push(``, `REMOVED BY THE CUSTOMER ON REVIEW (${input.excluded.length})`);
+    for (const x of input.excluded) lines.push(`  ${x.description}`);
+  }
+
+  if (input.attachedOnly && input.attachedOnly.length > 0) {
+    lines.push(``, `STORED BUT NOT MACHINE-READABLE (${input.attachedOnly.length})`);
+    for (const f of input.attachedOnly) lines.push(`  ${f}`);
   }
 
   if (input.documentNotes && input.documentNotes.length > 0) {
@@ -173,6 +209,11 @@ function buildRe10Notes(input: Re10DeliveryInput): string {
   }
 
   if (contact.notes) lines.push(``, `THEIR NOTE`, `  ${contact.notes}`);
+
+  /* The audit trail last: it is long, and it is the estimator's tool rather
+     than the reader's. Everything above answers "what is this lead"; this
+     answers "where did that number come from". */
+  if (input.auditTrail) lines.push(``, input.auditTrail);
 
   return lines.filter((l) => l !== undefined).join("\n");
 }
@@ -189,6 +230,7 @@ function buildRe10CrmRecord(input: Re10DeliveryInput) {
   const { contact, estimate } = input;
   return {
     kind: "re10-repair-estimate" as const,
+    pricingAlerts: input.pricingAlerts ?? [],
     property: {
       address: contact.propertyAddress,
       occupancy: contact.occupancy ?? "unknown",
@@ -255,18 +297,13 @@ function buildRe10CrmRecord(input: Re10DeliveryInput) {
 
 export async function deliverRe10Lead(input: Re10DeliveryInput): Promise<Re10DeliveryResult> {
   const { contact, estimate } = input;
-  const result: Re10DeliveryResult = { customerEmailed: false, adminEmailed: false, stored: false, accepted: false, duplicate: false };
+  const result: Re10DeliveryResult = { customerEmailed: false, adminEmailed: false, stored: false };
   const notes = buildRe10Notes(input);
 
   /* 1. Database, on the same table every other site lead uses. */
-  const durable = await saveAcceptedLead(db, {
-    inquiryId: input.inquiryId,
-    route: "re10",
-    contact: { email: contact.email, phone: contact.phone },
-    scope: `re10|${contact.propertyAddress}`,
-    metadata: { preferredContact: contact.preferredContact },
-    saveLead: async (tx) => {
-      await tx.insert(consultationRequests).values({
+  if (db) {
+    try {
+      await db.insert(consultationRequests).values({
         name: contact.name,
         phone: contact.phone || "",
         email: contact.email || "",
@@ -279,15 +316,10 @@ export async function deliverRe10Lead(input: Re10DeliveryInput): Promise<Re10Del
         estimateHigh: String(estimate.quotedPrice),
         estimateConfidence: estimate.confidence,
       });
-    },
-  });
-  result.accepted = durable.accepted;
-  result.duplicate = durable.duplicate;
-  result.stored = durable.accepted;
-  // A duplicate is a successful replay, but must never redeliver CRM or email.
-  if (!durable.accepted) {
-    if (durable.duplicate) return result;
-    throw new Error("RE-10 lead could not be saved");
+      result.stored = true;
+    } catch (err) {
+      console.error("[re10Lead] DB insert failed:", err);
+    }
   }
 
   /* 2. The CRM the team actually works leads in. Fire-and-forget by design. */
@@ -334,6 +366,7 @@ export async function deliverRe10Lead(input: Re10DeliveryInput): Promise<Re10Del
     const adminHtml = buildRe10AdminEmail(contact, estimate, {
       unmapped: input.unmapped,
       documentNotes: input.documentNotes,
+      excluded: input.excluded,
       attached: attachments.map((a) => a.filename),
       missingDocuments: missing,
     });
