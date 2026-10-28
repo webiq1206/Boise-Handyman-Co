@@ -3,7 +3,7 @@ on:
   push:
     branches: [fix/estimator-flow-20260913,release/estimator-overhaul-20260912,wip/estimator-overhaul-20260912,fix/research-format,fix/pricing-batches,fix/pricing-latency,fix/readable-estimates,fix/complete-scope-pricing, codex/activate-cost-books-20260911, codex/finalize-estimators-20260911, codex/p5-intelligent-wizard-20260910, codex/p5-upload-receipt-fix-20260910, main, codex/p5-estimator-policy-20260910, codex/p5-merge-all-20260910, codex/p5-complete-main-20260910]
   pull_request:
-    paths: ['components/ScrollToTop.tsx', 'scripts/test-scroll-startup.mjs', 'components/P5Estimator.tsx', 'scripts/p5-estimator-browser.mjs', 'scripts/lib/navigationEntry.mjs', 'scripts/p5-intake-intent-browser.mjs', 'scripts/p5-exit-browser.mjs', 'tests/p5-navigation-entry.test.mjs', 'tests/handyman-navigation-consumers.test.mjs', '.github/workflows/p5-estimator-verification.yml']
+    paths: ['components/modals/NavEstimateButton.tsx', 'components/modals/EstimateCTA.tsx', 'components/modals/FooterCTAs.tsx', 'scripts/test-hash-history-browser.mjs', 'components/ScrollToTop.tsx', 'scripts/test-scroll-startup.mjs', 'components/P5Estimator.tsx', 'scripts/p5-estimator-browser.mjs', 'scripts/lib/navigationEntry.mjs', 'scripts/p5-intake-intent-browser.mjs', 'scripts/p5-exit-browser.mjs', 'tests/p5-navigation-entry.test.mjs', 'tests/handyman-navigation-consumers.test.mjs', '.github/workflows/p5-estimator-verification.yml']
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -55,6 +55,7 @@ jobs:
         run: |
           npx next start -p 5000 > /tmp/p5-estimator-server.log 2>&1 &
           node -e 'const u="http://127.0.0.1:5000/estimate/p5-preview";let n=0;const t=setInterval(async()=>{try{const r=await fetch(u);if(r.ok){clearInterval(t)}}catch{}if(++n>90){clearInterval(t);process.exit(1)}},1000)'
+          node scripts/test-hash-history-browser.mjs
           P5_PARENT=0 node scripts/p5-mobile-navigation.mjs
           node --import tsx scripts/p5-estimator-browser.mjs
           P5_TEST_BROWSER=webkit node --import tsx scripts/p5-estimator-browser.mjs

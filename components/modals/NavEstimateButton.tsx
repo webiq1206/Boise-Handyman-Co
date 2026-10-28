@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import type { ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -40,22 +41,22 @@ export function NavEstimateButton({
 
   if (asLink) {
     return (
-      <a
+      <Link
         href={href}
         className={className}
         onClick={handleClick}
         {...(linkAttrs as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
         {children}
-      </a>
+      </Link>
     );
   }
 
   return (
     <Button {...props} className={cn(className)} asChild>
-      <a href={href} onClick={handleClick}>
+      <Link href={href} onClick={handleClick}>
         {children}
-      </a>
+      </Link>
     </Button>
   );
 }
