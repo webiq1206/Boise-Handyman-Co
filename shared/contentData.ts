@@ -56,7 +56,7 @@ export const SERVICES: ServiceData[] = [
   {
     slug: 'plumbing-repairs',
     name: 'Minor Plumbing Repairs',
-    shortDescription: 'Faucets, toilets, garbage disposals, supply lines, and slow drains fixed or swapped in a single visit.',
+    shortDescription: 'Faucets, toilets, garbage disposals, supply lines, and slow drains reviewed for repair or replacement.',
     planningFrom: '$145',
   },
   {
@@ -88,7 +88,7 @@ export const SERVICES: ServiceData[] = [
   {
     slug: 'home-maintenance',
     name: 'Caulking & Home Maintenance',
-    shortDescription: 'Caulking and weatherproofing, tile and grout touch-ups, and punch-list work knocked out in one trip.',
+    shortDescription: 'Caulking and weatherproofing, tile and grout touch-ups, and punch-list work planned around your repair list.',
     planningFrom: '$145',
     secondary: true,
   },

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "next build",
-    "postbuild": "node scripts/grep-static-reviews.mjs",
+    "postbuild": "node scripts/grep-static-reviews.mjs && node scripts/verify-shared-claims.mjs",
     "start": "next start -p 5000",
     "lint": "next lint",
     "test:e2e": "playwright test",

@@ -50,13 +50,9 @@ const CONTACT =
   `${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.state} ${SITE_CONFIG.address.postalCode} ` +
   `(not a staffed storefront). Phone ${SITE_CONFIG.phone}. Email ${SITE_CONFIG.email}.`;
 
-const smallRepairFrom = SERVICES.find((service) => service.slug === 'plumbing-repairs')!.planningFrom;
-
 const POSITIONING =
-  `Every job is quoted upfront as one written price before any work starts, priced by the ` +
-  `time it takes with a one-hour minimum, and most jobs are finished in a single visit. A ` +
-  `single small repair starts around ${smallRepairFrom}, materials are billed at cost as their own line, ` +
-  `and bundling several tasks into one visit is the best value (every job gets a written quote first). ` +
+  `Every job gets a written quote before work starts. The team reviews the repair list, ` +
+  `materials and access, then confirms scope, pricing and the visit plan before scheduling. ` +
   `Work that needs a general contractor or a licensed trade, such as full remodels, additions, ` +
   `repipes, or panel work, is out of scope and referred out honestly.`;
 
@@ -70,7 +66,7 @@ function buildShort(): string {
   lines.push('## Services', '');
   for (const s of SERVICES) {
     lines.push(
-      `- [${s.name}](${url(`/services/${s.slug}`)}): ${s.shortDescription} Planning from ${s.planningFrom}.`,
+      `- [${s.name}](${url(`/services/${s.slug}`)}): ${s.shortDescription}`,
     );
   }
   lines.push(
@@ -108,7 +104,7 @@ function buildShort(): string {
     `- [About ${SITE_CONFIG.name}](${url('/about')}): locally owned handyman service for the Treasure Valley.`,
   );
   lines.push(`- [Contact](${url('/contact')})`);
-  lines.push(`- [Instant handyman estimate](${url('/estimate')})`);
+  lines.push(`- [Request a handyman estimate](${url('/estimate')})`);
   lines.push(`- [Homeowner resources and checklists](${url('/resources')})`, '');
 
   lines.push('## Optional', '');
@@ -137,15 +133,15 @@ function buildFull(): string {
       `exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim ` +
       `repair, door and window adjustment, TV, shelf and furniture mounting and assembly, ` +
       `fence, deck and gutter repair, caulking and weatherproofing, and general punch-list ` +
-      `work. Every job gets a written quote before work starts, and most jobs are finished in ` +
-      `one visit. Full remodels, additions, and anything that requires a general contractor or ` +
+      `work. Every job gets a written quote and an agreed visit plan before work starts. ` +
+      `Full remodels, additions, and anything that requires a general contractor or ` +
       `a licensed trade are out of scope and referred out.`,
     '',
   );
   lines.push('- Business type: Handyman service (home repairs, installs, and maintenance)');
-  lines.push('- Service model: Upfront written quotes, one clear price per visit, one-trip fixes');
+  lines.push('- Service model: Scope review, written quotes and an agreed visit plan');
   lines.push(`- Contact: ${url('/contact')}`);
-  lines.push(`- Instant estimator: ${url('/estimate')}`, '');
+  lines.push(`- Project inquiry: ${url('/estimate')}`, '');
 
   lines.push('## Service area', '');
   lines.push('We serve the following Treasure Valley cities across Ada and Canyon County:', '');
@@ -195,15 +191,12 @@ function buildFull(): string {
 
   lines.push('## Common questions', '');
   lines.push(
-    '- What does a handyman visit cost in Boise? Market rates in the Treasure Valley typically ' +
-      'run $60 to $120 per hour. Every job with us is quoted upfront as one written price before ' +
-      'work starts, with a single small repair starting around $145 and materials billed at cost ' +
-      'as their own line.',
+    '- What does a handyman visit cost in Boise? Pricing depends on the agreed scope, materials ' +
+      'and access. Send your repair list for review; the team prepares a written quote before work starts.',
   );
   lines.push(
-    '- How fast can a repair be scheduled? Standard visits book at the next available slot, ' +
-      'usually within the week; priority scheduling within two business days is available for ' +
-      'an added fee. Most small repairs are finished in a single one-to-three-hour visit.',
+    '- How fast can a repair be scheduled? Share your requested dates with the repair list. ' +
+      'The team confirms availability and the number of visits after reviewing scope, materials and access.',
   );
   lines.push(
     '- Who supplies the materials? Either works. You can have parts on the counter when we ' +
@@ -226,7 +219,7 @@ function buildFull(): string {
   lines.push(`- About: ${url('/about')}`);
   lines.push(`- Services: ${url('/services')}`);
   lines.push(`- Service areas: ${url('/areas')}`);
-  lines.push(`- Instant estimator: ${url('/estimate')}`);
+  lines.push(`- Project inquiry: ${url('/estimate')}`);
   lines.push(`- Blog: ${url('/blog')}`);
   lines.push(`- Guides: ${url('/guides')}`);
   lines.push(`- Resources: ${url('/resources')}`);

@@ -2,7 +2,7 @@
 
 > Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, and maintenance. Drywall repair, interior and exterior painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, caulking and punch-list work. Serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, Caldwell. Phone (208) 477-1169.
 
-Every job is quoted upfront as one written price before any work starts, priced by the time it takes with a one-hour minimum, and most jobs are finished in a single visit. A single small repair starts around $145, materials are billed at cost as their own line, and bundling several tasks into one visit is the best value (every job gets a written quote first). Work that needs a general contractor or a licensed trade, such as full remodels, additions, repipes, or panel work, is out of scope and referred out honestly.
+Every job gets a written quote before work starts. The team reviews the repair list, materials and access, then confirms scope, pricing and the visit plan before scheduling. Work that needs a general contractor or a licensed trade, such as full remodels, additions, repipes, or panel work, is out of scope and referred out honestly.
 
 ## Contact
 
@@ -10,14 +10,14 @@ Public representative: Nick Perkins. Service-area business based at 4031 W Wapoo
 
 ## Services
 
-- [Drywall Repair & Patching](https://boisehandyman.co/services/drywall-repair): Holes, cracks, water-stained patches, and popcorn-ceiling repairs finished and blended to match. Planning from $149.
-- [Interior & Exterior Painting](https://boisehandyman.co/services/painting-touch-ups): Room refreshes, trim and door repaints, and exterior touch-ups with proper prep and clean lines. Planning from $199.
-- [Minor Plumbing Repairs](https://boisehandyman.co/services/plumbing-repairs): Faucets, toilets, garbage disposals, supply lines, and slow drains fixed or swapped in a single visit. Planning from $145.
-- [Minor Electrical Repairs](https://boisehandyman.co/services/electrical-repairs): Outlets, switches, light fixtures, and ceiling fans replaced or repaired safely and to code. Planning from $145.
-- [Carpentry & Trim Repair](https://boisehandyman.co/services/carpentry-trim-repair): Doors that stick, damaged trim and baseboard, stair rails, and small carpentry fixes done cleanly. Planning from $149.
-- [Mounting & Assembly](https://boisehandyman.co/services/mounting-assembly): TVs, shelves, mirrors, and curtain rods mounted level and anchored right; furniture assembled fast. Planning from $145.
-- [Fence, Deck & Gutter Repair](https://boisehandyman.co/services/fence-deck-gutter-repair): Leaning fence panels, loose deck boards and rails, gutter cleaning, and minor exterior repairs. Planning from $149.
-- [Caulking & Home Maintenance](https://boisehandyman.co/services/home-maintenance): Caulking and weatherproofing, tile and grout touch-ups, and punch-list work knocked out in one trip. Planning from $145.
+- [Drywall Repair & Patching](https://boisehandyman.co/services/drywall-repair): Holes, cracks, water-stained patches, and popcorn-ceiling repairs finished and blended to match.
+- [Interior & Exterior Painting](https://boisehandyman.co/services/painting-touch-ups): Room refreshes, trim and door repaints, and exterior touch-ups with proper prep and clean lines.
+- [Minor Plumbing Repairs](https://boisehandyman.co/services/plumbing-repairs): Faucets, toilets, garbage disposals, supply lines, and slow drains reviewed for repair or replacement.
+- [Minor Electrical Repairs](https://boisehandyman.co/services/electrical-repairs): Outlets, switches, light fixtures, and ceiling fans replaced or repaired safely and to code.
+- [Carpentry & Trim Repair](https://boisehandyman.co/services/carpentry-trim-repair): Doors that stick, damaged trim and baseboard, stair rails, and small carpentry fixes done cleanly.
+- [Mounting & Assembly](https://boisehandyman.co/services/mounting-assembly): TVs, shelves, mirrors, and curtain rods mounted level and anchored right; furniture assembled fast.
+- [Fence, Deck & Gutter Repair](https://boisehandyman.co/services/fence-deck-gutter-repair): Leaning fence panels, loose deck boards and rails, gutter cleaning, and minor exterior repairs.
+- [Caulking & Home Maintenance](https://boisehandyman.co/services/home-maintenance): Caulking and weatherproofing, tile and grout touch-ups, and punch-list work planned around your repair list.
 - [RE-10 / Inspection Repairs](https://boisehandyman.co/re-10-repairs-boise): repairs from an Idaho RE-10 inspection response, completed and documented before closing, for real estate agents, buyers and sellers.
 - [All Services](https://boisehandyman.co/services): plus city pages at /services/{service}/{city} and [Service Areas](https://boisehandyman.co/areas).
 
@@ -48,7 +48,7 @@ Public representative: Nick Perkins. Service-area business based at 4031 W Wapoo
 
 - [About Boise Handyman Co](https://boisehandyman.co/about): locally owned handyman service for the Treasure Valley.
 - [Contact](https://boisehandyman.co/contact)
-- [Instant handyman estimate](https://boisehandyman.co/estimate)
+- [Request a handyman estimate](https://boisehandyman.co/estimate)
 - [Homeowner resources and checklists](https://boisehandyman.co/resources)
 
 ## Optional
@@ -62,4 +62,4 @@ Public representative: Nick Perkins. Service-area business based at 4031 W Wapoo
 - [RSS feed](https://boisehandyman.co/feed.xml): guides and articles, newest first, with publication and revision dates.
 - [Full text for LLMs](https://boisehandyman.co/llms-full.txt): expanded reference copy of the core facts.
 
-Last updated: 2026-10-17.
+Last updated: 2026-10-28.

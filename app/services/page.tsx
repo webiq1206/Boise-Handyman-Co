@@ -78,21 +78,21 @@ export default function ServicesIndexPage() {
         </h1>
         <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
           Small repairs, installs and maintenance for Treasure Valley homes, quoted upfront as one
-            written price. Most jobs run one to eight hours and are finished in a single visit.
+            written price. The team reviews your repair list and confirms scope, materials and the visit plan before scheduling.
         </p>
       </InteriorHero>
 
       {/* Approved photo-led service directory. */}
-      <section className="interior-service-grid" aria-label="All services">{SERVICES.map(service=><Link className="interior-service-card" href={servicePath(service.slug)} key={service.slug}><img src={getServiceBackground(service.slug)} alt={altForImage(getServiceBackground(service.slug)) ?? service.name} width={900} height={675} loading="lazy"/><div><h2>{service.name}</h2><ArrowRight size={18} aria-hidden="true"/></div><p>{service.shortDescription}</p><p className="interior-price">Planning from {service.planningFrom}</p></Link>)}</section>
+      <section className="interior-service-grid" aria-label="All services">{SERVICES.map(service=><Link className="interior-service-card" href={servicePath(service.slug)} key={service.slug}><img src={getServiceBackground(service.slug)} alt={altForImage(getServiceBackground(service.slug)) ?? service.name} width={900} height={675} loading="lazy"/><div><h2>{service.name}</h2><ArrowRight size={18} aria-hidden="true"/></div><p>{service.shortDescription}</p></Link>)}</section>
 
       <EstimatePromptBand
         title={
           <>
-            Know your range before you{' '}
+            Share your repair list before you{' '}
               <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>book</em>
           </>
         }
-        description="Use our Treasure Valley estimator to see a realistic range for your repair, install or maintenance job - then book a handyman visit when you're ready."
+        description="Send your repair, install or maintenance details for team review. Scope, pricing and availability are confirmed before scheduling."
       />
 
       <Section surface="bone" spacing="xl" edge>
@@ -131,7 +131,7 @@ export default function ServicesIndexPage() {
             </h2>
             <div>
               <p className="ed-body">
-                Get a preliminary estimate online, or book a handyman visit with an upfront quote.
+                Send your repair list online, or call to discuss the scope and next steps before scheduling.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
                 <ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA>
