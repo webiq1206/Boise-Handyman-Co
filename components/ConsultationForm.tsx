@@ -3,7 +3,7 @@
 import { EstimatorRecovery } from "@/components/estimate/recovery/EstimatorRecovery";
 import { markEstimatorCompleted } from "@/lib/estimatorSession";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,7 +11,6 @@ import { z } from "zod";
 import { useMutation } from "@tanstack/react-query";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   Form,
   FormControl,
@@ -21,17 +20,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Check, CheckCircle2, ArrowRight, Phone, Plus, X, ChevronDown } from "lucide-react";
+import { Check, Plus, X, ChevronDown } from "lucide-react";
 import type { StoredEstimate } from "@/shared/estimateEngine";
-import { FINISH_LABELS, PROJECT_LABELS, formatPlanningCurrency } from "@/shared/estimateEngine";
+import { formatPlanningCurrency } from "@/shared/estimateEngine";
 import { DisplayNum } from "@/components/marketing";
 import { AddressAutocomplete } from "@/components/AddressAutocomplete";
-import { EstimateCTA } from "@/components/modals/EstimateCTA";
 import { CTA_FORM_SEND } from "@/shared/ctaCopy";
 import { CONSULT_BULLETS } from "@/shared/siteContent";
-import { SITE_CONFIG } from "@/shared/siteConfig";
 import { BusinessPhoneContact } from "@/components/BusinessPhoneContact";
 import { trackEvent, trackMetaEvent, trackAcceptedLeadConversion } from "@/lib/analytics";
 import { requireConsultationReceipt } from "@/lib/consultationReceipt";
@@ -44,27 +40,27 @@ import {
   buildCleanAddress,
   extractZip,
 } from "@/shared/addressValidation";
+import {
+  SelectableCard,
+  WizardActionBar,
+  WizardProgress,
+  WizardStep,
+} from "@/components/estimate/wizard";
 
 /**
  * Legacy sentinel from the home-builder era ("still looking for land"). No
  * handyman project option uses this value any more, so the address field is
- * effectively always required - a handyman job always has a service address.
- * The constant and its branches are kept so the validation logic stays inert
- * rather than rewritten.
+ * effectively always required.
  */
 const LAND_SEARCH_PROJECT_TYPE = "looking-for-land";
 
-/**
- * How the visitor wants us to reach back out. Only the chosen method is
- * required - asking for both a phone number and an email up front is one
- * more decision than the enquiry needs. Mirrors the same pattern already
- * shipped in the RE-10 wizard (components/re10/Re10Wizard.tsx).
- */
 const CONTACT_METHODS = [
   { value: "email", label: "Email" },
   { value: "phone", label: "Phone call" },
   { value: "text", label: "Text" },
 ] as const;
+
+const DRAFT_KEY = "handyman_consult_wizard_v1";
 
 const formSchema = z
   .object({
@@ -119,31 +115,42 @@ const formSchema = z
 type FormData = z.infer<typeof formSchema>;
 
 /**
- * Mirrors SERVICES in shared/contentData.ts (same slugs, so leads line up with
- * service pages and the estimator), plus the two answers that are not a single
- * service: a multi-task list, and someone who does not know yet. Both are real
- * states for a handyman lead and routing them to "other" loses the one detail
- * that changes the first reply.
+ * D2 / C10: at most six choice cards. Remaining job types route through
+ * "A list or something else" so the step stays one decision and no-scroll.
  */
-const PROJECT_OPTIONS = [
-  { value: "drywall-repair", label: "Drywall Repair & Patching" },
-  { value: "painting-touch-ups", label: "Interior / Exterior Painting" },
-  { value: "plumbing-repairs", label: "Minor Plumbing Repair" },
-  { value: "electrical-repairs", label: "Minor Electrical Repair" },
-  { value: "carpentry-trim-repair", label: "Carpentry, Doors & Trim" },
-  { value: "mounting-assembly", label: "Mounting & Assembly" },
-  { value: "fence-deck-gutter-repair", label: "Fence, Deck & Gutter Repair" },
-  { value: "home-maintenance", label: "Caulking & Home Maintenance" },
-  { value: "task-list", label: "A List of Small Jobs" },
-  { value: "other", label: "Other / Not sure yet" },
-];
+const JOB_CHOICES = [
+  { value: "drywall-repair", label: "Drywall repair", sub: "Holes, cracks, texture" },
+  { value: "painting-touch-ups", label: "Painting", sub: "Touch-ups and small jobs" },
+  { value: "plumbing-repairs", label: "Plumbing", sub: "Faucets, toilets, disposals" },
+  { value: "electrical-repairs", label: "Electrical", sub: "Outlets, switches, fixtures" },
+  { value: "mounting-assembly", label: "Mounting & assembly", sub: "TVs, shelves, furniture" },
+  { value: "task-list", label: "A list or something else", sub: "Several jobs or not sure yet" },
+] as const;
+
+const PROJECT_LABEL_LOOKUP: Record<string, string> = {
+  ...Object.fromEntries(JOB_CHOICES.map((o) => [o.value, o.label])),
+  "carpentry-trim-repair": "Carpentry, doors & trim",
+  "fence-deck-gutter-repair": "Fence, deck & gutter",
+  "home-maintenance": "Caulking & maintenance",
+  other: "Other / not sure yet",
+};
+
+const WIZARD_STEPS = [
+  { id: "job", label: "Job" },
+  { id: "about", label: "About you" },
+  { id: "reach", label: "Reach you" },
+  { id: "review", label: "Review" },
+] as const;
+
+type WizardStepId = (typeof WIZARD_STEPS)[number]["id"];
 
 const labelClass = "text-xs tracking-wide font-normal uppercase text-muted-foreground";
 
 function RequiredMark() {
   return (
     <span className="text-destructive" aria-hidden="true">
-      {" "}*
+      {" "}
+      *
     </span>
   );
 }
@@ -155,11 +162,39 @@ interface ConsultationFormProps {
   initialProjectType?: "drywall-repair" | "home-maintenance";
 }
 
-export function ConsultationForm({ onRevise, showTrust = false, initialProjectType }: ConsultationFormProps = {}) {
+function readDraft(): Partial<FormData> & { step?: WizardStepId } {
+  try {
+    const raw = sessionStorage.getItem(DRAFT_KEY);
+    if (!raw) return {};
+    return JSON.parse(raw) as Partial<FormData> & { step?: WizardStepId };
+  } catch {
+    return {};
+  }
+}
+
+function writeDraft(data: Partial<FormData> & { step: WizardStepId }) {
+  try {
+    sessionStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+  } catch {
+    /* draft is best-effort */
+  }
+}
+
+function clearDraft() {
+  try {
+    sessionStorage.removeItem(DRAFT_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+export function ConsultationForm({
+  onRevise,
+  showTrust = false,
+  initialProjectType,
+}: ConsultationFormProps = {}) {
   const [estimate, setEstimate] = useState<StoredEstimate | null>(null);
   const [estimateChecked, setEstimateChecked] = useState(false);
-  // The carried-over range is attached by default (no yes/no gate); the user
-  // can detach it with one tap and re-attach just as easily.
   const [attached, setAttached] = useState(true);
   const [success, setSuccess] = useState(false);
   const [submitted, setSubmitted] = useState<FormData | null>(null);
@@ -167,13 +202,14 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
   const [addressInput, setAddressInput] = useState("");
   const [showNote, setShowNote] = useState(false);
   const [showAddrInfo, setShowAddrInfo] = useState(false);
+  const [stepIndex, setStepIndex] = useState(0);
+  const [stepError, setStepError] = useState<string | null>(null);
   const lastKeyRef = useRef<string | null>(null);
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
+  const draftHydrated = useRef(false);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    // Validate each field on blur (and re-validate on change once touched) so
-    // users get inline feedback instead of every error at once on submit.
     mode: "onTouched",
     defaultValues: {
       name: "",
@@ -187,8 +223,51 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
   });
 
   const preferredContact = form.watch("preferredContact");
-
   const searchingForLand = form.watch("projectType") === LAND_SEARCH_PROJECT_TYPE;
+  const watched = form.watch();
+
+  // D2: persist draft across refresh / browser Back within the consult flow.
+  useEffect(() => {
+    if (draftHydrated.current) return;
+    draftHydrated.current = true;
+    const draft = readDraft();
+    if (draft.projectType && !initialProjectType) {
+      form.setValue("projectType", draft.projectType, { shouldValidate: false });
+    }
+    if (draft.name) form.setValue("name", draft.name, { shouldValidate: false });
+    if (draft.preferredContact) {
+      form.setValue("preferredContact", draft.preferredContact, { shouldValidate: false });
+    }
+    if (draft.phone) form.setValue("phone", draft.phone, { shouldValidate: false });
+    if (draft.email) form.setValue("email", draft.email, { shouldValidate: false });
+    if (draft.address) {
+      setAddressInput(draft.address);
+      form.setValue("address", draft.address, { shouldValidate: false });
+    }
+    if (draft.message) {
+      form.setValue("message", draft.message, { shouldValidate: false });
+      setShowNote(true);
+    }
+    if (draft.step) {
+      const idx = WIZARD_STEPS.findIndex((s) => s.id === draft.step);
+      if (idx >= 0) setStepIndex(idx);
+    }
+  }, [form, initialProjectType]);
+
+  useEffect(() => {
+    if (success) return;
+    const step = WIZARD_STEPS[stepIndex]?.id ?? "job";
+    writeDraft({
+      projectType: watched.projectType,
+      name: watched.name,
+      preferredContact: watched.preferredContact,
+      phone: watched.phone,
+      email: watched.email,
+      address: watched.address,
+      message: watched.message,
+      step,
+    });
+  }, [watched, stepIndex, success]);
 
   function handleProfileResolved(profile: PropertyProfile | null) {
     setPropertyProfile(profile);
@@ -201,19 +280,9 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
     }
   }
 
-  // ZIP is no longer a manual field; derive it from the resolved property
-  // profile, falling back to a 5-digit ZIP parsed from the address text.
   const deriveZip = (addr: string) =>
     propertyProfile?.zip?.slice(0, 5) || extractZip(addr) || "";
 
-  // Prefill contact fields so a visitor never re-types name / phone / email.
-  // Two sources feed this: a Meta lead-form click that arrived with the info in
-  // the URL, and the estimate gate on this same page (which writes the info it
-  // just captured and dispatches PREFILL_UPDATED_EVENT). We fill only fields the
-  // visitor hasn't touched, so an event never clobbers something they edited.
-  // Address prefills too now that the estimate gate captures a validated street
-  // address through the same autocomplete; a visitor who came through the gate
-  // should never be asked for their address a second time.
   useEffect(() => {
     function applyPrefill() {
       const pf = readStoredPrefill();
@@ -238,7 +307,7 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
   useEffect(() => {
     function loadEstimate() {
       setEstimateChecked(true);
-      if (initialProjectType) return; // A prior unrelated estimate must not overwrite this paid service inquiry.
+      if (initialProjectType) return;
       try {
         const raw = sessionStorage.getItem("brc_estimate");
         if (!raw) {
@@ -247,7 +316,6 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
           return;
         }
         const parsed: StoredEstimate = JSON.parse(raw);
-        // Defensive: never surface a range the user did not finish building.
         if (!parsed.project || !parsed.finish || !parsed.sqft || !parsed.priceLow) return;
         const key = `${parsed.project}|${parsed.finish}|${parsed.sqft}|${parsed.priceLow}|${parsed.priceHigh}|${parsed.confidenceLabel}`;
         if (key === lastKeyRef.current) return;
@@ -264,8 +332,6 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
 
   useEffect(() => {
     if (!success) return;
-    // Open the confirmation at the top, whether the form lives in the scrolling
-    // dialog body (modal) or inline on the page.
     const el = successHeadingRef.current;
     if (el && el.offsetParent !== null) {
       let ancestor: HTMLElement | null = el.parentElement;
@@ -294,7 +360,7 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
     if (onRevise) {
       onRevise();
     } else {
-      document.getElementById("calculator")?.scrollIntoView({ behavior: "smooth" });
+      document.getElementById("planning-range")?.scrollIntoView({ behavior: "smooth" });
     }
   }
 
@@ -304,29 +370,24 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
         ...data,
         zip: deriveZip(data.address),
         propertyProfile,
-        /* When the visitor already submitted the estimate gate, both the admin
-           and customer confirmation emails were already sent by /api/estimate-lead.
-           Sending them again from /api/consultation would be a duplicate. */
         skipEmail: hasPassedGate() ? true : undefined,
         inquiryId: inquiryId("primary"),
         website: data.website,
-        estimate: estimate && attached
-          ? {
-              project: estimate.project,
-              finish: estimate.finish,
-              priceLow: estimate.priceLow,
-              priceHigh: estimate.priceHigh,
-              roi: estimate.roi,
-              confidence: estimate.confidenceLabel,
-              sqft: estimate.sqft,
-              refinements: estimate.refinements,
-              // Forwarded verbatim from the estimator so the emails can restate
-              // the layout card and upgrade chips the visitor actually chose,
-              // not just the derived refinements.
-              layoutLabel: estimate.layoutLabel,
-              upgradeLabels: estimate.upgradeLabels,
-            }
-          : null,
+        estimate:
+          estimate && attached
+            ? {
+                project: estimate.project,
+                finish: estimate.finish,
+                priceLow: estimate.priceLow,
+                priceHigh: estimate.priceHigh,
+                roi: estimate.roi,
+                confidence: estimate.confidenceLabel,
+                sqft: estimate.sqft,
+                refinements: estimate.refinements,
+                layoutLabel: estimate.layoutLabel,
+                upgradeLabels: estimate.upgradeLabels,
+              }
+            : null,
       };
       const res = await fetch("/api/consultation", {
         method: "POST",
@@ -341,11 +402,12 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
     },
     onSuccess: (response: { accepted?: boolean }, variables) => {
       setSuccess(true);
-      try { sessionStorage.removeItem("brc_estimate"); } catch { /* Optional browser storage must not hide a saved receipt. */ }
-      // Conversion event: a submitted consultation request is the PRIMARY lead
-      // (estimate on the site, then submit). GA generate_lead + Meta Lead. The
-      // Meta Lead carries the visitor's email + phone, which the server-side
-      // Conversions API hashes for high match quality (best cost-per-result).
+      clearDraft();
+      try {
+        sessionStorage.removeItem("brc_estimate");
+      } catch {
+        /* Optional browser storage must not hide a saved receipt. */
+      }
       if (response.accepted) {
         markEstimatorCompleted("consultation");
         trackAcceptedLeadConversion({ projectType: variables.projectType });
@@ -354,7 +416,10 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
           project_type: variables.projectType,
           has_estimate: !!estimate && attached,
         });
-        trackMetaEvent("Lead", { content_name: variables.projectType, content_category: "consultation_request" });
+        trackMetaEvent("Lead", {
+          content_name: variables.projectType,
+          content_category: "consultation_request",
+        });
       }
     },
     onError: () => {
@@ -362,8 +427,6 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
     },
   });
 
-  /* form_start fires once, on the first real interaction - the funnel edge
-     between seeing the form and engaging it. */
   const formStartedRef = useRef(false);
   function trackFormStart() {
     if (formStartedRef.current) return;
@@ -371,15 +434,77 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
     trackEvent("form_start", { form: "consultation" });
   }
 
+  const goBack = useCallback(() => {
+    setStepError(null);
+    setStepIndex((i) => Math.max(0, i - 1));
+  }, []);
+
+  async function validateStep(index: number): Promise<boolean> {
+    setStepError(null);
+    if (index === 0) {
+      const ok = await form.trigger("projectType");
+      if (!ok || !form.getValues("projectType")) {
+        setStepError("Please choose what needs doing.");
+        return false;
+      }
+      return true;
+    }
+    if (index === 1) {
+      const ok = await form.trigger(["name", "preferredContact"]);
+      if (!ok) {
+        setStepError("Please enter your name and how we should reach you.");
+        return false;
+      }
+      return true;
+    }
+    if (index === 2) {
+      const fields: Array<"phone" | "email" | "address"> =
+        form.getValues("preferredContact") === "email"
+          ? ["email", "address"]
+          : ["phone", "address"];
+      const ok = await form.trigger(fields);
+      if (!ok) {
+        setStepError("Please complete how we reach you and your service address.");
+        return false;
+      }
+      return true;
+    }
+    return true;
+  }
+
+  async function goNext() {
+    const ok = await validateStep(stepIndex);
+    if (!ok) return;
+    if (stepIndex < WIZARD_STEPS.length - 1) {
+      setStepIndex((i) => i + 1);
+      return;
+    }
+    form.handleSubmit(
+      (data) => {
+        setSubmitted(data);
+        mutation.mutate(data);
+      },
+      (errors) => {
+        trackEvent("form_error", {
+          form: "consultation",
+          fields: Object.keys(errors).sort().join(","),
+        });
+        setStepError("Please fix the highlighted fields.");
+      },
+    )();
+  }
+
   if (success) {
     const submittedProject = submitted
-      ? PROJECT_OPTIONS.find((o) => o.value === submitted.projectType)?.label ??
-        submitted.projectType
+      ? PROJECT_LABEL_LOOKUP[submitted.projectType] ?? submitted.projectType
       : null;
 
     return (
-      <div className="flex flex-col items-start py-2 space-y-4" data-testid="consultation-success" data-clarity-mask="True">
-        {/* Brand icon (terracotta field) confirms the brand on the request-received state */}
+      <div
+        className="flex flex-col items-start space-y-4 py-2"
+        data-testid="consultation-success"
+        data-clarity-mask="True"
+      >
         <img
           src="/brand/svg/icon/boise-handyman-co-icon-accent.svg"
           alt="Boise Handyman Co"
@@ -397,7 +522,7 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
             Request received{submitted ? `, ${submitted.name.split(" ")[0]}` : ""}.
           </h3>
           {submittedProject && (
-            <p className="text-sm text-muted-foreground mt-1" data-clarity-mask="True">
+            <p className="mt-1 text-sm text-muted-foreground" data-clarity-mask="True">
               {submittedProject}
               {submitted?.address ? ` · ${submitted.address}` : ""}
             </p>
@@ -406,23 +531,24 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
 
         <ol className="space-y-2.5 text-sm text-muted-foreground">
           <li className="flex gap-3">
-            <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-caption font-normal text-foreground">
+            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-border text-caption font-normal text-foreground">
               1
             </span>
             <span className="pt-0.5">We review your request and any planning range you attached.</span>
           </li>
           <li className="flex gap-3">
-            <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-caption font-normal text-foreground">
+            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-border text-caption font-normal text-foreground">
               2
             </span>
             <span className="pt-0.5">Our team reviews the scope with you before preparing a quote.</span>
           </li>
           <li className="flex gap-3">
-            <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full border border-border text-caption font-normal text-foreground">
+            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-border text-caption font-normal text-foreground">
               3
             </span>
             <span className="pt-0.5">
-              Scheduling is confirmed after the scope and quote are agreed. This request does not book a visit.
+              Scheduling is confirmed after the scope and quote are agreed. This request does not book
+              a visit.
             </span>
           </li>
         </ol>
@@ -448,39 +574,38 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
     );
   }
 
-  const projectLabel = estimate?.project ? PROJECT_LABELS[estimate.project]?.label : null;
-  const finishLabel = estimate?.finish ? FINISH_LABELS[estimate.finish]?.label : null;
-  const showProjectSelect = !estimate || !attached;
+  const projectLabel = estimate?.project ?? null;
+  const finishLabel = estimate?.finish ?? null;
+  const stepId = WIZARD_STEPS[stepIndex].id;
+  const primaryLabel =
+    stepIndex === WIZARD_STEPS.length - 1
+      ? mutation.isPending
+        ? "Sending…"
+        : CTA_FORM_SEND
+      : "Continue";
 
   return (
     <Form {...form}>
       <EstimatorRecovery
         flow="consultation"
-        currentStep={form.formState.isDirty ? "filling" : "form"}
-        currentStepIndex={form.formState.isDirty ? 1 : 0}
-        totalSteps={2}
-        lastCompletedStep={form.formState.isDirty ? "form" : undefined}
+        currentStep={WIZARD_STEPS[stepIndex].id}
+        currentStepIndex={stepIndex}
+        totalSteps={WIZARD_STEPS.length}
+        lastCompletedStep={stepIndex > 0 ? WIZARD_STEPS[stepIndex - 1].id : undefined}
         selections={{ project_type: String(form.watch("projectType") ?? "") || null }}
         validationErrors={Object.keys(form.formState.errors)}
-        engaged={form.formState.isDirty}
+        engaged={form.formState.isDirty || stepIndex > 0}
         submitted={success}
       />
       <form
-        onSubmit={form.handleSubmit(
-          (data) => {
-            setSubmitted(data);
-            mutation.mutate(data);
-          },
-          // Validation failure: field NAMES only - never values.
-          (errors) => {
-            trackEvent("form_error", {
-              form: "consultation",
-              fields: Object.keys(errors).sort().join(","),
-            });
-          },
-        )}
+        onSubmit={(e) => {
+          e.preventDefault();
+          void goNext();
+        }}
         onFocusCapture={trackFormStart}
         className="space-y-4"
+        data-testid="consultation-wizard"
+        data-step={stepId}
       >
         <input
           {...form.register("website")}
@@ -489,8 +614,14 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
           aria-hidden="true"
           className="hidden"
         />
+
+        <WizardProgress steps={[...WIZARD_STEPS]} currentIndex={stepIndex} className="!mb-3" />
+
         {showTrust && (
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5" data-testid="consult-trust-bullets">
+          <ul
+            className="mb-2 grid grid-cols-1 gap-x-4 gap-y-1.5 sm:grid-cols-2"
+            data-testid="consult-trust-bullets"
+          >
             {CONSULT_BULLETS.map((item) => (
               <li key={item} className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Check className="h-3.5 w-3.5 flex-shrink-0 text-foreground/60" />
@@ -500,357 +631,426 @@ export function ConsultationForm({ onRevise, showTrust = false, initialProjectTy
           </ul>
         )}
 
-        {/* No estimate yet: a soft nudge to build one (it auto-carries over). */}
-        {estimateChecked && !estimate && (
-          <div
-            className="rounded-sm p-3 text-sm bg-accent/5 border border-accent/20 flex flex-wrap items-center justify-between gap-2"
-            data-testid="estimate-cta-card"
-          >
+        {estimateChecked && !estimate && stepIndex === 0 && (
+          <p className="text-xs text-muted-foreground" data-testid="estimate-cta-card">
+            Want a ballpark first?{" "}
+            <button
+              type="button"
+              onClick={handleRevise}
+              className="font-normal text-foreground underline underline-offset-2"
+              data-testid="button-start-estimate"
+            >
+              See planning range
+            </button>
+          </p>
+        )}
+
+        {estimate && attached && stepIndex === 0 && (
+          <div className="flex items-center justify-between gap-2 text-xs" data-testid="text-estimate-summary">
             <span className="text-muted-foreground">
-              Want a ballpark range first? We&apos;ll carry it over automatically.
-            </span>
-            {onRevise ? (
-              <Button
-                type="button"
-                size="sm"
-                variant="brandOutline"
-                className="w-full whitespace-normal px-4 py-3 text-center sm:w-auto sm:whitespace-nowrap sm:px-8"
-                onClick={onRevise}
-                data-testid="button-start-estimate"
-              >
-                Estimate cost <ArrowRight className="h-4 w-4" />
-              </Button>
-            ) : (
-              <EstimateCTA size="sm" variant="brandOutline" className="w-full whitespace-normal px-4 py-3 text-center sm:w-auto sm:whitespace-nowrap sm:px-8" data-testid="button-start-estimate">
-                Estimate cost <ArrowRight className="h-4 w-4" />
-              </EstimateCTA>
-            )}
-          </div>
-        )}
-
-        {/* Estimate attached: a compact, removable chip (no yes/no gate). */}
-        {estimate && attached && (
-          <div className="rounded-sm p-3 text-sm bg-accent/5 border border-accent/20">
-            <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0">
-                <div className="flex items-center gap-1.5 mb-1">
-                  <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-accent-legible" />
-                  <span className="font-normal text-foreground">Planning range attached</span>
-                </div>
-                <p className="text-muted-foreground text-xs" data-testid="text-estimate-summary">
-                  {projectLabel}
-                  {finishLabel ? ` · ${finishLabel}` : ""}
-                  {estimate.sqft ? (
-                    <>
-                      {" · "}
-                      <DisplayNum>{estimate.sqft.toLocaleString()}</DisplayNum> sqft
-                    </>
-                  ) : null}
-                </p>
-                <p className="mt-0.5 text-foreground" data-testid="text-estimate-range">
-                  <DisplayNum className="font-normal">
-                    {formatPlanningCurrency(estimate.priceLow)} to {formatPlanningCurrency(estimate.priceHigh)}
-                  </DisplayNum>
-                </p>
-              </div>
-              <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                <button
-                  type="button"
-                  onClick={() => setAttached(false)}
-                  className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
-                  data-testid="button-drop-estimate"
-                >
-                  <X className="h-3.5 w-3.5" />
-                  Remove
-                </button>
-                <button
-                  type="button"
-                  onClick={handleRevise}
-                  className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2"
-                  data-testid="button-revise-estimate"
-                >
-                  Revise
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {estimate && !attached && (
-          <div className="rounded-sm p-3 text-sm bg-muted/40 border border-border flex flex-wrap items-center justify-between gap-2">
-            <span className="text-muted-foreground" data-testid="status-estimate-dropped">
-              Submitting without a planning range.
+              Range attached:{" "}
+              <span className="text-foreground" data-testid="text-estimate-range">
+                <DisplayNum>
+                  {formatPlanningCurrency(estimate.priceLow)} to{" "}
+                  {formatPlanningCurrency(estimate.priceHigh)}
+                </DisplayNum>
+              </span>
+              {projectLabel ? ` · ${projectLabel}` : ""}
+              {finishLabel ? ` · ${finishLabel}` : ""}
             </span>
             <button
               type="button"
-              onClick={() => setAttached(true)}
-              className="inline-flex items-center gap-1 text-xs font-normal text-foreground hover:underline underline-offset-2"
-              data-testid="button-reattach-estimate"
+              onClick={() => setAttached(false)}
+              className="inline-flex flex-shrink-0 items-center gap-1 text-muted-foreground hover:text-foreground"
+              data-testid="button-drop-estimate"
             >
-              <Plus className="h-3.5 w-3.5" />
-              Attach it
+              <X className="h-3.5 w-3.5" />
+              Remove
             </button>
           </div>
         )}
 
         {mutation.isError && (
-          <div role="alert" className="rounded-sm p-3 text-sm bg-destructive/5 border border-destructive/20 text-destructive">
+          <div
+            role="alert"
+            className="rounded-sm border border-destructive/20 bg-destructive/5 p-3 text-sm text-destructive"
+          >
             {(mutation.error as Error).message || "Something went wrong. Please try again."}
           </div>
         )}
 
-        {showProjectSelect && (
-          <FormField
-            control={form.control}
-            name="projectType"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className={labelClass}>
-                  What needs doing?
-                  <RequiredMark />
-                </FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger data-testid="select-project-type" aria-required="true">
-                      <SelectValue placeholder="Select a job type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {PROJECT_OPTIONS.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        {stepError && (
+          <div role="alert" className="rounded-sm border border-destructive/20 bg-destructive/5 p-3 text-sm text-destructive">
+            {stepError}
+          </div>
         )}
 
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className={labelClass}>
-                Full name
-                <RequiredMark />
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Jane Smith"
-                  autoComplete="name"
-                  aria-required="true"
-                  data-testid="input-name"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="preferredContact"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className={labelClass}>
-                How should we reach you?
-                <RequiredMark />
-              </FormLabel>
-              <FormControl>
-                <div
-                  role="radiogroup"
-                  aria-label="Preferred contact method"
-                  className="grid grid-cols-3 gap-2"
-                >
-                  {CONTACT_METHODS.map((method) => {
-                    const selected = field.value === method.value;
-                    return (
-                      <button
-                        key={method.value}
-                        type="button"
-                        role="radio"
-                        aria-checked={selected}
-                        onClick={() => field.onChange(method.value)}
-                        className={cn(
-                          "min-h-11 rounded-sm border px-3 py-2.5 text-sm font-normal transition-colors hover-elevate active-elevate-2",
-                          selected
-                            ? "border-foreground bg-foreground text-background"
-                            : "border-border bg-transparent text-foreground",
-                        )}
-                        data-testid={`button-preferred-contact-${method.value}`}
-                      >
-                        {method.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-
-        <div className="grid sm:grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className={labelClass}>
-                  Phone
-                  {preferredContact !== "email" && <RequiredMark />}
-                  {preferredContact === "email" && (
-                    <span className="normal-case text-muted-foreground"> (optional)</span>
-                  )}
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    type="tel"
-                    placeholder="(208) 555-0000"
-                    autoComplete="tel"
-                    aria-required={preferredContact !== "email"}
-                    data-testid="input-phone"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className={labelClass}>
-                  Email
-                  {preferredContact === "email" && <RequiredMark />}
-                  {preferredContact !== "email" && (
-                    <span className="normal-case text-muted-foreground"> (optional)</span>
-                  )}
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    type="email"
-                    placeholder="jane@example.com"
-                    autoComplete="email"
-                    aria-required={preferredContact === "email"}
-                    data-testid="input-email"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <FormField
-          control={form.control}
-          name="address"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className={labelClass}>
-                {searchingForLand ? "Where are you looking?" : "Service address"}
-                {!searchingForLand && <RequiredMark />}
-              </FormLabel>
-              <FormControl>
-                <AddressAutocomplete
-                  value={addressInput || field.value}
-                  onChange={(v) => {
-                    setAddressInput(v);
-                    field.onChange(v);
+        {stepId === "job" && (
+          <WizardStep
+            as="h3"
+            compact
+            heading="What needs doing?"
+            instructions="One choice. Details come on the last step."
+            data-testid="consult-step-job"
+          >
+            <div role="radiogroup" aria-label="Job type" className="grid grid-cols-2 gap-2">
+              {JOB_CHOICES.map((opt) => (
+                <SelectableCard
+                  key={opt.value}
+                  dense
+                  control="radio"
+                  selected={form.watch("projectType") === opt.value}
+                  onSelect={() => {
+                    form.setValue("projectType", opt.value, { shouldValidate: true, shouldDirty: true });
+                    setStepError(null);
                   }}
-                  onProfileResolved={handleProfileResolved}
-                  data-testid="input-address"
+                  title={opt.label}
+                  data-testid={`consult-job-${opt.value}`}
                 />
-              </FormControl>
-              <FormDescription className="text-xs text-muted-foreground mt-1">
-                {searchingForLand
-                  ? "Optional. A city or neighborhood is enough for now."
-                  : "Where the work will happen - so we can confirm the service area and plan the visit."}
-              </FormDescription>
-              <button
-                type="button"
-                onClick={() => setShowAddrInfo((v) => !v)}
-                aria-expanded={showAddrInfo}
-                aria-controls="address-info"
-                className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground mt-1"
-                data-testid="button-address-info"
-              >
-                Why we ask for your address
-                <ChevronDown className={cn("h-3 w-3 transition-transform", showAddrInfo && "rotate-180")} />
-              </button>
-              {showAddrInfo && (
-                <FormDescription id="address-info" className="text-xs text-muted-foreground mt-1">
-                  The address confirms you are inside our service area and lets us plan the visit and
-                  materials before we arrive. Your information is never shared or sold -{" "}
-                  <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-foreground">
-                    privacy policy
-                  </Link>
-                  .
-                </FormDescription>
+              ))}
+            </div>
+            <FormField
+              control={form.control}
+              name="projectType"
+              render={() => (
+                <FormItem className="sr-only">
+                  <FormMessage />
+                </FormItem>
               )}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Optional note is progressive-disclosed so the form fits the viewport. */}
-        {showNote ? (
-          <FormField
-            control={form.control}
-            name="message"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className={labelClass}>
-                  Anything else we should know?{" "}
-                  <span className="normal-case text-muted-foreground">(optional)</span>
-                </FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="The task list, the symptoms, or your timing..."
-                    rows={3}
-                    autoFocus
-                    data-testid="textarea-message"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        ) : (
-          <button
-            type="button"
-            onClick={() => setShowNote(true)}
-            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
-            data-testid="button-add-note"
-          >
-            <Plus className="h-3.5 w-3.5" />
-            Add a note <span className="text-muted-foreground">(optional)</span>
-          </button>
+            />
+          </WizardStep>
         )}
 
-        <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:flex-wrap sm:items-center">
-          <Button
-            type="submit"
-            variant="brand"
-            className="whitespace-normal px-4 py-3 text-center sm:whitespace-nowrap sm:px-8"
-            disabled={mutation.isPending}
-            data-testid="button-submit-consultation"
+        {stepId === "about" && (
+          <WizardStep
+            as="h3"
+            compact
+            heading="About you"
+            instructions="Name and how you want us to follow up."
+            data-testid="consult-step-about"
           >
-            {mutation.isPending ? "Sending…" : CTA_FORM_SEND}
-            {!mutation.isPending && <ArrowRight className="h-4 w-4" />}
-          </Button>
-          <p className="text-xs text-muted-foreground sm:min-w-[14rem] sm:flex-1">
-            No spam. We review your request and confirm next steps.
-          </p>
-        </div>
+            <div className="space-y-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className={labelClass}>
+                      Full name
+                      <RequiredMark />
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Jane Smith"
+                        autoComplete="name"
+                        aria-required="true"
+                        data-testid="input-name"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="preferredContact"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className={labelClass}>
+                      How should we reach you?
+                      <RequiredMark />
+                    </FormLabel>
+                    <FormControl>
+                      <div
+                        role="radiogroup"
+                        aria-label="Preferred contact method"
+                        className="grid grid-cols-3 gap-2"
+                      >
+                        {CONTACT_METHODS.map((method) => {
+                          const selected = field.value === method.value;
+                          return (
+                            <button
+                              key={method.value}
+                              type="button"
+                              role="radio"
+                              aria-checked={selected}
+                              onClick={() => field.onChange(method.value)}
+                              className={cn(
+                                "min-h-11 rounded-sm border px-3 py-2.5 text-sm font-normal transition-colors hover-elevate active-elevate-2",
+                                selected
+                                  ? "border-foreground bg-foreground text-background"
+                                  : "border-border bg-transparent text-foreground",
+                              )}
+                              data-testid={`button-preferred-contact-${method.value}`}
+                            >
+                              {method.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+          </WizardStep>
+        )}
+
+        {stepId === "reach" && (
+          <WizardStep
+            as="h3"
+            compact
+            heading="How we reach you"
+            instructions="We only require the method you chose, plus the service address."
+            data-testid="consult-step-reach"
+          >
+            <div className="space-y-4">
+              {preferredContact === "email" ? (
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className={labelClass}>
+                        Email
+                        <RequiredMark />
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="jane@example.com"
+                          autoComplete="email"
+                          aria-required="true"
+                          data-testid="input-email"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ) : (
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className={labelClass}>
+                        Phone
+                        <RequiredMark />
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="tel"
+                          placeholder="(208) 555-0000"
+                          autoComplete="tel"
+                          aria-required="true"
+                          data-testid="input-phone"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {preferredContact === "email" ? (
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className={labelClass}>
+                        Phone <span className="normal-case text-muted-foreground">(optional)</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="tel"
+                          placeholder="(208) 555-0000"
+                          autoComplete="tel"
+                          data-testid="input-phone"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ) : (
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className={labelClass}>
+                        Email <span className="normal-case text-muted-foreground">(optional)</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="jane@example.com"
+                          autoComplete="email"
+                          data-testid="input-email"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className={labelClass}>
+                      {searchingForLand ? "Where are you looking?" : "Service address"}
+                      {!searchingForLand && <RequiredMark />}
+                    </FormLabel>
+                    <FormControl>
+                      <AddressAutocomplete
+                        value={addressInput || field.value}
+                        onChange={(v) => {
+                          setAddressInput(v);
+                          field.onChange(v);
+                        }}
+                        onProfileResolved={handleProfileResolved}
+                        data-testid="input-address"
+                      />
+                    </FormControl>
+                    <FormDescription className="mt-1 text-xs text-muted-foreground">
+                      Where the work will happen, so we can confirm the service area.
+                    </FormDescription>
+                    <button
+                      type="button"
+                      onClick={() => setShowAddrInfo((v) => !v)}
+                      aria-expanded={showAddrInfo}
+                      aria-controls="address-info"
+                      className="mt-1 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+                      data-testid="button-address-info"
+                    >
+                      Why we ask for your address
+                      <ChevronDown
+                        className={cn("h-3 w-3 transition-transform", showAddrInfo && "rotate-180")}
+                      />
+                    </button>
+                    {showAddrInfo && (
+                      <FormDescription id="address-info" className="mt-1 text-xs text-muted-foreground">
+                        The address confirms you are inside our service area and lets us plan the visit. Your
+                        information is never shared or sold. See our{" "}
+                        <Link
+                          href="/privacy-policy"
+                          className="underline underline-offset-2 hover:text-foreground"
+                        >
+                          privacy policy
+                        </Link>
+                        .
+                      </FormDescription>
+                    )}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </WizardStep>
+        )}
+
+        {stepId === "review" && (
+          <WizardStep
+            as="h3"
+            compact
+            heading="Review and send"
+            instructions="Check the summary, add an optional note, then send."
+            data-testid="consult-step-review"
+          >
+            <div className="space-y-4">
+              <dl className="space-y-2 rounded-sm border border-border bg-muted/30 p-3 text-sm">
+                <div className="flex justify-between gap-3">
+                  <dt className="text-muted-foreground">Job</dt>
+                  <dd className="text-right font-normal text-foreground">
+                    {PROJECT_LABEL_LOOKUP[form.watch("projectType")] ?? form.watch("projectType")}
+                  </dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt className="text-muted-foreground">Name</dt>
+                  <dd className="text-right text-foreground" data-clarity-mask="True">
+                    {form.watch("name")}
+                  </dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt className="text-muted-foreground">Reach by</dt>
+                  <dd className="text-right text-foreground">
+                    {CONTACT_METHODS.find((m) => m.value === preferredContact)?.label}
+                    {preferredContact === "email"
+                      ? ` · ${form.watch("email")}`
+                      : ` · ${form.watch("phone")}`}
+                  </dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt className="text-muted-foreground">Address</dt>
+                  <dd className="text-right text-foreground" data-clarity-mask="True">
+                    {form.watch("address")}
+                  </dd>
+                </div>
+              </dl>
+
+              {showNote ? (
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className={labelClass}>
+                        Anything else we should know?{" "}
+                        <span className="normal-case text-muted-foreground">(optional)</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="The task list, the symptoms, or your timing..."
+                          rows={3}
+                          autoFocus
+                          data-testid="textarea-message"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setShowNote(true)}
+                  className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+                  data-testid="button-add-note"
+                >
+                  <Plus className="h-3.5 w-3.5" />
+                  Add a note <span className="text-muted-foreground">(optional)</span>
+                </button>
+              )}
+
+              <p className="text-xs text-muted-foreground">
+                No spam. We review your request and confirm next steps.
+              </p>
+            </div>
+          </WizardStep>
+        )}
+
+        <WizardActionBar
+          onBack={stepIndex > 0 ? goBack : undefined}
+          onPrimary={() => void goNext()}
+          primaryLabel={primaryLabel}
+          primaryDisabled={mutation.isPending}
+          busy={mutation.isPending}
+          busyLabel="Sending…"
+          primaryIcon={stepIndex === WIZARD_STEPS.length - 1 ? "none" : "arrow"}
+          ownsBottomEdge
+          data-testid="consult-wizard-actions"
+        />
       </form>
     </Form>
   );

@@ -7,6 +7,7 @@ import { Section } from "@/components/marketing/Section";
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { BudgetInclusionsSection } from "@/components/sections/BudgetInclusionsSection";
+import { HandymanPlanningRange } from "@/components/sections/HandymanPlanningRange";
 import { HowP5Works } from "@/components/sections/HowP5Works";
 import { WhoYouAreHiring } from "@/components/sections/WhoYouAreHiring";
 import { ProjectGallerySection } from "@/components/sections/ProjectGallerySection";
@@ -55,30 +56,23 @@ export default function HomePage() {
     <div className="flex flex-col bg-background">
       {/* PAGE ORDER IS THE SALES CONVERSATION, IN THE ORDER A HOMEOWNER HAS IT.
 
-          1. Hero            who we are, where, how pricing works (answer block)
-          2. Where the money goes   frames price before we quote one
-          3. Estimator       the number - the question every visitor arrives with
-          4. What's included what a quote actually covers
-          5. Services        what we fix, install, and maintain
-          6. Gallery         representative repair photography (design inspiration)
-          7. Why us          why this company rather than another
-          8. Process         what happens after they say yes
-          9. Brand band      the emotional close
-          10. FAQ            the last objections
-          11. Booking        the ask
+          1. Hero + services answer
+          2. Approved home bands (services, why, how, areas, FAQ)
+          3. Planning-range interactive proof (C14) — ballpark before contact
+          4. Budget / inclusions
+          5. Gallery
+          6. Process + who you are hiring
+          7. Consult wizard (D2 / C10)
 
-          The estimator sits third on purpose. It is the site's primary lead
-          generator and the hero's own call to action points at it, so burying
-          it below services and process meant the highest-intent visitors
-          scrolled past five sections to reach the thing they came for.
-          Everything above it now exists only to make the number land well;
-          everything below it answers what the number raised. */}
+          The planning range sits before budget so visitors see a useful
+          pre-email result, then what a written quote covers, then the ask. */}
       <HomePageSchema />
       <ApprovedFamilyFrame>
         <ApprovedHomeHero />
         <HandymanServicesAnswer />
         <ApprovedHome />
       </ApprovedFamilyFrame>
+      <HandymanPlanningRange />
       <BudgetInclusionsSection />
       <ProjectGallerySection limit={6} showViewAll />
       <HowP5Works />

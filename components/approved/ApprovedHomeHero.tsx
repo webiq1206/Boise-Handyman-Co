@@ -59,7 +59,7 @@ export function ApprovedHomeHero() {
             </a>
           </div>
           <span className="estimator-promise">
-            One written price before work starts, usually within one business day.
+            Written price before work starts, usually within one business day.
           </span>
         </div>
       </section>
