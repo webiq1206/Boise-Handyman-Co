@@ -113,10 +113,10 @@ export default function AboutPage() {
               <em className="brc-accent">Co</em>
             </h1>
             <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-4">
-              Boise Handyman Co is a repair, install and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co. It is run by Nick Perkins, a construction project manager with a bachelor&apos;s degree in Construction and more than a decade of work from small renovations to multimillion-dollar custom homes.
+              Boise Handyman Co is a repair, install and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co. It is run by Nick Perkins, a construction project manager with a bachelor&apos;s degree in Construction with an emphasis in Project Management, and more than a decade of work from small renovations to multimillion-dollar custom homes.
             </p>
             <p className="text-base md:text-lg text-inverse-foreground/75 max-w-2xl leading-relaxed mb-8">
-              He founded P5 in Colorado in 2020, moved the family and company to the Treasure Valley, and named it for his five children. Read the full story on{' '}
+              He founded P5 in Colorado in 2020, moved the family and company to the Treasure Valley in 2025, and named it for his five children. Read the full story on{' '}
               <a href="https://p5homeco.com/about" className="underline underline-offset-2">p5homeco.com/about</a>.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-8">
@@ -138,25 +138,26 @@ export default function AboutPage() {
           </InteriorHero>
 
         <Section variant="greige" spacing="none" divider className="p-0">
-          <div id="team" className="grid md:grid-cols-2 overflow-hidden scroll-mt-24">
-            <div className="relative min-h-[260px] md:min-h-[520px] overflow-hidden bg-inverse">
-              <Image
-                src="/images/about/perkins-family-meridian-idaho.webp"
-                alt="Nick Perkins with his wife and five children at a pumpkin patch"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-8 md:p-12">
+          <div id="team" className="grid md:grid-cols-2 scroll-mt-24">
+            {/* Owner hard rule: full family; object-contain; never cover-crop people */}
+            <figure className="m-0 bg-inverse">
+              <div className="relative aspect-square w-full bg-inverse">
+                <Image
+                  src="/images/about/perkins-family-meridian-idaho-1x1.webp"
+                  alt="Nick Perkins with his wife and five children at a pumpkin patch in Meridian, Idaho"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <figcaption className="bg-inverse px-8 py-6 md:px-12 md:py-8">
                 <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>The Perkins family</p>
                 <p className="font-sans font-light text-xl md:text-2xl text-inverse-foreground">
-                  P5 stands for five kids
-                  <br />
-                  and the Perkins name
+                  P5 stands for five kids and the Perkins name
                 </p>
-              </div>
-            </div>
+              </figcaption>
+            </figure>
 
             <div className="section-y-sm px-8 md:px-14 lg:px-16 bg-card border-l border-border">
               <Reveal>
