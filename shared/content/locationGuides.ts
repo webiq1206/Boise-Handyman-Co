@@ -113,13 +113,13 @@ const PLACES: PlaceGuide[] = [
     excerpt:
       'Meridian is mostly subdivision homes built in the last thirty years, which means whole streets hit the same repair milestones at the same time.',
     quickAnswer:
-      'We provide handyman services across Meridian: drywall and settling repairs, fixture and fan installs, caulking, fence and gutter care, and punch-list visits, with flat quotes starting at $145. Meridian’s subdivision homes were largely built in the last three decades, so builder-grade parts tend to wear out street by street, on schedule.',
+      'We provide handyman services across Meridian: drywall and settling repairs, fixture and fan installs, caulking, fence and gutter care, and punch-list visits, with a quote prepared after scope review. Meridian’s subdivision homes were largely built in the last three decades, so builder-grade parts tend to wear out street by street, on schedule.',
     takeaways: [
       'Meridian’s housing stock is dominated by subdivision homes built from the 1990s onward.',
       'Builder-grade caulk, fixtures, and hardware wear out on a predictable clock, often across a whole street at once.',
       'Homes under five years old mostly need settling repairs; homes past fifteen need the first real replacement wave.',
       'HOA standards make fence, paint, and exterior upkeep a compliance matter as well as a maintenance one.',
-      'Batching several small jobs into one visit is the cheapest way to run a newer home’s punch list.',
+      'Share the full punch list so the team can review the scope and plan the visits.',
     ],
     housingStock: `<p><strong>Meridian grew faster than any city in the valley, and its housing stock shows it: overwhelmingly subdivision homes built from the 1990s through this year, in big coherent phases.</strong> That uniformity has a practical consequence for repairs: houses on the same street were built the same year with the same materials by the same crews, so they hit the same milestones together. The builder-grade kitchen faucet that fails at year twelve fails up and down the block at year twelve. The tan caulk shrinks on schedule. The water heaters age in formation.</p>
 <p>The upside is predictability. If you tell us your Meridian home's age, we can usually guess most of the list before the photos arrive: settling cracks and door adjustments in the first five years, caulk and hardware refresh around year ten, and the first genuine replacement wave, fixtures, disposals, fans, weatherstripping, somewhere past fifteen.</p>`,
@@ -130,7 +130,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'My Meridian home is only a few years old: what will it need?',
         answer:
-          'Settling work, mostly: hairline drywall cracks at corners and above openings, nail pops, doors that no longer latch cleanly, and builder-grade caulk shrinking at tubs and trim. All normal, all small. Document anything your builder warranty covers before it expires, then put the rest on a punch list for one visit.',
+          'Settling work, mostly: hairline drywall cracks at corners and above openings, nail pops, doors that no longer latch cleanly, and builder-grade caulk shrinking at tubs and trim. All normal, all small. Document anything your builder warranty covers before it expires, then share the remaining punch list for scope review.',
       },
       {
         question: 'Can you match my HOA’s fence style and colors?',
@@ -140,17 +140,17 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What does a handyman visit cost in Meridian?',
         answer:
-          'Valley-standard: most single repairs run $100 to $500, and our services start at flat prices from $145. Meridian jobs are often quoted quickly because the housing stock is so consistent, photos of a settling crack or a builder-grade faucet tell us nearly everything.',
+          'Pricing depends on the repair scope, materials, condition and access. Send details and optional photos so the team can review the work and prepare a quote.',
       },
       {
         question: 'Do you do punch-list visits for newer homes?',
         answer:
-          'Constantly, they are the ideal Meridian booking. A half-day visit typically clears eight to twelve small items: cracks patched and painted, doors adjusted, caulk redone, fixtures swapped, mounts hung. Per task it is far cheaper than separate calls, and the house feels new again by dinner.',
+          'You can include several repairs in one request, such as drywall patches, door adjustments, caulk, fixtures and mounting. The time and number of visits depend on the reviewed list, materials and access.',
       },
       {
         question: 'Which parts of Meridian do you cover?',
         answer:
-          'All of it, we are based in Meridian, and it is the center of our service area. Quotes come from photos within about a day, and most jobs are scheduled within the week and done in one trip.',
+          'Meridian is part of our service area. Send your address, repair list and requested dates so the team can review the scope and confirm scheduling.',
       },
     ],
   },
@@ -665,18 +665,18 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     p.housingStock,
     `<h2 id="common-repairs">The repairs ${p.name} homes actually need</h2>`,
     p.commonRepairs,
-    `<p>For typical prices on all of this, see the <a href="/guides/boise-home-repair-cost-guide">Boise home repair cost guide</a>, most single repairs across the valley land between $100 and $500, and our services carry flat starting prices from $145.</p>`,
+    p.citySlug === 'meridian' ? `<p>Pricing depends on the agreed scope, materials and access. Send your repair details for review and a written quote.</p>` : `<p>For typical prices on all of this, see the <a href="/guides/boise-home-repair-cost-guide">Boise home repair cost guide</a>, most single repairs across the valley land between $100 and $500, and our services carry flat starting prices from $145.</p>`,
     `<h2 id="watch-out">The thing that catches people out here</h2>`,
     p.watchOut,
     `<h2 id="seasonal">Seasonal maintenance in ${p.name}</h2>`,
     p.seasonal,
     `<p>The full season-by-season checklist for Treasure Valley homes is in <a href="/guides/boise-home-maintenance-guide">the complete Boise home maintenance guide</a>, with a printable version on the <a href="/resources">resources page</a>.</p>`,
     `<h2 id="how-we-work">How we work in ${p.name}</h2>`,
-    `<p><strong>Send the list with photos, get a flat quote, and we aim to finish in one trip.</strong> The quote names the scope and the price before we arrive, and it does not move unless the scope does, in which case you approve the change first. Batching several small jobs into one visit spreads the trip cost and is the cheapest way to buy this kind of work anywhere in the valley, and especially outside the core cities. Our labor carries a workmanship guarantee, and anything on your list that belongs with a licensed specialty trade gets said plainly at the quote stage.</p>`,
+    p.citySlug === 'meridian' ? `<p><strong>Send your repair list and optional photos for review.</strong> Scope, pricing and scheduling are agreed before work starts. If the scope changes, the change is reviewed before extra work proceeds. The number of visits depends on the work and materials involved.</p>` : `<p><strong>Send the list with photos, get a flat quote, and we aim to finish in one trip.</strong> The quote names the scope and the price before we arrive, and it does not move unless the scope does, in which case you approve the change first. Batching several small jobs into one visit spreads the trip cost and is the cheapest way to buy this kind of work anywhere in the valley, and especially outside the core cities. Our labor carries a workmanship guarantee, and anything on your list that belongs with a licensed specialty trade gets said plainly at the quote stage.</p>`,
     `<p>Services relevant here: <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing</a>, <a href="/services/electrical-repairs">minor electrical</a>, <a href="/services/carpentry-trim-repair">carpentry and trim</a>, <a href="/services/painting-touch-ups">painting</a>, <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/fence-deck-gutter-repair">fence, deck, and gutter repair</a>, and <a href="/services/home-maintenance">home maintenance</a>. See also <a href="/areas/${p.citySlug}">our ${p.citySlug} service area page</a> and <a href="/guides/hire-a-handyman-treasure-valley">how to hire a handyman in the Treasure Valley</a>.</p>`,
     priorityAreaLink(p, county),
     `<h2 id="next-steps">Start with the list</h2>`,
-    `<p>The fastest way to get a real answer about a repair in ${p.name} is to show it to us: <a href="/contact">send the list and a few photos</a> and we will reply with a flat quote and the earliest slot, usually within a day. No site-visit fee, no obligation, and if something on the list is not a handyman job, we will tell you whose job it is.</p>`,
+    p.citySlug === 'meridian' ? `<p>Start by <a href="/contact">sending your repair list and optional photos</a>. Include your service address and requested dates so the team can review the scope and discuss next steps.</p>` : `<p>The fastest way to get a real answer about a repair in ${p.name} is to show it to us: <a href="/contact">send the list and a few photos</a> and we will reply with a flat quote and the earliest slot, usually within a day. No site-visit fee, no obligation, and if something on the list is not a handyman job, we will tell you whose job it is.</p>`,
   ].join('\n');
 
   return {

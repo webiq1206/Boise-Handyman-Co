@@ -77,7 +77,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "Text or call us, get a preliminary range from the estimator on our site, or send photos and your to-do list via the contact form. Within one business day we'll get back to you with an upfront quote.",
+          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
       },
       {
         question: 'Do you serve Meridian, Idaho?',

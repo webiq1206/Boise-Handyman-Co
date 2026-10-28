@@ -744,7 +744,9 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
 export function getAreaIntro(city: CityData): string {
   const county = getCountyLabel(city.county);
-  const base = `Boise Handyman Co provides handyman services for homes in ${city.name}, Idaho and throughout ${county}: small repairs, installs, and maintenance with upfront quotes and most jobs finished in a single visit.`;
+  const base = city.slug === 'meridian'
+    ? `Boise Handyman Co provides small repairs, installs and maintenance for homes in ${city.name}, Idaho and throughout ${county}. Scope, pricing and the number of visits are confirmed after review.`
+    : `Boise Handyman Co provides handyman services for homes in ${city.name}, Idaho and throughout ${county}: small repairs, installs, and maintenance with upfront quotes and most jobs finished in a single visit.`;
   const added = getAreaCityCopy(city.slug)?.intro;
   return added ? `${added} ${base}` : base;
 }
