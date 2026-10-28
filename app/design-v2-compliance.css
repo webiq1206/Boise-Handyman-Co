@@ -240,16 +240,21 @@
   }
 }
 
-/* Desktop complete-hero budget for 1280×720: keep split compact. */
+/* Split hero (≥701): lay copy out from the top so flex centering never
+   pushes the H1 under the sticky header (768×1024 residual). Image keeps a
+   contain budget; the column itself sizes to content. */
 @media (min-width: 701px) {
   .approved-shell .family-handyman .f-hero {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    height: auto !important;
+    max-height: none !important;
   }
   .approved-shell .family-handyman .f-hero > img {
     height: auto !important;
     max-height: min(520px, calc(100svh - var(--header-h) - 24px));
     width: 100%;
-    align-self: center;
+    align-self: start;
     object-fit: contain !important;
     object-position: center top !important;
     background: #1c1f1e;
@@ -257,13 +262,49 @@
   .approved-shell .family-handyman .f-hero-copy {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    max-height: min(520px, calc(100svh - var(--header-h) - 24px));
+    justify-content: flex-start;
+    max-height: none;
+    overflow: visible;
+    padding-block: clamp(28px, 3.5vw, 48px) !important;
+  }
+  .approved-shell .family-handyman .f-hero h1 {
+    font-size: clamp(40px, 4.6vw, 64px) !important;
+    margin-bottom: 12px !important;
+  }
+  .approved-shell .family-handyman .f-hero .f-eyebrow {
+    margin-bottom: 12px !important;
   }
   .approved-shell .family-handyman .f-hero-intro {
-    font-size: 17px;
-    line-height: 1.55;
+    font-size: 16px;
+    line-height: 1.5;
     max-width: 38ch;
+  }
+  .approved-shell .family-handyman .f-hero .f-actions {
+    margin-top: 16px;
+  }
+  .approved-shell .family-handyman .f-hero .estimator-promise {
+    margin-top: 12px;
+  }
+}
+
+/* Short desktop (e.g. 1280×720): C3 sequence — trim support copy so the
+   complete hero still fits under the sticky header. */
+@media (min-width: 701px) and (max-height: 760px) {
+  .approved-shell .family-handyman .f-hero-intro,
+  .approved-shell .family-handyman .f-hero .f-link,
+  .approved-shell .family-handyman .f-hero .estimator-promise {
+    display: none !important;
+  }
+  .approved-shell .family-handyman .f-hero-copy {
+    padding-block: 24px !important;
+  }
+}
+
+/* Tablet portrait (768×1024 class): keep full H1; trim only the tertiary link. */
+@media (min-width: 701px) and (max-width: 1023px) {
+  .approved-shell .family-handyman .f-hero .f-link,
+  .approved-shell .family-handyman .f-hero .estimator-promise {
+    display: none !important;
   }
 }
 
