@@ -3,24 +3,27 @@ import Link from "next/link";
 
 /**
  * Phase 12 / H-6: founder trust block.
- * Owner hard rule: full Perkins family photo; object-fit contain; never cover-crop people.
+ * Owner hard rule: full Perkins family; never crop people on any breakpoint.
+ * Intrinsic width/height (no fill / no object-cover) so every head and body stays visible.
  */
 export function WhoYouAreHiring() {
   return (
     <section
       id="who-you-are-hiring"
-      className="border-y border-border bg-background"
+      className="scroll-mt-24 border-y border-border bg-background"
       aria-labelledby="who-hiring-heading"
     >
       <div className="container px-4 py-14 md:py-16 max-w-5xl">
-        <div className="grid gap-8 md:grid-cols-[minmax(0,360px)_1fr] md:items-start">
-          <figure className="relative mx-auto aspect-square w-full max-w-[360px] bg-muted md:mx-0 md:max-w-none">
+        <div className="grid gap-8 md:grid-cols-[minmax(0,380px)_1fr] md:items-start">
+          <figure className="m-0 w-full">
             <Image
               src="/images/about/perkins-family-meridian-idaho-1x1.webp"
               alt="Nick Perkins with his wife and five children at a pumpkin patch in Meridian, Idaho"
-              fill
-              sizes="(max-width: 768px) 90vw, 360px"
-              className="object-contain"
+              width={2048}
+              height={2048}
+              sizes="(max-width: 768px) 100vw, 380px"
+              className="h-auto w-full"
+              style={{ objectFit: "contain" }}
               priority={false}
             />
           </figure>

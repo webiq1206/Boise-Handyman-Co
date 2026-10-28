@@ -139,18 +139,18 @@ export default function AboutPage() {
 
         <Section variant="greige" spacing="none" divider className="p-0">
           <div id="team" className="grid md:grid-cols-2 scroll-mt-24">
-            {/* Owner hard rule: full family; object-contain; never cover-crop people */}
+            {/* Owner hard rule: full family; never crop people — intrinsic image, no fill/cover */}
             <figure className="m-0 bg-inverse">
-              <div className="relative aspect-square w-full bg-inverse">
-                <Image
-                  src="/images/about/perkins-family-meridian-idaho-1x1.webp"
-                  alt="Nick Perkins with his wife and five children at a pumpkin patch in Meridian, Idaho"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-contain"
-                  priority
-                />
-              </div>
+              <Image
+                src="/images/about/perkins-family-meridian-idaho-1x1.webp"
+                alt="Nick Perkins with his wife and five children at a pumpkin patch in Meridian, Idaho"
+                width={2048}
+                height={2048}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="h-auto w-full"
+                style={{ objectFit: "contain" }}
+                priority
+              />
               <figcaption className="bg-inverse px-8 py-6 md:px-12 md:py-8">
                 <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>The Perkins family</p>
                 <p className="font-sans font-light text-xl md:text-2xl text-inverse-foreground">
