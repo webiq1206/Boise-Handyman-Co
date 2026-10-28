@@ -42,16 +42,16 @@ export function ApprovedHomeHero() {
             <em>Your list, handled.</em>
           </h1>
           <p className="f-hero-summary" data-speakable="summary">{handymanServiceSentence()}</p>
-          <p>{b.intro}</p>
+          <p className="f-hero-intro">{b.intro}</p>
           <div className="f-actions">
-            {/* Calls are the conversion ads optimize for, so the number leads. */}
-            <a className="f-button" href={SITE_CONFIG.phoneHref} data-testid="button-call-hero">
-              <Phone size={18} aria-hidden="true" />
-              Call {SITE_CONFIG.phone}
-            </a>
-            <a className="f-button" href="/contact" data-cta="primary">
+            {/* Primary conversion. Call stays secondary (header / bottom bar) so the first screen stays C3-budget-safe. */}
+            <a className="f-button" href="/contact" data-cta="primary" data-testid="button-hero-primary">
               {b.action}
               <ArrowUpRight size={18} aria-hidden="true" />
+            </a>
+            <a className="f-button f-button-secondary" href={SITE_CONFIG.phoneHref} data-testid="button-call-hero">
+              <Phone size={18} aria-hidden="true" />
+              Call {SITE_CONFIG.phone}
             </a>
             <a className="f-link" href="#how-we-build">
               {b.secondary}

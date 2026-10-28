@@ -32,7 +32,7 @@ function Logo() {
 function FunnelHeader() {
   return (
     <header data-approved-navigation className="z-[100] w-full border-b border-border bg-background">
-      <nav className="container flex h-[60px] items-center justify-between gap-4 px-4 md:px-6">
+      <nav className="container flex h-16 items-center justify-between gap-4 px-4 md:px-6 md:h-[76px]">
         <ApprovedBrand />
         <a
           href={SITE_CONFIG.phoneHref}
@@ -109,7 +109,7 @@ function MarketingNavigation() {
           scrolled && "shadow-sm",
         )}
       >
-        <nav className="container flex h-[60px] items-center justify-between gap-4 px-4 md:px-6">
+        <nav className="container flex h-16 items-center justify-between gap-4 px-4 md:px-6 md:h-[76px]">
           <Logo />
 
           <div className="hidden min-[1180px]:flex items-center gap-0">
@@ -332,38 +332,28 @@ function MarketingNavigation() {
         </nav>
       </header>
 
-      {/* Sticky bottom bar: one primary conversion action (Get an estimate)
-          plus one secondary utility action (Call). Text remains reachable in
-          the header and mobile menu, but doesn't compete for space here -
-          three equal actions diluted which one visitors actually tap. */}
+      {/* C7: one primary + at most one secondary. B6: button 48, bar pad 12 + safe-area. */}
       <div
         data-mobile-nav-bar=""
         data-p5-actions-ready={mobileActionsVisible}
-        className={cn("fixed left-0 right-0 bottom-0 z-[100] min-[1180px]:hidden pb-safe border-t bg-background border-border", (mobileOpen || pathname?.startsWith("/estimate")) && "invisible pointer-events-none")}
+        className={cn(
+          "fixed left-0 right-0 bottom-0 z-[100] min-[1180px]:hidden border-t border-border bg-background",
+          "px-3 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))]",
+          (mobileOpen || pathname?.startsWith("/estimate")) && "invisible pointer-events-none",
+        )}
       >
-        <div className="flex items-stretch gap-2 p-2">
+        <div className="flex items-center gap-2">
           <a
             href={SITE_CONFIG.phoneHref}
-            className="flex min-h-14 w-[76px] shrink-0 flex-col gap-1 items-center justify-center rounded-sm border border-border text-foreground hover-elevate active-elevate-2"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm border border-border text-foreground hover-elevate active-elevate-2"
             aria-label={`Call ${SITE_CONFIG.phone}`}
             data-testid="button-call-mobile"
           >
-            <Phone className="h-5 w-5" strokeWidth={1.5} /><span className="text-xs font-medium">Call</span>
+            <Phone className="h-5 w-5" strokeWidth={1.5} />
           </a>
-          {["/services/drywall-repair","/services/home-maintenance"].includes(pathname ?? "") ? <a href={SITE_CONFIG.phoneSmsHref} className="flex min-h-14 w-[76px] shrink-0 items-center justify-center rounded-sm border border-border text-foreground focus-visible:ring-2 focus-visible:ring-ring">Text Us</a> : (
-          <button
-            type="button"
-            onClick={() => window.dispatchEvent(new Event("p5:assistant-open"))}
-            className="flex min-h-14 w-[76px] shrink-0 flex-col gap-1 items-center justify-center rounded-sm border border-border text-foreground hover-elevate active-elevate-2"
-            aria-label="Chat with our estimating assistant"
-            data-testid="button-chat-mobile"
-          >
-            <MessageSquare className="h-5 w-5" strokeWidth={1.5} /><span className="text-xs font-medium">Chat</span>
-          </button>
-          )}
           <NavEstimateButton
             variant="brand"
-            className="min-h-14 flex-1 text-base"
+            className="h-12 flex-1 text-sm font-medium"
             data-testid="button-begin-conversation-mobile"
             trackingLocation="mobile_sticky_bar"
           >
