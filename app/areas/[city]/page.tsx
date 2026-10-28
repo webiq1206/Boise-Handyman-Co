@@ -50,7 +50,9 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
   const path = areaPath(city.slug);
   const overview = getAreaIntro(city);
   const images = getAreaImageSet(city.slug);
-  const localNote = seo
+  const localNote = city.slug === 'meridian'
+    ? `We serve ${city.name} homeowners across ${county}. Share your repair list and requested dates; the team confirms scope, pricing and availability after review.`
+    : seo
     ? `We serve ${city.name} homeowners across ${seo.neighborhoods.slice(0, 3).join(', ')}, and all of ${county}. Same-week scheduling is typical, and where you are in the service area never changes the price.`
     : `We serve ${city.name} and all of ${county} with handyman repairs, installs, and maintenance.`;
 
@@ -146,7 +148,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
           `Local service in ${city.name} and ${county}`,
           'One accountable local contact',
           'Upfront quote before any work starts',
-          'Most jobs finished in one visit',
+          city.slug === 'meridian' ? 'Visits planned around the agreed scope' : 'Most jobs finished in one visit',
         ]}
         localNote={localNote}
         sections={sections}
