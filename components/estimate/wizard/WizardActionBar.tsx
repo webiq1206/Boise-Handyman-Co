@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -33,8 +33,11 @@ export interface WizardActionBarProps {
   ownsBottomEdge?: boolean;
   /**
    * Inside the one-screen AppFrame the frame's own footer is the bottom edge,
-   * so the bar renders in flow: no sticky, no negative margins, no keyboard
-   * translate (the frame is fixed and the keyboard shrinks it instead).
+   * so the bar renders in flow: no fixed positioning, no keyboard inset (the
+   * frame is fixed and the keyboard shrinks it instead).
+   * When true (default), the bar docks to the visual viewport while the wizard
+   * is on screen and rides `useKeyboardInset` so Back/Next stay above the
+   * software keyboard (C10 / D2).
    */
   pinned?: boolean;
   className?: string;
@@ -46,10 +49,11 @@ export interface WizardActionBarProps {
  * bar pinned to the bottom of the flow. Back sits left and reads as secondary;
  * Continue sits right, fills the remaining width, and is unmistakably primary.
  *
- * It is `sticky`, not `fixed`, so it belongs to the wizard rather than floating
- * over the whole marketing page, and it clears the software keyboard by riding
- * the visual viewport up when a field is focused. Safe-area padding keeps it off
- * the iPhone home indicator.
+ * Standalone flows (ConsultationForm) dock with `position: fixed` while the
+ * wizard is in view so Back/Next stick to the visual viewport and clear the
+ * software keyboard via the keyboard inset (C10 / D2). A matching spacer
+ * reserves layout height so the last fields are never hidden under the dock.
+ * Safe-area padding keeps the bar off the iPhone home indicator.
  */
 export function WizardActionBar({
   onBack,
@@ -70,98 +74,136 @@ export function WizardActionBar({
 }: WizardActionBarProps) {
   const keyboardInset = useKeyboardInset();
   const barRef = useRef<HTMLDivElement | null>(null);
+  const spacerRef = useRef<HTMLDivElement | null>(null);
+  const [barHeight, setBarHeight] = useState(112);
+  const [wizardInView, setWizardInView] = useState(true);
 
-  // While the bar is actually on screen it owns the bottom edge, so the global
-  // Call/Text bar and the assistant launcher step aside rather than stacking
-  // under or over Back/Continue. Scoped to visibility (not mount) so pages that
-  // embed a wizard mid-page - the homepage calculator - get their global bar
-  // back as soon as the visitor scrolls away from the wizard.
+  // Dock only while the wizard cluster is on screen (or the keyboard is open).
+  // Avoids a floating Continue over the home hero when #consult is below the fold.
   useEffect(() => {
-    if (!ownsBottomEdge) return;
-    const node = barRef.current;
-    if (!node || typeof IntersectionObserver === "undefined") {
-      return requestHideMobileNavBar();
-    }
-    let release: (() => void) | null = null;
+    if (!pinned) return;
+    const node = spacerRef.current;
+    if (!node || typeof IntersectionObserver === "undefined") return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          if (!release) release = requestHideMobileNavBar();
-        } else {
-          release?.();
-          release = null;
-        }
+        setWizardInView(entry.isIntersecting);
       },
-      { threshold: 0 },
+      { root: null, threshold: 0, rootMargin: "80px 0px 80px 0px" },
     );
     observer.observe(node);
-    return () => {
-      observer.disconnect();
-      release?.();
-    };
-  }, [ownsBottomEdge]);
+    return () => observer.disconnect();
+  }, [pinned]);
+
+  const docked = pinned && (wizardInView || keyboardInset > 0);
+
+  // While the docked bar owns the bottom edge, the global Call/Text bar and the
+  // assistant launcher step aside rather than stacking under or over Back/Continue.
+  useEffect(() => {
+    if (!ownsBottomEdge || !docked) return;
+    return requestHideMobileNavBar();
+  }, [ownsBottomEdge, docked]);
+
+  useEffect(() => {
+    if (!pinned) return;
+    const node = barRef.current;
+    if (!node || typeof ResizeObserver === "undefined") return;
+    const measure = () => setBarHeight(Math.ceil(node.getBoundingClientRect().height));
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(node);
+    return () => ro.disconnect();
+  }, [pinned, docked, onBack, primaryLabel, topAccessory, busy]);
 
   const inverse = tone === "inverse";
 
   return (
-    <div
-      ref={barRef}
-      data-wizard-action-bar=""
-      data-testid={testId}
-      style={pinned && keyboardInset > 0 ? { transform: `translateY(-${keyboardInset}px)` } : undefined}
-      className={cn(
-        pinned
-          ? "sticky bottom-0 z-30 -mx-4 mt-8 border-t px-4 pb-safe pt-3 backdrop-blur-md transition-transform duration-150"
-          : "pt-1",
-        pinned && (inverse
-          ? "border-inverse-foreground/15 bg-inverse"
-          : "border-border bg-background"),
-        className,
-      )}
-    >
-      {topAccessory && <div className="mx-auto max-w-3xl">{topAccessory}</div>}
-      {/* Phones stack the controls - full-width Continue on top, Back beneath -
-          because a long primary label ("Email me my estimate") next to Back
-          overflows a 375px viewport. sm and up returns to the single row. */}
-      <div className={cn("mx-auto flex max-w-3xl flex-col-reverse gap-2.5 sm:flex-row sm:items-center sm:gap-3", pinned ? "pb-3" : "pb-2")}>
-        {onBack ? (
+    <>
+      {pinned ? (
+        <div
+          ref={spacerRef}
+          aria-hidden="true"
+          data-wizard-action-bar-spacer=""
+          style={{ height: docked ? barHeight : 0 }}
+          className="pointer-events-none shrink-0"
+        />
+      ) : null}
+      <div
+        ref={barRef}
+        data-wizard-action-bar=""
+        data-wizard-action-bar-pinned={pinned ? "true" : "false"}
+        data-wizard-action-bar-docked={docked ? "true" : "false"}
+        data-testid={testId}
+        style={
+          docked
+            ? {
+                bottom: keyboardInset > 0 ? keyboardInset : 0,
+              }
+            : undefined
+        }
+        className={cn(
+          docked
+            ? "fixed inset-x-0 z-40 border-t px-4 pb-safe pt-3 backdrop-blur-md transition-[bottom] duration-150"
+            : pinned
+              ? "relative z-30 -mx-4 mt-6 border-t px-4 pb-safe pt-3 backdrop-blur-md"
+              : "pt-1",
+          (docked || pinned) &&
+            (inverse
+              ? "border-inverse-foreground/15 bg-inverse"
+              : "border-border bg-background"),
+          className,
+        )}
+      >
+        {topAccessory && <div className="mx-auto max-w-3xl">{topAccessory}</div>}
+        {/* Phones stack the controls - full-width Continue on top, Back beneath -
+            because a long primary label ("Email me my estimate") next to Back
+            overflows a 375px viewport. sm and up returns to the single row. */}
+        <div
+          className={cn(
+            "mx-auto flex max-w-3xl flex-col-reverse gap-2.5 sm:flex-row sm:items-center sm:gap-3",
+            docked || pinned ? "pb-3" : "pb-2",
+          )}
+        >
+          {onBack ? (
+            <Button
+              type="button"
+              variant={inverse ? "heroGhost" : "brandOutline"}
+              onClick={onBack}
+              disabled={busy}
+              className="min-h-12 w-full flex-shrink-0 px-4 sm:w-auto"
+              data-testid="wizard-back"
+            >
+              <ArrowLeft className="mr-1.5 h-4 w-4" aria-hidden="true" />
+              {backLabel}
+            </Button>
+          ) : null}
+
+          {children}
+
           <Button
             type="button"
-            variant={inverse ? "heroGhost" : "brandOutline"}
-            onClick={onBack}
-            disabled={busy}
-            className="min-h-12 w-full flex-shrink-0 px-4 sm:w-auto"
-            data-testid="wizard-back"
+            variant="brand"
+            onClick={onPrimary}
+            disabled={primaryDisabled || busy}
+            aria-busy={busy}
+            className="min-h-12 w-full text-base sm:w-auto sm:flex-1"
+            data-testid="wizard-continue"
           >
-            <ArrowLeft className="mr-1.5 h-4 w-4" aria-hidden="true" />
-            {backLabel}
+            {busy ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
+                {busyLabel ?? primaryLabel}
+              </>
+            ) : (
+              <>
+                {primaryLabel}
+                {primaryIcon === "arrow" && (
+                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                )}
+              </>
+            )}
           </Button>
-        ) : null}
-
-        {children}
-
-        <Button
-          type="button"
-          variant="brand"
-          onClick={onPrimary}
-          disabled={primaryDisabled || busy}
-          aria-busy={busy}
-          className="min-h-12 w-full text-base sm:w-auto sm:flex-1"
-          data-testid="wizard-continue"
-        >
-          {busy ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
-              {busyLabel ?? primaryLabel}
-            </>
-          ) : (
-            <>
-              {primaryLabel}
-              {primaryIcon === "arrow" && <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />}
-            </>
-          )}
-        </Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
