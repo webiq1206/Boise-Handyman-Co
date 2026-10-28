@@ -97,7 +97,7 @@ const INLINE_POOL: { src: string; alt: string; hubs?: string[] }[] = [
   },
   {
     src: FEATURED_PROPERTY_IMAGES.boiseBungalowExterior,
-    alt: "Boise craftsman bungalow porch with a sage-green front door and white trim",
+    alt: "Boise porch with a sage-green front door and white trim",
     hubs: ["exterior-and-outdoor", "home-maintenance", "costs-and-hiring"],
   },
   {

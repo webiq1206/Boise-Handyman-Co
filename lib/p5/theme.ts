@@ -21,7 +21,7 @@ const THEMES:Record<string,EstimatorTheme>={
   p5:{mode:'light',accent:'#D0B496',accentInk:'#486354',headingFont:'"P5 Serif", Georgia, serif'},
   remodeling:{mode:'light',accent:'#9AA098',accentInk:'#4C5F50',headingFont:DARK_HEADING},
   construction:{mode:'light',accent:'#D09A5C',accentInk:'#805125',headingFont:DARK_HEADING},
-  handyman:{mode:'light',accent:'#8FAEC4',accentInk:'#365D76',headingFont:DARK_HEADING},
+  handyman:{mode:'light',accent:'#C56B4A',accentInk:'#92472C',headingFont:DARK_HEADING},
   cabinet:{mode:'light',accent:'#8FBEBE',accentInk:'#356363',headingFont:DARK_HEADING},
 };
 

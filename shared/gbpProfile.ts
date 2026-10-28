@@ -182,7 +182,7 @@ export const GBP_SERVICES: GbpService[] = [
   {
     name: 'Free upfront quotes',
     description:
-      'Photo-based quotes within one business day, plus an instant online estimator. No obligation.',
+      'Photo-based written quotes within one business day. No obligation.',
   },
 ];
 
@@ -212,19 +212,11 @@ export const GBP_PRODUCTS: GbpProduct[] = [
   })),
   {
     category: 'Quotes & Tools',
-    name: 'Instant Online Estimate',
-    price: 'Free',
-    url: `${SITE}/estimate`,
-    description:
-      'An instant planning range for your repair, install, or maintenance job. Not a bid - a starting point, confirmed with an upfront quote.',
-  },
-  {
-    category: 'Quotes & Tools',
-    name: 'Book a Handyman Visit',
+    name: 'Send your list and photos',
     price: 'Free quote',
     url: `${SITE}/contact`,
     description:
-      'Send your task list with photos and get an upfront quote within one business day. No pressure, no obligation.',
+      'Send your task list with photos and get a written quote within one business day. No pressure, no obligation.',
   },
   {
     category: 'Quotes & Tools',
@@ -252,7 +244,7 @@ export interface GbpQaEntry {
 export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'Do you provide free estimates?',
-    answer: `Yes. Send your task list with photos and we reply with an upfront quote within one business day - no pressure, no obligation. You can also get a preliminary planning range online at ${SITE}/estimate`,
+    answer: `Yes. Send your task list with photos and we reply with a written quote within one business day, no pressure and no obligation. Start here: ${SITE}/contact`,
   },
   {
     question: 'What areas do you serve?',
@@ -261,7 +253,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   },
   {
     question: 'How much does a handyman cost in Boise?',
-    answer: `Treasure Valley handyman rates typically run $60 to $120 per hour. We quote every job upfront as one written price, with most single-task visits starting around $99 to $149.`,
+    answer: `Every job gets a written quote from your list and photos before work starts. Materials are billed at cost, there is a one-hour minimum per visit, and there is no trip fee in Ada and Canyon County. A single faucet swap is usually about one hour plus the faucet; a four-item list is usually about a half day.`,
   },
   {
     question: 'What services do you offer?',
@@ -280,7 +272,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'Are you a registered contractor and insured?',
     answer:
-      'We keep our work within the scope Idaho allows for handyman services and refer licensed-trade work (panels, repipes, gas, HVAC, roofing) to licensed specialists. We are an Idaho Registered Contractor #8381215, bonded, and insured.',
+      'Plumbing, electrical and HVAC work is done by licensed trade partners we schedule and stand behind. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew\'s own work. We are an Idaho Registered Contractor #8381215, bonded, and insured.',
   },
   {
     question: 'Do you do remodels?',

@@ -161,8 +161,8 @@ function MarketingNavigation() {
               </a>
               <SaveContactLink
                 className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
-                aria-label="Save to contacts"
-                title="Save to contacts"
+                aria-label="Save our contact"
+                title="Save our contact"
               >
                 <Contact className="h-[18px] w-[18px]" strokeWidth={1.5} aria-hidden />
               </SaveContactLink>

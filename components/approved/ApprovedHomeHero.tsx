@@ -49,17 +49,17 @@ export function ApprovedHomeHero() {
               <Phone size={18} aria-hidden="true" />
               Call {SITE_CONFIG.phone}
             </a>
-            <a className="f-button" href="/estimate">
+            <a className="f-button" href="/contact" data-cta="primary">
               {b.action}
               <ArrowUpRight size={18} aria-hidden="true" />
             </a>
-            <a className="f-link" href="/contact">
-              Send photos or contact us
+            <a className="f-link" href="#how-we-build">
+              {b.secondary}
               <ArrowRight size={18} />
             </a>
           </div>
           <span className="estimator-promise">
-            Describe your project. Our team will review it and prepare your estimate.
+            One written price before work starts, usually within one business day.
           </span>
         </div>
       </section>

@@ -92,7 +92,7 @@ export const CITY_HERO_IMAGES: Record<string, string> = {
   meridian: "/images/areas/meridian.webp",
   eagle: "/images/areas/eagle.webp",
   nampa: "/images/areas/nampa.webp",
-  kuna: "/images/areas/kuna.webp",
+  kuna: "/images/houses/kuna/kuna-single-storey-front.webp",
   star: "/images/areas/star.webp",
   middleton: "/images/areas/middleton.webp",
   caldwell: "/images/areas/caldwell.webp",

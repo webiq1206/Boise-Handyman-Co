@@ -7,7 +7,7 @@ export function InteriorPage({children,kind='detail'}:{children:ReactNode;kind?:
   return <div className={`approved-interior interior-${kind}`}>{children}</div>;
 }
 
-export function InteriorEstimateLink({label='Get my online estimate',href='/estimate'}:{label?:string;href?:string}) {
+export function InteriorEstimateLink({label='Send your list and photos',href='/contact'}:{label?:string;href?:string}) {
   return <a className="interior-estimate-link" href={href}>{label}<ArrowUpRight size={18} aria-hidden="true"/></a>;
 }
 

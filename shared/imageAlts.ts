@@ -103,7 +103,7 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/gallery/gallery-maintenance-star-after.webp':
     'White exterior door jamb sealed with fresh foam weatherstripping',
   '/images/gallery/gallery-boise-bungalow-exterior.webp':
-    'Boise craftsman bungalow porch with a sage-green front door and white trim',
+    'Boise porch with a sage-green front door and white trim',
 };
 
 export function altForImage(src: string | undefined | null): string | undefined {

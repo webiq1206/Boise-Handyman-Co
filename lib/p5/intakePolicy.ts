@@ -40,10 +40,10 @@ export function routeIntake(site:IntakeSite,service:string,supporting:readonly s
     handoff:site==='p5'||site===primaryTeam?null:primaryTeam,
     unresolved:context?.serviceConflict?['Confirm the main project type with this team before considering a handoff.']:Object.hasOwn(PRIMARY_TEAM,service)?[]:['Confirm the primary project team during review.']};
 }
-export const INTAKE_COPY={heading:'Tell us about your project in just a few minutes',
-  introduction:'Share your scope, add photos or plans, and we’ll review the details to prepare your estimate.',
-  submit:'Send project request',
-  next:'The team will review your scope and uploaded files before preparing an estimate. A site visit or additional information may be needed. We will use your preferred contact method to follow up.'};
+export const INTAKE_COPY={heading:'Send your list and photos',
+  introduction:'Share the tasks, add photos or your RE-10, and we will confirm the list with you. Pricing is a human job: you get a written quote before work starts, not an on-screen price.',
+  submit:'Send your list and photos',
+  next:'The team will review your list and uploaded files, confirm the items with you, and reply within one business day with questions or a written quote. A site visit may be needed for some items.'};
 
 /** Shared by the displayed review, submission and transfer authorization. */
 export function intakeRoutingContext(draft:{text:string;answers:{service?:string};extraction?:{conflicts?:Array<{field:string}>}|null;conflicts?:Array<{field:string}>;wizard?:{resolutions?:{service?:string}}}) {

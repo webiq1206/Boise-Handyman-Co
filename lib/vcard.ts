@@ -63,8 +63,8 @@ export function buildBusinessVCard(): string {
   // it is confirmed whether the profiles were renamed, a saved contact should
   // not ship a link that may point at the wrong or a defunct account.
   const note = [
-    "Treasure Valley handyman service. Repairs, installs, and home maintenance.",
-    `Public representative: ${SITE_CONFIG.publicRepresentative}`,
+    "Repairs, installs and maintenance in Boise and the Treasure Valley.",
+    "A P5 Home Co company (P5 Home Co LLC, Idaho Registered Contractor #8381215).",
     SITE_CONFIG.address.serviceArea,
     "Service-area business, not a staffed storefront.",
     `Hours: ${hoursSummary}`,
@@ -73,16 +73,15 @@ export function buildBusinessVCard(): string {
   const lines = [
     "BEGIN:VCARD",
     "VERSION:3.0",
-    foldLine(`FN:${escapeVCard(SITE_CONFIG.name)}`),
-    foldLine(`ORG:${escapeVCard(SITE_CONFIG.legalName)}`),
+    foldLine(`N:Perkins;Nick;;;`),
+    foldLine(`FN:${escapeVCard(SITE_CONFIG.publicRepresentative)}`),
+    foldLine(`ORG:${escapeVCard(SITE_CONFIG.name)}`),
+    foldLine(`TITLE:Founder`),
     foldLine(`TEL;TYPE=WORK,VOICE:${tel}`),
     foldLine(`EMAIL;TYPE=WORK:${escapeVCard(SITE_CONFIG.email)}`),
     foldLine(`URL:${escapeVCard(SITE_CONFIG.siteUrl)}`),
     foldLine(
-      `ADR;TYPE=WORK:;;${escapeVCard(SITE_CONFIG.address.street)};${escapeVCard(SITE_CONFIG.address.city)};${escapeVCard(SITE_CONFIG.address.state)};${escapeVCard(SITE_CONFIG.address.postalCode)};US`,
-    ),
-    foldLine(
-      `LABEL;TYPE=WORK:${escapeVCard(`${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.state} ${SITE_CONFIG.address.postalCode}`)}`,
+      `ADR;TYPE=WORK:;;;${escapeVCard(SITE_CONFIG.address.city)};${escapeVCard(SITE_CONFIG.address.state)};${escapeVCard(SITE_CONFIG.address.postalCode)};USA`,
     ),
     foldLine(`NOTE:${escapeVCard(note)}`),
     "END:VCARD",

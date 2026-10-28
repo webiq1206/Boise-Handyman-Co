@@ -231,7 +231,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     headline: 'Minor Plumbing Repairs in Boise and the Treasure Valley',
     primaryKeyword: 'minor plumbing repair boise',
     overview:
-      'Boise Handyman Co fixes the everyday plumbing problems that do not need a plumbing company: dripping faucets, running toilets, slow drains, failed garbage disposals, and worn supply lines. Fixture swaps and repairs are quoted upfront and scheduled after reviewing the scope.',
+      'Boise Handyman Co schedules everyday plumbing items on your repair list with licensed plumbing trade partners we stand behind, inside the same written quote and visit plan: dripping faucets, running toilets, slow drains, disposals and worn supply lines. Water heaters, repipes, gas and new plumbing runs stay with the plumber.',
     benefits: [
       'Fixture scope and parts reviewed before scheduling',
       'Upfront quote before we touch a fitting',
@@ -310,7 +310,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     outOfScope: {
       heading: 'What plumbing work we refer out',
       paragraphs: [
-        'Water heaters, repipes, gas lines, sewer and main drain lines, slab leaks, and any new plumbing runs are licensed-plumber territory under Idaho rules, and we do not take them on. When your problem crosses that line we say so immediately and refer you to a licensed plumbing contractor we trust, so you are never paying a handyman to learn plumbing on your house.',
+        'Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Water heaters, repipes, gas lines, sewer and main drain lines, slab leaks and new plumbing runs stay with the plumber. Our crew handles the drywall, mounting, doors, caulk and related finish work around those trades.',
       ],
     },
   },
@@ -321,7 +321,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     headline: 'Minor Electrical Repairs in Boise and the Treasure Valley',
     primaryKeyword: 'minor electrical repair boise',
     overview:
-      'Boise Handyman Co handles small, like-for-like electrical jobs across the Treasure Valley: replacing outlets and switches, swapping light fixtures, and installing ceiling fans where wiring already exists. Everything is quoted upfront, done to code, and tested before we leave, and anything bigger goes to a licensed electrician.',
+      'Boise Handyman Co schedules electrical items on your repair list with licensed electrical trade partners we stand behind, inside the same written quote and visit plan. Like-for-like outlet, switch, fixture and ceiling-fan work on existing wiring is coordinated that way; new circuits, panels and added wiring stay with the electrician.',
     benefits: [
       'Like-for-like swaps done safely, with power verified off',
       'Fixture and fan work reviewed against the existing wiring',
@@ -400,7 +400,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     outOfScope: {
       heading: 'What electrical work we refer out',
       paragraphs: [
-        'Panel and breaker work, new circuits and wire runs, service upgrades, EV chargers, spa and hot tub wiring, and troubleshooting that leads back into the walls all require a licensed electrician in Idaho. We keep strictly to like-for-like replacements on existing wiring, and when a job crosses that line we stop and refer you to a licensed electrical contractor we trust.',
+        'Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Panel and breaker work, new circuits, service upgrades, EV chargers and anything that runs new wire stay with the electrician. Our crew handles the drywall, mounting, doors, caulk and related finish work around those trades.',
       ],
     },
   },

@@ -18,24 +18,22 @@ export const INITIAL_FAQ_COUNT = 9;
  * Homepage FAQ set. These feed FAQPage schema, so answers lead with the direct
  * response before adding context.
  *
- * Our own dollar figures (visit minimums, starting prices) are placeholders
- * pending owner sign-off: [NEEDS: real pricing confirmation]. Market ranges
- * ($60-$120/hour) are editorial context, not our quote. The internal rate
- * model (trip fee + hourly) is deliberately not published.
+ * D4: do not explain hourly pricing without publishing the rate. Lead with the
+ * written-quote promise, materials at cost, and no trip fee.
  */
 export const HOMEPAGE_FAQS: HomepageFaq[] = [
   {
     q: "How is a Boise handyman visit priced?",
-    a: "Every job is quoted upfront as one written price before any work starts, priced by the time it takes with a one-hour minimum, and the visit plan is confirmed after scope review. Pricing comes as a written quote first. See how much a handyman costs in Boise and the Treasure Valley. Materials are billed at cost as their own line, and bundling several tasks into one visit is the best value. Work that needs a general contractor or a licensed trade, such as full remodels, additions, repipes, or panel work, is out of scope and referred out honestly.",
+    a: "You get one written price before work starts, usually within one business day of sending photos. Materials are billed at cost on their own line. There is a one-hour minimum per visit and no trip fee in Ada and Canyon County. Bundling several tasks into one visit is usually the best value. Work that needs a general contractor or a licensed trade is referred out honestly.",
   },
   {
     id: "handyman-cost",
     q: "How much does a handyman cost in Boise and the Treasure Valley?",
-    a: "The price depends on the tasks, materials and access. Send the full repair list for review. We prepare a written quote before work starts, with materials listed separately, and confirm the visit plan before scheduling.",
+    a: "Every job gets a written quote from your list and photos before work starts. A single faucet swap is usually about one hour plus the faucet; a four-item list like a door, a patch, a faucet and a TV mount is usually about a half day. Materials stay on their own line at cost, with no trip fee in Ada and Canyon County.",
   },
   {
-    q: "How quickly can you get to my job?",
-    a: "Share your requested dates with your repair list. The team reviews the scope and confirms availability before scheduling. If your job is urgent, say so when you reach out and we will tell you honestly what the soonest slot is. We are not an emergency service, so for active water leaks, shut off the supply valve first, and for anything dangerous call the appropriate emergency line before calling us.",
+    q: "How soon can you come?",
+    a: "Share your requested dates with your repair list. We usually schedule within a few business days after the quote is approved; say if it is urgent and we will tell you the soonest honest slot. We are not an emergency service, so for active water leaks shut off the supply valve first, and for anything dangerous call the appropriate emergency line before calling us.",
   },
   {
     q: "What areas do you serve?",
@@ -43,19 +41,19 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "How do quotes work?",
-    a: "Send us the task, ideally with a photo or two, and we reply with a written upfront quote: one clear price for the work, the expected time, and any materials as their own line. You approve the number before anything is scheduled. If we open something up and find more than expected, we stop and agree a revised price with you before continuing, so the final bill is never a surprise.",
+    a: "Send us the task, ideally with a photo or two, and we reply with a written quote: one clear price for the work and any materials as their own line. You approve the number before anything is scheduled. If we open something up and find more than expected, we stop and agree a revised price with you before continuing.",
   },
   {
     q: "Who supplies the materials?",
-    a: "Either of us, whichever you prefer. Many customers buy their own fixture, paint, or hardware and have it ready when we arrive, which works perfectly. If you would rather not, we pick up materials on the way and list them on the invoice at store cost plus the pickup time. We also carry common parts on the truck, washers, anchors, caulk, supply lines, and fasteners, so small jobs rarely wait on a store run.",
+    a: "Either of us, whichever you prefer. Many customers buy their own fixture, paint, or hardware and have it ready when we arrive. If you would rather not, we pick up materials on the way and list them on the invoice at store cost. We also carry common parts on the truck, so small jobs rarely wait on a store run.",
   },
   {
-    q: "Is there a minimum job size?",
-    a: "Small tasks are welcome. Any applicable visit minimum is included in the written quote before you agree to the work. Send the complete list so we can review the scope and plan the visit.",
+    q: "Is there a trip fee?",
+    a: "No. There is no trip fee in Ada and Canyon County. A one-hour minimum applies per visit, and materials are billed at cost on their own line.",
   },
   {
     q: "Are you a registered contractor and insured?",
-    a: "We keep our work within the scope Idaho allows for handyman services and refer anything that requires a licensed plumbing, electrical, or HVAC contractor to licensed specialists we trust. We are an Idaho Registered Contractor #8381215, bonded, and insured.",
+    a: "Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew's own work. We are an Idaho Registered Contractor #8381215, bonded, and insured.",
   },
   {
     q: "Do you handle big remodels or additions?",
@@ -63,10 +61,14 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "What kinds of jobs do you take on?",
-    a: "Drywall patching and texture blending, room and trim painting, minor plumbing fixes like faucets, toilets, and disposals, minor electrical swaps like outlets, fixtures, and ceiling fans, carpentry and door repair, TV mounting and furniture assembly, fence, deck, and gutter repairs, and caulking, weatherproofing, and punch lists. If it is a small job a homeowner would rather not do themselves, it is probably on our list.",
+    a: "Drywall patching and texture blending, room and trim painting, carpentry and door repair, TV mounting and furniture assembly, fence, deck, and gutter repairs, and caulking, weatherproofing, and punch lists. Plumbing, electrical and HVAC items on the same list are scheduled with licensed trade partners we stand behind. If it is a small job a homeowner would rather not do themselves, it is probably on our list.",
   },
   {
-    q: "Do you guarantee your work?",
-    a: "We stand behind our workmanship. If something we repaired or installed fails because of how we did the work, rather than normal wear, misuse, or a pre-existing condition, tell us and we come back to make it right. Materials carry their manufacturers' warranties, which we pass through on anything we supply.",
+    q: "Do you take cards and when is payment due?",
+    a: "Yes. Card, check and electronic payments are accepted. Pay when the work is done, not before. Standard small jobs do not require a deposit.",
+  },
+  {
+    q: "How long is the workmanship guarantee?",
+    a: "One year on our workmanship. If something we repaired or installed fails because of how we did the work, rather than normal wear, misuse, or a pre-existing condition, tell us and we come back to make it right. Materials carry their manufacturers' warranties, which we pass through on anything we supply. See the full terms on our warranty page.",
   },
 ];

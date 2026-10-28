@@ -8,6 +8,7 @@ import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { BudgetInclusionsSection } from "@/components/sections/BudgetInclusionsSection";
 import { HowP5Works } from "@/components/sections/HowP5Works";
+import { WhoYouAreHiring } from "@/components/sections/WhoYouAreHiring";
 import { ProjectGallerySection } from "@/components/sections/ProjectGallerySection";
 import { HomePageSchema } from "@/components/seo/HomePageSchema";
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
@@ -81,6 +82,7 @@ export default function HomePage() {
       <BudgetInclusionsSection />
       <ProjectGallerySection limit={6} showViewAll />
       <HowP5Works />
+      <WhoYouAreHiring />
       <div id="contact" className="scroll-mt-24" aria-hidden="true" />
       <Section id="consult" divider className="relative overflow-hidden scroll-mt-16 pb-28 md:pb-28">
         {/* Warm, dimmed lifestyle photo grounds the closing section. Directional

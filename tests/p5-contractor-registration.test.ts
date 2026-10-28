@@ -3,7 +3,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import test from 'node:test';
 import { generateLocalBusinessSchema, generateReviewSchema, generateServiceSchema } from '../lib/schema.ts';
-import { HOW_P5_WORKS } from '../shared/siteContent.ts';
+import { HOW_P5_WORKS, HOW_P5_WORKS_TITLE } from '../shared/siteContent.ts';
 
 const credential = readFileSync('components/ContractorCredential.tsx', 'utf8');
 const footer = readFileSync('components/Footer.tsx', 'utf8');
@@ -22,11 +22,12 @@ test('the registration number stays outside the DOPL link', () => {
   assert.equal(footer.includes('License details available upon request'), false);
   assert.equal(footer.includes('showVerifyLink={false}'), false);
   assert.match(footer, /<ContractorCredential /);
-  assert.match(about, /refer\s+licensed trade work to specialists we trust/);
+  assert.match(about, /licensed trade\s+partners we schedule and stand behind/);
   assert.match(about, /<ContractorCredential \/>/);
-  assert.match(about, /Insurance\s+details are available on request/);
+  assert.match(about, /Insured; certificate on request/);
   assert.equal(about.includes('Business registration and insurance details are available on request'), false);
   assert.equal(about.includes('License details'), false);
+  assert.equal(about.includes('scope Idaho allows for handyman services'), false);
 });
 
 function sourceFiles(dir: string): string[] {
@@ -59,16 +60,17 @@ test('the estimate funnel shows the number and hides the DOPL link', () => {
   }
 });
 
-test('How P5 works is six selling points plus Nick', () => {
+test('What you can count on lists six selling points without Nick', () => {
+  assert.equal(HOW_P5_WORKS_TITLE, 'What you can count on');
   assert.deepEqual([...HOW_P5_WORKS], [
     'Own install crew',
     'Bonded & insured',
     'Manufacturer warranties passed through on parts we supply',
     'Arrival time agreed and confirmed before we head out',
-    'Upfront quote before work starts',
-    'Free quotes from photos, no pressure',
-    'Public representative: Nick Perkins',
+    'Written quote before work starts',
+    'Quotes from photos, usually within one business day',
   ]);
+  assert.equal(HOW_P5_WORKS.some((line) => line.includes('Public representative')), false);
   assert.equal(HOW_P5_WORKS.some((line) => line.includes('Workmanship made right')), false);
   assert.equal(HOW_P5_WORKS.some((line) => line === 'Manufacturer warranties passed through'), false);
   const home = readFileSync('app/page.tsx', 'utf8');

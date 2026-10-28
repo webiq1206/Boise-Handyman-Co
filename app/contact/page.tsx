@@ -65,12 +65,12 @@ const CONTACT_FAQS = [
   {
     question: 'How do I get a cost estimate for my job?',
     answer:
-      'Send photos and your task list for a preliminary planning range, then get a firm upfront quote. Nothing is scheduled until you approve.',
+      'Send photos and your task list. We reply with a written quote, usually within one business day. Nothing is scheduled until you approve.',
   },
 ];
 
 const SPEAKABLE_SUMMARY =
-  `Contact ${SITE_CONFIG.name} for an upfront handyman quote. Send your task list with photos for an upfront quote, or call or text our team to explore a range for your repair, install, or maintenance job.`;
+  `Contact ${SITE_CONFIG.name} for a written handyman quote. Send your task list with photos, or call or text our team. You get one written price before work starts.`;
 
 function HeroBreadcrumbs() {
   const items = [
@@ -229,7 +229,7 @@ export default function ContactPage() {
             >
               Prefer to text? Message us instead
             </a>
-            <div className="interior-contact-actions"><InteriorEstimateLink label="Request a quote" href="/contact#consult"/><a href="#consult" className="interior-text-link">Request a handyman visit</a></div>
+            <div className="interior-contact-actions"><InteriorEstimateLink label="Send your list and photos" href="/contact#consult"/><a href="#consult" className="interior-text-link">Request a handyman visit</a></div>
             <dl className="ed-hero-facts">
               {HERO_STATS.map((stat) => (
                 <div key={stat.label}>
