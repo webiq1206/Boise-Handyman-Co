@@ -137,29 +137,28 @@ export default function AboutPage() {
             </dl>
           </InteriorHero>
 
+        {/* Owner hard rule: full family photo stacked full-width — never side-crop or cover-crop people */}
         <Section variant="greige" spacing="none" divider className="p-0">
-          <div id="team" className="grid md:grid-cols-2 scroll-mt-24">
-            {/* Owner hard rule: full family; never crop people — intrinsic image, no fill/cover */}
-            <figure className="m-0 bg-inverse">
+          <div id="team" className="scroll-mt-24">
+            <figure className="m-0 mx-auto w-full max-w-3xl bg-inverse px-0 sm:px-6 md:px-8">
               <Image
                 src="/images/about/perkins-family-meridian-idaho-1x1.webp"
                 alt="Nick Perkins with his wife and five children at a pumpkin patch in Meridian, Idaho"
                 width={2048}
                 height={2048}
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 768px) 100vw, 768px"
                 className="h-auto w-full"
-                style={{ objectFit: "contain" }}
+                style={{ objectFit: "contain", maxWidth: "100%", height: "auto" }}
                 priority
               />
               <figcaption className="bg-inverse px-8 py-6 md:px-12 md:py-8">
-                <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>The Perkins family</p>
                 <p className="font-sans font-light text-xl md:text-2xl text-inverse-foreground">
-                  P5 stands for five kids and the Perkins name
+                  The Perkins family
                 </p>
               </figcaption>
             </figure>
 
-            <div className="section-y-sm px-8 md:px-14 lg:px-16 bg-card border-l border-border">
+            <div className="section-y-sm px-8 md:px-14 lg:px-16 bg-card max-w-5xl mx-auto">
               <Reveal>
                 <SectionHeader
                   eyebrow="Credentials"
