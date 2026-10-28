@@ -16,14 +16,14 @@ export const firstTimeHomeownerRepairHandbook: GuidePageData = {
   tags: ['first-time homeowner', 'repairs', 'diy', 'basics', 'boise', 'treasure valley'],
   primaryKeyword: 'first time homeowner repairs',
   quickAnswer:
-    'New homeowners should learn five things first: where the main water shutoff, breaker panel, and gas shutoff are, how to fix a running toilet and a sticking door, and the rule that anything involving water gets attention within a week. Most first-year repairs are $100 to $500 handyman jobs, not emergencies.',
+    'New homeowners should learn five things first: where the main water shutoff, breaker panel, and gas shutoff are, how to fix a running toilet and a sticking door, and the rule that anything involving water gets attention within a week. Repair costs depend on the condition, materials and scope; ask for a written quote.',
   keyTakeaways: [
     'Day one, before anything breaks: find the main water shutoff, the breaker panel, and the gas shutoff, and make sure every adult in the house can operate them.',
     'The first things to break in most homes are small and cheap: running toilets, sticking doors, tripped GFCIs, worn caulk, and loose hardware.',
     'A safe DIY starter set exists: filters, caulk, toilet flappers, cabinet adjustments, and anything that needs no ladder, no wiring, and no pipe wrench.',
     'Water and electricity define the call-a-pro line: the cost of getting them wrong is damage, not just a redo.',
     'Most "emergencies" are not: only active water, gas smell, sparking, or no-heat-in-freezing-weather need same-day help.',
-    'A $200 repair ignored is a $2,000 repair scheduled: the deferred-repair multiplier is the most expensive lesson in homeownership.',
+    'Delaying a repair can allow damage to spread; assess the cause before deciding what work is needed.',
     'You do not need a garage of tools: about a dozen items cover ninety percent of homeowner tasks.',
   ],
   linkedClusterSlugs: ['what-small-home-repairs-cost-boise'],
@@ -47,7 +47,7 @@ export const firstTimeHomeownerRepairHandbook: GuidePageData = {
     {
       question: 'What breaks first in a house?',
       answer:
-        'The small, moving, wet things: toilet flappers and fill valves, faucet cartridges, caulk lines, door hinges and strike plates, GFCI outlets, and weatherstripping. In newer Treasure Valley homes, add settling drywall cracks and builder-grade caulk shrinking in the first couple of years. Almost all of it is $100 to $300 to put right, and none of it is a crisis.',
+        'The small, moving, wet things: toilet flappers and fill valves, faucet cartridges, caulk lines, door hinges and strike plates, GFCI outlets, and weatherstripping. In newer Treasure Valley homes, add settling drywall cracks and builder-grade caulk shrinking in the first couple of years. Have the cause and scope checked before deciding what work is needed.',
     },
     {
       question: 'What home repairs are safe to DIY?',
@@ -57,7 +57,7 @@ export const firstTimeHomeownerRepairHandbook: GuidePageData = {
     {
       question: 'Which repairs should I not DIY?',
       answer:
-        'Anything where failure costs more than the repair: wiring past a fixture swap you are confident in, plumbing behind walls, gas anything, roof work, texture-matched drywall you want invisible, and ladder work above the first floor. It is not about ability, it is asymmetry: a pro charges $150 to $350 for most of these, and a mistake charges four figures.',
+        'Anything where failure costs more than the repair: wiring past a fixture swap you are confident in, plumbing behind walls, gas anything, roof work, texture-matched drywall you want invisible, and ladder work above the first floor. Choose an appropriately qualified professional for work with electrical, water, gas or fall risks; confirm scope and price before work.',
     },
     {
       question: 'What counts as a real home repair emergency?',
@@ -72,12 +72,12 @@ export const firstTimeHomeownerRepairHandbook: GuidePageData = {
     {
       question: 'How much should I budget for repairs in my first year?',
       answer:
-        'A common rule of thumb is one percent of the home’s value per year for repairs and maintenance, more for older homes. In practice, first-year spending clusters in small amounts: a few hundred dollars of tools and supplies, and a handful of $100 to $500 repairs as you discover what the inspection did not. The budget-killer is deferral, not frequency.',
+        'Build your budget from the inspection findings, home condition and work you discover. Separate tools and supplies from professional work, and obtain written quotes for the tasks you plan to hire out.',
     },
     {
       question: 'My house is new construction: do I still need repairs?',
       answer:
-        'Yes, a different set. New Treasure Valley homes settle for a year or two: hairline drywall cracks appear at corners and joints, doors drift out of alignment, builder-grade caulk shrinks, and nail pops surface. Document what the builder warranty covers before it expires, usually at one year, and put the rest on a punch list, it is classic one-visit handyman work.',
+        'Yes, a different set. New Treasure Valley homes settle for a year or two: hairline drywall cracks appear at corners and joints, doors drift out of alignment, builder-grade caulk shrinks, and nail pops surface. Document what the builder warranty covers before it expires, usually at one year, and put the rest on a punch list, the scope and visit plan can then be reviewed together.',
     },
   ],
   content: `
@@ -89,20 +89,20 @@ export const firstTimeHomeownerRepairHandbook: GuidePageData = {
 <p><strong>The first repairs in almost every house are small, wet, or moving: toilets that run, faucets that drip, doors that stick, caulk that opens, outlets that die because a GFCI tripped somewhere else.</strong> None of these mean you bought a lemon. Houses are machines with thousands of parts, the cheap consumable parts fail first, and the Treasure Valley adds its own list: hard water scales up fixtures faster than soft-water regions, dry summers and freezing winters cycle caulk and wood joints, and newer homes in Meridian, Kuna, and Nampa subdivisions spend their first two years settling, hairline drywall cracks, drifting doors, nail pops.</p>
 <p>Here is the honest triage for the first-year usual suspects:</p>
 <table>
-<thead><tr><th>Symptom</th><th>Usually means</th><th>DIY or pro</th><th>Typical cost if pro</th></tr></thead>
+<thead><tr><th>Symptom</th><th>Usually means</th><th>DIY or pro</th><th>Pricing if pro</th></tr></thead>
 <tbody>
-<tr><td>Toilet runs after flushing</td><td>Worn flapper or fill valve</td><td>DIY-friendly</td><td>$100 to $200</td></tr>
-<tr><td>Faucet drips</td><td>Worn cartridge</td><td>Either</td><td>$100 to $250</td></tr>
-<tr><td>Door sticks or will not latch</td><td>Settling, hinge wear</td><td>Either</td><td>$75 to $200</td></tr>
-<tr><td>Outlet dead, others fine</td><td>Tripped GFCI upstream</td><td>DIY: find and reset it</td><td>$75 to $150 if failed</td></tr>
-<tr><td>Hairline cracks at drywall corners</td><td>Normal settling</td><td>Pro for invisible finish</td><td>$100 to $300</td></tr>
-<tr><td>Caulk pulling away in tub or shower</td><td>Age, movement</td><td>Either</td><td>$100 to $250</td></tr>
+<tr><td>Toilet runs after flushing</td><td>Worn flapper or fill valve</td><td>DIY-friendly</td><td>Quote after scope review</td></tr>
+<tr><td>Faucet drips</td><td>Worn cartridge</td><td>Either</td><td>Quote after scope review</td></tr>
+<tr><td>Door sticks or will not latch</td><td>Settling, hinge wear</td><td>Either</td><td>Quote after scope review</td></tr>
+<tr><td>Outlet dead, others fine</td><td>Tripped GFCI upstream</td><td>DIY: find and reset it</td><td>Quote after scope review</td></tr>
+<tr><td>Hairline cracks at drywall corners</td><td>Normal settling</td><td>Pro for invisible finish</td><td>Quote after scope review</td></tr>
+<tr><td>Caulk pulling away in tub or shower</td><td>Age, movement</td><td>Either</td><td>Quote after scope review</td></tr>
 <tr><td>Water stain on ceiling</td><td>Leak above: roof, bath, or line</td><td>Pro, this week</td><td>Depends on source</td></tr>
 </tbody>
 </table>
 
 <h2 id="water-rule">The one rule: water never waits</h2>
-<p><strong>If this handbook compresses to a single sentence: anything involving water gets attention within the week.</strong> Water is the engine behind nearly every expensive repair a house can need, rotted framing, ruined subfloor, mold, failed drywall, and it always starts as something small and visible: a stain, a bubble, a musty cabinet, a running toilet, a caulk line that opened. Found early, these are $100-to-$300 fixes. Deferred a season, they multiply by ten, and the multiplier is not a scare tactic, it is the arithmetic of what water does to wood and gypsum while nobody watches.</p>
+<p><strong>If this handbook compresses to a single sentence: anything involving water gets attention within the week.</strong> Water is the engine behind nearly every expensive repair a house can need, rotted framing, ruined subfloor, mold, failed drywall, and it always starts as something small and visible: a stain, a bubble, a musty cabinet, a running toilet, a caulk line that opened. Have the cause assessed promptly. Moisture can spread into surrounding materials, changing the repair scope.</p>
 <p>Build the five-minute monthly habit: touch the back corners under every sink, glance at ceilings below bathrooms, look at the floor around the water heater and toilets, and walk the outside after a hard rain to see where the gutters are putting the roof's water. What to do each season, beyond watching, is the subject of <a href="/guides/boise-home-maintenance-guide">the complete Boise home maintenance guide</a>.</p>
 
 <h2 id="safe-diy">The safe-DIY list, and why it is safe</h2>
@@ -111,8 +111,8 @@ export const firstTimeHomeownerRepairHandbook: GuidePageData = {
 <p>One valley-specific DIY habit earns its own mention: hard-water care. Treasure Valley water is mineral-heavy, and the scale it deposits is behind half the fixture complaints in any house here, showerheads that spray sideways, aerators that slow to a dribble, toilets that hiss and run. The countermeasures are the easiest DIY in this handbook: unscrew and vinegar-soak aerators and showerheads a couple of times a year, wipe scale off fixture bodies before it etches, and treat a stiffening toilet fill valve as a $15 part to replace rather than a mystery to live with. Learning this rhythm early means half the "plumbing problems" your house will ever show you get solved at the kitchen sink with a glass of vinegar.</p>
 
 <h2 id="call-a-pro">The call-a-pro list, and why it is not about skill</h2>
-<p><strong>The pro line is drawn by asymmetry, not difficulty: some jobs cost $200 to have done and $2,000 to have done wrong.</strong> Wiring beyond a confident like-for-like fixture swap, because the failure mode is fire. Plumbing beyond what a shutoff valve isolates, because the failure mode is the ceiling below. Gas, always. Roofs and second-story ladder work, because the failure mode is you. And finish work that must disappear, texture-matched drywall, stain-matched trim, clean long caulk lines, because the redo costs more than the do.</p>
-<p>For calibration on prices before you call anyone: the <a href="/guides/boise-home-repair-cost-guide">Boise home repair cost guide</a> carries typical Treasure Valley ranges for all of it, and <a href="/guides/hire-a-handyman-treasure-valley">how to hire a handyman</a> covers vetting whoever you call, including us. Most of the list above lands between $100 and $500, which is the going rate for never thinking about the problem again.</p>
+<p><strong>The pro line is drawn by asymmetry, not difficulty: some mistakes can cause damage well beyond the original repair.</strong> Wiring beyond a confident like-for-like fixture swap, because the failure mode is fire. Plumbing beyond what a shutoff valve isolates, because the failure mode is the ceiling below. Gas, always. Roofs and second-story ladder work, because the failure mode is you. And finish work that must disappear, texture-matched drywall, stain-matched trim, clean long caulk lines, because the redo costs more than the do.</p>
+<p>For calibration on prices before you call anyone: the <a href="/guides/boise-home-repair-cost-guide">Boise home repair cost guide</a> carries typical Treasure Valley ranges for all of it, and <a href="/guides/hire-a-handyman-treasure-valley">how to hire a handyman</a> covers vetting whoever you call, including us. Confirm a written quote for your actual scope before scheduling.</p>
 
 <h2 id="emergencies">Emergency or Tuesday problem: the honest sort</h2>
 <p><strong>Only four situations need same-day help: water you cannot stop, gas smell, electrical burning or sparking, and no heat in freezing weather.</strong> For water, close the fixture stop or the main, and the emergency is over, what remains is an urgent appointment. For gas, leave the house and call the gas company from outside. For sparking or burning smells, kill that breaker and call. For a dead furnace in January, call an HVAC company and open the taps to a trickle if the cold is severe.</p>
@@ -125,7 +125,7 @@ export const firstTimeHomeownerRepairHandbook: GuidePageData = {
 
 <h2 id="new-construction">A note for new-construction owners</h2>
 <p><strong>A brand-new house is not a zero-maintenance house; it is a house in its settling years.</strong> Expect hairline drywall cracks at corners and above openings, doors that drift out of alignment, nail pops, and builder-grade caulk shrinking at trim and tubs, all normal, all cosmetic, all worth fixing once the first year or two of movement has happened rather than immediately. The important administrative task: know what your builder warranty covers and when it expires, typically at one year, and walk the house with a list before that date.</p>
-<p>Whatever the warranty does not catch becomes a classic punch list, and one-visit punch-list work is exactly what our <a href="/services/home-maintenance">home maintenance service</a> exists for: settling cracks patched and painted, doors re-hung true, caulk lines redone properly.</p>
+<p>Whatever the warranty does not catch becomes a classic punch list, and reviewing and planning that punch-list work is what our <a href="/services/home-maintenance">home maintenance service</a> exists for: settling cracks patched and painted, doors re-hung true, caulk lines redone properly.</p>
 
 <h2 id="walkthrough">The one-hour walkthrough that pays for itself</h2>
 <p><strong>In your first month, walk the house once with a notebook and no agenda except learning it, because a house you can describe is a house you can triage over the phone.</strong> Inside: open every window and note which ones stick or will not lock; run every faucet hot and cold and watch the drains; flush every toilet and listen for one that keeps running; test every outlet with a $15 tester and mark any that are dead, loose, or reversed; find which switch controls what, including the mystery ones; and look inside every under-sink cabinet with a light. Note the model numbers of the furnace, water heater, and disposal while you are at it, photos are enough.</p>
@@ -143,7 +143,7 @@ export const firstTimeHomeownerRepairHandbook: GuidePageData = {
 <p><strong>Most of what this handbook covers needs no permit at all, and knowing where the line sits keeps you out of trouble on the few things that do.</strong> Painting, patching, caulking, hardware, and like-for-like fixture swaps are permit-free everywhere in Ada and Canyon County. Permits enter when work moves or adds wiring, plumbing, or structure, new circuits, relocated pipes, wall removal, water heater replacement, and at that point you are usually in licensed-trade territory anyway. The full picture, including who to call in each county to check a borderline case, is in <a href="/resources/ada-canyon-permit-flow">when a home repair needs a permit</a>, with a printable version on the <a href="/resources">resources page</a>.</p>
 
 <h2 id="the-list">Keep a list, not a panic</h2>
-<p><strong>The calm way to own a house is a running list: things go on it when noticed, and it gets cleared in batches.</strong> Small jobs share trip costs, so five items in one visit costs far less than five visits, and the list itself converts anxiety into scheduling. Our repeat clients run exactly this pattern, a list on the fridge, a call when it hits four items or a season changes.</p>
-<p><strong>When the list is ready, <a href="/contact">send it over with photos</a>.</strong> You will get a flat quote before anyone is in your house, the visit handles the whole list in one trip, and anything on it that genuinely needs a licensed trade gets named as such, with a pointer toward the right kind of specialist. That is the whole system: shutoffs learned, water watched, list kept, batches cleared. It is cheaper than worry and much cheaper than deferral.</p>
+<p><strong>The calm way to own a house is a running list: things go on it when noticed, and it gets cleared in batches.</strong> Small jobs share trip costs, so reviewing tasks together can help coordinate the visit plan, and the list itself converts anxiety into scheduling. Our repeat clients run exactly this pattern, a list on the fridge, a call when it hits four items or a season changes.</p>
+<p><strong>When the list is ready, <a href="/contact">send it over with photos</a>.</strong> We review the list and confirm what assessment is needed, then agree the scope, price and visit plan before work. Tasks requiring a licensed specialist are identified separately. That is the whole system: shutoffs learned, water watched, list kept, batches cleared. It is cheaper than worry and much cheaper than deferral.</p>
 `.trim(),
 };

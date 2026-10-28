@@ -95,7 +95,7 @@ export const emberReadyHomeChecklistTreasureValley: GuidePageData = {
 <ol>
 <li><strong>Saturday morning:</strong> walk the house with this list and take photos of gutters, vents, screens, deck edges, and anything stacked against the walls.</li>
 <li><strong>Saturday afternoon:</strong> do the DIY items: rake out the first five feet, move the woodpile, and clear under the deck.</li>
-<li><strong>Send us the photos</strong> of anything on the handyman list. We'll reply with a written quote for one visit and flag anything that belongs with a roofer or arborist.</li>
+<li><strong>Send us the photos</strong> of anything on the handyman list. We review the scope, agree a written quote and visit plan, and flag anything that belongs with a roofer or arborist.</li>
 <li><strong>If you're in Boise's WUI,</strong> request the free evaluation and schedule chipping for the branches you've cut.</li>
 </ol>
 <p>None of this makes a home fireproof, and no one can promise that. In the June 18, 2026 interview, Captain Kirpach's advice was not to assume firefighters can defend every structure during a fast-moving fire. Ada Fire Adapted puts the goal this way: changes that help your home withstand the brunt of a wildfire without the assistance of firefighters or fire equipment.</p>

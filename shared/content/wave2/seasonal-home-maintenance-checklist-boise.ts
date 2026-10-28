@@ -69,7 +69,7 @@ export const seasonalHomeMaintenanceChecklistBoise: BlogPostData = {
     {
       question: 'How much should seasonal maintenance cost per year?',
       answer:
-        'With Treasure Valley handyman labor typically running $60 to $120 per hour, a spring visit and a fall visit of a half day each, plus modest materials, generally lands well under what a single water-damage repair costs. A common budgeting benchmark is about one percent of home value a year for maintenance and repairs together; the seasonal visits are a small slice of it.',
+        'Build a maintenance budget from your home’s condition and task list. Share the work, photos and access details for scope review; price, materials and the visit plan are confirmed before scheduling.',
     },
   ],
   content: `
@@ -101,8 +101,8 @@ export const seasonalHomeMaintenanceChecklistBoise: BlogPostData = {
 <p>Winter also has its watch items. During heavy snow years, watch the eaves for ice damming and the attic for signs of moisture; in hard cold snaps, cabinet doors open under sinks on exterior walls is the old trick that keeps supply lines warm. Big ice or roof problems are contractor-and-roofer territory, but the prevention layer, sealing, insulation, gutters, is exactly the fall work above.</p>
 
 <h2 id="rhythm">The rhythm that makes it stick</h2>
-<p><strong>The checklist fails as a document and works as a rhythm: two planned visits, spring and fall, with summer and winter for projects.</strong> The spring visit repairs what winter broke; the fall visit seals and winterizes. Most items are one-to-three-hour jobs, our <a href="/blog/how-long-do-common-home-repairs-take">repair timeline guide</a> has the specifics, so each visit is a half day, and the backlog that haunts most houses simply never forms.</p>
-<p>The economics follow. At market labor rates of roughly $60 to $120 per hour, both visits together cost well under one water-damage repair, one burst hose bib, or one gutter pulled off by ice. Maintenance is the only home spending that reliably buys back more than it costs.</p>
+<p><strong>The checklist fails as a document and works as a rhythm: two planned visits, spring and fall, with summer and winter for projects.</strong> The spring visit repairs what winter broke; the fall visit seals and winterizes. Use our <a href="/blog/how-long-do-common-home-repairs-take">repair timeline guide</a> to prepare questions about the work, then confirm the actual visit plan after scope review.</p>
+<p>The economics follow. Early attention can help limit deterioration, but the work and cost depend on the home. Ask for a written quote covering the agreed tasks and materials.</p>
 
 <h2 id="next-steps">Where to go from here</h2>
 <p>If your house has missed a few seasons of this, start with a walkthrough list and photos, and <a href="/contact">send it over</a>; we will quote a catch-up visit in writing anywhere in Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton or Caldwell, and from there the spring-and-fall rhythm is easy to keep. Our <a href="/services/home-maintenance">caulking and home maintenance service</a> is built around exactly this list.</p>

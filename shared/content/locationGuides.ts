@@ -59,7 +59,7 @@ const PLACES: PlaceGuide[] = [
     excerpt:
       'Boise houses span a century of construction, and a 1920s North End bungalow needs a very different repair list from a 2015 build in Barber Valley.',
     quickAnswer:
-      'We provide handyman services across Boise: drywall repair, minor plumbing and electrical, carpentry, painting, mounting, and seasonal maintenance, with flat quotes starting at $145. Boise’s housing spans a century, so the work ranges from plaster-era repairs in the North End to settling fixes in newer East Boise homes.',
+      'We provide handyman services across Boise: drywall repair, minor plumbing and electrical, carpentry, painting, mounting, and seasonal maintenance, with written quotes after scope review. Boise’s housing spans a century, so the work ranges from plaster-era repairs in the North End to settling fixes in newer East Boise homes.',
     takeaways: [
       'Boise’s housing stock spans a century, and the repair list changes with the decade the house was built.',
       'Older neighborhoods bring plaster walls, original wood windows and doors, and mature trees that fill gutters fast.',
@@ -81,12 +81,12 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Boise?',
         answer:
-          'The same bands as the rest of the Treasure Valley: most single repairs run $100 to $500, market hourly rates run $60 to $120, and our services carry flat starting prices from $145. Older-home work sometimes sits toward the top of a range because matching plaster, old trim profiles, or aged paint takes more care than new drywall.',
+          'Pricing depends on the repair list, materials, access and finish matching. Send details and optional photos for review; the team prepares a written quote and confirms availability before scheduling.',
       },
       {
         question: 'Can you handle repairs in newer East Boise homes?',
         answer:
-          'Yes. Newer builds mostly need settling repairs, hairline drywall cracks, nail pops, doors drifting out of alignment, plus the install list: TV mounts, shelving, fans, and smart devices. If your builder warranty has expired, a one-visit punch list clears the accumulated small items at far less than booking them separately.',
+          'Yes. Newer builds mostly need settling repairs, hairline drywall cracks, nail pops, doors drifting out of alignment, plus the install list: TV mounts, shelving, fans, and smart devices. If your builder warranty has expired, send the accumulated list for scope review and an agreed visit plan.',
       },
       {
         question: 'Do you do small jobs, or only big lists?',
@@ -96,7 +96,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'How quickly can you get to a Boise job?',
         answer:
-          'Most small jobs are quoted from photos within a day and scheduled within the week, and we aim to finish in one trip by arriving with the materials the photos told us to bring. Send the list and photos through the contact page and we will reply with a flat quote and the earliest slot.',
+          'The team reviews your repair list and confirms availability and the visit plan before scheduling. Send the list and photos through the contact page and we will reply with a flat quote and the earliest slot.',
       },
     ],
   },
@@ -167,7 +167,7 @@ const PLACES: PlaceGuide[] = [
     excerpt:
       'Eagle homes are larger and more detailed than the valley average, which means more trim, more deck, more fence, and higher standards for how repairs should look when finished.',
     quickAnswer:
-      'We provide handyman services across Eagle: carpentry and trim repair, deck and fence care, caulking and maintenance, painting touch-ups, and install work, with flat quotes starting at $145. Eagle’s larger, higher-finish homes simply have more exterior surface and detail per house, and repairs are expected to blend in invisibly.',
+      'We provide handyman services across Eagle: carpentry and trim repair, deck and fence care, caulking and maintenance, painting touch-ups, and install work, with written quotes after scope review. Eagle’s larger, higher-finish homes simply have more exterior surface and detail per house, and repairs are expected to blend in invisibly.',
     takeaways: [
       'Eagle homes run larger and more detailed than the valley average: more trim, more glazing, more deck and fence per house.',
       'Higher finish standards mean repairs are judged on invisibility: texture, stain, and paint matching matter here.',
@@ -194,7 +194,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Eagle?',
         answer:
-          'The same valley bands: most single repairs run $100 to $500 and our services start at flat prices from $145. Eagle jobs sometimes price toward the top of a range for scale and finish-matching reasons, a longer fence run, a taller ceiling, a stain that must be matched, and the quote states that plainly up front.',
+          'Pricing depends on the repair list, materials, access and finish matching. Send details and optional photos for review; the team prepares a written quote and confirms availability before scheduling.',
       },
       {
         question: 'My home is on acreage with a well: does that change anything?',
@@ -275,7 +275,7 @@ const PLACES: PlaceGuide[] = [
     excerpt:
       'Star is mid-transition from farmland to subdivisions, so brand-new homes and decades-old properties sit a mile apart and need entirely different lists.',
     quickAnswer:
-      'We provide handyman services across Star: settling repairs and installs in the new subdivisions, honest upkeep for the older properties that predate them, and fence, gate, and exterior work everywhere, with flat quotes starting at $145. Star’s housing runs from this year’s builds to farmhouse-era homes, often on the same road.',
+      'We provide handyman services across Star: settling repairs and installs in the new subdivisions, honest upkeep for the older properties that predate them, and fence, gate, and exterior work everywhere, with written quotes after scope review. Star’s housing runs from this year’s builds to farmhouse-era homes, often on the same road.',
     takeaways: [
       'Star mixes brand-new subdivision homes with older properties from its small-town and agricultural past.',
       'New builds need settling repairs and installs; older properties need genuine repair carpentry and catch-up maintenance.',
@@ -286,7 +286,7 @@ const PLACES: PlaceGuide[] = [
     housingStock: `<p><strong>Star is in the middle of the same transition Meridian finished a decade ago: farmland becoming subdivisions, fast.</strong> The result is a housing stock with a barbell shape. One end is brand-new: homes a few years old at most, full of settling repairs waiting to be noticed and installs waiting to be wanted. The other end is the older Star, small-town homes and farm properties that have seen decades of weather and a few generations of owner improvements, where the work is real repair carpentry: porches, older doors and windows, outbuildings, and the accumulated list that older houses keep.</p>
 <p>Between them sits a practical difference in how we quote: new-build work is predictable from photos alone, while older-property work earns a few extra questions, because what a 1970s porch post needs depends on what is under the paint.</p>`,
     commonRepairs: `<p><strong>In the subdivisions: drywall settling cracks, nail pops, door adjustments, builder-grade fixture swaps, ceiling fans, TV mounts, closet and garage storage, and first-round caulk refresh.</strong> On the older properties: porch and step repairs, door and window easing, siding and trim patching, screen doors, gate and fence rebuilds, and paint that protects rather than decorates. Everywhere in Star: wind-tested fences, sprinkler-season fixes, and the pre-winter seal-up. It is two different trades' rhythms, and we run both weekly.</p>`,
-    watchOut: `<p><strong>The Star wrinkle is move-in blindness: most owners here are new to their specific house, and a home inspection is a snapshot, not a punch list.</strong> The first months in any house, new or old, surface the truth: the door that sticks in July, the outlet on a mystery switch, the gate that never latched. The efficient response is to keep the list and book one visit at the three-month mark rather than reacting item by item, it is cheaper, and it turns settling-in annoyances into an afternoon's work.</p>`,
+    watchOut: `<p><strong>The Star wrinkle is move-in blindness: most owners here are new to their specific house, and a home inspection is a snapshot, not a punch list.</strong> The first months in any house, new or old, surface the truth: the door that sticks in July, the outlet on a mystery switch, the gate that never latched. The efficient response is to keep the list and book one visit at the three-month mark rather than reacting item by item, the scope and visit plan can then be reviewed together.</p>`,
     seasonal: `<p><strong>Star’s seasonal rhythm is the valley standard with a wind emphasis: spring fence and gate checks after the windy months, summer paint and stain on sun-facing surfaces, and the fall pre-freeze list, weatherseal, hose bibs, sprinkler blowout, gutters.</strong> Older properties add a spring porch-and-step check, freeze-thaw is hardest on the oldest wood, and newer subdivisions add the annual walk for settling cracks worth patching once movement slows.</p>`,
     faqs: [
       {
@@ -297,7 +297,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'We just moved to Star: what should we do first?',
         answer:
-          'Keep a list for your first three months, the house will write it for you: sticking doors, mystery switches, worn caulk, a gate that will not latch. Then book one visit to clear it. That beats reacting item by item on both cost and sanity, and it gives you a baseline of a house where everything works.',
+          'Keep a list for your first three months, the house will write it for you: sticking doors, mystery switches, worn caulk, a gate that will not latch. Then share the list to agree the scope and visit plan. That beats reacting item by item on both cost and sanity, and it gives you a baseline of a house where everything works.',
       },
       {
         question: 'Can you repair older porches and outbuildings?',
@@ -307,7 +307,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What does handyman work cost in Star?',
         answer:
-          'Valley-standard: most single repairs run $100 to $500, market hourly rates run $60 to $120, and our services start at flat prices from $145. Older-property work occasionally uncovers more than the surface showed; when that happens, work pauses and you approve any change before it is billed.',
+          'Pricing depends on the repair list, materials, access and finish matching. Send details and optional photos for review; the team prepares a written quote and confirms availability before scheduling.',
       },
       {
         question: 'How far out from Star do you go?',
@@ -329,7 +329,7 @@ const PLACES: PlaceGuide[] = [
     excerpt:
       'Middleton pairs a small-town core and working acreage with a ring of new subdivisions, and we run repair lists for all three.',
     quickAnswer:
-      'We provide handyman services across Middleton: settling repairs and installs in the newer subdivisions, repair carpentry and upkeep for small-town and acreage properties, and fence, deck, and gutter work everywhere, with flat quotes starting at $145. Middleton is in Canyon County and sits fully inside our Treasure Valley service area.',
+      'We provide handyman services across Middleton: settling repairs and installs in the newer subdivisions, repair carpentry and upkeep for small-town and acreage properties, and fence, deck, and gutter work everywhere, with written quotes after scope review. Middleton is in Canyon County and sits fully inside our Treasure Valley service area.',
     takeaways: [
       'Middleton combines a small-town core, working acreage, and a growing ring of new subdivisions.',
       'Newer subdivision homes need settling repairs and installs; older town and farm properties need repair carpentry.',
@@ -339,14 +339,14 @@ const PLACES: PlaceGuide[] = [
     ],
     housingStock: `<p><strong>Middleton's housing stock has three layers: the small-town core of older homes, the farm and acreage properties around it, and the newer subdivisions that growth has added in rings.</strong> Each layer has its own list. The older town homes need what older homes need everywhere, doors eased, porches kept sound, caulk and paint kept ahead of the weather. The acreage properties add perimeter and outbuilding work, plus the faster fixture wear that comes with hard well water. The new subdivisions run the standard newer-home program: settling repairs in the early years, builder-grade part swaps as the first decade closes.</p>
 <p>Middleton owners chose the town partly for value, and the same logic applies to keeping a house here: small repairs done on time are the cheapest ownership strategy there is.</p>`,
-    commonRepairs: `<p><strong>The Middleton mix: drywall settling repairs and door adjustments in the subdivisions, fixture and fan swaps everywhere, fence sections and gates across town and acreage alike, deck and porch board replacement, gutter cleaning and minor repair, and the caulk-and-weatherseal work that Canyon County winters reward.</strong> Acreage properties add screen doors, shop-door hardware, and the long-run fence repairs that open ground and wind produce. Most items are one-visit work, and most Middleton bookings are lists rather than single tasks, which is exactly how the economics work best out here.</p>`,
-    watchOut: `<p><strong>The Middleton wrinkle is distance math: for any pro, a trip here costs the same whether it fixes one thing or nine, and homeowners who book single small jobs pay that overhead every time.</strong> The fix is entirely in your control: keep the running list, photograph it, and book it as one visit. Our flat quotes price the list as a package, we arrive with materials for all of it, and the per-task cost drops sharply. It is the single best cost lever for anyone living west of the county line.</p>`,
+    commonRepairs: `<p><strong>The Middleton mix: drywall settling repairs and door adjustments in the subdivisions, fixture and fan swaps everywhere, fence sections and gates across town and acreage alike, deck and porch board replacement, gutter cleaning and minor repair, and the caulk-and-weatherseal work that Canyon County winters reward.</strong> Acreage properties add screen doors, shop-door hardware, and the long-run fence repairs that open ground and wind produce. Send the full list so the team can review scope, materials and the number of visits.</p>`,
+    watchOut: `<p><strong>The Middleton wrinkle is distance math: for any pro, a trip here costs the same whether it fixes one thing or nine, and homeowners who book single small jobs pay that overhead every time.</strong> The fix is entirely in your control: keep the running list, photograph it, and book it as one visit. Our flat quotes price the list as a package, we confirm the materials and visit plan after reviewing it, and the per-task cost drops sharply. It is the single best cost lever for anyone living west of the county line.</p>`,
     seasonal: `<p><strong>Middleton’s calendar is the valley standard: spring fence and gate checks after wind and freeze-thaw, summer exterior paint and stain in the long dry window, fall gutter cleaning, weatherseal, hose-bib protection, and sprinkler blowout before the first hard freeze.</strong> Acreage adds a spring walk of outbuildings and gates, and well-water homes should expect the faster fixture-scale clock that mineral-heavy water sets everywhere in this valley.</p>`,
     faqs: [
       {
         question: 'Do you cover Middleton?',
         answer:
-          'Yes, Middleton is fully inside our Treasure Valley service area, which spans Ada and Canyon County. Quotes come from photos within about a day, and most jobs are scheduled within the week. Because of the drive, we encourage sending the whole list at once so one visit clears it.',
+          'Yes, Middleton is fully inside our Treasure Valley service area, which spans Ada and Canyon County. Send the full list and optional photos so the team can review the scope and confirm pricing, materials and the visit plan.',
       },
       {
         question: 'Can you handle acreage and farm-property repairs?',
@@ -356,7 +356,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Middleton?',
         answer:
-          'The same bands as the rest of the valley: most single repairs run $100 to $500 and our services start at flat prices from $145. Batching matters more here than anywhere: a one-visit list is quoted as a package and costs meaningfully less per task than separate calls.',
+          'Pricing depends on the repair list, materials, access and finish matching. Send details and optional photos for review; the team prepares a written quote and confirms availability before scheduling.',
       },
       {
         question: 'My subdivision home is new: what should I expect?',
@@ -600,7 +600,7 @@ const PLACES: PlaceGuide[] = [
     excerpt:
       'Harris Ranch is newer East Boise: homes mostly under twenty years old, community standards for how exteriors look, and repair lists dominated by settling fixes and installs.',
     quickAnswer:
-      'We provide handyman services in Harris Ranch: settling repairs, fixture and fan installs, mounting and storage, caulking, and exterior upkeep matched to community standards, with flat quotes starting at $145. Harris Ranch homes are mostly newer builds, so the work is the newer-home canon done to a visible-neighborhood standard.',
+      'We provide handyman services in Harris Ranch: settling repairs, fixture and fan installs, mounting and storage, caulking, and exterior upkeep matched to community standards, with written quotes after scope review. Harris Ranch homes are mostly newer builds, so the work is the newer-home canon done to a visible-neighborhood standard.',
     takeaways: [
       'Harris Ranch homes are mostly newer construction, from the 2000s to current phases.',
       'The repair list is the newer-home canon: settling fixes, builder-grade swaps, and installs.',
@@ -610,14 +610,14 @@ const PLACES: PlaceGuide[] = [
     ],
     housingStock: `<p><strong>Harris Ranch is one of Boise's newest large neighborhoods, a planned community in the Barber Valley on the city's east side, with homes running from the 2000s through phases still building.</strong> The stock is therefore young: the oldest homes are entering the age where builder-grade components begin their first replacement wave, and the newest are still settling. Density and design coherence are part of the neighborhood's character, front porches, alleys, consistent palettes, which means exterior repairs are visible to the street and expected to match.</p>
 <p>The setting at the mouth of the foothills adds a mild exposure gradient: east-side and foothill-facing surfaces take more sun and weather than the sheltered sides, and age a little ahead of them.</p>`,
-    commonRepairs: `<p><strong>The Harris Ranch workload is the newer-home program: drywall settling cracks and nail pops, doors drifting out of square, builder-grade faucet and fixture swaps as the first wave ages, ceiling fans, TV mounting, closet and garage storage, and smart-device installs.</strong> Exterior work runs to porch and railing upkeep, fence and gate repairs matched to community styles, gutter care, and re-caulking where siding meets trim. It is one-visit work almost without exception, which makes list-batching the economical way to book it.</p>`,
+    commonRepairs: `<p><strong>The Harris Ranch workload is the newer-home program: drywall settling cracks and nail pops, doors drifting out of square, builder-grade faucet and fixture swaps as the first wave ages, ceiling fans, TV mounting, closet and garage storage, and smart-device installs.</strong> Exterior work runs to porch and railing upkeep, fence and gate repairs matched to community styles, gutter care, and re-caulking where siding meets trim. Share the full list so the scope, materials and visit plan can be reviewed together.</p>`,
     watchOut: `<p><strong>The Harris Ranch wrinkle is street visibility: in a porch-forward, design-coherent neighborhood, exterior wear shows early and repairs are expected to match exactly.</strong> A weathered rail or a mismatched fence board reads from the sidewalk here in a way it would not on a half-acre lot. Practically that means exterior repairs are match-what-exists work, materials, profiles, colors, and that small exterior upkeep done promptly is what keeps a house looking like it belongs to the street it is on.</p>`,
     seasonal: `<p><strong>Seasonally Harris Ranch runs the standard valley calendar, young-tree edition: gutters are quick work but still need the fall look, the pre-freeze weatherseal pass and hose-bib protection matter as everywhere, and sprinkler blowout closes October.</strong> Spring means porch, rail, fence, and gate checks, plus sprinkler startup fixes; summer UV works hardest on foothill-facing paint and any south-facing porch detail, where touch-ups are worth an annual look.</p>`,
     faqs: [
       {
         question: 'What do Harris Ranch homes typically need?',
         answer:
-          'The newer-home canon: settling drywall repairs, door adjustments, builder-grade fixture swaps as components hit their first replacement age, fans, mounts, storage installs, and caulk refresh. Exteriors need porch, rail, fence, and gutter upkeep matched to community styles. Nearly all of it is one-visit work.',
+          'The newer-home canon: settling drywall repairs, door adjustments, builder-grade fixture swaps as components hit their first replacement age, fans, mounts, storage installs, and caulk refresh. Exteriors need porch, rail, fence, and gutter upkeep matched to community styles. The number of visits depends on the agreed scope and materials.',
       },
       {
         question: 'Do you match community styles on exterior repairs?',
@@ -627,7 +627,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What does handyman work cost in Harris Ranch?',
         answer:
-          'Valley-standard: most single repairs run $100 to $500 and our services carry flat starting prices from $145. Punch-list batching is the money move for homes this age, one visit clearing eight or ten small items costs far less per item than separate calls.',
+          'Pricing depends on the repair list, materials, access and finish matching. Send details and optional photos for review; the team prepares a written quote and confirms availability before scheduling.',
       },
       {
         question: 'My home is still under builder warranty: should I call you or the builder?',
@@ -637,7 +637,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'How do I book?',
         answer:
-          'Send your list with photos through the contact page. Quotes come back flat, usually within a day, and most Harris Ranch visits are scheduled within the week and completed in one trip with materials in hand.',
+          'Send your list with photos through the contact page. The team reviews scope, materials and access, then confirms pricing, availability and the visit plan.',
       },
     ],
   },
@@ -652,6 +652,7 @@ function priorityAreaLink(p: PlaceGuide, county: string): string {
 
 function buildLocationGuide(p: PlaceGuide): GuidePageData {
   const county = countyLabel(p.county);
+  const reviewedPriceScope = ['boise-handyman-guide','meridian-handyman-guide','eagle-handyman-guide','harris-ranch-handyman-guide','middleton-handyman-guide','star-handyman-guide'].includes(p.slug);
 
   const coverageCallout =
     `<div class="callout note"><p class="callout-label">${p.name}: service snapshot</p>` +
@@ -665,7 +666,7 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     p.housingStock,
     `<h2 id="common-repairs">The repairs ${p.name} homes actually need</h2>`,
     p.commonRepairs,
-    p.citySlug === 'meridian' ? `<p>Pricing depends on the agreed scope, materials and access. Send your repair details for review and a written quote.</p>` : `<p>For typical prices on all of this, see the <a href="/guides/boise-home-repair-cost-guide">Boise home repair cost guide</a>, most single repairs across the valley land between $100 and $500, and our services carry flat starting prices from $145.</p>`,
+    reviewedPriceScope ? `<p>Pricing depends on the agreed scope, materials and access. Send your repair details for review and a written quote.</p>` : `<p>For typical prices on all of this, see the <a href="/guides/boise-home-repair-cost-guide">Boise home repair cost guide</a>, most single repairs across the valley land between $100 and $500, and our services carry flat starting prices from $145.</p>`,
     `<h2 id="watch-out">The thing that catches people out here</h2>`,
     p.watchOut,
     `<h2 id="seasonal">Seasonal maintenance in ${p.name}</h2>`,
@@ -676,7 +677,7 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     `<p>Services relevant here: <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing</a>, <a href="/services/electrical-repairs">minor electrical</a>, <a href="/services/carpentry-trim-repair">carpentry and trim</a>, <a href="/services/painting-touch-ups">painting</a>, <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/fence-deck-gutter-repair">fence, deck, and gutter repair</a>, and <a href="/services/home-maintenance">home maintenance</a>. See also <a href="/areas/${p.citySlug}">our ${p.citySlug} service area page</a> and <a href="/guides/hire-a-handyman-treasure-valley">how to hire a handyman in the Treasure Valley</a>.</p>`,
     priorityAreaLink(p, county),
     `<h2 id="next-steps">Start with the list</h2>`,
-    p.citySlug === 'meridian' ? `<p>Start by <a href="/contact">sending your repair list and optional photos</a>. Include your service address and requested dates so the team can review the scope and discuss next steps.</p>` : `<p>The fastest way to get a real answer about a repair in ${p.name} is to show it to us: <a href="/contact">send the list and a few photos</a> and we will reply with a flat quote and the earliest slot, usually within a day. No site-visit fee, no obligation, and if something on the list is not a handyman job, we will tell you whose job it is.</p>`,
+    reviewedPriceScope ? `<p>Start by <a href="/contact">sending your repair list and optional photos</a>. Include your service address and requested dates so the team can review the scope and discuss next steps.</p>` : `<p>The fastest way to get a real answer about a repair in ${p.name} is to show it to us: <a href="/contact">send the list and a few photos</a> and we will reply with a flat quote and the earliest slot, usually within a day. No site-visit fee, no obligation, and if something on the list is not a handyman job, we will tell you whose job it is.</p>`,
   ].join('\n');
 
   return {

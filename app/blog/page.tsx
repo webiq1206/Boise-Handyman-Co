@@ -76,7 +76,7 @@ export default function BlogPage() {
             <em className="brc-accent">quote</em>
           </>
         }
-        description="Read enough to know what needs doing? Send us your list with a few photos and get a flat, upfront quote - no site-visit fee, no obligation, and most jobs done in one trip."
+        description="Send your repair list and optional photos for scope review, a written quote and a confirmed visit plan."
         variant="greige"
       />
     </></InteriorPage>

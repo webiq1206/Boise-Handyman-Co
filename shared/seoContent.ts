@@ -438,7 +438,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
         description: 'A firm written price for the repair, with any lumber or hardware listed separately.',
       },
       {
-        title: 'Repair in one trip',
+        title: 'Complete the agreed repairs',
         description: 'We adjust, replace, or rebuild the piece, matching profiles and anchoring into solid framing.',
       },
       {
