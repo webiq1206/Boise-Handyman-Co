@@ -173,7 +173,9 @@ html, body {
   }
 
   html {
-    scroll-behavior: smooth;
+    /* Native hash/focus scrolling must settle before a pointer gesture.
+       Global smooth scrolling can move a link between pointerdown and pointerup. */
+    scroll-behavior: auto;
     scroll-padding-top: 64px;
   }
 
