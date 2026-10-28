@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import type { ButtonProps } from "@/components/ui/button";
 import { trackEvent } from "@/lib/analytics";
@@ -17,7 +18,7 @@ export function EstimateCTA({ onExtraClick, children, trackingLocation, ...props
 
   return (
     <Button {...props} asChild>
-      <a
+      <Link
         href={href}
         onClick={() => {
           trackEvent("cta_click", { cta: "primary", location: trackingLocation ?? pathname });
@@ -25,7 +26,7 @@ export function EstimateCTA({ onExtraClick, children, trackingLocation, ...props
         }}
       >
         {children}
-      </a>
+      </Link>
     </Button>
   );
 }

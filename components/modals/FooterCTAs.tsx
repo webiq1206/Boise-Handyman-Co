@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { useModals } from "./modalsContext";
 import { CTA_PRIMARY, CTA_SECONDARY } from "@/shared/ctaCopy";
 import { trackEvent } from "@/lib/analytics";
@@ -16,13 +17,13 @@ export function FooterCTAs() {
     <>
       <li>
         {isHome ? (
-          <a href="/#calculator" className={cls}>
+          <Link href="/#calculator" className={cls}>
             {CTA_PRIMARY}
-          </a>
+          </Link>
         ) : (
-          <a href="/estimate" className={cls}>
+          <Link href="/estimate" className={cls}>
             {CTA_PRIMARY}
-          </a>
+          </Link>
         )}
       </li>
       <li>
@@ -30,9 +31,9 @@ export function FooterCTAs() {
             #consult branch; the modal button never navigates, so it reports
             its own secondary-CTA click. */}
         {isHome ? (
-          <a href="/#consult" className={cls}>
+          <Link href="/#consult" className={cls}>
             {CTA_SECONDARY}
-          </a>
+          </Link>
         ) : (
           <button
             onClick={() => {
