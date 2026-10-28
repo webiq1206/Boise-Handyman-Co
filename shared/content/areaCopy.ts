@@ -16,17 +16,17 @@ export interface AreaCityCopy {
 export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   boise: {
     intro:
-      "Boise's houses have some age on them: the median home was built in 1986, and about 17% of the city's housing predates 1960 (Census ACS 2020-2024). Boise Handyman Co takes care of the small stuff those homes collect, from drywall cracks and sticking doors to dripping faucets, loose deck boards, and a TV that needs mounting, with one written quote upfront and most jobs done in a single visit.",
+      "Boise's houses have some age on them: the median home was built in 1986, and about 17% of the city's housing predates 1960 (Census ACS 2020-2024). Boise Handyman Co takes care of the small stuff those homes collect, from drywall cracks and sticking doors to dripping faucets, loose deck boards, and a TV that needs mounting, with a written quote and visit plan based on the agreed scope.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
         answer:
-          'Small repairs, installs, and maintenance around Boise homes: patching drywall, touching up paint, fixing minor plumbing and electrical problems, repairing doors and carpentry, mounting TVs and assembling furniture, mending fences, decks, and gutters, and caulking or weatherproofing. Most jobs take one to eight hours.',
+          'Small repairs, installs, and maintenance around Boise homes: patching drywall, touching up paint, fixing minor plumbing and electrical problems, repairing doors and carpentry, mounting TVs and assembling furniture, mending fences, decks, and gutters, and caulking or weatherproofing. Timing is confirmed after scope review.',
       },
       {
         question: 'How does pricing work?',
         answer:
-          "You get one written quote upfront, before work starts, and it's priced by the time the job takes, with a one-hour minimum. A single small repair starts around $145, materials are billed at cost on their own line, and grouping a few tasks per visit is the best value (every job gets a written quote first).",
+          "You get one written quote upfront, before work starts, and it's priced by the time the job takes, with a one-hour minimum. Materials are billed at cost on their own line, and grouping a few tasks per visit is the best value (every job gets a written quote first).",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -36,7 +36,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "Call or text (208) 477-1169, try the online estimator to see a preliminary planning range, or use the contact form to share your list and a few photos. You'll have an upfront quote within one business day.",
+          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
       },
       {
         question: 'Do you serve Boise, Idaho?',
@@ -62,7 +62,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'What kinds of jobs do you take on?',
         answer:
-          'The small stuff on your Meridian list: drywall patches and paint touch-ups, minor electrical and plumbing fixes, door and carpentry repair, furniture assembly, TV mounting, gutter, deck, and fence repair, plus caulk and weatherproofing. Small repairs, installs, and maintenance, basically, and a typical job runs one to eight hours.',
+          'The small stuff on your Meridian list: drywall patches and paint touch-ups, minor electrical and plumbing fixes, door and carpentry repair, furniture assembly, TV mounting, gutter, deck, and fence repair, plus caulk and weatherproofing. Small repairs, installs, and maintenance, with timing confirmed after scope review.',
       },
       {
         question: 'How does pricing work?',
@@ -98,17 +98,17 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   },
   nampa: {
     intro:
-      "Nampa's homes run the full range, with about 15% built before 1960 and 22% since 2010 (Census ACS 2020-2024), so one street can need very different fixes. Boise Handyman Co covers Nampa and Canyon County with the fix-it work: one written price before work starts, materials at cost, and most jobs wrapped up in a single trip.",
+      "Nampa's homes run the full range, with about 15% built before 1960 and 22% since 2010 (Census ACS 2020-2024), so one street can need very different fixes. Boise Handyman Co covers Nampa and Canyon County with the fix-it work: one written price before work starts, materials at cost, and visits planned around the agreed scope.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
         answer:
-          'In Nampa we handle repairs, installs, and upkeep that fit in one to eight hours: sticking doors and carpentry, drywall holes, minor plumbing and electrical fixes, paint touch-ups, furniture assembly, wall-mounted TVs, fences, gutters, and decks, and caulking and weatherproofing.',
+          'In Nampa we handle repairs, installs, and upkeep: sticking doors and carpentry, drywall holes, minor plumbing and electrical fixes, paint touch-ups, furniture assembly, wall-mounted TVs, fences, gutters, and decks, and caulking and weatherproofing.',
       },
       {
         question: 'How does pricing work?',
         answer:
-          'Pricing is time-based with a one-hour minimum, and you see it as one upfront written quote before work begins. For context, Treasure Valley handyman rates typically run $60 to $120 per hour. Materials are listed separately at cost, and if you group several small tasks you get the best value.',
+          'Pricing is time-based with a one-hour minimum, and you see it as one upfront written quote before work begins. Materials are listed separately at cost, and if you group several small tasks you get the best value.',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -118,7 +118,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "Reach us by phone or text, pull a preliminary planning range from the online estimator, or attach your list and photos to a contact-form message. You'll hear back within one business day, upfront quote included.",
+          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
       },
       {
         question: 'Do you serve Nampa, Idaho?',
@@ -144,7 +144,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'What kinds of jobs do you take on?',
         answer:
-          'Small repairs, installs, and maintenance for Eagle homes. That covers TV mounting and furniture assembly, caulking and weatherproofing, carpentry and door repair, drywall patching, touch-up painting, minor plumbing or electrical fixes, and repairs to fences, decks, and gutters. Most jobs land between one and eight hours.',
+          'Small repairs, installs, and maintenance for Eagle homes. That covers TV mounting and furniture assembly, caulking and weatherproofing, carpentry and door repair, drywall patching, touch-up painting, minor plumbing or electrical fixes, and repairs to fences, decks, and gutters. Timing is confirmed after scope review.',
       },
       {
         question: 'How does pricing work?',
@@ -159,7 +159,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "Phone, text, or check the estimator for a preliminary planning number. Prefer to write it out? Send the list and some photos through our contact form, and we'll answer with an upfront quote inside one business day.",
+          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
       },
       {
         question: 'Do you serve Eagle, Idaho?',
@@ -185,7 +185,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'What kinds of jobs do you take on?',
         answer:
-          'Fence, deck, and gutter repair; caulking and weatherproofing; drywall patching; painting touch-ups; door and carpentry repair; minor plumbing and electrical fixes; TV mounting and furniture assembly. In short, the small repairs, installs, and maintenance Kuna homes need, with most jobs taking one to eight hours.',
+          'Fence, deck, and gutter repair; caulking and weatherproofing; drywall patching; painting touch-ups; door and carpentry repair; minor plumbing and electrical fixes; TV mounting and furniture assembly. In short, the small repairs, installs, and maintenance Kuna homes need, with timing confirmed after scope review.',
       },
       {
         question: 'How does pricing work?',
@@ -200,7 +200,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          'Send a text or call, plug your job into the online estimator for a preliminary range, or post your task list and pictures through our contact form. A written upfront quote comes back within one business day.',
+          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
       },
       {
         question: 'Do you serve Kuna, Idaho?',
@@ -226,7 +226,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'What kinds of jobs do you take on?',
         answer:
-          'Drywall patching, door and carpentry repair, paint touch-ups, minor plumbing and electrical fixes, weatherproofing and caulking, fence and deck and gutter repair, TV mounting, furniture assembly: those are the Caldwell jobs we take on, small repairs, installs, and maintenance that usually take one to eight hours each.',
+          'Drywall patching, door and carpentry repair, paint touch-ups, minor plumbing and electrical fixes, weatherproofing and caulking, fence and deck and gutter repair, TV mounting, furniture assembly: those are the Caldwell jobs we take on, small repairs, installs, and maintenance, with timing confirmed after scope review.',
       },
       {
         question: 'How does pricing work?',
@@ -241,7 +241,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "The quickest options: a call or text, the estimator's preliminary planning range, or uploading your list and photos via the contact form. We respond inside one business day with an upfront quote.",
+          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
       },
       {
         question: 'Do you serve Caldwell, Idaho?',
@@ -267,7 +267,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'What kinds of jobs do you take on?',
         answer:
-          'For Star homes we mount TVs, assemble furniture, patch drywall, touch up paint, make minor electrical and plumbing repairs, fix carpentry and doors, repair fences, decks, and gutters, and caulk and weatherproof. These small repair, install, and maintenance tasks typically take one to eight hours.',
+          'For Star homes we mount TVs, assemble furniture, patch drywall, touch up paint, make minor electrical and plumbing repairs, fix carpentry and doors, repair fences, decks, and gutters, and caulk and weatherproof. Timing for these tasks is confirmed after scope review.',
       },
       {
         question: 'How does pricing work?',
@@ -282,7 +282,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "Call or text, see a preliminary planning range in the online estimator, or attach photos and the task list to the contact form. We'll reply within one business day with your upfront quote.",
+          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
       },
       {
         question: 'Do you serve Star, Idaho?',
@@ -303,12 +303,12 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   },
   middleton: {
     intro:
-      "Middleton's housing is newer than most: the median home was built in 2009, and about one in eight went up in 2020 or later (Census ACS 2020-2024). Boise Handyman Co handles the small repairs, installs, and maintenance those homes need across Middleton and Canyon County, quoting each job upfront and finishing most of them in one visit.",
+      "Middleton's housing is newer than most: the median home was built in 2009, and about one in eight went up in 2020 or later (Census ACS 2020-2024). Boise Handyman Co handles the small repairs, installs, and maintenance those homes need across Middleton and Canyon County, quoting each job upfront and confirming the visit plan after scope review.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
         answer:
-          "Mounting a TV, assembling furniture, patching drywall, touching up paint, fixing a minor plumbing or electrical problem, repairing a door or other carpentry, mending fences, decks, and gutters, refreshing caulk and weatherproofing: that's the Middleton work we do. It's all small repairs, installs, and maintenance, and most jobs need one to eight hours.",
+          "Mounting a TV, assembling furniture, patching drywall, touching up paint, fixing a minor plumbing or electrical problem, repairing a door or other carpentry, mending fences, decks, and gutters, refreshing caulk and weatherproofing: that's the Middleton work we do. It's all small repairs, installs, and maintenance, with timing confirmed after scope review.",
       },
       {
         question: 'How does pricing work?',
@@ -323,12 +323,12 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          'Text or call (208) 477-1169, see a preliminary planning range in our estimator, or send your to-do list and a few photos through the contact form. Expect an upfront quote from us within one business day.',
+          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
       },
       {
         question: 'Do you serve Middleton, Idaho?',
         answer:
-          'Yes, we cover Middleton as part of our core Treasure Valley area, Middleton Heights included. Same-week scheduling is typical, and every small repair, install, or maintenance job in town carries the same upfront quotes and pricing as the rest of our area.',
+          'Yes, we cover Middleton as part of our core Treasure Valley area, Middleton Heights included. Availability is confirmed after scope review, and every small repair, install, or maintenance job in town carries the same upfront quotes and pricing as the rest of our area.',
       },
       {
         question: 'Does a fence in Middleton need a permit?',
@@ -344,12 +344,12 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   },
   'garden-city': {
     intro:
-      "Garden City is about 6 miles from the Boise Airport weather station, where NOAA's 1991-2020 normals record about 17.6 inches of snow a season and average December and January lows near 25°F. Boise Handyman Co provides handyman services for Garden City homes and the rest of Ada County: small repairs, installs, and maintenance, quoted upfront and usually finished in one visit.",
+      "Garden City is about 6 miles from the Boise Airport weather station, where NOAA's 1991-2020 normals record about 17.6 inches of snow a season and average December and January lows near 25°F. Boise Handyman Co provides handyman services for Garden City homes and the rest of Ada County: small repairs, installs, and maintenance, quoted upfront with the visit plan confirmed after scope review.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
         answer:
-          'Garden City jobs we handle include fence, gutter, and deck repair, minor electrical and plumbing fixes, drywall patching and painting touch-ups, door and carpentry fixes, assembling furniture and mounting TVs, and caulking and weatherproofing. Small repairs, installs, and maintenance, in other words, typically one to eight hours each.',
+          'Garden City jobs we handle include fence, gutter, and deck repair, minor electrical and plumbing fixes, drywall patching and painting touch-ups, door and carpentry fixes, assembling furniture and mounting TVs, and caulking and weatherproofing. Small repairs, installs, and maintenance, with timing confirmed after scope review.',
       },
       {
         question: 'How does pricing work?',
@@ -364,7 +364,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "Call or text us, check our online estimator for a preliminary number, or use the contact form to send your list with photos. We'll reply with an upfront quote within one business day.",
+          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
       },
       {
         question: 'Do you serve Garden City, Idaho?',

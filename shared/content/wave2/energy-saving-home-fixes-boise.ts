@@ -2,12 +2,12 @@ import type { BlogPostData } from '../../blogContent';
 
 export const energySavingHomeFixesBoise: BlogPostData = {
   slug: 'energy-saving-home-fixes-boise',
-  title: 'Energy-Saving Fixes a Handyman Can Do in an Afternoon',
+  title: 'Energy-Saving Home Fixes for Boise Houses',
   seoTitle: 'Energy-Saving Home Fixes for Boise Houses',
   metaDescription:
-    'Weatherstripping, caulking, door sweeps, attic hatch insulation and other small fixes that cut Boise energy bills, and what each costs.',
+    'Weatherstripping, caulking, door sweeps, attic hatch insulation and other small fixes that cut Boise energy bills, and how to plan the work.',
   excerpt:
-    'Boise summers and winters both punish a leaky house. These are the small, cheap air-sealing fixes that actually move a utility bill, and all of them fit in one handyman visit.',
+    'Boise summers and winters both punish a leaky house. These are the small, cheap air-sealing fixes that actually move a utility bill, with the scope and visit plan confirmed after review.',
   category: 'Home Maintenance',
   hubSlug: 'home-maintenance',
   author: 'Boise Handyman Co',
@@ -24,13 +24,13 @@ export const energySavingHomeFixesBoise: BlogPostData = {
   featuredSnippetTargets: ['energy saving fixes for home', 'cheap ways to make house more energy efficient'],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'The highest-return energy fixes are small ones: weatherstripping exterior doors, adding door sweeps, caulking gaps around windows and penetrations, sealing the attic hatch, and insulating exposed hot water lines. Each costs little in materials, takes a handyman under an hour, and works in both Boise winters and hundred-degree summers.',
+    'The highest-return energy fixes are small ones: weatherstripping exterior doors, adding door sweeps, caulking gaps around windows and penetrations, sealing the attic hatch, and insulating exposed hot water lines. The right materials and scope depend on the home; the team reviews access and condition before quoting the work.',
   keyTakeaways: [
     'Air leaks, not old appliances, are the cheapest problem to fix on most utility bills.',
     'Exterior door weatherstripping and sweeps are the single best first move; a visible daylight gap around a door is money leaving year-round.',
     'Caulk fails by drying and cracking, so exterior caulking is maintenance, not a one-time job.',
-    'The attic hatch is a large uninsulated hole in most ceilings and takes under an hour to fix.',
-    'All of these fixes together fit comfortably in a single half-day handyman visit.',
+    'An uninsulated attic hatch can be a source of heat loss; the approach depends on its condition and access.',
+    'Share the full list so the team can confirm materials, timing and the number of visits.',
   ],
   relatedLinks: [
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
@@ -49,7 +49,7 @@ export const energySavingHomeFixesBoise: BlogPostData = {
     {
       question: 'What is the single best energy fix for a Boise home?',
       answer:
-        'Seal the exterior doors. If you can see daylight around a door or feel movement of air at the edges, weatherstripping and a door sweep will fix it for the cost of an hour of labor and modest materials. Boise gets both real winters and hundred-degree summer stretches, so a sealed door pays in both directions.',
+        'Seal the exterior doors. If you can see daylight around a door or feel movement of air at the edges, weatherstripping and a door sweep may help; the scope and price depend on the condition of the door. Boise gets both real winters and hundred-degree summer stretches, so a sealed door pays in both directions.',
     },
     {
       question: 'How often does exterior caulking need to be redone?',
@@ -69,7 +69,7 @@ export const energySavingHomeFixesBoise: BlogPostData = {
     {
       question: 'How much does a visit like this cost?',
       answer:
-        'Treasure Valley handyman rates typically run about $60 to $120 per hour, and the whole air-sealing list, doors, sweeps, caulking, attic hatch, outlet gaskets, is usually a half day plus materials. We quote it as one flat price upfront once we know your door count and what shape the caulking is in.',
+        'Send the air-sealing list, door count and photos of the existing condition. The team reviews scope, access and materials, then prepares a written quote and confirms the visit plan before scheduling.',
     },
   ],
   content: `
@@ -86,11 +86,11 @@ export const energySavingHomeFixesBoise: BlogPostData = {
 
 <h2 id="caulking">Caulk the gaps, inside and out</h2>
 <p><strong>Caulk is the cheapest material on a house doing one of the most important jobs, and it fails on a schedule.</strong> Outside, the beads around window frames, door frames, hose bibs, dryer vents and anywhere pipe or wire enters the wall dry out and crack in our high-desert sun. Each failed bead leaks air, and worse, lets water into the wall assembly. Inside, gaps at baseboards on exterior walls and around window trim do the same quietly.</p>
-<p>Recaulking is core <a href="/services/home-maintenance">home maintenance</a> work: cut out the failed bead, clean, and run a new one with the right product for the location, silicone where water lives, paintable acrylic where appearance matters. A full exterior recaulk on a typical house is a few hours of labor, and it is as much water protection as energy work.</p>
+<p>Recaulking is core <a href="/services/home-maintenance">home maintenance</a> work: cut out the failed bead, clean, and run a new one with the right product for the location, silicone where water lives, paintable acrylic where appearance matters. The extent of exterior recaulking depends on the condition and access; it supports water protection as well as energy efficiency.</p>
 
 <h2 id="attic-hatch">Seal and insulate the attic hatch</h2>
 <p><strong>Most attic hatches are a large, uninsulated, unsealed hole in an otherwise insulated ceiling.</strong> Your attic may have a foot of blown insulation everywhere except the one panel you can reach, which is often bare wood or drywall with nothing above it. Warm air rises, finds the hatch, and leaves; in summer the hundred-forty-degree attic radiates back down through it.</p>
-<p>The fix is weatherstripping around the hatch lip and rigid foam insulation on the back of the panel. It takes under an hour, costs little, and brings the worst square meter of your ceiling up to the standard of the rest. Pull-down attic stairs get an insulated cover box instead, which is an equally quick install.</p>
+<p>The fix is weatherstripping around the hatch lip and rigid foam insulation on the back of the panel. The scope depends on the hatch and available access. Pull-down attic stairs may need an insulated cover box instead.</p>
 
 <h2 id="outlet-gaskets">Gasket the outlets on exterior walls</h2>
 <p><strong>Every outlet and switch on an exterior wall is a small hole through the drywall into the wall cavity.</strong> Hold a hand near one on a cold windy day and you can feel it. Individually they are minor; a house has dozens of them, and together they add up to a real leak.</p>
@@ -102,13 +102,13 @@ export const energySavingHomeFixesBoise: BlogPostData = {
 
 <h2 id="fans-and-film">Ceiling fans, window film, and the honorable mentions</h2>
 <p><strong>A few more small jobs earn their place on the list without being sealing work.</strong> Ceiling fans installed where a fixture already exists, standard handyman scope, let you raise the thermostat a couple of degrees in summer; flipping them to reverse in winter pushes warm air back down. Reflective window film on big west-facing glass takes real load off an air conditioner during a Boise July. Fresh filters, clear dryer vents, and closed fireplace dampers round out the list.</p>
-<p>None of these transforms a utility bill alone. Together, on a house that has had none of them done, the change is noticeable, and every one of them is an hours-not-weeks job.</p>
+<p>None of these transforms a utility bill alone. Together, on a house that has had none of them done, the change is noticeable, with the work planned around the condition of the home.</p>
 
 <h2 id="what-it-costs">What the whole list costs</h2>
-<p><strong>The entire air-sealing package is typically a half-day visit plus modest materials.</strong> Treasure Valley handyman labor generally runs $60 to $120 per hour at market rates, and the materials, weatherstripping, sweeps, caulk, foam board, gaskets, pipe insulation, are cheap relative to almost anything else you can buy for a house. We quote the whole list as one flat number after a quick walkthrough, so there is no meter running.</p>
+<p><strong>The price and visit plan depend on the agreed scope.</strong> Share the door count, repair list and photos of the existing condition. The team reviews access and materials, including weatherstripping, sweeps, caulk, foam board, gaskets and pipe insulation, before preparing a written quote and confirming availability.</p>
 <p>Compare that against the alternatives people usually consider first, new windows or a new HVAC system, and the sequencing logic is clear: seal the envelope first, because it is two orders of magnitude cheaper, and let the expensive decisions wait for a house that is no longer leaking.</p>
 
 <h2 id="next-steps">Where to go from here</h2>
-<p>If you want the whole list knocked out in one trip anywhere in Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton or Caldwell, <a href="/contact">get in touch</a> and tell us how many exterior doors you have and roughly how old the house is; that is enough for a solid quote. For the bigger picture of keeping a house ahead of its problems, start with our <a href="/blog/seasonal-home-maintenance-checklist-boise">seasonal maintenance checklist for Boise homes</a>, where most of these fixes appear in their fall slot.</p>
+<p>For help with your repair list in Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton or Caldwell, <a href="/contact">get in touch</a> and tell us how many exterior doors you have and roughly how old the house is; the team can review the scope, materials and access before preparing a quote. For the bigger picture of keeping a house ahead of its problems, start with our <a href="/blog/seasonal-home-maintenance-checklist-boise">seasonal maintenance checklist for Boise homes</a>, where most of these fixes appear in their fall slot.</p>
 `.trim(),
 };
