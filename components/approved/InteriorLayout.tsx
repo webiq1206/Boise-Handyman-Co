@@ -12,12 +12,42 @@ export function InteriorEstimateLink({label='Send your list and photos',href='/c
 }
 
 /** The approved split-detail and editorial-introduction compositions. */
-export function InteriorHero({children,imageSrc,imageAlt='',layout='split',estimateAction=false}:{children:ReactNode;imageSrc?:string;imageAlt?:string;layout?:'split'|'editorial'|'contact';estimateAction?:boolean}) {
+export function InteriorHero({
+  children,
+  imageSrc,
+  imageAlt = '',
+  layout = 'split',
+  estimateAction = false,
+  /** People photos must use contain / intrinsic height so CSS never crops heads or bodies. */
+  imageFit = 'cover',
+}: {
+  children: ReactNode;
+  imageSrc?: string;
+  imageAlt?: string;
+  layout?: 'split' | 'editorial' | 'contact';
+  estimateAction?: boolean;
+  imageFit?: 'cover' | 'contain';
+}) {
   if (imageSrc) preload(imageSrc, { as: 'image', fetchPriority: 'high' });
-  return <section className={`interior-hero interior-hero-${layout}${imageSrc?'':' interior-hero-text'}`}>
-    <div className="interior-hero-copy">{children}{estimateAction&&<div className="interior-hero-action"><InteriorEstimateLink/></div>}</div>
-    {imageSrc&&<div className="interior-hero-image"><img src={imageSrc} alt={imageAlt} width={1400} height={1100} fetchPriority="high"/></div>}
-  </section>;
+  const imageClass =
+    imageFit === 'contain' ? 'interior-hero-image interior-hero-image--contain' : 'interior-hero-image';
+  return (
+    <section className={`interior-hero interior-hero-${layout}${imageSrc ? '' : ' interior-hero-text'}`}>
+      <div className="interior-hero-copy">
+        {children}
+        {estimateAction && (
+          <div className="interior-hero-action">
+            <InteriorEstimateLink />
+          </div>
+        )}
+      </div>
+      {imageSrc && (
+        <div className={imageClass}>
+          <img src={imageSrc} alt={imageAlt} width={1400} height={1100} fetchPriority="high" />
+        </div>
+      )}
+    </section>
+  );
 }
 
 /** Reusable secondary column, with the estimator as its single dominant action. */

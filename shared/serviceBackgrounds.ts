@@ -81,7 +81,8 @@ const SERVICE_IMAGE_SETS: Record<string, LandingImageSet> = {
   "fence-deck-gutter-repair": {
     hero: h("service-fence-repair"),
     breather: h("deck-board-replacement"),
-    process: h("hero-gutter-cleaning"),
+    // No-people Kuna continuity shot (quality bar: avoid person-on-ladder stock)
+    process: "/images/houses/kuna/kuna-gutter-cleaning.webp",
   },
   "home-maintenance": {
     hero: h("service-caulking"),

@@ -220,6 +220,18 @@
   height:100%;
   object-fit:cover
 }
+/* People-safe: never CSS-crop heads/bodies (owner hard rule). */
+.approved-interior .interior-hero-image--contain {
+  height:auto !important;
+  min-height:0 !important;
+  overflow:visible
+}
+.approved-interior .interior-hero-image--contain img {
+  position:static;
+  width:100%;
+  height:auto;
+  object-fit:contain
+}
 .approved-interior .interior-hero-text {
   grid-template-columns:1fr;
   min-height:0;

@@ -102,7 +102,12 @@ export default function AboutPage() {
       <JsonLd data={schemas} />
       <div className="flex flex-col ">
         {/* Approved editorial hero */}
-        <InteriorHero layout="editorial" imageSrc={SITE_IMAGES.leadership} imageAlt="A handyman and a homeowner reviewing a clipboard at a front door">
+        <InteriorHero
+          layout="editorial"
+          imageSrc={SITE_IMAGES.leadership}
+          imageAlt="A handyman and a homeowner reviewing a clipboard at a front door"
+          imageFit="contain"
+        >
             <HeroBreadcrumbs />
             <p data-speakable="summary" className="sr-only">
               {SPEAKABLE_SUMMARY}
@@ -116,7 +121,7 @@ export default function AboutPage() {
               Boise Handyman Co is a repair, install and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co. It is run by Nick Perkins, a construction project manager with a bachelor&apos;s degree in Construction with an emphasis in Project Management, and more than a decade of work from small renovations to multimillion-dollar custom homes.
             </p>
             <p className="text-base md:text-lg text-inverse-foreground/75 max-w-2xl leading-relaxed mb-8">
-              He founded P5 in Colorado in 2020, moved the family and company to the Treasure Valley in 2025, and named it for his five children. Read the full story on{' '}
+              He founded P5 in Colorado in 2020 and moved the family and company to the Treasure Valley in 2025. Read the full story on{' '}
               <a href="https://p5homeco.com/about" className="underline underline-offset-2">p5homeco.com/about</a>.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-8">
