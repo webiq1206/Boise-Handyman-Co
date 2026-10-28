@@ -49,7 +49,7 @@ html, body {
    as a brand tone. Palette:
      charcoal (ink / dark ground) #2C302F · surface/bands stepped from it
      bone #F7F5F3 · body #E6E3DE · mist #9F9C97 · faint #767370
-     Accent = Terracotta #CB633B (the brand-distinct color; charcoal +
+     Accent = Terracotta #C56B4A (the brand-distinct color; charcoal +
      bone are shared unchanged). The exact terracotta is used for artwork and
      decorative fills. The lighter derived terracotta is used for text on
      charcoal; the darker derived terracotta is used for text on bone.
@@ -87,11 +87,11 @@ html, body {
   --sidebar: 163 5% 10%;
   --sidebar-foreground: 37 14% 89%;
   --sidebar-border: 163 6% 24%;
-  --sidebar-primary: 16.67 58.06% 51.37%; /* brand terracotta #CB633B */
-  --sidebar-primary-foreground: 163 5% 18%;  /* charcoal #2C302F */
+  --sidebar-primary: 16.10 51.46% 53.14%; /* brand terracotta #C56B4A */
+  --sidebar-primary-foreground: 150 6% 7%;  /* charcoal #2C302F */
   --sidebar-accent: 163 6% 16%;
   --sidebar-accent-foreground: 37 14% 89%;
-  --sidebar-ring: 16.67 58.06% 51.37%;  /* brand terracotta #CB633B */
+  --sidebar-ring: 16.10 51.46% 53.14%;  /* brand terracotta #C56B4A */
 
   --popover: 163 6% 16%;
   --popover-foreground: 37 14% 89%;
@@ -110,10 +110,10 @@ html, body {
 
   /* Exact brand pop for artwork and decorative UI; accessible text uses the
      light/dark derived variants below depending on its background. */
-  --accent: 16.67 58.06% 51.37%;       /* #CB633B */
-  --accent-foreground: 163 5% 18%;
+  --accent: 16.10 51.46% 53.14%;       /* #C56B4A */
+  --accent-foreground: 150 6% 7%;
 
-  --brass: 16.67 58.06% 51.37%;        /* #CB633B */
+  --brass: 16.67 58.06% 51.37%;        /* #C56B4A */
   --brass-foreground: 30 20% 96%;
 
   /* Derived terracotta variants preserve readable accents on both grounds. */
@@ -125,9 +125,9 @@ html, body {
   --destructive-foreground: 30 20% 96%;
 
   --input: 163 6% 13%;                /* input */
-  --ring: 16.67 58.06% 51.37%;          /* brand terracotta #CB633B */
+  --ring: 16.10 51.46% 53.14%;          /* brand terracotta #C56B4A */
 
-  --chart-1: 16.67 58.06% 51.37%;       /* brand terracotta #CB633B */
+  --chart-1: 16.67 58.06% 51.37%;       /* brand terracotta #C56B4A */
   --chart-2: 163 6% 16%;
   --chart-3: 30 20% 96%;
   --chart-4: 32 4% 61%;
@@ -383,7 +383,7 @@ html, body {
 /* The shared estimator keeps its upstream theme intact. Override its inline
    brand tokens only inside this Boise Handyman app. */
 .approved-shell [data-p5-estimator] {
-  --p5-accent: #CB633B !important;
+  --p5-accent: #C56B4A !important;
   --p5-accent-ink: #A9401D !important;
 }
 
@@ -999,3 +999,6 @@ body[data-p5-estimator-active="true"] [data-testid="assistant-launcher"] {
 .brc-swipe::-webkit-scrollbar { display: none; }
 .brc-swipe > * { flex: 0 0 82%; scroll-snap-align: start; }
 @media (min-width: 640px) { .brc-swipe { display: grid; overflow: visible; margin-inline: 0; padding-inline: 0; scroll-snap-type: none; } .brc-swipe > * { flex: initial; } }
+
+/* Site-owned approved palette; shared intake behavior and engine remain unchanged. */
+[data-p5-estimator][data-theme="light"]{--p5-accent:#C56B4A!important;--p5-accent-ink:#92472C!important;--p5-focus:#92472C!important}

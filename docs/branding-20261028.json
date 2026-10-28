@@ -1,0 +1,81 @@
+{
+  "sourceLibraryId": "libfile_4efa3eb963fc81919a6cd4c2c179b0e3",
+  "archiveSha256": "52ba70b766cd32a607675d11a4f1a36eb43697fe49f379b8ce4585c371316b6a",
+  "assets": [
+    {
+      "destination": "public/brand/approved-lockup-dark.svg",
+      "source": "handyman/logos/Boise-Handyman-Co_Logo_On-Light.svg",
+      "sha256": "1d708a2077ab9ed06148d54d06ed151c124cbb940be60df57eeef0f7dab14fe7"
+    },
+    {
+      "destination": "public/brand/p5-family-dark.svg",
+      "source": "handyman/icons/Boise-Handyman-Co_P5-Icon_On-Light.svg",
+      "sha256": "bf6e12771f03108fb97feeec735606b15a8e2354e0c3b1915bc0456ba484bd05"
+    },
+    {
+      "destination": "public/brand/approved-lockup-light.svg",
+      "source": "handyman/logos/Boise-Handyman-Co_Logo_On-Dark.svg",
+      "sha256": "cd2d2f987f724cd0be368e40405c03a18a173ea10c1d5b54961988898e1acfd8"
+    },
+    {
+      "destination": "public/brand/p5-family-light.svg",
+      "source": "handyman/icons/Boise-Handyman-Co_P5-Icon_On-Dark.svg",
+      "sha256": "58021b5f74523ef115e6865f7eb9d3adeb6255895bd9ff0f07f019e02500df6b"
+    },
+    {
+      "destination": "public/favicon.svg",
+      "source": "handyman/icons/Boise-Handyman-Co_P5-Icon_On-Light.svg",
+      "sha256": "bf6e12771f03108fb97feeec735606b15a8e2354e0c3b1915bc0456ba484bd05"
+    },
+    {
+      "destination": "public/favicon.ico",
+      "source": "handyman/icons/favicon.ico",
+      "sha256": "95b9eb94fbc5b45d13e049d03e2fec8310bf4fdecd43668114c24da803b50de8"
+    },
+    {
+      "destination": "public/favicon-16.png",
+      "source": "handyman/icons/Boise-Handyman-Co_P5-Icon_On-Light_16px.png",
+      "sha256": "5a7bb5b1464c6b3f4edb932b2cafc6176b13fd9d49be96b97524b0828dec5b91"
+    },
+    {
+      "destination": "public/favicon-32.png",
+      "source": "handyman/icons/Boise-Handyman-Co_P5-Icon_On-Light_32px.png",
+      "sha256": "068260ca41b0a31d1d26e4dfdaab5c75db48199a569d4fb0fef75f33fdc59a93"
+    },
+    {
+      "destination": "public/icons/apple-touch-icon.png",
+      "source": "handyman/icons/Boise-Handyman-Co_P5-Icon_On-Light_180px.png",
+      "sha256": "8e24a30220bf54d628750f528a9d8d3fa2e9faf703045d829b83e72ba30b7172"
+    },
+    {
+      "destination": "public/apple-touch-icon.png",
+      "source": "handyman/icons/Boise-Handyman-Co_P5-Icon_On-Light_180px.png",
+      "sha256": "8e24a30220bf54d628750f528a9d8d3fa2e9faf703045d829b83e72ba30b7172"
+    },
+    {
+      "destination": "public/icons/icon-192.png",
+      "source": "handyman/icons/Boise-Handyman-Co_P5-Icon_On-Light_192px.png",
+      "sha256": "5ca9c1b009e153c1f472759c9c734e96b23ce1a76a1714b855a844b547dc6833"
+    },
+    {
+      "destination": "public/icons/icon-512.png",
+      "source": "handyman/icons/Boise-Handyman-Co_P5-Icon_On-Light_512px.png",
+      "sha256": "5db20dda3d5376a4a7bb6889be26b15349f781f1d6b9b7c5a4c76a92c03a6cc4"
+    },
+    {
+      "destination": "public/brand/png/wordmark/light/boise-handyman-co-wordmark-charcoal-accent-1200w.png",
+      "source": "handyman/logos/Boise-Handyman-Co_Logo_On-Light_1280px.png",
+      "sha256": "97077861b190e5f796116b3de6eb744eb813672f4aabb8c8e45e58037c3a3483"
+    },
+    {
+      "destination": "public/brand/png/wordmark/dark/boise-handyman-co-wordmark-bone-accent-1200w.png",
+      "source": "handyman/logos/Boise-Handyman-Co_Logo_On-Dark_1280px.png",
+      "sha256": "3018ba9bab378ed2c07f65c11376a1d1711cb757e8e60492831eca95a6cfd043"
+    },
+    {
+      "destination": "public/family/handyman-boise-handyman-co-wordmark-bone-accent.svg",
+      "source": "handyman/logos/Boise-Handyman-Co_Logo_On-Dark.svg",
+      "sha256": "cd2d2f987f724cd0be368e40405c03a18a173ea10c1d5b54961988898e1acfd8"
+    }
+  ]
+}

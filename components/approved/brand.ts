@@ -1,7 +1,7 @@
 export const approvedBrand = {
   "id": "handyman",
   "name": "Boise Handyman Co",
-  "accent": "#CB633B",
+  "accent": "#C56B4A",
   // Query keeps phones from reusing a cached wordmark whose Co. was still steel blue.
   "wordmarkLight": "/brand/p5-wordmark-light.svg?v=co-accent",
   "wordmarkDark": "/brand/p5-wordmark-dark.svg?v=co-accent",
