@@ -500,7 +500,7 @@
     "lib/p5/intakeIntent.ts": "5f77bf876278b307a1fee4e49e8ac4a144e99bd7bd4e5f6b186491fd0888b360",
     "tests/p5-intake-intent.test.ts": "b7be17dd3d8c5a7e7b15f5bbd205ebaa719617ef25791294825570e1679c1513",
     "scripts/test-p5-intake-intent.mts": "cf2ec47bdf7a5cf5cab221991ca2d45c96c479fad9f160427d14d16dc8e95425",
-    "scripts/p5-intake-intent-browser.mjs": "0daa6f89b57d2d945076549cb4433059396be0708a86ebb8b31ce188ce485a21",
+    "scripts/p5-intake-intent-browser.mjs": "3c7b7f3b264d485e24b1cd8335eab06f2978ab0e573b9ab32b7fcda2a6fa6772",
     "scripts/p5-intake-progression-browser.mjs": "04bad0ff80bb43e9306c09aea428272707e370822d5c03a0a6c9f66bf7b8ae5d",
     "scripts/p5-intake-conflict-browser.mjs": "24baa3da4aafb51b3201622667bee1ec2b6cd41e809dc51d02201c2251763d29",
     "scripts/p5-contact-first-browser.mjs": "92f3646a7736ddf0169e8d700134ae1f4789c6eb01f6d28394deebaa792564f2",
@@ -869,6 +869,18 @@
           "file": "scripts/p5-estimator-browser.mjs",
           "before": "45fe24afc99c453a05052dbde66336ca906103819cfa44da4b197dc7b06f467e",
           "after": "0f4206a44f72ae8236dd0d5146ee870e8d9c0be0ed0bf2f80b4b296bd840c43a"
+        }
+      ],
+      "note": "Only explicitly listed files synchronized; other files and provenance retained. Runtime scope is restricted to mobile-action and route-presentation compatibility."
+    },
+    {
+      "source": "p5-home-co",
+      "commit": "374af300fb644c28ff8c34cf2e30bc5299de6955",
+      "files": [
+        {
+          "file": "scripts/p5-intake-intent-browser.mjs",
+          "before": "0daa6f89b57d2d945076549cb4433059396be0708a86ebb8b31ce188ce485a21",
+          "after": "3c7b7f3b264d485e24b1cd8335eab06f2978ab0e573b9ab32b7fcda2a6fa6772"
         }
       ],
       "note": "Only explicitly listed files synchronized; other files and provenance retained. Runtime scope is restricted to mobile-action and route-presentation compatibility."

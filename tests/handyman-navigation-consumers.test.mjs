@@ -1,3 +1,4 @@
+import {readFileSync} from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -21,3 +22,5 @@ for(const file of ['p5-intake-intent-browser.mjs','p5-exit-browser.mjs']) test(`
  assert.equal((s.match(/page\.goto\(/g)||[]).length,1,'One reviewed entry setup per script');
 });
 
+
+ test("intent confirmation checks the exact brand-specific submit label",()=>{const source=readFileSync("scripts/p5-intake-intent-browser.mjs","utf8");assert.match(source,/intakeCopyForSite\(brand.id\).submit/);assert.match(source,/routing.handoff\?/);});

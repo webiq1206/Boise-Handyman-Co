@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {applyIntakeIntent} from '../lib/p5/intakeIntent.ts';
 import {ESTIMATOR_BRAND as brand} from '../lib/p5/brand.ts';
-import {routeIntake,intakeSite} from '../lib/p5/intakePolicy.ts';
+import {routeIntake,intakeSite,intakeCopyForSite} from '../lib/p5/intakePolicy.ts';
 const base=process.env.P5_TEST_BASE_URL||'http://127.0.0.1:5137';
 if(!['localhost','127.0.0.1'].includes(new URL(base).hostname))throw Error('Local synthetic browser test only');
 const browser=await (process.env.P5_TEST_BROWSER==='webkit'?webkit:chromium).launch(),results=[];
@@ -28,7 +28,7 @@ try{
   await page.getByRole('button',{name:'Continue to contact details',exact:true}).click();
   await page.getByLabel('Your name',{exact:true}).fill('Synthetic Routing Check');
   await page.getByLabel('Email',{exact:true}).fill('routing@example.invalid');
-  await page.getByRole('button',{name:routing.handoff?`Continue with ${routing.teamName}`:'Send project request',exact:true}).waitFor();
+  await page.getByRole('button',{name:routing.handoff?`Continue with ${routing.teamName}`:intakeCopyForSite(brand.id).submit,exact:true}).waitFor();
   assert.equal(blocked.filter(p=>/scope|intake|callback/.test(p)).length,0);
   await page.screenshot({path:`${output}/${service||'unknown'}-${process.env.P5_TEST_BROWSER||'chromium'}.png`});
   results.push({service,site:brand.id,cta:routing.handoff||'current-site',passed:true});await context.close();
