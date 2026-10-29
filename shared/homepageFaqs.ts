@@ -24,7 +24,7 @@ export const INITIAL_FAQ_COUNT = 9;
 export const HOMEPAGE_FAQS: HomepageFaq[] = [
   {
     q: "How is a Boise handyman visit priced?",
-    a: "You get one written price before work starts, usually within one business day of sending photos. Materials are billed at cost on their own line. There is a one-hour minimum per visit and no trip fee in Ada and Canyon County. Bundling several tasks into one visit is usually the best value. Work that needs a general contractor or a licensed trade is referred out honestly.",
+    a: "You get one written price before work starts, after we review your list and photos. Materials are billed at cost on their own line. There is a one-hour minimum per visit and no trip fee in Ada and Canyon County. Bundling several tasks into one visit is usually the best value. Work that needs a general contractor or a licensed trade is referred out honestly.",
   },
   {
     id: "handyman-cost",
@@ -33,7 +33,7 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "How soon can you come?",
-    a: "Share your requested dates with your repair list. We usually schedule within a few business days after the quote is approved; say if it is urgent and we will tell you the soonest honest slot. We are not an emergency service, so for active water leaks shut off the supply valve first, and for anything dangerous call the appropriate emergency line before calling us.",
+    a: "Share your requested dates with your repair list. We confirm availability after the quote is approved; say if it is urgent and we will tell you the soonest available slot. We are not an emergency service, so for active water leaks shut off the supply valve first, and for anything dangerous call the appropriate emergency line before calling us.",
   },
   {
     q: "What areas do you serve?",

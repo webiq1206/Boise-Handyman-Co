@@ -20,6 +20,7 @@ import { RE10_EVENTS, RE10_FUNNEL_ORDER } from "../shared/re10/analyticsEvents";
 import { EXTRACTABLE_KINDS, EXTRACTION_SCHEMA, EXTRACTION_REVIEW_REASONS } from "../shared/re10/extraction";
 import { classifyUpload, resolveMimeType, UPLOAD_ACCEPT, isStoredDocumentUrl } from "../shared/re10/uploads";
 import fs from "fs";
+import { RE10_PRICING_DISCLAIMER } from "../shared/content/re10Content";
 
 let checks = 0;
 let failures = 0;
@@ -115,7 +116,8 @@ for (const contact of CONTACTS) {
       `${label}: customer email is missing the quoted price`,
     );
     // A firm price is only firm if its terms travel with it.
-    check(/firm for the repairs listed/i.test(ct), `${label}: customer email is missing the firm-price terms`);
+    check(ct.includes(RE10_PRICING_DISCLAIMER), `${label}: customer email is missing the current reviewed pricing policy`);
+    check(/agreed in writing/i.test(ct), `${label}: customer email must preserve written scope agreement`);
     check(/held for \d+ days/i.test(ct), `${label}: customer email does not say how long the price is held`);
     // The internal band must never appear now that we quote one number - two
     // figures on the page is exactly the ambiguity this change removes.
@@ -123,7 +125,7 @@ for (const contact of CONTACTS) {
     check(!ct.includes("$" + est.high.toLocaleString("en-US")), `${label}: customer email leaks the internal band high`);
     check(ct.includes(contact.propertyAddress), `${label}: customer email is missing the property address`);
     check(
-      /priced separately once we see them/i.test(ct),
+      /Not included: needs an onsite look/i.test(ct) && /These are not in the price above/i.test(ct),
       `${label}: customer email does not say the onsite items are excluded`,
     );
     if (est.review.length > 0) {
@@ -257,13 +259,15 @@ for (const r of EXTRACTION_REVIEW_REASONS) {
  */
 for (const [url, ok] of [
   ["/api/documents/local/re10%2Fabc%2F0-RE-10.pdf", true],
-  ["/uploads/re10/x.pdf", true],
+  ["/uploads/re10/x.pdf", false],
   ["https://blob.example.com/re10/x.pdf", true],
   ["http://localhost:3000/api/documents/x.pdf", true],
   ["", false],
   ["javascript:alert(1)", false],
   ["//evil.example.com/x.pdf", false],
   ["not a url at all", false],
+  ["/api/documents/local/..%2Fsecret", false],
+  ["/api/documents/local/%2Fabsolute", false],
 ] as const) {
   check(
     isStoredDocumentUrl(url) === ok,

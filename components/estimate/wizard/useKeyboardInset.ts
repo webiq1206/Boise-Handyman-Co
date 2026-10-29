@@ -41,7 +41,7 @@ export function useKeyboardInset(): number {
     vv?.addEventListener("resize", readGap);
     vv?.addEventListener("scroll", readGap);
     window.addEventListener("resize", readGap);
-    // focusin: re-read after a field focuses — covers mocks installed after mount
+    // focusin: re-read after a field focuses - covers mocks installed after mount
     // and OS keyboards that update visualViewport slightly after focus.
     document.addEventListener("focusin", readGap);
     const interval = window.setInterval(readGap, 500);

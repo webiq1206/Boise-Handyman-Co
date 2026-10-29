@@ -142,7 +142,7 @@ export default function AboutPage() {
             </dl>
           </InteriorHero>
 
-        {/* Owner hard rule: full family photo stacked full-width — never side-crop or cover-crop people */}
+        {/* Owner hard rule: full family photo stacked full-width - never side-crop or cover-crop people */}
         <Section variant="greige" spacing="none" divider className="p-0">
           <div id="team" className="scroll-mt-24">
             <figure className="m-0 mx-auto w-full max-w-3xl bg-inverse px-0 sm:px-6 md:px-8">

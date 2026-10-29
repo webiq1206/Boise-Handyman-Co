@@ -17,7 +17,7 @@ import {
   type JobCategoryId,
 } from "@/shared/estimateEngine";
 
-/** Six featured categories — D2 choice-card budget, light homepage density (C14). */
+/** Six featured categories - D2 choice-card budget, light homepage density (C14). */
 const PROOF_CATEGORIES = [
   "drywall-repair",
   "painting-touch-ups",

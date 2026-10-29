@@ -345,7 +345,7 @@ export default function ContactPage() {
         <Section variant="canvas" spacing="none" divider className="p-0">
           <div className="grid md:grid-cols-2 overflow-hidden">
             <div className="bg-inverse order-2 md:order-1">
-              {/* People photo: contain / intrinsic — never cover-crop heads or bodies */}
+              {/* People photo: contain / intrinsic - never cover-crop heads or bodies */}
               <Image
                 src={SITE_IMAGES.leadership}
                 alt="A handyman and a homeowner reviewing a clipboard at a front door"

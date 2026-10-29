@@ -58,7 +58,7 @@ export default function HomePage() {
 
           1. Hero + services answer
           2. Approved home bands (services, why, how, areas, FAQ)
-          3. Planning-range interactive proof (C14) — ballpark before contact
+          3. Planning-range interactive proof (C14) - ballpark before contact
           4. Budget / inclusions
           5. Gallery
           6. Process + who you are hiring

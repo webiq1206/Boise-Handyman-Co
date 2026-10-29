@@ -120,7 +120,7 @@
     "lib/p5/intakeDeliveryPolicy.ts": "a992846e078a7926d515f6ab21bd8cc2a132cc237a4682ab532739cfde742cb8",
     "lib/p5/intakeDraft.ts": "7b02a7d8f3ee59c1d10c8203a09a4aa9f7059c29c7cda98b0e46355dde1b3bfd",
     "lib/p5/intakeEndpoint.ts": "778ac7dfa0de16d0613fa607d95628e45685bd16147c37bbec9c67df5a176453",
-    "lib/p5/intakePolicy.ts": "9462838165089ce20d302955da7b1e43a02b2a7affa8955fbc7e430dc4c4b283",
+    "lib/p5/intakePolicy.ts": "739f7ce282e99bc86337e291cfc35c316223351d8cc8adb7cb187032372cab94",
     "lib/p5/intakeProjectReview.ts": "702d1ccc6c2d4141d49d64b2eb5288ab258226029cdcaac1dfebb97c8ecccd1a",
     "lib/p5/intakeQuestionMemory.ts": "8e05a9fa67756ba83415575887fcf271ca8dc1c08852e75cf8bd8d5e485eaa1f",
     "lib/p5/intakeQuestions.ts": "e6fad84a86ab792221c1eaadcc03eeba627e06c0bf5b3c658040339c62c2b972",
@@ -265,7 +265,7 @@
     "scripts/p5-build-price-book.mjs": "714a76f8a9f29077d052304456aca38769fc9485022774856eae816b2e847450",
     "scripts/p5-cli-acceptance.mts": "ed5b8fc80231c03b3c2b54de486fb6db7f259947e855ecf4985a9caf6f4ea6b8",
     "scripts/p5-component-review.mjs": "7035921690a6dc0648b1c3142b054ad09d67535c706e108817369e9e6de6ab26",
-    "scripts/p5-estimator-browser.mjs": "45fe24afc99c453a05052dbde66336ca906103819cfa44da4b197dc7b06f467e",
+    "scripts/p5-estimator-browser.mjs": "0f4206a44f72ae8236dd0d5146ee870e8d9c0be0ed0bf2f80b4b296bd840c43a",
     "scripts/p5-host-build.mjs": "1d83b593096c24575847b9f290253c7d32e74dfaa640d22ac68b427307599b3f",
     "scripts/p5-hub-notification-check.mjs": "e2d4216777feeb2e4099b93986ca257e4760f671312a6b343014ef7677148f06",
     "scripts/p5-intake-browser-fixture.mts": "438c997dfdf18d8f11383059cdb93df31de0275f79dfb43af845c143a10f0872",
@@ -514,7 +514,7 @@
     "tests/p5-intake-pdf.test.ts": "cb331ce30787d6df4154885531aaa05c2dec4e29e51cea3315392636bb0d1758",
     "scripts/lib/navigationEntry.mjs": "6f9ae022bb7e6df5d86e848b1e2e0da2a402b59522cdb0c1ce3cda15a86a10b4",
     "tests/p5-navigation-entry.test.mjs": "c3074d9648326b9caf700ffa78089c4170512102b1efc1ee6e76535432baa8be",
-    "scripts/lib/navigationDiagnostics.mjs": "f594d62686447c3935d39857898152746eb7a78cab1945d35abd2c0794332cb7",
+    "scripts/lib/navigationDiagnostics.mjs": "1c42cf7c8bdc065709fe59b056ba37f3ad49867abcb73f21ce24dc5becf36aad",
     "tests/p5-navigation-diagnostics.test.mjs": "d13257aef933467f032783248d2c3e87708507f719505c0e1d5f893ba43b37da",
     "lib/p5/imageSignature.ts": "3bc13ad775f4906c6759c9b17680773f8639875b3a121a342547472ba8c9468a",
     "tests/p5-image-signature.test.ts": "074c4406271a79525c99afe1970acd0994e97d426c687ca7019c851798201b6f",
@@ -777,6 +777,23 @@
         }
       ],
       "note": "Only canonical diff hunks applied to the recorded brand baseline. Reviewed Cursor changes are reconciled explicitly; unrelated target-engine code is preserved."
+    },
+    {
+      "source": "p5-home-co",
+      "sourceBase": "9335dd918dfebbab84d5c9fd3d3e23d1c856428c",
+      "sourceHead": "8987237ec6e33bc81f3bbdbd82ec27558b1bef0d",
+      "targetBase": "fc591fdff871389be65eab88d4bcd506e9f3f6f9",
+      "targetCurrent": "fc591fdff871389be65eab88d4bcd506e9f3f6f9",
+      "files": [
+        {
+          "file": "lib/p5/intakePolicy.ts",
+          "before": "9462838165089ce20d302955da7b1e43a02b2a7affa8955fbc7e430dc4c4b283",
+          "reviewedCursor": "9462838165089ce20d302955da7b1e43a02b2a7affa8955fbc7e430dc4c4b283",
+          "after": "739f7ce282e99bc86337e291cfc35c316223351d8cc8adb7cb187032372cab94",
+          "patchSha256": "13c7c1f61cf078d837b156cc1008d3b38c416374df103b63551bde5fcf9e8c25"
+        }
+      ],
+      "note": "Only canonical diff hunks applied to the recorded brand baseline. Reviewed Cursor changes are reconciled explicitly; unrelated target-engine code is preserved."
     }
   ],
   "selectiveVerificationBatches": [
@@ -818,6 +835,23 @@
           "file": "tests/p5-navigation-entry.test.mjs",
           "before": "ed5e8ca0ad9efe4e68bd492a63efcf640c34e47ffa240c4fbc7fee912b1a3cef",
           "after": "c3074d9648326b9caf700ffa78089c4170512102b1efc1ee6e76535432baa8be"
+        }
+      ],
+      "note": "Only explicitly listed files synchronized; other files and provenance retained. Runtime scope is restricted to mobile-action and route-presentation compatibility."
+    },
+    {
+      "source": "p5-home-co",
+      "commit": "130a8852aeedfe518af115b9586c46bf1d142143",
+      "files": [
+        {
+          "file": "scripts/lib/navigationDiagnostics.mjs",
+          "before": "f594d62686447c3935d39857898152746eb7a78cab1945d35abd2c0794332cb7",
+          "after": "1c42cf7c8bdc065709fe59b056ba37f3ad49867abcb73f21ce24dc5becf36aad"
+        },
+        {
+          "file": "scripts/p5-estimator-browser.mjs",
+          "before": "45fe24afc99c453a05052dbde66336ca906103819cfa44da4b197dc7b06f467e",
+          "after": "0f4206a44f72ae8236dd0d5146ee870e8d9c0be0ed0bf2f80b4b296bd840c43a"
         }
       ],
       "note": "Only explicitly listed files synchronized; other files and provenance retained. Runtime scope is restricted to mobile-action and route-presentation compatibility."

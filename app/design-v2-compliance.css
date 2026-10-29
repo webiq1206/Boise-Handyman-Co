@@ -122,7 +122,7 @@
   border: 1px solid rgba(251, 250, 246, 0.55);
 }
 
-/* Phone: compact first screen — H1 + primary CTA in budget; complete hero at 360/390. */
+/* Phone: compact first screen - H1 + primary CTA in budget; complete hero at 360/390. */
 @media (max-width: 700px) {
   .approved-shell {
     --bottom-bar-h: calc(48px + 24px + env(safe-area-inset-bottom, 0px));
@@ -142,7 +142,7 @@
     background: #1c1f1e;
   }
 
-  /* People-safe: intrinsic 16:9 row — no max-height crop; heads stay complete. */
+  /* People-safe: intrinsic 16:9 row - no max-height crop; heads stay complete. */
   .approved-shell .family-site .f-hero > img,
   .approved-shell .family-handyman .f-hero > img {
     position: relative !important;
@@ -228,7 +228,7 @@
 }
 
 /* Very short phone (320×568 class): keep H1 + primary CTA only (C3).
-   Do not catch 360×640 — that tier requires a complete hero and C5 reassurance. */
+   Do not catch 360×640 - that tier requires a complete hero and C5 reassurance. */
 @media (max-width: 360px) and (max-height: 600px) {
   .approved-shell .family-site .f-hero-intro,
   .approved-shell .family-site .f-hero .estimator-promise {
@@ -296,7 +296,7 @@
   }
 }
 
-/* Short desktop (e.g. 1280×720): C3 sequence — trim support copy so the
+/* Short desktop (e.g. 1280×720): C3 sequence - trim support copy so the
    complete hero still fits under the sticky header. Keep C5 reassurance. */
 @media (min-width: 701px) and (max-height: 760px) {
   .approved-shell .family-handyman .f-hero-intro,
