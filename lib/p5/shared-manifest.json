@@ -120,7 +120,7 @@
     "lib/p5/intakeDeliveryPolicy.ts": "a992846e078a7926d515f6ab21bd8cc2a132cc237a4682ab532739cfde742cb8",
     "lib/p5/intakeDraft.ts": "7b02a7d8f3ee59c1d10c8203a09a4aa9f7059c29c7cda98b0e46355dde1b3bfd",
     "lib/p5/intakeEndpoint.ts": "778ac7dfa0de16d0613fa607d95628e45685bd16147c37bbec9c67df5a176453",
-    "lib/p5/intakePolicy.ts": "739f7ce282e99bc86337e291cfc35c316223351d8cc8adb7cb187032372cab94",
+    "lib/p5/intakePolicy.ts": "b6065a58e1125635ea6d77338308c086199276cb2679528e04653fa159c33898",
     "lib/p5/intakeProjectReview.ts": "702d1ccc6c2d4141d49d64b2eb5288ab258226029cdcaac1dfebb97c8ecccd1a",
     "lib/p5/intakeQuestionMemory.ts": "8e05a9fa67756ba83415575887fcf271ca8dc1c08852e75cf8bd8d5e485eaa1f",
     "lib/p5/intakeQuestions.ts": "e6fad84a86ab792221c1eaadcc03eeba627e06c0bf5b3c658040339c62c2b972",
@@ -791,6 +791,23 @@
           "reviewedCursor": "9462838165089ce20d302955da7b1e43a02b2a7affa8955fbc7e430dc4c4b283",
           "after": "739f7ce282e99bc86337e291cfc35c316223351d8cc8adb7cb187032372cab94",
           "patchSha256": "13c7c1f61cf078d837b156cc1008d3b38c416374df103b63551bde5fcf9e8c25"
+        }
+      ],
+      "note": "Only canonical diff hunks applied to the recorded brand baseline. Reviewed Cursor changes are reconciled explicitly; unrelated target-engine code is preserved."
+    },
+    {
+      "source": "p5-home-co",
+      "sourceBase": "dfeacdef8f7b1c6b73226ce8932c6016da69e403",
+      "sourceHead": "9ae8f77d8770e068907ee4ff8dd206a42ccdcac5",
+      "targetBase": "50e2400f98383fcc7fde8d2aed4b15fbb5ba8f2e",
+      "targetCurrent": "50e2400f98383fcc7fde8d2aed4b15fbb5ba8f2e",
+      "files": [
+        {
+          "file": "lib/p5/intakePolicy.ts",
+          "before": "739f7ce282e99bc86337e291cfc35c316223351d8cc8adb7cb187032372cab94",
+          "reviewedCursor": "739f7ce282e99bc86337e291cfc35c316223351d8cc8adb7cb187032372cab94",
+          "after": "b6065a58e1125635ea6d77338308c086199276cb2679528e04653fa159c33898",
+          "patchSha256": "b3719c742a88f64157625d592aaacdf4a4d9487b5a9f9466c4faadc48222a7b0"
         }
       ],
       "note": "Only canonical diff hunks applied to the recorded brand baseline. Reviewed Cursor changes are reconciled explicitly; unrelated target-engine code is preserved."

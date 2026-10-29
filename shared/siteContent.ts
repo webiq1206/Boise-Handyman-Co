@@ -17,18 +17,18 @@ export const HERO_EYEBROW = "Boise Handyman · Treasure Valley";
 // do, where, and how pricing works, in one readable sentence pair. D4: lead
 // with the written-quote promise; do not explain hourly pricing without a rate.
 export const HERO_SUBHEAD =
-  "Boise Handyman Co handles small repairs, installs, and maintenance for homes in Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley. One upfront written quote before any work starts, and most jobs finished in a single visit.";
+  "Boise Handyman Co handles small repairs, installs, and maintenance for homes in Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley. One upfront written quote before any work starts, with the visit plan agreed after we review the tasks.";
 
 export const HERO_STATS = [
   { num: "before work starts", label: "Written quote" },
   { num: "one hour", label: "Minimum" },
-  { num: "within one business day", label: "Reply" },
+  { num: "after scope review", label: "Visit plan" },
 ] as const;
 
 export const DIFFERENTIATORS_HEADLINE = "Built for people whose small jobs keep getting ignored";
 
 export const DIFFERENTIATORS_INTRO =
-  "Most people we meet have the same story: contractors who never called back because the job was too small, a vague quote that grew once the work started, or a fix that needed a second and third visit. We built our process around the opposite. Small jobs taken seriously, an upfront quote before any work starts, and one person who shows up with the right materials to finish in a single trip.";
+  "Most people we meet have the same story: contractors who never called back because the job was too small, a vague quote that grew once the work started, or a fix that needed a second and third visit. We built our process around the opposite. Small jobs taken seriously, an upfront quote before any work starts, and a visit plan based on the work and materials needed.";
 
 export interface Differentiator {
   title: string;
@@ -53,7 +53,7 @@ export const DIFFERENTIATORS: Differentiator[] = [
   {
     title: "One trip whenever the job allows it",
     contrast: "Instead of a look-around visit, a parts visit, and a someday follow-up,",
-    body: "we ask the right questions and request photos up front, so we arrive with the materials and hardware the job actually needs. Most repairs and installs are finished the first time we visit.",
+    body: "we ask the right questions and request photos up front, so we arrive with the materials and hardware the job actually needs. The scope, materials and drying times determine whether follow-up visits are needed.",
   },
   {
     title: "One person accountable for the fix",
@@ -111,7 +111,7 @@ export const TRUST_ITEMS = [
   "Locally Owned",
   "Upfront Quotes",
   "No trip fee in Ada and Canyon County",
-  "One-Trip Fixes",
+  "Agreed Visit Plan",
   "Tidy Job Sites",
   "Idaho Registered Contractor #8381215",
 ];
@@ -123,7 +123,7 @@ export const HOW_P5_WORKS = [
   "Manufacturer warranties passed through on parts we supply",
   "Arrival time agreed and confirmed before we head out",
   "Written quote before work starts",
-  "Quotes from photos, usually within one business day",
+  "Photos help us review the scope before quoting",
 ] as const;
 
 export const PROMISE_ITEMS = [
@@ -207,7 +207,7 @@ export const HOW_WE_BUILD_STEPS = [
   {
     number: "04",
     title: "One-trip fix",
-    desc: "We show up with the parts the job needs and work through your list. Most repairs and installs are finished in a single visit.",
+    desc: "We show up with the parts the job needs and work through your list. The task list, materials and drying times determine the visits needed.",
   },
   {
     number: "05",
@@ -261,7 +261,7 @@ export const OPTIONAL_ENHANCEMENTS = {
 export const BUDGET_GUIDANCE_POINTS = [
   {
     title: "One written price before work starts",
-    body: "Send your list and photos. We reply with a written quote, usually within one business day. You approve that price before anyone opens a toolbox.",
+    body: "Send your list and photos. We review the scope before preparing a written quote. You approve that price before anyone opens a toolbox.",
   },
   {
     title: "Materials at cost, no trip fee",

@@ -64,7 +64,7 @@ const CONTACT_FAQS = [
   {
     question: 'How do I get a cost estimate for my job?',
     answer:
-      'Send photos and your task list. We reply with a written quote, usually within one business day. Nothing is scheduled until you approve.',
+      'Send photos and your task list. We review the scope before preparing a written quote. Nothing is scheduled until you approve.',
   },
 ];
 

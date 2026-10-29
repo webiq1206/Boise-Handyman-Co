@@ -326,7 +326,7 @@ export default function AboutPage() {
               </h2>
               <div>
               <p className="ed-body">
-                Send your tasks with photos and get an upfront quote within one business day. No
+                Send your tasks with photos for review and a written quote. No
                 pressure, no obligation.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto sm:justify-center">

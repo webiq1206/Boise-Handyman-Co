@@ -55,6 +55,6 @@ test('contact hero quote request points at the contact form, ahead of the visit 
   assert.match(stats, /label: "Written quote"/);
   assert.match(stats, /num: "before work starts"/);
   assert.doesNotMatch(stats, /Instant online estimate|60 sec|Planning range after photos/);
-  assert.match(source, /Send photos and your task list\. We reply with a written quote, usually within one business day\. Nothing is scheduled until you approve\./);
+  assert.match(source, /Send photos and your task list\. We review the scope before preparing a written quote\. Nothing is scheduled until you approve\./);
   assert.match(source, /Send your task list with photos, or call or text our team\. You get one written price before work starts\./);
 });

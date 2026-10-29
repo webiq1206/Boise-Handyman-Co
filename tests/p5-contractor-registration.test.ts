@@ -68,7 +68,7 @@ test('What you can count on lists six selling points without Nick', () => {
     'Manufacturer warranties passed through on parts we supply',
     'Arrival time agreed and confirmed before we head out',
     'Written quote before work starts',
-    'Quotes from photos, usually within one business day',
+    'Photos help us review the scope before quoting',
   ]);
   assert.equal(HOW_P5_WORKS.some((line) => line.includes('Public representative')), false);
   assert.equal(HOW_P5_WORKS.some((line) => line.includes('Workmanship made right')), false);
