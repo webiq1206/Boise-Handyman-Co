@@ -205,10 +205,11 @@ export default function ContactPage() {
             <p data-speakable="summary" className="sr-only">
               {SPEAKABLE_SUMMARY}
             </p>
-            <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>Get in touch</p>
-            <h1 className="ed-display ed-statement-display text-inverse-foreground mb-8">
-              Contact Boise Handyman{' '}
-              <em className="brc-accent">Co</em>
+            <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>Boise Handyman Co</p>
+            <h1 className="ed-display ed-statement-display text-inverse-foreground mb-8 tracking-[-0.02em]">
+              Send your list.
+              <br />
+              <em className="brc-accent">Get a written quote.</em>
             </h1>
             <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-6">
               Send your task list with photos for an upfront quote, or call or text our team to

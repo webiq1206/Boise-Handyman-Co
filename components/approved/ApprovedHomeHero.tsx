@@ -35,16 +35,16 @@ export function ApprovedHomeHero() {
         />
         <div className="f-hero-shade" />
         <div className="f-hero-copy">
+          <p className="f-brand-mark">Boise Handyman Co</p>
           <p className="f-eyebrow">{b.kicker}</p>
           <h1>
-            Boise handyman.
+            Your list,
             <br />
-            <em>Your list, handled.</em>
+            <em>handled.</em>
           </h1>
           <p className="f-hero-summary" data-speakable="summary">{handymanServiceSentence()}</p>
           <p className="f-hero-intro">{b.intro}</p>
           <div className="f-actions">
-            {/* Primary conversion. Call stays secondary (header / bottom bar) so the first screen stays C3-budget-safe. */}
             <a className="f-button" href="/contact" data-cta="primary" data-testid="button-hero-primary">
               {b.action}
               <ArrowUpRight size={18} aria-hidden="true" />

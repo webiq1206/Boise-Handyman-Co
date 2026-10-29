@@ -28,6 +28,7 @@ import './approved-interiors.css'
 import './audit-accessibility.css'
 import './design-refresh.css'
 import './design-v2-compliance.css'
+import './premium-handyman.css'
 
 // P5 family typefaces, self-hosted from the same two OFL variable files P5 Home Co serves.
 const manrope = localFont({

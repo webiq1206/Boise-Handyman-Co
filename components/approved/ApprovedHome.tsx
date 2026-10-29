@@ -18,7 +18,17 @@ return <>
  <section className="f-section f-container" id="services"><div className="f-section-top"><div><p className="f-eyebrow">FIND YOUR STARTING POINT</p><h2><Title lines={b.serviceTitle}/></h2></div><p>{b.serviceIntro}</p></div><Tabs defaultValue={tabs[0].slug} className="f-explorer"><TabsList className="f-tabs">{tabs.map(s=><TabsTrigger value={s.slug} key={s.slug}>{s.name}</TabsTrigger>)}</TabsList>{tabs.map((s,i)=><TabsContent key={s.slug} value={s.slug}><div className="f-scene"><a className="f-scene-image" href={s.live || `/services/${s.slug}`} aria-label={`Explore ${s.name.toLowerCase()}`}><img src={s.image} alt={s.name} loading="lazy" width="1000" height="750"/></a><div className="f-scene-copy"><p className="f-eyebrow"><span aria-hidden="true" style={{letterSpacing:0}}>{String(i+1).padStart(2,"0")}</span>{" / "}{b.name.replace("Boise ","")}</p><h3>{s.name}</h3><p>{s.summary}</p><ul>{s.includes.slice(0,2).map(t=><li key={t}>{t}</li>)}</ul><a className="f-link" href={s.live || `/services/${s.slug}`}>Explore this service <Arrow/></a></div></div></TabsContent>)}</Tabs><p className="f-section-top" style={{marginTop:'1.5rem'}}><strong>For agents:</strong> RE-10 and inspection repair lists have their own page with document upload. <a className="f-link" href="/re-10-repairs-boise">Send the list and photos <Arrow/></a></p><a className="f-link f-browse-all" href={`${home}/services`}>View all services <Arrow/></a></section>
 
  <section className="f-value"><img src={b.valueImage} alt={b.id==='handyman'?'Finish carpentry and trim work':b.id==='construction'?'Coordinated framing and mechanical rough-in':b.id==='adu'?'A home and its surrounding property':'Materials and careful preparation for remodeling'} loading="lazy" width="1200" height="900"/><div><p className="f-eyebrow">{b.id==='adu'?'A SOUND STARTING POINT':'WHERE YOUR MONEY GOES'}</p><h2><Title lines={b.valueTitle}/></h2><p>{b.value}</p><a className="f-link" href={primary}>{b.action}<Arrow/></a></div></section>
- {approachBlock}{processBlock}
+ {approachBlock}
+ <section className="f-section f-container f-image-pair" aria-label="On the job photography">
+  <img src="/images/handyman/service-drywall-repair.webp" alt="Drywall repair finish ready for texture and paint" loading="lazy" width="1200" height="900"/>
+  <div>
+   <img src="/images/handyman/service-mounting.webp" alt="Mounting and assembly work in a Treasure Valley home" loading="lazy" width="1000" height="750"/>
+   <p className="f-eyebrow">ON THE JOB</p>
+   <h3>Everyday repairs.<br/><em>Finished with care.</em></h3>
+   <p style={{marginTop:'18px',color:'#62605a',maxWidth:'42ch'}}>From drywall patches to mounting and punch-list fixes, the work is planned around your list and left tidy.</p>
+  </div>
+ </section>
+ {processBlock}
  <section className="f-area f-section f-container"><p className="f-eyebrow">AT HOME IN IDAHO</p><h2>Local people.<br/><em>Valley-wide reach.</em></h2><p>Serving homeowners throughout the Treasure Valley.</p><div>{cities.map(city=><a key={city} href={b.id==='adu'?`${home}/contact`:`/areas/${city.toLowerCase().replaceAll(" ","-")}`}>{city}<Arrow/></a>)}</div></section>
  <FAQSection/>
  </>;}

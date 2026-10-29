@@ -7,6 +7,7 @@ import { Section } from "@/components/marketing/Section";
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { BudgetInclusionsSection } from "@/components/sections/BudgetInclusionsSection";
+import { HandymanPhotoBand } from "@/components/sections/HandymanPhotoBand";
 import { HandymanPlanningRange } from "@/components/sections/HandymanPlanningRange";
 import { HowP5Works } from "@/components/sections/HowP5Works";
 import { WhoYouAreHiring } from "@/components/sections/WhoYouAreHiring";
@@ -72,16 +73,31 @@ export default function HomePage() {
         <HandymanServicesAnswer />
         <ApprovedHome />
       </ApprovedFamilyFrame>
+      <HandymanPhotoBand
+        src={SITE_IMAGES.valueCraft}
+        alt="Finish carpentry and trim work on a Treasure Valley home"
+        title="Clean lines. Careful hands."
+        eyebrow="Carpentry and trim"
+      />
       <HandymanPlanningRange />
       <BudgetInclusionsSection />
+      <HandymanPhotoBand
+        src={SITE_IMAGES.statementBand}
+        alt="Fresh interior paint with crisp cut-in lines on trim"
+        title="Small jobs, finished well."
+        eyebrow="Painting and touch-ups"
+      />
       <ProjectGallerySection limit={6} showViewAll />
       <HowP5Works />
       <WhoYouAreHiring />
+      <HandymanPhotoBand
+        src={SITE_IMAGES.process}
+        alt="Written quote materials ready for a handyman visit"
+        title="One written price before work."
+        eyebrow="How we quote"
+      />
       <div id="contact" className="scroll-mt-24" aria-hidden="true" />
-      <Section id="consult" divider className="relative overflow-hidden scroll-mt-16 pb-28 md:pb-28">
-        {/* Warm, dimmed lifestyle photo grounds the closing section. Directional
-            scrims keep the left-column copy legible and fade the edges into the
-            page ground; the form card floats above on its own shadow. */}
+      <Section id="consult" divider className="relative overflow-hidden scroll-mt-16 pb-24 md:pb-28">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <Image
             src={SITE_IMAGES.consultBg}
@@ -89,18 +105,13 @@ export default function HomePage() {
             fill
             loading="lazy"
             sizes="100vw"
-            className="object-cover opacity-[0.52] img-brand-grade"
+            className="object-cover opacity-[0.45] img-brand-grade"
           />
-          {/* Directional scrims: solid behind the left-column copy, opening up
-              toward the right where the form card carries its own surface. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/[0.68] to-background/[0.32]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-transparent to-background" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/[0.78] to-background/[0.4]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-transparent to-background" />
         </div>
-        {/* The ask. Full measure, heading at h2 scale, the form kept in its
-            card because a form needs a defined field to sit in - this is one of
-            the places a card is actually the right answer. */}
         <div className="ed-shell relative z-10">
-          <div className="grid gap-[var(--ed-gutter)] lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="grid gap-[var(--ed-gutter)] lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
             <div className="lg:sticky lg:top-28">
               <Reveal>
                 <p className="ed-eyebrow">Begin a conversation</p>

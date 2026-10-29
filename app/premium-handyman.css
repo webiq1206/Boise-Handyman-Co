@@ -1,0 +1,421 @@
+/**
+ * Premium Handyman redesign layer.
+ * Loaded after design-v2-compliance so visual judgment wins over checklist clamps.
+ * Keeps coral accent, paper/charcoal shell, complete-head photography rules.
+ */
+
+.approved-shell.family-premium,
+.approved-shell {
+  --hm-coral: #c56b4a;
+  --hm-coral-ink: #92472c;
+  --hm-coral-on-dark: #e48f6d;
+  --hm-paper: #fbfaf6;
+  --hm-bone: #f1ede4;
+  --hm-ink: #2c302f;
+  --hm-deep: #1c1f1e;
+}
+
+/* Soften smashed tracking on large Cormorant; keep editorial, not crushed. */
+.approved-shell .family-site :is(h1, h2, h3),
+.approved-shell .family-site .f-hero h1,
+.approved-shell .family-handyman .f-hero h1,
+.approved-shell .ed-h2,
+.approved-shell .ed-h3,
+.approved-shell .ed-display {
+  letter-spacing: -0.02em !important;
+}
+
+.approved-shell .family-site .f-eyebrow,
+.approved-shell .ed-eyebrow {
+  letter-spacing: 0.14em !important;
+}
+
+/* Large expressive display hierarchy (premium bar). */
+.approved-shell .family-site h1,
+.approved-shell .family-site .f-hero h1,
+.approved-shell .family-handyman .f-hero h1 {
+  font-size: clamp(48px, 7vw, 92px) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.022em !important;
+}
+
+.approved-shell .family-site h2 {
+  font-size: clamp(36px, 4.8vw, 68px) !important;
+  line-height: 1.02 !important;
+}
+
+.approved-shell .ed-h2 {
+  font-size: clamp(2.35rem, 5vw, 4.25rem) !important;
+  line-height: 1.02 !important;
+}
+
+/* ─── Full-bleed atmosphere hero (brand-first) ─── */
+.approved-shell .family-handyman .f-hero {
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+  align-items: stretch !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  background: var(--hm-deep) !important;
+  overflow: hidden;
+}
+
+.approved-shell .family-handyman .f-hero > img {
+  position: relative !important;
+  inset: auto !important;
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  height: 100% !important;
+  min-height: 640px !important;
+  max-height: none !important;
+  /* Contain keeps the worker's head complete; deep fill hides letterbox edges. */
+  object-fit: contain !important;
+  object-position: center center !important;
+  background: var(--hm-deep);
+  z-index: 0;
+}
+
+.approved-shell .family-handyman .f-hero-shade {
+  display: none !important;
+}
+
+.approved-shell .family-handyman .f-hero-copy {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: clamp(40px, 6vw, 88px) clamp(28px, 5vw, 72px) !important;
+  background: linear-gradient(
+    135deg,
+    #1c1f1e 0%,
+    #242826 55%,
+    color-mix(in srgb, #c56b4a 18%, #1c1f1e) 100%
+  );
+  color: var(--hm-paper);
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.approved-shell .family-handyman .f-hero .f-brand-mark {
+  display: block;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 300;
+  font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+  letter-spacing: -0.01em;
+  color: var(--hm-coral-on-dark);
+  margin-bottom: 18px;
+}
+
+.approved-shell .family-handyman .f-hero .f-eyebrow {
+  margin-bottom: 14px !important;
+  color: color-mix(in srgb, var(--hm-paper) 72%, transparent);
+}
+
+.approved-shell .family-handyman .f-hero h1 {
+  margin-bottom: 20px !important;
+  max-width: 11ch;
+}
+
+.approved-shell .family-handyman .f-hero h1 em {
+  color: var(--hm-coral-on-dark) !important;
+}
+
+.approved-shell .family-handyman .f-hero-intro {
+  display: block !important;
+  font-size: clamp(16px, 1.35vw, 18px) !important;
+  line-height: 1.65 !important;
+  max-width: 38ch !important;
+  color: #eceae3 !important;
+}
+
+.approved-shell .family-handyman .f-hero .f-actions {
+  margin-top: 28px !important;
+  gap: 14px !important;
+  flex-wrap: wrap;
+}
+
+.approved-shell .family-handyman .f-hero .f-button {
+  min-height: 52px;
+  background: var(--hm-coral);
+  color: var(--hm-paper);
+  border: 1px solid transparent;
+}
+
+.approved-shell .family-handyman .f-hero .f-button:hover {
+  background: color-mix(in srgb, var(--hm-coral) 88%, #000);
+}
+
+.approved-shell .family-handyman .f-hero .f-button-secondary {
+  display: inline-flex !important;
+  background: transparent !important;
+  color: var(--hm-paper) !important;
+  border: 1px solid rgba(251, 250, 246, 0.45) !important;
+}
+
+.approved-shell .family-handyman .f-hero .f-link {
+  display: inline-flex !important;
+  color: color-mix(in srgb, var(--hm-paper) 85%, transparent);
+}
+
+.approved-shell .family-handyman .f-hero .estimator-promise {
+  display: block !important;
+  margin-top: 18px;
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 36ch;
+  opacity: 0.88;
+}
+
+/* Proof strip denser + coral numerals */
+.approved-shell .family-handyman .f-proof {
+  background: var(--hm-paper);
+  border-bottom: 1px solid #2c302f26;
+}
+
+.approved-shell .family-handyman .f-proof span {
+  color: var(--hm-coral) !important;
+  font-size: clamp(28px, 3vw, 36px) !important;
+}
+
+/* Service scenes: taller photography */
+.approved-shell .family-handyman .f-scene {
+  min-height: 560px;
+}
+
+.approved-shell .family-handyman .f-scene-image {
+  min-height: 560px;
+}
+
+.approved-shell .family-handyman .f-value > img {
+  min-height: 680px;
+  object-fit: cover;
+}
+
+/* Photo bands between marketing blocks */
+.hm-photo-band {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(280px, 42vw, 520px);
+  overflow: hidden;
+  background: var(--hm-deep);
+}
+
+.hm-photo-band img {
+  width: 100%;
+  height: 100%;
+  min-height: clamp(280px, 42vw, 520px);
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hm-photo-band::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--hm-deep) 55%, transparent),
+    transparent 45%,
+    color-mix(in srgb, var(--hm-deep) 35%, transparent)
+  );
+  pointer-events: none;
+}
+
+.hm-photo-band-caption {
+  position: absolute;
+  left: clamp(20px, 6vw, 72px);
+  bottom: clamp(20px, 4vw, 40px);
+  z-index: 1;
+  color: var(--hm-paper);
+  max-width: 36ch;
+}
+
+.hm-photo-band-caption p {
+  margin: 0;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.hm-photo-band-caption span {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Motion: intentional reveal on photo bands + hero CTA */
+@media (prefers-reduced-motion: no-preference) {
+  .hm-photo-band img {
+    animation: hm-kenburns 18s ease-in-out infinite alternate;
+  }
+
+  .approved-shell .family-handyman .f-hero-copy {
+    animation: hm-fade-up 0.7s cubic-bezier(0.2, 0.65, 0.2, 1) both;
+  }
+
+  .approved-shell .family-handyman .f-hero > img {
+    animation: hm-fade-in 1s ease both;
+  }
+}
+
+@keyframes hm-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes hm-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hm-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-photo-band img,
+  .approved-shell .family-handyman .f-hero-copy,
+  .approved-shell .family-handyman .f-hero > img {
+    animation: none !important;
+  }
+}
+
+/* Who you are hiring: denser premium family block */
+.hm-who-hiring {
+  background:
+    radial-gradient(90% 70% at 100% 0%, color-mix(in srgb, var(--hm-coral) 10%, transparent), transparent 55%),
+    var(--hm-paper);
+}
+
+.hm-who-hiring figure {
+  background: var(--hm-bone);
+  padding: clamp(12px, 2vw, 20px);
+}
+
+.hm-who-hiring img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center top;
+}
+
+/* Consult section: denser, no dock chrome */
+#consult [data-consult-layout="single-page"] {
+  min-height: 0;
+}
+
+#consult [data-wizard-action-bar],
+#consult [data-wizard-action-bar-spacer] {
+  display: none !important;
+}
+
+/* Phone: stacked hero still premium, brand-first */
+@media (max-width: 700px) {
+  .approved-shell .family-handyman .f-hero {
+    grid-template-columns: minmax(0, 1fr) !important;
+    min-height: 0 !important;
+  }
+
+  .approved-shell .family-handyman .f-hero > img {
+    grid-column: 1;
+    grid-row: 1;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: 4 / 3;
+    object-fit: contain !important;
+    object-position: center top !important;
+  }
+
+  .approved-shell .family-handyman .f-hero-copy {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 28px var(--gutter, 20px) 32px !important;
+    width: 100% !important;
+  }
+
+  .approved-shell .family-handyman .f-hero h1 {
+    font-size: clamp(40px, 11vw, 56px) !important;
+    max-width: none;
+    margin-bottom: 14px !important;
+  }
+
+  .approved-shell .family-handyman .f-hero-intro {
+    display: block !important;
+    font-size: 16px !important;
+    max-width: 34ch !important;
+  }
+
+  .approved-shell .family-handyman .f-hero .f-button-secondary,
+  .approved-shell .family-handyman .f-hero .f-link {
+    display: none !important;
+  }
+
+  .approved-shell .family-handyman .f-hero .f-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .approved-shell .family-handyman .f-hero .f-button {
+    width: 100%;
+    min-height: 52px;
+  }
+
+  .approved-shell .family-handyman .f-scene,
+  .approved-shell .family-handyman .f-scene-image {
+    min-height: 0;
+  }
+
+  .approved-shell .family-handyman .f-scene-image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .approved-shell .family-handyman .f-value > img {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .hm-photo-band,
+  .hm-photo-band img {
+    min-height: 240px;
+  }
+}
+
+@media (min-width: 701px) and (max-height: 760px) {
+  .approved-shell .family-handyman .f-hero {
+    min-height: 0 !important;
+  }
+  .approved-shell .family-handyman .f-hero > img {
+    min-height: 520px !important;
+  }
+  .approved-shell .family-handyman .f-hero-intro {
+    display: block !important;
+  }
+}

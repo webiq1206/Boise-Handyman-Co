@@ -3,7 +3,7 @@
 import { EstimatorRecovery } from "@/components/estimate/recovery/EstimatorRecovery";
 import { markEstimatorCompleted } from "@/lib/estimatorSession";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,6 +11,7 @@ import { z } from "zod";
 import { useMutation } from "@tanstack/react-query";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -21,7 +22,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
-import { Check, Plus, X, ChevronDown } from "lucide-react";
+import { Check, Plus, X, ChevronDown, Loader2 } from "lucide-react";
 import type { StoredEstimate } from "@/shared/estimateEngine";
 import { formatPlanningCurrency } from "@/shared/estimateEngine";
 import { DisplayNum } from "@/components/marketing";
@@ -40,13 +41,7 @@ import {
   buildCleanAddress,
   extractZip,
 } from "@/shared/addressValidation";
-import {
-  SelectableCard,
-  WizardActionBar,
-  WizardProgress,
-  WizardStep,
-} from "@/components/estimate/wizard";
-import { useKeyboardInset } from "@/components/estimate/wizard/useKeyboardInset";
+import { SelectableCard } from "@/components/estimate/wizard";
 
 /**
  * Legacy sentinel from the home-builder era ("still looking for land"). No
@@ -116,8 +111,8 @@ const formSchema = z
 type FormData = z.infer<typeof formSchema>;
 
 /**
- * D2 / C10: at most six choice cards. Remaining job types route through
- * "A list or something else" so the step stays one decision and no-scroll.
+ * At most six choice cards. Remaining job types route through
+ * "A list or something else" so the first decision stays clear.
  */
 const JOB_CHOICES = [
   { value: "drywall-repair", label: "Drywall repair", sub: "Holes, cracks, texture" },
@@ -135,22 +130,6 @@ const PROJECT_LABEL_LOOKUP: Record<string, string> = {
   "home-maintenance": "Caulking & maintenance",
   other: "Other / not sure yet",
 };
-
-/**
- * C10 fit sequence #1 (split): text steps carry at most one keyboard field so
- * the step + fixed Back/Next fit in vh − header − bar − keyboard at 320+.
- * Choice-only steps (job, prefer) do not open the keyboard.
- */
-const WIZARD_STEPS = [
-  { id: "job", label: "Job" },
-  { id: "about", label: "About you" },
-  { id: "prefer", label: "Reach by" },
-  { id: "reach", label: "Contact" },
-  { id: "address", label: "Address" },
-  { id: "review", label: "Review" },
-] as const;
-
-type WizardStepId = (typeof WIZARD_STEPS)[number]["id"];
 
 const labelClass = "text-xs tracking-wide font-normal uppercase text-muted-foreground";
 
@@ -170,19 +149,19 @@ interface ConsultationFormProps {
   initialProjectType?: "drywall-repair" | "home-maintenance";
 }
 
-function readDraft(): Partial<FormData> & { step?: WizardStepId } {
+function readDraft(): Partial<FormData> {
   try {
     const raw = sessionStorage.getItem(DRAFT_KEY);
     if (!raw) return {};
-    return JSON.parse(raw) as Partial<FormData> & { step?: WizardStepId };
+    return JSON.parse(raw) as Partial<FormData>;
   } catch {
     return {};
   }
 }
 
-function writeDraft(data: Partial<FormData> & { step: WizardStepId }) {
+function writeDraft(data: Partial<FormData>) {
   try {
-    sessionStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+    sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ ...data, step: "form" }));
   } catch {
     /* draft is best-effort */
   }
@@ -196,6 +175,13 @@ function clearDraft() {
   }
 }
 
+/**
+ * Premium single-page send-list form.
+ *
+ * Replaces the empty one-field wizard steps and the viewport-fixed CONTINUE
+ * dock that leaked onto marketing pages. Same CRM payload, draft persistence,
+ * and planning-range attachment as before.
+ */
 export function ConsultationForm({
   onRevise,
   showTrust = false,
@@ -210,8 +196,7 @@ export function ConsultationForm({
   const [addressInput, setAddressInput] = useState("");
   const [showNote, setShowNote] = useState(false);
   const [showAddrInfo, setShowAddrInfo] = useState(false);
-  const [stepIndex, setStepIndex] = useState(0);
-  const [stepError, setStepError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null);
   const lastKeyRef = useRef<string | null>(null);
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
   const draftHydrated = useRef(false);
@@ -233,35 +218,7 @@ export function ConsultationForm({
   const preferredContact = form.watch("preferredContact");
   const searchingForLand = form.watch("projectType") === LAND_SEARCH_PROJECT_TYPE;
   const watched = form.watch();
-  const keyboardInset = useKeyboardInset();
 
-  // C10: keep the focused text field above the fixed Back/Next dock while the
-  // software keyboard (or a visualViewport mock) covers the bottom of the screen.
-  const keepFieldAboveDock = useCallback(() => {
-    const active = document.activeElement;
-    if (!(active instanceof HTMLElement)) return;
-    if (!/^(INPUT|TEXTAREA)$/.test(active.tagName)) return;
-    if (!active.closest("[data-testid='consultation-wizard']")) return;
-    const bar = document.querySelector<HTMLElement>(
-      "[data-testid='consult-wizard-actions']",
-    );
-    const vv = window.visualViewport;
-    const usableBottom = vv ? vv.height + vv.offsetTop : window.innerHeight;
-    const barH = bar?.getBoundingClientRect().height ?? 112;
-    const limit = usableBottom - barH - 12;
-    const rect = active.getBoundingClientRect();
-    if (rect.bottom > limit) {
-      window.scrollBy({ top: rect.bottom - limit, behavior: "auto" });
-    } else if (rect.top < 72) {
-      window.scrollBy({ top: rect.top - 72, behavior: "auto" });
-    }
-  }, []);
-
-  useEffect(() => {
-    keepFieldAboveDock();
-  }, [keyboardInset, stepIndex, keepFieldAboveDock]);
-
-  // D2: persist draft across refresh / browser Back within the consult flow.
   useEffect(() => {
     if (draftHydrated.current) return;
     draftHydrated.current = true;
@@ -283,15 +240,10 @@ export function ConsultationForm({
       form.setValue("message", draft.message, { shouldValidate: false });
       setShowNote(true);
     }
-    if (draft.step) {
-      const idx = WIZARD_STEPS.findIndex((s) => s.id === draft.step);
-      if (idx >= 0) setStepIndex(idx);
-    }
   }, [form, initialProjectType]);
 
   useEffect(() => {
     if (success) return;
-    const step = WIZARD_STEPS[stepIndex]?.id ?? "job";
     writeDraft({
       projectType: watched.projectType,
       name: watched.name,
@@ -300,9 +252,8 @@ export function ConsultationForm({
       email: watched.email,
       address: watched.address,
       message: watched.message,
-      step,
     });
-  }, [watched, stepIndex, success]);
+  }, [watched, success]);
 
   function handleProfileResolved(profile: PropertyProfile | null) {
     setPropertyProfile(profile);
@@ -469,83 +420,10 @@ export function ConsultationForm({
     trackEvent("form_start", { form: "consultation" });
   }
 
-  const goBack = useCallback(() => {
-    setStepError(null);
-    setStepIndex((i) => Math.max(0, i - 1));
-  }, []);
-
-  async function validateStep(index: number): Promise<boolean> {
-    setStepError(null);
-    const id = WIZARD_STEPS[index]?.id;
-    if (id === "job") {
-      const ok = await form.trigger("projectType");
-      if (!ok || !form.getValues("projectType")) {
-        setStepError("Please choose what needs doing.");
-        return false;
-      }
-      return true;
-    }
-    if (id === "about") {
-      const ok = await form.trigger("name");
-      if (!ok) {
-        setStepError("Please enter your name.");
-        return false;
-      }
-      return true;
-    }
-    if (id === "prefer") {
-      const ok = await form.trigger("preferredContact");
-      if (!ok) {
-        setStepError("Please choose how we should reach you.");
-        return false;
-      }
-      return true;
-    }
-    if (id === "reach") {
-      const field: "phone" | "email" =
-        form.getValues("preferredContact") === "email" ? "email" : "phone";
-      const ok = await form.trigger(field);
-      if (!ok) {
-        setStepError(
-          field === "email"
-            ? "Please enter a valid email address."
-            : "Please enter a valid phone number.",
-        );
-        return false;
-      }
-      return true;
-    }
-    if (id === "address") {
-      const ok = await form.trigger("address");
-      if (!ok) {
-        setStepError("Please enter your service address.");
-        return false;
-      }
-      return true;
-    }
-    return true;
-  }
-
-  async function goNext() {
-    const ok = await validateStep(stepIndex);
-    if (!ok) return;
-    if (stepIndex < WIZARD_STEPS.length - 1) {
-      setStepIndex((i) => i + 1);
-      return;
-    }
-    form.handleSubmit(
-      (data) => {
-        setSubmitted(data);
-        mutation.mutate(data);
-      },
-      (errors) => {
-        trackEvent("form_error", {
-          form: "consultation",
-          fields: Object.keys(errors).sort().join(","),
-        });
-        setStepError("Please fix the highlighted fields.");
-      },
-    )();
+  function onSubmit(data: FormData) {
+    setFormError(null);
+    setSubmitted(data);
+    mutation.mutate(data);
   }
 
   if (success) {
@@ -630,42 +508,32 @@ export function ConsultationForm({
 
   const projectLabel = estimate?.project ?? null;
   const finishLabel = estimate?.finish ?? null;
-  const stepId = WIZARD_STEPS[stepIndex].id;
-  const primaryLabel =
-    stepIndex === WIZARD_STEPS.length - 1
-      ? mutation.isPending
-        ? "Sending…"
-        : CTA_FORM_SEND
-      : "Continue";
 
   return (
     <Form {...form}>
       <EstimatorRecovery
         flow="consultation"
-        currentStep={WIZARD_STEPS[stepIndex].id}
-        currentStepIndex={stepIndex}
-        totalSteps={WIZARD_STEPS.length}
-        lastCompletedStep={stepIndex > 0 ? WIZARD_STEPS[stepIndex - 1].id : undefined}
+        currentStep="form"
+        currentStepIndex={0}
+        totalSteps={1}
         selections={{ project_type: String(form.watch("projectType") ?? "") || null }}
         validationErrors={Object.keys(form.formState.errors)}
-        engaged={form.formState.isDirty || stepIndex > 0}
+        engaged={form.formState.isDirty}
         submitted={success}
       />
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          void goNext();
-        }}
-        onFocusCapture={(e) => {
-          trackFormStart();
-          const t = e.target;
-          if (t instanceof HTMLElement && /^(INPUT|TEXTAREA)$/.test(t.tagName)) {
-            requestAnimationFrame(() => keepFieldAboveDock());
-          }
-        }}
-        className="space-y-4"
+        onSubmit={form.handleSubmit(onSubmit, (errors) => {
+          trackEvent("form_error", {
+            form: "consultation",
+            fields: Object.keys(errors).sort().join(","),
+          });
+          setFormError("Please fix the highlighted fields.");
+        })}
+        onFocusCapture={trackFormStart}
+        className="space-y-5"
         data-testid="consultation-wizard"
-        data-step={stepId}
+        data-step="form"
+        data-consult-layout="single-page"
       >
         <input
           {...form.register("website")}
@@ -675,11 +543,19 @@ export function ConsultationForm({
           className="hidden"
         />
 
-        <WizardProgress steps={[...WIZARD_STEPS]} currentIndex={stepIndex} className="!mb-2" />
+        <div>
+          <p className="ed-eyebrow !mb-2">Send your list</p>
+          <h3 className="font-serif text-[clamp(1.5rem,2.4vw,1.875rem)] font-light leading-tight tracking-[-0.02em] text-foreground">
+            What needs fixing?
+          </h3>
+          <p className="mt-1.5 text-sm text-muted-foreground">
+            Choose a starting point, then add your details. We reply with a written quote.
+          </p>
+        </div>
 
         {showTrust && (
           <ul
-            className="mb-2 grid grid-cols-1 gap-x-4 gap-y-1.5 sm:grid-cols-2"
+            className="grid grid-cols-1 gap-x-4 gap-y-1.5 sm:grid-cols-2"
             data-testid="consult-trust-bullets"
           >
             {CONSULT_BULLETS.map((item) => (
@@ -691,7 +567,7 @@ export function ConsultationForm({
           </ul>
         )}
 
-        {estimateChecked && !estimate && stepIndex === 0 && (
+        {estimateChecked && !estimate && (
           <p className="text-xs text-muted-foreground" data-testid="estimate-cta-card">
             Want a ballpark first?{" "}
             <button
@@ -705,7 +581,7 @@ export function ConsultationForm({
           </p>
         )}
 
-        {estimate && attached && stepIndex === 0 && (
+        {estimate && attached && (
           <div className="flex items-center justify-between gap-2 text-xs" data-testid="text-estimate-summary">
             <span className="text-muted-foreground">
               Range attached:{" "}
@@ -730,80 +606,131 @@ export function ConsultationForm({
           </div>
         )}
 
-        {mutation.isError && (
+        {(mutation.isError || formError) && (
           <div
             role="alert"
             className="rounded-sm border border-destructive/20 bg-destructive/5 p-3 text-sm text-destructive"
           >
-            {(mutation.error as Error).message || "Something went wrong. Please try again."}
+            {formError ||
+              (mutation.error as Error)?.message ||
+              "Something went wrong. Please try again."}
           </div>
         )}
 
-        {stepError && (
-          <div role="alert" className="rounded-sm border border-destructive/20 bg-destructive/5 p-3 text-sm text-destructive">
-            {stepError}
+        <div data-testid="consult-step-job">
+          <div role="radiogroup" aria-label="Job type" className="grid grid-cols-2 gap-2">
+            {JOB_CHOICES.map((opt) => (
+              <SelectableCard
+                key={opt.value}
+                dense
+                control="radio"
+                selected={form.watch("projectType") === opt.value}
+                onSelect={() => {
+                  form.setValue("projectType", opt.value, { shouldValidate: true, shouldDirty: true });
+                  setFormError(null);
+                }}
+                title={opt.label}
+                description={opt.sub}
+                data-testid={`consult-job-${opt.value}`}
+              />
+            ))}
           </div>
-        )}
+          <FormField
+            control={form.control}
+            name="projectType"
+            render={() => (
+              <FormItem className="mt-1">
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
-        {stepId === "job" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading="What needs doing?"
-            instructions="One choice. Details come on the last step."
-            data-testid="consult-step-job"
-          >
-            <div role="radiogroup" aria-label="Job type" className="grid grid-cols-2 gap-2">
-              {JOB_CHOICES.map((opt) => (
-                <SelectableCard
-                  key={opt.value}
-                  dense
-                  control="radio"
-                  selected={form.watch("projectType") === opt.value}
-                  onSelect={() => {
-                    form.setValue("projectType", opt.value, { shouldValidate: true, shouldDirty: true });
-                    setStepError(null);
-                  }}
-                  title={opt.label}
-                  data-testid={`consult-job-${opt.value}`}
-                />
-              ))}
-            </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem className="sm:col-span-2">
+                <FormLabel className={labelClass}>
+                  Full name
+                  <RequiredMark />
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Jane Smith"
+                    autoComplete="name"
+                    aria-required="true"
+                    data-testid="input-name"
+                    className="min-h-12"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="preferredContact"
+            render={({ field }) => (
+              <FormItem className="sm:col-span-2">
+                <FormLabel className={labelClass}>
+                  Preferred contact
+                  <RequiredMark />
+                </FormLabel>
+                <FormControl>
+                  <div
+                    role="radiogroup"
+                    aria-label="Preferred contact method"
+                    className="grid grid-cols-3 gap-2"
+                  >
+                    {CONTACT_METHODS.map((method) => {
+                      const selected = field.value === method.value;
+                      return (
+                        <button
+                          key={method.value}
+                          type="button"
+                          role="radio"
+                          aria-checked={selected}
+                          onClick={() => field.onChange(method.value)}
+                          className={cn(
+                            "min-h-11 rounded-sm border px-3 py-2.5 text-sm font-normal transition-colors hover-elevate active-elevate-2",
+                            selected
+                              ? "border-foreground bg-foreground text-background"
+                              : "border-border bg-transparent text-foreground",
+                          )}
+                          data-testid={`button-preferred-contact-${method.value}`}
+                        >
+                          {method.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          {preferredContact === "email" ? (
             <FormField
               control={form.control}
-              name="projectType"
-              render={() => (
-                <FormItem className="sr-only">
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </WizardStep>
-        )}
-
-        {stepId === "about" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading="About you"
-            instructions="Your name for the written quote."
-            data-testid="consult-step-about"
-          >
-            <FormField
-              control={form.control}
-              name="name"
+              name="email"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className={labelClass}>
-                    Full name
+                    Email
                     <RequiredMark />
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Jane Smith"
-                      autoComplete="name"
+                      type="email"
+                      placeholder="jane@example.com"
+                      autoComplete="email"
                       aria-required="true"
-                      data-testid="input-name"
+                      data-testid="input-email"
+                      className="min-h-12"
                       {...field}
                     />
                   </FormControl>
@@ -811,327 +738,189 @@ export function ConsultationForm({
                 </FormItem>
               )}
             />
-          </WizardStep>
-        )}
-
-        {stepId === "prefer" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading="How should we follow up?"
-            instructions="One choice. We will ask for that detail next."
-            data-testid="consult-step-prefer"
-          >
+          ) : (
             <FormField
               control={form.control}
-              name="preferredContact"
+              name="phone"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className={labelClass}>
-                    Preferred contact
+                    Phone
                     <RequiredMark />
                   </FormLabel>
                   <FormControl>
-                    <div
-                      role="radiogroup"
-                      aria-label="Preferred contact method"
-                      className="grid grid-cols-3 gap-2"
-                    >
-                      {CONTACT_METHODS.map((method) => {
-                        const selected = field.value === method.value;
-                        return (
-                          <button
-                            key={method.value}
-                            type="button"
-                            role="radio"
-                            aria-checked={selected}
-                            onClick={() => field.onChange(method.value)}
-                            className={cn(
-                              "min-h-11 rounded-sm border px-3 py-2.5 text-sm font-normal transition-colors hover-elevate active-elevate-2",
-                              selected
-                                ? "border-foreground bg-foreground text-background"
-                                : "border-border bg-transparent text-foreground",
-                            )}
-                            data-testid={`button-preferred-contact-${method.value}`}
-                          >
-                            {method.label}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </WizardStep>
-        )}
-
-        {stepId === "reach" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading={preferredContact === "email" ? "Your email" : "Your phone"}
-            instructions={
-              preferredContact === "email"
-                ? "We reply with the written quote."
-                : preferredContact === "text"
-                  ? "We text about timing and the quote."
-                  : "We call about timing and the quote."
-            }
-            data-testid="consult-step-reach"
-          >
-            {preferredContact === "email" ? (
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className={labelClass}>
-                      Email
-                      <RequiredMark />
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="jane@example.com"
-                        autoComplete="email"
-                        aria-required="true"
-                        data-testid="input-email"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            ) : (
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className={labelClass}>
-                      Phone
-                      <RequiredMark />
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="tel"
-                        placeholder="(208) 555-0000"
-                        autoComplete="tel"
-                        aria-required="true"
-                        data-testid="input-phone"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            )}
-          </WizardStep>
-        )}
-
-        {stepId === "address" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading="Service address"
-            instructions="Confirms you are in our service area."
-            data-testid="consult-step-address"
-          >
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={labelClass}>
-                    {searchingForLand ? "Where are you looking?" : "Address"}
-                    {!searchingForLand && <RequiredMark />}
-                  </FormLabel>
-                  <FormControl>
-                    <div className="[&_[data-testid=property-profile-summary]]:p-2 [&_[data-testid=property-profile-summary]_ul]:hidden [&_[data-testid=button-use-typed-address]]:min-h-10">
-                      <AddressAutocomplete
-                        value={addressInput || field.value}
-                        onChange={(v) => {
-                          setAddressInput(v);
-                          field.onChange(v);
-                        }}
-                        onProfileResolved={handleProfileResolved}
-                        data-testid="input-address"
-                      />
-                    </div>
-                  </FormControl>
-                  <button
-                    type="button"
-                    onClick={() => setShowAddrInfo((v) => !v)}
-                    aria-expanded={showAddrInfo}
-                    aria-controls="address-info"
-                    className="mt-1 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
-                    data-testid="button-address-info"
-                  >
-                    Why we ask
-                    <ChevronDown
-                      className={cn("h-3 w-3 transition-transform", showAddrInfo && "rotate-180")}
+                    <Input
+                      type="tel"
+                      placeholder="(208) 555-0000"
+                      autoComplete="tel"
+                      aria-required="true"
+                      data-testid="input-phone"
+                      className="min-h-12"
+                      {...field}
                     />
-                  </button>
-                  {showAddrInfo && (
-                    <FormDescription id="address-info" className="mt-1 text-xs text-muted-foreground">
-                      Confirms the service area and helps plan the visit. Never shared or sold.{" "}
-                      <Link
-                        href="/privacy-policy"
-                        className="underline underline-offset-2 hover:text-foreground"
-                      >
-                        Privacy policy
-                      </Link>
-                      .
-                    </FormDescription>
-                  )}
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-          </WizardStep>
-        )}
+          )}
 
-        {stepId === "review" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading="Review and send"
-            instructions="Check the summary, add optional details, then send."
-            data-testid="consult-step-review"
-          >
-            <div className="space-y-3">
-              <dl className="space-y-2 rounded-sm border border-border bg-muted/30 p-3 text-sm">
-                <div className="flex justify-between gap-3">
-                  <dt className="text-muted-foreground">Job</dt>
-                  <dd className="text-right font-normal text-foreground">
-                    {PROJECT_LABEL_LOOKUP[form.watch("projectType")] ?? form.watch("projectType")}
-                  </dd>
-                </div>
-                <div className="flex justify-between gap-3">
-                  <dt className="text-muted-foreground">Name</dt>
-                  <dd className="text-right text-foreground" data-clarity-mask="True">
-                    {form.watch("name")}
-                  </dd>
-                </div>
-                <div className="flex justify-between gap-3">
-                  <dt className="text-muted-foreground">Reach by</dt>
-                  <dd className="text-right text-foreground">
-                    {CONTACT_METHODS.find((m) => m.value === preferredContact)?.label}
-                    {preferredContact === "email"
-                      ? ` · ${form.watch("email")}`
-                      : ` · ${form.watch("phone")}`}
-                  </dd>
-                </div>
-                <div className="flex justify-between gap-3">
-                  <dt className="text-muted-foreground">Address</dt>
-                  <dd className="text-right text-foreground" data-clarity-mask="True">
-                    {form.watch("address")}
-                  </dd>
-                </div>
-              </dl>
-
-              {preferredContact === "email" ? (
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className={labelClass}>
-                        Phone <span className="normal-case text-muted-foreground">(optional)</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="tel"
-                          placeholder="(208) 555-0000"
-                          autoComplete="tel"
-                          data-testid="input-phone"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              ) : (
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className={labelClass}>
-                        Email <span className="normal-case text-muted-foreground">(optional)</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="jane@example.com"
-                          autoComplete="email"
-                          data-testid="input-email"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+          {preferredContact === "email" ? (
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className={labelClass}>
+                    Phone <span className="normal-case text-muted-foreground">(optional)</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="tel"
+                      placeholder="(208) 555-0000"
+                      autoComplete="tel"
+                      data-testid="input-phone"
+                      className="min-h-12"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
               )}
+            />
+          ) : (
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className={labelClass}>
+                    Email <span className="normal-case text-muted-foreground">(optional)</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="jane@example.com"
+                      autoComplete="email"
+                      data-testid="input-email"
+                      className="min-h-12"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
 
-              {showNote ? (
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className={labelClass}>
-                        Anything else we should know?{" "}
-                        <span className="normal-case text-muted-foreground">(optional)</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="The task list, the symptoms, or your timing..."
-                          rows={3}
-                          autoFocus
-                          data-testid="textarea-message"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              ) : (
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem className="sm:col-span-2">
+                <FormLabel className={labelClass}>
+                  {searchingForLand ? "Where are you looking?" : "Service address"}
+                  {!searchingForLand && <RequiredMark />}
+                </FormLabel>
+                <FormControl>
+                  <div className="[&_[data-testid=property-profile-summary]]:p-2 [&_[data-testid=property-profile-summary]_ul]:hidden [&_[data-testid=button-use-typed-address]]:min-h-10">
+                    <AddressAutocomplete
+                      value={addressInput || field.value}
+                      onChange={(v) => {
+                        setAddressInput(v);
+                        field.onChange(v);
+                      }}
+                      onProfileResolved={handleProfileResolved}
+                      data-testid="input-address"
+                    />
+                  </div>
+                </FormControl>
                 <button
                   type="button"
-                  onClick={() => setShowNote(true)}
-                  className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
-                  data-testid="button-add-note"
+                  onClick={() => setShowAddrInfo((v) => !v)}
+                  aria-expanded={showAddrInfo}
+                  aria-controls="address-info"
+                  className="mt-1 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+                  data-testid="button-address-info"
                 >
-                  <Plus className="h-3.5 w-3.5" />
-                  Add a note <span className="text-muted-foreground">(optional)</span>
+                  Why we ask
+                  <ChevronDown
+                    className={cn("h-3 w-3 transition-transform", showAddrInfo && "rotate-180")}
+                  />
                 </button>
-              )}
+                {showAddrInfo && (
+                  <FormDescription id="address-info" className="mt-1 text-xs text-muted-foreground">
+                    Confirms the service area and helps plan the visit. Never shared or sold.{" "}
+                    <Link
+                      href="/privacy-policy"
+                      className="underline underline-offset-2 hover:text-foreground"
+                    >
+                      Privacy policy
+                    </Link>
+                    .
+                  </FormDescription>
+                )}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
-              <p className="text-xs text-muted-foreground">
-                No spam. We review your request and confirm next steps.
-              </p>
-            </div>
-          </WizardStep>
+        {showNote ? (
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className={labelClass}>
+                  Anything else we should know?{" "}
+                  <span className="normal-case text-muted-foreground">(optional)</span>
+                </FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="The task list, the symptoms, or your timing..."
+                    rows={3}
+                    data-testid="textarea-message"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={() => setShowNote(true)}
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+            data-testid="button-add-note"
+          >
+            <Plus className="h-3.5 w-3.5" />
+            Add a note <span className="text-muted-foreground">(optional)</span>
+          </button>
         )}
 
-        <WizardActionBar
-          onBack={stepIndex > 0 ? goBack : undefined}
-          onPrimary={() => void goNext()}
-          primaryLabel={primaryLabel}
-          primaryDisabled={mutation.isPending}
-          busy={mutation.isPending}
-          busyLabel="Sending…"
-          primaryIcon={stepIndex === WIZARD_STEPS.length - 1 ? "none" : "arrow"}
-          ownsBottomEdge
+        <p className="text-xs text-muted-foreground">
+          No spam. We review your request and confirm next steps. Written price before work starts.
+        </p>
+
+        <Button
+          type="submit"
+          variant="brand"
+          disabled={mutation.isPending}
+          aria-busy={mutation.isPending}
+          className="min-h-12 w-full border-transparent bg-[#C56B4A] text-base text-[#fbfaf6] hover:bg-[#92472C]"
           data-testid="consult-wizard-actions"
-        />
+        >
+          {mutation.isPending ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
+              Sending…
+            </>
+          ) : (
+            CTA_FORM_SEND
+          )}
+        </Button>
       </form>
     </Form>
   );
