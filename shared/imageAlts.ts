@@ -47,7 +47,7 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/handyman/deck-board-replacement.webp':
     'Gloved hands replacing a deck board with a new cedar board',
   '/images/handyman/hero-gutter-cleaning.webp':
-    'A worker on a ladder clearing leaves from a house gutter',
+    'Autumn leaves filling a house gutter along a cream two-story home exterior',
   '/images/handyman/weatherstripping.webp':
     'Hands applying foam weatherstripping to a white exterior door frame',
   '/images/handyman/winterize-spigot.webp':
@@ -55,7 +55,7 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/handyman/grab-bar-install.webp':
     'A brushed-nickel grab bar installed on subway tile in a shower',
   '/images/areas/boise.webp':
-    'A handyman and a homeowner standing together in a bright home',
+    'Cream Craftsman bungalow on a Boise street with porch, lawn, and foothills beyond',
   '/images/areas/meridian.webp':
     'A modern suburban home exterior with a lawn and front walkway',
   '/images/areas/eagle.webp':
@@ -103,7 +103,9 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/gallery/gallery-maintenance-star-after.webp':
     'White exterior door jamb sealed with fresh foam weatherstripping',
   '/images/gallery/gallery-boise-bungalow-exterior.webp':
-    'Boise craftsman bungalow porch with a sage-green front door and white trim',
+    'Boise porch with a sage-green front door and white trim',
+  '/images/houses/kuna/kuna-gutter-cleaning.webp':
+    'White gutter with autumn leaves at the eave of a beige Kuna single-storey home',
 };
 
 export function altForImage(src: string | undefined | null): string | undefined {

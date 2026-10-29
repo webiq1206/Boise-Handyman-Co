@@ -11,11 +11,9 @@ import {
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { fitDescription } from '@/lib/page-metadata';
 
-
-
-const TITLE = "Request a Handyman Estimate";
+const TITLE = "Send your list and photos";
 const DESCRIPTION =
-  fitDescription("Need repairs in Boise or the Treasure Valley? Send your task list, photos or plans. Our team will review the details before preparing your estimate.");
+  fitDescription("Need repairs in Boise or the Treasure Valley? Send your task list and photos. Boise Handyman Co confirms the scope and replies with a written quote before work starts.");
 
 export const metadata: Metadata = withBrandPageMetadata(({
   title: { absolute: `${TITLE} | ${SITE_CONFIG.name}` },
@@ -39,26 +37,23 @@ export const metadata: Metadata = withBrandPageMetadata(({
 export default function EstimatePage() {
   const schemas = [
     generateWebPageSchema({
-      title: "Request a Handyman Estimate",
+      title: TITLE,
       description: DESCRIPTION,
       url: "/estimate",
     }),
     generateBreadcrumbSchema([
       { name: "Home", url: "/" },
-      { name: "Online Estimate", url: "/estimate" },
+      { name: "Send your list and photos", url: "/estimate" },
     ]),
   ];
 
   return (
     <>
       <JsonLd data={schemas} />
-
-      {/* Static page-shell heading. The estimator is a client component, so its
-          own heading is not in the server HTML. headingAs stays h2 so the tool
-          does not emit a second h1. Estimator logic is unchanged. */}
-      <h1 className="sr-only">Request a Boise Handyman Co repair estimate</h1>
+      <h1 className="sr-only">Send your Boise Handyman Co repair list and photos</h1>
       <EstimateCalculator fitViewport headingAs="h2" />
       <p className="px-4 py-3 text-center text-xs text-muted-foreground">
+        Intake only: no on-screen price. You get a written quote before work starts.{" "}
         <ContractorCredential showVerifyLink={false} />
       </p>
     </>

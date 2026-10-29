@@ -34,7 +34,7 @@ const LIBRARY = {
   },
   gutterCleaning: {
     src: img('hero-gutter-cleaning'),
-    alt: 'Worker on a ladder clearing autumn leaves from the rain gutter of a single-story suburban Boise home',
+    alt: 'Autumn leaves filling a rain gutter on a single-story suburban Boise home',
   },
   drywall: {
     src: img('service-drywall-repair'),

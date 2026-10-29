@@ -85,7 +85,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   },
   'gutter-cleaning-schedule-boise': {
     hero: '/images/handyman/hero-gutter-cleaning.webp',
-    alt: 'Worker on a ladder clearing autumn leaves from the rain gutter of a single-story suburban Boise home',
+    alt: 'Autumn leaves filling a rain gutter on a single-story suburban Boise home',
     topicTags: ["gutter cleaning","home maintenance","boise","exterior","home"],
     source: 'handyman',
   },
@@ -235,7 +235,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   },
   'ember-ready-home-checklist-treasure-valley': {
     hero: '/images/handyman/hero-gutter-cleaning.webp',
-    alt: 'Worker on a ladder clearing autumn leaves from the rain gutter of a single-story suburban Boise home',
+    alt: 'Autumn leaves filling a rain gutter on a single-story suburban Boise home',
     topicTags: ["wildfire","embers","exterior","gutters","boise"],
     source: 'handyman',
   },
@@ -259,7 +259,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   },
   'treasure-valley-exterior-home-care-guide': {
     hero: '/images/handyman/hero-gutter-cleaning.webp',
-    alt: 'Worker on a ladder clearing autumn leaves from the rain gutter of a single-story suburban Boise home',
+    alt: 'Autumn leaves filling a rain gutter on a single-story suburban Boise home',
     topicTags: ["exterior","fence","deck","gutters","siding"],
     source: 'handyman',
   },

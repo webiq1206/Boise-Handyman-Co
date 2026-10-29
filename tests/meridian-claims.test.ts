@@ -60,3 +60,10 @@ test('shared root service metadata cannot promise one-trip fixes',()=>{
  assert.doesNotMatch(readFileSync('lib/seo.ts','utf8'),/Upfront quotes and one-trip fixes/);
  assert.match(readFileSync('lib/seo.ts','utf8'),/Scope-based written quotes/);
 });
+
+for (const file of ["components/approved/ApprovedHomeHero.tsx", "shared/siteContent.ts", "app/contact/page.tsx", "app/about/page.tsx"]) test(`${file}: current Cursor entry content preserves scope-based promises`, () => {
+ assert.doesNotMatch(readFileSync(file, "utf8"), sharedUnsupported);
+});
+
+import {intakeCopyForSite} from "../lib/p5/intakePolicy.ts";
+test("guided Handyman confirmation preserves scope review without a response deadline",()=>{const c=intakeCopyForSite("handyman");assert.doesNotMatch(c.next,sharedUnsupported);assert.match(c.next,/site visit may be needed/i);});

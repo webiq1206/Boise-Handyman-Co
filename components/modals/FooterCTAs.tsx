@@ -17,11 +17,11 @@ export function FooterCTAs() {
     <>
       <li>
         {isHome ? (
-          <Link href="/#calculator" className={cls}>
+          <Link href="/#consult" className={cls}>
             {CTA_PRIMARY}
           </Link>
         ) : (
-          <Link href="/estimate" className={cls}>
+          <Link href="/contact" className={cls}>
             {CTA_PRIMARY}
           </Link>
         )}

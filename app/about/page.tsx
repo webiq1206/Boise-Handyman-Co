@@ -25,13 +25,20 @@ import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { visibleTrustItems } from '@/shared/foundingClaims';
 import { HERO_STATS,HOW_P5_WORKS,HOW_P5_WORKS_TITLE,PRINCIPLES,TRUST_ITEMS } from '@/shared/siteContent';
-import { FEATURED_PROPERTY_IMAGES } from '@/shared/galleryData';
 import { SITE_IMAGES } from '@/shared/siteImages';
 import { ArrowRight,Check,ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 const SPEAKABLE_SUMMARY =
-  'Boise Handyman Co is the repair and maintenance specialist in the P5 family, serving the Treasure Valley. Send your repair list for review. Scope, price and timing are agreed before work begins; sending a request does not book a visit.';
+  'Boise Handyman Co is a design-minded repair and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co. Founder Nick Perkins leads the work with one written price before work starts, including RE-10 inspection repair lists.';
+
+const HANDYMAN_FIVE = [
+  'Written quote before work starts',
+  'One-hour minimum and materials at cost',
+  'Agreed arrival time',
+  'One-trip fixes where the job allows',
+  'Cleanup and haul-away',
+] as const;
 
 function HeroBreadcrumbs() {
   const items = [
@@ -95,21 +102,27 @@ export default function AboutPage() {
       <JsonLd data={schemas} />
       <div className="flex flex-col ">
         {/* Approved editorial hero */}
-        <InteriorHero layout="editorial" imageSrc={SITE_IMAGES.leadership} imageAlt="A handyman and a homeowner reviewing a clipboard at a front door">
+        <InteriorHero
+          layout="editorial"
+          imageSrc={SITE_IMAGES.leadership}
+          imageAlt="A handyman and a homeowner reviewing a clipboard at a front door"
+          imageFit="contain"
+        >
             <HeroBreadcrumbs />
             <p data-speakable="summary" className="sr-only">
               {SPEAKABLE_SUMMARY}
             </p>
-            <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>About us</p>
+            <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>Real people. A higher standard.</p>
             <h1 className="ed-display ed-statement-display text-inverse-foreground mb-8">
               About Boise Handyman{' '}
               <em className="brc-accent">Co</em>
             </h1>
             <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-4">
-              Boise Handyman Co is the repair and maintenance specialist in the P5 family, serving the Treasure Valley. Send one task or your full repair list so we can review what help you need.
+              Boise Handyman Co is a repair, install and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co. It is run by Nick Perkins, a construction project manager with a bachelor&apos;s degree in Construction with an emphasis in Project Management, and more than a decade of work from small renovations to multimillion-dollar custom homes.
             </p>
             <p className="text-base md:text-lg text-inverse-foreground/75 max-w-2xl leading-relaxed mb-8">
-              We review your request and clarify the work before preparing a quote. Scope, price and timing are agreed before work begins; sending a request does not book a visit.
+              He founded P5 in Colorado in 2020 and moved the family and company to the Treasure Valley in 2025. Read the full story on{' '}
+              <a href="https://p5homeco.com/about" className="underline underline-offset-2">p5homeco.com/about</a>.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-8">
               <ConsultCTA variant="brand">
@@ -129,52 +142,44 @@ export default function AboutPage() {
             </dl>
           </InteriorHero>
 
-        {/* ─── How we work split ───
-            The id="team" anchor is kept from the old team section so any
-            existing /about#team links still land somewhere sensible. No
-            invented team bios or history appear here.
-            [NEEDS: owner bio/photo approval before adding any team content] */}
+        {/* Owner hard rule: full family photo stacked full-width - never side-crop or cover-crop people */}
         <Section variant="greige" spacing="none" divider className="p-0">
-          <div id="team" className="grid md:grid-cols-2 overflow-hidden scroll-mt-24">
-            <div className="relative min-h-[260px] md:min-h-[520px] overflow-hidden bg-inverse">
+          <div id="team" className="scroll-mt-24">
+            <figure className="m-0 mx-auto w-full max-w-3xl bg-inverse px-0 sm:px-6 md:px-8">
               <Image
-                src={SITE_IMAGES.process}
-                alt="Quoting and planning a home repair task list in the Treasure Valley"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover img-brand-grade"
+                src="/images/about/perkins-family-meridian-idaho-1x1.webp"
+                alt="Nick Perkins with his wife and five children at a pumpkin patch in Meridian, Idaho"
+                width={2048}
+                height={2048}
+                sizes="(max-width: 768px) 100vw, 768px"
+                className="h-auto w-full"
+                style={{ objectFit: "contain", maxWidth: "100%", height: "auto" }}
+                priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ backgroundImage: GRAIN_URL, backgroundRepeat: 'repeat', opacity: 0.028 }}
-              />
-              <div className="absolute bottom-0 left-0 p-8 md:p-12">
-                <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>How we work</p>
+              <figcaption className="bg-inverse px-8 py-6 md:px-12 md:py-8">
                 <p className="font-sans font-light text-xl md:text-2xl text-inverse-foreground">
-                  Request, quote,
-                  <br />
-                  one-trip fix
+                  The Perkins family
                 </p>
-              </div>
-            </div>
+              </figcaption>
+            </figure>
 
-            <div className="section-y-sm px-8 md:px-14 lg:px-16 bg-card border-l border-border">
+            <div className="section-y-sm px-8 md:px-14 lg:px-16 bg-card max-w-5xl mx-auto">
               <Reveal>
                 <SectionHeader
-                  eyebrow="Our model"
+                  eyebrow="Credentials"
                   title={
                     <>
-                      How we <em className="brc-accent">work</em>
+                      Locally owned. <em className="brc-accent">Registered.</em>
                     </>
                   }
-                  description="Send your repair list, service address and any helpful photos. We review the tasks with you and clarify the scope before preparing a quote. Agree on the work, price and visit timing before scheduling, then review the finished tasks together."
+                  description="P5 Home Co LLC, Idaho Registered Contractor #8381215. Insured; certificate on request. One-year workmanship warranty on repairs and installs."
                   className="mb-8 max-w-none"
                 />
                 <p className="text-sm text-muted-foreground leading-relaxed mb-8">
-                  We keep our work within the scope Idaho allows for handyman services and refer
-                  licensed trade work to specialists we trust. <ContractorCredential />. Insurance
-                  details are available on request.
+                  Plumbing, electrical and HVAC work on your list is done by the licensed trade
+                  partners we schedule and stand behind, inside the same written quote and the same
+                  visit plan. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware
+                  are our crew&apos;s own work. <ContractorCredential />.
                 </p>
                 <ul className="grid sm:grid-cols-2 gap-3">
                   {visibleTrustItems(TRUST_ITEMS).map((item) => (
@@ -192,30 +197,22 @@ export default function AboutPage() {
                     </li>
                   ))}
                 </ul>
+                <h3 className="ed-h4 mt-8 mb-4">What you can count on from this trade</h3>
+                <ul className="grid sm:grid-cols-1 gap-3">
+                  {HANDYMAN_FIVE.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
+                      <Check className="h-4 w-4 text-accent-legible flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
                 <div className="mt-8 pt-8 border-t border-border">
-                  <p className="ed-eyebrow">Our commitment</p>
-                  <h3 className="ed-h4">
-                    One accountable local team
-                  </h3>
+                  <p className="ed-eyebrow">Warranty</p>
+                  <h3 className="ed-h4">One year on our workmanship</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    {SITE_CONFIG.name} is locally owned and serves the Treasure Valley only. The
-                    person who quotes your job is accountable for how it turns out, and if our
-                    workmanship ever lets you down, we come back and make it right.
-                  </p>
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-4">
-                    Not sure where your job fits? Start with our most requested service,{' '}
-                    <Link
-                      href="/services/drywall-repair"
-                      className="text-foreground underline underline-offset-2 hover:text-accent-legible"
-                    >
-                      drywall repair and patching
-                    </Link>
-                    , or browse{' '}
-                    <Link
-                      href="/services"
-                      className="text-foreground underline underline-offset-2 hover:text-accent-legible"
-                    >
-                      everything we fix, install, and maintain
+                    If our work fails within a year, we come back and make it right. Full terms on the{' '}
+                    <Link href="/warranty" className="underline underline-offset-2">
+                      warranty page
                     </Link>
                     .
                   </p>
@@ -223,13 +220,12 @@ export default function AboutPage() {
                 <div className="mt-8 pt-8 border-t border-border">
                   <p className="ed-eyebrow">Where your money goes</p>
                   <h3 className="ed-h4">
-                    You pay for the fix, not the overhead
+                    Don&apos;t pay for our overhead
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Franchise fees, call centers, and wrapped trucks are real costs, and they are
-                    quietly recovered inside minimum charges and inflated hourly rates. We keep our
-                    footprint small on purpose, so what you spend goes into the time and materials
-                    your repair actually takes.
+                    No showroom, no sales team, no fleet of wrapped trucks. What you spend goes into
+                    the time and materials your repair actually takes, with materials at cost and no
+                    trip fee in Ada and Canyon County.
                   </p>
                 </div>
               </Reveal>
@@ -239,11 +235,10 @@ export default function AboutPage() {
 
         <WhyChooseUsSection />
 
-        {/* Location-true establishing photo between copy blocks for mobile rhythm */}
-        <section className="relative h-[clamp(220px,32vw,400px)] overflow-hidden" aria-label="Treasure Valley home exterior">
+        <section className="relative h-[clamp(220px,32vw,400px)] overflow-hidden" aria-label="Kuna single-storey home exterior">
           <Image
-            src={FEATURED_PROPERTY_IMAGES.boiseBungalowExterior}
-            alt="Boise craftsman bungalow porch with a sage-green front door and white trim"
+            src="/images/houses/kuna/kuna-single-storey-front.webp"
+            alt="Beige single-storey home in Kuna with white trim, two-car garage and open fields beyond"
             fill
             sizes="100vw"
             className="object-cover img-brand-grade"
@@ -331,7 +326,7 @@ export default function AboutPage() {
               </h2>
               <div>
               <p className="ed-body">
-                Send your tasks with photos and get an upfront quote within one business day. No
+                Send your tasks with photos for review and a written quote. No
                 pressure, no obligation.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto sm:justify-center">

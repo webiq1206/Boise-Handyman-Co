@@ -1,8 +1,9 @@
+import {retainedEstimatorPath} from './lib/quoteEntry.mjs';
+import {readFile} from 'node:fs/promises';
+const sitePackage=JSON.parse(await readFile('package.json','utf8')).name;
 import {chromium,webkit} from '@playwright/test';
 import assert from 'node:assert/strict';
-import {mkdir,writeFile,readFile} from 'node:fs/promises';
-import {enterEstimator} from './lib/navigationEntry.mjs';
-const navigationBrand=JSON.parse(await readFile(new URL('../package.json',import.meta.url),'utf8')).name;
+import {mkdir,writeFile} from 'node:fs/promises';
 const base=process.env.P5_TEST_BASE_URL||'http://127.0.0.1:5137';
 if(!['localhost','127.0.0.1'].includes(new URL(base).hostname))throw Error('This test only runs against a local server.');
 const output=process.env.P5_TEST_OUTPUT_DIR||'p5-verification/exit';
@@ -28,8 +29,7 @@ async function setup(width,mode='saved') {
   if(mode==='failure'&&requests.length===1)return route.fulfill({status:503,json:{ok:false}});
   return route.fulfill({json:{ok:true,notified:mode!=='pending'}});
  });
- await page.goto(base+'/estimate');
- await enterEstimator(page,{route:'/estimate',brand:navigationBrand,parent:false});
+ await page.goto(base+retainedEstimatorPath(sitePackage));
  await page.getByRole('button',{name:'Close the estimator. Your progress is saved.',exact:true}).waitFor();
  await page.getByText('Loading your project...', {exact:true}).waitFor({state:'hidden'});
  return {context,page,requests,exit:page.getByRole('button',{name:'Close the estimator. Your progress is saved.',exact:true}),offer:page.getByRole('dialog',{name:'Prefer to talk about your project?'})};

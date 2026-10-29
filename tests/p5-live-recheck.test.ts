@@ -73,10 +73,10 @@ test('every vCard line is at most 75 octets and lines use CRLF', () => {
   assert.match(note, /Hours: Monday 9:00 AM - 6:00 PM\\; Tuesday 9:00 AM - 6:00 PM\\; Wednesday 9:00 AM - 6:00 PM\\; Thursday 9:00 AM - 6:00 PM\\; Friday 9:00 AM - 6:00 PM\\; Saturday 9:00 AM - 4:00 PM\\; Sunday Closed/);
 });
 
-test('the vCard display label includes the street from the ADR field', () => {
+test('the service-area vCard preserves locality without publishing a street-address label', () => {
   const card = buildBusinessVCard();
   const { street, city, state, postalCode } = SITE_CONFIG.address;
-  const label = `${street}\\, ${city}\\, ${state} ${postalCode}`;
-  assert.match(card, new RegExp(`ADR;TYPE=WORK:;;${street};${city};${state};${postalCode};US`));
-  assert.match(card, new RegExp(`LABEL;TYPE=WORK:${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`));
+  assert.ok(card.includes(`ADR;TYPE=WORK:;;;${city};${state};${postalCode};USA`));
+  assert.equal(card.includes(street), false);
+  assert.equal(card.includes('LABEL;TYPE=WORK:'), false);
 });

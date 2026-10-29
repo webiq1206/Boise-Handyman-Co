@@ -208,7 +208,7 @@ test("Meta autoConfig is off before init and the privacy wording matches Cabinet
   const analytics = readFileSync(new URL("../lib/analytics.ts", import.meta.url), "utf8");
   assert.equal(analytics.includes("userData"), false);
   const consult = readFileSync(new URL("../components/ConsultationForm.tsx", import.meta.url), "utf8");
-  assert.match(consult, /trackMetaEvent\("Lead", \{ content_name: variables\.projectType, content_category: "consultation_request" \}\)/);
+  assert.match(consult, /trackMetaEvent\(\s*"Lead",\s*\{\s*content_name:\s*variables\.projectType,\s*content_category:\s*"consultation_request",?\s*\}\s*\)/);
   const search = readFileSync(new URL("../components/marketing/BlogIndexClient.tsx", import.meta.url), "utf8");
   assert.equal(search.includes("query: q"), false);
 });

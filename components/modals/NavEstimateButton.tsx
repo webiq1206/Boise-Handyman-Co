@@ -18,8 +18,8 @@ interface NavEstimateButtonProps extends Omit<ButtonProps, "onClick" | "asChild"
 }
 
 /**
- * Header and mobile-bar estimate entry: homepage scrolls to #calculator;
- * every other page goes to the dedicated /estimate page.
+ * Header and mobile-bar primary CTA: homepage scrolls to the request form;
+ * every other page goes to /contact.
  */
 export function NavEstimateButton({
   asLink = false,
@@ -31,7 +31,7 @@ export function NavEstimateButton({
 }: NavEstimateButtonProps) {
   const pathname = usePathname();
   const onHome = pathname === "/";
-  const href = onHome ? "/#calculator" : "/estimate";
+  const href = onHome ? "/#consult" : "/contact";
   const { variant: _v, size: _s, ...linkAttrs } = props as Record<string, unknown>;
 
   const handleClick = () => {

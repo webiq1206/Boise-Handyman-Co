@@ -960,13 +960,21 @@ body[data-hide-mobile-nav-bar="true"] [data-mobile-nav-bar] {
 .article-table-scroll > table { display: table; }
 .article-table-scroll:focus-visible { outline: 2px solid hsl(var(--accent)); outline-offset: 3px; }
 
-/* Estimator navigation scrolls with the questions on phones and tablets. */
+/* AppFrame / guided-flow on phones: the whole frame scrolls, so in-frame
+   footers stay in document flow. Do NOT force static on standalone D2 bars
+   (ConsultationForm): C10 requires a viewport-fixed Back/Next that rides the
+   keyboard inset. */
 @media (max-width: 1023px) {
-  [data-testid="wizard-action-bar"],
-  [data-wizard-action-bar],
-  [data-testid="wizard-sticky-nav"],
-  [data-testid="result-sticky-actions"],
-  [data-testid="wizard-mobile-bar"] {
+  [data-testid="estimate-app-frame"] [data-testid="wizard-action-bar"],
+  [data-testid="estimate-app-frame"] [data-wizard-action-bar],
+  [data-testid="estimate-app-frame"] [data-testid="wizard-sticky-nav"],
+  [data-testid="estimate-app-frame"] [data-testid="result-sticky-actions"],
+  [data-testid="estimate-app-frame"] [data-testid="wizard-mobile-bar"],
+  [data-testid="guided-flow-fit"] [data-testid="wizard-action-bar"],
+  [data-testid="guided-flow-fit"] [data-wizard-action-bar],
+  [data-testid="guided-flow-fit"] [data-testid="wizard-sticky-nav"],
+  [data-testid="guided-flow-fit"] [data-testid="result-sticky-actions"],
+  [data-testid="guided-flow-fit"] [data-testid="wizard-mobile-bar"] {
     position: static !important;
     transform: none !important;
     margin-top: 20px;

@@ -45,16 +45,16 @@ test('contact hero quote request points at the contact form, ahead of the visit 
   const source = read('app/contact/page.tsx');
   const about = read('app/about/page.tsx');
   const stats = read('shared/siteContent.ts');
-  assert.match(source, /interior-contact-actions[\s\S]*?<InteriorEstimateLink\s+label="Request a quote"\s+href="\/contact#consult"\s*\/>[\s\S]*?href="#consult"/);
+  assert.match(source, /interior-contact-actions[\s\S]*?<InteriorEstimateLink\s+label="Send your list and photos"\s+href="\/contact#consult"\s*\/>[\s\S]*?href="#consult"/);
   assert.doesNotMatch(source, /href="\/estimate"/);
-  assert.match(read('components/approved/InteriorLayout.tsx'), /href='\/estimate'/);
-  for (const phrase of ['Instant online estimate', '60 sec', 'Get my online estimate', 'online estimator']) {
+  assert.match(read('components/approved/InteriorLayout.tsx'), /href='\/contact'/);
+  for (const phrase of ['Instant online estimate', '60 sec', 'Get my online estimate', 'online estimator', 'Planning range after photos']) {
     assert.equal(about.includes(phrase), false, `about: ${phrase}`);
     assert.equal(source.includes(phrase), false, `contact: ${phrase}`);
   }
-  assert.match(stats, /label: "Planning range after photos"/);
-  assert.match(stats, /num: "Upfront quote"/);
-  assert.doesNotMatch(stats, /Instant online estimate|60 sec/);
-  assert.match(source, /Send photos and your task list for a preliminary planning range, then get a firm upfront quote\. Nothing is scheduled until you approve\./);
-  assert.match(source, /Send your task list with photos for an upfront quote, or call or text our team to explore a range for your repair, install, or maintenance job\./);
+  assert.match(stats, /label: "Written quote"/);
+  assert.match(stats, /num: "before work starts"/);
+  assert.doesNotMatch(stats, /Instant online estimate|60 sec|Planning range after photos/);
+  assert.match(source, /Send photos and your task list\. We review the scope before preparing a written quote\. Nothing is scheduled until you approve\./);
+  assert.match(source, /Send your task list with photos, or call or text our team\. You get one written price before work starts\./);
 });

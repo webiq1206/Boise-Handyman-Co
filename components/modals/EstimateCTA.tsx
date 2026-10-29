@@ -14,7 +14,7 @@ interface EstimateCTAProps extends Omit<ButtonProps, "onClick" | "asChild"> {
 
 export function EstimateCTA({ onExtraClick, children, trackingLocation, ...props }: EstimateCTAProps) {
   const pathname = usePathname();
-  const href = pathname === "/" ? "/#calculator" : "/estimate";
+  const href = pathname === "/" ? "/#consult" : "/contact";
 
   return (
     <Button {...props} asChild>

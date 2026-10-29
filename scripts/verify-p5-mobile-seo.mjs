@@ -5,6 +5,7 @@ const base=process.env.P5_TEST_ORIGIN||'http://127.0.0.1:5000';const out='p5-mob
 const browser=await chromium.launch();const results={pages:[],mobile:[],errors:[],scope:'Built production app in Chromium emulation; not physical devices or a claim of live deployment.'};
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const ctx=await browser.newContext({viewport:{width:390,height:844},hasTouch:true});const page=await ctx.newPage();page.setDefaultTimeout(15000);
+await ctx.route('**/*',route=>{const u=new URL(route.request().url());return u.origin!==new URL(base).origin||u.pathname.startsWith('/api/')?route.abort():route.continue();});
 const visible=locator=>locator.evaluateAll(els=>els.some(e=>{const s=getComputedStyle(e),r=e.getBoundingClientRect();return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'&&s.opacity!=='0';}));
 try{
  for(const width of [320,390,768,1440]){
@@ -18,7 +19,7 @@ try{
    let shown=false;
    for(let y=400;y<10000;y+=350){await page.evaluate(y=>scrollTo({top:y,behavior:'instant'}),y);await delay(100);if(await visible(bar)){shown=true;break;}}
    assert.ok(shown,`Mobile CTA never appears after the hero at ${width}px`);
-   const controls=await bar.locator('a,button').evaluateAll(els=>els.map(e=>({text:e.textContent?.trim(),href:e.getAttribute('href'),height:e.getBoundingClientRect().height})));
+   const controls=await bar.locator('a,button').evaluateAll(els=>els.map(e=>({text:e.getAttribute('aria-label')||e.textContent?.trim(),href:e.getAttribute('href'),height:e.getBoundingClientRect().height})));
    assert.ok(controls.some(c=>c.href?.startsWith('tel:')&&c.text?.includes('Call')),'Missing labeled Call control');
    assert.ok(controls.every(c=>c.height>=44),'Mobile action too small');
    await page.screenshot({path:`${out}/actions-${width}.png`});

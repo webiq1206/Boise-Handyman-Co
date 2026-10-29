@@ -1,5 +1,5 @@
 /**
- * Alias for EstimateCTA - all sitewide "Get an estimate" buttons share one behavior:
- * homepage scrolls to /#calculator; every other page goes to /estimate.
+ * Alias for EstimateCTA - sitewide primary CTA behavior:
+ * homepage scrolls to /#consult; every other page goes to /contact.
  */
 export { EstimateCTA as ConsultCTA } from "./EstimateCTA";

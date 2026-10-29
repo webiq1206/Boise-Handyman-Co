@@ -1,10 +1,10 @@
 import {mkdir,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 export const MAX_ENTRY_EVENTS=100;
-export function entryRoute(raw){try{const u=new URL(raw);return {path:['/','/estimate'].includes(u.pathname)?u.pathname:'other',review:u.searchParams.get('review')==='1'};}catch{return {path:'invalid',review:false};}}
+export function entryRoute(raw){try{const u=new URL(raw);return {path:['/','/estimate','/contact'].includes(u.pathname)?u.pathname:'other',review:u.searchParams.get('review')==='1'};}catch{return {path:'invalid',review:false};}}
 export function safeEntryEvent(raw){
  const out={};
- for(const [key,values] of Object.entries({phase:['capture','after-dispatch'],kind:['event','dom-ready','navigation','navigation-request','page-error'],type:['pointerdown','pointerup','click','submit'],ready:['loading','interactive','complete'],fonts:['loading','loaded'],path:['/','/estimate','other','invalid']}))if(values.includes(raw?.[key]))out[key]=raw[key];
+ for(const [key,values] of Object.entries({phase:['capture','after-dispatch'],kind:['event','dom-ready','navigation','navigation-request','page-error'],type:['pointerdown','pointerup','click','submit'],ready:['loading','interactive','complete'],fonts:['loading','loaded'],path:['/','/estimate','/contact','other','invalid']}))if(values.includes(raw?.[key]))out[key]=raw[key];
  for(const key of ['review','trusted','expectedLink','reactAttached','centerHitsLink','prevented'])if(typeof raw?.[key]==='boolean')out[key]=raw[key];
  for(const key of ['at','x','y','scrollY'])if(Number.isFinite(raw?.[key]))out[key]=raw[key];
  if(typeof raw?.tag==='string'&&/^[A-Z]{1,16}$/.test(raw.tag))out.tag=raw.tag;
@@ -18,10 +18,10 @@ export async function startNavigationDiagnostics(context,page,{base,width,output
  await page.exposeFunction('__p5EntryRecord',record);
  await page.addInitScript(()=>{
   const send=value=>{void window.__p5EntryRecord(value);};
-  const state=()=>{const form=document.querySelector('#quick-request form'),a=document.querySelector('a[href="/estimate?review=1"]'),r=a?.getBoundingClientRect(),hit=r?document.elementFromPoint(r.x+r.width/2,r.y+r.height/2):null;return {ready:document.readyState,fonts:document.fonts.status,reactAttached:!!form&&Object.keys(form).some(k=>k.startsWith('__reactFiber$')),scrollY,link:r?{x:r.x,y:r.y,width:r.width,height:r.height}:null,centerHitsLink:!!a&&!!hit&&(a===hit||a.contains(hit))};};
+  const state=()=>{const form=document.querySelector('[data-testid=consultation-wizard]'),a=document.querySelector('main a[href="/contact"]'),r=a?.getBoundingClientRect(),hit=r?document.elementFromPoint(r.x+r.width/2,r.y+r.height/2):null;return {ready:document.readyState,fonts:document.fonts.status,reactAttached:!!form&&Object.keys(form).some(k=>k.startsWith('__reactFiber$')),scrollY,link:r?{x:r.x,y:r.y,width:r.width,height:r.height}:null,centerHitsLink:!!a&&!!hit&&(a===hit||a.contains(hit))};};
   for(const type of ['pointerdown','pointerup','click','submit'])document.addEventListener(type,e=>{
    const target=e.target,anchor=target instanceof Element?target.closest('a'):null;
-   const sample={kind:'event',type,at:performance.now(),trusted:e.isTrusted,tag:target instanceof Element?target.tagName:'other',expectedLink:anchor?.getAttribute('href')==='/estimate?review=1',x:Number.isFinite(e.clientX)?e.clientX:null,y:Number.isFinite(e.clientY)?e.clientY:null,...state()};
+   const sample={kind:'event',type,at:performance.now(),trusted:e.isTrusted,tag:target instanceof Element?target.tagName:'other',expectedLink:anchor?.getAttribute('href')==='/contact',x:Number.isFinite(e.clientX)?e.clientX:null,y:Number.isFinite(e.clientY)?e.clientY:null,...state()};
    send({...sample,phase:'capture',prevented:e.defaultPrevented});
    setTimeout(()=>send({...sample,phase:'after-dispatch',prevented:e.defaultPrevented}),0);
   },true);

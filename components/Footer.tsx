@@ -185,7 +185,9 @@ export function Footer() {
             {" · "}
             <a href="https://boisecabinet.co" className="underline underline-offset-2 transition-colors hover:text-inverse-foreground">Boise Cabinet Co</a>
             {" · "}
-            Boise ADU Co (website coming soon; requests through P5)
+            Boise ADU Co (projects currently run through{" "}
+            <a href="https://boiseconstruction.co" className="underline underline-offset-2 transition-colors hover:text-inverse-foreground">Boise Construction Co</a>
+            ; site coming)
           </p>
         </div>
 

@@ -19,7 +19,6 @@ AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
-import { GRAIN_URL } from '@/lib/grain';
 import { buildPageMetadata } from '@/lib/page-metadata';
 import {
 generateBreadcrumbSchema,
@@ -65,12 +64,12 @@ const CONTACT_FAQS = [
   {
     question: 'How do I get a cost estimate for my job?',
     answer:
-      'Send photos and your task list for a preliminary planning range, then get a firm upfront quote. Nothing is scheduled until you approve.',
+      'Send photos and your task list. We review the scope before preparing a written quote. Nothing is scheduled until you approve.',
   },
 ];
 
 const SPEAKABLE_SUMMARY =
-  `Contact ${SITE_CONFIG.name} for an upfront handyman quote. Send your task list with photos for an upfront quote, or call or text our team to explore a range for your repair, install, or maintenance job.`;
+  `Contact ${SITE_CONFIG.name} for a written handyman quote. Send your task list with photos, or call or text our team. You get one written price before work starts.`;
 
 function HeroBreadcrumbs() {
   const items = [
@@ -229,7 +228,7 @@ export default function ContactPage() {
             >
               Prefer to text? Message us instead
             </a>
-            <div className="interior-contact-actions"><InteriorEstimateLink label="Request a quote" href="/contact#consult"/><a href="#consult" className="interior-text-link">Request a handyman visit</a></div>
+            <div className="interior-contact-actions"><InteriorEstimateLink label="Send your list and photos" href="/contact#consult"/><a href="#consult" className="interior-text-link">Request a handyman visit</a></div>
             <dl className="ed-hero-facts">
               {HERO_STATS.map((stat) => (
                 <div key={stat.label}>
@@ -345,25 +344,21 @@ export default function ContactPage() {
         {/* ─── What to expect split ─── */}
         <Section variant="canvas" spacing="none" divider className="p-0">
           <div className="grid md:grid-cols-2 overflow-hidden">
-            <div className="relative min-h-[260px] md:min-h-[520px] overflow-hidden bg-inverse order-2 md:order-1">
+            <div className="bg-inverse order-2 md:order-1">
+              {/* People photo: contain / intrinsic - never cover-crop heads or bodies */}
               <Image
                 src={SITE_IMAGES.leadership}
                 alt="A handyman and a homeowner reviewing a clipboard at a front door"
-                fill
+                width={1461}
+                height={1076}
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover img-brand-grade"
+                className="h-auto w-full"
+                style={{ objectFit: "contain" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ backgroundImage: GRAIN_URL, backgroundRepeat: 'repeat', opacity: 0.028 }}
-              />
-              <div className="absolute bottom-0 left-0 p-8 md:p-12">
-                <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>Your quote includes</p>
-                <p className="font-sans font-light text-xl md:text-2xl text-inverse-foreground">
-                  No pressure.
-                  <br />
-                  No pitch. Just answers.
+              <div className="px-8 py-8 md:px-12 md:py-10">
+                <p className="ed-eyebrow text-muted-foreground">Your quote includes</p>
+                <p className="font-sans font-light text-xl md:text-2xl text-foreground">
+                  No pressure. No pitch. Just answers.
                 </p>
               </div>
             </div>

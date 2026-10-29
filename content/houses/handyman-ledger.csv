@@ -1,0 +1,8 @@
+file,shot,reference_used,check_passed_by,date
+kuna-single-storey-front.webp,master-front,prompt-10.7-handyman,agent-bc-43c5fb8a,2026-10-28
+kuna-deck-board-replacement.webp,deck-boards-no-people,kuna-single-storey-front.webp,agent-bc-43c5fb8a,2026-10-28-quality-pass
+kuna-fence-gate-latch.webp,fence-latch-no-people,kuna-single-storey-front.webp,agent-bc-43c5fb8a,2026-10-28-quality-pass
+kuna-tv-mount.webp,tv-mount-no-people,kuna-single-storey-front.webp,agent-bc-43c5fb8a,2026-10-28-quality-pass
+kuna-drywall-patch.webp,drywall-patch-no-people,kuna-single-storey-front.webp,agent-bc-43c5fb8a,2026-10-28-quality-pass
+kuna-gutter-cleaning.webp,gutter-cleaning-no-people,kuna-single-storey-front.webp,agent-bc-43c5fb8a,2026-10-28-quality-pass
+kuna-water-heater-garage.webp,garage-water-heater-no-people,kuna-single-storey-front.webp,agent-bc-43c5fb8a,2026-10-28-quality-pass

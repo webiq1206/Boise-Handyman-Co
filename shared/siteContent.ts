@@ -14,21 +14,21 @@ export const SITE_TAGLINE = "Treasure Valley handyman service, built on upfront 
 export const HERO_EYEBROW = "Boise Handyman · Treasure Valley";
 
 // The hero subhead doubles as the homepage's extractable answer block: what we
-// do, where, and how pricing works, in one readable sentence pair. Pricing
-// figures are placeholders: [NEEDS: real pricing confirmation].
+// do, where, and how pricing works, in one readable sentence pair. D4: lead
+// with the written-quote promise; do not explain hourly pricing without a rate.
 export const HERO_SUBHEAD =
-  "Boise Handyman Co handles small repairs, installs, and maintenance for homes in Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley. One upfront written quote before any work starts, and most jobs finished in a single visit.";
+  "Boise Handyman Co handles small repairs, installs, and maintenance for homes in Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley. One upfront written quote before any work starts, with the visit plan agreed after we review the tasks.";
 
 export const HERO_STATS = [
-  { num: "Upfront quote", label: "Planning range after photos" },
-  { num: "Upfront", label: "Quote before work starts" },
-  { num: "Your list", label: "Visits planned around the agreed scope" },
+  { num: "before work starts", label: "Written quote" },
+  { num: "one hour", label: "Minimum" },
+  { num: "after scope review", label: "Visit plan" },
 ] as const;
 
 export const DIFFERENTIATORS_HEADLINE = "Built for people whose small jobs keep getting ignored";
 
 export const DIFFERENTIATORS_INTRO =
-  "Most people we meet have the same story: contractors who never called back because the job was too small, a vague quote that grew once the work started, or a fix that needed a second and third visit. We built our process around the opposite. Small jobs taken seriously, an upfront quote before any work starts, and one person who shows up with the right materials to finish in a single trip.";
+  "Most people we meet have the same story: contractors who never called back because the job was too small, a vague quote that grew once the work started, or a fix that needed a second and third visit. We built our process around the opposite. Small jobs taken seriously, an upfront quote before any work starts, and a visit plan based on the work and materials needed.";
 
 export interface Differentiator {
   title: string;
@@ -53,7 +53,7 @@ export const DIFFERENTIATORS: Differentiator[] = [
   {
     title: "One trip whenever the job allows it",
     contrast: "Instead of a look-around visit, a parts visit, and a someday follow-up,",
-    body: "we ask the right questions and request photos up front, so we arrive with the materials and hardware the job actually needs. Most repairs and installs are finished the first time we visit.",
+    body: "we ask the right questions and request photos up front, so we arrive with the materials and hardware the job actually needs. The scope, materials and drying times determine whether follow-up visits are needed.",
   },
   {
     title: "One person accountable for the fix",
@@ -110,21 +110,20 @@ export const PROOF_STATS = {
 export const TRUST_ITEMS = [
   "Locally Owned",
   "Upfront Quotes",
-  "Hourly + Trip Fee Pricing",
-  "One-Trip Fixes",
+  "No trip fee in Ada and Canyon County",
+  "Agreed Visit Plan",
   "Tidy Job Sites",
-  "Ada & Canyon County",
+  "Idaho Registered Contractor #8381215",
 ];
 
-export const HOW_P5_WORKS_TITLE = "How P5 works";
+export const HOW_P5_WORKS_TITLE = "What you can count on";
 export const HOW_P5_WORKS = [
   "Own install crew",
   "Bonded & insured",
   "Manufacturer warranties passed through on parts we supply",
   "Arrival time agreed and confirmed before we head out",
-  "Upfront quote before work starts",
-  "Free quotes from photos, no pressure",
-  "Public representative: Nick Perkins",
+  "Written quote before work starts",
+  "Photos help us review the scope before quoting",
 ] as const;
 
 export const PROMISE_ITEMS = [
@@ -208,7 +207,7 @@ export const HOW_WE_BUILD_STEPS = [
   {
     number: "04",
     title: "One-trip fix",
-    desc: "We show up with the parts the job needs and work through your list. Most repairs and installs are finished in a single visit.",
+    desc: "We show up with the parts the job needs and work through your list. The task list, materials and drying times determine the visits needed.",
   },
   {
     number: "05",
@@ -261,16 +260,16 @@ export const OPTIONAL_ENHANCEMENTS = {
 
 export const BUDGET_GUIDANCE_POINTS = [
   {
-    title: "A range first, then a firm quote",
-    body: "The online estimator gives you a preliminary planning range for your kind of job. Once we see photos or the task itself, that range becomes a firm upfront quote you approve before work starts.",
+    title: "One written price before work starts",
+    body: "Send your list and photos. We review the scope before preparing a written quote. You approve that price before anyone opens a toolbox.",
   },
   {
-    title: "Priced by the time the job takes",
-    body: "Your quote reflects the time the work takes, with a one-hour minimum per visit. Book several tasks in one visit and each extra task only adds its own time, which is why a list is the best value.",
+    title: "Materials at cost, no trip fee",
+    body: "Parts and materials appear on the quote as their own line, at what they cost. There is no trip fee in Ada and Canyon County. A one-hour minimum applies per visit, and bundling tasks into one trip is usually the best value.",
   },
   {
-    title: "Materials as their own line",
-    body: "Parts and materials appear on the quote separately, at what they cost. You are welcome to supply your own, or we pick them up on the way for the time it takes.",
+    title: "You can supply the parts",
+    body: "Bring your own fixture, paint, or hardware, or ask us to pick them up on the way. Either way, materials stay visible on the quote instead of folded into a mystery number.",
   },
   {
     title: "Changes agreed before they happen",
@@ -329,9 +328,9 @@ export const VALUE_MODEL = {
   headlineB: "not the",
   accentWord: "overhead",
   costs: "A franchise fee. A call center in another state. Wrapped trucks and a dispatcher who has never held a drill.",
-  costsBody: "None of it is free. It gets folded into a minimum charge and an inflated hourly rate, whether your job needed any of it or not.",
+  costsBody: "None of it is free. It gets folded into a minimum charge and padded pricing, whether your job needed any of it or not.",
   reframe:
-    "We built the company to leave that out. A small local operation keeps our costs low, so what you pay goes into the time and materials your repair actually takes - one fair written price and nothing padding the invoice.",
+    "We built the company to leave that out. A small local operation keeps our costs low, so what you pay goes into the time and materials your repair actually takes: one fair written price and nothing padding the invoice.",
   taglineLead: "Fair rates,",
   taglineAccent: "honest invoices",
 } as const;

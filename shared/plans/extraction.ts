@@ -1,278 +1,761 @@
-/**
- * The contract between reading an architectural plan set and the estimator.
- *
- * Deliberately the same shape as shared/re10/extraction.ts, for the same
- * reason: the extractor's job is to read what the drawings say, the estimator's
- * job is to price it, and the boundary here means either can be changed or
- * stubbed without the other knowing.
- *
- * WHAT THIS TARGETS. Residential plan sets in this market put the numbers the
- * estimator needs in the cover-sheet titleblock, in almost exactly this form:
- *
- *     PROJECT INFORMATION
- *     DESCRIPTION: SINGLE FAMILY RESIDENCE
- *     SCOPE:  LIVABLE:  1ST FLOOR 1,129 SF   2ND FLOOR 908 SF   TOTAL 2,037 SF
- *             NON-LIVABLE:  GARAGE 488 SF    COVERED EXT. SPACE 0 SF
- *
- * That is a verbatim reading of one of the sets this schema was built against.
- * So the fields below are the fields a cover sheet actually states, rather than
- * a wish list, and everything is nullable because a schematic set states far
- * less than a permit set.
- *
- * THE MOST IMPORTANT FIELD IS `isNewConstruction`. Two of the four plan sets
- * used to design this were remodels and additions, carrying EXISTING, DEMO and
- * NEW sheet series and a titleblock that reads "REMODEL SITE". Feeding one of
- * those to a new-home estimator would price an entire house where the client
- * asked for a kitchen expansion, so it is asked explicitly and the caller is
- * expected to stop rather than to price it anyway.
- */
-
-/** How sure the extractor is about a single reading. */
-export type PlanConfidence = "high" | "medium" | "low";
+import { TRADES, type StatedUnit, type Trade } from "../takeoff/units";
 
 /**
- * Everything worth pulling off a plan set, all optional.
+ * Reading a remodel or new-build plan set well enough to price it.
  *
- * Areas are in square feet as printed. Nothing here is derived: if the cover
- * sheet gives floor areas but no total, the total stays null and the caller
- * adds them, because a total the drawings never stated is a number nobody can
- * check against the paper.
+ * WHY THIS IS A DIFFERENT PROBLEM FROM THE RE-10. An RE-10 is a list of
+ * sentences; the risk is missing one. A plan set is a set of measurements, and
+ * the risk is getting one WRONG - which is worse, because a wrong measurement
+ * does not look wrong. It produces a confident, tidy, incorrect price, and the
+ * whole point of uploading plans is to earn a tighter number. A tight number
+ * built on a misread dimension is strictly worse than the wide one it replaced:
+ * a customer can plan around a wide range and cannot recover from a precise
+ * figure that is wrong.
+ *
+ * So every rule below exists to make the model's uncertainty VISIBLE rather
+ * than to squeeze more numbers out of it.
+ *
+ * THE NARROWING IS EARNED PER MEASUREMENT, NOT PER UPLOAD. Uploading a file
+ * buys nothing. A dimension that is printed on the drawing and can be quoted
+ * back tightens that item. A dimension that was inferred, paced off a scale
+ * bar, or guessed from context stays as wide as it would have been with no
+ * plans at all. Mixing those two would let a napkin sketch buy the same
+ * confidence as a stamped permit set.
  */
-export interface ExtractedPlan {
-  /** True when this is a ground-up new home rather than a remodel or addition. */
-  isNewConstruction: boolean;
-  /** What the drawings call the project, e.g. "SINGLE FAMILY RESIDENCE". */
-  description?: string | null;
-  projectAddress?: string | null;
 
-  /** Conditioned living area, excluding garage and covered outdoor space. */
-  livableSqft?: number | null;
-  /** Per-floor areas when stated, first floor first. */
-  floorAreas?: number[] | null;
-  storiesAboveGrade?: number | null;
-  /** Main-floor plate/ceiling height in feet, when the plans note it (8, 9, 10, 12). */
-  mainCeilingHeightFt?: number | null;
+/** Where a number came from. This drives how much the range may narrow. */
+export type MeasurementSource =
+  /** Printed on the drawing as a dimension string or schedule value. */
+  | "printed"
+  /** Computed from two or more printed dimensions (e.g. length x width). */
+  | "derived"
+  /** Read off the geometry against a stated scale. Much weaker. */
+  | "scaled"
+  /** The model's read of an unlabelled drawing. Treated as no better than a guess. */
+  | "inferred";
 
-  garageSqft?: number | null;
-  /**
-   * Car bays when the plans LABEL them ("3-CAR GARAGE", "RV BAY"), independent
-   * of area. Preferred over garageSqft when both are present: a stated bay count
-   * is exact, whereas an area has to be bucketed and a deep or tall bay throws
-   * the bucket off.
-   */
-  garageBays?: number | null;
-  /** Covered patio, covered deck, covered entry: roofed but not conditioned. */
-  coveredOutdoorSqft?: number | null;
+/**
+ * Only these two tighten anything.
+ *
+ * "scaled" is deliberately excluded. Scale misreads are the characteristic
+ * failure on drawings - a wrong scale bar produces numbers that are internally
+ * consistent and completely wrong, and nothing downstream can detect it.
+ */
+export const TRUSTWORTHY_SOURCES: readonly MeasurementSource[] = ["printed", "derived"];
 
-  bedrooms?: number | null;
-  /** Full bathrooms. Half baths are counted separately. */
-  fullBathrooms?: number | null;
-  halfBathrooms?: number | null;
+/**
+ * WHICH DRAWING A ROOM CAME OFF, WHICH IS A FACT RATHER THAN A JUDGEMENT.
+ *
+ * FOUND ON PRODUCTION, ON THE FIRST LIVE RUN. The same eighteen-sheet remodel
+ * was read twice and `inScope` came back differently each time: once with ten
+ * rooms (the new first floor), once with nineteen (the new first floor AND the
+ * existing first floor, which is the same physical floor drawn twice). The
+ * second read summed 3,056 SF for a 1,714 SF project. A coin flip was deciding
+ * a price.
+ *
+ * The cause is that `inScope` asks the model to make a judgement. `phase` asks
+ * it a question of fact instead: what does the sheet this room is drawn on
+ * represent? Models answer that reliably, because it is written in the sheet
+ * title. Scope is then decided in code, deterministically, from the phase.
+ */
+export type RoomPhase =
+  /** Drawn on an existing-conditions plan. The house as it stands today. */
+  | "existing"
+  /** Drawn on a demolition plan. Same footprint, marked for removal. */
+  | "demolition"
+  /** Drawn on a new / proposed / construction plan. This is what gets built. */
+  | "new"
+  /** Shown for context only: an adjacent unit, a site plan callout, a detail. */
+  | "reference";
 
-  /**
-   * Notable rooms beyond bedrooms and bathrooms, as labelled: office, den,
-   * bonus, loft, flex, mudroom, pantry, gym, theater, wine room. Carried for a
-   * COMPLETE picture of the scope, not for pricing: the estimate scales on area
-   * and finish, not on a room list. Empty when the plans are unlabelled.
-   */
-  rooms?: string[] | null;
-
-  /**
-   * Cost- or scope-relevant features drawn or scheduled: fireplaces, uncovered
-   * decks, porches, patios, an outdoor kitchen, a pool, tall or vaulted
-   * ceilings, an elevator. Free text as read. Informational for the builder;
-   * only the ones with their own estimator input change the number.
-   */
-  specialFeatures?: string[] | null;
-
-  /** "none" when the drawings show a slab or crawlspace and no basement. */
-  basement?: "none" | "unfinished" | "finished" | null;
-
-  /** Separate buildings drawn on the site plan. */
-  accessoryStructures?: ExtractedStructure[] | null;
-
-  /** Per-field confidence, so a low reading can be flagged for confirmation. */
-  confidence: PlanConfidence;
-  /** Anything a human should know: unreadable sheets, conflicts, missing pages. */
-  notes: string[];
+export interface PlanRoom {
+  /** Room name exactly as labelled on the plan. */
+  name: string;
+  /** Floor area in square feet, or null if it is not determinable. */
+  areaSqFt: number | null;
+  /** How the area was arrived at. */
+  areaSource: MeasurementSource;
+  /** Dimension string quoted verbatim from the sheet, e.g. "12'-6\" x 14'-0\"". */
+  dimensionText: string | null;
+  /** Ceiling height in feet if stated. */
+  ceilingHeightFt: number | null;
+  /** Sheet this came from, e.g. "A2.1". */
+  sheet: string | null;
+  /** Which drawing this room was read off. Drives scope; see RoomPhase. */
+  phase: RoomPhase;
+  /** Which storey, so a two-storey house is not read as one floor. */
+  level: string | null;
+  /** True when this room is inside the work rather than shown for reference. */
+  inScope: boolean;
 }
 
-export interface ExtractedStructure {
-  /** Free text as drawn: "SHOP", "DETACHED GARAGE", "ADU", "BARN". */
+export interface PlanCounts {
+  /** Counted from a schedule where possible, from the plan otherwise. */
   label: string;
-  sqft?: number | null;
-  attached?: boolean | null;
+  count: number;
+  source: MeasurementSource;
+  sheet: string | null;
 }
 
 /**
- * The JSON schema the model is constrained to.
+ * A piece of work the drawings call for that is not a room area.
  *
- * `additionalProperties: false` throughout, and every numeric field is nullable
- * so "the drawings do not say" has a representation that is not zero. Zero and
- * null are different answers here: a cover sheet stating COVERED EXT. SPACE 0 SF
- * is a fact, and a set that never mentions covered space is not.
+ * WHY THIS EXISTS. Everything the extractor learned about the actual scope used
+ * to die in a free-text `scopeNotes` array that nothing read. On the Gambardella
+ * permit set that discarded the demolition schedule, a 1-hour rated garage wall,
+ * new structural steel, a driveway widening and 50 cubic yards of cut. On the
+ * Squier remodel it discarded a gas fireplace, a TV lift, a built-in bed, a
+ * double shower with a linear drain and a washer/dryer rough-in. A price built
+ * from floor area alone silently omits all of it.
  *
- * CONFORMS TO WHAT THE ANTHROPIC STRUCTURED-OUTPUT VALIDATOR ACCEPTS, which is
- * narrower than JSON Schema at large and is the reason this file mirrors the
- * shape of the working RE-10 schema rather than the richer form it started as.
- * Two constructs it rejects, learned the hard way against the live API: an array
- * typed `["array","null"]` (arrays are a plain `"array"` and made required, so
- * "none" is an empty array, never null), and `null` listed inside an `enum`
- * (nullable-by-omission instead - the field is left out of `required` and simply
- * absent when unknown). A schema using either fails the request in about a
- * second, before the model reads a single page.
+ * `inContract: false` is the other half and matters just as much. Drawings
+ * routinely mark work "by others", "separate permit" or "NIC" - the Squier patio
+ * deck and the Gambardella greenhouse and swim spa are all somebody else's job.
+ * Pricing those would be as wrong as omitting the fireplace.
+ */
+export type ScopeCategory =
+  | "demolition"
+  | "structural"
+  | "envelope"
+  | "plumbing"
+  | "electrical"
+  | "hvac"
+  | "finishes"
+  | "millwork"
+  | "appliance"
+  | "site";
+
+export interface PlanScopeItem {
+  category: ScopeCategory;
+  /** Quoted from the sheet, or closely paraphrased. Never invented. */
+  description: string;
+  sheet: string | null;
+  /** False when the drawings hand this to someone else. */
+  inContract: boolean;
+  /**
+   * HOW THIS ITEM COUNTS COMMERCIALLY, which `inContract` alone cannot say.
+   *
+   * A drawing set distinguishes four things that a single boolean flattens
+   * into two, and flattening them is how a customer ends up believing an
+   * alternate was quoted:
+   *
+   * - "base": ordinary work, in the price.
+   * - "allowance": a budget line the drawings set for a selection nobody has
+   *   made yet ("plumbing fixtures allowance $14,000"). Real money, but a
+   *   PLACEHOLDER, and the final figure moves with the selection.
+   * - "alternate": deliberately priced SEPARATELY and NOT in the base bid.
+   *   Pricing one into the total overstates the job; ignoring it entirely
+   *   loses a request the customer made.
+   * - "optional": shown as a possibility the owner may or may not take.
+   *
+   * Anything the drawings hand to somebody else stays `inContract: false` and
+   * is reported as excluded regardless of this field.
+   */
+  commercialStatus: "base" | "allowance" | "alternate" | "optional";
+  /**
+   * WHAT THERE IS OF IT, in a unit a rate card can multiply.
+   *
+   * Descriptions alone produced excellent prose and nothing priceable: "main
+   * bar millwork, 18'-2 3/4" long x 3'-6" high" is a takeoff a human still
+   * has to do. Quantity plus unit is a takeoff the engine can price.
+   *
+   * ZERO means the drawings did not state enough to measure this item. That
+   * is a normal outcome and must never be filled in with a guess - an item
+   * with no quantity is reported as needing a measurement, which is honest,
+   * where an invented one is a wrong number nobody can see is wrong.
+   *
+   * Both fields are deliberately non-nullable: structured outputs cap a schema
+   * at 16 union-typed parameters and this one already sits exactly at the
+   * limit. See the note on statedAmount below.
+   */
+  quantity: number;
+  unit: StatedUnit;
+  /** Who does the work. Drives which section of the rate book applies. */
+  trade: Trade;
+  /**
+   * Dollar figure the drawings state for an allowance. ZERO means not stated.
+   *
+   * Deliberately not nullable. Structured outputs cap a schema at 16
+   * union-typed parameters and this set was already at the line: adding one
+   * more `["number", "null"]` took it to 17 and the API rejected every
+   * request outright. Zero is unambiguous here because an allowance of zero
+   * dollars is not a thing a drawing sets.
+   */
+  statedAmount: number;
+}
+
+/**
+ * Facts about the work, asked as facts rather than as ratings.
+ *
+ * The estimator wants "layoutChanges: moderate" and "plumbingElectrical: full",
+ * which are judgements with a house style behind them. Asking a model to make
+ * that call directly produces drift between runs. Asking whether a wall is
+ * coming out is a question the drawing answers in one hatch pattern, so these
+ * are booleans and the ratings are derived from them in code.
+ *
+ * null means the drawings do not say, which is different from "no" and must not
+ * be collapsed into it.
+ */
+export interface PlanScopeFacts {
+  /** Walls removed, added or relocated. The single biggest cost driver. */
+  wallsRemovedOrAdded: boolean | null;
+  /** Sinks, toilets, tubs or showers moving to a new location. */
+  plumbingFixturesRelocated: boolean | null;
+  /** New panel, service upgrade, or circuits substantially rerun. */
+  electricalServiceOrPanelWork: boolean | null;
+  /** New beams, headers, footings, posts or engineered members. */
+  structuralWork: boolean | null;
+  /** Ducting, equipment or a new system. */
+  hvacWork: boolean | null;
+  /** Windows, exterior doors, siding, roof: anything on the envelope. */
+  exteriorEnvelopeWork: boolean | null;
+  /** A kitchen is inside the work. */
+  kitchenInScope: boolean | null;
+}
+
+export interface PlanExtractionResult {
+  /** True when this reads as a construction drawing set at all. */
+  looksLikePlans: boolean;
+  /** New construction changes what is priced; a remodel carries demolition. */
+  projectType: "new-build" | "remodel" | "addition" | "unclear";
+  /** Total conditioned area if the drawings state one. */
+  statedTotalSqFt: number | null;
+  /** Sum of the extracted room areas. Compared against the above as a check. */
+  roomAreaTotalSqFt: number | null;
+  rooms: PlanRoom[];
+  /** Doors, windows, plumbing fixtures, and anything else countable. */
+  counts: PlanCounts[];
+  /** Every piece of work the drawings call for that is not a room area. */
+  scopeItems: PlanScopeItem[];
+  /** The cost-driving facts, asked as facts. See PlanScopeFacts. */
+  scopeFacts: PlanScopeFacts;
+  /** Sheets that carried the pricing-relevant content. */
+  sheetsUsed: string[];
+  /** Scope statements found in the general notes or demolition plan. */
+  scopeNotes: string[];
+  /** Anything a human must resolve: unreadable sheets, conflicts, missing pages. */
+  warnings: string[];
+}
+
+/**
+ * FIELD ORDER IS LOad-BEARING HERE, WHICH IS NOT OBVIOUS.
+ *
+ * Found on the 42-sheet Gambardella permit set. The read came back with 46
+ * rooms and then EMPTY counts, warnings, sheetsUsed, scopeNotes and scopeItems
+ * - every single field declared after `rooms`. It was not truncation: output
+ * was 4,424 tokens against a 32,000 ceiling, so the model chose to stop. It had
+ * simply spent its effort enumerating rooms and treated the rest as done.
+ *
+ * `rooms` is the one field whose size scales with the drawing set, and `phase`
+ * roughly doubled it, because a remodel draws each floor existing AND new. So
+ * it now goes LAST, after the small high-value fields. Everything that decides
+ * how the job is priced gets written while the model is still paying attention,
+ * and the list that can balloon can no longer starve them.
  */
 export const PLAN_EXTRACTION_SCHEMA = {
   type: "object",
+  additionalProperties: false,
   properties: {
-    isNewConstruction: {
-      type: "boolean",
+    looksLikePlans: { type: "boolean" },
+    projectType: { type: "string", enum: ["new-build", "remodel", "addition", "unclear"] },
+    statedTotalSqFt: { type: ["number", "null"] },
+    roomAreaTotalSqFt: { type: ["number", "null"] },
+    scopeItems: {
+      /**
+       * THE DESCRIPTION LIVES HERE, NOT ONLY IN THE SYSTEM PROMPT.
+       *
+       * On the 42-sheet permit set this came back empty twice, while the seven
+       * bounded booleans beside it were answered every time - and it was not
+       * starvation, because by then it was the fifth field generated with three
+       * times the output budget. An unbounded "list every piece of work across
+       * forty-two sheets" is a task a model will decline rather than half-do.
+       * A target and a priority order turn it into something finishable, and
+       * the schema is where that instruction is actually read.
+       */
       description:
-        "True only if this is a ground-up new home. False for a remodel, addition, tenant improvement, or any set carrying EXISTING/DEMO sheet series or describing work to a house that already stands.",
-    },
-    description: { type: ["string", "null"], description: "The project description as printed, e.g. 'SINGLE FAMILY RESIDENCE'." },
-    projectAddress: { type: ["string", "null"] },
-
-    livableSqft: {
-      type: ["number", "null"],
-      description:
-        "Conditioned living area in square feet, as printed. Usually labelled LIVABLE, HEATED, or FINISHED. Excludes garage and covered outdoor space. Null if not stated.",
-    },
-    floorAreas: {
-      type: "array",
-      items: { type: "number" },
-      description: "Per-floor living areas in order, ground floor first, only when the set states them separately. Empty array if only a total is given.",
-    },
-    storiesAboveGrade: { type: ["number", "null"], description: "Count of storeys of living space above grade. A basement does not count." },
-    mainCeilingHeightFt: {
-      type: ["number", "null"],
-      description:
-        "Main-floor plate or ceiling height in feet if the plans note it (commonly 8, 9, 10, or 12). Null if not stated.",
-    },
-
-    garageSqft: { type: ["number", "null"], description: "Garage area in square feet as printed. Null if not stated." },
-    garageBays: {
-      type: ["number", "null"],
-      description:
-        "Number of car bays when the plans LABEL them, e.g. a '3-CAR GARAGE' title is 3. Report this whenever a bay count is stated, even if you also give garageSqft. Null if only an area or nothing is given.",
-    },
-    coveredOutdoorSqft: {
-      type: ["number", "null"],
-      description:
-        "Roofed but unconditioned outdoor area: covered patio, covered deck, covered entry, covered porch. Sum them if several are stated. Use 0 only if the set explicitly states zero.",
-    },
-
-    bedrooms: { type: ["number", "null"], description: "Count rooms labelled as bedrooms on the floor plans." },
-    fullBathrooms: { type: ["number", "null"], description: "Bathrooms with a shower or tub." },
-    halfBathrooms: { type: ["number", "null"], description: "Powder rooms: toilet and basin only." },
-    rooms: {
-      type: "array",
-      items: { type: "string" },
-      description:
-        "Notable rooms beyond bedrooms and bathrooms, exactly as labelled on the floor plans: office, den, bonus room, loft, flex, mudroom, pantry, gym, theater, wine room, shop, RV bay. List every one you can read. Empty array if the plans are unlabelled.",
-    },
-    specialFeatures: {
-      type: "array",
-      items: { type: "string" },
-      description:
-        "Cost- or scope-relevant features drawn or scheduled: each fireplace, uncovered deck, porch, patio, outdoor kitchen, pool, vaulted or tall ceiling, elevator, solar. Free text as read. Empty array if none.",
-    },
-
-    basement: {
-      type: "string",
-      enum: ["none", "unfinished", "finished"],
-      description:
-        "'finished' when the basement is drawn as living space, 'unfinished' when it is shell or storage, 'none' for slab or crawlspace. OMIT this field entirely if the drawings do not show the foundation type.",
-    },
-
-    accessoryStructures: {
+        "Every piece of work the drawings call for that is not a room area. Aim for 15 to 40 entries on a full permit set and at least 5 on any set showing construction; list the highest-cost work first (structural, envelope, demolition, mechanical) and stop when the remaining items are trivial. An empty array means the drawings show no work at all, which is almost never true.",
       type: "array",
       items: {
         type: "object",
-        properties: {
-          label: { type: "string", description: "As labelled on the drawings: SHOP, DETACHED GARAGE, ADU, BARN, POOL HOUSE." },
-          sqft: { type: ["number", "null"] },
-          attached: { type: "boolean", description: "True if it shares a wall with the house. Omit if the drawings do not make it clear." },
-        },
-        required: ["label"],
         additionalProperties: false,
+        properties: {
+          category: {
+            type: "string",
+            enum: [
+              "demolition",
+              "structural",
+              "envelope",
+              "plumbing",
+              "electrical",
+              "hvac",
+              "finishes",
+              "millwork",
+              "appliance",
+              "site",
+            ],
+          },
+          description: { type: "string" },
+          sheet: { type: ["string", "null"] },
+          inContract: { type: "boolean" },
+          commercialStatus: {
+            type: "string",
+            enum: ["base", "allowance", "alternate", "optional"],
+            description:
+              'How the drawings treat this commercially. "allowance" when a budget figure is set for a selection not yet made (the sheet usually says ALLOWANCE and a dollar amount). "alternate" when it is to be priced separately and is NOT in the base bid (ALTERNATE No. 1, ADD ALTERNATE, PRICE SEPARATELY). "optional" when shown as a possibility the owner may not take. "base" for ordinary work. Use "base" unless the sheet actually says otherwise; do not infer an alternate from the fact that work looks discretionary.',
+          },
+          quantity: {
+            type: "number",
+            description:
+              "How much of it there is, in the unit below. Convert drawing dimensions to decimals (18'-2 3/4\" is 18.23 LF). Use 0 when the sheets do not state enough to measure it - NEVER estimate, and never infer a quantity from a similar item elsewhere.",
+          },
+          unit: {
+            type: "string",
+            enum: ["EA", "LF", "SF", "SY", "CY", "TON", "LB", "HR", "LS", ""],
+            description:
+              'The unit the quantity is in. EA for countable things (doors, casework units, fixtures), LF for runs (bar fronts, trim, countertops), SF for areas, LS for scope with no natural unit. Use "" when quantity is 0.',
+          },
+          trade: {
+            type: "string",
+            enum: TRADES,
+            description:
+              "Which trade does this work. Casework, bars, built-ins, shelving and architectural woodwork are \"millwork\". Baseboard, casing and door hanging are \"finish-carpentry\".",
+          },
+          statedAmount: {
+            type: "number",
+            description:
+              "The dollar figure the drawings state for an allowance. Use 0 when no figure is stated. Never estimate one.",
+          },
+        },
+        required: [
+          "category", "description", "sheet", "inContract",
+          "commercialStatus", "quantity", "unit", "trade", "statedAmount",
+        ],
       },
-      description:
-        "Separate buildings drawn on the site plan. Empty array if there are none. Do NOT include the attached garage here; that is garageSqft. Omit structures the plans note as existing and not part of this work.",
     },
-
-    confidence: {
-      type: "string",
-      enum: ["high", "medium", "low"],
-      description:
-        "'high' only when a titleblock or area schedule states the numbers outright. 'low' when you had to read them off the drawings or interpret.",
+    scopeFacts: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        wallsRemovedOrAdded: { type: ["boolean", "null"] },
+        plumbingFixturesRelocated: { type: ["boolean", "null"] },
+        electricalServiceOrPanelWork: { type: ["boolean", "null"] },
+        structuralWork: { type: ["boolean", "null"] },
+        hvacWork: { type: ["boolean", "null"] },
+        exteriorEnvelopeWork: { type: ["boolean", "null"] },
+        kitchenInScope: { type: ["boolean", "null"] },
+      },
+      required: [
+        "wallsRemovedOrAdded",
+        "plumbingFixturesRelocated",
+        "electricalServiceOrPanelWork",
+        "structuralWork",
+        "hvacWork",
+        "exteriorEnvelopeWork",
+        "kitchenInScope",
+      ],
     },
-    notes: {
+    counts: {
       type: "array",
-      items: { type: "string" },
-      description: "Anything a human should know: pages that would not render, conflicting area figures, a set that stops at schematic.",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          label: { type: "string" },
+          count: { type: "number" },
+          source: { type: "string", enum: ["printed", "derived", "scaled", "inferred"] },
+          sheet: { type: ["string", "null"] },
+        },
+        required: ["label", "count", "source", "sheet"],
+      },
+    },
+    sheetsUsed: { type: "array", items: { type: "string" } },
+    scopeNotes: { type: "array", items: { type: "string" } },
+    warnings: { type: "array", items: { type: "string" } },
+    rooms: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          name: { type: "string" },
+          areaSqFt: { type: ["number", "null"] },
+          areaSource: { type: "string", enum: ["printed", "derived", "scaled", "inferred"] },
+          dimensionText: { type: ["string", "null"] },
+          ceilingHeightFt: { type: ["number", "null"] },
+          sheet: { type: ["string", "null"] },
+          phase: { type: "string", enum: ["existing", "demolition", "new", "reference"] },
+          level: { type: ["string", "null"] },
+          inScope: { type: "boolean" },
+        },
+        required: [
+          "name",
+          "areaSqFt",
+          "areaSource",
+          "dimensionText",
+          "ceilingHeightFt",
+          "sheet",
+          "phase",
+          "level",
+          "inScope",
+        ],
+      },
     },
   },
-  // Arrays are required and non-nullable, matching the working RE-10 schema: the
-  // model always returns them, empty when there is nothing to report, so "none"
-  // is [] rather than a missing or null field. Scalars stay optional and
-  // nullable, which the validator does accept.
   required: [
-    "isNewConstruction",
-    "floorAreas",
+    "looksLikePlans",
+    "projectType",
+    "statedTotalSqFt",
+    "roomAreaTotalSqFt",
     "rooms",
-    "specialFeatures",
-    "accessoryStructures",
-    "confidence",
-    "notes",
+    "counts",
+    "scopeItems",
+    "scopeFacts",
+    "sheetsUsed",
+    "scopeNotes",
+    "warnings",
   ],
-  additionalProperties: false,
 } as const;
 
+export const PLAN_EXTRACTION_SYSTEM_PROMPT = `You read residential construction drawings for a Boise remodeling contractor and return the measurements needed to price the work.
+
+WHAT MATTERS MOST: being right, not being complete. A measurement you are unsure of is worth less than no measurement at all, because a wrong number produces a confident wrong price. When in doubt, return null and say why in warnings.
+
+HOW TO SOURCE EVERY NUMBER. Tag each measurement with where it came from:
+- "printed": the number is written on the drawing - a dimension string, a room area tag, a schedule value. Quote it in dimensionText exactly as printed.
+- "derived": you multiplied or added printed dimensions. Only when every input was printed.
+- "scaled": you measured against a scale bar or drawing scale. Use this honestly; it will be treated as unreliable.
+- "inferred": you judged it from the drawing without a printed number. Use this rather than pretending a number was printed.
+
+NEVER upgrade a source. If a room has no printed dimension, its area is "scaled" or "inferred" even when your estimate feels good. The whole system depends on this being truthful, and it is checked.
+
+WHICH SHEETS TO USE. Floor plans, demolition plans, and schedules (door, window, finish, plumbing fixture, electrical) carry what matters. Structural details, foundation sections, elevations and general notes usually do not. Record the sheet number each measurement came from, and list the sheets you actually used.
+
+PHASE, WHICH IS THE MOST IMPORTANT FIELD ON A REMODEL. For every room, report which drawing you read it off:
+- "existing": an existing-conditions or as-built plan. The house as it stands today.
+- "demolition": a demolition plan.
+- "new": a new, proposed, construction or permit floor plan. What actually gets built.
+- "reference": shown for context only - a neighbouring unit, a site-plan callout, a detail.
+
+A REMODEL SET USUALLY DRAWS THE SAME FLOOR TWICE, once existing and once new, and the two sheets show THE SAME PHYSICAL ROOMS before and after. Report both, each tagged with its own phase and its own sheet. Never merge them and never leave the phase off. A set that shows "EXISTING FIRST FLOOR" on A103 and "NEW FIRST FLOOR" on A105 has two floor plans of one floor, not two floors.
+
+Also report "level" for every room - "Basement", "Main", "Second", "Upper" - exactly as the sheet labels it, so a two-storey house is not read as one floor.
+
+SCOPE. Set inScope true for rooms inside the work. On a remodel that is the "new" phase rooms. Rooms shown only as existing, or marked "existing to remain", "not altered", "not in contract", are inScope false. If the drawings do not make the boundary clear, say so in warnings rather than guessing.
+
+CONSISTENCY. Report statedTotalSqFt if the drawings state a total conditioned area, and roomAreaTotalSqFt as the sum of the room areas you extracted. Do not adjust either to make them agree - a disagreement is information.
+
+COUNTS. Count doors, windows, and plumbing fixtures from the schedule when there is one, and from the plan when there is not. Say which in source.
+
+SCOPE ITEMS - CAPTURE THE WHOLE JOB, NOT JUST THE FLOOR AREA. A price built from square footage alone silently omits most of what a drawing set actually asks for. Go through the sheets and list every piece of work you can see, in scopeItems, each with the category it belongs to and the sheet it came from. Include at minimum:
+- demolition: walls, floors, roofs, decks, cabinetry, fixtures being removed
+- structural: new beams, headers, posts, footings, engineered members, shear walls
+- envelope: windows, exterior doors, siding, roofing, insulation, waterproofing
+- plumbing, electrical, hvac: new or relocated fixtures, panels, equipment, ducting
+- finishes: flooring, tile, paint, trim called out on the sheets
+- millwork: built-ins, custom cabinetry, benches, shelving, specialty items
+- appliance: anything with a connection called out
+- site: driveways, patios, retaining walls, grading, drainage
+
+Quote or closely paraphrase what the sheet says. Do not invent work that is not drawn or noted.
+
+HOW MANY. Aim for 15 to 40 items on a full permit set, and at least 5 on any set that shows construction at all. Work the highest-cost trades first - structural, envelope, demolition, mechanical - and stop once what is left is trivial. You are not required to be exhaustive across every sheet; you ARE required not to return an empty list on a set that plainly shows work, because downstream that reads as a project with nothing in it.
+
+SCOPE ITEMS AND SCOPE NOTES ARE NOT THE SAME FIELD, AND THIS IS THE ONE MISTAKE THAT KEEPS HAPPENING. Every piece of WORK goes in scopeItems, one entry each, structured. scopeNotes is only for context about the drawing set itself: the project name, the architect, which sheets are present, drafting conventions, what a legend means. A sentence in scopeNotes such as "the legend indicates new floor joists, new headers and beams, new partition walls and existing construction to be demolished" is FIVE scope items that have been written in the wrong place, and downstream nothing can price them. If you can point at work on a sheet, it belongs in scopeItems. If scopeItems comes back empty on a set that clearly shows construction, that is an error, not an empty project.
+
+WORK THE DRAWINGS HAND TO SOMEONE ELSE. Set inContract false on any item marked "by others", "NIC", "not in contract", "separate permit", "by owner", or similar. These are real and must be listed - they are what the customer will otherwise assume is included - but they are not ours to price. Pricing them would be as wrong as omitting the work that is ours.
+
+SCOPE FACTS. Answer each of the scopeFacts questions from what is drawn. These decide how the work is priced, so answer them as facts, not impressions:
+- wallsRemovedOrAdded: does any wall move, come out, or get added?
+- plumbingFixturesRelocated: does a sink, toilet, tub or shower end up somewhere new?
+- electricalServiceOrPanelWork: a new panel, a service upgrade, or circuits substantially rerun?
+- structuralWork: new beams, headers, posts, footings or engineered members?
+- hvacWork: new equipment, ducting or a new system?
+- exteriorEnvelopeWork: anything touching windows, exterior doors, siding or roof?
+- kitchenInScope: is a kitchen inside the work?
+Use null for any of these the drawings genuinely do not settle. null means "the drawings do not say", which is different from "no", and guessing "no" would quietly remove real cost from the price.
+
+If this is not a construction drawing set, set looksLikePlans to false, explain in warnings, and do not invent measurements from whatever you can see.`;
+
 /**
- * What the extractor is told to do.
+ * Does the extraction hang together?
  *
- * Stated as prohibitions where it matters commercially. The expensive failure
- * mode is the same one the RE-10 extractor guards against: a confident number
- * the drawings never stated. Here it would set the square footage that the
- * entire estimate scales from, so a scaled-off guess is worse than a null.
+ * A misread scale produces numbers that are individually plausible and
+ * collectively wrong, so the check that catches it is not "is this number
+ * sensible" but "do two independent statements of the same fact agree". When
+ * the room areas and the stated total disagree materially, something was
+ * misread and nothing may be narrowed on the strength of it.
  */
-export const PLAN_EXTRACTION_SYSTEM_PROMPT = `You read residential architectural plan sets and permit drawings, and you extract the facts a home builder needs to produce a construction budget. Your job is to capture the COMPLETE scope of the project, not just its headline square footage.
+export const AREA_AGREEMENT_TOLERANCE = 0.12;
 
-READ THE ENTIRE SET FIRST
-Look at every page you were given before you answer: the cover sheet and its PROJECT INFORMATION / SCOPE / area block, the site plan, every floor plan, the roof plan, and any door, window, or room schedule. A plan set describes one building across many sheets, and the thing that is easy to miss - a second storey, a bonus room over the garage, a detached shop on the site plan, a covered patio on the rear elevation - is exactly what a budget cannot afford to miss. Be exhaustive: it is better to list a room or structure and be corrected than to overlook it.
+/**
+ * The floor area of the home AS IT WILL BE, deduped by phase.
+ *
+ * THIS IS THE NUMBER THE CROSS-CHECK NEEDS, AND IT IS NOT THE IN-SCOPE SUM.
+ * Found by running the flow live: we ask the customer for the finished square
+ * footage of their home, then compared it against the sum of the rooms being
+ * remodelled. On a whole-house job those match. On the Squier set - a first
+ * floor reconfiguration of a two-storey house - the in-scope work is 1,714 SF
+ * of a home more than twice that size, so an honest answer to our own question
+ * would have failed the gate and blocked a near-perfect read.
+ *
+ * The two jobs were tangled together. Validating the READ needs a figure for
+ * the whole home; PRICING needs the in-scope subset. So this computes the
+ * former: take each level, prefer the new plan where one was drawn and fall
+ * back to the existing plan where one was not, and sum. On Squier that is the
+ * new first floor plus the existing second floor, which is exactly what the
+ * homeowner would describe. Demolition and reference sheets never contribute.
+ *
+ * It also kills the double count structurally. Existing and new plans of the
+ * same level can no longer both land in the total, whatever the model decided
+ * about scope, because only one phase per level is ever counted.
+ */
+/**
+ * Space a homeowner would not count in "finished square footage".
+ *
+ * FOUND ON THE FIRST CLEAN LIVE READ. Squier's second floor carries two roof
+ * decks tagged 665 and 161 SF, and counting them pushed the as-drawn figure to
+ * 3,459 SF against a house whose conditioned area is nearer 2,600. The
+ * cross-check would then have called a perfect read a disagreement, purely
+ * because a deck has a square footage printed on it.
+ *
+ * This filter applies ONLY to the cross-check, never to pricing. A garage
+ * conversion is real work and gets priced; it is just not what someone means
+ * when they tell you how big their house is.
+ */
+const UNCONDITIONED = /\b(deck|patio|porch|balcony|terrace|garage|carport|shed|crawl\s*space|attic)\b/i;
 
-WHERE THE NUMBERS USUALLY ARE
-Most residential sets state areas outright on the cover sheet, in a PROJECT INFORMATION or SCOPE block, in roughly this form:
+export function isConditionedSpace(room: PlanRoom): boolean {
+  return !UNCONDITIONED.test(room.name);
+}
 
-  SCOPE:  LIVABLE:  1ST FLOOR 1,129 SF   2ND FLOOR 908 SF   TOTAL 2,037 SF
-          NON-LIVABLE:  GARAGE 488 SF    COVERED EXT. SPACE 0 SF
+export function asDrawnFloorArea(result: PlanExtractionResult): number {
+  const usable = result.rooms.filter(
+    (r) =>
+      r.areaSqFt &&
+      r.areaSqFt > 0 &&
+      (r.phase === "new" || r.phase === "existing") &&
+      isConditionedSpace(r),
+  );
+  if (usable.length === 0) return 0;
 
-Prefer a stated figure over anything you work out yourself, every time. Check the cover sheet and any area schedule before reading areas off the floor plans.
+  const byLevel = new Map<string, PlanRoom[]>();
+  for (const r of usable) {
+    // An unlabelled level is its own bucket rather than everyone's, so a set
+    // that omits level labels degrades to "one floor" instead of merging a
+    // basement into a second storey.
+    const key = (r.level ?? "").trim().toLowerCase() || "unspecified";
+    if (!byLevel.has(key)) byLevel.set(key, []);
+    byLevel.get(key)!.push(r);
+  }
 
-NEVER INVENT A NUMBER
-- Give an area ONLY when the drawings state it or when you can read it from a dimensioned plan with confidence. If you cannot, use null.
-- Do not scale, estimate, or infer square footage from the look of a drawing. Square footage is what the whole budget scales from, so a plausible guess is far worse than no answer: it produces a confident price for a house that was never drawn.
-- Do not add floor areas together to produce a total the set does not state. Report the floors you found and leave the total null.
-- 0 and null are different answers. Use 0 only when the drawings explicitly say zero.
-- The one thing you MAY count rather than read off a schedule is discrete, labelled items: bedrooms, bathrooms, garage bays ("3-CAR GARAGE" is 3), fireplaces, and named rooms. Counting labels on the plan is reading, not inventing.
+  let total = 0;
+  for (const rooms of byLevel.values()) {
+    const fresh = rooms.filter((r) => r.phase === "new");
+    const chosen = fresh.length > 0 ? fresh : rooms.filter((r) => r.phase === "existing");
+    total += chosen.reduce((s, r) => s + (r.areaSqFt ?? 0), 0);
+  }
+  return total;
+}
 
-NEW CONSTRUCTION VERSUS REMODEL - READ THIS CAREFULLY
-Set isNewConstruction to FALSE if the set is for a remodel, addition, or alteration. Tell-tale signs: sheet series named EXISTING, DEMO, or NEW; a site plan labelled REMODEL SITE; notes such as "GARAGE NOT ALTERED DURING PROJECT" or "BASEMENT TO REMAIN UNCHANGED"; areas broken into EXISTING and NEW ADDITION; hatching that indicates existing construction to be demolished.
+/**
+ * Do two independent statements of the home's floor area agree?
+ *
+ * The check that catches a misread is not "is this number sensible" but "do two
+ * independent statements of the same fact agree". Both sides here describe the
+ * whole home: one from the drawings' own room tags, one from a total stated on
+ * the sheets or supplied by the person who lives there.
+ */
+export function areasAgree(result: PlanExtractionResult): boolean | null {
+  const stated = result.statedTotalSqFt;
+  if (!stated || stated <= 0) return null; // Nothing to cross-check against.
+  const drawn = asDrawnFloorArea(result);
+  if (drawn <= 0) return null; // Nothing read to check.
+  return Math.abs(drawn - stated) / stated <= AREA_AGREEMENT_TOLERANCE;
+}
 
-This matters more than anything else you report. These drawings are being used to budget a ground-up home, so a remodel set read as a new build would price an entire house that nobody asked for.
+/**
+ * THE PRINTED FOOTPRINT DIMENSIONS WERE INVESTIGATED AS A SECOND CROSS-CHECK,
+ * AND THEY DO NOT WORK. Settled by reading the sheets, not by argument, so that
+ * the next person does not spend the same day on it.
+ *
+ * The idea was tempting because the best read in the corpus (Squier, 0.90 room
+ * coverage, every area a printed tag) is blocked solely by `areasAgree` being
+ * null, and the model volunteers overall dimensions unprompted. Three things
+ * kill it, all visible on sheet A105:
+ *
+ * 1. WHAT IS PRINTED IS A DIMENSION CHAIN, NOT AN OUTLINE. The top edge reads
+ *    74'-7" overall, decomposing into 22'-7" and 51'-6"; the bottom reads 64'-2"
+ *    and 21'-4"; the sides carry their own chains. Recovering an AREA needs the
+ *    polygon - which run lies on which edge, and where the steps are - and that
+ *    is not recoverable from an unordered list of lengths. Only a bounding
+ *    rectangle is derivable, and this plan is visibly nowhere near rectangular.
+ * 2. THE REFERENCE VALUE IS LESS CERTAIN THAN THE THING IT WOULD POLICE. Reading
+ *    the same sheet at full resolution, the overall depth is somewhere between
+ *    27'-5" and about 48' depending on which chain is the outer one, so the
+ *    bounding box lands anywhere from ~2,000 to ~3,600 SF. A reference with 75%
+ *    uncertainty cannot enforce a 12% tolerance.
+ * 3. ROOM TAGS DO NOT TILE THE FLOOR. Hallways, stairs, the storage below the
+ *    stairs and the closet "by others" carry no SF tag at all, so tagged area is
+ *    an unknown fraction of gross area even before the remodel question - and on
+ *    a remodel the in-scope rooms are a subset of the building anyway, which is
+ *    exactly the case that lacks a stated total.
+ *
+ * Any band wide enough to admit Squier (tagged area ~47% of its bounding box)
+ * would also admit a read that had doubled every room in the house. That is not
+ * a cross-check, it is a formality, and `verify:plans` asserts the tolerance
+ * stays tight precisely so formalities cannot creep in here.
+ *
+ * SO THE SECOND CROSS-CHECK IS NOT ON THE DRAWING. It is the customer. This
+ * flow already reads first and prices only after they confirm what we read, and
+ * the owner of the house knows its square footage. A total they supply is
+ * genuinely independent of our read of the sheets, which is the whole property
+ * the gate needs. Do not weaken `areasAgree`; ask for the number.
+ */
 
-CAPTURE THE WHOLE SCOPE, not just the totals
-- garageSqft AND garageBays: give the bay count whenever the plans label it, even alongside an area. A stated "3-CAR" is more reliable than an area.
-- coveredOutdoorSqft: sum every roofed-but-unconditioned space - covered patio, covered deck, covered porch, covered entry.
-- rooms: list every notable room beyond bedrooms and baths that the floor plans label - office, den, bonus, loft, flex, mudroom, pantry, gym, theater, wine room. This is how the homeowner knows you read their actual plans.
-- specialFeatures: list each fireplace, uncovered deck, porch, patio, outdoor kitchen, pool, vaulted or tall ceiling, elevator, or solar array that is drawn or scheduled.
-- mainCeilingHeightFt: report it if a plate height or ceiling height is noted.
+/**
+ * The rooms a price is actually built from.
+ *
+ * ONE DEFINITION, USED BY EVERY GATE AND BY THE ESTIMATOR, so coverage, trusted
+ * share and floor area can never disagree about which rooms they are talking
+ * about. Three filters, each earning its place:
+ *
+ * - reference and demolition phases are never priced as floor area. A room on a
+ *   demolition plan is the same room as on the new plan; counting both charges
+ *   twice for one floor.
+ * - when the model tagged BOTH new and existing rooms as in scope, only the new
+ *   ones count. This is the production double count, and it is fixed here in
+ *   code rather than by asking the model more nicely: on the same PDF read
+ *   twice, one run returned ten in-scope rooms and the other nineteen, summing
+ *   3,056 SF for a 1,714 SF project.
+ * - a set with no "new" sheets at all (existing plans only, or a set whose
+ *   phases are all "existing") still prices, because refusing those would throw
+ *   away every read where the architect supplied as-builts and nothing else.
+ */
+export function scopedRooms(result: PlanExtractionResult): PlanRoom[] {
+  const candidates = result.rooms.filter(
+    (r) => r.inScope && r.phase !== "reference" && r.phase !== "demolition",
+  );
+  const fresh = candidates.filter((r) => r.phase === "new");
+  return fresh.length > 0 ? fresh : candidates;
+}
 
-ACCESSORY STRUCTURES
-Walk the site plan and report EVERY separate building - shop, detached garage, RV garage, ADU, guest house, barn, pool house, workshop - with its area if stated and whether it is attached to or detached from the house. Do not put the attached garage here; that is garageSqft and garageBays. If the drawings mark a structure as existing and outside the scope of this work, leave it out and say so in notes.
+/**
+ * How much of the scope rests on numbers we can actually stand behind.
+ *
+ * Returned as a share so the estimator can narrow proportionally rather than
+ * on a yes/no: a plan set where every room is printed deserves more than one
+ * where half were paced off.
+ */
+export function trustedAreaShare(result: PlanExtractionResult): number {
+  const scoped = scopedRooms(result).filter((r) => r.areaSqFt && r.areaSqFt > 0);
+  if (scoped.length === 0) return 0;
+  const total = scoped.reduce((s, r) => s + (r.areaSqFt ?? 0), 0);
+  if (total <= 0) return 0;
+  const trusted = scoped
+    .filter((r) => TRUSTWORTHY_SOURCES.includes(r.areaSource))
+    .reduce((s, r) => s + (r.areaSqFt ?? 0), 0);
+  return trusted / total;
+}
 
-CONFIDENCE AND NOTES
-Use "high" only when a titleblock or schedule stated the key areas outright. Use "low" when pages would not render, the set is schematic, or you had to interpret. Put anything a builder should know in notes: conflicting area figures, missing sheets, a set that is clearly partial, or scope you saw but could not measure. A builder reads notes before trusting the numbers.
+/**
+ * What fraction of the rooms we were asked about did we actually measure?
+ *
+ * FOUND ON A REAL PLAN SET, AND IT WOULD HAVE SHIPPED. trustedAreaShare only
+ * divides among rooms that HAVE an area, so a read that captured one printed
+ * garage and left sixteen rooms empty scored a perfect 1.0. Combined with a
+ * drawing set that states no total to cross-check against, every gate passed
+ * and the price would have tightened on a read that found almost nothing.
+ *
+ * A share is not a coverage measure. This is.
+ */
+export function measuredRoomCoverage(result: PlanExtractionResult): number {
+  const scoped = scopedRooms(result);
+  if (scoped.length === 0) return 0;
+  const measured = scoped.filter(
+    (r) => r.areaSqFt && r.areaSqFt > 0 && TRUSTWORTHY_SOURCES.includes(r.areaSource),
+  );
+  return measured.length / scoped.length;
+}
 
-If the upload is not an architectural plan set at all, set isNewConstruction to false, leave the areas null, and say what it appears to be in notes.`;
+/** Below this, too much of the floor plan is guesswork to tighten anything. */
+export const MIN_ROOM_COVERAGE = 0.6;
+
+/** Below this, most of what we have is estimate rather than measurement. */
+export const MIN_TRUSTED_AREA_SHARE = 0.6;
+
+export interface PlanQuality {
+  areasAgree: boolean | null;
+  trustedAreaShare: number;
+  measuredRoomCoverage: number;
+  /** Only ever true when nothing below objected. */
+  canTightenPrice: boolean;
+  blockers: string[];
+}
+
+/**
+ * May this read tighten the price, and if not, why not?
+ *
+ * LIVES HERE RATHER THAN IN THE ROUTE SO IT CAN BE TESTED. These five gates are
+ * the entire safety argument for the feature, and while they sat inline in the
+ * request handler the only way to exercise them was to upload a file and spend
+ * two minutes and real money finding out. `verify:plans` now runs them against
+ * the shapes four real plan sets actually produced.
+ *
+ * All must hold. Any one failing drops back to pricing as though no plans
+ * arrived, because a tightened range is a promise about accuracy and each of
+ * these is a way that promise breaks silently rather than loudly.
+ */
+export function assessPlanQuality(result: PlanExtractionResult): PlanQuality {
+  const agree = areasAgree(result);
+  const trusted = trustedAreaShare(result);
+  const coverage = measuredRoomCoverage(result);
+  const blockers: string[] = [];
+
+  if (!result.looksLikePlans) blockers.push("These do not read as construction drawings.");
+
+  if (agree === false) {
+    blockers.push(
+      "The room areas do not add up to the total floor area stated on the drawings, so something was misread.",
+    );
+  }
+
+  if (trusted < MIN_TRUSTED_AREA_SHARE) {
+    blockers.push(
+      "Too few of the rooms carry a printed dimension, so most of the areas are estimates rather than measurements.",
+    );
+  }
+
+  // COVERAGE, WHICH IS NOT THE SAME AS SHARE. A read that measured one printed
+  // garage and left sixteen rooms blank scores a perfect trusted SHARE, because
+  // a share only divides among the rooms it managed to measure. Seen on a real
+  // plan set, where every other gate passed - and then seen again on a permit
+  // set, where the eleven "measured rooms" turned out to be the cover sheet's
+  // area tabulation and all thirty-three actual rooms were blank.
+  if (coverage < MIN_ROOM_COVERAGE) {
+    blockers.push(
+      `We could only measure ${Math.round(coverage * 100)}% of the rooms from these drawings, so most of the floor plan would still be an estimate.`,
+    );
+  }
+
+  // No total on the sheets means no way to catch a misread, and "we could not
+  // check" must not read the same as "we checked and it was fine".
+  //
+  // NAMES THE FIX, BECAUSE THIS ONE IS FIXABLE AND THE OTHERS ARE NOT. Every
+  // other blocker here means the drawings cannot carry a tighter price. This one
+  // means a single number is missing, and the person who uploaded the plans
+  // knows it. Nothing printed on the sheets can substitute (see the note above
+  // areasAgree), so the message must ask rather than apologise.
+  if (agree === null) {
+    blockers.push(
+      "The drawings do not state a total floor area, so there is nothing to check the room measurements against. Tell us the total square footage and we can tighten this.",
+    );
+  }
+
+  return {
+    areasAgree: agree,
+    trustedAreaShare: Number(trusted.toFixed(3)),
+    measuredRoomCoverage: Number(coverage.toFixed(3)),
+    canTightenPrice: blockers.length === 0,
+    blockers,
+  };
+}

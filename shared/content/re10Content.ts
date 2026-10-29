@@ -26,7 +26,7 @@ export const RE10_DEFINITION =
  * in Boise, so it has to stand alone away from the page and still be true.
  */
 export const RE10_DIRECT_ANSWER =
-  "Boise Handyman Co completes RE-10 and home inspection repairs for real estate agents, buyers and sellers across Boise and the Treasure Valley. Send the RE-10 and inspection report, and we review the repair list, price it, coordinate access, complete the approved work, and provide photo documentation and invoices for the file.";
+  "Boise Handyman Co is the P5 company for RE-10 and home inspection repairs across Boise and the Treasure Valley. Upload the RE-10 and inspection report, confirm the list with us, and we reply with one written price before work starts. We coordinate access, complete the approved work, and provide photo documentation and invoices for the file.";
 
 export interface Re10Benefit {
   title: string;
@@ -37,7 +37,7 @@ export interface Re10Benefit {
 export const RE10_BENEFITS: Re10Benefit[] = [
   {
     title: "One contact for the whole repair list",
-    body: "Carpentry, drywall, paint, flooring, minor plumbing and electrical, and exterior work coordinated by one company. You stop chasing four contractors for one inspection response.",
+    body: "Carpentry, drywall, paint, flooring and exterior work by our crew, with plumbing, electrical and HVAC scheduled through licensed trade partners we stand behind. You stop chasing four contractors for one inspection response.",
   },
   {
     title: "You are told before we proceed",
@@ -278,20 +278,8 @@ export const RE10_SERVICE_AREAS = [
 ];
 
 /**
- * Shown wherever pricing or timing is discussed.
- *
- * The estimator this page will eventually feed produces a planning range, not a
- * quote, and the difference matters when the reader is under a contractual
- * deadline.
- */
-/**
- * Rewritten when the estimator moved from a range to a firm price.
- *
- * The old wording ("a planning range, not a contract price") would now
- * contradict the number beside it. A price an agent cannot rely on is not
- * worth quoting, so this commits to the figure and is precise about the two
- * things that can move it: an item we said needed an onsite look, and damage
- * nobody could see. Both are named up front rather than discovered later.
+ * RE-10 intake is document-only on the public path (D5): confirm the list,
+ * send it to the team, no on-screen price. Written pricing is a human reply.
  */
 export const RE10_PRICING_DISCLAIMER =
-  "This price is firm for the repairs listed, at the quantities shown, and is held for 30 days. Items we have flagged for an onsite look are not included and are priced separately once we see them. If concealed damage turns up behind a finish, we stop and agree the change with you in writing before any extra work happens. No work is scheduled or authorized until a scope and agreement are approved.";
+  "Upload the RE-10 and inspection pages so we can confirm every requested item with you. There is no on-screen price. We reply with a written quote for the items we can complete, flag what needs an onsite look, and hold that quote until you approve a scope. No work is scheduled until the list and price are agreed in writing.";

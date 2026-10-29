@@ -49,7 +49,7 @@ const TITLE_WITH_BRAND = "RE-10 and Inspection Repairs Boise | Boise Handyman Co
 const TITLE = "RE-10 and Inspection Repairs in Boise";
 // 154 characters, benefit-led, ends on the action.
 const DESCRIPTION =
-  fitDescription("Request RE-10 repair help from Boise Handyman Co. Send your inspection list, property details and closing date for scope and scheduling review.");
+  fitDescription("Upload your RE-10 to Boise Handyman Co. Confirm the list, get a written quote before work starts, and receive completion photos for the file.");
 
 export const metadata: Metadata = withBrandPageMetadata(({
   title: { absolute: TITLE_WITH_BRAND },
@@ -107,9 +107,20 @@ export default function Re10RepairsPage() {
         <div className="re10-intro-grid">
           <div>
             <p className="ed-eyebrow">For agents, buyers and sellers</p>
-            <h1>Start your <em>RE-10 repair estimate.</em></h1>
-            <p>Share your inspection repair list, photos, and closing date below. Our team will review the scope, pricing, and availability with you.</p>
-            <a className="re10-phone" href={SITE_CONFIG.phoneHref} data-testid="link-re10-call"><Phone size={18} aria-hidden="true" /> Prefer to talk? {SITE_CONFIG.phone}</a>
+            <h1>Upload your <em>RE-10</em> and get a written quote.</h1>
+            <p>
+              This is Boise Handyman Co&apos;s RE-10 page. Upload the RE-10 and inspection pages,
+              confirm the list with us, and we reply with one written price before work starts.
+              There is no on-screen price.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 mt-4">
+              <Button variant="brand" asChild>
+                <Link href="#re10-wizard">
+                  Upload your RE-10 <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <a className="re10-phone" href={SITE_CONFIG.phoneHref} data-testid="link-re10-call"><Phone size={18} aria-hidden="true" /> Prefer to talk? {SITE_CONFIG.phone}</a>
+            </div>
           </div>
           <figure>
             <img src={SITE_IMAGES.processInProgress} alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth" width={1200} height={896} />
