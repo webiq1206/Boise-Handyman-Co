@@ -106,6 +106,10 @@ const IMAGE_ALTS: Record<string, string> = {
     'Boise porch with a sage-green front door and white trim',
   '/images/houses/kuna/kuna-gutter-cleaning.webp':
     'White gutter with autumn leaves at the eave of a beige Kuna single-storey home',
+  '/images/houses/kuna/kuna-single-storey-front.webp':
+    'Beige single-storey home in Kuna with white trim, two-car garage and open fields beyond',
+  '/images/houses/kuna/kuna-deck-board-replacement.webp':
+    'Representative image: new deck boards going down beside a single-storey home with a wood privacy fence',
 };
 
 export function altForImage(src: string | undefined | null): string | undefined {

@@ -99,6 +99,10 @@ export const CITY_HERO_IMAGES: Record<string, string> = {
   // so the Caldwell card and area hero use the high-desert farmhouse (on
   // sagebrush and open farmland) that no other city card shows.
   caldwell: "/images/areas/kuna.webp",
+  // Garden City used to fall back to the door-hinge photo that is also the
+  // home, contact and areas hero. A deck job beside a single-storey home is
+  // the one fitting house image no other page uses.
+  "garden-city": "/images/houses/kuna/kuna-deck-board-replacement.webp",
 };
 
 /** The primary image for each service, used when no city applies. */

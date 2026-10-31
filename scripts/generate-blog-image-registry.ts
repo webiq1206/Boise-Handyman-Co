@@ -137,8 +137,9 @@ const LIBRARY = {
     alt: 'Custom home on a landscaped Eagle, Idaho acreage lot at sunset with the foothills in the distance',
   },
   kunaArea: {
-    src: area('kuna'),
-    alt: 'Modern farmhouse home on rural Kuna, Idaho acreage bordered by sagebrush and open farmland',
+    // The Kuna area page hero, so the guide and the area page show one house.
+    src: '/images/houses/kuna/kuna-single-storey-front.webp',
+    alt: 'Beige single-storey home in Kuna with white trim, two-car garage and open fields beyond',
   },
   starArea: {
     src: area('star'),
@@ -153,8 +154,12 @@ const LIBRARY = {
     alt: 'Established brick ranch home on a landscaped corner lot in Nampa, Idaho with farmland behind',
   },
   caldwellArea: {
-    src: area('caldwell'),
-    alt: 'Stucco home overlooking the vineyards of the Sunnyslope wine district near Caldwell, Idaho at sunset',
+    // caldwell.webp is a Tuscan-style villa among vineyards, not a Treasure
+    // Valley house. The guide uses the Caldwell area page hero instead (the
+    // high-desert farmhouse no other city page shows), with alt text that
+    // describes it rather than placing it.
+    src: area('kuna'),
+    alt: 'Representative image: a farmhouse-style home with a stone front and metal roof, bordered by sagebrush',
   },
 } as const;
 
