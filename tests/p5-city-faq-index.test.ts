@@ -13,8 +13,9 @@ import {getCityOnlyFaqs} from '../shared/cityPageFacts.ts';
 import {AREA_PAGE_FAQS,SERVICE_SEO_CONTENT,areaPageFaqs,cityServicePageFaqs,getAreaIntro,getCityServiceFaqs,getCityServiceIntro,getCityServiceSections} from '../shared/seoContent.ts';
 import {CITY_SEO_DATA} from '../lib/seo.ts';
 
-const HOME_TITLE='Handyman & Home Repairs in Boise, ID | Boise Handyman Co';
-const HOME_DESCRIPTION='Get help with repairs, installations and home maintenance in Boise and the Treasure Valley. Describe your project or send a repair list for an estimate.';
+// Phase 4 (owner-approved plan): keyword-first homepage title from one source.
+const HOME_TITLE='Boise Handyman Services | Upfront Quotes | Boise Handyman Co';
+const HOME_DESCRIPTION='Boise handyman for small repairs, installs and home maintenance across the Treasure Valley. One written quote before work starts. Send your list today.';
 const NOINDEX_TODAY=[
  'carpentry-trim-repair/nampa',
  'drywall-repair/kuna',
@@ -181,5 +182,5 @@ test('home document, Open Graph, and Twitter titles stay on the published handym
  assert.equal((result.openGraph as {title?:string}).title,HOME_TITLE);
  assert.equal((result.twitter as {title?:string}).title,HOME_TITLE);
  assert.equal(result.description,HOME_DESCRIPTION);
- assert.equal(HOME_TITLE.length,56);
+ assert.equal(HOME_TITLE.length,60);
 });

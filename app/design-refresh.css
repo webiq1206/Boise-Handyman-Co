@@ -270,3 +270,24 @@
     border-bottom: 1px solid #2c302f26;
   }
 }
+
+/* Handyman home: the parent-company line closes the first answer paragraph on
+   its own line. Ink text with an underlined link (the accent only colors the
+   underline, never small text). */
+.approved-shell .family-site section#handyman-services-boise .f-parent-company {
+  display: block;
+  margin-top: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c302f;
+}
+.approved-shell .family-site section#handyman-services-boise .f-parent-company a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: #C56B4A;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+.approved-shell .family-site section#handyman-services-boise .f-parent-company a:hover {
+  text-decoration-color: #a9401d;
+}

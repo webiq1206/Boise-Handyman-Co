@@ -99,7 +99,11 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
   }
 
   if (variant === 'city-service' && serviceSlug && citySlug) {
-    const otherCities = CITIES.filter((c) => c.slug !== citySlug).slice(0, 4);
+    // Indexed city pages only, the sitemap's rule: a noindexed combination
+    // cannot rank, so it does not get the link. Every service has at least two
+    // indexed cities, so this list is never empty. Other services in this city
+    // point at the service page when their city page is noindexed.
+    const otherCities = CITIES.filter((c) => c.slug !== citySlug && !isCityServiceNoindex(serviceSlug, c.slug)).slice(0, 4);
     const otherServices = SERVICES.filter((s) => s.slug !== serviceSlug).slice(0, 3);
     return (
       <div className="space-y-10">
@@ -129,7 +133,11 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
             {otherServices.map((service) => (
               <li key={service.slug}>
                 <Link
-                  href={cityServicePath(service.slug, citySlug)}
+                  href={
+                    isCityServiceNoindex(service.slug, citySlug)
+                      ? servicePath(service.slug)
+                      : cityServicePath(service.slug, citySlug)
+                  }
                   className="ed-body text-[0.9375rem] transition-colors hover:[color:var(--ed-accent)]"
                 >
                   {service.name}

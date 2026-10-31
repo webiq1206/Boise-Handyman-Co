@@ -1,6 +1,8 @@
 /**
  * Fails when any page asks withBrandPageMetadata to cut its title or its meta
- * description. The fitter used to trim silently at 60 / 155 characters, which
+ * description, or when any rendered description carries a phone number or an
+ * exclamation mark (42 generated descriptions once ended "Call (208)
+ * 477-1169 to book a visit!"). The fitter used to trim silently at 60 / 155 characters, which
  * shipped titles like "How to Hire a Handyman in the Treasure" and
  * descriptions ending "and the repair permit". A title or description that does
  * not fit is now a content defect, fixed by hand in the page or content file.
@@ -15,6 +17,7 @@ import Module,{register} from 'node:module';
 import {readdirSync,statSync} from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
+import {descriptionContentIssues} from '../lib/brand-page-metadata.ts';
 
 process.env.BRAND_METADATA_STRICT='1';
 
@@ -66,6 +69,11 @@ async function main(){
  const failures:string[]=[];
  let checked=0;
  const skipped:string[]=[];
+ // Checked on the description the page actually renders, wrapped or not.
+ const contentCheck=(where:string,meta:{description?:unknown}|undefined)=>{
+  const description=typeof meta?.description==='string'?meta.description:undefined;
+  for(const issue of descriptionContentIssues(description))failures.push(`${where}: ${issue}`);
+ };
  for(const file of pages(path.join(root,'app')).sort()){
   const route=routeOf(file);
   let mod:PageModule;
@@ -88,7 +96,8 @@ async function main(){
    for(const params of paramSets){
     checked++;
     try{
-     await mod.generateMetadata({params:Promise.resolve(params),searchParams:Promise.resolve({})});
+     const meta=await mod.generateMetadata({params:Promise.resolve(params),searchParams:Promise.resolve({})}) as {description?:unknown}|undefined;
+     contentCheck(fill(route,params),meta);
     }catch(error){
      const message=error instanceof Error?error.message:String(error);
      failures.push(message.includes('[metadata-fit]')?`${fill(route,params)} ${message}`:`${fill(route,params)}: generateMetadata failed: ${message.split('\n')[0]}`);
@@ -96,15 +105,16 @@ async function main(){
    }
   }else{
    checked++;
+   contentCheck(route,mod.metadata as {description?:unknown}|undefined);
   }
  }
  if(skipped.length)console.log(`verify-metadata-fit: skipped dynamic routes without generateStaticParams: ${skipped.join(', ')}`);
  if(failures.length){
-  console.error(`verify-metadata-fit: ${failures.length} page(s) would ship a cut title or description:`);
+  console.error(`verify-metadata-fit: ${failures.length} problem(s): a cut title or description, or a description with a phone number or "!":`);
   for(const failure of failures)console.error(` - ${failure}`);
   process.exit(1);
  }
- console.log(`verify-metadata-fit: ${checked} page renders checked; every title is at most 60 and every description at most 155 characters.`);
+ console.log(`verify-metadata-fit: ${checked} page renders checked; every title is at most 60 and every description at most 155 characters, with no phone number or "!".`);
 }
 
 main().catch((error)=>{console.error(error);process.exit(1);});

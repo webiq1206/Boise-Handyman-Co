@@ -11,7 +11,7 @@ landingBreadcrumbs,
 landingFAQSchema,
 landingServiceSchema
 } from '@/lib/landing-schema';
-import { buildPageMetadata } from '@/lib/page-metadata';
+import { buildPageMetadata,isCityServiceNoindex } from '@/lib/page-metadata';
 import { generateSpeakableSchema } from '@/lib/schema';
 import { SERVICE_SLUGS,getServiceBySlug,servicePath } from '@/lib/seo-routes';
 import { CITIES } from '@/shared/contentData';
@@ -53,8 +53,8 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
       ? {
           heading:
             service.slug === 'drywall-repair'
-              ? 'Drywall repair in Boise, Idaho'
-              : 'Carpentry and trim repair in Boise, Idaho',
+              ? 'What drywall repair in Boise covers'
+              : 'What carpentry and trim repair in Boise covers',
           paragraphs: [service.shortDescription, content.overview],
         }
       : undefined;
@@ -103,10 +103,12 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
     {
       heading: `${service.name} across the Treasure Valley`,
       paragraphs: [
-        `We provide ${serviceLC} throughout the Treasure Valley, with dedicated local pages for each city we serve. The same upfront quotes apply everywhere in Ada and Canyon County, so where you live never inflates the price.`,
-        `Choose your city below for local ${serviceLC} details, or send photos of the job for an upfront quote.`,
+        `We provide ${serviceLC} throughout the Treasure Valley. The same upfront quotes apply everywhere in Ada and Canyon County, so where you live never inflates the price.`,
+        `Choose a city below for local ${serviceLC} details, or send photos of the job for an upfront quote.`,
       ],
-      links: CITIES.map((c) => ({
+      // Only city pages that are in the index (the sitemap's rule). A
+      // noindexed combination cannot rank, so it does not get the link.
+      links: CITIES.filter((c) => !isCityServiceNoindex(service.slug, c.slug)).map((c) => ({
         label: `${service.name} in ${c.name}`,
         href: `/services/${service.slug}/${c.slug}`,
       })),

@@ -58,7 +58,10 @@ test('known full-document boundary includes all 72 agreed URLs and the previousl
 
 test('shared root service metadata cannot promise one-trip fixes',()=>{
  assert.doesNotMatch(readFileSync('lib/seo.ts','utf8'),/Upfront quotes and one-trip fixes/);
- assert.match(readFileSync('lib/seo.ts','utf8'),/Scope-based written quotes/);
+ // Phase 4 rewrote the generated descriptions keyword first; they promise a
+ // written quote ("Send photos for a written quote"), never a one-trip fix.
+ assert.match(readFileSync('lib/seo.ts','utf8'),/written quote/);
+ assert.doesNotMatch(readFileSync('lib/seo.ts','utf8'),/one-trip/i);
 });
 
 for (const file of ["components/approved/ApprovedHomeHero.tsx", "shared/siteContent.ts", "app/contact/page.tsx", "app/about/page.tsx"]) test(`${file}: current Cursor entry content preserves scope-based promises`, () => {

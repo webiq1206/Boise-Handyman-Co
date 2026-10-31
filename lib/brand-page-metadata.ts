@@ -20,10 +20,10 @@ const COPY:Record<string,Record<string,Copy>>={
   '/about':{title:'About Our Boise Remodeling Team',description:'Learn how Boise Remodeling Co plans and manages Treasure Valley renovations, including project scopes, design decisions, communication and construction.'},
   '/contact':{title:'Contact Our Boise Remodeling Team',description:'Discuss your kitchen, bathroom or whole-home renovation with Boise Remodeling Co. Call our team or request a consultation for your Treasure Valley project.'}},
  handyman:{
-  "/guides/boise-home-repair-cost-guide":{title:"Boise Home Repair Costs (2026)",description:"Compare planning costs for common Boise home repairs, installations and maintenance. See how labor, materials and a combined repair list affect your quote."},
   "/blog/drywall-repair-cost-boise":{title:"Boise Drywall Repair Costs (2026)",description:"Review Boise drywall repair costs for holes, cracks, texture matching and paint. Learn what affects the price and how to describe your repair for a quote."},
   "/blog/what-small-home-repairs-cost-boise":{title:"Small Home Repair Costs in Boise",description:"Explore Boise small-repair budgets for drywall, doors, fixtures and maintenance. Plan your task list and understand labor, materials and visit costs."},
-  '/':{title:'Handyman & Home Repairs in Boise, ID',description:'Get help with repairs, installations and home maintenance in Boise and the Treasure Valley. Describe your project or send a repair list for an estimate.'},
+  // The homepage's only title and description source; app/page.tsx sets neither.
+  '/':{title:'Boise Handyman Services | Upfront Quotes',description:'Boise handyman for small repairs, installs and home maintenance across the Treasure Valley. One written quote before work starts. Send your list today.'},
   '/services':{title:'Handyman Repair & Installation Services',description:'Explore drywall repair, painting, carpentry, mounting and maintenance services in Boise and the Treasure Valley. Send your repair list to our local team.'},
   '/about':{title:'About Our Boise Handyman Team',description:'Learn how Boise Handyman Co handles Treasure Valley home repairs and installations, with clear project scopes, scheduling and attention to small jobs.'},
   '/contact':{title:'Contact a Boise Handyman',description:'Contact Boise Handyman Co about your repair list, installation or maintenance project. Call our team or send your scope for a Treasure Valley estimate.'}},
@@ -107,6 +107,20 @@ function requestedTitle(meta:Metadata,overrideTitle?:string):string{
  const original=titleText(meta).replace(/\s+/g,' ').trim();
  return original.includes(brand.name)?original:`${original}${BRAND_SUFFIX}`;
 }
+/** A phone number in a search snippet: (208) 477-1169, 208-477-1169, 208.477.1169. */
+const PHONE_IN_TEXT=/\(?\b\d{3}\)?[\s.-]*\d{3}[\s.-]*\d{4}\b/;
+/**
+ * Content rules for a meta description: no phone number (it belongs next to
+ * the page's actions, not in the snippet) and no exclamation mark. Generated
+ * descriptions used to end "Call (208) 477-1169 to book a visit!" on 42 pages.
+ */
+export function descriptionContentIssues(description:string|undefined):string[]{
+ if(!description)return [];
+ const issues:string[]=[];
+ if(PHONE_IN_TEXT.test(description))issues.push(`description carries a phone number: "${description}"`);
+ if(description.includes('!'))issues.push(`description carries an exclamation mark: "${description}"`);
+ return issues;
+}
 /**
  * Every title or description this fitter would have to cut. A cut lands
  * mid-phrase ("How to Hire a Handyman in the Treasure"), so a page that needs
@@ -123,6 +137,7 @@ export function metadataFitIssues(meta:Metadata,routeHint?:string):string[]{
  const rawDescription=override?.description||(typeof meta.description==='string'?meta.description:undefined);
  const description=rawDescription?.replace(/\s+/g,' ').trim();
  if(description&&description.length>DESCRIPTION_LIMIT)issues.push(`description is ${description.length} characters (limit ${DESCRIPTION_LIMIT}): "${description}"`);
+ issues.push(...descriptionContentIssues(description));
  return issues;
 }
 /** Production builds (and the prebuild verifier) refuse to cut metadata. */
@@ -140,7 +155,7 @@ export function withBrandPageMetadata(meta:Metadata,routeHint?:string):Metadata{
   const issues=metadataFitIssues(meta,routeHint);
   if(issues.length){
    const where=pagePath(meta,routeHint)||routeHint||'(unknown route)';
-   throw new Error(`[metadata-fit] ${where}: ${issues.join('; ')}. Rewrite it by hand to fit; the fitter no longer cuts mid-phrase.`);
+   throw new Error(`[metadata-fit] ${where}: ${issues.join('; ')}. Rewrite it by hand: the fitter no longer cuts mid-phrase, and descriptions carry no phone number or exclamation mark.`);
   }
  }
  const override=routeHint==='__layout__'?undefined:COPY[brand.id]?.[pagePath(meta,routeHint)];

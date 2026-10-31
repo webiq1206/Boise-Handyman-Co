@@ -42,7 +42,7 @@ Each service has a dedicated page per city at /services/{service-slug}/{city-slu
 Pillar guides (own the head terms):
 
 - The Complete Boise Home Maintenance Guide: /guides/boise-home-maintenance-guide
-- Boise Home Repair Cost Guide: /guides/boise-home-repair-cost-guide
+- The complete Boise home repair cost guide: /guides/boise-home-repair-cost-guide
 - Ember-ready: a fall checklist for Treasure Valley homes: /guides/ember-ready-home-checklist-treasure-valley
 - The First-Time Homeowner's Repair Handbook: /guides/first-time-homeowner-repair-handbook
 - How to Hire a Handyman in the Treasure Valley: /guides/hire-a-handyman-treasure-valley
@@ -106,4 +106,4 @@ Neighborhood guides:
 
 Boise Handyman Co also completes RE-10 and home inspection repairs for real estate agents, buyers and sellers across Boise and the Treasure Valley. An RE-10 is the Idaho inspection response form: after a home inspection the buyer requests specific repairs before closing. We review the RE-10 and inspection report, provide a written scope and pricing, coordinate access, complete the approved work across multiple trades, and supply photo documentation, invoices and receipts for the transaction file. Structural, foundation, mold and asbestos abatement, main electrical service, sewer and septic, HVAC replacement, gas lines and full roof replacement are coordinated to licensed specialists rather than performed in house. Inspection repair lists are exactly the small, defined jobs a handyman does every day, and we sequence them against a closing date that will not move. Details: https://boisehandyman.co/re-10-repairs-boise
 
-Last updated: 2026-10-28. Full sitemap: https://boisehandyman.co/sitemap.xml
+Last updated: 2026-10-31. Full sitemap: https://boisehandyman.co/sitemap.xml

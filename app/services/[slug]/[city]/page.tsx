@@ -72,7 +72,10 @@ export default async function CityServicePage(
     : undefined;
 
   const overview = getCityServiceIntro(content, city, localFact);
-  const h1 = `${service.name} in ${city.name}, Idaho`;
+  // The page's display name: the catalog name, except where the page was
+  // retitled to its slug and scope (painting-touch-ups reads "Painting
+  // Touch-Ups", matching its title).
+  const h1 = `${content.name} in ${city.name}, Idaho`;
   const faqs = cityServicePageFaqs(content, city);
   const localNote = `${city.name} sits inside our core ${county} service area, so ${content.name.toLowerCase()} jobs are quoted from photos, scheduled locally, and priced the same as everywhere else we work.`;
   const images = getCityServiceImageSet(service.slug, city.slug);

@@ -2,6 +2,7 @@ import { BLOG_POSTS, type BlogPostData } from "../../shared/blogContent";
 import { GUIDE_PAGES } from "../../shared/guideContent";
 import { getHubBySlug, getHubPillarSlug, guidePath } from "../../shared/contentHubs";
 import { PRIORITY_SERVICES, CITIES, type ServiceData, type CityData } from "../../shared/contentData";
+import { isCityServiceNoindex } from "../../lib/page-metadata";
 
 export type PageType = "blog" | "guide" | "service" | "city" | "city-service";
 
@@ -290,6 +291,9 @@ function quotasFor(from: PageNode): Quota {
 
 function eligible(from: PageNode, to: PageNode): boolean {
   if (from.id === to.id) return false;
+  // Never spend a link on a noindexed city x service page: it cannot rank and
+  // is out of the sitemap. Same rule as the sitemap and the area pages.
+  if (to.type === "city-service" && isCityServiceNoindex(to.serviceSlug ?? "", to.citySlug ?? "")) return false;
 
   if (from.type === "city-service") {
     if (to.type === "city-service") {

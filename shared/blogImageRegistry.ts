@@ -282,8 +282,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'kuna-handyman-guide': {
-    hero: '/images/areas/kuna.webp',
-    alt: 'Modern farmhouse home on rural Kuna, Idaho acreage bordered by sagebrush and open farmland',
+    hero: '/images/houses/kuna/kuna-single-storey-front.webp',
+    alt: 'Beige single-storey home in Kuna with white trim, two-car garage and open fields beyond',
     topicTags: ["kuna","idaho","handyman","costs"],
     source: 'handyman',
   },
@@ -306,8 +306,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'caldwell-handyman-guide': {
-    hero: '/images/areas/caldwell.webp',
-    alt: 'Stucco home overlooking the vineyards of the Sunnyslope wine district near Caldwell, Idaho at sunset',
+    hero: '/images/areas/kuna.webp',
+    alt: 'Representative image: a farmhouse-style home with a stone front and metal roof, bordered by sagebrush',
     topicTags: ["caldwell","idaho","handyman","costs"],
     source: 'handyman',
   },
@@ -320,7 +320,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   'hidden-springs-handyman-guide': {
     hero: '/images/areas/boise.webp',
     alt: 'Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street',
-    topicTags: ["eagle","hidden springs","idaho","handyman","costs"],
+    topicTags: ["boise","hidden springs","idaho","handyman","costs"],
     source: 'handyman',
   },
   'harris-ranch-handyman-guide': {
