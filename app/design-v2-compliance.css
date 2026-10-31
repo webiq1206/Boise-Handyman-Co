@@ -450,6 +450,29 @@
   .approved-shell .family-handyman .f-hero .f-hero-intro { display: none !important; }
 }
 
+/* ─── Phase 3 type scale: H1 caps at the 64px display size ───
+   Index, document and article H1s ran 70 to 82px at desktop, larger than the
+   homepage display. Same clamps below 1024px; only the ceiling changes. The
+   paid-traffic landings (data-ad-landing) keep their hero exactly as set. */
+@media (min-width: 1024px) {
+  .approved-interior .interior-hero-copy h1:not([data-ad-landing] *) { font-size: clamp(44px, 4.8vw, 64px); }
+  .approved-interior .interior-hero-editorial h1 { font-size: clamp(48px, 5.7vw, 64px); }
+  .approved-interior .interior-document-heading h1,
+  .approved-interior .interior-article-header h1 { font-size: clamp(43px, 5vw, 64px); }
+  .approved-interior.interior-legal h1,
+  .approved-interior.interior-sitemap h1,
+  .interior-legal h1,
+  .interior-sitemap h1 { font-size: clamp(42px, 5vw, 64px); }
+}
+
+/* ─── Phase 3 RE-10 measure ───
+   The long-copy blocks ran the full 1,160px container (about 150 characters
+   a line): the shared container rule overrode their max-w-3xl. Honour the
+   column and cap running text at 65ch. */
+.approved-interior.interior-re-10-repairs-boise .container.max-w-3xl { max-width: 48rem; }
+.approved-interior.interior-re-10-repairs-boise main .container p:not([class*="max-w-"]),
+.approved-interior.interior-re-10-repairs-boise .container p:not([class*="max-w-"]) { max-width: 65ch; }
+
 /* ─── Phase 3 homepage: "What you can count on" beside the process ─── */
 .approved-shell .family-site .f-count-on {
   margin-top: 40px;
