@@ -2,7 +2,9 @@ import { SERVICES } from '@/shared/contentData';
 
 /**
  * Answer-first homepage block. Sentences are the published fact sheet and
- * the service list already on the site. Nothing here is a new claim.
+ * the service list already on the site. Nothing here is a new claim. The
+ * first paragraph names the main services and every city served; the hero
+ * above it stays free of a city list by the family copy rules.
  */
 export function HandymanServicesAnswer() {
   return (
@@ -10,7 +12,12 @@ export function HandymanServicesAnswer() {
       <p className="f-eyebrow">BOISE, IDAHO</p>
       <h2>Handyman services in Boise, Idaho</h2>
       <p data-speakable="summary">
-        Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, and maintenance. Drywall repair, interior and exterior painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, caulking and punch-list work. Serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, Caldwell. Phone (208) 477-1169.
+        Boise Handyman Co handles small home repairs, installs and maintenance in Boise and the Treasure Valley: drywall repair, paint touch-ups, minor plumbing and electrical repairs, carpentry and trim, TV mounting and assembly, fence, deck and gutter repair, and caulking. We serve Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City and Caldwell.
+        {/* The family relationship, said plainly on the page that owns the
+            brand query. A followed link: P5 Home Co is the parent company. */}
+        <span className="f-parent-company">
+          A <a href="https://p5homeco.com">P5 Home Co</a> company.
+        </span>
       </p>
       <p>
         Send the full repair list, clear photos, your Boise-area service address and any date you are working toward. We review the tasks and confirm the scope before scheduling. Work that needs a licensed specialist or a larger remodel is handled separately from a handyman visit.
