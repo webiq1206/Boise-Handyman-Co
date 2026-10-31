@@ -4,6 +4,7 @@ const {
   GUIDE_REDIRECTS,
   HUB_REDIRECTS,
   SERVICE_SLUG_REDIRECTS,
+  SIBLING_SERVICE_REDIRECTS,
   SERVICE_INDEX_REDIRECTS,
 } = require('./shared/content/contentRedirects');
 
@@ -182,6 +183,17 @@ const nextConfig = {
       redirects.push({
         source: `/services/${oldSlug}/:city`,
         destination: `/services/${newSlug}/:city`,
+        permanent: true,
+      });
+    }
+
+    // Remodel-era services owned by Boise Remodeling Co: the base URL and every
+    // city child go one hop to the remodeling service page that serves them.
+    for (const [oldSlug, destination] of Object.entries(SIBLING_SERVICE_REDIRECTS)) {
+      redirects.push(...r(`/services/${oldSlug}`, destination));
+      redirects.push({
+        source: `/services/${oldSlug}/:city`,
+        destination,
         permanent: true,
       });
     }
