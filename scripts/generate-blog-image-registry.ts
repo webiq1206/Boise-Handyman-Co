@@ -165,9 +165,17 @@ const LIBRARY = {
 
 type LibraryKey = keyof typeof LIBRARY;
 
-/** Fallback per hub, used for any slug without an explicit assignment. */
+/**
+ * Fallback per hub, used for any slug without an explicit assignment.
+ *
+ * Phase 3: the tool-bag photo is the RE-10 page's one image, so it no longer
+ * heads a guide, a post or a blog category; those slots use library shots
+ * that suit the topic and that the template around them does not already
+ * show. The two "Representative image" door-hinge posts stay as they are
+ * (tests/p5-image-labels.test.ts pins that label).
+ */
 const HUB_DEFAULT: Record<string, LibraryKey> = {
-  'repairs-and-fixes': 'toolbag',
+  'repairs-and-fixes': 'electrical',
   'installs-and-upgrades': 'mounting',
   'home-maintenance': 'caulking',
   'costs-and-hiring': 'estimate',
@@ -196,7 +204,7 @@ const BY_SLUG: Record<string, LibraryKey> = {
 
   // Home maintenance
   'caulking-guide-boise-homes': 'caulking',
-  'seasonal-home-maintenance-checklist-boise': 'toolbag',
+  'seasonal-home-maintenance-checklist-boise': 'deck',
   'preparing-your-boise-home-for-winter': 'winterSpigot',
   'energy-saving-home-fixes-boise': 'weatherstrip',
   'gutter-cleaning-schedule-boise': 'gutterCleaning',
@@ -213,9 +221,9 @@ const BY_SLUG: Record<string, LibraryKey> = {
   'home-maintenance-budget-idaho': 'estimate',
   'questions-to-ask-a-handyman': 'consult',
   'handyman-red-flags': 'consult',
-  'handyman-vs-contractor': 'toolbag',
+  'handyman-vs-contractor': 'consult',
   'what-to-expect-first-handyman-visit': 'consult',
-  'diy-vs-hiring-a-handyman': 'toolbag',
+  'diy-vs-hiring-a-handyman': 'carpentry',
   'who-supplies-materials-handyman-jobs': 'materials',
   'ada-vs-canyon-county-permit-timelines': 'permits',
   'boise-building-permit-guide': 'permits',
@@ -227,7 +235,7 @@ const BY_SLUG: Record<string, LibraryKey> = {
   // Pillar guides
   'boise-home-repair-cost-guide': 'estimate',
   'hire-a-handyman-treasure-valley': 'consult',
-  'boise-home-maintenance-guide': 'toolbag',
+  'boise-home-maintenance-guide': 'winterSpigot',
   'small-home-upgrades-that-pay-off': 'hardware',
   'first-time-homeowner-repair-handbook': 'doorRepair',
   'treasure-valley-exterior-home-care-guide': 'gutterCleaning',

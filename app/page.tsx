@@ -1,12 +1,12 @@
-import { ApprovedHome } from "@/components/approved/ApprovedHome";
+import { ApprovedHowItWorks, ApprovedServiceArea } from "@/components/approved/ApprovedHome";
 import { ApprovedFamilyFrame, ApprovedHomeHero } from "@/components/approved/ApprovedHomeHero";
 import { HandymanServicesAnswer } from "@/components/seo/HandymanServicesAnswer";
 import { ConsultationForm } from "@/components/ConsultationForm";
+import { FAQSection } from "@/components/FAQSection";
 import { MarketingCard } from "@/components/marketing/MarketingCard";
 import { Section } from "@/components/marketing/Section";
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
-import { BudgetInclusionsSection } from "@/components/sections/BudgetInclusionsSection";
 import { HandymanPlanningRange } from "@/components/sections/HandymanPlanningRange";
 import { HowP5Works } from "@/components/sections/HowP5Works";
 import { WhoYouAreHiring } from "@/components/sections/WhoYouAreHiring";
@@ -45,28 +45,36 @@ export default function HomePage() {
   return (
     <div className="flex flex-col bg-background">
       {/* PAGE ORDER IS THE SALES CONVERSATION, IN THE ORDER A HOMEOWNER HAS IT.
+          Phase 3 (template T1): about eight sections, each promise said once.
 
-          1. Hero + services answer
-          2. Approved home bands (services, why, how, areas, FAQ)
-          3. Planning-range interactive proof (C14) - ballpark before contact
-          4. Budget / inclusions
-          5. Gallery
-          6. Process + who you are hiring
-          7. Consult wizard (D2 / C10)
+          1. Hero (one paragraph, two actions) and its proof strip
+          2. Services: the answer-first block and every service link
+          3. Planning-range interactive proof (C14): a ballpark before contact
+             (the gallery slot after it renders nothing until real work exists)
+          4. How it works, with "What you can count on" beside the steps
+          5. Founder
+          6. Service area
+          7. FAQ (FAQPage schema reads the same list, see HomePageSchema)
+          8. The request band (#consult)
 
-          The planning range sits before budget so visitors see a useful
-          pre-email result, then what a written quote covers, then the ask. */}
+          Removed as repeats of the proof strip and of each other: the services
+          tab explorer, "Pay for the fix", "Good work. A better experience."
+          and "What your quote actually covers". */}
       <HomePageSchema />
       <ApprovedFamilyFrame>
         <ApprovedHomeHero />
         <HandymanServicesAnswer />
-        <ApprovedHome />
       </ApprovedFamilyFrame>
       <HandymanPlanningRange />
-      <BudgetInclusionsSection />
       <ProjectGallerySection limit={6} showViewAll />
-      <HowP5Works />
+      <ApprovedFamilyFrame>
+        <ApprovedHowItWorks aside={<HowP5Works />} />
+      </ApprovedFamilyFrame>
       <WhoYouAreHiring />
+      <ApprovedFamilyFrame>
+        <ApprovedServiceArea />
+        <FAQSection />
+      </ApprovedFamilyFrame>
       <div id="contact" className="scroll-mt-24" aria-hidden="true" />
       <Section id="consult" divider className="relative overflow-hidden scroll-mt-16 pb-28 md:pb-28">
         {/* Warm, dimmed lifestyle photo grounds the closing section. Directional
@@ -104,9 +112,6 @@ export default function HomePage() {
                 <p className="ed-lede mt-8 max-w-[40ch]">
                   Send your repair list and optional photos. We review the scope, prepare
                   a written quote and confirm availability before scheduling.
-                </p>
-                <p className="ed-body mt-4">
-                  No pressure, and no expectation to go any further.
                 </p>
                 <ul
                   className="mt-8 grid list-none gap-3 border-t p-0 pt-6"

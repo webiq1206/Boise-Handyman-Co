@@ -54,8 +54,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'diy-vs-hiring-a-handyman': {
-    hero: '/images/handyman/toolbag-ready.webp',
-    alt: 'Neatly organized canvas tool bag with drill, levels, and tape measure staged on a drop cloth in a living room',
+    hero: '/images/handyman/service-carpentry-trim-branded.webp',
+    alt: 'Carpenter fitting a new piece of white baseboard trim along a wood floor in a modern home',
     topicTags: ["diy","hiring","home repairs","handyman","costs"],
     source: 'handyman',
   },
@@ -102,8 +102,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'handyman-vs-contractor': {
-    hero: '/images/handyman/toolbag-ready.webp',
-    alt: 'Neatly organized canvas tool bag with drill, levels, and tape measure staged on a drop cloth in a living room',
+    hero: '/images/handyman/consult-doorstep-branded.webp',
+    alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
     topicTags: ["hiring a handyman","contractors","boise","home repairs","costs"],
     source: 'handyman',
   },
@@ -180,8 +180,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'seasonal-home-maintenance-checklist-boise': {
-    hero: '/images/handyman/toolbag-ready.webp',
-    alt: 'Neatly organized canvas tool bag with drill, levels, and tape measure staged on a drop cloth in a living room',
+    hero: '/images/handyman/deck-board-replacement.webp',
+    alt: 'Gloved hands replacing a weathered deck board with a new cedar board on a backyard deck',
     topicTags: ["home maintenance","seasonal checklist","boise","gutters","winterizing"],
     source: 'handyman',
   },
@@ -222,8 +222,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'boise-home-maintenance-guide': {
-    hero: '/images/handyman/toolbag-ready.webp',
-    alt: 'Neatly organized canvas tool bag with drill, levels, and tape measure staged on a drop cloth in a living room',
+    hero: '/images/handyman/winterize-spigot.webp',
+    alt: 'Insulated faucet cover being fitted over an outdoor hose spigot with frost on the grass',
     topicTags: ["maintenance","seasonal","checklist","home care","boise"],
     source: 'handyman',
   },
@@ -332,7 +332,7 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
 };
 
 export const HUB_HERO_IMAGES: Record<string, string> = {
-  'repairs-and-fixes': '/images/handyman/toolbag-ready.webp',
+  'repairs-and-fixes': '/images/handyman/service-electrical.webp',
   'installs-and-upgrades': '/images/handyman/service-mounting.webp',
   'home-maintenance': '/images/handyman/service-caulking.webp',
   'costs-and-hiring': '/images/handyman/estimate-clipboard.webp',

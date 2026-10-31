@@ -190,9 +190,28 @@ export function LandingPageTemplate({
   const processAlt = altForImage(processImage) ?? '';
   const showTimelineBelow = !!timeline && !costGuidance;
   const callFirst = callFirstProp || !!paidService;
+  // Phase 3. The paid-traffic pages (callFirst) render exactly as before. On
+  // every other page each photograph is shown once, and the area and
+  // city-service pages drop the bands that only restated the promises already
+  // in the hero, the aside and the long-form copy.
+  const isArea = !callFirst && related.variant === 'area';
+  const isLocal = !callFirst && related.variant !== 'service';
+  const showDetailBody = callFirst || (!!inclusions && inclusions.length > 0) || !!timeline;
+  const showBenefits = !!benefits && benefits.length > 0 && !isArea;
+  const showNotesBand = (showTimelineBelow || !!localNote) && !isLocal;
+  const showProcessPanel = !!processSteps && processSteps.length > 0;
+  // Images already on the page outside the long-form block: the hero, the
+  // breather band and (when the process panel renders) the process photo.
+  const shownElsewhere = new Set(
+    [heroImageUrl, breatherImage, showProcessPanel ? processImage : undefined].filter(Boolean),
+  );
+  const uniqueInline = processImage && !shownElsewhere.has(processImage) ? processImage : undefined;
 
   return (
-    <div className={`flex flex-col ${paidService === 'home-maintenance' ? styles.maintenance : ''}`}>
+    <div
+      className={`flex flex-col ${paidService === 'home-maintenance' ? styles.maintenance : ''}`}
+      data-ad-landing={callFirst ? '' : undefined}
+    >
       {/* Approved editorial hero */}
       <InteriorHero imageSrc={heroImageUrl} imageAlt={heroAlt} layout="split">
           <HeroBreadcrumbs items={breadcrumbs} />
@@ -280,7 +299,7 @@ export function LandingPageTemplate({
           </div>
         </Section>
       )}
-<div className="interior-detail-body"><div><p className="interior-eyebrow">A CLEAR SCOPE</p><h2>Plan the details.<br/><em>Know the next step.</em></h2>{inclusions&&inclusions.length>0&&<ul className="interior-scope-list">{inclusions.map((item,i)=><li key={item}><span>{String(i+1).padStart(2,'0')}</span>{item}</li>)}</ul>}</div><InteriorProjectAside>{timeline&&<p className="ed-body mt-6">{timeline}</p>}</InteriorProjectAside></div>
+{showDetailBody&&<div className="interior-detail-body"><div><p className="interior-eyebrow">A CLEAR SCOPE</p><h2>Plan the details.<br/><em>Know the next step.</em></h2>{inclusions&&inclusions.length>0&&<ul className="interior-scope-list">{inclusions.map((item,i)=><li key={item}><span>{String(i+1).padStart(2,'0')}</span>{item}</li>)}</ul>}</div><InteriorProjectAside>{timeline&&<p className="ed-body mt-6">{timeline}</p>}</InteriorProjectAside></div>}
 
       {/* ─── Cost and timeline expectation ───
           Cost guidance follows the concise scope and estimate sidebar. */}
@@ -323,7 +342,7 @@ export function LandingPageTemplate({
       )}
 
       {/* ─── Benefits: a hairline matrix, not a card grid ─── */}
-      {benefits && benefits.length > 0 && (
+      {showBenefits && (
         <Section surface="bone" spacing="xl" edge>
           <div className="ed-shell">
             <Reveal>
@@ -366,7 +385,7 @@ export function LandingPageTemplate({
       {featuredProject && <FeaturedBeforeAfterSection project={featuredProject} />}
 
       {/* ─── Process: the family's image panel, timeline leading ─── */}
-      {processSteps && processSteps.length > 0 && (
+      {showProcessPanel && (
         <Section surface="deep" spacing="none" edge className="p-0">
           <div className="ed-panel ed-panel-reverse">
             <div className="ed-panel-media">
@@ -403,7 +422,7 @@ export function LandingPageTemplate({
       {/* ─── Timeline & local notes ───
           The timeline renders up in the cost section when costGuidance hoisted
           it; showing it twice would be noise. */}
-      {(showTimelineBelow || localNote) && (
+      {showNotesBand && (
         <Section surface="dark" spacing="lg" edge>
           <div className="ed-shell">
             {showTimelineBelow && localNote ? (
@@ -471,21 +490,30 @@ export function LandingPageTemplate({
                 {sections.map((section, i) => {
                   // Mid-guide photography for mobile scroll rhythm: after the first
                   // long-form block, and again near the midpoint on longer pages.
-                  const showInlinePhoto =
-                    !!breatherImage &&
-                    (i === 0 || (sections.length >= 4 && i === Math.floor(sections.length / 2) - 1));
-                  const inlineSrc =
-                    i === 0
+                  // Paid-traffic pages keep their original pair of inline photos.
+                  // Everywhere else an inline photo appears only when it is one
+                  // the page has not already shown (Phase 3: one use per image).
+                  const showInlinePhoto = callFirst
+                    ? !!breatherImage &&
+                      (i === 0 || (sections.length >= 4 && i === Math.floor(sections.length / 2) - 1))
+                    : !!uniqueInline && i === 0;
+                  const inlineSrc = !callFirst
+                    ? uniqueInline
+                    : i === 0
                       ? (breatherImage ?? heroImageUrl)
                       : (processImage ?? breatherImage ?? heroImageUrl);
-                  const inlineAlt =
-                    i === 0 ? breatherAlt : (processAlt || breatherAlt);
+                  const inlineAlt = !callFirst
+                    ? processAlt
+                    : i === 0 ? breatherAlt : (processAlt || breatherAlt);
+                  // Area and city pages keep running text in the body sans; the
+                  // serif lede is for service pages and the paid landings.
+                  const ledeFirst = i === 0 && !costGuidance && !isLocal;
                   return (
                     <div key={section.heading}>
                       <Reveal delay={Math.min(i, 4) * 60}>
                         <h2 id={sectionId(section.heading)} className="ed-h2-sm ed-statement-wide scroll-mt-28">{section.heading}</h2>
                         {section.paragraphs?.map((p, j) => (
-                          <p key={j} className={i === 0 && j === 0 && !costGuidance ? 'ed-lede mt-6 max-w-[52ch]' : j === 0 ? 'ed-body mt-6 max-w-[62ch]' : 'ed-body mt-4 max-w-[62ch]'}>{p}</p>
+                          <p key={j} className={ledeFirst && j === 0 ? 'ed-lede mt-6 max-w-[52ch]' : j === 0 ? 'ed-body mt-6 max-w-[62ch]' : 'ed-body mt-4 max-w-[62ch]'}>{p}</p>
                         ))}
                         {section.subsections?.map((sub) => (
                           <div key={sub.heading} className="mt-8 border-t pt-6" style={line}>

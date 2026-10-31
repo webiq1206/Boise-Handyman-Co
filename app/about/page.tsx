@@ -235,10 +235,13 @@ export default function AboutPage() {
 
         <WhyChooseUsSection />
 
+        {/* The Kuna front elevation is also the Kuna card in the service-area
+            grid below; this band uses a different Kuna photograph so the page
+            shows each image once. */}
         <section className="relative h-[clamp(220px,32vw,400px)] overflow-hidden" aria-label="Kuna single-storey home exterior">
           <Image
-            src="/images/houses/kuna/kuna-single-storey-front.webp"
-            alt="Beige single-storey home in Kuna with white trim, two-car garage and open fields beyond"
+            src="/images/houses/kuna/kuna-gutter-cleaning.webp"
+            alt="White gutter with autumn leaves at the eave of a beige Kuna single-storey home"
             fill
             sizes="100vw"
             className="object-cover img-brand-grade"

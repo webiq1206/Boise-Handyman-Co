@@ -1,7 +1,7 @@
-import { ArrowRight, ArrowUpRight, Phone } from 'lucide-react';
+import { ArrowUpRight, Phone } from 'lucide-react';
 import { preload } from 'react-dom';
 import type { CSSProperties, ReactNode } from 'react';
-import { SITE_CONFIG, handymanServiceSentence } from '@/shared/siteConfig';
+import { SITE_CONFIG } from '@/shared/siteConfig';
 import { brands } from './family-content';
 
 /** Keeps the approved family palette on the server so the hero is not inside a client component. */
@@ -15,9 +15,16 @@ export function ApprovedFamilyFrame({ children }: { children: ReactNode }) {
 }
 
 /**
- * Home hero rendered by the server. The image, headline, and answer sentence
- * are the largest things in the first viewport, so they stay out of the
- * client bundle and out of any entrance animation.
+ * Home hero rendered by the server: the approved HeroSplit variant. The image,
+ * headline and one paragraph are the largest things in the first viewport, so
+ * they stay out of the client bundle and out of any entrance animation.
+ *
+ * One paragraph and two actions: the filled primary ("Send your list and
+ * photos") and Call as a text link. "See how it works" sits below the hero, in
+ * the services answer. From 701px the photo fills the panel height (cover, with
+ * the focal point on the technician and headroom above his hair); on phones it
+ * runs full bleed behind the copy with a directional scrim. The rules live in
+ * app/design-v2-compliance.css under "Phase 3 home hero".
  */
 export function ApprovedHomeHero() {
   const b = brands.handyman;
@@ -41,26 +48,17 @@ export function ApprovedHomeHero() {
             <br />
             <em>Your list, handled.</em>
           </h1>
-          <p className="f-hero-summary" data-speakable="summary">{handymanServiceSentence()}</p>
           <p className="f-hero-intro">{b.intro}</p>
           <div className="f-actions">
-            {/* Primary conversion. Call stays secondary (header / bottom bar) so the first screen stays C3-budget-safe. */}
             <a className="f-button" href="/contact" data-cta="primary" data-testid="button-hero-primary">
               {b.action}
               <ArrowUpRight size={18} aria-hidden="true" />
             </a>
-            <a className="f-button f-button-secondary" href={SITE_CONFIG.phoneHref} data-testid="button-call-hero">
+            <a className="f-link f-hero-call" href={SITE_CONFIG.phoneHref} data-testid="button-call-hero">
               <Phone size={18} aria-hidden="true" />
               Call {SITE_CONFIG.phone}
             </a>
-            <a className="f-link" href="#how-we-build">
-              {b.secondary}
-              <ArrowRight size={18} />
-            </a>
           </div>
-          <span className="estimator-promise">
-            Written price before work starts, after we review your list.
-          </span>
         </div>
       </section>
       <div className="f-proof">

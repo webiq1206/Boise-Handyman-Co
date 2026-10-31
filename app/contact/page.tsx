@@ -200,7 +200,7 @@ export default function ContactPage() {
       <JsonLd data={schemas} />
       <div className="flex flex-col ">
         {/* Approved editorial hero */}
-        <InteriorHero layout="contact" imageSrc={SITE_IMAGES.hero} imageAlt="A worker adjusting an interior door hinge with a screwdriver">
+        <InteriorHero layout="contact" imageSrc={SITE_IMAGES.consultBg} imageAlt="A freshly painted sage-green front door with white trim and black hardware">
             <HeroBreadcrumbs />
             <p data-speakable="summary" className="sr-only">
               {SPEAKABLE_SUMMARY}
