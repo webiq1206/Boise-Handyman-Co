@@ -51,33 +51,19 @@ test("built HTML has no trust claims outside the terms page when the flag is off
   const built = html.join("\n");
   assert.deepEqual(built.match(/\btrusted\b|top-rated|satisfaction guaranteed/gi) ?? [], []);
 
-  const meridian = generateCityServiceDescription("Drywall Repair", "Meridian");
-  const caldwell = generateCityServiceDescription("Drywall Repair", "Caldwell");
-  const garden = generateCityServiceDescription("Drywall Repair", "Garden City");
-  assert.equal(meridian.startsWith("Meridian's local drywall repair"), true, meridian);
-  assert.equal(caldwell.startsWith("Caldwell's local drywall repair"), true, caldwell);
-  assert.equal(garden.startsWith("Garden City's local drywall repair"), true, garden);
-  assert.equal(FORBIDDEN.test(meridian), false, meridian);
-  assert.equal(FORBIDDEN.test(caldwell), false, caldwell);
-  assert.equal(FORBIDDEN.test(garden), false, garden);
-  const unmappedCta = generateMetaDescription({
-    serviceName: "Plumbing Repairs",
-    serviceSlug: "plumbing-repairs",
-    city: "Garden City",
-  });
-  assert.equal(unmappedCta.includes("Free quotes from photos"), true, unmappedCta);
-  assert.equal(unmappedCta.includes("Garden City's local"), true, unmappedCta);
+  // Phase 4: generated descriptions no longer carry a city "trusted/local"
+  // lead or a CTA variant at all; they open with the searched term. The
+  // keyword-first, length, phone and "!" rules live in
+  // tests/generated-descriptions.test.ts.
+  for (const city of ["Meridian", "Caldwell", "Garden City"]) {
+    const description = generateCityServiceDescription("Drywall Repair & Patching", city);
+    assert.equal(description.startsWith(`Drywall repair in ${city}, Idaho`), true, description);
+    assert.equal(FORBIDDEN.test(description), false, description);
+  }
 
   const terms = readFileSync(new URL("../app/terms-of-service/page.tsx", import.meta.url), "utf8");
   assert.match(terms, /<h2 id="document-section-9">Satisfaction Guarantee<\/h2>/);
   const termsBody = terms.replace(/<h2 id="document-section-9">Satisfaction Guarantee<\/h2>/, "");
   assert.equal(FORBIDDEN.test(termsBody), false);
 
-  const seo = readFileSync(new URL("../lib/seo.ts", import.meta.url), "utf8");
-  assert.equal(seo.includes("Kuna's trusted local"), true);
-  assert.equal(seo.includes("Meridian's trusted"), true);
-  assert.equal(seo.includes("Nampa's trusted"), true);
-  assert.equal(seo.includes("Caldwell's trusted"), true);
-  assert.equal(seo.includes("${city}'s trusted"), true);
-  assert.equal(seo.includes("Satisfaction guaranteed"), true);
 });

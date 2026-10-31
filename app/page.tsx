@@ -13,20 +13,17 @@ import { WhoYouAreHiring } from "@/components/sections/WhoYouAreHiring";
 import { ProjectGallerySection } from "@/components/sections/ProjectGallerySection";
 import { HomePageSchema } from "@/components/seo/HomePageSchema";
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
-import { buildCanonical,fitDescription } from "@/lib/page-metadata";
+import { buildCanonical } from "@/lib/page-metadata";
 import { SITE_CONFIG } from "@/shared/siteConfig";
-import { CONSULT_BULLETS,SITE_TAGLINE } from "@/shared/siteContent";
+import { CONSULT_BULLETS } from "@/shared/siteContent";
 import { SITE_IMAGES } from "@/shared/siteImages";
 import { ArrowUpRight, Check } from "lucide-react";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  ...withBrandPageMetadata(({
-  // 49 chars. Leads with the primary term ("handyman in Boise") rather than
-  // the brand, which the suffix carries anyway.
-  title: { absolute: `Handyman in Boise, ID | ${SITE_CONFIG.name}` },
-  description:
-    fitDescription("Handyman services in Boise for small repairs, installations and maintenance. Send your task list and photos to Boise Handyman Co for a scope review."),
+// Title and description come from one place: the '/' entry in
+// lib/brand-page-metadata.ts, which wraps this object. Setting them here too
+// shipped two competing sources, and the wrapper silently won.
+export const metadata: Metadata = withBrandPageMetadata({
   alternates: {
     canonical: buildCanonical("/"),
     // Setting `alternates` replaces the root declaration, so the feed link has
@@ -38,18 +35,11 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: `${SITE_CONFIG.name} | Treasure Valley Handyman`,
-    description:
-      `${SITE_TAGLINE}. Small repairs, installs, and home maintenance across the Treasure Valley.`,
     type: "website",
     url: buildCanonical("/"),
     siteName: SITE_CONFIG.name,
-    images: [{ url: "/images/og-default.png", width: 1200, height: 630, alt: SITE_CONFIG.name }],
   },
-}), "/"),
-  // Homepage description is intentionally applied after the shared brand defaults.
-  description: "Handyman services in Boise for small repairs, installations and maintenance. Send your task list and photos to Boise Handyman Co for a scope review.",
-};
+}, "/");
 
 export default function HomePage() {
   return (

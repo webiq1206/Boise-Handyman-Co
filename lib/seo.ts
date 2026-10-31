@@ -131,70 +131,108 @@ export function generatePageTitle(params: ServiceSEOParams): string {
   return `${truncatedService} | ${BRAND}`;
 }
 
-const SATISFACTION_GUARANTEED_CTA = "Satisfaction guaranteed";
-const NEUTRAL_FALLBACK_CTA = "Free quotes from photos";
+/**
+ * Meta descriptions for the generated pages (home fallback, 8 service pages,
+ * 9 area pages and every service x city page).
+ *
+ * Rules, enforced by tests/generated-descriptions.test.ts and by
+ * verify:metadata-fit on every rendered page:
+ * - keyword first: the description opens with the page's search term
+ * - 140 to 155 characters, so it fills the snippet and ships uncut
+ * - no phone number and no exclamation mark (the phone sits on the page,
+ *   next to the actions, not in the search snippet)
+ * Facts come from the service, area and guide copy already on the site.
+ */
+export const DESCRIPTION_MIN = 140;
+export const DESCRIPTION_MAX = 155;
 
-const CITY_DESCRIPTION_VARIANTS: Record<string, string> = {
-  Kuna: SHOW_TRUST_CLAIMS ? "Kuna's trusted local" : "Kuna's local",
-  Boise: "Boise's local",
-  Meridian: SHOW_TRUST_CLAIMS ? "Meridian's trusted" : "Meridian's local",
-  Eagle: "Eagle's preferred",
-  Star: "Star's reliable",
-  Middleton: "Middleton's expert",
-  Nampa: SHOW_TRUST_CLAIMS ? "Nampa's trusted" : "Nampa's local",
-  Caldwell: SHOW_TRUST_CLAIMS ? "Caldwell's trusted" : "Caldwell's local",
+const HOME_DESCRIPTION =
+  'Boise handyman for small repairs, installs and home maintenance across the Treasure Valley. One written quote before work starts. Send your list today.';
+
+const GENERIC_DESCRIPTION =
+  'Handyman services in Boise and the Treasure Valley: small repairs, installs and home maintenance, with one written quote before any work starts.';
+
+/** Keyed by service slug (shared/contentData.ts). */
+const SERVICE_DESCRIPTIONS: Record<string, string> = {
+  'drywall-repair':
+    'Drywall repair in Boise and the Treasure Valley: holes, stress cracks, water stains and texture patches, primed and blended. Send photos for a quote.',
+  'painting-touch-ups':
+    'Paint touch-ups in Boise and the Treasure Valley: room refreshes, trim and door repaints and exterior spot work with real prep. Send photos for a quote.',
+  'plumbing-repairs':
+    'Minor plumbing repairs in Boise and the Treasure Valley: dripping faucets, running toilets, disposals and slow drains. Send photos for one written quote.',
+  'electrical-repairs':
+    'Minor electrical repairs in Boise and the Treasure Valley: outlets, switches, fixtures and ceiling fans on existing circuits. Send photos for a quote.',
+  'carpentry-trim-repair':
+    'Carpentry and trim repair in Boise and the Treasure Valley: sticking doors, split casing, loose baseboard and stair rails. Send photos for a written quote.',
+  'mounting-assembly':
+    'TV mounting in Boise and the Treasure Valley, plus shelves, mirrors, curtain rods and furniture assembly, anchored right. Send photos for a written quote.',
+  'fence-deck-gutter-repair':
+    'Fence, deck and gutter repair in Boise and the Treasure Valley: leaning posts, sagging gates, loose deck boards, gutter cleaning. Send photos for a quote.',
+  'home-maintenance':
+    'Home maintenance and caulking in Boise and the Treasure Valley: tub and sink recaulking, weatherstripping, grout repair and punch lists. Quote first.',
 };
 
-function cityDescriptionLead(city: string): string {
-  return CITY_DESCRIPTION_VARIANTS[city] || (SHOW_TRUST_CLAIMS ? `${city}'s trusted` : `${city}'s local`);
-}
-
-const CITY_CTA_VARIANTS: Record<string, string> = {
-  Kuna: "Free upfront quotes",
-  Boise: "Treasure Valley handyman",
-  Eagle: "Upfront quotes",
-  Meridian: "One-trip fixes",
-  Star: "Same-week scheduling",
-  Middleton: "Workmanship guarantee",
-  Nampa: "Ada & Canyon County service",
-  Caldwell: "Repairs and installs",
+/** Keyed by city name. Each housing note is from that city's guide or area copy. */
+const AREA_DESCRIPTIONS: Record<string, string> = {
+  Boise:
+    'Handyman in Boise, Idaho: North End plaster to Harris Ranch nail pops. One written quote before work starts, same pricing valley-wide, no travel surcharge.',
+  Meridian:
+    'Handyman in Meridian, Idaho: settling cracks and builder-grade swaps in subdivision homes. One written quote before work starts, same pricing valley-wide.',
+  Eagle:
+    'Handyman in Eagle, Idaho: larger homes with more exterior to keep up, decks and fences included. One written quote before work starts, same valley pricing.',
+  Nampa:
+    'Handyman in Nampa, Idaho: older homes near downtown and new Canyon County subdivisions. One written quote before work starts, same pricing valley-wide.',
+  Kuna:
+    'Handyman in Kuna, Idaho: new-subdivision settling repairs and acreage fence upkeep. One written quote before work starts, same pricing across the valley.',
+  Star:
+    'Handyman in Star, Idaho: new builds, farmhouse-era homes and wind-tested fences. One written quote before work starts, same pricing across the valley.',
+  Middleton:
+    'Handyman in Middleton, Idaho: small-town and acreage homes plus new-subdivision repairs. One written quote before work starts, same pricing valley-wide.',
+  'Garden City':
+    'Handyman in Garden City, Idaho: small repairs, installs and upkeep for Ada County homes near the Greenbelt. One written quote before work starts.',
+  Caldwell:
+    'Handyman in Caldwell, Idaho: older homes near the historic core and new subdivisions. One written quote before work starts, same pricing across the valley.',
 };
 
 /**
- * Generate SEO-optimized meta description
- * 150-160 characters with phone number, CTA, and unique value prop
- * Phone: (208) 477-1169
+ * Generate the meta description for the home, a service page or an area page.
+ * Keyword first, 140 to 155 characters, no phone number, no exclamation mark.
  */
 export function generateMetaDescription(params: ServiceSEOParams): string {
-  const { serviceName, city } = params;
-  const phone = SITE_CONFIG.phone;
-  
-  if (params.isHomePage) {
-    return `Handyman services in Boise, Meridian, Eagle & the Treasure Valley. Repairs, installs & maintenance with upfront quotes. Call ${phone} to book a visit!`;
-  }
+  const { serviceName, serviceSlug, city } = params;
 
-  if (params.serviceSlug === 'drywall-repair') {
-    return `Drywall repair and patching in ${city || 'Boise & the Treasure Valley'}. Share photos for a scope review. Drying and finishing may require more than one visit.`;
-  }
+  if (params.isHomePage) return HOME_DESCRIPTION;
 
   if (city && serviceName) {
-    const serviceLC = serviceName.toLowerCase();
-    const cityVariant = cityDescriptionLead(city);
-    const ctaVariant = CITY_CTA_VARIANTS[city] || (SHOW_TRUST_CLAIMS ? SATISFACTION_GUARANTEED_CTA : NEUTRAL_FALLBACK_CTA);
-    return `${cityVariant} ${serviceLC} team. Upfront quotes. ${ctaVariant}. Call ${phone} to book a visit!`;
+    return generateCityServiceDescription(serviceName, city);
   }
 
   if (city) {
-    return `Handyman in ${city}, Idaho. Locally owned repairs, installs & maintenance. Call ${phone} to book a handyman visit in ${city}!`;
+    return AREA_DESCRIPTIONS[city] ?? fitDescriptionCandidates([
+      `Handyman in ${city}, Idaho: small repairs, installs and home maintenance. One written quote before work starts, same pricing across the Treasure Valley.`,
+      `Handyman in ${city}, Idaho: small repairs, installs and home maintenance, with one written quote before work starts and the same pricing valley-wide.`,
+      `Handyman in ${city}, Idaho: small repairs, installs and home maintenance. One written quote before work starts.`,
+    ]);
   }
 
-  if (!serviceName) {
-    return `Handyman services in Boise & the Treasure Valley. Small repairs, installs & home maintenance with upfront quotes. Call ${phone} to book a visit!`;
-  }
+  if (serviceSlug && SERVICE_DESCRIPTIONS[serviceSlug]) return SERVICE_DESCRIPTIONS[serviceSlug];
 
-  const serviceLC = serviceName.toLowerCase();
-  const serviceLead = serviceLC.charAt(0).toUpperCase() + serviceLC.slice(1);
-  return `${serviceLead} in Boise & the Treasure Valley. Scope-based written quotes from a local handyman. Call ${phone} to book a visit!`;
+  if (!serviceName) return GENERIC_DESCRIPTION;
+
+  const lead = serviceName.charAt(0).toUpperCase() + serviceName.slice(1).toLowerCase();
+  return fitDescriptionCandidates([
+    `${lead} in Boise and the Treasure Valley from a local handyman, with one written quote before any work starts. Send your list and photos to begin.`,
+    `${lead} in Boise and the Treasure Valley, with one written quote before work starts. Send your list and photos to begin.`,
+  ]);
+}
+
+/** First candidate inside 140 to 155 characters, else the longest one that fits 155. */
+function fitDescriptionCandidates(candidates: string[]): string {
+  const clean = candidates.map((c) => c.replace(/\s+/g, ' ').trim());
+  const inRange = clean.find((c) => c.length >= DESCRIPTION_MIN && c.length <= DESCRIPTION_MAX);
+  if (inRange) return inRange;
+  const fitting = clean.filter((c) => c.length <= DESCRIPTION_MAX).sort((a, b) => b.length - a.length);
+  return fitting[0] ?? clean[clean.length - 1];
 }
 
 /**
@@ -238,36 +276,75 @@ export function generateCityServiceTitle(serviceName: string, cityName: string):
 }
 
 /**
- * Generate varied city-service meta description
- * Guaranteed under 160 characters
+ * The search term and the work it covers, per service, for service x city
+ * descriptions. Keyed by the `name` values in shared/contentData.ts. Scopes
+ * are lists from each service's own inclusions.
+ */
+const CITY_SERVICE_DESCRIPTION_PARTS: Record<string, { lead: string; scope: string }> = {
+  'Drywall Repair & Patching': { lead: 'Drywall repair', scope: 'holes, cracks, nail pops, texture matched' },
+  'Interior & Exterior Painting': { lead: 'Painting touch-ups', scope: 'rooms, trim, doors, exterior spots' },
+  'Minor Plumbing Repairs': { lead: 'Minor plumbing repairs', scope: 'faucets, toilets, disposals, slow drains' },
+  'Minor Electrical Repairs': { lead: 'Minor electrical repairs', scope: 'outlets, switches, fixtures, ceiling fans' },
+  'Carpentry & Trim Repair': { lead: 'Carpentry and trim repair', scope: 'sticking doors, casing, baseboard, rails' },
+  'Mounting & Assembly': { lead: 'TV mounting and assembly', scope: 'TVs, shelves, mirrors, furniture' },
+  'Fence, Deck & Gutter Repair': { lead: 'Fence, deck and gutter repair', scope: 'leaning panels, loose boards, gutters' },
+  'Caulking & Home Maintenance': { lead: 'Home maintenance', scope: 'recaulking, weatherstripping, punch lists' },
+};
+
+/**
+ * Where in each city the work runs, from CITY_SEO_DATA neighborhoods and the
+ * neighborhood guides already published (Harris Ranch is a Boise guide).
+ */
+const CITY_SPANS: Record<string, string> = {
+  Boise: 'North End to Harris Ranch',
+  Meridian: 'Lochsa Falls to Paramount',
+  Eagle: 'Banbury to Floating Feather',
+  Nampa: 'Downtown to Karcher',
+  Caldwell: 'Wilson to Cleveland Blvd',
+  Kuna: 'Crimson Point and beyond',
+  Star: 'Star River Ranch and beyond',
+  Middleton: 'Middleton Heights and beyond',
+};
+
+const CITY_SERVICE_CLOSERS = [
+  'Send photos for one written quote before work starts.',
+  'Send photos for one written quote before the visit.',
+  'Send a few photos for one written quote first.',
+  'Send a few photos for one written quote before work starts.',
+  'Send photos for one written quote first.',
+  'Send photos and get one written quote before any work starts.',
+  'One written quote before work starts, same pricing valley-wide.',
+  'Send your list and photos for one written quote before work starts.',
+  'Send photos for a quote.',
+];
+
+/**
+ * Service x city meta description: "{service} in {City}, Idaho, {span}: {scope}.
+ * {closer}" Keyword first, 140 to 155 characters, no phone, no exclamation.
  */
 export function generateCityServiceDescription(
   serviceName: string,
   cityName: string,
-  shortDescription?: string,
+  _shortDescription?: string,
 ): string {
-  const phone = SITE_CONFIG.phone;
-  const serviceLC = serviceName.toLowerCase();
-  const cityVariant = cityDescriptionLead(cityName);
-  const cityData = CITY_SEO_DATA[cityName as keyof typeof CITY_SEO_DATA];
-  const neighborhood = cityData?.neighborhoods?.[0];
-
-  if (neighborhood) {
-    const withNeighborhood = `${cityVariant} ${serviceLC}. Serving ${neighborhood} & all ${cityName}. Upfront quotes. Call ${phone}!`;
-    if (withNeighborhood.length <= 160) return withNeighborhood;
+  const parts = CITY_SERVICE_DESCRIPTION_PARTS[serviceName] ?? {
+    lead: serviceName.charAt(0).toUpperCase() + serviceName.slice(1).toLowerCase(),
+    scope: 'small repairs, installs and upkeep',
+  };
+  const span = CITY_SPANS[cityName];
+  const heads = [
+    ...(span ? [`${parts.lead} in ${cityName}, Idaho, ${span}: ${parts.scope}.`] : []),
+    `${parts.lead} in ${cityName}, Idaho: ${parts.scope}.`,
+    `${parts.lead} in ${cityName}, Idaho, across the city: ${parts.scope}.`,
+    `${parts.lead} in ${cityName}, Idaho, from a local Treasure Valley handyman: ${parts.scope}.`,
+  ];
+  const candidates: string[] = [];
+  for (const head of heads) {
+    for (const closer of CITY_SERVICE_CLOSERS) candidates.push(`${head} ${closer}`);
   }
-
-  if (shortDescription) {
-    const desc = `${cityVariant} ${serviceLC}. ${shortDescription}. Upfront quotes. Call ${phone}!`;
-    if (desc.length <= 160) return desc;
-  }
-
-  const base = `${cityVariant} ${serviceLC} in ${cityName}, ID. Upfront quotes. Call ${phone} to book a visit!`;
-  if (base.length <= 160) return base;
-
-  const serviceLead = serviceLC.charAt(0).toUpperCase() + serviceLC.slice(1);
-  return `${serviceLead} in ${cityName}, ID. Upfront quotes from a local handyman. Call ${phone} to book a visit!`;
+  return fitDescriptionCandidates(candidates);
 }
+
 
 /** Keep complete authored titles; an optional secondary label may be omitted. */
 export function generateSafePageTitle(primary: string, suffix?: string): string {

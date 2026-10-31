@@ -31,3 +31,12 @@ test('the RE-10 page ships its own metadata, not a core-page override',()=>{
  assert.equal(result.description,'Own description.');
  assert.equal((result.openGraph as {title?:string}).title,'RE-10 and Inspection Repairs Boise | Boise Handyman Co');
 });
+
+test('a description with a phone number or an exclamation mark is reported',()=>{
+ const phone=metadataFitIssues({title:'Drywall Repair in Boise',description:'Drywall repair in Boise. Call (208) 477-1169 to book a visit.'},'/services/drywall-repair');
+ assert.equal(phone.length,1);
+ assert.match(phone[0],/phone number/);
+ const bang=metadataFitIssues({title:'Drywall Repair in Boise',description:'Drywall repair in Boise, done right!'},'/services/drywall-repair');
+ assert.equal(bang.length,1);
+ assert.match(bang[0],/exclamation mark/);
+});
