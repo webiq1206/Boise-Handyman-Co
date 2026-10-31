@@ -2,7 +2,6 @@ import { InteriorPage } from '@/components/approved/InteriorLayout';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AreaCard } from "@/components/marketing/AreaCard";
 import { BlogEndCta } from "@/components/marketing/BlogEndCta";
-import { EstimatePromptBand } from "@/components/marketing/EstimatePromptBand";
 import { Section } from "@/components/marketing/Section";
 import { SectionHeader } from "@/components/marketing/SectionHeader";
 import { ConsultCTA } from "@/components/modals/ConsultCTA";
@@ -86,7 +85,7 @@ export default function AreasHubPage() {
               description="Repairs, installs, and maintenance across Ada and Canyon County, quoted upfront."
               align="left"
             />
-            <div className="grid gap-5 sm:grid-cols-2 min-[1180px]:grid-cols-4">
+            <div className="grid gap-5 sm:grid-cols-3">
               {CITIES.map((city, i) => (
                 <Reveal key={city.slug} delay={i * 40}>
                   <AreaCard city={city} imageSrc={CITY_HERO_IMAGES[city.slug]} />
@@ -111,17 +110,8 @@ export default function AreasHubPage() {
           </div>
         </Section>
 
-        <EstimatePromptBand
-          title={
-            <>
-              Got a fix waiting in your{' '}
-              <em className="brc-accent">city</em>?
-            </>
-          }
-          description="The same upfront quotes and fair pricing apply across Ada and Canyon County. Get a preliminary estimate for your job, then book a handyman visit when you're ready."
-          variant="tint"
-        />
-
+        {/* One closing ask: the "Got a fix waiting in your city?" band used to
+            sit directly on top of this one, the same ask twice. */}
         <BlogEndCta />
       </div>
     </></InteriorPage>

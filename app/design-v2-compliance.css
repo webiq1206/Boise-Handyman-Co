@@ -93,6 +93,17 @@
   min-height: 48px !important;
   height: 48px;
 }
+/* With a labelled Call beside it, the primary keeps "Send your list and
+   photos" on one line on phones: tighter tracking and side padding, never a
+   smaller font. */
+.approved-shell [data-mobile-nav-bar] a:last-child {
+  padding-inline: 12px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.approved-shell [data-mobile-nav-bar] a:first-child {
+  padding-inline: 12px;
+}
 
 /* ─── M1 + M2: home hero ─── */
 
