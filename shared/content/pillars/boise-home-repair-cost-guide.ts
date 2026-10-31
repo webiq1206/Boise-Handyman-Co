@@ -6,10 +6,12 @@ import type { GuidePageData } from '../../guideContent';
 
 export const boiseHomeRepairCostGuide: GuidePageData = {
   slug: 'boise-home-repair-cost-guide',
-  title: 'Boise Home Repair Cost Guide',
-  seoTitle: 'Boise Home Repair Cost Guide (2026)',
+  // The complete per-job cost guide. Hourly rates and visit minimums belong to
+  // /blog/handyman-prices-boise; the two link to each other.
+  title: 'The complete Boise home repair cost guide',
+  seoTitle: 'Boise Home Repair Costs: Complete Guide',
   metaDescription:
-    'What small home repairs cost in Boise in 2026: drywall, plumbing, electrical, carpentry, and paint, how handyman pricing works, and how to compare quotes.',
+    'Boise home repair costs for 2026, job by job: planning prices for drywall, plumbing, electrical, carpentry and paint, and how to compare two quotes fairly.',
   excerpt:
     'The complete picture of what small home repairs cost in the Treasure Valley: typical ranges by job, how hourly and flat-rate pricing differ, why quotes vary, and how to tell a fair price from a padded one.',
   hubSlug: 'costs-and-hiring',
@@ -18,7 +20,7 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
   publishedAt: '2026-06-20',
   updatedAt: '2026-08-13',
   tags: ['cost', 'handyman rates', 'home repair', 'pricing', 'boise', 'treasure valley'],
-  primaryKeyword: 'handyman cost boise',
+  primaryKeyword: 'home repair cost boise',
   quickAnswer:
     'Handyman rates in the Boise area typically run $60 to $120 per hour in 2026, with most single repairs landing between $100 and $500 total. Small jobs like a faucet swap or drywall patch usually take one to three hours. Our services carry flat starting prices from $145 so you know the number before we arrive.',
   keyTakeaways: [
@@ -34,6 +36,7 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
   linkedServices: ['drywall-repair', 'plumbing-repairs', 'electrical-repairs', 'carpentry-trim-repair'],
   linkedCities: ['boise', 'meridian', 'eagle', 'nampa'],
   relatedLinks: [
+    { url: '/blog/handyman-prices-boise', anchor: 'Handyman prices in Boise: hourly rates and job prices' },
     { url: '/guides/hire-a-handyman-treasure-valley', anchor: 'How to Hire a Handyman in the Treasure Valley' },
     { url: '/guides/first-time-homeowner-repair-handbook', anchor: "The First-Time Homeowner's Repair Handbook" },
     { url: '/services/drywall-repair', anchor: 'Drywall Repair & Patching' },
@@ -97,7 +100,7 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
   content: `
 <h2 id="the-honest-answer">What home repairs cost in Boise</h2>
 <p><strong>Handyman rates in the Treasure Valley typically run $60 to $120 per hour in 2026, and most single household repairs land between $100 and $500 all-in.</strong> A drywall patch, a faucet swap, a sticking door, a ceiling fan install: these are one-to-three-hour jobs, and their prices cluster tightly enough that you can sanity-check any quote against the ranges in this guide. Our own services carry flat starting prices, $145 to $199 depending on the trade, so the number is on the table before anyone is in your hallway.</p>
-<p>This guide covers the typical cost of the repairs people actually call about, how handyman pricing models work and which one favors you, why two quotes on the same job can be far apart, and where the line sits between a handyman job and a licensed-contractor job. If you want the short version for a specific repair, the ranges by job type are in the tables below, and <a href="/blog/what-small-home-repairs-cost-boise">what small home repairs cost in Boise</a> keeps a running list.</p>
+<p>This guide covers the typical cost of the repairs people actually call about, how handyman pricing models work and which one favors you, why two quotes on the same job can be far apart, and where the line sits between a handyman job and a licensed-contractor job. If you want the short version for a specific repair, the ranges by job type are in the tables below, and <a href="/blog/what-small-home-repairs-cost-boise">what small home repairs cost in Boise</a> keeps a running list. For hourly rates, visit minimums and how a handyman prices one job, see <a href="/blog/handyman-prices-boise">handyman prices in Boise</a>.</p>
 
 <h2 id="how-pricing-works">How handyman pricing works: hourly, flat rate, and minimums</h2>
 <p><strong>There are three pricing models in this market, and the one your quote uses matters more than the headline number.</strong> Hourly billing charges a rate, commonly $60 to $120 in this valley, for however long the work takes. Flat-rate pricing names one number for a defined job. And nearly everyone carries a minimum service charge, because driving to your house, unloading tools, and cleaning up costs the same whether the repair takes twenty minutes or two hours.</p>

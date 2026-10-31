@@ -6,10 +6,12 @@ import type { BlogPostData } from '../../blogContent';
 
 export const handymanPricesBoise: BlogPostData = {
   slug: 'handyman-prices-boise',
-  title: 'What a Handyman Costs in Boise (2026)',
-  seoTitle: 'Handyman Prices in Boise (2026 Rates)',
+  // Hourly rates, minimums and single-job prices. The per-job planning guide
+  // for every common repair is /guides/boise-home-repair-cost-guide.
+  title: 'Handyman prices in Boise: hourly rates and job prices (2026)',
+  seoTitle: 'Handyman Prices in Boise | Hourly Rates',
   metaDescription:
-    'Treasure Valley handyman rates typically run $60 to $120 per hour, with common repairs from $145 to $400. See how pricing works and get an upfront quote.',
+    'Handyman prices in Boise for 2026: typical hourly rates, visit minimums and trip fees, what common jobs cost, and how a flat written quote compares.',
   excerpt:
     'Handyman pricing in the Treasure Valley is not mysterious: an hourly market band, trip minimums, and flat rates for common jobs. Here is how the numbers actually work.',
   category: 'Costs & Hiring',
@@ -18,7 +20,7 @@ export const handymanPricesBoise: BlogPostData = {
   publishedAt: '2026-06-02',
   updatedAt: '2026-08-13',
   tags: ['cost', 'handyman rates', 'boise', 'hiring'],
-  primaryKeyword: 'handyman cost Boise',
+  primaryKeyword: 'handyman prices boise',
   secondaryKeywords: [
     'handyman hourly rate boise',
     'how much does a handyman charge in idaho',
@@ -41,6 +43,7 @@ export const handymanPricesBoise: BlogPostData = {
     'The cheapest quote is not the cheapest job if it takes two extra visits to finish.',
   ],
   relatedLinks: [
+    { url: '/guides/boise-home-repair-cost-guide', anchor: 'The complete Boise home repair cost guide' },
     { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
     { url: '/blog/drywall-repair-cost-boise', anchor: 'Drywall Repair Cost in Boise' },
     { url: '/blog/who-supplies-materials-handyman-jobs', anchor: 'Who Supplies Materials on a Handyman Job' },
@@ -84,7 +87,7 @@ export const handymanPricesBoise: BlogPostData = {
   content: `
 <h2 id="the-number">What a handyman costs in Boise</h2>
 <p><strong>Handyman labor in the Treasure Valley typically runs $60 to $120 per hour in 2026, and most companies carry a per-visit minimum of roughly $100 to $200.</strong> Most common repairs, a drywall patch, a faucet swap, a sticking door, a run of caulk, land between $145 and $400 including labor. Larger half-day and full-day visits commonly run $300 to $800 depending on scope and materials.</p>
-<p>Those are market bands, not our price list. Our own model is flat, upfront quotes for defined work, with common services starting at $145 for <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/home-maintenance">caulking and maintenance</a>, and minor plumbing and electrical repairs, and $149 to $199 for <a href="/services/drywall-repair">drywall</a>, carpentry, and painting work. The rest of this post explains how the pricing actually works, because the structure matters more than the sticker.</p>
+<p>Those are market bands, not our price list. Our own model is flat, upfront quotes for defined work, with common services starting at $145 for <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/home-maintenance">caulking and maintenance</a>, and minor plumbing and electrical repairs, and $149 to $199 for <a href="/services/drywall-repair">drywall</a>, carpentry, and painting work. The rest of this post explains how the pricing actually works, because the structure matters more than the sticker. For planning prices on every common repair, job by job, see <a href="/guides/boise-home-repair-cost-guide">the complete Boise home repair cost guide</a>.</p>
 
 <h2 id="hourly-band">Why the hourly band is $60 wide</h2>
 <p><strong>The spread mostly reflects who is showing up and what stands behind them.</strong> At the low end of the market you find solo operators with low overhead, informal scheduling, and sometimes no insurance. At the higher end you get established companies with insurance, warranties on workmanship, stocked trucks, and someone who answers the phone. Neither end is a scam; they are different products. The expensive mistake is paying the low rate while assuming you bought the high-end product.</p>

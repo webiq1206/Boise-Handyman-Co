@@ -44,11 +44,12 @@ export async function generateMetadata(
 
   const posts = BLOG_POSTS.filter((p) => p.hubSlug === params.hubSlug);
   const indexable = isCategoryHubIndexable(params.hubSlug, posts.length);
-  const title = `${hub.title} Articles`;
-  // The hub's own authored description, written to fit 155 characters. The old
-  // version appended a post count and then cut the result, which shipped
-  // descriptions ending "...licensed trade instead. 16…".
-  const description = hub.description;
+  // Authored per hub: a keyword-first title of 50 or more characters with the
+  // brand, and a 140 to 155 character description. The old description
+  // appended a post count and then cut the result, which shipped
+  // "...licensed trade instead. 16…".
+  const title = hub.seoTitle;
+  const description = hub.metaDescription;
   const heroImage = getHubHeroImage(params.hubSlug);
   const imageUrl = getAbsoluteImageUrl(heroImage, getBaseUrl());
 

@@ -60,7 +60,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
   'drywall-repair': {
     slug: 'drywall-repair',
     name: 'Drywall Repair & Patching',
-    headline: 'Drywall Repair and Patching in Boise and the Treasure Valley',
+    headline: 'Drywall repair in Boise',
     primaryKeyword: 'drywall repair boise',
     overview:
       'Boise Handyman Co patches holes, cracks, and water-damaged drywall for homes across the Treasure Valley, then blends the texture and paint so the repair disappears. You get an upfront quote based on the size and number of patches, and most repairs are finished across one or two short visits.',
@@ -143,9 +143,11 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
   'painting-touch-ups': {
     slug: 'painting-touch-ups',
-    name: 'Interior & Exterior Painting',
-    headline: 'Interior and Exterior Painting in Boise and the Treasure Valley',
-    primaryKeyword: 'painting handyman boise',
+    // Touch-ups and small repaints, matching the slug and the scope; whole-house
+    // and full exterior repaints are referred out (see outOfScope).
+    name: 'Painting Touch-Ups',
+    headline: 'Paint touch-ups in Boise and the Treasure Valley',
+    primaryKeyword: 'paint touch up boise',
     overview:
       'Boise Handyman Co paints rooms, trim, doors, and exterior touch-up areas for Treasure Valley homes, with proper prep and clean lines. It is painting at handyman scale: an accent wall, a refreshed bedroom, scuffed trim, a faded front door, or peeling patches caught before they spread. You get an upfront quote and tidy work.',
     benefits: [
@@ -408,7 +410,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
   'carpentry-trim-repair': {
     slug: 'carpentry-trim-repair',
     name: 'Carpentry & Trim Repair',
-    headline: 'Carpentry, Trim, and Door Repair in Boise and the Treasure Valley',
+    headline: 'Carpentry and trim repair in Boise',
     primaryKeyword: 'carpentry repair boise',
     overview:
       'Boise Handyman Co handles the small carpentry that keeps a house feeling solid: doors that stick or will not latch, damaged baseboard and casing, loose stair rails, and worn thresholds. Repairs are quoted upfront and finished cleanly, with filler, caulk, and paint touch-up where it matters.',

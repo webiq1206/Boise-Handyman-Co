@@ -127,19 +127,19 @@ export function stripBrandSuffix(title: string): string {
 }
 
 /**
- * Concise, intentional service-parent titles. Each is <= 36 chars so the final
- * rendered title (after the layout appends " | Boise Handyman Co", 24
- * characters) stays <= 60.
+ * Concise, intentional service-parent titles, keyword first. Each is <= 40
+ * chars so the final rendered title (after the layout appends
+ * " | Boise Handyman Co", 20 characters) stays <= 60.
  *
  * Without an override these fall back to "<name> in the Treasure Valley",
  * which overruns the title budget and word-truncates to "... in the".
  */
 const SERVICE_TITLE_OVERRIDES: Record<string, string> = {
-  'drywall-repair': 'Drywall Repair & Patching in Boise',
-  'painting-touch-ups': 'Interior & Exterior Painting, Boise',
+  'drywall-repair': 'Drywall Repair in Boise | Patch & Blend',
+  'painting-touch-ups': 'Paint Touch-Ups in Boise | Rooms & Trim',
   'plumbing-repairs': 'Minor Plumbing Repairs in Boise, ID',
   'electrical-repairs': 'Minor Electrical Repairs, Boise ID',
-  'carpentry-trim-repair': 'Carpentry & Trim Repair in Boise',
+  'carpentry-trim-repair': 'Carpentry & Trim Repair in Boise | Doors',
   'mounting-assembly': 'TV Mounting & Assembly in Boise',
   'fence-deck-gutter-repair': 'Fence, Deck & Gutter Repair, Boise',
   'home-maintenance': 'Caulking & Home Maintenance, Boise',
@@ -197,9 +197,9 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
         `Contact ${SITE_CONFIG.name} for an upfront handyman quote. Call or text ${SITE_CONFIG.phone} or book online. Serving Boise, Meridian, Eagle & the Treasure Valley.`;
       break;
     case 'blog':
-      title = 'Home Repair Insights & Ideas';
+      title = 'Boise Home Repair Blog | Costs & Tips';
       description =
-        `Honest home repair and maintenance advice for Idaho: costs, DIY vs pro calls, seasonal upkeep, and hiring guidance from ${SITE_CONFIG.name}.`;
+        'Boise home repair blog: what small repairs cost, hourly versus flat-rate handyman pricing, DIY or hire decisions, seasonal upkeep and vetting a handyman.';
       break;
     default:
       title = input.titleOverride || SITE_CONFIG.name;
