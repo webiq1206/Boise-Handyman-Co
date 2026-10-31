@@ -52,14 +52,14 @@ const PLACES: PlaceGuide[] = [
     citySlug: 'boise',
     county: 'ada',
     guideType: 'location',
-    title: 'Handyman Services in Boise',
-    seoTitle: 'Handyman Services in Boise, Idaho',
+    title: 'Boise home repair guide: what local houses need, by age',
+    seoTitle: 'Boise Home Repair Guide | By Home Age',
     metaDescription:
-      'Handyman services in Boise: repairs for North End and Bench-era homes, newer East Boise builds, seasonal maintenance, and flat upfront pricing.',
+      'Boise home repair guide: what local houses need by the decade they were built, the repairs they collect, the one local trap to watch, and seasonal upkeep.',
     excerpt:
       'Boise houses span a century of construction, and a 1920s North End bungalow needs a very different repair list from a 2015 build in Barber Valley.',
     quickAnswer:
-      'We provide handyman services across Boise: drywall repair, minor plumbing and electrical, carpentry, painting, mounting, and seasonal maintenance, with written quotes after scope review. Boise’s housing spans a century, so the work ranges from plaster-era repairs in the North End to settling fixes in newer East Boise homes.',
+      'Boise home repairs follow the age of the house. Boise’s housing spans a century, so the work ranges from plaster-era repairs in the North End to settling fixes in newer East Boise homes. We provide handyman services across Boise: drywall repair, minor plumbing and electrical, carpentry, painting, mounting, and seasonal maintenance, with written quotes after scope review.',
     takeaways: [
       'Boise’s housing stock spans a century, and the repair list changes with the decade the house was built.',
       'Older neighborhoods bring plaster walls, original wood windows and doors, and mature trees that fill gutters fast.',
@@ -106,14 +106,14 @@ const PLACES: PlaceGuide[] = [
     citySlug: 'meridian',
     county: 'ada',
     guideType: 'location',
-    title: 'Handyman Services in Meridian',
-    seoTitle: 'Handyman Services in Meridian, Idaho',
+    title: 'Meridian home repair guide: what local houses need, by age',
+    seoTitle: 'Meridian Home Repair Guide | By Home Age',
     metaDescription:
-      'Handyman services in Meridian: settling repairs and builder-grade part swaps in subdivision homes, HOA-friendly exterior work, and flat upfront pricing.',
+      'Meridian home repair guide: what local houses need by the decade they were built, the repairs they collect, the local trap to watch and seasonal upkeep.',
     excerpt:
       'Meridian is mostly subdivision homes built in the last thirty years, which means whole streets hit the same repair milestones at the same time.',
     quickAnswer:
-      'We provide handyman services across Meridian: drywall and settling repairs, fixture and fan installs, caulking, fence and gutter care, and punch-list visits, with a quote prepared after scope review. Meridian’s subdivision homes were largely built in the last three decades, so builder-grade parts tend to wear out street by street, on schedule.',
+      'Meridian home repairs follow the age of the house. Meridian’s subdivision homes were largely built in the last three decades, so builder-grade parts tend to wear out street by street, on schedule. We provide handyman services across Meridian: drywall and settling repairs, fixture and fan installs, caulking, fence and gutter care, and punch-list visits, with a quote prepared after scope review.',
     takeaways: [
       'Meridian’s housing stock is dominated by subdivision homes built from the 1990s onward.',
       'Builder-grade caulk, fixtures, and hardware wear out on a predictable clock, often across a whole street at once.',
@@ -160,14 +160,14 @@ const PLACES: PlaceGuide[] = [
     citySlug: 'eagle',
     county: 'ada',
     guideType: 'location',
-    title: 'Handyman Services in Eagle',
-    seoTitle: 'Handyman Services in Eagle, Idaho',
+    title: 'Eagle home repair guide: what local houses need, by age',
+    seoTitle: 'Eagle Home Repair Guide | By Home Age',
     metaDescription:
-      'Handyman services in Eagle: larger homes with more exterior to maintain, higher finish standards, deck and fence care, and flat upfront pricing.',
+      'Eagle home repair guide: what local houses need by the decade they were built, the repairs they collect, the one local trap to watch, and seasonal upkeep.',
     excerpt:
       'Eagle homes are larger and more detailed than the valley average, which means more trim, more deck, more fence, and higher standards for how repairs should look when finished.',
     quickAnswer:
-      'We provide handyman services across Eagle: carpentry and trim repair, deck and fence care, caulking and maintenance, painting touch-ups, and install work, with written quotes after scope review. Eagle’s larger, higher-finish homes simply have more exterior surface and detail per house, and repairs are expected to blend in invisibly.',
+      'Eagle home repairs follow the size and finish of the house. Eagle’s larger, higher-finish homes simply have more exterior surface and detail per house, and repairs are expected to blend in invisibly. We provide handyman services across Eagle: carpentry and trim repair, deck and fence care, caulking and maintenance, painting touch-ups, and install work, with written quotes after scope review.',
     takeaways: [
       'Eagle homes run larger and more detailed than the valley average: more trim, more glazing, more deck and fence per house.',
       'Higher finish standards mean repairs are judged on invisibility: texture, stain, and paint matching matter here.',
@@ -214,14 +214,14 @@ const PLACES: PlaceGuide[] = [
     citySlug: 'kuna',
     county: 'ada',
     guideType: 'location',
-    title: 'Handyman Services in Kuna',
-    seoTitle: 'Handyman Services in Kuna, Idaho',
+    title: 'Kuna home repair guide: what local houses need, by age',
+    seoTitle: 'Kuna Home Repair Guide | By Home Age',
     metaDescription:
-      'Handyman services in Kuna: new-subdivision settling repairs, acreage fence and outbuilding upkeep, wind and hard-water fixes, and flat upfront pricing.',
+      'Kuna home repair guide: what local houses need by the decade they were built, the repairs they collect, the one local trap to watch, and seasonal upkeep.',
     excerpt:
       'Kuna splits between brand-new subdivisions and open acreage, and the wind that crosses that open ground is the hardest thing in the valley on fences.',
     quickAnswer:
-      'We provide handyman services across Kuna: settling repairs and installs in newer subdivision homes, fence and gate repair after wind, fixture swaps where hard water has done its work, and seasonal maintenance, with flat quotes starting at $145. Kuna’s mix of new builds and acreage produces two distinct repair lists, and we run both.',
+      'Kuna home repairs depend on whether the house is a new subdivision build or an acreage property. Kuna’s mix of new builds and acreage produces two distinct repair lists, and we run both. We provide handyman services across Kuna: settling repairs and installs in newer subdivision homes, fence and gate repair after wind, fixture swaps where hard water has done its work, and seasonal maintenance, with flat quotes starting at $145.',
     takeaways: [
       'Kuna’s stock splits between very new subdivision homes and rural acreage properties.',
       'Open ground means wind, and wind means Kuna fences and gates take more abuse than most in the valley.',
@@ -268,14 +268,14 @@ const PLACES: PlaceGuide[] = [
     citySlug: 'star',
     county: 'ada',
     guideType: 'location',
-    title: 'Handyman Services in Star',
-    seoTitle: 'Handyman Services in Star, Idaho',
+    title: 'Star home repair guide: what local houses need, by age',
+    seoTitle: 'Star Home Repair Guide | By Home Age',
     metaDescription:
-      'Handyman services in Star: settling repairs in new subdivisions, upkeep for older farmhouse-era properties, wind-tested fences, and flat upfront pricing.',
+      'Star home repair guide: what local houses need by the decade they were built, the repairs they collect, the one local trap to watch, and seasonal upkeep.',
     excerpt:
       'Star is mid-transition from farmland to subdivisions, so brand-new homes and decades-old properties sit a mile apart and need entirely different lists.',
     quickAnswer:
-      'We provide handyman services across Star: settling repairs and installs in the new subdivisions, honest upkeep for the older properties that predate them, and fence, gate, and exterior work everywhere, with written quotes after scope review. Star’s housing runs from this year’s builds to farmhouse-era homes, often on the same road.',
+      'Star home repairs follow the age of the house. Star’s housing runs from this year’s builds to farmhouse-era homes, often on the same road. We provide handyman services across Star: settling repairs and installs in the new subdivisions, honest upkeep for the older properties that predate them, and fence, gate, and exterior work everywhere, with written quotes after scope review.',
     takeaways: [
       'Star mixes brand-new subdivision homes with older properties from its small-town and agricultural past.',
       'New builds need settling repairs and installs; older properties need genuine repair carpentry and catch-up maintenance.',
@@ -322,14 +322,14 @@ const PLACES: PlaceGuide[] = [
     citySlug: 'middleton',
     county: 'canyon',
     guideType: 'location',
-    title: 'Handyman Services in Middleton',
-    seoTitle: 'Handyman Services in Middleton, Idaho',
+    title: 'Middleton home repair guide: what local houses need, by age',
+    seoTitle: 'Middleton Home Repair Guide | House Age',
     metaDescription:
-      'Handyman services in Middleton: new-subdivision repairs, acreage and small-town home upkeep, fence and exterior work, and flat upfront pricing.',
+      'Middleton home repair guide: what local houses need by the decade they were built, the repairs they collect, the local trap to watch and seasonal upkeep.',
     excerpt:
       'Middleton pairs a small-town core and working acreage with a ring of new subdivisions, and we run repair lists for all three.',
     quickAnswer:
-      'We provide handyman services across Middleton: settling repairs and installs in the newer subdivisions, repair carpentry and upkeep for small-town and acreage properties, and fence, deck, and gutter work everywhere, with written quotes after scope review. Middleton is in Canyon County and sits fully inside our Treasure Valley service area.',
+      'Middleton home repairs follow the kind of property: the small-town core, working acreage or a new subdivision. Middleton is in Canyon County and sits fully inside our Treasure Valley service area. We provide handyman services across Middleton: settling repairs and installs in the newer subdivisions, repair carpentry and upkeep for small-town and acreage properties, and fence, deck, and gutter work everywhere, with written quotes after scope review.',
     takeaways: [
       'Middleton combines a small-town core, working acreage, and a growing ring of new subdivisions.',
       'Newer subdivision homes need settling repairs and installs; older town and farm properties need repair carpentry.',
@@ -376,14 +376,14 @@ const PLACES: PlaceGuide[] = [
     citySlug: 'nampa',
     county: 'canyon',
     guideType: 'location',
-    title: 'Handyman Services in Nampa',
-    seoTitle: 'Handyman Services in Nampa, Idaho',
+    title: 'Nampa home repair guide: what local houses need, by age',
+    seoTitle: 'Nampa Home Repair Guide | By Home Age',
     metaDescription:
-      'Handyman services in Nampa: repairs for historic downtown homes and new subdivisions alike, seasonal maintenance, and flat upfront pricing.',
+      'Nampa home repair guide: what local houses need by the decade they were built, the repairs they collect, the one local trap to watch, and seasonal upkeep.',
     excerpt:
       'Nampa has the widest housing-stock range in Canyon County, from early-1900s homes near downtown to subdivisions finished this year, and the repair lists differ as much as the houses.',
     quickAnswer:
-      'We provide handyman services across Nampa: plaster-era repairs in the historic core, settling fixes and installs in the new subdivisions, and fence, gutter, and maintenance work everywhere, with flat quotes starting at $145. Nampa is Canyon County’s largest city and sits fully inside our service area.',
+      'Nampa home repairs follow the age of the house, from early-1900s homes near downtown to new subdivisions. Nampa is Canyon County’s largest city and sits fully inside our service area. We provide handyman services across Nampa: plaster-era repairs in the historic core, settling fixes and installs in the new subdivisions, and fence, gutter, and maintenance work everywhere, with flat quotes starting at $145.',
     takeaways: [
       'Nampa’s housing runs from early-1900s homes near downtown to subdivisions still being built.',
       'Older-core homes bring plaster, original doors and windows, and mature-tree gutter duty.',
@@ -430,14 +430,14 @@ const PLACES: PlaceGuide[] = [
     citySlug: 'caldwell',
     county: 'canyon',
     guideType: 'location',
-    title: 'Handyman Services in Caldwell',
-    seoTitle: 'Handyman Services in Caldwell, Idaho',
+    title: 'Caldwell home repair guide: what local houses need, by age',
+    seoTitle: 'Caldwell Home Repair Guide | By Home Age',
     metaDescription:
-      'Handyman services in Caldwell: older-home repairs near the historic core, new-subdivision fixes, acreage upkeep, and flat upfront pricing.',
+      'Caldwell home repair guide: what local houses need by the decade they were built, the repairs they collect, the local trap to watch and seasonal upkeep.',
     excerpt:
       'Caldwell runs from a historic core through mid-century neighborhoods to new subdivisions and working acreage, and each layer keeps its own repair list.',
     quickAnswer:
-      'We provide handyman services across Caldwell: repairs for the older homes near the historic core, settling fixes and installs in newer subdivisions, and fence, deck, and maintenance work on town lots and acreage alike, with flat quotes starting at $145. Caldwell is fully inside our Ada-and-Canyon service area.',
+      'Caldwell home repairs follow the age of the house, from the historic core to new subdivisions and acreage. Caldwell is fully inside our Ada-and-Canyon service area. We provide handyman services across Caldwell: repairs for the older homes near the historic core, settling fixes and installs in newer subdivisions, and fence, deck, and maintenance work on town lots and acreage alike, with flat quotes starting at $145.',
     takeaways: [
       'Caldwell’s stock spans a historic core, mid-century neighborhoods, new subdivisions, and surrounding acreage.',
       'Older homes need repair carpentry and paint kept ahead of the weather; new builds need settling fixes and installs.',
@@ -656,7 +656,8 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
 
   const coverageCallout =
     `<div class="callout note"><p class="callout-label">${p.name}: service snapshot</p>` +
-    `<p>${p.name} is in <strong>${county}</strong> and sits fully inside our Treasure Valley service area. ` +
+    `<p>${p.name} is in <strong>${county}</strong> and sits fully inside our Treasure Valley service area` +
+    (p.guideType === 'location' ? `: to book a visit, see <a href="/areas/${p.citySlug}">handyman in ${p.name}</a>. ` : '. ') +
     `We handle drywall repair, minor plumbing and electrical, carpentry and trim, painting, mounting and assembly, fence, deck, and gutter repair, and seasonal maintenance, with flat quotes from photos and one-trip completion as the goal. ` +
     `Jobs that need a licensed specialty trade or a major permit get named as such at the quote, see <a href="/resources/ada-canyon-permit-flow">when a home repair needs a permit</a>.</p></div>`;
 
@@ -674,7 +675,7 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     `<p>The full season-by-season checklist for Treasure Valley homes is in <a href="/guides/boise-home-maintenance-guide">the complete Boise home maintenance guide</a>, with a printable version on the <a href="/resources">resources page</a>.</p>`,
     `<h2 id="how-we-work">How we work in ${p.name}</h2>`,
     p.citySlug === 'meridian' ? `<p><strong>Send your repair list and optional photos for review.</strong> Scope, pricing and scheduling are agreed before work starts. If the scope changes, the change is reviewed before extra work proceeds. The number of visits depends on the work and materials involved.</p>` : `<p><strong>Send the list with photos, get a flat quote, and we aim to finish in one trip.</strong> The quote names the scope and the price before we arrive, and it does not move unless the scope does, in which case you approve the change first. Batching several small jobs into one visit spreads the trip cost and is the cheapest way to buy this kind of work anywhere in the valley, and especially outside the core cities. Our labor carries a workmanship guarantee, and anything on your list that belongs with a licensed specialty trade gets said plainly at the quote stage.</p>`,
-    `<p>Services relevant here: <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing</a>, <a href="/services/electrical-repairs">minor electrical</a>, <a href="/services/carpentry-trim-repair">carpentry and trim</a>, <a href="/services/painting-touch-ups">painting</a>, <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/fence-deck-gutter-repair">fence, deck, and gutter repair</a>, and <a href="/services/home-maintenance">home maintenance</a>. See also <a href="/areas/${p.citySlug}">our ${p.citySlug} service area page</a> and <a href="/guides/hire-a-handyman-treasure-valley">how to hire a handyman in the Treasure Valley</a>.</p>`,
+    `<p>Services relevant here: <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing</a>, <a href="/services/electrical-repairs">minor electrical</a>, <a href="/services/carpentry-trim-repair">carpentry and trim</a>, <a href="/services/painting-touch-ups">painting</a>, <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/fence-deck-gutter-repair">fence, deck, and gutter repair</a>, and <a href="/services/home-maintenance">home maintenance</a>. See also <a href="/areas/${p.citySlug}">${p.guideType === 'location' ? `handyman in ${p.name}` : `our ${p.citySlug} service area page`}</a> and <a href="/guides/hire-a-handyman-treasure-valley">how to hire a handyman in the Treasure Valley</a>.</p>`,
     priorityAreaLink(p, county),
     `<h2 id="next-steps">Start with the list</h2>`,
     reviewedPriceScope ? `<p>Start by <a href="/contact">sending your repair list and optional photos</a>. Include your service address and requested dates so the team can review the scope and discuss next steps.</p>` : `<p>The fastest way to get a real answer about a repair in ${p.name} is to show it to us: <a href="/contact">send the list and a few photos</a> and we will reply with a flat quote and the earliest slot, usually within a day. No site-visit fee, no obligation, and if something on the list is not a handyman job, we will tell you whose job it is.</p>`,
@@ -703,13 +704,19 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     faqs: p.faqs,
     linkedCities: [p.citySlug],
     relatedLinks: [
-      { url: `/areas/${p.citySlug}`, anchor: `Handyman services in ${p.name}` },
+      { url: `/areas/${p.citySlug}`, anchor: p.guideType === 'location' ? `Handyman in ${p.name}` : `Handyman services in ${p.name}` },
       { url: '/guides/boise-home-repair-cost-guide', anchor: 'Boise Home Repair Cost Guide' },
       { url: '/guides/hire-a-handyman-treasure-valley', anchor: 'How to hire a handyman' },
       { url: '/guides/boise-home-maintenance-guide', anchor: 'Boise home maintenance guide' },
       { url: '/services/home-maintenance', anchor: 'Caulking & home maintenance' },
     ],
-    primaryKeyword: `handyman ${p.name.toLowerCase()}`,
+    // City guides are the informational page ("{city} home repair guide");
+    // "handyman {city}" belongs to /areas/{city}, so the two stop competing.
+    // Neighborhood guides have no area page and keep the handyman keyword.
+    primaryKeyword:
+      p.guideType === 'location'
+        ? `${p.name.toLowerCase()} home repair guide`
+        : `handyman ${p.name.toLowerCase()}`,
   };
 }
 

@@ -94,6 +94,16 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
         answer:
           'Not very. A CoCoRaHS gauge 4.8 miles south-southeast of Meridian averages about 12.8 inches of precipitation a year in NOAA\'s 1991-2020 normals, with January at 1.43 inches and July at just 0.37. Dry summers suit fence, deck, and exterior caulk work, and interior jobs run year-round.',
       },
+      {
+        question: 'What do Meridian homes usually need from a handyman?',
+        answer:
+          'Meridian’s housing stock is dominated by subdivision homes built from the 1990s onward, so builder-grade caulk, fixtures, and hardware wear out on a predictable clock, often across a whole street at once. Homes under five years old mostly need settling repairs; homes past fifteen need the first real replacement wave. The Meridian home repair guide walks through it by the age of the house.',
+      },
+      {
+        question: 'Can you handle RE-10 inspection repairs on a Meridian home sale?',
+        answer:
+          'Yes. Meridian is inside our Treasure Valley service area, and RE-10 repairs run the same way here as in Boise: upload the RE-10 and the inspection report, confirm the list with us, and get one written price before work starts. The RE-10 page explains the process for agents and sellers.',
+      },
     ],
   },
   nampa: {
@@ -134,6 +144,16 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
         question: 'Does outdoor lighting need a permit in Nampa?',
         answer:
           "It depends on voltage. Nampa's residential FAQ says low-voltage outdoor lighting needs no electrical permit, while 110-volt lighting does. The same FAQ exempts interior painting, flooring, and cabinets, but requires a permit once framing is exposed or plumbing fixtures are relocated.",
+      },
+      {
+        question: 'What do Nampa homes usually need from a handyman?',
+        answer:
+          'Nampa’s housing runs from early-1900s homes near downtown to subdivisions still being built. Older-core homes bring plaster, original doors and windows, and mature-tree gutter duty; newer subdivision homes need settling repairs and builder-grade part swaps on a predictable clock. The Nampa home repair guide goes decade by decade.',
+      },
+      {
+        question: 'Can you handle RE-10 inspection repairs on a Nampa home sale?',
+        answer:
+          'Yes. Nampa is inside our Treasure Valley service area, and RE-10 repairs run the same way here as in Boise: upload the RE-10 and the inspection report, confirm the list with us, and get one written price before work starts. The RE-10 page explains the process for agents and sellers.',
       },
     ],
   },
@@ -217,6 +237,16 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
         answer:
           "Mostly in winter. In NOAA's 1991-2020 normals, the volunteer CoCoRaHS gauge 1.5 miles south-southeast of Kuna records roughly 11.8 inches a year: 1.35 inches in an average January versus 0.29 in July. That's why gutter cleaning before the first freeze and caulk refreshes before winter pay off.",
       },
+      {
+        question: 'What do Kuna homes usually need from a handyman?',
+        answer:
+          'Kuna’s stock splits between very new subdivision homes and rural acreage properties. New builds need settling repairs and the install list; acreage properties need perimeter and outbuilding upkeep, and open ground means fences and gates take more wind than most in the valley. The Kuna home repair guide covers both.',
+      },
+      {
+        question: 'Can you handle RE-10 inspection repairs on a Kuna home sale?',
+        answer:
+          'Yes. Kuna is inside our Treasure Valley service area, and RE-10 repairs run the same way here as in Boise: upload the RE-10 and the inspection report, confirm the list with us, and get one written price before work starts. The RE-10 page explains the process for agents and sellers.',
+      },
     ],
   },
   caldwell: {
@@ -257,6 +287,16 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
         question: 'When do freezes start and end around Caldwell?',
         answer:
           "NOAA's 1991-2020 normals for the Deer Flat Dam station by Lake Lowell, southwest of Caldwell, put the median last spring freeze around April 23 and the first fall freeze around October 18. That window is the best time for exterior caulking, deck, and fence repairs, while interior work runs all year.",
+      },
+      {
+        question: 'What do Caldwell homes usually need from a handyman?',
+        answer:
+          'Caldwell’s stock spans a historic core, mid-century neighborhoods, new subdivisions, and surrounding acreage. Older homes need repair carpentry and paint kept ahead of the weather; new builds need settling fixes and installs; acreage brings long fences, outbuildings, and well-water fixture wear. The Caldwell home repair guide covers each.',
+      },
+      {
+        question: 'Can you handle RE-10 inspection repairs on a Caldwell home sale?',
+        answer:
+          'Yes. Caldwell is inside our Treasure Valley service area, and RE-10 repairs run the same way here as in Boise: upload the RE-10 and the inspection report, confirm the list with us, and get one written price before work starts. The RE-10 page explains the process for agents and sellers.',
       },
     ],
   },
@@ -339,6 +379,16 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
         question: 'When do freezes start and stop around Middleton?',
         answer:
           "Using 1991-2020 NOAA data from the long-term Nampa Sugar Factory station, which lies roughly 7 miles south-southeast, the typical last frost of spring falls near April 29 and the first of fall near October 13, a growing season of roughly 164 days. Exterior caulk, paint, and fence repairs fit best inside that window.",
+      },
+      {
+        question: 'What do Middleton homes usually need from a handyman?',
+        answer:
+          'Middleton combines a small-town core, working acreage, and a growing ring of new subdivisions. Newer subdivision homes need settling repairs and installs; older town and farm properties need repair carpentry, and acreage brings long fence runs, outbuildings, and well-water fixture wear. The Middleton home repair guide covers each.',
+      },
+      {
+        question: 'Can you handle RE-10 inspection repairs on a Middleton home sale?',
+        answer:
+          'Yes. Middleton is inside our Treasure Valley service area, and RE-10 repairs run the same way here as in Boise: upload the RE-10 and the inspection report, confirm the list with us, and get one written price before work starts. The RE-10 page explains the process for agents and sellers.',
       },
     ],
   },

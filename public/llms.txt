@@ -24,7 +24,7 @@ Public representative: Nick Perkins. Service-area business based at 4031 W Wapoo
 ## Authoritative guides
 
 - [The Complete Boise Home Maintenance Guide](https://boisehandyman.co/guides/boise-home-maintenance-guide)
-- [Boise Home Repair Cost Guide](https://boisehandyman.co/guides/boise-home-repair-cost-guide)
+- [The complete Boise home repair cost guide](https://boisehandyman.co/guides/boise-home-repair-cost-guide)
 - [Ember-ready: a fall checklist for Treasure Valley homes](https://boisehandyman.co/guides/ember-ready-home-checklist-treasure-valley)
 - [The First-Time Homeowner's Repair Handbook](https://boisehandyman.co/guides/first-time-homeowner-repair-handbook)
 - [How to Hire a Handyman in the Treasure Valley](https://boisehandyman.co/guides/hire-a-handyman-treasure-valley)
@@ -34,7 +34,7 @@ Public representative: Nick Perkins. Service-area business based at 4031 W Wapoo
 ## Local permit and location resources
 
 - [Ada County vs Canyon County permit flow](https://boisehandyman.co/resources/ada-canyon-permit-flow)
-- City guides: [Handyman Services in Boise](https://boisehandyman.co/guides/boise-handyman-guide), [Handyman Services in Meridian](https://boisehandyman.co/guides/meridian-handyman-guide), [Handyman Services in Eagle](https://boisehandyman.co/guides/eagle-handyman-guide), [Handyman Services in Kuna](https://boisehandyman.co/guides/kuna-handyman-guide), [Handyman Services in Star](https://boisehandyman.co/guides/star-handyman-guide), [Handyman Services in Middleton](https://boisehandyman.co/guides/middleton-handyman-guide), [Handyman Services in Nampa](https://boisehandyman.co/guides/nampa-handyman-guide), [Handyman Services in Caldwell](https://boisehandyman.co/guides/caldwell-handyman-guide)
+- City guides: [Boise home repair guide: what local houses need, by age](https://boisehandyman.co/guides/boise-handyman-guide), [Meridian home repair guide: what local houses need, by age](https://boisehandyman.co/guides/meridian-handyman-guide), [Eagle home repair guide: what local houses need, by age](https://boisehandyman.co/guides/eagle-handyman-guide), [Kuna home repair guide: what local houses need, by age](https://boisehandyman.co/guides/kuna-handyman-guide), [Star home repair guide: what local houses need, by age](https://boisehandyman.co/guides/star-handyman-guide), [Middleton home repair guide: what local houses need, by age](https://boisehandyman.co/guides/middleton-handyman-guide), [Nampa home repair guide: what local houses need, by age](https://boisehandyman.co/guides/nampa-handyman-guide), [Caldwell home repair guide: what local houses need, by age](https://boisehandyman.co/guides/caldwell-handyman-guide)
 - Neighborhood guides: [Handyman Services in the Eagle Foothills](https://boisehandyman.co/guides/eagle-foothills-handyman-guide), [Handyman Services in Hidden Springs](https://boisehandyman.co/guides/hidden-springs-handyman-guide), [Handyman Services in Harris Ranch](https://boisehandyman.co/guides/harris-ranch-handyman-guide)
 
 ## Blog category hubs
@@ -62,4 +62,4 @@ Public representative: Nick Perkins. Service-area business based at 4031 W Wapoo
 - [RSS feed](https://boisehandyman.co/feed.xml): guides and articles, newest first, with publication and revision dates.
 - [Full text for LLMs](https://boisehandyman.co/llms-full.txt): expanded reference copy of the core facts.
 
-Last updated: 2026-10-28.
+Last updated: 2026-10-31.

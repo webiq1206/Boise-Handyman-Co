@@ -31,14 +31,14 @@
         {
           "url": "/blog/handyman-prices-boise",
           "anchor": "What a Handyman Costs in Boise",
-          "title": "What a Handyman Costs in Boise (2026)",
+          "title": "Handyman prices in Boise: hourly rates and job prices (2026)",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -58,10 +58,10 @@
         },
         {
           "url": "/guides/middleton-handyman-guide",
-          "anchor": "Handyman Services in Middleton",
-          "title": "Handyman Services in Middleton",
+          "anchor": "Middleton home repair guide: what local houses need, by age",
+          "title": "Middleton home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.581
+          "score": 0.595
         }
       ]
     },
@@ -81,7 +81,7 @@
         {
           "url": "/blog/handyman-prices-boise",
           "anchor": "What a Handyman Costs in Boise",
-          "title": "What a Handyman Costs in Boise (2026)",
+          "title": "Handyman prices in Boise: hourly rates and job prices (2026)",
           "type": "blog",
           "score": 999
         },
@@ -152,7 +152,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -172,10 +172,10 @@
         },
         {
           "url": "/guides/boise-handyman-guide",
-          "anchor": "Handyman Services in Boise",
-          "title": "Handyman Services in Boise",
+          "anchor": "Boise home repair guide: what local houses need, by age",
+          "title": "Boise home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.775
+          "score": 0.82
         }
       ]
     },
@@ -286,10 +286,10 @@
         },
         {
           "url": "/guides/boise-handyman-guide",
-          "anchor": "Handyman Services in Boise",
-          "title": "Handyman Services in Boise",
+          "anchor": "Boise home repair guide: what local houses need, by age",
+          "title": "Boise home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.304
+          "score": 0.302
         }
       ]
     },
@@ -366,7 +366,7 @@
         {
           "url": "/blog/handyman-prices-boise",
           "anchor": "What a Handyman Costs in Boise",
-          "title": "What a Handyman Costs in Boise (2026)",
+          "title": "Handyman prices in Boise: hourly rates and job prices (2026)",
           "type": "blog",
           "score": 999
         },
@@ -387,7 +387,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -423,7 +423,7 @@
         {
           "url": "/blog/handyman-prices-boise",
           "anchor": "What a Handyman Costs in Boise",
-          "title": "What a Handyman Costs in Boise (2026)",
+          "title": "Handyman prices in Boise: hourly rates and job prices (2026)",
           "type": "blog",
           "score": 999
         },
@@ -437,7 +437,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -457,10 +457,10 @@
         },
         {
           "url": "/guides/boise-handyman-guide",
-          "anchor": "Handyman Services in Boise",
-          "title": "Handyman Services in Boise",
+          "anchor": "Boise home repair guide: what local houses need, by age",
+          "title": "Boise home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.681
+          "score": 0.671
         }
       ]
     },
@@ -627,11 +627,11 @@
           "score": 999
         },
         {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Handyman Services in Eagle",
-          "title": "Handyman Services in Eagle",
+          "url": "/guides/eagle-foothills-handyman-guide",
+          "anchor": "Handyman Services in the Eagle Foothills",
+          "title": "Handyman Services in the Eagle Foothills",
           "type": "guide",
-          "score": 0.174
+          "score": 0.173
         }
       ]
     },
@@ -694,8 +694,8 @@
     },
     "/blog/handyman-prices-boise": {
       "type": "blog",
-      "title": "What a Handyman Costs in Boise (2026)",
-      "anchor": "What a Handyman Costs in Boise (2026)",
+      "title": "Handyman prices in Boise: hourly rates and job prices (2026)",
+      "anchor": "Handyman prices in Boise: hourly rates and job prices (2026)",
       "url": "/blog/handyman-prices-boise",
       "links": [
         {
@@ -729,7 +729,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -745,7 +745,7 @@
           "anchor": "How to Hire a Handyman in the Treasure Valley",
           "title": "How to Hire a Handyman in the Treasure Valley",
           "type": "guide",
-          "score": 0.744
+          "score": 0.738
         }
       ]
     },
@@ -786,7 +786,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -836,7 +836,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -855,11 +855,11 @@
           "score": 999
         },
         {
-          "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "url": "/guides/boise-handyman-guide",
+          "anchor": "Boise home repair guide: what local houses need, by age",
+          "title": "Boise home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.678
+          "score": 0.693
         }
       ]
     },
@@ -879,7 +879,7 @@
         {
           "url": "/blog/handyman-prices-boise",
           "anchor": "What a Handyman Costs in Boise",
-          "title": "What a Handyman Costs in Boise (2026)",
+          "title": "Handyman prices in Boise: hourly rates and job prices (2026)",
           "type": "blog",
           "score": 999
         },
@@ -900,7 +900,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -912,11 +912,11 @@
           "score": 999
         },
         {
-          "url": "/guides/star-handyman-guide",
-          "anchor": "Handyman Services in Star",
-          "title": "Handyman Services in Star",
+          "url": "/guides/eagle-handyman-guide",
+          "anchor": "Eagle home repair guide: what local houses need, by age",
+          "title": "Eagle home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.681
+          "score": 0.737
         }
       ]
     },
@@ -1014,7 +1014,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -1026,11 +1026,11 @@
           "score": 999
         },
         {
-          "url": "/guides/boise-handyman-guide",
-          "anchor": "Handyman Services in Boise",
-          "title": "Handyman Services in Boise",
+          "url": "/guides/hidden-springs-handyman-guide",
+          "anchor": "Handyman Services in Hidden Springs",
+          "title": "Handyman Services in Hidden Springs",
           "type": "guide",
-          "score": 0.664
+          "score": 0.643
         }
       ]
     },
@@ -1128,7 +1128,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -1141,10 +1141,10 @@
         },
         {
           "url": "/guides/boise-handyman-guide",
-          "anchor": "Handyman Services in Boise",
-          "title": "Handyman Services in Boise",
+          "anchor": "Boise home repair guide: what local houses need, by age",
+          "title": "Boise home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.662
+          "score": 0.677
         }
       ]
     },
@@ -1185,7 +1185,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -1368,11 +1368,11 @@
           "score": 999
         },
         {
-          "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Nampa home repair guide: what local houses need, by age",
+          "title": "Nampa home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.205
+          "score": 0.231
         }
       ]
     },
@@ -1456,7 +1456,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -1483,10 +1483,10 @@
         },
         {
           "url": "/guides/caldwell-handyman-guide",
-          "anchor": "Handyman Services in Caldwell",
-          "title": "Handyman Services in Caldwell",
+          "anchor": "Caldwell home repair guide: what local houses need, by age",
+          "title": "Caldwell home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.609
+          "score": 0.62
         }
       ]
     },
@@ -1539,11 +1539,11 @@
           "score": 999
         },
         {
-          "url": "/guides/meridian-handyman-guide",
-          "anchor": "Handyman Services in Meridian",
-          "title": "Handyman Services in Meridian",
+          "url": "/guides/hidden-springs-handyman-guide",
+          "anchor": "Handyman Services in Hidden Springs",
+          "title": "Handyman Services in Hidden Springs",
           "type": "guide",
-          "score": 0.143
+          "score": 0.161
         }
       ]
     },
@@ -1654,10 +1654,10 @@
         },
         {
           "url": "/guides/boise-handyman-guide",
-          "anchor": "Handyman Services in Boise",
-          "title": "Handyman Services in Boise",
+          "anchor": "Boise home repair guide: what local houses need, by age",
+          "title": "Boise home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.168
+          "score": 0.211
         }
       ]
     },
@@ -1741,7 +1741,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -1767,11 +1767,11 @@
           "score": 999
         },
         {
-          "url": "/guides/hire-a-handyman-treasure-valley",
-          "anchor": "How to Hire a Handyman in the Treasure Valley",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "url": "/guides/kuna-handyman-guide",
+          "anchor": "Kuna home repair guide: what local houses need, by age",
+          "title": "Kuna home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.597
+          "score": 0.609
         }
       ]
     },
@@ -1812,7 +1812,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -1828,7 +1828,7 @@
           "anchor": "How to Hire a Handyman in the Treasure Valley",
           "title": "How to Hire a Handyman in the Treasure Valley",
           "type": "guide",
-          "score": 0.649
+          "score": 0.689
         }
       ]
     },
@@ -1848,7 +1848,7 @@
         {
           "url": "/blog/handyman-prices-boise",
           "anchor": "What a Handyman Costs in Boise",
-          "title": "What a Handyman Costs in Boise (2026)",
+          "title": "Handyman prices in Boise: hourly rates and job prices (2026)",
           "type": "blog",
           "score": 999
         },
@@ -1862,7 +1862,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -1881,11 +1881,11 @@
           "score": 999
         },
         {
-          "url": "/guides/kuna-handyman-guide",
-          "anchor": "Handyman Services in Kuna",
-          "title": "Handyman Services in Kuna",
+          "url": "/guides/meridian-handyman-guide",
+          "anchor": "Meridian home repair guide: what local houses need, by age",
+          "title": "Meridian home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.656
+          "score": 0.638
         }
       ]
     },
@@ -1912,7 +1912,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Costs & Hiring",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -1938,11 +1938,11 @@
           "score": 999
         },
         {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Handyman Services in Nampa",
-          "title": "Handyman Services in Nampa",
+          "url": "/guides/hire-a-handyman-treasure-valley",
+          "anchor": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to Hire a Handyman in the Treasure Valley",
           "type": "guide",
-          "score": 0.622
+          "score": 0.631
         }
       ]
     },
@@ -4129,11 +4129,11 @@
       "url": "/services/fence-deck-gutter-repair/nampa",
       "links": [
         {
-          "url": "/services/fence-deck-gutter-repair/garden-city",
-          "anchor": "Fence, Deck & Gutter Repair in Garden City",
-          "title": "Fence, Deck & Gutter Repair in Garden City, Idaho",
+          "url": "/services/fence-deck-gutter-repair/star",
+          "anchor": "Fence, Deck & Gutter Repair in Star",
+          "title": "Fence, Deck & Gutter Repair in Star, Idaho",
           "type": "city-service",
-          "score": 1.713
+          "score": 1.767
         },
         {
           "url": "/services/fence-deck-gutter-repair/caldwell",
@@ -6988,10 +6988,10 @@
         },
         {
           "url": "/guides/middleton-handyman-guide",
-          "anchor": "Handyman Services in Middleton",
-          "title": "Handyman Services in Middleton",
+          "anchor": "Middleton home repair guide: what local houses need, by age",
+          "title": "Middleton home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.339
+          "score": 0.325
         },
         {
           "url": "/areas/boise",
@@ -7051,17 +7051,17 @@
           "score": 0.343
         },
         {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Handyman Services in Nampa",
-          "title": "Handyman Services in Nampa",
-          "type": "guide",
-          "score": 0.328
-        },
-        {
           "url": "/areas/kuna",
           "anchor": "Handyman in Kuna",
           "title": "Remodeling Services in Kuna, Idaho",
           "type": "city",
+          "score": 0.32
+        },
+        {
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Nampa home repair guide: what local houses need, by age",
+          "title": "Nampa home repair guide: what local houses need, by age",
+          "type": "guide",
           "score": 0.32
         }
       ]
@@ -7115,30 +7115,30 @@
           "score": 0.38
         },
         {
+          "url": "/guides/star-handyman-guide",
+          "anchor": "Star home repair guide: what local houses need, by age",
+          "title": "Star home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": 0.357
+        },
+        {
           "url": "/areas/garden-city",
           "anchor": "Handyman in Garden City",
           "title": "Remodeling Services in Garden City, Idaho",
           "type": "city",
           "score": 0.33
-        },
-        {
-          "url": "/guides/star-handyman-guide",
-          "anchor": "Handyman Services in Star",
-          "title": "Handyman Services in Star",
-          "type": "guide",
-          "score": 0.325
         }
       ]
     },
     "/guides/boise-handyman-guide": {
       "type": "guide",
-      "title": "Handyman Services in Boise",
-      "anchor": "Handyman Services in Boise",
+      "title": "Boise home repair guide: what local houses need, by age",
+      "anchor": "Boise home repair guide: what local houses need, by age",
       "url": "/guides/boise-handyman-guide",
       "links": [
         {
           "url": "/areas/boise",
-          "anchor": "Handyman services in Boise",
+          "anchor": "Handyman in Boise",
           "title": "Remodeling Services in Boise, Idaho",
           "type": "city",
           "score": 999
@@ -7153,7 +7153,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Boise Home Repair Cost Guide",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -7166,31 +7166,31 @@
         },
         {
           "url": "/guides/caldwell-handyman-guide",
-          "anchor": "Handyman Services in Caldwell",
-          "title": "Handyman Services in Caldwell",
+          "anchor": "Caldwell home repair guide: what local houses need, by age",
+          "title": "Caldwell home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.112
+          "score": 1.227
         },
         {
           "url": "/blog/how-to-compare-handyman-quotes",
           "anchor": "How to Compare Handyman Quotes",
           "title": "How to Compare Handyman Quotes",
           "type": "blog",
-          "score": 0.383
+          "score": 0.368
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
           "anchor": "Who Supplies Materials on a Handyman Job?",
           "title": "Who Supplies Materials on a Handyman Job?",
           "type": "blog",
-          "score": 0.369
+          "score": 0.361
         },
         {
-          "url": "/blog/why-handyman-quotes-vary",
-          "anchor": "Why Handyman Quotes Vary So Much",
-          "title": "Why Handyman Quotes Vary So Much",
+          "url": "/blog/handyman-vs-contractor",
+          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
+          "title": "Handyman vs Contractor: Which Does Your Job Need?",
           "type": "blog",
-          "score": 0.335
+          "score": 0.353
         }
       ]
     },
@@ -7260,10 +7260,17 @@
     },
     "/guides/boise-home-repair-cost-guide": {
       "type": "guide",
-      "title": "Boise Home Repair Cost Guide",
-      "anchor": "Boise Home Repair Cost Guide",
+      "title": "The complete Boise home repair cost guide",
+      "anchor": "The complete Boise home repair cost guide",
       "url": "/guides/boise-home-repair-cost-guide",
       "links": [
+        {
+          "url": "/blog/handyman-prices-boise",
+          "anchor": "Handyman prices in Boise: hourly rates and job prices",
+          "title": "Handyman prices in Boise: hourly rates and job prices (2026)",
+          "type": "blog",
+          "score": 999
+        },
         {
           "url": "/guides/first-time-homeowner-repair-handbook",
           "anchor": "The First-Time Homeowner's Repair Handbook",
@@ -7279,18 +7286,11 @@
           "score": 999
         },
         {
-          "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
+          "url": "/guides/eagle-handyman-guide",
+          "anchor": "Eagle home repair guide: what local houses need, by age",
+          "title": "Eagle home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.845
-        },
-        {
-          "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
-          "type": "guide",
-          "score": 0.841
+          "score": 0.873
         },
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
@@ -7300,18 +7300,18 @@
           "score": 0.653
         },
         {
-          "url": "/blog/handyman-prices-boise",
-          "anchor": "What a Handyman Costs in Boise (2026)",
-          "title": "What a Handyman Costs in Boise (2026)",
-          "type": "blog",
-          "score": 0.626
-        },
-        {
           "url": "/blog/how-to-compare-handyman-quotes",
           "anchor": "How to Compare Handyman Quotes",
           "title": "How to Compare Handyman Quotes",
           "type": "blog",
           "score": 0.449
+        },
+        {
+          "url": "/blog/why-handyman-quotes-vary",
+          "anchor": "Why Handyman Quotes Vary So Much",
+          "title": "Why Handyman Quotes Vary So Much",
+          "type": "blog",
+          "score": 0.404
         },
         {
           "url": "/services/carpentry-trim-repair/boise",
@@ -7324,13 +7324,13 @@
     },
     "/guides/caldwell-handyman-guide": {
       "type": "guide",
-      "title": "Handyman Services in Caldwell",
-      "anchor": "Handyman Services in Caldwell",
+      "title": "Caldwell home repair guide: what local houses need, by age",
+      "anchor": "Caldwell home repair guide: what local houses need, by age",
       "url": "/guides/caldwell-handyman-guide",
       "links": [
         {
           "url": "/areas/caldwell",
-          "anchor": "Handyman services in Caldwell",
+          "anchor": "Handyman in Caldwell",
           "title": "Remodeling Services in Caldwell, Idaho",
           "type": "city",
           "score": 999
@@ -7345,7 +7345,7 @@
         {
           "url": "/guides/boise-home-repair-cost-guide",
           "anchor": "Boise Home Repair Cost Guide",
-          "title": "Boise Home Repair Cost Guide",
+          "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
         },
@@ -7358,31 +7358,31 @@
         },
         {
           "url": "/guides/middleton-handyman-guide",
-          "anchor": "Handyman Services in Middleton",
-          "title": "Handyman Services in Middleton",
+          "anchor": "Middleton home repair guide: what local houses need, by age",
+          "title": "Middleton home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.211
+          "score": 1.314
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
           "anchor": "Who Supplies Materials on a Handyman Job?",
           "title": "Who Supplies Materials on a Handyman Job?",
           "type": "blog",
-          "score": 0.323
-        },
-        {
-          "url": "/blog/diy-vs-hiring-a-handyman",
-          "anchor": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
-          "type": "blog",
-          "score": 0.27
+          "score": 0.315
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
           "anchor": "How to Budget for Home Maintenance in Idaho",
           "title": "How to Budget for Home Maintenance in Idaho",
           "type": "blog",
-          "score": 0.263
+          "score": 0.308
+        },
+        {
+          "url": "/blog/diy-vs-hiring-a-handyman",
+          "anchor": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "type": "blog",
+          "score": 0.284
         }
       ]
     },
@@ -7415,17 +7415,17 @@
         },
         {
           "url": "/guides/eagle-handyman-guide",
-          "anchor": "Handyman Services in Eagle",
-          "title": "Handyman Services in Eagle",
+          "anchor": "Eagle home repair guide: what local houses need, by age",
+          "title": "Eagle home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.297
+          "score": 1.261
         },
         {
-          "url": "/guides/meridian-handyman-guide",
-          "anchor": "Handyman Services in Meridian",
-          "title": "Handyman Services in Meridian",
+          "url": "/guides/star-handyman-guide",
+          "anchor": "Star home repair guide: what local houses need, by age",
+          "title": "Star home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.091
+          "score": 1.098
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
@@ -7452,13 +7452,13 @@
     },
     "/guides/eagle-handyman-guide": {
       "type": "guide",
-      "title": "Handyman Services in Eagle",
-      "anchor": "Handyman Services in Eagle",
+      "title": "Eagle home repair guide: what local houses need, by age",
+      "anchor": "Eagle home repair guide: what local houses need, by age",
       "url": "/guides/eagle-handyman-guide",
       "links": [
         {
           "url": "/areas/eagle",
-          "anchor": "Handyman services in Eagle",
+          "anchor": "Handyman in Eagle",
           "title": "Remodeling Services in Eagle, Idaho",
           "type": "city",
           "score": 999
@@ -7482,33 +7482,33 @@
           "anchor": "Handyman Services in the Eagle Foothills",
           "title": "Handyman Services in the Eagle Foothills",
           "type": "guide",
-          "score": 1.197
+          "score": 1.241
         },
         {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Handyman Services in Nampa",
-          "title": "Handyman Services in Nampa",
+          "url": "/guides/meridian-handyman-guide",
+          "anchor": "Meridian home repair guide: what local houses need, by age",
+          "title": "Meridian home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.126
+          "score": 1.236
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
           "anchor": "How to Budget for Home Maintenance in Idaho",
           "title": "How to Budget for Home Maintenance in Idaho",
           "type": "blog",
-          "score": 0.255
-        },
-        {
-          "url": "/blog/who-supplies-materials-handyman-jobs",
-          "anchor": "Who Supplies Materials on a Handyman Job?",
-          "title": "Who Supplies Materials on a Handyman Job?",
-          "type": "blog",
-          "score": 0.251
+          "score": 0.297
         },
         {
           "url": "/blog/handyman-red-flags",
           "anchor": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
           "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
+          "type": "blog",
+          "score": 0.253
+        },
+        {
+          "url": "/blog/boise-building-permit-guide",
+          "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
           "type": "blog",
           "score": 0.245
         }
@@ -7556,11 +7556,11 @@
           "score": 0.27
         },
         {
-          "url": "/guides/kuna-handyman-guide",
-          "anchor": "Handyman Services in Kuna",
-          "title": "Handyman Services in Kuna",
+          "url": "/guides/eagle-foothills-handyman-guide",
+          "anchor": "Handyman Services in the Eagle Foothills",
+          "title": "Handyman Services in the Eagle Foothills",
           "type": "guide",
-          "score": 0.127
+          "score": 0.147
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
@@ -7627,11 +7627,11 @@
           "score": 0.219
         },
         {
-          "url": "/guides/boise-handyman-guide",
-          "anchor": "Handyman Services in Boise",
-          "title": "Handyman Services in Boise",
+          "url": "/guides/hidden-springs-handyman-guide",
+          "anchor": "Handyman Services in Hidden Springs",
+          "title": "Handyman Services in Hidden Springs",
           "type": "guide",
-          "score": 0.125
+          "score": 0.141
         },
         {
           "url": "/services/electrical-repairs/boise",
@@ -7671,24 +7671,17 @@
         },
         {
           "url": "/guides/meridian-handyman-guide",
-          "anchor": "Handyman Services in Meridian",
-          "title": "Handyman Services in Meridian",
+          "anchor": "Meridian home repair guide: what local houses need, by age",
+          "title": "Meridian home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.136
+          "score": 1.149
         },
         {
-          "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
+          "url": "/guides/star-handyman-guide",
+          "anchor": "Star home repair guide: what local houses need, by age",
+          "title": "Star home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.113
-        },
-        {
-          "url": "/blog/handyman-vs-contractor",
-          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
-          "title": "Handyman vs Contractor: Which Does Your Job Need?",
-          "type": "blog",
-          "score": 0.291
+          "score": 1.101
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
@@ -7703,6 +7696,13 @@
           "title": "Why Handyman Quotes Vary So Much",
           "type": "blog",
           "score": 0.281
+        },
+        {
+          "url": "/blog/questions-to-ask-a-handyman",
+          "anchor": "Questions to Ask a Handyman Before You Book",
+          "title": "Questions to Ask a Handyman Before You Book",
+          "type": "blog",
+          "score": 0.275
         }
       ]
     },
@@ -7734,18 +7734,18 @@
           "score": 999
         },
         {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Handyman Services in Eagle",
-          "title": "Handyman Services in Eagle",
-          "type": "guide",
-          "score": 1.102
-        },
-        {
           "url": "/guides/eagle-foothills-handyman-guide",
           "anchor": "Handyman Services in the Eagle Foothills",
           "title": "Handyman Services in the Eagle Foothills",
           "type": "guide",
           "score": 1.078
+        },
+        {
+          "url": "/guides/harris-ranch-handyman-guide",
+          "anchor": "Handyman Services in Harris Ranch",
+          "title": "Handyman Services in Harris Ranch",
+          "type": "guide",
+          "score": 1.064
         },
         {
           "url": "/blog/handyman-red-flags",
@@ -7784,11 +7784,11 @@
           "score": 999
         },
         {
-          "url": "/guides/kuna-handyman-guide",
-          "anchor": "Handyman Services in Kuna",
-          "title": "Handyman Services in Kuna",
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Nampa home repair guide: what local houses need, by age",
+          "title": "Nampa home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.967
+          "score": 0.945
         },
         {
           "url": "/guides/hidden-springs-handyman-guide",
@@ -7798,25 +7798,25 @@
           "score": 0.915
         },
         {
-          "url": "/guides/meridian-handyman-guide",
-          "anchor": "Handyman Services in Meridian",
-          "title": "Handyman Services in Meridian",
+          "url": "/guides/kuna-handyman-guide",
+          "anchor": "Kuna home repair guide: what local houses need, by age",
+          "title": "Kuna home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.908
+          "score": 0.911
         },
         {
-          "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "url": "/guides/boise-handyman-guide",
+          "anchor": "Boise home repair guide: what local houses need, by age",
+          "title": "Boise home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.889
+          "score": 0.909
         },
         {
           "url": "/blog/handyman-prices-boise",
-          "anchor": "What a Handyman Costs in Boise (2026)",
-          "title": "What a Handyman Costs in Boise (2026)",
+          "anchor": "Handyman prices in Boise: hourly rates and job prices (2026)",
+          "title": "Handyman prices in Boise: hourly rates and job prices (2026)",
           "type": "blog",
-          "score": 0.384
+          "score": 0.378
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
@@ -7836,13 +7836,13 @@
     },
     "/guides/kuna-handyman-guide": {
       "type": "guide",
-      "title": "Handyman Services in Kuna",
-      "anchor": "Handyman Services in Kuna",
+      "title": "Kuna home repair guide: what local houses need, by age",
+      "anchor": "Kuna home repair guide: what local houses need, by age",
       "url": "/guides/kuna-handyman-guide",
       "links": [
         {
           "url": "/areas/kuna",
-          "anchor": "Handyman services in Kuna",
+          "anchor": "Handyman in Kuna",
           "title": "Remodeling Services in Kuna, Idaho",
           "type": "city",
           "score": 999
@@ -7862,51 +7862,51 @@
           "score": 999
         },
         {
-          "url": "/guides/middleton-handyman-guide",
-          "anchor": "Handyman Services in Middleton",
-          "title": "Handyman Services in Middleton",
-          "type": "guide",
-          "score": 1.21
-        },
-        {
-          "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
-          "type": "guide",
-          "score": 1.108
-        },
-        {
           "url": "/guides/caldwell-handyman-guide",
-          "anchor": "Handyman Services in Caldwell",
-          "title": "Handyman Services in Caldwell",
+          "anchor": "Caldwell home repair guide: what local houses need, by age",
+          "title": "Caldwell home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.09
+          "score": 1.313
+        },
+        {
+          "url": "/guides/middleton-handyman-guide",
+          "anchor": "Middleton home repair guide: what local houses need, by age",
+          "title": "Middleton home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": 1.25
+        },
+        {
+          "url": "/guides/meridian-handyman-guide",
+          "anchor": "Meridian home repair guide: what local houses need, by age",
+          "title": "Meridian home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": 1.22
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
           "anchor": "Who Supplies Materials on a Handyman Job?",
           "title": "Who Supplies Materials on a Handyman Job?",
           "type": "blog",
-          "score": 0.216
+          "score": 0.243
         },
         {
-          "url": "/blog/how-to-compare-handyman-quotes",
-          "anchor": "How to Compare Handyman Quotes",
-          "title": "How to Compare Handyman Quotes",
+          "url": "/blog/home-maintenance-budget-idaho",
+          "anchor": "How to Budget for Home Maintenance in Idaho",
+          "title": "How to Budget for Home Maintenance in Idaho",
           "type": "blog",
-          "score": 0.177
+          "score": 0.201
         }
       ]
     },
     "/guides/meridian-handyman-guide": {
       "type": "guide",
-      "title": "Handyman Services in Meridian",
-      "anchor": "Handyman Services in Meridian",
+      "title": "Meridian home repair guide: what local houses need, by age",
+      "anchor": "Meridian home repair guide: what local houses need, by age",
       "url": "/guides/meridian-handyman-guide",
       "links": [
         {
           "url": "/areas/meridian",
-          "anchor": "Handyman services in Meridian",
+          "anchor": "Handyman in Meridian",
           "title": "Remodeling Services in Meridian, Idaho",
           "type": "city",
           "score": 999
@@ -7926,51 +7926,51 @@
           "score": 999
         },
         {
-          "url": "/guides/star-handyman-guide",
-          "anchor": "Handyman Services in Star",
-          "title": "Handyman Services in Star",
+          "url": "/guides/eagle-handyman-guide",
+          "anchor": "Eagle home repair guide: what local houses need, by age",
+          "title": "Eagle home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.081
+          "score": 1.156
         },
         {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Handyman Services in Nampa",
-          "title": "Handyman Services in Nampa",
+          "url": "/guides/eagle-foothills-handyman-guide",
+          "anchor": "Handyman Services in the Eagle Foothills",
+          "title": "Handyman Services in the Eagle Foothills",
           "type": "guide",
-          "score": 1.037
+          "score": 1.105
         },
         {
-          "url": "/blog/questions-to-ask-a-handyman",
-          "anchor": "Questions to Ask a Handyman Before You Book",
-          "title": "Questions to Ask a Handyman Before You Book",
+          "url": "/blog/who-supplies-materials-handyman-jobs",
+          "anchor": "Who Supplies Materials on a Handyman Job?",
+          "title": "Who Supplies Materials on a Handyman Job?",
           "type": "blog",
-          "score": 0.184
+          "score": 0.198
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
           "anchor": "How to Budget for Home Maintenance in Idaho",
           "title": "How to Budget for Home Maintenance in Idaho",
           "type": "blog",
-          "score": 0.176
+          "score": 0.182
         },
         {
-          "url": "/blog/boise-building-permit-guide",
-          "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
-          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "url": "/blog/how-to-compare-handyman-quotes",
+          "anchor": "How to Compare Handyman Quotes",
+          "title": "How to Compare Handyman Quotes",
           "type": "blog",
-          "score": 0.173
+          "score": 0.181
         }
       ]
     },
     "/guides/middleton-handyman-guide": {
       "type": "guide",
-      "title": "Handyman Services in Middleton",
-      "anchor": "Handyman Services in Middleton",
+      "title": "Middleton home repair guide: what local houses need, by age",
+      "anchor": "Middleton home repair guide: what local houses need, by age",
       "url": "/guides/middleton-handyman-guide",
       "links": [
         {
           "url": "/areas/middleton",
-          "anchor": "Handyman services in Middleton",
+          "anchor": "Handyman in Middleton",
           "title": "Remodeling Services in Middleton, Idaho",
           "type": "city",
           "score": 999
@@ -7991,50 +7991,50 @@
         },
         {
           "url": "/guides/kuna-handyman-guide",
-          "anchor": "Handyman Services in Kuna",
-          "title": "Handyman Services in Kuna",
+          "anchor": "Kuna home repair guide: what local houses need, by age",
+          "title": "Kuna home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.21
+          "score": 1.37
         },
         {
           "url": "/guides/caldwell-handyman-guide",
-          "anchor": "Handyman Services in Caldwell",
-          "title": "Handyman Services in Caldwell",
+          "anchor": "Caldwell home repair guide: what local houses need, by age",
+          "title": "Caldwell home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.171
-        },
-        {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Handyman Services in Nampa",
-          "title": "Handyman Services in Nampa",
-          "type": "guide",
-          "score": 1.17
+          "score": 1.314
         },
         {
           "url": "/guides/star-handyman-guide",
-          "anchor": "Handyman Services in Star",
-          "title": "Handyman Services in Star",
+          "anchor": "Star home repair guide: what local houses need, by age",
+          "title": "Star home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.164
+          "score": 1.313
+        },
+        {
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Nampa home repair guide: what local houses need, by age",
+          "title": "Nampa home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": 1.294
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
           "anchor": "Ada vs Canyon County: Permits for Small Home Projects",
           "title": "Ada vs Canyon County: Permits for Small Home Projects",
           "type": "blog",
-          "score": 0.181
+          "score": 0.195
         }
       ]
     },
     "/guides/nampa-handyman-guide": {
       "type": "guide",
-      "title": "Handyman Services in Nampa",
-      "anchor": "Handyman Services in Nampa",
+      "title": "Nampa home repair guide: what local houses need, by age",
+      "anchor": "Nampa home repair guide: what local houses need, by age",
       "url": "/guides/nampa-handyman-guide",
       "links": [
         {
           "url": "/areas/nampa",
-          "anchor": "Handyman services in Nampa",
+          "anchor": "Handyman in Nampa",
           "title": "Remodeling Services in Nampa, Idaho",
           "type": "city",
           "score": 999
@@ -8054,39 +8054,39 @@
           "score": 999
         },
         {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Handyman Services in Eagle",
-          "title": "Handyman Services in Eagle",
-          "type": "guide",
-          "score": 1.126
-        },
-        {
           "url": "/guides/meridian-handyman-guide",
-          "anchor": "Handyman Services in Meridian",
-          "title": "Handyman Services in Meridian",
+          "anchor": "Meridian home repair guide: what local houses need, by age",
+          "title": "Meridian home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.117
+          "score": 1.233
         },
         {
           "url": "/guides/star-handyman-guide",
-          "anchor": "Handyman Services in Star",
-          "title": "Handyman Services in Star",
+          "anchor": "Star home repair guide: what local houses need, by age",
+          "title": "Star home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.061
+          "score": 1.206
         },
         {
-          "url": "/blog/how-to-budget-home-repairs-boise",
-          "anchor": "How to Budget a Home Repair Punch List in Boise",
-          "title": "How to Budget a Home Repair Punch List in Boise",
+          "url": "/blog/handyman-vs-contractor",
+          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
+          "title": "Handyman vs Contractor: Which Does Your Job Need?",
           "type": "blog",
-          "score": 0.151
+          "score": 0.165
         },
         {
-          "url": "/blog/hourly-rate-vs-flat-rate-handyman",
-          "anchor": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
-          "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
+          "url": "/blog/questions-to-ask-a-handyman",
+          "anchor": "Questions to Ask a Handyman Before You Book",
+          "title": "Questions to Ask a Handyman Before You Book",
           "type": "blog",
-          "score": 0.149
+          "score": 0.158
+        },
+        {
+          "url": "/blog/who-supplies-materials-handyman-jobs",
+          "anchor": "Who Supplies Materials on a Handyman Job?",
+          "title": "Who Supplies Materials on a Handyman Job?",
+          "type": "blog",
+          "score": 0.158
         }
       ]
     },
@@ -8139,11 +8139,11 @@
           "score": 0.122
         },
         {
-          "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "url": "/guides/kuna-handyman-guide",
+          "anchor": "Kuna home repair guide: what local houses need, by age",
+          "title": "Kuna home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.044
+          "score": 0.065
         },
         {
           "url": "/services/painting-touch-ups/boise",
@@ -8156,13 +8156,13 @@
     },
     "/guides/star-handyman-guide": {
       "type": "guide",
-      "title": "Handyman Services in Star",
-      "anchor": "Handyman Services in Star",
+      "title": "Star home repair guide: what local houses need, by age",
+      "anchor": "Star home repair guide: what local houses need, by age",
       "url": "/guides/star-handyman-guide",
       "links": [
         {
           "url": "/areas/star",
-          "anchor": "Handyman services in Star",
+          "anchor": "Handyman in Star",
           "title": "Remodeling Services in Star, Idaho",
           "type": "city",
           "score": 999
@@ -8182,39 +8182,39 @@
           "score": 999
         },
         {
-          "url": "/guides/middleton-handyman-guide",
-          "anchor": "Handyman Services in Middleton",
-          "title": "Handyman Services in Middleton",
+          "url": "/guides/kuna-handyman-guide",
+          "anchor": "Kuna home repair guide: what local houses need, by age",
+          "title": "Kuna home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.164
+          "score": 1.313
+        },
+        {
+          "url": "/guides/middleton-handyman-guide",
+          "anchor": "Middleton home repair guide: what local houses need, by age",
+          "title": "Middleton home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": 1.313
         },
         {
           "url": "/guides/caldwell-handyman-guide",
-          "anchor": "Handyman Services in Caldwell",
-          "title": "Handyman Services in Caldwell",
+          "anchor": "Caldwell home repair guide: what local houses need, by age",
+          "title": "Caldwell home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.137
+          "score": 1.27
         },
         {
-          "url": "/guides/kuna-handyman-guide",
-          "anchor": "Handyman Services in Kuna",
-          "title": "Handyman Services in Kuna",
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Nampa home repair guide: what local houses need, by age",
+          "title": "Nampa home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.09
+          "score": 1.206
         },
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
           "anchor": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
           "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
           "type": "blog",
-          "score": 0.165
-        },
-        {
-          "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
-          "type": "blog",
-          "score": 0.161
+          "score": 0.189
         }
       ]
     },
@@ -8254,24 +8254,24 @@
         },
         {
           "url": "/guides/eagle-handyman-guide",
-          "anchor": "Handyman Services in Eagle",
-          "title": "Handyman Services in Eagle",
+          "anchor": "Eagle home repair guide: what local houses need, by age",
+          "title": "Eagle home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.121
+          "score": 0.122
         },
         {
           "url": "/guides/boise-handyman-guide",
-          "anchor": "Handyman Services in Boise",
-          "title": "Handyman Services in Boise",
+          "anchor": "Boise home repair guide: what local houses need, by age",
+          "title": "Boise home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.096
+          "score": 0.117
         },
         {
-          "url": "/services/fence-deck-gutter-repair/star",
-          "anchor": "Fence, Deck & Gutter Repair in Star",
-          "title": "Fence, Deck & Gutter Repair in Star, Idaho",
+          "url": "/services/fence-deck-gutter-repair/garden-city",
+          "anchor": "Fence, Deck & Gutter Repair in Garden City",
+          "title": "Fence, Deck & Gutter Repair in Garden City, Idaho",
           "type": "city-service",
-          "score": 0.052
+          "score": 0.047
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
@@ -8367,6 +8367,13 @@
           "score": 1.775
         },
         {
+          "url": "/services/drywall-repair/star",
+          "anchor": "Drywall Repair & Patching in Star",
+          "title": "Drywall Repair & Patching in Star, Idaho",
+          "type": "city-service",
+          "score": 1.713
+        },
+        {
           "url": "/services/drywall-repair/kuna",
           "anchor": "Drywall Repair & Patching in Kuna",
           "title": "Drywall Repair & Patching in Kuna, Idaho",
@@ -8398,13 +8405,6 @@
           "url": "/services/drywall-repair/middleton",
           "anchor": "Drywall Repair & Patching in Middleton",
           "title": "Drywall Repair & Patching in Middleton, Idaho",
-          "type": "city-service",
-          "score": 1.673
-        },
-        {
-          "url": "/services/drywall-repair/star",
-          "anchor": "Drywall Repair & Patching in Star",
-          "title": "Drywall Repair & Patching in Star, Idaho",
           "type": "city-service",
           "score": 1.673
         }
@@ -8779,18 +8779,18 @@
           "score": 1.633
         },
         {
-          "url": "/blog/common-toilet-problems-and-fixes",
-          "anchor": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
-          "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
-          "type": "blog",
-          "score": -0.237
-        },
-        {
           "url": "/blog/replacing-faucets-and-fixtures",
           "anchor": "Replacing Faucets and Fixtures: A Homeowner Guide",
           "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
           "type": "blog",
           "score": -0.239
+        },
+        {
+          "url": "/blog/how-long-do-common-home-repairs-take",
+          "anchor": "How Long Do Common Home Repairs Take?",
+          "title": "How Long Do Common Home Repairs Take?",
+          "type": "blog",
+          "score": -0.266
         }
       ]
     }
@@ -8800,7 +8800,7 @@
     "/blog/aging-in-place-home-design": 6,
     "/blog/boise-building-permit-guide": 8,
     "/blog/caulking-guide-boise-homes": 9,
-    "/blog/common-toilet-problems-and-fixes": 9,
+    "/blog/common-toilet-problems-and-fixes": 8,
     "/blog/deck-maintenance-boise": 10,
     "/blog/diy-vs-hiring-a-handyman": 9,
     "/blog/drywall-repair-cost-boise": 9,
@@ -8810,25 +8810,25 @@
     "/blog/gutter-cleaning-schedule-boise": 11,
     "/blog/handyman-prices-boise": 8,
     "/blog/handyman-red-flags": 9,
-    "/blog/handyman-vs-contractor": 8,
+    "/blog/handyman-vs-contractor": 9,
     "/blog/home-maintenance-budget-idaho": 10,
     "/blog/home-repairs-before-selling-boise": 7,
-    "/blog/hourly-rate-vs-flat-rate-handyman": 9,
-    "/blog/how-long-do-common-home-repairs-take": 9,
-    "/blog/how-to-budget-home-repairs-boise": 8,
+    "/blog/hourly-rate-vs-flat-rate-handyman": 8,
+    "/blog/how-long-do-common-home-repairs-take": 10,
+    "/blog/how-to-budget-home-repairs-boise": 7,
     "/blog/how-to-compare-handyman-quotes": 8,
     "/blog/how-to-patch-drywall": 7,
     "/blog/interior-paint-touch-up-guide": 10,
     "/blog/new-home-punch-list-handyman": 6,
     "/blog/preparing-your-boise-home-for-winter": 7,
-    "/blog/questions-to-ask-a-handyman": 8,
+    "/blog/questions-to-ask-a-handyman": 9,
     "/blog/replacing-faucets-and-fixtures": 9,
     "/blog/seasonal-home-maintenance-checklist-boise": 8,
     "/blog/small-home-upgrade-ideas-boise": 9,
     "/blog/tv-mounting-and-anchoring-guide": 11,
     "/blog/what-small-home-repairs-cost-boise": 17,
     "/blog/what-to-expect-first-handyman-visit": 9,
-    "/blog/who-supplies-materials-handyman-jobs": 9,
+    "/blog/who-supplies-materials-handyman-jobs": 10,
     "/blog/why-handyman-quotes-vary": 8,
     "/guides/boise-home-maintenance-guide": 18,
     "/guides/boise-home-repair-cost-guide": 18,
@@ -8847,7 +8847,7 @@
     "/guides/caldwell-handyman-guide": 5,
     "/guides/eagle-foothills-handyman-guide": 5,
     "/guides/hidden-springs-handyman-guide": 5,
-    "/guides/harris-ranch-handyman-guide": 6,
+    "/guides/harris-ranch-handyman-guide": 5,
     "/services/drywall-repair": 18,
     "/services/painting-touch-ups": 17,
     "/services/plumbing-repairs": 18,

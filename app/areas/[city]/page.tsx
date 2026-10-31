@@ -10,7 +10,7 @@ landingFAQSchema,
 } from '@/lib/landing-schema';
 import { buildPageMetadata,isCityServiceNoindex } from '@/lib/page-metadata';
 import { generateSpeakableSchema } from '@/lib/schema';
-import { CITY_SEO_DATA } from '@/lib/seo';
+import { CITY_SEO_DATA,serviceCityAnchor } from '@/lib/seo';
 import { areaPath,cityServicePath,CITY_SLUGS,getCityBySlug,servicePath } from '@/lib/seo-routes';
 import { getAreaImageSet } from '@/shared/cityServiceImages';
 import { LOCATION_GUIDES } from '@/shared/content/locationGuides';
@@ -69,15 +69,18 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
   const serviceIntro =
     indexedCount === SERVICES.length
       ? `Explore the specific services we offer in ${city.name} below. Each links to a dedicated ${city.name} page with local details, typical jobs, and pricing guidance.`
-      : `Explore the services we offer in ${city.name} below. Where a service has a dedicated ${city.name} page the link goes there; the others go to the service page, with the typical jobs and how pricing works.`;
+      : indexedCount === 0
+        ? `Every service below is available in ${city.name}. Each link goes to the service page, with the typical jobs and how pricing works; the quote process and pricing are the same in ${city.name} as everywhere else we work.`
+        : `Explore the services we offer in ${city.name} below. Where a service has a dedicated ${city.name} page the link goes there; the others go to the service page, with the typical jobs and how pricing works.`;
+  // Service anchors carry the searched term and the city ("drywall repair in
+  // Kuna") whichever page they point at.
   const serviceLinks = [
-    ...SERVICES.map((s) =>
-      isCityServiceNoindex(s.slug, city.slug)
-        ? { label: s.name, href: servicePath(s.slug) }
-        : { label: `${s.name} in ${city.name}`, href: cityServicePath(s.slug, city.slug) },
-    ),
+    ...SERVICES.map((s) => ({
+      label: serviceCityAnchor(s.slug, s.name, city.name),
+      href: isCityServiceNoindex(s.slug, city.slug) ? servicePath(s.slug) : cityServicePath(s.slug, city.slug),
+    })),
     ...(cityGuide ? [{ label: `${city.name} home repair guide`, href: guidePath(cityGuide.slug) }] : []),
-    { label: 'RE-10 inspection repairs for a home sale', href: '/re-10-repairs-boise' },
+    { label: `RE-10 inspection repairs in ${city.name}`, href: '/re-10-repairs-boise' },
   ];
   // The links sit in a two-column rule list; keep the count even.
   if (serviceLinks.length % 2 === 1) serviceLinks.push({ label: 'All handyman services', href: '/services' });

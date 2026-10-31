@@ -255,6 +255,27 @@ const SERVICE_SEARCH_NAMES: Record<string, string> = {
   'Caulking & Home Maintenance': 'Home Maintenance',
 };
 
+/**
+ * Sentence-case service names for in-body anchors ("drywall repair in Kuna"),
+ * keyed by service slug. They carry the searched term, not the catalog's
+ * display name ("Drywall Repair & Patching").
+ */
+const SERVICE_ANCHOR_NAMES: Record<string, string> = {
+  'drywall-repair': 'Drywall repair',
+  'painting-touch-ups': 'Paint touch-ups',
+  'plumbing-repairs': 'Minor plumbing repairs',
+  'electrical-repairs': 'Minor electrical repairs',
+  'carpentry-trim-repair': 'Carpentry and trim repair',
+  'mounting-assembly': 'TV mounting and assembly',
+  'fence-deck-gutter-repair': 'Fence, deck and gutter repair',
+  'home-maintenance': 'Caulking and home maintenance',
+};
+
+/** "Drywall repair in Kuna": the anchor an area page uses for a service. */
+export function serviceCityAnchor(serviceSlug: string, serviceName: string, cityName: string): string {
+  return `${SERVICE_ANCHOR_NAMES[serviceSlug] ?? serviceName} in ${cityName}`;
+}
+
 /** Budget after the layout template appends " | Boise Handyman Co" (20). */
 export const CITY_SERVICE_TITLE_BUDGET = 40;
 

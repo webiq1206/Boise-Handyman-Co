@@ -32,6 +32,10 @@ export interface ContentHub {
   pillarSlug: string;
   pillarRoute: ContentRoute;
   description: string;
+  /** Category page title, keyword first; the layout appends the brand (60 max in total). */
+  seoTitle: string;
+  /** Category page meta description: keyword first, 140 to 155 characters. */
+  metaDescription: string;
   priorityTier: 1 | 2 | 3 | 4 | 5;
   serviceSlugs: string[];
 }
@@ -56,6 +60,9 @@ export const CONTENT_HUBS: ContentHub[] = [
     pillarRoute: 'guide',
     description:
       'Drywall holes, dripping faucets, dead outlets, sticking doors: what common home repairs involve, what you can safely do yourself, and when to call a pro.',
+    seoTitle: 'Repairs & Fixes | Home Repair Articles',
+    metaDescription:
+      'Repairs and fixes articles for Boise homes: drywall holes, dripping faucets, dead outlets, squeaky floors and sticking doors, and when to call a handyman.',
     priorityTier: 1,
     serviceSlugs: ['drywall-repair', 'plumbing-repairs', 'electrical-repairs', 'carpentry-trim-repair'],
   },
@@ -67,6 +74,9 @@ export const CONTENT_HUBS: ContentHub[] = [
     pillarRoute: 'guide',
     description:
       'TV mounting, shelving, ceiling fans, fresh paint, new fixtures: small installs and upgrades that improve a house in an afternoon instead of a renovation.',
+    seoTitle: 'Installs & Upgrades | Boise Articles',
+    metaDescription:
+      'Installs and upgrades articles for Boise homes: TV mounting, shelving, faucet swaps, aging-in-place grab bars and one-day upgrades that improve a house.',
     priorityTier: 2,
     serviceSlugs: ['mounting-assembly', 'painting-touch-ups', 'carpentry-trim-repair', 'electrical-repairs'],
   },
@@ -78,6 +88,9 @@ export const CONTENT_HUBS: ContentHub[] = [
     pillarRoute: 'guide',
     description:
       'Season-by-season upkeep for Treasure Valley homes: caulking, weatherstripping, gutter cleaning, and the small tasks that prevent expensive repairs.',
+    seoTitle: 'Home Maintenance Articles | Boise Homes',
+    metaDescription:
+      'Home maintenance articles for Treasure Valley homes: seasonal checklists, caulking, gutter cleaning, winterizing, energy fixes and new-home punch lists.',
     priorityTier: 1,
     serviceSlugs: ['home-maintenance', 'fence-deck-gutter-repair', 'plumbing-repairs'],
   },
@@ -89,6 +102,9 @@ export const CONTENT_HUBS: ContentHub[] = [
     pillarRoute: 'guide',
     description:
       'What small home repairs cost in the Boise area, how handyman pricing works, how to vet who you hire, and when a job needs a licensed trade instead.',
+    seoTitle: 'Handyman Costs & Hiring | Boise Articles',
+    metaDescription:
+      'Costs and hiring articles: what a handyman costs in Boise, hourly versus flat rate, comparing quotes, red flags, questions to ask and when to call a pro.',
     priorityTier: 1,
     serviceSlugs: ['drywall-repair', 'plumbing-repairs', 'electrical-repairs', 'home-maintenance'],
   },
@@ -100,6 +116,9 @@ export const CONTENT_HUBS: ContentHub[] = [
     pillarRoute: 'guide',
     description:
       'Fences, decks, gutters, siding, and exterior paint: keeping the outside of a Treasure Valley home sound through hot, dry summers and freezing winters.',
+    seoTitle: 'Exterior & Outdoor | Home Care Articles',
+    metaDescription:
+      'Exterior and outdoor articles for Treasure Valley homes: fence repair, deck care and keeping gutters, siding and paint sound through heat and frost.',
     priorityTier: 2,
     serviceSlugs: ['fence-deck-gutter-repair', 'painting-touch-ups', 'home-maintenance'],
   },
@@ -159,7 +178,7 @@ function guide(
  */
 export const CONTENT_MANIFEST: ContentManifestEntry[] = [
   // Hub pillars
-  { slug: 'boise-home-repair-cost-guide', title: 'Boise Home Repair Cost Guide', ...hubPillar('costs-and-hiring'), status: PUBLISHED, replacesSlug: 'boise-home-building-cost-guide' },
+  { slug: 'boise-home-repair-cost-guide', title: 'The complete Boise home repair cost guide', ...hubPillar('costs-and-hiring'), status: PUBLISHED, replacesSlug: 'boise-home-building-cost-guide' },
   { slug: 'hire-a-handyman-treasure-valley', title: 'How to Hire a Handyman in the Treasure Valley', hubSlug: 'costs-and-hiring', contentType: 'pillar', route: 'guide', status: PUBLISHED, replacesSlug: 'choose-home-builder-boise' },
   { slug: 'boise-home-maintenance-guide', title: 'The Complete Boise Home Maintenance Guide', ...hubPillar('home-maintenance'), status: PUBLISHED, replacesSlug: 'boise-home-building-process-guide' },
   { slug: 'small-home-upgrades-that-pay-off', title: 'Small Home Upgrades That Pay Off', ...hubPillar('installs-and-upgrades'), status: PUBLISHED, replacesSlug: 'custom-home-design-guide' },
@@ -167,16 +186,17 @@ export const CONTENT_MANIFEST: ContentManifestEntry[] = [
   { slug: 'treasure-valley-exterior-home-care-guide', title: 'The Treasure Valley Exterior Home Care Guide', ...hubPillar('exterior-and-outdoor'), status: PUBLISHED, replacesSlug: 'treasure-valley-home-building-guide' },
   { slug: 'ember-ready-home-checklist-treasure-valley', title: 'Ember-ready: a fall checklist for Treasure Valley homes', hubSlug: 'exterior-and-outdoor', contentType: 'pillar', route: 'guide', status: PUBLISHED, primaryKeyword: 'ember ready home checklist treasure valley' },
 
-  // City and neighborhood handyman guides (under costs-and-hiring: local
-  // hiring intent is what a "handyman in {city}" search expresses).
-  guide('boise-handyman-guide', 'Handyman Services in Boise', 'costs-and-hiring', 'location', PUBLISHED),
-  guide('meridian-handyman-guide', 'Handyman Services in Meridian', 'costs-and-hiring', 'location', PUBLISHED),
-  guide('eagle-handyman-guide', 'Handyman Services in Eagle', 'costs-and-hiring', 'location', PUBLISHED),
-  guide('kuna-handyman-guide', 'Handyman Services in Kuna', 'costs-and-hiring', 'location', PUBLISHED),
-  guide('star-handyman-guide', 'Handyman Services in Star', 'costs-and-hiring', 'location', PUBLISHED),
-  guide('middleton-handyman-guide', 'Handyman Services in Middleton', 'costs-and-hiring', 'location', PUBLISHED),
-  guide('nampa-handyman-guide', 'Handyman Services in Nampa', 'costs-and-hiring', 'location', PUBLISHED),
-  guide('caldwell-handyman-guide', 'Handyman Services in Caldwell', 'costs-and-hiring', 'location', PUBLISHED),
+  // City home repair guides (informational: "{city} home repair guide") and
+  // neighborhood handyman guides, under costs-and-hiring. "handyman {city}"
+  // belongs to /areas/{city}.
+  guide('boise-handyman-guide', 'Boise home repair guide: what local houses need, by age', 'costs-and-hiring', 'location', PUBLISHED),
+  guide('meridian-handyman-guide', 'Meridian home repair guide: what local houses need, by age', 'costs-and-hiring', 'location', PUBLISHED),
+  guide('eagle-handyman-guide', 'Eagle home repair guide: what local houses need, by age', 'costs-and-hiring', 'location', PUBLISHED),
+  guide('kuna-handyman-guide', 'Kuna home repair guide: what local houses need, by age', 'costs-and-hiring', 'location', PUBLISHED),
+  guide('star-handyman-guide', 'Star home repair guide: what local houses need, by age', 'costs-and-hiring', 'location', PUBLISHED),
+  guide('middleton-handyman-guide', 'Middleton home repair guide: what local houses need, by age', 'costs-and-hiring', 'location', PUBLISHED),
+  guide('nampa-handyman-guide', 'Nampa home repair guide: what local houses need, by age', 'costs-and-hiring', 'location', PUBLISHED),
+  guide('caldwell-handyman-guide', 'Caldwell home repair guide: what local houses need, by age', 'costs-and-hiring', 'location', PUBLISHED),
   guide('eagle-foothills-handyman-guide', 'Handyman Services in the Eagle Foothills', 'costs-and-hiring', 'neighborhood', PUBLISHED),
   guide('hidden-springs-handyman-guide', 'Handyman Services in Hidden Springs', 'costs-and-hiring', 'neighborhood', PUBLISHED),
   guide('harris-ranch-handyman-guide', 'Handyman Services in Harris Ranch', 'costs-and-hiring', 'neighborhood', PUBLISHED),
@@ -194,7 +214,7 @@ export const CONTENT_MANIFEST: ContentManifestEntry[] = [
   { slug: 'fence-repair-treasure-valley', title: 'Fence Repair in the Treasure Valley: Posts, Panels, and Gates', hubSlug: 'exterior-and-outdoor', contentType: 'cluster', route: 'blog', status: PUBLISHED, primaryKeyword: 'fence repair treasure valley' },
   { slug: 'fixing-squeaky-floors-and-sticking-doors', title: 'Fixing Squeaky Floors and Sticking Doors in Boise Homes', hubSlug: 'repairs-and-fixes', contentType: 'cluster', route: 'blog', status: PUBLISHED, primaryKeyword: 'fix squeaky floors sticking doors' },
   { slug: 'gutter-cleaning-schedule-boise', title: 'Gutter Cleaning Schedule for Boise Homes', hubSlug: 'home-maintenance', contentType: 'cluster', route: 'blog', status: PUBLISHED, primaryKeyword: 'gutter cleaning boise' },
-  { slug: 'handyman-prices-boise', title: 'What a Handyman Costs in Boise (2026)', hubSlug: 'costs-and-hiring', contentType: 'cluster', route: 'blog', status: PUBLISHED, primaryKeyword: 'handyman cost Boise' },
+  { slug: 'handyman-prices-boise', title: 'Handyman prices in Boise: hourly rates and job prices (2026)', hubSlug: 'costs-and-hiring', contentType: 'cluster', route: 'blog', status: PUBLISHED, primaryKeyword: 'handyman prices boise' },
   { slug: 'handyman-red-flags', title: 'Handyman Red Flags: How to Avoid Hiring the Wrong One', hubSlug: 'costs-and-hiring', contentType: 'cluster', route: 'blog', status: PUBLISHED, primaryKeyword: 'handyman red flags' },
   { slug: 'handyman-vs-contractor', title: 'Handyman vs Contractor: Which Does Your Job Need?', hubSlug: 'costs-and-hiring', contentType: 'cluster', route: 'blog', status: PUBLISHED, primaryKeyword: 'handyman vs contractor' },
   { slug: 'home-maintenance-budget-idaho', title: 'How to Budget for Home Maintenance in Idaho', hubSlug: 'costs-and-hiring', contentType: 'cluster', route: 'blog', status: PUBLISHED, primaryKeyword: 'home maintenance budget' },
