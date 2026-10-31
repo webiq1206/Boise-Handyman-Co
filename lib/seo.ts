@@ -198,40 +198,37 @@ export function generateMetaDescription(params: ServiceSEOParams): string {
 }
 
 /**
- * Generate varied city-service title (used for page metadata title field)
- * Does NOT include brand name since layout template appends "| Boise Handyman Co"
- * Target: under 36 chars so final rendered title stays under 60 chars
+ * City-service title (the layout template appends " | Boise Handyman Co", 20
+ * characters, so the part here gets 40 of the 60).
+ *
+ * Each service is titled by the term people search for, not by a clipped
+ * display name: "Plumbing Fixes", "Exterior Repair" and "Maintenance" dropped
+ * the searched word and stopped matching the page's H1. Keyed by the `name`
+ * values in shared/contentData.ts.
  */
-
-/**
- * Shorter display names for the longest services, used only when the full name
- * would push a city-service title past the budget. Keyed by the `name` values
- * in shared/contentData.ts.
- */
-const SERVICE_SHORT_NAMES: Record<string, string> = {
+const SERVICE_SEARCH_NAMES: Record<string, string> = {
   'Drywall Repair & Patching': 'Drywall Repair',
-  'Interior & Exterior Painting': 'Painting',
-  'Minor Plumbing Repairs': 'Plumbing Fixes',
-  'Minor Electrical Repairs': 'Electrical Fixes',
-  'Carpentry & Trim Repair': 'Carpentry Repair',
-  'Fence, Deck & Gutter Repair': 'Exterior Repair',
-  'Caulking & Home Maintenance': 'Maintenance',
+  'Interior & Exterior Painting': 'Painting Touch-Ups',
+  'Minor Plumbing Repairs': 'Plumbing Repairs',
+  'Minor Electrical Repairs': 'Electrical Repairs',
+  'Carpentry & Trim Repair': 'Carpentry & Trim Repair',
+  'Mounting & Assembly': 'TV Mounting & Assembly',
+  'Fence, Deck & Gutter Repair': 'Fence & Deck Repair',
+  'Caulking & Home Maintenance': 'Home Maintenance',
 };
 
 /** Budget after the layout template appends " | Boise Handyman Co" (20). */
-const CITY_SERVICE_TITLE_BUDGET = 36;
+export const CITY_SERVICE_TITLE_BUDGET = 40;
 
 export function generateCityServiceTitle(serviceName: string, cityName: string): string {
-  const short = SERVICE_SHORT_NAMES[serviceName] ?? serviceName;
+  const name = SERVICE_SEARCH_NAMES[serviceName] ?? serviceName;
 
-  // Degrade in steps rather than truncating mid-word: full name with "Idaho",
-  // then the short name, then the "ID" abbreviation. Every service/city pair in
-  // the current matrix resolves at one of these levels.
+  // "Idaho" when it fits, the "ID" abbreviation when it does not. Every
+  // service/city pair in the current matrix resolves at one of these two.
   const candidates = [
-    `${serviceName} in ${cityName}, Idaho`,
-    `${short} in ${cityName}, Idaho`,
-    `${short} in ${cityName}, ID`,
-    `${short}, ${cityName}`,
+    `${name} in ${cityName}, Idaho`,
+    `${name} in ${cityName}, ID`,
+    `${name}, ${cityName}`,
   ];
 
   return (

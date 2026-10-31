@@ -3,9 +3,9 @@ import type { GuidePageData } from '../../guideContent';
 export const emberReadyHomeChecklistTreasureValley: GuidePageData = {
   slug: 'ember-ready-home-checklist-treasure-valley',
   title: 'Ember-ready: a fall checklist for Treasure Valley homes',
-  seoTitle: 'Ember-Ready Home: A Fall Wildfire Checklist for Treasure Valley Homes',
+  seoTitle: 'Ember-Ready Home Wildfire Checklist',
   metaDescription:
-    'Small, practical fixes that make a home harder for wind-blown embers to ignite, based on NFPA Firewise guidance and Boise Fire\'s programs, plus which jobs are DIY, handyman, or roofer work.',
+    'Ember-ready home checklist: small fixes that make a Treasure Valley home harder for wind-blown embers to ignite, based on NFPA Firewise guidance.',
   excerpt:
     'Small, practical fixes that make a home harder for wind-blown embers to ignite, based on NFPA Firewise guidance and Boise Fire\'s programs, plus which jobs are DIY, handyman, or roofer work.',
   hubSlug: 'exterior-and-outdoor',

@@ -5,7 +5,7 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
   title: 'Hourly Rate vs Flat Rate: How Handyman Pricing Works',
   seoTitle: 'Hourly vs Flat Rate Handyman Pricing',
   metaDescription:
-    'How handyman pricing works in the Treasure Valley: hourly rates, flat quotes, minimums, and trip fees. Which model favors you on which jobs, so you can compare quotes fairly.',
+    'Hourly vs flat rate handyman pricing in the Treasure Valley: how rates, flat quotes, minimums and trip fees work, and which model favors you on which job.',
   excerpt:
     'Hourly and flat-rate handyman pricing put the risk of a slow job on different people. Here is how each model works, where the market rates sit, and which favors you when.',
   category: 'Costs & Hiring',

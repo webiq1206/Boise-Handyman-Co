@@ -3,9 +3,9 @@ import type { BlogPostData } from '../../blogContent';
 export const replacingFaucetsAndFixtures: BlogPostData = {
   slug: 'replacing-faucets-and-fixtures',
   title: 'Replacing Faucets and Fixtures: A Homeowner Guide',
-  seoTitle: 'Replacing Faucets & Fixtures: Homeowner Guide',
+  seoTitle: 'Replacing Faucets and Fixtures: A Guide',
   metaDescription:
-    'How to pick a faucet that fits, what a swap really involves, why old shutoff valves are the hidden risk, and Boise labor ranges. Plan the upgrade before you buy.',
+    'Replacing faucets and fixtures: how to pick a faucet that fits, what a swap involves, why old shutoff valves are the hidden risk, and Boise labor ranges.',
   excerpt:
     'A faucet swap is a one-hour job on a good day and a plumbing adventure on a bad one. The difference is almost always the shutoff valves nobody has turned since the house was built.',
   category: 'Installs & Upgrades',

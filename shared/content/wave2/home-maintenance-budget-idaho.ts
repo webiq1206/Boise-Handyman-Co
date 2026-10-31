@@ -5,7 +5,7 @@ export const homeMaintenanceBudgetIdaho: BlogPostData = {
   title: 'How to Budget for Home Maintenance in Idaho',
   seoTitle: 'Home Maintenance Budget for Idaho Homes',
   metaDescription:
-    'Plan 1 to 2 percent of home value yearly for maintenance, or use a per-system checklist. A realistic Idaho budget framework, plus what deferral really costs.',
+    'Home maintenance budget for Idaho: plan 1 to 2 percent of home value a year or use a per-system checklist, plus what deferring maintenance costs.',
   excerpt:
     'The one percent rule, the per-square-foot rule, and what Treasure Valley homes actually need: a realistic way to budget for the repairs that are coming either way.',
   category: 'Costs & Hiring',

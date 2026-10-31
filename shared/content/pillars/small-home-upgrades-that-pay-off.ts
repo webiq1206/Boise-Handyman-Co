@@ -3,9 +3,9 @@ import type { GuidePageData } from '../../guideContent';
 export const smallHomeUpgradesThatPayOff: GuidePageData = {
   slug: 'small-home-upgrades-that-pay-off',
   title: 'Small Home Upgrades That Pay Off',
-  seoTitle: 'Small Home Upgrades That Pay Off in Boise',
+  seoTitle: 'Small Home Upgrades That Pay Off',
   metaDescription:
-    'Afternoon-scale upgrades that improve a Boise home: paint, lighting, hardware, fans, shelving, and sealing, ranked by payoff, with realistic costs for each.',
+    'Small home upgrades that pay off in a Boise home: paint, lighting, hardware, fans, shelving and sealing, ranked by payoff with realistic costs for each.',
   excerpt:
     'The upgrades that change how a house feels and functions without a renovation: what they cost in the Treasure Valley, which ones earn their money back, and which order to do them in.',
   hubSlug: 'installs-and-upgrades',

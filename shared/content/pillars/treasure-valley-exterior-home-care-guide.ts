@@ -5,7 +5,7 @@ export const treasureValleyExteriorHomeCareGuide: GuidePageData = {
   title: 'The Treasure Valley Exterior Home Care Guide',
   seoTitle: 'Treasure Valley Exterior Home Care Guide',
   metaDescription:
-    'Fences, decks, gutters, siding, and exterior paint in the Boise climate: what our sun and freeze-thaw do to them, repair costs, and the upkeep that prevents rot.',
+    'Exterior home care in the Treasure Valley: what sun and freeze-thaw do to fences, decks, gutters, siding and paint, repair costs and rot prevention.',
   excerpt:
     'What the high-desert climate does to the outside of a house, and what to do about it: fence and deck repair, gutter care, siding and trim, exterior caulk and paint, with realistic Treasure Valley costs.',
   hubSlug: 'exterior-and-outdoor',

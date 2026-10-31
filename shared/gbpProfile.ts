@@ -89,6 +89,19 @@ export const GBP_LINKS = {
  * the rebrand, update both URLs here and nowhere else - the footer and schema
  * both read from this.
  */
+/**
+ * Profiles that must never render here. Boise Handyman Co has no social or
+ * Google profile of its own (owner, 31 October 2026); the only ones are P5
+ * Home Co's. The boiseremodeling handles never existed as this company's, so
+ * an env value naming one is dropped rather than published as a footer link
+ * or a schema sameAs.
+ */
+const NOT_THIS_COMPANY = /(facebook|instagram)\.com\/boiseremodeling\b/i;
+function ownProfile(url: string | undefined): string {
+  const value = url?.trim() ?? '';
+  return value && !NOT_THIS_COMPANY.test(value) ? value : '';
+}
+
 export const GBP_SOCIAL = {
   /**
    * Empty until Boise Handyman Co has its own profiles. The previous values
@@ -97,8 +110,8 @@ export const GBP_SOCIAL = {
    * NEXT_PUBLIC_FACEBOOK_URL / NEXT_PUBLIC_INSTAGRAM_URL once the real
    * profiles exist; every consumer renders nothing for an empty value.
    */
-  facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? '',
-  instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? '',
+  facebook: ownProfile(process.env.NEXT_PUBLIC_FACEBOOK_URL),
+  instagram: ownProfile(process.env.NEXT_PUBLIC_INSTAGRAM_URL),
 } as const;
 
 export const GBP_ATTRIBUTES = {

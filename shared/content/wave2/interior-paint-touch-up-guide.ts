@@ -3,9 +3,9 @@ import type { BlogPostData } from '../../blogContent';
 export const interiorPaintTouchUpGuide: BlogPostData = {
   slug: 'interior-paint-touch-up-guide',
   title: 'Interior Paint Touch-Up Guide: Blending Without Repainting',
-  seoTitle: 'Interior Paint Touch-Up Guide That Actually Blends',
+  seoTitle: 'Interior Paint Touch-Ups That Blend',
   metaDescription:
-    'Why touch-ups flash, how to match color and sheen, the feathering technique that blends, and when a wall needs corner-to-corner paint. Fix the scuffs the right way.',
+    'Interior paint touch-ups that blend: why touch-ups flash, how to match color and sheen, the feathering technique, and when a wall needs a full repaint.',
   excerpt:
     'Half of paint touch-ups make the wall worse, a shiny or dull rectangle where a scuff used to be. The difference between blending and flashing is sheen, method, and knowing when to stop.',
   category: 'Repairs & Fixes',

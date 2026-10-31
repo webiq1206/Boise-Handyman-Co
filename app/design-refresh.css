@@ -252,6 +252,19 @@
     padding-block: 4px;
   }
 }
+/* Three columns for both rule lists: three request tips as 3x1 and nine
+   service links as 3x3. auto-fill gave four columns at desktop and left the
+   ninth link (RE-10) alone on a third row. One column on phones. */
+@media (min-width: 720px) {
+  .approved-shell .family-site section#handyman-services-boise > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 719px) {
+  .approved-shell .family-site section#handyman-services-boise > ul {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 @media (max-width: 527px) {
   .approved-shell .family-site section#handyman-services-boise > ul {
     border-bottom: 1px solid #2c302f26;

@@ -4,6 +4,7 @@ import {
 LandingPageTemplate,
 type LandingSection,
 } from '@/components/seo/LandingPageTemplate';
+import { isAdCallFirstPath } from '@/lib/adLandingPaths';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import {
 landingBreadcrumbs,
@@ -146,6 +147,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
       <JsonLd data={schemas} />
       <LandingPageTemplate
         paidService={service.slug === "drywall-repair" || service.slug === "home-maintenance" ? service.slug : undefined}
+        callFirst={isAdCallFirstPath(path)}
         h1={content.headline}
         speakableSummary={content.overview}
         overview={content.overview}

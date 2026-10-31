@@ -5,7 +5,7 @@ export const howToCompareHandymanQuotes: BlogPostData = {
   title: 'How to Compare Handyman Quotes',
   seoTitle: 'How to Compare Handyman Quotes Fairly',
   metaDescription:
-    'A method for comparing handyman quotes: same written scope, totals not rates, materials and trip fees surfaced, insurance verified. Pick the right quote, not just the low one.',
+    'How to compare handyman quotes: same written scope, totals not rates, materials and trip fees surfaced, insurance verified, and the low bid questioned.',
   excerpt:
     'Two handyman quotes with different numbers are usually two different jobs wearing the same name. Here is how to make quotes comparable before you pick one.',
   category: 'Costs & Hiring',

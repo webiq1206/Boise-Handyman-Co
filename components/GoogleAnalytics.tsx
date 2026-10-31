@@ -5,16 +5,21 @@ import Script from 'next/script';
 // used here. G-NGE449QF9Y is Boise Remodeling Co's property - it was the
 // hardcoded fallback on this site (a leftover from when boisehandyman.co was
 // duplicated from boiseremodeling.co), so every Handyman session, event and
-// conversion was landing in the Remodeling company's reports and inflating
-// its numbers. boisehandyman.co's own property is 549906676 (measurement ID
-// G-4WQQ639LR1, set in .replit). If NEXT_PUBLIC_GA_MEASUREMENT_ID is ever
-// missing or set to the wrong property, this component renders nothing -
-// sending no data is correct; sending to the wrong property is not.
+// conversion was landing in the Remodeling company's reports.
+//
+// boisehandyman.co's own property is 549906676, measurement ID G-4WQQ639LR1.
+// A measurement ID is public (it ships in the page source), so it is the
+// literal fallback here, as on the sibling sites: a redeploy without
+// NEXT_PUBLIC_GA_MEASUREMENT_ID used to render no tag at all and silently drop
+// every session. An env value naming the wrong property still falls back to
+// this site's own ID rather than sending data elsewhere. The hostname,
+// webdriver and opt-out gates live in googleTagBootstrap and are unchanged.
 const WRONG_PROPERTY_IDS = new Set(['G-NGE449QF9Y']);
+const HANDYMAN_MEASUREMENT_ID = 'G-4WQQ639LR1';
 
 const configuredId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
 const GA_MEASUREMENT_ID =
-  configuredId && !WRONG_PROPERTY_IDS.has(configuredId) ? configuredId : null;
+  configuredId && !WRONG_PROPERTY_IDS.has(configuredId) ? configuredId : HANDYMAN_MEASUREMENT_ID;
 
 /** Load only for real visitors on this brand's live hostname. */
 export function GoogleAnalytics() {

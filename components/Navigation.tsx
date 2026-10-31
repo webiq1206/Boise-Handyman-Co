@@ -345,11 +345,13 @@ function MarketingNavigation() {
         <div className="flex items-center gap-2">
           <a
             href={SITE_CONFIG.phoneHref}
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm border border-border text-foreground hover-elevate active-elevate-2"
+            className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-sm border border-border px-4 text-foreground hover-elevate active-elevate-2"
             aria-label={`Call ${SITE_CONFIG.phone}`}
             data-testid="button-call-mobile"
           >
-            <Phone className="h-5 w-5" strokeWidth={1.5} />
+            {/* C7: a bar action carries a visible label, not an icon alone. */}
+            <Phone className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
+            <span>Call</span>
           </a>
           <NavEstimateButton
             variant="brand"

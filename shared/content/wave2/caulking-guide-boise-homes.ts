@@ -7,9 +7,9 @@ import type { BlogPostData } from '../../blogContent';
 export const caulkingGuideBoiseHomes: BlogPostData = {
   slug: 'caulking-guide-boise-homes',
   title: 'The Caulking Guide for Boise Homes: What, Where, and How Often',
-  seoTitle: 'Caulking Guide for Boise Homes: Where & How Often',
+  seoTitle: 'Caulking Guide for Boise Homes',
   metaDescription:
-    'Where Boise homes need caulk, which type goes where, and how often freeze-thaw makes you redo it. The full sealing map, plus when to have a pro run the bead.',
+    'Caulking guide for Boise homes: where caulk fails first, which type goes where, how often freeze-thaw makes you redo it, and when to call a pro.',
   excerpt:
     'Caulk is the cheapest material in your house doing the most important job. A room-by-room and joint-by-joint map of what to seal, with what, and how often in this climate.',
   category: 'Home Maintenance',

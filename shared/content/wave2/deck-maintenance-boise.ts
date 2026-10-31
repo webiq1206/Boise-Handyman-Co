@@ -3,9 +3,9 @@ import type { BlogPostData } from '../../blogContent';
 export const deckMaintenanceBoise: BlogPostData = {
   slug: 'deck-maintenance-boise',
   title: 'Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck',
-  seoTitle: 'Deck Maintenance in Boise: Annual Care Guide',
+  seoTitle: 'Deck Maintenance in Boise: Annual Care',
   metaDescription:
-    'Boise sun and freeze-thaw cycles are hard on decks. The annual inspection, cleaning, sealing, and repair rhythm that prevents rot, plus what deck repairs cost.',
+    'Deck maintenance in Boise: the annual inspection, cleaning, sealing and repair rhythm that prevents rot in sun and freeze-thaw, plus deck repair costs.',
   excerpt:
     'High-desert sun cooks deck finishes and winter freeze-thaw pries at every fastener. Here is the annual maintenance rhythm that keeps a Treasure Valley deck safe and solid.',
   category: 'Exterior & Outdoor',

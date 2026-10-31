@@ -40,16 +40,19 @@ export const metadata: Metadata = withBrandPageMetadata((buildPageMetadata({
   path: '/guides',
   titleOverride: 'Home Repair & Maintenance Guides | Boise Handyman Co',
   descriptionOverride:
-    'In-depth Treasure Valley home repair guides: what small repairs cost, how to hire a handyman, seasonal maintenance, smart small upgrades, and exterior care.',
+    'In-depth Treasure Valley home repair guides: what small repairs cost, how to hire a handyman, seasonal maintenance, small upgrades and exterior care.',
 })), "/guides");
 
 const PILLAR_TYPES = new Set(['hub-pillar', 'master']);
 
 export default function GuidesIndexPage() {
   const pillarGuides = GUIDE_PAGES.filter((g) => PILLAR_TYPES.has(g.guideType));
-  const locationGuides = GUIDE_PAGES.filter(
-    (g) => g.guideType === 'location' || g.guideType === 'neighborhood',
-  );
+  // Seven pillars: one featured across the row, then 3x2. Eight city guides
+  // as 4x2 and three neighborhood guides as 3x1. As one grid of eleven they
+  // ended in two stretched half-width cards; seven ended in a lone centred one.
+  const [featuredGuide, ...otherPillars] = pillarGuides;
+  const cityGuides = GUIDE_PAGES.filter((g) => g.guideType === 'location');
+  const neighborhoodGuides = GUIDE_PAGES.filter((g) => g.guideType === 'neighborhood');
   const sortedHubs = [...CONTENT_HUBS].sort((a, b) => a.priorityTier - b.priorityTier);
 
   const webPageSchema = generateWebPageSchema({
@@ -102,8 +105,34 @@ export default function GuidesIndexPage() {
           <h2 className="text-sm font-normal uppercase tracking-wider text-muted-foreground mb-6">
             Cornerstone guides
           </h2>
-          <div className="ed-cards-3 gap-6">
-            {pillarGuides.map((guide) => (
+          {featuredGuide && (
+            <MarketingCard padding="none" className="mb-6 grid overflow-hidden md:grid-cols-2">
+              <div className="relative aspect-[16/9] overflow-hidden md:aspect-auto md:min-h-[320px]">
+                <Image
+                  src={getBlogHeroImage(featuredGuide.slug, featuredGuide.heroImage)}
+                  alt={getBlogImageAlt(featuredGuide.slug)}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover img-brand-grade"
+                />
+              </div>
+              <div className="p-6 md:p-8 flex flex-col">
+                <BookOpen className="h-5 w-5 text-accent-legible mb-3" />
+                <h3 className="font-normal text-xl mb-2">{featuredGuide.title}</h3>
+                <p className="text-sm text-muted-foreground flex-1 mb-3">{featuredGuide.excerpt}</p>
+                <GuideCardStats guide={featuredGuide} />
+                <Link
+                  href={guidePath(featuredGuide.slug)}
+                  className="inline-flex items-center text-sm text-accent-legible hover:underline"
+                >
+                  Read guide
+                  <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </div>
+            </MarketingCard>
+          )}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {otherPillars.map((guide) => (
               <MarketingCard key={guide.slug} padding="none" className="flex flex-col h-full overflow-hidden">
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image
@@ -134,10 +163,46 @@ export default function GuidesIndexPage() {
 
         <div className="container px-4 max-w-6xl mx-auto mb-16">
           <h2 className="text-sm font-normal uppercase tracking-wider text-muted-foreground mb-6">
-            City &amp; neighborhood guides
+            City guides
           </h2>
-          <div className="ed-cards-3 gap-4">
-            {locationGuides.map((guide) => (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {cityGuides.map((guide) => (
+              <MarketingCard key={guide.slug} padding="none" className="flex flex-col h-full overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={getBlogHeroImage(guide.slug, guide.heroImage)}
+                    alt={getBlogImageAlt(guide.slug)}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 25vw"
+                    className="object-cover img-brand-grade"
+                  />
+                </div>
+                <div className="p-5 flex flex-col flex-1">
+                  <MapPin className="h-4 w-4 text-accent-legible mb-2" />
+                  <h3 className="font-normal text-base mb-1">{guide.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
+                    {guide.excerpt}
+                  </p>
+                  <GuideCardStats guide={guide} />
+                  <Link
+                    href={guidePath(guide.slug)}
+                    className="mt-auto text-sm text-accent-legible hover:underline inline-flex items-center"
+                  >
+                    Read
+                    <ArrowRight className="ml-1 h-3 w-3" />
+                  </Link>
+                </div>
+              </MarketingCard>
+            ))}
+          </div>
+        </div>
+
+        <div className="container px-4 max-w-6xl mx-auto mb-16">
+          <h2 className="text-sm font-normal uppercase tracking-wider text-muted-foreground mb-6">
+            Neighborhood guides
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {neighborhoodGuides.map((guide) => (
               <MarketingCard key={guide.slug} padding="none" className="flex flex-col h-full overflow-hidden">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
@@ -172,12 +237,17 @@ export default function GuidesIndexPage() {
           <h2 className="text-sm font-normal uppercase tracking-wider text-muted-foreground mb-6">
             Browse by topic
           </h2>
-          <div className="ed-cards-3 gap-4">
+          {/* Five topics as a ruled list: as cards they ran 3 + 2 stretched. */}
+          <ul className="border-t" style={{ borderColor: 'var(--ed-line)' }}>
             {sortedHubs.map((hub) => (
-              <MarketingCard key={hub.hubSlug} className="p-5">
-                <h3 className="font-normal mb-1">{hub.title}</h3>
-                <p className="text-sm text-muted-foreground mb-3">{hub.description}</p>
-                <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
+              <li
+                key={hub.hubSlug}
+                className="grid gap-2 border-b py-5 lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_auto] lg:items-baseline lg:gap-8"
+                style={{ borderColor: 'var(--ed-line)' }}
+              >
+                <h3 className="font-normal">{hub.title}</h3>
+                <p className="text-sm text-muted-foreground">{hub.description}</p>
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm lg:justify-end">
                   <Link
                     href={guidePath(hub.pillarSlug)}
                     className="text-accent-legible hover:underline inline-flex items-center"
@@ -192,9 +262,9 @@ export default function GuidesIndexPage() {
                     Related articles
                   </Link>
                 </div>
-              </MarketingCard>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </Section>
 

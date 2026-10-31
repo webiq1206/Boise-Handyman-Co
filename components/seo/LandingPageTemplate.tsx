@@ -32,6 +32,11 @@ interface BreadcrumbItem {
 
 interface LandingPageTemplateProps {
   paidService?: "drywall-repair" | "home-maintenance";
+  /**
+   * Paid-traffic page (lib/adLandingPaths.ts): keep the owner's call-first
+   * hero. A paidService page is always call-first.
+   */
+  callFirst?: boolean;
   h1: string;
   speakableSummary: string;
   overview: string;
@@ -149,6 +154,7 @@ function sectionId(heading: string): string {
 
 export function LandingPageTemplate({
   paidService,
+  callFirst: callFirstProp = false,
   h1,
   speakableSummary,
   overview,
@@ -183,6 +189,7 @@ export function LandingPageTemplate({
   const breatherAlt = altForImage(breatherImage) ?? '';
   const processAlt = altForImage(processImage) ?? '';
   const showTimelineBelow = !!timeline && !costGuidance;
+  const callFirst = callFirstProp || !!paidService;
 
   return (
     <div className={`flex flex-col ${paidService === 'home-maintenance' ? styles.maintenance : ''}`}>
@@ -194,6 +201,9 @@ export function LandingPageTemplate({
             <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>{eyebrow}</p>
           )}
           <h1 className="ed-display ed-statement-display text-inverse-foreground">{paidService === 'home-maintenance' ? 'Home maintenance in Boise' : h1}</h1>
+          {callFirst ? <>
+          {/* Paid-traffic pages (lib/adLandingPaths.ts) keep the owner's
+              call-first hero exactly as set on 19 and 27 October 2026. */}
           {paidService ? <>
             <p className="mt-4 text-base">{paidService === 'drywall-repair' ? 'Have damaged drywall? Call Boise Handyman Co to discuss the repair, or send a description.' : 'Caulking, weatherproofing and the upkeep on your list. Call Boise Handyman Co to discuss what needs attention.'}</p>
             <LandingContactActions formId="service-inquiry" formLabel={paidService === 'drywall-repair' ? 'Describe the Damage' : 'Send Your Maintenance List'} />
@@ -218,6 +228,34 @@ export function LandingPageTemplate({
               <a href="/#consult">{CTA_SECONDARY}</a>
             </Button>
           </div>
+          {planningFrom && (
+            <p className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-inverse-foreground/80">
+              <span className="ed-eyebrow !mb-0" style={{ color: 'rgb(255 255 255 / 0.72)' }}>Planning from</span>
+              <span className="brc-display-num text-inverse-foreground text-[1.5rem] leading-none">{planningFrom}</span>
+              <span className="ed-small text-inverse-foreground/70">Send photos for an upfront written quote</span>
+            </p>
+          )}
+          </>}
+          </> : <>
+          {/* Every other service, city and area page: one filled primary
+              ("Send your list and photos") directly under the heading, so it
+              is in the first screen at every size, and the phone as a text
+              link beneath it, as on the RE-10 hero. */}
+          <div className="mt-6 [&>*]:w-full sm:[&>*]:w-auto">
+            <ConsultCTA variant="brand" data-testid="button-primary-service-hero" trackingLocation="landing_hero">
+              {CTA_PRIMARY} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </ConsultCTA>
+          </div>
+          <a
+            href={SITE_CONFIG.phoneHref}
+            className="re10-phone mt-3 text-base text-inverse-foreground"
+            data-testid="link-call-service-hero"
+          >
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Prefer to talk? Call {SITE_CONFIG.phone}
+          </a>
+          <p className="text-sm text-inverse-foreground/80">Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM</p>
+          <p className="mt-8 max-w-[60ch] text-base md:text-lg leading-relaxed text-inverse-foreground/95">{overview}</p>
           {planningFrom && (
             <p className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-inverse-foreground/80">
               <span className="ed-eyebrow !mb-0" style={{ color: 'rgb(255 255 255 / 0.72)' }}>Planning from</span>

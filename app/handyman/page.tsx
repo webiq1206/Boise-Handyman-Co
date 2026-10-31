@@ -17,8 +17,8 @@ import Image from "next/image";
  * must not compete with the indexed homepage and service pages.
  */
 const PATH = "/handyman";
-const TITLE = `Boise Handyman for Repairs, Installs & Upkeep | ${SITE_CONFIG.name}`;
-const DESCRIPTION = `Drywall, doors and trim, caulking, minor plumbing and electrical, and mounting across Boise and the Treasure Valley. Call or text ${SITE_CONFIG.phone} for an upfront written quote.`;
+const TITLE = `Boise Handyman for Repairs and Installs | ${SITE_CONFIG.name}`;
+const DESCRIPTION = `Boise handyman for drywall, doors and trim, caulking, minor plumbing and electrical, and mounting across the Treasure Valley, with a written quote first.`;
 const HOURS = "Call or text Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM (Mountain).";
 
 const HERO_IMAGE = "/family/handyman-hero-door-hinge-branded.webp";

@@ -5,7 +5,7 @@ export const howToPatchDrywall: BlogPostData = {
   title: 'How to Patch Drywall Like a Pro (and When to Call One)',
   seoTitle: 'How to Patch Drywall Like a Pro',
   metaDescription:
-    'Nail pops to fist-sized holes: the right patch method for each size, why texture matching is the hard part, and what pros charge in Boise. Make the repair disappear.',
+    'How to patch drywall, from nail pops to fist-sized holes: the right method for each size, why texture matching is hard, and what Boise pros charge.',
   excerpt:
     'Anyone can fill a hole. Making the wall look like nothing happened is a different skill, and the difference is feathering, texture, and knowing which patch method fits which damage.',
   category: 'Repairs & Fixes',

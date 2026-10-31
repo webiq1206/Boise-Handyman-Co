@@ -3,7 +3,7 @@ import type { BlogPostData } from '../../blogContent';
 export const diyVsHiringAHandyman: BlogPostData = {
   slug: 'diy-vs-hiring-a-handyman',
   title: 'DIY vs Hiring a Handyman: When Each Actually Makes Sense',
-  seoTitle: 'DIY vs Hiring a Handyman: An Honest Framework',
+  seoTitle: 'DIY vs Hiring a Handyman: How to Decide',
   metaDescription:
     'Some repairs are perfect DIY; others punish beginners. An honest framework for the DIY vs handyman call, job by job, plus what hiring out costs in Boise.',
   excerpt:

@@ -3,9 +3,9 @@ import type { GuidePageData } from '../../guideContent';
 export const firstTimeHomeownerRepairHandbook: GuidePageData = {
   slug: 'first-time-homeowner-repair-handbook',
   title: "The First-Time Homeowner's Repair Handbook",
-  seoTitle: "First-Time Homeowner's Repair Handbook: Boise",
+  seoTitle: 'First-Time Homeowner Repair Handbook',
   metaDescription:
-    'A calm guide to your first years of home repairs: what breaks first, what to DIY, what to call a pro for, the tools worth owning, and what counts as urgent.',
+    'First-time homeowner repair handbook: what breaks first, what to DIY, what to call a pro for, the tools worth owning, and what counts as urgent.',
   excerpt:
     'Everything nobody tells you at closing: which things break first, which fixes are safely yours, which belong to a pro, the short list of tools worth owning, and how to tell a Tuesday problem from a right-now problem.',
   hubSlug: 'repairs-and-fixes',

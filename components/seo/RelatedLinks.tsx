@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { CITIES, SERVICES } from '@/shared/contentData';
+import { isCityServiceNoindex } from '@/lib/page-metadata';
 import { areaPath, cityServicePath, servicePath } from '@/lib/seo-routes';
 
 interface RelatedLinksProps {
@@ -72,8 +73,18 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
             Handyman services in {city?.name}
           </h2>
           <div className="ed-grid-balance grid sm:grid-cols-2 gap-4">
+            {/* Indexed city pages get the link; a noindexed combination points
+                at the service page instead, so the grid stays whole without
+                spending a link on a page that cannot rank. */}
             {SERVICES.map((service) => (
-              <Link key={service.slug} href={cityServicePath(service.slug, citySlug)}>
+              <Link
+                key={service.slug}
+                href={
+                  isCityServiceNoindex(service.slug, citySlug)
+                    ? servicePath(service.slug)
+                    : cityServicePath(service.slug, citySlug)
+                }
+              >
                 <div className="ed-card ed-card-link h-full">
                   <h3 className="ed-h4">{service.name}</h3>
                   <p className="ed-body mt-2 text-[0.875rem]">{service.shortDescription}</p>

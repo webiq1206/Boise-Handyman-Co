@@ -236,15 +236,28 @@ const HUB_REDIRECTS = {
  * city is preserved across the redirect by next.config.js.
  */
 const SERVICE_SLUG_REDIRECTS = {
-  // Remodel-era slugs whose intent a handyman can partly serve.
-  'aging-in-place': 'mounting-assembly',
-  'aging-in-place-remodeling': 'mounting-assembly',
-  'outdoor-living': 'fence-deck-gutter-repair',
-  'outdoor-living-spaces': 'fence-deck-gutter-repair',
+  // Build intent landing on repair; tolerable for a deck or patio search.
   'decks-patios': 'fence-deck-gutter-repair',
-  'basement-finishing': 'drywall-repair',
-  'basement-remodel': 'drywall-repair',
-  'basement-remodeling': 'drywall-repair',
+};
+
+/**
+ * Remodel-era service slugs whose intent belongs to Boise Remodeling Co, the
+ * family company that actually does the work. These used to land on weakly
+ * related handyman pages (aging in place on TV mounting, a basement finish on
+ * drywall patching, an outdoor-living build on fence repair), which is a soft
+ * 404 with a 301 status. Each destination was checked to exist as a service
+ * page on boiseremodeling.co. The base URL and every /:city child go to that
+ * service page: remodeling's city pages do not cover every city this site
+ * serves, and one hop to a page that exists beats a city match that might not.
+ */
+const SIBLING_SERVICE_REDIRECTS = {
+  'aging-in-place': 'https://boiseremodeling.co/services/aging-in-place',
+  'aging-in-place-remodeling': 'https://boiseremodeling.co/services/aging-in-place',
+  'basement-finishing': 'https://boiseremodeling.co/services/basement-remodel',
+  'basement-remodel': 'https://boiseremodeling.co/services/basement-remodel',
+  'basement-remodeling': 'https://boiseremodeling.co/services/basement-remodel',
+  'outdoor-living': 'https://boiseremodeling.co/services/outdoor-living',
+  'outdoor-living-spaces': 'https://boiseremodeling.co/services/outdoor-living',
 };
 
 /**
@@ -286,5 +299,6 @@ module.exports = {
   GUIDE_REDIRECTS,
   HUB_REDIRECTS,
   SERVICE_SLUG_REDIRECTS,
+  SIBLING_SERVICE_REDIRECTS,
   SERVICE_INDEX_REDIRECTS,
 };
