@@ -164,10 +164,12 @@ export function getAreaImageSet(citySlug: string): LandingImageSet {
   const hero = CITY_HERO_IMAGES[citySlug] ?? SITE_IMAGES.hero;
   const rotation = SERVICE_ROTATION["home-maintenance"];
   const i = Math.max(0, CITY_SLUGS.indexOf(citySlug as (typeof CITY_SLUGS)[number]));
+  // The rotation holds four images, so the old (i + 4) offset handed back the
+  // breather photo again and area pages showed one caulking shot three times.
   return {
     hero,
     breather: rotation[i % rotation.length],
-    process: rotation[(i + 4) % rotation.length],
+    process: rotation[(i + 2) % rotation.length],
   };
 }
 
