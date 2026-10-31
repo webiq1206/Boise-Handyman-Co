@@ -7,6 +7,7 @@ import {schemaTime} from './schemaTime';
 import { BUSINESS_INFO, getBaseUrl } from './seo';
 import { SERVICES } from '@/shared/contentData';
 import { SITE_CONFIG, handymanServiceSentence } from '@/shared/siteConfig';
+import { P5_SOCIAL } from '@/shared/gbpProfile';
 
 interface SchemaContext {
   '@context': string;
@@ -45,6 +46,9 @@ export const P5_PARENT_ORGANIZATION = {
   '@id': P5_ORG_ID,
   name: 'P5 Home Co',
   url: P5_ORIGIN,
+  // The owner's only social profile is P5 Home Co's Facebook page, so it is
+  // asserted here on the parent and kept out of this brand's own sameAs.
+  sameAs: [P5_SOCIAL.facebook],
 } as const;
 
 // Organization logo for knowledge-panel / rich-result use. The approved seal on
@@ -213,7 +217,7 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
         },
       })),
     },
-    sameAs: BUSINESS_INFO.sameAs,
+    ...(BUSINESS_INFO.sameAs.length ? { sameAs: BUSINESS_INFO.sameAs } : {}),
   };
 }
 
@@ -347,7 +351,7 @@ export function generateOrganizationSchema(): SchemaContext {
       'tile and grout repair',
       'home maintenance and punch-list work',
     ],
-    sameAs: BUSINESS_INFO.sameAs,
+    ...(BUSINESS_INFO.sameAs.length ? { sameAs: BUSINESS_INFO.sameAs } : {}),
   };
 }
 
