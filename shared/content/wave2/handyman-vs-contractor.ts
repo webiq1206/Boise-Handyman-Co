@@ -5,7 +5,7 @@ export const handymanVsContractor: BlogPostData = {
   title: 'Handyman vs Contractor: Which Does Your Job Need?',
   seoTitle: 'Handyman vs Contractor: Which to Hire',
   metaDescription:
-    'When a handyman is the right call, when a job needs a licensed contractor, and how to tell in Idaho. A job-by-job guide with the gray areas explained. Get the right pro the first time.',
+    'Handyman vs contractor in Idaho: when a handyman is the right call, when a job needs a licensed contractor, and how to tell, job by job.',
   excerpt:
     'The line between handyman work and contractor work is about job size, permits, and specialty licensing, not skill. Here is where the line sits in Idaho, job by job.',
   category: 'Costs & Hiring',

@@ -5,7 +5,7 @@ export const whyHandymanQuotesVary: BlogPostData = {
   title: 'Why Handyman Quotes Vary So Much',
   seoTitle: 'Why Handyman Quotes Vary So Much',
   metaDescription:
-    'Three quotes on the same repair can differ by 3x. Here are the legitimate reasons, the warning signs, and how to compare handyman quotes fairly before you book.',
+    'Why handyman quotes vary: three quotes on one repair can differ by 3x. The legitimate reasons, the warning signs, and how to compare quotes fairly.',
   excerpt:
     'A 3x spread between quotes on the same small repair is common and usually explainable. The explanation is almost never that one handyman is simply cheaper.',
   category: 'Costs & Hiring',

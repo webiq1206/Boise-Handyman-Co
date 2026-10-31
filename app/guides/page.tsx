@@ -40,7 +40,7 @@ export const metadata: Metadata = withBrandPageMetadata((buildPageMetadata({
   path: '/guides',
   titleOverride: 'Home Repair & Maintenance Guides | Boise Handyman Co',
   descriptionOverride:
-    'In-depth Treasure Valley home repair guides: what small repairs cost, how to hire a handyman, seasonal maintenance, smart small upgrades, and exterior care.',
+    'In-depth Treasure Valley home repair guides: what small repairs cost, how to hire a handyman, seasonal maintenance, small upgrades and exterior care.',
 })), "/guides");
 
 const PILLAR_TYPES = new Set(['hub-pillar', 'master']);

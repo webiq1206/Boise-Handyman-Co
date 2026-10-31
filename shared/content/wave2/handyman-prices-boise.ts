@@ -7,7 +7,7 @@ import type { BlogPostData } from '../../blogContent';
 export const handymanPricesBoise: BlogPostData = {
   slug: 'handyman-prices-boise',
   title: 'What a Handyman Costs in Boise (2026)',
-  seoTitle: 'Handyman Prices in Boise: Rates & Costs (2026)',
+  seoTitle: 'Handyman Prices in Boise (2026 Rates)',
   metaDescription:
     'Treasure Valley handyman rates typically run $60 to $120 per hour, with common repairs from $145 to $400. See how pricing works and get an upfront quote.',
   excerpt:

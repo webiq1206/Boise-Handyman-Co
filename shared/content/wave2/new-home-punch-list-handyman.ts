@@ -3,9 +3,9 @@ import type { BlogPostData } from '../../blogContent';
 export const newHomePunchListHandyman: BlogPostData = {
   slug: 'new-home-punch-list-handyman',
   title: 'New-Home Punch List: What a Handyman Fixes After You Move In',
-  seoTitle: 'New-Home Punch List: What a Handyman Fixes',
+  seoTitle: 'New-Home Punch List: Handyman Fixes',
   metaDescription:
-    'Nail pops, sticking doors, cracked caulk: what to expect in a new home, what stays on builder warranty, and what a handyman knocks out in one visit. Plan your list.',
+    'New-home punch list: nail pops, sticking doors and cracked caulk, what stays on builder warranty, and what a handyman knocks out in one visit.',
   excerpt:
     'New homes can develop a punch list in year one. Some tasks belong to the builder warranty; other repairs need a scope review and agreed visit plan. Knowing which is which helps you plan the next step.',
   category: 'Home Maintenance',

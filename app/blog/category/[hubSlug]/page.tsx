@@ -45,19 +45,10 @@ export async function generateMetadata(
   const posts = BLOG_POSTS.filter((p) => p.hubSlug === params.hubSlug);
   const indexable = isCategoryHubIndexable(params.hubSlug, posts.length);
   const title = `${hub.title} Articles`;
-  // Benefit-led, unique per hub (uses the hub's own description) and long enough
-  // to earn the click, instead of the old formulaic 60-char template.
-  const countPhrase = posts.length >= 3 ? `${posts.length} in-depth articles` : 'Expert articles';
-  const rawDescription =
-    `${hub.description} ${countPhrase} on ${hub.title.toLowerCase()} for homeowners in Boise, Meridian, Eagle, Nampa and across the Treasure Valley.`.replace(
-      /\s+/g,
-      ' ',
-    );
-  // Trim to ~158 chars on a word boundary so descriptions never truncate mid-word.
-  const description =
-    rawDescription.length <= 158
-      ? rawDescription
-      : rawDescription.slice(0, 158).replace(/\s+\S*$/, '') + '…';
+  // The hub's own authored description, written to fit 155 characters. The old
+  // version appended a post count and then cut the result, which shipped
+  // descriptions ending "...licensed trade instead. 16…".
+  const description = hub.description;
   const heroImage = getHubHeroImage(params.hubSlug);
   const imageUrl = getAbsoluteImageUrl(heroImage, getBaseUrl());
 

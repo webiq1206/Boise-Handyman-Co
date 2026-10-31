@@ -3,9 +3,9 @@ import type { BlogPostData } from '../../blogContent';
 export const fenceRepairTreasureValley: BlogPostData = {
   slug: 'fence-repair-treasure-valley',
   title: 'Fence Repair in the Treasure Valley: Posts, Panels, and Gates',
-  seoTitle: 'Fence Repair in the Treasure Valley: A Guide',
+  seoTitle: 'Fence Repair in the Treasure Valley',
   metaDescription:
-    'Why Boise-area fences lean, rot, and sag, how post, panel, and gate repairs work, repair-vs-replace math, and local cost ranges. Fix the fence before the next windstorm.',
+    'Fence repair in the Treasure Valley: why fences lean, rot and sag, how post, panel and gate repairs work, repair-versus-replace math and local costs.',
   excerpt:
     'Treasure Valley fences fight wind, sun, irrigation, and clay soil, and they lose in predictable places. Most of those losses are repairable for a fraction of replacement.',
   category: 'Exterior & Outdoor',

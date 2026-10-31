@@ -3,9 +3,9 @@ import type { BlogPostData } from '../../blogContent';
 export const questionsToAskAHandyman: BlogPostData = {
   slug: 'questions-to-ask-a-handyman',
   title: 'Questions to Ask a Handyman Before You Book',
-  seoTitle: 'Questions to Ask a Handyman Before Booking',
+  seoTitle: 'Questions to Ask a Handyman: Checklist',
   metaDescription:
-    'The questions that actually reveal how a handyman works: pricing, insurance, scope limits, scheduling, and warranty, with good and bad answers for each. Ask before you book.',
+    'Questions to ask a handyman before you book: pricing, insurance, scope limits, scheduling and warranty, with good and bad answers to each one.',
   excerpt:
     'Most handyman screening questions get a rehearsed yes. These ones force specifics, and each comes with what a good answer sounds like and what a bad one sounds like.',
   category: 'Costs & Hiring',

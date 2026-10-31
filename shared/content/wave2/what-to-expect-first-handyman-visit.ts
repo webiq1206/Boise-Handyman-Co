@@ -5,7 +5,7 @@ export const whatToExpectFirstHandymanVisit: BlogPostData = {
   title: 'What to Expect at Your First Handyman Visit',
   seoTitle: 'What to Expect at a First Handyman Visit',
   metaDescription:
-    'How a first handyman visit works: what to have ready, how quoting happens, what gets fixed same-day, and how payment works. Walk in prepared and get more fixed per trip.',
+    'What to expect at a first handyman visit: what to have ready, how quoting works, what gets fixed the same day and how payment works.',
   excerpt:
     'A first handyman visit follows a predictable shape: a walkthrough, a written quote, and in many cases the work itself, same day. Here is how to get the most out of it.',
   category: 'Costs & Hiring',

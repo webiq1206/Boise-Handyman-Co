@@ -540,7 +540,7 @@ const PLACES: PlaceGuide[] = [
     county: 'ada',
     guideType: 'neighborhood',
     title: 'Handyman Services in Hidden Springs',
-    seoTitle: 'Handyman Services in Hidden Springs, Idaho',
+    seoTitle: 'Handyman Services in Hidden Springs, ID',
     metaDescription:
       'Handyman services in Hidden Springs: repairs matched to community standards, maintenance for homes entering their third decade, and flat upfront pricing.',
     excerpt:

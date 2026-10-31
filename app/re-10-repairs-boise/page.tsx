@@ -43,13 +43,14 @@ const PATH = "/re-10-repairs-boise";
  * Google truncates around 60 - so the words after the pipe were being written
  * for nobody. Primary term front-loaded, one secondary term, brand last.
  */
-// 57 characters including the brand.
+// 54 characters including the brand. This page owns its metadata: there is no
+// COPY override in lib/brand-page-metadata.ts for this path any more.
 const TITLE_WITH_BRAND = "RE-10 and Inspection Repairs Boise | Boise Handyman Co";
 // The social/OG variant does not carry the brand, which the card shows anyway.
 const TITLE = "RE-10 and Inspection Repairs in Boise";
-// 154 characters, benefit-led, ends on the action.
+// 144 characters, keyword first, benefit-led, ends on the deliverable.
 const DESCRIPTION =
-  fitDescription("Upload your RE-10 to Boise Handyman Co. Confirm the list, get a written quote before work starts, and receive completion photos for the file.");
+  fitDescription("RE-10 repairs in Boise: upload your RE-10, confirm the list, get a written quote before work starts, and receive completion photos for the file.");
 
 export const metadata: Metadata = withBrandPageMetadata(({
   title: { absolute: TITLE_WITH_BRAND },
@@ -109,9 +110,9 @@ export default function Re10RepairsPage() {
             <p className="ed-eyebrow">For agents, buyers and sellers</p>
             <h1>Upload your <em>RE-10</em> and get a written quote.</h1>
             <p>
-              This is Boise Handyman Co&apos;s RE-10 page. Upload the RE-10 and inspection pages,
-              confirm the list with us, and we reply with one written price before work starts.
-              There is no on-screen price.
+              An RE-10 is the Idaho inspection response form: the repairs a buyer asks the seller
+              to make before closing. Upload it with the inspection pages, confirm the list with
+              us, and we reply with one written price before work starts.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 mt-4">
               <Button variant="brand" asChild>

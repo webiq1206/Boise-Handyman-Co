@@ -3,9 +3,9 @@ import type { BlogPostData } from '../../blogContent';
 export const preparingYourBoiseHomeForWinter: BlogPostData = {
   slug: 'preparing-your-boise-home-for-winter',
   title: 'Preparing Your Boise Home for Winter: The Checklist That Matters',
-  seoTitle: 'Winterizing Your Boise Home: Practical Checklist',
+  seoTitle: 'Winterizing Your Boise Home: Checklist',
   metaDescription:
-    'Freeze-proof hose bibs, seal drafts, clear gutters, service doors: the fall checklist that prevents Boise winter damage. Book one visit and be done by November.',
+    'Winterizing your Boise home: freeze-proof hose bibs, seal drafts, clear gutters and service doors with the fall checklist that prevents winter damage.',
   excerpt:
     'Boise winters are not brutal, but they freeze pipes, find every gap you did not caulk, and turn clogged gutters into ice dams. Here is the fall checklist that actually prevents damage.',
   category: 'Home Maintenance',

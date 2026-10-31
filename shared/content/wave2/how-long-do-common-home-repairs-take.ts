@@ -5,7 +5,7 @@ export const howLongDoCommonHomeRepairsTake: BlogPostData = {
   title: 'How Long Do Common Home Repairs Take?',
   seoTitle: 'How Long Common Home Repairs Take',
   metaDescription:
-    'Realistic time estimates for common repairs: drywall patches, faucet swaps, toilet fixes, ceiling fans, doors, fences and more. Know the hours before you book the visit.',
+    'How long common home repairs take: realistic times for drywall patches, faucet swaps, toilet fixes, ceiling fans, doors and fences, before you book.',
   excerpt:
     'Most handyman repairs take one to three hours, and the ones that take longer are longer for reasons you can see coming. Here are honest time ranges, job by job.',
   category: 'Repairs & Fixes',

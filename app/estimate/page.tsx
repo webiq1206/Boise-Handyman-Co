@@ -13,7 +13,7 @@ import { fitDescription } from '@/lib/page-metadata';
 
 const TITLE = "Send your list and photos";
 const DESCRIPTION =
-  fitDescription("Need repairs in Boise or the Treasure Valley? Send your task list and photos. Boise Handyman Co confirms the scope and replies with a written quote before work starts.");
+  fitDescription("Send your Treasure Valley repair list and photos. Boise Handyman Co confirms the scope and replies with a written quote before work starts.");
 
 export const metadata: Metadata = withBrandPageMetadata(({
   title: { absolute: `${TITLE} | ${SITE_CONFIG.name}` },

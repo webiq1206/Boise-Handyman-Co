@@ -23,7 +23,6 @@ const COPY:Record<string,Record<string,Copy>>={
   "/guides/boise-home-repair-cost-guide":{title:"Boise Home Repair Costs (2026)",description:"Compare planning costs for common Boise home repairs, installations and maintenance. See how labor, materials and a combined repair list affect your quote."},
   "/blog/drywall-repair-cost-boise":{title:"Boise Drywall Repair Costs (2026)",description:"Review Boise drywall repair costs for holes, cracks, texture matching and paint. Learn what affects the price and how to describe your repair for a quote."},
   "/blog/what-small-home-repairs-cost-boise":{title:"Small Home Repair Costs in Boise",description:"Explore Boise small-repair budgets for drywall, doors, fixtures and maintenance. Plan your task list and understand labor, materials and visit costs."},
-  "/re-10-repairs-boise":{title:"RE-10 Inspection Repairs in Boise",description:"Get help with RE-10 and inspection repair lists in Boise and the Treasure Valley. Share the report and closing deadline for a clear scope and repair estimate."},
   '/':{title:'Handyman & Home Repairs in Boise, ID',description:'Get help with repairs, installations and home maintenance in Boise and the Treasure Valley. Describe your project or send a repair list for an estimate.'},
   '/services':{title:'Handyman Repair & Installation Services',description:'Explore drywall repair, painting, carpentry, mounting and maintenance services in Boise and the Treasure Valley. Send your repair list to our local team.'},
   '/about':{title:'About Our Boise Handyman Team',description:'Learn how Boise Handyman Co handles Treasure Valley home repairs and installations, with clear project scopes, scheduling and attention to small jobs.'},
@@ -102,6 +101,34 @@ function resolveDocumentTitle(meta:Metadata,overrideTitle?:string):{document:Met
  const plain=original.includes(brand.name)?fitAbsoluteTitle(original):fitAbsoluteTitle(`${original}${BRAND_SUFFIX}`);
  return {document:meta.title,plain};
 }
+/** The plain title before any fitting: what the page asked to ship. */
+function requestedTitle(meta:Metadata,overrideTitle?:string):string{
+ if(overrideTitle)return `${overrideTitle}${BRAND_SUFFIX}`.replace(/\s+/g,' ').trim();
+ const original=titleText(meta).replace(/\s+/g,' ').trim();
+ return original.includes(brand.name)?original:`${original}${BRAND_SUFFIX}`;
+}
+/**
+ * Every title or description this fitter would have to cut. A cut lands
+ * mid-phrase ("How to Hire a Handyman in the Treasure"), so a page that needs
+ * one is a content defect to fix by hand, not something to trim silently.
+ */
+export function metadataFitIssues(meta:Metadata,routeHint?:string):string[]{
+ if(routeHint==='__layout__')return [];
+ const override=COPY[brand.id]?.[pagePath(meta,routeHint)];
+ const issues:string[]=[];
+ if(typeof meta.title==='string'||override?.title||(meta.title&&typeof meta.title==='object'&&'absolute' in meta.title)){
+  const title=requestedTitle(meta,override?.title);
+  if(title.length>TITLE_LIMIT)issues.push(`title is ${title.length} characters (limit ${TITLE_LIMIT}): "${title}"`);
+ }
+ const rawDescription=override?.description||(typeof meta.description==='string'?meta.description:undefined);
+ const description=rawDescription?.replace(/\s+/g,' ').trim();
+ if(description&&description.length>DESCRIPTION_LIMIT)issues.push(`description is ${description.length} characters (limit ${DESCRIPTION_LIMIT}): "${description}"`);
+ return issues;
+}
+/** Production builds (and the prebuild verifier) refuse to cut metadata. */
+function strictMetadataFit():boolean{
+ return process.env.NEXT_PHASE==='phase-production-build'||process.env.BRAND_METADATA_STRICT==='1';
+}
 function pagePath(meta:Metadata,hint?:string):string{
  const canonical=meta.alternates?.canonical;
  const value=typeof canonical==='string'?canonical:canonical instanceof URL?canonical.toString():canonical&&typeof canonical==='object'&&'url' in canonical?String(canonical.url):'';
@@ -109,6 +136,13 @@ function pagePath(meta:Metadata,hint?:string):string{
  return hint&&!hint.includes('[')&&hint!=='__layout__'?(hint.replace(/\/$/,'')||'/'):'';
 }
 export function withBrandPageMetadata(meta:Metadata,routeHint?:string):Metadata{
+ if(strictMetadataFit()){
+  const issues=metadataFitIssues(meta,routeHint);
+  if(issues.length){
+   const where=pagePath(meta,routeHint)||routeHint||'(unknown route)';
+   throw new Error(`[metadata-fit] ${where}: ${issues.join('; ')}. Rewrite it by hand to fit; the fitter no longer cuts mid-phrase.`);
+  }
+ }
  const override=routeHint==='__layout__'?undefined:COPY[brand.id]?.[pagePath(meta,routeHint)];
  const resolved=resolveDocumentTitle(meta,override?.title);
  const title=resolved.plain;

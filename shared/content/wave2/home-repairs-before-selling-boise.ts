@@ -3,9 +3,9 @@ import type { BlogPostData } from '../../blogContent';
 export const homeRepairsBeforeSellingBoise: BlogPostData = {
   slug: 'home-repairs-before-selling-boise',
   title: 'Home Repairs Worth Making Before Selling Your Boise House',
-  seoTitle: 'Home Repairs to Make Before Selling in Boise',
+  seoTitle: 'Home Repairs Before Selling in Boise',
   metaDescription:
-    'Which small repairs pay off before listing a Boise home, which to skip, and how to clear a buyer inspection punch list fast. Fix the right things before the photos.',
+    'Home repairs before selling in Boise: which small fixes pay off before listing, which to skip, and how to clear a buyer inspection punch list fast.',
   excerpt:
     'Before listing, small repairs punch far above their weight: they clean up photos, calm inspections, and remove negotiation ammunition. Here is what to fix and what to skip.',
   category: 'Repairs & Fixes',

@@ -3,9 +3,9 @@ import type { BlogPostData } from '../../blogContent';
 export const fixingSqueakyFloorsAndStickingDoors: BlogPostData = {
   slug: 'fixing-squeaky-floors-and-sticking-doors',
   title: 'Fixing Squeaky Floors and Sticking Doors in Boise Homes',
-  seoTitle: 'Fix Squeaky Floors & Sticking Doors: Causes & Costs',
+  seoTitle: 'Fix Squeaky Floors and Sticking Doors',
   metaDescription:
-    'Squeaks are loose fasteners; sticking doors are hinges, swelling, or settling. What causes both in Boise homes, what fixes cost, and when to book the repair.',
+    'Fix squeaky floors and sticking doors: squeaks are loose fasteners, sticking is hinges, swelling or settling. Causes in Boise homes and what fixes cost.',
   excerpt:
     'The two most common annoyances in any Treasure Valley house are a floor that announces you and a door that fights back. Both are usually fast, inexpensive fixes. Here is what is going on.',
   category: 'Repairs & Fixes',

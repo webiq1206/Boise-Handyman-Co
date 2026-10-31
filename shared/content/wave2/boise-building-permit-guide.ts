@@ -3,7 +3,7 @@ import type { BlogPostData } from '../../blogContent';
 export const boiseBuildingPermitGuide: BlogPostData = {
   slug: 'boise-building-permit-guide',
   title: 'Do Home Repairs Need a Permit in Boise? A Practical Guide',
-  seoTitle: 'Boise Permit Guide: Which Home Repairs Need One',
+  seoTitle: 'Boise Repair Permits: What Needs One',
   metaDescription:
     'Most Boise home repairs need no permit: painting, drywall, trim, fixture swaps. See which small jobs do, which do not, and get yours fixed the right way.',
   excerpt:

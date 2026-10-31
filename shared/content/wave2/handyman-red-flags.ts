@@ -5,7 +5,7 @@ export const handymanRedFlags: BlogPostData = {
   title: 'Handyman Red Flags: How to Avoid Hiring the Wrong One',
   seoTitle: 'Handyman Red Flags to Watch For',
   metaDescription:
-    'Warning signs before you hire a handyman: cash-only demands, no written quote, no insurance, vague scope, and vanishing acts. Know what each one predicts before you book.',
+    'Handyman red flags to spot before you hire: cash-only demands, no written quote, no insurance, vague scope and vanishing acts, and what each predicts.',
   excerpt:
     'Every warning sign in hiring a handyman predicts a specific later problem. Here is what each one actually means, before you book and once the work starts.',
   category: 'Costs & Hiring',

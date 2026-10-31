@@ -18,7 +18,7 @@ export const metadata: Metadata = withBrandPageMetadata((buildPageMetadata({
   path: '/resources',
   titleOverride: 'Home Repair & Maintenance Resources | Boise Handyman Co',
   descriptionOverride:
-    'Free PDF checklists and visual guides for Treasure Valley homeowners: seasonal maintenance checklist, repair priority worksheet, and the repair permit guide.',
+    'Free PDF checklists and visual guides for Treasure Valley homeowners: a seasonal maintenance checklist, a repair priority worksheet and a permit guide.',
 })), "/resources");
 
 export default function ResourcesIndexPage() {

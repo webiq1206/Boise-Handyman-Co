@@ -21,7 +21,7 @@ const PERMIT_FLOW_DESCRIPTION =
 export const metadata: Metadata = withBrandPageMetadata((buildPageMetadata({
   kind: 'blog',
   path: '/resources/ada-canyon-permit-flow',
-  titleOverride: 'When Does a Home Repair Need a Permit? Ada & Canyon County | Boise Handyman Co',
+  titleOverride: 'Home Repair Permits: Ada & Canyon County | Boise Handyman Co',
   descriptionOverride: PERMIT_FLOW_DESCRIPTION,
 })), "/resources/ada-canyon-permit-flow");
 

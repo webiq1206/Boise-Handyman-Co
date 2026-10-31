@@ -3,9 +3,9 @@ import type { GuidePageData } from '../../guideContent';
 export const hireAHandymanTreasureValley: GuidePageData = {
   slug: 'hire-a-handyman-treasure-valley',
   title: 'How to Hire a Handyman in the Treasure Valley',
-  seoTitle: 'How to Hire a Handyman in the Treasure Valley',
+  seoTitle: 'How to Hire a Handyman in Boise, Idaho',
   metaDescription:
-    'How to find and vet a handyman in Boise, Meridian, Eagle, and Nampa: what to check, what to ask, how quotes should work, and the red flags to walk away from.',
+    'How to hire a handyman in Boise, Meridian, Eagle and Nampa: what to check, what to ask, how quotes should work, and the red flags to walk away from.',
   excerpt:
     'How to find someone good, check that they are who they say they are, get a quote that means something, and recognize the warning signs before they cost you money.',
   hubSlug: 'costs-and-hiring',

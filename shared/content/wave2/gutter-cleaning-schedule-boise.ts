@@ -5,7 +5,7 @@ export const gutterCleaningScheduleBoise: BlogPostData = {
   title: 'Gutter Cleaning Schedule for Boise Homes',
   seoTitle: 'Gutter Cleaning Schedule for Boise Homes',
   metaDescription:
-    'How often Boise gutters really need cleaning, why cottonwoods and ice dams set the schedule, warning signs, and local cost ranges. Get on the right schedule now.',
+    'Gutter cleaning schedule for Boise homes: how often gutters need it, why cottonwoods and ice dams set the timing, warning signs and local cost ranges.',
   excerpt:
     'Twice a year is the right baseline for Boise gutters, but cottonwoods, pines, and ice dams all rewrite the schedule. Here is how to set yours, and what neglect actually costs.',
   category: 'Home Maintenance',

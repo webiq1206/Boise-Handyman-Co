@@ -3,9 +3,9 @@ import type { BlogPostData } from '../../blogContent';
 export const tvMountingAndAnchoringGuide: BlogPostData = {
   slug: 'tv-mounting-and-anchoring-guide',
   title: 'TV Mounting and Anchoring Guide for Boise Homes',
-  seoTitle: 'TV Mounting & Anchoring Guide for Boise Homes',
+  seoTitle: 'TV Mounting and Anchoring Guide: Boise',
   metaDescription:
-    'Mount types, stud finding, drywall anchors that actually hold, cable hiding, and fireplace heights, plus when to call a pro. Get your TV on the wall safely.',
+    'TV mounting and anchoring guide: mount types, stud finding, drywall anchors that hold, cable hiding and fireplace heights, plus when to call a pro.',
   excerpt:
     'A TV mount fails at the wall, not at the bracket. Here is how to anchor into studs, what to do when the studs are in the wrong place, and which shortcuts drop televisions.',
   category: 'Installs & Upgrades',

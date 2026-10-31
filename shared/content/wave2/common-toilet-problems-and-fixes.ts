@@ -3,9 +3,9 @@ import type { BlogPostData } from '../../blogContent';
 export const commonToiletProblemsAndFixes: BlogPostData = {
   slug: 'common-toilet-problems-and-fixes',
   title: 'Fixing Common Toilet Problems: Running, Rocking, and Leaks',
-  seoTitle: 'Fixing Common Toilet Problems: A Practical Guide',
+  seoTitle: 'Common Toilet Problems and Fixes',
   metaDescription:
-    'Running toilets, phantom flushes, weak flushes, rocking bases, and leaks: what causes each, what the fix costs in Boise, and when to stop DIYing. Diagnose yours here.',
+    'Common toilet problems and fixes for running toilets, phantom and weak flushes, rocking bases and leaks: the causes, Boise costs and when to stop DIYing.',
   excerpt:
     'Nearly every toilet complaint traces to five causes, and four of them are cheap. Here is how to tell which one you have, and which one is quietly rotting your floor.',
   category: 'Repairs & Fixes',
