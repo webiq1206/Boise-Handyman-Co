@@ -31,6 +31,8 @@ export function HandymanServicesAnswer() {
       <p className="f-answer-links">
         <a href="/contact">Send your repair list and photos</a>
         <a href="/re-10-repairs-boise">Inspection-related repairs</a>
+        {/* Moved here from the hero in Phase 3: the hero keeps two actions. */}
+        <a href="#how-we-build">See how it works</a>
       </p>
       <ul>
         {SERVICES.map((service) => (
