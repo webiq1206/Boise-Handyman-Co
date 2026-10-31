@@ -84,19 +84,18 @@ export const GBP_LINKS = {
  * where a wrong URL actively misidentifies the business to search engines, so
  * they must point at profiles that genuinely belong to the company.
  *
- * [NEEDS: confirm social profile URLs for Boise Handyman] - these still use
- * the legacy `boiseremodeling` handles. If the profiles are renamed as part of
- * the rebrand, update both URLs here and nowhere else - the footer and schema
- * both read from this.
+ * Boise Handyman Co has none yet. The owner's only profile, P5 Home Co's
+ * Facebook page, is in P5_SOCIAL below and is asserted on the parent node.
  */
 /**
  * Profiles that must never render here. Boise Handyman Co has no social or
  * Google profile of its own (owner, 31 October 2026); the only ones are P5
  * Home Co's. The boiseremodeling handles never existed as this company's, so
  * an env value naming one is dropped rather than published as a footer link
- * or a schema sameAs.
+ * or a schema sameAs. P5 Home Co's own Facebook page is dropped here too: it
+ * describes the parent, so it belongs on the parentOrganization node only.
  */
-const NOT_THIS_COMPANY = /(facebook|instagram)\.com\/boiseremodeling\b/i;
+const NOT_THIS_COMPANY = /(facebook|instagram)\.com\/(boiseremodeling\b|1228704823655951\b)/i;
 function ownProfile(url: string | undefined): string {
   const value = url?.trim() ?? '';
   return value && !NOT_THIS_COMPANY.test(value) ? value : '';
@@ -112,6 +111,16 @@ export const GBP_SOCIAL = {
    */
   facebook: ownProfile(process.env.NEXT_PUBLIC_FACEBOOK_URL),
   instagram: ownProfile(process.env.NEXT_PUBLIC_INSTAGRAM_URL),
+} as const;
+
+/**
+ * The owner's only social profile: P5 Home Co's Facebook page (confirmed via
+ * the Facebook API, 31 October 2026). It describes the parent company, so it
+ * feeds `sameAs` on the P5 parentOrganization node in lib/schema.ts and the
+ * footer link labelled "P5 Home Co on Facebook", never this brand's sameAs.
+ */
+export const P5_SOCIAL = {
+  facebook: 'https://www.facebook.com/1228704823655951',
 } as const;
 
 export const GBP_ATTRIBUTES = {
