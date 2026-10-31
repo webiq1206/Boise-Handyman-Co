@@ -78,7 +78,9 @@ export default function ResourcesIndexPage() {
         <h2 id="document-section-1" className="text-sm font-normal uppercase tracking-wider text-muted-foreground mb-4">
           PDF checklists &amp; worksheets
         </h2>
-        <div className="ed-grid-balance grid gap-4 sm:grid-cols-2 mb-12">
+        {/* One column, like a list: three PDFs in two columns left one card
+            stretched across the row on its own. */}
+        <div className="grid gap-4 mb-12">
           {pdfs.map((r) => (
             <MarketingCard key={r.id} className="p-5 flex flex-col h-full">
               <FileText className="h-5 w-5 text-accent-legible mb-3" />
@@ -99,7 +101,7 @@ export default function ResourcesIndexPage() {
         <h2 id="document-section-2" className="text-sm font-normal uppercase tracking-wider text-muted-foreground mb-4">
           Visual guides
         </h2>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4">
           {visuals.map((r) => (
             <MarketingCard key={r.id} className="p-5 flex flex-col h-full">
               <Workflow className="h-5 w-5 text-accent-legible mb-3" />

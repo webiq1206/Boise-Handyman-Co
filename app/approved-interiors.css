@@ -101,9 +101,10 @@
   position:static;
   width:100%
 }
+/* The full list at its natural height: a 240px scroll box clipped the fifth
+   link behind the CTA card that follows it, and C10/C9 forbid inner scroll
+   boxes for content. */
 .interior-document-index nav {
-  max-height:240px;
-  overflow:auto;
   border-bottom:1px solid #2c302f30
 }
 .interior-contact-grid {
@@ -380,13 +381,23 @@
   margin:0 0 20px;
   line-height:1.85
 }
+/* Eight services: 4x2 on wide screens and 2x4 below (three columns left
+   3+3+2 with an empty slot). */
 .approved-interior .interior-service-grid {
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:55px 30px;
   width:min(88%,1260px);
   margin:0 auto;
   padding:20px 0 85px
+}
+@media(min-width:1180px) {
+  .approved-interior .interior-service-grid {
+    grid-template-columns:repeat(4,minmax(0,1fr))
+  }
+  .approved-interior .interior-service-grid .interior-service-card h2 {
+    font-size:26px
+  }
 }
 .interior-service-card {
   display:block;
