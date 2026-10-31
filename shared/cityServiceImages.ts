@@ -95,7 +95,10 @@ export const CITY_HERO_IMAGES: Record<string, string> = {
   kuna: "/images/houses/kuna/kuna-single-storey-front.webp",
   star: "/images/areas/star.webp",
   middleton: "/images/areas/middleton.webp",
-  caldwell: "/images/areas/caldwell.webp",
+  // caldwell.webp reads as a Tuscan villa among vineyards, not an Idaho house,
+  // so the Caldwell card and area hero use the high-desert farmhouse (on
+  // sagebrush and open farmland) that no other city card shows.
+  caldwell: "/images/areas/kuna.webp",
 };
 
 /** The primary image for each service, used when no city applies. */

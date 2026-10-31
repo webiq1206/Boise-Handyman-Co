@@ -63,7 +63,7 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/areas/nampa.webp':
     'A modern single-story home with large windows and landscaping',
   '/images/areas/kuna.webp':
-    'A craftsman-style home with a covered front porch',
+    'A farmhouse-style home with a stone front and metal roof, bordered by sagebrush',
   '/images/areas/star.webp':
     'A house exterior with a front yard and trees',
   '/images/areas/middleton.webp':
