@@ -8,12 +8,14 @@ landingAreaBusinessSchema,
 landingBreadcrumbs,
 landingFAQSchema,
 } from '@/lib/landing-schema';
-import { buildPageMetadata } from '@/lib/page-metadata';
+import { buildPageMetadata,isCityServiceNoindex } from '@/lib/page-metadata';
 import { generateSpeakableSchema } from '@/lib/schema';
 import { CITY_SEO_DATA } from '@/lib/seo';
-import { areaPath,CITY_SLUGS,getCityBySlug } from '@/lib/seo-routes';
+import { areaPath,cityServicePath,CITY_SLUGS,getCityBySlug } from '@/lib/seo-routes';
 import { getAreaImageSet } from '@/shared/cityServiceImages';
+import { LOCATION_GUIDES } from '@/shared/content/locationGuides';
 import { getCountyLabel,SERVICES } from '@/shared/contentData';
+import { guidePath } from '@/shared/contentHubs';
 import { getGalleryProjectsForCity } from '@/shared/galleryData';
 import { getCityLocalSection } from '@/shared/cityPageFacts';
 import { areaPageFaqs,getAreaIntro } from '@/shared/seoContent';
@@ -59,17 +61,37 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
       ? 'Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell. Indian Creek Plaza is in Caldwell.'
       : undefined;
 
+  // Link only the city x service pages that are in the index. The others are
+  // noindex, follow, and linking them from every area page spent crawl budget
+  // on pages that cannot rank; the services index covers those services.
+  const indexedServices = SERVICES.filter((s) => !isCityServiceNoindex(s.slug, city.slug));
+  const cityGuide = LOCATION_GUIDES.find((g) => g.guideType === 'location' && g.linkedCities?.includes(city.slug));
+  const serviceIntro =
+    indexedServices.length === SERVICES.length
+      ? `Explore the specific services we offer in ${city.name} below. Each links to a dedicated ${city.name} page with local details, typical jobs, and pricing guidance.`
+      : indexedServices.length > 0
+        ? `The services below have a dedicated ${city.name} page with local details, typical jobs, and pricing guidance. Every other service we offer here is described on our services page.`
+        : `Every service we offer in ${city.name} is described on our services page, with the typical jobs and how pricing works.`;
+  const serviceLinks = [
+    ...indexedServices.map((s) => ({
+      label: `${s.name} in ${city.name}`,
+      href: cityServicePath(s.slug, city.slug),
+    })),
+    ...(indexedServices.length < SERVICES.length
+      ? [{ label: 'All handyman services', href: '/services' }]
+      : []),
+    ...(cityGuide ? [{ label: `${city.name} home repair guide`, href: guidePath(cityGuide.slug) }] : []),
+    { label: 'RE-10 inspection repairs for a home sale', href: '/re-10-repairs-boise' },
+  ];
+
   const sections: LandingSection[] = [
     {
       heading: `Handyman services in ${city.name}`,
       paragraphs: [
         `${SITE_CONFIG.name} is a locally owned handyman service covering ${city.name} and the surrounding ${county} area. Whether it is a drywall patch, a dripping faucet, a sticking door, a TV that needs mounting, or a whole to-do list, every job runs the same way: an upfront quote from photos, an agreed arrival time, and a one-trip fix whenever the work allows.`,
-        `Explore the specific services we offer in ${city.name} below. Each links to a dedicated ${city.name} page with local details, typical jobs, and pricing guidance.`,
+        serviceIntro,
       ],
-      links: SERVICES.map((s) => ({
-        label: `${s.name} in ${city.name}`,
-        href: `/services/${s.slug}/${city.slug}`,
-      })),
+      links: serviceLinks,
     },
     {
       heading: `Neighborhoods we serve in ${city.name}`,
