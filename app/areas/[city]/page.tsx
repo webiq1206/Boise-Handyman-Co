@@ -11,7 +11,7 @@ landingFAQSchema,
 import { buildPageMetadata,isCityServiceNoindex } from '@/lib/page-metadata';
 import { generateSpeakableSchema } from '@/lib/schema';
 import { CITY_SEO_DATA } from '@/lib/seo';
-import { areaPath,cityServicePath,CITY_SLUGS,getCityBySlug } from '@/lib/seo-routes';
+import { areaPath,cityServicePath,CITY_SLUGS,getCityBySlug,servicePath } from '@/lib/seo-routes';
 import { getAreaImageSet } from '@/shared/cityServiceImages';
 import { LOCATION_GUIDES } from '@/shared/content/locationGuides';
 import { getCountyLabel,SERVICES } from '@/shared/contentData';
@@ -63,26 +63,24 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
 
   // Link only the city x service pages that are in the index. The others are
   // noindex, follow, and linking them from every area page spent crawl budget
-  // on pages that cannot rank; the services index covers those services.
-  const indexedServices = SERVICES.filter((s) => !isCityServiceNoindex(s.slug, city.slug));
+  // on pages that cannot rank, so those services link to their service page.
+  const indexedCount = SERVICES.filter((s) => !isCityServiceNoindex(s.slug, city.slug)).length;
   const cityGuide = LOCATION_GUIDES.find((g) => g.guideType === 'location' && g.linkedCities?.includes(city.slug));
   const serviceIntro =
-    indexedServices.length === SERVICES.length
+    indexedCount === SERVICES.length
       ? `Explore the specific services we offer in ${city.name} below. Each links to a dedicated ${city.name} page with local details, typical jobs, and pricing guidance.`
-      : indexedServices.length > 0
-        ? `The services below have a dedicated ${city.name} page with local details, typical jobs, and pricing guidance. Every other service we offer here is described on our services page.`
-        : `Every service we offer in ${city.name} is described on our services page, with the typical jobs and how pricing works.`;
+      : `Explore the services we offer in ${city.name} below. Where a service has a dedicated ${city.name} page the link goes there; the others go to the service page, with the typical jobs and how pricing works.`;
   const serviceLinks = [
-    ...indexedServices.map((s) => ({
-      label: `${s.name} in ${city.name}`,
-      href: cityServicePath(s.slug, city.slug),
-    })),
-    ...(indexedServices.length < SERVICES.length
-      ? [{ label: 'All handyman services', href: '/services' }]
-      : []),
+    ...SERVICES.map((s) =>
+      isCityServiceNoindex(s.slug, city.slug)
+        ? { label: s.name, href: servicePath(s.slug) }
+        : { label: `${s.name} in ${city.name}`, href: cityServicePath(s.slug, city.slug) },
+    ),
     ...(cityGuide ? [{ label: `${city.name} home repair guide`, href: guidePath(cityGuide.slug) }] : []),
     { label: 'RE-10 inspection repairs for a home sale', href: '/re-10-repairs-boise' },
   ];
+  // The links sit in a two-column rule list; keep the count even.
+  if (serviceLinks.length % 2 === 1) serviceLinks.push({ label: 'All handyman services', href: '/services' });
 
   const sections: LandingSection[] = [
     {
