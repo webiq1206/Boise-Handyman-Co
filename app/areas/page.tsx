@@ -20,8 +20,11 @@ import { AREA_PAGE_FAQS } from "@/shared/seoContent";
 import { CITY_HERO_IMAGES } from "@/shared/cityServiceImages";
 import { CITIES,TREASURE_VALLEY_CITIES } from "@/shared/contentData";
 import { CTA_PRIMARY,CTA_SECONDARY } from "@/shared/ctaCopy";
-import { SITE_IMAGES } from "@/shared/siteImages";
 import { ArrowRight } from "lucide-react";
+
+// The door-hinge technician is the homepage hero. The areas index leads with a
+// house exterior instead, one that none of its nine city cards uses.
+const AREAS_HERO_IMAGE = "/images/handyman/hero-gutter-cleaning.webp";
 
 export const metadata = withBrandPageMetadata((buildPageMetadata({
   kind: "about",
@@ -50,8 +53,8 @@ export default function AreasHubPage() {
       <JsonLd data={schemas} />
       <div className="flex flex-col ">
         <PageHeroBand
-          imageSrc={SITE_IMAGES.hero}
-          imageAlt="A worker adjusting an interior door hinge with a screwdriver"
+          imageSrc={AREAS_HERO_IMAGE}
+          imageAlt="Autumn leaves filling a house gutter along a cream two-story home exterior"
         >
           <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Service Areas" }]} />
           <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Treasure Valley</p>

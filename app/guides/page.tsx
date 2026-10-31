@@ -79,8 +79,10 @@ export default function GuidesIndexPage() {
       />
 
       <PageHeroBand
-        imageSrc={getBlogHeroImage('boise-home-repair-cost-guide')}
-        imageAlt={getBlogImageAlt('boise-home-repair-cost-guide')}
+        /* Not the cost guide's own photo: that guide is the featured card just
+           below, and the estimate clipboard is also the warranty page hero. */
+        imageSrc="/images/handyman/punch-list-markers.webp"
+        imageAlt="Blue painter's tape marking touch-up spots on a wall and window trim"
       >
         <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Treasure Valley know-how</p>
         <h1 className="ed-display ed-statement-display text-inverse-foreground">
