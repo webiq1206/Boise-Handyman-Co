@@ -46,19 +46,3 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-
-/* scripts/verify-p5-mobile-seo.mjs (owner-approved, see commit 74ff0c4) requires the
-   bar to be gone within 150ms of scrolling back to the homepage hero. The shared hide
-   keeps it visible through its 300ms slide-out, so on this site it leaves at once and
-   still slides in as usual. The shared bar has no option for this; reported for the
-   source repository rather than changed in the synced file. */
-.approved-shell .fam-bar[data-family-bar][data-state='hidden'] {
-  transition: none;
-}
-
-/* P5 Home Co on Google sits under the contact list, set like its links. */
-.approved-shell .fam-footer[data-family-footer] .fam-footer-social a {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--touch-min, 44px);
-}

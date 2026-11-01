@@ -51,7 +51,8 @@ test('the P5 Home Co Google profile sits on the parent node, not this brand',asy
  delete process.env.NEXT_PUBLIC_GBP_URL;
  const {BUSINESS_INFO}=await import('../lib/seo.ts');
  assert.equal(BUSINESS_INFO.sameAs.some((url)=>/11ntl1t7dc/.test(url)),false);
- const footer=readFileSync('components/Footer.tsx','utf8');
- assert.match(footer,/href=\{P5_SOCIAL\.google\}/);
- assert.match(footer,/"P5 Home Co on Google"/);
+ // The shared footer renders it from lib/familyBrand.ts, right after the Facebook link.
+ const {FAMILY_BRAND}=await import('../lib/familyBrand.ts');
+ assert.deepEqual(FAMILY_BRAND.parentGoogle,{href:P5_GOOGLE,label:'P5 Home Co on Google'});
+ assert.equal(readFileSync('components/Footer.tsx','utf8').includes('link-footer-google'),false,'one Google link, from the shared footer');
 });
