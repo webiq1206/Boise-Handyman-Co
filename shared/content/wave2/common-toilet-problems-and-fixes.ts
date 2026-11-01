@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const commonToiletProblemsAndFixes: BlogPostData = {
   slug: 'common-toilet-problems-and-fixes',
-  title: 'Fixing Common Toilet Problems: Running, Rocking, and Leaks',
+  title: 'Fixing common toilet problems: running, rocking, and leaks',
   seoTitle: 'Common Toilet Problems and Fixes',
   metaDescription:
     'Common toilet problems and fixes for running toilets, phantom and weak flushes, rocking bases and leaks: the causes, Boise costs and when to stop DIYing.',
@@ -38,7 +38,7 @@ export const commonToiletProblemsAndFixes: BlogPostData = {
   relatedLinks: [
     { url: '/services/plumbing-repairs', anchor: 'Minor Plumbing Repairs' },
     { url: '/blog/replacing-faucets-and-fixtures', anchor: 'Replacing Faucets and Fixtures' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
     { url: '/blog/questions-to-ask-a-handyman', anchor: 'Questions to Ask a Handyman' },
     { url: '/contact', anchor: 'Contact' },

@@ -2,7 +2,7 @@ import type { GuidePageData } from '../../guideContent';
 
 export const boiseHomeMaintenanceGuide: GuidePageData = {
   slug: 'boise-home-maintenance-guide',
-  title: 'The Complete Boise Home Maintenance Guide',
+  title: 'The complete Boise home maintenance guide',
   seoTitle: 'Boise Home Maintenance Guide',
   metaDescription:
     'A season-by-season maintenance plan for Treasure Valley homes: what to check in spring, summer, fall, and winter, what to DIY, and what to hand to a pro.',
@@ -28,7 +28,7 @@ export const boiseHomeMaintenanceGuide: GuidePageData = {
   linkedServices: ['home-maintenance', 'fence-deck-gutter-repair', 'plumbing-repairs', 'painting-touch-ups'],
   linkedCities: ['boise', 'meridian', 'eagle', 'nampa'],
   relatedLinks: [
-    { url: '/guides/first-time-homeowner-repair-handbook', anchor: "The First-Time Homeowner's Repair Handbook" },
+    { url: '/guides/first-time-homeowner-repair-handbook', anchor: "The first-time homeowner's repair handbook" },
     { url: '/guides/treasure-valley-exterior-home-care-guide', anchor: 'Treasure Valley Exterior Home Care Guide' },
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
     { url: '/services/fence-deck-gutter-repair', anchor: 'Fence, Deck & Gutter Repair' },

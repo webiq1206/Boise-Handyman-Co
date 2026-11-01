@@ -20,7 +20,7 @@ for(const route of ['/','/contact']){
 }
 for(const route of ['/blog','/sitemap','/guides/boise-home-maintenance-guide','/blog/category/home-maintenance']){
  const html=readFileSync(`.next/server/app${route==='/'?'/index':route}.html`,'utf8');
- assert.match(html,/Energy-Saving Home Fixes for Boise Houses/);
+ assert.match(html,/Energy-Saving Home Fixes for Boise Houses/i);
  assert.doesNotMatch(html,/all of them fit in one handyman visit|Energy-Saving Fixes a Handyman Can Do in an Afternoon/);
 }
 for(const file of ['llms.txt','llms-full.txt'])assert.doesNotMatch(readFileSync(`public/${file}`,'utf8'),unsupported,file);

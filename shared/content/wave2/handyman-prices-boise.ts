@@ -44,7 +44,7 @@ export const handymanPricesBoise: BlogPostData = {
   ],
   relatedLinks: [
     { url: '/guides/boise-home-repair-cost-guide', anchor: 'The complete Boise home repair cost guide' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/blog/drywall-repair-cost-boise', anchor: 'Drywall Repair Cost in Boise' },
     { url: '/blog/who-supplies-materials-handyman-jobs', anchor: 'Who Supplies Materials on a Handyman Job' },
     { url: '/blog/diy-vs-hiring-a-handyman', anchor: 'DIY vs Hiring a Handyman' },

@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const fenceRepairTreasureValley: BlogPostData = {
   slug: 'fence-repair-treasure-valley',
-  title: 'Fence Repair in the Treasure Valley: Posts, Panels, and Gates',
+  title: 'Fence repair in the Treasure Valley: posts, panels, and gates',
   seoTitle: 'Fence Repair in the Treasure Valley',
   metaDescription:
     'Fence repair in the Treasure Valley: why fences lean, rot and sag, how post, panel and gate repairs work, repair-versus-replace math and local costs.',
@@ -39,7 +39,7 @@ export const fenceRepairTreasureValley: BlogPostData = {
     { url: '/services/fence-deck-gutter-repair', anchor: 'Fence, Deck & Gutter Repair' },
     { url: '/blog/gutter-cleaning-schedule-boise', anchor: 'Gutter Cleaning Schedule for Boise' },
     { url: '/services/carpentry-trim-repair', anchor: 'Carpentry & Trim Repair' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/services/painting-touch-ups', anchor: 'Interior & Exterior Painting' },
     { url: '/contact', anchor: 'Contact' },
   ],

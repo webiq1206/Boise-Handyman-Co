@@ -14,7 +14,7 @@ landingServiceSchema
 import { buildPageMetadata,isCityServiceNoindex } from '@/lib/page-metadata';
 import { generateSpeakableSchema } from '@/lib/schema';
 import { SERVICE_SLUGS,getServiceBySlug,servicePath } from '@/lib/seo-routes';
-import { CITIES } from '@/shared/contentData';
+import { CITIES, serviceHeading } from '@/shared/contentData';
 import { getFeaturedGalleryProject } from '@/shared/galleryData';
 import { SERVICE_SEO_CONTENT } from '@/shared/seoContent';
 import { getServiceImageSet } from '@/shared/serviceBackgrounds';
@@ -101,7 +101,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
         ]
       : []),
     {
-      heading: `${service.name} across the Treasure Valley`,
+      heading: `${serviceHeading(service.name)} across the Treasure Valley`,
       paragraphs: [
         `We provide ${serviceLC} throughout the Treasure Valley. The same upfront quotes apply everywhere in Ada and Canyon County, so where you live never inflates the price.`,
         `Choose a city below for local ${serviceLC} details, or send photos of the job for an upfront quote.`,
@@ -109,7 +109,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
       // Only city pages that are in the index (the sitemap's rule). A
       // noindexed combination cannot rank, so it does not get the link.
       links: CITIES.filter((c) => !isCityServiceNoindex(service.slug, c.slug)).map((c) => ({
-        label: `${service.name} in ${c.name}`,
+        label: `${serviceHeading(service.name)} in ${c.name}`,
         href: `/services/${service.slug}/${c.slug}`,
       })),
     },
@@ -137,7 +137,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
     landingBreadcrumbs([
       { name: 'Home', url: '/' },
       { name: 'Services', url: '/services' },
-      { name: service.name, url: path },
+      { name: serviceHeading(service.name), url: path },
     ]),
     landingServiceSchema(service.name, content.overview),
     landingFAQSchema(pageFaqs),
@@ -162,7 +162,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
         breadcrumbs={[
           { name: 'Home', href: '/' },
           { name: 'Services', href: '/services' },
-          { name: service.name },
+          { name: serviceHeading(service.name) },
         ]}
         benefits={content.benefits}
         inclusions={content.inclusions}

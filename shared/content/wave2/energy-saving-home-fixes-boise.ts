@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const energySavingHomeFixesBoise: BlogPostData = {
   slug: 'energy-saving-home-fixes-boise',
-  title: 'Energy-Saving Home Fixes for Boise Houses',
+  title: 'Energy-saving home fixes for Boise houses',
   seoTitle: 'Energy-Saving Home Fixes for Boise',
   metaDescription:
     'Weatherstripping, caulking, door sweeps, attic hatch insulation and other small fixes that cut Boise energy bills, and how to plan the work.',

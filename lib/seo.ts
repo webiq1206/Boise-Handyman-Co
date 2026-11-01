@@ -616,8 +616,9 @@ export const BUSINESS_INFO = {
   rating: 0,
   reviewCount: 0,
   yearlyServicesCompleted: 0,
-  // This brand has no social profile of its own. The owner's Facebook page
-  // belongs to P5 Home Co, so it sits on the parentOrganization node in
+  // This brand has no social or Google profile of its own. The owner's
+  // Facebook page and Google Business Profile belong to P5 Home Co, so they
+  // sit on the parentOrganization node in
   // lib/schema.ts, not here. GBP_SOCIAL stays the slot for a brand profile.
   sameAs: [
     GBP_SOCIAL.facebook,

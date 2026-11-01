@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const howToCompareHandymanQuotes: BlogPostData = {
   slug: 'how-to-compare-handyman-quotes',
-  title: 'How to Compare Handyman Quotes',
+  title: 'How to compare handyman quotes',
   seoTitle: 'How to Compare Handyman Quotes Fairly',
   metaDescription:
     'How to compare handyman quotes: same written scope, totals not rates, materials and trip fees surfaced, insurance verified, and the low bid questioned.',

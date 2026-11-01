@@ -24,7 +24,7 @@ export interface GuideResource {
 export const GUIDE_RESOURCES: Record<string, GuideResource> = {
   'maintenance-checklist': {
     id: 'maintenance-checklist',
-    title: 'Home Maintenance Checklist',
+    title: 'Home maintenance checklist',
     description:
       'Printable season-by-season checklist for Treasure Valley homes: fall freeze prep, spring damage audit, and the monthly five-minute water check.',
     kind: 'pdf',
@@ -33,7 +33,7 @@ export const GUIDE_RESOURCES: Record<string, GuideResource> = {
   },
   'repair-priority-worksheet': {
     id: 'repair-priority-worksheet',
-    title: 'Home Repair Priority Worksheet',
+    title: 'Home repair priority worksheet',
     description:
       'Walk your house and triage the list: what is urgent, what can wait, what to DIY, and what to hand to a pro, with typical cost ranges for each.',
     kind: 'pdf',
@@ -42,7 +42,7 @@ export const GUIDE_RESOURCES: Record<string, GuideResource> = {
   },
   'repair-permit-pdf': {
     id: 'repair-permit-pdf',
-    title: 'Home Repair Permit Guide',
+    title: 'Home repair permit guide',
     description:
       'One-page reference: which home repairs need a permit in Ada and Canyon County, which do not, and who to call to check before work starts.',
     kind: 'pdf',
@@ -51,7 +51,7 @@ export const GUIDE_RESOURCES: Record<string, GuideResource> = {
   },
   'ada-canyon-permit-flow': {
     id: 'ada-canyon-permit-flow',
-    title: 'Repair Permit Flow Infographic',
+    title: 'Repair permit flow infographic',
     description:
       'Visual walkthrough: when a home repair needs a permit in Ada vs Canyon County, and the path from application to final inspection.',
     kind: 'visual',

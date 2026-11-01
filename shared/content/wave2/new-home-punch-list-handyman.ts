@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const newHomePunchListHandyman: BlogPostData = {
   slug: 'new-home-punch-list-handyman',
-  title: 'New-Home Punch List: What a Handyman Fixes After You Move In',
+  title: 'New-home punch list: what a handyman fixes after you move in',
   seoTitle: 'New-Home Punch List: Handyman Fixes',
   metaDescription:
     'New-home punch list: nail pops, sticking doors and cracked caulk, what stays on builder warranty, and what a handyman knocks out in one visit.',

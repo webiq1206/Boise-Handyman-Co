@@ -55,3 +55,10 @@
 .approved-shell .fam-bar[data-family-bar][data-state='hidden'] {
   transition: none;
 }
+
+/* P5 Home Co on Google sits under the contact list, set like its links. */
+.approved-shell .fam-footer[data-family-footer] .fam-footer-social a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-min, 44px);
+}

@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const smallHomeUpgradeIdeasBoise: BlogPostData = {
   slug: 'small-home-upgrade-ideas-boise',
-  title: 'Small Home Upgrade Ideas That Refresh a Room in a Day',
+  title: 'Small home upgrade ideas that refresh a room in a day',
   seoTitle: 'Small Home Upgrade Ideas in Boise',
   metaDescription:
     'Small home upgrade ideas that change how a room feels in a day: lighting swaps, hardware, paint, floating shelves, bathroom refreshes and entry fixes.',

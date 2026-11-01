@@ -21,7 +21,7 @@ export default function StyleGuidePage() {
         <div className="container px-4 max-w-4xl">
           <PageHeader
             eyebrow="Internal reference"
-            title="Boise Handyman Co - Design System"
+            title="Boise Handyman Co - Design system"
             description="Tokens, typography, buttons, cards, and article styles for all marketing pages."
             align="left"
           />

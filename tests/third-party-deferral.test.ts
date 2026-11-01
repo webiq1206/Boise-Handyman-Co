@@ -1,9 +1,12 @@
 /**
- * Phase 5 performance rules, executed rather than grepped:
+ * Third-party timing rules, executed rather than grepped:
  *
- * - Meta Pixel and Microsoft Clarity request their network script only on the
- *   first pointerdown, keydown, scroll or touchstart, or 5 seconds after load.
- *   Their stubs exist at once, so PageView, Lead and Clarity calls queue and
+ * - Meta Pixel requests fbevents.js at the window load event, with no
+ *   interaction wait and no timeout (owner decision B, 1 November 2026: paid
+ *   Landing Page Views matter more than the blocking-time saving).
+ * - Microsoft Clarity requests its tag only on the first pointerdown, keydown,
+ *   scroll or touchstart, or 5 seconds after load.
+ * - Both stubs exist at once, so PageView, Lead and Clarity calls queue and
  *   reach the vendor script when it loads.
  * - Hero images get priority from the <img> the page renders, not a react-dom
  *   preload(), which travels in prefetched RSC payloads to every linking page.
@@ -52,7 +55,7 @@ function sandbox(readyState: 'loading' | 'interactive' | 'complete') {
   return { ctx, inserted, timers, fire, listeners };
 }
 
-test('both tags load after interaction and keep their stubs at hydration', async () => {
+test('both stubs run at hydration; the Clarity wait is first interaction or 5 seconds', async () => {
   const { metaProps, clarityProps } = await tags;
   assert.equal(metaProps.strategy, 'afterInteractive');
   assert.equal(clarityProps.strategy, 'afterInteractive');
@@ -60,21 +63,46 @@ test('both tags load after interaction and keep their stubs at hydration', async
   assert.deepEqual([...THIRD_PARTY_INTERACTION_EVENTS], ['pointerdown', 'keydown', 'scroll', 'touchstart']);
 });
 
+test('Meta: fbevents.js at the window load event, no interaction and no timer, queue intact', async () => {
+  const { metaCode } = await tags;
+  const s = sandbox('interactive');
+  vm.runInContext(metaCode, s.ctx);
+  assert.equal(s.inserted.length, 0, 'nothing requested before the load event');
+  const fbq = s.ctx.fbq as ((...a: unknown[]) => void) & { queue: unknown[][] };
+  assert.equal(typeof fbq, 'function');
+  const queued = Array.from(fbq.queue, (args) => Array.from(args).slice(0, 2).join(':'));
+  assert.deepEqual(queued, ['set:autoConfig', 'init:2461987544292871', 'track:PageView']);
+  fbq('track', 'Lead', { content_category: 'consultation_request' });
+  assert.equal(fbq.queue.length, 4, 'Lead queues before the script loads');
+  for (const type of THIRD_PARTY_INTERACTION_EVENTS) {
+    assert.equal(s.listeners.get(type)?.size ?? 0, 0, `no ${type} wait`);
+  }
+  s.fire('load');
+  assert.equal(s.inserted.length, 1, 'requested at load with no interaction');
+  assert.equal(s.inserted[0].src, 'https://connect.facebook.net/en_US/fbevents.js');
+  assert.equal(s.timers.length, 0, 'no timeout involved');
+  s.fire('pointerdown');
+  s.fire('scroll');
+  assert.equal(s.inserted.length, 1, 'interaction does not request it again');
+});
+
+test('Meta: requested at once when the page has already loaded', async () => {
+  const { metaCode } = await tags;
+  const s = sandbox('complete');
+  vm.runInContext(metaCode, s.ctx);
+  assert.equal(s.inserted.length, 1);
+  assert.equal(s.inserted[0].src, 'https://connect.facebook.net/en_US/fbevents.js');
+  assert.equal(s.timers.length, 0);
+});
+
 for (const event of THIRD_PARTY_INTERACTION_EVENTS) {
-  test(`Meta: nothing requested before ${event}, fbevents.js after it, queue intact`, async () => {
-    const { metaCode } = await tags;
+  test(`Clarity: nothing requested before ${event}, tag after it, loads once`, async () => {
+    const { clarityCode } = await tags;
     const s = sandbox('complete');
-    vm.runInContext(metaCode, s.ctx);
+    vm.runInContext(clarityCode, s.ctx);
     assert.equal(s.inserted.length, 0, 'no network script before interaction');
-    const fbq = s.ctx.fbq as ((...a: unknown[]) => void) & { queue: unknown[][] };
-    assert.equal(typeof fbq, 'function');
-    const queued = Array.from(fbq.queue, (args) => Array.from(args).slice(0, 2).join(":"));
-    assert.deepEqual(queued, ['set:autoConfig', 'init:2461987544292871', 'track:PageView']);
-    fbq('track', 'Lead', { content_category: 'consultation_request' });
-    assert.equal(fbq.queue.length, 4, 'Lead queues before the script loads');
     s.fire(event);
     assert.equal(s.inserted.length, 1);
-    assert.equal(s.inserted[0].src, 'https://connect.facebook.net/en_US/fbevents.js');
     s.fire('pointerdown');
     s.fire('scroll');
     s.timers.forEach((t) => t.fn());
@@ -97,9 +125,9 @@ test('Clarity: nothing requested before interaction, tag after keydown, calls qu
   assert.equal(s.inserted[0].src, 'https://www.clarity.ms/tag/y2aeap6n0p?ref=bwt');
 });
 
-test('with no interaction, both load on a timer armed at window load, not before', async () => {
-  const { metaCode, clarityCode } = await tags;
-  for (const code of [metaCode, clarityCode]) {
+test('with no interaction, Clarity loads on a timer armed at window load, not before', async () => {
+  const { clarityCode } = await tags;
+  for (const code of [clarityCode]) {
     const s = sandbox('interactive');
     vm.runInContext(code, s.ctx);
     assert.equal(s.timers.length, 0, 'timer waits for the load event');

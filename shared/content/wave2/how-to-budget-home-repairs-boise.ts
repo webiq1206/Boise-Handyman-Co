@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const howToBudgetHomeRepairsBoise: BlogPostData = {
   slug: 'how-to-budget-home-repairs-boise',
-  title: 'How to Budget a Home Repair Punch List in Boise',
+  title: 'How to budget a home repair punch list in Boise',
   seoTitle: 'Budgeting Home Repairs in Boise',
   metaDescription:
     'Turn nagging home repairs into a punch list with a realistic budget: market rates, batching, materials, and a sane priority order.',
@@ -35,7 +35,7 @@ export const howToBudgetHomeRepairsBoise: BlogPostData = {
   relatedLinks: [
     { url: '/blog/hourly-rate-vs-flat-rate-handyman', anchor: 'Hourly Rate vs Flat Rate Handyman Pricing' },
     { url: '/blog/how-long-do-common-home-repairs-take', anchor: 'How Long Common Home Repairs Take' },
-    { url: '/blog/how-to-compare-handyman-quotes', anchor: 'How to Compare Handyman Quotes' },
+    { url: '/blog/how-to-compare-handyman-quotes', anchor: 'How to compare handyman quotes' },
     { url: '/blog/seasonal-home-maintenance-checklist-boise', anchor: 'Seasonal Home Maintenance Checklist for Boise' },
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
     { url: '/contact', anchor: 'Contact' },

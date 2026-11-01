@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const adaVsCanyonCountyPermitTimelines: BlogPostData = {
   slug: 'ada-vs-canyon-county-permit-timelines',
-  title: 'Ada vs Canyon County: Permits for Small Home Projects',
+  title: 'Ada vs Canyon County: permits for small home projects',
   seoTitle: 'Ada vs Canyon County Permits: Small Jobs',
   metaDescription:
     'Most handyman-scale repairs need no permit in Ada or Canyon County, but a few small jobs do. See what differs by county and book the fix with confidence.',

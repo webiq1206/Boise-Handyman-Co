@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const deckMaintenanceBoise: BlogPostData = {
   slug: 'deck-maintenance-boise',
-  title: 'Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck',
+  title: 'Deck maintenance in Boise: the annual rhythm that saves your deck',
   seoTitle: 'Deck Maintenance in Boise: Annual Care',
   metaDescription:
     'Deck maintenance in Boise: the annual inspection, cleaning, sealing and repair rhythm that prevents rot in sun and freeze-thaw, plus deck repair costs.',
@@ -40,7 +40,7 @@ export const deckMaintenanceBoise: BlogPostData = {
     { url: '/services/fence-deck-gutter-repair', anchor: 'Fence, Deck & Gutter Repair' },
     { url: '/services/painting-touch-ups', anchor: 'Interior & Exterior Painting' },
     { url: '/blog/preparing-your-boise-home-for-winter', anchor: 'Preparing Your Boise Home for Winter' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/blog/home-maintenance-budget-idaho', anchor: 'Budgeting for Home Maintenance in Idaho' },
     { url: '/contact', anchor: 'Book a Deck Check' },
   ],

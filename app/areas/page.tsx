@@ -42,7 +42,7 @@ export default function AreasHubPage() {
     }),
     generateBreadcrumbSchema([
       { name: "Home", url: "/" },
-      { name: "Service Areas", url: "/areas" },
+      { name: "Service areas", url: "/areas" },
     ]),
     landingFAQSchema(AREA_PAGE_FAQS),
   ];
@@ -55,7 +55,7 @@ export default function AreasHubPage() {
           imageSrc={AREAS_HERO_IMAGE}
           imageAlt="Autumn leaves filling a house gutter along a cream two-story home exterior"
         >
-          <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Service Areas" }]} />
+          <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Service areas" }]} />
           <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Treasure Valley</p>
           <h1 className="ed-display ed-statement-display text-inverse-foreground">
             Treasure Valley service{" "}

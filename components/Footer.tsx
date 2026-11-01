@@ -1,5 +1,6 @@
 import { ContractorCredential } from "@/components/ContractorCredential";
 import { SiteFooter } from "@/components/family/SiteFooter";
+import { P5_SOCIAL } from "@/shared/gbpProfile";
 
 /**
  * Boise Handyman Co footer: the shared family SiteFooter, set up by
@@ -11,18 +12,30 @@ import { SiteFooter } from "@/components/family/SiteFooter";
  * Co's Facebook page (labelled for the parent, never this brand), plus the P5
  * Home Co family row.
  *
- * The registration line is this site's ContractorCredential rather than the
- * shared one-link line: the number stays outside the DOPL link
- * (tests/p5-contractor-registration.test.ts).
+ * Two lines ride the brand column (SiteFooter brandExtra) because the shared
+ * config has no slot for them:
+ * - P5 Home Co's Google Business Profile, the owner's one Google profile,
+ *   labelled for the parent like the Facebook link (owner decision A,
+ *   1 November 2026; tests/social-profiles.test.ts).
+ * - The registration line, this site's ContractorCredential rather than the
+ *   shared one-link line, so the number stays outside the DOPL link
+ *   (tests/p5-contractor-registration.test.ts).
  */
 export function Footer() {
   return (
     <SiteFooter
       hideRegistration
       brandExtra={
-        <p className="fam-footer-credential">
-          <ContractorCredential linkClassName="fam-footer-credential-link" />
-        </p>
+        <>
+          <p className="fam-footer-social">
+            <a href={P5_SOCIAL.google} rel="noopener" target="_blank" data-testid="link-footer-google">
+              {"P5 Home Co on Google"}
+            </a>
+          </p>
+          <p className="fam-footer-credential">
+            <ContractorCredential linkClassName="fam-footer-credential-link" />
+          </p>
+        </>
       }
     />
   );

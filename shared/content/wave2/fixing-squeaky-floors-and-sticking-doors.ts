@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const fixingSqueakyFloorsAndStickingDoors: BlogPostData = {
   slug: 'fixing-squeaky-floors-and-sticking-doors',
-  title: 'Fixing Squeaky Floors and Sticking Doors in Boise Homes',
+  title: 'Fixing squeaky floors and sticking doors in Boise homes',
   seoTitle: 'Fix Squeaky Floors and Sticking Doors',
   metaDescription:
     'Fix squeaky floors and sticking doors: squeaks are loose fasteners, sticking is hinges, swelling or settling. Causes in Boise homes and what fixes cost.',
@@ -39,7 +39,7 @@ export const fixingSqueakyFloorsAndStickingDoors: BlogPostData = {
   relatedLinks: [
     { url: '/services/carpentry-trim-repair', anchor: 'Carpentry & Trim Repair' },
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/blog/diy-vs-hiring-a-handyman', anchor: 'DIY vs Hiring a Handyman' },
     { url: '/blog/aging-in-place-home-design', anchor: 'Aging in Place: Small Home Modifications' },
     { url: '/contact', anchor: 'Book a Repair' },

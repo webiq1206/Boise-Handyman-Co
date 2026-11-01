@@ -155,7 +155,7 @@ export default function AboutPage() {
                   The Perkins family
                 </p>
                 <p className="mt-4 text-base md:text-lg text-inverse-foreground/85 leading-relaxed">
-                  It is run by Nick Perkins, a construction project manager with a bachelor&apos;s degree in Construction with an emphasis in Project Management, and more than a decade of work from small renovations to multimillion-dollar custom homes.
+                  Boise Handyman Co is run by Nick Perkins, a construction project manager with a bachelor&apos;s degree in Construction with an emphasis in Project Management, and more than a decade of work from small renovations to multimillion-dollar custom homes.
                 </p>
                 <p className="mt-4 text-base md:text-lg text-inverse-foreground/85 leading-relaxed">
                   He founded P5 in Colorado in 2020 and moved the family and company to the Treasure Valley in 2025. Read the full story on{' '}

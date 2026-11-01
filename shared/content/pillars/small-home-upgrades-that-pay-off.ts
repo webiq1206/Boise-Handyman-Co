@@ -2,7 +2,7 @@ import type { GuidePageData } from '../../guideContent';
 
 export const smallHomeUpgradesThatPayOff: GuidePageData = {
   slug: 'small-home-upgrades-that-pay-off',
-  title: 'Small Home Upgrades That Pay Off',
+  title: 'Small home upgrades that pay off',
   seoTitle: 'Small Home Upgrades That Pay Off',
   metaDescription:
     'Small home upgrades that pay off in a Boise home: paint, lighting, hardware, fans, shelving and sealing, ranked by payoff with realistic costs for each.',
@@ -33,7 +33,7 @@ export const smallHomeUpgradesThatPayOff: GuidePageData = {
     { url: '/services/mounting-assembly', anchor: 'Mounting & Assembly' },
     { url: '/services/electrical-repairs', anchor: 'Minor Electrical Repairs' },
     { url: '/services/carpentry-trim-repair', anchor: 'Carpentry & Trim Repair' },
-    { url: '/blog/category/installs-and-upgrades', anchor: 'Installs & Upgrades articles' },
+    { url: '/blog/category/installs-and-upgrades', anchor: 'Installs & upgrades articles' },
     { url: '/guides/boise-home-repair-cost-guide', anchor: 'Boise Home Repair Cost Guide' },
     { url: '/contact', anchor: 'Contact' },
   ],

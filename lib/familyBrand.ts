@@ -19,7 +19,7 @@ import {
   DOPL_LOOKUP_TITLE,
 } from '@/components/ContractorCredential';
 import { CONTENT_HUBS, guidePath } from '@/shared/contentHubs';
-import { CITIES, SERVICES } from '@/shared/contentData';
+import { CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
 import { CTA_QUOTE } from '@/shared/ctaCopy';
 import { P5_SOCIAL } from '@/shared/gbpProfile';
 import { PUBLIC_NAP_LINE, SITE_CONFIG } from '@/shared/siteConfig';
@@ -91,7 +91,8 @@ export const FAMILY_BRAND: FamilyBrand = {
       {
         title: 'Services',
         links: [
-          ...SERVICES.map((service) => ({ label: service.name, href: servicePath(service.slug) })),
+          // Sentence case with the same words (owner call C), as the old footer printed them.
+          ...SERVICES.map((service) => ({ label: serviceHeading(service.name), href: servicePath(service.slug) })),
           { label: 'All services', href: '/services' },
         ],
       },

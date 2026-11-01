@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const whyHandymanQuotesVary: BlogPostData = {
   slug: 'why-handyman-quotes-vary',
-  title: 'Why Handyman Quotes Vary So Much',
+  title: 'Why handyman quotes vary so much',
   seoTitle: 'Why Handyman Quotes Vary So Much',
   metaDescription:
     'Why handyman quotes vary: three quotes on one repair can differ by 3x. The legitimate reasons, the warning signs, and how to compare quotes fairly.',
@@ -36,7 +36,7 @@ export const whyHandymanQuotesVary: BlogPostData = {
     'Compare quotes by matching what each includes line by line, then decide. The cheapest complete quote often was not the cheapest number.',
   ],
   relatedLinks: [
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/blog/questions-to-ask-a-handyman', anchor: 'Questions to Ask a Handyman' },
     { url: '/services/drywall-repair', anchor: 'Drywall Repair & Patching' },
     { url: '/services/plumbing-repairs', anchor: 'Minor Plumbing Repairs' },

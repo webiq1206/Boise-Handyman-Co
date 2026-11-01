@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const questionsToAskAHandyman: BlogPostData = {
   slug: 'questions-to-ask-a-handyman',
-  title: 'Questions to Ask a Handyman Before You Book',
+  title: 'Questions to ask a handyman before you book',
   seoTitle: 'Questions to Ask a Handyman: Checklist',
   metaDescription:
     'Questions to ask a handyman before you book: pricing, insurance, scope limits, scheduling and warranty, with good and bad answers to each one.',
@@ -37,7 +37,7 @@ export const questionsToAskAHandyman: BlogPostData = {
   ],
   relatedLinks: [
     { url: '/blog/why-handyman-quotes-vary', anchor: 'Why Handyman Quotes Vary' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
     { url: '/services/electrical-repairs', anchor: 'Minor Electrical Repairs' },
     { url: '/services/carpentry-trim-repair', anchor: 'Carpentry & Trim Repair' },

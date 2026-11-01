@@ -6,7 +6,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const caulkingGuideBoiseHomes: BlogPostData = {
   slug: 'caulking-guide-boise-homes',
-  title: 'The Caulking Guide for Boise Homes: What, Where, and How Often',
+  title: 'The caulking guide for Boise homes: what, where, and how often',
   seoTitle: 'Caulking Guide for Boise Homes',
   metaDescription:
     'Caulking guide for Boise homes: where caulk fails first, which type goes where, how often freeze-thaw makes you redo it, and when to call a pro.',
@@ -45,7 +45,7 @@ export const caulkingGuideBoiseHomes: BlogPostData = {
     { url: '/blog/preparing-your-boise-home-for-winter', anchor: 'Preparing Your Boise Home for Winter' },
     { url: '/blog/home-maintenance-budget-idaho', anchor: 'Budgeting for Home Maintenance in Idaho' },
     { url: '/blog/diy-vs-hiring-a-handyman', anchor: 'DIY vs Hiring a Handyman' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/contact', anchor: 'Book a Sealing Visit' },
   ],
   faqs: [

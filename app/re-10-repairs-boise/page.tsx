@@ -94,7 +94,7 @@ export default function Re10RepairsPage() {
     }),
     generateBreadcrumbSchema([
       { name: "Home", url: "/" },
-      { name: "RE-10 Repairs", url: PATH },
+      { name: "RE-10 repairs", url: PATH },
     ]),
   ];
 
@@ -104,7 +104,7 @@ export default function Re10RepairsPage() {
       <Re10ContactTracking />
 
       <section className="re10-intro">
-        <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "RE-10 Repairs" }]} />
+        <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "RE-10 repairs" }]} />
         <div className="re10-intro-grid">
           <div>
             <p className="ed-eyebrow">For agents, buyers and sellers</p>
