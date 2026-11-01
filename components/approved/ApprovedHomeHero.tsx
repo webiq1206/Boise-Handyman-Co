@@ -1,5 +1,4 @@
 import { ArrowUpRight, Phone } from 'lucide-react';
-import { preload } from 'react-dom';
 import type { CSSProperties, ReactNode } from 'react';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { brands } from './family-content';
@@ -25,10 +24,13 @@ export function ApprovedFamilyFrame({ children }: { children: ReactNode }) {
  * the focal point on the technician and headroom above his hair); on phones it
  * runs full bleed behind the copy with a directional scrim. The rules live in
  * app/design-v2-compliance.css under "Phase 3 home hero".
+ *
+ * The photo loads at high priority from its own <img fetchPriority>, not a
+ * react-dom preload(): preloads ride along in prefetched RSC payloads, so any
+ * page linking home would otherwise fetch this hero as well.
  */
 export function ApprovedHomeHero() {
   const b = brands.handyman;
-  preload(b.hero, { as: 'image', fetchPriority: 'high' });
   return (
     <>
       <section className="f-hero">
