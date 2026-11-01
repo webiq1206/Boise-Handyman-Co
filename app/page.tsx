@@ -47,7 +47,8 @@ export default function HomePage() {
       {/* PAGE ORDER IS THE SALES CONVERSATION, IN THE ORDER A HOMEOWNER HAS IT.
           Phase 3 (template T1): about eight sections, each promise said once.
 
-          1. Hero (one paragraph, two actions) and its proof strip
+          1. Hero (family HeroPhoto: one support line, one primary, Call as a
+             text link) and its proof strip
           2. Services: the answer-first block and every service link
           3. Planning-range interactive proof (C14): a ballpark before contact
              (the gallery slot after it renders nothing until real work exists)
@@ -61,8 +62,10 @@ export default function HomePage() {
           tab explorer, "Pay for the fix", "Good work. A better experience."
           and "What your quote actually covers". */}
       <HomePageSchema />
+      {/* The family photo hero renders outside the legacy family frame so the
+          frame's heading overrides cannot restyle the shared HeroPhoto. */}
+      <ApprovedHomeHero />
       <ApprovedFamilyFrame>
-        <ApprovedHomeHero />
         <HandymanServicesAnswer />
       </ApprovedFamilyFrame>
       <HandymanPlanningRange />

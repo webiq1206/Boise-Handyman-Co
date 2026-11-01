@@ -1,6 +1,8 @@
-import { ArrowUpRight, Phone } from 'lucide-react';
 import type { CSSProperties, ReactNode } from 'react';
-import { SITE_CONFIG } from '@/shared/siteConfig';
+import { HeroPhoto } from '@/components/family/HeroPhoto';
+import { ProofStrip } from '@/components/family/ProofStrip';
+import { CONTRACTOR_REGISTRATION } from '@/components/ContractorCredential';
+import { FAMILY_BRAND } from '@/lib/familyBrand';
 import { brands } from './family-content';
 
 /** Keeps the approved family palette on the server so the hero is not inside a client component. */
@@ -14,63 +16,46 @@ export function ApprovedFamilyFrame({ children }: { children: ReactNode }) {
 }
 
 /**
- * Home hero rendered by the server: the approved HeroSplit variant. The image,
- * headline and one paragraph are the largest things in the first viewport, so
- * they stay out of the client bundle and out of any entrance animation.
+ * Homepage hero on the shared family HeroPhoto (Phase 2 family chrome).
  *
- * One paragraph and two actions: the filled primary ("Send your list and
- * photos") and Call as a text link. "See how it works" sits below the hero, in
- * the services answer. From 701px the photo fills the panel height (cover, with
- * the focal point on the technician and headroom above his hair); on phones it
- * runs full bleed behind the copy with a directional scrim. The rules live in
- * app/design-v2-compliance.css under "Phase 3 home hero".
+ * The technician photograph (branded jacket, real tools) runs full bleed with
+ * the directional scrim on the open wall to his left; the focal point keeps his
+ * complete head in frame from 320px to 1920px. Same eyebrow and H1 as before,
+ * two declaratives with the terracotta second line, one support line, one
+ * primary ("Send your list and photos" to /contact, where every other primary
+ * on the site goes) and Call as the text link. The proof strip under it carries
+ * the three facts the hero already published, nothing new.
  *
- * The photo loads at high priority from its own <img fetchPriority>, not a
- * react-dom preload(): preloads ride along in prefetched RSC payloads, so any
- * page linking home would otherwise fetch this hero as well.
+ * Server-rendered: HeroPhoto gives the photo fetchPriority="high" on its own
+ * img (no react-dom preload()), so the image and H1 are in the first HTML.
  */
 export function ApprovedHomeHero() {
   const b = brands.handyman;
   return (
     <>
-      <section className="f-hero">
-        <img
-          src={b.hero}
-          alt="Careful adjustment of an interior door hinge"
-          fetchPriority="high"
-          width="1600"
-          height="1000"
-          decoding="sync"
-        />
-        <div className="f-hero-shade" />
-        <div className="f-hero-copy">
-          <p className="f-eyebrow">{b.kicker}</p>
-          <h1>
-            Boise handyman.
-            <br />
-            <em>Your list, handled.</em>
-          </h1>
-          <p className="f-hero-intro">{b.intro}</p>
-          <div className="f-actions">
-            <a className="f-button" href="/contact" data-cta="primary" data-testid="button-hero-primary">
-              {b.action}
-              <ArrowUpRight size={18} aria-hidden="true" />
-            </a>
-            <a className="f-link f-hero-call" href={SITE_CONFIG.phoneHref} data-testid="button-call-hero">
-              <Phone size={18} aria-hidden="true" />
-              Call {SITE_CONFIG.phone}
-            </a>
-          </div>
-        </div>
-      </section>
-      <div className="f-proof">
-        {b.proof.map((p, i) => (
-          <div key={p}>
-            <span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            <p>{p}</p>
-          </div>
-        ))}
-      </div>
+      <HeroPhoto
+        image={{
+          src: b.hero,
+          width: 1280,
+          height: 720,
+          position: '66% 12%',
+          alt: 'Careful adjustment of an interior door hinge',
+        }}
+        eyebrow={b.kicker}
+        title="Boise handyman."
+        titleAccent="Your list, handled."
+        support="Skilled local help for the list that keeps growing."
+        primary={{ label: FAMILY_BRAND.cta.label, href: FAMILY_BRAND.cta.href }}
+        link={{ label: `Call ${FAMILY_BRAND.phone.display}`, href: FAMILY_BRAND.phone.telHref }}
+      />
+      {/* The three facts this hero already published: written quote, no trip fee, registration. */}
+      <ProofStrip
+        items={[
+          { label: 'Pricing', text: b.proof[0] },
+          { label: 'Travel', text: b.proof[1] },
+          { label: 'Registered', text: CONTRACTOR_REGISTRATION },
+        ]}
+      />
     </>
   );
 }
