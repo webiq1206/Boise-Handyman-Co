@@ -66,7 +66,11 @@ export default function BlogPage() {
         </Link>
       </PageHeroBand>
 
-      <BlogIndexClient />
+      <BlogIndexClient
+        posts={BLOG_POSTS.map(({ slug, title, excerpt, category, hubSlug, tags, publishedAt, thumbnail }) => ({
+          slug, title, excerpt, category, hubSlug, tags, publishedAt, thumbnail,
+        }))}
+      />
 
       <EstimatePromptBand
         eyebrow="Ready to fix it"

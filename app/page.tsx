@@ -1,7 +1,7 @@
 import { ApprovedHowItWorks, ApprovedServiceArea } from "@/components/approved/ApprovedHome";
 import { ApprovedFamilyFrame, ApprovedHomeHero } from "@/components/approved/ApprovedHomeHero";
 import { HandymanServicesAnswer } from "@/components/seo/HandymanServicesAnswer";
-import { ConsultationForm } from "@/components/ConsultationForm";
+import { LazyConsultationForm as ConsultationForm } from "@/components/LazyConsultationForm";
 import { QuoteFormAnchor } from "@/components/QuoteFormAnchor";
 import { FAQSection } from "@/components/FAQSection";
 import { MarketingCard } from "@/components/marketing/MarketingCard";

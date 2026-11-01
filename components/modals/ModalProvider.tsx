@@ -1,20 +1,26 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { ConsultationForm } from "@/components/ConsultationForm";
-import { EstimateCalculator } from "@/components/EstimateCalculator";
+import dynamic from "next/dynamic";
 import { requestHideMobileNavBar } from "@/lib/mobileNavBar";
 import { ModalsContext, type ModalType } from "./modalsContext";
 
+// The consult dialog and the estimator only render once a modal opens, so they
+// load on demand. Imported statically, this provider (mounted in the root
+// layout) put both, with the dialog primitives, react-hook-form, zod and the
+// estimate engines, into the JavaScript every page downloads and evaluates
+// before it is interactive.
+const ConsultDialog = dynamic(() => import("./ConsultDialog").then((m) => m.ConsultDialog));
+const EstimateCalculator = dynamic(() => import("@/components/EstimateCalculator").then((m) => m.EstimateCalculator));
+
 export function ModalProvider({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState<ModalType>(null);
+  // Once opened, the dialog stays mounted (closed) exactly as before, so its
+  // close animation and focus return behave as they always did.
+  const [consultMounted, setConsultMounted] = useState(false);
+  useEffect(() => {
+    if (open === "consult") setConsultMounted(true);
+  }, [open]);
 
   const openConsult = useCallback(() => setOpen("consult"), []);
   const openEstimate = useCallback(() => setOpen("estimate"), []);
@@ -32,19 +38,9 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     <ModalsContext.Provider value={{ openConsult, openEstimate, close }}>
       {children}
 
-      <Dialog open={open === "consult"} onOpenChange={(v) => !v && close()}>
-        <DialogContent className="max-w-lg w-[95vw] max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="font-sans font-light text-xl text-foreground">
-              Book a handyman visit
-            </DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground">
-              No obligation - tell us what needs doing and we&apos;ll reply with an upfront quote.
-            </DialogDescription>
-          </DialogHeader>
-          <ConsultationForm onRevise={() => setOpen("estimate")} showTrust headingLevel="h3" />
-        </DialogContent>
-      </Dialog>
+      {(consultMounted || open === "consult") && (
+        <ConsultDialog open={open === "consult"} onClose={close} onRevise={() => setOpen("estimate")} />
+      )}
 
       {/* The estimator is its own full-screen experience beneath the site
           header (not a dialog inside a dialog): it owns the screen with its

@@ -1,6 +1,6 @@
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
-import { Section } from "@/components/marketing";
+import { Section } from "@/components/marketing/Section";
 import { HOW_WE_BUILD_STEPS } from "@/shared/siteContent";
 import { SITE_IMAGES } from "@/shared/siteImages";
 import { GRAIN_URL } from "@/lib/grain";

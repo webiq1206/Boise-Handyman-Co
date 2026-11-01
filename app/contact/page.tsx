@@ -1,8 +1,8 @@
 import { InteriorEstimateLink,InteriorHero,InteriorPage } from '@/components/approved/InteriorLayout';
 import { BusinessPhoneContact } from '@/components/BusinessPhoneContact';
-import { ConsultationForm } from '@/components/ConsultationForm';
+import { LazyConsultationForm as ConsultationForm } from '@/components/LazyConsultationForm';
 import { QuoteFormAnchor } from '@/components/QuoteFormAnchor';
-import { Section } from '@/components/marketing';
+import { Section } from '@/components/marketing/Section';
 import { Hairline } from '@/components/marketing/Hairline';
 import { MarketingCard } from '@/components/marketing/MarketingCard';
 import { SectionHeader } from '@/components/marketing/SectionHeader';
