@@ -62,9 +62,12 @@ export const FAMILY_BRAND: FamilyBrand = {
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' },
   ],
-  // One label, one destination: the contact page with the repair-list wizard, where the
-  // homepage hero and every interior page already sent "Send your list and photos".
-  cta: { label: CTA_QUOTE, href: '/contact' },
+  // One label, one destination: the homepage request band (#consult) with the repair-list
+  // wizard. On the homepage it scrolls, as the old header and hero did; elsewhere it lands on
+  // the same form, as Remodeling sends every "Request a quote" to /#request. The owner's
+  // hash Back/Forward journeys (scripts/test-hash-history-browser.mjs) enter from this header
+  // link at 1440 and from the footer link below.
+  cta: { label: CTA_QUOTE, href: '/#consult' },
   phone: { display: SITE_CONFIG.phone, telHref: SITE_CONFIG.phoneHref, smsHref: SITE_CONFIG.phoneSmsHref },
   // The assistant opens from the menu tile and its own launcher (desktop).
   chat: { enabled: true, label: 'Chat', openEvent: 'p5:assistant-open' },
@@ -103,6 +106,8 @@ export const FAMILY_BRAND: FamilyBrand = {
           { label: 'Why choose us', href: '/#why-choose-us' },
           { label: 'How we work', href: '/#how-we-build' },
           { label: 'RE-10 repairs', href: '/re-10-repairs-boise' },
+          // The old footer CTAs: the homepage request band, kept for the hash history journeys.
+          { label: CTA_QUOTE, href: '/#consult' },
           { label: 'Contact', href: '/contact' },
         ],
       },

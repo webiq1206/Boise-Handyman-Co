@@ -24,7 +24,7 @@ import { SITE_TAGLINE } from '../shared/siteContent.ts';
 test('the brand config carries this site’s facts, one CTA and one destination', () => {
   assert.equal(FAMILY_BRAND.cta.label, 'Send your list and photos');
   assert.equal(FAMILY_BRAND.cta.label, CTA_QUOTE);
-  assert.equal(FAMILY_BRAND.cta.href, '/contact');
+  assert.equal(FAMILY_BRAND.cta.href, '/#consult');
   assert.equal(FAMILY_BRAND.phone.telHref, SITE_CONFIG.phoneHref);
   assert.equal(FAMILY_BRAND.phone.smsHref, SITE_CONFIG.phoneSmsHref);
   assert.equal(FAMILY_BRAND.phone.display, '(208) 477-1169');
@@ -99,7 +99,7 @@ test('the homepage hero is the family template with sourced proof', () => {
   assert.match(html, /<h1 class="fam-hero-title" id="family-hero-title">Boise handyman\. <span class="fam-hero-accent">Your list, handled\.<\/span><\/h1>/);
   const cta = html.match(/<a [^>]*data-hero-cta="primary"[^>]*>([^<]+)<\/a>/);
   assert.ok(cta, 'hero primary CTA');
-  assert.match(cta[0], /href="\/contact"/);
+  assert.match(cta[0], /href="\/#consult"/);
   assert.match(cta[0], /fam-btn--hero fam-btn--lg/);
   assert.equal(cta[1], 'Send your list and photos');
   assert.match(html, /<a href="tel:\+12084771169" class="fam-hero-link">Call \(208\) 477-1169<\/a>/);
