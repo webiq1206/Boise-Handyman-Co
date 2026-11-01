@@ -17,7 +17,6 @@ AccordionContent,
 AccordionItem,
 AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Button } from '@/components/ui/button';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { buildPageMetadata } from '@/lib/page-metadata';
 import {
@@ -35,6 +34,7 @@ import { CONSULT_BULLETS,HERO_STATS } from '@/shared/siteContent';
 import { SITE_IMAGES } from '@/shared/siteImages';
 import { ArrowRight,Check,ChevronRight,Mail,MapPin,MessageSquare,Phone } from 'lucide-react';
 import Link from 'next/link';
+import { FamilyButton } from '@/components/family/Button';
 
 const CONTACT_FAQS = [
   {
@@ -216,7 +216,7 @@ export default function ContactPage() {
             </p>
             {/* One support line, then the primary, so it sits in the first
                 screen at 360x640. The phone and text links follow the CTA. */}
-            <div className="interior-contact-actions"><InteriorEstimateLink label="Send your list and photos" href="/contact#consult"/><a href="#consult" className="interior-text-link">Request a handyman visit</a></div>
+            <div className="interior-contact-actions" data-hero-cta="primary"><InteriorEstimateLink label="Send your list and photos" href="/contact#consult"/><a href="#consult" className="interior-text-link">Request a handyman visit</a></div>
             <BusinessPhoneContact
               layout="stack"
               display
@@ -393,7 +393,7 @@ export default function ContactPage() {
                 </ul>
                 <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                   <ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA>
-                  <Button variant="brandOutline" asChild><a href="#consult">{CTA_SECONDARY}</a></Button>
+                  <FamilyButton href="#consult" variant="secondary">{CTA_SECONDARY}</FamilyButton>
                 </div>
               </Reveal>
             </div>
@@ -488,10 +488,8 @@ export default function ContactPage() {
                   Or send us a text message
                 </a>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
-                  <ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA>
-                  <Button variant="heroOutline" asChild>
-                    <a href="#consult">{CTA_SECONDARY}</a>
-                  </Button>
+                  <ConsultCTA variant="brand" tone="dark">{CTA_PRIMARY}</ConsultCTA>
+                  <FamilyButton href="#consult" variant="secondary" tone="dark">{CTA_SECONDARY}</FamilyButton>
                 </div>
 
               </div></div>

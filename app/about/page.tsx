@@ -10,7 +10,6 @@ import { Reveal } from '@/components/Reveal';
 import { StatementBandSection } from '@/components/sections/StatementBandSection';
 import { WhyChooseUsSection } from '@/components/sections/WhyChooseUsSection';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { Button } from '@/components/ui/button';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { GRAIN_URL } from '@/lib/grain';
 import { buildPageMetadata } from '@/lib/page-metadata';
@@ -26,8 +25,9 @@ import { SITE_CONFIG } from '@/shared/siteConfig';
 import { visibleTrustItems } from '@/shared/foundingClaims';
 import { HERO_STATS,HOW_P5_WORKS,HOW_P5_WORKS_TITLE,PRINCIPLES,TRUST_ITEMS } from '@/shared/siteContent';
 import { SITE_IMAGES } from '@/shared/siteImages';
-import { ArrowRight,Check,ChevronRight } from 'lucide-react';
+import { Check,ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { FamilyButton } from '@/components/family/Button';
 
 const SPEAKABLE_SUMMARY =
   'Boise Handyman Co is a design-minded repair and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co. Founder Nick Perkins leads the work with one written price before work starts, including RE-10 inspection repair lists.';
@@ -123,12 +123,8 @@ export default function AboutPage() {
               Boise Handyman Co is a repair, install and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-8">
-              <ConsultCTA variant="brand">
-                {CTA_PRIMARY} <ArrowRight className="h-4 w-4" />
-              </ConsultCTA>
-              <Button variant="heroOutline" asChild>
-                <a href="/#consult">{CTA_SECONDARY}</a>
-              </Button>
+              <ConsultCTA variant="brand" data-hero-cta="primary">{CTA_PRIMARY}</ConsultCTA>
+              <FamilyButton href="/#consult" variant="secondary">{CTA_SECONDARY}</FamilyButton>
             </div>
             <dl className="ed-hero-facts">
               {HERO_STATS.map((stat) => (
@@ -338,10 +334,8 @@ export default function AboutPage() {
                 pressure, no obligation.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto sm:justify-center">
-                <ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA>
-                <Button variant="heroOutline" asChild>
-                  <a href="/contact#consult">{CTA_SECONDARY}</a>
-                </Button>
+                <ConsultCTA variant="brand" tone="dark">{CTA_PRIMARY}</ConsultCTA>
+                <FamilyButton href="/contact#consult" variant="secondary" tone="dark">{CTA_SECONDARY}</FamilyButton>
               </div>
 
               </div></div>

@@ -225,7 +225,8 @@ export function LandingPageTemplate({
               call-first hero exactly as set on 19 and 27 October 2026. */}
           {paidService ? <>
             <p className="mt-4 text-base">{paidService === 'drywall-repair' ? 'Have damaged drywall? Call Boise Handyman Co to discuss the repair, or send a description.' : 'Caulking, weatherproofing and the upkeep on your list. Call Boise Handyman Co to discuss what needs attention.'}</p>
-            <LandingContactActions formId="service-inquiry" formLabel={paidService === 'drywall-repair' ? 'Describe the Damage' : 'Send Your Maintenance List'} />
+            {/* data-hero-cta: the family mobile bar waits until these actions leave the screen (owner commit 74ff0c4). */}
+            <div data-hero-cta="primary"><LandingContactActions formId="service-inquiry" formLabel={paidService === 'drywall-repair' ? 'Describe the Damage' : 'Send Your Maintenance List'} /></div>
           </> : <>
           {/* Call sits directly under the heading so it is in the first phone
               screen; the longer overview and estimate actions follow. */}
@@ -233,6 +234,7 @@ export function LandingPageTemplate({
             href={SITE_CONFIG.phoneHref}
             className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm bg-[#2c302f] px-5 text-base font-medium text-[#fbfaf6] transition-colors hover:bg-[#444947] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c302f] focus-visible:ring-offset-2 sm:w-auto"
             data-testid="button-call-service-hero"
+            data-hero-cta="primary"
           >
             <Phone className="h-4 w-4" aria-hidden="true" />
             Call {SITE_CONFIG.phone}
@@ -261,8 +263,8 @@ export function LandingPageTemplate({
               is in the first screen at every size, and the phone as a text
               link beneath it, as on the RE-10 hero. */}
           <div className="mt-6 [&>*]:w-full sm:[&>*]:w-auto">
-            <ConsultCTA variant="brand" data-testid="button-primary-service-hero" trackingLocation="landing_hero">
-              {CTA_PRIMARY} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <ConsultCTA variant="brand" data-testid="button-primary-service-hero" data-hero-cta="primary" trackingLocation="landing_hero">
+              {CTA_PRIMARY}
             </ConsultCTA>
           </div>
           <a

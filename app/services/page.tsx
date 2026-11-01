@@ -6,7 +6,6 @@ import { Section } from '@/components/marketing/Section';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
 import { Reveal } from '@/components/Reveal';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { Button } from '@/components/ui/button';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { buildCanonical,FEED_ALTERNATES,fitDescription } from '@/lib/page-metadata';
 import { generateBreadcrumbSchema } from '@/lib/schema';
@@ -21,6 +20,7 @@ import { SITE_CONFIG } from '@/shared/siteConfig';
 import { ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { FamilyButton } from '@/components/family/Button';
 
 const TITLE = 'Handyman Services | Treasure Valley';
 const DESCRIPTION =
@@ -134,8 +134,8 @@ export default function ServicesIndexPage() {
                 Send your repair list online, or call to discuss the scope and next steps before scheduling.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
-                <ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA>
-                <Button variant="brandOutline" asChild><a href="/#consult">{CTA_SECONDARY}</a></Button>
+                <ConsultCTA variant="brand" tone="dark">{CTA_PRIMARY}</ConsultCTA>
+                <FamilyButton href="/#consult" variant="secondary" tone="dark">{CTA_SECONDARY}</FamilyButton>
               </div>
             </div>
           </div>

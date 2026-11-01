@@ -7,7 +7,7 @@ import { Re10ContactTracking } from "@/components/re10/Re10ContactTracking";
 import { Re10Faqs } from "@/components/re10/Re10Faqs";
 import { Re10Wizard } from "@/components/re10/Re10Wizard";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { Button } from "@/components/ui/button";
+import { FamilyButton } from "@/components/family/Button";
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { buildCanonical,fitDescription } from '@/lib/page-metadata';
 import {
@@ -30,7 +30,7 @@ RE10_SERVICES,
 } from "@/shared/content/re10Content";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { SITE_IMAGES } from "@/shared/siteImages";
-import { AlertTriangle,ArrowRight,Check,MessageSquare,Phone } from "lucide-react";
+import { AlertTriangle,Check,MessageSquare,Phone } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -115,11 +115,9 @@ export default function Re10RepairsPage() {
               us, and we reply with one written price before work starts.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 mt-4">
-              <Button variant="brand" asChild>
-                <Link href="#re10-wizard">
-                  Upload your RE-10 <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+              <FamilyButton href="#re10-wizard" variant="primary" size="lg" data-hero-cta="primary">
+                Upload your RE-10
+              </FamilyButton>
               <a className="re10-phone" href={SITE_CONFIG.phoneHref} data-testid="link-re10-call"><Phone size={18} aria-hidden="true" /> Prefer to talk? {SITE_CONFIG.phone}</a>
             </div>
           </div>
@@ -504,21 +502,15 @@ export default function Re10RepairsPage() {
             report and any photos.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button variant="brand" asChild>
-              <Link href="/contact#consult">
-                Submit an RE-10 for review <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button variant="brandInverseOutline" asChild>
-              <a href={SITE_CONFIG.phoneHref} data-testid="link-re10-call-footer">
-                <Phone className="mr-2 h-4 w-4" /> {SITE_CONFIG.phone}
-              </a>
-            </Button>
-            <Button variant="brandInverseOutline" asChild>
-              <a href={SITE_CONFIG.phoneSmsHref} data-testid="link-re10-text">
-                <MessageSquare className="mr-2 h-4 w-4" /> Text us
-              </a>
-            </Button>
+            <FamilyButton href="/contact#consult" variant="primary" size="lg">
+              Submit an RE-10 for review
+            </FamilyButton>
+            <FamilyButton href={SITE_CONFIG.phoneHref} variant="secondary" size="lg" data-testid="link-re10-call-footer">
+              <Phone className="h-4 w-4" aria-hidden="true" /> {SITE_CONFIG.phone}
+            </FamilyButton>
+            <FamilyButton href={SITE_CONFIG.phoneSmsHref} variant="secondary" size="lg" data-testid="link-re10-text">
+              <MessageSquare className="h-4 w-4" aria-hidden="true" /> Text us
+            </FamilyButton>
           </div>
           <p className="mt-7 text-xs text-inverse-foreground/60 leading-relaxed">
             {SITE_CONFIG.name} &middot; {SITE_CONFIG.publicRepresentative} &middot;{" "}
