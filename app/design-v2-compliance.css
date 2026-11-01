@@ -465,6 +465,14 @@
   .interior-sitemap h1 { font-size: clamp(42px, 5vw, 64px); }
 }
 
+/* Phase 5: the paid-traffic landings were left out of the cap above and their
+   H1 reached 69px at 1440 (72px on wider screens). Same 44px floor and 4.8vw
+   slope, so nothing changes below 1334px; only the ceiling drops to 64px.
+   Every other part of the call-first hero stays exactly as set. */
+@media (min-width: 1024px) {
+  .approved-interior .interior-hero-copy h1:is([data-ad-landing] *) { font-size: clamp(44px, 4.8vw, 64px); }
+}
+
 /* ─── Phase 3 RE-10 measure ───
    The long-copy blocks ran the full 1,160px container (about 150 characters
    a line): the shared container rule overrode their max-w-3xl. Honour the
