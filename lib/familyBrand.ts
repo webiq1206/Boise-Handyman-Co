@@ -79,6 +79,9 @@ export const FAMILY_BRAND: FamilyBrand = {
     // The estimator owns the whole screen (Navigation renders no chrome there either).
     hiddenOn: ['/estimate/*'],
     yieldToBodyFlags: ['assistantOpen', 'hideMobileNavBar', 'p5EstimatorActive'],
+    // The same check requires the bar gone within 150ms of returning to the hero: it leaves at
+    // once instead of after the 300ms slide-out, and still slides in as usual.
+    hideInstantly: true,
   },
   // Same GA4 event the old header, menu and bar CTAs sent.
   analytics: { ctaEvent: 'cta_click', barCtaEvent: 'cta_click' },
@@ -163,4 +166,7 @@ export const FAMILY_BRAND: FamilyBrand = {
   // P5 Home Co's Facebook page (shared/gbpProfile P5_SOCIAL): the owner's profile, labelled for
   // the parent and never this brand's own.
   parentFacebook: { href: P5_SOCIAL.facebook, label: 'P5 Home Co on Facebook' },
+  // P5 Home Co's Google Business Profile (owner decision A, 1 November 2026), the owner's one
+  // Google profile, labelled for the parent like the Facebook link and listed right after it.
+  parentGoogle: { href: P5_SOCIAL.google, label: 'P5 Home Co on Google' },
 };

@@ -87,6 +87,9 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   assert.match(html, /is a DBA of <a href="https:\/\/p5homeco\.com" rel="noopener">P5 Home Co LLC<\/a>/);
   assert.match(html, /<a href="\/subcontractor" rel="nofollow">Subcontractor login<\/a>/);
   assert.match(html, />P5 Home Co on Facebook<\/a>/);
+  assert.match(html, /<a href="https:\/\/www\.google\.com\/search\?kgmid=\/g\/11ntl1t7dc" rel="noopener" target="_blank" data-testid="link-footer-google">P5 Home Co on Google<\/a>/);
+  assert.equal((html.match(/data-testid="link-footer-google"/g) ?? []).length, 1);
+  assert.equal((html.match(/data-testid="link-footer-facebook"/g) ?? []).length, 1);
   // The registration number stays outside the DOPL link, once.
   assert.equal((html.match(/Idaho Registered Contractor #8381215/g) ?? []).length, 1);
   assert.equal(/>Idaho Registered Contractor #8381215<\/a>/.test(html), false);
