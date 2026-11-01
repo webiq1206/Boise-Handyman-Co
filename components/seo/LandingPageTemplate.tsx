@@ -1,7 +1,7 @@
-import { ConsultationForm } from "@/components/ConsultationForm";
+import { LazyConsultationForm as ConsultationForm } from "@/components/LazyConsultationForm";
 import { LandingContactActions } from "@/components/marketing/LandingContactActions";
 import { InteriorHero,InteriorProjectAside } from '@/components/approved/InteriorLayout';
-import { Section } from '@/components/marketing';
+import { Section } from '@/components/marketing/Section';
 import { RelatedPostCards } from '@/components/marketing/RelatedPostCards';
 import Image from '@/components/MarketingImage';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';

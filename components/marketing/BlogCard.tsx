@@ -7,8 +7,11 @@ import { Chip } from "./Chip";
 import type { BlogPostData } from "@/shared/blogContent";
 import { getBlogImageAlt, getBlogThumbnail } from "@/shared/blogImages";
 
+/** The fields a card shows; callers pass summaries, not whole articles. */
+export type BlogCardPost = Pick<BlogPostData, "slug" | "thumbnail" | "title" | "category" | "publishedAt" | "excerpt">;
+
 export interface BlogCardProps {
-  post: BlogPostData;
+  post: BlogCardPost;
   featured?: boolean;
   formatDate: (date: string) => string;
 }

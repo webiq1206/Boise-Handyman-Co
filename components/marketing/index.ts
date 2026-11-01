@@ -1,3 +1,7 @@
+// Import from the component files directly, not from this barrel. It re-exports
+// BlogPostLayout, BlogIndexClient and RelatedPostCards, so one named import from
+// here pulls every article body and the internal link graph into the importing
+// route (and, through a client component, into its browser bundle).
 export { Section, type SectionProps } from "./Section";
 export { SectionHeader, type SectionHeaderProps } from "./SectionHeader";
 export { Hairline, type HairlineProps } from "./Hairline";

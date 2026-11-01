@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Home, ArrowRight, MessageSquare, Phone, Wrench } from "lucide-react";
-import { DisplayNum } from "@/components/marketing";
+import { DisplayNum } from "@/components/marketing/DisplayNum";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { SaveContactLink } from "@/components/SaveContactLink";
 

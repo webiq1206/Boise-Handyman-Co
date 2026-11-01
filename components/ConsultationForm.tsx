@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 import { Check, Plus, X, ChevronDown } from "lucide-react";
 import type { StoredEstimate } from "@/shared/estimateEngine";
 import { formatPlanningCurrency } from "@/shared/estimateEngine";
-import { DisplayNum } from "@/components/marketing";
+import { DisplayNum } from "@/components/marketing/DisplayNum";
 import { AddressAutocomplete } from "@/components/AddressAutocomplete";
 import { CTA_FORM_SEND } from "@/shared/ctaCopy";
 import { CONSULT_BULLETS } from "@/shared/siteContent";

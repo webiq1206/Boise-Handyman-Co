@@ -1,6 +1,7 @@
 import { InteriorHero,InteriorPage } from '@/components/approved/InteriorLayout';
 import { ContractorCredential } from '@/components/ContractorCredential';
-import { DisplayNum,formatStepNumber,Section } from '@/components/marketing';
+import { DisplayNum, formatStepNumber } from '@/components/marketing/DisplayNum';
+import { Section } from '@/components/marketing/Section';
 import { AreaCard } from '@/components/marketing/AreaCard';
 import { Hairline } from '@/components/marketing/Hairline';
 import { SectionHeader } from '@/components/marketing/SectionHeader';
