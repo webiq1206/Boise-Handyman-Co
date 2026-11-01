@@ -214,6 +214,9 @@ export default function ContactPage() {
               Send your task list with photos for an upfront quote, or call or text our team to
               explore a range for your repair, install, or maintenance job.
             </p>
+            {/* One support line, then the primary, so it sits in the first
+                screen at 360x640. The phone and text links follow the CTA. */}
+            <div className="interior-contact-actions"><InteriorEstimateLink label="Send your list and photos" href="/contact#consult"/><a href="#consult" className="interior-text-link">Request a handyman visit</a></div>
             <BusinessPhoneContact
               layout="stack"
               display
@@ -228,7 +231,6 @@ export default function ContactPage() {
             >
               Prefer to text? Message us instead
             </a>
-            <div className="interior-contact-actions"><InteriorEstimateLink label="Send your list and photos" href="/contact#consult"/><a href="#consult" className="interior-text-link">Request a handyman visit</a></div>
             <dl className="ed-hero-facts">
               {HERO_STATS.map((stat) => (
                 <div key={stat.label}>

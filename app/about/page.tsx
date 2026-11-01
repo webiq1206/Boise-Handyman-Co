@@ -117,12 +117,10 @@ export default function AboutPage() {
               About Boise Handyman{' '}
               <em className="brc-accent">Co</em>
             </h1>
-            <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-4">
-              Boise Handyman Co is a repair, install and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co. It is run by Nick Perkins, a construction project manager with a bachelor&apos;s degree in Construction with an emphasis in Project Management, and more than a decade of work from small renovations to multimillion-dollar custom homes.
-            </p>
-            <p className="text-base md:text-lg text-inverse-foreground/75 max-w-2xl leading-relaxed mb-8">
-              He founded P5 in Colorado in 2020 and moved the family and company to the Treasure Valley in 2025. Read the full story on{' '}
-              <a href="https://p5homeco.com/about" className="underline underline-offset-2">p5homeco.com/about</a>.
+            {/* One support line keeps the primary in the first screen at 360x640;
+                the rest of the introduction sits with the family photo below. */}
+            <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-8">
+              Boise Handyman Co is a repair, install and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-8">
               <ConsultCTA variant="brand">
@@ -159,6 +157,13 @@ export default function AboutPage() {
               <figcaption className="bg-inverse px-8 py-6 md:px-12 md:py-8">
                 <p className="font-sans font-light text-xl md:text-2xl text-inverse-foreground">
                   The Perkins family
+                </p>
+                <p className="mt-4 text-base md:text-lg text-inverse-foreground/85 leading-relaxed">
+                  It is run by Nick Perkins, a construction project manager with a bachelor&apos;s degree in Construction with an emphasis in Project Management, and more than a decade of work from small renovations to multimillion-dollar custom homes.
+                </p>
+                <p className="mt-4 text-base md:text-lg text-inverse-foreground/85 leading-relaxed">
+                  He founded P5 in Colorado in 2020 and moved the family and company to the Treasure Valley in 2025. Read the full story on{' '}
+                  <a href="https://p5homeco.com/about" className="underline underline-offset-2">p5homeco.com/about</a>.
                 </p>
               </figcaption>
             </figure>

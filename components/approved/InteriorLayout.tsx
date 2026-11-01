@@ -1,5 +1,4 @@
 import { ArrowUpRight } from 'lucide-react';
-import { preload } from 'react-dom';
 import type { ReactNode } from 'react';
 
 /** Public-page layout. Application routes retain their dedicated interfaces. */
@@ -28,7 +27,6 @@ export function InteriorHero({
   estimateAction?: boolean;
   imageFit?: 'cover' | 'contain';
 }) {
-  if (imageSrc) preload(imageSrc, { as: 'image', fetchPriority: 'high' });
   const imageClass =
     imageFit === 'contain' ? 'interior-hero-image interior-hero-image--contain' : 'interior-hero-image';
   return (
@@ -41,6 +39,9 @@ export function InteriorHero({
           </div>
         )}
       </div>
+      {/* Priority comes from the <img> the page renders, never from react-dom
+          preload(): a preload travels in prefetched RSC payloads, so every
+          linked page would fetch this hero too. */}
       {imageSrc && (
         <div className={imageClass}>
           <img src={imageSrc} alt={imageAlt} width={1400} height={1100} fetchPriority="high" />
