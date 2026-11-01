@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const howToPatchDrywall: BlogPostData = {
   slug: 'how-to-patch-drywall',
-  title: 'How to Patch Drywall Like a Pro (and When to Call One)',
+  title: 'How to patch drywall like a pro (and when to call one)',
   seoTitle: 'How to Patch Drywall Like a Pro',
   metaDescription:
     'How to patch drywall, from nail pops to fist-sized holes: the right method for each size, why texture matching is hard, and what Boise pros charge.',
@@ -40,7 +40,7 @@ export const howToPatchDrywall: BlogPostData = {
     { url: '/blog/interior-paint-touch-up-guide', anchor: 'Interior Paint Touch-Up Guide' },
     { url: '/blog/new-home-punch-list-handyman', anchor: 'New-Home Punch List' },
     { url: '/services/painting-touch-ups', anchor: 'Interior & Exterior Painting' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/contact', anchor: 'Contact' },
   ],
   faqs: [

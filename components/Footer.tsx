@@ -6,7 +6,7 @@ import { ApprovedBrand } from "@/components/approved/ApprovedBrand";
 import { FooterCTAs } from "@/components/modals/FooterCTAs";
 import { Button } from "@/components/ui/button";
 import { areaPath,servicePath } from "@/lib/seo-routes";
-import { CITIES,SERVICES } from "@/shared/contentData";
+import { CITIES,SERVICES,serviceHeading } from "@/shared/contentData";
 import { CONTENT_HUBS,guidePath } from "@/shared/contentHubs";
 import { GBP_SOCIAL, P5_SOCIAL } from "@/shared/gbpProfile";
 import { GUIDE_PAGES } from "@/shared/guideContent";
@@ -51,19 +51,19 @@ function buildFooterGroups(): { title: string; links: FooterLink[] }[] {
     {
       title: "Services",
       links: [
-        ...SERVICES.map((s) => ({ label: s.name, href: servicePath(s.slug) })),
+        ...SERVICES.map((s) => ({ label: serviceHeading(s.name), href: servicePath(s.slug) })),
         { label: "All services", href: "/services" },
       ],
     },
     {
       title: "Company",
-      links: [{ label: "About", href: "/about" }, { label: "Why Choose Us", href: "/#why-choose-us" }, { label: "How We Work", href: "/#how-we-build" }, { label: "RE-10 Repairs", href: "/re-10-repairs-boise" }, { label: "Contact", href: "/contact" }],
+      links: [{ label: "About", href: "/about" }, { label: "Why choose us", href: "/#why-choose-us" }, { label: "How we work", href: "/#how-we-build" }, { label: "RE-10 repairs", href: "/re-10-repairs-boise" }, { label: "Contact", href: "/contact" }],
     },
     {
       title: "Resources",
       links: [
-        { label: "Home Repair Guides", href: "/guides" },
-        { label: "Planning Downloads", href: "/resources" },
+        { label: "Home repair guides", href: "/guides" },
+        { label: "Planning downloads", href: "/resources" },
         { label: "Blog", href: "/blog" },
         ...pillarGuides,
       ],

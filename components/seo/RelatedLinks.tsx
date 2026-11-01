@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CITIES, SERVICES } from '@/shared/contentData';
+import { CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
 import { isCityServiceNoindex } from '@/lib/page-metadata';
 import { areaPath, cityServicePath, servicePath } from '@/lib/seo-routes';
 
@@ -31,7 +31,7 @@ function ExploreFurther({ serviceSlug }: { serviceSlug?: string }) {
      an internal link on a redirect hop - which is what scripts/internal-links
      audits for. */
   const links: { href: string; label: string }[] = [
-    guide ?? { href: '/guides/hire-a-handyman-treasure-valley', label: 'Hiring a Handyman in the Treasure Valley' },
+    guide ?? { href: '/guides/hire-a-handyman-treasure-valley', label: 'Hiring a handyman in the Treasure Valley' },
     { href: '/services', label: 'Explore repair and installation services' },
     { href: '/resources', label: 'Free home maintenance planning worksheets' },
     { href: '/estimate', label: 'Estimate your repair cost' },
@@ -69,8 +69,10 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
     return (
       <div className="space-y-10">
         <div>
+          {/* Distinct from the page's own "Handyman services in {city}"
+              section H2 above, which this block used to repeat word for word. */}
           <h2 className="ed-h2-sm ed-statement-wide mb-8">
-            Handyman services in {city?.name}
+            More handyman help in {city?.name}
           </h2>
           <div className="ed-grid-balance grid sm:grid-cols-2 gap-4">
             {/* Indexed city pages get the link; a noindexed combination points
@@ -86,7 +88,7 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
                 }
               >
                 <div className="ed-card ed-card-link h-full">
-                  <h3 className="ed-h4">{service.name}</h3>
+                  <h3 className="ed-h4">{serviceHeading(service.name)}</h3>
                   <p className="ed-body mt-2 text-[0.875rem]">{service.shortDescription}</p>
                 </div>
               </Link>
@@ -119,7 +121,7 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
                   href={cityServicePath(serviceSlug, city.slug)}
                   className="ed-body text-[0.9375rem] transition-colors hover:[color:var(--ed-accent)]"
                 >
-                  {SERVICES.find((s) => s.slug === serviceSlug)?.name} in {city.name}
+                  {serviceHeading(SERVICES.find((s) => s.slug === serviceSlug)?.name ?? '')} in {city.name}
                 </Link>
               </li>
             ))}
@@ -140,14 +142,14 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
                   }
                   className="ed-body text-[0.9375rem] transition-colors hover:[color:var(--ed-accent)]"
                 >
-                  {service.name}
+                  {serviceHeading(service.name)}
                 </Link>
               </li>
             ))}
           </ul>
           <div className="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t pt-6" style={{ borderColor: "var(--ed-line)" }}>
             <Link href={servicePath(serviceSlug)} className="ed-link">
-              All {SERVICES.find((s) => s.slug === serviceSlug)?.name} areas →
+              All {SERVICES.find((s) => s.slug === serviceSlug)?.name.toLowerCase()} areas →
             </Link>
             <Link href={areaPath(citySlug)} className="ed-link">
               Handyman services in {CITIES.find((c) => c.slug === citySlug)?.name} →

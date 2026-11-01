@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const agingInPlaceHomeDesign: BlogPostData = {
   slug: 'aging-in-place-home-design',
-  title: 'Aging in Place: Small Home Modifications That Matter Most',
+  title: 'Aging in place: small home modifications that matter most',
   seoTitle: 'Aging in Place Fixes a Handyman Installs',
   metaDescription:
     'Aging-in-place modifications a Boise handyman can install in a day: grab bars, railings, lever handles and better lighting. Plan a safety visit.',

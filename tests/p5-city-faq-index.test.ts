@@ -127,7 +127,7 @@ test('published city claims and the Kuna and Caldwell neighborhood order stay',(
  assert.ok(cityServicePageFaqs(drywall,boise).every((faq)=>!faq.answer.includes('starts around $149')));
  const kunaSections=getCityServiceSections(drywall,kuna,CITY_SEO_DATA.Kuna);
  assert.ok(kunaSections.some((section)=>section.paragraphs.some((paragraph)=>paragraph.includes('Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell.'))));
- assert.ok(kunaSections.some((section)=>section.heading.startsWith('Drywall Repair & Patching in Kuna: homes, permits')));
+ assert.ok(kunaSections.some((section)=>section.heading.startsWith('Drywall repair & patching in Kuna: homes, permits')));
 });
 
 test('noindex pages stay noindex and robots and sitemap rules are unchanged',()=>{

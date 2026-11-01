@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const boiseBuildingPermitGuide: BlogPostData = {
   slug: 'boise-building-permit-guide',
-  title: 'Do Home Repairs Need a Permit in Boise? A Practical Guide',
+  title: 'Do home repairs need a permit in Boise? A practical guide',
   seoTitle: 'Boise Repair Permits: What Needs One',
   metaDescription:
     'Most Boise home repairs need no permit: painting, drywall, trim, fixture swaps. See which small jobs do, which do not, and get yours fixed the right way.',
@@ -39,7 +39,7 @@ export const boiseBuildingPermitGuide: BlogPostData = {
   relatedLinks: [
     { url: '/blog/ada-vs-canyon-county-permit-timelines', anchor: 'Ada vs Canyon County: Permits for Small Projects' },
     { url: '/blog/diy-vs-hiring-a-handyman', anchor: 'DIY vs Hiring a Handyman' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/services/drywall-repair', anchor: 'Drywall Repair & Patching' },
     { url: '/services/plumbing-repairs', anchor: 'Minor Plumbing Repairs' },
     { url: '/services/carpentry-trim-repair', anchor: 'Carpentry & Trim Repair' },

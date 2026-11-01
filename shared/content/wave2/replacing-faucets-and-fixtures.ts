@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const replacingFaucetsAndFixtures: BlogPostData = {
   slug: 'replacing-faucets-and-fixtures',
-  title: 'Replacing Faucets and Fixtures: A Homeowner Guide',
+  title: 'Replacing faucets and fixtures: a homeowner guide',
   seoTitle: 'Replacing Faucets and Fixtures: A Guide',
   metaDescription:
     'Replacing faucets and fixtures: how to pick a faucet that fits, what a swap involves, why old shutoff valves are the hidden risk, and Boise labor ranges.',
@@ -39,7 +39,7 @@ export const replacingFaucetsAndFixtures: BlogPostData = {
     { url: '/services/plumbing-repairs', anchor: 'Minor Plumbing Repairs' },
     { url: '/services/electrical-repairs', anchor: 'Minor Electrical Repairs' },
     { url: '/blog/common-toilet-problems-and-fixes', anchor: 'Fixing Common Toilet Problems' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/services/mounting-assembly', anchor: 'Mounting & Assembly' },
     { url: '/contact', anchor: 'Contact' },
   ],

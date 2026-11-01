@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const hourlyRateVsFlatRateHandyman: BlogPostData = {
   slug: 'hourly-rate-vs-flat-rate-handyman',
-  title: 'Hourly Rate vs Flat Rate: How Handyman Pricing Works',
+  title: 'Hourly rate vs flat rate: how handyman pricing works',
   seoTitle: 'Hourly vs Flat Rate Handyman Pricing',
   metaDescription:
     'Hourly vs flat rate handyman pricing in the Treasure Valley: how rates, flat quotes, minimums and trip fees work, and which model favors you on which job.',
@@ -33,7 +33,7 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
     'The model matters less than the writing: either structure works when scope and price are written down first.',
   ],
   relatedLinks: [
-    { url: '/blog/how-to-compare-handyman-quotes', anchor: 'How to Compare Handyman Quotes' },
+    { url: '/blog/how-to-compare-handyman-quotes', anchor: 'How to compare handyman quotes' },
     { url: '/blog/how-to-budget-home-repairs-boise', anchor: 'How to Budget a Home Repair Punch List' },
     { url: '/blog/handyman-red-flags', anchor: 'Handyman Red Flags' },
     { url: '/blog/how-long-do-common-home-repairs-take', anchor: 'How Long Common Home Repairs Take' },

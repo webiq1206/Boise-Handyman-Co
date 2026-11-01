@@ -139,7 +139,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
   const schemas = [
     landingBreadcrumbs([
       { name: 'Home', url: '/' },
-      { name: 'Service Areas', url: '/areas' },
+      { name: 'Service areas', url: '/areas' },
       { name: city.name, url: path },
     ]),
     landingAreaBusinessSchema(city.name),
@@ -160,7 +160,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
         manifestPath={path}
         breadcrumbs={[
           { name: 'Home', href: '/' },
-          { name: 'Service Areas', href: '/areas' },
+          { name: 'Service areas', href: '/areas' },
           { name: city.name },
         ]}
         benefits={[

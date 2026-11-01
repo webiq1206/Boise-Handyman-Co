@@ -10,21 +10,21 @@
   "pages": {
     "/blog/ada-vs-canyon-county-permit-timelines": {
       "type": "blog",
-      "title": "Ada vs Canyon County: Permits for Small Home Projects",
-      "anchor": "Ada vs Canyon County: Permits for Small Home Projects",
+      "title": "Ada vs Canyon County: permits for small home projects",
+      "anchor": "Ada vs Canyon County: permits for small home projects",
       "url": "/blog/ada-vs-canyon-county-permit-timelines",
       "links": [
         {
           "url": "/blog/boise-building-permit-guide",
           "anchor": "Do Home Repairs Need a Permit in Boise?",
-          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "title": "Do home repairs need a permit in Boise? A practical guide",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
           "anchor": "DIY vs Hiring a Handyman",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "title": "DIY vs hiring a handyman: when each actually makes sense",
           "type": "blog",
           "score": 999
         },
@@ -37,7 +37,7 @@
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -67,14 +67,14 @@
     },
     "/blog/aging-in-place-home-design": {
       "type": "blog",
-      "title": "Aging in Place: Small Home Modifications That Matter Most",
-      "anchor": "Aging in Place: Small Home Modifications That Matter Most",
+      "title": "Aging in place: small home modifications that matter most",
+      "anchor": "Aging in place: small home modifications that matter most",
       "url": "/blog/aging-in-place-home-design",
       "links": [
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
           "anchor": "Fixing Squeaky Floors and Sticking Doors",
-          "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+          "title": "Fixing squeaky floors and sticking doors in Boise homes",
           "type": "blog",
           "score": 999
         },
@@ -87,8 +87,8 @@
         },
         {
           "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Installs & Upgrades",
-          "title": "Small Home Upgrades That Pay Off",
+          "anchor": "Installs & upgrades",
+          "title": "Small home upgrades that pay off",
           "type": "guide",
           "score": 999
         },
@@ -124,34 +124,34 @@
     },
     "/blog/boise-building-permit-guide": {
       "type": "blog",
-      "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
-      "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+      "title": "Do home repairs need a permit in Boise? A practical guide",
+      "anchor": "Do home repairs need a permit in Boise? A practical guide",
       "url": "/blog/boise-building-permit-guide",
       "links": [
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
           "anchor": "Ada vs Canyon County: Permits for Small Projects",
-          "title": "Ada vs Canyon County: Permits for Small Home Projects",
+          "title": "Ada vs Canyon County: permits for small home projects",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
           "anchor": "DIY vs Hiring a Handyman",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "title": "DIY vs hiring a handyman: when each actually makes sense",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -181,42 +181,42 @@
     },
     "/blog/caulking-guide-boise-homes": {
       "type": "blog",
-      "title": "The Caulking Guide for Boise Homes: What, Where, and How Often",
-      "anchor": "The Caulking Guide for Boise Homes: What, Where, and How Often",
+      "title": "The caulking guide for Boise homes: what, where, and how often",
+      "anchor": "The caulking guide for Boise homes: what, where, and how often",
       "url": "/blog/caulking-guide-boise-homes",
       "links": [
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
           "anchor": "DIY vs Hiring a Handyman",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "title": "DIY vs hiring a handyman: when each actually makes sense",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
           "anchor": "Budgeting for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/preparing-your-boise-home-for-winter",
           "anchor": "Preparing Your Boise Home for Winter",
-          "title": "Preparing Your Boise Home for Winter: The Checklist That Matters",
+          "title": "Preparing your Boise home for winter: the checklist that matters",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-maintenance-guide",
-          "anchor": "Home Maintenance",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "anchor": "Home maintenance",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
@@ -229,8 +229,8 @@
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
-          "anchor": "The Treasure Valley Exterior Home Care Guide",
-          "title": "The Treasure Valley Exterior Home Care Guide",
+          "anchor": "The Treasure Valley exterior home care guide",
+          "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
           "score": 0.338
         }
@@ -238,35 +238,35 @@
     },
     "/blog/common-toilet-problems-and-fixes": {
       "type": "blog",
-      "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
-      "anchor": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+      "title": "Fixing common toilet problems: running, rocking, and leaks",
+      "anchor": "Fixing common toilet problems: running, rocking, and leaks",
       "url": "/blog/common-toilet-problems-and-fixes",
       "links": [
         {
           "url": "/blog/questions-to-ask-a-handyman",
           "anchor": "Questions to Ask a Handyman",
-          "title": "Questions to Ask a Handyman Before You Book",
+          "title": "Questions to ask a handyman before you book",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/replacing-faucets-and-fixtures",
           "anchor": "Replacing Faucets and Fixtures",
-          "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
+          "title": "Replacing faucets and fixtures: a homeowner guide",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "Repairs & Fixes",
-          "title": "The First-Time Homeowner's Repair Handbook",
+          "anchor": "Repairs & fixes",
+          "title": "The first-time homeowner's repair handbook",
           "type": "guide",
           "score": 999
         },
@@ -295,35 +295,35 @@
     },
     "/blog/deck-maintenance-boise": {
       "type": "blog",
-      "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
-      "anchor": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+      "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
+      "anchor": "Deck maintenance in Boise: the annual rhythm that saves your deck",
       "url": "/blog/deck-maintenance-boise",
       "links": [
         {
           "url": "/blog/home-maintenance-budget-idaho",
           "anchor": "Budgeting for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/preparing-your-boise-home-for-winter",
           "anchor": "Preparing Your Boise Home for Winter",
-          "title": "Preparing Your Boise Home for Winter: The Checklist That Matters",
+          "title": "Preparing your Boise home for winter: the checklist that matters",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
-          "anchor": "Exterior & Outdoor",
-          "title": "The Treasure Valley Exterior Home Care Guide",
+          "anchor": "Exterior & outdoor",
+          "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
           "score": 999
         },
@@ -352,14 +352,14 @@
     },
     "/blog/diy-vs-hiring-a-handyman": {
       "type": "blog",
-      "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
-      "anchor": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+      "title": "DIY vs hiring a handyman: when each actually makes sense",
+      "anchor": "DIY vs hiring a handyman: when each actually makes sense",
       "url": "/blog/diy-vs-hiring-a-handyman",
       "links": [
         {
           "url": "/blog/boise-building-permit-guide",
           "anchor": "Do Home Repairs Need a Permit in Boise?",
-          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "title": "Do home repairs need a permit in Boise? A practical guide",
           "type": "blog",
           "score": 999
         },
@@ -372,21 +372,21 @@
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
           "anchor": "Who Supplies Materials on a Handyman Job",
-          "title": "Who Supplies Materials on a Handyman Job?",
+          "title": "Who supplies materials on a handyman job?",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -400,8 +400,8 @@
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
-          "anchor": "How to Hire a Handyman in the Treasure Valley",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "anchor": "How to hire a handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 0.775
         }
@@ -409,14 +409,14 @@
     },
     "/blog/drywall-repair-cost-boise": {
       "type": "blog",
-      "title": "Drywall Repair Cost in Boise: What Patches Really Run",
-      "anchor": "Drywall Repair Cost in Boise: What Patches Really Run",
+      "title": "Drywall repair cost in Boise: what patches really run",
+      "anchor": "Drywall repair cost in Boise: what patches really run",
       "url": "/blog/drywall-repair-cost-boise",
       "links": [
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
           "anchor": "DIY vs Hiring a Handyman",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "title": "DIY vs hiring a handyman: when each actually makes sense",
           "type": "blog",
           "score": 999
         },
@@ -429,14 +429,14 @@
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -466,35 +466,35 @@
     },
     "/blog/energy-saving-home-fixes-boise": {
       "type": "blog",
-      "title": "Energy-Saving Home Fixes for Boise Houses",
-      "anchor": "Energy-Saving Home Fixes for Boise Houses",
+      "title": "Energy-saving home fixes for Boise houses",
+      "anchor": "Energy-saving home fixes for Boise houses",
       "url": "/blog/energy-saving-home-fixes-boise",
       "links": [
         {
           "url": "/blog/how-long-do-common-home-repairs-take",
           "anchor": "How Long Common Home Repairs Take",
-          "title": "How Long Do Common Home Repairs Take?",
+          "title": "How long do common home repairs take?",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-to-budget-home-repairs-boise",
           "anchor": "How to Budget a Home Repair Punch List",
-          "title": "How to Budget a Home Repair Punch List in Boise",
+          "title": "How to budget a home repair punch list in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
           "anchor": "Seasonal Home Maintenance Checklist for Boise",
-          "title": "Seasonal Home Maintenance Checklist for Boise Homes",
+          "title": "Seasonal home maintenance checklist for Boise homes",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-maintenance-guide",
-          "anchor": "Home Maintenance",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "anchor": "Home maintenance",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
@@ -514,8 +514,8 @@
         },
         {
           "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Small Home Upgrades That Pay Off",
-          "title": "Small Home Upgrades That Pay Off",
+          "anchor": "Small home upgrades that pay off",
+          "title": "Small home upgrades that pay off",
           "type": "guide",
           "score": 0.245
         }
@@ -523,28 +523,28 @@
     },
     "/blog/fence-repair-treasure-valley": {
       "type": "blog",
-      "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
-      "anchor": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+      "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
+      "anchor": "Fence repair in the Treasure Valley: posts, panels, and gates",
       "url": "/blog/fence-repair-treasure-valley",
       "links": [
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
           "anchor": "Gutter Cleaning Schedule for Boise",
-          "title": "Gutter Cleaning Schedule for Boise Homes",
+          "title": "Gutter cleaning schedule for Boise homes",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
-          "anchor": "Exterior & Outdoor",
-          "title": "The Treasure Valley Exterior Home Care Guide",
+          "anchor": "Exterior & outdoor",
+          "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
           "score": 999
         },
@@ -580,35 +580,35 @@
     },
     "/blog/fixing-squeaky-floors-and-sticking-doors": {
       "type": "blog",
-      "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
-      "anchor": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+      "title": "Fixing squeaky floors and sticking doors in Boise homes",
+      "anchor": "Fixing squeaky floors and sticking doors in Boise homes",
       "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
       "links": [
         {
           "url": "/blog/aging-in-place-home-design",
           "anchor": "Aging in Place: Small Home Modifications",
-          "title": "Aging in Place: Small Home Modifications That Matter Most",
+          "title": "Aging in place: small home modifications that matter most",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
           "anchor": "DIY vs Hiring a Handyman",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "title": "DIY vs hiring a handyman: when each actually makes sense",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "Repairs & Fixes",
-          "title": "The First-Time Homeowner's Repair Handbook",
+          "anchor": "Repairs & fixes",
+          "title": "The first-time homeowner's repair handbook",
           "type": "guide",
           "score": 999
         },
@@ -628,8 +628,8 @@
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
+          "anchor": "Handyman services in the Eagle Foothills",
+          "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
           "score": 0.173
         }
@@ -637,28 +637,28 @@
     },
     "/blog/gutter-cleaning-schedule-boise": {
       "type": "blog",
-      "title": "Gutter Cleaning Schedule for Boise Homes",
-      "anchor": "Gutter Cleaning Schedule for Boise Homes",
+      "title": "Gutter cleaning schedule for Boise homes",
+      "anchor": "Gutter cleaning schedule for Boise homes",
       "url": "/blog/gutter-cleaning-schedule-boise",
       "links": [
         {
           "url": "/blog/fence-repair-treasure-valley",
           "anchor": "Fence Repair in the Treasure Valley",
-          "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+          "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-maintenance-guide",
-          "anchor": "Home Maintenance",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "anchor": "Home maintenance",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
@@ -685,8 +685,8 @@
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
-          "anchor": "The Treasure Valley Exterior Home Care Guide",
-          "title": "The Treasure Valley Exterior Home Care Guide",
+          "anchor": "The Treasure Valley exterior home care guide",
+          "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
           "score": 0.335
         }
@@ -701,34 +701,34 @@
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
           "anchor": "DIY vs Hiring a Handyman",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "title": "DIY vs hiring a handyman: when each actually makes sense",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/drywall-repair-cost-boise",
           "anchor": "Drywall Repair Cost in Boise",
-          "title": "Drywall Repair Cost in Boise: What Patches Really Run",
+          "title": "Drywall repair cost in Boise: what patches really run",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
           "anchor": "Who Supplies Materials on a Handyman Job",
-          "title": "Who Supplies Materials on a Handyman Job?",
+          "title": "Who supplies materials on a handyman job?",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -742,8 +742,8 @@
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
-          "anchor": "How to Hire a Handyman in the Treasure Valley",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "anchor": "How to hire a handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 0.738
         }
@@ -751,41 +751,41 @@
     },
     "/blog/handyman-red-flags": {
       "type": "blog",
-      "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
-      "anchor": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
+      "title": "Handyman red flags: how to avoid hiring the wrong one",
+      "anchor": "Handyman red flags: how to avoid hiring the wrong one",
       "url": "/blog/handyman-red-flags",
       "links": [
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
           "anchor": "Hourly Rate vs Flat Rate Handyman Pricing",
-          "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
+          "title": "Hourly rate vs flat rate: how handyman pricing works",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-to-compare-handyman-quotes",
-          "anchor": "How to Compare Handyman Quotes",
-          "title": "How to Compare Handyman Quotes",
+          "anchor": "How to compare handyman quotes",
+          "title": "How to compare handyman quotes",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/questions-to-ask-a-handyman",
           "anchor": "Questions to Ask Before Hiring a Handyman",
-          "title": "Questions to Ask a Handyman Before You Book",
+          "title": "Questions to ask a handyman before you book",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
-          "anchor": "What to Expect at Your First Handyman Visit",
-          "title": "What to Expect at Your First Handyman Visit",
+          "anchor": "What to expect at your first handyman visit",
+          "title": "What to expect at your first handyman visit",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -799,8 +799,8 @@
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
-          "anchor": "How to Hire a Handyman in the Treasure Valley",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "anchor": "How to hire a handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 0.748
         }
@@ -808,34 +808,34 @@
     },
     "/blog/handyman-vs-contractor": {
       "type": "blog",
-      "title": "Handyman vs Contractor: Which Does Your Job Need?",
-      "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
+      "title": "Handyman vs contractor: which does your job need?",
+      "anchor": "Handyman vs contractor: which does your job need?",
       "url": "/blog/handyman-vs-contractor",
       "links": [
         {
           "url": "/blog/handyman-red-flags",
           "anchor": "Handyman Red Flags",
-          "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
+          "title": "Handyman red flags: how to avoid hiring the wrong one",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-long-do-common-home-repairs-take",
           "anchor": "How Long Common Home Repairs Take",
-          "title": "How Long Do Common Home Repairs Take?",
+          "title": "How long do common home repairs take?",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/questions-to-ask-a-handyman",
           "anchor": "Questions to Ask Before Hiring a Handyman",
-          "title": "Questions to Ask a Handyman Before You Book",
+          "title": "Questions to ask a handyman before you book",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -865,14 +865,14 @@
     },
     "/blog/home-maintenance-budget-idaho": {
       "type": "blog",
-      "title": "How to Budget for Home Maintenance in Idaho",
-      "anchor": "How to Budget for Home Maintenance in Idaho",
+      "title": "How to budget for home maintenance in Idaho",
+      "anchor": "How to budget for home maintenance in Idaho",
       "url": "/blog/home-maintenance-budget-idaho",
       "links": [
         {
           "url": "/blog/deck-maintenance-boise",
           "anchor": "Deck Maintenance in Boise",
-          "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+          "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
           "type": "blog",
           "score": 999
         },
@@ -886,20 +886,20 @@
         {
           "url": "/blog/preparing-your-boise-home-for-winter",
           "anchor": "Preparing Your Boise Home for Winter",
-          "title": "Preparing Your Boise Home for Winter: The Checklist That Matters",
+          "title": "Preparing your Boise home for winter: the checklist that matters",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -922,28 +922,28 @@
     },
     "/blog/home-repairs-before-selling-boise": {
       "type": "blog",
-      "title": "Home Repairs Worth Making Before Selling Your Boise House",
-      "anchor": "Home Repairs Worth Making Before Selling Your Boise House",
+      "title": "Home repairs worth making before selling your Boise house",
+      "anchor": "Home repairs worth making before selling your Boise house",
       "url": "/blog/home-repairs-before-selling-boise",
       "links": [
         {
           "url": "/blog/how-long-do-common-home-repairs-take",
           "anchor": "How Long Common Home Repairs Take",
-          "title": "How Long Do Common Home Repairs Take?",
+          "title": "How long do common home repairs take?",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-to-budget-home-repairs-boise",
           "anchor": "How to Budget a Home Repair Punch List",
-          "title": "How to Budget a Home Repair Punch List in Boise",
+          "title": "How to budget a home repair punch list in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "Repairs & Fixes",
-          "title": "The First-Time Homeowner's Repair Handbook",
+          "anchor": "Repairs & fixes",
+          "title": "The first-time homeowner's repair handbook",
           "type": "guide",
           "score": 999
         },
@@ -970,8 +970,8 @@
         },
         {
           "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
           "type": "guide",
           "score": 0.242
         }
@@ -979,41 +979,41 @@
     },
     "/blog/hourly-rate-vs-flat-rate-handyman": {
       "type": "blog",
-      "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
-      "anchor": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
+      "title": "Hourly rate vs flat rate: how handyman pricing works",
+      "anchor": "Hourly rate vs flat rate: how handyman pricing works",
       "url": "/blog/hourly-rate-vs-flat-rate-handyman",
       "links": [
         {
           "url": "/blog/handyman-red-flags",
           "anchor": "Handyman Red Flags",
-          "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
+          "title": "Handyman red flags: how to avoid hiring the wrong one",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-long-do-common-home-repairs-take",
           "anchor": "How Long Common Home Repairs Take",
-          "title": "How Long Do Common Home Repairs Take?",
+          "title": "How long do common home repairs take?",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-to-budget-home-repairs-boise",
           "anchor": "How to Budget a Home Repair Punch List",
-          "title": "How to Budget a Home Repair Punch List in Boise",
+          "title": "How to budget a home repair punch list in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-to-compare-handyman-quotes",
-          "anchor": "How to Compare Handyman Quotes",
-          "title": "How to Compare Handyman Quotes",
+          "anchor": "How to compare handyman quotes",
+          "title": "How to compare handyman quotes",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -1027,8 +1027,8 @@
         },
         {
           "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "anchor": "Handyman services in Hidden Springs",
+          "title": "Handyman services in Hidden Springs",
           "type": "guide",
           "score": 0.643
         }
@@ -1036,28 +1036,28 @@
     },
     "/blog/how-long-do-common-home-repairs-take": {
       "type": "blog",
-      "title": "How Long Do Common Home Repairs Take?",
-      "anchor": "How Long Do Common Home Repairs Take?",
+      "title": "How long do common home repairs take?",
+      "anchor": "How long do common home repairs take?",
       "url": "/blog/how-long-do-common-home-repairs-take",
       "links": [
         {
           "url": "/blog/how-to-budget-home-repairs-boise",
           "anchor": "How to Budget a Home Repair Punch List",
-          "title": "How to Budget a Home Repair Punch List in Boise",
+          "title": "How to budget a home repair punch list in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
-          "anchor": "What to Expect at Your First Handyman Visit",
-          "title": "What to Expect at Your First Handyman Visit",
+          "anchor": "What to expect at your first handyman visit",
+          "title": "What to expect at your first handyman visit",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "Repairs & Fixes",
-          "title": "The First-Time Homeowner's Repair Handbook",
+          "anchor": "Repairs & fixes",
+          "title": "The first-time homeowner's repair handbook",
           "type": "guide",
           "score": 999
         },
@@ -1084,8 +1084,8 @@
         },
         {
           "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
           "type": "guide",
           "score": 0.255
         }
@@ -1093,41 +1093,41 @@
     },
     "/blog/how-to-budget-home-repairs-boise": {
       "type": "blog",
-      "title": "How to Budget a Home Repair Punch List in Boise",
-      "anchor": "How to Budget a Home Repair Punch List in Boise",
+      "title": "How to budget a home repair punch list in Boise",
+      "anchor": "How to budget a home repair punch list in Boise",
       "url": "/blog/how-to-budget-home-repairs-boise",
       "links": [
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
           "anchor": "Hourly Rate vs Flat Rate Handyman Pricing",
-          "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
+          "title": "Hourly rate vs flat rate: how handyman pricing works",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-long-do-common-home-repairs-take",
           "anchor": "How Long Common Home Repairs Take",
-          "title": "How Long Do Common Home Repairs Take?",
+          "title": "How long do common home repairs take?",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-to-compare-handyman-quotes",
-          "anchor": "How to Compare Handyman Quotes",
-          "title": "How to Compare Handyman Quotes",
+          "anchor": "How to compare handyman quotes",
+          "title": "How to compare handyman quotes",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
           "anchor": "Seasonal Home Maintenance Checklist for Boise",
-          "title": "Seasonal Home Maintenance Checklist for Boise Homes",
+          "title": "Seasonal home maintenance checklist for Boise homes",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -1150,41 +1150,41 @@
     },
     "/blog/how-to-compare-handyman-quotes": {
       "type": "blog",
-      "title": "How to Compare Handyman Quotes",
-      "anchor": "How to Compare Handyman Quotes",
+      "title": "How to compare handyman quotes",
+      "anchor": "How to compare handyman quotes",
       "url": "/blog/how-to-compare-handyman-quotes",
       "links": [
         {
           "url": "/blog/handyman-red-flags",
           "anchor": "Handyman Red Flags",
-          "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
+          "title": "Handyman red flags: how to avoid hiring the wrong one",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
           "anchor": "Hourly Rate vs Flat Rate Handyman Pricing",
-          "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
+          "title": "Hourly rate vs flat rate: how handyman pricing works",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-to-budget-home-repairs-boise",
           "anchor": "How to Budget a Home Repair Punch List",
-          "title": "How to Budget a Home Repair Punch List in Boise",
+          "title": "How to budget a home repair punch list in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/questions-to-ask-a-handyman",
           "anchor": "Questions to Ask Before Hiring a Handyman",
-          "title": "Questions to Ask a Handyman Before You Book",
+          "title": "Questions to ask a handyman before you book",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -1198,8 +1198,8 @@
         },
         {
           "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "anchor": "Handyman services in Hidden Springs",
+          "title": "Handyman services in Hidden Springs",
           "type": "guide",
           "score": 0.613
         }
@@ -1207,35 +1207,35 @@
     },
     "/blog/how-to-patch-drywall": {
       "type": "blog",
-      "title": "How to Patch Drywall Like a Pro (and When to Call One)",
-      "anchor": "How to Patch Drywall Like a Pro (and When to Call One)",
+      "title": "How to patch drywall like a pro (and when to call one)",
+      "anchor": "How to patch drywall like a pro (and when to call one)",
       "url": "/blog/how-to-patch-drywall",
       "links": [
         {
           "url": "/blog/interior-paint-touch-up-guide",
           "anchor": "Interior Paint Touch-Up Guide",
-          "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+          "title": "Interior paint touch-up guide: blending without repainting",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/new-home-punch-list-handyman",
           "anchor": "New-Home Punch List",
-          "title": "New-Home Punch List: What a Handyman Fixes After You Move In",
+          "title": "New-home punch list: what a handyman fixes after you move in",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "Repairs & Fixes",
-          "title": "The First-Time Homeowner's Repair Handbook",
+          "anchor": "Repairs & fixes",
+          "title": "The first-time homeowner's repair handbook",
           "type": "guide",
           "score": 999
         },
@@ -1255,8 +1255,8 @@
         },
         {
           "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
           "type": "guide",
           "score": 0.208
         }
@@ -1264,28 +1264,28 @@
     },
     "/blog/interior-paint-touch-up-guide": {
       "type": "blog",
-      "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
-      "anchor": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+      "title": "Interior paint touch-up guide: blending without repainting",
+      "anchor": "Interior paint touch-up guide: blending without repainting",
       "url": "/blog/interior-paint-touch-up-guide",
       "links": [
         {
           "url": "/blog/how-to-patch-drywall",
           "anchor": "How to Patch Drywall Like a Pro",
-          "title": "How to Patch Drywall Like a Pro (and When to Call One)",
+          "title": "How to patch drywall like a pro (and when to call one)",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/new-home-punch-list-handyman",
           "anchor": "New-Home Punch List",
-          "title": "New-Home Punch List: What a Handyman Fixes After You Move In",
+          "title": "New-home punch list: what a handyman fixes after you move in",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "Repairs & Fixes",
-          "title": "The First-Time Homeowner's Repair Handbook",
+          "anchor": "Repairs & fixes",
+          "title": "The first-time homeowner's repair handbook",
           "type": "guide",
           "score": 999
         },
@@ -1312,8 +1312,8 @@
         },
         {
           "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Small Home Upgrades That Pay Off",
-          "title": "Small Home Upgrades That Pay Off",
+          "anchor": "Small home upgrades that pay off",
+          "title": "Small home upgrades that pay off",
           "type": "guide",
           "score": 0.288
         }
@@ -1321,28 +1321,28 @@
     },
     "/blog/new-home-punch-list-handyman": {
       "type": "blog",
-      "title": "New-Home Punch List: What a Handyman Fixes After You Move In",
-      "anchor": "New-Home Punch List: What a Handyman Fixes After You Move In",
+      "title": "New-home punch list: what a handyman fixes after you move in",
+      "anchor": "New-home punch list: what a handyman fixes after you move in",
       "url": "/blog/new-home-punch-list-handyman",
       "links": [
         {
           "url": "/blog/how-to-patch-drywall",
           "anchor": "How to Patch Drywall Like a Pro",
-          "title": "How to Patch Drywall Like a Pro (and When to Call One)",
+          "title": "How to patch drywall like a pro (and when to call one)",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
           "anchor": "Interior Paint Touch-Up Guide",
-          "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+          "title": "Interior paint touch-up guide: blending without repainting",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-maintenance-guide",
-          "anchor": "Home Maintenance",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "anchor": "Home maintenance",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
@@ -1378,28 +1378,28 @@
     },
     "/blog/preparing-your-boise-home-for-winter": {
       "type": "blog",
-      "title": "Preparing Your Boise Home for Winter: The Checklist That Matters",
-      "anchor": "Preparing Your Boise Home for Winter: The Checklist That Matters",
+      "title": "Preparing your Boise home for winter: the checklist that matters",
+      "anchor": "Preparing your Boise home for winter: the checklist that matters",
       "url": "/blog/preparing-your-boise-home-for-winter",
       "links": [
         {
           "url": "/blog/deck-maintenance-boise",
           "anchor": "Deck Maintenance in Boise",
-          "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+          "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
           "anchor": "Fixing Squeaky Floors and Sticking Doors",
-          "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+          "title": "Fixing squeaky floors and sticking doors in Boise homes",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-maintenance-guide",
-          "anchor": "Home Maintenance",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "anchor": "Home maintenance",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
@@ -1435,27 +1435,27 @@
     },
     "/blog/questions-to-ask-a-handyman": {
       "type": "blog",
-      "title": "Questions to Ask a Handyman Before You Book",
-      "anchor": "Questions to Ask a Handyman Before You Book",
+      "title": "Questions to ask a handyman before you book",
+      "anchor": "Questions to ask a handyman before you book",
       "url": "/blog/questions-to-ask-a-handyman",
       "links": [
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/why-handyman-quotes-vary",
           "anchor": "Why Handyman Quotes Vary",
-          "title": "Why Handyman Quotes Vary So Much",
+          "title": "Why handyman quotes vary so much",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -1492,28 +1492,28 @@
     },
     "/blog/replacing-faucets-and-fixtures": {
       "type": "blog",
-      "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
-      "anchor": "Replacing Faucets and Fixtures: A Homeowner Guide",
+      "title": "Replacing faucets and fixtures: a homeowner guide",
+      "anchor": "Replacing faucets and fixtures: a homeowner guide",
       "url": "/blog/replacing-faucets-and-fixtures",
       "links": [
         {
           "url": "/blog/common-toilet-problems-and-fixes",
           "anchor": "Fixing Common Toilet Problems",
-          "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+          "title": "Fixing common toilet problems: running, rocking, and leaks",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Installs & Upgrades",
-          "title": "Small Home Upgrades That Pay Off",
+          "anchor": "Installs & upgrades",
+          "title": "Small home upgrades that pay off",
           "type": "guide",
           "score": 999
         },
@@ -1540,8 +1540,8 @@
         },
         {
           "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "anchor": "Handyman services in Hidden Springs",
+          "title": "Handyman services in Hidden Springs",
           "type": "guide",
           "score": 0.161
         }
@@ -1549,35 +1549,35 @@
     },
     "/blog/seasonal-home-maintenance-checklist-boise": {
       "type": "blog",
-      "title": "Seasonal Home Maintenance Checklist for Boise Homes",
-      "anchor": "Seasonal Home Maintenance Checklist for Boise Homes",
+      "title": "Seasonal home maintenance checklist for Boise homes",
+      "anchor": "Seasonal home maintenance checklist for Boise homes",
       "url": "/blog/seasonal-home-maintenance-checklist-boise",
       "links": [
         {
           "url": "/blog/energy-saving-home-fixes-boise",
           "anchor": "Energy-Saving Fixes a Handyman Can Do",
-          "title": "Energy-Saving Home Fixes for Boise Houses",
+          "title": "Energy-saving home fixes for Boise houses",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-long-do-common-home-repairs-take",
           "anchor": "How Long Common Home Repairs Take",
-          "title": "How Long Do Common Home Repairs Take?",
+          "title": "How long do common home repairs take?",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-to-budget-home-repairs-boise",
           "anchor": "How to Budget a Home Repair Punch List",
-          "title": "How to Budget a Home Repair Punch List in Boise",
+          "title": "How to budget a home repair punch list in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-maintenance-guide",
-          "anchor": "Home Maintenance",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "anchor": "Home maintenance",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
@@ -1606,28 +1606,28 @@
     },
     "/blog/small-home-upgrade-ideas-boise": {
       "type": "blog",
-      "title": "Small Home Upgrade Ideas That Refresh a Room in a Day",
-      "anchor": "Small Home Upgrade Ideas That Refresh a Room in a Day",
+      "title": "Small home upgrade ideas that refresh a room in a day",
+      "anchor": "Small home upgrade ideas that refresh a room in a day",
       "url": "/blog/small-home-upgrade-ideas-boise",
       "links": [
         {
           "url": "/blog/home-repairs-before-selling-boise",
           "anchor": "Home Repairs Worth Making Before Selling",
-          "title": "Home Repairs Worth Making Before Selling Your Boise House",
+          "title": "Home repairs worth making before selling your Boise house",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-long-do-common-home-repairs-take",
           "anchor": "How Long Common Home Repairs Take",
-          "title": "How Long Do Common Home Repairs Take?",
+          "title": "How long do common home repairs take?",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Installs & Upgrades",
-          "title": "Small Home Upgrades That Pay Off",
+          "anchor": "Installs & upgrades",
+          "title": "Small home upgrades that pay off",
           "type": "guide",
           "score": 999
         },
@@ -1663,28 +1663,28 @@
     },
     "/blog/tv-mounting-and-anchoring-guide": {
       "type": "blog",
-      "title": "TV Mounting and Anchoring Guide for Boise Homes",
-      "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
+      "title": "TV mounting and anchoring guide for Boise homes",
+      "anchor": "TV mounting and anchoring guide for Boise homes",
       "url": "/blog/tv-mounting-and-anchoring-guide",
       "links": [
         {
           "url": "/blog/how-to-patch-drywall",
           "anchor": "How to Patch Drywall Like a Pro",
-          "title": "How to Patch Drywall Like a Pro (and When to Call One)",
+          "title": "How to patch drywall like a pro (and when to call one)",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Installs & Upgrades",
-          "title": "Small Home Upgrades That Pay Off",
+          "anchor": "Installs & upgrades",
+          "title": "Small home upgrades that pay off",
           "type": "guide",
           "score": 999
         },
@@ -1711,8 +1711,8 @@
         },
         {
           "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
           "type": "guide",
           "score": 0.154
         }
@@ -1720,27 +1720,27 @@
     },
     "/blog/what-small-home-repairs-cost-boise": {
       "type": "blog",
-      "title": "What Small Home Repairs Cost in Boise",
-      "anchor": "What Small Home Repairs Cost in Boise",
+      "title": "What small home repairs cost in Boise",
+      "anchor": "What small home repairs cost in Boise",
       "url": "/blog/what-small-home-repairs-cost-boise",
       "links": [
         {
           "url": "/blog/questions-to-ask-a-handyman",
           "anchor": "Questions to Ask a Handyman",
-          "title": "Questions to Ask a Handyman Before You Book",
+          "title": "Questions to ask a handyman before you book",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/why-handyman-quotes-vary",
           "anchor": "Why Handyman Quotes Vary",
-          "title": "Why Handyman Quotes Vary So Much",
+          "title": "Why handyman quotes vary so much",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -1777,41 +1777,41 @@
     },
     "/blog/what-to-expect-first-handyman-visit": {
       "type": "blog",
-      "title": "What to Expect at Your First Handyman Visit",
-      "anchor": "What to Expect at Your First Handyman Visit",
+      "title": "What to expect at your first handyman visit",
+      "anchor": "What to expect at your first handyman visit",
       "url": "/blog/what-to-expect-first-handyman-visit",
       "links": [
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
           "anchor": "Hourly Rate vs Flat Rate Handyman Pricing",
-          "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
+          "title": "Hourly rate vs flat rate: how handyman pricing works",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-long-do-common-home-repairs-take",
           "anchor": "How Long Common Home Repairs Take",
-          "title": "How Long Do Common Home Repairs Take?",
+          "title": "How long do common home repairs take?",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/how-to-budget-home-repairs-boise",
           "anchor": "How to Budget a Home Repair Punch List",
-          "title": "How to Budget a Home Repair Punch List in Boise",
+          "title": "How to budget a home repair punch list in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/questions-to-ask-a-handyman",
           "anchor": "Questions to Ask Before Hiring a Handyman",
-          "title": "Questions to Ask a Handyman Before You Book",
+          "title": "Questions to ask a handyman before you book",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -1825,8 +1825,8 @@
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
-          "anchor": "How to Hire a Handyman in the Treasure Valley",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "anchor": "How to hire a handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 0.689
         }
@@ -1834,14 +1834,14 @@
     },
     "/blog/who-supplies-materials-handyman-jobs": {
       "type": "blog",
-      "title": "Who Supplies Materials on a Handyman Job?",
-      "anchor": "Who Supplies Materials on a Handyman Job?",
+      "title": "Who supplies materials on a handyman job?",
+      "anchor": "Who supplies materials on a handyman job?",
       "url": "/blog/who-supplies-materials-handyman-jobs",
       "links": [
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
           "anchor": "DIY vs Hiring a Handyman",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "title": "DIY vs hiring a handyman: when each actually makes sense",
           "type": "blog",
           "score": 999
         },
@@ -1854,14 +1854,14 @@
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -1891,27 +1891,27 @@
     },
     "/blog/why-handyman-quotes-vary": {
       "type": "blog",
-      "title": "Why Handyman Quotes Vary So Much",
-      "anchor": "Why Handyman Quotes Vary So Much",
+      "title": "Why handyman quotes vary so much",
+      "anchor": "Why handyman quotes vary so much",
       "url": "/blog/why-handyman-quotes-vary",
       "links": [
         {
           "url": "/blog/questions-to-ask-a-handyman",
           "anchor": "Questions to Ask a Handyman",
-          "title": "Questions to Ask a Handyman Before You Book",
+          "title": "Questions to ask a handyman before you book",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/what-small-home-repairs-cost-boise",
-          "anchor": "What Small Home Repairs Cost in Boise",
-          "title": "What Small Home Repairs Cost in Boise",
+          "anchor": "What small home repairs cost in Boise",
+          "title": "What small home repairs cost in Boise",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/boise-home-repair-cost-guide",
-          "anchor": "Costs & Hiring",
+          "anchor": "Costs & hiring",
           "title": "The complete Boise home repair cost guide",
           "type": "guide",
           "score": 999
@@ -1939,8 +1939,8 @@
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
-          "anchor": "How to Hire a Handyman in the Treasure Valley",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "anchor": "How to hire a handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 0.631
         }
@@ -1996,15 +1996,15 @@
         },
         {
           "url": "/blog/small-home-upgrade-ideas-boise",
-          "anchor": "Small Home Upgrade Ideas That Refresh a Room in a Day",
-          "title": "Small Home Upgrade Ideas That Refresh a Room in a Day",
+          "anchor": "Small home upgrade ideas that refresh a room in a day",
+          "title": "Small home upgrade ideas that refresh a room in a day",
           "type": "blog",
           "score": 0.126
         },
         {
           "url": "/blog/home-repairs-before-selling-boise",
-          "anchor": "Home Repairs Worth Making Before Selling Your Boise House",
-          "title": "Home Repairs Worth Making Before Selling Your Boise House",
+          "anchor": "Home repairs worth making before selling your Boise house",
+          "title": "Home repairs worth making before selling your Boise house",
           "type": "blog",
           "score": 0.117
         }
@@ -2060,15 +2060,15 @@
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
-          "anchor": "Ada vs Canyon County: Permits for Small Home Projects",
-          "title": "Ada vs Canyon County: Permits for Small Home Projects",
+          "anchor": "Ada vs Canyon County: permits for small home projects",
+          "title": "Ada vs Canyon County: permits for small home projects",
           "type": "blog",
           "score": 0.016
         },
         {
           "url": "/blog/aging-in-place-home-design",
-          "anchor": "Aging in Place: Small Home Modifications That Matter Most",
-          "title": "Aging in Place: Small Home Modifications That Matter Most",
+          "anchor": "Aging in place: small home modifications that matter most",
+          "title": "Aging in place: small home modifications that matter most",
           "type": "blog",
           "score": 0.014
         }
@@ -2124,15 +2124,15 @@
         },
         {
           "url": "/blog/common-toilet-problems-and-fixes",
-          "anchor": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
-          "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+          "anchor": "Fixing common toilet problems: running, rocking, and leaks",
+          "title": "Fixing common toilet problems: running, rocking, and leaks",
           "type": "blog",
           "score": 0.014
         },
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
-          "anchor": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
-          "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+          "anchor": "Fixing squeaky floors and sticking doors in Boise homes",
+          "title": "Fixing squeaky floors and sticking doors in Boise homes",
           "type": "blog",
           "score": 0.011
         }
@@ -2188,15 +2188,15 @@
         },
         {
           "url": "/blog/energy-saving-home-fixes-boise",
-          "anchor": "Energy-Saving Home Fixes for Boise Houses",
-          "title": "Energy-Saving Home Fixes for Boise Houses",
+          "anchor": "Energy-saving home fixes for Boise houses",
+          "title": "Energy-saving home fixes for Boise houses",
           "type": "blog",
           "score": 0.008
         },
         {
           "url": "/blog/drywall-repair-cost-boise",
-          "anchor": "Drywall Repair Cost in Boise: What Patches Really Run",
-          "title": "Drywall Repair Cost in Boise: What Patches Really Run",
+          "anchor": "Drywall repair cost in Boise: what patches really run",
+          "title": "Drywall repair cost in Boise: what patches really run",
           "type": "blog",
           "score": -0.009
         }
@@ -2252,15 +2252,15 @@
         },
         {
           "url": "/blog/fence-repair-treasure-valley",
-          "anchor": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
-          "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+          "anchor": "Fence repair in the Treasure Valley: posts, panels, and gates",
+          "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
           "type": "blog",
           "score": -0.011
         },
         {
           "url": "/blog/why-handyman-quotes-vary",
-          "anchor": "Why Handyman Quotes Vary So Much",
-          "title": "Why Handyman Quotes Vary So Much",
+          "anchor": "Why handyman quotes vary so much",
+          "title": "Why handyman quotes vary so much",
           "type": "blog",
           "score": -0.011
         }
@@ -2316,15 +2316,15 @@
         },
         {
           "url": "/blog/small-home-upgrade-ideas-boise",
-          "anchor": "Small Home Upgrade Ideas That Refresh a Room in a Day",
-          "title": "Small Home Upgrade Ideas That Refresh a Room in a Day",
+          "anchor": "Small home upgrade ideas that refresh a room in a day",
+          "title": "Small home upgrade ideas that refresh a room in a day",
           "type": "blog",
           "score": -0.014
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
-          "anchor": "Ada vs Canyon County: Permits for Small Home Projects",
-          "title": "Ada vs Canyon County: Permits for Small Home Projects",
+          "anchor": "Ada vs Canyon County: permits for small home projects",
+          "title": "Ada vs Canyon County: permits for small home projects",
           "type": "blog",
           "score": -0.024
         }
@@ -2380,15 +2380,15 @@
         },
         {
           "url": "/blog/boise-building-permit-guide",
-          "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
-          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "anchor": "Do home repairs need a permit in Boise? A practical guide",
+          "title": "Do home repairs need a permit in Boise? A practical guide",
           "type": "blog",
           "score": -0.024
         },
         {
           "url": "/blog/home-repairs-before-selling-boise",
-          "anchor": "Home Repairs Worth Making Before Selling Your Boise House",
-          "title": "Home Repairs Worth Making Before Selling Your Boise House",
+          "anchor": "Home repairs worth making before selling your Boise house",
+          "title": "Home repairs worth making before selling your Boise house",
           "type": "blog",
           "score": -0.024
         }
@@ -2444,15 +2444,15 @@
         },
         {
           "url": "/blog/aging-in-place-home-design",
-          "anchor": "Aging in Place: Small Home Modifications That Matter Most",
-          "title": "Aging in Place: Small Home Modifications That Matter Most",
+          "anchor": "Aging in place: small home modifications that matter most",
+          "title": "Aging in place: small home modifications that matter most",
           "type": "blog",
           "score": -0.026
         },
         {
           "url": "/blog/common-toilet-problems-and-fixes",
-          "anchor": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
-          "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+          "anchor": "Fixing common toilet problems: running, rocking, and leaks",
+          "title": "Fixing common toilet problems: running, rocking, and leaks",
           "type": "blog",
           "score": -0.026
         }
@@ -2508,15 +2508,15 @@
         },
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
-          "anchor": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
-          "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+          "anchor": "Fixing squeaky floors and sticking doors in Boise homes",
+          "title": "Fixing squeaky floors and sticking doors in Boise homes",
           "type": "blog",
           "score": -0.029
         },
         {
           "url": "/blog/energy-saving-home-fixes-boise",
-          "anchor": "Energy-Saving Home Fixes for Boise Houses",
-          "title": "Energy-Saving Home Fixes for Boise Houses",
+          "anchor": "Energy-saving home fixes for Boise houses",
+          "title": "Energy-saving home fixes for Boise houses",
           "type": "blog",
           "score": -0.031
         }
@@ -2565,8 +2565,8 @@
         },
         {
           "url": "/blog/drywall-repair-cost-boise",
-          "anchor": "Drywall Repair Cost in Boise: What Patches Really Run",
-          "title": "Drywall Repair Cost in Boise: What Patches Really Run",
+          "anchor": "Drywall repair cost in Boise: what patches really run",
+          "title": "Drywall repair cost in Boise: what patches really run",
           "type": "blog",
           "score": 0.3
         },
@@ -2579,8 +2579,8 @@
         },
         {
           "url": "/blog/handyman-vs-contractor",
-          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
-          "title": "Handyman vs Contractor: Which Does Your Job Need?",
+          "anchor": "Handyman vs contractor: which does your job need?",
+          "title": "Handyman vs contractor: which does your job need?",
           "type": "blog",
           "score": 0.132
         }
@@ -2629,8 +2629,8 @@
         },
         {
           "url": "/blog/drywall-repair-cost-boise",
-          "anchor": "Drywall Repair Cost in Boise: What Patches Really Run",
-          "title": "Drywall Repair Cost in Boise: What Patches Really Run",
+          "anchor": "Drywall repair cost in Boise: what patches really run",
+          "title": "Drywall repair cost in Boise: what patches really run",
           "type": "blog",
           "score": 0.149
         },
@@ -2643,8 +2643,8 @@
         },
         {
           "url": "/blog/handyman-vs-contractor",
-          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
-          "title": "Handyman vs Contractor: Which Does Your Job Need?",
+          "anchor": "Handyman vs contractor: which does your job need?",
+          "title": "Handyman vs contractor: which does your job need?",
           "type": "blog",
           "score": -0.009
         }
@@ -2700,15 +2700,15 @@
         },
         {
           "url": "/blog/drywall-repair-cost-boise",
-          "anchor": "Drywall Repair Cost in Boise: What Patches Really Run",
-          "title": "Drywall Repair Cost in Boise: What Patches Really Run",
+          "anchor": "Drywall repair cost in Boise: what patches really run",
+          "title": "Drywall repair cost in Boise: what patches really run",
           "type": "blog",
           "score": 0.109
         },
         {
           "url": "/blog/how-to-patch-drywall",
-          "anchor": "How to Patch Drywall Like a Pro (and When to Call One)",
-          "title": "How to Patch Drywall Like a Pro (and When to Call One)",
+          "anchor": "How to patch drywall like a pro (and when to call one)",
+          "title": "How to patch drywall like a pro (and when to call one)",
           "type": "blog",
           "score": -0.039
         }
@@ -2764,15 +2764,15 @@
         },
         {
           "url": "/blog/drywall-repair-cost-boise",
-          "anchor": "Drywall Repair Cost in Boise: What Patches Really Run",
-          "title": "Drywall Repair Cost in Boise: What Patches Really Run",
+          "anchor": "Drywall repair cost in Boise: what patches really run",
+          "title": "Drywall repair cost in Boise: what patches really run",
           "type": "blog",
           "score": 0.059
         },
         {
           "url": "/blog/handyman-vs-contractor",
-          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
-          "title": "Handyman vs Contractor: Which Does Your Job Need?",
+          "anchor": "Handyman vs contractor: which does your job need?",
+          "title": "Handyman vs contractor: which does your job need?",
           "type": "blog",
           "score": -0.05
         }
@@ -2828,15 +2828,15 @@
         },
         {
           "url": "/blog/drywall-repair-cost-boise",
-          "anchor": "Drywall Repair Cost in Boise: What Patches Really Run",
-          "title": "Drywall Repair Cost in Boise: What Patches Really Run",
+          "anchor": "Drywall repair cost in Boise: what patches really run",
+          "title": "Drywall repair cost in Boise: what patches really run",
           "type": "blog",
           "score": 0.04
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "anchor": "How to budget for home maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": -0.049
         }
@@ -2892,15 +2892,15 @@
         },
         {
           "url": "/blog/drywall-repair-cost-boise",
-          "anchor": "Drywall Repair Cost in Boise: What Patches Really Run",
-          "title": "Drywall Repair Cost in Boise: What Patches Really Run",
+          "anchor": "Drywall repair cost in Boise: what patches really run",
+          "title": "Drywall repair cost in Boise: what patches really run",
           "type": "blog",
           "score": -0.011
         },
         {
           "url": "/blog/fence-repair-treasure-valley",
-          "anchor": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
-          "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+          "anchor": "Fence repair in the Treasure Valley: posts, panels, and gates",
+          "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
           "type": "blog",
           "score": -0.052
         }
@@ -2956,15 +2956,15 @@
         },
         {
           "url": "/blog/drywall-repair-cost-boise",
-          "anchor": "Drywall Repair Cost in Boise: What Patches Really Run",
-          "title": "Drywall Repair Cost in Boise: What Patches Really Run",
+          "anchor": "Drywall repair cost in Boise: what patches really run",
+          "title": "Drywall repair cost in Boise: what patches really run",
           "type": "blog",
           "score": -0.051
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
-          "anchor": "What to Expect at Your First Handyman Visit",
-          "title": "What to Expect at Your First Handyman Visit",
+          "anchor": "What to expect at your first handyman visit",
+          "title": "What to expect at your first handyman visit",
           "type": "blog",
           "score": -0.052
         }
@@ -3020,15 +3020,15 @@
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
-          "anchor": "Interior Paint Touch-Up Guide: Blending Without Repainting",
-          "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+          "anchor": "Interior paint touch-up guide: blending without repainting",
+          "title": "Interior paint touch-up guide: blending without repainting",
           "type": "blog",
           "score": -0.054
         },
         {
           "url": "/blog/new-home-punch-list-handyman",
-          "anchor": "New-Home Punch List: What a Handyman Fixes After You Move In",
-          "title": "New-Home Punch List: What a Handyman Fixes After You Move In",
+          "anchor": "New-home punch list: what a handyman fixes after you move in",
+          "title": "New-home punch list: what a handyman fixes after you move in",
           "type": "blog",
           "score": -0.055
         }
@@ -3084,15 +3084,15 @@
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
-          "anchor": "Ada vs Canyon County: Permits for Small Home Projects",
-          "title": "Ada vs Canyon County: Permits for Small Home Projects",
+          "anchor": "Ada vs Canyon County: permits for small home projects",
+          "title": "Ada vs Canyon County: permits for small home projects",
           "type": "blog",
           "score": -0.066
         },
         {
           "url": "/blog/boise-building-permit-guide",
-          "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
-          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "anchor": "Do home repairs need a permit in Boise? A practical guide",
+          "title": "Do home repairs need a permit in Boise? A practical guide",
           "type": "blog",
           "score": -0.066
         }
@@ -3141,15 +3141,15 @@
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
-          "anchor": "The Caulking Guide for Boise Homes: What, Where, and How Often",
-          "title": "The Caulking Guide for Boise Homes: What, Where, and How Often",
+          "anchor": "The caulking guide for Boise homes: what, where, and how often",
+          "title": "The caulking guide for Boise homes: what, where, and how often",
           "type": "blog",
           "score": 0.1
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
-          "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
-          "title": "TV Mounting and Anchoring Guide for Boise Homes",
+          "anchor": "TV mounting and anchoring guide for Boise homes",
+          "title": "TV mounting and anchoring guide for Boise homes",
           "type": "blog",
           "score": 0.1
         },
@@ -3212,15 +3212,15 @@
         },
         {
           "url": "/blog/replacing-faucets-and-fixtures",
-          "anchor": "Replacing Faucets and Fixtures: A Homeowner Guide",
-          "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
+          "anchor": "Replacing faucets and fixtures: a homeowner guide",
+          "title": "Replacing faucets and fixtures: a homeowner guide",
           "type": "blog",
           "score": -0.014
         },
         {
           "url": "/blog/handyman-vs-contractor",
-          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
-          "title": "Handyman vs Contractor: Which Does Your Job Need?",
+          "anchor": "Handyman vs contractor: which does your job need?",
+          "title": "Handyman vs contractor: which does your job need?",
           "type": "blog",
           "score": -0.088
         }
@@ -3276,15 +3276,15 @@
         },
         {
           "url": "/blog/replacing-faucets-and-fixtures",
-          "anchor": "Replacing Faucets and Fixtures: A Homeowner Guide",
-          "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
+          "anchor": "Replacing faucets and fixtures: a homeowner guide",
+          "title": "Replacing faucets and fixtures: a homeowner guide",
           "type": "blog",
           "score": -0.054
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "anchor": "How to budget for home maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": -0.089
         }
@@ -3340,15 +3340,15 @@
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
-          "anchor": "What to Expect at Your First Handyman Visit",
-          "title": "What to Expect at Your First Handyman Visit",
+          "anchor": "What to expect at your first handyman visit",
+          "title": "What to expect at your first handyman visit",
           "type": "blog",
           "score": -0.092
         },
         {
           "url": "/blog/common-toilet-problems-and-fixes",
-          "anchor": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
-          "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+          "anchor": "Fixing common toilet problems: running, rocking, and leaks",
+          "title": "Fixing common toilet problems: running, rocking, and leaks",
           "type": "blog",
           "score": -0.094
         }
@@ -3404,15 +3404,15 @@
         },
         {
           "url": "/blog/home-repairs-before-selling-boise",
-          "anchor": "Home Repairs Worth Making Before Selling Your Boise House",
-          "title": "Home Repairs Worth Making Before Selling Your Boise House",
+          "anchor": "Home repairs worth making before selling your Boise house",
+          "title": "Home repairs worth making before selling your Boise house",
           "type": "blog",
           "score": -0.092
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
-          "anchor": "Interior Paint Touch-Up Guide: Blending Without Repainting",
-          "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+          "anchor": "Interior paint touch-up guide: blending without repainting",
+          "title": "Interior paint touch-up guide: blending without repainting",
           "type": "blog",
           "score": -0.092
         }
@@ -3468,15 +3468,15 @@
         },
         {
           "url": "/blog/handyman-red-flags",
-          "anchor": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
-          "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
+          "anchor": "Handyman red flags: how to avoid hiring the wrong one",
+          "title": "Handyman red flags: how to avoid hiring the wrong one",
           "type": "blog",
           "score": -0.094
         },
         {
           "url": "/blog/new-home-punch-list-handyman",
-          "anchor": "New-Home Punch List: What a Handyman Fixes After You Move In",
-          "title": "New-Home Punch List: What a Handyman Fixes After You Move In",
+          "anchor": "New-home punch list: what a handyman fixes after you move in",
+          "title": "New-home punch list: what a handyman fixes after you move in",
           "type": "blog",
           "score": -0.094
         }
@@ -3532,15 +3532,15 @@
         },
         {
           "url": "/blog/replacing-faucets-and-fixtures",
-          "anchor": "Replacing Faucets and Fixtures: A Homeowner Guide",
-          "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
+          "anchor": "Replacing faucets and fixtures: a homeowner guide",
+          "title": "Replacing faucets and fixtures: a homeowner guide",
           "type": "blog",
           "score": -0.094
         },
         {
           "url": "/blog/handyman-vs-contractor",
-          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
-          "title": "Handyman vs Contractor: Which Does Your Job Need?",
+          "anchor": "Handyman vs contractor: which does your job need?",
+          "title": "Handyman vs contractor: which does your job need?",
           "type": "blog",
           "score": -0.128
         }
@@ -3596,15 +3596,15 @@
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "anchor": "How to budget for home maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": -0.129
         },
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
-          "anchor": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
-          "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+          "anchor": "Fixing squeaky floors and sticking doors in Boise homes",
+          "title": "Fixing squeaky floors and sticking doors in Boise homes",
           "type": "blog",
           "score": -0.131
         }
@@ -3660,15 +3660,15 @@
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
-          "anchor": "What to Expect at Your First Handyman Visit",
-          "title": "What to Expect at Your First Handyman Visit",
+          "anchor": "What to expect at your first handyman visit",
+          "title": "What to expect at your first handyman visit",
           "type": "blog",
           "score": -0.131
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
-          "anchor": "Ada vs Canyon County: Permits for Small Home Projects",
-          "title": "Ada vs Canyon County: Permits for Small Home Projects",
+          "anchor": "Ada vs Canyon County: permits for small home projects",
+          "title": "Ada vs Canyon County: permits for small home projects",
           "type": "blog",
           "score": -0.133
         }
@@ -3717,15 +3717,15 @@
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
-          "anchor": "Gutter Cleaning Schedule for Boise Homes",
-          "title": "Gutter Cleaning Schedule for Boise Homes",
+          "anchor": "Gutter cleaning schedule for Boise homes",
+          "title": "Gutter cleaning schedule for Boise homes",
           "type": "blog",
           "score": 0.154
         },
         {
           "url": "/blog/fence-repair-treasure-valley",
-          "anchor": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
-          "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+          "anchor": "Fence repair in the Treasure Valley: posts, panels, and gates",
+          "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
           "type": "blog",
           "score": 0.109
         },
@@ -3781,15 +3781,15 @@
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
-          "anchor": "Gutter Cleaning Schedule for Boise Homes",
-          "title": "Gutter Cleaning Schedule for Boise Homes",
+          "anchor": "Gutter cleaning schedule for Boise homes",
+          "title": "Gutter cleaning schedule for Boise homes",
           "type": "blog",
           "score": 0.011
         },
         {
           "url": "/blog/deck-maintenance-boise",
-          "anchor": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
-          "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+          "anchor": "Deck maintenance in Boise: the annual rhythm that saves your deck",
+          "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
           "type": "blog",
           "score": -0.021
         },
@@ -3838,15 +3838,15 @@
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
-          "anchor": "Gutter Cleaning Schedule for Boise Homes",
-          "title": "Gutter Cleaning Schedule for Boise Homes",
+          "anchor": "Gutter cleaning schedule for Boise homes",
+          "title": "Gutter cleaning schedule for Boise homes",
           "type": "blog",
           "score": -0.029
         },
         {
           "url": "/blog/fence-repair-treasure-valley",
-          "anchor": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
-          "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+          "anchor": "Fence repair in the Treasure Valley: posts, panels, and gates",
+          "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
           "type": "blog",
           "score": -0.035
         },
@@ -3902,15 +3902,15 @@
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
-          "anchor": "Who Supplies Materials on a Handyman Job?",
-          "title": "Who Supplies Materials on a Handyman Job?",
+          "anchor": "Who supplies materials on a handyman job?",
+          "title": "Who supplies materials on a handyman job?",
           "type": "blog",
           "score": -0.053
         },
         {
           "url": "/blog/deck-maintenance-boise",
-          "anchor": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
-          "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+          "anchor": "Deck maintenance in Boise: the annual rhythm that saves your deck",
+          "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
           "type": "blog",
           "score": -0.063
         },
@@ -3966,15 +3966,15 @@
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
-          "anchor": "Gutter Cleaning Schedule for Boise Homes",
-          "title": "Gutter Cleaning Schedule for Boise Homes",
+          "anchor": "Gutter cleaning schedule for Boise homes",
+          "title": "Gutter cleaning schedule for Boise homes",
           "type": "blog",
           "score": -0.066
         },
         {
           "url": "/blog/fence-repair-treasure-valley",
-          "anchor": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
-          "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+          "anchor": "Fence repair in the Treasure Valley: posts, panels, and gates",
+          "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
           "type": "blog",
           "score": -0.071
         },
@@ -4030,15 +4030,15 @@
         },
         {
           "url": "/blog/why-handyman-quotes-vary",
-          "anchor": "Why Handyman Quotes Vary So Much",
-          "title": "Why Handyman Quotes Vary So Much",
+          "anchor": "Why handyman quotes vary so much",
+          "title": "Why handyman quotes vary so much",
           "type": "blog",
           "score": -0.088
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
-          "anchor": "Who Supplies Materials on a Handyman Job?",
-          "title": "Who Supplies Materials on a Handyman Job?",
+          "anchor": "Who supplies materials on a handyman job?",
+          "title": "Who supplies materials on a handyman job?",
           "type": "blog",
           "score": -0.092
         },
@@ -4094,15 +4094,15 @@
         },
         {
           "url": "/blog/deck-maintenance-boise",
-          "anchor": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
-          "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+          "anchor": "Deck maintenance in Boise: the annual rhythm that saves your deck",
+          "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
           "type": "blog",
           "score": -0.101
         },
         {
           "url": "/blog/boise-building-permit-guide",
-          "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
-          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "anchor": "Do home repairs need a permit in Boise? A practical guide",
+          "title": "Do home repairs need a permit in Boise? A practical guide",
           "type": "blog",
           "score": -0.104
         },
@@ -4158,15 +4158,15 @@
         },
         {
           "url": "/blog/common-toilet-problems-and-fixes",
-          "anchor": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
-          "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+          "anchor": "Fixing common toilet problems: running, rocking, and leaks",
+          "title": "Fixing common toilet problems: running, rocking, and leaks",
           "type": "blog",
           "score": -0.106
         },
         {
           "url": "/blog/how-to-patch-drywall",
-          "anchor": "How to Patch Drywall Like a Pro (and When to Call One)",
-          "title": "How to Patch Drywall Like a Pro (and When to Call One)",
+          "anchor": "How to patch drywall like a pro (and when to call one)",
+          "title": "How to patch drywall like a pro (and when to call one)",
           "type": "blog",
           "score": -0.106
         },
@@ -4229,22 +4229,22 @@
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
-          "anchor": "The Treasure Valley Exterior Home Care Guide",
-          "title": "The Treasure Valley Exterior Home Care Guide",
+          "anchor": "The Treasure Valley exterior home care guide",
+          "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
           "score": 0.132
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
-          "anchor": "Gutter Cleaning Schedule for Boise Homes",
-          "title": "Gutter Cleaning Schedule for Boise Homes",
+          "anchor": "Gutter cleaning schedule for Boise homes",
+          "title": "Gutter cleaning schedule for Boise homes",
           "type": "blog",
           "score": -0.109
         },
         {
           "url": "/blog/fence-repair-treasure-valley",
-          "anchor": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
-          "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+          "anchor": "Fence repair in the Treasure Valley: posts, panels, and gates",
+          "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
           "type": "blog",
           "score": -0.115
         }
@@ -4300,15 +4300,15 @@
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
-          "anchor": "The Caulking Guide for Boise Homes: What, Where, and How Often",
-          "title": "The Caulking Guide for Boise Homes: What, Where, and How Often",
+          "anchor": "The caulking guide for Boise homes: what, where, and how often",
+          "title": "The caulking guide for Boise homes: what, where, and how often",
           "type": "blog",
           "score": 0.163
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
-          "anchor": "Seasonal Home Maintenance Checklist for Boise Homes",
-          "title": "Seasonal Home Maintenance Checklist for Boise Homes",
+          "anchor": "Seasonal home maintenance checklist for Boise homes",
+          "title": "Seasonal home maintenance checklist for Boise homes",
           "type": "blog",
           "score": 0.077
         }
@@ -4364,15 +4364,15 @@
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
-          "anchor": "The Caulking Guide for Boise Homes: What, Where, and How Often",
-          "title": "The Caulking Guide for Boise Homes: What, Where, and How Often",
+          "anchor": "The caulking guide for Boise homes: what, where, and how often",
+          "title": "The caulking guide for Boise homes: what, where, and how often",
           "type": "blog",
           "score": 0.02
         },
         {
           "url": "/blog/energy-saving-home-fixes-boise",
-          "anchor": "Energy-Saving Home Fixes for Boise Houses",
-          "title": "Energy-Saving Home Fixes for Boise Houses",
+          "anchor": "Energy-saving home fixes for Boise houses",
+          "title": "Energy-saving home fixes for Boise houses",
           "type": "blog",
           "score": -0.047
         }
@@ -4428,15 +4428,15 @@
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
-          "anchor": "The Caulking Guide for Boise Homes: What, Where, and How Often",
-          "title": "The Caulking Guide for Boise Homes: What, Where, and How Often",
+          "anchor": "The caulking guide for Boise homes: what, where, and how often",
+          "title": "The caulking guide for Boise homes: what, where, and how often",
           "type": "blog",
           "score": -0.02
         },
         {
           "url": "/blog/new-home-punch-list-handyman",
-          "anchor": "New-Home Punch List: What a Handyman Fixes After You Move In",
-          "title": "New-Home Punch List: What a Handyman Fixes After You Move In",
+          "anchor": "New-home punch list: what a handyman fixes after you move in",
+          "title": "New-home punch list: what a handyman fixes after you move in",
           "type": "blog",
           "score": -0.052
         }
@@ -4492,15 +4492,15 @@
         },
         {
           "url": "/blog/small-home-upgrade-ideas-boise",
-          "anchor": "Small Home Upgrade Ideas That Refresh a Room in a Day",
-          "title": "Small Home Upgrade Ideas That Refresh a Room in a Day",
+          "anchor": "Small home upgrade ideas that refresh a room in a day",
+          "title": "Small home upgrade ideas that refresh a room in a day",
           "type": "blog",
           "score": -0.056
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
-          "anchor": "The Caulking Guide for Boise Homes: What, Where, and How Often",
-          "title": "The Caulking Guide for Boise Homes: What, Where, and How Often",
+          "anchor": "The caulking guide for Boise homes: what, where, and how often",
+          "title": "The caulking guide for Boise homes: what, where, and how often",
           "type": "blog",
           "score": -0.063
         }
@@ -4542,8 +4542,8 @@
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
+          "anchor": "Handyman services in the Eagle Foothills",
+          "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
           "score": 0.08
         },
@@ -4556,15 +4556,15 @@
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
-          "anchor": "Seasonal Home Maintenance Checklist for Boise Homes",
-          "title": "Seasonal Home Maintenance Checklist for Boise Homes",
+          "anchor": "Seasonal home maintenance checklist for Boise homes",
+          "title": "Seasonal home maintenance checklist for Boise homes",
           "type": "blog",
           "score": -0.063
         },
         {
           "url": "/blog/aging-in-place-home-design",
-          "anchor": "Aging in Place: Small Home Modifications That Matter Most",
-          "title": "Aging in Place: Small Home Modifications That Matter Most",
+          "anchor": "Aging in place: small home modifications that matter most",
+          "title": "Aging in place: small home modifications that matter most",
           "type": "blog",
           "score": -0.066
         }
@@ -4620,15 +4620,15 @@
         },
         {
           "url": "/blog/preparing-your-boise-home-for-winter",
-          "anchor": "Preparing Your Boise Home for Winter: The Checklist That Matters",
-          "title": "Preparing Your Boise Home for Winter: The Checklist That Matters",
+          "anchor": "Preparing your Boise home for winter: the checklist that matters",
+          "title": "Preparing your Boise home for winter: the checklist that matters",
           "type": "blog",
           "score": -0.069
         },
         {
           "url": "/blog/home-repairs-before-selling-boise",
-          "anchor": "Home Repairs Worth Making Before Selling Your Boise House",
-          "title": "Home Repairs Worth Making Before Selling Your Boise House",
+          "anchor": "Home repairs worth making before selling your Boise house",
+          "title": "Home repairs worth making before selling your Boise house",
           "type": "blog",
           "score": -0.077
         }
@@ -4684,15 +4684,15 @@
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
-          "anchor": "Ada vs Canyon County: Permits for Small Home Projects",
-          "title": "Ada vs Canyon County: Permits for Small Home Projects",
+          "anchor": "Ada vs Canyon County: permits for small home projects",
+          "title": "Ada vs Canyon County: permits for small home projects",
           "type": "blog",
           "score": -0.086
         },
         {
           "url": "/blog/energy-saving-home-fixes-boise",
-          "anchor": "Energy-Saving Home Fixes for Boise Houses",
-          "title": "Energy-Saving Home Fixes for Boise Houses",
+          "anchor": "Energy-saving home fixes for Boise houses",
+          "title": "Energy-saving home fixes for Boise houses",
           "type": "blog",
           "score": -0.087
         }
@@ -4748,15 +4748,15 @@
         },
         {
           "url": "/blog/new-home-punch-list-handyman",
-          "anchor": "New-Home Punch List: What a Handyman Fixes After You Move In",
-          "title": "New-Home Punch List: What a Handyman Fixes After You Move In",
+          "anchor": "New-home punch list: what a handyman fixes after you move in",
+          "title": "New-home punch list: what a handyman fixes after you move in",
           "type": "blog",
           "score": -0.092
         },
         {
           "url": "/blog/small-home-upgrade-ideas-boise",
-          "anchor": "Small Home Upgrade Ideas That Refresh a Room in a Day",
-          "title": "Small Home Upgrade Ideas That Refresh a Room in a Day",
+          "anchor": "Small home upgrade ideas that refresh a room in a day",
+          "title": "Small home upgrade ideas that refresh a room in a day",
           "type": "blog",
           "score": -0.095
         }
@@ -4805,22 +4805,22 @@
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
+          "anchor": "Handyman services in the Eagle Foothills",
+          "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
           "score": 0.04
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
-          "anchor": "The Caulking Guide for Boise Homes: What, Where, and How Often",
-          "title": "The Caulking Guide for Boise Homes: What, Where, and How Often",
+          "anchor": "The caulking guide for Boise homes: what, where, and how often",
+          "title": "The caulking guide for Boise homes: what, where, and how often",
           "type": "blog",
           "score": -0.1
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
-          "anchor": "Seasonal Home Maintenance Checklist for Boise Homes",
-          "title": "Seasonal Home Maintenance Checklist for Boise Homes",
+          "anchor": "Seasonal home maintenance checklist for Boise homes",
+          "title": "Seasonal home maintenance checklist for Boise homes",
           "type": "blog",
           "score": -0.104
         }
@@ -4876,15 +4876,15 @@
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
-          "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
-          "title": "TV Mounting and Anchoring Guide for Boise Homes",
+          "anchor": "TV mounting and anchoring guide for Boise homes",
+          "title": "TV mounting and anchoring guide for Boise homes",
           "type": "blog",
           "score": 0.093
         },
         {
           "url": "/blog/how-to-compare-handyman-quotes",
-          "anchor": "How to Compare Handyman Quotes",
-          "title": "How to Compare Handyman Quotes",
+          "anchor": "How to compare handyman quotes",
+          "title": "How to compare handyman quotes",
           "type": "blog",
           "score": -0.02
         }
@@ -4940,15 +4940,15 @@
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
-          "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
-          "title": "TV Mounting and Anchoring Guide for Boise Homes",
+          "anchor": "TV mounting and anchoring guide for Boise homes",
+          "title": "TV mounting and anchoring guide for Boise homes",
           "type": "blog",
           "score": -0.048
         },
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
-          "anchor": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
-          "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+          "anchor": "Fixing squeaky floors and sticking doors in Boise homes",
+          "title": "Fixing squeaky floors and sticking doors in Boise homes",
           "type": "blog",
           "score": -0.172
         }
@@ -5004,15 +5004,15 @@
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
-          "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
-          "title": "TV Mounting and Anchoring Guide for Boise Homes",
+          "anchor": "TV mounting and anchoring guide for Boise homes",
+          "title": "TV mounting and anchoring guide for Boise homes",
           "type": "blog",
           "score": -0.088
         },
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
-          "anchor": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
-          "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+          "anchor": "Fixing squeaky floors and sticking doors in Boise homes",
+          "title": "Fixing squeaky floors and sticking doors in Boise homes",
           "type": "blog",
           "score": -0.212
         }
@@ -5061,22 +5061,22 @@
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
+          "anchor": "Handyman services in the Eagle Foothills",
+          "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
           "score": 0
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
-          "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
-          "title": "TV Mounting and Anchoring Guide for Boise Homes",
+          "anchor": "TV mounting and anchoring guide for Boise homes",
+          "title": "TV mounting and anchoring guide for Boise homes",
           "type": "blog",
           "score": -0.129
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
-          "anchor": "Gutter Cleaning Schedule for Boise Homes",
-          "title": "Gutter Cleaning Schedule for Boise Homes",
+          "anchor": "Gutter cleaning schedule for Boise homes",
+          "title": "Gutter cleaning schedule for Boise homes",
           "type": "blog",
           "score": -0.213
         }
@@ -5132,15 +5132,15 @@
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
-          "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
-          "title": "TV Mounting and Anchoring Guide for Boise Homes",
+          "anchor": "TV mounting and anchoring guide for Boise homes",
+          "title": "TV mounting and anchoring guide for Boise homes",
           "type": "blog",
           "score": -0.167
         },
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
-          "anchor": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
-          "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+          "anchor": "Fixing squeaky floors and sticking doors in Boise homes",
+          "title": "Fixing squeaky floors and sticking doors in Boise homes",
           "type": "blog",
           "score": -0.251
         }
@@ -5196,15 +5196,15 @@
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
-          "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
-          "title": "TV Mounting and Anchoring Guide for Boise Homes",
+          "anchor": "TV mounting and anchoring guide for Boise homes",
+          "title": "TV mounting and anchoring guide for Boise homes",
           "type": "blog",
           "score": -0.208
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
-          "anchor": "Gutter Cleaning Schedule for Boise Homes",
-          "title": "Gutter Cleaning Schedule for Boise Homes",
+          "anchor": "Gutter cleaning schedule for Boise homes",
+          "title": "Gutter cleaning schedule for Boise homes",
           "type": "blog",
           "score": -0.252
         }
@@ -5260,15 +5260,15 @@
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
-          "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
-          "title": "TV Mounting and Anchoring Guide for Boise Homes",
+          "anchor": "TV mounting and anchoring guide for Boise homes",
+          "title": "TV mounting and anchoring guide for Boise homes",
           "type": "blog",
           "score": -0.248
         },
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
-          "anchor": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
-          "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+          "anchor": "Fixing squeaky floors and sticking doors in Boise homes",
+          "title": "Fixing squeaky floors and sticking doors in Boise homes",
           "type": "blog",
           "score": -0.292
         }
@@ -5324,15 +5324,15 @@
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
-          "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
-          "title": "TV Mounting and Anchoring Guide for Boise Homes",
+          "anchor": "TV mounting and anchoring guide for Boise homes",
+          "title": "TV mounting and anchoring guide for Boise homes",
           "type": "blog",
           "score": -0.288
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
-          "anchor": "Gutter Cleaning Schedule for Boise Homes",
-          "title": "Gutter Cleaning Schedule for Boise Homes",
+          "anchor": "Gutter cleaning schedule for Boise homes",
+          "title": "Gutter cleaning schedule for Boise homes",
           "type": "blog",
           "score": -0.292
         }
@@ -5388,15 +5388,15 @@
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
-          "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
-          "title": "TV Mounting and Anchoring Guide for Boise Homes",
+          "anchor": "TV mounting and anchoring guide for Boise homes",
+          "title": "TV mounting and anchoring guide for Boise homes",
           "type": "blog",
           "score": -0.328
         },
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
-          "anchor": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
-          "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+          "anchor": "Fixing squeaky floors and sticking doors in Boise homes",
+          "title": "Fixing squeaky floors and sticking doors in Boise homes",
           "type": "blog",
           "score": -0.332
         }
@@ -5452,15 +5452,15 @@
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
-          "anchor": "Interior Paint Touch-Up Guide: Blending Without Repainting",
-          "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+          "anchor": "Interior paint touch-up guide: blending without repainting",
+          "title": "Interior paint touch-up guide: blending without repainting",
           "type": "blog",
           "score": 0.058
         },
         {
           "url": "/blog/small-home-upgrade-ideas-boise",
-          "anchor": "Small Home Upgrade Ideas That Refresh a Room in a Day",
-          "title": "Small Home Upgrade Ideas That Refresh a Room in a Day",
+          "anchor": "Small home upgrade ideas that refresh a room in a day",
+          "title": "Small home upgrade ideas that refresh a room in a day",
           "type": "blog",
           "score": -0.007
         }
@@ -5516,15 +5516,15 @@
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
-          "anchor": "Interior Paint Touch-Up Guide: Blending Without Repainting",
-          "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+          "anchor": "Interior paint touch-up guide: blending without repainting",
+          "title": "Interior paint touch-up guide: blending without repainting",
           "type": "blog",
           "score": -0.086
         },
         {
           "url": "/blog/small-home-upgrade-ideas-boise",
-          "anchor": "Small Home Upgrade Ideas That Refresh a Room in a Day",
-          "title": "Small Home Upgrade Ideas That Refresh a Room in a Day",
+          "anchor": "Small home upgrade ideas that refresh a room in a day",
+          "title": "Small home upgrade ideas that refresh a room in a day",
           "type": "blog",
           "score": -0.149
         }
@@ -5580,15 +5580,15 @@
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
-          "anchor": "Interior Paint Touch-Up Guide: Blending Without Repainting",
-          "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+          "anchor": "Interior paint touch-up guide: blending without repainting",
+          "title": "Interior paint touch-up guide: blending without repainting",
           "type": "blog",
           "score": -0.126
         },
         {
           "url": "/blog/deck-maintenance-boise",
-          "anchor": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
-          "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+          "anchor": "Deck maintenance in Boise: the annual rhythm that saves your deck",
+          "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
           "type": "blog",
           "score": -0.172
         }
@@ -5637,22 +5637,22 @@
         },
         {
           "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "anchor": "Handyman services in Hidden Springs",
+          "title": "Handyman services in Hidden Springs",
           "type": "guide",
           "score": 0
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
-          "anchor": "Interior Paint Touch-Up Guide: Blending Without Repainting",
-          "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+          "anchor": "Interior paint touch-up guide: blending without repainting",
+          "title": "Interior paint touch-up guide: blending without repainting",
           "type": "blog",
           "score": -0.169
         },
         {
           "url": "/blog/home-repairs-before-selling-boise",
-          "anchor": "Home Repairs Worth Making Before Selling Your Boise House",
-          "title": "Home Repairs Worth Making Before Selling Your Boise House",
+          "anchor": "Home repairs worth making before selling your Boise house",
+          "title": "Home repairs worth making before selling your Boise house",
           "type": "blog",
           "score": -0.174
         }
@@ -5708,15 +5708,15 @@
         },
         {
           "url": "/blog/small-home-upgrade-ideas-boise",
-          "anchor": "Small Home Upgrade Ideas That Refresh a Room in a Day",
-          "title": "Small Home Upgrade Ideas That Refresh a Room in a Day",
+          "anchor": "Small home upgrade ideas that refresh a room in a day",
+          "title": "Small home upgrade ideas that refresh a room in a day",
           "type": "blog",
           "score": -0.187
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
-          "anchor": "Interior Paint Touch-Up Guide: Blending Without Repainting",
-          "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+          "anchor": "Interior paint touch-up guide: blending without repainting",
+          "title": "Interior paint touch-up guide: blending without repainting",
           "type": "blog",
           "score": -0.202
         }
@@ -5772,15 +5772,15 @@
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
-          "anchor": "The Caulking Guide for Boise Homes: What, Where, and How Often",
-          "title": "The Caulking Guide for Boise Homes: What, Where, and How Often",
+          "anchor": "The caulking guide for Boise homes: what, where, and how often",
+          "title": "The caulking guide for Boise homes: what, where, and how often",
           "type": "blog",
           "score": -0.209
         },
         {
           "url": "/blog/deck-maintenance-boise",
-          "anchor": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
-          "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+          "anchor": "Deck maintenance in Boise: the annual rhythm that saves your deck",
+          "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
           "type": "blog",
           "score": -0.212
         }
@@ -5836,15 +5836,15 @@
         },
         {
           "url": "/blog/home-repairs-before-selling-boise",
-          "anchor": "Home Repairs Worth Making Before Selling Your Boise House",
-          "title": "Home Repairs Worth Making Before Selling Your Boise House",
+          "anchor": "Home repairs worth making before selling your Boise house",
+          "title": "Home repairs worth making before selling your Boise house",
           "type": "blog",
           "score": -0.214
         },
         {
           "url": "/blog/small-home-upgrade-ideas-boise",
-          "anchor": "Small Home Upgrade Ideas That Refresh a Room in a Day",
-          "title": "Small Home Upgrade Ideas That Refresh a Room in a Day",
+          "anchor": "Small home upgrade ideas that refresh a room in a day",
+          "title": "Small home upgrade ideas that refresh a room in a day",
           "type": "blog",
           "score": -0.229
         }
@@ -5900,15 +5900,15 @@
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
-          "anchor": "Interior Paint Touch-Up Guide: Blending Without Repainting",
-          "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+          "anchor": "Interior paint touch-up guide: blending without repainting",
+          "title": "Interior paint touch-up guide: blending without repainting",
           "type": "blog",
           "score": -0.246
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
-          "anchor": "The Caulking Guide for Boise Homes: What, Where, and How Often",
-          "title": "The Caulking Guide for Boise Homes: What, Where, and How Often",
+          "anchor": "The caulking guide for Boise homes: what, where, and how often",
+          "title": "The caulking guide for Boise homes: what, where, and how often",
           "type": "blog",
           "score": -0.249
         }
@@ -5964,15 +5964,15 @@
         },
         {
           "url": "/blog/deck-maintenance-boise",
-          "anchor": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
-          "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+          "anchor": "Deck maintenance in Boise: the annual rhythm that saves your deck",
+          "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
           "type": "blog",
           "score": -0.252
         },
         {
           "url": "/blog/fence-repair-treasure-valley",
-          "anchor": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
-          "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+          "anchor": "Fence repair in the Treasure Valley: posts, panels, and gates",
+          "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
           "type": "blog",
           "score": -0.252
         }
@@ -6028,15 +6028,15 @@
         },
         {
           "url": "/blog/replacing-faucets-and-fixtures",
-          "anchor": "Replacing Faucets and Fixtures: A Homeowner Guide",
-          "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
+          "anchor": "Replacing faucets and fixtures: a homeowner guide",
+          "title": "Replacing faucets and fixtures: a homeowner guide",
           "type": "blog",
           "score": 0.021
         },
         {
           "url": "/blog/common-toilet-problems-and-fixes",
-          "anchor": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
-          "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+          "anchor": "Fixing common toilet problems: running, rocking, and leaks",
+          "title": "Fixing common toilet problems: running, rocking, and leaks",
           "type": "blog",
           "score": -0.017
         }
@@ -6092,15 +6092,15 @@
         },
         {
           "url": "/blog/replacing-faucets-and-fixtures",
-          "anchor": "Replacing Faucets and Fixtures: A Homeowner Guide",
-          "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
+          "anchor": "Replacing faucets and fixtures: a homeowner guide",
+          "title": "Replacing faucets and fixtures: a homeowner guide",
           "type": "blog",
           "score": -0.121
         },
         {
           "url": "/blog/why-handyman-quotes-vary",
-          "anchor": "Why Handyman Quotes Vary So Much",
-          "title": "Why Handyman Quotes Vary So Much",
+          "anchor": "Why handyman quotes vary so much",
+          "title": "Why handyman quotes vary so much",
           "type": "blog",
           "score": -0.129
         }
@@ -6156,15 +6156,15 @@
         },
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
-          "anchor": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
-          "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
+          "anchor": "Hourly rate vs flat rate: how handyman pricing works",
+          "title": "Hourly rate vs flat rate: how handyman pricing works",
           "type": "blog",
           "score": -0.131
         },
         {
           "url": "/blog/handyman-red-flags",
-          "anchor": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
-          "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
+          "anchor": "Handyman red flags: how to avoid hiring the wrong one",
+          "title": "Handyman red flags: how to avoid hiring the wrong one",
           "type": "blog",
           "score": -0.134
         }
@@ -6220,15 +6220,15 @@
         },
         {
           "url": "/blog/boise-building-permit-guide",
-          "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
-          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "anchor": "Do home repairs need a permit in Boise? A practical guide",
+          "title": "Do home repairs need a permit in Boise? A practical guide",
           "type": "blog",
           "score": -0.147
         },
         {
           "url": "/blog/how-to-patch-drywall",
-          "anchor": "How to Patch Drywall Like a Pro (and When to Call One)",
-          "title": "How to Patch Drywall Like a Pro (and When to Call One)",
+          "anchor": "How to patch drywall like a pro (and when to call one)",
+          "title": "How to patch drywall like a pro (and when to call one)",
           "type": "blog",
           "score": -0.149
         }
@@ -6284,15 +6284,15 @@
         },
         {
           "url": "/blog/common-toilet-problems-and-fixes",
-          "anchor": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
-          "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+          "anchor": "Fixing common toilet problems: running, rocking, and leaks",
+          "title": "Fixing common toilet problems: running, rocking, and leaks",
           "type": "blog",
           "score": -0.157
         },
         {
           "url": "/blog/replacing-faucets-and-fixtures",
-          "anchor": "Replacing Faucets and Fixtures: A Homeowner Guide",
-          "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
+          "anchor": "Replacing faucets and fixtures: a homeowner guide",
+          "title": "Replacing faucets and fixtures: a homeowner guide",
           "type": "blog",
           "score": -0.159
         }
@@ -6348,15 +6348,15 @@
         },
         {
           "url": "/blog/handyman-vs-contractor",
-          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
-          "title": "Handyman vs Contractor: Which Does Your Job Need?",
+          "anchor": "Handyman vs contractor: which does your job need?",
+          "title": "Handyman vs contractor: which does your job need?",
           "type": "blog",
           "score": -0.169
         },
         {
           "url": "/blog/why-handyman-quotes-vary",
-          "anchor": "Why Handyman Quotes Vary So Much",
-          "title": "Why Handyman Quotes Vary So Much",
+          "anchor": "Why handyman quotes vary so much",
+          "title": "Why handyman quotes vary so much",
           "type": "blog",
           "score": -0.169
         }
@@ -6412,15 +6412,15 @@
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "anchor": "How to budget for home maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": -0.17
         },
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
-          "anchor": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
-          "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
+          "anchor": "Hourly rate vs flat rate: how handyman pricing works",
+          "title": "Hourly rate vs flat rate: how handyman pricing works",
           "type": "blog",
           "score": -0.171
         }
@@ -6476,15 +6476,15 @@
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
-          "anchor": "What to Expect at Your First Handyman Visit",
-          "title": "What to Expect at Your First Handyman Visit",
+          "anchor": "What to expect at your first handyman visit",
+          "title": "What to expect at your first handyman visit",
           "type": "blog",
           "score": -0.172
         },
         {
           "url": "/blog/handyman-red-flags",
-          "anchor": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
-          "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
+          "anchor": "Handyman red flags: how to avoid hiring the wrong one",
+          "title": "Handyman red flags: how to avoid hiring the wrong one",
           "type": "blog",
           "score": -0.174
         }
@@ -6540,15 +6540,15 @@
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
-          "anchor": "Ada vs Canyon County: Permits for Small Home Projects",
-          "title": "Ada vs Canyon County: Permits for Small Home Projects",
+          "anchor": "Ada vs Canyon County: permits for small home projects",
+          "title": "Ada vs Canyon County: permits for small home projects",
           "type": "blog",
           "score": -0.186
         },
         {
           "url": "/blog/boise-building-permit-guide",
-          "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
-          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "anchor": "Do home repairs need a permit in Boise? A practical guide",
+          "title": "Do home repairs need a permit in Boise? A practical guide",
           "type": "blog",
           "score": -0.186
         }
@@ -6611,8 +6611,8 @@
         },
         {
           "url": "/blog/how-to-compare-handyman-quotes",
-          "anchor": "How to Compare Handyman Quotes",
-          "title": "How to Compare Handyman Quotes",
+          "anchor": "How to compare handyman quotes",
+          "title": "How to compare handyman quotes",
           "type": "blog",
           "score": -0.06
         }
@@ -7146,7 +7146,7 @@
         {
           "url": "/guides/boise-home-maintenance-guide",
           "anchor": "Boise home maintenance guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
@@ -7160,7 +7160,7 @@
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to hire a handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
@@ -7173,22 +7173,22 @@
         },
         {
           "url": "/blog/how-to-compare-handyman-quotes",
-          "anchor": "How to Compare Handyman Quotes",
-          "title": "How to Compare Handyman Quotes",
+          "anchor": "How to compare handyman quotes",
+          "title": "How to compare handyman quotes",
           "type": "blog",
           "score": 0.368
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
-          "anchor": "Who Supplies Materials on a Handyman Job?",
-          "title": "Who Supplies Materials on a Handyman Job?",
+          "anchor": "Who supplies materials on a handyman job?",
+          "title": "Who supplies materials on a handyman job?",
           "type": "blog",
           "score": 0.361
         },
         {
           "url": "/blog/handyman-vs-contractor",
-          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
-          "title": "Handyman vs Contractor: Which Does Your Job Need?",
+          "anchor": "Handyman vs contractor: which does your job need?",
+          "title": "Handyman vs contractor: which does your job need?",
           "type": "blog",
           "score": 0.353
         }
@@ -7196,49 +7196,49 @@
     },
     "/guides/boise-home-maintenance-guide": {
       "type": "guide",
-      "title": "The Complete Boise Home Maintenance Guide",
-      "anchor": "The Complete Boise Home Maintenance Guide",
+      "title": "The complete Boise home maintenance guide",
+      "anchor": "The complete Boise home maintenance guide",
       "url": "/guides/boise-home-maintenance-guide",
       "links": [
         {
           "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "The First-Time Homeowner's Repair Handbook",
-          "title": "The First-Time Homeowner's Repair Handbook",
+          "anchor": "The first-time homeowner's repair handbook",
+          "title": "The first-time homeowner's repair handbook",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
           "anchor": "Treasure Valley Exterior Home Care Guide",
-          "title": "The Treasure Valley Exterior Home Care Guide",
+          "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/blog/preparing-your-boise-home-for-winter",
-          "anchor": "Preparing Your Boise Home for Winter: The Checklist That Matters",
-          "title": "Preparing Your Boise Home for Winter: The Checklist That Matters",
+          "anchor": "Preparing your Boise home for winter: the checklist that matters",
+          "title": "Preparing your Boise home for winter: the checklist that matters",
           "type": "blog",
           "score": 0.485
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
-          "anchor": "Seasonal Home Maintenance Checklist for Boise Homes",
-          "title": "Seasonal Home Maintenance Checklist for Boise Homes",
+          "anchor": "Seasonal home maintenance checklist for Boise homes",
+          "title": "Seasonal home maintenance checklist for Boise homes",
           "type": "blog",
           "score": 0.382
         },
         {
           "url": "/blog/energy-saving-home-fixes-boise",
-          "anchor": "Energy-Saving Home Fixes for Boise Houses",
-          "title": "Energy-Saving Home Fixes for Boise Houses",
+          "anchor": "Energy-saving home fixes for Boise houses",
+          "title": "Energy-saving home fixes for Boise houses",
           "type": "blog",
           "score": 0.315
         },
         {
           "url": "/blog/new-home-punch-list-handyman",
-          "anchor": "New-Home Punch List: What a Handyman Fixes After You Move In",
-          "title": "New-Home Punch List: What a Handyman Fixes After You Move In",
+          "anchor": "New-home punch list: what a handyman fixes after you move in",
+          "title": "New-home punch list: what a handyman fixes after you move in",
           "type": "blog",
           "score": 0.305
         },
@@ -7273,15 +7273,15 @@
         },
         {
           "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "The First-Time Homeowner's Repair Handbook",
-          "title": "The First-Time Homeowner's Repair Handbook",
+          "anchor": "The first-time homeowner's repair handbook",
+          "title": "The first-time homeowner's repair handbook",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
-          "anchor": "How to Hire a Handyman in the Treasure Valley",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "anchor": "How to hire a handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
@@ -7294,22 +7294,22 @@
         },
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
-          "anchor": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
-          "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
+          "anchor": "Hourly rate vs flat rate: how handyman pricing works",
+          "title": "Hourly rate vs flat rate: how handyman pricing works",
           "type": "blog",
           "score": 0.653
         },
         {
           "url": "/blog/how-to-compare-handyman-quotes",
-          "anchor": "How to Compare Handyman Quotes",
-          "title": "How to Compare Handyman Quotes",
+          "anchor": "How to compare handyman quotes",
+          "title": "How to compare handyman quotes",
           "type": "blog",
           "score": 0.449
         },
         {
           "url": "/blog/why-handyman-quotes-vary",
-          "anchor": "Why Handyman Quotes Vary So Much",
-          "title": "Why Handyman Quotes Vary So Much",
+          "anchor": "Why handyman quotes vary so much",
+          "title": "Why handyman quotes vary so much",
           "type": "blog",
           "score": 0.404
         },
@@ -7338,7 +7338,7 @@
         {
           "url": "/guides/boise-home-maintenance-guide",
           "anchor": "Boise home maintenance guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
@@ -7352,7 +7352,7 @@
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to hire a handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
@@ -7365,22 +7365,22 @@
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
-          "anchor": "Who Supplies Materials on a Handyman Job?",
-          "title": "Who Supplies Materials on a Handyman Job?",
+          "anchor": "Who supplies materials on a handyman job?",
+          "title": "Who supplies materials on a handyman job?",
           "type": "blog",
           "score": 0.315
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "anchor": "How to budget for home maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": 0.308
         },
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
-          "anchor": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "anchor": "DIY vs hiring a handyman: when each actually makes sense",
+          "title": "DIY vs hiring a handyman: when each actually makes sense",
           "type": "blog",
           "score": 0.284
         }
@@ -7388,8 +7388,8 @@
     },
     "/guides/eagle-foothills-handyman-guide": {
       "type": "guide",
-      "title": "Handyman Services in the Eagle Foothills",
-      "anchor": "Handyman Services in the Eagle Foothills",
+      "title": "Handyman services in the Eagle Foothills",
+      "anchor": "Handyman services in the Eagle Foothills",
       "url": "/guides/eagle-foothills-handyman-guide",
       "links": [
         {
@@ -7402,14 +7402,14 @@
         {
           "url": "/guides/boise-home-maintenance-guide",
           "anchor": "Boise home maintenance guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to hire a handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
@@ -7422,22 +7422,22 @@
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
-          "anchor": "Who Supplies Materials on a Handyman Job?",
-          "title": "Who Supplies Materials on a Handyman Job?",
+          "anchor": "Who supplies materials on a handyman job?",
+          "title": "Who supplies materials on a handyman job?",
           "type": "blog",
           "score": 0.289
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "anchor": "How to budget for home maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": 0.258
         },
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
-          "anchor": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "anchor": "DIY vs hiring a handyman: when each actually makes sense",
+          "title": "DIY vs hiring a handyman: when each actually makes sense",
           "type": "blog",
           "score": 0.209
         },
@@ -7466,14 +7466,14 @@
         {
           "url": "/guides/boise-home-maintenance-guide",
           "anchor": "Boise home maintenance guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to hire a handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
@@ -7486,22 +7486,22 @@
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "anchor": "How to budget for home maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": 0.297
         },
         {
           "url": "/blog/handyman-red-flags",
-          "anchor": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
-          "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
+          "anchor": "Handyman red flags: how to avoid hiring the wrong one",
+          "title": "Handyman red flags: how to avoid hiring the wrong one",
           "type": "blog",
           "score": 0.253
         },
         {
           "url": "/blog/boise-building-permit-guide",
-          "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
-          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "anchor": "Do home repairs need a permit in Boise? A practical guide",
+          "title": "Do home repairs need a permit in Boise? A practical guide",
           "type": "blog",
           "score": 0.245
         },
@@ -7523,49 +7523,49 @@
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
           "anchor": "Gutter Cleaning Schedule for Boise",
-          "title": "Gutter Cleaning Schedule for Boise Homes",
+          "title": "Gutter cleaning schedule for Boise homes",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/blog/preparing-your-boise-home-for-winter",
           "anchor": "Preparing Your Boise Home for Winter",
-          "title": "Preparing Your Boise Home for Winter: The Checklist That Matters",
+          "title": "Preparing your Boise home for winter: the checklist that matters",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
           "anchor": "Treasure Valley Exterior Home Care Guide",
-          "title": "The Treasure Valley Exterior Home Care Guide",
+          "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/blog/fence-repair-treasure-valley",
-          "anchor": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
-          "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+          "anchor": "Fence repair in the Treasure Valley: posts, panels, and gates",
+          "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
           "type": "blog",
           "score": 0.391
         },
         {
           "url": "/blog/deck-maintenance-boise",
-          "anchor": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
-          "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+          "anchor": "Deck maintenance in Boise: the annual rhythm that saves your deck",
+          "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
           "type": "blog",
           "score": 0.27
         },
         {
           "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Small Home Upgrades That Pay Off",
-          "title": "Small Home Upgrades That Pay Off",
+          "anchor": "Small home upgrades that pay off",
+          "title": "Small home upgrades that pay off",
           "type": "guide",
           "score": 0.122
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
-          "anchor": "Seasonal Home Maintenance Checklist for Boise Homes",
-          "title": "Seasonal Home Maintenance Checklist for Boise Homes",
+          "anchor": "Seasonal home maintenance checklist for Boise homes",
+          "title": "Seasonal home maintenance checklist for Boise homes",
           "type": "blog",
           "score": 0.088
         },
@@ -7580,49 +7580,49 @@
     },
     "/guides/first-time-homeowner-repair-handbook": {
       "type": "guide",
-      "title": "The First-Time Homeowner's Repair Handbook",
-      "anchor": "The First-Time Homeowner's Repair Handbook",
+      "title": "The first-time homeowner's repair handbook",
+      "anchor": "The first-time homeowner's repair handbook",
       "url": "/guides/first-time-homeowner-repair-handbook",
       "links": [
         {
           "url": "/guides/boise-home-maintenance-guide",
-          "anchor": "The Complete Boise Home Maintenance Guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "anchor": "The complete Boise home maintenance guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to Hire a Handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/blog/how-to-patch-drywall",
-          "anchor": "How to Patch Drywall Like a Pro (and When to Call One)",
-          "title": "How to Patch Drywall Like a Pro (and When to Call One)",
+          "anchor": "How to patch drywall like a pro (and when to call one)",
+          "title": "How to patch drywall like a pro (and when to call one)",
           "type": "blog",
           "score": 0.514
         },
         {
           "url": "/blog/common-toilet-problems-and-fixes",
-          "anchor": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
-          "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+          "anchor": "Fixing common toilet problems: running, rocking, and leaks",
+          "title": "Fixing common toilet problems: running, rocking, and leaks",
           "type": "blog",
           "score": 0.352
         },
         {
           "url": "/blog/home-repairs-before-selling-boise",
-          "anchor": "Home Repairs Worth Making Before Selling Your Boise House",
-          "title": "Home Repairs Worth Making Before Selling Your Boise House",
+          "anchor": "Home repairs worth making before selling your Boise house",
+          "title": "Home repairs worth making before selling your Boise house",
           "type": "blog",
           "score": 0.253
         },
         {
           "url": "/blog/how-long-do-common-home-repairs-take",
-          "anchor": "How Long Do Common Home Repairs Take?",
-          "title": "How Long Do Common Home Repairs Take?",
+          "anchor": "How long do common home repairs take?",
+          "title": "How long do common home repairs take?",
           "type": "blog",
           "score": 0.219
         },
@@ -7644,8 +7644,8 @@
     },
     "/guides/harris-ranch-handyman-guide": {
       "type": "guide",
-      "title": "Handyman Services in Harris Ranch",
-      "anchor": "Handyman Services in Harris Ranch",
+      "title": "Handyman services in Harris Ranch",
+      "anchor": "Handyman services in Harris Ranch",
       "url": "/guides/harris-ranch-handyman-guide",
       "links": [
         {
@@ -7658,42 +7658,42 @@
         {
           "url": "/guides/boise-home-maintenance-guide",
           "anchor": "Boise home maintenance guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to hire a handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "anchor": "Handyman services in Hidden Springs",
+          "title": "Handyman services in Hidden Springs",
           "type": "guide",
           "score": 1.064
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
-          "anchor": "What to Expect at Your First Handyman Visit",
-          "title": "What to Expect at Your First Handyman Visit",
+          "anchor": "What to expect at your first handyman visit",
+          "title": "What to expect at your first handyman visit",
           "type": "blog",
           "score": 0.283
         },
         {
           "url": "/blog/why-handyman-quotes-vary",
-          "anchor": "Why Handyman Quotes Vary So Much",
-          "title": "Why Handyman Quotes Vary So Much",
+          "anchor": "Why handyman quotes vary so much",
+          "title": "Why handyman quotes vary so much",
           "type": "blog",
           "score": 0.281
         },
         {
           "url": "/blog/questions-to-ask-a-handyman",
-          "anchor": "Questions to Ask a Handyman Before You Book",
-          "title": "Questions to Ask a Handyman Before You Book",
+          "anchor": "Questions to ask a handyman before you book",
+          "title": "Questions to ask a handyman before you book",
           "type": "blog",
           "score": 0.275
         },
@@ -7708,28 +7708,28 @@
     },
     "/guides/hidden-springs-handyman-guide": {
       "type": "guide",
-      "title": "Handyman Services in Hidden Springs",
-      "anchor": "Handyman Services in Hidden Springs",
+      "title": "Handyman services in Hidden Springs",
+      "anchor": "Handyman services in Hidden Springs",
       "url": "/guides/hidden-springs-handyman-guide",
       "links": [
         {
           "url": "/guides/boise-home-maintenance-guide",
           "anchor": "Boise home maintenance guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to hire a handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
           "type": "guide",
           "score": 1.064
         },
@@ -7742,22 +7742,22 @@
         },
         {
           "url": "/blog/handyman-red-flags",
-          "anchor": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
-          "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
+          "anchor": "Handyman red flags: how to avoid hiring the wrong one",
+          "title": "Handyman red flags: how to avoid hiring the wrong one",
           "type": "blog",
           "score": 0.286
         },
         {
           "url": "/blog/handyman-vs-contractor",
-          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
-          "title": "Handyman vs Contractor: Which Does Your Job Need?",
+          "anchor": "Handyman vs contractor: which does your job need?",
+          "title": "Handyman vs contractor: which does your job need?",
           "type": "blog",
           "score": 0.278
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
-          "anchor": "What to Expect at Your First Handyman Visit",
-          "title": "What to Expect at Your First Handyman Visit",
+          "anchor": "What to expect at your first handyman visit",
+          "title": "What to expect at your first handyman visit",
           "type": "blog",
           "score": 0.268
         },
@@ -7772,28 +7772,28 @@
     },
     "/guides/hire-a-handyman-treasure-valley": {
       "type": "guide",
-      "title": "How to Hire a Handyman in the Treasure Valley",
-      "anchor": "How to Hire a Handyman in the Treasure Valley",
+      "title": "How to hire a handyman in the Treasure Valley",
+      "anchor": "How to hire a handyman in the Treasure Valley",
       "url": "/guides/hire-a-handyman-treasure-valley",
       "links": [
         {
           "url": "/blog/handyman-red-flags",
           "anchor": "Handyman Red Flags",
-          "title": "Handyman Red Flags: How to Avoid Hiring the Wrong One",
+          "title": "Handyman red flags: how to avoid hiring the wrong one",
           "type": "blog",
           "score": 999
         },
         {
           "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "anchor": "Handyman services in Hidden Springs",
+          "title": "Handyman services in Hidden Springs",
           "type": "guide",
           "score": 0.875
         },
         {
           "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
           "type": "guide",
           "score": 0.849
         },
@@ -7813,15 +7813,15 @@
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
-          "anchor": "What to Expect at Your First Handyman Visit",
-          "title": "What to Expect at Your First Handyman Visit",
+          "anchor": "What to expect at your first handyman visit",
+          "title": "What to expect at your first handyman visit",
           "type": "blog",
           "score": 0.369
         },
         {
           "url": "/blog/why-handyman-quotes-vary",
-          "anchor": "Why Handyman Quotes Vary So Much",
-          "title": "Why Handyman Quotes Vary So Much",
+          "anchor": "Why handyman quotes vary so much",
+          "title": "Why handyman quotes vary so much",
           "type": "blog",
           "score": 0.351
         },
@@ -7850,14 +7850,14 @@
         {
           "url": "/guides/boise-home-maintenance-guide",
           "anchor": "Boise home maintenance guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to hire a handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
@@ -7870,22 +7870,22 @@
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
-          "anchor": "Who Supplies Materials on a Handyman Job?",
-          "title": "Who Supplies Materials on a Handyman Job?",
+          "anchor": "Who supplies materials on a handyman job?",
+          "title": "Who supplies materials on a handyman job?",
           "type": "blog",
           "score": 0.243
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "anchor": "How to budget for home maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": 0.201
         },
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
-          "anchor": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "anchor": "DIY vs hiring a handyman: when each actually makes sense",
+          "title": "DIY vs hiring a handyman: when each actually makes sense",
           "type": "blog",
           "score": 0.19
         },
@@ -7914,14 +7914,14 @@
         {
           "url": "/guides/boise-home-maintenance-guide",
           "anchor": "Boise home maintenance guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to hire a handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
@@ -7934,22 +7934,22 @@
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
-          "anchor": "Who Supplies Materials on a Handyman Job?",
-          "title": "Who Supplies Materials on a Handyman Job?",
+          "anchor": "Who supplies materials on a handyman job?",
+          "title": "Who supplies materials on a handyman job?",
           "type": "blog",
           "score": 0.198
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "anchor": "How to budget for home maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": 0.182
         },
         {
           "url": "/blog/how-to-compare-handyman-quotes",
-          "anchor": "How to Compare Handyman Quotes",
-          "title": "How to Compare Handyman Quotes",
+          "anchor": "How to compare handyman quotes",
+          "title": "How to compare handyman quotes",
           "type": "blog",
           "score": 0.181
         },
@@ -7978,14 +7978,14 @@
         {
           "url": "/guides/boise-home-maintenance-guide",
           "anchor": "Boise home maintenance guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to hire a handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
@@ -7998,22 +7998,22 @@
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
-          "anchor": "Ada vs Canyon County: Permits for Small Home Projects",
-          "title": "Ada vs Canyon County: Permits for Small Home Projects",
+          "anchor": "Ada vs Canyon County: permits for small home projects",
+          "title": "Ada vs Canyon County: permits for small home projects",
           "type": "blog",
           "score": 0.195
         },
         {
           "url": "/blog/boise-building-permit-guide",
-          "anchor": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
-          "title": "Do Home Repairs Need a Permit in Boise? A Practical Guide",
+          "anchor": "Do home repairs need a permit in Boise? A practical guide",
+          "title": "Do home repairs need a permit in Boise? A practical guide",
           "type": "blog",
           "score": 0.184
         },
         {
           "url": "/blog/how-to-budget-home-repairs-boise",
-          "anchor": "How to Budget a Home Repair Punch List in Boise",
-          "title": "How to Budget a Home Repair Punch List in Boise",
+          "anchor": "How to budget a home repair punch list in Boise",
+          "title": "How to budget a home repair punch list in Boise",
           "type": "blog",
           "score": 0.178
         },
@@ -8042,14 +8042,14 @@
         {
           "url": "/guides/boise-home-maintenance-guide",
           "anchor": "Boise home maintenance guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to hire a handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
@@ -8062,22 +8062,22 @@
         },
         {
           "url": "/blog/handyman-vs-contractor",
-          "anchor": "Handyman vs Contractor: Which Does Your Job Need?",
-          "title": "Handyman vs Contractor: Which Does Your Job Need?",
+          "anchor": "Handyman vs contractor: which does your job need?",
+          "title": "Handyman vs contractor: which does your job need?",
           "type": "blog",
           "score": 0.165
         },
         {
           "url": "/blog/questions-to-ask-a-handyman",
-          "anchor": "Questions to Ask a Handyman Before You Book",
-          "title": "Questions to Ask a Handyman Before You Book",
+          "anchor": "Questions to ask a handyman before you book",
+          "title": "Questions to ask a handyman before you book",
           "type": "blog",
           "score": 0.158
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
-          "anchor": "Who Supplies Materials on a Handyman Job?",
-          "title": "Who Supplies Materials on a Handyman Job?",
+          "anchor": "Who supplies materials on a handyman job?",
+          "title": "Who supplies materials on a handyman job?",
           "type": "blog",
           "score": 0.158
         },
@@ -8092,42 +8092,42 @@
     },
     "/guides/small-home-upgrades-that-pay-off": {
       "type": "guide",
-      "title": "Small Home Upgrades That Pay Off",
-      "anchor": "Small Home Upgrades That Pay Off",
+      "title": "Small home upgrades that pay off",
+      "anchor": "Small home upgrades that pay off",
       "url": "/guides/small-home-upgrades-that-pay-off",
       "links": [
         {
           "url": "/blog/small-home-upgrade-ideas-boise",
-          "anchor": "Small Home Upgrade Ideas That Refresh a Room in a Day",
-          "title": "Small Home Upgrade Ideas That Refresh a Room in a Day",
+          "anchor": "Small home upgrade ideas that refresh a room in a day",
+          "title": "Small home upgrade ideas that refresh a room in a day",
           "type": "blog",
           "score": 0.641
         },
         {
           "url": "/blog/aging-in-place-home-design",
-          "anchor": "Aging in Place: Small Home Modifications That Matter Most",
-          "title": "Aging in Place: Small Home Modifications That Matter Most",
+          "anchor": "Aging in place: small home modifications that matter most",
+          "title": "Aging in place: small home modifications that matter most",
           "type": "blog",
           "score": 0.415
         },
         {
           "url": "/blog/replacing-faucets-and-fixtures",
-          "anchor": "Replacing Faucets and Fixtures: A Homeowner Guide",
-          "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
+          "anchor": "Replacing faucets and fixtures: a homeowner guide",
+          "title": "Replacing faucets and fixtures: a homeowner guide",
           "type": "blog",
           "score": 0.34
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
-          "anchor": "TV Mounting and Anchoring Guide for Boise Homes",
-          "title": "TV Mounting and Anchoring Guide for Boise Homes",
+          "anchor": "TV mounting and anchoring guide for Boise homes",
+          "title": "TV mounting and anchoring guide for Boise homes",
           "type": "blog",
           "score": 0.207
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
-          "anchor": "The Treasure Valley Exterior Home Care Guide",
-          "title": "The Treasure Valley Exterior Home Care Guide",
+          "anchor": "The Treasure Valley exterior home care guide",
+          "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
           "score": 0.093
         },
@@ -8140,8 +8140,8 @@
         },
         {
           "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
           "type": "guide",
           "score": 0.004
         },
@@ -8170,14 +8170,14 @@
         {
           "url": "/guides/boise-home-maintenance-guide",
           "anchor": "Boise home maintenance guide",
-          "title": "The Complete Boise Home Maintenance Guide",
+          "title": "The complete Boise home maintenance guide",
           "type": "guide",
           "score": 999
         },
         {
           "url": "/guides/hire-a-handyman-treasure-valley",
           "anchor": "How to hire a handyman",
-          "title": "How to Hire a Handyman in the Treasure Valley",
+          "title": "How to hire a handyman in the Treasure Valley",
           "type": "guide",
           "score": 999
         },
@@ -8190,22 +8190,22 @@
         },
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
-          "anchor": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
-          "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
+          "anchor": "Hourly rate vs flat rate: how handyman pricing works",
+          "title": "Hourly rate vs flat rate: how handyman pricing works",
           "type": "blog",
           "score": 0.189
         },
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
-          "anchor": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
-          "title": "DIY vs Hiring a Handyman: When Each Actually Makes Sense",
+          "anchor": "DIY vs hiring a handyman: when each actually makes sense",
+          "title": "DIY vs hiring a handyman: when each actually makes sense",
           "type": "blog",
           "score": 0.139
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
-          "anchor": "How to Budget for Home Maintenance in Idaho",
-          "title": "How to Budget for Home Maintenance in Idaho",
+          "anchor": "How to budget for home maintenance in Idaho",
+          "title": "How to budget for home maintenance in Idaho",
           "type": "blog",
           "score": 0.135
         },
@@ -8220,8 +8220,8 @@
     },
     "/guides/treasure-valley-exterior-home-care-guide": {
       "type": "guide",
-      "title": "The Treasure Valley Exterior Home Care Guide",
-      "anchor": "The Treasure Valley Exterior Home Care Guide",
+      "title": "The Treasure Valley exterior home care guide",
+      "anchor": "The Treasure Valley exterior home care guide",
       "url": "/guides/treasure-valley-exterior-home-care-guide",
       "links": [
         {
@@ -8233,22 +8233,22 @@
         },
         {
           "url": "/blog/deck-maintenance-boise",
-          "anchor": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
-          "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+          "anchor": "Deck maintenance in Boise: the annual rhythm that saves your deck",
+          "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
           "type": "blog",
           "score": 0.425
         },
         {
           "url": "/blog/fence-repair-treasure-valley",
-          "anchor": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
-          "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+          "anchor": "Fence repair in the Treasure Valley: posts, panels, and gates",
+          "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
           "type": "blog",
           "score": 0.395
         },
         {
           "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Small Home Upgrades That Pay Off",
-          "title": "Small Home Upgrades That Pay Off",
+          "anchor": "Small home upgrades that pay off",
+          "title": "Small home upgrades that pay off",
           "type": "guide",
           "score": 0.093
         },
@@ -8261,15 +8261,15 @@
         },
         {
           "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "anchor": "Handyman services in Hidden Springs",
+          "title": "Handyman services in Hidden Springs",
           "type": "guide",
           "score": 0.029
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
-          "anchor": "Seasonal Home Maintenance Checklist for Boise Homes",
-          "title": "Seasonal Home Maintenance Checklist for Boise Homes",
+          "anchor": "Seasonal home maintenance checklist for Boise homes",
+          "title": "Seasonal home maintenance checklist for Boise homes",
           "type": "blog",
           "score": -0.005
         },
@@ -8304,8 +8304,8 @@
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
+          "anchor": "Handyman services in the Eagle Foothills",
+          "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
           "score": -0.04
         },
@@ -8318,8 +8318,8 @@
         },
         {
           "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
           "type": "guide",
           "score": -0.099
         },
@@ -8332,15 +8332,15 @@
         },
         {
           "url": "/blog/aging-in-place-home-design",
-          "anchor": "Aging in Place: Small Home Modifications That Matter Most",
-          "title": "Aging in Place: Small Home Modifications That Matter Most",
+          "anchor": "Aging in place: small home modifications that matter most",
+          "title": "Aging in place: small home modifications that matter most",
           "type": "blog",
           "score": -0.144
         },
         {
           "url": "/blog/energy-saving-home-fixes-boise",
-          "anchor": "Energy-Saving Home Fixes for Boise Houses",
-          "title": "Energy-Saving Home Fixes for Boise Houses",
+          "anchor": "Energy-saving home fixes for Boise houses",
+          "title": "Energy-saving home fixes for Boise houses",
           "type": "blog",
           "score": -0.19
         }
@@ -8382,29 +8382,29 @@
         },
         {
           "url": "/blog/drywall-repair-cost-boise",
-          "anchor": "Drywall Repair Cost in Boise: What Patches Really Run",
-          "title": "Drywall Repair Cost in Boise: What Patches Really Run",
+          "anchor": "Drywall repair cost in Boise: what patches really run",
+          "title": "Drywall repair cost in Boise: what patches really run",
           "type": "blog",
           "score": -0.08
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
+          "anchor": "Handyman services in the Eagle Foothills",
+          "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
           "score": -0.08
         },
         {
           "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "anchor": "Handyman services in Hidden Springs",
+          "title": "Handyman services in Hidden Springs",
           "type": "guide",
           "score": -0.103
         },
         {
           "url": "/blog/how-to-patch-drywall",
-          "anchor": "How to Patch Drywall Like a Pro (and When to Call One)",
-          "title": "How to Patch Drywall Like a Pro (and When to Call One)",
+          "anchor": "How to patch drywall like a pro (and when to call one)",
+          "title": "How to patch drywall like a pro (and when to call one)",
           "type": "blog",
           "score": -0.197
         }
@@ -8446,29 +8446,29 @@
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
+          "anchor": "Handyman services in the Eagle Foothills",
+          "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
           "score": -0.12
         },
         {
           "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman Services in Hidden Springs",
-          "title": "Handyman Services in Hidden Springs",
+          "anchor": "Handyman services in Hidden Springs",
+          "title": "Handyman services in Hidden Springs",
           "type": "guide",
           "score": -0.141
         },
         {
           "url": "/blog/new-home-punch-list-handyman",
-          "anchor": "New-Home Punch List: What a Handyman Fixes After You Move In",
-          "title": "New-Home Punch List: What a Handyman Fixes After You Move In",
+          "anchor": "New-home punch list: what a handyman fixes after you move in",
+          "title": "New-home punch list: what a handyman fixes after you move in",
           "type": "blog",
           "score": -0.254
         },
         {
           "url": "/blog/how-to-budget-home-repairs-boise",
-          "anchor": "How to Budget a Home Repair Punch List in Boise",
-          "title": "How to Budget a Home Repair Punch List in Boise",
+          "anchor": "How to budget a home repair punch list in Boise",
+          "title": "How to budget a home repair punch list in Boise",
           "type": "blog",
           "score": -0.289
         }
@@ -8496,8 +8496,8 @@
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
-          "anchor": "The Treasure Valley Exterior Home Care Guide",
-          "title": "The Treasure Valley Exterior Home Care Guide",
+          "anchor": "The Treasure Valley exterior home care guide",
+          "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
           "score": -0.021
         },
@@ -8524,15 +8524,15 @@
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
-          "anchor": "Ada vs Canyon County: Permits for Small Home Projects",
-          "title": "Ada vs Canyon County: Permits for Small Home Projects",
+          "anchor": "Ada vs Canyon County: permits for small home projects",
+          "title": "Ada vs Canyon County: permits for small home projects",
           "type": "blog",
           "score": -0.263
         },
         {
           "url": "/blog/common-toilet-problems-and-fixes",
-          "anchor": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
-          "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+          "anchor": "Fixing common toilet problems: running, rocking, and leaks",
+          "title": "Fixing common toilet problems: running, rocking, and leaks",
           "type": "blog",
           "score": -0.264
         }
@@ -8588,15 +8588,15 @@
         },
         {
           "url": "/blog/aging-in-place-home-design",
-          "anchor": "Aging in Place: Small Home Modifications That Matter Most",
-          "title": "Aging in Place: Small Home Modifications That Matter Most",
+          "anchor": "Aging in place: small home modifications that matter most",
+          "title": "Aging in place: small home modifications that matter most",
           "type": "blog",
           "score": -0.186
         },
         {
           "url": "/blog/preparing-your-boise-home-for-winter",
-          "anchor": "Preparing Your Boise Home for Winter: The Checklist That Matters",
-          "title": "Preparing Your Boise Home for Winter: The Checklist That Matters",
+          "anchor": "Preparing your Boise home for winter: the checklist that matters",
+          "title": "Preparing your Boise home for winter: the checklist that matters",
           "type": "blog",
           "score": -0.187
         }
@@ -8638,29 +8638,29 @@
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman Services in the Eagle Foothills",
-          "title": "Handyman Services in the Eagle Foothills",
+          "anchor": "Handyman services in the Eagle Foothills",
+          "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
           "score": -0.16
         },
         {
           "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "The First-Time Homeowner's Repair Handbook",
-          "title": "The First-Time Homeowner's Repair Handbook",
+          "anchor": "The first-time homeowner's repair handbook",
+          "title": "The first-time homeowner's repair handbook",
           "type": "guide",
           "score": -0.176
         },
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
-          "anchor": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
-          "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+          "anchor": "Fixing squeaky floors and sticking doors in Boise homes",
+          "title": "Fixing squeaky floors and sticking doors in Boise homes",
           "type": "blog",
           "score": -0.371
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
-          "anchor": "Gutter Cleaning Schedule for Boise Homes",
-          "title": "Gutter Cleaning Schedule for Boise Homes",
+          "anchor": "Gutter cleaning schedule for Boise homes",
+          "title": "Gutter cleaning schedule for Boise homes",
           "type": "blog",
           "score": -0.371
         }
@@ -8702,29 +8702,29 @@
         },
         {
           "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Small Home Upgrades That Pay Off",
-          "title": "Small Home Upgrades That Pay Off",
+          "anchor": "Small home upgrades that pay off",
+          "title": "Small home upgrades that pay off",
           "type": "guide",
           "score": -0.17
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
-          "anchor": "The Treasure Valley Exterior Home Care Guide",
-          "title": "The Treasure Valley Exterior Home Care Guide",
+          "anchor": "The Treasure Valley exterior home care guide",
+          "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
           "score": -0.177
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
-          "anchor": "Interior Paint Touch-Up Guide: Blending Without Repainting",
-          "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+          "anchor": "Interior paint touch-up guide: blending without repainting",
+          "title": "Interior paint touch-up guide: blending without repainting",
           "type": "blog",
           "score": -0.282
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
-          "anchor": "The Caulking Guide for Boise Homes: What, Where, and How Often",
-          "title": "The Caulking Guide for Boise Homes: What, Where, and How Often",
+          "anchor": "The caulking guide for Boise homes: what, where, and how often",
+          "title": "The caulking guide for Boise homes: what, where, and how often",
           "type": "blog",
           "score": -0.288
         }
@@ -8766,8 +8766,8 @@
         },
         {
           "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman Services in Harris Ranch",
-          "title": "Handyman Services in Harris Ranch",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
           "type": "guide",
           "score": -0.171
         },
@@ -8780,15 +8780,15 @@
         },
         {
           "url": "/blog/replacing-faucets-and-fixtures",
-          "anchor": "Replacing Faucets and Fixtures: A Homeowner Guide",
-          "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
+          "anchor": "Replacing faucets and fixtures: a homeowner guide",
+          "title": "Replacing faucets and fixtures: a homeowner guide",
           "type": "blog",
           "score": -0.239
         },
         {
           "url": "/blog/how-long-do-common-home-repairs-take",
-          "anchor": "How Long Do Common Home Repairs Take?",
-          "title": "How Long Do Common Home Repairs Take?",
+          "anchor": "How long do common home repairs take?",
+          "title": "How long do common home repairs take?",
           "type": "blog",
           "score": -0.266
         }
@@ -8942,100 +8942,100 @@
     "costs-and-hiring": [
       {
         "slug": "what-to-expect-first-handyman-visit",
-        "title": "What to Expect at Your First Handyman Visit",
+        "title": "What to expect at your first handyman visit",
         "publishedAt": "2026-07-25"
       },
       {
         "slug": "who-supplies-materials-handyman-jobs",
-        "title": "Who Supplies Materials on a Handyman Job?",
+        "title": "Who supplies materials on a handyman job?",
         "publishedAt": "2026-07-20"
       },
       {
         "slug": "home-maintenance-budget-idaho",
-        "title": "How to Budget for Home Maintenance in Idaho",
+        "title": "How to budget for home maintenance in Idaho",
         "publishedAt": "2026-07-13"
       },
       {
         "slug": "hourly-rate-vs-flat-rate-handyman",
-        "title": "Hourly Rate vs Flat Rate: How Handyman Pricing Works",
+        "title": "Hourly rate vs flat rate: how handyman pricing works",
         "publishedAt": "2026-07-12"
       }
     ],
     "installs-and-upgrades": [
       {
         "slug": "aging-in-place-home-design",
-        "title": "Aging in Place: Small Home Modifications That Matter Most",
+        "title": "Aging in place: small home modifications that matter most",
         "publishedAt": "2026-07-08"
       },
       {
         "slug": "replacing-faucets-and-fixtures",
-        "title": "Replacing Faucets and Fixtures: A Homeowner Guide",
+        "title": "Replacing faucets and fixtures: a homeowner guide",
         "publishedAt": "2026-07-01"
       },
       {
         "slug": "tv-mounting-and-anchoring-guide",
-        "title": "TV Mounting and Anchoring Guide for Boise Homes",
+        "title": "TV mounting and anchoring guide for Boise homes",
         "publishedAt": "2026-06-30"
       },
       {
         "slug": "small-home-upgrade-ideas-boise",
-        "title": "Small Home Upgrade Ideas That Refresh a Room in a Day",
+        "title": "Small home upgrade ideas that refresh a room in a day",
         "publishedAt": "2026-06-15"
       }
     ],
     "home-maintenance": [
       {
         "slug": "new-home-punch-list-handyman",
-        "title": "New-Home Punch List: What a Handyman Fixes After You Move In",
+        "title": "New-home punch list: what a handyman fixes after you move in",
         "publishedAt": "2026-07-22"
       },
       {
         "slug": "gutter-cleaning-schedule-boise",
-        "title": "Gutter Cleaning Schedule for Boise Homes",
+        "title": "Gutter cleaning schedule for Boise homes",
         "publishedAt": "2026-07-22"
       },
       {
         "slug": "preparing-your-boise-home-for-winter",
-        "title": "Preparing Your Boise Home for Winter: The Checklist That Matters",
+        "title": "Preparing your Boise home for winter: the checklist that matters",
         "publishedAt": "2026-07-17"
       },
       {
         "slug": "energy-saving-home-fixes-boise",
-        "title": "Energy-Saving Home Fixes for Boise Houses",
+        "title": "Energy-saving home fixes for Boise houses",
         "publishedAt": "2026-07-15"
       }
     ],
     "repairs-and-fixes": [
       {
         "slug": "common-toilet-problems-and-fixes",
-        "title": "Fixing Common Toilet Problems: Running, Rocking, and Leaks",
+        "title": "Fixing common toilet problems: running, rocking, and leaks",
         "publishedAt": "2026-07-18"
       },
       {
         "slug": "fixing-squeaky-floors-and-sticking-doors",
-        "title": "Fixing Squeaky Floors and Sticking Doors in Boise Homes",
+        "title": "Fixing squeaky floors and sticking doors in Boise homes",
         "publishedAt": "2026-07-10"
       },
       {
         "slug": "how-to-patch-drywall",
-        "title": "How to Patch Drywall Like a Pro (and When to Call One)",
+        "title": "How to patch drywall like a pro (and when to call one)",
         "publishedAt": "2026-07-02"
       },
       {
         "slug": "interior-paint-touch-up-guide",
-        "title": "Interior Paint Touch-Up Guide: Blending Without Repainting",
+        "title": "Interior paint touch-up guide: blending without repainting",
         "publishedAt": "2026-06-24"
       }
     ],
     "exterior-and-outdoor": [
       {
         "slug": "deck-maintenance-boise",
-        "title": "Deck Maintenance in Boise: The Annual Rhythm That Saves Your Deck",
+        "title": "Deck maintenance in Boise: the annual rhythm that saves your deck",
         "publishedAt": "2026-07-28"
       },
       {
         "slug": "fence-repair-treasure-valley",
-        "title": "Fence Repair in the Treasure Valley: Posts, Panels, and Gates",
+        "title": "Fence repair in the Treasure Valley: posts, panels, and gates",
         "publishedAt": "2026-06-19"
       }
     ]

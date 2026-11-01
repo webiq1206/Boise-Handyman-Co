@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const homeMaintenanceBudgetIdaho: BlogPostData = {
   slug: 'home-maintenance-budget-idaho',
-  title: 'How to Budget for Home Maintenance in Idaho',
+  title: 'How to budget for home maintenance in Idaho',
   seoTitle: 'Home Maintenance Budget for Idaho Homes',
   metaDescription:
     'Home maintenance budget for Idaho: plan 1 to 2 percent of home value a year or use a per-system checklist, plus what deferring maintenance costs.',
@@ -38,7 +38,7 @@ export const homeMaintenanceBudgetIdaho: BlogPostData = {
   ],
   relatedLinks: [
     { url: '/blog/handyman-prices-boise', anchor: 'What a Handyman Costs in Boise' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/blog/preparing-your-boise-home-for-winter', anchor: 'Preparing Your Boise Home for Winter' },
     { url: '/blog/deck-maintenance-boise', anchor: 'Deck Maintenance in Boise' },
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },

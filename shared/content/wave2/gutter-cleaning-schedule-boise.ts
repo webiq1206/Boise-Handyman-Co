@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const gutterCleaningScheduleBoise: BlogPostData = {
   slug: 'gutter-cleaning-schedule-boise',
-  title: 'Gutter Cleaning Schedule for Boise Homes',
+  title: 'Gutter cleaning schedule for Boise homes',
   seoTitle: 'Gutter Cleaning Schedule for Boise Homes',
   metaDescription:
     'Gutter cleaning schedule for Boise homes: how often gutters need it, why cottonwoods and ice dams set the timing, warning signs and local cost ranges.',
@@ -39,7 +39,7 @@ export const gutterCleaningScheduleBoise: BlogPostData = {
     { url: '/services/fence-deck-gutter-repair', anchor: 'Fence, Deck & Gutter Repair' },
     { url: '/blog/fence-repair-treasure-valley', anchor: 'Fence Repair in the Treasure Valley' },
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/services/carpentry-trim-repair', anchor: 'Carpentry & Trim Repair' },
     { url: '/contact', anchor: 'Contact' },
   ],

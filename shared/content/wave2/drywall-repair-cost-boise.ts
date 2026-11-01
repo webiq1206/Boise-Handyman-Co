@@ -5,7 +5,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const drywallRepairCostBoise: BlogPostData = {
   slug: 'drywall-repair-cost-boise',
-  title: 'Drywall Repair Cost in Boise: What Patches Really Run',
+  title: 'Drywall repair cost in Boise: what patches really run',
   seoTitle: 'Drywall Repair Cost in Boise (2026 Prices)',
   metaDescription:
     'Drywall repair in Boise runs $150 to $400 for most patches, texture matching included. See what drives the price and get a flat quote on your repair today.',
@@ -42,7 +42,7 @@ export const drywallRepairCostBoise: BlogPostData = {
   relatedLinks: [
     { url: '/services/drywall-repair', anchor: 'Drywall Repair & Patching' },
     { url: '/services/painting-touch-ups', anchor: 'Interior & Exterior Painting' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/blog/handyman-prices-boise', anchor: 'What a Handyman Costs in Boise' },
     { url: '/blog/diy-vs-hiring-a-handyman', anchor: 'DIY vs Hiring a Handyman' },
     { url: '/contact', anchor: 'Get a Quote' },

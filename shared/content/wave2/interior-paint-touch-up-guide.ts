@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const interiorPaintTouchUpGuide: BlogPostData = {
   slug: 'interior-paint-touch-up-guide',
-  title: 'Interior Paint Touch-Up Guide: Blending Without Repainting',
+  title: 'Interior paint touch-up guide: blending without repainting',
   seoTitle: 'Interior Paint Touch-Ups That Blend',
   metaDescription:
     'Interior paint touch-ups that blend: why touch-ups flash, how to match color and sheen, the feathering technique, and when a wall needs a full repaint.',

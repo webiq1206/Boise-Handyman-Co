@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const whatSmallHomeRepairsCostBoise: BlogPostData = {
   slug: 'what-small-home-repairs-cost-boise',
-  title: 'What Small Home Repairs Cost in Boise',
+  title: 'What small home repairs cost in Boise',
   seoTitle: 'What Small Home Repairs Cost in Boise',
   metaDescription:
     'Real Treasure Valley price ranges for drywall patches, faucet swaps, minor electrical, trim and more, plus what moves a handyman bill up or down. Budget before you book.',

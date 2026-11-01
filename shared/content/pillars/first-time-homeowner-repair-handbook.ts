@@ -2,7 +2,7 @@ import type { GuidePageData } from '../../guideContent';
 
 export const firstTimeHomeownerRepairHandbook: GuidePageData = {
   slug: 'first-time-homeowner-repair-handbook',
-  title: "The First-Time Homeowner's Repair Handbook",
+  title: "The first-time homeowner's repair handbook",
   seoTitle: 'First-Time Homeowner Repair Handbook',
   metaDescription:
     'First-time homeowner repair handbook: what breaks first, what to DIY, what to call a pro for, the tools worth owning, and what counts as urgent.',
@@ -30,12 +30,12 @@ export const firstTimeHomeownerRepairHandbook: GuidePageData = {
   linkedServices: ['drywall-repair', 'plumbing-repairs', 'electrical-repairs', 'home-maintenance'],
   linkedCities: ['boise', 'meridian', 'nampa', 'kuna'],
   relatedLinks: [
-    { url: '/guides/boise-home-maintenance-guide', anchor: 'The Complete Boise Home Maintenance Guide' },
+    { url: '/guides/boise-home-maintenance-guide', anchor: 'The complete Boise home maintenance guide' },
     { url: '/guides/boise-home-repair-cost-guide', anchor: 'Boise Home Repair Cost Guide' },
     { url: '/guides/hire-a-handyman-treasure-valley', anchor: 'How to Hire a Handyman' },
     { url: '/services/plumbing-repairs', anchor: 'Minor Plumbing Repairs' },
     { url: '/services/electrical-repairs', anchor: 'Minor Electrical Repairs' },
-    { url: '/blog/category/repairs-and-fixes', anchor: 'Repairs & Fixes articles' },
+    { url: '/blog/category/repairs-and-fixes', anchor: 'Repairs & fixes articles' },
     { url: '/contact', anchor: 'Contact' },
   ],
   faqs: [

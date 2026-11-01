@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const howLongDoCommonHomeRepairsTake: BlogPostData = {
   slug: 'how-long-do-common-home-repairs-take',
-  title: 'How Long Do Common Home Repairs Take?',
+  title: 'How long do common home repairs take?',
   seoTitle: 'How Long Common Home Repairs Take',
   metaDescription:
     'How long common home repairs take: realistic times for drywall patches, faucet swaps, toilet fixes, ceiling fans, doors and fences, before you book.',
@@ -36,7 +36,7 @@ export const howLongDoCommonHomeRepairsTake: BlogPostData = {
     { url: '/services/drywall-repair', anchor: 'Drywall Repair & Patching' },
     { url: '/services/plumbing-repairs', anchor: 'Minor Plumbing Repairs' },
     { url: '/services/carpentry-trim-repair', anchor: 'Carpentry & Trim Repair' },
-    { url: '/blog/what-to-expect-first-handyman-visit', anchor: 'What to Expect at Your First Handyman Visit' },
+    { url: '/blog/what-to-expect-first-handyman-visit', anchor: 'What to expect at your first handyman visit' },
     { url: '/blog/how-to-budget-home-repairs-boise', anchor: 'How to Budget a Home Repair Punch List' },
     { url: '/blog/seasonal-home-maintenance-checklist-boise', anchor: 'Seasonal Home Maintenance Checklist for Boise' },
   ],

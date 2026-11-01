@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const tvMountingAndAnchoringGuide: BlogPostData = {
   slug: 'tv-mounting-and-anchoring-guide',
-  title: 'TV Mounting and Anchoring Guide for Boise Homes',
+  title: 'TV mounting and anchoring guide for Boise homes',
   seoTitle: 'TV Mounting and Anchoring Guide: Boise',
   metaDescription:
     'TV mounting and anchoring guide: mount types, stud finding, drywall anchors that hold, cable hiding and fireplace heights, plus when to call a pro.',
@@ -39,7 +39,7 @@ export const tvMountingAndAnchoringGuide: BlogPostData = {
     { url: '/services/mounting-assembly', anchor: 'Mounting & Assembly' },
     { url: '/services/electrical-repairs', anchor: 'Minor Electrical Repairs' },
     { url: '/blog/how-to-patch-drywall', anchor: 'How to Patch Drywall Like a Pro' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/services/drywall-repair', anchor: 'Drywall Repair & Patching' },
     { url: '/contact', anchor: 'Contact' },
   ],

@@ -23,6 +23,20 @@ export interface ServiceData {
   secondary?: boolean;
 }
 
+/**
+ * Sentence-case form of a catalog service name, for headings and menu labels
+ * (owner decision C, 1 November 2026): the same words with only the letter
+ * case changed, acronyms such as "TV" kept. `name` itself stays as it is,
+ * because it is also a lookup key (estimator categories, metadata and
+ * description maps) and the value carried to leads and schema.
+ */
+export function serviceHeading(name: string): string {
+  return name
+    .split(' ')
+    .map((word, i) => (i === 0 || /^[A-Z0-9-]{2,}$/.test(word) ? word : word.toLowerCase()))
+    .join(' ');
+}
+
 export interface CityData {
   slug: string;
   name: string;

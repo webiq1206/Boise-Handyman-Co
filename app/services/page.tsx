@@ -13,7 +13,7 @@ import { generateBreadcrumbSchema } from '@/lib/schema';
 import { getBaseUrl } from '@/lib/seo';
 import { servicePath } from '@/lib/seo-routes';
 import { CITY_HERO_IMAGES } from '@/shared/cityServiceImages';
-import { CITIES,SERVICES } from '@/shared/contentData';
+import { CITIES,SERVICES,serviceHeading } from '@/shared/contentData';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import { altForImage } from '@/shared/imageAlts';
 import { getServiceBackground } from '@/shared/serviceBackgrounds';
@@ -83,7 +83,7 @@ export default function ServicesIndexPage() {
       </InteriorHero>
 
       {/* Approved photo-led service directory. */}
-      <section className="interior-service-grid" aria-label="All services">{SERVICES.map(service=><Link className="interior-service-card" href={servicePath(service.slug)} key={service.slug}><img src={getServiceBackground(service.slug)} alt={altForImage(getServiceBackground(service.slug)) ?? service.name} width={900} height={675} loading="lazy"/><div><h2>{service.name}</h2><ArrowRight size={18} aria-hidden="true"/></div><p>{service.shortDescription}</p></Link>)}</section>
+      <section className="interior-service-grid" aria-label="All services">{SERVICES.map(service=><Link className="interior-service-card" href={servicePath(service.slug)} key={service.slug}><img src={getServiceBackground(service.slug)} alt={altForImage(getServiceBackground(service.slug)) ?? service.name} width={900} height={675} loading="lazy"/><div><h2>{serviceHeading(service.name)}</h2><ArrowRight size={18} aria-hidden="true"/></div><p>{service.shortDescription}</p></Link>)}</section>
 
       <EstimatePromptBand
         title={

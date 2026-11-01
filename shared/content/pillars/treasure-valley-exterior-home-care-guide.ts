@@ -2,7 +2,7 @@ import type { GuidePageData } from '../../guideContent';
 
 export const treasureValleyExteriorHomeCareGuide: GuidePageData = {
   slug: 'treasure-valley-exterior-home-care-guide',
-  title: 'The Treasure Valley Exterior Home Care Guide',
+  title: 'The Treasure Valley exterior home care guide',
   seoTitle: 'Treasure Valley Exterior Home Care Guide',
   metaDescription:
     'Exterior home care in the Treasure Valley: what sun and freeze-thaw do to fences, decks, gutters, siding and paint, repair costs and rot prevention.',
@@ -32,9 +32,9 @@ export const treasureValleyExteriorHomeCareGuide: GuidePageData = {
     { url: '/services/fence-deck-gutter-repair', anchor: 'Fence, Deck & Gutter Repair' },
     { url: '/services/painting-touch-ups', anchor: 'Interior & Exterior Painting' },
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
-    { url: '/guides/boise-home-maintenance-guide', anchor: 'The Complete Boise Home Maintenance Guide' },
+    { url: '/guides/boise-home-maintenance-guide', anchor: 'The complete Boise home maintenance guide' },
     { url: '/guides/ember-ready-home-checklist-treasure-valley', anchor: 'Ember-Ready Home Checklist' },
-    { url: '/blog/category/exterior-and-outdoor', anchor: 'Exterior & Outdoor articles' },
+    { url: '/blog/category/exterior-and-outdoor', anchor: 'Exterior & outdoor articles' },
     { url: '/contact', anchor: 'Contact' },
   ],
   faqs: [

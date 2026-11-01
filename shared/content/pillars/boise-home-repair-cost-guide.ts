@@ -37,12 +37,12 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
   linkedCities: ['boise', 'meridian', 'eagle', 'nampa'],
   relatedLinks: [
     { url: '/blog/handyman-prices-boise', anchor: 'Handyman prices in Boise: hourly rates and job prices' },
-    { url: '/guides/hire-a-handyman-treasure-valley', anchor: 'How to Hire a Handyman in the Treasure Valley' },
-    { url: '/guides/first-time-homeowner-repair-handbook', anchor: "The First-Time Homeowner's Repair Handbook" },
+    { url: '/guides/hire-a-handyman-treasure-valley', anchor: 'How to hire a handyman in the Treasure Valley' },
+    { url: '/guides/first-time-homeowner-repair-handbook', anchor: "The first-time homeowner's repair handbook" },
     { url: '/services/drywall-repair', anchor: 'Drywall Repair & Patching' },
     { url: '/services/plumbing-repairs', anchor: 'Minor Plumbing Repairs' },
     { url: '/services/electrical-repairs', anchor: 'Minor Electrical Repairs' },
-    { url: '/blog/category/costs-and-hiring', anchor: 'Costs & Hiring articles' },
+    { url: '/blog/category/costs-and-hiring', anchor: 'Costs & hiring articles' },
     { url: '/contact', anchor: 'Contact' },
   ],
   faqs: [
