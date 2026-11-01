@@ -33,7 +33,8 @@ test('the P5 Home Co Facebook page sits on the parent node, not this brand',asyn
  assert.deepEqual([...P5_PARENT_ORGANIZATION.sameAs],[P5_FACEBOOK]);
  const {BUSINESS_INFO}=await import('../lib/seo.ts');
  assert.equal(BUSINESS_INFO.sameAs.includes(P5_FACEBOOK),false);
- const footer=readFileSync('components/Footer.tsx','utf8');
- assert.match(footer,/GBP_SOCIAL\.facebook \|\| P5_SOCIAL\.facebook/);
- assert.match(footer,/"P5 Home Co on Facebook"/);
+ // The footer is the shared family SiteFooter (Phase 2); lib/familyBrand.ts gives it the
+ // P5 page, labelled for the parent.
+ const {FAMILY_BRAND}=await import('../lib/familyBrand.ts');
+ assert.deepEqual(FAMILY_BRAND.parentFacebook,{href:P5_FACEBOOK,label:'P5 Home Co on Facebook'});
 });
