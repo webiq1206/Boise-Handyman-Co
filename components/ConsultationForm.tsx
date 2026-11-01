@@ -488,7 +488,10 @@ export function ConsultationForm({
     const busy = uploads.some((item) => item.status === "uploading");
 
     return (
-      <div className="hm-form hm-form-done" data-testid="consultation-success" data-clarity-mask="True">
+      // data-family-bar-yield (here and on the request form): the family mobile bar steps aside
+      // while the form, this success screen or its Step 2 is on screen
+      // (components/family/MobileActionBar.tsx).
+      <div className="hm-form hm-form-done" data-testid="consultation-success" data-clarity-mask="True" data-family-bar-yield="">
         <div role="status" className="hm-form-done-head">
           <Heading ref={successHeadingRef} tabIndex={-1} data-clarity-mask="True" className="hm-form-title">
             Thanks{submitted ? `, ${submitted.name.split(" ")[0]}` : ""}. We have your request.
@@ -608,7 +611,7 @@ export function ConsultationForm({
   );
 
   return (
-    <div className="hm-form">
+    <div className="hm-form" data-family-bar-yield="">
       <EstimatorRecovery
         flow="consultation"
         currentStep={engaged ? "filling" : "form"}
