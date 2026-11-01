@@ -1,6 +1,6 @@
 import { InteriorHero, InteriorPage } from "@/components/approved/InteriorLayout";
 import { ContractorCredential } from "@/components/ContractorCredential";
-import { Section } from "@/components/marketing";
+import { Section } from "@/components/marketing/Section";
 import { SectionHeader } from "@/components/marketing/SectionHeader";
 import { ConsultCTA } from "@/components/modals/ConsultCTA";
 import { JsonLd } from "@/components/seo/JsonLd";

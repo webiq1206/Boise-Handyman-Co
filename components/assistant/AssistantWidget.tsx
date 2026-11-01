@@ -13,7 +13,6 @@ import { usePathname } from "next/navigation";
 import { useFormInView } from "@/hooks/use-form-in-view";
 import Link from "next/link";
 import { MessageCircle, Send, X } from "lucide-react";
-import { continueAssistantProject } from "@/lib/p5/assistantContinuation";
 import { trackEvent } from "@/lib/analytics";
 
 interface ChatMessage {
@@ -121,8 +120,14 @@ export function AssistantWidget() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open, close]);
 
-  const continueProject = () => {
-    try { continueAssistantProject(messages,input); window.location.assign('/estimate'); }
+  /* The draft helpers (scope rules, labour facts, browser drafts) load on the
+     tap that needs them rather than with every page: this widget is mounted
+     site-wide and only the Continue button uses them. */
+  const continueProject = async () => {
+    try {
+      const { continueAssistantProject } = await import("@/lib/p5/assistantContinuation");
+      continueAssistantProject(messages,input); window.location.assign('/estimate');
+    }
     catch(error) { setMessages(cur=>[...cur,{role:'assistant',content:error instanceof Error?error.message:'Your project could not be saved. Please retry.'}]); }
   };
 
