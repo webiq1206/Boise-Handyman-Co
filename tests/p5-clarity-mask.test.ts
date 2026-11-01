@@ -197,11 +197,17 @@ test('the consultation success screen masks the echoed name and address', () => 
   assert.ok(successAt > 0);
   assert.match(source.slice(successAt, successAt + 80), /data-clarity-mask="True"/);
   const nameAt = source.indexOf('submitted.name.split(" ")[0]');
-  const addressAt = source.indexOf('submitted?.address');
   assert.ok(nameAt > successAt);
-  assert.ok(addressAt > nameAt);
   assert.match(source.slice(nameAt - 280, nameAt), /data-clarity-mask="True"/);
-  assert.match(source.slice(addressAt - 220, addressAt), /data-clarity-mask="True"/);
+  // The address is no longer echoed back: it is asked for on the success screen
+  // (Step 2, "Help us prepare"), and that form is masked as well.
+  const detailsAt = source.indexOf('data-testid="consult-details"');
+  const addressAt = source.indexOf('data-testid="details-address"');
+  assert.ok(detailsAt > 0 && addressAt > detailsAt);
+  assert.match(source.slice(detailsAt - 120, detailsAt), /data-clarity-mask="True"/);
+  // The file names on the success screen are masked too.
+  const uploadsAt = source.indexOf('data-testid="consult-upload-status"');
+  assert.match(source.slice(uploadsAt, uploadsAt + 80), /data-clarity-mask="True"/);
 });
 
 test('the assistant transcript is masked', () => {

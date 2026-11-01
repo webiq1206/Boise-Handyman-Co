@@ -95,6 +95,8 @@ test("intake body uses the fields the p5 route already reads", () => {
     city: "Boise",
     summary: "Visitor project: painting-touch-ups\n\nTwo rooms and a door.",
     externalLeadId: "boisehandyman-consultation:11111111-1111-4111-8111-111111111111",
+    external_id: "boisehandyman-consultation:11111111-1111-4111-8111-111111111111",
+    submission_kind: "initial",
   });
 });
 
@@ -125,7 +127,7 @@ test("phone-only consultations omit an empty email", () => {
   assert.equal(body.phone, "2085550100");
   assert.equal(body.address, "123 Main St, 83702");
   assert.equal(body.projectType, "A multi-item home list");
-  assert.match(body.summary, /Visitor project: task-list/);
+  assert.match(String(body.summary), /Visitor project: task-list/);
 });
 
 test("bridge posts once and swallows transport and HTTP failures", async () => {

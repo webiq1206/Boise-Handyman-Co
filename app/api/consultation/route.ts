@@ -36,15 +36,11 @@ import {
   type EstimateRefinements,
 } from "@/shared/estimateEngine";
 import {
-  appendPhotoLinks,
   consultationBodySchema,
   optionalEstimateSchema,
-  photoExtension,
-  photoMimeType,
-  photoProblem,
-  photoSafeName,
   withPreferredContact,
 } from "@/server/services/consultationRequest";
+import { detailsSecret, issueDetailsToken } from "@/server/services/consultationDetails";
 import { resolveQuotedRange } from "@/shared/costs/resolve";
 import { forwardToLeadDashboard } from "@/server/services/leadDashboardForward";
 import { forwardConsultationToP5Intake } from "@/server/services/p5IntakeBridge";
@@ -63,52 +59,10 @@ import {
 // database (tests/consultation-request.test.ts).
 const bodySchema = consultationBodySchema;
 
-/**
- * The one-screen form posts multipart only when the visitor added photos: the
- * same JSON body as the "payload" field, plus up to four "photos". Everything
- * else posts JSON exactly as before.
- */
-async function readMultipart(
-  request: NextRequest,
-): Promise<{ ok: true; raw: unknown; photos: File[] } | { ok: false; response: NextResponse }> {
-  const form = await request.formData();
-  let raw: unknown;
-  try {
-    raw = JSON.parse(String(form.get("payload") ?? ""));
-  } catch {
-    return { ok: false, response: NextResponse.json({ message: "Invalid request" }, { status: 400 }) };
-  }
-  const photos = form
-    .getAll("photos")
-    .filter((entry): entry is File => entry instanceof File && entry.size > 0);
-  const problem = photoProblem(photos);
-  if (problem) return { ok: false, response: NextResponse.json({ message: problem }, { status: 400 }) };
-  return { ok: true, raw, photos };
-}
-
-/** Short stable hash of the visitor's own words (photo links excluded: they are added after). */
+/** Short stable hash of the visitor's own words, so a second, different list is its own request. */
 function listFingerprint(message: string | undefined): string {
   const words = (message ?? "").toLowerCase().replace(/\s+/g, " ").trim();
   return words ? createHash("sha256").update(words).digest("hex").slice(0, 16) : "";
-}
-
-function absoluteStoredUrl(url: string): string {
-  if (url.startsWith("http://") || url.startsWith("https://")) return url;
-  return `${SITE_CONFIG.siteUrl.replace(/\/$/, "")}${url.startsWith("/") ? url : `/${url}`}`;
-}
-
-/** Stores the photos under the inquiry id (a retry overwrites nothing) and returns their links. */
-async function storePhotos(inquiry: string, photos: File[]): Promise<string[]> {
-  const { uploadFile } = await import("@/lib/storage/blob");
-  const links: string[] = [];
-  for (let index = 0; index < photos.length; index += 1) {
-    const file = photos[index];
-    const ext = photoExtension(file) ?? "jpg";
-    const key = `consultation/${inquiry}/${index + 1}-${photoSafeName(file.name, ext)}`;
-    const stored = await uploadFile(key, Buffer.from(await file.arrayBuffer()), photoMimeType(file, ext));
-    links.push(absoluteStoredUrl(stored));
-  }
-  return links;
 }
 
 /**
@@ -178,16 +132,9 @@ function verifyEstimate(
 
 export async function POST(request: NextRequest) {
   try {
-    let raw: unknown;
-    let photos: File[] = [];
-    if ((request.headers.get("content-type") || "").includes("multipart/form-data")) {
-      const read = await readMultipart(request);
-      if (!read.ok) return read.response;
-      raw = read.raw;
-      photos = read.photos;
-    } else {
-      raw = await request.json();
-    }
+    // JSON only. Files follow the saved request one upload each
+    // (/api/consultation/files), so an upload can never delay or lose the lead.
+    const raw: unknown = await request.json();
     const parsed = bodySchema.safeParse(raw);
 
     if (!parsed.success) {
@@ -197,30 +144,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let data = parsed.data;
+    const data = parsed.data;
     if (classifyLeadSpam({ honeypot: data.website, name: data.name, message: data.message }).spam)
       return NextResponse.json({ success: true, accepted: false, duplicate: true });
     const limit = rateLimit(clientKeyFrom(request.headers, "consultation"), 8, 10 * 60 * 1000);
     if (!limit.ok) return NextResponse.json({ message: "Please wait a few minutes before trying again." }, { status: 429 });
 
-    // Photos are stored only once the request passed the spam and rate checks,
-    // and their links travel in the notes every destination already keeps.
-    const listScope = listFingerprint(data.message);
-    if (photos.length > 0) {
-      try {
-        data = { ...data, message: appendPhotoLinks(data.message, await storePhotos(data.inquiryId, photos)) };
-      } catch (uploadErr) {
-        console.error("[consultation] Photo upload failed:", uploadErr instanceof Error ? uploadErr.message : uploadErr);
-        return NextResponse.json(
-          { message: "We could not save your photos. Try again, or send the request without them." },
-          { status: 503 },
-        );
-      }
-    }
+    // The pending-files line is added by the schema; the duplicate scope reads
+    // the visitor's own words only.
+    const listScope = listFingerprint(parsed.data.message?.split("\n\nFiles: ")[0]);
 
     // Server-side verification: never trust client-supplied dollar amounts.
     const estimate = data.estimate ? verifyEstimate(data.estimate) : null;
 
+    const savedRow: { id: string | null } = { id: null };
     const accepted = await saveAcceptedLead(db, {
       inquiryId: data.inquiryId,
       route: "consultation",
@@ -236,11 +173,11 @@ export async function POST(request: NextRequest) {
         hasAttribution: Boolean(data.attribution),
         preferredContact: data.preferredContact,
         requestKind: data.requestKind,
-        photos: photos.length,
+        files: data.filesPending ?? 0,
       },
       saveLead: async (tx) => {
         const profile = data.propertyProfile as Record<string, unknown> | null | undefined;
-        await tx.insert(consultationRequests).values({
+        const [saved] = await tx.insert(consultationRequests).values({
           name: data.name,
           phone: data.phone,
           email: data.email,
@@ -256,7 +193,8 @@ export async function POST(request: NextRequest) {
           estimateHigh: estimate?.priceHigh?.toString() || null,
           estimateSqft: estimate?.sqft ?? null,
           estimateConfidence: estimate?.confidence || null,
-        });
+        }).returning({ id: consultationRequests.id });
+        savedRow.id = saved?.id ?? null;
       },
     });
     if (!accepted.accepted) {
@@ -283,6 +221,10 @@ export async function POST(request: NextRequest) {
         // choice (Call me, Text me, Email me) rides at the end of the summary.
         message: withPreferredContact(data.message, data.requestKind, data.preferredContact),
         inquiryId: data.inquiryId,
+        requestKind: data.requestKind,
+        preferredContact: data.preferredContact,
+        bestTime: data.requestKind === "callback" ? data.bestTimeToCall : undefined,
+        submissionKind: "initial",
       });
       after(() => bridge);
     } catch (bridgeErr) {
@@ -412,7 +354,14 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ success: true, accepted: true, duplicate: false });
+    // Step 2 ("Help us prepare") and the file uploads add to this same request.
+    // The token is signed with a server secret and lives two hours; without a
+    // secret the form says to text the files instead.
+    const secret = detailsSecret();
+    const requestId = savedRow.id;
+    const followUp =
+      requestId && secret ? { requestId, ...issueDetailsToken({ requestId, inquiryId: data.inquiryId }, secret) } : {};
+    return NextResponse.json({ success: true, accepted: true, duplicate: false, ...followUp });
   } catch (err) {
     console.error("[consultation] Error:", err);
     return NextResponse.json({ message: "Server error" }, { status: 500 });

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { estimateSchema } from "@/shared/estimatePayload";
+import { MAX_REQUEST_FILES } from "@/shared/requestFiles";
 
 /**
  * Request body for POST /api/consultation, kept outside the route file so the
@@ -68,6 +69,12 @@ export const consultationBodySchema = z
      */
     requestKind: z.enum(["quote", "callback"]).optional().default("quote"),
     bestTimeToCall: z.string().trim().max(60).optional(),
+    /**
+     * How many files the visitor attached. The lead is saved and forwarded
+     * first; the files follow one request each (/api/consultation/files) and
+     * reach every destination as a "Details added" update.
+     */
+    filesPending: z.number().int().min(0).max(MAX_REQUEST_FILES).optional(),
     propertyProfile: propertyProfileSchema,
     estimate: optionalEstimateSchema,
     /* Set by the client when the visitor already submitted the estimate gate,
@@ -92,7 +99,7 @@ export const consultationBodySchema = z
   .transform((data) => ({
     ...data,
     preferredContact: data.requestKind === "callback" ? ("phone" as const) : data.preferredContact,
-    message: composeConsultationMessage(data),
+    message: withFilesPending(composeConsultationMessage(data), data.filesPending),
   }));
 
 export type ConsultationBody = z.infer<typeof consultationBodySchema>;
@@ -137,64 +144,21 @@ export function withPreferredContact(
   return message?.trim() ? `${message}\n\n${line}` : line;
 }
 
-/* ───────────────────────────── optional photos (multipart) */
+/* ───────────────────────────── attachments */
 
-export const MAX_PHOTOS = 4;
-export const MAX_PHOTO_BYTES = 8 * 1024 * 1024;
-
-const PHOTO_TYPES = new Map<string, string>([
-  ["image/jpeg", "jpg"],
-  ["image/png", "png"],
-  ["image/webp", "webp"],
-  ["image/heic", "heic"],
-  ["image/heif", "heif"],
-]);
-const PHOTO_EXTENSIONS = new Map<string, string>([
-  ["jpg", "jpg"],
-  ["jpeg", "jpg"],
-  ["png", "png"],
-  ["webp", "webp"],
-  ["heic", "heic"],
-  ["heif", "heif"],
-]);
-
-/** File extension for an accepted photo, or null when the file is not one. */
-export function photoExtension(file: { type: string; name: string }): string | null {
-  const fromType = PHOTO_TYPES.get(file.type);
-  if (fromType) return fromType;
-  if (file.type && file.type !== "application/octet-stream") return null;
-  const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
-  return PHOTO_EXTENSIONS.get(ext) ?? null;
+/**
+ * The line every destination gets when the visitor attached files: the lead
+ * itself is sent first and never waits on an upload, so the team knows links
+ * are on the way in a "Details added" follow-up.
+ */
+export function filesPendingLine(count: number | undefined): string | null {
+  if (!count || count < 1) return null;
+  return `Files: ${count} ${count === 1 ? "file is" : "files are"} uploading. Links follow in a "Details added" update.`;
 }
 
-export function photoMimeType(file: { type: string }, ext: string): string {
-  if (PHOTO_TYPES.has(file.type)) return file.type;
-  return ext === "jpg" ? "image/jpeg" : `image/${ext}`;
-}
-
-/** Storage-safe file name: letters, digits, dash and underscore, then the extension. */
-export function photoSafeName(name: string, ext: string): string {
-  const base = name
-    .replace(/\.[^.]+$/, "")
-    .replace(/[^a-zA-Z0-9_-]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 48);
-  return `${base || "photo"}.${ext}`;
-}
-
-/** Plain-words problem with a set of photos, or null when they can be stored. */
-export function photoProblem(files: { type: string; name: string; size: number }[]): string | null {
-  if (files.length > MAX_PHOTOS) return `You can add up to ${MAX_PHOTOS} photos.`;
-  for (const file of files) {
-    if (!photoExtension(file)) return "Photos must be JPEG, PNG, WebP or HEIC.";
-    if (file.size > MAX_PHOTO_BYTES) return "Each photo must be 8 MB or smaller.";
-  }
-  return null;
-}
-
-/** The visitor's list followed by the stored photo links, as every destination keeps it. */
-export function appendPhotoLinks(message: string | undefined, links: string[]): string | undefined {
-  if (links.length === 0) return message;
-  const block = `Photos:\n${links.join("\n")}`;
-  return message?.trim() ? `${message}\n\n${block}` : block;
+/** The visitor's notes plus the pending-files line, when there is one. */
+export function withFilesPending(message: string | undefined, count: number | undefined): string | undefined {
+  const line = filesPendingLine(count);
+  if (!line) return message;
+  return message?.trim() ? `${message}\n\n${line}` : line;
 }

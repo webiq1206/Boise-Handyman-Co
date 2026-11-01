@@ -10,13 +10,9 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
   CALLBACK_MARKER,
-  MAX_PHOTOS,
   UNSPECIFIED_PROJECT_TYPE,
-  appendPhotoLinks,
   consultationBodySchema,
-  photoExtension,
-  photoProblem,
-  photoSafeName,
+  filesPendingLine,
   withPreferredContact,
 } from "../server/services/consultationRequest";
 import { buildAdminEmailHtml, buildAdminSubject } from "../server/services/consultationEmail";
@@ -123,34 +119,37 @@ test("the preferred contact the visitor chose reaches the CRM notes and the inte
   assert.equal(withPreferredContact("CALLBACK REQUEST: x", "callback", "phone"), "CALLBACK REQUEST: x");
 });
 
-test("photos: type, count and size checks, safe names and links after the list", () => {
-  const ok = { type: "image/jpeg", name: "IMG 0001.JPG", size: 1024 };
-  assert.equal(photoProblem([ok]), null);
-  assert.equal(photoExtension({ type: "", name: "door.heic" }), "heic");
-  assert.equal(photoExtension({ type: "application/pdf", name: "plan.pdf" }), null);
-  assert.equal(photoExtension({ type: "image/svg+xml", name: "x.svg" }), null);
-  assert.match(photoProblem(Array(MAX_PHOTOS + 1).fill(ok)) ?? "", /up to 4 photos/);
-  assert.match(photoProblem([{ ...ok, size: 9 * 1024 * 1024 }]) ?? "", /8 MB/);
-  assert.match(photoProblem([{ type: "text/html", name: "a.html", size: 10 }]) ?? "", /JPEG, PNG, WebP or HEIC/);
-  assert.equal(photoSafeName("../../etc/passwd.jpg", "jpg"), "etc-passwd.jpg");
+test("attached files never ride with the request: the notes say links follow", () => {
+  const parsed = consultationBodySchema.parse({
+    inquiryId: ID,
+    name: "Jordan Example",
+    phone: "2085550199",
+    preferredContact: "text",
+    message: "Fix the gate",
+    filesPending: 2,
+  });
+  assert.equal(parsed.message, `Fix the gate\n\n${filesPendingLine(2)}`);
+  assert.match(filesPendingLine(1) ?? "", /^Files: 1 file is uploading\. Links follow in a "Details added" update\.$/);
+  assert.equal(filesPendingLine(0), null);
+  // More than the tile allows is not a request this form sends.
   assert.equal(
-    appendPhotoLinks("Fix the gate", ["https://boisehandyman.co/api/documents/local/a"]),
-    "Fix the gate\n\nPhotos:\nhttps://boisehandyman.co/api/documents/local/a",
+    consultationBodySchema.safeParse({ inquiryId: ID, name: "Jordan", phone: "2085550199", message: "x y z", filesPending: 11 }).success,
+    false,
   );
-  assert.equal(appendPhotoLinks("Fix the gate", []), "Fix the gate");
 });
 
-test("the route parses through the shared schema and stores photos only after the spam and rate checks", () => {
+test("the route is JSON only, checks spam and rate first, and issues the Step 2 token only for a saved row", () => {
   const source = readFileSync(new URL("../app/api/consultation/route.ts", import.meta.url), "utf8");
   assert.match(source, /const bodySchema = consultationBodySchema;/);
+  assert.doesNotMatch(source, /formData\(\)|multipart/, "files upload separately, after the request is saved");
   const spam = source.indexOf("classifyLeadSpam(");
   const limit = source.indexOf("rateLimit(clientKeyFrom");
-  const store = source.indexOf("await storePhotos(");
   const save = source.indexOf("saveAcceptedLead(db");
-  assert.ok(spam > 0 && limit > spam && store > limit && save > store);
+  const token = source.indexOf("issueDetailsToken(");
+  assert.ok(spam > 0 && limit > spam && save > limit && token > save);
+  assert.match(source, /\.returning\(\{ id: consultationRequests\.id \}\)/);
   assert.match(source, /scope: `\$\{data\.requestKind === "callback" \? "callback\|" : ""\}/);
-  // The duplicate scope hashes the list as typed, before the photo links (which carry the inquiry id).
-  const fingerprint = source.indexOf("const listScope = listFingerprint(data.message);");
-  assert.ok(fingerprint > 0 && fingerprint < store);
+  // The duplicate scope hashes the list as typed, not the pending-files line.
+  assert.match(source, /listFingerprint\(parsed\.data\.message\?\.split\("\\n\\nFiles: "\)\[0\]\)/);
   assert.match(source, /\|\$\{listScope\}`,/);
 });
