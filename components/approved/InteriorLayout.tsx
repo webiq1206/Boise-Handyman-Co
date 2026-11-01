@@ -1,13 +1,15 @@
 import { ArrowUpRight } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { familyButtonClass } from '@/components/family/Button';
 
 /** Public-page layout. Application routes retain their dedicated interfaces. */
 export function InteriorPage({children,kind='detail'}:{children:ReactNode;kind?:string}) {
   return <div className={`approved-interior interior-${kind}`}>{children}</div>;
 }
 
+/** The family primary button (charcoal, paper label, accent bar), one label for the one action. */
 export function InteriorEstimateLink({label='Send your list and photos',href='/contact'}:{label?:string;href?:string}) {
-  return <a className="interior-estimate-link" href={href}>{label}<ArrowUpRight size={18} aria-hidden="true"/></a>;
+  return <a className={familyButtonClass({variant:'primary',size:'lg',className:'interior-estimate-link'})} href={href}>{label}</a>;
 }
 
 /** The approved split-detail and editorial-introduction compositions. */

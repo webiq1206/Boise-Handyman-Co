@@ -76,33 +76,13 @@
   letter-spacing: -0.02em;
 }
 
-/* M3 / C7: bottom bar height budget for page clearance. */
-.approved-shell {
-  padding-bottom: var(--bottom-bar-h) !important;
-}
+/* M3 / C7: the family mobile action bar (styles/family-chrome.css) reserves its own
+   clearance with a spacer after the footer, so the shell no longer pads itself.
+   --bottom-bar-h stays for the hero budgets below. */
 @media (min-width: 1180px) {
   .approved-shell {
-    padding-bottom: 0 !important;
     --bottom-bar-h: 0px;
   }
-}
-.approved-shell [data-mobile-nav-bar] {
-  min-height: 0 !important;
-}
-.approved-shell [data-mobile-nav-bar] :is(a, button) {
-  min-height: 48px !important;
-  height: 48px;
-}
-/* With a labelled Call beside it, the primary keeps "Send your list and
-   photos" on one line on phones: tighter tracking and side padding, never a
-   smaller font. */
-.approved-shell [data-mobile-nav-bar] a:last-child {
-  padding-inline: 12px;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-.approved-shell [data-mobile-nav-bar] a:first-child {
-  padding-inline: 12px;
 }
 
 /* ─── M1 + M2: home hero ─── */

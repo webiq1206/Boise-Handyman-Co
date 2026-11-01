@@ -1,0 +1,64 @@
+/*
+  Boise Handyman Co adoption of the shared family chrome. BRAND-OWNED: the shared
+  styles live in styles/family-*.css and are never edited here. Loaded last so the
+  older per-site layers cannot restyle the family buttons placed in page content.
+*/
+
+/* The interior estimate link keeps its layout hooks (full width in asides and the
+   document index) but takes the family button face: the older 54px, 14px rule set
+   padding, height, type and a forced paper label. */
+.approved-shell .fam-btn.interior-estimate-link {
+  justify-content: center;
+  gap: var(--space-2, 8px);
+  min-height: var(--button-height-lg, 48px);
+  padding: 0 var(--space-6, 24px);
+  font: 600 var(--fs-button, 16px) / 1.2 var(--font-sans);
+}
+.approved-shell .fam-btn.fam-btn--primary.interior-estimate-link {
+  color: var(--color-paper) !important;
+}
+/* On the charcoal contact hero it is the paper-filled primary with the accent bar. */
+.approved-shell .approved-interior .interior-hero-contact .fam-btn.interior-estimate-link {
+  border-color: var(--color-paper);
+  background: var(--color-paper);
+  color: var(--color-charcoal) !important;
+}
+
+/* Family buttons inside page content: keep the label on one line where it fits and
+   let the old icon arrows sit with the family icon gap. */
+.approved-shell main .fam-btn > svg {
+  flex: none;
+}
+
+/* Footer registration line: this site's ContractorCredential (number outside the
+   DOPL link) in the brand column, set like the footer's other small text. */
+.approved-shell .fam-footer[data-family-footer] .fam-footer-credential {
+  max-width: 34ch;
+  margin-top: var(--space-4, 16px);
+  color: var(--color-on-dark-muted);
+  font: 400 var(--fs-small) / var(--lh-small) var(--font-sans);
+}
+.approved-shell .fam-footer[data-family-footer] .fam-footer-credential-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-min, 44px);
+  color: var(--color-paper);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* scripts/verify-p5-mobile-seo.mjs (owner-approved, see commit 74ff0c4) requires the
+   bar to be gone within 150ms of scrolling back to the homepage hero. The shared hide
+   keeps it visible through its 300ms slide-out, so on this site it leaves at once and
+   still slides in as usual. The shared bar has no option for this; reported for the
+   source repository rather than changed in the synced file. */
+.approved-shell .fam-bar[data-family-bar][data-state='hidden'] {
+  transition: none;
+}
+
+/* P5 Home Co on Google sits under the contact list, set like its links. */
+.approved-shell .fam-footer[data-family-footer] .fam-footer-social a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-min, 44px);
+}

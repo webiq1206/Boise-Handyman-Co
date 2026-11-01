@@ -4,7 +4,6 @@ import { Section } from "@/components/marketing";
 import { SectionHeader } from "@/components/marketing/SectionHeader";
 import { ConsultCTA } from "@/components/modals/ConsultCTA";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { Button } from "@/components/ui/button";
 import { withBrandPageMetadata } from "@/lib/brand-page-metadata";
 import { buildCanonical, fitDescription } from "@/lib/page-metadata";
 import {
@@ -15,9 +14,10 @@ import {
 import { CTA_PRIMARY } from "@/shared/ctaCopy";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { SITE_IMAGES } from "@/shared/siteImages";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FamilyButton } from '@/components/family/Button';
 
 const COVERED = [
   "Workmanship on repairs and installs we completed",
@@ -94,12 +94,8 @@ export default function WarrantyPage() {
             we come back and make it right. Materials we supply carry their manufacturer warranties.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-6">
-            <ConsultCTA variant="brand">
-              {CTA_PRIMARY} <ArrowRight className="h-4 w-4" />
-            </ConsultCTA>
-            <Button variant="heroOutline" asChild>
-              <Link href="/about">About our team</Link>
-            </Button>
+            <ConsultCTA variant="brand" data-hero-cta="primary">{CTA_PRIMARY}</ConsultCTA>
+            <FamilyButton href="/about" variant="secondary">About our team</FamilyButton>
           </div>
           <p className="text-sm text-inverse-foreground/70">
             <ContractorCredential />. Insured; certificate on request.

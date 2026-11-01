@@ -3,7 +3,9 @@ import {withBrandPageMetadata} from '@/lib/brand-page-metadata';
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import localFont from 'next/font/local'
-import { Navigation } from '@/components/Navigation'
+import { Navigation, SiteActionBar } from '@/components/Navigation'
+import { SkipLink } from '@/components/family/SkipLink'
+import { brandStyle } from '@/components/family/brandStyle'
 import { ConditionalFooter } from '@/components/ConditionalFooter'
 import { Footer } from '@/components/Footer'
 import { Toaster } from '@/components/ui/toaster'
@@ -28,6 +30,11 @@ import './approved-interiors.css'
 import './audit-accessibility.css'
 import './design-refresh.css'
 import './design-v2-compliance.css'
+// Shared P5 Home Co family tokens and chrome (header, menu, bar, footer, hero),
+// synced byte-identical across the family; brand values come from lib/familyBrand.ts.
+import '@/styles/family-tokens.css'
+import '@/styles/family-chrome.css'
+import './family-adoption.css'
 
 // P5 family typefaces, self-hosted from the same two OFL variable files P5 Home Co serves.
 const manrope = localFont({
@@ -137,19 +144,16 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      {/* The brand accent as family tokens for every family button in page content
+          (the shared chrome sets the same values on its own roots). */}
+      <body className="min-h-screen bg-background font-sans antialiased" style={brandStyle()}>
         <noscript>
           <style>{`.reveal-init{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         <SiteBusinessSchema />
         <Providers>
           <ScrollToTop />
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-sm focus:bg-foreground focus:px-4 focus:py-2 focus:text-background focus:shadow-lg"
-          >
-            Skip to content
-          </a>
+          <SkipLink />
           <ApprovedShell><div className="flex flex-col min-h-screen">
             <Navigation />
             <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
@@ -158,6 +162,7 @@ export default function RootLayout({
             <ConditionalFooter>
               <Footer />
             </ConditionalFooter>
+            <SiteActionBar />
           </div></ApprovedShell>
           <Toaster />
           <AssistantWidget />

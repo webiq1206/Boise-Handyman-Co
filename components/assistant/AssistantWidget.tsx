@@ -61,6 +61,15 @@ export function AssistantWidget() {
     window.addEventListener("p5:assistant-open", openFromBar);
     return () => window.removeEventListener("p5:assistant-open", openFromBar);
   }, []);
+  /* The family mobile action bar (lib/familyBrand.ts bar.yieldToBodyFlags) steps
+     aside while the chat panel owns the bottom of the screen. */
+  useEffect(() => {
+    if (!open) return;
+    document.body.dataset.assistantOpen = "true";
+    return () => {
+      delete document.body.dataset.assistantOpen;
+    };
+  }, [open]);
   const [messages, setMessages] = useState<ChatMessage[]>([GREETING]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);

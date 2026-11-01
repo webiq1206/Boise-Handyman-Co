@@ -8,7 +8,6 @@ import { ConsultCTA } from "@/components/modals/ConsultCTA";
 import { Reveal } from "@/components/Reveal";
 import { PageHeroBand } from "@/components/sections/PageHeroBand";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { Button } from "@/components/ui/button";
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { landingFAQSchema } from "@/lib/landing-schema";
 import { buildPageMetadata } from "@/lib/page-metadata";
@@ -20,7 +19,7 @@ import { AREA_PAGE_FAQS } from "@/shared/seoContent";
 import { CITY_HERO_IMAGES } from "@/shared/cityServiceImages";
 import { CITIES,TREASURE_VALLEY_CITIES } from "@/shared/contentData";
 import { CTA_PRIMARY,CTA_SECONDARY } from "@/shared/ctaCopy";
-import { ArrowRight } from "lucide-react";
+import { FamilyButton } from '@/components/family/Button';
 
 // The door-hinge technician is the homepage hero. The areas index leads with a
 // house exterior instead, one that none of its nine city cards uses.
@@ -71,12 +70,8 @@ export default function AreasHubPage() {
             Treasure Valley handyman service areas across Ada and Canyon County.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
-            <ConsultCTA variant="brand">
-              {CTA_PRIMARY} <ArrowRight className="h-4 w-4" />
-            </ConsultCTA>
-            <Button variant="heroOutline" asChild>
-              <a href="/#consult">{CTA_SECONDARY}</a>
-            </Button>
+            <ConsultCTA variant="brand" data-hero-cta="primary">{CTA_PRIMARY}</ConsultCTA>
+            <FamilyButton href="/#consult" variant="secondary">{CTA_SECONDARY}</FamilyButton>
           </div>
         </PageHeroBand>
 
