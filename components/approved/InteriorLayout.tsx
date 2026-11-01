@@ -37,7 +37,7 @@ export function InteriorHero({
         {children}
         {estimateAction && (
           <div className="interior-hero-action">
-            <InteriorEstimateLink />
+            <InteriorEstimateLink href="/contact#consult" />
           </div>
         )}
       </div>
@@ -55,9 +55,9 @@ export function InteriorHero({
 
 /** Reusable secondary column, with the estimator as its single dominant action. */
 export function InteriorProjectAside({children}:{children?:ReactNode}) {
-  return <aside className="interior-project-aside"><p className="interior-eyebrow">YOUR PROJECT. REVIEWED BY OUR TEAM.</p><h2>Start with<br/><em>what you know.</em></h2><p>Describe your project and share plans or photos for our team to review.</p><InteriorEstimateLink/>{children}<a className="interior-text-link" href="/contact">Talk through the details<ArrowUpRight size={16} aria-hidden="true"/></a></aside>;
+  return <aside className="interior-project-aside"><p className="interior-eyebrow">YOUR PROJECT. REVIEWED BY OUR TEAM.</p><h2>Start with<br/><em>what you know.</em></h2><p>Describe your project and share plans or photos for our team to review.</p><InteriorEstimateLink href="/contact#consult"/>{children}<a className="interior-text-link" href="/contact">Talk through the details<ArrowUpRight size={16} aria-hidden="true"/></a></aside>;
 }
 
 export function InteriorDocument({heading,children,contents=[]}:{heading:ReactNode;children:ReactNode;contents?:{id:string;label:string}[]}) {
-  return <div className="interior-document"><header className="interior-document-heading">{heading}</header><div className="interior-document-grid"><aside className="interior-document-index">{contents.length>0&&<nav aria-label="On this page"><p className="interior-eyebrow">ON THIS PAGE</p>{contents.map(item=><a href={`#${item.id}`} key={item.id}>{item.label}</a>)}</nav>}<InteriorEstimateLink/></aside><div className="interior-document-main">{children}</div></div></div>;
+  return <div className="interior-document"><header className="interior-document-heading">{heading}</header><div className="interior-document-grid"><aside className="interior-document-index">{contents.length>0&&<nav aria-label="On this page"><p className="interior-eyebrow">ON THIS PAGE</p>{contents.map(item=><a href={`#${item.id}`} key={item.id}>{item.label}</a>)}</nav>}<InteriorEstimateLink href="/contact#consult"/></aside><div className="interior-document-main">{children}</div></div></div>;
 }

@@ -1,6 +1,7 @@
 import { LandingMobileActions } from "@/components/marketing/LandingMobileActions";
 import { LandingContactActions } from "@/components/marketing/LandingContactActions";
 import { ConsultationForm } from "@/components/ConsultationForm";
+import { QuoteFormAnchor } from "@/components/QuoteFormAnchor";
 import { CONTRACTOR_REGISTRATION } from "@/components/ContractorCredential";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { withBrandPageMetadata } from "@/lib/brand-page-metadata";
@@ -155,10 +156,11 @@ export default function HandymanLandingPage() {
         </div>
       </section>
 
-        <section tabIndex={-1} id="quick-quote" className="mx-auto w-full max-w-3xl px-6 py-8 scroll-mt-28 space-y-5">
-          <h2 className="font-serif text-3xl text-foreground">Rather write? Send your list</h2>
-          <p>Tell us what needs fixing and where the work is located. Photos are optional; no upload or chat is required.</p>
-          <ConsultationForm />
+        {/* "Send Your Repair List" lands on the form itself: heading, then the first field. */}
+        <section tabIndex={-1} id="quick-quote" data-quote-anchor="" className="mx-auto w-full max-w-3xl px-6 py-8 space-y-5">
+          <QuoteFormAnchor id="quick-quote" />
+          <ConsultationForm heading="Rather write? Send your list" />
+          <p className="text-sm text-muted-foreground">Tell us what needs fixing and where the work is located. Photos are optional; no upload or chat is required.</p>
         </section>
 
       <section className="mx-auto grid max-w-5xl grid-cols-2 gap-4 px-5 py-10 sm:grid-cols-3 sm:px-8" aria-label="What we fix">

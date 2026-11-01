@@ -5,8 +5,10 @@ export const CTA_SECONDARY = "Request a quote";
 export const CTA_SECONDARY_ALT = "Request a quote";
 export const CTA_QUOTE = "Send your list and photos";
 
-/** Consultation form: a single, explicit send (no separate review step). */
-export const CTA_FORM_SEND = "Send my repair request";
+/** Request form: one short screen, one explicit send. */
+export const CTA_FORM_SEND = "Send my list";
+/** The same form in "Have us call you" mode. */
+export const CTA_FORM_CALLBACK = "Request a call";
 /** @deprecated Superseded by the single-step CTA_FORM_SEND. */
 export const CTA_FORM_REVIEW = "Review my request";
 /** @deprecated Superseded by the single-step CTA_FORM_SEND. */

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { familyButtonClass } from "@/components/family/Button";
 import { trackEvent } from "@/lib/analytics";
+import { FAMILY_BRAND } from "@/lib/familyBrand";
 
 interface EstimateCTAProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "onClick"> {
   onExtraClick?: () => void;
@@ -23,13 +24,16 @@ interface EstimateCTAProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>,
 /**
  * Sitewide "Send your list and photos" in page content, drawn as the family
  * button (components/family/Button: charcoal fill, paper label, accent bar;
- * paper fill on dark grounds). The homepage scrolls to its own request form
- * (#consult); every other page goes to /contact, as before. Tracked once here
+ * paper fill on dark grounds). It lands on a request form: the contact page's
+ * own (#consult), or the homepage form (/#consult) from anywhere else. Tracked once here
  * with the same cta_click event the call sites always sent.
  */
 export function EstimateCTA({ onExtraClick, children, trackingLocation, variant, size, tone = "light", className, ...props }: EstimateCTAProps) {
   const pathname = usePathname();
-  const href = pathname === "/" ? "/#consult" : "/contact";
+  // Owner, 1 November 2026: every "Send your list and photos" lands ON a form.
+  // The contact page has its own (#consult); everywhere else it is the family
+  // header's destination, the homepage form.
+  const href = pathname === "/contact" ? "/contact#consult" : FAMILY_BRAND.cta.href;
   const secondary = /outline/i.test(variant ?? "");
 
   return (

@@ -17,6 +17,9 @@ export async function GET(_request: NextRequest, props: { params: Promise<{ key:
       jpeg: "image/jpeg",
       png: "image/png",
       webp: "image/webp",
+      // Phone photos attached to a request (/api/consultation).
+      heic: "image/heic",
+      heif: "image/heif",
     };
 
     return new NextResponse(buffer, {

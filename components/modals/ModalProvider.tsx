@@ -42,7 +42,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
               No obligation - tell us what needs doing and we&apos;ll reply with an upfront quote.
             </DialogDescription>
           </DialogHeader>
-          <ConsultationForm onRevise={() => setOpen("estimate")} showTrust />
+          <ConsultationForm onRevise={() => setOpen("estimate")} showTrust headingLevel="h3" />
         </DialogContent>
       </Dialog>
 

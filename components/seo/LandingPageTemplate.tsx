@@ -1,4 +1,5 @@
 import { ConsultationForm } from "@/components/ConsultationForm";
+import { QuoteFormAnchor } from "@/components/QuoteFormAnchor";
 import { LandingContactActions } from "@/components/marketing/LandingContactActions";
 import { InteriorHero,InteriorProjectAside } from '@/components/approved/InteriorLayout';
 import { Section } from '@/components/marketing';
@@ -286,10 +287,15 @@ export function LandingPageTemplate({
           )}
           </>}
         </InteriorHero>
-      {paidService && <section id="service-inquiry" tabIndex={-1} className="mx-auto w-full max-w-3xl scroll-mt-28 px-6 py-8">
-        <h2 className="text-2xl font-serif">{paidService === 'drywall-repair' ? 'Tell us about the drywall repair' : 'What is on your maintenance list?'}</h2>
-        <p className="my-4">Tell us what needs attention and where the work is located. Photos are optional. Our team will review scope, scheduling and an estimate with you.</p>
-        <ConsultationForm initialProjectType={paidService} />
+      {/* The hero's form link lands on the form itself: its heading is the form's
+          own, and the note that used to sit above it follows the form. */}
+      {paidService && <section id="service-inquiry" tabIndex={-1} data-quote-anchor="" className="mx-auto w-full max-w-3xl px-6 py-8">
+        <QuoteFormAnchor id="service-inquiry" />
+        <ConsultationForm
+          initialProjectType={paidService}
+          heading={paidService === 'drywall-repair' ? 'Tell us about the drywall repair' : 'What is on your maintenance list?'}
+        />
+        <p className="mt-6 text-sm text-muted-foreground">Tell us what needs attention and where the work is located. Photos are optional. Our team will review scope, scheduling and an estimate with you.</p>
       </section>}
       {answerFirst && (
         <Section surface="bone" spacing="lg">

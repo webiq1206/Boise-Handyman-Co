@@ -1,4 +1,5 @@
 import { after, NextRequest, NextResponse } from "next/server";
+import { createHash } from "crypto";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { consultationRequests } from "@/shared/schema";
@@ -34,7 +35,15 @@ import {
   PROJECT_LABELS,
   type EstimateRefinements,
 } from "@/shared/estimateEngine";
-import { estimateSchema } from "@/shared/estimatePayload";
+import {
+  appendPhotoLinks,
+  consultationBodySchema,
+  optionalEstimateSchema,
+  photoExtension,
+  photoMimeType,
+  photoProblem,
+  photoSafeName,
+} from "@/server/services/consultationRequest";
 import { resolveQuotedRange } from "@/shared/costs/resolve";
 import { forwardToLeadDashboard } from "@/server/services/leadDashboardForward";
 import { forwardConsultationToP5Intake } from "@/server/services/p5IntakeBridge";
@@ -48,61 +57,58 @@ import {
   buildProjectGoals,
 } from "@/server/services/leadRecord";
 
-const propertyProfileSchema = z
-  .object({
-    formattedAddress: z.string(),
-    city: z.string(),
-    state: z.string(),
-    zip: z.string(),
-  })
-  .passthrough()
-  .optional()
-  .nullable();
+// The body schema lives in server/services/consultationRequest.ts so the full
+// request and the "Have us call you" callback shape are tested without a
+// database (tests/consultation-request.test.ts).
+const bodySchema = consultationBodySchema;
 
-// The consultation form may arrive with no estimate at all (someone who came
-// straight to the contact page), so the shared object is wrapped as optional.
-const optionalEstimateSchema = estimateSchema.optional().nullable();
+/**
+ * The one-screen form posts multipart only when the visitor added photos: the
+ * same JSON body as the "payload" field, plus up to four "photos". Everything
+ * else posts JSON exactly as before.
+ */
+async function readMultipart(
+  request: NextRequest,
+): Promise<{ ok: true; raw: unknown; photos: File[] } | { ok: false; response: NextResponse }> {
+  const form = await request.formData();
+  let raw: unknown;
+  try {
+    raw = JSON.parse(String(form.get("payload") ?? ""));
+  } catch {
+    return { ok: false, response: NextResponse.json({ message: "Invalid request" }, { status: 400 }) };
+  }
+  const photos = form
+    .getAll("photos")
+    .filter((entry): entry is File => entry instanceof File && entry.size > 0);
+  const problem = photoProblem(photos);
+  if (problem) return { ok: false, response: NextResponse.json({ message: problem }, { status: 400 }) };
+  return { ok: true, raw, photos };
+}
 
-const bodySchema = z
-  .object({
-    name: z.string().min(2),
-    /**
-     * Only the visitor's chosen contact method is required (see superRefine
-     * below) - matches the same preferred-contact pattern already shipped in
-     * the RE-10 wizard. Defaults to "email" so older cached client bundles
-     * that never send this field behave exactly as before (email required).
-     */
-    preferredContact: z.enum(["email", "phone", "text"]).optional().default("email"),
-    phone: z.string().optional().default(""),
-    email: z.string().optional().default(""),
-    /**
-     * Optional because a new-build enquiry from someone who has not bought land
-     * yet has no site to name. The client requires a locatable site for every
-     * other project type; see LAND_SEARCH_PROJECT_TYPE in ConsultationForm.
-     */
-    address: z.string().max(300).optional().default(""),
-    zip: z.string().optional(),
-    projectType: z.string().min(1),
-    message: z.string().optional(),
-    propertyProfile: propertyProfileSchema,
-    estimate: optionalEstimateSchema,
-    /* Set by the client when the visitor already submitted the estimate gate,
-       which already sent admin + customer emails via /api/estimate-lead.
-       Prevents duplicate email sends when the same person submits both forms. */
-    skipEmail: z.boolean().optional(),
-    inquiryId: z.string().uuid(),
-    website: z.string().max(0).optional(),
-    attribution: z.record(z.string().max(100)).optional(),
-  })
-  .superRefine((data, ctx) => {
-    if (data.preferredContact === "email") {
-      if (!z.string().email().safeParse(data.email).success) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["email"], message: "Valid email required" });
-      }
-    } else if (data.phone.replace(/\D/g, "").length < 10) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["phone"], message: "Valid phone required" });
-    }
-  });
+/** Short stable hash of the visitor's own words (photo links excluded: they are added after). */
+function listFingerprint(message: string | undefined): string {
+  const words = (message ?? "").toLowerCase().replace(/\s+/g, " ").trim();
+  return words ? createHash("sha256").update(words).digest("hex").slice(0, 16) : "";
+}
+
+function absoluteStoredUrl(url: string): string {
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  return `${SITE_CONFIG.siteUrl.replace(/\/$/, "")}${url.startsWith("/") ? url : `/${url}`}`;
+}
+
+/** Stores the photos under the inquiry id (a retry overwrites nothing) and returns their links. */
+async function storePhotos(inquiry: string, photos: File[]): Promise<string[]> {
+  const { uploadFile } = await import("@/lib/storage/blob");
+  const links: string[] = [];
+  for (let index = 0; index < photos.length; index += 1) {
+    const file = photos[index];
+    const ext = photoExtension(file) ?? "jpg";
+    const key = `consultation/${inquiry}/${index + 1}-${photoSafeName(file.name, ext)}`;
+    const stored = await uploadFile(key, Buffer.from(await file.arrayBuffer()), photoMimeType(file, ext));
+    links.push(absoluteStoredUrl(stored));
+  }
+  return links;
+}
 
 /**
  * Recomputes the planning range server-side from the submitted inputs so a
@@ -171,7 +177,16 @@ function verifyEstimate(
 
 export async function POST(request: NextRequest) {
   try {
-    const raw = await request.json();
+    let raw: unknown;
+    let photos: File[] = [];
+    if ((request.headers.get("content-type") || "").includes("multipart/form-data")) {
+      const read = await readMultipart(request);
+      if (!read.ok) return read.response;
+      raw = read.raw;
+      photos = read.photos;
+    } else {
+      raw = await request.json();
+    }
     const parsed = bodySchema.safeParse(raw);
 
     if (!parsed.success) {
@@ -181,11 +196,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const data = parsed.data;
+    let data = parsed.data;
     if (classifyLeadSpam({ honeypot: data.website, name: data.name, message: data.message }).spam)
       return NextResponse.json({ success: true, accepted: false, duplicate: true });
     const limit = rateLimit(clientKeyFrom(request.headers, "consultation"), 8, 10 * 60 * 1000);
     if (!limit.ok) return NextResponse.json({ message: "Please wait a few minutes before trying again." }, { status: 429 });
+
+    // Photos are stored only once the request passed the spam and rate checks,
+    // and their links travel in the notes every destination already keeps.
+    const listScope = listFingerprint(data.message);
+    if (photos.length > 0) {
+      try {
+        data = { ...data, message: appendPhotoLinks(data.message, await storePhotos(data.inquiryId, photos)) };
+      } catch (uploadErr) {
+        console.error("[consultation] Photo upload failed:", uploadErr instanceof Error ? uploadErr.message : uploadErr);
+        return NextResponse.json(
+          { message: "We could not save your photos. Try again, or send the request without them." },
+          { status: 503 },
+        );
+      }
+    }
 
     // Server-side verification: never trust client-supplied dollar amounts.
     const estimate = data.estimate ? verifyEstimate(data.estimate) : null;
@@ -194,8 +224,19 @@ export async function POST(request: NextRequest) {
       inquiryId: data.inquiryId,
       route: "consultation",
       contact: { email: data.email, phone: data.phone },
-      scope: `${data.projectType}|${data.address || data.zip || (data.propertyProfile as { city?: string } | null)?.city || ""}`,
-      metadata: { hasAttribution: Boolean(data.attribution), preferredContact: data.preferredContact },
+      // A callback is its own request: asking for a call after sending a list
+      // (or the other way round) must not read as a duplicate of the first.
+      // The one-screen form sends no address or job type by default, so the
+      // list itself (normalised, hashed) keeps a second, different list from
+      // the same person this month from reading as a duplicate of the first.
+      // The same list sent twice still is one.
+      scope: `${data.requestKind === "callback" ? "callback|" : ""}${data.projectType}|${data.address || data.zip || (data.propertyProfile as { city?: string } | null)?.city || ""}|${listScope}`,
+      metadata: {
+        hasAttribution: Boolean(data.attribution),
+        preferredContact: data.preferredContact,
+        requestKind: data.requestKind,
+        photos: photos.length,
+      },
       saveLead: async (tx) => {
         const profile = data.propertyProfile as Record<string, unknown> | null | undefined;
         await tx.insert(consultationRequests).values({
@@ -256,6 +297,8 @@ export async function POST(request: NextRequest) {
       zip: data.zip,
       projectType: data.projectType,
       message: data.message,
+      preferredContact: data.preferredContact,
+      requestKind: data.requestKind,
     };
     // Real unit costs entered in the admin pricing panel, applied to every
     // breakdown this request renders so the panel, emails and CRM agree.
@@ -311,6 +354,8 @@ export async function POST(request: NextRequest) {
           zip: data.zip,
           projectType: data.projectType,
           message: data.message,
+          preferredContact: data.preferredContact,
+          requestKind: data.requestKind,
         };
         const enrichment = (data.propertyProfile as PropertyEnrichment | null) ?? null;
 
