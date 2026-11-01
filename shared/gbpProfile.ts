@@ -84,8 +84,9 @@ export const GBP_LINKS = {
  * where a wrong URL actively misidentifies the business to search engines, so
  * they must point at profiles that genuinely belong to the company.
  *
- * Boise Handyman Co has none yet. The owner's only profile, P5 Home Co's
- * Facebook page, is in P5_SOCIAL below and is asserted on the parent node.
+ * Boise Handyman Co has none yet. The owner's only profiles, P5 Home Co's
+ * Facebook page and Google Business Profile, are in P5_SOCIAL below and are
+ * asserted on the parent node.
  */
 /**
  * Profiles that must never render here. Boise Handyman Co has no social or
@@ -114,14 +115,21 @@ export const GBP_SOCIAL = {
 } as const;
 
 /**
- * The owner's only social profile: P5 Home Co's Facebook page (confirmed via
- * the Facebook API, 31 October 2026). It describes the parent company, so it
- * feeds `sameAs` on the P5 parentOrganization node in lib/schema.ts and the
- * footer link labelled "P5 Home Co on Facebook", never this brand's sameAs.
+ * The owner's only profiles both describe the parent company, P5 Home Co: its
+ * Facebook page (confirmed via the Facebook API, 31 October 2026) and its
+ * Google Business Profile (category General contractor, knowledge graph id
+ * /g/11ntl1t7dc, owner decision 1 November 2026). They feed `sameAs` on the
+ * P5 parentOrganization node in lib/schema.ts and the footer links labelled
+ * "P5 Home Co on Facebook" and "P5 Home Co on Google", never this brand's
+ * sameAs: Boise Handyman Co has no Google profile of its own.
  */
 export const P5_SOCIAL = {
   facebook: 'https://www.facebook.com/1228704823655951',
+  google: 'https://www.google.com/search?kgmid=/g/11ntl1t7dc',
 } as const;
+
+/** P5 Home Co's Google profile id; never published as this brand's sameAs. */
+const P5_GOOGLE_PROFILE = /11ntl1t7dc/i;
 
 export const GBP_ATTRIBUTES = {
   onlineEstimates: true,
@@ -463,7 +471,10 @@ export function getExternalProfileUrls(): string[] {
     'NEXT_PUBLIC_HOUZZ_URL',
   ] as const;
 
+  // NEXT_PUBLIC_GBP_URL is the slot for this brand's own profile. The only
+  // Google profile today is P5 Home Co's, which rides the parent node, so an
+  // env value naming it is dropped rather than claimed as this brand's.
   return keys
     .map((key) => process.env[key]?.trim())
-    .filter((url): url is string => Boolean(url));
+    .filter((url): url is string => Boolean(url) && !P5_GOOGLE_PROFILE.test(url as string));
 }
