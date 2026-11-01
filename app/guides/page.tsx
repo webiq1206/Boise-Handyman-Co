@@ -56,7 +56,7 @@ export default function GuidesIndexPage() {
   const sortedHubs = [...CONTENT_HUBS].sort((a, b) => a.priorityTier - b.priorityTier);
 
   const webPageSchema = generateWebPageSchema({
-    title: 'Home Repair & Maintenance Guides',
+    title: 'Home repair & maintenance guides',
     description:
       'In-depth Treasure Valley home repair guides: what small repairs cost, how to hire a handyman, seasonal maintenance, smart small upgrades, and exterior care.',
     url: '/guides',
@@ -86,7 +86,7 @@ export default function GuidesIndexPage() {
       >
         <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Treasure Valley know-how</p>
         <h1 className="ed-display ed-statement-display text-inverse-foreground">
-          Home Repair &amp; Maintenance Guides
+          Home repair &amp; maintenance guides
         </h1>
         <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
           In-depth guides for Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley.

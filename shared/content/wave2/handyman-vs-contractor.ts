@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const handymanVsContractor: BlogPostData = {
   slug: 'handyman-vs-contractor',
-  title: 'Handyman vs Contractor: Which Does Your Job Need?',
+  title: 'Handyman vs contractor: which does your job need?',
   seoTitle: 'Handyman vs Contractor: Which to Hire',
   metaDescription:
     'Handyman vs contractor in Idaho: when a handyman is the right call, when a job needs a licensed contractor, and how to tell, job by job.',

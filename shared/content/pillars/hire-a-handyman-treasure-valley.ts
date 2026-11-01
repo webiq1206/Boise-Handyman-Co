@@ -2,7 +2,7 @@ import type { GuidePageData } from '../../guideContent';
 
 export const hireAHandymanTreasureValley: GuidePageData = {
   slug: 'hire-a-handyman-treasure-valley',
-  title: 'How to Hire a Handyman in the Treasure Valley',
+  title: 'How to hire a handyman in the Treasure Valley',
   seoTitle: 'How to Hire a Handyman in Boise, Idaho',
   metaDescription:
     'How to hire a handyman in Boise, Meridian, Eagle and Nampa: what to check, what to ask, how quotes should work, and the red flags to walk away from.',
@@ -32,7 +32,7 @@ export const hireAHandymanTreasureValley: GuidePageData = {
   relatedLinks: [
     { url: '/guides/boise-home-repair-cost-guide', anchor: 'Boise Home Repair Cost Guide' },
     { url: '/blog/handyman-red-flags', anchor: 'Handyman Red Flags' },
-    { url: '/blog/category/costs-and-hiring', anchor: 'Costs & Hiring articles' },
+    { url: '/blog/category/costs-and-hiring', anchor: 'Costs & hiring articles' },
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
     { url: '/about', anchor: 'About Boise Handyman Co' },
     { url: '/contact', anchor: 'Contact' },

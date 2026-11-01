@@ -18,7 +18,7 @@ getCityBySlug,
 getServiceBySlug,
 } from '@/lib/seo-routes';
 import { getCityServiceImageSet } from '@/shared/cityServiceImages';
-import { getCountyLabel } from '@/shared/contentData';
+import { getCountyLabel, serviceHeading } from '@/shared/contentData';
 import { getGalleryProjectsFor } from '@/shared/galleryData';
 import {
 cityServicePageFaqs,
@@ -72,9 +72,9 @@ export default async function CityServicePage(
     : undefined;
 
   const overview = getCityServiceIntro(content, city, localFact);
-  // The page's display name: the catalog name, except where the page was
-  // retitled to its slug and scope (painting-touch-ups reads "Painting
-  // Touch-Ups", matching its title).
+  // The page's display name: the catalog name in sentence case, except where
+  // the page was retitled to its slug and scope (painting-touch-ups reads
+  // "Painting touch-ups", matching its title).
   const h1 = `${content.name} in ${city.name}, Idaho`;
   const faqs = cityServicePageFaqs(content, city);
   const localNote = `${city.name} sits inside our core ${county} service area, so ${content.name.toLowerCase()} jobs are quoted from photos, scheduled locally, and priced the same as everywhere else we work.`;
@@ -100,7 +100,7 @@ export default async function CityServicePage(
     landingBreadcrumbs([
       { name: 'Home', url: '/' },
       { name: 'Services', url: '/services' },
-      { name: service.name, url: `/services/${service.slug}` },
+      { name: serviceHeading(service.name), url: `/services/${service.slug}` },
       { name: `${city.name}, ID`, url: path },
     ]),
     landingServiceSchema(service.name, overview, city.name),
@@ -122,7 +122,7 @@ export default async function CityServicePage(
         planningFrom={undefined}
         breadcrumbs={[
           { name: 'Home', href: '/' },
-          { name: service.name, href: `/services/${service.slug}` },
+          { name: serviceHeading(service.name), href: `/services/${service.slug}` },
           { name: `${city.name}, Idaho` },
         ]}
         benefits={content.benefits}

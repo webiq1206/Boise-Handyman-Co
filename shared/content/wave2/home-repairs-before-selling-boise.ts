@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const homeRepairsBeforeSellingBoise: BlogPostData = {
   slug: 'home-repairs-before-selling-boise',
-  title: 'Home Repairs Worth Making Before Selling Your Boise House',
+  title: 'Home repairs worth making before selling your Boise house',
   seoTitle: 'Home Repairs Before Selling in Boise',
   metaDescription:
     'Home repairs before selling in Boise: which small fixes pay off before listing, which to skip, and how to clear a buyer inspection punch list fast.',

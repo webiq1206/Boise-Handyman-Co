@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const whatToExpectFirstHandymanVisit: BlogPostData = {
   slug: 'what-to-expect-first-handyman-visit',
-  title: 'What to Expect at Your First Handyman Visit',
+  title: 'What to expect at your first handyman visit',
   seoTitle: 'What to Expect at a First Handyman Visit',
   metaDescription:
     'What to expect at a first handyman visit: what to have ready, how quoting works, what gets fixed the same day and how payment works.',

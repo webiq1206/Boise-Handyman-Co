@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const diyVsHiringAHandyman: BlogPostData = {
   slug: 'diy-vs-hiring-a-handyman',
-  title: 'DIY vs Hiring a Handyman: When Each Actually Makes Sense',
+  title: 'DIY vs hiring a handyman: when each actually makes sense',
   seoTitle: 'DIY vs Hiring a Handyman: How to Decide',
   metaDescription:
     'Some repairs are perfect DIY; others punish beginners. An honest framework for the DIY vs handyman call, job by job, plus what hiring out costs in Boise.',
@@ -38,7 +38,7 @@ export const diyVsHiringAHandyman: BlogPostData = {
   ],
   relatedLinks: [
     { url: '/blog/handyman-prices-boise', anchor: 'What a Handyman Costs in Boise' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/blog/boise-building-permit-guide', anchor: 'Do Home Repairs Need a Permit in Boise?' },
     { url: '/blog/who-supplies-materials-handyman-jobs', anchor: 'Who Supplies Materials on a Handyman Job' },
     { url: '/services/drywall-repair', anchor: 'Drywall Repair & Patching' },

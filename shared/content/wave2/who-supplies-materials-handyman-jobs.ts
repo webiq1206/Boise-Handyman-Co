@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const whoSuppliesMaterialsHandymanJobs: BlogPostData = {
   slug: 'who-supplies-materials-handyman-jobs',
-  title: 'Who Supplies Materials on a Handyman Job?',
+  title: 'Who supplies materials on a handyman job?',
   seoTitle: 'Who Buys Materials on a Handyman Job?',
   metaDescription:
     'Consumables, fixtures, markups, returns: how materials work on a handyman job, when to buy your own, and when to let the pro handle it. Get a clear quote.',
@@ -38,7 +38,7 @@ export const whoSuppliesMaterialsHandymanJobs: BlogPostData = {
   ],
   relatedLinks: [
     { url: '/blog/handyman-prices-boise', anchor: 'What a Handyman Costs in Boise' },
-    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What Small Home Repairs Cost in Boise' },
+    { url: '/blog/what-small-home-repairs-cost-boise', anchor: 'What small home repairs cost in Boise' },
     { url: '/blog/diy-vs-hiring-a-handyman', anchor: 'DIY vs Hiring a Handyman' },
     { url: '/services/plumbing-repairs', anchor: 'Minor Plumbing Repairs' },
     { url: '/services/carpentry-trim-repair', anchor: 'Carpentry & Trim Repair' },

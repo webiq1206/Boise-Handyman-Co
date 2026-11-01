@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const handymanRedFlags: BlogPostData = {
   slug: 'handyman-red-flags',
-  title: 'Handyman Red Flags: How to Avoid Hiring the Wrong One',
+  title: 'Handyman red flags: how to avoid hiring the wrong one',
   seoTitle: 'Handyman Red Flags to Watch For',
   metaDescription:
     'Handyman red flags to spot before you hire: cash-only demands, no written quote, no insurance, vague scope and vanishing acts, and what each predicts.',
@@ -34,9 +34,9 @@ export const handymanRedFlags: BlogPostData = {
   ],
   relatedLinks: [
     { url: '/blog/questions-to-ask-a-handyman', anchor: 'Questions to Ask Before Hiring a Handyman' },
-    { url: '/blog/how-to-compare-handyman-quotes', anchor: 'How to Compare Handyman Quotes' },
+    { url: '/blog/how-to-compare-handyman-quotes', anchor: 'How to compare handyman quotes' },
     { url: '/blog/hourly-rate-vs-flat-rate-handyman', anchor: 'Hourly Rate vs Flat Rate Handyman Pricing' },
-    { url: '/blog/what-to-expect-first-handyman-visit', anchor: 'What to Expect at Your First Handyman Visit' },
+    { url: '/blog/what-to-expect-first-handyman-visit', anchor: 'What to expect at your first handyman visit' },
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
     { url: '/contact', anchor: 'Contact' },
   ],

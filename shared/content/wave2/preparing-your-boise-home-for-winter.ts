@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const preparingYourBoiseHomeForWinter: BlogPostData = {
   slug: 'preparing-your-boise-home-for-winter',
-  title: 'Preparing Your Boise Home for Winter: The Checklist That Matters',
+  title: 'Preparing your Boise home for winter: the checklist that matters',
   seoTitle: 'Winterizing Your Boise Home: Checklist',
   metaDescription:
     'Winterizing your Boise home: freeze-proof hose bibs, seal drafts, clear gutters and service doors with the fall checklist that prevents winter damage.',

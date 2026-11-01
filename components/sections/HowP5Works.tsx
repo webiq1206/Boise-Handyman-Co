@@ -4,7 +4,7 @@ import { HOW_P5_WORKS, HOW_P5_WORKS_TITLE } from "@/shared/siteContent";
  * "What you can count on": the six standing promises, said once on the
  * homepage. Since Phase 3 it renders inside the how-it-works column (see
  * ApprovedHowItWorks) instead of as its own band, and it carries the
- * #why-choose-us anchor the footer's "Why Choose Us" link points at.
+ * #why-choose-us anchor the footer's "Why choose us" link points at.
  */
 export function HowP5Works() {
   return (

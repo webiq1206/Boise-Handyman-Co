@@ -59,7 +59,7 @@ export interface ServiceSEOContent {
 export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
   'drywall-repair': {
     slug: 'drywall-repair',
-    name: 'Drywall Repair & Patching',
+    name: 'Drywall repair & patching',
     headline: 'Drywall repair in Boise',
     primaryKeyword: 'drywall repair boise',
     overview:
@@ -145,7 +145,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     slug: 'painting-touch-ups',
     // Touch-ups and small repaints, matching the slug and the scope; whole-house
     // and full exterior repaints are referred out (see outOfScope).
-    name: 'Painting Touch-Ups',
+    name: 'Painting touch-ups',
     headline: 'Paint touch-ups in Boise and the Treasure Valley',
     primaryKeyword: 'paint touch up boise',
     overview:
@@ -229,8 +229,8 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
   'plumbing-repairs': {
     slug: 'plumbing-repairs',
-    name: 'Minor Plumbing Repairs',
-    headline: 'Minor Plumbing Repairs in Boise and the Treasure Valley',
+    name: 'Minor plumbing repairs',
+    headline: 'Minor plumbing repairs in Boise and the Treasure Valley',
     primaryKeyword: 'minor plumbing repair boise',
     overview:
       'Boise Handyman Co schedules everyday plumbing items on your repair list with licensed plumbing trade partners we stand behind, inside the same written quote and visit plan: dripping faucets, running toilets, slow drains, disposals and worn supply lines. Water heaters, repipes, gas and new plumbing runs stay with the plumber.',
@@ -319,8 +319,8 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
   'electrical-repairs': {
     slug: 'electrical-repairs',
-    name: 'Minor Electrical Repairs',
-    headline: 'Minor Electrical Repairs in Boise and the Treasure Valley',
+    name: 'Minor electrical repairs',
+    headline: 'Minor electrical repairs in Boise and the Treasure Valley',
     primaryKeyword: 'minor electrical repair boise',
     overview:
       'Boise Handyman Co schedules electrical items on your repair list with licensed electrical trade partners we stand behind, inside the same written quote and visit plan. Like-for-like outlet, switch, fixture and ceiling-fan work on existing wiring is coordinated that way; new circuits, panels and added wiring stay with the electrician.',
@@ -409,7 +409,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
   'carpentry-trim-repair': {
     slug: 'carpentry-trim-repair',
-    name: 'Carpentry & Trim Repair',
+    name: 'Carpentry & trim repair',
     headline: 'Carpentry and trim repair in Boise',
     primaryKeyword: 'carpentry repair boise',
     overview:
@@ -493,8 +493,8 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
   'mounting-assembly': {
     slug: 'mounting-assembly',
-    name: 'Mounting & Assembly',
-    headline: 'TV Mounting, Shelving, and Furniture Assembly in Boise',
+    name: 'Mounting & assembly',
+    headline: 'TV mounting, shelving, and furniture assembly in Boise',
     primaryKeyword: 'tv mounting boise',
     overview:
       'Boise Handyman Co helps with TV mounting, shelves, mirrors, curtain rods and furniture assembly. Send the items, product details and installation locations so our team can review the scope before preparing a quote.',
@@ -577,8 +577,8 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
   'fence-deck-gutter-repair': {
     slug: 'fence-deck-gutter-repair',
-    name: 'Fence, Deck & Gutter Repair',
-    headline: 'Fence, Deck, and Gutter Repair in Boise and the Treasure Valley',
+    name: 'Fence, deck & gutter repair',
+    headline: 'Fence, deck, and gutter repair in Boise and the Treasure Valley',
     primaryKeyword: 'fence repair boise',
     overview:
       'Boise Handyman Co repairs the exterior wear items Treasure Valley weather works on hardest: leaning fence panels and rotted posts, loose deck boards and railings, and gutters that sag, leak, or overflow. Repairs are quoted upfront and sized for a visit, not a rebuild.',
@@ -661,8 +661,8 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
   'home-maintenance': {
     slug: 'home-maintenance',
-    name: 'Caulking & Home Maintenance',
-    headline: 'Caulking, Weatherproofing, and Home Maintenance in Boise',
+    name: 'Caulking & home maintenance',
+    headline: 'Caulking, weatherproofing, and home maintenance in Boise',
     primaryKeyword: 'home maintenance handyman boise',
     overview:
       'Boise Handyman Co handles the recurring small maintenance that keeps a Treasure Valley home tight and dry: fresh caulk in kitchens and baths, weatherstripping and draft sealing before winter, tile and grout touch-ups, and household punch lists reviewed together.',
@@ -865,7 +865,7 @@ export function getCityServiceSections(
       ],
       links: [
         { label: `Handyman services in ${city.name}`, href: `/areas/${city.slug}` },
-        { label: `All ${service.name} details`, href: `/services/${service.slug}` },
+        { label: `All ${service.name.toLowerCase()} details`, href: `/services/${service.slug}` },
       ],
     },
     ...(service.outOfScope

@@ -353,7 +353,7 @@ export function PaymentSuccess({ message, onContinue }: { message?: string; onCo
         <div className="w-16 h-16 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center mx-auto mb-4">
           <CheckCircle2 className="h-8 w-8 text-primary" />
         </div>
-        <h3 className="text-xl font-semibold mb-2">Payment Successful!</h3>
+        <h3 className="text-xl font-semibold mb-2">Payment successful!</h3>
         <p className="text-muted-foreground mb-6">
           {message || "Your payment has been processed successfully."}
         </p>

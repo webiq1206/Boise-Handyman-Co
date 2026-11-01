@@ -28,7 +28,7 @@ export default function BlogPage() {
       { name: "Blog", url: "/blog" },
     ]),
     generateCollectionPageSchema({
-      title: "Home Repair & Maintenance Insights",
+      title: "Home repair & maintenance insights",
       description:
         "Straight answers for Treasure Valley homeowners: what small repairs cost, what to fix before it gets expensive, how to hire well, and what each season demands.",
       url: "/blog",
@@ -50,7 +50,7 @@ export default function BlogPage() {
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Blog" }]} />
         <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Blog</p>
         <h1 className="ed-display ed-statement-display text-inverse-foreground">
-          Home Repair &amp; Maintenance Insights
+          Home repair &amp; maintenance insights
         </h1>
         <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
           Straight answers for Treasure Valley homeowners. What small repairs actually cost,

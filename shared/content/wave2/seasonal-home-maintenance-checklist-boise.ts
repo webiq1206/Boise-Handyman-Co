@@ -2,7 +2,7 @@ import type { BlogPostData } from '../../blogContent';
 
 export const seasonalHomeMaintenanceChecklistBoise: BlogPostData = {
   slug: 'seasonal-home-maintenance-checklist-boise',
-  title: 'Seasonal Home Maintenance Checklist for Boise Homes',
+  title: 'Seasonal home maintenance checklist for Boise homes',
   seoTitle: 'Seasonal Maintenance Checklist for Boise',
   metaDescription:
     'Seasonal home maintenance checklist for Treasure Valley weather: spring inspection, summer exterior work, fall winterizing and winter interior fixes.',

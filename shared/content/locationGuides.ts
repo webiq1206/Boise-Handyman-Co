@@ -484,7 +484,7 @@ const PLACES: PlaceGuide[] = [
     citySlug: 'eagle',
     county: 'ada',
     guideType: 'neighborhood',
-    title: 'Handyman Services in the Eagle Foothills',
+    title: 'Handyman services in the Eagle Foothills',
     seoTitle: 'Handyman Services in the Eagle Foothills',
     metaDescription:
       'Handyman services in the Eagle Foothills: wind- and sun-exposed exteriors, deck and fence care on sloped lots, sealing and maintenance, and flat pricing.',
@@ -539,7 +539,7 @@ const PLACES: PlaceGuide[] = [
     citySlug: 'boise',
     county: 'ada',
     guideType: 'neighborhood',
-    title: 'Handyman Services in Hidden Springs',
+    title: 'Handyman services in Hidden Springs',
     seoTitle: 'Handyman Services in Hidden Springs, ID',
     metaDescription:
       'Handyman services in Hidden Springs: repairs matched to community standards, maintenance for homes entering their third decade, and flat upfront pricing.',
@@ -593,7 +593,7 @@ const PLACES: PlaceGuide[] = [
     citySlug: 'boise',
     county: 'ada',
     guideType: 'neighborhood',
-    title: 'Handyman Services in Harris Ranch',
+    title: 'Handyman services in Harris Ranch',
     seoTitle: 'Handyman Services in Harris Ranch, Boise',
     metaDescription:
       'Handyman services in Harris Ranch: settling repairs and installs in newer East Boise homes, HOA-conscious exterior work, and flat upfront pricing.',
