@@ -64,6 +64,9 @@
   .interior-contact-grid.quote-form-first {
     display: flex;
     flex-direction: column;
+    /* The grid's align-items:start would shrink-wrap the form block, and the form
+       is a size container (no intrinsic width), so the column stretches it. */
+    align-items: stretch;
     gap: 40px;
   }
   .interior-contact-grid.quote-form-first > [data-quote-anchor] {
@@ -86,8 +89,11 @@
    One column, labels always visible, 48px targets, native radio pills drawn as
    the family segmented control and pills. Charcoal fill with paper text marks the
    active choice; the send button is the family primary with its accent bar. */
+/* A size container for its own send row (below). It has no intrinsic width, so it
+   always fills its parent rather than shrink-wrapping. */
 .hm-form {
   container-type: inline-size;
+  width: 100%;
 }
 .hm-form,
 .hm-form-body {

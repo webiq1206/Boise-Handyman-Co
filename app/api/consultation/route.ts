@@ -43,6 +43,7 @@ import {
   photoMimeType,
   photoProblem,
   photoSafeName,
+  withPreferredContact,
 } from "@/server/services/consultationRequest";
 import { resolveQuotedRange } from "@/shared/costs/resolve";
 import { forwardToLeadDashboard } from "@/server/services/leadDashboardForward";
@@ -278,7 +279,9 @@ export async function POST(request: NextRequest) {
         city: location?.city,
         zip: data.zip || location?.zip,
         projectType: data.projectType,
-        message: data.message,
+        // The p5 intake has no contact-preference field, so the visitor's
+        // choice (Call me, Text me, Email me) rides at the end of the summary.
+        message: withPreferredContact(data.message, data.requestKind, data.preferredContact),
         inquiryId: data.inquiryId,
       });
       after(() => bridge);

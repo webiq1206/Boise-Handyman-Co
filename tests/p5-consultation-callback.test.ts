@@ -17,6 +17,7 @@ import {
   photoExtension,
   photoProblem,
   photoSafeName,
+  withPreferredContact,
 } from "../server/services/consultationRequest";
 import { buildAdminEmailHtml, buildAdminSubject } from "../server/services/consultationEmail";
 import { buildLeadNotes } from "../server/services/leadRecord";
@@ -117,6 +118,9 @@ test("the preferred contact the visitor chose reaches the CRM notes and the inte
   assert.match(buildLeadNotes(parsed, null, null), /Preferred contact: Text/);
   assert.match(buildAdminEmailHtml(parsed, null, null), /Preferred contact<\/td><td[^>]*>Text</);
   assert.match(buildAdminSubject(parsed, null), /^New consultation request: Jordan Example/);
+  // The p5 intake has no field for it, so the summary carries it.
+  assert.equal(withPreferredContact(parsed.message, parsed.requestKind, parsed.preferredContact), "List\n\nPreferred contact: Text");
+  assert.equal(withPreferredContact("CALLBACK REQUEST: x", "callback", "phone"), "CALLBACK REQUEST: x");
 });
 
 test("photos: type, count and size checks, safe names and links after the list", () => {

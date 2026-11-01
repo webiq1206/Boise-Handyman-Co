@@ -123,6 +123,20 @@ export function composeConsultationMessage(input: {
   return typed ? `${header}\n\n${typed}` : header;
 }
 
+/**
+ * The notes plus the visitor's contact choice, for a destination that has no
+ * field for it (the p5 intake). A callback already says "please call".
+ */
+export function withPreferredContact(
+  message: string | undefined,
+  requestKind: "quote" | "callback",
+  preferredContact: "email" | "phone" | "text",
+): string | undefined {
+  if (requestKind === "callback") return message;
+  const line = `Preferred contact: ${CONTACT_LABELS[preferredContact]}`;
+  return message?.trim() ? `${message}\n\n${line}` : line;
+}
+
 /* ───────────────────────────── optional photos (multipart) */
 
 export const MAX_PHOTOS = 4;
