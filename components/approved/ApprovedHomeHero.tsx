@@ -33,12 +33,15 @@ export function ApprovedHomeHero() {
   const b = brands.handyman;
   return (
     <>
+      {/* Already sized WebP (1280x720 at 59 KB), so it is served as is. A /_next/image request
+          for a hero can stall and hold the page's load event open, as it did on Boise Remodeling Co. */}
       <HeroPhoto
         image={{
           src: b.hero,
           width: 1280,
           height: 720,
           position: '66% 12%',
+          unoptimized: true,
           alt: 'Careful adjustment of an interior door hinge',
         }}
         eyebrow={b.kicker}
