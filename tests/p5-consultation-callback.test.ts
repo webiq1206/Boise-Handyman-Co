@@ -1,0 +1,155 @@
+/**
+ * The one-screen request form and its "Have us call you" switch post to the
+ * same /api/consultation pipeline. These pin the shapes the server accepts and
+ * the callback marker every destination (database row, CRM notes, p5 intake,
+ * internal email) carries, so a callback can never arrive looking like an
+ * ordinary request or be rejected for a missing list.
+ */
+import test from "node:test";
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import {
+  CALLBACK_MARKER,
+  UNSPECIFIED_PROJECT_TYPE,
+  consultationBodySchema,
+  filesPendingLine,
+  withPreferredContact,
+} from "../server/services/consultationRequest";
+import { buildAdminEmailHtml, buildAdminSubject } from "../server/services/consultationEmail";
+import { buildLeadNotes } from "../server/services/leadRecord";
+import { buildP5IntakeBody, p5ProjectType } from "../server/services/p5IntakeBridge";
+
+const ID = "4b82598a-24f7-48d3-a9b6-ab5a64c44438";
+
+test("the one-screen request needs no project type or address", () => {
+  const parsed = consultationBodySchema.safeParse({
+    inquiryId: ID,
+    name: "Jordan Example",
+    phone: "(208) 555-0199",
+    email: "",
+    preferredContact: "text",
+    message: "Patch two doorknob holes, rehang a closet door.",
+  });
+  assert.ok(parsed.success, JSON.stringify(parsed.success ? "" : parsed.error.flatten()));
+  assert.equal(parsed.data.projectType, UNSPECIFIED_PROJECT_TYPE);
+  assert.equal(parsed.data.address, "");
+  assert.equal(parsed.data.requestKind, "quote");
+  assert.equal(parsed.data.message, "Patch two doorknob holes, rehang a closet door.");
+  // "task-list" is the value p5 already maps, so the CRM deal keeps a project type.
+  assert.equal(p5ProjectType(parsed.data.projectType), "A multi-item home list");
+});
+
+test("a callback is name and phone only and is marked for every destination", () => {
+  const parsed = consultationBodySchema.safeParse({
+    inquiryId: ID,
+    name: "Riley Example",
+    phone: "208-555-0123",
+    requestKind: "callback",
+    bestTimeToCall: "Morning",
+  });
+  assert.ok(parsed.success, JSON.stringify(parsed.success ? "" : parsed.error.flatten()));
+  const data = parsed.data;
+  assert.equal(data.preferredContact, "phone", "a callback is a call whatever the old default said");
+  assert.equal(data.message, `${CALLBACK_MARKER}: please call 208-555-0123. Best time: Morning.`);
+
+  const lead = { ...data, message: data.message };
+  assert.match(buildAdminSubject(lead, null), /^Callback request: Riley Example/);
+  const html = buildAdminEmailHtml(lead, null, null);
+  assert.match(html, /Callback Request/);
+  assert.match(html, /Callback request: Riley asked us to call 208-555-0123/);
+  assert.match(html, /CALLBACK REQUEST: please call/);
+  const notes = buildLeadNotes(lead, null, null);
+  assert.match(notes, /Request: CALLBACK REQUEST/);
+  assert.match(notes, /Best time: Morning/);
+  const intake = buildP5IntakeBody({ name: data.name, phone: data.phone, projectType: data.projectType, message: data.message, inquiryId: ID });
+  assert.match(JSON.stringify(intake), /CALLBACK REQUEST/);
+});
+
+test("a callback still needs a callable number, and a full request its contact", () => {
+  assert.equal(
+    consultationBodySchema.safeParse({ inquiryId: ID, name: "Riley", phone: "123", requestKind: "callback" }).success,
+    false,
+  );
+  // An email-preferred callback is still a call: the phone is what is checked.
+  assert.equal(
+    consultationBodySchema.safeParse({ inquiryId: ID, name: "Riley", phone: "2085550123", email: "", preferredContact: "email", requestKind: "callback" }).success,
+    true,
+  );
+  assert.equal(
+    consultationBodySchema.safeParse({ inquiryId: ID, name: "Jordan", phone: "", email: "nope", preferredContact: "email" }).success,
+    false,
+  );
+  assert.equal(consultationBodySchema.safeParse({ inquiryId: ID, name: "J", phone: "2085550123" }).success, false);
+});
+
+test("older cached bundles that send the wizard's full body are still accepted unchanged", () => {
+  const parsed = consultationBodySchema.safeParse({
+    inquiryId: ID,
+    name: "Ada Example",
+    preferredContact: "email",
+    phone: "",
+    email: "ada@example.com",
+    address: "123 Main St, Boise, ID 83702",
+    zip: "83702",
+    projectType: "drywall-repair",
+    message: "Two holes",
+    propertyProfile: null,
+    estimate: null,
+    website: "",
+  });
+  assert.ok(parsed.success);
+  assert.equal(parsed.data.projectType, "drywall-repair");
+  assert.equal(parsed.data.message, "Two holes");
+  assert.equal(parsed.data.requestKind, "quote");
+});
+
+test("the preferred contact the visitor chose reaches the CRM notes and the internal email", () => {
+  const parsed = consultationBodySchema.parse({
+    inquiryId: ID,
+    name: "Jordan Example",
+    phone: "2085550199",
+    preferredContact: "text",
+    message: "List",
+  });
+  assert.match(buildLeadNotes(parsed, null, null), /Preferred contact: Text/);
+  assert.match(buildAdminEmailHtml(parsed, null, null), /Preferred contact<\/td><td[^>]*>Text</);
+  assert.match(buildAdminSubject(parsed, null), /^New consultation request: Jordan Example/);
+  // The p5 intake has no field for it, so the summary carries it.
+  assert.equal(withPreferredContact(parsed.message, parsed.requestKind, parsed.preferredContact), "List\n\nPreferred contact: Text");
+  assert.equal(withPreferredContact("CALLBACK REQUEST: x", "callback", "phone"), "CALLBACK REQUEST: x");
+});
+
+test("attached files never ride with the request: the notes say links follow", () => {
+  const parsed = consultationBodySchema.parse({
+    inquiryId: ID,
+    name: "Jordan Example",
+    phone: "2085550199",
+    preferredContact: "text",
+    message: "Fix the gate",
+    filesPending: 2,
+  });
+  assert.equal(parsed.message, `Fix the gate\n\n${filesPendingLine(2)}`);
+  assert.match(filesPendingLine(1) ?? "", /^Files: 1 file is uploading\. Links follow in a "Details added" update\.$/);
+  assert.equal(filesPendingLine(0), null);
+  // More than the tile allows is not a request this form sends.
+  assert.equal(
+    consultationBodySchema.safeParse({ inquiryId: ID, name: "Jordan", phone: "2085550199", message: "x y z", filesPending: 11 }).success,
+    false,
+  );
+});
+
+test("the route is JSON only, checks spam and rate first, and issues the Step 2 token only for a saved row", () => {
+  const source = readFileSync(new URL("../app/api/consultation/route.ts", import.meta.url), "utf8");
+  assert.match(source, /const bodySchema = consultationBodySchema;/);
+  assert.doesNotMatch(source, /formData\(\)|multipart/, "files upload separately, after the request is saved");
+  const spam = source.indexOf("classifyLeadSpam(");
+  const limit = source.indexOf("rateLimit(clientKeyFrom");
+  const save = source.indexOf("saveAcceptedLead(db");
+  const token = source.indexOf("issueDetailsToken(");
+  assert.ok(spam > 0 && limit > spam && save > limit && token > save);
+  assert.match(source, /\.returning\(\{ id: consultationRequests\.id \}\)/);
+  assert.match(source, /scope: `\$\{data\.requestKind === "callback" \? "callback\|" : ""\}/);
+  // The duplicate scope hashes the list as typed, not the pending-files line.
+  assert.match(source, /listFingerprint\(parsed\.data\.message\?\.split\("\\n\\nFiles: "\)\[0\]\)/);
+  assert.match(source, /\|\$\{listScope\}`,/);
+});

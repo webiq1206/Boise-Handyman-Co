@@ -3,186 +3,87 @@
 import { EstimatorRecovery } from "@/components/estimate/recovery/EstimatorRecovery";
 import { markEstimatorCompleted } from "@/lib/estimatorSession";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { useEffect, useId, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { cn } from "@/lib/utils";
-import { Check, Plus, X, ChevronDown } from "lucide-react";
+import { MessageSquare, Phone, X } from "lucide-react";
 import type { StoredEstimate } from "@/shared/estimateEngine";
 import { formatPlanningCurrency } from "@/shared/estimateEngine";
 import { DisplayNum } from "@/components/marketing/DisplayNum";
-import { AddressAutocomplete } from "@/components/AddressAutocomplete";
-import { CTA_FORM_SEND } from "@/shared/ctaCopy";
+import { AttachmentTile, type AttachmentStatus, type PickedFile } from "@/components/forms/AttachmentTile";
+import { CTA_FORM_CALLBACK, CTA_FORM_SEND } from "@/shared/ctaCopy";
 import { CONSULT_BULLETS } from "@/shared/siteContent";
-import { BusinessPhoneContact } from "@/components/BusinessPhoneContact";
+import { SITE_CONFIG } from "@/shared/siteConfig";
+import { JOB_CHOICES, TIMING_OPTIONS, jobLabel } from "@/shared/consultationChoices";
+import { partitionRequestFiles } from "@/shared/requestFiles";
 import { trackEvent, trackMetaEvent, trackAcceptedLeadConversion } from "@/lib/analytics";
 import { requireConsultationReceipt } from "@/lib/consultationReceipt";
 import { inquiryId } from "@/lib/leadInquiry";
 import { readStoredPrefill, PREFILL_UPDATED_EVENT, hasPassedGate } from "@/lib/leadPrefill";
-import type { PropertyProfile } from "@/shared/propertyProfile";
-import {
-  isLocatableSite,
-  SITE_LOCATION_ERROR_MESSAGE,
-  buildCleanAddress,
-  extractZip,
-} from "@/shared/addressValidation";
-import {
-  SelectableCard,
-  WizardActionBar,
-  WizardProgress,
-  WizardStep,
-} from "@/components/estimate/wizard";
-import { useKeyboardInset } from "@/components/estimate/wizard/useKeyboardInset";
 
 /**
- * Legacy sentinel from the home-builder era ("still looking for land"). No
- * handyman project option uses this value any more, so the address field is
- * effectively always required.
+ * The request form every "Send your list and photos" lands on (homepage and
+ * contact #consult, the paid landing pages, the /handyman funnel and the
+ * consult dialog).
+ *
+ * Two steps (owner, 1 November 2026: the easiest form there is, and the more
+ * information the better). Step 1 is one short screen that captures the
+ * request: the list first, an optional attachment tile, name, phone, optional
+ * email, how to reach you, one send. "Have us call you" reduces it to name,
+ * phone and an optional best time. Step 2 sits on the success screen: an
+ * optional "Help us prepare" panel whose answers and files are added to the
+ * SAME request (POST /api/consultation/details with the signed token the
+ * request returned), never a second lead.
+ *
+ * Files never ride with the request: it is sent first, so an upload can never
+ * delay or lose it, then each file uploads on its own and the success screen
+ * says which ones did not, with a retry and a text link.
+ *
+ * Native elements only (input, textarea, select, radio), so nothing here sets
+ * state during hydration and every control is announced as itself.
  */
-const LAND_SEARCH_PROJECT_TYPE = "looking-for-land";
 
-const CONTACT_METHODS = [
-  { value: "email", label: "Email" },
-  { value: "phone", label: "Phone call" },
+type Mode = "request" | "callback";
+type Reach = "phone" | "text" | "email";
+type Field = "message" | "files" | "name" | "phone" | "email";
+type Errors = Partial<Record<Field, string>>;
+
+/** Values match the server's preferredContact enum (phone = call). */
+const REACH_OPTIONS: { value: Reach; label: string }[] = [
+  { value: "phone", label: "Call" },
   { value: "text", label: "Text" },
-] as const;
+  { value: "email", label: "Email" },
+];
+/** The site has a text line, so a text reply is the default. */
+const DEFAULT_REACH: Reach = "text";
+/** Same list as BEST_TIMES_TO_CALL in server/services/consultationRequest.ts. */
+const BEST_TIMES = ["Any time", "Morning", "Midday", "Afternoon"] as const;
+const FIELD_ORDER: Field[] = ["message", "files", "name", "phone", "email"];
+const LIST_PLACEHOLDER = "For example: patch two doorknob holes, fix a leaky kitchen faucet, hang three shelves";
 
-const DRAFT_KEY = "handyman_consult_wizard_v1";
+const DRAFT_KEY = "handyman_consult_form_v3";
 
-const formSchema = z
-  .object({
-    name: z.string().min(2, "Please enter your full name"),
-    preferredContact: z.enum(["email", "phone", "text"]),
-    phone: z.string(),
-    email: z.string(),
-    address: z.string(),
-    projectType: z.string().min(1, "Please select a project type"),
-    message: z.string().optional(),
-    website: z.string().max(0).optional(),
-  })
-  .superRefine((data, ctx) => {
-    if (data.preferredContact === "email") {
-      if (!z.string().email().safeParse(data.email).success) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ["email"],
-          message: "Please enter a valid email address",
-        });
-      }
-    } else if (data.phone.replace(/\D/g, "").length < 10) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["phone"],
-        message:
-          data.preferredContact === "text"
-            ? "Please enter a valid mobile number"
-            : "Please enter a valid phone number",
-      });
-    }
-
-    if (data.projectType === LAND_SEARCH_PROJECT_TYPE) return;
-    const address = data.address.trim();
-    if (address.length < 5) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["address"],
-        message: "Please enter your service address",
-      });
-      return;
-    }
-    if (!isLocatableSite(address)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["address"],
-        message: SITE_LOCATION_ERROR_MESSAGE,
-      });
-    }
-  });
-
-type FormData = z.infer<typeof formSchema>;
-
-/**
- * D2 / C10: at most six choice cards. Remaining job types route through
- * "A list or something else" so the step stays one decision and no-scroll.
- */
-const JOB_CHOICES = [
-  { value: "drywall-repair", label: "Drywall repair", sub: "Holes, cracks, texture" },
-  { value: "painting-touch-ups", label: "Painting", sub: "Touch-ups and small jobs" },
-  { value: "plumbing-repairs", label: "Plumbing", sub: "Faucets, toilets, disposals" },
-  { value: "electrical-repairs", label: "Electrical", sub: "Outlets, switches, fixtures" },
-  { value: "mounting-assembly", label: "Mounting & assembly", sub: "TVs, shelves, furniture" },
-  { value: "task-list", label: "A list or something else", sub: "Several jobs or not sure yet" },
-] as const;
-
-const PROJECT_LABEL_LOOKUP: Record<string, string> = {
-  ...Object.fromEntries(JOB_CHOICES.map((o) => [o.value, o.label])),
-  "carpentry-trim-repair": "Carpentry, doors & trim",
-  "fence-deck-gutter-repair": "Fence, deck & gutter",
-  "home-maintenance": "Caulking & maintenance",
-  other: "Other / not sure yet",
-};
-
-/**
- * C10 fit sequence #1 (split): text steps carry at most one keyboard field so
- * the step + fixed Back/Next fit in vh − header − bar − keyboard at 320+.
- * Choice-only steps (job, prefer) do not open the keyboard.
- */
-const WIZARD_STEPS = [
-  { id: "job", label: "Job" },
-  { id: "about", label: "About you" },
-  { id: "prefer", label: "Reach by" },
-  { id: "reach", label: "Contact" },
-  { id: "address", label: "Address" },
-  { id: "review", label: "Review" },
-] as const;
-
-type WizardStepId = (typeof WIZARD_STEPS)[number]["id"];
-
-const labelClass = "text-xs tracking-wide font-normal uppercase text-muted-foreground";
-
-function RequiredMark() {
-  return (
-    <span className="text-destructive" aria-hidden="true">
-      {" "}
-      *
-    </span>
-  );
+interface Draft {
+  mode?: Mode;
+  name?: string;
+  phone?: string;
+  email?: string;
+  message?: string;
+  reach?: Reach;
+  bestTime?: string;
 }
 
-interface ConsultationFormProps {
-  onRevise?: () => void;
-  /** Compact trust bullets above the form (used in the modal variant). */
-  showTrust?: boolean;
-  initialProjectType?: "drywall-repair" | "home-maintenance";
-}
-
-function readDraft(): Partial<FormData> & { step?: WizardStepId } {
+function readDraft(): Draft {
   try {
     const raw = sessionStorage.getItem(DRAFT_KEY);
-    if (!raw) return {};
-    return JSON.parse(raw) as Partial<FormData> & { step?: WizardStepId };
+    return raw ? (JSON.parse(raw) as Draft) : {};
   } catch {
     return {};
   }
 }
 
-function writeDraft(data: Partial<FormData> & { step: WizardStepId }) {
+function writeDraft(draft: Draft) {
   try {
-    sessionStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+    sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
   } catch {
     /* draft is best-effort */
   }
@@ -196,152 +97,123 @@ function clearDraft() {
   }
 }
 
+function digits(value: string): string {
+  return value.replace(/\D/g, "");
+}
+
+function validEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+let fileSeq = 0;
+function pick(files: File[]): PickedFile[] {
+  return files.map((file) => ({ id: `f${(fileSeq += 1)}`, file, status: "ready" as const }));
+}
+
+interface ConsultationFormProps {
+  onRevise?: () => void;
+  /** Compact trust bullets below the form (used in the modal variant). */
+  showTrust?: boolean;
+  initialProjectType?: "drywall-repair" | "home-maintenance";
+  /** The form's own heading. Callback mode always reads "Request a call". */
+  heading?: string;
+  /** h2 on a page, h3 inside the dialog (which has its own title). */
+  headingLevel?: "h2" | "h3";
+}
+
+interface Submitted {
+  mode: Mode;
+  name: string;
+  phone: string;
+  email: string;
+  reach: Reach;
+  projectType: string;
+  hadList: boolean;
+}
+
+/** What /api/consultation returns for a saved request, used by uploads and Step 2. */
+interface FollowUp {
+  requestId: string;
+  inquiryId: string;
+  token: string;
+}
+
+type Upload = PickedFile & { status: AttachmentStatus; key?: string };
+
 export function ConsultationForm({
   onRevise,
   showTrust = false,
   initialProjectType,
+  heading = "Send your list",
+  headingLevel = "h2",
 }: ConsultationFormProps = {}) {
+  const uid = useId();
+  const ids = (name: string) => `${uid}-${name}`;
+  const [mode, setMode] = useState<Mode>("request");
+  const [message, setMessage] = useState("");
+  const [files, setFiles] = useState<PickedFile[]>([]);
+  const [fileNote, setFileNote] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [reach, setReach] = useState<Reach>(DEFAULT_REACH);
+  const [bestTime, setBestTime] = useState<string>(BEST_TIMES[0]);
+  const [website, setWebsite] = useState("");
   const [estimate, setEstimate] = useState<StoredEstimate | null>(null);
-  const [estimateChecked, setEstimateChecked] = useState(false);
   const [attached, setAttached] = useState(true);
+  const [touched, setTouched] = useState<Partial<Record<Field, boolean>>>({});
+  const [submitTried, setSubmitTried] = useState(false);
+  const [submitted, setSubmitted] = useState<Submitted | null>(null);
   const [success, setSuccess] = useState(false);
-  const [submitted, setSubmitted] = useState<FormData | null>(null);
-  const [propertyProfile, setPropertyProfile] = useState<PropertyProfile | null>(null);
-  const [addressInput, setAddressInput] = useState("");
-  const [showNote, setShowNote] = useState(false);
-  const [showAddrInfo, setShowAddrInfo] = useState(false);
-  const [stepIndex, setStepIndex] = useState(0);
-  const [stepError, setStepError] = useState<string | null>(null);
-  const lastKeyRef = useRef<string | null>(null);
+  const [followUp, setFollowUp] = useState<FollowUp | null>(null);
+  const [uploads, setUploads] = useState<Upload[]>([]);
+  const [forwardError, setForwardError] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
+  const lastKeyRef = useRef<string | null>(null);
   const draftHydrated = useRef(false);
+  /** Uploaded file keys already handed to the request (by the upload run or Step 2). */
+  const forwardedRef = useRef<Set<string>>(new Set());
+  const uploadsRef = useRef<Upload[]>([]);
+  const callback = mode === "callback";
+  const Heading = headingLevel;
 
-  const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    mode: "onTouched",
-    defaultValues: {
-      name: "",
-      preferredContact: "email",
-      phone: "",
-      email: "",
-      address: "",
-      projectType: initialProjectType ?? "",
-      message: "",
-    },
-  });
-
-  const preferredContact = form.watch("preferredContact");
-  const searchingForLand = form.watch("projectType") === LAND_SEARCH_PROJECT_TYPE;
-  const watched = form.watch();
-  const keyboardInset = useKeyboardInset();
-
-  // C10: keep the focused text field above the fixed Back/Next dock while the
-  // software keyboard (or a visualViewport mock) covers the bottom of the screen.
-  const keepFieldAboveDock = useCallback(() => {
-    const active = document.activeElement;
-    if (!(active instanceof HTMLElement)) return;
-    if (!/^(INPUT|TEXTAREA)$/.test(active.tagName)) return;
-    if (!active.closest("[data-testid='consultation-wizard']")) return;
-    const bar = document.querySelector<HTMLElement>(
-      "[data-testid='consult-wizard-actions']",
-    );
-    const vv = window.visualViewport;
-    const usableBottom = vv ? vv.height + vv.offsetTop : window.innerHeight;
-    const barH = bar?.getBoundingClientRect().height ?? 112;
-    const limit = usableBottom - barH - 12;
-    const rect = active.getBoundingClientRect();
-    if (rect.bottom > limit) {
-      window.scrollBy({ top: rect.bottom - limit, behavior: "auto" });
-    } else if (rect.top < 72) {
-      window.scrollBy({ top: rect.top - 72, behavior: "auto" });
-    }
-  }, []);
-
-  useEffect(() => {
-    keepFieldAboveDock();
-  }, [keyboardInset, stepIndex, keepFieldAboveDock]);
-
-  // D2: persist draft across refresh / browser Back within the consult flow.
+  // Restore a draft across refresh or browser Back within the visit. Files
+  // cannot be restored by a browser, so they are never part of it.
   useEffect(() => {
     if (draftHydrated.current) return;
     draftHydrated.current = true;
     const draft = readDraft();
-    if (draft.projectType && !initialProjectType) {
-      form.setValue("projectType", draft.projectType, { shouldValidate: false });
-    }
-    if (draft.name) form.setValue("name", draft.name, { shouldValidate: false });
-    if (draft.preferredContact) {
-      form.setValue("preferredContact", draft.preferredContact, { shouldValidate: false });
-    }
-    if (draft.phone) form.setValue("phone", draft.phone, { shouldValidate: false });
-    if (draft.email) form.setValue("email", draft.email, { shouldValidate: false });
-    if (draft.address) {
-      setAddressInput(draft.address);
-      form.setValue("address", draft.address, { shouldValidate: false });
-    }
-    if (draft.message) {
-      form.setValue("message", draft.message, { shouldValidate: false });
-      setShowNote(true);
-    }
-    if (draft.step) {
-      const idx = WIZARD_STEPS.findIndex((s) => s.id === draft.step);
-      if (idx >= 0) setStepIndex(idx);
-    }
-  }, [form, initialProjectType]);
+    if (draft.mode === "callback") setMode("callback");
+    if (draft.name) setName(draft.name);
+    if (draft.phone) setPhone(draft.phone);
+    if (draft.email) setEmail(draft.email);
+    if (draft.message) setMessage(draft.message);
+    if (draft.reach && REACH_OPTIONS.some((o) => o.value === draft.reach)) setReach(draft.reach);
+    if (draft.bestTime) setBestTime(draft.bestTime);
+  }, []);
 
   useEffect(() => {
-    if (success) return;
-    const step = WIZARD_STEPS[stepIndex]?.id ?? "job";
-    writeDraft({
-      projectType: watched.projectType,
-      name: watched.name,
-      preferredContact: watched.preferredContact,
-      phone: watched.phone,
-      email: watched.email,
-      address: watched.address,
-      message: watched.message,
-      step,
-    });
-  }, [watched, stepIndex, success]);
+    if (success || !draftHydrated.current) return;
+    writeDraft({ mode, name, phone, email, message, reach, bestTime });
+  }, [mode, name, phone, email, message, reach, bestTime, success]);
 
-  function handleProfileResolved(profile: PropertyProfile | null) {
-    setPropertyProfile(profile);
-    if (profile) {
-      const clean = buildCleanAddress(profile);
-      if (clean) {
-        setAddressInput(clean);
-        form.setValue("address", clean, { shouldValidate: true });
-      }
-    }
-  }
-
-  const deriveZip = (addr: string) =>
-    propertyProfile?.zip?.slice(0, 5) || extractZip(addr) || "";
-
+  // A Meta lead form click or an earlier form on this visit may already know who this is.
   useEffect(() => {
     function applyPrefill() {
       const pf = readStoredPrefill();
-      const fillIfEmpty = (field: "name" | "phone" | "email", value?: string) => {
-        if (value && !form.getValues(field)) {
-          form.setValue(field, value, { shouldValidate: false });
-        }
-      };
-      fillIfEmpty("name", pf.name);
-      fillIfEmpty("phone", pf.phone);
-      fillIfEmpty("email", pf.email);
-      if (pf.address && !form.getValues("address")) {
-        setAddressInput(pf.address);
-        form.setValue("address", pf.address, { shouldValidate: false });
-      }
+      if (pf.name) setName((value) => value || pf.name || "");
+      if (pf.phone) setPhone((value) => value || pf.phone || "");
+      if (pf.email) setEmail((value) => value || pf.email || "");
     }
     applyPrefill();
     window.addEventListener(PREFILL_UPDATED_EVENT, applyPrefill);
     return () => window.removeEventListener(PREFILL_UPDATED_EVENT, applyPrefill);
-  }, [form]);
+  }, []);
 
+  // A planning range from the estimator on this visit rides along with the request.
   useEffect(() => {
     function loadEstimate() {
-      setEstimateChecked(true);
       if (initialProjectType) return;
       try {
         const raw = sessionStorage.getItem("brc_estimate");
@@ -357,26 +229,26 @@ export function ConsultationForm({
         lastKeyRef.current = key;
         setEstimate(parsed);
         setAttached(true);
-        form.setValue("projectType", parsed.project, { shouldValidate: false });
-      } catch {}
+      } catch {
+        /* no stored range */
+      }
     }
     loadEstimate();
     window.addEventListener("brc_estimate_updated", loadEstimate);
     return () => window.removeEventListener("brc_estimate_updated", loadEstimate);
-  }, [form, initialProjectType]);
+  }, [initialProjectType]);
 
   useEffect(() => {
     if (!success) return;
     const el = successHeadingRef.current;
     if (el && el.offsetParent !== null) {
+      // Inside the dialog, scroll its own body back to the top; on a page,
+      // bring the success message under the sticky header.
       let ancestor: HTMLElement | null = el.parentElement;
       let scrolledContainer = false;
       while (ancestor && ancestor !== document.body && ancestor !== document.documentElement) {
         const overflowY = getComputedStyle(ancestor).overflowY;
-        if (
-          (overflowY === "auto" || overflowY === "scroll") &&
-          ancestor.scrollHeight > ancestor.clientHeight
-        ) {
+        if ((overflowY === "auto" || overflowY === "scroll") && ancestor.scrollHeight > ancestor.clientHeight) {
           ancestor.scrollTo({ top: 0, behavior: "auto" });
           scrolledContainer = true;
           break;
@@ -384,32 +256,137 @@ export function ConsultationForm({
         ancestor = ancestor.parentElement;
       }
       if (!scrolledContainer) {
-        const top = el.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+        const rect = el.getBoundingClientRect();
+        if (rect.top < 80 || rect.bottom > window.innerHeight) {
+          window.scrollTo({ top: Math.max(0, rect.top + window.scrollY - 96), behavior: "auto" });
+        }
       }
     }
     el?.focus({ preventScroll: true });
   }, [success]);
 
-  function handleRevise() {
-    if (onRevise) {
-      onRevise();
-    } else {
-      document.getElementById("planning-range")?.scrollIntoView({ behavior: "smooth" });
+  function validate(): Errors {
+    const errors: Errors = {};
+    if (!callback && message.trim().length < 3) errors.message = "Tell us in a few words what needs doing.";
+    if (name.trim().length < 2) errors.name = "Enter your name.";
+    const phoneDigits = digits(phone).length;
+    if (phoneDigits < 10 || phoneDigits > 15) errors.phone = "Enter a phone number with the area code.";
+    if (callback) return errors;
+    const cleanEmail = email.trim();
+    if (cleanEmail && !validEmail(cleanEmail)) errors.email = "Check the email address.";
+    else if (!cleanEmail && reach === "email") errors.email = "Add your email so we can email you back.";
+    return errors;
+  }
+
+  const errors = validate();
+  const shown = (field: Field) => ((submitTried || touched[field]) && errors[field]) || "";
+  const touch = (field: Field) => () => setTouched((current) => ({ ...current, [field]: true }));
+  const engaged = Boolean(name || phone || message || email || files.length);
+
+  const formStartedRef = useRef(false);
+  function trackFormStart() {
+    if (formStartedRef.current) return;
+    formStartedRef.current = true;
+    trackEvent("form_start", { form: "consultation" });
+  }
+
+  /* ───────────── files after the request is saved */
+
+  async function uploadOne(item: Upload, receipt: FollowUp): Promise<Upload> {
+    const body = new FormData();
+    body.set("requestId", receipt.requestId);
+    body.set("inquiryId", receipt.inquiryId);
+    body.set("token", receipt.token);
+    body.set("file", item.file);
+    try {
+      const res = await fetch("/api/consultation/files", { method: "POST", body });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json?.ok || typeof json.file?.key !== "string") return { ...item, status: "failed" };
+      return { ...item, status: "done", key: json.file.key };
+    } catch {
+      return { ...item, status: "failed" };
     }
   }
 
+  async function postDetails(
+    receipt: FollowUp,
+    details: Record<string, string | undefined>,
+    keys: string[],
+  ): Promise<{ ok: boolean; message?: string }> {
+    try {
+      const res = await fetch("/api/consultation/details", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...receipt, details, files: keys }),
+      });
+      const json = await res.json().catch(() => ({}));
+      return res.ok && json?.ok ? { ok: true } : { ok: false, message: json?.message };
+    } catch {
+      return { ok: false };
+    }
+  }
+
+  /** Uploads what still needs uploading, then hands the new links to the request. */
+  async function sendFiles(list: Upload[], receipt: FollowUp) {
+    let current = list.map((item) => (item.status === "done" ? item : { ...item, status: "uploading" as const }));
+    uploadsRef.current = current;
+    setUploads(current);
+    for (const item of current) {
+      if (item.status !== "uploading") continue;
+      const result = await uploadOne(item, receipt);
+      current = current.map((entry) => (entry.id === item.id ? result : entry));
+      uploadsRef.current = current;
+      setUploads(current);
+    }
+    uploadsRef.current = current;
+    const keys = claimPending();
+    if (keys.length === 0) return;
+    const sent = await postDetails(receipt, {}, keys);
+    if (sent.ok) {
+      setForwardError("");
+    } else {
+      releaseKeys(keys);
+      setForwardError("Your files are saved, but we could not add them to your request yet.");
+    }
+  }
+
+  /** Keys uploaded but not yet handed to the request, marked as handed. */
+  function claimPending(): string[] {
+    const keys = uploadsRef.current
+      .filter((item) => item.status === "done" && item.key && !forwardedRef.current.has(item.key))
+      .map((item) => item.key as string);
+    for (const key of keys) forwardedRef.current.add(key);
+    return keys;
+  }
+
+  function releaseKeys(keys: string[]) {
+    for (const key of keys) forwardedRef.current.delete(key);
+  }
+
   const mutation = useMutation({
-    mutationFn: async (data: FormData) => {
+    mutationFn: async (data: Submitted) => {
+      const isCallback = data.mode === "callback";
+      const id = inquiryId(isCallback ? "callback" : "primary");
       const payload = {
-        ...data,
-        zip: deriveZip(data.address),
-        propertyProfile,
+        name: data.name,
+        phone: data.phone,
+        email: isCallback ? "" : data.email,
+        preferredContact: isCallback ? "phone" : data.reach,
+        address: "",
+        zip: "",
+        // Blank is filed as "task-list" by the server; Step 2 can refine it.
+        projectType: data.projectType,
+        message: isCallback ? undefined : message.trim(),
+        requestKind: isCallback ? "callback" : "quote",
+        bestTimeToCall: isCallback ? bestTime : undefined,
+        filesPending: !isCallback && files.length > 0 ? files.length : undefined,
+        propertyProfile: null,
         skipEmail: hasPassedGate() ? true : undefined,
-        inquiryId: inquiryId("primary"),
-        website: data.website,
+        // A callback after a list (or the other way round) is its own inquiry.
+        inquiryId: id,
+        website,
         estimate:
-          estimate && attached
+          !isCallback && estimate && attached
             ? {
                 project: estimate.project,
                 finish: estimate.finish,
@@ -431,12 +408,19 @@ export function ConsultationForm({
       });
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        throw new Error(err.message || "Something went wrong");
+        throw new Error(err.message || "We could not send that. Try again, or call us.");
       }
-      return requireConsultationReceipt(await res.json());
+      const json = await res.json();
+      const receipt = requireConsultationReceipt(json);
+      const next: FollowUp | null =
+        typeof json.requestId === "string" && typeof json.token === "string"
+          ? { requestId: json.requestId, inquiryId: id, token: json.token }
+          : null;
+      return { ...receipt, followUp: next };
     },
-    onSuccess: (response: { accepted?: boolean }, variables) => {
+    onSuccess: (response: { accepted?: boolean; followUp: FollowUp | null }, variables) => {
       setSuccess(true);
+      setFollowUp(response.followUp);
       clearDraft();
       try {
         sessionStorage.removeItem("brc_estimate");
@@ -456,683 +440,749 @@ export function ConsultationForm({
           content_category: "consultation_request",
         });
       }
+      // Files follow the saved request, one upload each.
+      if (variables.mode === "request" && files.length > 0) {
+        const list: Upload[] = files.map((item) => ({ ...item, status: "ready" }));
+        setUploads(list);
+        if (response.followUp) void sendFiles(list, response.followUp);
+      }
     },
     onError: () => {
       trackEvent("form_error", { form: "consultation", reason: "submit_failed" });
     },
   });
 
-  const formStartedRef = useRef(false);
-  function trackFormStart() {
-    if (formStartedRef.current) return;
-    formStartedRef.current = true;
-    trackEvent("form_start", { form: "consultation" });
-  }
-
-  const goBack = useCallback(() => {
-    setStepError(null);
-    setStepIndex((i) => Math.max(0, i - 1));
-  }, []);
-
-  async function validateStep(index: number): Promise<boolean> {
-    setStepError(null);
-    const id = WIZARD_STEPS[index]?.id;
-    if (id === "job") {
-      const ok = await form.trigger("projectType");
-      if (!ok || !form.getValues("projectType")) {
-        setStepError("Please choose what needs doing.");
-        return false;
-      }
-      return true;
-    }
-    if (id === "about") {
-      const ok = await form.trigger("name");
-      if (!ok) {
-        setStepError("Please enter your name.");
-        return false;
-      }
-      return true;
-    }
-    if (id === "prefer") {
-      const ok = await form.trigger("preferredContact");
-      if (!ok) {
-        setStepError("Please choose how we should reach you.");
-        return false;
-      }
-      return true;
-    }
-    if (id === "reach") {
-      const field: "phone" | "email" =
-        form.getValues("preferredContact") === "email" ? "email" : "phone";
-      const ok = await form.trigger(field);
-      if (!ok) {
-        setStepError(
-          field === "email"
-            ? "Please enter a valid email address."
-            : "Please enter a valid phone number.",
-        );
-        return false;
-      }
-      return true;
-    }
-    if (id === "address") {
-      const ok = await form.trigger("address");
-      if (!ok) {
-        setStepError("Please enter your service address.");
-        return false;
-      }
-      return true;
-    }
-    return true;
-  }
-
-  async function goNext() {
-    const ok = await validateStep(stepIndex);
-    if (!ok) return;
-    if (stepIndex < WIZARD_STEPS.length - 1) {
-      setStepIndex((i) => i + 1);
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (mutation.isPending) return;
+    setSubmitTried(true);
+    const found = validate();
+    const first = FIELD_ORDER.find((field) => found[field]);
+    if (first) {
+      trackEvent("form_error", { form: "consultation", fields: Object.keys(found).sort().join(",") });
+      formRef.current?.querySelector<HTMLElement>(`[data-field="${first}"]`)?.focus();
       return;
     }
-    form.handleSubmit(
-      (data) => {
-        setSubmitted(data);
-        mutation.mutate(data);
-      },
-      (errors) => {
-        trackEvent("form_error", {
-          form: "consultation",
-          fields: Object.keys(errors).sort().join(","),
-        });
-        setStepError("Please fix the highlighted fields.");
-      },
-    )();
+    const data: Submitted = {
+      mode,
+      name: name.trim(),
+      phone: phone.trim(),
+      email: callback ? "" : email.trim(),
+      reach,
+      projectType: initialProjectType || (estimate && attached && !callback ? estimate.project : "") || "task-list",
+      hadList: !callback && message.trim().length > 0,
+    };
+    setSubmitted(data);
+    mutation.mutate(data);
+  }
+
+  function addFiles(incoming: File[]) {
+    const { accepted, problems } = partitionRequestFiles(incoming, files.map((item) => item.file));
+    if (accepted.length) setFiles((current) => [...current, ...pick(accepted)]);
+    setFileNote(problems.join(" "));
   }
 
   if (success) {
-    const submittedProject = submitted
-      ? PROJECT_LABEL_LOOKUP[submitted.projectType] ?? submitted.projectType
-      : null;
+    const wasCallback = submitted?.mode === "callback";
+    const failed = uploads.filter((item) => item.status === "failed");
+    const busy = uploads.some((item) => item.status === "uploading");
 
     return (
-      <div
-        className="flex flex-col items-start space-y-4 py-2"
-        data-testid="consultation-success"
-        data-clarity-mask="True"
-      >
-        <img
-          src="/brand/svg/icon/boise-handyman-co-icon-accent.svg"
-          alt="Boise Handyman Co"
-          width={48}
-          height={48}
-          className="h-12 w-12"
-        />
-        <div>
-          <h3
-            ref={successHeadingRef}
-            tabIndex={-1}
-            data-clarity-mask="True"
-            className="font-serif text-2xl text-foreground outline-none"
-          >
-            Request received{submitted ? `, ${submitted.name.split(" ")[0]}` : ""}.
-          </h3>
-          {submittedProject && (
-            <p className="mt-1 text-sm text-muted-foreground" data-clarity-mask="True">
-              {submittedProject}
-              {submitted?.address ? ` · ${submitted.address}` : ""}
-            </p>
-          )}
-        </div>
-
-        <ol className="space-y-2.5 text-sm text-muted-foreground">
-          <li className="flex gap-3">
-            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-border text-caption font-normal text-foreground">
-              1
-            </span>
-            <span className="pt-0.5">We review your request and any planning range you attached.</span>
-          </li>
-          <li className="flex gap-3">
-            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-border text-caption font-normal text-foreground">
-              2
-            </span>
-            <span className="pt-0.5">Our team reviews the scope with you before preparing a quote.</span>
-          </li>
-          <li className="flex gap-3">
-            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-border text-caption font-normal text-foreground">
-              3
-            </span>
-            <span className="pt-0.5">
-              Scheduling is confirmed after the scope and quote are agreed. This request does not book
-              a visit.
-            </span>
-          </li>
-        </ol>
-
-        <div className="flex flex-col gap-1">
-          <p className="text-sm text-muted-foreground">
-            Need us sooner?{" "}
-            <BusinessPhoneContact
-              inline
-              showPhoneIcon
-              phoneClassName="inline-flex items-center gap-1.5 font-normal text-foreground underline-offset-2 hover:underline"
-              saveClassName="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              phoneTestId="link-consult-success-phone"
-            />
+      // data-family-bar-yield (here and on the request form): the family mobile bar steps aside
+      // while the form, this success screen or its Step 2 is on screen
+      // (components/family/MobileActionBar.tsx).
+      <div className="hm-form hm-form-done" data-testid="consultation-success" data-clarity-mask="True" data-family-bar-yield="">
+        <div role="status" className="hm-form-done-head">
+          <Heading ref={successHeadingRef} tabIndex={-1} data-clarity-mask="True" className="hm-form-title">
+            Thanks{submitted ? `, ${submitted.name.split(" ")[0]}` : ""}. We have your request.
+          </Heading>
+          <p className="hm-form-lead">
+            {wasCallback
+              ? `We call you back at ${submitted?.phone} within one business day.`
+              : "We review your list and reply with a written quote. Scheduling is confirmed after the scope and quote are agreed."}
           </p>
-          {submitted?.email && (
-            <p className="text-xs text-muted-foreground">
-              Your request is saved. Email delivery is not confirmed on this page.
-            </p>
-          )}
+          <p className="hm-form-next">
+            Need us sooner?{" "}
+            <a className="hm-form-inline-link" href={SITE_CONFIG.phoneHref} data-testid="link-consult-success-phone">
+              Call {SITE_CONFIG.phone}
+            </a>
+          </p>
         </div>
+
+        {uploads.length > 0 && (
+          <div className="hm-form-uploads" data-testid="consult-upload-status" data-clarity-mask="True" aria-live="polite">
+            <p className="hm-form-uploads-title">
+              {!followUp
+                ? "We could not add your files on this page."
+                : busy
+                  ? "Adding your files to the request"
+                  : failed.length
+                    ? `${failed.length === 1 ? "One file" : `${failed.length} files`} did not upload.`
+                    : "Your files are with your request."}
+            </p>
+            <ul className="hm-tile-chips">
+              {uploads.map((item) => (
+                <li key={item.id} className={`hm-tile-chip is-${followUp ? item.status : "failed"}`} data-testid="upload-row">
+                  <span className="hm-tile-chip-text">
+                    <span className="hm-tile-chip-name">{item.file.name}</span>
+                    <span className="hm-tile-chip-meta">
+                      {!followUp
+                        ? "Not uploaded"
+                        : item.status === "uploading"
+                          ? "Uploading"
+                          : item.status === "done"
+                            ? "Added"
+                            : item.status === "failed"
+                              ? "Did not upload"
+                              : "Waiting"}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            {forwardError && <p className="hm-form-error-text">{forwardError}</p>}
+            {(failed.length > 0 || forwardError || !followUp) && !busy && (
+              <div className="hm-form-upload-actions">
+                {followUp && (
+                  <button
+                    type="button"
+                    className="hm-form-text"
+                    onClick={() => void sendFiles(uploads, followUp)}
+                    data-testid="button-retry-uploads"
+                  >
+                    Try again
+                  </button>
+                )}
+                <a className="hm-form-text" href={SITE_CONFIG.phoneSmsHref} data-testid="link-text-files">
+                  Text {failed.length === 1 ? "it" : "them"} to us
+                </a>
+              </div>
+            )}
+          </div>
+        )}
+
+        {followUp && submitted && (
+          <DetailsPanel
+            followUp={followUp}
+            submitted={submitted}
+            headingLevel={headingLevel === "h2" ? "h3" : "h4"}
+            initialProjectType={initialProjectType}
+            uploadOne={uploadOne}
+            postDetails={postDetails}
+            claimPending={claimPending}
+            releaseKeys={releaseKeys}
+          />
+        )}
       </div>
     );
   }
 
-  const projectLabel = estimate?.project ?? null;
-  const finishLabel = estimate?.finish ?? null;
-  const stepId = WIZARD_STEPS[stepIndex].id;
-  const primaryLabel =
-    stepIndex === WIZARD_STEPS.length - 1
-      ? mutation.isPending
-        ? "Sending…"
-        : CTA_FORM_SEND
-      : "Continue";
+  const describedBy = (field: Field, hint?: string) =>
+    [hint, shown(field) ? ids(`${field}-error`) : ""].filter(Boolean).join(" ") || undefined;
+  const fieldError = (field: Field) => (
+    <p id={ids(`${field}-error`)} className="hm-form-error-text" aria-live="polite" data-testid={`error-${field}`}>
+      {shown(field)}
+    </p>
+  );
+  const errorCount = Object.keys(errors).length;
+
+  const talk = (
+    <div className="hm-form-talk">
+      <p className="hm-form-talk-title">Prefer to talk?</p>
+      <div className="hm-form-talk-actions">
+        <a className="hm-form-call" href={SITE_CONFIG.phoneHref} data-testid="link-consult-form-call">
+          <Phone size={18} aria-hidden="true" />
+          Call {SITE_CONFIG.phone}
+        </a>
+        <a className="hm-form-text" href={SITE_CONFIG.phoneSmsHref} data-testid="link-consult-form-text">
+          Text us
+        </a>
+        <button
+          type="button"
+          className="hm-form-chat"
+          onClick={() => window.dispatchEvent(new Event("p5:assistant-open"))}
+          data-testid="button-consult-form-chat"
+        >
+          <MessageSquare size={18} aria-hidden="true" />
+          Chat
+        </button>
+      </div>
+    </div>
+  );
 
   return (
-    <Form {...form}>
+    <div className="hm-form" data-family-bar-yield="">
       <EstimatorRecovery
         flow="consultation"
-        currentStep={WIZARD_STEPS[stepIndex].id}
-        currentStepIndex={stepIndex}
-        totalSteps={WIZARD_STEPS.length}
-        lastCompletedStep={stepIndex > 0 ? WIZARD_STEPS[stepIndex - 1].id : undefined}
-        selections={{ project_type: String(form.watch("projectType") ?? "") || null }}
-        validationErrors={Object.keys(form.formState.errors)}
-        engaged={form.formState.isDirty || stepIndex > 0}
+        currentStep={engaged ? "filling" : "form"}
+        currentStepIndex={engaged ? 1 : 0}
+        totalSteps={2}
+        lastCompletedStep={engaged ? "form" : undefined}
+        selections={{ project_type: callback ? "Callback request" : initialProjectType || "task-list" }}
+        validationErrors={Object.keys(submitTried ? errors : {})}
+        engaged={engaged}
         submitted={success}
       />
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          void goNext();
-        }}
-        onFocusCapture={(e) => {
-          trackFormStart();
-          const t = e.target;
-          if (t instanceof HTMLElement && /^(INPUT|TEXTAREA)$/.test(t.tagName)) {
-            requestAnimationFrame(() => keepFieldAboveDock());
-          }
-        }}
-        className="space-y-4"
+        ref={formRef}
+        onSubmit={onSubmit}
+        onFocusCapture={trackFormStart}
+        noValidate
+        aria-labelledby={ids("title")}
+        className="hm-form-body"
         data-testid="consultation-wizard"
-        data-step={stepId}
+        data-step={mode}
+        data-clarity-mask="True"
       >
+        <Heading className="hm-form-title" id={ids("title")} tabIndex={-1} data-quote-form-heading="">
+          {callback ? "Request a call" : heading}
+        </Heading>
+
+        <fieldset className="hm-form-mode">
+          <legend className="sr-only">How do you want to start?</legend>
+          <label className="hm-form-pill">
+            <input
+              type="radio"
+              name={ids("mode")}
+              value="request"
+              checked={!callback}
+              onChange={() => setMode("request")}
+              data-testid="request-mode-request"
+            />
+            <span>Send a request</span>
+          </label>
+          <label className="hm-form-pill">
+            <input
+              type="radio"
+              name={ids("mode")}
+              value="callback"
+              checked={callback}
+              onChange={() => setMode("callback")}
+              data-testid="request-mode-callback"
+            />
+            <span>Have us call you</span>
+          </label>
+        </fieldset>
+
+        {!callback && (
+          <>
+            <div className="hm-form-field">
+              <label htmlFor={ids("message")}>Your list</label>
+              <textarea
+                id={ids("message")}
+                data-field="message"
+                data-testid="textarea-message"
+                name="message"
+                rows={3}
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+                onBlur={touch("message")}
+                placeholder={LIST_PLACEHOLDER}
+                aria-required="true"
+                aria-invalid={shown("message") ? true : undefined}
+                aria-describedby={describedBy("message")}
+                maxLength={2000}
+              />
+              {fieldError("message")}
+            </div>
+
+            <div data-field="files" tabIndex={-1}>
+              <AttachmentTile
+                id={ids("files")}
+                files={files}
+                onAdd={addFiles}
+                onRemove={(fileId) => {
+                  setFiles((current) => current.filter((item) => item.id !== fileId));
+                  setFileNote("");
+                }}
+                message={fileNote}
+              />
+            </div>
+          </>
+        )}
+
+        <div className="hm-form-field">
+          <label htmlFor={ids("name")}>Name</label>
+          <input
+            id={ids("name")}
+            data-field="name"
+            data-testid="input-name"
+            name="name"
+            autoComplete="name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            onBlur={touch("name")}
+            aria-required="true"
+            aria-invalid={shown("name") ? true : undefined}
+            aria-describedby={describedBy("name")}
+            maxLength={100}
+          />
+          {fieldError("name")}
+        </div>
+
+        <div className="hm-form-field">
+          <label htmlFor={ids("phone")}>Phone</label>
+          <input
+            id={ids("phone")}
+            data-field="phone"
+            data-testid="input-phone"
+            name="phone"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            value={phone}
+            onChange={(event) => setPhone(event.target.value)}
+            onBlur={touch("phone")}
+            aria-required="true"
+            aria-invalid={shown("phone") ? true : undefined}
+            aria-describedby={describedBy("phone")}
+            maxLength={30}
+          />
+          {fieldError("phone")}
+        </div>
+
+        {callback ? (
+          <div className="hm-form-field">
+            <label htmlFor={ids("best-time")}>Best time to call (optional)</label>
+            <select
+              id={ids("best-time")}
+              name="bestTimeToCall"
+              value={bestTime}
+              onChange={(event) => setBestTime(event.target.value)}
+              aria-describedby={ids("best-time-hint")}
+              data-testid="select-best-time"
+            >
+              {BEST_TIMES.map((time) => (
+                <option key={time} value={time}>
+                  {time}
+                </option>
+              ))}
+            </select>
+            <p className="hm-form-hint" id={ids("best-time-hint")}>
+              We call during business hours (Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM).
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="hm-form-field">
+              <label htmlFor={ids("email")}>{reach === "email" ? "Email" : "Email (optional)"}</label>
+              <input
+                id={ids("email")}
+                data-field="email"
+                data-testid="input-email"
+                name="email"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                onBlur={touch("email")}
+                aria-required={reach === "email" ? "true" : undefined}
+                aria-invalid={shown("email") ? true : undefined}
+                aria-describedby={describedBy("email", ids("email-hint"))}
+                maxLength={200}
+              />
+              <p className="hm-form-hint" id={ids("email-hint")}>
+                {reach === "email" ? "We reply with the written quote here." : "For a written copy of your quote."}
+              </p>
+              {fieldError("email")}
+            </div>
+
+            <fieldset className="hm-form-reach">
+              <legend>How should we reach you?</legend>
+              <div className="hm-form-pills">
+                {REACH_OPTIONS.map((option) => (
+                  <label className="hm-form-pill" key={option.value}>
+                    <input
+                      type="radio"
+                      name={ids("reach")}
+                      value={option.value}
+                      checked={reach === option.value}
+                      onChange={() => setReach(option.value)}
+                      data-testid={`button-preferred-contact-${option.value}`}
+                    />
+                    <span>{option.label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            {estimate && attached && (
+              <div className="hm-form-estimate" data-testid="text-estimate-summary">
+                <span>
+                  Range attached:{" "}
+                  <span data-testid="text-estimate-range">
+                    <DisplayNum>
+                      {formatPlanningCurrency(estimate.priceLow)} to {formatPlanningCurrency(estimate.priceHigh)}
+                    </DisplayNum>
+                  </span>
+                </span>
+                <button type="button" onClick={() => setAttached(false)} data-testid="button-drop-estimate">
+                  <X className="h-3.5 w-3.5" aria-hidden="true" />
+                  Remove
+                </button>
+              </div>
+            )}
+          </>
+        )}
+
         <input
-          {...form.register("website")}
+          className="hm-form-honeypot"
+          name="website"
           tabIndex={-1}
           autoComplete="off"
           aria-hidden="true"
-          className="hidden"
+          value={website}
+          onChange={(event) => setWebsite(event.target.value)}
         />
 
-        <WizardProgress steps={[...WIZARD_STEPS]} currentIndex={stepIndex} className="!mb-2" />
+        {mutation.isError ? (
+          <p className="hm-form-error" role="alert">
+            {(mutation.error as Error).message || "We could not send that. Try again, or call us."}
+          </p>
+        ) : submitTried && errorCount > 0 ? (
+          <p className="hm-form-error" role="alert">
+            Check the {errorCount === 1 ? "field" : "fields"} marked above.
+          </p>
+        ) : null}
 
-        {showTrust && (
-          <ul
-            className="mb-2 grid grid-cols-1 gap-x-4 gap-y-1.5 sm:grid-cols-2"
-            data-testid="consult-trust-bullets"
-          >
-            {CONSULT_BULLETS.map((item) => (
-              <li key={item} className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Check className="h-3.5 w-3.5 flex-shrink-0 text-foreground/60" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className="hm-form-send" data-testid="consult-wizard-actions">
+          {talk}
+          <div className="hm-form-send-main">
+            <button className="hm-form-submit" type="submit" disabled={mutation.isPending} data-testid="button-consult-submit">
+              {mutation.isPending ? "Sending" : callback ? CTA_FORM_CALLBACK : CTA_FORM_SEND}
+            </button>
+            <p className="hm-form-next">
+              {callback
+                ? "We call you back within one business day."
+                : "We review your list and reply with a written quote. This request does not book a visit."}
+            </p>
+          </div>
+        </div>
 
-        {estimateChecked && !estimate && stepIndex === 0 && (
-          <p className="text-xs text-muted-foreground" data-testid="estimate-cta-card">
+        {/* In the dialog, the estimator is one tap away (onRevise opens it). */}
+        {onRevise && !callback && !estimate && !initialProjectType && (
+          <p className="hm-form-next">
             Want a ballpark first?{" "}
-            <button
-              type="button"
-              onClick={handleRevise}
-              className="font-normal text-foreground underline underline-offset-2"
-              data-testid="button-start-estimate"
-            >
-              See planning range
+            <button type="button" className="hm-form-inline-link" onClick={() => onRevise?.()} data-testid="button-start-estimate">
+              See a planning range
             </button>
           </p>
         )}
 
-        {estimate && attached && stepIndex === 0 && (
-          <div className="flex items-center justify-between gap-2 text-xs" data-testid="text-estimate-summary">
-            <span className="text-muted-foreground">
-              Range attached:{" "}
-              <span className="text-foreground" data-testid="text-estimate-range">
-                <DisplayNum>
-                  {formatPlanningCurrency(estimate.priceLow)} to{" "}
-                  {formatPlanningCurrency(estimate.priceHigh)}
-                </DisplayNum>
-              </span>
-              {projectLabel ? ` · ${projectLabel}` : ""}
-              {finishLabel ? ` · ${finishLabel}` : ""}
-            </span>
-            <button
-              type="button"
-              onClick={() => setAttached(false)}
-              className="inline-flex flex-shrink-0 items-center gap-1 text-muted-foreground hover:text-foreground"
-              data-testid="button-drop-estimate"
-            >
-              <X className="h-3.5 w-3.5" />
-              Remove
-            </button>
-          </div>
+        {showTrust && (
+          <ul className="hm-form-trust" data-testid="consult-trust-bullets">
+            {CONSULT_BULLETS.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         )}
-
-        {mutation.isError && (
-          <div
-            role="alert"
-            className="rounded-sm border border-destructive/20 bg-destructive/5 p-3 text-sm text-destructive"
-          >
-            {(mutation.error as Error).message || "Something went wrong. Please try again."}
-          </div>
-        )}
-
-        {stepError && (
-          <div role="alert" className="rounded-sm border border-destructive/20 bg-destructive/5 p-3 text-sm text-destructive">
-            {stepError}
-          </div>
-        )}
-
-        {stepId === "job" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading="What needs doing?"
-            instructions="One choice. Details come on the last step."
-            data-testid="consult-step-job"
-          >
-            <div role="radiogroup" aria-label="Job type" className="grid grid-cols-2 gap-2">
-              {JOB_CHOICES.map((opt) => (
-                <SelectableCard
-                  key={opt.value}
-                  dense
-                  control="radio"
-                  selected={form.watch("projectType") === opt.value}
-                  onSelect={() => {
-                    form.setValue("projectType", opt.value, { shouldValidate: true, shouldDirty: true });
-                    setStepError(null);
-                  }}
-                  title={opt.label}
-                  data-testid={`consult-job-${opt.value}`}
-                />
-              ))}
-            </div>
-            <FormField
-              control={form.control}
-              name="projectType"
-              render={() => (
-                <FormItem className="sr-only">
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </WizardStep>
-        )}
-
-        {stepId === "about" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading="About you"
-            instructions="Your name for the written quote."
-            data-testid="consult-step-about"
-          >
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={labelClass}>
-                    Full name
-                    <RequiredMark />
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Jane Smith"
-                      autoComplete="name"
-                      aria-required="true"
-                      data-testid="input-name"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </WizardStep>
-        )}
-
-        {stepId === "prefer" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading="How should we follow up?"
-            instructions="One choice. We will ask for that detail next."
-            data-testid="consult-step-prefer"
-          >
-            <FormField
-              control={form.control}
-              name="preferredContact"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={labelClass}>
-                    Preferred contact
-                    <RequiredMark />
-                  </FormLabel>
-                  <FormControl>
-                    <div
-                      role="radiogroup"
-                      aria-label="Preferred contact method"
-                      className="grid grid-cols-3 gap-2"
-                    >
-                      {CONTACT_METHODS.map((method) => {
-                        const selected = field.value === method.value;
-                        return (
-                          <button
-                            key={method.value}
-                            type="button"
-                            role="radio"
-                            aria-checked={selected}
-                            onClick={() => field.onChange(method.value)}
-                            className={cn(
-                              "min-h-11 rounded-sm border px-3 py-2.5 text-sm font-normal transition-colors hover-elevate active-elevate-2",
-                              selected
-                                ? "border-foreground bg-foreground text-background"
-                                : "border-border bg-transparent text-foreground",
-                            )}
-                            data-testid={`button-preferred-contact-${method.value}`}
-                          >
-                            {method.label}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </WizardStep>
-        )}
-
-        {stepId === "reach" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading={preferredContact === "email" ? "Your email" : "Your phone"}
-            instructions={
-              preferredContact === "email"
-                ? "We reply with the written quote."
-                : preferredContact === "text"
-                  ? "We text about timing and the quote."
-                  : "We call about timing and the quote."
-            }
-            data-testid="consult-step-reach"
-          >
-            {preferredContact === "email" ? (
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className={labelClass}>
-                      Email
-                      <RequiredMark />
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="jane@example.com"
-                        autoComplete="email"
-                        aria-required="true"
-                        data-testid="input-email"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            ) : (
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className={labelClass}>
-                      Phone
-                      <RequiredMark />
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="tel"
-                        placeholder="(208) 555-0000"
-                        autoComplete="tel"
-                        aria-required="true"
-                        data-testid="input-phone"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            )}
-          </WizardStep>
-        )}
-
-        {stepId === "address" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading="Service address"
-            instructions="Confirms you are in our service area."
-            data-testid="consult-step-address"
-          >
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={labelClass}>
-                    {searchingForLand ? "Where are you looking?" : "Address"}
-                    {!searchingForLand && <RequiredMark />}
-                  </FormLabel>
-                  <FormControl>
-                    <div className="[&_[data-testid=property-profile-summary]]:p-2 [&_[data-testid=property-profile-summary]_ul]:hidden [&_[data-testid=button-use-typed-address]]:min-h-10">
-                      <AddressAutocomplete
-                        value={addressInput || field.value}
-                        onChange={(v) => {
-                          setAddressInput(v);
-                          field.onChange(v);
-                        }}
-                        onProfileResolved={handleProfileResolved}
-                        data-testid="input-address"
-                      />
-                    </div>
-                  </FormControl>
-                  <button
-                    type="button"
-                    onClick={() => setShowAddrInfo((v) => !v)}
-                    aria-expanded={showAddrInfo}
-                    aria-controls="address-info"
-                    className="mt-1 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
-                    data-testid="button-address-info"
-                  >
-                    Why we ask
-                    <ChevronDown
-                      className={cn("h-3 w-3 transition-transform", showAddrInfo && "rotate-180")}
-                    />
-                  </button>
-                  {showAddrInfo && (
-                    <FormDescription id="address-info" className="mt-1 text-xs text-muted-foreground">
-                      Confirms the service area and helps plan the visit. Never shared or sold.{" "}
-                      <Link
-                        href="/privacy-policy"
-                        className="underline underline-offset-2 hover:text-foreground"
-                      >
-                        Privacy policy
-                      </Link>
-                      .
-                    </FormDescription>
-                  )}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </WizardStep>
-        )}
-
-        {stepId === "review" && (
-          <WizardStep
-            as="h3"
-            compact
-            heading="Review and send"
-            instructions="Check the summary, add optional details, then send."
-            data-testid="consult-step-review"
-          >
-            <div className="space-y-3">
-              <dl className="space-y-2 rounded-sm border border-border bg-muted/30 p-3 text-sm">
-                <div className="flex justify-between gap-3">
-                  <dt className="text-muted-foreground">Job</dt>
-                  <dd className="text-right font-normal text-foreground">
-                    {PROJECT_LABEL_LOOKUP[form.watch("projectType")] ?? form.watch("projectType")}
-                  </dd>
-                </div>
-                <div className="flex justify-between gap-3">
-                  <dt className="text-muted-foreground">Name</dt>
-                  <dd className="text-right text-foreground" data-clarity-mask="True">
-                    {form.watch("name")}
-                  </dd>
-                </div>
-                <div className="flex justify-between gap-3">
-                  <dt className="text-muted-foreground">Reach by</dt>
-                  <dd className="text-right text-foreground">
-                    {CONTACT_METHODS.find((m) => m.value === preferredContact)?.label}
-                    {preferredContact === "email"
-                      ? ` · ${form.watch("email")}`
-                      : ` · ${form.watch("phone")}`}
-                  </dd>
-                </div>
-                <div className="flex justify-between gap-3">
-                  <dt className="text-muted-foreground">Address</dt>
-                  <dd className="text-right text-foreground" data-clarity-mask="True">
-                    {form.watch("address")}
-                  </dd>
-                </div>
-              </dl>
-
-              {preferredContact === "email" ? (
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className={labelClass}>
-                        Phone <span className="normal-case text-muted-foreground">(optional)</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="tel"
-                          placeholder="(208) 555-0000"
-                          autoComplete="tel"
-                          data-testid="input-phone"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              ) : (
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className={labelClass}>
-                        Email <span className="normal-case text-muted-foreground">(optional)</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="jane@example.com"
-                          autoComplete="email"
-                          data-testid="input-email"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
-
-              {showNote ? (
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className={labelClass}>
-                        Anything else we should know?{" "}
-                        <span className="normal-case text-muted-foreground">(optional)</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="The task list, the symptoms, or your timing..."
-                          rows={3}
-                          autoFocus
-                          data-testid="textarea-message"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setShowNote(true)}
-                  className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
-                  data-testid="button-add-note"
-                >
-                  <Plus className="h-3.5 w-3.5" />
-                  Add a note <span className="text-muted-foreground">(optional)</span>
-                </button>
-              )}
-
-              <p className="text-xs text-muted-foreground">
-                No spam. We review your request and confirm next steps.
-              </p>
-            </div>
-          </WizardStep>
-        )}
-
-        <WizardActionBar
-          onBack={stepIndex > 0 ? goBack : undefined}
-          onPrimary={() => void goNext()}
-          primaryLabel={primaryLabel}
-          primaryDisabled={mutation.isPending}
-          busy={mutation.isPending}
-          busyLabel="Sending…"
-          primaryIcon={stepIndex === WIZARD_STEPS.length - 1 ? "none" : "arrow"}
-          ownsBottomEdge
-          data-testid="consult-wizard-actions"
-        />
       </form>
-    </Form>
+    </div>
+  );
+}
+
+/* ───────────────────────────── Step 2: "Help us prepare (optional)" */
+
+interface DetailsPanelProps {
+  followUp: FollowUp;
+  submitted: Submitted;
+  headingLevel: "h3" | "h4";
+  initialProjectType?: string;
+  uploadOne: (item: Upload, receipt: FollowUp) => Promise<Upload>;
+  postDetails: (
+    receipt: FollowUp,
+    details: Record<string, string | undefined>,
+    keys: string[],
+  ) => Promise<{ ok: boolean; message?: string }>;
+  claimPending: () => string[];
+  releaseKeys: (keys: string[]) => void;
+}
+
+/**
+ * Optional, on the success screen, and never re-asks what Step 1 already has:
+ * the type of work (unless a service page already set it), the address,
+ * timing, the best time to call (only when they asked for a call), an email
+ * (only if they left none), their list (only after a callback) and more files.
+ */
+function DetailsPanel({
+  followUp,
+  submitted,
+  headingLevel,
+  initialProjectType,
+  uploadOne,
+  postDetails,
+  claimPending,
+  releaseKeys,
+}: DetailsPanelProps) {
+  const uid = useId();
+  const ids = (name: string) => `${uid}-${name}`;
+  const Heading = headingLevel;
+  const wasCallback = submitted.mode === "callback";
+  const askJob = !wasCallback && !initialProjectType && submitted.projectType === "task-list";
+  const askBestTime = !wasCallback && submitted.reach === "phone";
+  const askEmail = !submitted.email;
+  const askList = wasCallback;
+  const [state, setState] = useState<"open" | "saving" | "saved" | "skipped">("open");
+  const [projectType, setProjectType] = useState("");
+  const [address, setAddress] = useState("");
+  const [timing, setTiming] = useState("");
+  const [bestTime, setBestTime] = useState("");
+  const [email, setEmail] = useState("");
+  const [list, setList] = useState("");
+  const [files, setFiles] = useState<Upload[]>([]);
+  const [fileNote, setFileNote] = useState("");
+  const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const savedRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (state === "saved" || state === "skipped") savedRef.current?.focus({ preventScroll: true });
+  }, [state]);
+
+  if (state === "skipped") {
+    return (
+      <p className="hm-form-next hm-details-done" ref={savedRef} tabIndex={-1} data-testid="consult-details-skipped">
+        No problem. We have what we need to start.
+      </p>
+    );
+  }
+  if (state === "saved") {
+    return (
+      <p className="hm-form-lead hm-details-done" ref={savedRef} tabIndex={-1} role="status" data-testid="consult-details-saved">
+        Saved. Thank you.
+      </p>
+    );
+  }
+
+  async function onSave(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (state === "saving") return;
+    const cleanEmail = email.trim();
+    if (cleanEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      setEmailError("Check the email address.");
+      document.getElementById(ids("email"))?.focus();
+      return;
+    }
+    setEmailError("");
+    const details: Record<string, string | undefined> = {
+      projectType: projectType || undefined,
+      address: address.trim() || undefined,
+      timing: timing || undefined,
+      bestTimeToCall: bestTime || undefined,
+      email: cleanEmail || undefined,
+      message: list.trim() || undefined,
+    };
+    const filled = Object.values(details).filter(Boolean).length;
+    if (filled === 0 && files.length === 0) {
+      setError("Add a detail or a file, or skip this step.");
+      return;
+    }
+    setError("");
+    setState("saving");
+    let current = files.map((item) => (item.status === "done" ? item : { ...item, status: "uploading" as const }));
+    setFiles(current);
+    for (const item of current) {
+      if (item.status !== "uploading") continue;
+      const result = await uploadOne(item, followUp);
+      current = current.map((entry) => (entry.id === item.id ? result : entry));
+      setFiles(current);
+    }
+    const failed = current.filter((item) => item.status === "failed");
+    const own = current.filter((item) => item.status === "done" && item.key).map((item) => item.key as string);
+    if (filled === 0 && own.length === 0) {
+      setState("open");
+      setError("Those files did not upload. Try again, or text them to us.");
+      return;
+    }
+    // Any first-step files that finished uploading ride along, once.
+    const earlier = claimPending();
+    const keys = [...earlier, ...own];
+    const sent = await postDetails(followUp, details, keys);
+    if (!sent.ok) {
+      releaseKeys(earlier);
+      setState("open");
+      setError(sent.message || "We could not save that. Try again, or call us.");
+      return;
+    }
+    trackEvent("lead_details_added", {
+      form: "consultation",
+      fields_added: filled,
+      files_added: keys.length,
+    });
+    if (failed.length > 0) {
+      // The details are in; keep only the files that did not make it, with a retry.
+      setFiles(failed);
+      setState("open");
+      setError(`Saved your details. ${failed.length === 1 ? "One file" : `${failed.length} files`} did not upload: try again, or text ${failed.length === 1 ? "it" : "them"} to us.`);
+      return;
+    }
+    setState("saved");
+  }
+
+  return (
+    <form
+      className="hm-details"
+      onSubmit={onSave}
+      noValidate
+      aria-labelledby={ids("title")}
+      data-clarity-mask="True"
+      data-testid="consult-details"
+    >
+      <Heading className="hm-details-title" id={ids("title")}>
+        Help us prepare (optional)
+      </Heading>
+      <p className="hm-form-hint">A few details help us give you a closer quote on the first call.</p>
+
+      {askList && (
+        <div className="hm-form-field">
+          <label htmlFor={ids("list")}>What can we help with?</label>
+          <textarea
+            id={ids("list")}
+            data-testid="details-message"
+            rows={3}
+            value={list}
+            onChange={(event) => setList(event.target.value)}
+            placeholder={LIST_PLACEHOLDER}
+            maxLength={2000}
+          />
+        </div>
+      )}
+
+      {askJob && (
+        <fieldset className="hm-form-reach">
+          <legend>Type of work</legend>
+          <div className="hm-form-chips">
+            {JOB_CHOICES.map((choice) => (
+              <label className="hm-form-pill hm-form-chip" key={choice.value}>
+                <input
+                  type="radio"
+                  name={ids("job")}
+                  value={choice.value}
+                  checked={projectType === choice.value}
+                  onChange={() => setProjectType(choice.value)}
+                  data-testid={`details-job-${choice.value}`}
+                />
+                <span>{jobLabel(choice.value)}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
+
+      <div className="hm-form-field">
+        <label htmlFor={ids("address")}>Address or ZIP code</label>
+        <input
+          id={ids("address")}
+          data-testid="details-address"
+          name="address"
+          autoComplete="street-address"
+          value={address}
+          onChange={(event) => setAddress(event.target.value)}
+          aria-describedby={ids("address-hint")}
+          maxLength={300}
+        />
+        <p className="hm-form-hint" id={ids("address-hint")}>
+          Confirms you are in our service area. Never shared or sold.
+        </p>
+      </div>
+
+      <fieldset className="hm-form-reach">
+        <legend>When would you like this done?</legend>
+        <div className="hm-form-chips">
+          {TIMING_OPTIONS.map((option) => (
+            <label className="hm-form-pill hm-form-chip" key={option}>
+              <input
+                type="radio"
+                name={ids("timing")}
+                value={option}
+                checked={timing === option}
+                onChange={() => setTiming(option)}
+                data-testid={`details-timing-${option.toLowerCase().replace(/\s+/g, "-")}`}
+              />
+              <span>{option}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      {askBestTime && (
+        <div className="hm-form-field">
+          <label htmlFor={ids("best-time")}>Best time to call</label>
+          <select
+            id={ids("best-time")}
+            data-testid="details-best-time"
+            value={bestTime}
+            onChange={(event) => setBestTime(event.target.value)}
+          >
+            <option value="">No preference</option>
+            {BEST_TIMES.filter((time) => time !== "Any time").map((time) => (
+              <option key={time} value={time}>
+                {time}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {askEmail && (
+        <div className="hm-form-field">
+          <label htmlFor={ids("email")}>Email (optional)</label>
+          <input
+            id={ids("email")}
+            data-testid="details-email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            aria-invalid={emailError ? true : undefined}
+            aria-describedby={emailError ? ids("email-error") : undefined}
+            maxLength={200}
+          />
+          <p className="hm-form-error-text" id={ids("email-error")} aria-live="polite">
+            {emailError}
+          </p>
+        </div>
+      )}
+
+      <AttachmentTile
+        id={ids("files")}
+        files={files}
+        label={wasCallback ? "Add photos, plans or files" : "Add more photos, plans or files"}
+        testId="details-attachment-tile"
+        onAdd={(incoming) => {
+          const { accepted, problems } = partitionRequestFiles(incoming, files.map((item) => item.file));
+          if (accepted.length) setFiles((current) => [...current, ...pick(accepted).map((item) => ({ ...item, status: "ready" as const }))]);
+          setFileNote(problems.join(" "));
+        }}
+        onRemove={(fileId) => {
+          setFiles((current) => current.filter((item) => item.id !== fileId));
+          setFileNote("");
+        }}
+        message={fileNote}
+      />
+
+      {error && (
+        <p className="hm-form-error" role="alert">
+          {error}
+        </p>
+      )}
+
+      <div className="hm-details-actions">
+        <button type="submit" className="hm-form-submit" disabled={state === "saving"} data-testid="button-details-save">
+          {state === "saving" ? "Saving" : "Save details"}
+        </button>
+        <button
+          type="button"
+          className="hm-form-inline-link"
+          onClick={() => setState("skipped")}
+          disabled={state === "saving"}
+          data-testid="button-details-skip"
+        >
+          Skip
+        </button>
+      </div>
+    </form>
   );
 }

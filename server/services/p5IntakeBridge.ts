@@ -118,7 +118,32 @@ export type ConsultationBridgeInput = {
   projectType?: string | null;
   message?: string | null;
   inquiryId?: string | null;
+  /**
+   * The quote form release contract (owner, 1 November 2026). p5 accepts these
+   * as extra optional fields; today's intake ignores them, and a "details"
+   * post with the same externalLeadId is filed there as a duplicate rather
+   * than a second deal. Once p5 merges details, the same post updates the deal
+   * and its HubSpot record.
+   */
+  requestKind?: "quote" | "callback";
+  preferredContact?: "email" | "phone" | "text";
+  bestTime?: string | null;
+  files?: P5IntakeFile[];
+  submissionKind?: "initial" | "details";
+  /** Step 2 timing ("Soon", "1 to 3 months", ...). */
+  timeline?: string | null;
 };
+
+export type P5IntakeFile = { name: string; url: string; contentType: string; size: number };
+
+/** p5 contact_preference values. The form's "phone" is a call. */
+const P5_CONTACT_PREFERENCE = { phone: "call", text: "text", email: "email" } as const;
+
+/** The brand's own request id, stable across the request and its details. */
+export function p5ExternalId(inquiryId: string | null | undefined): string | null {
+  const id = inquiryId?.trim();
+  return id ? `boisehandyman-consultation:${id}` : null;
+}
 
 /** p5 normalizeEmail, kept local so a bad optional phone cannot 422 a good email. */
 function reachableEmail(raw: string | null | undefined): string | null {
@@ -156,12 +181,13 @@ function composeAddress(address?: string | null, zip?: string | null): string | 
   return `${street}, ${postal}`;
 }
 
-export function buildP5IntakeBody(input: ConsultationBridgeInput): Record<string, string> {
+export function buildP5IntakeBody(input: ConsultationBridgeInput): Record<string, unknown> {
   const visitorType = input.projectType?.trim() ?? "";
   const projectType = p5ProjectType(visitorType);
   const note = input.message?.trim() ?? "";
   const summaryParts: string[] = [];
-  if (visitorType && projectType && projectType !== visitorType) {
+  // A details post leads with its "DETAILS ADDED" block, which p5 appends to the deal.
+  if (input.submissionKind !== "details" && visitorType && projectType && projectType !== visitorType) {
     summaryParts.push(`Visitor project: ${visitorType}`);
   }
   if (note) summaryParts.push(note);
@@ -172,7 +198,7 @@ export function buildP5IntakeBody(input: ConsultationBridgeInput): Record<string
   const rawPhone = input.phone?.trim() ?? "";
 
   const attribution = consultationAttribution(input.attribution, input.email);
-  const body: Record<string, string> = {
+  const body: Record<string, unknown> = {
     ...attribution,
     brand: P5_HANDYMAN_BRAND,
     name: input.name.trim(),
@@ -194,8 +220,28 @@ export function buildP5IntakeBody(input: ConsultationBridgeInput): Record<string
   if (city) body.city = city;
   if (summaryParts.length) body.summary = summaryParts.join("\n\n");
 
-  const inquiryId = input.inquiryId?.trim();
-  if (inquiryId) body.externalLeadId = `boisehandyman-consultation:${inquiryId}`;
+  const externalId = p5ExternalId(input.inquiryId);
+  if (externalId) {
+    body.externalLeadId = externalId;
+    body.external_id = externalId;
+  }
+  body.submission_kind = input.submissionKind ?? "initial";
+  if (input.requestKind) body.request_kind = input.requestKind;
+  if (input.preferredContact) {
+    body.contact_preference = input.requestKind === "callback" ? "call" : P5_CONTACT_PREFERENCE[input.preferredContact];
+  }
+  const bestTime = input.bestTime?.trim();
+  if (bestTime) body.best_time = bestTime;
+  const timeline = input.timeline?.trim();
+  if (timeline) body.timeline = timeline;
+  if (input.files?.length) {
+    body.files = input.files.map((file) => ({
+      name: file.name,
+      url: file.url,
+      contentType: file.contentType,
+      size: file.size,
+    }));
+  }
   return body;
 }
 

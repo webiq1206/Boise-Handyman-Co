@@ -30,7 +30,7 @@ export function ConsultDialog({
             No obligation - tell us what needs doing and we&apos;ll reply with an upfront quote.
           </DialogDescription>
         </DialogHeader>
-        <ConsultationForm onRevise={onRevise} showTrust />
+        <ConsultationForm onRevise={onRevise} showTrust headingLevel="h3" />
       </DialogContent>
     </Dialog>
   );

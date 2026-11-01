@@ -168,7 +168,8 @@ export function HandymanPlanningRange() {
                     className="mt-6 min-h-12 whitespace-normal px-5"
                     data-testid="proof-cta-contact"
                   >
-                    <Link href="/contact">
+                    {/* The request form is on this page (#consult): land on it. */}
+                    <Link href="/#consult">
                       {CTA_PRIMARY}
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </Link>

@@ -46,3 +46,556 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* ---------- Request form landing (owner, 1 November 2026) ----------
+   Every "Send your list and photos" lands ON the form: the id="consult" block is
+   the form itself. The root scroll-padding already clears the sticky header
+   (styles/family-chrome.css), so the generic :target margins from
+   audit-accessibility.css and design-v2-compliance.css would only push the form
+   further down the screen. */
+[data-quote-anchor],
+.approved-shell [data-quote-anchor]:target {
+  scroll-margin-top: 0 !important;
+}
+
+/* Contact: below 1024px the form leads and the intro follows it. Above, the intro
+   keeps its column beside the form (design-refresh.css owns the two columns). */
+@media (max-width: 1023px) {
+  .interior-contact-grid.quote-form-first {
+    display: flex;
+    flex-direction: column;
+    /* The grid's align-items:start would shrink-wrap the form block, and the form
+       is a size container (no intrinsic width), so the column stretches it. */
+    align-items: stretch;
+    gap: 40px;
+  }
+  .interior-contact-grid.quote-form-first > [data-quote-anchor] {
+    order: -1;
+  }
+  .interior-contact-grid.quote-form-first > .interior-contact-intro {
+    margin-bottom: 0;
+  }
+}
+
+/* The form heading takes programmatic focus on arrival (tabindex=-1) so screen
+   readers announce it. It is not an interactive control, so no focus ring. */
+.approved-shell [data-quote-form-heading]:focus,
+[data-quote-form-heading]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ---------- The request form (components/ConsultationForm.tsx) ----------
+   One column, labels always visible, 48px targets, native radio pills drawn as
+   the family segmented control and pills. Charcoal fill with paper text marks the
+   active choice; the send button is the family primary with its accent bar. */
+/* A size container for its own send row (below). It has no intrinsic width, so it
+   always fills its parent rather than shrink-wrapping. */
+.hm-form {
+  container-type: inline-size;
+  width: 100%;
+}
+.hm-form,
+.hm-form-body {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+}
+.hm-form .hm-form-title {
+  margin: 0;
+  font: 300 clamp(30px, 4vw, 40px) / 1.08 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--color-charcoal);
+  text-transform: none;
+}
+.hm-form fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.hm-form .hm-form-field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.hm-form .hm-form-field > label,
+.hm-form .hm-form-reach > legend {
+  padding: 0;
+  font: 600 15px/1.4 var(--font-sans);
+  color: var(--color-charcoal);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.hm-form .hm-form-reach > legend {
+  margin-bottom: 6px;
+}
+.hm-form input:not([type="radio"]):not([type="file"]):not(.hm-form-honeypot),
+.hm-form textarea,
+.hm-form select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid rgba(44, 48, 47, 0.4);
+  border-radius: var(--radius-input, 4px);
+  background: #fff;
+  color: var(--color-charcoal);
+  font: 400 16px/1.4 var(--font-sans);
+}
+.hm-form textarea {
+  min-height: 104px;
+  resize: vertical;
+}
+.hm-form input:focus-visible,
+.hm-form textarea:focus-visible,
+.hm-form select:focus-visible,
+.hm-form button:focus-visible,
+.hm-form a:focus-visible,
+.hm-form summary:focus-visible {
+  outline: 2px solid var(--color-charcoal);
+  outline-offset: 2px;
+}
+.hm-form [aria-invalid="true"] {
+  border-color: var(--color-error) !important;
+  box-shadow: 0 0 0 1px var(--color-error);
+}
+.hm-form input::placeholder,
+.hm-form textarea::placeholder {
+  color: #62605a;
+}
+.hm-form .hm-form-hint,
+.hm-form .hm-form-next {
+  margin: 0;
+  font: 500 14px/1.5 var(--font-sans);
+  color: #555b56;
+}
+.hm-form .hm-form-error-text {
+  margin: 0;
+  color: var(--color-error);
+  font: 600 14px/1.4 var(--font-sans);
+}
+.hm-form .hm-form-error-text:empty {
+  display: none;
+}
+.hm-form .hm-form-error {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid rgba(163, 58, 44, 0.3);
+  background: rgba(163, 58, 44, 0.06);
+  color: var(--color-error);
+  font: 600 14px/1.45 var(--font-sans);
+}
+.hm-form .hm-form-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Native radios drawn as pills: the input stays focusable and announced. */
+.hm-form .hm-form-mode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--color-charcoal);
+}
+.hm-form .hm-form-pills {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.hm-form .hm-form-pill {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  margin: 0;
+}
+.hm-form .hm-form-pill input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.hm-form .hm-form-pill span {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 8px;
+  border: 1px solid rgba(44, 48, 47, 0.4);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--color-charcoal);
+  font: 600 15px/1.2 var(--font-sans);
+  text-align: center;
+}
+.hm-form .hm-form-mode .hm-form-pill span {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.hm-form .hm-form-pill input:checked + span {
+  border-color: var(--color-charcoal);
+  background: var(--color-charcoal);
+  color: var(--color-paper);
+}
+.hm-form .hm-form-pill input:focus-visible + span {
+  outline: 2px solid var(--color-charcoal);
+  outline-offset: 2px;
+}
+
+.hm-form .hm-form-estimate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font: 500 14px/1.45 var(--font-sans);
+}
+.hm-form .hm-form-estimate button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  background: none;
+  border: 0;
+  color: #555b56;
+  cursor: pointer;
+}
+
+/* Call, text or chat sit right above the send button on a phone, beside it on a wide card. */
+.hm-form .hm-form-send {
+  display: grid;
+  gap: 14px;
+}
+.hm-form .hm-form-talk {
+  display: grid;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(44, 48, 47, 0.15);
+}
+.hm-form .hm-form-talk-title {
+  margin: 0;
+  font: 600 15px/1.4 var(--font-sans);
+  color: var(--color-charcoal);
+}
+.hm-form .hm-form-talk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hm-form .hm-form-call,
+.hm-form .hm-form-text,
+.hm-form .hm-form-chat {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--color-charcoal);
+  background: transparent;
+  color: var(--color-charcoal);
+  font: 600 15px/1.2 var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+}
+.hm-form .hm-form-call:hover,
+.hm-form .hm-form-text:hover,
+.hm-form .hm-form-chat:hover {
+  background: rgba(44, 48, 47, 0.06);
+}
+.hm-form .hm-form-talk-actions .hm-form-call {
+  flex: 1 1 100%;
+}
+.hm-form .hm-form-talk-actions .hm-form-text,
+.hm-form .hm-form-talk-actions .hm-form-chat {
+  flex: 1 1 0;
+}
+.hm-form .hm-form-send-main {
+  display: grid;
+  gap: 8px;
+}
+.hm-form .hm-form-submit {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 56px;
+  padding: 0 20px;
+  border: 1px solid var(--color-charcoal);
+  border-radius: 0;
+  background: var(--color-charcoal);
+  box-shadow: inset 4px 0 0 var(--color-accent);
+  color: var(--color-paper);
+  font: 600 16px/1.2 var(--font-sans);
+  cursor: pointer;
+}
+.hm-form .hm-form-submit:hover {
+  background: var(--color-ink-2);
+}
+.hm-form .hm-form-submit:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+.hm-form .hm-form-inline-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-charcoal);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.hm-form .hm-form-lead {
+  margin: 0;
+  font: 500 16px/1.55 var(--font-sans);
+  color: var(--color-charcoal);
+}
+.hm-form .hm-form-trust {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 500 13px/1.4 var(--font-sans);
+  color: #555b56;
+}
+/* Beside the send button only where the form itself is wide (homepage and contact
+   cards on a desktop), never in the dialog or a narrow column. */
+@container (min-width: 560px) {
+  .hm-form .hm-form-send {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(44, 48, 47, 0.15);
+  }
+  .hm-form .hm-form-send-main {
+    order: -1;
+  }
+  .hm-form .hm-form-talk {
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+/* ---------- Attachment tile (components/forms/AttachmentTile.tsx) ----------
+   One dashed tile instead of the browser's raw file control. The native input is
+   visually hidden but stays focusable and labelled; its focus ring shows on the
+   tile face. Chips list what was picked, each with a 44px remove button. */
+.hm-form .hm-tile-field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.hm-form .hm-tile {
+  position: relative;
+}
+.hm-form .hm-tile-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+.hm-form .hm-tile-face {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 12px 14px;
+  border: 1.5px dashed rgba(44, 48, 47, 0.45);
+  border-radius: var(--radius-input, 4px);
+  background: #fff;
+  color: var(--color-charcoal);
+  cursor: pointer;
+}
+.hm-form .hm-tile-face:hover,
+.hm-form .hm-tile.is-dragging .hm-tile-face {
+  border-color: var(--color-charcoal);
+  background: rgba(44, 48, 47, 0.04);
+}
+.hm-form .hm-tile-input:focus-visible + .hm-tile-face {
+  outline: 2px solid var(--color-charcoal);
+  outline-offset: 2px;
+}
+.hm-form .hm-tile-icon {
+  flex-shrink: 0;
+}
+.hm-form .hm-tile-text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.hm-form .hm-tile-label {
+  font: 600 15px/1.3 var(--font-sans);
+}
+.hm-form .hm-tile-hint {
+  font: 500 13px/1.4 var(--font-sans);
+  color: #555b56;
+}
+.hm-form .hm-tile-chips {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hm-form .hm-tile-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 4px 4px 4px 6px;
+  border: 1px solid rgba(44, 48, 47, 0.2);
+  border-radius: var(--radius-input, 4px);
+  background: #fff;
+}
+.hm-form .hm-tile-chip.is-failed {
+  border-color: rgba(163, 58, 44, 0.45);
+}
+.hm-form .hm-tile-thumb {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  object-fit: cover;
+}
+.hm-form .hm-tile-thumb-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(44, 48, 47, 0.07);
+  color: var(--color-charcoal);
+}
+.hm-form .hm-tile-chip-text {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+.hm-form .hm-tile-chip-name {
+  overflow: hidden;
+  font: 600 14px/1.35 var(--font-sans);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hm-form .hm-tile-chip-meta {
+  font: 500 13px/1.35 var(--font-sans);
+  color: #555b56;
+}
+.hm-form .hm-tile-chip.is-failed .hm-tile-chip-meta {
+  color: var(--color-error);
+}
+.hm-form .hm-tile-remove {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-charcoal);
+  cursor: pointer;
+}
+.hm-form .hm-tile-remove:hover {
+  background: rgba(44, 48, 47, 0.06);
+}
+
+/* ---------- After sending: file status and Step 2 ("Help us prepare") ---------- */
+.hm-form .hm-form-done-head {
+  display: grid;
+  gap: 16px;
+}
+.hm-form .hm-form-uploads {
+  display: grid;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(44, 48, 47, 0.15);
+}
+.hm-form .hm-form-uploads-title {
+  margin: 0;
+  font: 600 15px/1.4 var(--font-sans);
+}
+.hm-form .hm-form-upload-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hm-form .hm-form-upload-actions > * {
+  flex: 1 1 0;
+}
+.hm-form .hm-details {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid rgba(44, 48, 47, 0.2);
+  background: rgba(44, 48, 47, 0.025);
+}
+.hm-form .hm-details .hm-details-title {
+  margin: 0;
+  font: 600 19px/1.3 var(--font-sans);
+  letter-spacing: 0;
+  color: var(--color-charcoal);
+  text-transform: none;
+}
+.hm-form .hm-details > .hm-form-hint {
+  margin-top: -10px;
+}
+.hm-form .hm-form-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hm-form .hm-form-chip span {
+  padding: 0 14px;
+  font-size: 14px;
+}
+.hm-form .hm-details-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+}
+.hm-form .hm-details-actions .hm-form-submit {
+  width: auto;
+  flex: 1 1 200px;
+}
+.hm-form .hm-details-actions .hm-form-inline-link {
+  min-height: 48px;
+  padding: 0 8px;
+}
+.hm-form .hm-details-done:focus {
+  outline: none;
+}
+@media (max-width: 479px) {
+  .hm-form .hm-details {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 359px) {
+  .hm-form .hm-form-pill span {
+    padding: 0 4px;
+    font-size: 14px;
+  }
+}

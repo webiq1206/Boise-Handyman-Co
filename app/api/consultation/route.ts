@@ -1,4 +1,5 @@
 import { after, NextRequest, NextResponse } from "next/server";
+import { createHash } from "crypto";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { consultationRequests } from "@/shared/schema";
@@ -34,7 +35,12 @@ import {
   PROJECT_LABELS,
   type EstimateRefinements,
 } from "@/shared/estimateEngine";
-import { estimateSchema } from "@/shared/estimatePayload";
+import {
+  consultationBodySchema,
+  optionalEstimateSchema,
+  withPreferredContact,
+} from "@/server/services/consultationRequest";
+import { detailsSecret, issueDetailsToken } from "@/server/services/consultationDetails";
 import { resolveQuotedRange } from "@/shared/costs/resolve";
 import { forwardToLeadDashboard } from "@/server/services/leadDashboardForward";
 import { forwardConsultationToP5Intake } from "@/server/services/p5IntakeBridge";
@@ -48,61 +54,16 @@ import {
   buildProjectGoals,
 } from "@/server/services/leadRecord";
 
-const propertyProfileSchema = z
-  .object({
-    formattedAddress: z.string(),
-    city: z.string(),
-    state: z.string(),
-    zip: z.string(),
-  })
-  .passthrough()
-  .optional()
-  .nullable();
+// The body schema lives in server/services/consultationRequest.ts so the full
+// request and the "Have us call you" callback shape are tested without a
+// database (tests/consultation-request.test.ts).
+const bodySchema = consultationBodySchema;
 
-// The consultation form may arrive with no estimate at all (someone who came
-// straight to the contact page), so the shared object is wrapped as optional.
-const optionalEstimateSchema = estimateSchema.optional().nullable();
-
-const bodySchema = z
-  .object({
-    name: z.string().min(2),
-    /**
-     * Only the visitor's chosen contact method is required (see superRefine
-     * below) - matches the same preferred-contact pattern already shipped in
-     * the RE-10 wizard. Defaults to "email" so older cached client bundles
-     * that never send this field behave exactly as before (email required).
-     */
-    preferredContact: z.enum(["email", "phone", "text"]).optional().default("email"),
-    phone: z.string().optional().default(""),
-    email: z.string().optional().default(""),
-    /**
-     * Optional because a new-build enquiry from someone who has not bought land
-     * yet has no site to name. The client requires a locatable site for every
-     * other project type; see LAND_SEARCH_PROJECT_TYPE in ConsultationForm.
-     */
-    address: z.string().max(300).optional().default(""),
-    zip: z.string().optional(),
-    projectType: z.string().min(1),
-    message: z.string().optional(),
-    propertyProfile: propertyProfileSchema,
-    estimate: optionalEstimateSchema,
-    /* Set by the client when the visitor already submitted the estimate gate,
-       which already sent admin + customer emails via /api/estimate-lead.
-       Prevents duplicate email sends when the same person submits both forms. */
-    skipEmail: z.boolean().optional(),
-    inquiryId: z.string().uuid(),
-    website: z.string().max(0).optional(),
-    attribution: z.record(z.string().max(100)).optional(),
-  })
-  .superRefine((data, ctx) => {
-    if (data.preferredContact === "email") {
-      if (!z.string().email().safeParse(data.email).success) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["email"], message: "Valid email required" });
-      }
-    } else if (data.phone.replace(/\D/g, "").length < 10) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["phone"], message: "Valid phone required" });
-    }
-  });
+/** Short stable hash of the visitor's own words, so a second, different list is its own request. */
+function listFingerprint(message: string | undefined): string {
+  const words = (message ?? "").toLowerCase().replace(/\s+/g, " ").trim();
+  return words ? createHash("sha256").update(words).digest("hex").slice(0, 16) : "";
+}
 
 /**
  * Recomputes the planning range server-side from the submitted inputs so a
@@ -171,7 +132,9 @@ function verifyEstimate(
 
 export async function POST(request: NextRequest) {
   try {
-    const raw = await request.json();
+    // JSON only. Files follow the saved request one upload each
+    // (/api/consultation/files), so an upload can never delay or lose the lead.
+    const raw: unknown = await request.json();
     const parsed = bodySchema.safeParse(raw);
 
     if (!parsed.success) {
@@ -187,18 +150,34 @@ export async function POST(request: NextRequest) {
     const limit = rateLimit(clientKeyFrom(request.headers, "consultation"), 8, 10 * 60 * 1000);
     if (!limit.ok) return NextResponse.json({ message: "Please wait a few minutes before trying again." }, { status: 429 });
 
+    // The pending-files line is added by the schema; the duplicate scope reads
+    // the visitor's own words only.
+    const listScope = listFingerprint(parsed.data.message?.split("\n\nFiles: ")[0]);
+
     // Server-side verification: never trust client-supplied dollar amounts.
     const estimate = data.estimate ? verifyEstimate(data.estimate) : null;
 
+    const savedRow: { id: string | null } = { id: null };
     const accepted = await saveAcceptedLead(db, {
       inquiryId: data.inquiryId,
       route: "consultation",
       contact: { email: data.email, phone: data.phone },
-      scope: `${data.projectType}|${data.address || data.zip || (data.propertyProfile as { city?: string } | null)?.city || ""}`,
-      metadata: { hasAttribution: Boolean(data.attribution), preferredContact: data.preferredContact },
+      // A callback is its own request: asking for a call after sending a list
+      // (or the other way round) must not read as a duplicate of the first.
+      // The one-screen form sends no address or job type by default, so the
+      // list itself (normalised, hashed) keeps a second, different list from
+      // the same person this month from reading as a duplicate of the first.
+      // The same list sent twice still is one.
+      scope: `${data.requestKind === "callback" ? "callback|" : ""}${data.projectType}|${data.address || data.zip || (data.propertyProfile as { city?: string } | null)?.city || ""}|${listScope}`,
+      metadata: {
+        hasAttribution: Boolean(data.attribution),
+        preferredContact: data.preferredContact,
+        requestKind: data.requestKind,
+        files: data.filesPending ?? 0,
+      },
       saveLead: async (tx) => {
         const profile = data.propertyProfile as Record<string, unknown> | null | undefined;
-        await tx.insert(consultationRequests).values({
+        const [saved] = await tx.insert(consultationRequests).values({
           name: data.name,
           phone: data.phone,
           email: data.email,
@@ -214,7 +193,8 @@ export async function POST(request: NextRequest) {
           estimateHigh: estimate?.priceHigh?.toString() || null,
           estimateSqft: estimate?.sqft ?? null,
           estimateConfidence: estimate?.confidence || null,
-        });
+        }).returning({ id: consultationRequests.id });
+        savedRow.id = saved?.id ?? null;
       },
     });
     if (!accepted.accepted) {
@@ -237,8 +217,14 @@ export async function POST(request: NextRequest) {
         city: location?.city,
         zip: data.zip || location?.zip,
         projectType: data.projectType,
-        message: data.message,
+        // The p5 intake has no contact-preference field, so the visitor's
+        // choice (Call me, Text me, Email me) rides at the end of the summary.
+        message: withPreferredContact(data.message, data.requestKind, data.preferredContact),
         inquiryId: data.inquiryId,
+        requestKind: data.requestKind,
+        preferredContact: data.preferredContact,
+        bestTime: data.requestKind === "callback" ? data.bestTimeToCall : undefined,
+        submissionKind: "initial",
       });
       after(() => bridge);
     } catch (bridgeErr) {
@@ -256,6 +242,8 @@ export async function POST(request: NextRequest) {
       zip: data.zip,
       projectType: data.projectType,
       message: data.message,
+      preferredContact: data.preferredContact,
+      requestKind: data.requestKind,
     };
     // Real unit costs entered in the admin pricing panel, applied to every
     // breakdown this request renders so the panel, emails and CRM agree.
@@ -311,6 +299,8 @@ export async function POST(request: NextRequest) {
           zip: data.zip,
           projectType: data.projectType,
           message: data.message,
+          preferredContact: data.preferredContact,
+          requestKind: data.requestKind,
         };
         const enrichment = (data.propertyProfile as PropertyEnrichment | null) ?? null;
 
@@ -364,7 +354,14 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ success: true, accepted: true, duplicate: false });
+    // Step 2 ("Help us prepare") and the file uploads add to this same request.
+    // The token is signed with a server secret and lives two hours; without a
+    // secret the form says to text the files instead.
+    const secret = detailsSecret();
+    const requestId = savedRow.id;
+    const followUp =
+      requestId && secret ? { requestId, ...issueDetailsToken({ requestId, inquiryId: data.inquiryId }, secret) } : {};
+    return NextResponse.json({ success: true, accepted: true, duplicate: false, ...followUp });
   } catch (err) {
     console.error("[consultation] Error:", err);
     return NextResponse.json({ message: "Server error" }, { status: 500 });
