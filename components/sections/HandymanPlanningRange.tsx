@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { SelectableCard } from "@/components/estimate/wizard/SelectableCard";
 import { CTA_PRIMARY } from "@/shared/ctaCopy";
 import Link from "next/link";
+import { toSentenceCase } from "@/shared/sentenceCase";
 import {
   JOB_CATEGORY_LABELS,
   TASK_CATALOG,
@@ -33,8 +34,10 @@ const PROOF_CATEGORIES = [
  * market defaults). Written quote still happens after contact.
  */
 export function HandymanPlanningRange() {
-  const [category, setCategory] = useState<(typeof PROOF_CATEGORIES)[number] | null>(null);
-  const [taskId, setTaskId] = useState<string | null>(null);
+  // Drywall and its first task are selected on arrival, so the panel opens on a
+  // worked example instead of an empty box; one click changes it.
+  const [category, setCategory] = useState<(typeof PROOF_CATEGORIES)[number] | null>(PROOF_CATEGORIES[0]);
+  const [taskId, setTaskId] = useState<string | null>(TASK_CATALOG[PROOF_CATEGORIES[0]][0]?.id ?? null);
 
   const tasks = category ? TASK_CATALOG[category].slice(0, 4) : [];
 
@@ -59,7 +62,7 @@ export function HandymanPlanningRange() {
       surface="dark"
       spacing="xl"
       edge
-      className="handyman-planning-range"
+      className="handyman-planning-range fr-band"
       data-testid="handyman-planning-range"
     >
       <div className="ed-shell relative z-10">
@@ -101,7 +104,7 @@ export function HandymanPlanningRange() {
                       control="radio"
                       selected={category === id}
                       onSelect={() => selectCategory(id)}
-                      title={JOB_CATEGORY_LABELS[id].label}
+                      title={toSentenceCase(JOB_CATEGORY_LABELS[id].label)}
                       description={JOB_CATEGORY_LABELS[id].sub}
                       data-testid={`proof-category-${id}`}
                     />
@@ -126,7 +129,7 @@ export function HandymanPlanningRange() {
                         control="radio"
                         selected={taskId === task.id}
                         onSelect={() => setTaskId(task.id)}
-                        title={task.label}
+                        title={toSentenceCase(task.label)}
                         description={task.sub}
                         data-testid={`proof-task-${task.id}`}
                       />
@@ -137,19 +140,15 @@ export function HandymanPlanningRange() {
             </div>
 
             <aside
-              className="rounded-sm border p-5 sm:p-6"
-              style={{
-                borderColor: "var(--ed-line)",
-                background: "var(--ed-bone)",
-              }}
+              className="fr-range-result hm-range-result"
               aria-live="polite"
               data-testid="proof-result"
             >
-              <p className="ed-eyebrow">Your planning range</p>
+              <p className="fr-range-result-label">Your planning range</p>
               {estimate ? (
                 <>
                   <p
-                    className="mt-3 font-serif text-[clamp(2rem,4vw,2.75rem)] leading-none tracking-[-0.03em]"
+                    className="fr-range-result-figure"
                     data-testid="proof-range-value"
                   >
                     {formatHandymanCurrency(estimate.priceLow)}

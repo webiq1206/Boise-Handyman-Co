@@ -289,13 +289,26 @@ export function LandingPageTemplate({
         </InteriorHero>
       {/* The hero's form link lands on the form itself: its heading is the form's
           own, and the note that used to sit above it follows the form. */}
-      {paidService && <section id="service-inquiry" tabIndex={-1} data-quote-anchor="" className="mx-auto w-full max-w-3xl px-6 py-8">
-        <QuoteFormAnchor id="service-inquiry" />
-        <ConsultationForm
-          initialProjectType={paidService}
-          heading={paidService === 'drywall-repair' ? 'Tell us about the drywall repair' : 'What is on your maintenance list?'}
-        />
-        <p className="mt-6 text-sm text-muted-foreground">Tell us what needs attention and where the work is located. Photos are optional. Our team will review scope, scheduling and an estimate with you.</p>
+      {paidService && <section id="service-inquiry" tabIndex={-1} data-quote-anchor="" className="fr-request family-site family-handyman" style={{ '--f-accent': '#C56B4A' } as React.CSSProperties} aria-label="Send your list">
+        <div className="f-section f-container">
+          <div className="fr-request-grid">
+            <div className="order-1 lg:order-2 lg:col-start-2 lg:row-start-1">
+              <QuoteFormAnchor id="service-inquiry" />
+              <div className="fr-request-card">
+                <ConsultationForm
+                  initialProjectType={paidService}
+                  heading={paidService === 'drywall-repair' ? 'Tell us about the drywall repair' : 'What is on your maintenance list?'}
+                />
+              </div>
+            </div>
+            <div className="fr-request-copy order-2 lg:order-1 lg:col-start-1 lg:row-start-1">
+              <p className="f-eyebrow">ONE WRITTEN PRICE</p>
+              <h2>Send the list.<br /><em style={{ color: 'var(--f-accent)' }}>Get a quote.</em></h2>
+              <p>Tell us what needs attention and where the work is located. Photos are optional. Our team will review scope, scheduling and an estimate with you.</p>
+              <p>You approve one clear price before anything is scheduled. If the job reveals something unexpected, we stop and agree the change first.</p>
+            </div>
+          </div>
+        </div>
       </section>}
       {answerFirst && (
         <Section surface="bone" spacing="lg">

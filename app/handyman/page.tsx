@@ -157,10 +157,23 @@ export default function HandymanLandingPage() {
       </section>
 
         {/* "Send Your Repair List" lands on the form itself: heading, then the first field. */}
-        <section tabIndex={-1} id="quick-quote" data-quote-anchor="" className="mx-auto w-full max-w-3xl px-6 py-8 space-y-5">
-          <QuoteFormAnchor id="quick-quote" />
-          <ConsultationForm heading="Rather write? Send your list" />
-          <p className="text-sm text-muted-foreground">Tell us what needs fixing and where the work is located. Photos are optional; no upload or chat is required.</p>
+        <section tabIndex={-1} id="quick-quote" data-quote-anchor="" className="fr-request family-site family-handyman" style={{ '--f-accent': '#C56B4A' } as React.CSSProperties} aria-label="Send your list">
+          <div className="f-section f-container">
+            <div className="fr-request-grid">
+              <div className="order-1 lg:order-2 lg:col-start-2 lg:row-start-1">
+                <QuoteFormAnchor id="quick-quote" />
+                <div className="fr-request-card">
+                  <ConsultationForm heading="Rather write? Send your list" />
+                </div>
+              </div>
+              <div className="fr-request-copy order-2 lg:order-1 lg:col-start-1 lg:row-start-1">
+                <p className="f-eyebrow">ONE WRITTEN PRICE</p>
+                <h2>Send the list.<br /><em style={{ color: 'var(--f-accent)' }}>Get a quote.</em></h2>
+                <p>Tell us what needs fixing and where the work is located. Photos are optional; no upload or chat is required.</p>
+                <p>You approve one clear price before anything is scheduled. If the job reveals something unexpected, we stop and agree the change first.</p>
+              </div>
+            </div>
+          </div>
         </section>
 
       <section className="mx-auto grid max-w-5xl grid-cols-2 gap-4 px-5 py-10 sm:grid-cols-3 sm:px-8" aria-label="What we fix">

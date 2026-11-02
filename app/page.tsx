@@ -1,23 +1,18 @@
-import { ApprovedHowItWorks, ApprovedServiceArea } from "@/components/approved/ApprovedHome";
+import { ApprovedCtaStrip, ApprovedFounder, ApprovedHowItWorks, ApprovedServiceArea } from "@/components/approved/ApprovedHome";
 import { ApprovedFamilyFrame, ApprovedHomeHero } from "@/components/approved/ApprovedHomeHero";
 import { HandymanServicesAnswer } from "@/components/seo/HandymanServicesAnswer";
 import { LazyConsultationForm as ConsultationForm } from "@/components/LazyConsultationForm";
 import { QuoteFormAnchor } from "@/components/QuoteFormAnchor";
 import { FAQSection } from "@/components/FAQSection";
-import { MarketingCard } from "@/components/marketing/MarketingCard";
-import { Section } from "@/components/marketing/Section";
-import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { HandymanPlanningRange } from "@/components/sections/HandymanPlanningRange";
 import { HowP5Works } from "@/components/sections/HowP5Works";
-import { WhoYouAreHiring } from "@/components/sections/WhoYouAreHiring";
 import { ProjectGallerySection } from "@/components/sections/ProjectGallerySection";
 import { HomePageSchema } from "@/components/seo/HomePageSchema";
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { buildCanonical } from "@/lib/page-metadata";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { CONSULT_BULLETS } from "@/shared/siteContent";
-import { SITE_IMAGES } from "@/shared/siteImages";
 import { ArrowUpRight, Check } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -73,90 +68,50 @@ export default function HomePage() {
       <ProjectGallerySection limit={6} showViewAll />
       <ApprovedFamilyFrame>
         <ApprovedHowItWorks aside={<HowP5Works />} />
-      </ApprovedFamilyFrame>
-      <WhoYouAreHiring />
-      <ApprovedFamilyFrame>
+        <ApprovedFounder />
+        <ApprovedCtaStrip />
         <ApprovedServiceArea />
         <FAQSection />
       </ApprovedFamilyFrame>
       <div id="contact" className="scroll-mt-24" aria-hidden="true" />
-      <Section divider reveal={false} className="relative overflow-hidden pb-28 md:pb-28">
-        {/* Warm, dimmed lifestyle photo grounds the closing section. Directional
-            scrims keep the left-column copy legible and fade the edges into the
-            page ground; the form card floats above on its own shadow. */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <Image
-            src={SITE_IMAGES.consultBg}
-            alt="A freshly painted sage-green front door with white trim and black hardware"
-            fill
-            loading="lazy"
-            sizes="100vw"
-            className="object-cover opacity-[0.52] img-brand-grade"
-          />
-          {/* Directional scrims: solid behind the left-column copy, opening up
-              toward the right where the form card carries its own surface. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/[0.68] to-background/[0.32]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-transparent to-background" />
-        </div>
-        {/* The ask. Full measure, heading at h2 scale, the form kept in its
-            card because a form needs a defined field to sit in - this is one of
-            the places a card is actually the right answer. */}
-        <div className="ed-shell relative z-10">
-          <div className="grid gap-[var(--ed-gutter)] lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            {/* Phones: the form leads and this reassurance follows it. Desktop: it
-                sits beside the form. Never above the landing point. */}
-            <div className="order-2 lg:order-1 lg:sticky lg:top-28">
-              <Reveal>
-                <p className="ed-eyebrow">Begin a conversation</p>
-                <h2 className="ed-h2 ed-statement">
-                  Tell us what needs{" "}
-                  <em className="not-italic" style={{ color: "var(--ed-accent)" }}>
-                    fixing
-                  </em>
-                  .
-                </h2>
-                <p className="ed-lede mt-8 max-w-[40ch]">
-                  Send your repair list and optional photos. We review the scope, prepare
-                  a written quote and confirm availability before scheduling.
-                </p>
-                <ul
-                  className="mt-8 grid list-none gap-3 border-t p-0 pt-6"
-                  style={{ borderColor: "var(--ed-line)" }}
-                >
-                  {CONSULT_BULLETS.map((item) => (
-                    <li key={item} className="ed-body flex items-center gap-3 text-[0.875rem]">
-                      <Check
-                        className="h-4 w-4 flex-shrink-0"
-                        style={{ color: "var(--ed-accent)" }}
-                        aria-hidden="true"
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6 grid border-t" style={{ borderColor: "var(--ed-line)" }}>
-                  <a href={SITE_CONFIG.phoneHref} className="flex min-h-12 items-center justify-between gap-4 border-b text-[0.9375rem] font-medium transition-colors hover:[color:var(--ed-accent)]" style={{ borderColor: "var(--ed-line)" }}>
-                    Call {SITE_CONFIG.phone}
-                    <ArrowUpRight className="h-4 w-4 shrink-0" style={{ color: "var(--ed-accent)" }} aria-hidden="true" />
-                  </a>
-                  <a href={SITE_CONFIG.phoneSmsHref} className="flex min-h-12 items-center justify-between gap-4 border-b text-[0.9375rem] font-medium transition-colors hover:[color:var(--ed-accent)]" style={{ borderColor: "var(--ed-line)" }}>
-                    Send a text
-                    <ArrowUpRight className="h-4 w-4 shrink-0" style={{ color: "var(--ed-accent)" }} aria-hidden="true" />
-                  </a>
+      {/* The ask. A bone band with the form as the one bright object on the screen:
+          white card, accent top rule, deep shadow. Every "#consult" link lands on the
+          form heading and its first field (QuoteFormAnchor). Phones: the form leads
+          and the reassurance follows it. */}
+      <ApprovedFamilyFrame>
+        <section className="fr-request" aria-label="Send your list">
+          <div className="f-section f-container">
+            <div className="fr-request-grid">
+              <div id="consult" data-quote-anchor="" className="order-1 lg:order-2 lg:col-start-2 lg:row-start-1">
+                <QuoteFormAnchor />
+                <div className="fr-request-card">
+                  <ConsultationForm />
                 </div>
-              </Reveal>
-            </div>
-            {/* Every "#consult" link lands here: the form heading and its first
-                field directly under the sticky header (QuoteFormAnchor). */}
-            <div id="consult" data-quote-anchor="" className="order-1 lg:order-2">
-              <QuoteFormAnchor />
-              <MarketingCard className="shadow-2xl" padding="lg">
-                <ConsultationForm />
-              </MarketingCard>
+              </div>
+              <div className="fr-request-copy order-2 lg:order-1 lg:col-start-1 lg:row-start-1">
+                <Reveal>
+                  <p className="f-eyebrow">BEGIN A CONVERSATION</p>
+                  <h2>Tell us what<br /><em style={{ color: "var(--f-accent)" }}>needs fixing.</em></h2>
+                  <p>Send your repair list and optional photos. We review the scope, prepare a written quote and confirm availability before scheduling.</p>
+                  <p>Include each task and where it is in the home, photos and any product details, and the timing you are working toward.</p>
+                  <ul className="fr-request-list">
+                    {CONSULT_BULLETS.map((item) => (
+                      <li key={item}>
+                        <Check className="h-4 w-4" aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <ul className="fr-request-list" style={{ borderTop: 0, paddingTop: 0 }}>
+                    <li><a href={SITE_CONFIG.phoneHref} className="f-link">Call {SITE_CONFIG.phone} <ArrowUpRight size={16} aria-hidden="true" /></a></li>
+                    <li><a href={SITE_CONFIG.phoneSmsHref} className="f-link">Send a text <ArrowUpRight size={16} aria-hidden="true" /></a></li>
+                  </ul>
+                </Reveal>
+              </div>
             </div>
           </div>
-        </div>
-      </Section>
+        </section>
+      </ApprovedFamilyFrame>
     </div>
   );
 }
