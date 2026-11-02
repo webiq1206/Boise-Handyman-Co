@@ -29,6 +29,7 @@ import './approved-system.css'
 import './approved-interiors.css'
 import './audit-accessibility.css'
 import './design-refresh.css'
+import './family-redesign.css'
 import './design-v2-compliance.css'
 // Shared P5 Home Co family tokens and chrome (header, menu, bar, footer, hero),
 // synced byte-identical across the family; brand values come from lib/familyBrand.ts.

@@ -29,6 +29,7 @@ import { SITE_IMAGES } from '@/shared/siteImages';
 import { Check,ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { FamilyButton } from '@/components/family/Button';
+import { toSentenceCase } from '@/shared/sentenceCase';
 
 const SPEAKABLE_SUMMARY =
   'Boise Handyman Co is a design-minded repair and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co. Founder Nick Perkins leads the work with one written price before work starts, including RE-10 inspection repair lists.';
@@ -137,104 +138,109 @@ export default function AboutPage() {
             </dl>
           </InteriorHero>
 
-        {/* Owner hard rule: full family photo stacked full-width - never side-crop or cover-crop people */}
-        <Section variant="greige" spacing="none" divider className="p-0">
-          <div id="team" className="scroll-mt-24">
-            <figure className="m-0 mx-auto w-full max-w-3xl bg-inverse px-0 sm:px-6 md:px-8">
+        {/* Who runs it: the lede beside the full family photograph (owner hard rule:
+            the whole family, never side-cropped or cover-cropped on any breakpoint). */}
+        <Section divider>
+          <div className="ed-shell">
+            <div id="team" className="ed-split ed-split-narrow ed-split-center scroll-mt-24">
+              <Reveal>
+                <p className="ed-eyebrow">The Perkins family</p>
+                <p className="ed-lede">
+                  Boise Handyman Co is run by Nick Perkins, a construction project manager with a bachelor&apos;s degree in Construction with an emphasis in Project Management, and more than a decade of work from small renovations to multimillion-dollar custom homes.
+                </p>
+                <p className="ed-body mt-6">
+                  He founded P5 in Colorado in 2020 and moved the family and company to the Treasure Valley in 2025. Read the full story on{' '}
+                  <a href="https://p5homeco.com/about" className="underline underline-offset-2">p5homeco.com/about</a>.
+                </p>
+              </Reveal>
               <Image
                 src="/images/about/perkins-family-meridian-idaho-1x1.webp"
                 alt="Nick Perkins with his wife and five children at a pumpkin patch in Meridian, Idaho"
                 width={2048}
                 height={2048}
-                sizes="(max-width: 768px) 100vw, 768px"
+                sizes="(max-width: 1024px) 100vw, 640px"
                 className="h-auto w-full"
                 style={{ objectFit: "contain", maxWidth: "100%", height: "auto" }}
                 priority
               />
-              <figcaption className="bg-inverse px-8 py-6 md:px-12 md:py-8">
-                <p className="font-sans font-light text-xl md:text-2xl text-inverse-foreground">
-                  The Perkins family
-                </p>
-                <p className="mt-4 text-base md:text-lg text-inverse-foreground/85 leading-relaxed">
-                  Boise Handyman Co is run by Nick Perkins, a construction project manager with a bachelor&apos;s degree in Construction with an emphasis in Project Management, and more than a decade of work from small renovations to multimillion-dollar custom homes.
-                </p>
-                <p className="mt-4 text-base md:text-lg text-inverse-foreground/85 leading-relaxed">
-                  He founded P5 in Colorado in 2020 and moved the family and company to the Treasure Valley in 2025. Read the full story on{' '}
-                  <a href="https://p5homeco.com/about" className="underline underline-offset-2">p5homeco.com/about</a>.
-                </p>
-              </figcaption>
-            </figure>
+            </div>
+          </div>
+        </Section>
 
-            <div className="section-y-sm px-8 md:px-14 lg:px-16 bg-card max-w-5xl mx-auto">
+        {/* Credentials: heading column beside the facts. */}
+        <Section variant="greige" divider>
+          <div className="ed-shell">
+            <div className="ed-split ed-split-narrow">
+              <div className="lg:sticky lg:top-28 lg:self-start">
+                <p className="ed-eyebrow">Credentials</p>
+                <h2 className="ed-h2 ed-statement">Locally owned. <em className="brc-accent">Registered.</em></h2>
+              </div>
               <Reveal>
-                <SectionHeader
-                  eyebrow="Credentials"
-                  title={
-                    <>
-                      Locally owned. <em className="brc-accent">Registered.</em>
-                    </>
-                  }
-                  description="P5 Home Co LLC, Idaho Registered Contractor #8381215. Insured; certificate on request. One-year workmanship warranty on repairs and installs."
-                  className="mb-8 max-w-none"
-                />
-                <p className="text-sm text-muted-foreground leading-relaxed mb-8">
+                <p className="ed-lede">
+                  P5 Home Co LLC, Idaho Registered Contractor #8381215. Insured; certificate on request. One-year workmanship warranty on repairs and installs.
+                </p>
+                <p className="ed-body mt-6">
                   Plumbing, electrical and HVAC work on your list is done by the licensed trade
                   partners we schedule and stand behind, inside the same written quote and the same
                   visit plan. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware
                   are our crew&apos;s own work. <ContractorCredential />.
                 </p>
-                <ul className="grid sm:grid-cols-2 gap-3">
+                <ul className="mt-8 grid gap-3 border-t pt-6 sm:grid-cols-2" style={{ borderColor: 'var(--ed-line)' }}>
                   {visibleTrustItems(TRUST_ITEMS).map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                      <Check className="h-4 w-4 text-accent-legible flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
+                    <li key={item} className="ed-body flex items-start gap-3 text-[0.9375rem]">
+                      <Check className="h-4 w-4 flex-shrink-0 mt-1" style={{ color: 'var(--ed-accent)' }} aria-hidden="true" />
+                      <span>{toSentenceCase(item)}</span>
                     </li>
                   ))}
                 </ul>
-                <h3 className="ed-h4 mt-8 mb-4">{HOW_P5_WORKS_TITLE}</h3>
-                <ul className="grid sm:grid-cols-2 gap-3">
+                <h3 className="ed-h4 mt-10 mb-4">{HOW_P5_WORKS_TITLE}</h3>
+                <ul className="grid gap-3 sm:grid-cols-2">
                   {HOW_P5_WORKS.map((item) => (
-                    <li key={item} className="text-sm text-muted-foreground">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <h3 className="ed-h4 mt-8 mb-4">What you can count on from this trade</h3>
-                <ul className="grid sm:grid-cols-1 gap-3">
-                  {HANDYMAN_FIVE.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                      <Check className="h-4 w-4 text-accent-legible flex-shrink-0 mt-0.5" />
+                    <li key={item} className="ed-body flex items-start gap-3 text-[0.9375rem]">
+                      <Check className="h-4 w-4 flex-shrink-0 mt-1" style={{ color: 'var(--ed-accent)' }} aria-hidden="true" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-8 pt-8 border-t border-border">
-                  <p className="ed-eyebrow">Warranty</p>
-                  <h3 className="ed-h4">One year on our workmanship</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    If our work fails within a year, we come back and make it right. Full terms on the{' '}
-                    <Link href="/warranty" className="underline underline-offset-2">
-                      warranty page
-                    </Link>
-                    .
-                  </p>
-                </div>
-                <div className="mt-8 pt-8 border-t border-border">
-                  <p className="ed-eyebrow">Where your money goes</p>
-                  <h3 className="ed-h4">
-                    Don&apos;t pay for our overhead
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    No showroom, no sales team, no fleet of wrapped trucks. What you spend goes into
-                    the time and materials your repair actually takes, with materials at cost and no
-                    trip fee in Ada and Canyon County.
-                  </p>
-                </div>
               </Reveal>
             </div>
           </div>
         </Section>
 
+        {/* Five promises from this trade, as a hairline matrix (three then two). */}
+        <Section divider>
+          <div className="ed-shell">
+            <p className="ed-eyebrow">On every visit</p>
+            <h2 className="ed-h2 ed-statement">What you can count on from this trade.</h2>
+            <ul className="ed-matrix mt-10 list-none p-0" style={{ '--ed-cell-h': '150px' } as React.CSSProperties}>
+              {HANDYMAN_FIVE.map((item, i) => (
+                <li key={item} className="flex flex-col gap-4">
+                  <span className="ed-step-n" aria-hidden="true">{formatStepNumber(i)}</span>
+                  <span className="ed-h4">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="ed-split ed-split-even mt-12">
+              <div className="ed-inset">
+                <p className="ed-eyebrow">Warranty</p>
+                <h3 className="ed-h3">One year on our workmanship</h3>
+                <p className="ed-body mt-3">
+                  If our work fails within a year, we come back and make it right. Full terms on the{' '}
+                  <Link href="/warranty" className="underline underline-offset-2">warranty page</Link>.
+                </p>
+              </div>
+              <div className="ed-inset">
+                <p className="ed-eyebrow">Where your money goes</p>
+                <h3 className="ed-h3">Don&apos;t pay for our overhead</h3>
+                <p className="ed-body mt-3">
+                  No showroom, no sales team, no fleet of wrapped trucks. What you spend goes into
+                  the time and materials your repair actually takes, with materials at cost and no
+                  trip fee in Ada and Canyon County.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Section>
         <WhyChooseUsSection />
 
         {/* The Kuna front elevation is also the Kuna card in the service-area
