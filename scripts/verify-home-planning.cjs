@@ -46,7 +46,7 @@ const check=(ok,text)=>{if(!ok)failures.push(text)};
     check(!metrics.horizontalOverflow,`${key} ${state}: horizontal overflow`);
     if(!baseline){
      check(count===1,`${key} ${state}: expected one persistent CTA`);
-     if(count){check((await cta.innerText()).trim()==='Request a quote',`${key} ${state}: quote wording`);check(await cta.getAttribute('href')==='/#consult',`${key} ${state}: destination`);}
+     if(count){check((await cta.textContent()).trim()==='Request a quote',`${key} ${state}: quote wording`);check(await cta.getAttribute('href')==='/#consult',`${key} ${state}: destination`);}
      check(await section.getByTestId('proof-range-value').count()===(empty?0:1),`${key} ${state}: range state`);
     }
     await section.screenshot({path:path.join(output,`${state}-${key}.png`)});
