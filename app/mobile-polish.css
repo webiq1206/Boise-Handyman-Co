@@ -1,0 +1,226 @@
+/*
+  Phone polish (under 768px). Loaded last so it wins over the family layers.
+  Dark surfaces and text use brand charcoal #383837. No layout change above 768px
+  except the call-bar clearance, which follows the bar up to its 1180px desktop switch.
+*/
+
+:root {
+  --color-ink: #383837;
+}
+
+.approved-shell,
+.family-site {
+  --f-ink: #383837;
+  --ed-ink: #383837;
+  --ed-bone-ink: #383837;
+  --foreground: 60 0.69% 21.76%;
+  --heading: 60 0.69% 21.76%;
+  --card-foreground: 60 0.69% 21.76%;
+}
+
+.approved-shell {
+  color: #383837;
+}
+
+.family-site {
+  color: var(--f-ink);
+}
+
+/* Primary button hover stays a step darker than the charcoal fill. */
+.fam-btn.fam-btn--primary:hover {
+  border-color: #2f2f2e;
+  background: #2f2f2e;
+}
+
+/* The fixed call bar covers the bottom of the viewport. Reserve that height
+   on the body wherever the bar is in the page, up to the desktop switch. */
+@media (max-width: 1179px) {
+  body:has([data-family-bar]) {
+    padding-bottom: calc(var(--bar-height) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 767px) {
+  /* Hero: center the eyebrow, title, support line and actions. */
+  .fam-hero[data-family-hero] .fam-hero-copy {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .fam-hero[data-family-hero] .fam-hero-copy .fam-hero-eyebrow,
+  .fam-hero[data-family-hero] .fam-hero-copy .fam-hero-title,
+  .fam-hero[data-family-hero] .fam-hero-copy .fam-hero-support {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .fam-hero[data-family-hero] .fam-hero-copy .fam-hero-actions {
+    align-items: center;
+  }
+
+  .fam-hero[data-family-hero] .fam-hero-copy .fam-hero-link {
+    align-self: center;
+  }
+
+  /* Keep the pricing strip below the bar instead of under it. */
+  .fam-hero[data-family-hero] {
+    min-height: calc(100svh - var(--header-height));
+  }
+
+  .fam-hero[data-family-hero] .fam-hero-inner {
+    padding-bottom: calc(var(--section-y-compact) + var(--bar-height) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .interior-hero-copy {
+    text-align: center;
+  }
+
+  .interior-hero-copy .ed-eyebrow,
+  .interior-hero-copy h1,
+  .interior-hero-copy .ed-lede,
+  .interior-hero-copy .ed-body {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .interior-hero-copy nav[aria-label="Breadcrumb"] {
+    text-align: left;
+  }
+
+  .interior-hero-action,
+  .interior-hero-copy .interior-estimate-link,
+  .interior-hero-copy .f-button,
+  .interior-hero-copy .fam-btn {
+    margin-inline: auto;
+  }
+
+  .interior-hero-editorial .interior-hero-copy,
+  .interior-hero-contact .interior-hero-copy {
+    padding-bottom: calc(52px + var(--bar-height) + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* H1 stays within 40px and about three lines. H2 stays within 36px. */
+  .fam-hero[data-family-hero] .fam-hero-title,
+  .approved-shell h1,
+  .approved-interior h1,
+  .interior-hero-editorial h1,
+  .ed-display,
+  .ed-statement-display {
+    font-size: 40px !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Display heroes use a wider measure so a 40px title stays within three lines. */
+  .fam-hero[data-family-hero] .fam-hero-title,
+  .interior-hero-copy h1,
+  .interior-hero-editorial h1.ed-statement-display {
+    max-width: 18ch;
+  }
+
+  .approved-shell h2,
+  html .family-site h2,
+  .approved-interior h2,
+  .ed-h2,
+  .fr-gallery h2,
+  html .fr-band-estimate.approved-estimate h2 {
+    font-size: 36px !important;
+    line-height: 1.15 !important;
+  }
+
+  /* Sections: 64 to 96px, with a divider when the next band does not change ground. */
+  .approved-shell .f-section,
+  .approved-shell .ed-section,
+  .approved-shell .ed-section-lg,
+  .approved-shell .section-y,
+  .approved-shell .section-y-lg,
+  .approved-shell .fr-gallery-inner,
+  .approved-shell .fr-cta-strip {
+    padding-block: clamp(64px, 12vw, 96px) !important;
+  }
+
+  .approved-shell main section + section {
+    border-top: 1px solid color-mix(in srgb, #383837 14%, transparent);
+  }
+
+  .approved-shell main :is(.fr-band, .fam-hero, .interior-hero-contact) + section,
+  .approved-shell main section + :is(.fr-band, .fr-request, .ed-on-dark, .ed-on-bone) {
+    border-top: 0;
+  }
+
+  /* Body copy stays at least 16px. Eyebrows stay labels. */
+  .approved-shell main :is(
+    p,
+    li,
+    .ed-lede,
+    .ed-body,
+    .fam-hero-support
+  ):not(.f-eyebrow):not(.ed-eyebrow):not(.fam-hero-eyebrow):not(.fr-gallery-eyebrow) {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .interior-estimate-link,
+  .fam-btn,
+  .f-button {
+    font-size: 16px;
+  }
+
+  /* Tap targets. Inline links inside a sentence keep their line box. */
+  .fam-btn,
+  .f-button,
+  .f-link,
+  .fr-cities a,
+  .fam-header a,
+  .fam-bar a,
+  .fam-menu button,
+  .interior-estimate-link,
+  .approved-shell main button,
+  .approved-shell main summary,
+  .approved-shell main :is(input, select, textarea) {
+    min-height: 44px;
+  }
+
+  /* Repeat photo and service rows become one-row carousels. The items stay in the DOM. */
+  html .fr-cards,
+  html .fr-mosaic {
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  html .fr-cards > * {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+    grid-column: auto !important;
+  }
+
+  html .fr-mosaic > figure {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+    grid-column: auto !important;
+    aspect-ratio: 16 / 9;
+  }
+
+  html .fr-mosaic figure.is-wide,
+  html .fr-mosaic figure:last-child:not(.is-wide) {
+    grid-column: auto !important;
+    aspect-ratio: 16 / 9;
+  }
+
+  nav.fr-cities[aria-label="All handyman services"] {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+    scroll-snap-type: x mandatory;
+  }
+
+  nav.fr-cities[aria-label="All handyman services"] a {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+}

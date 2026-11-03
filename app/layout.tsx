@@ -36,6 +36,7 @@ import './design-v2-compliance.css'
 import '@/styles/family-tokens.css'
 import '@/styles/family-chrome.css'
 import './family-adoption.css'
+import './mobile-polish.css'
 
 // P5 family typefaces, self-hosted from the same two OFL variable files P5 Home Co serves.
 const manrope = localFont({
