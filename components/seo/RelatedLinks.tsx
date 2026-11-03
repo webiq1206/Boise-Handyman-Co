@@ -72,7 +72,7 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
           {/* Distinct from the page's own "Handyman services in {city}"
               section H2 above, which this block used to repeat word for word. */}
           <h2 className="ed-h2-sm ed-statement-wide mb-8">
-            More handyman help in {city?.name}
+            More handyman help <span className="mobile-keep">in {city?.name}</span>
           </h2>
           <div className="ed-grid-balance grid sm:grid-cols-2 gap-4">
             {/* Indexed city pages get the link; a noindexed combination points
@@ -129,7 +129,7 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
         </div>
         <div>
           <h2 className="ed-h4 mb-6">
-            More services in {CITIES.find((c) => c.slug === citySlug)?.name}
+            More services <span className="mobile-keep">in {CITIES.find((c) => c.slug === citySlug)?.name}</span>
           </h2>
           <ul className="space-y-2">
             {otherServices.map((service) => (

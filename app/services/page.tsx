@@ -21,6 +21,19 @@ import { ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { FamilyButton } from '@/components/family/Button';
+import type { ReactNode } from 'react';
+
+/** Keeps the last two words together so a short heading does not end on one word. */
+function keepTail(label: string): ReactNode {
+  const words = label.trim().split(/\s+/);
+  if (words.length < 3) return label;
+  return (
+    <>
+      {words.slice(0, -2).join(' ')}{' '}
+      <span className="mobile-keep">{words.slice(-2).join(' ')}</span>
+    </>
+  );
+}
 
 const TITLE = 'Handyman Services | Treasure Valley';
 const DESCRIPTION =
@@ -83,13 +96,13 @@ export default function ServicesIndexPage() {
       </InteriorHero>
 
       {/* Approved photo-led service directory. */}
-      <section className="interior-service-grid" aria-label="All services">{SERVICES.map(service=><Link className="interior-service-card" href={servicePath(service.slug)} key={service.slug}><img src={getServiceBackground(service.slug)} alt={altForImage(getServiceBackground(service.slug)) ?? service.name} width={900} height={675} loading="lazy"/><div><h2>{serviceHeading(service.name)}</h2><ArrowRight size={18} aria-hidden="true"/></div><p>{service.shortDescription}</p></Link>)}</section>
+      <section className="interior-service-grid" aria-label="All services">{SERVICES.map(service=><Link className="interior-service-card" href={servicePath(service.slug)} key={service.slug}><img src={getServiceBackground(service.slug)} alt={altForImage(getServiceBackground(service.slug)) ?? service.name} width={900} height={675} loading="lazy"/><div><h2>{keepTail(serviceHeading(service.name))}</h2><ArrowRight size={18} aria-hidden="true"/></div><p>{service.shortDescription}</p></Link>)}</section>
 
       <EstimatePromptBand
         title={
           <>
-            Share your repair list before you{' '}
-              <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>book</em>
+            Share your repair list before{' '}
+              <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>you book</em>
           </>
         }
         description="Send your repair, install or maintenance details for team review. Scope, pricing and availability are confirmed before scheduling."
@@ -101,8 +114,8 @@ export default function ServicesIndexPage() {
             <Reveal>
               <p className="ed-eyebrow">Treasure Valley</p>
               <h2 className="ed-h2 ed-statement-wide">
-                Serving communities across the{' '}
-                <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>valley</em>
+                Serving communities across{' '}
+                <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>the valley</em>
               </h2>
             </Reveal>
             <Reveal delay={60}>
@@ -127,7 +140,7 @@ export default function ServicesIndexPage() {
           <div className="ed-split ed-split-center">
             <h2 className="ed-h2 ed-statement">
               Ready to get it{' '}
-                <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>fixed</em>?
+                <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>fixed?</em>
             </h2>
             <div>
               <p className="ed-body">

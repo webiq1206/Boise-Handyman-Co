@@ -342,8 +342,8 @@ export default function Re10RepairsPage() {
             size="display"
             title={
               <>
-                We ask for the deadline{" "}
-                <em className="brc-accent">first</em>
+                We ask for the{" "}
+                <em className="brc-accent">deadline first</em>
               </>
             }
             className="mb-6"

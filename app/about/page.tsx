@@ -116,8 +116,8 @@ export default function AboutPage() {
             </p>
             <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>Real people. A higher standard.</p>
             <h1 className="ed-display ed-statement-display text-inverse-foreground mb-8">
-              About Boise Handyman{' '}
-              <em className="brc-accent">Co</em>
+              About Boise{' '}
+              <span className="mobile-keep">Handyman <em className="brc-accent">Co</em></span>
             </h1>
             {/* One support line keeps the primary in the first screen at 360x640;
                 the rest of the introduction sits with the family photo below. */}
@@ -173,7 +173,7 @@ export default function AboutPage() {
             <div className="ed-split ed-split-narrow">
               <div className="lg:sticky lg:top-28 lg:self-start">
                 <p className="ed-eyebrow">Credentials</p>
-                <h2 className="ed-h2 ed-statement">Locally owned. <em className="brc-accent">Registered.</em></h2>
+                <h2 className="ed-h2 ed-statement">Locally <em className="brc-accent">owned. Registered.</em></h2>
               </div>
               <Reveal>
                 <p className="ed-lede">
@@ -280,7 +280,7 @@ export default function AboutPage() {
               title={
                 <>
                   Six principles we never{' '}
-                  <em className="brc-accent">compromise</em> on
+                  <em className="brc-accent">compromise on</em>
                 </>
               }
               className="mb-0 max-w-3xl"

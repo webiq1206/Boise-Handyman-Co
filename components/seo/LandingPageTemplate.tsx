@@ -419,7 +419,7 @@ export function LandingPageTemplate({
               <Reveal>
                 <p className="ed-eyebrow">How it works</p>
                 <h2 className="ed-h2-sm ed-statement">
-                  Our <em className="not-italic" style={accent}>process</em>, step by step
+                  Our <em className="not-italic" style={accent}>process,</em> step by step
                 </h2>
               </Reveal>
               <div className="ed-steps mt-[clamp(32px,4vw,56px)]">
@@ -675,7 +675,7 @@ export function LandingPageTemplate({
             <Reveal>
               <p className="ed-eyebrow ed-eyebrow-accent">Start your project</p>
               <h2 className="ed-h2 ed-statement">
-                Ready to <em className="not-italic" style={accent}>begin</em>?
+                Ready to <em className="not-italic" style={accent}>begin?</em>
               </h2>
             </Reveal>
             <Reveal delay={60}>

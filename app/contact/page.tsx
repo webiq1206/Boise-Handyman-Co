@@ -208,8 +208,8 @@ export default function ContactPage() {
             </p>
             <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>Get in touch</p>
             <h1 className="ed-display ed-statement-display text-inverse-foreground mb-8">
-              Contact Boise Handyman{' '}
-              <em className="brc-accent">Co</em>
+              Contact Boise{' '}
+              <span className="mobile-keep">Handyman <em className="brc-accent">Co</em></span>
             </h1>
             <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-6">
               Send your task list with photos for an upfront quote, or call or text our team to
@@ -251,7 +251,7 @@ export default function ContactPage() {
                   <p className="ed-eyebrow">Book your visit</p>
                   <h2 className="ed-h2 ed-statement-wide">
                     Tell us what needs{' '}
-                    <em className="brc-accent">fixing</em>.
+                    <em className="brc-accent">fixing.</em>
                   </h2>
                   <p className="text-base leading-relaxed mb-8 text-muted-foreground">
                     Send your repair list and optional photos. The team reviews the scope,

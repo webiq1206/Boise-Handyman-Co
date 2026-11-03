@@ -76,8 +76,8 @@ export default function BlogPage() {
         eyebrow="Ready to fix it"
         title={
           <>
-            From articles to an actual{' '}
-            <em className="brc-accent">quote</em>
+            From articles to an{' '}
+            <em className="brc-accent">actual quote</em>
           </>
         }
         description="Send your repair list and optional photos for scope review, a written quote and a confirmed visit plan."

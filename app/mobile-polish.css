@@ -245,3 +245,72 @@
 .f-answer-points + p {
   margin-top: 16px;
 }
+
+/* Keep a short last phrase on one line so a heading does not end on one word. */
+.mobile-keep {
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  body :is(p, li, a, button, label, small, figcaption, summary, td, th, dt, dd, span, input, select, textarea):not(h1 span, h1 em, h2 span, h2 em, h3 span, h3 em, h4 span, h4 em, h5 span, h5 em, h6 span, h6 em) {
+    font-size: 16px !important;
+  }
+
+  body :is(.text-sm, .text-xs),
+  .f-count-on-title {
+    font-size: 16px !important;
+  }
+
+  body :is(h1, h2, h3) em {
+    white-space: nowrap;
+  }
+
+  body :is(a, button, summary, select, textarea, [role="button"]):not(.fam-skip) {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  body a:not(.fam-skip):not(.fr-card):not(.interior-service-card):not(.fam-btn):not(.f-button):not([class*="flex"]):not([class*="block"]):not([class*="grid"]) {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  body input:not(.hm-tile-input):not(.fam-skip):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]) {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  body label:has(input[type="checkbox"]),
+  body label:has(input[type="radio"]) {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  body :is(h1, h2, h3, h4) {
+    text-wrap: pretty;
+  }
+
+  .interior-service-card h2 {
+    font-size: 22px !important;
+  }
+
+  .interior-sitemap section > h2 {
+    font-size: clamp(18px, 4.6vw, 28px) !important;
+    white-space: nowrap;
+  }
+
+  .approved-shell :is(.ed-statement, .ed-statement-wide, .ed-statement-display) {
+    max-width: none !important;
+  }
+
+  .fam-hero[data-family-hero] .fam-hero-title,
+  .interior-hero-copy h1 {
+    max-width: none;
+  }
+
+  .interior-document-main h2 {
+    font-size: clamp(18px, 5vw, 28px) !important;
+    white-space: nowrap;
+  }
+}

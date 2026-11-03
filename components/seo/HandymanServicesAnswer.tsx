@@ -5,6 +5,17 @@ import { brands, serviceExtras } from '@/components/approved/family-content';
 
 const Arrow = () => <ArrowUpRight size={18} aria-hidden="true" />;
 
+function keepTail(label: string) {
+  const words = label.trim().split(/\s+/);
+  if (words.length < 3) return label;
+  return (
+    <>
+      {words.slice(0, -2).join(' ')}{' '}
+      <span className="mobile-keep">{words.slice(-2).join(' ')}</span>
+    </>
+  );
+}
+
 const CARD_ALT: Record<string, string> = {
   'inspection-repairs': 'Open tool bag ready beside a front door',
   'drywall-repair': 'A patched and sanded drywall repair ready for paint',
@@ -57,7 +68,7 @@ export function HandymanServicesAnswer() {
               <img src={s.image} alt={CARD_ALT[s.slug] ?? ''} loading={i < 3 ? 'eager' : 'lazy'} width="1000" height="750" />
             </span>
             <span className="fr-card-body">
-              <h3>{s.name}</h3>
+              <h3>{keepTail(s.name)}</h3>
               <p>{s.summary}</p>
               <span className="f-link">Explore this service <Arrow /></span>
             </span>

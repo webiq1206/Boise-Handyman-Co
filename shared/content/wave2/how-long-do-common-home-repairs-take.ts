@@ -88,7 +88,7 @@ export const howLongDoCommonHomeRepairsTake: BlogPostData = {
 <p><strong>Like-for-like electrical swaps are quick; the box in the ceiling decides the rest.</strong> Replacing a light fixture typically takes under an hour. A ceiling fan where a fixture already hangs runs one to two hours, including assembly and balancing, with one caveat: fans need a fan-rated electrical box, and if the existing box is not rated for the weight and wobble, swapping it adds real time. Switches, dimmers, and outlets on existing circuits are quick swaps.</p>
 <p>Anything involving new wiring, new circuits, or the panel is licensed electrician territory, not a longer handyman job. The line is legal, not a matter of confidence, and we explain it fully in <a href="/blog/handyman-vs-contractor">handyman versus contractor</a>.</p>
 
-<h2 id="doors">Doors and trim: about an hour each, satisfaction immediate</h2>
+<h2 id="doors">Doors and trim: about an hour each, <span class="mobile-keep">satisfaction immediate</span></h2>
 <p><strong>A sticking door is usually an hour, and it is the best hour on the list.</strong> Most sticking, sagging, and latch problems come down to hinge screws, strike plate alignment, or a modest plane of the slab edge, all part of standard <a href="/services/carpentry-trim-repair">carpentry and trim repair</a>. Replacing an interior door slab runs longer, more like two hours, since it needs hinges mortised and hardware bored to match.</p>
 <p>Trim work scales with length rather than difficulty: a damaged baseboard section or a chewed door casing is an hour or so; re-running trim around a whole room is a half day. Caulk and paint touch-up at the end is what makes the repair disappear, and it is included time, not extra.</p>
 
