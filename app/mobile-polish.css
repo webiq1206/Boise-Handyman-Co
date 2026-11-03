@@ -64,7 +64,7 @@
 
   /* Keep the pricing strip below the bar instead of under it. */
   .fam-hero[data-family-hero] {
-    min-height: calc(100svh - var(--header-height));
+    min-height: calc(100svh - var(--header-height)) !important;
   }
 
   .fam-hero[data-family-hero] .fam-hero-inner {
