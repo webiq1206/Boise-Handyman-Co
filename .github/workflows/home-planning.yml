@@ -5,6 +5,7 @@ on:
     paths:
       - components/sections/HandymanPlanningRange.tsx
       - tests/handyman-planning-cta.test.mjs
+      - tests/fixtures/handyman-planning-before.tsx.txt
       - scripts/verify-home-planning.cjs
       - scripts/offline-run.mjs
       - scripts/offline-network-guard.cjs
@@ -34,11 +35,10 @@ jobs:
       - name: Isolated component regression
         run: node scripts/offline-run.mjs test tests/handyman-planning-cta.test.mjs
       - name: Preserve before and after source
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           cp components/sections/HandymanPlanningRange.tsx /tmp/planning-after.tsx
-          git show "$BASE_SHA:components/sections/HandymanPlanningRange.tsx" > components/sections/HandymanPlanningRange.tsx
+          # Exact component blob c570e88c96db1b52ae4fb766d2316da39e184e51 from base c249da7.
+          cp tests/fixtures/handyman-planning-before.tsx.txt components/sections/HandymanPlanningRange.tsx
       - name: Start isolated homepage preview
         run: |
           mkdir -p test-results/home-planning
