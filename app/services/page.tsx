@@ -73,8 +73,8 @@ export default function ServicesIndexPage() {
         <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Services' }]} />
         <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>Our services</p>
         <h1 className="ed-display ed-statement-display text-inverse-foreground">
-          Everything we fix, install and{' '}
-            <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>maintain</em>
+          Everything we fix{' '}
+            <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>and maintain</em>
         </h1>
         <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
           Small repairs, installs and maintenance for Treasure Valley homes, quoted upfront as one
