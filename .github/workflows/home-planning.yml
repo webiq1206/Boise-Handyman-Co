@@ -1,0 +1,60 @@
+name: Handyman homepage planning review
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - components/sections/HandymanPlanningRange.tsx
+      - tests/handyman-planning-cta.test.mjs
+      - scripts/verify-home-planning.cjs
+      - scripts/offline-run.mjs
+      - scripts/offline-network-guard.cjs
+      - .github/workflows/home-planning.yml
+permissions:
+  contents: read
+concurrency:
+  group: handyman-home-planning-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  planning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    container: mcr.microsoft.com/playwright:v1.60.0-noble
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Isolated component regression
+        run: node scripts/offline-run.mjs test tests/handyman-planning-cta.test.mjs
+      - name: Preserve before and after source
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          cp components/sections/HandymanPlanningRange.tsx /tmp/planning-after.tsx
+          git show "$BASE_SHA:components/sections/HandymanPlanningRange.tsx" > components/sections/HandymanPlanningRange.tsx
+      - name: Start isolated homepage preview
+        run: |
+          mkdir -p test-results/home-planning
+          node scripts/offline-run.mjs dev --hostname 127.0.0.1 --port 34863 > test-results/home-planning/server.log 2>&1 &
+          node -e 'let n=0;const t=setInterval(async()=>{try{if((await fetch("http://127.0.0.1:34863/",{signal:AbortSignal.timeout(10000)})).ok){clearInterval(t);return}}catch{}if(++n>150){clearInterval(t);process.exit(1)}},1000)'
+      - name: Capture baseline categories and tasks
+        run: node scripts/verify-home-planning.cjs --baseline
+      - name: Restore proposed component
+        if: always()
+        run: cp /tmp/planning-after.tsx components/sections/HandymanPlanningRange.tsx
+      - name: Check proposed CTA across every category and task
+        run: node scripts/verify-home-planning.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: handyman-home-planning-${{ github.sha }}
+          path: test-results/home-planning/
+          retention-days: 14
+          if-no-files-found: error
