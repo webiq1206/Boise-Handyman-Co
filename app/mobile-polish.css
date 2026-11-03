@@ -28,8 +28,57 @@
 
 /* Primary button hover stays a step darker than the charcoal fill. */
 .fam-btn.fam-btn--primary:hover {
-  border-color: #2f2f2e;
-  background: #2f2f2e;
+  border-color: var(--color-charcoal-press);
+  background: var(--color-charcoal-press);
+}
+
+/* Charcoal chrome: cards, popovers and fields sit a step above the ground.
+   Borders stay lighter than both the page and the surface. */
+.approved-shell [data-approved-navigation],
+.approved-shell footer,
+.approved-shell .ed-on-gradient {
+  --card: 60 1.37% 28.63%;
+  --card-foreground: 40 32% 92%;
+  --card-border: 60 1.38% 42.55%;
+  --popover: 60 1.37% 28.63%;
+  --popover-foreground: 40 32% 92%;
+  --popover-border: 60 1.38% 42.55%;
+  --input: 60 1.37% 28.63%;
+  --muted: 60 1.37% 28.63%;
+  --border: 60 1.38% 42.55%;
+}
+
+/* Light pages: a popover matches the paper unless it is a step lighter. */
+.approved-shell {
+  --popover: 0 0% 100%;
+  --popover-border: 42 10% 80%;
+}
+
+/* Dark bands: 13px labels sit on charcoal, so they cannot use the paper muted ink.
+   The paper result card keeps the shell muted ink, which passes on paper. */
+.approved-shell .fr-band .space-y-6 {
+  --ed-muted-ink: #d9dbd4;
+}
+
+/* 13px terracotta numbers on charcoal are 3.1:1. The lighter derived accent passes. */
+.approved-shell :is(.ed-on-gradient, .bg-inverse) .ed-small[style*="ed-accent"] {
+  color: #e48f6d !important;
+}
+
+/* Choice cards on a charcoal band: a lighter surface and a lighter edge. */
+.fr-band .fr-range-choice:not(.is-selected) {
+  background: var(--color-charcoal-surface);
+  border-color: var(--color-charcoal-line);
+}
+
+/* Photo captions are 12px paper. The scrim has to reach charcoal under the type. */
+.fr-mosaic figcaption {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-charcoal) 78%, transparent) 42%,
+    var(--color-charcoal) 100%
+  );
 }
 
 /* The fixed call bar covers the bottom of the viewport. Reserve that height
@@ -252,7 +301,7 @@
 }
 
 @media (max-width: 767px) {
-  body :is(p, li, a, button, label, small, figcaption, summary, td, th, dt, dd, span, input, select, textarea):not(h1 span, h1 em, h2 span, h2 em, h3 span, h3 em, h4 span, h4 em, h5 span, h5 em, h6 span, h6 em) {
+  body :is(p, li, a, button, label, small, figcaption, summary, td, th, dt, dd, span, input, select, textarea):not(h1 span, h1 em, h2 span, h2 em, h3 span, h3 em, h4 span, h4 em, h5 span, h5 em, h6 span, h6 em):not(.f-eyebrow):not(.ed-eyebrow):not(.fam-hero-eyebrow):not(.fr-gallery-eyebrow):not(.interior-eyebrow) {
     font-size: 16px !important;
   }
 
@@ -273,6 +322,16 @@
   body a:not(.fam-skip):not(.fr-card):not(.interior-service-card):not(.fam-btn):not(.f-button):not([class*="flex"]):not([class*="block"]):not([class*="grid"]) {
     display: inline-flex;
     align-items: center;
+  }
+
+  /* Inline links inside sentences are not standalone controls.
+     !important beats the high-specificity tap-target rules above. */
+  body :is(p, .ed-lede, .ed-body, .fam-hero-support) a,
+  .blog-content p a,
+  .prose p a {
+    display: inline !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
   }
 
   body input:not(.hm-tile-input):not(.fam-skip):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]) {

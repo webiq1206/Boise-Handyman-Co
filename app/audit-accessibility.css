@@ -172,7 +172,7 @@
   }
   .approved-shell .family-site .f-hero-shade {
     display: block; position: absolute; inset: 0; z-index: -1;
-    background: linear-gradient(180deg, rgba(23,30,27,.08) 0%, rgba(23,30,27,.34) 40%, rgba(23,30,27,.88) 74%, rgba(23,30,27,.97) 100%);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--color-charcoal) 8%, transparent) 0%, color-mix(in srgb, var(--color-charcoal) 34%, transparent) 40%, color-mix(in srgb, var(--color-charcoal) 88%, transparent) 74%, color-mix(in srgb, var(--color-charcoal) 97%, transparent) 100%);
   }
   .approved-shell .family-site .f-hero-copy { grid-area: auto; width: calc(100% - 40px); margin: 0 auto; padding: 44vh 0 34px; }
   .approved-shell .family-site .f-hero .f-eyebrow { font-size: 11px; margin-bottom: 14px !important; max-width: none; }

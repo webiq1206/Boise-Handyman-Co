@@ -75,6 +75,12 @@
   --color-ink-2: #343934;
   /* Brand charcoal for headers, buttons, footers and other dark grounds. */
   --color-charcoal: #383837;
+  /* Cards, popovers and inputs on a charcoal page. Lighter than the ground. */
+  --color-charcoal-surface: #4a4a48;
+  /* Borders on charcoal. Lighter than both the page and the surface. */
+  --color-charcoal-line: #6e6e6b;
+  /* Pressed or hovered charcoal. Still above the near-black floor. */
+  --color-charcoal-press: #30302f;
   --color-moss: #233029;
   /* Footer, mobile bar and hero fallback use the same brand charcoal. */
   --color-forest: #383837;
@@ -90,7 +96,7 @@
   --color-on-dark: var(--color-paper);
   --color-on-dark-muted: rgba(251, 250, 246, 0.8);
   --color-border-on-dark: rgba(251, 250, 246, 0.18);
-  --color-scrim-rgb: 13, 24, 18;
+  --color-scrim-rgb: 56, 56, 55;
   --color-success: #3f6b4a;
   --color-warning: #8a6a1f;
   --color-error: #a33a2c;

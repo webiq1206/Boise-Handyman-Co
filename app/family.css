@@ -116,7 +116,7 @@
 .ed-on-dark { color: var(--ed-ink); background: var(--ed-ground); }
 /* Measured at 82% the step from dark was five RGB points - a difference you
    can prove but not see. 68% puts it clearly below the page ground. */
-.ed-on-deep { color: var(--ed-ink); background: color-mix(in srgb, hsl(var(--background)) 68%, #000); }
+.ed-on-deep { color: var(--ed-ink); background: color-mix(in srgb, hsl(var(--background)) 68%, var(--color-charcoal)); }
 .ed-on-bone { color: var(--ed-bone-ink); background: var(--ed-bone); }
 .ed-on-muted { color: var(--ed-bone-ink); background: color-mix(in srgb, hsl(var(--primary)) 93%, hsl(var(--accent))); }
 .ed-on-gradient {
@@ -181,7 +181,7 @@
    * - under the 4.5:1 floor for body text. 74% clears 5:1 with headroom.
    */
   --ed-muted-ink: color-mix(in srgb, hsl(var(--ed-bone-ink-hsl)) 74%, hsl(var(--ed-bone-hsl)));
-  --ed-accent: color-mix(in srgb, hsl(var(--accent)) 58%, #000);
+  --ed-accent: color-mix(in srgb, hsl(var(--accent)) 58%, var(--color-charcoal));
 }
 
 /* Hairline separation between adjacent bands of the same value. */
@@ -423,7 +423,7 @@ html :where(.ed-small) {
 .ed-panel-media::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 62%, rgb(0 0 0 / 0.5));
+  background: linear-gradient(180deg, transparent 62%, rgba(var(--color-scrim-rgb), 0.5));
   content: "";
   pointer-events: none;
 }
@@ -655,7 +655,7 @@ main > div:first-of-type > div:first-of-type:not(section ~ div):not(.pt-0):not(.
   width: fit-content;
   max-width: calc(100% - 56px);
   padding: 8px 12px;
-  background: rgb(20 25 23 / 0.9);
+  background: rgba(var(--color-scrim-rgb), 0.9);
   color: #fff;
   font-size: 0.6875rem;
   line-height: 1.5;
