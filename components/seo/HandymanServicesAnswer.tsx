@@ -32,13 +32,21 @@ export function HandymanServicesAnswer() {
         </div>
         <div>
           <p data-speakable="summary">
-            Boise Handyman Co handles small home repairs, installs and maintenance in Boise and the Treasure Valley: drywall repair, paint touch-ups, minor plumbing and electrical repairs, carpentry and trim, TV mounting and assembly, fence, deck and gutter repair, and caulking. We serve Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City and Caldwell.
+            Boise Handyman Co handles small home repairs, installs and maintenance in Boise and the Treasure Valley.
             {/* The family relationship, said plainly on the page that owns the
                 brand query. A followed link: P5 Home Co is the parent company. */}
             <span className="f-parent-company">
               {' '}A <a href="https://p5homeco.com">P5 Home Co</a> company.
             </span>
           </p>
+          <ul className="f-answer-points">
+            <li>Drywall repair and paint touch-ups</li>
+            <li>Minor plumbing and electrical repairs</li>
+            <li>Carpentry and trim</li>
+            <li>TV mounting and assembly</li>
+            <li>Fence, deck, gutter repair, and caulking</li>
+          </ul>
+          <p>We serve Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City and Caldwell.</p>
         </div>
       </div>
 

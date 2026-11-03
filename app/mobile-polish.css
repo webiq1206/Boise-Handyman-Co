@@ -224,3 +224,24 @@
     scroll-snap-align: start;
   }
 }
+
+/* Homepage services lead: the long sentence is a short line plus cards. */
+.f-answer-points {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.f-answer-points li {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  background: var(--color-bone, #f1ede4);
+}
+
+.f-answer-points + p {
+  margin-top: 16px;
+}
