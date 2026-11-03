@@ -17,6 +17,6 @@
     "lib/family/types.ts": "56993733a433d82b0933d5dd381e9c7a0bccd37699a0ccd326b32cc467dd270f",
     "scripts/verify-family-chrome.mjs": "1c20ec3d7a39dcd11311dc0ee01459c31b9417e7603363c6f2e69e97da33e7fb",
     "styles/family-chrome.css": "c097bd8a32b93cab815217a7001dd13bbfcc23b465f03c135aa3a3a164557664",
-    "styles/family-tokens.css": "076ca63f159f87208f39ed967b3b8c2635321ac5db35564c0b74709d58a49ab5"
+    "styles/family-tokens.css": "53bc930c86126cd80fde1c088e3db198b9454cd6dc7d4ee5deb6cc38ae1cc22e"
   }
 }

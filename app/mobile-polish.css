@@ -39,13 +39,13 @@
 .approved-shell .ed-on-gradient {
   --card: 60 1.37% 28.63%;
   --card-foreground: 40 32% 92%;
-  --card-border: 60 1.38% 42.55%;
+  --card-border: 60 1.42% 58.63%;
   --popover: 60 1.37% 28.63%;
   --popover-foreground: 40 32% 92%;
-  --popover-border: 60 1.38% 42.55%;
+  --popover-border: 60 1.42% 58.63%;
   --input: 60 1.37% 28.63%;
   --muted: 60 1.37% 28.63%;
-  --border: 60 1.38% 42.55%;
+  --border: 60 1.42% 58.63%;
 }
 
 /* Light pages: a popover matches the paper unless it is a step lighter. */
@@ -60,9 +60,19 @@
   --ed-muted-ink: #d9dbd4;
 }
 
-/* 13px terracotta numbers on charcoal are 3.1:1. The lighter derived accent passes. */
+/* 13px step numbers. #E48F6D is 3.57:1 on the lighter surface, so this is #f1bfa6 (5.39:1 there, 7.12:1 on #383837). */
 .approved-shell :is(.ed-on-gradient, .bg-inverse) .ed-small[style*="ed-accent"] {
-  color: #e48f6d !important;
+  color: #f1bfa6 !important;
+}
+
+/* #E48F6D, #ADABA8 and #CB633B stay off small type on the lighter charcoal surface. */
+.fr-band .fr-range-choice:not(.is-selected),
+.approved-shell :is(.ed-on-gradient, .bg-inverse) .bg-card {
+  color: #fbfaf6;
+}
+.fr-band .fr-range-choice:not(.is-selected) :is(small, span, p),
+.approved-shell :is(.ed-on-gradient, .bg-inverse) .bg-card :is(.text-xs, .text-sm, small, .ed-small) {
+  color: #fbfaf6;
 }
 
 /* Choice cards on a charcoal band: a lighter surface and a lighter edge. */

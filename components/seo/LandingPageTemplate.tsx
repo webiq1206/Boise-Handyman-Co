@@ -233,7 +233,7 @@ export function LandingPageTemplate({
               screen; the longer overview and estimate actions follow. */}
           <a
             href={SITE_CONFIG.phoneHref}
-            className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm bg-[var(--color-charcoal)] px-5 text-base font-medium text-[#fbfaf6] transition-colors hover:bg-[#444947] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-charcoal)] focus-visible:ring-offset-2 sm:w-auto"
+            className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm bg-[var(--color-charcoal)] px-5 text-base font-medium text-[#fbfaf6] transition-colors hover:bg-[var(--color-charcoal-press)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-charcoal)] focus-visible:ring-offset-2 sm:w-auto"
             data-testid="button-call-service-hero"
             data-hero-cta="primary"
           >

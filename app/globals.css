@@ -68,7 +68,7 @@ html, body {
   --border: 40 8% 27%;  /* hairline warmed toward bone, like P5's --line */
   --card: 60 1.37% 28.63%;         /* charcoal surface #4A4A48 */
   --card-foreground: 37 14% 89%;
-  --card-border: 60 1.38% 42.55%;  /* charcoal line #6E6E6B */
+  --card-border: 60 1.42% 58.63%;  /* charcoal line #979794 */
 
   /* Elevated band (footer, statement bands) */
   --inverse: 163 6% 14%;
@@ -86,7 +86,7 @@ html, body {
   /* Sidebar - admin/portal (a touch below page base) */
   --sidebar: 60 0.69% 21.76%;  /* brand charcoal #383837 */
   --sidebar-foreground: 37 14% 89%;
-  --sidebar-border: 60 1.38% 42.55%;  /* charcoal line #6E6E6B */
+  --sidebar-border: 60 1.42% 58.63%;  /* charcoal line #979794 */
   --sidebar-primary: 16.10 51.46% 53.14%; /* brand terracotta #C56B4A */
   --sidebar-primary-foreground: 60 0.69% 21.76%;  /* brand charcoal #383837 */
   --sidebar-accent: 163 6% 16%;
@@ -95,7 +95,7 @@ html, body {
 
   --popover: 60 1.37% 28.63%;  /* charcoal surface #4A4A48 */
   --popover-foreground: 37 14% 89%;
-  --popover-border: 60 1.38% 42.55%;  /* charcoal line #6E6E6B */
+  --popover-border: 60 1.42% 58.63%;  /* charcoal line #979794 */
 
   /* Primary CTA - bone #F7F5F3 fill, brand charcoal #383837 text */
   --primary: 30 20% 96%;
@@ -117,7 +117,7 @@ html, body {
   --brass-foreground: 30 20% 96%;
 
   /* Derived terracotta variants preserve readable accents on both grounds. */
-  --accent-legible: 17.14 68.79% 66.08%; /* #E48F6D; 5.38:1 on charcoal */
+  --accent-legible: 20 72.82% 79.8%; /* #f1bfa6; 5.39:1 on surface #4a4a48, 7.12:1 on #383837 */
   --accent-on-light: 15 70.71% 38.82%; /* #A9401D; 5.62:1 on bone */
 
   /* Danger - muted terracotta #C77B6B */

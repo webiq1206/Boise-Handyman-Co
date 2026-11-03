@@ -77,8 +77,9 @@
   --color-charcoal: #383837;
   /* Cards, popovers and inputs on a charcoal page. Lighter than the ground. */
   --color-charcoal-surface: #4a4a48;
-  /* Borders on charcoal. Lighter than both the page and the surface. */
-  --color-charcoal-line: #6e6e6b;
+  /* Borders on charcoal. Lighter than the page and the surface.
+     #979794 is 4.01:1 on #383837 and 3.03:1 on #4a4a48. */
+  --color-charcoal-line: #979794;
   /* Pressed or hovered charcoal. Still above the near-black floor. */
   --color-charcoal-press: #30302f;
   --color-moss: #233029;
