@@ -8,12 +8,12 @@ import { PUBLIC_NAP_LINE, SITE_CONFIG } from "@/shared/siteConfig";
  * pull the same colors.
  */
 export const EMAIL_BRAND = {
-  bg: "#2C302F",         // page background (brand charcoal)
+  bg: "#383837",         // page background (brand charcoal)
   surface: "#333836",    // content card
   raised: "#3B403E",     // highlighted boxes, footer, badges
   hairline: "#454B49",   // borders + dividers
   text: "#F7F5F3",       // primary text (bone)
-  textMuted: "#9F9C97",  // secondary text (mist)
+  textMuted: "#ADABA8",  // mist, lifted so secondary text stays AA on #383837
   accent: "#E48F6D",      // lighter terracotta for text links on charcoal (AA)
   accentDeep: "#CB633B",  // exact brand pop for fills and decorative accents
 } as const;

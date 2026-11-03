@@ -100,7 +100,7 @@
   min-height: 0 !important;
   object-fit: contain !important;
   object-position: center top !important;
-  background: #1c1f1e;
+  background: var(--color-charcoal);
 }
 
 .approved-shell .family-handyman .f-hero-copy {
@@ -130,7 +130,7 @@
     height: auto !important;
     min-height: 0 !important;
     max-height: none !important;
-    background: #1c1f1e;
+    background: var(--color-charcoal);
   }
 
   /* People-safe: intrinsic 16:9 row - no max-height crop; heads stay complete. */
@@ -147,7 +147,7 @@
     min-height: 0 !important;
     object-fit: contain !important;
     object-position: center top !important;
-    background: #1c1f1e;
+    background: var(--color-charcoal);
   }
 
   .approved-shell .family-site .f-hero-shade,
@@ -164,7 +164,7 @@
     width: calc(100% - (2 * var(--gutter)));
     margin: 0 auto;
     padding: 20px 0 16px !important;
-    background: #1c1f1e;
+    background: var(--color-charcoal);
     color: #fbfaf6;
   }
 
@@ -257,7 +257,7 @@
     align-self: start;
     object-fit: contain !important;
     object-position: center top !important;
-    background: #1c1f1e;
+    background: var(--color-charcoal);
   }
   .approved-shell .family-handyman .f-hero-copy {
     display: flex;
@@ -381,7 +381,7 @@
     flex-direction: column;
     justify-content: flex-end;
     min-height: calc(100svh - var(--header-h) - var(--bottom-bar-h)) !important;
-    background: #1c1f1e;
+    background: var(--color-charcoal);
   }
   .approved-shell .family-handyman .f-hero > img {
     position: absolute !important;
@@ -397,7 +397,7 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(0deg, #1c1f1e 0, rgba(28, 31, 30, 0.92) 250px, rgba(28, 31, 30, 0.55) 340px, rgba(28, 31, 30, 0) 430px);
+    background: linear-gradient(0deg, var(--color-charcoal) 0, color-mix(in srgb, var(--color-charcoal) 92%, transparent) 250px, color-mix(in srgb, var(--color-charcoal) 55%, transparent) 340px, transparent 430px);
   }
   .approved-shell .family-handyman .f-hero-copy {
     background: transparent;

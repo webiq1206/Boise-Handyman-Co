@@ -73,9 +73,11 @@
   --color-bone: #f1ede4;
   --color-ink: #20231f;
   --color-ink-2: #343934;
-  --color-charcoal: #2c302f;
+  /* Brand charcoal for headers, buttons, footers and other dark grounds. */
+  --color-charcoal: #383837;
   --color-moss: #233029;
-  --color-forest: #17211c;
+  /* Footer, mobile bar and hero fallback use the same brand charcoal. */
+  --color-forest: #383837;
   --color-bg: var(--color-paper);
   --color-bg-alt: var(--color-bone);
   --color-surface: var(--color-paper);

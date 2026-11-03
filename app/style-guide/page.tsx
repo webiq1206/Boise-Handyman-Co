@@ -33,7 +33,7 @@ export default function StyleGuidePage() {
           <h2 className="text-section-title font-serif">Brand kit (placeholder)</h2>
           <p className="text-sm text-muted-foreground max-w-prose">
             PLACEHOLDER kit generated programmatically pending real brand assets. Charcoal
-            #2C302F, bone #F7F5F3, and the brand accent terracotta #CB633B. Lighter and
+            #383837, bone #F7F5F3, and the brand accent terracotta #CB633B. Lighter and
             darker variants are used for readable text on charcoal and bone. Full kit and usage rules:{" "}
             <a href="/brand/brand-kit.html" className="underline underline-offset-4">
               /brand/brand-kit.html
@@ -49,7 +49,7 @@ export default function StyleGuidePage() {
                 className="w-28 h-28"
               />
             </div>
-            <div className="rounded-sm border bg-[#2C302F] p-4 flex items-center justify-center">
+            <div className="rounded-sm border bg-[var(--color-charcoal)] p-4 flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/brand/svg/seal/dark/boise-handyman-co-seal-bone-accent.svg"
@@ -66,10 +66,10 @@ export default function StyleGuidePage() {
               />
             </div>
             <div className="rounded-sm border h-full min-h-24 bg-[#CB633B] flex items-end p-2">
-              <span className="text-xs text-[#2C302F]">Accent #CB633B</span>
+              <span className="text-xs text-[var(--color-charcoal)]">Accent #CB633B</span>
             </div>
           </div>
-          <div className="rounded-sm border bg-[#2C302F] p-6">
+          <div className="rounded-sm border bg-[var(--color-charcoal)] p-6">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/brand/svg/wordmark/dark/boise-handyman-co-wordmark-bone-accent.svg"

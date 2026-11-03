@@ -20,7 +20,7 @@
 .fr-band,
 .fr-request,
 .fr-cta-strip {
-  --fr-ink: #2c302f;
+  --fr-ink: var(--color-charcoal);
   --fr-ink-soft: #484c47;
   --fr-paper: #fbfaf6;
   --fr-bone: #f1ede4;
@@ -373,7 +373,7 @@
 .referral-panel {
   border-top: 6px solid var(--f-accent, #2c302f);
   background: var(--fr-bone, #f1ede4);
-  color: var(--fr-ink, #2c302f);
+  color: var(--fr-ink, var(--color-charcoal));
   box-shadow: 0 40px 70px -40px rgba(28, 31, 30, 0.35);
 }
 .referral-visual { margin: 0; }
@@ -417,10 +417,9 @@
 .fr-band-estimate .fr-range-result .planning-range-value { font-size: clamp(40px, 5vw, 72px); line-height: 1; }
 .fr-band-estimate .fr-range-result .planning-range-band { font-size: 16px; margin-top: 14px; }
 
-/* Brand ground for the shared chrome: this site's footer and hero fallback sit on
-   its own deep charcoal, not the parent company's forest green. */
-footer.fam-footer[data-family-footer] { background: #1c1f1e; }
-section.fam-hero[data-family-hero] { background: #2c302f; }
+/* Brand ground for the shared chrome: footer and hero fallback use brand charcoal. */
+footer.fam-footer[data-family-footer] { background: var(--color-charcoal); }
+section.fam-hero[data-family-hero] { background: var(--color-charcoal); }
 
 /* One heading scale for the family sections, whatever the site's older approved
    layer says: the editorial h2 is large on purpose. */
@@ -470,7 +469,7 @@ html .approved-shell.site-cabinet .approved-interior .interior-hero-fit .interio
 html .approved-interior .interior-detail-body h2 { font-size: clamp(2.5rem, 4.4vw, 4rem); line-height: 1.02; }
 
 /* ------------------------------------------------------- design gallery mosaic */
-.fr-gallery { background: var(--fr-paper, #fbfaf6); color: var(--fr-ink, #2c302f); }
+.fr-gallery { background: var(--fr-paper, #fbfaf6); color: var(--fr-ink, var(--color-charcoal)); }
 .fr-gallery-inner { width: min(1260px, 88%); margin-inline: auto; padding-block: clamp(80px, 9vw, 124px); }
 .fr-gallery-top {
   display: grid;

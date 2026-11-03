@@ -122,7 +122,7 @@ export const metadata: Metadata = withBrandPageMetadata(({
 }), "__layout__")
 
 export const viewport: Viewport = {
-  themeColor: '#2C302F',
+  themeColor: '#383837',
   colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,
