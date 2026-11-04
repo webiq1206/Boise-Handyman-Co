@@ -14,6 +14,15 @@ const CARD_ALT: Record<string, string> = {
   'home-maintenance': 'Careful adjustment of an interior door hinge',
 };
 
+// Existing approved campaign/planning assets, scoped to the homepage cards.
+// These illustrate service scope, never completed company-project evidence.
+const CARD_IMAGES: Record<string, {src: string; alt: string; width: number; height: number; position?: string}> = {
+  'drywall-repair': {src: '/images/handyman/punch-list-markers.webp', alt: 'Repair-planning notes and blue wall markers beside a window', width: 1216, height: 896},
+  'carpentry-trim-repair': {src: '/family/drive/square-2-entry-bench-and-coat-hooks.webp', alt: 'Entry bench, beadboard wall and coat hooks', width: 1200, height: 1200, position: '50% 0%'},
+  'painting-touch-ups': {src: '/images/handyman/front-door-repaint-p5-reviewed-20260910.webp', alt: 'Painted front door and surrounding trim', width: 1461, height: 1076},
+  'mounting-assembly': {src: '/family/drive/square-1-front-door-smart-lock.webp', alt: 'Black front door with deadbolt and lever handle', width: 1200, height: 1200},
+};
+
 /**
  * Answer-first homepage block, then the six most common jobs as picture cards
  * and every service as one line of links. Sentences are the published fact
@@ -24,13 +33,13 @@ const CARD_ALT: Record<string, string> = {
 export function HandymanServicesAnswer() {
   const b = brands.handyman;
   return (
-    <section className="f-section f-container" id="handyman-services-boise">
+    <section className="f-section f-container [overflow-wrap:anywhere]" id="handyman-services-boise">
       <div className="f-section-top">
-        <div>
+        <div className="min-w-0">
           <p className="f-eyebrow">BOISE, IDAHO</p>
           <h2>Handyman services<br /><em>in Boise, Idaho</em></h2>
         </div>
-        <div>
+        <div className="min-w-0">
           <p data-speakable="summary">
             Boise Handyman Co handles small home repairs, installs and maintenance in Boise and the Treasure Valley: drywall repair, paint touch-ups, minor plumbing and electrical repairs, carpentry and trim, TV mounting and assembly, fence, deck and gutter repair, and caulking. We serve Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City and Caldwell.
             {/* The family relationship, said plainly on the page that owns the
@@ -46,7 +55,7 @@ export function HandymanServicesAnswer() {
         {b.services.map((s, i) => (
           <a className="fr-card" key={s.slug} href={s.live || `/services/${s.slug}`}>
             <span className="fr-card-media">
-              <img src={s.image} alt={CARD_ALT[s.slug] ?? ''} loading={i < 3 ? 'eager' : 'lazy'} width="1000" height="750" />
+              <img src={CARD_IMAGES[s.slug]?.src ?? s.image} alt={CARD_IMAGES[s.slug]?.alt ?? CARD_ALT[s.slug] ?? ''} loading={i < 3 ? 'eager' : 'lazy'} width={CARD_IMAGES[s.slug]?.width ?? 1000} height={CARD_IMAGES[s.slug]?.height ?? 750} style={CARD_IMAGES[s.slug]?.position ? {objectPosition: CARD_IMAGES[s.slug].position} : undefined} />
             </span>
             <span className="fr-card-body">
               <h3>{s.name}</h3>
@@ -57,6 +66,8 @@ export function HandymanServicesAnswer() {
         ))}
       </div>
 
+      <p className="ed-small mt-4">Representative images of repair tasks and finishes.</p>
+
       <div className="fr-cards-more">
         <span>Also:</span>
         {serviceExtras.handyman.map(([label, href]) => (
@@ -64,7 +75,10 @@ export function HandymanServicesAnswer() {
         ))}
       </div>
 
-      <h3 className="fr-every-title">Every service, one visit.</h3>
+      <h3 className="fr-every-title">Small jobs, one repair list.</h3>
+      <p className="ed-body mt-4 max-w-[65ch]">
+        Bring the repairs, installs and maintenance on your list together. We review the tasks, materials and access before agreeing the scope, price and visit plan. Larger construction or structural work needs a different contractor.
+      </p>
       <nav className="fr-cities" aria-label="All handyman services">
         {SERVICES.map((service) => (
           <a key={service.slug} href={`/services/${service.slug}`}>{toSentenceCase(service.name)}</a>
@@ -72,9 +86,11 @@ export function HandymanServicesAnswer() {
         <a href="/re-10-repairs-boise">RE-10 and inspection repairs</a>
       </nav>
 
-      <p className="f-answer-links">
+      <p className="f-answer-links [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center">
         <a href="/contact">Send your repair list and photos</a>
         <a href="/re-10-repairs-boise">Inspection-related repairs</a>
+        <a href="/services/drywall-repair/boise">Drywall repair in Boise</a>
+        <a href="/areas/boise">Handyman help in Boise</a>
         <a href="#how-we-build">See how it works</a>
       </p>
     </section>

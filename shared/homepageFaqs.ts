@@ -44,16 +44,16 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
     a: "Send us the task, ideally with a photo or two, and we reply with a written quote: one clear price for the work and any materials as their own line. You approve the number before anything is scheduled. If we open something up and find more than expected, we stop and agree a revised price with you before continuing.",
   },
   {
+    q: "Are you a registered contractor and insured?",
+    a: "Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew's own work. We are an Idaho Registered Contractor #8381215, bonded, and insured.",
+  },
+  {
     q: "Who supplies the materials?",
     a: "Either of us, whichever you prefer. Many customers buy their own fixture, paint, or hardware and have it ready when we arrive. If you would rather not, we pick up materials on the way and list them on the invoice at store cost. We also carry common parts on the truck, so small jobs rarely wait on a store run.",
   },
   {
     q: "Is there a trip fee?",
     a: "No. There is no trip fee in Ada and Canyon County. A one-hour minimum applies per visit, and materials are billed at cost on their own line.",
-  },
-  {
-    q: "Are you a registered contractor and insured?",
-    a: "Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew's own work. We are an Idaho Registered Contractor #8381215, bonded, and insured.",
   },
   {
     q: "Do you handle big remodels or additions?",

@@ -90,6 +90,20 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
     : undefined;
 
   const sections: LandingSection[] = [
+    ...(service.slug === 'drywall-repair'
+      ? [{
+          heading: 'What to send for a drywall repair quote',
+          paragraphs: [
+            'Share a wide photo and a close photo of each damaged area with something for scale. Include the number of patches, approximate sizes, whether the damage is on a wall or ceiling, the ceiling height and any access restrictions.',
+            'Describe the existing texture and tell us whether you have matching paint, including the color and sheen if known. For water damage, explain the cause and whether the leak has been fixed. These details help us review preparation, finish expectations and the visit plan before quoting.',
+          ],
+          links: [
+            { label: 'Plan drywall repair at a Boise address', href: '/services/drywall-repair/boise' },
+            { label: 'Paint touch-ups and small repaints', href: '/services/painting-touch-ups' },
+            { label: 'Send repair details and optional photos', href: '/contact#consult' },
+          ],
+        }]
+      : []),
     ...(content.typicalJobs?.length
       ? [
           {
