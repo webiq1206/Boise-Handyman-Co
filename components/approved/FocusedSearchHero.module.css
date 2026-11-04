@@ -266,7 +266,7 @@
   max-width: 100%;
   flex: 0 1 auto;
 }
-@media (max-width: 1179px) {
+@media (min-width: 360px) and (max-width: 1179px) {
   :global(body):has(.homeHero) :global(.fam-header[data-family-header] .fam-header-logo),
   :global(body):has(.serviceHero) :global(.fam-header[data-family-header] .fam-header-logo) {
     flex-basis: 0;
