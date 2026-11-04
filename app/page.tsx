@@ -1,6 +1,7 @@
 import { ApprovedCtaStrip, ApprovedFounder, ApprovedHowItWorks, ApprovedServiceArea } from "@/components/approved/ApprovedHome";
 import { ApprovedFamilyFrame, ApprovedHomeHero } from "@/components/approved/ApprovedHomeHero";
 import focusedHeroStyles from '@/components/approved/FocusedSearchHero.module.css';
+import { ReviewedPageBarClearance } from '@/components/approved/ReviewedPageBarClearance';
 import { HandymanServicesAnswer } from "@/components/seo/HandymanServicesAnswer";
 import { DesignGallery } from "@/components/sections/DesignGallery";
 import { LazyConsultationForm as ConsultationForm } from "@/components/LazyConsultationForm";
@@ -60,6 +61,7 @@ export default function HomePage() {
           tab explorer, "Pay for the fix", "Good work. A better experience."
           and "What your quote actually covers". */}
       <HomePageSchema />
+      <ReviewedPageBarClearance />
       {/* The family photo hero renders outside the legacy family frame so the
           frame's heading overrides cannot restyle the shared HeroPhoto. */}
       <ApprovedHomeHero heroClassName={focusedHeroStyles.homeHero} />

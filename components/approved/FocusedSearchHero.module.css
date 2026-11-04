@@ -7,6 +7,9 @@
 .homeHero :global(.fam-hero[data-family-hero] .fam-hero-inner) {
   padding: var(--section-y) var(--gutter);
 }
+.homeHero :global(.fam-hero-title) {
+  overflow-wrap: anywhere;
+}
 @media (max-width: 1023px) {
   .homeHero :global(.fam-hero[data-family-hero]) {
     display: flex;
@@ -66,6 +69,7 @@
   font: 300 var(--fs-h1) / var(--lh-h1) var(--font-display);
   letter-spacing: var(--tracking-display);
   color: var(--color-text);
+  overflow-wrap: anywhere;
 }
 .serviceCopy .support {
   margin: var(--stack-heading) 0 0;
@@ -143,4 +147,48 @@
   .serviceMedia {
     height: auto;
   }
+}
+
+/* The following corrections are active only while one of the reviewed page
+   wrappers is present. Form/estimator buttons retain their existing behavior. */
+:global(html):has(.homeHero),
+:global(html):has(.serviceHero) {
+  scroll-padding-bottom: var(--handyman-reviewed-bar-clearance, var(--bar-height));
+}
+:global(body):has(.homeHero) :global(.fam-btn:not(form *)),
+:global(body):has(.serviceHero) :global(.fam-btn:not(form *)) {
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+}
+:global(body):has(.homeHero) :global(.fam-bar[data-family-bar] .fam-bar-inner),
+:global(body):has(.serviceHero) :global(.fam-bar[data-family-bar] .fam-bar-inner) {
+  flex-wrap: wrap;
+}
+:global(body):has(.homeHero) :global(.fam-bar[data-family-bar] .fam-bar-primary),
+:global(body):has(.serviceHero) :global(.fam-bar[data-family-bar] .fam-bar-primary) {
+  flex-basis: max-content;
+}
+:global(body):has(.homeHero) :global(.fam-bar[data-family-bar] .fam-bar-call),
+:global(body):has(.serviceHero) :global(.fam-bar[data-family-bar] .fam-bar-call) {
+  min-width: 0;
+}
+:global(body):has(.homeHero) :global(.fam-footer[data-family-footer] a),
+:global(body):has(.serviceHero) :global(.fam-footer[data-family-footer] a) {
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+:global(body):has(.homeHero) :global(.fam-menu-foot),
+:global(body):has(.serviceHero) :global(.fam-menu-foot) {
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+:global(body):has(.homeHero) :global(.fam-menu-foot > *),
+:global(body):has(.serviceHero) :global(.fam-menu-foot > *) {
+  min-width: 0;
+  max-width: 100%;
 }

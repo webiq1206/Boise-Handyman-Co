@@ -33,13 +33,13 @@ const CARD_IMAGES: Record<string, {src: string; alt: string; width: number; heig
 export function HandymanServicesAnswer() {
   const b = brands.handyman;
   return (
-    <section className="f-section f-container" id="handyman-services-boise">
+    <section className="f-section f-container [overflow-wrap:anywhere]" id="handyman-services-boise">
       <div className="f-section-top">
-        <div>
+        <div className="min-w-0">
           <p className="f-eyebrow">BOISE, IDAHO</p>
           <h2>Handyman services<br /><em>in Boise, Idaho</em></h2>
         </div>
-        <div>
+        <div className="min-w-0">
           <p data-speakable="summary">
             Boise Handyman Co handles small home repairs, installs and maintenance in Boise and the Treasure Valley: drywall repair, paint touch-ups, minor plumbing and electrical repairs, carpentry and trim, TV mounting and assembly, fence, deck and gutter repair, and caulking. We serve Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City and Caldwell.
             {/* The family relationship, said plainly on the page that owns the

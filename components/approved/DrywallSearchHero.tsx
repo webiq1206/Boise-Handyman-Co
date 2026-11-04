@@ -3,6 +3,7 @@ import { ConsultCTA } from '@/components/modals/ConsultCTA';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { CTA_PRIMARY } from '@/shared/ctaCopy';
 import styles from './FocusedSearchHero.module.css';
+import { ReviewedPageBarClearance } from './ReviewedPageBarClearance';
 
 interface Breadcrumb { name: string; href?: string }
 
@@ -16,6 +17,7 @@ export function DrywallSearchHero({h1, overview, speakableSummary, breadcrumbs, 
   callFirst: boolean;
 }) {
   return <>
+    <ReviewedPageBarClearance />
     <section className={styles.serviceHero} data-focused-search-hero="" aria-labelledby="drywall-search-title">
       <div className={styles.serviceCopy}>
         <p className="sr-only" data-speakable="summary">{speakableSummary}</p>
