@@ -1,10 +1,5 @@
 # Boise Handyman Co · Brand Kit
 
-> **PLACEHOLDER kit generated programmatically pending real brand assets.**
-> Every file in this folder is rebuilt from source fonts by
-> `scripts/brand/generate-brand-assets.mjs`. When approved artwork arrives,
-> replace this tree and retire the generator.
-
 Handyman Services · Boise & the Treasure Valley, Idaho
 
 The kit follows the shared Boise trades brand conventions: charcoal ink, bone

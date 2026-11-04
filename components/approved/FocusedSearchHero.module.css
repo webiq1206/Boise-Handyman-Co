@@ -1,6 +1,7 @@
 /* Brand-owned, opt-in repairs for the three reviewed search pages only.
    Shared family chrome and unselected interior heroes retain their defaults. */
 .homeHero :global(.fam-hero[data-family-hero]) {
+  --color-accent-on-dark: var(--color-accent);
   min-height: 0;
   overflow: visible;
 }
@@ -68,7 +69,7 @@
 .serviceCopy h1 {
   margin: 0;
   max-width: 24ch;
-  font: 300 var(--fs-h1) / var(--lh-h1) var(--font-display);
+  font: var(--weight-display) var(--fs-h1) / var(--lh-h1) var(--font-display);
   letter-spacing: var(--tracking-display);
   color: var(--color-text);
   overflow-wrap: anywhere;
@@ -265,7 +266,7 @@
   max-width: 100%;
   flex: 0 1 auto;
 }
-@media (max-width: 1179px) {
+@media (min-width: 360px) and (max-width: 1179px) {
   :global(body):has(.homeHero) :global(.fam-header[data-family-header] .fam-header-logo),
   :global(body):has(.serviceHero) :global(.fam-header[data-family-header] .fam-header-logo) {
     flex-basis: 0;

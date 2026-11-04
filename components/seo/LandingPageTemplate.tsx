@@ -586,9 +586,9 @@ export function LandingPageTemplate({
         <Section surface="deep" spacing="xl" edge>
           <div className="ed-shell">
             <Reveal>
-              <p className="ed-eyebrow">Design inspiration</p>
+              <p className="ed-eyebrow">Repair details</p>
               <h2 className="ed-h2 ed-statement-wide">
-                {proofHeading ?? (<>Local <em className="not-italic" style={accent}>design inspiration</em></>)}
+                {proofHeading ?? (<>Local <em className="not-italic" style={accent}>repair details</em></>)}
               </h2>
             </Reveal>
 

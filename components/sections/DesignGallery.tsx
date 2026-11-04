@@ -3,8 +3,8 @@
  * every desktop row is full (wide + square, square + wide, wide + square) and
  * phones get a full-width frame, a pair of details, and so on, never a lone
  * half-width tile. Photos come from the company's own campaign library
- * (public/family/drive). They show the finish and feel we build toward, so the
- * note under the grid says so rather than presenting them as finished jobs.
+ * (public/family/drive). These generic service and material details are not
+ * evidence of completed customer jobs.
  */
 export interface GalleryPhoto {
   src: string;

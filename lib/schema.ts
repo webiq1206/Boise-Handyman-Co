@@ -95,41 +95,29 @@ const SCHEMA_TELEPHONE = schemaTelephone();
  * and P5 resolve to one Nick Perkins entity. worksFor points at the parent
  * organization, which is the same @id parentOrganization uses.
  */
-const publicRepresentativePerson = {
+const founderPerson = {
   '@type': 'Person' as const,
   '@id': `${P5_ORIGIN}/#nick-perkins`,
-  name: SITE_CONFIG.publicRepresentative,
-  jobTitle: 'Public representative',
+  name: SITE_CONFIG.founderName,
   worksFor: { '@id': P5_ORG_ID },
 };
 
 /**
- * Nominatim point for 4031 W Wapoot St, Meridian, ID 83646.
- * Not the Meridian city centroid.
- */
-const HQ_GEO = { latitude: 43.6515, longitude: -116.4444 } as const;
-
-/**
- * Public JSON-LD address for this service-area business.
- * Street, locality, region, and postal code come from the site constants,
- * which match the authorized P5 address. Region and country stay ISO codes
- * (ID / US). areaServed still lists the cities. This address is not a
- * staffed storefront, and a city page must not mint its own PostalAddress.
+ * Public locality only. The website does not publish a street address or
+ * precise premises coordinates; the owner retains verification records.
+ * Region and country stay ISO codes, and areaServed lists the served cities.
  */
 export function publicPostalAddress() {
   return {
     '@type': 'PostalAddress' as const,
-    streetAddress: SITE_CONFIG.address.street,
     addressLocality: SITE_CONFIG.address.city,
     addressRegion: SITE_CONFIG.address.state,
-    postalCode: SITE_CONFIG.address.postalCode,
     addressCountry: 'US',
   };
 }
 
-const publicRepresentativeContact = {
+const customerServiceContact = {
   '@type': 'ContactPoint' as const,
-  name: SITE_CONFIG.publicRepresentative,
   contactType: 'customer service',
   telephone: SCHEMA_TELEPHONE,
   areaServed: 'US-ID',
@@ -149,10 +137,8 @@ const CONTRACTOR_CREDENTIAL = {
 };
 
 export function generateLocalBusinessSchema(city?: string): SchemaContext {
-  // A single-location business has ONE set of coordinates (its HQ). Emitting
-  // per-city coordinates under one @id confuses entity disambiguation, so geo
-  // is always the HQ; the service area is expressed via `areaServed`. The
-  // optional `city` only customizes the human-readable description.
+  // The service area is expressed via areaServed, without publishing a
+  // premises location. The optional city customizes the description.
   return {
     '@context': 'https://schema.org',
     // Schema.org has no dedicated Handyman type; HomeAndConstructionBusiness is
@@ -170,14 +156,9 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
     hasCredential: CONTRACTOR_CREDENTIAL,
     telephone: SCHEMA_TELEPHONE,
     email: BUSINESS_INFO.email,
-    employee: publicRepresentativePerson,
-    contactPoint: publicRepresentativeContact,
+    employee: founderPerson,
+    contactPoint: customerServiceContact,
     address: publicPostalAddress(),
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: HQ_GEO.latitude,
-      longitude: HQ_GEO.longitude,
-    },
     openingHoursSpecification: Object.entries(BUSINESS_INFO.hours).map(([day, hours]) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: day.charAt(0).toUpperCase() + day.slice(1),
@@ -260,10 +241,9 @@ export function generateServiceSchema(serviceName: string, serviceDescription: s
       priceRange: '$$',
       parentOrganization: P5_PARENT_ORGANIZATION,
       hasCredential: CONTRACTOR_CREDENTIAL,
-      employee: publicRepresentativePerson,
-      contactPoint: publicRepresentativeContact,
-      // Served cities stay on areaServed. The provider address is the authorized
-      // Meridian postal address, never a per-city PostalAddress.
+      employee: founderPerson,
+      contactPoint: customerServiceContact,
+      // Served cities stay on areaServed; only the public locality is emitted.
       address: publicPostalAddress(),
     },
     areaServed: city ? {
@@ -337,7 +317,7 @@ export function generateOrganizationSchema(): SchemaContext {
     telephone: SCHEMA_TELEPHONE,
     email: BUSINESS_INFO.email,
     address: publicPostalAddress(),
-    contactPoint: publicRepresentativeContact,
+    contactPoint: customerServiceContact,
     knowsAbout: [
       'drywall repair and patching',
       'interior and exterior painting',

@@ -26,9 +26,9 @@ export function FeaturedBeforeAfterSection({
     <Section divider>
       <div className="container px-4 max-w-5xl">
         <SectionHeader
-          eyebrow="Design inspiration"
+          eyebrow="Repair details"
           title={title}
-          description="Explore a representative repair direction for your own home. Final scope and materials are tailored to your property."
+          description="Final scope and materials are tailored to your property."
           className="mb-8 max-w-3xl"
         />
         <Reveal>

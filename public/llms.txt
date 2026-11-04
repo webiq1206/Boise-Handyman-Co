@@ -6,7 +6,7 @@ Every job gets a written quote before work starts. The team reviews the repair l
 
 ## Contact
 
-Public representative: Nick Perkins. Service-area business based at 4031 W Wapoot St, Meridian, ID 83646 (not a staffed storefront). Phone (208) 477-1169. Email hello@boisehandyman.co.
+Serving Boise and the Treasure Valley across Ada and Canyon County. Phone (208) 477-1169. Email hello@boisehandyman.co.
 
 ## Services
 
@@ -62,4 +62,4 @@ Public representative: Nick Perkins. Service-area business based at 4031 W Wapoo
 - [RSS feed](https://boisehandyman.co/feed.xml): guides and articles, newest first, with publication and revision dates.
 - [Full text for LLMs](https://boisehandyman.co/llms-full.txt): expanded reference copy of the core facts.
 
-Last updated: 2026-11-01.
+Last updated: 2026-11-04.

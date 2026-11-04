@@ -46,9 +46,8 @@ const indexableHubs = CONTENT_HUBS.filter((h) =>
 );
 
 const CONTACT =
-  `Public representative: ${SITE_CONFIG.publicRepresentative}. Service-area business based at ` +
-  `${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.state} ${SITE_CONFIG.address.postalCode} ` +
-  `(not a staffed storefront). Phone ${SITE_CONFIG.phone}. Email ${SITE_CONFIG.email}.`;
+  `Serving Boise and the Treasure Valley across Ada and Canyon County. ` +
+  `Phone ${SITE_CONFIG.phone}. Email ${SITE_CONFIG.email}.`;
 
 const POSITIONING =
   `Every job gets a written quote before work starts. The team reviews the repair list, ` +

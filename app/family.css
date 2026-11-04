@@ -6,12 +6,9 @@
  * The shared editorial system for the four P5 Home Co brands: Boise Remodeling,
  * Boise Construction, Boise Cabinet and Boise Handyman.
  *
- * THIS FILE IS IDENTICAL IN ALL FOUR REPOSITORIES. It contains no brand colour
- * of its own - every hue is read from the site's existing custom properties
- * (--background, --primary, --accent, --accent-legible / --accent-text). Drop
- * the same file into any of the four sites and it takes on that brand's palette
- * automatically. Consistency is therefore structural rather than eyeballed, and
- * a change to the family system is one edit repeated, not four designs redrawn.
+ * This site-owned editorial layer consumes the canonical role tokens in
+ * styles/family-tokens.css. Guarded shared chrome has its separate manifest;
+ * page-specific selectors and compositions stay with this brand.
  *
  * What it provides: the rhythm, the type scale, the surface alternation and the
  * layout primitives. What it never provides: colour decisions.
@@ -42,32 +39,27 @@
 
   /* ------------------------------------------------------------- type scale */
   /*
-   * One scale, four sites. The display sizes are large on purpose - the brief
-   * for this system was editorial headings, and a 40px "large" heading is not
-   * editorial, it is just a heading.
+   * Editorial role aliases use the agreed responsive family scale. Interior
+   * H1s have their own role in approved-interiors.css; marketing hero sizing
+   * remains in the guarded family hero and its existing reviewed opt-in.
    */
-  --ed-fs-display: clamp(3rem, 6.2vw, 5.75rem);
-  --ed-fs-h2: clamp(2.5rem, 5vw, 4.5rem);
-  --ed-fs-h2-sm: clamp(2.125rem, 3.6vw, 3.25rem);
-  --ed-fs-h3: clamp(1.5rem, 2.2vw, 2.125rem);
-  --ed-fs-h4: clamp(1.1875rem, 1.5vw, 1.4375rem);
+  --ed-fs-display: var(--fs-display);
+  --ed-fs-h2: var(--fs-display);
+  --ed-fs-h2-sm: var(--fs-h2);
+  --ed-fs-h3: var(--fs-h3);
+  --ed-fs-h4: var(--fs-h4);
 
-  /*
-   * The parent site sets supporting copy at 13px. That is a shade tight for
-   * sustained reading and for anyone using a smaller display, so the family
-   * runs it at 15px with the same generous leading. The editorial feel comes
-   * from the CONTRAST between display and body, not from shrinking the body.
-   */
-  --ed-fs-lede: clamp(1.0625rem, 1.25vw, 1.3125rem);
-  --ed-fs-body: 1rem;
-  --ed-fs-small: 0.8125rem;
-  --ed-fs-eyebrow: 0.6875rem;
+  /* Body, captions and labels share the canonical responsive role values. */
+  --ed-fs-lede: var(--fs-body);
+  --ed-fs-body: var(--fs-body);
+  --ed-fs-small: var(--fs-small);
+  --ed-fs-eyebrow: var(--fs-label);
 
-  --ed-lh-display: 0.94;
-  --ed-lh-heading: 1.05;
-  --ed-lh-body: 1.75;
-  --ed-tracking-display: -0.042em;
-  --ed-tracking-eyebrow: 0.18em;
+  --ed-lh-display: var(--lh-display);
+  --ed-lh-heading: var(--lh-h3);
+  --ed-lh-body: var(--lh-body);
+  --ed-tracking-display: var(--tracking-display);
+  --ed-tracking-eyebrow: var(--tracking-label);
 
   /* --------------------------------------------------------------- surfaces */
   /* Read from the site's own palette. No literal brand colour appears here. */
@@ -197,17 +189,18 @@
  * then tracked-out uppercase. It tells a skimming reader what KIND of section
  * they have landed on before they read a word of the heading.
  */
-html :where(.ed-eyebrow) {
+.approved-shell .ed-eyebrow {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 0 0 clamp(18px, 2vw, 28px);
+  margin: 0 0 var(--stack-heading);
   color: var(--ed-muted-ink);
-  font-size: var(--ed-fs-eyebrow);
+  font-size: var(--fs-label);
   font-weight: 700;
-  letter-spacing: var(--ed-tracking-eyebrow);
-  line-height: 1.2;
+  letter-spacing: var(--tracking-label);
+  line-height: var(--lh-label);
   text-transform: uppercase;
+  font-family: var(--font-sans);
 }
 html :where(.ed-eyebrow)::before {
   flex: 0 0 auto;
@@ -218,56 +211,62 @@ html :where(.ed-eyebrow)::before {
 }
 html :where(.ed-eyebrow-accent) { color: var(--ed-accent); }
 
-html :where(.ed-display),
-html :where(.ed-h2),
-html :where(.ed-h2-sm),
-html :where(.ed-h3) {
+.approved-shell .ed-display,
+.approved-shell .ed-h2,
+.approved-shell .ed-h2-sm,
+.approved-shell .ed-h3 {
   font-family: var(--font-cormorant, Georgia, serif);
   font-weight: 400;
   letter-spacing: var(--ed-tracking-display);
   text-wrap: balance;
 }
-html :where(.ed-display) { font-size: var(--ed-fs-display); line-height: var(--ed-lh-display); }
-html :where(.ed-h2) { font-size: var(--ed-fs-h2); line-height: 0.98; }
-html :where(.ed-h2-sm) { font-size: var(--ed-fs-h2-sm); line-height: 1.02; }
-html :where(.ed-h3) {
-  font-size: var(--ed-fs-h3);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: var(--ed-lh-heading);
+.approved-shell .ed-display { font-size: var(--fs-display); line-height: var(--lh-display); font-family: var(--font-display); font-weight: var(--weight-display); letter-spacing: var(--tracking-display); }
+.approved-shell .ed-h2 { font-size: var(--fs-display); line-height: var(--lh-display); font-family: var(--font-display); font-weight: var(--weight-display); letter-spacing: var(--tracking-display); }
+.approved-shell .ed-h2-sm { font-size: var(--fs-h2); line-height: var(--lh-h2); font-family: var(--font-display); font-weight: var(--weight-display); letter-spacing: var(--tracking-heading); }
+.approved-shell .ed-h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--lh-h3);
+  font-family: var(--font-display);
 }
-html :where(.ed-h4) {
-  font-family: var(--font-cormorant, Georgia, serif);
-  font-size: var(--ed-fs-h4);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.2;
+.approved-shell .ed-h4 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  font-weight: var(--weight-display);
+  letter-spacing: 0;
+  line-height: var(--lh-h4);
 }
 
 /* Spacing is a default. Page-level mt/mb utilities must win. */
 html :where(.ed-display, .ed-h2, .ed-h3, .ed-h4, .ed-lede, .ed-body) { margin: 0; }
 
-/* The serif lede: one short paragraph that carries the weight of the heading. */
-html :where(.ed-lede) {
-  font-family: var(--font-cormorant, Georgia, serif);
-  font-size: var(--ed-fs-lede);
+/* The introduction uses the shared readable body role. */
+.approved-shell .ed-lede {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
   font-weight: 500;
-  line-height: 1.4;
+  line-height: var(--lh-body);
   text-wrap: pretty;
+  letter-spacing: 0;
 }
 
-html :where(.ed-body) {
+.approved-shell .ed-body {
   max-width: 58ch;
   color: var(--ed-muted-ink);
-  font-size: var(--ed-fs-body);
-  line-height: var(--ed-lh-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   text-wrap: pretty;
+  font-family: var(--font-sans);
+  letter-spacing: 0;
 }
-html :where(.ed-body + .ed-body) { margin-top: 1.1em; }
-html :where(.ed-small) {
+html :where(.ed-body + .ed-body) { margin-top: 1lh; }
+.approved-shell .ed-small {
   color: var(--ed-muted-ink);
-  font-size: var(--ed-fs-small);
-  line-height: 1.6;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  font-family: var(--font-sans);
+  letter-spacing: 0;
 }
 
 /* ==========================================================================
@@ -294,11 +293,13 @@ html :where(.ed-small) {
   gap: 16px;
   padding-bottom: 8px;
   border-bottom: 1px solid currentColor;
-  font-size: var(--ed-fs-eyebrow);
+  font-size: var(--fs-nav);
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   text-transform: uppercase;
   transition: color var(--ed-dur) var(--ed-ease);
+  font-family: var(--font-sans);
+  line-height: 1;
 }
 .ed-link-accent { color: var(--ed-accent); }
 
@@ -440,10 +441,12 @@ html :where(.ed-small) {
   bottom: 22px;
   left: 28px;
   color: rgb(255 255 255 / 0.72);
-  font-size: 0.625rem;
+  font-size: var(--fs-small);
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0;
   text-transform: uppercase;
+  font-family: var(--font-sans);
+  line-height: var(--lh-small);
 }
 
 /* Horizontal rail: a scroll-snapping row for galleries and testimonials. */
@@ -497,8 +500,11 @@ html :where(.ed-small) {
   border: 1px solid var(--ed-line);
   border-radius: 50%;
   color: var(--ed-accent);
-  font-size: 0.6875rem;
+  font-size: var(--fs-label);
   font-weight: 700;
+  font-family: var(--font-sans);
+  line-height: var(--lh-label);
+  letter-spacing: var(--tracking-label);
 }
 
 /* ==========================================================================
@@ -635,17 +641,20 @@ main > div:first-of-type > div:first-of-type:not(section ~ div):not(.pt-0):not(.
 }
 .ed-hero-facts > div { min-width: 0; }
 .ed-hero-facts dt {
-  font-size: 0.6875rem;
+  font-size: var(--fs-label);
   font-weight: 500;
-  letter-spacing: 0.06em;
-  line-height: 1.5;
+  letter-spacing: var(--tracking-label);
+  line-height: var(--lh-label);
   text-transform: uppercase;
+  font-family: var(--font-sans);
 }
 .ed-hero-facts dd {
   margin: 0 0 6px;
-  font-family: var(--font-cormorant, Georgia, serif);
-  font-size: clamp(1.375rem, 2.2vw, 2rem);
-  line-height: 1.1;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-heading);
 }
 @media (max-width: 560px) {
   .ed-hero-facts { gap: 12px; margin-top: 24px; }
@@ -657,9 +666,10 @@ main > div:first-of-type > div:first-of-type:not(section ~ div):not(.pt-0):not(.
   padding: 8px 12px;
   background: rgb(20 25 23 / 0.9);
   color: #fff;
-  font-size: 0.6875rem;
-  line-height: 1.5;
-  letter-spacing: 0.08em;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  letter-spacing: 0;
+  font-family: var(--font-sans);
 }
 
 /* Photographic bands need brighter body copy than solid dark sections. */

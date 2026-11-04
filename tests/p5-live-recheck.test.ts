@@ -75,8 +75,12 @@ test('every vCard line is at most 75 octets and lines use CRLF', () => {
 
 test('the service-area vCard preserves locality without publishing a street-address label', () => {
   const card = buildBusinessVCard();
-  const { street, city, state, postalCode } = SITE_CONFIG.address;
-  assert.ok(card.includes(`ADR;TYPE=WORK:;;;${city};${state};${postalCode};USA`));
-  assert.equal(card.includes(street), false);
+  const { city, state } = SITE_CONFIG.address;
+  assert.deepEqual(
+    card.split('\r\n').filter((line) => line.startsWith('ADR;TYPE=WORK:')),
+    [`ADR;TYPE=WORK:;;;${city};${state};;USA`],
+  );
+  assert.equal(Object.hasOwn(SITE_CONFIG.address, 'street'), false);
+  assert.equal(Object.hasOwn(SITE_CONFIG.address, 'postalCode'), false);
   assert.equal(card.includes('LABEL;TYPE=WORK:'), false);
 });
