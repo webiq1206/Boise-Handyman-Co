@@ -1,5 +1,6 @@
 import { ApprovedCtaStrip, ApprovedFounder, ApprovedHowItWorks, ApprovedServiceArea } from "@/components/approved/ApprovedHome";
 import { ApprovedFamilyFrame, ApprovedHomeHero } from "@/components/approved/ApprovedHomeHero";
+import focusedHeroStyles from '@/components/approved/FocusedSearchHero.module.css';
 import { HandymanServicesAnswer } from "@/components/seo/HandymanServicesAnswer";
 import { DesignGallery } from "@/components/sections/DesignGallery";
 import { LazyConsultationForm as ConsultationForm } from "@/components/LazyConsultationForm";
@@ -61,7 +62,7 @@ export default function HomePage() {
       <HomePageSchema />
       {/* The family photo hero renders outside the legacy family frame so the
           frame's heading overrides cannot restyle the shared HeroPhoto. */}
-      <ApprovedHomeHero />
+      <ApprovedHomeHero heroClassName={focusedHeroStyles.homeHero} />
       <ApprovedFamilyFrame>
         <HandymanServicesAnswer />
         {/* The finish: six photographs from the company's own campaign library. */}

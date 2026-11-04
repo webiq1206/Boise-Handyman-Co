@@ -1,0 +1,25 @@
+# Bounded Handyman hero and image remediation
+
+Baseline: `abfc2b9c31b282283d045a1cafd79997753920b4`. Scope: existing `/`, `/services/drywall-repair` and `/services/drywall-repair/boise`, following the independent F4 failures recorded November 4. Apply the current full Website Design Quality master Version 2.3, implementation rules and review record, Organic and AI Search Visibility 1.0.0, and the source-owned [brand profile](brand-profile.md). No new exception or identity approval is inferred.
+
+## Root causes and scoped implementation
+
+- Homepage: the shared photo hero's 560px floor and compensating fade/padding exceeded the normal short-phone viewport. A homepage-only CSS-module wrapper gives it natural height and keeps the existing 64/80/96px tier padding. Phones place the existing intact-head image apart from copy; the documented short-phone tier places the image after the headline/actions in normal flow. Tablet shows the intact image at its original 16:9 ratio. Desktop retains the approved photo-led composition, uses the existing display token and keeps copy left of the person's head. The wrapper uses the existing `pt-0` opt-out from legacy first-section header compensation, because the current header already occupies normal layout space.
+- Drywall pages: breadcrumbs, repeated service labels, long overview/contact details and a 300px stacked photograph overloaded the hero. Only the two exact manifest paths opt into `DrywallSearchHero`. It keeps the original H1, a short repair instruction and the original primary destination; the full overview, breadcrumbs and contact choices remain immediately below. The hub retains Call/Text and its inquiry anchor; Boise retains its quote action and phone details. The image is an existing approved no-person planning asset. No essential text is clipped or hidden to manufacture a fit.
+- Homepage adjacent service cards: four component-local image mappings replace cut-head or hands-only sources with existing approved no-person assets. Correct alt text describes planning markers, bench/hooks, painted door/trim and deadbolt/lever hardware. Representative imagery is explicitly labeled. The existing maintenance source has an intact head and stays in use. No gallery project proof is asserted.
+
+No shared family component, token or hashed chrome file is edited. No global interior style or image rotation is changed. `LandingPageTemplate` has 89 generated public consumers: 8 service hubs, 9 area pages and 72 city-service pages. Exactly 2 use the new opt-in; the other 87 retain the existing fallback branch. The two homepage components each have one public consumer. Complete route enumeration is retained in the task evidence.
+
+## Protected requirements
+
+Retain URLs, titles/descriptions, canonicals, robots/indexability, H1 text, schema/entity sources and visible useful content. Preserve phone/SMS/form destinations, accepted-lead analytics, consent, qualification, uploads, estimator/pricing/provider policy and all form components. No new claim, price, availability, credential wording, service area, overlay, image generation, spending or access change.
+
+The parent separately corrected the reproduced credential-test failure by moving the exact existing registration FAQ object from position eight to six. Its wording, IDs, other objects, tests and credential policy are unchanged. The parent's independent receipt records the exact-object move and seven passing policy tests. This is not test suppression or a new business claim.
+
+## Evidence and gates
+
+Before editing, the exact abfc2b9 built version was captured at 320x568, 360x640, 390x844, 430x932, 768x1024, 1024x768, 1280x720, 1440x900 and 1920x1080 for all three pages, including initial/full views, hero geometry and homepage service imagery. Old evidence remains preserved. Final evidence must correspond to the final source revision, with complete hero fit at every required normal tier, full headline/primary visibility at 320x568, readable text, actual control sizes, intact heads, no overlap/overflow, relevant focus/anchor/menu states and protected output checks.
+
+Required checks: TypeScript; existing focused/interior/FAQ/family/credential tests; normal prebuild/build/postbuild; matching rendered matrix and image crops; metadata/H1/indexability/schema/link preservation; independent final review in a fresh context. Lab/field performance, physical-device keyboards and downstream delivery are separate checks, not implied by screenshots or a build. No real leads or protected estimator/provider operations are authorized here.
+
+Implementation, rendered checks and independent review remain separate states. Source commit is not deployment. No child push, merge, import or publication is authorized; the parent coordinates those stages only after the required gates pass.

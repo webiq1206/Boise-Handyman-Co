@@ -14,6 +14,15 @@ const CARD_ALT: Record<string, string> = {
   'home-maintenance': 'Careful adjustment of an interior door hinge',
 };
 
+// Existing approved campaign/planning assets, scoped to the homepage cards.
+// These illustrate service scope, never completed company-project evidence.
+const CARD_IMAGES: Record<string, {src: string; alt: string; width: number; height: number; position?: string}> = {
+  'drywall-repair': {src: '/images/handyman/punch-list-markers.webp', alt: 'Repair-planning notes and blue wall markers beside a window', width: 1216, height: 896},
+  'carpentry-trim-repair': {src: '/family/drive/square-2-entry-bench-and-coat-hooks.webp', alt: 'Entry bench, beadboard wall and coat hooks', width: 1200, height: 1200, position: '50% 0%'},
+  'painting-touch-ups': {src: '/images/handyman/front-door-repaint-p5-reviewed-20260910.webp', alt: 'Painted front door and surrounding trim', width: 1461, height: 1076},
+  'mounting-assembly': {src: '/family/drive/square-1-front-door-smart-lock.webp', alt: 'Black front door with deadbolt and lever handle', width: 1200, height: 1200},
+};
+
 /**
  * Answer-first homepage block, then the six most common jobs as picture cards
  * and every service as one line of links. Sentences are the published fact
@@ -46,7 +55,7 @@ export function HandymanServicesAnswer() {
         {b.services.map((s, i) => (
           <a className="fr-card" key={s.slug} href={s.live || `/services/${s.slug}`}>
             <span className="fr-card-media">
-              <img src={s.image} alt={CARD_ALT[s.slug] ?? ''} loading={i < 3 ? 'eager' : 'lazy'} width="1000" height="750" />
+              <img src={CARD_IMAGES[s.slug]?.src ?? s.image} alt={CARD_IMAGES[s.slug]?.alt ?? CARD_ALT[s.slug] ?? ''} loading={i < 3 ? 'eager' : 'lazy'} width={CARD_IMAGES[s.slug]?.width ?? 1000} height={CARD_IMAGES[s.slug]?.height ?? 750} style={CARD_IMAGES[s.slug]?.position ? {objectPosition: CARD_IMAGES[s.slug].position} : undefined} />
             </span>
             <span className="fr-card-body">
               <h3>{s.name}</h3>
@@ -56,6 +65,8 @@ export function HandymanServicesAnswer() {
           </a>
         ))}
       </div>
+
+      <p className="ed-small mt-4">Representative images of repair tasks and finishes.</p>
 
       <div className="fr-cards-more">
         <span>Also:</span>

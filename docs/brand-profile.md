@@ -24,3 +24,5 @@ Source of truth: `docs/approved-design-handoff.md` (implemented 2026-09-24), `li
 - **Family relationship:** Boise Handyman Co is a P5 Home Co company using shared family chrome, fonts and neutral surfaces. This brand owns its terracotta accent, wordmark, service content and repair-list journey. Do not transfer another site's accent, imagery or service claims.
 
 For every edit and review apply the current user-owned `website-design-quality` skill and its complete master Version 2.3, implementation rules and review record, plus `organic-ai-search-visibility` 1.0.0. This profile records existing values; it does not relax mandatory design, accessibility, preservation or release gates.
+
+Scoped November 4 C3/C4 correction: the homepage and two drywall search pages use the opt-in composition recorded in [hero-remediation-20261104.md](hero-remediation-20261104.md). It retains the palette, font families, original headline text and contact destinations, uses existing typography/spacing/control tokens and existing approved imagery, and adds no exception. Other interior heroes and all shared family chrome retain their prior implementation.

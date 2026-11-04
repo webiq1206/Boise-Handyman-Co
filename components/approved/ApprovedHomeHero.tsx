@@ -29,13 +29,13 @@ export function ApprovedFamilyFrame({ children }: { children: ReactNode }) {
  * Server-rendered: HeroPhoto gives the photo fetchPriority="high" on its own
  * img (no react-dom preload()), so the image and H1 are in the first HTML.
  */
-export function ApprovedHomeHero() {
+export function ApprovedHomeHero({heroClassName}: {heroClassName?: string} = {}) {
   const b = brands.handyman;
   return (
     <>
       {/* Already sized WebP (1280x720 at 59 KB), so it is served as is. A /_next/image request
           for a hero can stall and hold the page's load event open, as it did on Boise Remodeling Co. */}
-      <HeroPhoto
+      <div className={[heroClassName, 'pt-0'].filter(Boolean).join(' ')}><HeroPhoto
         image={{
           src: b.hero,
           width: 1280,
@@ -50,7 +50,7 @@ export function ApprovedHomeHero() {
         support="Skilled local help for the list that keeps growing."
         primary={{ label: FAMILY_BRAND.cta.label, href: FAMILY_BRAND.cta.href }}
         link={{ label: `Call ${FAMILY_BRAND.phone.display}`, href: FAMILY_BRAND.phone.telHref }}
-      />
+      /></div>
       {/* The three facts this hero already published: written quote, no trip fee, registration. */}
       <ProofStrip
         items={[
