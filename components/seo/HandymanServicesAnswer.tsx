@@ -75,7 +75,7 @@ export function HandymanServicesAnswer() {
         <a href="/re-10-repairs-boise">RE-10 and inspection repairs</a>
       </nav>
 
-      <p className="f-answer-links">
+      <p className="f-answer-links [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center">
         <a href="/contact">Send your repair list and photos</a>
         <a href="/re-10-repairs-boise">Inspection-related repairs</a>
         <a href="/services/drywall-repair/boise">Drywall repair in Boise</a>
