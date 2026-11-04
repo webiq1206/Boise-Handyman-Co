@@ -1,4 +1,5 @@
 'use client';
+import {ServiceArea} from '@/components/family/ServiceArea';
 import type {ReactNode} from 'react';
 import Link from 'next/link';
 import {ArrowUpRight} from 'lucide-react';
@@ -47,4 +48,4 @@ export function ApprovedCtaStrip(){
 
 /** Service area: the eight area pages as one line of linked cities. */
 export function ApprovedServiceArea(){
- return <section className="f-area f-section f-container"><p className="f-eyebrow">AT HOME IN IDAHO</p><h2>Local people.<br/><em>Valley-wide reach.</em></h2><p>Serving homeowners throughout the Treasure Valley.</p><nav className="fr-cities" aria-label="Service area cities">{cities.map(city=><a key={city} href={`/areas/${city.toLowerCase().replaceAll(" ","-")}`} aria-label={`Handyman services in ${city}`}>{city}</a>)}</nav></section>;}
+ return <ServiceArea image={{src:'/family/drive/square-1-front-door-smart-lock.webp',alt:'Door handle and lock beside painted trim',width:1200,height:1200}}><p className="f-eyebrow">AT HOME IN IDAHO</p><h2>Local people.<br/><em>Valley-wide reach.</em></h2><p>Serving homeowners throughout the Treasure Valley.</p><nav className="fr-cities" aria-label="Service area cities">{cities.map(city=><a key={city} href={`/areas/${city.toLowerCase().replaceAll(" ","-")}`} aria-label={`Handyman services in ${city}`}>{city}</a>)}</nav></ServiceArea>;}
