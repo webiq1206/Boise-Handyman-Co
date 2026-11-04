@@ -66,8 +66,6 @@ export function HandymanServicesAnswer() {
         ))}
       </div>
 
-      <p className="ed-small mt-4">Representative images of repair tasks and finishes.</p>
-
       <div className="fr-cards-more">
         <span>Also:</span>
         {serviceExtras.handyman.map(([label, href]) => (

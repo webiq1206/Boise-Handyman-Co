@@ -10,11 +10,11 @@ export interface GalleryProject {
 const g = (name: string) => `/images/gallery/${name}.webp`;
 
 /**
- * Representative design imagery for handyman-scope visits.
+ * Generated comparison assets for handyman-scope illustrations.
  *
  * These pairs are generated design photography for scroll rhythm and service
- * illustration. They are not completed customer projects. Copy below states
- * that plainly so pages never present them as job proof.
+ * illustration. They are not completed customer projects and stay in the
+ * unpublished dataset, outside project-proof consumers.
  *
  * Continuity: each pair shares one camera lock. The Boise painting and drywall
  * pairs belong to the same craftsman bungalow (see also
@@ -28,7 +28,7 @@ export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
     afterImageUrl: g("gallery-painting-boise-after"),
     title: "Front Door Paint Refresh",
     description:
-      "Representative design imagery for a Boise craftsman porch door. Drag to compare weathered finish with a fresh sage cut-in. Final color and prep are tailored to your door.",
+      "Exterior door paint, trim and hardware. Final color and prep are tailored to your door.",
   },
   {
     serviceType: "drywall-repair",
@@ -37,7 +37,7 @@ export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
     afterImageUrl: g("gallery-drywall-boise-after"),
     title: "Hallway Drywall Patch",
     description:
-      "Representative design imagery inside the same Boise bungalow hallway. Drag to compare an open wall scar with a smooth paint-ready patch.",
+      "Drywall patching, surface preparation and paint matching.",
   },
   {
     serviceType: "carpentry-trim-repair",
@@ -46,7 +46,7 @@ export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
     afterImageUrl: g("gallery-carpentry-eagle-after"),
     title: "Sticking Interior Door",
     description:
-      "Representative design imagery for an Eagle foothills foyer door that binds in the jamb. Drag to compare the sticking door with a plumb, freely closing swing.",
+      "Interior door alignment and hinge adjustments.",
   },
   {
     serviceType: "fence-deck-gutter-repair",
@@ -55,7 +55,7 @@ export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
     afterImageUrl: g("gallery-fence-meridian-after"),
     title: "Cedar Fence Picket Repair",
     description:
-      "Representative design imagery for a Meridian side-yard cedar fence. Drag to compare missing pickets with a flush repaired run.",
+      "Cedar fence pickets and rails.",
   },
   {
     serviceType: "mounting-assembly",
@@ -64,7 +64,7 @@ export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
     afterImageUrl: g("gallery-mounting-nampa-after"),
     title: "Living Room TV Mount",
     description:
-      "Representative design imagery for a Nampa ranch living room. Drag to compare a blank marked wall with a level flat-screen mount.",
+      "TV bracket placement and mounting.",
   },
   {
     serviceType: "plumbing-repairs",
@@ -73,7 +73,7 @@ export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
     afterImageUrl: g("gallery-plumbing-caldwell-after"),
     title: "Kitchen Faucet Swap",
     description:
-      "Representative design imagery for a Caldwell kitchen sink. Drag to compare a worn builder faucet with a clean brushed-nickel install.",
+      "Kitchen faucets and fixture connections.",
   },
   {
     serviceType: "electrical-repairs",
@@ -82,7 +82,7 @@ export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
     afterImageUrl: g("gallery-electrical-kuna-after"),
     title: "Outlet Replacement",
     description:
-      "Representative design imagery for a Kuna laundry-room outlet. Drag to compare a yellowed askew receptacle with a level new cover plate.",
+      "Receptacles and cover plates.",
   },
   {
     serviceType: "home-maintenance",
@@ -91,7 +91,7 @@ export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
     afterImageUrl: g("gallery-maintenance-star-after"),
     title: "Door Weatherstripping",
     description:
-      "Representative design imagery for a Star exterior door jamb. Drag to compare a daylight draft gap with a sealed weatherstrip.",
+      "Exterior door jambs and weatherstripping.",
   },
 ];
 

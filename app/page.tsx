@@ -70,7 +70,7 @@ export default function HomePage() {
         {/* The finish: six photographs from the company's own campaign library. */}
         <DesignGallery
           id="the-finish"
-          eyebrow="THE FINISH WE LEAVE BEHIND"
+          eyebrow="REPAIRS, INSTALLS & FINISHES"
           title="Small fixes."
           accent="Finished properly."
           intro="A door that closes, a fence that stands straight, a clean caulk line. The small things make a home feel cared for, and we leave every job tidy."
@@ -82,7 +82,7 @@ export default function HomePage() {
             { src: "/family/drive/landscape-3-cedar-fence-and-backyard-deck.webp", alt: "Cedar fence and gate behind a wood deck with Adirondack chairs and string lights", label: "Fence and deck", wide: true },
             { src: "/family/drive/square-2-entry-bench-and-coat-hooks.webp", alt: "Entry with a wood bench, coat hooks and beadboard wall", label: "Entry bench and hooks" },
           ]}
-          note="Photographs showing the kind of finish we aim for on every visit. Send your list and photos, and we will reply with one written quote before any work starts."
+          note="Send your list and photos, and we will reply with one written quote before any work starts."
         />
       </ApprovedFamilyFrame>
       <HandymanPlanningRange />

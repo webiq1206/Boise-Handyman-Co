@@ -39,7 +39,7 @@
 .approved-shell .budget-inclusions { --ed-accent:#A9401D; }
 .approved-shell .re10-intro { width:min(1260px,88%); margin-inline:auto; padding-block:24px 12px; }
 .approved-shell .re10-intro-grid { display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr); gap:40px; align-items:center; margin-top:24px; }
-.approved-shell .re10-intro h1 { font-size:clamp(36px,4.2vw,60px); max-width:20ch; margin:12px 0 16px; }
+.approved-shell .re10-intro h1 { font-size:var(--fs-h1); max-width:20ch; margin:12px 0 16px; font-family:var(--font-display); font-weight:var(--weight-display); line-height:var(--lh-h1); letter-spacing:var(--tracking-display); }
 .approved-shell .re10-intro h1 em { color:#A9401D; }
 .approved-shell .re10-intro p { max-width:64ch; }
 .approved-shell .re10-intro figure { margin:0; }

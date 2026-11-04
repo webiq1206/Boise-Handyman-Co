@@ -123,7 +123,6 @@ export default function Re10RepairsPage() {
           </div>
           <figure>
             <img src={SITE_IMAGES.processInProgress} alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth" width={1200} height={896} />
-            <figcaption>Representative imagery</figcaption>
           </figure>
         </div>
       </section>
@@ -457,11 +456,7 @@ export default function Re10RepairsPage() {
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-5">
             {SITE_CONFIG.name} provides RE-10 and home inspection repair services for real estate
             agents, buyers and sellers in {RE10_SERVICE_AREAS.slice(0, -1).join(", ")} and{" "}
-            {RE10_SERVICE_AREAS[RE10_SERVICE_AREAS.length - 1]}. We are based in{" "}
-            {SITE_CONFIG.address.cityState} and work across the Treasure Valley. Public
-            representative: {SITE_CONFIG.publicRepresentative}. Authorized address:{" "}
-            {SITE_CONFIG.address.street}, {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state}{" "}
-            {SITE_CONFIG.address.postalCode}. Service-area business, not a staffed storefront.
+            {RE10_SERVICE_AREAS[RE10_SERVICE_AREAS.length - 1]}. We work across the Treasure Valley.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
             More on how we work:{" "}
@@ -513,10 +508,7 @@ export default function Re10RepairsPage() {
             </FamilyButton>
           </div>
           <p className="mt-7 text-xs text-inverse-foreground/60 leading-relaxed">
-            {SITE_CONFIG.name} &middot; {SITE_CONFIG.publicRepresentative} &middot;{" "}
-            {SITE_CONFIG.address.street}, {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state}{" "}
-            {SITE_CONFIG.address.postalCode} &middot; {SITE_CONFIG.address.cityState} &middot;{" "}
-            {SITE_CONFIG.address.serviceArea}
+            {SITE_CONFIG.name} &middot; {SITE_CONFIG.address.serviceArea}
           </p>
         </div>
       </Section>

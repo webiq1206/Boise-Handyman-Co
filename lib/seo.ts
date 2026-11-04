@@ -582,14 +582,10 @@ export const BUSINESS_INFO = {
   founderName: '',
   phone: SITE_CONFIG.phone,
   email: SITE_CONFIG.email,
-  // Authorized public address. Schema reads the street, city, region code,
-  // and postal code from SITE_CONFIG. State is spelled out here for citation
-  // copy; JSON-LD uses the ID region code.
+  // Public locality only; verification addresses are not website content.
   address: {
-    street: SITE_CONFIG.address.street,
     city: SITE_CONFIG.address.city,
     state: 'Idaho',
-    postalCode: SITE_CONFIG.address.postalCode,
     country: 'United States',
   },
   // America/Boise. Sunday is closed and is omitted from the schema.

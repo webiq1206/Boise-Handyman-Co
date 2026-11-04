@@ -126,7 +126,7 @@ export default function HandymanLandingPage() {
       <section data-p5-hero className="hl-hero relative flex min-h-[32rem] items-end overflow-hidden">
         <Image
           src={HERO_IMAGE}
-          alt="A Boise Handyman Co technician adjusting an interior door hinge"
+          alt="A worker adjusting an interior door hinge with a screwdriver"
           fill
           priority
           sizes="100vw"

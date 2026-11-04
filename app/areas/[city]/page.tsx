@@ -172,7 +172,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
         localNote={localNote}
         sections={sections}
         proof={proof}
-        proofHeading={`${city.name} design inspiration`}
+        proofHeading={`${city.name} repair details`}
         showEstimatePrompt
         faqs={faqs}
         related={{ variant: 'area', citySlug: city.slug }}

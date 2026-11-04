@@ -9,7 +9,7 @@ import { CONTRACTOR_REGISTRATION, DOPL_LOOKUP_HREF } from '../components/Contrac
 import { Footer } from '../components/Footer.tsx';
 import { matchesRoute, isActiveHref } from '../lib/family/types.ts';
 import { FAMILY_BRAND } from '../lib/familyBrand.ts';
-import { BUSINESS_VCARD_PATH } from '../lib/vcard.ts';
+import { BUSINESS_VCARD_PATH, buildBusinessVCard } from '../lib/vcard.ts';
 import { CITIES, SERVICES } from '../shared/contentData.ts';
 import { CTA_QUOTE } from '../shared/ctaCopy.ts';
 import { P5_SOCIAL } from '../shared/gbpProfile.ts';
@@ -32,14 +32,16 @@ test('the brand config carries this site’s facts, one CTA and one destination'
   assert.equal(FAMILY_BRAND.parentFacebook.href, P5_SOCIAL.facebook);
   assert.equal(FAMILY_BRAND.tagline, `${SITE_TAGLINE}.`);
   assert.equal(`${FAMILY_BRAND.nap.line}.`, PUBLIC_NAP_LINE);
-  assert.match(FAMILY_BRAND.nap.line, /4031 W Wapoot St, Meridian, ID 83646/);
+  assert.equal(FAMILY_BRAND.nap.line, 'Serving Boise and the Treasure Valley');
   assert.equal(FAMILY_BRAND.registration.text, CONTRACTOR_REGISTRATION);
   assert.equal(FAMILY_BRAND.registration.href, DOPL_LOOKUP_HREF);
   assert.equal(FAMILY_BRAND.accent, '#c56b4a');
   // Owner commit 74ff0c4 and scripts/verify-p5-mobile-seo.mjs: no bar over the homepage hero.
   assert.equal(FAMILY_BRAND.bar.showOverHero, false);
   assert.equal(FAMILY_BRAND.header.desktopFrom, 1180);
-  assert.deepEqual(FAMILY_BRAND.header.phoneActions, ['call']);
+  assert.deepEqual(FAMILY_BRAND.header.phoneActions, ['call', 'text', 'chat']);
+  assert.ok('hiddenOn' in FAMILY_BRAND.chat);
+  assert.deepEqual(FAMILY_BRAND.chat.hiddenOn, ['/estimate*', '/admin*', '/subcontractor*', '/handyman*']);
   assert.equal(matchesRoute('/estimate', FAMILY_BRAND.bar.hiddenOn), true);
   assert.equal(matchesRoute('/estimate/scope', FAMILY_BRAND.bar.hiddenOn), true);
   assert.equal(matchesRoute('/', FAMILY_BRAND.bar.hiddenOn), false);
@@ -79,8 +81,12 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   assert.match(html, /<span class="fam-footer-current" aria-current="true">Boise Handyman Co<\/span>/);
   assert.equal(/rel="noopener noreferrer">(P5 Home Co|Boise)/.test(html), false);
   assert.equal(html.includes('Boise ADU Co'), false);
-  assert.match(html, /Public representative: Nick Perkins/);
-  assert.match(html, /not a staffed storefront\. <a href="tel:/);
+  assert.match(html, /Serving Boise and the Treasure Valley\. <a href="tel:/);
+  assert.doesNotMatch(html, /public representative|staffed storefront|Wapoot|4031/i);
+  const vcard = buildBusinessVCard().replace(/\r?\n[ \t]/g, '');
+  assert.doesNotMatch(vcard, /public representative|staffed storefront|Wapoot|4031/i);
+  assert.match(vcard, /TEL;TYPE=WORK,VOICE:\+12084771169/);
+  assert.match(vcard, /Hours:/);
   assert.match(html, /Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM Mountain\. Closed Sunday\./);
   assert.match(html, /mailto:hello@boisehandyman\.co/);
   assert.match(html, /href="\/contact\.vcf"/);
@@ -93,7 +99,7 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   // The registration number stays outside the DOPL link, once.
   assert.equal((html.match(/Idaho Registered Contractor #8381215/g) ?? []).length, 1);
   assert.equal(/>Idaho Registered Contractor #8381215<\/a>/.test(html), false);
-  assert.match(html, /aria-label="Verify with Idaho DOPL: look up registration 8381215, opens in a new tab"/);
+  assert.match(html, /aria-label="Verify Idaho contractor registration 8381215, opens in a new tab"/);
 });
 
 test('the homepage hero is the family template with sourced proof', () => {
