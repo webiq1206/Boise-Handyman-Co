@@ -87,7 +87,7 @@ const INLINE_POOL: { src: string; alt: string; hubs?: string[] }[] = [
   },
   {
     src: SITE_IMAGES.valueCraft,
-    alt: "Hands fitting white baseboard trim with a hammer during a repair",
+    alt: "A sage-green front door with white trim and black hardware",
     hubs: ["repairs-and-fixes", "installs-and-upgrades"],
   },
   {

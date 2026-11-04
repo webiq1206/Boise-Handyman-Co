@@ -1,0 +1,126 @@
+/*
+  Charcoal and phone-audit reconciliation.
+  Keep the Charcoal contrast work and usable touch targets. The current family
+  tokens own typography, hero composition, responsive grids and bar clearance.
+  Older blanket type/nowrap/carousel rules would override that reviewed work.
+*/
+
+:root {
+  --color-ink: #383837;
+}
+
+.approved-shell,
+.family-site {
+  --f-ink: #383837;
+  --ed-ink: #383837;
+  --ed-bone-ink: #383837;
+  --foreground: 60 0.69% 21.76%;
+  --heading: 60 0.69% 21.76%;
+  --card-foreground: 60 0.69% 21.76%;
+}
+
+.approved-shell { color: var(--color-charcoal); }
+.family-site { color: var(--f-ink); }
+
+.fam-btn.fam-btn--primary:hover {
+  border-color: var(--color-charcoal-press);
+  background: var(--color-charcoal-press);
+}
+
+/* Dark cards and popovers remain distinct from the charcoal ground. */
+.approved-shell [data-approved-navigation],
+.approved-shell footer,
+.approved-shell .ed-on-gradient {
+  --card: 60 1.37% 28.63%;
+  --card-foreground: 40 32% 92%;
+  --card-border: 60 1.42% 58.63%;
+  --popover: 60 1.37% 28.63%;
+  --popover-foreground: 40 32% 92%;
+  --popover-border: 60 1.42% 58.63%;
+  --input: 60 1.37% 28.63%;
+  --muted: 60 1.37% 28.63%;
+  --border: 60 1.42% 58.63%;
+}
+
+.approved-shell {
+  --popover: 0 0% 100%;
+  --popover-border: 42 10% 80%;
+}
+
+.approved-shell .fr-band .space-y-6 { --ed-muted-ink: #d9dbd4; }
+
+/* Small accent text uses the PR's lighter contrast treatment on dark cards. */
+.approved-shell :is(.ed-on-gradient, .bg-inverse) .ed-small[style*="ed-accent"] {
+  color: #f1bfa6 !important;
+}
+
+.fr-band .fr-range-choice:not(.is-selected),
+.approved-shell :is(.ed-on-gradient, .bg-inverse) .bg-card,
+.fr-band .fr-range-choice:not(.is-selected) :is(small, span, p),
+.approved-shell :is(.ed-on-gradient, .bg-inverse) .bg-card :is(.text-xs, .text-sm, small, .ed-small) {
+  color: #fbfaf6;
+}
+
+.fr-band .fr-range-choice:not(.is-selected) {
+  background: var(--color-charcoal-surface);
+  border-color: var(--color-charcoal-line);
+}
+
+.fr-mosaic figcaption {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-charcoal) 78%, transparent) 42%,
+    var(--color-charcoal) 100%
+  );
+}
+
+/* The phone audit made these repair-list answers scannable; retain that list
+   with the current body role and spacing scale. */
+.f-answer-points {
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.f-answer-points li {
+  display: flex;
+  align-items: center;
+  min-height: var(--touch-min);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bone);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.f-answer-points + p { margin-top: var(--space-4); }
+
+@media (max-width: 767px) {
+  /* Current canonical buttons/chrome already have their own correct targets.
+     Preserve the audit's standalone legacy-link floor without changing inline
+     prose, protected P5 controls or the shared family component geometry. */
+  .approved-shell main .f-link,
+  .approved-shell nav.fr-cities a,
+  .approved-shell main summary {
+    min-height: var(--touch-min);
+  }
+
+  .approved-shell main .interior-estimate-link,
+  .approved-shell main .f-button {
+    min-height: var(--button-height-lg);
+    font-size: var(--fs-button);
+  }
+
+  .hm-form :is(input, select, textarea):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]) {
+    min-height: var(--input-height);
+  }
+
+  .hm-form-pill { min-height: var(--choice-card-min); }
+
+  .interior-service-card h2 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+  }
+}

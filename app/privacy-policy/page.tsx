@@ -54,7 +54,7 @@ export default function PrivacyPolicyPage() {
       />
       <section className="py-16 md:py-24">
         <div className="container px-4">
-          <InteriorDocument heading={<h1>Privacy policy for Boise Handyman Co handyman services</h1>} contents={[{"id":"document-section-1","label":"Introduction"},{"id":"document-section-2","label":"Information we collect"},{"id":"document-section-3","label":"How we use your information"},{"id":"document-section-4","label":"Information sharing"},{"id":"cookies-analytics-advertising","label":"Cookies, analytics and advertising"},{"id":"document-section-5","label":"Data security"},{"id":"document-section-6","label":"Your rights"},{"id":"document-section-7","label":"Contact us"}]}>
+          <InteriorDocument heading={<h1>Privacy policy for Boise Handyman Co <span className="mobile-keep">handyman services</span></h1>} contents={[{"id":"document-section-1","label":"Introduction"},{"id":"document-section-2","label":"Information we collect"},{"id":"document-section-3","label":"How we use your information"},{"id":"document-section-4","label":"Information sharing"},{"id":"cookies-analytics-advertising","label":"Cookies, analytics and advertising"},{"id":"document-section-5","label":"Data security"},{"id":"document-section-6","label":"Your rights"},{"id":"document-section-7","label":"Contact us"}]}>
 
             <p className="lead text-muted-foreground">
               Last updated: January 2024

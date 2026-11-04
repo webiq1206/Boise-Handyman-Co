@@ -72,13 +72,13 @@ function customerBreakdownTable(lines: CustomerTaskLine[], total: number): strin
     .map(
       (line) =>
         `<tr><td style="padding:4px 12px 4px 0;color:#444;">${escapeHtml(line.label)}</td>` +
-        `<td style="padding:4px 0;text-align:right;color:#111;">${formatHandymanCurrency(line.amount)}</td></tr>`,
+        `<td style="padding:4px 0;text-align:right;color:#383837;">${formatHandymanCurrency(line.amount)}</td></tr>`,
     )
     .join("");
   return (
     `<table style="border-collapse:collapse;font-size:14px;width:100%;max-width:420px;">${rows}` +
-    `<tr><td style="padding:6px 12px 4px 0;border-top:1px solid #ddd;color:#111;"><strong>Estimated visit total</strong></td>` +
-    `<td style="padding:6px 0 4px;border-top:1px solid #ddd;text-align:right;color:#111;"><strong>${formatHandymanCurrency(total)}</strong></td></tr></table>`
+    `<tr><td style="padding:6px 12px 4px 0;border-top:1px solid #ddd;color:#383837;"><strong>Estimated visit total</strong></td>` +
+    `<td style="padding:6px 0 4px;border-top:1px solid #ddd;text-align:right;color:#383837;"><strong>${formatHandymanCurrency(total)}</strong></td></tr></table>`
   );
 }
 
@@ -90,13 +90,13 @@ function breakdownTable(estimate: HandymanEstimate, hideInternalLines = false): 
     .map(
       (line) =>
         `<tr><td style="padding:4px 12px 4px 0;color:#444;">${escapeHtml(line.label)}</td>` +
-        `<td style="padding:4px 0;text-align:right;color:#111;">${formatHandymanCurrency(line.amount)}</td></tr>`,
+        `<td style="padding:4px 0;text-align:right;color:#383837;">${formatHandymanCurrency(line.amount)}</td></tr>`,
     )
     .join("");
   return (
     `<table style="border-collapse:collapse;font-size:14px;width:100%;max-width:420px;">${rows}` +
-    `<tr><td style="padding:6px 12px 4px 0;border-top:1px solid #ddd;color:#111;"><strong>Estimated visit total</strong></td>` +
-    `<td style="padding:6px 0 4px;border-top:1px solid #ddd;text-align:right;color:#111;"><strong>${formatHandymanCurrency(estimate.total)}</strong></td></tr></table>`
+    `<tr><td style="padding:6px 12px 4px 0;border-top:1px solid #ddd;color:#383837;"><strong>Estimated visit total</strong></td>` +
+    `<td style="padding:6px 0 4px;border-top:1px solid #ddd;text-align:right;color:#383837;"><strong>${formatHandymanCurrency(estimate.total)}</strong></td></tr></table>`
   );
 }
 
@@ -128,7 +128,7 @@ export function buildHandymanAdminEmailHtml(
   const urgency = URGENCY_LEVELS[input.urgency];
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;">
-    <h2 style="color:#111;">New estimate lead</h2>
+    <h2 style="color:#383837;">New estimate lead</h2>
     <table style="border-collapse:collapse;font-size:14px;">
       <tr><td style="padding:3px 12px 3px 0;color:#666;">Name</td><td>${escapeHtml(lead.name)}</td></tr>
       <tr><td style="padding:3px 12px 3px 0;color:#666;">Email</td><td>${escapeHtml(lead.email)}</td></tr>
@@ -139,10 +139,10 @@ export function buildHandymanAdminEmailHtml(
       <tr><td style="padding:3px 12px 3px 0;color:#666;">Materials</td><td>${input.materials === "we-pick-up" ? "We pick up (supply run added)" : "Customer supplies"}</td></tr>
       <tr><td style="padding:3px 12px 3px 0;color:#666;">Est. hours</td><td>${escapeHtml(formatHours(estimate.totalHours))}</td></tr>
     </table>
-    <h3 style="color:#111;margin-bottom:2px;">Requested work</h3>
+    <h3 style="color:#383837;margin-bottom:2px;">Requested work</h3>
     ${selectionsList(input)}
     ${lead.notes ? `<p style="font-size:14px;color:#333;"><strong>Notes:</strong> ${escapeHtml(lead.notes)}</p>` : ""}
-    <h3 style="color:#111;margin-bottom:6px;">Range shown to the visitor: ${rangeLine(estimate)}</h3>
+    <h3 style="color:#383837;margin-bottom:6px;">Range shown to the visitor: ${rangeLine(estimate)}</h3>
     ${breakdownTable(estimate)}
     ${estimate.oversized ? `<p style="font-size:13px;color:#a15c00;"><strong>Heads up:</strong> this is more than a full day on site. Call to scope before quoting.</p>` : ""}
     <p style="font-size:12px;color:#888;">Server-recomputed range. Reply goes straight to the customer.</p>
@@ -157,11 +157,11 @@ export function buildHandymanCustomerEmailHtml(
   const urgency = URGENCY_LEVELS[input.urgency];
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;color:#222;">
-    <h2 style="color:#111;">Your estimate from ${escapeHtml(SITE_CONFIG.name)}</h2>
+    <h2 style="color:#383837;">Your estimate from ${escapeHtml(SITE_CONFIG.name)}</h2>
     <p style="font-size:14px;">Hi ${escapeHtml(lead.name)}, thanks for telling us about your job. Here is the starting range for the work you described:</p>
-    <p style="font-size:22px;color:#111;margin:8px 0;"><strong>${rangeLine(estimate)}</strong></p>
+    <p style="font-size:22px;color:#383837;margin:8px 0;"><strong>${rangeLine(estimate)}</strong></p>
     ${customerBreakdownTable(estimate.customerLines, estimate.total)}
-    <h3 style="color:#111;margin-bottom:2px;">What you told us</h3>
+    <h3 style="color:#383837;margin-bottom:2px;">What you told us</h3>
     ${selectionsList(input)}
     <p style="font-size:13px;color:#444;">Scheduling: ${escapeHtml(`${urgency.label}, ${urgency.sub.toLowerCase()}`)}. City: ${escapeHtml(lead.city)}.</p>
     <p style="font-size:13px;color:#444;">${escapeHtml(MATERIALS_COST_NOTE)}</p>

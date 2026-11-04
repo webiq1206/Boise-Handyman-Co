@@ -616,3 +616,15 @@
   font-weight: 600;
   letter-spacing: 0;
 }
+
+
+/* Exact logo colors for heading emphasis, owner direction November 4.
+   Functional link/focus inks and body copy keep their existing contrast roles. */
+:root { --color-heading-accent: #c56b4a; }
+html .approved-shell main :is(h1, h2, .ed-display, .ed-h2, .ed-h2-sm, .interior-statement) {
+  --ed-accent: var(--color-heading-accent);
+}
+html .approved-shell main :is(h1, h2, .ed-display, .ed-h2, .ed-h2-sm) :is(em, .brc-accent, .text-accent, .text-accent-legible),
+html .approved-shell main .interior-statement em {
+  color: var(--color-heading-accent);
+}

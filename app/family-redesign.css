@@ -19,13 +19,13 @@
 .fr-band,
 .fr-request,
 .fr-cta-strip {
-  --fr-ink: #2c302f;
+  --fr-ink: var(--color-charcoal);
   --fr-ink-soft: #484c47;
   --fr-paper: #fbfaf6;
   --fr-bone: #f1ede4;
   --fr-line: rgba(44, 48, 47, 0.16);
   --fr-line-on-dark: rgba(251, 250, 246, 0.24);
-  --fr-accent-on-dark: color-mix(in srgb, var(--f-accent) 68%, #fbfaf6);
+  --fr-accent-on-dark: var(--color-heading-accent, var(--f-accent));
 }
 .family-site { font-size: var(--fs-body); font-family: var(--font-sans); line-height: var(--lh-body); letter-spacing: 0; }
 /* A band that sits outside the family frame still gets its heading and label colours. */
@@ -290,10 +290,11 @@
 .fr-request { background: var(--fr-bone); }
 .fr-request-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 8%;
   align-items: start;
 }
+.fr-request-grid > * { min-width: 0; }
 .fr-request-card {
   padding: clamp(24px, 3vw, 40px);
   border-top: 6px solid var(--f-accent);
@@ -337,10 +338,15 @@
 /* ----------------------------------------------------------------- responsive */
 @media (max-width: 1100px) {
   .fr-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; }
-  .fr-range, .fr-showcase, .fr-request-grid, .fr-founder { grid-template-columns: 1fr; gap: 44px; }
+  .fr-range, .fr-showcase, .fr-founder { grid-template-columns: 1fr; gap: 44px; }
   .fr-founder img { max-width: 560px; }
   .family-site .f-two { grid-template-columns: 1fr; gap: 44px; }
   .family-site .f-sticky { position: static; }
+}
+/* Match the lg placement on the form/copy children; an earlier 1100px stack
+   left an implicit second column between 1024px and 1100px. */
+@media (max-width: 1023.98px) {
+  .fr-request-grid { grid-template-columns: minmax(0, 1fr); gap: var(--grid-gap); }
 }
 @media (max-width: 640px) {
   .family-site .f-section { padding-block: 64px; }
@@ -385,7 +391,7 @@
 .referral-panel {
   border-top: 6px solid var(--f-accent, #2c302f);
   background: var(--fr-bone, #f1ede4);
-  color: var(--fr-ink, #2c302f);
+  color: var(--fr-ink, var(--color-charcoal));
   box-shadow: 0 40px 70px -40px rgba(28, 31, 30, 0.35);
 }
 .referral-visual { margin: 0; }
@@ -429,10 +435,9 @@
 .fr-band-estimate .fr-range-result .planning-range-value { font-size: clamp(40px, 5vw, 72px); line-height: 1; }
 .fr-band-estimate .fr-range-result .planning-range-band { font-size: 16px; margin-top: 14px; }
 
-/* Brand ground for the shared chrome: this site's footer and hero fallback sit on
-   its own deep charcoal, not the parent company's forest green. */
-footer.fam-footer[data-family-footer] { background: #1c1f1e; }
-section.fam-hero[data-family-hero] { background: #2c302f; }
+/* Brand ground for the shared chrome: footer and hero fallback use brand charcoal. */
+footer.fam-footer[data-family-footer] { background: var(--color-charcoal); }
+section.fam-hero[data-family-hero] { background: var(--color-charcoal); }
 
 /* Explicit editorial roles replace the old independent section-size clamps.
    Input titles keep their own protected geometry. */
@@ -467,8 +472,8 @@ html .family-site .f-section-top { align-items: end; }
   html .fr-cards:has(> :last-child:nth-child(odd)) > :first-child { grid-column: 1 / -1; }
   html .fr-cards:has(> :last-child:nth-child(odd)) > :first-child .fr-card-media { aspect-ratio: 2 / 1; }
 }
-/* The accent second line on a dark band: a brighter step of the brand hue. */
-.family-site, .fr-band { --fr-accent-on-dark: color-mix(in srgb, var(--f-accent) 55%, #fbfaf6); }
+/* Dark-band headings preserve the supplied logo hue. */
+.family-site, .fr-band { --fr-accent-on-dark: var(--color-heading-accent, var(--f-accent)); }
 
 /* A force-mounted accordion keeps closed answers in the server HTML for crawlers;
    Radix does not add `hidden` to a force-mounted panel, so the closed state must
@@ -482,7 +487,7 @@ html .approved-shell.site-cabinet .approved-interior .interior-hero-fit .interio
 html .approved-interior .interior-detail-body h2 { font-size: var(--fs-display); line-height: var(--lh-display); font-family: var(--font-display); font-weight: var(--weight-display); letter-spacing: var(--tracking-display); }
 
 /* ------------------------------------------------------- design gallery mosaic */
-.fr-gallery { background: var(--fr-paper, #fbfaf6); color: var(--fr-ink, #2c302f); }
+.fr-gallery { background: var(--fr-paper, #fbfaf6); color: var(--fr-ink, var(--color-charcoal)); }
 .fr-gallery-inner { width: min(1260px, 88%); margin-inline: auto; padding-block: clamp(80px, 9vw, 124px); }
 .fr-gallery-top {
   display: grid;
@@ -540,7 +545,7 @@ html .approved-interior .interior-detail-body h2 { font-size: var(--fs-display);
   right: 0;
   bottom: 0;
   padding: 40px 18px 14px;
-  background: linear-gradient(180deg, transparent, rgba(20, 22, 21, 0.55));
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--color-charcoal) 55%, transparent));
   color: #fbfaf6;
   font-size: var(--fs-small);
   font-weight: 600;

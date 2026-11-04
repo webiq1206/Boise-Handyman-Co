@@ -5,6 +5,17 @@ import { brands, serviceExtras } from '@/components/approved/family-content';
 
 const Arrow = () => <ArrowUpRight size={18} aria-hidden="true" />;
 
+function keepTail(label: string) {
+  const words = label.trim().split(/\s+/);
+  if (words.length < 3) return label;
+  return (
+    <>
+      {words.slice(0, -2).join(' ')}{' '}
+      <span className="mobile-keep">{words.slice(-2).join(' ')}</span>
+    </>
+  );
+}
+
 const CARD_ALT: Record<string, string> = {
   'inspection-repairs': 'Open tool bag ready beside a front door',
   'drywall-repair': 'A patched and sanded drywall repair ready for paint',
@@ -41,13 +52,21 @@ export function HandymanServicesAnswer() {
         </div>
         <div className="min-w-0">
           <p data-speakable="summary">
-            Boise Handyman Co handles small home repairs, installs and maintenance in Boise and the Treasure Valley: drywall repair, paint touch-ups, minor plumbing and electrical repairs, carpentry and trim, TV mounting and assembly, fence, deck and gutter repair, and caulking. We serve Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City and Caldwell.
+            Boise Handyman Co handles small home repairs, installs and maintenance in Boise and the Treasure Valley.
             {/* The family relationship, said plainly on the page that owns the
                 brand query. A followed link: P5 Home Co is the parent company. */}
             <span className="f-parent-company">
               {' '}A <a href="https://p5homeco.com">P5 Home Co</a> company.
             </span>
           </p>
+          <ul className="f-answer-points">
+            <li>Drywall repair and paint touch-ups</li>
+            <li>Minor plumbing and electrical repairs</li>
+            <li>Carpentry and trim</li>
+            <li>TV mounting and assembly</li>
+            <li>Fence, deck, gutter repair, and caulking</li>
+          </ul>
+          <p>We serve Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City and Caldwell.</p>
         </div>
       </div>
 
@@ -58,7 +77,7 @@ export function HandymanServicesAnswer() {
               <img src={CARD_IMAGES[s.slug]?.src ?? s.image} alt={CARD_IMAGES[s.slug]?.alt ?? CARD_ALT[s.slug] ?? ''} loading={i < 3 ? 'eager' : 'lazy'} width={CARD_IMAGES[s.slug]?.width ?? 1000} height={CARD_IMAGES[s.slug]?.height ?? 750} style={CARD_IMAGES[s.slug]?.position ? {objectPosition: CARD_IMAGES[s.slug].position} : undefined} />
             </span>
             <span className="fr-card-body">
-              <h3>{s.name}</h3>
+              <h3>{keepTail(s.name)}</h3>
               <p>{s.summary}</p>
               <span className="f-link">Explore this service <Arrow /></span>
             </span>

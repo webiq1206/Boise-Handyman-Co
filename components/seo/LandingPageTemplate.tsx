@@ -235,7 +235,7 @@ export function LandingPageTemplate({
               screen; the longer overview and estimate actions follow. */}
           <a
             href={SITE_CONFIG.phoneHref}
-            className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm bg-[#2c302f] px-5 text-base font-medium text-[#fbfaf6] transition-colors hover:bg-[#444947] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2c302f] focus-visible:ring-offset-2 sm:w-auto"
+            className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm bg-[var(--color-charcoal)] px-5 text-base font-medium text-[#fbfaf6] transition-colors hover:bg-[var(--color-charcoal-press)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-charcoal)] focus-visible:ring-offset-2 sm:w-auto"
             data-testid="button-call-service-hero"
             data-hero-cta="primary"
           >
@@ -421,7 +421,7 @@ export function LandingPageTemplate({
               <Reveal>
                 <p className="ed-eyebrow">How it works</p>
                 <h2 className="ed-h2-sm ed-statement">
-                  Our <em className="not-italic" style={accent}>process</em>, step by step
+                  Our <em className="not-italic" style={accent}>process,</em> step by step
                 </h2>
               </Reveal>
               <div className="ed-steps mt-[clamp(32px,4vw,56px)]">
@@ -651,7 +651,7 @@ export function LandingPageTemplate({
             <Accordion type="single" collapsible className="w-full border-t" style={line}>
               {faqs.map((faq, i) => (
                 <AccordionItem key={i} value={`faq-${i}`} className="border-0 border-b" style={line}>
-                  <AccordionTrigger className="ed-h4 py-6 text-left hover:no-underline [&[data-state=open]]:[color:var(--ed-accent)]">
+                  <AccordionTrigger className="ed-h4 py-6 text-left hover:no-underline [&[data-state=open]]:underline [&[data-state=open]]:underline-offset-4">
                     {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="ed-body pb-7 text-[0.9375rem]">{faq.answer}</AccordionContent>
@@ -677,7 +677,7 @@ export function LandingPageTemplate({
             <Reveal>
               <p className="ed-eyebrow ed-eyebrow-accent">Start your project</p>
               <h2 className="ed-h2 ed-statement">
-                Ready to <em className="not-italic" style={accent}>begin</em>?
+                Ready to <em className="not-italic" style={accent}>begin?</em>
               </h2>
             </Reveal>
             <Reveal delay={60}>

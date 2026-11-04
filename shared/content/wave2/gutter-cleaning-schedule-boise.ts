@@ -99,7 +99,7 @@ export const gutterCleaningScheduleBoise: BlogPostData = {
 <p><strong>The gutter tells you, if you look during weather.</strong> Watch in a good rain for water sheeting over the front edge or pouring at the corners. Between storms, the signs are plants growing in the trough, the surest overdue sign in existence, sagging runs pulling off the fascia, peeling paint or gray staining on the fascia board, mosquito activity around standing water, and tiger-striping stains down the gutter face.</p>
 <p>Any one of these means book the cleaning; two or more usually mean the visit will include minor repairs, tightening hangers, resealing an end cap or seam, which is why cleaning and repair travel together as one service.</p>
 
-<h2 id="guards">Gutter guards, honestly</h2>
+<h2 id="guards">Gutter <span class="mobile-keep">guards, honestly</span></h2>
 <p><strong>Guards change the maintenance question; they do not remove it.</strong> Quality screens and micro-mesh keep out leaves and most cottonwood matter, stretching cleaning intervals from months to a year or more under trees, a genuine win in the right yard. But fine debris still enters or mats on top, pine needles defeat cheap screens entirely, and when cleaning day comes the guards must come off and go back on, making that visit slower and costlier.</p>
 <p>The honest rule: under heavy cottonwoods or poplars, good guards pay for themselves in skipped cleanings and avoided overflow. On an open lot, the money is usually better spent on the twice-a-year schedule. Either way, inspection stays on the calendar.</p>
 

@@ -73,6 +73,26 @@
 .interior-contact-form {
   min-width:0
 }
+/* Contact cards may shrink inside their grid instead of contributing a
+   min-content track wider than a narrow phone. */
+.interior-contact-channels > *,
+.interior-contact-channel {
+  min-width:0
+}
+.interior-contact-channel {
+  overflow-wrap:anywhere
+}
+@media(max-width:639.98px) {
+  .interior-contact-channels {
+    grid-template-columns:minmax(0,1fr)
+  }
+  .interior-contact-channel-inner {
+    flex-direction:column
+  }
+  .interior-contact-channel-companion {
+    padding-left:0
+  }
+}
 .approved-interior.interior-catalog .interior-page-heading {
   margin-bottom:40px
 }
@@ -289,7 +309,7 @@
   height:clamp(280px,38vw,520px)
 }
 .approved-interior .interior-hero-contact {
-  background:#2c302f;
+  background:var(--color-charcoal);
   color:#fbfaf6
 }
 .approved-interior .interior-hero-contact .interior-hero-copy {
@@ -303,7 +323,7 @@
 }
 .approved-interior .interior-hero-contact .interior-estimate-link {
   background:#fbfaf6;
-  color:#2c302f
+  color:var(--color-charcoal)
 }
 .interior-estimate-link {
   display:inline-flex;
@@ -312,7 +332,7 @@
   gap:22px;
   padding:17px 23px;
   min-height:54px;
-  background:#2c302f;
+  background:var(--color-charcoal);
   color:#fbfaf6!important;
   text-decoration:none;
   border:1px solid transparent;
@@ -609,7 +629,7 @@
 }
 .approved-interior [data-article-sidebar-cta] {
   border-radius:0;
-  background:#2c302f;
+  background:var(--color-charcoal);
   padding:28px
 }
 .approved-interior .article-table-scroll {
@@ -637,7 +657,7 @@
   letter-spacing:var(--tracking-heading)
 }
 .approved-interior .ed-on-gradient {
-  background:#2c302f;
+  background:var(--color-charcoal);
   color:#fbfaf6
 }
 .approved-interior .ed-on-gradient :is(h2,h3,p) {

@@ -25,7 +25,7 @@ const HOURS = "Call or text Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM (Mountain)
 const HERO_IMAGE = "/family/handyman-hero-door-hinge-branded.webp";
 const TILES = [
   { src: "/images/handyman/service-drywall-repair.webp", label: "Drywall repair", from: "$149", alt: "Hands spreading joint compound over a drywall patch" },
-  { src: "/images/handyman/service-carpentry-trim-branded.webp", label: "Doors, trim & baseboards", from: "$149", alt: "Hands fitting white baseboard trim along a wall" },
+  { src: "/images/handyman/front-door-repaint-p5-reviewed-20260910.webp", label: "Doors, trim & baseboards", from: "$149", alt: "A sage-green front door with white trim and black hardware" },
   { src: "/images/handyman/service-caulking.webp", label: "Caulking & weatherproofing", from: "$145", alt: "A caulk gun laying a white bead along a bathtub edge" },
   { src: "/images/handyman/service-plumbing.webp", label: "Minor plumbing", from: "$145", alt: "Hands installing a kitchen faucet at a sink" },
   { src: "/images/handyman/service-electrical.webp", label: "Minor electrical", from: "$145", alt: "Hands installing a white electrical outlet" },
@@ -87,7 +87,7 @@ function CallTextButtons({ onDark = false }: { onDark?: boolean }) {
     <div className="grid grid-cols-2 gap-3">
       <a
         href={SITE_CONFIG.phoneHref}
-        className={`${base} ${onDark ? "bg-[#fbfaf6] text-[#2c302f] focus-visible:ring-[#fbfaf6]" : "bg-primary text-primary-foreground focus-visible:ring-ring"}`}
+        className={`${base} ${onDark ? "bg-[#fbfaf6] text-[var(--color-charcoal)] focus-visible:ring-[#fbfaf6]" : "bg-primary text-primary-foreground focus-visible:ring-ring"}`}
         data-testid="button-call-landing"
       >
         Call {SITE_CONFIG.phone}
@@ -132,7 +132,7 @@ export default function HandymanLandingPage() {
           sizes="100vw"
           className="object-cover object-[62%_center]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1c1f1e]/95 via-[#1c1f1e]/60 to-[#1c1f1e]/20" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[color-mix(in_srgb,var(--color-charcoal)_95%,transparent)] via-[color-mix(in_srgb,var(--color-charcoal)_60%,transparent)] to-[color-mix(in_srgb,var(--color-charcoal)_20%,transparent)]" aria-hidden="true" />
         <div className="relative z-10 mx-auto w-full max-w-5xl px-5 pb-5 pt-6 sm:px-8 sm:pb-16 sm:pt-16">
           <h1 className="max-w-[16ch] font-serif">Boise handyman for the repairs on your list</h1>
           <p className="mt-4 max-w-[36rem] text-base leading-snug sm:text-lg sm:leading-relaxed">
@@ -146,7 +146,7 @@ export default function HandymanLandingPage() {
             {TRUST.map(({ icon: Icon, label }) => (
               <li
                 key={label}
-                className="inline-flex items-center gap-1.5 rounded-full border border-[#fbfaf6]/35 bg-[#1c1f1e]/55 px-3 py-1.5 text-[13px] leading-tight text-[#fbfaf6]"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#fbfaf6]/35 bg-[color-mix(in_srgb,var(--color-charcoal)_55%,transparent)] px-3 py-1.5 text-[13px] leading-tight text-[#fbfaf6]"
               >
                 <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 <span>{label}</span>

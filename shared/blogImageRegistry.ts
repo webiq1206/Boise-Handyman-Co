@@ -54,8 +54,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'diy-vs-hiring-a-handyman': {
-    hero: '/images/handyman/service-carpentry-trim-branded.webp',
-    alt: 'Carpenter fitting a new piece of white baseboard trim along a wood floor in a modern home',
+    hero: '/images/handyman/front-door-repaint-p5-reviewed-20260910.webp',
+    alt: 'A freshly painted sage-green front door with white trim and black hardware',
     topicTags: ["diy","hiring","home repairs","handyman","costs"],
     source: 'handyman',
   },

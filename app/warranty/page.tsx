@@ -87,7 +87,7 @@ export default function WarrantyPage() {
             Our promise
           </p>
           <h1 className="ed-display ed-statement-display text-inverse-foreground mb-6">
-            One-year workmanship <em className="brc-accent">warranty</em>
+            One-year <span className="mobile-keep">workmanship <em className="brc-accent">warranty</em></span>
           </h1>
           <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-8">
             If something we repaired or installed fails because of our workmanship within one year,

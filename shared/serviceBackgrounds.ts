@@ -19,7 +19,7 @@ export const SERVICE_BACKGROUNDS: ServiceBackgroundConfig = {
   "painting-touch-ups": h("service-painting-p5-reviewed-20260910"),
   "plumbing-repairs": h("service-plumbing"),
   "electrical-repairs": h("service-electrical"),
-  "carpentry-trim-repair": h("service-carpentry-trim-branded"),
+  "carpentry-trim-repair": SITE_IMAGES.valueCraft,
   "mounting-assembly": h("service-mounting"),
   "fence-deck-gutter-repair": h("service-fence-repair"),
   "home-maintenance": h("service-caulking"),
@@ -69,7 +69,7 @@ const SERVICE_IMAGE_SETS: Record<string, LandingImageSet> = {
     process: h("estimate-clipboard"),
   },
   "carpentry-trim-repair": {
-    hero: h("service-carpentry-trim-branded"),
+    hero: SITE_IMAGES.valueCraft,
     breather: h("door-hinge-fix"),
     process: h("toolbag-ready"),
   },

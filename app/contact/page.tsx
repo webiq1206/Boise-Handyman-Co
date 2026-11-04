@@ -132,12 +132,12 @@ function ContactChannel({
 }: ContactChannelProps) {
   const inner = (
     <MarketingCard
-      className={`h-full transition-colors ${
+      className={`interior-contact-channel h-full transition-colors ${
         href ? 'group-hover:border-foreground/25' : ''
       } ${featured ? 'md:p-10' : ''}`}
       padding={featured ? 'lg' : 'default'}
     >
-      <div className="flex items-start gap-4">
+      <div className="interior-contact-channel-inner flex items-start gap-4">
         <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-sm bg-accent-legible/10 text-accent-legible">
           {icon}
         </div>
@@ -166,7 +166,7 @@ function ContactChannel({
         >
           {inner}
         </a>
-        {companion ? <div className="mt-2 pl-14">{companion}</div> : null}
+        {companion ? <div className="interior-contact-channel-companion mt-2 pl-14">{companion}</div> : null}
       </div>
     );
   }
@@ -208,8 +208,8 @@ export default function ContactPage() {
             </p>
             <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>Get in touch</p>
             <h1 className="ed-display ed-statement-display text-inverse-foreground mb-8">
-              Contact Boise Handyman{' '}
-              <em className="brc-accent">Co</em>
+              Contact Boise{' '}
+              <span className="mobile-keep">Handyman <em className="brc-accent">Co</em></span>
             </h1>
             <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-6">
               Send your task list with photos for an upfront quote, or call or text our team to
@@ -251,7 +251,7 @@ export default function ContactPage() {
                   <p className="ed-eyebrow">Book your visit</p>
                   <h2 className="ed-h2 ed-statement-wide">
                     Tell us what needs{' '}
-                    <em className="brc-accent">fixing</em>.
+                    <em className="brc-accent">fixing.</em>
                   </h2>
                   <p className="text-base leading-relaxed mb-8 text-muted-foreground">
                     Send your repair list and optional photos. The team reviews the scope,
@@ -286,7 +286,7 @@ export default function ContactPage() {
               description="Call, text, or email to discuss your repair list and next steps, with no pressure."
               className="max-w-3xl"
             />
-            <div className="ed-grid-balance grid sm:grid-cols-2 gap-4">
+            <div className="interior-contact-channels ed-grid-balance grid sm:grid-cols-2 gap-4">
               <Reveal className="sm:col-span-2">
                 <ContactChannel
                   icon={<Phone className="h-5 w-5" strokeWidth={1.5} />}

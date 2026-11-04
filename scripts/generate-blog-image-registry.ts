@@ -53,8 +53,8 @@ const LIBRARY = {
     alt: 'Hands replacing a white electrical outlet with a screwdriver, faceplate and voltage tester nearby',
   },
   carpentry: {
-    src: img('service-carpentry-trim-branded'),
-    alt: 'Carpenter fitting a new piece of white baseboard trim along a wood floor in a modern home',
+    src: img('front-door-repaint-p5-reviewed-20260910'),
+    alt: 'A freshly painted sage-green front door with white trim and black hardware',
   },
   mounting: {
     src: img('service-mounting'),

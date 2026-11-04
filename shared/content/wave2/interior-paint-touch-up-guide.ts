@@ -91,7 +91,7 @@ export const interiorPaintTouchUpGuide: BlogPostData = {
 <p><strong>A meaningful share of touch-up lists disappear under a damp cloth.</strong> Scuffs, crayon, fingerprints, and door-edge marks often wipe off with warm water and a drop of dish soap on microfiber. Melamine sponges erase stubborn marks but abrade the surface, so use them gently on flat paint or they polish a shiny spot into existence, creating the exact flash you were trying to avoid.</p>
 <p>What survives washing gets painted, and the washing already did the mandatory prep, because paint over dust and hand oil adheres poorly and shows every particle. Let the wall dry fully before any paint touches it.</p>
 
-<h2 id="technique">The blending technique</h2>
+<h2 id="technique">The <span class="mobile-keep">blending technique</span></h2>
 <p><strong>Thin, matched, and feathered are the three words that matter.</strong> Load a mini roller lightly, the wall was almost certainly rolled, and a brush cannot fake roller stipple, and apply a thin coat just covering the mark. Then feather: keep rolling outward past the repair with progressively lighter pressure so the film thins to nothing rather than ending at an edge. A crisp edge is a line light will find; a feathered edge is a gradient it slides past.</p>
 <p>Let it dry completely and judge in the room's worst light, low-angle daylight or a flashlight held against the wall. Not blended? One more thin pass. Resist the thick coat; thickness is where flashing comes from. For brushed trim, the same logic applies with a quality brush and long light strokes following the original direction.</p>
 
