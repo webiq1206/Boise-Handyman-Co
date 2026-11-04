@@ -132,12 +132,12 @@ function ContactChannel({
 }: ContactChannelProps) {
   const inner = (
     <MarketingCard
-      className={`h-full transition-colors ${
+      className={`interior-contact-channel h-full transition-colors ${
         href ? 'group-hover:border-foreground/25' : ''
       } ${featured ? 'md:p-10' : ''}`}
       padding={featured ? 'lg' : 'default'}
     >
-      <div className="flex items-start gap-4">
+      <div className="interior-contact-channel-inner flex items-start gap-4">
         <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-sm bg-accent-legible/10 text-accent-legible">
           {icon}
         </div>
@@ -166,7 +166,7 @@ function ContactChannel({
         >
           {inner}
         </a>
-        {companion ? <div className="mt-2 pl-14">{companion}</div> : null}
+        {companion ? <div className="interior-contact-channel-companion mt-2 pl-14">{companion}</div> : null}
       </div>
     );
   }
@@ -286,7 +286,7 @@ export default function ContactPage() {
               description="Call, text, or email to discuss your repair list and next steps, with no pressure."
               className="max-w-3xl"
             />
-            <div className="ed-grid-balance grid sm:grid-cols-2 gap-4">
+            <div className="interior-contact-channels ed-grid-balance grid sm:grid-cols-2 gap-4">
               <Reveal className="sm:col-span-2">
                 <ContactChannel
                   icon={<Phone className="h-5 w-5" strokeWidth={1.5} />}

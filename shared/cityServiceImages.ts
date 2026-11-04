@@ -52,7 +52,7 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("service-electrical"),
   ],
   "carpentry-trim-repair": [
-    h("service-carpentry-trim-branded"),
+    SITE_IMAGES.valueCraft,
     h("hero-door-hinge-branded"),
     h("door-hinge-fix"),
   ],

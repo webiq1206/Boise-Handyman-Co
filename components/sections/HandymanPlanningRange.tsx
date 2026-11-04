@@ -6,7 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { Section } from "@/components/marketing/Section";
 import { Button } from "@/components/ui/button";
 import { SelectableCard } from "@/components/estimate/wizard/SelectableCard";
-import { CTA_PRIMARY } from "@/shared/ctaCopy";
+import { CTA_SECONDARY } from "@/shared/ctaCopy";
 import Link from "next/link";
 import { toSentenceCase } from "@/shared/sentenceCase";
 import {
@@ -161,24 +161,24 @@ export function HandymanPlanningRange() {
                   <p className="ed-small mt-4" style={{ color: "var(--ed-muted-ink)" }}>
                     {HANDYMAN_RATE_DISCLAIMER}
                   </p>
-                  <Button
-                    asChild
-                    variant="brand"
-                    className="mt-6 min-h-12 whitespace-normal px-5"
-                    data-testid="proof-cta-contact"
-                  >
-                    {/* The request form is on this page (#consult): land on it. */}
-                    <Link href="/#consult">
-                      {CTA_PRIMARY}
-                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </Link>
-                  </Button>
                 </>
               ) : (
                 <p className="ed-body mt-4 text-[0.9375rem]" style={{ color: "var(--ed-muted-ink)" }}>
                   Choose a job and task to see a planning range. No email required.
                 </p>
               )}
+              <Button
+                asChild
+                variant="brand"
+                className="mt-6 min-h-12 whitespace-normal px-5"
+                data-testid="proof-cta-contact"
+              >
+                {/* Keep contact available while a different task is being chosen. */}
+                <Link href="/#consult">
+                  {CTA_SECONDARY}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </Button>
             </aside>
           </div>
         </Reveal>

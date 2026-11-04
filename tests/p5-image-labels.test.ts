@@ -30,22 +30,24 @@ test("photo alt text describes the picture and does not label it as our work", (
   }
   const re10 = read("app/re-10-repairs-boise/page.tsx");
   assert.match(re10, /alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth"/);
-  assert.match(re10, /<figcaption>Representative imagery<\/figcaption>/);
-  const representative = [
-    "Representative image: a worker adjusting an interior door hinge with a screwdriver",
-    "Representative image: a worker painting white window trim with a brush over a drop cloth",
-    "Representative image: a freshly painted sage-green front door with white trim and black hardware",
+  assert.doesNotMatch(re10, /<figcaption>Representative imagery<\/figcaption>/);
+  const descriptiveAlts = [
+    "A worker adjusting an interior door hinge with a screwdriver",
+    "A worker painting white window trim with a brush over a drop cloth",
+    "A freshly painted sage-green front door with white trim and black hardware",
   ];
   const registry = read("shared/blogImageRegistry.ts");
   const generator = read("scripts/generate-blog-image-registry.ts");
-  for (const alt of representative) {
+  for (const alt of descriptiveAlts) {
     assert.equal(registry.includes(alt), true, alt);
     assert.equal(generator.includes(alt), true, alt);
   }
-  assert.equal(registry.split("Representative image: a worker adjusting an interior door hinge with a screwdriver").length - 1, 2);
+  assert.doesNotMatch(registry, /Representative image:/);
+  assert.doesNotMatch(generator, /Representative image:/);
+  assert.equal(registry.split("A worker adjusting an interior door hinge with a screwdriver").length - 1, 2);
   for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx"]) {
     const source = read(file);
-    assert.equal(source.includes('alt="Hands fitting white baseboard trim with a hammer"'), true, file);
+    assert.equal(source.includes('alt="A sage-green front door with white trim and black hardware"'), true, file);
   }
   for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx", "shared/imageAlts.ts"]) {
     assert.equal(read(file).includes("nail gun"), false, file);

@@ -51,8 +51,7 @@ export const FAMILY_BRAND: FamilyBrand = {
     // Six navigation items, the lockup and "Send your list and photos" do not fit at 1024px;
     // 1180 is where this site's navigation and bottom bar have always switched.
     desktopFrom: 1180,
-    // As today: Call with its label beside the menu. Text and Chat are tiles in the menu.
-    phoneActions: ['call'],
+    phoneActions: ['call', 'text', 'chat'],
   },
   nav: [
     { label: 'Services', href: '/services' },
@@ -70,7 +69,14 @@ export const FAMILY_BRAND: FamilyBrand = {
   cta: { label: CTA_QUOTE, href: '/#consult' },
   phone: { display: SITE_CONFIG.phone, telHref: SITE_CONFIG.phoneHref, smsHref: SITE_CONFIG.phoneSmsHref },
   // The assistant opens from the menu tile and its own launcher (desktop).
-  chat: { enabled: true, label: 'Chat', openEvent: 'p5:assistant-open' },
+  chat: {
+    enabled: true,
+    label: 'Chat',
+    openEvent: 'p5:assistant-open',
+    // Mirrors AssistantWidget's suppression predicate. The spread remains
+    // compatible while the canonical family contract is transported here.
+    ...{ hiddenOn: ['/estimate*', '/admin*', '/subcontractor*', '/handyman*'] },
+  },
   bar: {
     // Owner commit 74ff0c4 and scripts/verify-p5-mobile-seo.mjs: the bar stays hidden over the
     // homepage hero and appears once the hero's own CTA has left the screen.

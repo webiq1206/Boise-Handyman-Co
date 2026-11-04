@@ -46,6 +46,7 @@
 
   /* B6 controls and chrome */
   --header-height: 64px;
+  --header-min-height: 64px;
   --button-height-lg: 48px;
   --button-height-md: 44px;
   --button-height-sm: 36px;
@@ -73,17 +74,10 @@
   --color-bone: #f1ede4;
   --color-ink: #20231f;
   --color-ink-2: #343934;
-  /* Brand charcoal for headers, buttons, footers and other dark grounds. */
   --color-charcoal: #383837;
-  /* Cards, popovers and inputs on a charcoal page. Lighter than the ground. */
-  --color-charcoal-surface: #4a4a48;
-  /* Borders on charcoal. Lighter than the page and the surface.
-     #979794 is 4.01:1 on #383837 and 3.03:1 on #4a4a48. */
-  --color-charcoal-line: #979794;
-  /* Pressed or hovered charcoal. Still above the near-black floor. */
-  --color-charcoal-press: #30302f;
+  /* Owner-approved family charcoal for headers, menus and footers. */
+  --color-chrome: var(--color-charcoal);
   --color-moss: #233029;
-  /* Footer, mobile bar and hero fallback use the same brand charcoal. */
   --color-forest: #383837;
   --color-bg: var(--color-paper);
   --color-bg-alt: var(--color-bone);
@@ -149,6 +143,7 @@
     --section-y-feature: 96px;
     --grid-gap: 24px;
     --header-height: 76px;
+    --header-min-height: 76px;
     --fs-hero: clamp(56px, 8.5vw, 80px);
     --fs-hero-support: 18px;
     --fs-display: 52px;

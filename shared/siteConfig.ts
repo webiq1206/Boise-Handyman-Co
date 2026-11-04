@@ -40,32 +40,22 @@ export const SITE_CONFIG = {
   phoneSmsHref: businessTelHref(process.env.NEXT_PUBLIC_PHONE_TEL ?? DEFAULT_PHONE_TEL).replace(/^tel:/, "sms:"),
   email: process.env.NEXT_PUBLIC_EMAIL ?? DEFAULT_EMAIL,
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL,
-  // Public representative named in the P5 contact records. Published as the
-  // contact, not as an owner and not as storefront staff.
-  publicRepresentative: "Nick Perkins",
-  // Authorized public address. The business stays a service-area operation:
-  // publish the street where an address is required, and do not describe it
-  // as a staffed storefront.
+  founderName: "Nick Perkins",
+  // Public locality and service coverage. Street/verification records stay
+  // with the business-profile owner, outside website output.
   address: {
-    street: "4031 W Wapoot St",
     city: "Meridian",
     state: "ID",
-    postalCode: "83646",
     cityState: "Meridian, ID",
     serviceArea: "Treasure Valley · Ada and Canyon County",
   },
 } as const;
 
 /**
- * One visible NAP line for footers and contact surfaces.
- * Wording matches the family string: public representative, street address,
- * then the service-area disclaimer. No extra facts.
+ * One customer-facing service-area line for footers and contact surfaces.
  */
 export const PUBLIC_NAP_LINE =
-  `Public representative: ${SITE_CONFIG.publicRepresentative} · ${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.state} ${SITE_CONFIG.address.postalCode} · Service-area business, not a staffed storefront.`;
-
-/** Storefront disclaimer used wherever the shorter NAP phrase is published. */
-export const SERVICE_AREA_DISCLAIMER = "Service-area business, not a staffed storefront.";
+  "Serving Boise and the Treasure Valley.";
 
 /**
  * Answer-first entity sentence already published in LocalBusiness schema.

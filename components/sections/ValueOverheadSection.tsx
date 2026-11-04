@@ -71,7 +71,7 @@ export function ValueOverheadSection() {
                 <Image
                   src={SITE_IMAGES.valueCraft}
                   loading="lazy"
-                  alt="Hands fitting white baseboard trim with a hammer"
+                  alt="A sage-green front door with white trim and black hardware"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover img-brand-grade"

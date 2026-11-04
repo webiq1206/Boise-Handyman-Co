@@ -30,9 +30,9 @@ export default function StyleGuidePage() {
 
       <Section variant="greige" divider>
         <div className="container px-4 max-w-4xl space-y-8">
-          <h2 className="text-section-title font-serif">Brand kit (placeholder)</h2>
+          <h2 className="ed-h2-sm">Brand kit</h2>
           <p className="text-sm text-muted-foreground max-w-prose">
-            PLACEHOLDER kit generated programmatically pending real brand assets. Charcoal
+            Charcoal
             #383837, bone #F7F5F3, and the brand accent terracotta #CB633B. Lighter and
             darker variants are used for readable text on charcoal and bone. Full kit and usage rules:{" "}
             <a href="/brand/brand-kit.html" className="underline underline-offset-4">
@@ -82,7 +82,7 @@ export default function StyleGuidePage() {
 
       <Section variant="greige" divider>
         <div className="container px-4 max-w-4xl space-y-8">
-          <h2 className="text-section-title font-serif">Colors</h2>
+          <h2 className="ed-h2-sm">Colors</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { name: "Canvas", class: "bg-background border" },
@@ -100,23 +100,23 @@ export default function StyleGuidePage() {
 
       <Section divider>
         <div className="container px-4 max-w-4xl space-y-6">
-          <h2 className="text-section-title font-serif">Typography</h2>
-          <p className="brc-label">Eyebrow label</p>
-          <h1 className="text-display font-serif">
+          <h2 className="ed-h2-sm">Typography</h2>
+          <p className="ed-eyebrow">Eyebrow label</p>
+          <h2 className="ed-display">
             Display with <em className="brc-accent">accent</em>
-          </h1>
-          <h2 className="text-3xl md:text-4xl font-serif">Section title</h2>
-          <p className="text-base leading-relaxed text-foreground max-w-prose">
+          </h2>
+          <h2 className="ed-h2-sm">Section title</h2>
+          <p className="ed-body text-foreground max-w-prose">
             Body copy uses foreground color at comfortable line height. Meta lines use muted
             foreground only.
           </p>
-          <p className="text-sm text-muted-foreground">Meta / caption text</p>
+          <p className="ed-small text-muted-foreground">Meta / caption text</p>
         </div>
       </Section>
 
       <Section divider>
         <div className="container px-4 max-w-4xl space-y-6">
-          <h2 className="text-section-title font-serif">Buttons & links</h2>
+          <h2 className="ed-h2-sm">Buttons & links</h2>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-3 [&>*]:w-full sm:[&>*]:w-auto">
             <Button variant="brand">Primary (brand)</Button>
             <Button variant="brandOutline">Secondary (outline)</Button>
@@ -127,7 +127,7 @@ export default function StyleGuidePage() {
 
       <Section divider>
         <div className="container px-4 max-w-4xl space-y-6">
-          <h2 className="text-section-title font-serif">Cards & chips</h2>
+          <h2 className="ed-h2-sm">Cards & chips</h2>
           <MarketingCard>
             <p className="text-sm text-muted-foreground">Marketing card - rounded-sm, border, shadow-sm.</p>
           </MarketingCard>

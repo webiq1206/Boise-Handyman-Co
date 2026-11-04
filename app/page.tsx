@@ -1,5 +1,7 @@
 import { ApprovedCtaStrip, ApprovedFounder, ApprovedHowItWorks, ApprovedServiceArea } from "@/components/approved/ApprovedHome";
 import { ApprovedFamilyFrame, ApprovedHomeHero } from "@/components/approved/ApprovedHomeHero";
+import focusedHeroStyles from '@/components/approved/FocusedSearchHero.module.css';
+import { ReviewedPageBarClearance } from '@/components/approved/ReviewedPageBarClearance';
 import { HandymanServicesAnswer } from "@/components/seo/HandymanServicesAnswer";
 import { DesignGallery } from "@/components/sections/DesignGallery";
 import { LazyConsultationForm as ConsultationForm } from "@/components/LazyConsultationForm";
@@ -59,15 +61,16 @@ export default function HomePage() {
           tab explorer, "Pay for the fix", "Good work. A better experience."
           and "What your quote actually covers". */}
       <HomePageSchema />
+      <ReviewedPageBarClearance />
       {/* The family photo hero renders outside the legacy family frame so the
           frame's heading overrides cannot restyle the shared HeroPhoto. */}
-      <ApprovedHomeHero />
+      <ApprovedHomeHero heroClassName={focusedHeroStyles.homeHero} />
       <ApprovedFamilyFrame>
         <HandymanServicesAnswer />
         {/* The finish: six photographs from the company's own campaign library. */}
         <DesignGallery
           id="the-finish"
-          eyebrow="THE FINISH WE LEAVE BEHIND"
+          eyebrow="REPAIRS, INSTALLS & FINISHES"
           title="Small fixes."
           accent="Finished properly."
           intro="A door that closes, a fence that stands straight, a clean caulk line. The small things make a home feel cared for, and we leave every job tidy."
@@ -79,7 +82,7 @@ export default function HomePage() {
             { src: "/family/drive/landscape-3-cedar-fence-and-backyard-deck.webp", alt: "Cedar fence and gate behind a wood deck with Adirondack chairs and string lights", label: "Fence and deck", wide: true },
             { src: "/family/drive/square-2-entry-bench-and-coat-hooks.webp", alt: "Entry with a wood bench, coat hooks and beadboard wall", label: "Entry bench and hooks" },
           ]}
-          note="Photographs showing the kind of finish we aim for on every visit. Send your list and photos, and we will reply with one written quote before any work starts."
+          note="Send your list and photos, and we will reply with one written quote before any work starts."
         />
       </ApprovedFamilyFrame>
       <HandymanPlanningRange />

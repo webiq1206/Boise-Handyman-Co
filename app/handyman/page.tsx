@@ -25,7 +25,7 @@ const HOURS = "Call or text Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM (Mountain)
 const HERO_IMAGE = "/family/handyman-hero-door-hinge-branded.webp";
 const TILES = [
   { src: "/images/handyman/service-drywall-repair.webp", label: "Drywall repair", from: "$149", alt: "Hands spreading joint compound over a drywall patch" },
-  { src: "/images/handyman/service-carpentry-trim-branded.webp", label: "Doors, trim & baseboards", from: "$149", alt: "Hands fitting white baseboard trim along a wall" },
+  { src: "/images/handyman/front-door-repaint-p5-reviewed-20260910.webp", label: "Doors, trim & baseboards", from: "$149", alt: "A sage-green front door with white trim and black hardware" },
   { src: "/images/handyman/service-caulking.webp", label: "Caulking & weatherproofing", from: "$145", alt: "A caulk gun laying a white bead along a bathtub edge" },
   { src: "/images/handyman/service-plumbing.webp", label: "Minor plumbing", from: "$145", alt: "Hands installing a kitchen faucet at a sink" },
   { src: "/images/handyman/service-electrical.webp", label: "Minor electrical", from: "$145", alt: "Hands installing a white electrical outlet" },
@@ -126,7 +126,7 @@ export default function HandymanLandingPage() {
       <section data-p5-hero className="hl-hero relative flex min-h-[32rem] items-end overflow-hidden">
         <Image
           src={HERO_IMAGE}
-          alt="A Boise Handyman Co technician adjusting an interior door hinge"
+          alt="A worker adjusting an interior door hinge with a screwdriver"
           fill
           priority
           sizes="100vw"

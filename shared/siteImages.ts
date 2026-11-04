@@ -11,8 +11,8 @@ export const SITE_IMAGES = {
   hero: "/images/handyman/hero-door-hinge-branded.webp",
   /** "How we work" split panels: a written quote on a clipboard with a tape measure. */
   process: "/images/handyman/estimate-clipboard.webp",
-  /** "Where your money goes" value band: careful trim carpentry up close. */
-  valueCraft: "/images/handyman/service-carpentry-trim-branded.webp",
+  /** Value and carpentry sections: approved people-free door, trim and hardware. */
+  valueCraft: "/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
   /** Process sections: a tidy tool bag staged on a drop cloth for a repair visit. */
   processInProgress: "/images/handyman/toolbag-ready.webp",
   /** Full-bleed brand statement band: crisp cut-in paint lines on trim. */

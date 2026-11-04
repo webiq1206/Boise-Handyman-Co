@@ -109,7 +109,7 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/houses/kuna/kuna-single-storey-front.webp':
     'Beige single-storey home in Kuna with white trim, two-car garage and open fields beyond',
   '/images/houses/kuna/kuna-deck-board-replacement.webp':
-    'Representative image: new deck boards going down beside a single-storey home with a wood privacy fence',
+    'New deck boards going down beside a single-storey home with a wood privacy fence',
 };
 
 export function altForImage(src: string | undefined | null): string | undefined {

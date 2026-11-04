@@ -52,8 +52,8 @@ test('rendered registration, FAQ schema, and GBP copy do not claim this brand is
   assert.match(withLink, /href="https:\/\/edopl\.idaho\.gov\/OnlineServices\/\?link=PubSearch"/);
   assert.match(withLink, /target="_blank"/);
   assert.match(withLink, /rel="noopener noreferrer"/);
-  assert.match(withLink, /title="Look up registration 8381215 on Idaho DOPL"/);
-  assert.match(withLink, /aria-label="Verify with Idaho DOPL: look up registration 8381215, opens in a new tab"/);
+  assert.match(withLink, /title="Verify Idaho contractor registration 8381215"/);
+  assert.match(withLink, /aria-label="Verify Idaho contractor registration 8381215, opens in a new tab"/);
   assert.equal(numberOnly.includes('edopl.idaho.gov'), false);
   assert.match(numberOnly, /Idaho Registered Contractor #8381215/);
 
@@ -72,6 +72,11 @@ test('rendered registration, FAQ schema, and GBP copy do not claim this brand is
   assert.match(faqSchema, /an Idaho Registered Contractor #8381215, bonded, and insured/);
 
   const business = generateLocalBusinessSchema();
+  assert.doesNotMatch(JSON.stringify([
+    business,
+    generateServiceSchema('Drywall repair', 'Patch a wall', 'Boise'),
+    generateReviewSchema([]),
+  ]), /streetAddress|Wapoot|4031|public representative|43\.6515|-116\.4444/i);
   const credential = {
     '@type': 'EducationalOccupationalCredential',
     credentialCategory: 'registration',

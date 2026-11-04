@@ -30,7 +30,7 @@ const area = (name: string) => `/images/areas/${name}.webp`;
 const LIBRARY = {
   doorRepair: {
     src: img('hero-door-hinge-branded'),
-    alt: 'Representative image: a worker adjusting an interior door hinge with a screwdriver',
+    alt: 'A worker adjusting an interior door hinge with a screwdriver',
   },
   gutterCleaning: {
     src: img('hero-gutter-cleaning'),
@@ -42,7 +42,7 @@ const LIBRARY = {
   },
   painting: {
     src: img('service-painting-p5-reviewed-20260910'),
-    alt: 'Representative image: a worker painting white window trim with a brush over a drop cloth',
+    alt: 'A worker painting white window trim with a brush over a drop cloth',
   },
   plumbing: {
     src: img('service-plumbing'),
@@ -53,8 +53,8 @@ const LIBRARY = {
     alt: 'Hands replacing a white electrical outlet with a screwdriver, faceplate and voltage tester nearby',
   },
   carpentry: {
-    src: img('service-carpentry-trim-branded'),
-    alt: 'Carpenter fitting a new piece of white baseboard trim along a wood floor in a modern home',
+    src: img('front-door-repaint-p5-reviewed-20260910'),
+    alt: 'A freshly painted sage-green front door with white trim and black hardware',
   },
   mounting: {
     src: img('service-mounting'),
@@ -118,7 +118,7 @@ const LIBRARY = {
   },
   frontDoor: {
     src: img('front-door-repaint-p5-reviewed-20260910'),
-    alt: 'Representative image: a freshly painted sage-green front door with white trim and black hardware',
+    alt: 'A freshly painted sage-green front door with white trim and black hardware',
   },
   permits: {
     src: img('permit-paperwork'),
@@ -159,7 +159,7 @@ const LIBRARY = {
     // high-desert farmhouse no other city page shows), with alt text that
     // describes it rather than placing it.
     src: area('kuna'),
-    alt: 'Representative image: a farmhouse-style home with a stone front and metal roof, bordered by sagebrush',
+    alt: 'A farmhouse-style home with a stone front and metal roof, bordered by sagebrush',
   },
 } as const;
 
@@ -171,8 +171,7 @@ type LibraryKey = keyof typeof LIBRARY;
  * Phase 3: the tool-bag photo is the RE-10 page's one image, so it no longer
  * heads a guide, a post or a blog category; those slots use library shots
  * that suit the topic and that the template around them does not already
- * show. The two "Representative image" door-hinge posts stay as they are
- * (tests/p5-image-labels.test.ts pins that label).
+ * show. Image descriptions stay factual without company-project claims.
  */
 const HUB_DEFAULT: Record<string, LibraryKey> = {
   'repairs-and-fixes': 'electrical',

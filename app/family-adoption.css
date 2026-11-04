@@ -599,3 +599,32 @@
     font-size: 14px;
   }
 }
+
+/*
+  Reviewed marketing typography roles, November 4. Dedicated tool and form controls retain their own rules.
+*/
+
+.fr-card-body > .f-link,
+.fr-cards-more > .f-link,
+.f-value > div > .f-link,
+.fr-founder > div > p > .f-link,
+.fr-cta-strip-actions > .f-link,
+.fr-request-copy .fr-request-list .f-link {
+  font-family: var(--font-sans);
+  font-size: var(--fs-button);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+
+/* Exact logo colors for heading emphasis, owner direction November 4.
+   Functional link/focus inks and body copy keep their existing contrast roles. */
+:root { --color-heading-accent: #c56b4a; }
+html .approved-shell main :is(h1, h2, .ed-display, .ed-h2, .ed-h2-sm, .interior-statement) {
+  --ed-accent: var(--color-heading-accent);
+}
+html .approved-shell main :is(h1, h2, .ed-display, .ed-h2, .ed-h2-sm) :is(em, .brc-accent, .text-accent, .text-accent-legible),
+html .approved-shell main .interior-statement em {
+  color: var(--color-heading-accent);
+}

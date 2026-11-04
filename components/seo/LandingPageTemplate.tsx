@@ -2,6 +2,7 @@ import { LazyConsultationForm as ConsultationForm } from "@/components/LazyConsu
 import { QuoteFormAnchor } from "@/components/QuoteFormAnchor";
 import { LandingContactActions } from "@/components/marketing/LandingContactActions";
 import { InteriorHero,InteriorProjectAside } from '@/components/approved/InteriorLayout';
+import { DrywallSearchHero } from '@/components/approved/DrywallSearchHero';
 import { Section } from '@/components/marketing/Section';
 import { RelatedPostCards } from '@/components/marketing/RelatedPostCards';
 import Image from '@/components/MarketingImage';
@@ -191,6 +192,7 @@ export function LandingPageTemplate({
   const processAlt = altForImage(processImage) ?? '';
   const showTimelineBelow = !!timeline && !costGuidance;
   const callFirst = callFirstProp || !!paidService;
+  const focusedDrywallHero = manifestPath === '/services/drywall-repair' || manifestPath === '/services/drywall-repair/boise';
   // Phase 3. The paid-traffic pages (callFirst) render exactly as before. On
   // every other page each photograph is shown once, and the area and
   // city-service pages drop the bands that only restated the promises already
@@ -214,7 +216,7 @@ export function LandingPageTemplate({
       data-ad-landing={callFirst ? '' : undefined}
     >
       {/* Approved editorial hero */}
-      <InteriorHero imageSrc={heroImageUrl} imageAlt={heroAlt} layout="split">
+      {focusedDrywallHero ? <DrywallSearchHero h1={h1} overview={overview} speakableSummary={speakableSummary} breadcrumbs={breadcrumbs} callFirst={callFirst} /> : <InteriorHero imageSrc={heroImageUrl} imageAlt={heroAlt} layout="split">
           <HeroBreadcrumbs items={breadcrumbs} />
           <p data-speakable="summary" className="sr-only">{speakableSummary}</p>
           {eyebrow && (
@@ -286,7 +288,7 @@ export function LandingPageTemplate({
             </p>
           )}
           </>}
-        </InteriorHero>
+        </InteriorHero>}
       {/* The hero's form link lands on the form itself: its heading is the form's
           own, and the note that used to sit above it follows the form. */}
       {paidService && <section id="service-inquiry" tabIndex={-1} data-quote-anchor="" className="fr-request family-site family-handyman" style={{ '--f-accent': '#C56B4A' } as React.CSSProperties} aria-label="Send your list">
@@ -487,7 +489,7 @@ export function LandingPageTemplate({
       {sections && sections.length > 0 && (
         <Section surface="dark" spacing="xl" edge>
           <div className="ed-shell">
-            <div className="mx-auto grid max-w-3xl gap-10">
+            <div className="mx-auto grid max-w-3xl gap-10" data-reviewed-search-guide={focusedDrywallHero ? '' : undefined}>
               {/* Keep the guide index above centered copy at every width. */}
               <aside aria-label="In this guide">
                 <Reveal>
@@ -584,9 +586,9 @@ export function LandingPageTemplate({
         <Section surface="deep" spacing="xl" edge>
           <div className="ed-shell">
             <Reveal>
-              <p className="ed-eyebrow">Design inspiration</p>
+              <p className="ed-eyebrow">Repair details</p>
               <h2 className="ed-h2 ed-statement-wide">
-                {proofHeading ?? (<>Local <em className="not-italic" style={accent}>design inspiration</em></>)}
+                {proofHeading ?? (<>Local <em className="not-italic" style={accent}>repair details</em></>)}
               </h2>
             </Reveal>
 
@@ -649,7 +651,7 @@ export function LandingPageTemplate({
             <Accordion type="single" collapsible className="w-full border-t" style={line}>
               {faqs.map((faq, i) => (
                 <AccordionItem key={i} value={`faq-${i}`} className="border-0 border-b" style={line}>
-                  <AccordionTrigger className="ed-h4 py-6 text-left hover:no-underline [&[data-state=open]]:[color:var(--ed-accent)]">
+                  <AccordionTrigger className="ed-h4 py-6 text-left hover:no-underline [&[data-state=open]]:underline [&[data-state=open]]:underline-offset-4">
                     {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="ed-body pb-7 text-[0.9375rem]">{faq.answer}</AccordionContent>
