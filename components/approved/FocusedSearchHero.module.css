@@ -48,6 +48,18 @@
   .homeHero :global(.fam-hero[data-family-hero] .fam-hero-copy) {
     max-width: 50%;
   }
+  /* Keep exact terracotta on a continuous charcoal copy field. The existing
+     directional scrim and photograph remain visible beyond its short fade. */
+  .homeHero :global(.fam-hero[data-family-hero] .fam-hero-scrim)::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      var(--color-charcoal) 0% 50%,
+      rgba(var(--color-scrim-rgb), 0) calc(50% + var(--space-20))
+    );
+  }
   .homeHero :global(.fam-hero[data-family-hero] .fam-hero-copy .fam-hero-title) {
     font-size: var(--fs-display);
     line-height: var(--lh-display);
