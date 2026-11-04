@@ -1,6 +1,6 @@
 # Boise Handyman Co brand profile
 
-Profile version: source record 2026-11-04. Last approved: no new approval asserted. This records the existing approved source at `fc6f73278dc4cbad19bdc5df2738a8cc0908939b`; it does not approve a new identity or exception.
+Profile version: source record 2026-11-04.1. Last approved: no new approval asserted. This records the existing brand basis at `fc6f73278dc4cbad19bdc5df2738a8cc0908939b`; it does not approve a new identity or exception.
 
 Source of truth: `docs/approved-design-handoff.md` (implemented 2026-09-24), `lib/familyBrand.ts`, `styles/family-tokens.css`, current loaded `app/approved-system.css`, `app/family-redesign.css`, `app/layout.tsx` and `components/approved/family-content.ts`. Those implementation files retain authority for actual values. Older Montserrat/Libre references in the brand kit and content brief conflict with the loaded approved family design and are not instructions to revert it.
 
@@ -29,3 +29,8 @@ For every edit and review apply the current user-owned `website-design-quality` 
 Scoped November 4 C3/C4 correction: the homepage and two drywall search pages use the opt-in composition recorded in [hero-remediation-20261104.md](hero-remediation-20261104.md). It retains the palette, font families, original headline text and contact destinations, uses existing typography/spacing/control tokens and existing approved imagery, and adds no exception. Other interior heroes and all shared family chrome retain their prior implementation.
 
 The later six-site public-copy and typography work is recorded in [public-copy-cleanup-20261104.md](public-copy-cleanup-20261104.md). The homepage hero uses the exact approved terracotta token `#c56b4a` for its accent rather than the shared lightened mix; contrast and rendered acceptance remain pending. Canonical shared header/footer transport, section imagery, independent review, exact-head CI and owner publication are separate gates.
+
+
+### November4 narrow-header and menu implementation record
+
+Canonical source `boise-remodeling-co` revision `fa720a579b696af92861fb571fa0aff043e734b0` restores the complete approved SVG below360px in a logo row above the unboxed contact/menu controls. Normal320px prototype height is89px including the border; use the actual measured header/safe-area height, not a fixed clearance. Enlarged text may grow it. Normal360px-and-up header geometry is unchanged. Mobile-menu Call/Text/Chat contact controls are transparent and borderless at rest, retain visible focus and existing destinations/capability, and use the same icons as header/footer. This records the owner-requested consistency repair, not a new identity or approval exception. The independently reviewed prototype is narrower evidence than each final built site; retain exact-head rendering and functional gates.
