@@ -64,7 +64,10 @@ export function HandymanServicesAnswer() {
         ))}
       </div>
 
-      <h3 className="fr-every-title">Every service, one visit.</h3>
+      <h3 className="fr-every-title">Small jobs, one repair list.</h3>
+      <p className="ed-body mt-4 max-w-[65ch]">
+        Bring the repairs, installs and maintenance on your list together. We review the tasks, materials and access before agreeing the scope, price and visit plan. Larger construction or structural work needs a different contractor.
+      </p>
       <nav className="fr-cities" aria-label="All handyman services">
         {SERVICES.map((service) => (
           <a key={service.slug} href={`/services/${service.slug}`}>{toSentenceCase(service.name)}</a>
@@ -75,6 +78,8 @@ export function HandymanServicesAnswer() {
       <p className="f-answer-links">
         <a href="/contact">Send your repair list and photos</a>
         <a href="/re-10-repairs-boise">Inspection-related repairs</a>
+        <a href="/services/drywall-repair/boise">Drywall repair in Boise</a>
+        <a href="/areas/boise">Handyman help in Boise</a>
         <a href="#how-we-build">See how it works</a>
       </p>
     </section>

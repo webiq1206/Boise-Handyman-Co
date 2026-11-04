@@ -2,6 +2,10 @@
 
 Implemented September 24, 2026. Production deployment remains the owner's responsibility through Replit.
 
+## Current maintenance standard
+
+Apply the current user-owned `website-design-quality` skill, its complete Version 2.3 master standard, implementation rules and review record, and `organic-ai-search-visibility` 1.0.0 to edits and reviews. The existing approved values and protected workflows are recorded in [the Handyman brand profile](brand-profile.md); that source record grants no new exception or release approval. Use focused evidence for bounded copy edits and independent review before release.
+
 ## Design
 
 - Original horizontal vector wordmark retained, with the P5 family signature in the brand accent and the endorsement “A P5 Home Company”.

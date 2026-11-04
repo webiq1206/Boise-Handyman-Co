@@ -1,5 +1,9 @@
 # Content brief: Boise Handyman Co blog posts
 
+## Current website maintenance requirements
+
+Website edits and reviews also load the current user-owned `website-design-quality` skill, complete master Version 2.3, implementation rules and review record, and `organic-ai-search-visibility` 1.0.0. Use [the source-owned brand profile](../docs/brand-profile.md) and the current approved source for visual values and verified business facts. This historical brief is not permission to revert newer approved pricing, visit-plan, credential or design records. Preserve all protected journeys and follow the existing Git-to-Replit release gates. The bounded November 4 edit is recorded in [its change receipt](../docs/seo-boise-20261104.md).
+
 (Filename is historical: this brief previously covered the new-construction
 library. As of the August 2026 conversion it is the authoring brief for the
 **handyman** content library. Every article written for this site must satisfy

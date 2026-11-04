@@ -63,7 +63,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     headline: 'Drywall repair in Boise',
     primaryKeyword: 'drywall repair boise',
     overview:
-      'Boise Handyman Co patches holes, cracks, and water-damaged drywall for homes across the Treasure Valley, then blends the texture and paint so the repair disappears. You get an upfront quote based on the size and number of patches, and most repairs are finished across one or two short visits.',
+      'Boise Handyman Co repairs holes, dents, cracks and small damaged areas of drywall across the Treasure Valley. Patching, texture repair, priming and paint blending are reviewed together. The existing finish, damage, access and drying time determine the work and visit plan; water-damaged areas are considered after the leak is fixed.',
     benefits: [
       'Texture matched to your wall, not a flat shiny square',
       'Upfront quote from photos before we ever visit',
@@ -114,22 +114,22 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'Can you match my wall texture?',
         answer:
-          'Yes. Orange peel, knockdown, and most common Treasure Valley textures can be blended so the patch is hard to find once painted. Heavy custom textures take an extra finishing pass, which we include in the quote.',
+          'We assess the existing texture before quoting and aim to blend the repair with the surrounding wall. Orange peel, knockdown and custom textures need different finishing work. Existing texture, paint age, sheen and lighting can leave a repair visible, so an exact match is not guaranteed.',
       },
       {
         question: 'Do you paint the patch too?',
         answer:
-          'Yes. We prime every patch and blend paint over it. If you have leftover matching paint, we use it; otherwise we can color-match a sample at the paint store on the way.',
+          'Priming and paint blending are part of our listed drywall repair scope. Tell us whether you have leftover paint and include its color and sheen if known. Aged or faded paint may not match a fresh patch; we review whether touch-up work or painting a larger area makes sense before agreeing the work.',
       },
       {
         question: 'Why does drywall repair take two visits?',
         answer:
-          'Joint compound has to dry before the next coat, and rushing it leaves a visible bump. Small dents can be done in one visit with fast-setting compound; patches larger than a fist usually get two short visits so the finish is actually flat.',
+          'Joint compound and finish coats need drying time between stages. The size and depth of the damage, existing finish, materials and access affect whether a return visit is needed. We confirm the visit plan after reviewing your repair rather than promise a fixed number of visits from patch size alone.',
       },
       {
         question: 'Do you repair the leak that caused the damage?',
         answer:
-          'We fix minor plumbing leaks like a failed supply line or a dripping trap as part of the same visit. Roof leaks and anything inside walls that needs a licensed plumber get referred out first, because patching over an active leak just ruins the new drywall.',
+          'The water source needs to be resolved before damaged drywall is patched. Tell us what caused the stain, whether it is still changing and what repair has already been done. Roof leaks, concealed plumbing and underlying moisture problems need the appropriate contractor before finish work is agreed.',
       },
     ],
     costGuidance: {"heading":"Scope and pricing for your project","paragraphs":["Send your repair list and photos. Our team reviews the work, materials and access before preparing a quote.","Scope, price and scheduling are agreed before work begins. A request does not reserve a visit or confirm a price."]},
@@ -812,6 +812,22 @@ export function getCityServiceSections(
   const serviceLC = service.name.toLowerCase();
 
   const sections: LandingSection[] = [
+    ...(service.slug === 'drywall-repair' && city.slug === 'boise'
+      ? [{
+          heading: 'Plan a drywall repair in your Boise home',
+          paragraphs: [
+            'Send your Boise service address and a wide photo of the room, then a close photo of each damaged area with something for scale. Count the patches and note whether they are on a wall, ceiling or stairwell. Include the ceiling height and anything that limits access.',
+            'Tell us about the texture, any matching paint you have and any related work, such as a moved fixture or a repaired leak. If the stain is still spreading, the surface feels damp or the crack keeps returning, describe that before requesting a cosmetic patch.',
+            'For work beyond a surface repair, confirm the property jurisdiction and permit requirements with the building authority. A Boise mailing address alone does not establish which authority handles the property. The City of Boise homeowner guide is a starting point for properties inside city limits.',
+          ],
+          links: [
+            { label: 'Drywall repair scope and finish expectations', href: '/services/drywall-repair' },
+            { label: 'Paint touch-up scope', href: '/services/painting-touch-ups' },
+            { label: 'Handyman services in Boise', href: '/areas/boise' },
+            { label: 'City of Boise homeowner permit guide', href: 'https://www.cityofboise.org/departments/planning-and-development-services/building/homeowners-guide/' },
+          ],
+        }]
+      : []),
     // Server-rendered cost bands (extractable by crawlers and AI engines,
     // unlike the client-side estimator).
     ...(service.costGuidance
