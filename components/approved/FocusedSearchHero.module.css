@@ -61,7 +61,9 @@
 }
 .serviceCopy {
   min-width: 0;
+  align-self: center;
   padding: var(--section-y) var(--gutter);
+  padding-left: max(var(--gutter), calc((100vw - var(--container-max)) / 2));
 }
 .serviceCopy h1 {
   margin: 0;
@@ -154,6 +156,7 @@
 :global(html):has(.homeHero),
 :global(html):has(.serviceHero) {
   scroll-padding-bottom: var(--handyman-reviewed-bar-clearance, var(--bar-height));
+  scroll-padding-top: calc(var(--handyman-reviewed-header-clearance, var(--header-height)) + var(--space-4));
 }
 :global(body):has(.homeHero) :global(.fam-btn:not(form *)),
 :global(body):has(.serviceHero) :global(.fam-btn:not(form *)) {
@@ -191,4 +194,86 @@
 :global(body):has(.serviceHero) :global(.fam-menu-foot > *) {
   min-width: 0;
   max-width: 100%;
+}
+
+/* Ordinary content only: these grids must not acquire an enlarged-text
+   min-content width. Protected planning and input containers are excluded. */
+:global(body):has(.homeHero) :global(#the-finish .fr-gallery-top),
+:global(body):has(.homeHero) :global(#how-we-build),
+:global(body):has(.homeHero) :global(#who-you-are-hiring .fr-founder) {
+  overflow-wrap: anywhere;
+}
+:global(body):has(.homeHero) :global(#the-finish .fr-gallery-top > *),
+:global(body):has(.homeHero) :global(#how-we-build > *),
+:global(body):has(.homeHero) :global(#who-you-are-hiring .fr-founder > *) {
+  min-width: 0;
+  max-width: 100%;
+}
+:global(body):has(.serviceHero) :global([data-reviewed-search-guide]) {
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+  overflow-wrap: anywhere;
+}
+:global(body):has(.serviceHero) :global([data-reviewed-search-guide] > *),
+:global(body):has(.serviceHero) :global([data-reviewed-search-guide] :is(aside, ol, li, a, span)) {
+  min-width: 0;
+  max-width: 100%;
+}
+:global(body):has(.homeHero) :global(.ed-statement),
+:global(body):has(.homeHero) :global(.f-area h2),
+:global(body):has(.serviceHero) :global(.ed-statement) {
+  overflow-wrap: anywhere;
+}
+:global(body):has(.homeHero) :global(#how-we-build > .f-sticky),
+:global(body):has(.homeHero) :global(.ed-split > [class~="lg:sticky"]),
+:global(body):has(.serviceHero) :global(.ed-split > [class~="lg:sticky"]),
+:global(body):has(.serviceHero) :global(.interior-project-aside) {
+  top: calc(var(--handyman-reviewed-header-clearance, var(--header-height)) + var(--space-5));
+}
+:global(body):has(.homeHero) :global([data-reviewed-static-sticky]),
+:global(body):has(.serviceHero) :global([data-reviewed-static-sticky]) {
+  position: static;
+}
+
+/* Keep the existing header in normal flow when large text needs another row.
+   The observer records its real height for anchor/focus clearance. */
+:global(body):has(.homeHero) :global(.fam-header[data-family-header]),
+:global(body):has(.serviceHero) :global(.fam-header[data-family-header]) {
+  height: auto;
+  min-height: calc(var(--header-height) + env(safe-area-inset-top, 0px));
+}
+:global(body):has(.homeHero) :global(.fam-header[data-family-header] .fam-header-inner),
+:global(body):has(.serviceHero) :global(.fam-header[data-family-header] .fam-header-inner) {
+  height: auto;
+  min-height: calc(var(--header-height) - 1px);
+  flex-wrap: wrap;
+}
+:global(body):has(.homeHero) :global(.fam-header[data-family-header] .fam-header-nav),
+:global(body):has(.serviceHero) :global(.fam-header[data-family-header] .fam-header-nav) {
+  min-width: 0;
+}
+:global(body):has(.homeHero) :global(.fam-header[data-family-header] .fam-header-nav ul),
+:global(body):has(.serviceHero) :global(.fam-header[data-family-header] .fam-header-nav ul) {
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+:global(body):has(.homeHero) :global(.fam-header[data-family-header] .fam-header-cta),
+:global(body):has(.serviceHero) :global(.fam-header[data-family-header] .fam-header-cta) {
+  min-width: 0;
+  max-width: 100%;
+  flex: 0 1 auto;
+}
+@media (max-width: 1179px) {
+  :global(body):has(.homeHero) :global(.fam-header[data-family-header] .fam-header-logo),
+  :global(body):has(.serviceHero) :global(.fam-header[data-family-header] .fam-header-logo) {
+    flex-basis: 0;
+  }
+}
+@media (min-width: 1180px) {
+  :global(body):has(.homeHero) :global(.fam-header[data-family-header] .fam-header-logo),
+  :global(body):has(.serviceHero) :global(.fam-header[data-family-header] .fam-header-logo) {
+    flex-shrink: 0;
+  }
 }

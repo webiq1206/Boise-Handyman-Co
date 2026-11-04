@@ -489,7 +489,7 @@ export function LandingPageTemplate({
       {sections && sections.length > 0 && (
         <Section surface="dark" spacing="xl" edge>
           <div className="ed-shell">
-            <div className="mx-auto grid max-w-3xl gap-10">
+            <div className="mx-auto grid max-w-3xl gap-10" data-reviewed-search-guide={focusedDrywallHero ? '' : undefined}>
               {/* Keep the guide index above centered copy at every width. */}
               <aside aria-label="In this guide">
                 <Reveal>
