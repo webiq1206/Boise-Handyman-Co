@@ -77,39 +77,25 @@ photo crop and fit require final rendering before acceptance. Protected estimato
 their own typography and behavior. These are implementation directions, not new
 palette, fit or accessibility exceptions or a final rendered/release acceptance.
 
-### November 5 homepage overlay, fold and existing-image direction
+### November 5 approved homepage video and visible fold
 
-The owner replaces the homepage split photograph/charcoal copy field with a
-full-bleed approved photograph and one uniform overlay. The original40%-opacity
-black instruction was later superseded by explicit permission to darken overlays
-as needed using design judgment. The selected homepage treatment is uniform
-`rgba(0,0,0,.78)`: measured minimum black opacity was approximately77.061% across
-nine normal and three enlarged-phone states, rounded to78% for a small margin.
-No gradient, regional dark band or independent copy panel remains. Other pages
-and approved typography, exact terracotta, copy and contact destinations stay
-protected. The initial homepage hero reaches
-the current visible viewport below the measured header, without subtracting the
-bar that is already hidden over this hero or counting safe areas/browser controls
-twice. Enlarged text can grow naturally. Overlay strength may satisfy the latest
-readability direction; the exact approved accent and clean type remain unchanged.
+The latest owner direction replaces the homepage photo/copy split with the
+approved people-free Handyman video, full bleed across the complete hero.
+This supersedes the earlier worker/door photograph prototypes for the homepage.
+The representative video shows finished residential details; it is not evidence
+of a named customer project. Other pages retain their existing media.
 
-The implementation and observed limits are recorded in
-[hero-black-fold-20261105.md](hero-black-fold-20261105.md). Required image/text
-contrast, short-phone head clearance, independent review, exact-head CI and owner
-publication remain separate gates. This direction grants no accessibility
-exception and establishes no final rendered approval.
+Use one consistent uniform black overlay, currently `rgba(0,0,0,.78)`, darkened only as needed for measured
+readability while preserving the exact terracotta accent, clean approved type,
+copy and contact destinations. No gradient, regional band or copy panel remains.
+The initial hero fills the current visible viewport below the actual measured
+header. The already-hidden mobile bar and browser/safe-area clearances must not
+be subtracted twice. Larger text grows naturally with every action accessible.
 
-The owner's delegated visual judgment permits an appropriate existing approved
-brand image choice within the homepage hero. The homepage now selects the
-people-free `/images/handyman/front-door-repaint-p5-reviewed-20260910.webp` to
-remove short-phone head/text collisions and enlarged-text head cropping. Its
-existing approval and door/trim relevance are recorded in
-`docs/charcoal-integration-20261104.md`; approved carpentry service consumers
-already use it. This representative photograph is not authentic completed-job
-proof. Other pages keep their existing media. Exact overlay/accent, full-bleed
-coverage, independent crops and actual contrast remain required review gates.
-The September10 visual audit records the asset as previously generated/edited
-representative imagery reviewed at full size. Natural cover uses a60% horizontal
-focal point below640px and centered placement above, retaining complete hardware
-in enlarged phone crops and source quality without zoom. No filter or additional
-darkening is applied.
+The high-priority poster appears in the first response, including without
+JavaScript. Motion respects reduced-motion and data-saving preferences until
+explicitly played. Use muted inline looping video with an accessible pause/play
+control, responsive 720p/1080p selection and offscreen/hidden pause. The poster
+remains available if playback is blocked or fails. Final actual-frame contrast,
+responsive composition, independent review, exact-head CI and source release
+checks remain required; owner Replit publication is a separate step.
