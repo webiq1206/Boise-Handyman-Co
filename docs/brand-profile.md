@@ -92,9 +92,10 @@ The initial hero fills the current visible viewport below the actual measured
 header. The already-hidden mobile bar and browser/safe-area clearances must not
 be subtracted twice. Larger text grows naturally with every action accessible.
 
-The high-priority poster and native autoplay sources appear in the first response,
-including without JavaScript. The owner's latest direction requires muted inline
-looping playback attempts in all device and preference modes, including reduced
+The high-priority poster appears in the first response. JavaScript enhancement
+mounts the video; without JavaScript, the technical poster fallback avoids
+browser-forced native controls. The owner's latest direction requires muted inline
+looping playback attempts in all JavaScript-enabled device and preference modes, including reduced
 motion and Save-Data, with no visible or native play/pause/stop controls. Responsive
 720p/1080p selection and offscreen/hidden lifecycle pause remain; visible media
 resumes automatically. Technical loading, browser-blocked playback and media errors

@@ -7,18 +7,21 @@ const POSTER = `${MEDIA}poster.jpg`;
 const PHONE_VIDEO = `${MEDIA}background-720p.mp4`;
 const DESKTOP_VIDEO = `${MEDIA}background-1080p.mp4`;
 
-/** Native autoplay is eligible in the first response; the poster covers technical failures. */
+/** The poster covers unavailable enhancement; enhanced media attempts native autoplay. */
 export function HandymanHeroVideo() {
   const media = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
+  const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
+
+  useEffect(() => { setReady(true); }, []);
 
   useEffect(() => {
     const element = video.current;
     if (!element || failed) return;
     let desktop = window.innerWidth >= 1024;
     const initialSource = desktop ? DESKTOP_VIDEO : PHONE_VIDEO;
-    // Native playback may start before hydration and an early viewport change.
+    // Native source selection and enhancement may straddle a viewport change.
     if (element.currentSrc && !element.currentSrc.endsWith(initialSource)) {
       element.src = initialSource;
       element.load();
@@ -69,7 +72,7 @@ export function HandymanHeroVideo() {
       element.removeEventListener('playing', playing);
       element.pause();
     };
-  }, [failed]);
+  }, [failed, ready]);
 
   return (
     <div ref={media} className="fam-hero-media" aria-hidden="true">
@@ -77,13 +80,13 @@ export function HandymanHeroVideo() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img data-hero-poster="" src={POSTER} alt="" width={1920} height={1080}
         fetchPriority="high" loading="eager" className="fam-hero-img" />
-      <video ref={video} id="handyman-hero-video" poster={POSTER}
+      {ready && <video ref={video} id="handyman-hero-video" poster={POSTER}
         autoPlay muted loop playsInline preload="auto" tabIndex={-1}
         disablePictureInPicture hidden={failed} className="handyman-hero-video"
         onError={event => { if (event.currentTarget.error) setFailed(true); }}>
         <source media="(min-width: 1024px)" src={DESKTOP_VIDEO} type="video/mp4" />
         <source src={PHONE_VIDEO} type="video/mp4" />
-      </video>
+      </video>}
     </div>
   );
 }

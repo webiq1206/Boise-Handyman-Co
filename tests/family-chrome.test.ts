@@ -114,15 +114,9 @@ test('the homepage video hero preserves first-response content, poster and sourc
   assert.match(html, /<a href="tel:\+12084771169" class="fam-hero-link">Call \(208\) 477-1169<\/a>/);
   assert.match(html, /<img [^>]*fetchPriority="high"[^>]*class="fam-hero-img"/);
   assert.match(html, /<img [^>]*src="\/media\/handyman\/boise-handyman-co-poster\.jpg"/);
-  const video = html.match(/<video\b[^>]*>/)?.[0] ?? '';
-  assert.ok(video, 'decorative video element');
-  assert.match(video, /autoplay=""/i, 'native autoplay is eligible in the first response');
-  assert.match(video, /muted=""/);
-  assert.match(video, /loop=""/);
-  assert.match(video, /playsinline=""/);
-  assert.doesNotMatch(video, /\scontrols(?:=|\s|>)/i, 'no native controls');
-  assert.match(html, /<source media="\(min-width: 1024px\)" src="\/media\/handyman\/boise-handyman-co-background-1080p\.mp4" type="video\/mp4"\/>/);
-  assert.match(html, /<source src="\/media\/handyman\/boise-handyman-co-background-720p\.mp4" type="video\/mp4"\/>/);
+  // No-JavaScript uses the approved poster: WebKit can force native controls
+  // onto an SSR video even when its controls attribute is absent.
+  assert.doesNotMatch(html, /<video\b|<source\b/, 'video is enhanced only when JavaScript is available');
   assert.doesNotMatch(html, /handyman-hero-video-control|aria-controls="handyman-hero-video"/, 'no page-level video controls');
   assert.doesNotMatch(html, /handyman-hero-door-hinge-branded|front-door-repaint/, 'no superseded image in the final hero');
   const support = html.match(/<p class="fam-hero-support">([^<]+)<\/p>/)?.[1] ?? '';
