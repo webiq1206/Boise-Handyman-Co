@@ -112,8 +112,15 @@ export default function HandymanLandingPage() {
         .approved-shell .hl-hero p { color: #fbfaf6; }
         .approved-shell .hl-hero h1 { font-size: clamp(32px, 7.6vw, 60px); line-height: 1.05; }
         @media (max-width: 767px) {
-          .approved-shell .hl-hero { min-height: 0; }
-          .approved-shell .hl-hero h1 { font-size: 32px; }
+          .approved-shell.site-handyman .hl-hero { min-height: 0; padding-block: 0; flex-direction: column; background: var(--color-charcoal); }
+          .approved-shell .hl-hero-copy { order: 1; padding-block: var(--section-y); }
+          .approved-shell .hl-hero-copy > div:has([data-landing-contact]) { margin-top: var(--stack-cta); }
+          .approved-shell .hl-hero-photo { position: relative; inset: auto; order: 2; width: 100%; height: 96px; flex-shrink: 0; }
+          .approved-shell .hl-hero-photo img { object-position: 62% top; }
+          .approved-shell .hl-hero-shade,
+          .approved-shell .hl-hero-trust,
+          .approved-shell .hl-hero [data-landing-contact] > p { display: none; }
+          .approved-shell .hl-hero h1 { font-size: var(--fs-page-title, var(--fs-h1)); }
         }
       `}</style>
       <JsonLd
@@ -124,16 +131,18 @@ export default function HandymanLandingPage() {
       />
 
       <section data-p5-hero className="hl-hero relative flex min-h-[32rem] items-end overflow-hidden">
-        <Image
+        <div className="hl-hero-photo absolute inset-0">
+          <Image
           src={HERO_IMAGE}
           alt="A worker adjusting an interior door hinge with a screwdriver"
           fill
           priority
           sizes="100vw"
           className="object-cover object-[62%_center]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[color-mix(in_srgb,var(--color-charcoal)_95%,transparent)] via-[color-mix(in_srgb,var(--color-charcoal)_60%,transparent)] to-[color-mix(in_srgb,var(--color-charcoal)_20%,transparent)]" aria-hidden="true" />
-        <div className="relative z-10 mx-auto w-full max-w-5xl px-5 pb-5 pt-6 sm:px-8 sm:pb-16 sm:pt-16">
+          />
+        </div>
+        <div className="hl-hero-shade absolute inset-0 bg-gradient-to-t from-[color-mix(in_srgb,var(--color-charcoal)_95%,transparent)] via-[color-mix(in_srgb,var(--color-charcoal)_60%,transparent)] to-[color-mix(in_srgb,var(--color-charcoal)_20%,transparent)]" aria-hidden="true" />
+        <div className="hl-hero-copy relative z-10 mx-auto w-full max-w-5xl px-5 pb-5 pt-6 sm:px-8 sm:pb-16 sm:pt-16">
           <h1 className="max-w-[16ch] font-serif">Boise handyman for the repairs on your list</h1>
           <p className="mt-4 max-w-[36rem] text-base leading-snug sm:text-lg sm:leading-relaxed">
             Tell Boise Handyman Co what needs fixing. Call to discuss your repair list, or send the details online.
@@ -141,8 +150,21 @@ export default function HandymanLandingPage() {
           <div className="mt-5">
             <LandingContactActions onDark formId="quick-quote" formLabel="Send Your Repair List" />
           </div>
-          
-          <ul className="mt-5 flex flex-wrap gap-2">
+          <ul className="hl-hero-trust mt-5 flex flex-wrap gap-2">
+            {TRUST.map(({ icon: Icon, label }) => (
+              <li key={label} className="inline-flex items-center gap-1.5 rounded-full border border-[#fbfaf6]/35 bg-[color-mix(in_srgb,var(--color-charcoal)_55%,transparent)] px-3 py-1.5 text-[13px] leading-tight text-[#fbfaf6]">
+                <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                <span>{label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <div className="bg-[var(--color-charcoal)] px-5 py-4 text-[#fbfaf6] sm:px-8 md:hidden" aria-label="Handyman service details">
+        <div className="mx-auto w-full max-w-5xl">
+          <p className="mb-4 text-sm">{SITE_CONFIG.phone} · Prefer another option? Use the form below.</p>
+          <ul className="flex flex-wrap gap-2">
             {TRUST.map(({ icon: Icon, label }) => (
               <li
                 key={label}
@@ -154,7 +176,7 @@ export default function HandymanLandingPage() {
             ))}
           </ul>
         </div>
-      </section>
+      </div>
 
         {/* "Send Your Repair List" lands on the form itself: heading, then the first field. */}
         <section tabIndex={-1} id="quick-quote" data-quote-anchor="" className="fr-request family-site family-handyman" style={{ '--f-accent': '#C56B4A' } as React.CSSProperties} aria-label="Send your list">
