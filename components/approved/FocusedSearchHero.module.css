@@ -28,6 +28,11 @@
   position: absolute;
   inset: 0;
   height: auto;
+  overflow: hidden;
+}
+.homeHero :global(.fam-hero[data-family-hero] .fam-hero-img) {
+  transform: scale(1.8);
+  transform-origin: 60% 50%;
 }
 .homeHero :global(.fam-hero[data-family-hero] .fam-hero-scrim) {
   display: block;
