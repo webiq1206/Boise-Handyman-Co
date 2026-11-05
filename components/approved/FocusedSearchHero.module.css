@@ -41,31 +41,7 @@
   height: 100%;
   object-fit: cover;
   object-position: 50% 50%;
-  opacity: 0;
   pointer-events: none;
-}
-.homeHero :global(.handyman-hero-video[data-has-frame='true']) {
-  opacity: 1;
-}
-.homeHero :global(.handyman-hero-video-control) {
-  position: absolute;
-  top: var(--space-4);
-  right: var(--gutter);
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--touch-min);
-  height: var(--touch-min);
-  padding: var(--space-2);
-  color: var(--color-paper);
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid currentColor;
-  cursor: pointer;
-}
-.homeHero :global(.handyman-hero-video-control:focus-visible) {
-  outline: 2px solid var(--color-paper);
-  outline-offset: 3px;
 }
 .homeHero :global(.fam-hero-title) {
   overflow-wrap: anywhere;
