@@ -18,13 +18,12 @@ export function ApprovedFamilyFrame({ children }: { children: ReactNode }) {
 /**
  * Homepage hero on the shared family HeroPhoto (Phase 2 family chrome).
  *
- * The technician photograph (branded jacket, real tools) runs full bleed with
- * the directional scrim on the open wall to his left; the focal point keeps his
- * complete head in frame from 320px to 1920px. Same eyebrow and H1 as before,
- * two declaratives with the terracotta second line, one support line, one
- * primary ("Send your list and photos" to /contact, where every other primary
- * on the site goes) and Call as the text link. The proof strip under it carries
- * the three facts the hero already published, nothing new.
+ * The existing approved, people-free door/trim photograph runs full bleed under
+ * the homepage's uniform black scrim. It avoids the technician head/copy
+ * collision in short-phone and enlarged-text crops. This representative image
+ * is not a claim of a named completed company project. Eyebrow, H1, terracotta,
+ * support and existing action destinations stay unchanged. The proof strip
+ * carries the three facts the hero already published, nothing new.
  *
  * Server-rendered: HeroPhoto gives the photo fetchPriority="high" on its own
  * img (no react-dom preload()), so the image and H1 are in the first HTML.
@@ -33,16 +32,16 @@ export function ApprovedHomeHero({heroClassName}: {heroClassName?: string} = {})
   const b = brands.handyman;
   return (
     <>
-      {/* Already sized WebP (1280x720 at 59 KB), so it is served as is. A /_next/image request
+      {/* Existing approved WebP, served as is. A /_next/image request
           for a hero can stall and hold the page's load event open, as it did on Boise Remodeling Co. */}
       <div className={[heroClassName, 'pt-0'].filter(Boolean).join(' ')}><HeroPhoto
         image={{
-          src: b.hero,
-          width: 1280,
-          height: 720,
-          position: '66% 12%',
+          src: '/images/handyman/front-door-repaint-p5-reviewed-20260910.webp',
+          width: 1461,
+          height: 1076,
+          position: '50% 50%',
           unoptimized: true,
-          alt: 'Careful adjustment of an interior door hinge',
+          alt: 'Sage-green front door with white trim and black hardware',
         }}
         eyebrow={b.kicker}
         title="Boise handyman."

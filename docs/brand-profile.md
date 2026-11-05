@@ -93,5 +93,15 @@ must not be darkened/recolored to manufacture contrast compliance.
 The implementation and observed limits are recorded in
 [hero-black-fold-20261105.md](hero-black-fold-20261105.md). Required image/text
 contrast, short-phone head clearance, independent review, exact-head CI and owner
-publication remain separate gates. This direction grants no accessibility or
-media-replacement exception and establishes no final rendered approval.
+publication remain separate gates. This direction grants no accessibility
+exception and establishes no final rendered approval.
+
+The owner's delegated visual judgment permits an appropriate existing approved
+brand image choice within the homepage hero. The homepage now selects the
+people-free `/images/handyman/front-door-repaint-p5-reviewed-20260910.webp` to
+remove short-phone head/text collisions and enlarged-text head cropping. Its
+existing approval and door/trim relevance are recorded in
+`docs/charcoal-integration-20261104.md`; approved carpentry service consumers
+already use it. This representative photograph is not authentic completed-job
+proof. Other pages keep their existing media. Exact overlay/accent, full-bleed
+coverage, independent crops and actual contrast remain required review gates.

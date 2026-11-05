@@ -25,3 +25,23 @@ Replace the existing homepage-only split composition and desktop charcoal pseudo
 - FAIL, contrast: actual foreground-core pixel locations compared with the rendered backdrop without copy. Exact terracotta large-text minimums are1.003/1.344/1.283/1.015/1.091:1 at320/360/390/768/1440, below3:1. White eyebrow fails at320(4.113),360(4.270),768(3.659), below4.5:1. Support fails at768(3.990),1440(3.840), and Call at1440(3.429). See `working-contrast.json`; no overlay/accent substitution has been made.
 - FAIL, image/text clearance: the full approved worker head is visible in the default crop, but short-phone eyebrow/H1 crosses the head. Same-image horizontal66/74/79% focal trials preserve that conflict; further shift clips hair. These trial screenshots/approximate source-derived head bounds are `trial-focal-*` and `focal-trials.json`. They are unselected experiments; source keeps the original focal point.
 - NOT RUN: physical iPhone Safari toolbar/safe areas, physical keyboard, downstream delivery, field performance, local production build/postbuild, exact-head CI and independent final review. The parent coordinates disk-limited local build and review before any release. No merge, import, publication or live verification is asserted.
+
+## Later existing-image composition correction
+
+The preceding worker-image results are historical observations through candidate
+`8add9445cabe271bc8ed3d3c01ec70cf14e9d1dc`. That candidate corrected the exact360px
+gutter to20px, passed normal build/exact-head CI, and remained visually blocked.
+The owner's delegated design judgment also permits an ordinary appropriate
+existing brand image choice; a current-photo-only restriction was too narrow.
+
+The homepage alone now selects the existing approved people-free sage door image
+`/images/handyman/front-door-repaint-p5-reviewed-20260910.webp` (1461×1076). Its
+approval/relevance is recorded in `docs/charcoal-integration-20261104.md`, and the
+approved carpentry service already uses it. No asset is generated/downloaded and
+no other media consumer changes. Alt text describes the visible door, trim and
+hardware without an authentic-job assertion. Full-bleed coverage, exact overlay,
+accent, type, copy and CTA destinations stay unchanged. The absence of people
+removes head occlusion/cropping; new full responsive/enlarged-text review and
+actual contrast measurements are required before acceptance. Previous worker
+contrast samples do not certify this replacement. Merge remains held for visual
+approval and any unresolved exact-overlay/accent contrast conflict.
