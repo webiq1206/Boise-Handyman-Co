@@ -46,7 +46,9 @@ actual contrast measurements are required before acceptance. Previous worker
 contrast samples do not certify this replacement. Merge remains held for visual
 approval and any unresolved exact-overlay/accent contrast conflict.
 
-Natural centered cover retains the door/hardware context and source quality.
+Natural cover retains the door/hardware context and source quality, with a60%
+horizontal focal point only below640px to keep hardware inside enlarged crops;
+tablet/desktop remain centered and no image enlargement is added.
 Only the media container clips image content; text preserves natural overflow.
 No filter, gradient, panel or additional darkening is applied. The September10
 visual audit records this as previously generated representative imagery reviewed

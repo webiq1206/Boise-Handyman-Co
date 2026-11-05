@@ -24,6 +24,11 @@
     --gutter: var(--space-5);
   }
 }
+@media (max-width: 639px) {
+  .homeHero :global(.fam-hero[data-family-hero] .fam-hero-img) {
+    object-position: 60% 50%;
+  }
+}
 .homeHero :global(.fam-hero[data-family-hero] .fam-hero-media) {
   position: absolute;
   inset: 0;
