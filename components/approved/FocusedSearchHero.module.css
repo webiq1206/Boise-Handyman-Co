@@ -37,7 +37,7 @@
 }
 .homeHero :global(.fam-hero[data-family-hero] .fam-hero-scrim) {
   display: block;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.78);
 }
 .homeHero :global(.fam-hero-title) {
   overflow-wrap: anywhere;

@@ -1,55 +1,31 @@
-# Handyman homepage black overlay and visible-fold correction
+# Handyman homepage overlay and visible-fold correction
 
-Status: implemented candidate; visual release gate blocked pending independent review. Base/recovery revision `15a162de3ebae722bf406d0c356063d6343060ea`; branch `codex/handyman-hero-black-fold`.
+The owner requests full-bleed homepage media, a consistent uniform overlay and a mobile hero that reaches the current visible fold below the actual header. The latest instruction explicitly permits darkening the overlay as needed using design judgment; it supersedes the original fixed40%-opacity black constraint. Preserve exact brand accent, typography, copy, actions, SEO, schema, analytics, forms, contacts and lead routing. No new media generation or provider/customer operation is part of this correction.
 
-The owner's November 5 instruction explicitly requests `#000000` with 60% transparency (40% opacity), consistently across the existing websites, and a mobile hero that reaches the visible fold with no next section initially. This supersedes the homepage split-photo/charcoal-field direction in the earlier brand profile. Preserve approved media, headline, support, CTAs, full heads, typography, brand accent, SEO, schema, analytics, contacts and lead routing. No image creation, real lead, provider operation or publication is authorized. Jared owns import and Replit publication.
+Website Design Quality Version2.3, its complete standard/implementation/review references, and `docs/brand-profile.md` govern the candidate. Orbit engineering/sites skills were absent from the available catalog and checkout and are not claimed as loaded. Baseline/recovery revision is `15a162de3ebae722bf406d0c356063d6343060ea`.
 
-Apply Website Design Quality Version 2.3, its complete design standard, implementation rules and review record, plus `docs/brand-profile.md` source record 2026-11-05.1. Current Orbit engineering/sites skills were absent from the available catalog and checkout; they are not claimed as loaded. Scope is the existing homepage-only `.homeHero` CSS-module opt-in. Two drywall service opt-ins and canonical shared family files remain unchanged.
+## Scoped implementation
 
-## Baseline and planned coverage
+Only the existing homepage opt-in in `FocusedSearchHero.module.css`, the homepage image selection in `ApprovedHomeHero.tsx` and their records change. Canonical shared family source, other pages, service media and all protected input flows remain unchanged.
 
-Before changing source, Chromium148.0.7778.96 captured exact base at320×568,360×640,390×844,430×932,768×1024,1024×768,1280×720,1440×900 and1920×1080. Evidence is private task `../evidence/handyman/baseline-*`, with initial/full screenshots and JSON geometry. At390×844, the original hero ends at657.953px; at1440×900 it ends565.266px. The next section is visible. At320×568 the original ends638.031px, with primary CTA visible under the documented C3 narrow-phone exception.
+The photograph fills the complete hero. Remove split-photo/charcoal copy fields, gradients and pseudo-panels. Use a single uniform black scrim at78% opacity. Budget minimum hero height from100svh, upgraded to100dvh when supported, minus the existing observer's actual header height. That measured header includes its safe area. The mobile bar is hidden over this homepage hero and consumes no initial height; do not subtract it or browser controls again. Natural minimum height and visible text overflow preserve enlarged-text scrolling and action access. The homepage gutter is20px from360–639, retaining16px below360.
 
-Matching final captures and measurements will check overlay/background layers, full-bleed approved image, actual header/hero/media bounds, no horizontal overflow, headline/actions, portrait/landscape, dynamic viewport resize simulation, WebKit emulation, reduced motion,200% text, menu/focus and existing CTA navigation without submitting. Measure text contrast from the actual image backdrop. Physical Safari/browser controls and downstream delivery remain separate, unavailable checks. Independent final review and exact-head CI are required before source merge; commit/build alone is not acceptance or deployment.
+## Existing approved image and crop
 
-## Implementation
+The owner's delegated visual judgment permits ordinary appropriate existing brand imagery. The people-free sage door at `/images/handyman/front-door-repaint-p5-reviewed-20260910.webp` (1461×1076) replaces the former technician image in the homepage only. `docs/charcoal-integration-20261104.md` records its existing approval and door/trim relevance; approved carpentry consumers already use it. The September10 visual audit records this as previously generated/edited representative imagery reviewed at full size, not authentic completed-company-project proof. The asset bytes are unchanged; nothing is generated or downloaded.
 
-Replace the existing homepage-only split composition and desktop charcoal pseudo-panel in `FocusedSearchHero.module.css` with an absolute full-bleed image and one uniform `rgba(0,0,0,.4)` scrim. Clear the copy gradient. Budget the hero from `100svh`, upgraded to `100dvh` when supported, minus the observer's actual header height. That measured height already includes header safe area; viewport units exclude browser controls. The bottom bar is hidden over the hero and consumes no initial height. Use natural minimum height so enlarged text can scroll without clipping or an internal scrollbar.
+Natural cover retains image quality and door/hardware context, with a60% horizontal focal point only below640px to retain complete hardware in enlarged-phone crops. Tablet/desktop remain centered, without added zoom. Only media clips to its boundary; text remains accessible. Alt text describes the visible sage door, white trim and black hardware.
 
-## Results
+## Uniform-overlay measurement
 
-- PASS: exact black40%-opacity scrim, clear inner background and full-bleed media at all9 responsive sizes. Header plus hero equals initial viewport height; media covers the complete hero, CTA remains fully visible, page has no horizontal overflow. Metadata(title/description/canonical/robots), H1 text, original image URL and both hero CTA destinations match base at every size. See `working-measurements.json`.
-- PASS: Chromium148 and WebKit26.4 reduced-motion checks at390×844 and viewport resize simulations640→740→844. Fold error at most0.016px. Menu opens/dismisses; primary CTA lands `#consult` at80px below64px header. No data entered or lead submitted. Existing automatic local `/api/estimator-session` POST and Next development error-stack requests were observed; later browser checks block non-GET requests. This is not a provider or delivery test.
-- PASS with C12 exception: computed per-element200% text grows the hero naturally to1080px at390×844, preserving text and actions without horizontal clipping. This is emulated text enlargement, not a physical device claim.
-- PASS: TypeScript no-emit;9 existing family/branding tests; family manifest guard confirms17 canonical shared files unchanged; `git diff --check`.
-- FAIL, contrast: actual foreground-core pixel locations compared with the rendered backdrop without copy. Exact terracotta large-text minimums are1.003/1.344/1.283/1.015/1.091:1 at320/360/390/768/1440, below3:1. White eyebrow fails at320(4.113),360(4.270),768(3.659), below4.5:1. Support fails at768(3.990),1440(3.840), and Call at1440(3.429). See `working-contrast.json`; no overlay/accent substitution has been made.
-- FAIL, image/text clearance: the full approved worker head is visible in the default crop, but short-phone eyebrow/H1 crosses the head. Same-image horizontal66/74/79% focal trials preserve that conflict; further shift clips hair. These trial screenshots/approximate source-derived head bounds are `trial-focal-*` and `focal-trials.json`. They are unselected experiments; source keeps the original focal point.
-- NOT RUN: physical iPhone Safari toolbar/safe areas, physical keyboard, downstream delivery, field performance, local production build/postbuild, exact-head CI and independent final review. The parent coordinates disk-limited local build and review before any release. No merge, import, publication or live verification is asserted.
+Actual photo-backed core glyph locations are compared with the same rendered backdrop without copy. Normal large text requires3:1 and normal-size text4.5:1; enlarged roles use their actual computed size/weight. A90%-black render provides a clean glyph mask; the unoverlaid rendered photo supplies source pixels for black source-over opacity calculations. Across nine normal viewports and320/360/390 enlarged-phone states, the controlling normal430px terracotta sample required approximately0.77061 black opacity. Select0.78, then verify the actual rendered result independently in both engines. No glyph shadow, text surround, image filter, gradient, regional band or accent substitution is introduced.
 
-## Later existing-image composition correction
+Earlier worker-photo and centered/zoom trial contrast numbers do not certify this final media/treatment. The prior head/text collision is removed by the approved people-free image; natural phone focal placement addresses the observed hardware-edge crop. Final current render/review receipts govern acceptance.
 
-The preceding worker-image results are historical observations through candidate
-`8add9445cabe271bc8ed3d3c01ec70cf14e9d1dc`. That candidate corrected the exact360px
-gutter to20px, passed normal build/exact-head CI, and remained visually blocked.
-The owner's delegated design judgment also permits an ordinary appropriate
-existing brand image choice; a current-photo-only restriction was too narrow.
+## Verification and release gates
 
-The homepage alone now selects the existing approved people-free sage door image
-`/images/handyman/front-door-repaint-p5-reviewed-20260910.webp` (1461×1076). Its
-approval/relevance is recorded in `docs/charcoal-integration-20261104.md`, and the
-approved carpentry service already uses it. No asset is generated/downloaded and
-no other media consumer changes. Alt text describes the visible door, trim and
-hardware without an authentic-job assertion. Full-bleed coverage, exact overlay,
-accent, type, copy and CTA destinations stay unchanged. The absence of people
-removes head occlusion/cropping; new full responsive/enlarged-text review and
-actual contrast measurements are required before acceptance. Previous worker
-contrast samples do not certify this replacement. Merge remains held for visual
-approval and any unresolved exact-overlay/accent contrast conflict.
+Capture normal320×568,360×640,390×844,430×932,768×1024,1024×768,1280×720,1440×900 and1920×1080. Review enlarged320/360/390 phones, reduced motion, viewport-height resize simulations, keyboard actions, menu/anchor clearance and actual photo contrast. Check full-bleed coverage, exact fold, complete headline/actions, width overflow, hardware integrity, visible media and unchanged H1/metadata/CTA destinations. Independent final review records all ten F4 dimensions and precise scope limits.
 
-Natural cover retains the door/hardware context and source quality, with a60%
-horizontal focal point only below640px to keep hardware inside enlarged crops;
-tablet/desktop remain centered and no image enlargement is added.
-Only the media container clips image content; text preserves natural overflow.
-No filter, gradient, panel or additional darkening is applied. The September10
-visual audit records this as previously generated representative imagery reviewed
-full-size, not authentic company project proof.
+Existing9 family/branding tests, TypeScript and17-file manifest guard passed earlier scoped candidates. Normal local prebuild/build/postbuild also passed before the image replacement, with local standalone tracing warnings caused by read-only shared dependency symlinks; that output is not a deployment artifact. The current source must pass the normal production build and relevant regressions in exact-head CI, not inherit an earlier revision's release status. Current review/CI receipts are retained with the task and PR checks.
+
+Physical iPhone Safari toolbars/safe areas, physical keyboard/screen reader, unchanged complete protected input journeys, downstream delivery, authentic-project proof and field performance are not established by viewport emulation or GET-only review. No data is entered or lead submitted. Source merge requires the authorized independent visual/functional and exact-head CI gates; Git import, Replit publication and live verification remain with Jared. No publication is asserted by this source record.

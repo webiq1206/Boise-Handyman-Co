@@ -77,18 +77,21 @@ photo crop and fit require final rendering before acceptance. Protected estimato
 their own typography and behavior. These are implementation directions, not new
 palette, fit or accessibility exceptions or a final rendered/release acceptance.
 
-### November 5 uniform black homepage overlay and fold direction
+### November 5 homepage overlay, fold and existing-image direction
 
-The later owner direction replaces the homepage split photograph/charcoal copy
-field with the existing full-bleed photograph and one uniform `#000000` overlay
-at60% transparency, precisely `rgba(0,0,0,.4)`. No gradient or independent copy
-panel remains in the homepage opt-in. This supersedes only the earlier homepage
-composition paragraph; other pages and approved typography, terracotta, media,
-copy and contact destinations stay protected. The initial homepage hero reaches
+The owner replaces the homepage split photograph/charcoal copy field with a
+full-bleed approved photograph and one uniform overlay. The original40%-opacity
+black instruction was later superseded by explicit permission to darken overlays
+as needed using design judgment. The selected homepage treatment is uniform
+`rgba(0,0,0,.78)`: measured minimum black opacity was approximately77.061% across
+nine normal and three enlarged-phone states, rounded to78% for a small margin.
+No gradient, regional dark band or independent copy panel remains. Other pages
+and approved typography, exact terracotta, copy and contact destinations stay
+protected. The initial homepage hero reaches
 the current visible viewport below the measured header, without subtracting the
 bar that is already hidden over this hero or counting safe areas/browser controls
-twice. Enlarged text can grow naturally. The exact overlay and protected accent
-must not be darkened/recolored to manufacture contrast compliance.
+twice. Enlarged text can grow naturally. Overlay strength may satisfy the latest
+readability direction; the exact approved accent and clean type remain unchanged.
 
 The implementation and observed limits are recorded in
 [hero-black-fold-20261105.md](hero-black-fold-20261105.md). Required image/text
