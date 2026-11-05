@@ -46,8 +46,8 @@ actual contrast measurements are required before acceptance. Previous worker
 contrast samples do not certify this replacement. Merge remains held for visual
 approval and any unresolved exact-overlay/accent contrast conflict.
 
-The selected focused crop scales only the existing image1.8× around60%50% and
-clips only the media container, preserving text's natural overflow. It places
-more copy over the door panels without a filter, gradient, panel or additional
-darkening. The September10 visual audit records this as previously generated
-representative imagery reviewed full-size, not authentic company project proof.
+Natural centered cover retains the door/hardware context and source quality.
+Only the media container clips image content; text preserves natural overflow.
+No filter, gradient, panel or additional darkening is applied. The September10
+visual audit records this as previously generated representative imagery reviewed
+full-size, not authentic company project proof.

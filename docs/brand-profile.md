@@ -106,5 +106,6 @@ already use it. This representative photograph is not authentic completed-job
 proof. Other pages keep their existing media. Exact overlay/accent, full-bleed
 coverage, independent crops and actual contrast remain required review gates.
 The September10 visual audit records the asset as previously generated/edited
-representative imagery reviewed at full size. A focused1.8× crop places more of
-the copy over the door panels; no filter or additional darkening is applied.
+representative imagery reviewed at full size. Natural centered cover retains
+door/hardware context and source quality; no filter or additional darkening is
+applied.
