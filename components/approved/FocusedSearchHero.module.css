@@ -19,6 +19,11 @@
   padding: var(--section-y) var(--gutter);
   background: none;
 }
+@media (min-width: 360px) and (max-width: 639px) {
+  .homeHero :global(.fam-hero[data-family-hero]) {
+    --gutter: var(--space-5);
+  }
+}
 .homeHero :global(.fam-hero[data-family-hero] .fam-hero-media) {
   position: absolute;
   inset: 0;
