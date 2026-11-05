@@ -10,6 +10,7 @@ on:
       - scripts/offline-run.mjs
       - scripts/offline-network-guard.cjs
       - .github/workflows/home-planning.yml
+      - scripts/branding-ci-evidence-bound.mjs
 permissions:
   contents: read
 concurrency:
@@ -51,10 +52,15 @@ jobs:
         run: cp /tmp/planning-after.tsx components/sections/HandymanPlanningRange.tsx
       - name: Check proposed CTA across every category and task
         run: node scripts/verify-home-planning.cjs
-      - uses: actions/upload-artifact@v4
+      - name: Bound complete artifact group 1 to64MiB
+        id: bounded_artifact_01
         if: always()
+        run: node scripts/branding-ci-evidence-bound.mjs --strict-64m 'test-results/home-planning/'
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() && steps.bounded_artifact_01.outcome == 'success' && steps.bounded_artifact_01.outputs.ready == 'true' }}
         with:
           name: handyman-home-planning-${{ github.sha }}
-          path: test-results/home-planning/
+          path: branding-ci-evidence/complete.tar.gz
           retention-days: 14
+          compression-level: 0
           if-no-files-found: error

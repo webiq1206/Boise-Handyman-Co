@@ -21,7 +21,7 @@
     position: relative;
     inset: auto;
     z-index: auto;
-    height: var(--space-32);
+    height: clamp(var(--space-24), 17.5svh, var(--space-32));
     flex: none;
   }
   .homeHero :global(.fam-hero[data-family-hero] .fam-hero-scrim) {

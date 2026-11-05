@@ -1,6 +1,6 @@
 # Boise Handyman Co brand profile
 
-Profile version: source record 2026-11-04.2. The later explicit instruction to resolve and merge Charcoal PR 144 authorizes its neutral palette. This records that integration with the reviewed November 4 family work; final rendered review and publication remain separate gates. No new logo, typeface or rule exception is asserted.
+Profile version: source record 2026-11-05.1. The later explicit instruction to resolve and merge Charcoal PR 144 authorizes its neutral palette. This records that integration with the reviewed November 4 family work; final rendered review and publication remain separate gates. No new logo, typeface or rule exception is asserted.
 
 Source of truth: `docs/approved-design-handoff.md` (implemented 2026-09-24), `lib/familyBrand.ts`, `styles/family-tokens.css`, current loaded `app/approved-system.css`, `app/family-redesign.css`, `app/layout.tsx` and `components/approved/family-content.ts`. Those implementation files retain authority for actual values. Older Montserrat/Libre references in the brand kit and content brief conflict with the loaded approved family design and are not instructions to revert it.
 
@@ -8,7 +8,7 @@ Source of truth: `docs/approved-design-handoff.md` (implemented 2026-09-24), `li
 - **Visual character:** practical, warm editorial design with large serif headings, clear service photography, restrained terracotta emphasis and generous paper surfaces.
 - **Logos:** existing `/brand/approved-lockup-light.svg` on dark and `/brand/approved-lockup-dark.svg` on light, intrinsic size 377 by 50. Retain the P5 Home Company endorsement and original vector assets, including their built-in colors. The light lockup has a bone main wordmark/P outline with a terracotta Co/icon accent; the earlier blanket terracotta wording did not describe that approved SVG. No asset recolor or new minimum size/clear-space approval is inferred.
 - **Colors:** background/surface paper `#fbfaf6`; alternate bone `#f1ede4`; primary and chrome charcoal `#383837`; charcoal surface `#4a4a48`, border `#979794`, pressed `#30302f`; site text uses the Charcoal role, with existing muted text roles retained. Handyman accent remains `#c56b4a`, accent ink `#92472c`; on-dark text `#fbfaf6`, muted `rgba(251,250,246,0.8)`, border `rgba(251,250,246,0.18)`; success `#3f6b4a`, warning `#8a6a1f`, error `#a33a2c`. Moss `#233029` is unchanged; the canonical forest fallback is now `#383837` and the neutral scrim uses RGB `56,56,55`. Canonical role definitions in `styles/family-tokens.css` and the existing site layers remain the source of truth. No new secondary CTA accent.
-- **Typography:** self-hosted Manrope and Cormorant Garamond loaded by `app/layout.tsx`. The November 4 family decision uses the existing canonical responsive roles in `styles/family-tokens.css`: editorial display 36/52/64px; interior H1 32/44/52px; ordinary H2 28/36/40px; H3 22/26/28px; body 17/18/18px; captions 14/15/15px; labels 13px; navigation 15px and buttons 16px. Display headings use the shared 400 weight, role leading and tracking. Existing marketing hero sizing and the reviewed three-route composition stay in place. Site-owned legacy overrides now consume these roles; final rendered role equality and task-state fit remain review gates.
+- **Typography:** self-hosted Manrope and Cormorant Garamond loaded by `app/layout.tsx`. The latest November 5 heading direction uses canonical responsive roles in `styles/family-tokens.css`: editorial display 36/52/64px; page H1 40/44/52px through `--fs-page-title`; compact feature 32/44/52px; ordinary H2 28/36/40px; H3 22/26/28px; body 17/18/18px; captions 14/15/15px; labels 13px; navigation 15px and buttons 16px. Display headings use the shared 400 weight, role leading and tracking. Existing marketing hero sizing and the reviewed three-route composition stay in place. Site-owned legacy overrides now consume these roles; final rendered role equality and task-state fit remain review gates.
 - **Spacing and layout:** preserve current Part B token scale and existing editorial grid. Shared token phone/tablet/desktop gutters are 20/32/48px, narrow phone 16px; content max 1280px. Existing Handyman navigation switches at 1180px per `lib/familyBrand.ts`. Token definitions and existing presentation overrides are retained rather than reinterpreted during a copy edit.
 - **Shape and surface:** existing square controls/cards, 4px inputs and choice cards, full-radius utilities where present; no new shadows or borders. Hairline service divisions and image-led cards stay in use.
 - **Photography:** existing approved service images are representative, not evidence of named completed jobs. `docs/photo-shot-list.md` records replacement needs. Do not label conceptual or generated imagery as authentic company project proof. Preserve the master standard's complete-head/crop rule. The Charcoal integration replaces active uses of the source-cropped carpentry worker with the existing approved people-free door/trim image, as recorded in `docs/charcoal-integration-20261104.md`; original asset URLs remain available.
@@ -51,3 +51,28 @@ This is a source implementation record, not a rendered contrast or visual accept
 Actual font pixels, photograph contrast, all listed template consumers and independent
 review remain required at the exact final revision. Source evidence lives in the private
 `evidence/brand-heading-accent-inventory.json` and implementation ledger.
+
+### November 5 mobile heading direction
+
+The owner's latest family direction enlarges mobile H1s, removes H1 glyph shadows
+and restores earlier mobile alignment selectively. The new page-title role is
+40/44/52px through `--fs-page-title`; the compact feature role remains 32/44/52px.
+The shared phone photo-hero role becomes `clamp(44px,13.333vw,56px)`. Existing
+Manrope/Cormorant families, 400 display weight, exact terracotta and other heading
+roles stay in use. Canonical Remodeling owns the shared source and transport.
+
+Handyman's reviewed Charcoal merge already removed the recent mobile centering;
+retain its left-flowing heroes and explicit centered sections and controls. Its
+homepage has no H1 glyph shadow. Preserve its separate photo/copy composition and
+desktop charcoal copy field. The phone photograph uses a 96–128px responsive height
+within that composition, with the complete worker head required at every crop.
+The `/handyman` landing consumes the page-title role instead of its former 32px
+phone override. Its normal-flow header no longer leaves a second phone header offset
+inside the hero. The phone copy has 64px section padding on charcoal and precedes
+a 96px photograph strip, with a top focal point intended to preserve the complete
+worker head without text over it. The phone/contact note and unchanged trust
+details follow immediately after the phone hero. Desktop composition and the
+other contact-action consumers retain their original content and styling. The
+photo crop and fit require final rendering before acceptance. Protected estimator, request-form and RE-10 task controls retain
+their own typography and behavior. These are implementation directions, not new
+palette, fit or accessibility exceptions or a final rendered/release acceptance.
