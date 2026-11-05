@@ -43,6 +43,12 @@
   object-position: 50% 50%;
   pointer-events: none;
 }
+.homeHero :global(.handyman-hero-video::-webkit-media-controls),
+.homeHero :global(.handyman-hero-video::-webkit-media-controls-enclosure),
+.homeHero :global(.handyman-hero-video::-webkit-media-controls-panel),
+.homeHero :global(.handyman-hero-video::-webkit-media-controls-start-playback-button) {
+  display: none !important;
+}
 .homeHero :global(.fam-hero-title) {
   overflow-wrap: anywhere;
 }
