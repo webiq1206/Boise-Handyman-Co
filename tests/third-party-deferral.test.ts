@@ -159,8 +159,10 @@ test('no page or component preloads an image through react-dom', () => {
     /\bpreload\s*\(/.test(readFileSync(file, 'utf8').replace(/\/\/.*$|\/\*[\s\S]*?\*\//gm, '')),
   );
   assert.deepEqual(offenders, []);
-  // The homepage hero is the shared family HeroPhoto (Phase 2), which sets the priority on its own img.
-  assert.match(readFileSync('components/approved/ApprovedHomeHero.tsx', 'utf8'), /<HeroPhoto\b/);
+  // The video hero keeps a first-response, high-priority poster rather than
+  // imperatively preloading through react-dom before preferences are known.
+  assert.match(readFileSync('components/approved/ApprovedHomeHero.tsx', 'utf8'), /<HandymanHeroVideo\b/);
+  assert.match(readFileSync('components/approved/HandymanHeroVideo.tsx', 'utf8'), /fetchPriority="high"/);
   assert.match(readFileSync('components/family/HeroPhoto.tsx', 'utf8'), /fetchPriority="high"/);
   assert.match(readFileSync('components/approved/InteriorLayout.tsx', 'utf8'), /fetchPriority="high"/);
 });

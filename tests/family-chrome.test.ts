@@ -102,7 +102,7 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   assert.match(html, /aria-label="Verify Idaho contractor registration 8381215, opens in a new tab"/);
 });
 
-test('the homepage hero is the family template with sourced proof', () => {
+test('the homepage video hero preserves first-response content, poster and sourced proof', () => {
   const html = renderToStaticMarkup(React.createElement(ApprovedHomeHero));
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
   assert.match(html, /<h1 class="fam-hero-title" id="family-hero-title">Boise handyman\. <span class="fam-hero-accent">Your list, handled\.<\/span><\/h1>/);
@@ -113,6 +113,14 @@ test('the homepage hero is the family template with sourced proof', () => {
   assert.equal(cta[1], 'Send your list and photos');
   assert.match(html, /<a href="tel:\+12084771169" class="fam-hero-link">Call \(208\) 477-1169<\/a>/);
   assert.match(html, /<img [^>]*fetchPriority="high"[^>]*class="fam-hero-img"/);
+  assert.match(html, /<img [^>]*src="\/media\/handyman\/boise-handyman-co-poster\.jpg"/);
+  const video = html.match(/<video\b[^>]*>/)?.[0] ?? '';
+  assert.ok(video, 'decorative video element');
+  assert.doesNotMatch(video, /\ssrc=|autoplay/i, 'no video download or autoplay before preferences are known');
+  assert.match(video, /muted=""/);
+  assert.match(video, /loop=""/);
+  assert.match(video, /playsinline=""/);
+  assert.doesNotMatch(html, /handyman-hero-door-hinge-branded|front-door-repaint/, 'no superseded image in the final hero');
   const support = html.match(/<p class="fam-hero-support">([^<]+)<\/p>/)?.[1] ?? '';
   assert.ok(support.split(/\s+/).length <= 14, support);
   // Proof: the three facts this hero already published, nothing new.

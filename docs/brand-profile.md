@@ -76,3 +76,26 @@ other contact-action consumers retain their original content and styling. The
 photo crop and fit require final rendering before acceptance. Protected estimator, request-form and RE-10 task controls retain
 their own typography and behavior. These are implementation directions, not new
 palette, fit or accessibility exceptions or a final rendered/release acceptance.
+
+### November 5 approved homepage video and visible fold
+
+The latest owner direction replaces the homepage photo/copy split with the
+approved people-free Handyman video, full bleed across the complete hero.
+This supersedes the earlier worker/door photograph prototypes for the homepage.
+The representative video shows finished residential details; it is not evidence
+of a named customer project. Other pages retain their existing media.
+
+Use one consistent uniform black overlay, currently `rgba(0,0,0,.78)`, darkened only as needed for measured
+readability while preserving the exact terracotta accent, clean approved type,
+copy and contact destinations. No gradient, regional band or copy panel remains.
+The initial hero fills the current visible viewport below the actual measured
+header. The already-hidden mobile bar and browser/safe-area clearances must not
+be subtracted twice. Larger text grows naturally with every action accessible.
+
+The high-priority poster appears in the first response, including without
+JavaScript. Motion respects reduced-motion and data-saving preferences until
+explicitly played. Use muted inline looping video with an accessible pause/play
+control, responsive 720p/1080p selection and offscreen/hidden pause. The poster
+remains available if playback is blocked or fails. Final actual-frame contrast,
+responsive composition, independent review, exact-head CI and source release
+checks remain required; owner Replit publication is a separate step.
