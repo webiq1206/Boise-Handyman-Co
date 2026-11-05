@@ -92,10 +92,15 @@ The initial hero fills the current visible viewport below the actual measured
 header. The already-hidden mobile bar and browser/safe-area clearances must not
 be subtracted twice. Larger text grows naturally with every action accessible.
 
-The high-priority poster appears in the first response, including without
-JavaScript. Motion respects reduced-motion and data-saving preferences until
-explicitly played. Use muted inline looping video with an accessible pause/play
-control, responsive 720p/1080p selection and offscreen/hidden pause. The poster
-remains available if playback is blocked or fails. Final actual-frame contrast,
+The high-priority poster appears in the first response. JavaScript enhancement
+mounts the video; without JavaScript, the technical poster fallback avoids
+browser-forced native controls. The owner's latest direction requires muted inline
+looping playback attempts in all JavaScript-enabled device and preference modes, including reduced
+motion and Save-Data, with no visible or native play/pause/stop controls. Responsive
+720p/1080p selection and offscreen/hidden lifecycle pause remain; visible media
+resumes automatically. Technical loading, browser-blocked playback and media errors
+retain the poster. Browser autoplay restrictions cannot be overridden or guaranteed.
+This user-directed motion behavior lacks a page-level pause/stop mechanism and does
+not establish WCAG pause-control or reduced-motion conformance. Final actual-frame contrast,
 responsive composition, independent review, exact-head CI and source release
 checks remain required; owner Replit publication is a separate step.
