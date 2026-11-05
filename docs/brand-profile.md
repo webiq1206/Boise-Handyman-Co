@@ -76,3 +76,22 @@ other contact-action consumers retain their original content and styling. The
 photo crop and fit require final rendering before acceptance. Protected estimator, request-form and RE-10 task controls retain
 their own typography and behavior. These are implementation directions, not new
 palette, fit or accessibility exceptions or a final rendered/release acceptance.
+
+### November 5 uniform black homepage overlay and fold direction
+
+The later owner direction replaces the homepage split photograph/charcoal copy
+field with the existing full-bleed photograph and one uniform `#000000` overlay
+at60% transparency, precisely `rgba(0,0,0,.4)`. No gradient or independent copy
+panel remains in the homepage opt-in. This supersedes only the earlier homepage
+composition paragraph; other pages and approved typography, terracotta, media,
+copy and contact destinations stay protected. The initial homepage hero reaches
+the current visible viewport below the measured header, without subtracting the
+bar that is already hidden over this hero or counting safe areas/browser controls
+twice. Enlarged text can grow naturally. The exact overlay and protected accent
+must not be darkened/recolored to manufacture contrast compliance.
+
+The implementation and observed limits are recorded in
+[hero-black-fold-20261105.md](hero-black-fold-20261105.md). Required image/text
+contrast, short-phone head clearance, independent review, exact-head CI and owner
+publication remain separate gates. This direction grants no accessibility or
+media-replacement exception and establishes no final rendered approval.

@@ -1,0 +1,27 @@
+# Handyman homepage black overlay and visible-fold correction
+
+Status: implemented candidate; visual release gate blocked pending independent review. Base/recovery revision `15a162de3ebae722bf406d0c356063d6343060ea`; branch `codex/handyman-hero-black-fold`.
+
+The owner's November 5 instruction explicitly requests `#000000` with 60% transparency (40% opacity), consistently across the existing websites, and a mobile hero that reaches the visible fold with no next section initially. This supersedes the homepage split-photo/charcoal-field direction in the earlier brand profile. Preserve approved media, headline, support, CTAs, full heads, typography, brand accent, SEO, schema, analytics, contacts and lead routing. No image creation, real lead, provider operation or publication is authorized. Jared owns import and Replit publication.
+
+Apply Website Design Quality Version 2.3, its complete design standard, implementation rules and review record, plus `docs/brand-profile.md` source record 2026-11-05.1. Current Orbit engineering/sites skills were absent from the available catalog and checkout; they are not claimed as loaded. Scope is the existing homepage-only `.homeHero` CSS-module opt-in. Two drywall service opt-ins and canonical shared family files remain unchanged.
+
+## Baseline and planned coverage
+
+Before changing source, Chromium148.0.7778.96 captured exact base at320×568,360×640,390×844,430×932,768×1024,1024×768,1280×720,1440×900 and1920×1080. Evidence is private task `../evidence/handyman/baseline-*`, with initial/full screenshots and JSON geometry. At390×844, the original hero ends at657.953px; at1440×900 it ends565.266px. The next section is visible. At320×568 the original ends638.031px, with primary CTA visible under the documented C3 narrow-phone exception.
+
+Matching final captures and measurements will check overlay/background layers, full-bleed approved image, actual header/hero/media bounds, no horizontal overflow, headline/actions, portrait/landscape, dynamic viewport resize simulation, WebKit emulation, reduced motion,200% text, menu/focus and existing CTA navigation without submitting. Measure text contrast from the actual image backdrop. Physical Safari/browser controls and downstream delivery remain separate, unavailable checks. Independent final review and exact-head CI are required before source merge; commit/build alone is not acceptance or deployment.
+
+## Implementation
+
+Replace the existing homepage-only split composition and desktop charcoal pseudo-panel in `FocusedSearchHero.module.css` with an absolute full-bleed image and one uniform `rgba(0,0,0,.4)` scrim. Clear the copy gradient. Budget the hero from `100svh`, upgraded to `100dvh` when supported, minus the observer's actual header height. That measured height already includes header safe area; viewport units exclude browser controls. The bottom bar is hidden over the hero and consumes no initial height. Use natural minimum height so enlarged text can scroll without clipping or an internal scrollbar.
+
+## Results
+
+- PASS: exact black40%-opacity scrim, clear inner background and full-bleed media at all9 responsive sizes. Header plus hero equals initial viewport height; media covers the complete hero, CTA remains fully visible, page has no horizontal overflow. Metadata(title/description/canonical/robots), H1 text, original image URL and both hero CTA destinations match base at every size. See `working-measurements.json`.
+- PASS: Chromium148 and WebKit26.4 reduced-motion checks at390×844 and viewport resize simulations640→740→844. Fold error at most0.016px. Menu opens/dismisses; primary CTA lands `#consult` at80px below64px header. No data entered or lead submitted. Existing automatic local `/api/estimator-session` POST and Next development error-stack requests were observed; later browser checks block non-GET requests. This is not a provider or delivery test.
+- PASS with C12 exception: computed per-element200% text grows the hero naturally to1080px at390×844, preserving text and actions without horizontal clipping. This is emulated text enlargement, not a physical device claim.
+- PASS: TypeScript no-emit;9 existing family/branding tests; family manifest guard confirms17 canonical shared files unchanged; `git diff --check`.
+- FAIL, contrast: actual foreground-core pixel locations compared with the rendered backdrop without copy. Exact terracotta large-text minimums are1.003/1.344/1.283/1.015/1.091:1 at320/360/390/768/1440, below3:1. White eyebrow fails at320(4.113),360(4.270),768(3.659), below4.5:1. Support fails at768(3.990),1440(3.840), and Call at1440(3.429). See `working-contrast.json`; no overlay/accent substitution has been made.
+- FAIL, image/text clearance: the full approved worker head is visible in the default crop, but short-phone eyebrow/H1 crosses the head. Same-image horizontal66/74/79% focal trials preserve that conflict; further shift clips hair. These trial screenshots/approximate source-derived head bounds are `trial-focal-*` and `focal-trials.json`. They are unselected experiments; source keeps the original focal point.
+- NOT RUN: physical iPhone Safari toolbar/safe areas, physical keyboard, downstream delivery, field performance, local production build/postbuild, exact-head CI and independent final review. The parent coordinates disk-limited local build and review before any release. No merge, import, publication or live verification is asserted.
