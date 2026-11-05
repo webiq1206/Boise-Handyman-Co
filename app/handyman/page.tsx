@@ -112,9 +112,10 @@ export default function HandymanLandingPage() {
         .approved-shell .hl-hero p { color: #fbfaf6; }
         .approved-shell .hl-hero h1 { font-size: clamp(32px, 7.6vw, 60px); line-height: 1.05; }
         @media (max-width: 767px) {
-          .approved-shell.site-handyman .hl-hero { min-height: 0; padding-block: 0; flex-direction: column; background: var(--color-charcoal); }
+          .approved-shell.site-handyman .hl-landing .hl-hero[data-p5-hero] { min-height: 0; padding-block: 0; flex-direction: column; background: var(--color-charcoal); }
           .approved-shell .hl-hero-copy { order: 1; padding-block: var(--section-y); }
           .approved-shell .hl-hero-copy > div:has([data-landing-contact]) { margin-top: var(--stack-cta); }
+          .approved-shell .hl-hero [data-landing-contact] { margin-bottom: 0; }
           .approved-shell .hl-hero-photo { position: relative; inset: auto; order: 2; width: 100%; height: 96px; flex-shrink: 0; }
           .approved-shell .hl-hero-photo img { object-position: 62% top; }
           .approved-shell .hl-hero-shade,
