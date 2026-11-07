@@ -122,7 +122,7 @@ export default function AboutPage() {
             {/* One support line keeps the primary in the first screen at 360x640;
                 the rest of the introduction sits with the family photo below. */}
             <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-8">
-              Boise Handyman Co is a repair, install and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co.
+              Boise Handyman Co is a repair, install and maintenance company in Meridian, Idaho, and one of the companies of P5 Home Co.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-8">
               <ConsultCTA variant="brand" data-hero-cta="primary">{CTA_PRIMARY}</ConsultCTA>
