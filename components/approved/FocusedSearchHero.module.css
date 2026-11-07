@@ -52,6 +52,12 @@
 .homeHero :global(.fam-hero-title) {
   overflow-wrap: anywhere;
 }
+.homeHero :global(.fam-hero-answer) {
+  max-width: 36rem;
+  margin: var(--space-5) 0 0;
+  color: var(--color-paper);
+  font: 400 var(--fs-hero-support) / 1.5 var(--font-sans);
+}
 @media (min-width: 1024px) {
   .homeHero :global(.fam-hero[data-family-hero] .fam-hero-copy) {
     max-width: 50%;

@@ -11,6 +11,7 @@ import assert from 'node:assert/strict';
 import {buildPageMetadata} from '../lib/page-metadata.ts';
 import {DESCRIPTION_MAX,DESCRIPTION_MIN,generateMetaDescription} from '../lib/seo.ts';
 import {CITIES,SERVICES} from '../shared/contentData.ts';
+import {BOISE_AREA_DESCRIPTION,CALDWELL_AREA_DESCRIPTION,HOME_DESCRIPTION} from '../shared/p5VisibilityCopy.ts';
 
 const PHONE=/\(?\d{3}\)?[\s.-]*\d{3}[\s.-]*\d{4}/;
 
@@ -42,9 +43,19 @@ test('service, area and service x city descriptions are keyword first, 140 to 15
  for(const city of CITIES){
   const meta=buildPageMetadata({kind:'area',cityName:city.name,citySlug:city.slug,path:`/areas/${city.slug}`});
   const description=String(meta.description);
-  check(`/areas/${city.slug}`,description,new RegExp(`^Handyman in ${city.name}, Idaho`));
+  if(city.slug==='boise'){
+   assert.equal(description,BOISE_AREA_DESCRIPTION);
+   check(`/areas/${city.slug}`,description,/^Get your Boise repair list handled with a written quote first/);
+  }else if(city.slug==='caldwell'){
+   assert.equal(description,CALDWELL_AREA_DESCRIPTION);
+   check(`/areas/${city.slug}`,description,/^Get your Caldwell repair list/);
+  }else{
+   check(`/areas/${city.slug}`,description,new RegExp(`^Handyman in ${city.name}, Idaho`));
+  }
   add(`/areas/${city.slug}`,description);
  }
- check('home',generateMetaDescription({serviceName:'',serviceSlug:'',isHomePage:true}),/^Boise handyman/);
+ const home=generateMetaDescription({serviceName:'',serviceSlug:'',isHomePage:true});
+ assert.equal(home,HOME_DESCRIPTION);
+ check('home',home,/^Get your Boise repair list handled with a written quote before work starts/);
  check('generic',generateMetaDescription({serviceName:'',serviceSlug:''}),/^Handyman services in Boise/);
 });

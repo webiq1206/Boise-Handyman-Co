@@ -26,7 +26,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "You get one written quote upfront, before work starts, and it's priced by the time the job takes, with a one-hour minimum. Materials are billed at cost on their own line, and grouping a few tasks per visit is the best value (every job gets a written quote first).",
+          'You get one written quote upfront, before work starts, and grouping a few tasks per visit is the best value (every job gets a written quote first).',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -36,12 +36,12 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
+          'Call to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.',
       },
       {
         question: 'Do you serve Boise, Idaho?',
         answer:
-          'Yes. Boise is core Treasure Valley territory for us, Downtown, the East End, and Southwest Boise included. We handle small repairs, installs, and maintenance anywhere in the city, and quotes and pricing match everywhere else we work.',
+          'Yes. Boise is core Treasure Valley territory for us, Downtown, the East End, and Southwest Boise included. We handle small repairs, installs, and maintenance anywhere in the city.',
       },
       {
         question: 'Which small jobs need a permit in Boise?',
@@ -261,7 +261,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'Each job is priced by time with a one-hour minimum and written up as a single upfront quote before work starts. Materials are a separate line billed at cost. Bundling tasks together is the best value for Caldwell homeowners.',
+          'Each job is written up as a single upfront quote before work starts. Bundling tasks together is the best value for Caldwell homeowners.',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -271,12 +271,12 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
+          'Call to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.',
       },
       {
         question: 'Do you serve Caldwell, Idaho?',
         answer:
-          'Yes. Caldwell is core service territory, with Wilson among its neighborhoods. Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell, and Indian Creek Plaza is in Caldwell. Small repairs, installs, and upkeep throughout Caldwell carry identical upfront quoting and pricing to anywhere else in our service area.',
+          'Yes. Caldwell is core service territory, with Wilson among its neighborhoods. Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell, and Indian Creek Plaza is in Caldwell. Small repairs, installs, and upkeep throughout Caldwell use the same upfront quote as the rest of our service area.',
       },
       {
         question: 'Is a permit needed for a fence in Caldwell?',
