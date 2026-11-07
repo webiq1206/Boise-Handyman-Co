@@ -151,63 +151,54 @@ export interface GbpService {
 }
 
 /**
- * GBP service list mirrors shared/contentData.ts SERVICES. startingPrice
- * values are the same placeholder "From" figures used on the site:
- * [NEEDS: real pricing confirmation].
+ * GBP service list mirrors shared/contentData.ts SERVICES. No starting
+ * price is published here.
  */
 export const GBP_SERVICES: GbpService[] = [
   {
     name: 'Drywall repair and patching',
     description:
       'Holes, cracks, and water-damaged patches repaired, textured to match, and paint-blended. Quoted upfront from photos.',
-    startingPrice: '$149',
   },
   {
     name: 'Interior and exterior painting',
     description:
       'Rooms, accent walls, trim, doors, and exterior touch-ups with proper prep and clean lines. Upfront per-room quotes.',
-    startingPrice: '$199',
   },
   {
     name: 'Minor plumbing repairs',
     description:
-      'Faucets, toilets, disposals, supply lines, and slow drains fixed or swapped in one visit. Licensed-plumber work referred out.',
-    startingPrice: '$129',
+      'Faucets, toilets, disposals, supply lines, and slow drains fixed or swapped. Licensed-plumber work referred out. You get one written quote before work starts.',
   },
   {
     name: 'Minor electrical repairs',
     description:
       'Outlets, switches, light fixtures, and ceiling fans replaced on existing wiring, tested before we leave. Panel work referred out.',
-    startingPrice: '$129',
   },
   {
     name: 'Carpentry and trim repair',
     description:
       'Sticking doors, damaged baseboard and casing, stair rails, and small carpentry fixes finished cleanly.',
-    startingPrice: '$149',
   },
   {
     name: 'TV mounting and furniture assembly',
     description:
       'TVs, shelves, mirrors, and curtain rods mounted level and anchored right; flat-pack furniture assembled and tightened.',
-    startingPrice: '$99',
   },
   {
     name: 'Fence, deck, and gutter repair',
     description:
       'Leaning fence posts reset, deck boards and rails replaced, gutters cleaned, resealed, and re-pitched.',
-    startingPrice: '$149',
   },
   {
     name: 'Caulking and home maintenance',
     description:
-      'Kitchen and bath recaulking, weatherproofing, tile and grout touch-ups, and whole punch lists cleared in one visit.',
-    startingPrice: '$99',
+      'Kitchen and bath recaulking, weatherproofing, tile and grout touch-ups, and punch lists. You get one written quote before work starts.',
   },
   {
     name: 'Punch list and to-do list visits',
     description:
-      'Bundle small tasks into one visit with one written price. Send the list with photos for an upfront quote.',
+      'Send your list with photos. You get one written quote before work starts.',
   },
   {
     name: 'Free upfront quotes',
@@ -292,10 +283,10 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'How quickly can you come out?',
     answer:
-      'We reply within one business day and most jobs are scheduled within the week. Because we quote from photos first, the visit is spent doing the work, not estimating it.',
+      'We reply and confirm your arrival time when you book. You get one written quote before work starts.',
   },
   {
-    question: 'Is there a minimum charge?',
+    question: 'How does pricing work?',
     answer:
       'You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
   },
@@ -306,7 +297,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   },
   {
     question: 'Do you do remodels?',
-    answer: `No. We focus on small repair, install, and maintenance jobs, typically 1 to 8 hours. Remodels and additions get referred to general contractors we trust. What we do cover: ${SITE}/services`,
+    answer: `No. We focus on small repair, install, and maintenance jobs. Remodels and additions get referred to general contractors we trust. You get one written quote before work starts. What we do cover: ${SITE}/services`,
   },
   {
     question: 'Who supplies the materials?',
@@ -435,7 +426,7 @@ export const GBP_PARALLEL_LISTINGS = [
 
 export const GBP_MONTHLY_SYNC = [
   'Publish 1 Google Post with deep link (see GBP_POSTS_STARTER rotation)',
-  'Upload 2–4 new job photos with city + job type captions',
+  'Upload new job photos with city and job type captions.',
   'Respond to all reviews within 48 hours',
   'Check Q&A for new homeowner questions',
   'Verify NAP on Facebook, Bing, Apple still matches GBP_NAP',
