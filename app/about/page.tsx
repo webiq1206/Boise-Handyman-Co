@@ -89,7 +89,7 @@ export default function AboutPage() {
     generateWebPageSchema({
       title: `About ${SITE_CONFIG.name}`,
       description:
-        'Locally owned Treasure Valley handyman service committed to upfront quotes, one-trip fixes, and clear communication.',
+        'Locally owned Treasure Valley handyman service committed to written quotes, repairs and clear communication.',
       url: '/about',
       speakable: true,
     }),

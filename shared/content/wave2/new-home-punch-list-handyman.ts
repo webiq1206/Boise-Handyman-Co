@@ -27,7 +27,7 @@ export const newHomePunchListHandyman: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Every new home develops small defects in the first year as lumber dries and the structure settles: drywall nail pops, hairline cracks, sticking doors, split caulk. Structural, mechanical, and workmanship defects belong on the builder warranty. The cosmetic settling items are normal, and a handyman typically clears the whole list in a half-day visit.',
+    'Every new home develops small defects in the first year as lumber dries and the structure settles: drywall nail pops, hairline cracks, sticking doors, split caulk. Structural, mechanical, and workmanship defects belong on the builder warranty. The cosmetic settling items are normal. Send the cosmetic repair list with photos so the scope and visit plan can be reviewed.',
   keyTakeaways: [
     'Nail pops, hairline drywall cracks, sticking doors, and cracked caulk in year one are normal settling, not defects.',
     'Report warranty-eligible items to your builder in writing before the warranty window closes; do not pay to fix what the builder owes you.',
@@ -67,17 +67,17 @@ export const newHomePunchListHandyman: BlogPostData = {
     {
       question: 'What does it cost to clear a typical punch list?',
       answer:
-        'A typical settling list on a Treasure Valley home, a handful of nail pops, a few caulk joints, two or three door adjustments, and paint touch-up, is usually a half-day to full-day visit. At market rates of $60 to $120 per hour that puts most lists in the $300 to $800 range depending on count and texture matching. Bundling everything into one visit is much cheaper than separate bookings.',
+        'A settling list can include nail pops, caulk joints, door adjustments and paint touch-ups. You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
     },
     {
       question: 'Should I do the 11-month walkthrough myself?',
       answer:
-        'Yes, and be systematic: walk every room with raking light from a flashlight, mark items with painter tape, and photograph everything. Check doors and windows for operation, caulk lines in wet areas, grout, and exterior caulk joints. Send warranty-eligible items to the builder in writing before the deadline, then book one visit for whatever remains.',
+        'Yes, and be systematic: walk every room with raking light from a flashlight, mark items with painter tape, and photograph everything. Check doors and windows for operation, caulk lines in wet areas, grout, and exterior caulk joints. Send warranty-eligible items to the builder in writing before the deadline, then send the remaining list with photos for a scope review.',
     },
   ],
   content: `
 <h2 id="the-short-answer">The short answer</h2>
-<p><strong>New homes are built from thousands of pounds of lumber that keeps drying after you move in, so year one produces small flaws on schedule.</strong> Nail pops, hairline cracks over doorways, doors that stick in July, caulk that splits at the tub. None of it means the house is badly built. The skill is sorting the list into what the builder warranty owes you, what is simply normal settling, and then clearing the settling items in one efficient visit instead of a year of drips and annoyances.</p>
+<p><strong>New homes are built from thousands of pounds of lumber that keeps drying after you move in, so year one produces small flaws on schedule.</strong> Nail pops, hairline cracks over doorways, doors that stick in July, caulk that splits at the tub. None of it means the house is badly built. The skill is sorting the list into what the builder warranty owes you, what is simply normal settling, and then planning the remaining repairs around an agreed scope.</p>
 
 <h2 id="what-to-expect">What year one does to a new house</h2>
 <p><strong>Expect movement, and expect it to be cosmetic.</strong> Framing lumber leaves the yard with more moisture than it will hold after a winter of forced-air heat, and as it dries it shrinks a little and twists a little. Drywall is nailed and screwed to that moving frame. The predictable results:</p>
@@ -103,14 +103,14 @@ export const newHomePunchListHandyman: BlogPostData = {
 <p>Taping matters on settling cracks. Mud alone bridges a hairline crack until the next season; mesh or paper tape under the mud is what keeps it closed. The full method is in <a href="/blog/how-to-patch-drywall">how to patch drywall like a pro</a>, and the paint side, why touch-ups flash and when a wall needs corner-to-corner repainting, is in the <a href="/blog/interior-paint-touch-up-guide">interior paint touch-up guide</a>.</p>
 
 <h2 id="typical-list">What a typical punch-list visit includes</h2>
-<p><strong>Most new-home lists are a half-day of mixed small trades, which is exactly what handyman work is for.</strong> A representative Treasure Valley list: eight nail pops patched and textured, two settling cracks taped and skimmed, three interior doors adjusted at hinges and strikes, tub and backsplash caulk cut out and rerun, a toilet paper holder that pulled its anchors remounted properly, and paint touch-up where sheen allows.</p>
-<p>Separately booked, that is five appointments across three trades. Bundled, it is one visit under our <a href="/services/home-maintenance">home maintenance</a> service, drawing on <a href="/services/drywall-repair">drywall repair</a> and <a href="/services/carpentry-trim-repair">carpentry and trim</a> skills as the list demands. Market labor rates in the valley run $60 to $120 per hour, which puts most complete lists in the $300 to $800 range.</p>
+<p><strong>A new-home repair list can involve several kinds of small repairs.</strong> A representative Treasure Valley list: eight nail pops patched and textured, two settling cracks taped and skimmed, three interior doors adjusted at hinges and strikes, tub and backsplash caulk cut out and rerun, a toilet paper holder that pulled its anchors remounted properly, and paint touch-up where sheen allows.</p>
+<p>Separately booked, that is five appointments across three trades. Send the list for review under our <a href="/services/home-maintenance">home maintenance</a> service, including <a href="/services/drywall-repair">drywall repair</a> and <a href="/services/carpentry-trim-repair">carpentry and trim</a> where needed. Market labor rates in the valley run $60 to $120 per hour, which puts most complete lists in the $300 to $800 range.</p>
 
 <h2 id="watch-items">The items that are not cosmetic</h2>
 <p><strong>A short list of year-one symptoms deserves attention rather than spackle.</strong> Cracks wider than about a quarter inch, cracks that keep growing after the second year, doors across the house going out of square at once, stair-step cracks in foundation walls, or floors developing a visible slope point at movement beyond normal settling. Water staining anywhere, around windows, under sinks, at ceiling corners, is never a wait-and-see item.</p>
 <p>Report these to the builder in writing regardless of where the warranty clock stands, and get independent eyes on them if the response is slow. Patching over an active problem costs you the evidence and the repair.</p>
 
-<h2 id="next-steps">Book one visit, clear the list</h2>
-<p>If your new home has collected its year-one list, send it over with photos and we will quote the whole thing upfront as a single visit, and tell you plainly if any item looks like builder-warranty material you should claim instead. Start at the <a href="/contact">contact page</a>, or see what a bundled visit covers under <a href="/services/home-maintenance">caulking and home maintenance</a>.</p>
+<h2 id="next-steps">Send your new-home repair list</h2>
+<p>Send your new-home repair list with photos so we can review the scope and visit plan. We will flag anything that looks like builder-warranty work. Start at the <a href="/contact">contact page</a>, or see our <a href="/services/home-maintenance">caulking and home maintenance</a> service.</p>
 `.trim(),
 };

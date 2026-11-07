@@ -26,7 +26,7 @@ for(const route of ['/blog','/sitemap','/guides/boise-home-maintenance-guide','/
 for(const file of ['llms.txt','llms-full.txt'])assert.doesNotMatch(readFileSync(`public/${file}`,'utf8'),unsupported,file);
 assert.match(readFileSync('.next/server/app/areas/meridian.html','utf8'),/R-FEN/);
 assert.match(readFileSync('.next/server/app/areas/garden-city.html','utf8'),/\$500 or less/);
-assert.match(readFileSync('.next/server/app/guides/meridian-handyman-guide.html','utf8'),/one-trip completion as the goal/);
+assert.match(readFileSync('.next/server/app/guides/meridian-handyman-guide.html','utf8'),/written quotes before work starts/);
 console.log(`Shared claim verification passed: ${knownRoutes.length-2} complete pages, 4 article-link consumers, 2 schema consumers, 2 generated references; municipal facts and conditional goal preserved.`);
 
 function documents(dir){return readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?documents(path.join(dir,e.name)):e.name.endsWith('.html')?[path.join(dir,e.name)]:[]);}

@@ -21,7 +21,7 @@ export const HERO_SUBHEAD =
 
 export const HERO_STATS = [
   { num: "before work starts", label: "Written quote" },
-  { num: "one hour", label: "Minimum" },
+  { num: "Written quote", label: "Before work starts" },
   { num: "after scope review", label: "Visit plan" },
 ] as const;
 
@@ -204,7 +204,7 @@ export const HOW_WE_BUILD_STEPS = [
   },
   {
     number: "04",
-    title: "One-trip fix",
+    title: "Work through your list",
     desc: "We show up with the parts the job needs and work through your list. The task list, materials and drying times determine the visits needed.",
   },
   {
@@ -289,7 +289,7 @@ export const LEADERSHIP_COPY = {
 export const FINANCING_BULLETS = [
   "Card, check, and electronic payments accepted",
   "Pay when the work is done, not before",
-  "One visit covers the whole list, however many tasks",
+  "Your scope and visit plan are agreed before work starts",
   "Written quote to keep, whatever you decide",
   "No deposits on standard small jobs",
 ];

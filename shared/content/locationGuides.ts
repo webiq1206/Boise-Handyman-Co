@@ -227,7 +227,7 @@ const PLACES: PlaceGuide[] = [
       'Open ground means wind, and wind means Kuna fences and gates take more abuse than most in the valley.',
       'New builds need settling repairs and the install list; acreage properties need perimeter and outbuilding upkeep.',
       'Hard water is at its most noticeable on acreage wells: fixtures and valves scale up faster.',
-      'Batching repairs matters more here: one visit covering a whole list beats multiple trips out.',
+      'Send your full repair list with photos so we can review the scope and visit plan.',
     ],
     housingStock: `<p><strong>Kuna is two housing stocks sharing a zip code: fast-growing subdivisions full of homes under fifteen years old, and the acreage properties that were here first.</strong> The subdivision half generates the newer-home canon, settling cracks, door adjustments, builder-grade part swaps, and a long install wishlist. The acreage half generates perimeter work: long fence runs, gates that see daily use, outbuildings and shop doors, deck and porch upkeep, and the general wear of properties that work for a living.</p>
 <p>What both halves share is exposure. Kuna sits on open ground, and the wind that crosses it tests every fence, gate, screen door, and patio umbrella in town. If there is one repair Kuna generates more reliably than anywhere else we work, it is the fence call after a spring windstorm.</p>`,
@@ -238,7 +238,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'Do you come out to rural Kuna properties?',
         answer:
-          'Yes, acreage properties around Kuna are inside our normal service area. Because the drive is longer, batching matters more: send the whole list with photos and we will quote it as one visit, bringing materials for everything at once. Per task, that is much cheaper than piecemeal calls.',
+          'Yes, acreage properties around Kuna are inside our normal service area. Send your whole list with photos so we can review the scope, materials and visit plan. You get one written quote before work starts.',
       },
       {
         question: 'Can you fix wind-damaged fences?',
@@ -248,7 +248,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'My new Kuna home has drywall cracks: is that normal?',
         answer:
-          'Almost always, yes: new homes settle for a year or two, producing hairline cracks at corners and above doors, nail pops, and doors that drift out of alignment. Check what your builder warranty covers before it expires, then have the rest patched, textured, and painted in one visit once the main settling has happened.',
+          'New homes can develop drywall cracks, nail pops and doors that drift out of alignment as they settle. Check what your builder warranty covers, then send the remaining repair list with photos so we can review the scope and visit plan.',
       },
       {
         question: 'Does well water change my fixture maintenance?',
@@ -258,7 +258,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Kuna?',
         answer:
-          'Valley-standard bands: most single repairs run $100 to $500, and our services carry flat starting prices from $145. Every job gets a firm quote from photos before we arrive, and one-visit batching spreads the trip cost across the whole list.',
+          'You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
       },
     ],
   },
@@ -281,12 +281,12 @@ const PLACES: PlaceGuide[] = [
       'New builds need settling repairs and installs; older properties need genuine repair carpentry and catch-up maintenance.',
       'Open western exposure means wind, and wind means fences and gates lead the exterior list.',
       'Fast growth means many owners are new to their houses: a punch-list visit after move-in finds what inspections skim.',
-      'Batching several jobs into one visit is the cheapest way to buy small work here.',
+      'Send your full repair list with photos so we can review the scope and visit plan.',
     ],
     housingStock: `<p><strong>Star is in the middle of the same transition Meridian finished a decade ago: farmland becoming subdivisions, fast.</strong> The result is a housing stock with a barbell shape. One end is brand-new: homes a few years old at most, full of settling repairs waiting to be noticed and installs waiting to be wanted. The other end is the older Star, small-town homes and farm properties that have seen decades of weather and a few generations of owner improvements, where the work is real repair carpentry: porches, older doors and windows, outbuildings, and the accumulated list that older houses keep.</p>
 <p>Between them sits a practical difference in how we quote: new-build work is predictable from photos alone, while older-property work earns a few extra questions, because what a 1970s porch post needs depends on what is under the paint.</p>`,
     commonRepairs: `<p><strong>In the subdivisions: drywall settling cracks, nail pops, door adjustments, builder-grade fixture swaps, ceiling fans, TV mounts, closet and garage storage, and first-round caulk refresh.</strong> On the older properties: porch and step repairs, door and window easing, siding and trim patching, screen doors, gate and fence rebuilds, and paint that protects rather than decorates. Everywhere in Star: wind-tested fences, sprinkler-season fixes, and the pre-winter seal-up. It is two different trades' rhythms, and we run both weekly.</p>`,
-    watchOut: `<p><strong>The Star wrinkle is move-in blindness: most owners here are new to their specific house, and a home inspection is a snapshot, not a punch list.</strong> The first months in any house, new or old, surface the truth: the door that sticks in July, the outlet on a mystery switch, the gate that never latched. The efficient response is to keep the list and book one visit at the three-month mark rather than reacting item by item, the scope and visit plan can then be reviewed together.</p>`,
+    watchOut: `<p><strong>The Star wrinkle is move-in blindness: most owners here are new to their specific house, and a home inspection is a snapshot, not a punch list.</strong> The first months in any house, new or old, surface the truth: the door that sticks in July, the outlet on a mystery switch, the gate that never latched. Keep a running repair list with photos so the scope, materials and visit plan can be reviewed together.</p>`,
     seasonal: `<p><strong>Star’s seasonal rhythm is the valley standard with a wind emphasis: spring fence and gate checks after the windy months, summer paint and stain on sun-facing surfaces, and the fall pre-freeze list, weatherseal, hose bibs, sprinkler blowout, gutters.</strong> Older properties add a spring porch-and-step check, freeze-thaw is hardest on the oldest wood, and newer subdivisions add the annual walk for settling cracks worth patching once movement slows.</p>`,
     faqs: [
       {
@@ -335,12 +335,12 @@ const PLACES: PlaceGuide[] = [
       'Newer subdivision homes need settling repairs and installs; older town and farm properties need repair carpentry.',
       'Acreage properties bring long fence runs, outbuildings, and well-water fixture wear.',
       'Middleton is Canyon County, and it is fully inside our regular service area.',
-      'One-visit batching matters most where the drive is longest: send the whole list at once.',
+      'Send your full repair list with photos so we can review the scope and visit plan.',
     ],
     housingStock: `<p><strong>Middleton's housing stock has three layers: the small-town core of older homes, the farm and acreage properties around it, and the newer subdivisions that growth has added in rings.</strong> Each layer has its own list. The older town homes need what older homes need everywhere, doors eased, porches kept sound, caulk and paint kept ahead of the weather. The acreage properties add perimeter and outbuilding work, plus the faster fixture wear that comes with hard well water. The new subdivisions run the standard newer-home program: settling repairs in the early years, builder-grade part swaps as the first decade closes.</p>
 <p>Middleton owners chose the town partly for value, and the same logic applies to keeping a house here: small repairs done on time are the cheapest ownership strategy there is.</p>`,
     commonRepairs: `<p><strong>The Middleton mix: drywall settling repairs and door adjustments in the subdivisions, fixture and fan swaps everywhere, fence sections and gates across town and acreage alike, deck and porch board replacement, gutter cleaning and minor repair, and the caulk-and-weatherseal work that Canyon County winters reward.</strong> Acreage properties add screen doors, shop-door hardware, and the long-run fence repairs that open ground and wind produce. Send the full list so the team can review scope, materials and the number of visits.</p>`,
-    watchOut: `<p><strong>The Middleton wrinkle is distance math: for any pro, a trip here costs the same whether it fixes one thing or nine, and homeowners who book single small jobs pay that overhead every time.</strong> The fix is entirely in your control: keep the running list, photograph it, and book it as one visit. Our flat quotes price the list as a package, we confirm the materials and visit plan after reviewing it, and the per-task cost drops sharply. It is the single best cost lever for anyone living west of the county line.</p>`,
+    watchOut: `<p><strong>The Middleton wrinkle is distance math: for any pro, a trip here costs the same whether it fixes one thing or nine, and homeowners who book single small jobs pay that overhead every time.</strong> Keep a running repair list with photos. You get one written quote before work starts, with the scope, materials and visit plan confirmed after review.</p>`,
     seasonal: `<p><strong>Middleton’s calendar is the valley standard: spring fence and gate checks after wind and freeze-thaw, summer exterior paint and stain in the long dry window, fall gutter cleaning, weatherseal, hose-bib protection, and sprinkler blowout before the first hard freeze.</strong> Acreage adds a spring walk of outbuildings and gates, and well-water homes should expect the faster fixture-scale clock that mineral-heavy water sets everywhere in this valley.</p>`,
     faqs: [
       {
@@ -415,7 +415,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'How fast can you get to a Nampa job?',
         answer:
-          'Photo quotes usually come back within a day, and most jobs are scheduled within the week. One-trip completion is the goal, which is why we quote from photos: they tell us what materials to have on the truck before we cross the county line.',
+          'Send your list with photos. You get one written quote before work starts, and we confirm your arrival time when you book.',
       },
       {
         question: 'Which Nampa areas do you serve?',
@@ -443,7 +443,7 @@ const PLACES: PlaceGuide[] = [
       'Older homes need repair carpentry and paint kept ahead of the weather; new builds need settling fixes and installs.',
       'Acreage around Caldwell brings long fences, outbuildings, and well-water fixture wear.',
       'Value-minded ownership works best here: small repairs done on time are the cheapest strategy.',
-      'One-visit batching keeps trip costs low across the west valley.',
+      'Send your full repair list with photos so we can review the scope and visit plan.',
     ],
     housingStock: `<p><strong>Caldwell's housing tells the same layered story as Nampa's, at a slightly smaller scale: a historic core of early-1900s homes, mid-century rings around it, new subdivisions at the edges, and working acreage beyond them.</strong> The older blocks bring the older-home program, plaster, original doors and windows, porches, mature trees, and the newer edges bring the settling-and-installs program. The acreage adds perimeter work: long fence lines, gates, outbuildings, and the faster fixture wear of well water.</p>
 <p>Caldwell owners tend to be practical about their houses, and the practical playbook is the one this whole guide argues for: catch things small, batch the list, and spend on the repairs that prevent bigger ones.</p>`,
@@ -454,7 +454,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'Do you serve Caldwell?',
         answer:
-          'Yes, Caldwell is fully inside our Treasure Valley service area, which covers Ada and Canyon County. Photo quotes usually come back within a day, most jobs are scheduled within the week, and batching your list into one visit keeps the per-task cost down across the west valley.',
+          'Yes, Caldwell is inside our Treasure Valley service area in Ada and Canyon counties. Send your list with photos. You get one written quote before work starts, and we confirm your arrival time when you book.',
       },
       {
         question: 'Can you repair older Caldwell homes?',
@@ -474,7 +474,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'My new Caldwell home is cracking at the corners: is something wrong?',
         answer:
-          'Almost certainly just settling, which new homes do for a year or two: hairline cracks at corners and above openings, nail pops, and doors drifting slightly are all normal. Let the builder warranty cover what it covers, then have the rest patched, textured, and painted in one visit once movement slows.',
+          'New homes can develop drywall cracks, nail pops and doors that drift out of alignment as they settle. Check what your builder warranty covers, then send the remaining repair list with photos so we can review the scope and visit plan.',
       },
     ],
   },
@@ -528,7 +528,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'Do you handle wind-damage repairs?',
         answer:
-          'Routinely: fence sections and posts, gates, popped pickets and boards, and the assorted exterior items wind loosens. After a significant wind event, walk the property and photograph anything leaning or moving, one visit usually puts the lot right, and quickly, before the next front finishes what the last one started.',
+          'We handle fence sections, posts, gates and other exterior repairs. After a wind event, photograph anything leaning or moving and send the list so we can review the scope and visit plan.',
       },
     ],
   },
@@ -573,7 +573,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Hidden Springs?',
         answer:
-          'Valley-standard bands: most single repairs run $100 to $500, and our services carry flat starting prices from $145. Batch pricing is where this neighborhood wins: a planned-refresh list quoted as one visit costs meaningfully less per item than reactive one-off calls.',
+          'You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
       },
       {
         question: 'Do you handle exterior work here?',
@@ -658,7 +658,7 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     `<div class="callout note"><p class="callout-label">${p.name}: service snapshot</p>` +
     `<p>${p.name} is in <strong>${county}</strong> and sits fully inside our Treasure Valley service area` +
     (p.guideType === 'location' ? `: to book a visit, see <a href="/areas/${p.citySlug}">handyman in ${p.name}</a>. ` : '. ') +
-    `We handle drywall repair, minor plumbing and electrical, carpentry and trim, painting, mounting and assembly, fence, deck, and gutter repair, and seasonal maintenance, with flat quotes from photos and one-trip completion as the goal. ` +
+    `We handle drywall repair, minor plumbing and electrical, carpentry and trim, painting, mounting and assembly, fence, deck, and gutter repair, and seasonal maintenance, with written quotes before work starts. ` +
     `Jobs that need a licensed specialty trade or a major permit get named as such at the quote, see <a href="/resources/ada-canyon-permit-flow">when a home repair needs a permit</a>.</p></div>`;
 
   const content = [
@@ -674,11 +674,11 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     p.seasonal,
     `<p>The full season-by-season checklist for Treasure Valley homes is in <a href="/guides/boise-home-maintenance-guide">the complete Boise home maintenance guide</a>, with a printable version on the <a href="/resources">resources page</a>.</p>`,
     `<h2 id="how-we-work">How we work in ${p.name}</h2>`,
-    p.citySlug === 'meridian' ? `<p><strong>Send your repair list and optional photos for review.</strong> Scope, pricing and scheduling are agreed before work starts. If the scope changes, the change is reviewed before extra work proceeds. The number of visits depends on the work and materials involved.</p>` : `<p><strong>Send the list with photos, get a flat quote, and we aim to finish in one trip.</strong> The quote names the scope and the price before we arrive, and it does not move unless the scope does, in which case you approve the change first. Batching several small jobs into one visit spreads the trip cost and is the cheapest way to buy this kind of work anywhere in the valley, and especially outside the core cities. Our labor carries a workmanship guarantee, and anything on your list that belongs with a licensed specialty trade gets said plainly at the quote stage.</p>`,
+    `<p><strong>Send your repair list and optional photos for review.</strong> Scope, pricing and scheduling are agreed before work starts. If the scope changes, the change is reviewed before extra work proceeds. The number of visits depends on the work and materials involved.</p>`,
     `<p>Services relevant here: <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing</a>, <a href="/services/electrical-repairs">minor electrical</a>, <a href="/services/carpentry-trim-repair">carpentry and trim</a>, <a href="/services/painting-touch-ups">painting</a>, <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/fence-deck-gutter-repair">fence, deck, and gutter repair</a>, and <a href="/services/home-maintenance">home maintenance</a>. See also <a href="/areas/${p.citySlug}">${p.guideType === 'location' ? `handyman in ${p.name}` : `our ${p.citySlug} service area page`}</a> and <a href="/guides/hire-a-handyman-treasure-valley">how to hire a handyman in the Treasure Valley</a>.</p>`,
     priorityAreaLink(p, county),
     `<h2 id="next-steps">Start with the list</h2>`,
-    reviewedPriceScope ? `<p>Start by <a href="/contact">sending your repair list and optional photos</a>. Include your service address and requested dates so the team can review the scope and discuss next steps.</p>` : `<p>The fastest way to get a real answer about a repair in ${p.name} is to show it to us: <a href="/contact">send the list and a few photos</a> and we will reply with a flat quote and the earliest slot, usually within a day. No site-visit fee, no obligation, and if something on the list is not a handyman job, we will tell you whose job it is.</p>`,
+    `<p>Start by <a href="/contact">sending your repair list and optional photos</a>. Include your service address and requested dates so the team can review the scope and discuss next steps.</p>`,
   ].join('\n');
 
   return {
