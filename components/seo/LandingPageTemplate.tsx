@@ -264,16 +264,19 @@ export function LandingPageTemplate({
           )}
           </>}
           </> : areaCallFirst ? <>
-          <div className="fam-hero-actions mt-6">
+          {/* Same order as the homepage: Call is the primary action, and the
+              list link is secondary. Stacked on the light interior hero so the
+              long label stays on its own row at 360. */}
+          <div className="mt-6 flex flex-col items-stretch gap-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2">
             <BusinessPhoneLink
-              className={familyButtonClass({ variant: 'hero', size: 'lg' })}
+              className={familyButtonClass({ variant: 'primary', size: 'lg', className: 'w-full justify-center sm:w-auto' })}
               data-hero-cta="primary"
               data-cta="primary"
               data-testid="link-area-call"
             >
               Call us about your project.
             </BusinessPhoneLink>
-            <a href="/#consult" className="fam-hero-link" data-cta="secondary">{CTA_PRIMARY}</a>
+            <a href="/#consult" className="re10-phone self-start text-base" data-cta="secondary">{CTA_PRIMARY}</a>
           </div>
           <p className="mt-8 max-w-[60ch] text-base md:text-lg leading-relaxed text-inverse-foreground/95">{overview}</p>
           </> : <>

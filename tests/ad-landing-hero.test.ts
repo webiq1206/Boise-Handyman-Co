@@ -3,6 +3,8 @@
  *
  * - Paid-traffic pages (lib/adLandingPaths.ts) keep the owner's call-first
  *   hero from 19 and 27 October 2026: Call comes before any request action.
+ * - Boise and Caldwell area heroes match the homepage: Call is the filled
+ *   primary, and "Send your list and photos" is the text link under it.
  * - Every other service, city and area page leads with the site primary,
  *   "Send your list and photos", and carries the phone as a text link after it.
  *
@@ -76,6 +78,22 @@ test('/services/carpentry-trim-repair keeps the filled Call before the request a
  assert.ok(primary>call,'Call comes before the request action');
  assert.equal(hero.includes('Prefer to talk?'),false);
 });
+
+for(const city of ['boise','caldwell']){
+ test(`/areas/${city} leads with Call and keeps the list link secondary`,async()=>{
+  const hero=heroOf(await render('../app/areas/[city]/page.tsx',{city}));
+  const call=hero.indexOf('data-testid="link-area-call"');
+  const secondary=hero.indexOf('href="/#consult"');
+  assert.ok(call>=0,'filled Call in the hero');
+  assert.ok(secondary>call,'list link follows Call');
+  assert.match(hero.slice(0,secondary), /href="tel:\+12084771169"[^>]*data-testid="link-area-call"/);
+  assert.match(hero.slice(0,secondary), /fam-btn--primary[^>]*>\s*Call us about your project\./);
+  assert.ok(hero.slice(secondary).includes('data-cta="secondary"'));
+  assert.ok(hero.slice(secondary).includes(`>${PRIMARY}<`), 'secondary carries the site label');
+  assert.equal(hero.includes('Prefer to talk?'),false);
+  assert.equal(hero.includes('data-testid="button-primary-service-hero"'),false);
+ });
+}
 
 for(const [file,params,label] of [
  ['../app/services/[slug]/page.tsx',{slug:'plumbing-repairs'},'/services/plumbing-repairs'],
