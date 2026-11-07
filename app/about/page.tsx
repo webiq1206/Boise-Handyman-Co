@@ -32,7 +32,7 @@ import { FamilyButton } from '@/components/family/Button';
 import { toSentenceCase } from '@/shared/sentenceCase';
 
 const SPEAKABLE_SUMMARY =
-  'Boise Handyman Co is a design-minded repair and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co. Founder Nick Perkins leads the work with one written price before work starts, including RE-10 inspection repair lists.';
+  'Boise Handyman Co is a design-minded repair and maintenance company in Meridian, Idaho, and one of the companies of P5 Home Co. Founder Nick Perkins leads the work with one written price before work starts, including RE-10 inspection repair lists.';
 
 const HANDYMAN_FIVE = [
   'Written quote before work starts',
@@ -225,7 +225,7 @@ export default function AboutPage() {
                 <p className="ed-eyebrow">Warranty</p>
                 <h3 className="ed-h3">Written workmanship warranty</h3>
                 <p className="ed-body mt-3">
-                  Our work carries a written workmanship warranty, and parts we supply keep their manufacturer warranty. Call or text us with warranty questions.
+                  Our work carries a written workmanship warranty. Call or text us with warranty questions.
                 </p>
               </div>
               <div className="ed-inset">

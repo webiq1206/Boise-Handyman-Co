@@ -108,7 +108,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   },
   nampa: {
     intro:
-      "Nampa's homes run the full range, with about 15% built before 1960 and 22% since 2010 (Census ACS 2020 to 2024), so one street can need very different fixes. Boise Handyman Co covers Nampa and Canyon County with the fix-it work: one written price before work starts, materials at cost, and visits planned around the agreed scope.",
+      "Nampa's homes run the full range, with about 15% built before 1960 and 22% since 2010 (Census ACS 2020 to 2024), so one street can need very different fixes. You get one written quote before work starts. Parts and materials appear on your quote as their own line.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
@@ -200,7 +200,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   },
   kuna: {
     intro:
-      "Kuna's homes are some of the newest in the valley, with a median build year of 2008 and roughly 15% built in 2020 or later, per Census ACS 2020 to 2024 estimates. We take on the small jobs Kuna homeowners collect, from first-year punch lists to fence and gutter repairs, with one written price upfront, materials at cost, and never a travel surcharge.",
+      "Kuna's homes are some of the newest in the valley, with a median build year of 2008 and roughly 15% built in 2020 or later, per Census ACS 2020 to 2024 estimates. We take on the small jobs Kuna homeowners collect, from first-year punch lists to fence and gutter repairs. You get one written quote before work starts. Parts and materials appear on your quote as their own line.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
@@ -302,7 +302,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   },
   star: {
     intro:
-      'Star is the youngest city we serve: about half its homes went up in 2010 or later, and 90% are single-family detached (Census ACS 2020 to 2024). We help Star homeowners with the repairs, installs, and maintenance that new, settling houses need, quoted upfront as one written price with materials at cost.',
+      'Star is the youngest city we serve: about half its homes went up in 2010 or later, and 90% are single-family detached (Census ACS 2020 to 2024). We help Star homeowners with the repairs, installs, and maintenance that new, settling houses need. You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',

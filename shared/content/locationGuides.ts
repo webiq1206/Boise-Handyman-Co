@@ -91,7 +91,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'Do you do small jobs, or only big lists?',
         answer:
-          'Both, though batching saves you money. A single repair is a normal call, but our minimum service charge covers the fixed cost of any visit, so three or four tasks in one trip cost far less per task. Most Boise clients keep a running list and call when it reaches a few items.',
+          'Both. Keep a running list and send it with photos. You get one written quote before work starts.',
       },
       {
         question: 'How quickly can you get to a Boise job?',
@@ -410,7 +410,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'Can you do a punch list on my new Nampa build?',
         answer:
-          'Yes, it is one of our standard visits: settling cracks patched, textured, and painted, doors re-adjusted, caulk redone, fixtures and mounts installed, all in one trip. Check your builder warranty first and let it cover what it covers; we handle what it does not.',
+          'Yes, it is one of our standard visits: settling cracks patched, textured, and painted, doors re-adjusted, caulk redone, fixtures and mounts installed. Check your builder warranty first and let it cover what it covers; we handle what it does not.',
       },
       {
         question: 'How fast can you get to a Nampa job?',
@@ -583,7 +583,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'How do I get a quote?',
         answer:
-          'Send your list with photos through the contact page. Most Hidden Springs quotes come back flat within a day, and most visits are scheduled within the week, with materials brought for the whole list so one trip finishes it.',
+          'Send your list with photos through the contact page. You get one written quote before work starts, and we confirm your arrival time when you book.',
       },
     ],
   },

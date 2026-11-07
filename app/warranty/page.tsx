@@ -1,7 +1,8 @@
 import { InteriorHero, InteriorPage } from "@/components/approved/InteriorLayout";
 import { ContractorCredential } from "@/components/ContractorCredential";
 import { Section } from "@/components/marketing/Section";
-import { ConsultCTA } from "@/components/modals/ConsultCTA";
+import { BusinessPhoneLink } from "@/components/BusinessPhoneContact";
+import { FamilyButton, familyButtonClass } from "@/components/family/Button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { withBrandPageMetadata } from "@/lib/brand-page-metadata";
 import { buildCanonical, fitDescription } from "@/lib/page-metadata";
@@ -15,7 +16,6 @@ import { SITE_CONFIG } from "@/shared/siteConfig";
 import { SITE_IMAGES } from "@/shared/siteImages";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FamilyButton } from '@/components/family/Button';
 
 const WARRANTY_COPY =
   "Our work carries a written workmanship warranty. Call or text us with warranty questions.";
@@ -73,8 +73,16 @@ export default function WarrantyPage() {
           <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-8">
             {WARRANTY_COPY}
           </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-6">
-            <ConsultCTA variant="brand" data-hero-cta="primary">{CTA_PRIMARY}</ConsultCTA>
+          <div className="flex flex-col items-stretch gap-3 sm:items-start mb-6">
+            <BusinessPhoneLink
+              className={familyButtonClass({ variant: "primary", size: "lg", className: "w-full justify-center sm:w-auto" })}
+              data-hero-cta="primary"
+              data-cta="primary"
+              data-testid="link-warranty-call"
+            >
+              Call us about your project.
+            </BusinessPhoneLink>
+            <a href="/#consult" className="re10-phone self-start text-base" data-cta="secondary">{CTA_PRIMARY}</a>
             <FamilyButton href="/about" variant="secondary">About our team</FamilyButton>
           </div>
           <p className="text-sm text-inverse-foreground/70">

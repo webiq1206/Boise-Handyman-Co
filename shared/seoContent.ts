@@ -173,7 +173,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       },
       {
         title: 'Upfront quote',
-        description: 'A firm written price for the work, with paint either supplied by you or picked up by us and billed at cost.',
+        description: 'You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
       },
       {
         title: 'Prep and protect',
@@ -867,8 +867,8 @@ export function getCityServiceSections(
           ? ['Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell. Indian Creek Plaza is in Caldwell.']
           : []),
         landmarks.length
-          ? `As a local team that knows ${city.name} landmarks like ${landmarks.slice(0, 3).join(', ')}, scheduling is straightforward: we quote a real arrival time, confirm before heading out, and never add a travel surcharge.`
-          : `As a local team, scheduling is straightforward: we quote a real arrival time, confirm before heading out, and never add a travel surcharge.`,
+          ? `As a local team that knows ${city.name} landmarks like ${landmarks.slice(0, 3).join(', ')}, we confirm your arrival time when you book.`
+          : `As a local team, we confirm your arrival time when you book.`,
       ],
     },
     {

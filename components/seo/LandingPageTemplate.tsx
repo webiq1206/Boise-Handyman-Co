@@ -23,6 +23,7 @@ import { altForImage } from '@/shared/imageAlts';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import type { GalleryProject } from '@/shared/galleryData';
 import type { FAQItem } from '@/shared/seoContent';
+import { AREA_ANSWER_UNDER_H1 } from '@/shared/p5VisibilityCopy';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { ArrowRight,ChevronRight,Phone,Star } from 'lucide-react';
 import Link from 'next/link';
@@ -211,6 +212,7 @@ export function LandingPageTemplate({
     [heroImageUrl, breatherImage, showProcessPanel ? processImage : undefined].filter(Boolean),
   );
   const uniqueInline = processImage && !shownElsewhere.has(processImage) ? processImage : undefined;
+  const answerUnderH1 = AREA_ANSWER_UNDER_H1[h1];
   const areaCallFirst = h1 === 'Handyman in Boise, Idaho' || h1 === 'Handyman in Caldwell, Idaho';
 
   return (
@@ -221,7 +223,7 @@ export function LandingPageTemplate({
       {/* Approved editorial hero */}
       {focusedDrywallHero ? <DrywallSearchHero h1={h1} overview={overview} speakableSummary={speakableSummary} breadcrumbs={breadcrumbs} callFirst={callFirst} /> : <InteriorHero imageSrc={heroImageUrl} imageAlt={heroAlt} layout="split">
           <HeroBreadcrumbs items={breadcrumbs} />
-          <p data-speakable="summary" className="sr-only">{speakableSummary}</p>
+          {!answerUnderH1 && <p data-speakable="summary" className="sr-only">{speakableSummary}</p>}
           {eyebrow && (
             <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>{eyebrow}</p>
           )}
@@ -278,7 +280,11 @@ export function LandingPageTemplate({
             </BusinessPhoneLink>
             <a href="/#consult" className="re10-phone self-start text-base" data-cta="secondary">{CTA_PRIMARY}</a>
           </div>
-          <p className="mt-8 max-w-[60ch] text-base md:text-lg leading-relaxed text-inverse-foreground/95">{overview}</p>
+          {answerUnderH1 ? (
+            <p data-speakable="summary" className="mt-8 max-w-[65ch] text-base leading-relaxed text-inverse-foreground/95 md:text-lg">{answerUnderH1}</p>
+          ) : (
+            <p className="mt-8 max-w-[60ch] text-base md:text-lg leading-relaxed text-inverse-foreground/95">{overview}</p>
+          )}
           </> : <>
           {/* Every other service, city and area page: one filled primary
               ("Send your list and photos") directly under the heading, so it

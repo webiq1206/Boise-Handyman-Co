@@ -221,7 +221,7 @@ export const PRINCIPLES = [
   },
   {
     title: "Small jobs get real respect",
-    desc: "A one-hour fix gets the same scheduling, the same care, and the same cleanup as a full-day list.",
+    desc: "A small fix gets the same scheduling, care and cleanup as a long list.",
   },
   {
     title: "Know the limits of the trade",
