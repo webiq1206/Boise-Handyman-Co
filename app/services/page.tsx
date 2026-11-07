@@ -9,7 +9,7 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { buildCanonical,FEED_ALTERNATES,fitDescription } from '@/lib/page-metadata';
 import { generateBreadcrumbSchema } from '@/lib/schema';
-import { getBaseUrl } from '@/lib/seo';
+import { getBaseUrl, serviceCityAnchor } from '@/lib/seo';
 import { servicePath } from '@/lib/seo-routes';
 import { CITY_HERO_IMAGES } from '@/shared/cityServiceImages';
 import { CITIES,SERVICES,serviceHeading } from '@/shared/contentData';
@@ -97,6 +97,26 @@ export default function ServicesIndexPage() {
 
       {/* Approved photo-led service directory. */}
       <section className="interior-service-grid" aria-label="All services">{SERVICES.map(service=><Link className="interior-service-card" href={servicePath(service.slug)} key={service.slug}><img src={getServiceBackground(service.slug)} alt={altForImage(getServiceBackground(service.slug)) ?? service.name} width={900} height={675} loading="lazy"/><div><h2>{keepTail(serviceHeading(service.name))}</h2><ArrowRight size={18} aria-hidden="true"/></div><p>{service.shortDescription}</p></Link>)}</section>
+
+      <Section surface="bone" spacing="sm" edge>
+        <div className="ed-shell">
+          <h2 className="ed-h4">Services in Boise</h2>
+          <p className="ed-body mt-4 max-w-[70ch]">
+            Service pages:{' '}
+            {SERVICES.map((service, index) => (
+              <span key={service.slug}>
+                {index > 0 ? ', ' : null}
+                <Link href={servicePath(service.slug)}>{serviceCityAnchor(service.slug, service.name, 'Boise')}</Link>
+              </span>
+            ))}
+            {', '}
+            <Link href="/services/home-repairs">home repairs in Boise</Link>
+            {', and '}
+            <Link href="/re-10-repairs-boise">RE-10 inspection repairs in Boise</Link>
+            .
+          </p>
+        </div>
+      </Section>
 
       <EstimatePromptBand
         title={

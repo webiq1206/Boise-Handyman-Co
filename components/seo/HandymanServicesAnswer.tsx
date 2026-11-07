@@ -1,6 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
-import { SERVICES } from '@/shared/contentData';
-import { toSentenceCase } from '@/shared/sentenceCase';
+import { CITIES, SERVICES } from '@/shared/contentData';
+import { serviceCityAnchor } from '@/lib/seo';
 import { brands, serviceExtras } from '@/components/approved/family-content';
 
 const Arrow = () => <ArrowUpRight size={18} aria-hidden="true" />;
@@ -66,7 +66,19 @@ export function HandymanServicesAnswer() {
             <li>TV mounting and assembly</li>
             <li>Fence, deck, gutter repair, and caulking</li>
           </ul>
-          <p>We serve Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City and Caldwell.</p>
+          <p>
+            We serve{' '}
+            {CITIES.map((city, index) => {
+              const joiner = index === CITIES.length - 1 ? '' : index === CITIES.length - 2 ? ' and ' : ', ';
+              return (
+                <span key={city.slug}>
+                  <a href={`/areas/${city.slug}`}>{city.name}</a>
+                  {joiner}
+                </span>
+              );
+            })}
+            .
+          </p>
         </div>
       </div>
 
@@ -98,9 +110,10 @@ export function HandymanServicesAnswer() {
       </p>
       <nav className="fr-cities" aria-label="All handyman services">
         {SERVICES.map((service) => (
-          <a key={service.slug} href={`/services/${service.slug}`}>{toSentenceCase(service.name)}</a>
+          <a key={service.slug} href={`/services/${service.slug}`}>{serviceCityAnchor(service.slug, service.name, 'Boise')}</a>
         ))}
-        <a href="/re-10-repairs-boise">RE-10 and inspection repairs</a>
+        <a href="/services/home-repairs">Home repairs in Boise</a>
+        <a href="/re-10-repairs-boise">RE-10 inspection repairs in Boise</a>
       </nav>
 
       <p className="f-answer-links [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center">

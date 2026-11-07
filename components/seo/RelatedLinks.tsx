@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
 import { isCityServiceNoindex } from '@/lib/page-metadata';
+import { serviceCityAnchor } from '@/lib/seo';
 import { areaPath, cityServicePath, servicePath } from '@/lib/seo-routes';
 
 interface RelatedLinksProps {
@@ -57,8 +58,24 @@ function ExploreFurther({ serviceSlug }: { serviceSlug?: string }) {
 
 export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksProps) {
   if (variant === 'service' && serviceSlug) {
+    const relatedServices = SERVICES.filter((service) => service.slug !== serviceSlug);
     return (
       <div className="space-y-10">
+        <div>
+          <h2 className="ed-h4 mb-6">Related services</h2>
+          <ul className="grid sm:grid-cols-2 gap-2">
+            {relatedServices.map((service) => (
+              <li key={service.slug} className="list-none">
+                <Link
+                  href={servicePath(service.slug)}
+                  className="ed-body flex min-h-11 items-center text-[0.9375rem] transition-colors hover:[color:var(--ed-accent)] lg:min-h-0"
+                >
+                  {serviceCityAnchor(service.slug, service.name, 'Boise')}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
         <ExploreFurther serviceSlug={serviceSlug} />
       </div>
     );

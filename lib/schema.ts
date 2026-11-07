@@ -41,6 +41,7 @@ export const WEBSITE_ID = `${baseUrl}/#website`;
  */
 const P5_ORIGIN = 'https://p5homeco.com';
 export const P5_ORG_ID = `${P5_ORIGIN}/#organization`;
+export const P5_BUSINESS_ID = `${P5_ORIGIN}/#business`;
 export const P5_PARENT_ORGANIZATION = {
   '@type': 'Organization',
   '@id': P5_ORG_ID,
@@ -51,6 +52,19 @@ export const P5_PARENT_ORGANIZATION = {
   // this brand's own sameAs.
   sameAs: [P5_SOCIAL.facebook, P5_SOCIAL.google],
 } as const;
+
+/**
+ * Parent reference used only on HomeAndConstructionBusiness nodes. Same name,
+ * url, and sameAs as P5_PARENT_ORGANIZATION. The @id is the parent business
+ * node, https://p5homeco.com/#business.
+ */
+const P5_BUSINESS_PARENT = {
+  '@type': 'Organization' as const,
+  '@id': P5_BUSINESS_ID,
+  name: P5_PARENT_ORGANIZATION.name,
+  url: P5_PARENT_ORGANIZATION.url,
+  sameAs: P5_PARENT_ORGANIZATION.sameAs,
+};
 
 // Organization logo for knowledge-panel / rich-result use. The approved seal on
 // a charcoal disc (bone lettering, terracotta ring) is square and stays legible on
@@ -151,8 +165,7 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
     logo: LOGO_URL,
     '@id': LOCALBUSINESS_ID,
     url: baseUrl,
-    // parentOrganization stays on https://p5homeco.com/#organization.
-    parentOrganization: P5_PARENT_ORGANIZATION,
+    parentOrganization: P5_BUSINESS_PARENT,
     hasCredential: CONTRACTOR_CREDENTIAL,
     telephone: SCHEMA_TELEPHONE,
     email: BUSINESS_INFO.email,
@@ -239,7 +252,7 @@ export function generateServiceSchema(serviceName: string, serviceDescription: s
       telephone: SCHEMA_TELEPHONE,
       email: BUSINESS_INFO.email,
       priceRange: '$$',
-      parentOrganization: P5_PARENT_ORGANIZATION,
+      parentOrganization: P5_BUSINESS_PARENT,
       hasCredential: CONTRACTOR_CREDENTIAL,
       employee: founderPerson,
       contactPoint: customerServiceContact,

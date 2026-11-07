@@ -4,18 +4,19 @@ import { InteriorHero, InteriorPage } from '@/components/approved/InteriorLayout
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Section } from '@/components/marketing/Section';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { buildCanonical } from '@/lib/page-metadata';
+import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
+import { buildCanonical, FEED_ALTERNATES } from '@/lib/page-metadata';
 import { generateBreadcrumbSchema } from '@/lib/schema';
 import { SERVICES, serviceHeading } from '@/shared/contentData';
 
-const title = 'Home Repairs in Boise & the Treasure Valley';
+const title = 'Home repairs in Boise';
 const description = 'Get help with drywall, doors, trim, fixtures and a household repair list. Share what needs attention or request a call from Boise Handyman Co.';
-export const metadata: Metadata = {
-  title: { absolute: `${title} | Boise Handyman Co` },
+export const metadata: Metadata = withBrandPageMetadata({
+  title,
   description,
-  alternates: { canonical: buildCanonical('/services/home-repairs') },
+  alternates: { canonical: buildCanonical('/services/home-repairs'), types: FEED_ALTERNATES },
   openGraph: { title, description, url: buildCanonical('/services/home-repairs'), type: 'website' },
-};
+}, '/services/home-repairs');
 
 export default function HomeRepairsPage() {
   return <InteriorPage kind="services">

@@ -41,6 +41,17 @@ export interface SiteUrlGroup {
   entries: SiteUrlEntry[];
 }
 
+/**
+ * Revision date for indexable pages that have no per-page publish date.
+ * Blog posts and guides keep their own updatedAt. This date is the internal
+ * linking revision, not a build clock.
+ */
+const STATIC_CONTENT_REVISION = new Date('2026-11-07T00:00:00.000Z');
+
+function withLastModified(entry: SiteUrlEntry): SiteUrlEntry {
+  return entry.lastModified ? entry : { ...entry, lastModified: STATIC_CONTENT_REVISION };
+}
+
 export function getSiteUrlGroups(): SiteUrlGroup[] {
   const core: SiteUrlEntry[] = [
     { path: '/', label: 'Home', changeFrequency: 'weekly', priority: 1 },
@@ -60,12 +71,20 @@ export function getSiteUrlGroups(): SiteUrlGroup[] {
     { path: '/terms-of-service', label: 'Terms of service', changeFrequency: 'yearly', priority: 0.3 },
   ];
 
-  const services: SiteUrlEntry[] = SERVICES.map((s) => ({
-    path: `/services/${s.slug}`,
-    label: s.name,
-    changeFrequency: 'monthly',
-    priority: 0.85,
-  }));
+  const services: SiteUrlEntry[] = [
+    ...SERVICES.map((s) => ({
+      path: `/services/${s.slug}`,
+      label: s.name,
+      changeFrequency: 'monthly' as const,
+      priority: 0.85,
+    })),
+    {
+      path: '/services/home-repairs',
+      label: 'Home repairs in Boise',
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+  ];
 
   const areas: SiteUrlEntry[] = CITIES.map((c) => ({
     path: `/areas/${c.slug}`,
@@ -122,7 +141,7 @@ export function getSiteUrlGroups(): SiteUrlGroup[] {
   ];
 }
 
-/** Flat list, for the XML sitemap. */
+/** Flat list, for the XML sitemap. Every indexable URL carries lastModified. */
 export function getAllSiteUrls(): SiteUrlEntry[] {
-  return getSiteUrlGroups().flatMap((g) => g.entries);
+  return getSiteUrlGroups().flatMap((g) => g.entries).map(withLastModified);
 }
