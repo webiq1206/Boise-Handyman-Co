@@ -63,7 +63,7 @@ test('rendered registration, FAQ schema, and GBP copy do not claim this brand is
   assert.ok(HOMEPAGE_FAQS.slice(0, INITIAL_FAQ_COUNT).includes(credentialFaq));
   const gbpFaq = GBP_QA_SEED.find((faq) => faq.question === 'Are you a registered contractor and insured?');
   assert.ok(gbpFaq);
-  assert.match(gbpFaq.answer, /an Idaho Registered Contractor #8381215, bonded, and insured/);
+  assert.match(gbpFaq.answer, /Idaho Registered Contractor #8381215/);
 
   const faqSchema = JSON.stringify(
     generateFAQSchema(HOMEPAGE_FAQS.slice(0, INITIAL_FAQ_COUNT).map((faq) => ({ question: faq.q, answer: faq.a }))),

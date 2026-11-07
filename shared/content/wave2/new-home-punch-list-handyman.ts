@@ -5,7 +5,7 @@ export const newHomePunchListHandyman: BlogPostData = {
   title: 'New-home punch list: what a handyman fixes after you move in',
   seoTitle: 'New-Home Punch List: Handyman Fixes',
   metaDescription:
-    'New-home punch list: nail pops, sticking doors and cracked caulk, what stays on builder warranty, and what a handyman can handle for you.',
+    'New-home punch list: nail pops, sticking doors and cracked caulk, what stays on the builder warranty, and what our local handyman can review with you.',
   excerpt:
     'New homes can develop a punch list in year one. Some tasks belong to the builder warranty; other repairs need a scope review and agreed visit plan. Knowing which is which helps you plan the next step.',
   category: 'Home Maintenance',
@@ -103,8 +103,8 @@ export const newHomePunchListHandyman: BlogPostData = {
 <p>Taping matters on settling cracks. Mud alone bridges a hairline crack until the next season; mesh or paper tape under the mud is what keeps it closed. The full method is in <a href="/blog/how-to-patch-drywall">how to patch drywall like a pro</a>, and the paint side, why touch-ups flash and when a wall needs corner-to-corner repainting, is in the <a href="/blog/interior-paint-touch-up-guide">interior paint touch-up guide</a>.</p>
 
 <h2 id="typical-list">What a typical punch-list visit includes</h2>
-<p><strong>A new-home repair list can involve several kinds of small repairs.</strong> A representative Treasure Valley list: eight nail pops patched and textured, two settling cracks taped and skimmed, three interior doors adjusted at hinges and strikes, tub and backsplash caulk cut out and rerun, a toilet paper holder that pulled its anchors remounted properly, and paint touch-up where sheen allows.</p>
-<p>Separately booked, that is five appointments across three trades. Send the list for review under our <a href="/services/home-maintenance">home maintenance</a> service, including <a href="/services/drywall-repair">drywall repair</a> and <a href="/services/carpentry-trim-repair">carpentry and trim</a> where needed.</p>
+<p><strong>A new-home repair list can involve several kinds of small repairs.</strong> A representative Treasure Valley list: nail pops, settling cracks, sticking doors, caulk and paint touch-up.</p>
+<p>Separately booked, that is several separate appointments across trades. Send the list for review under our <a href="/services/home-maintenance">home maintenance</a> service, including <a href="/services/drywall-repair">drywall repair</a> and <a href="/services/carpentry-trim-repair">carpentry and trim</a> where needed.</p>
 
 <h2 id="watch-items">The items that are not cosmetic</h2>
 <p><strong>A short list of year-one symptoms deserves attention rather than spackle.</strong> Cracks wider than about a quarter inch, cracks that keep growing after the second year, doors across the house going out of square at once, stair-step cracks in foundation walls, or floors developing a visible slope point at movement beyond normal settling. Water staining anywhere, around windows, under sinks, at ceiling corners, is never a wait-and-see item.</p>
