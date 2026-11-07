@@ -3,6 +3,7 @@ import { getCountyLabel } from './contentData';
 import { getAreaCityCopy } from './content/areaCopy';
 import { getCityServiceCopy } from './content/cityServiceCopy';
 import { getCityLocalSection, getCityOnlyFaqs } from './cityPageFacts';
+import { AREA_VISIBILITY_FAQS } from './p5VisibilityCopy';
 import type { LandingSection } from '@/components/seo/LandingPageTemplate';
 
 export interface FAQItem {
@@ -928,8 +929,8 @@ function appendNewFaqs(base: FAQItem[], extra: FAQItem[]): FAQItem[] {
 
 /**
  * Visible area-page FAQs. Published city copy stays first, in its original
- * order. The two city-only questions are appended. FAQPage schema must use
- * this same array.
+ * order. The two city-only questions follow, then any visibility questions for
+ * that city. FAQPage schema must use this same array. One node, no duplicate.
  */
 export function areaPageFaqs(city: CityData): FAQItem[] {
   const published = getAreaCityCopy(city.slug)?.faqs;
@@ -940,7 +941,7 @@ export function areaPageFaqs(city: CityData): FAQItem[] {
       answer: `Yes. ${city.name} is part of our core Treasure Valley service area. We handle small repairs, installs, and maintenance across the city, with the same upfront quotes and pricing as everywhere else we work.`,
     },
   ];
-  return appendNewFaqs(base, getCityOnlyFaqs(city));
+  return appendNewFaqs(appendNewFaqs(base, getCityOnlyFaqs(city)), AREA_VISIBILITY_FAQS[city.slug] ?? []);
 }
 
 /** Visible service-city FAQs. Published service copy stays first; city-only questions follow. */

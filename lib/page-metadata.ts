@@ -10,6 +10,7 @@ import {
   getBaseUrl,
   getDefaultOgImage,
 } from './seo';
+import { AREA_TITLE_BY_SLUG } from '@/shared/p5VisibilityCopy';
 
 
 export type PageMetaKind =
@@ -171,7 +172,9 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
     case 'area':
       // "Handyman in Middleton, Idaho" is the longest at 28 chars, so no
       // city name pushes this past the title budget or triggers truncation.
-      title = generateSafePageTitle(`Handyman in ${input.cityName}, Idaho`);
+      // Boise and Caldwell use the visibility titles, still without the brand
+      // suffix the layout template appends.
+      title = AREA_TITLE_BY_SLUG[input.citySlug ?? ''] ?? generateSafePageTitle(`Handyman in ${input.cityName}, Idaho`);
       description = generateMetaDescription({
         serviceName: '',
         serviceSlug: '',

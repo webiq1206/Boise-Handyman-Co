@@ -4,6 +4,7 @@ import { brandStyle } from '@/components/family/brandStyle';
 import { ProofStrip } from '@/components/family/ProofStrip';
 import { CONTRACTOR_REGISTRATION } from '@/components/ContractorCredential';
 import { FAMILY_BRAND } from '@/lib/familyBrand';
+import { HOME_ANSWER } from '@/shared/p5VisibilityCopy';
 import { brands } from './family-content';
 import { HandymanHeroVideo } from './HandymanHeroVideo';
 
@@ -39,6 +40,7 @@ export function ApprovedHomeHero({heroClassName}: {heroClassName?: string} = {})
               <h1 className="fam-hero-title" id="family-hero-title">
                 Boise handyman.{' '}<span className="fam-hero-accent">Your list, handled.</span>
               </h1>
+              <p className="fam-hero-answer" data-speakable="summary">{HOME_ANSWER}</p>
               <p className="fam-hero-support">Skilled local help for the list that keeps growing.</p>
               <div className="fam-hero-actions">
                 <FamilyButton href={FAMILY_BRAND.cta.href} variant="hero" size="lg" data-hero-cta="primary" data-cta="primary">

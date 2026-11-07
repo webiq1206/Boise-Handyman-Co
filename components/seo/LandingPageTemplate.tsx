@@ -21,6 +21,7 @@ import { altForImage } from '@/shared/imageAlts';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import type { GalleryProject } from '@/shared/galleryData';
 import type { FAQItem } from '@/shared/seoContent';
+import { AREA_ANSWER_UNDER_H1 } from '@/shared/p5VisibilityCopy';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { ArrowRight,ChevronRight,Phone,Star } from 'lucide-react';
 import Link from 'next/link';
@@ -209,6 +210,7 @@ export function LandingPageTemplate({
     [heroImageUrl, breatherImage, showProcessPanel ? processImage : undefined].filter(Boolean),
   );
   const uniqueInline = processImage && !shownElsewhere.has(processImage) ? processImage : undefined;
+  const answerUnderH1 = AREA_ANSWER_UNDER_H1[h1];
 
   return (
     <div
@@ -218,11 +220,14 @@ export function LandingPageTemplate({
       {/* Approved editorial hero */}
       {focusedDrywallHero ? <DrywallSearchHero h1={h1} overview={overview} speakableSummary={speakableSummary} breadcrumbs={breadcrumbs} callFirst={callFirst} /> : <InteriorHero imageSrc={heroImageUrl} imageAlt={heroAlt} layout="split">
           <HeroBreadcrumbs items={breadcrumbs} />
-          <p data-speakable="summary" className="sr-only">{speakableSummary}</p>
+          {!answerUnderH1 && <p data-speakable="summary" className="sr-only">{speakableSummary}</p>}
           {eyebrow && (
             <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>{eyebrow}</p>
           )}
           <h1 className="ed-display ed-statement-display text-inverse-foreground">{paidService === 'home-maintenance' ? 'Home maintenance in Boise' : h1}</h1>
+          {answerUnderH1 && (
+            <p data-speakable="summary" className="mt-6 max-w-[65ch] text-base leading-relaxed text-inverse-foreground/95 md:mt-8 md:text-lg">{answerUnderH1}</p>
+          )}
           {callFirst ? <>
           {/* Paid-traffic pages (lib/adLandingPaths.ts) keep the owner's
               call-first hero exactly as set on 19 and 27 October 2026. */}

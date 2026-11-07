@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import {ESTIMATOR_BRAND as brand} from './p5/brand.ts';
+import {HOME_DESCRIPTION,HOME_TITLE} from '@/shared/p5VisibilityCopy';
 
 /** Branded sharing previews are the owner's preference. Product/article schema
  * retains its real subject image. Neither favicon nor preview display is guaranteed. */
@@ -23,7 +24,7 @@ const COPY:Record<string,Record<string,Copy>>={
   "/blog/drywall-repair-cost-boise":{title:"Boise Drywall Repair Costs (2026)",description:"Review Boise drywall repair costs for holes, cracks, texture matching and paint. Learn what affects the price and how to describe your repair for a quote."},
   "/blog/what-small-home-repairs-cost-boise":{title:"Small Home Repair Costs in Boise",description:"Explore Boise small-repair budgets for drywall, doors, fixtures and maintenance. Plan your task list and understand labor, materials and visit costs."},
   // The homepage's only title and description source; app/page.tsx sets neither.
-  '/':{title:'Boise Handyman Services | Upfront Quotes',description:'Boise handyman for small repairs, installs and home maintenance across the Treasure Valley. One written quote before work starts. Send your list today.'},
+  '/':{title:HOME_TITLE,description:HOME_DESCRIPTION},
   '/services':{title:'Handyman Repair & Installation Services',description:'Explore drywall repair, painting, carpentry, mounting and maintenance services in Boise and the Treasure Valley. Send your repair list to our local team.'},
   '/about':{title:'About Our Boise Handyman Team',description:'Learn how Boise Handyman Co handles Treasure Valley home repairs and installations, with clear project scopes, scheduling and attention to small jobs.'},
   '/contact':{title:'Contact a Boise Handyman',description:'Contact Boise Handyman Co about your repair list, installation or maintenance project. Call our team or send your scope for a Treasure Valley estimate.'}},

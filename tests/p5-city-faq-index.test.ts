@@ -12,10 +12,10 @@ import {CITY_SERVICE_COPY} from '../shared/content/cityServiceCopy.ts';
 import {getCityOnlyFaqs} from '../shared/cityPageFacts.ts';
 import {AREA_PAGE_FAQS,SERVICE_SEO_CONTENT,areaPageFaqs,cityServicePageFaqs,getAreaIntro,getCityServiceFaqs,getCityServiceIntro,getCityServiceSections} from '../shared/seoContent.ts';
 import {CITY_SEO_DATA} from '../lib/seo.ts';
+import {AREA_VISIBILITY_FAQS,HOME_DESCRIPTION,HOME_TITLE as HOME_TOPIC,HOME_VISIBILITY_FAQS} from '../shared/p5VisibilityCopy.ts';
+import {HOMEPAGE_FAQS} from '../shared/homepageFaqs.ts';
 
-// Phase 4 (owner-approved plan): keyword-first homepage title from one source.
-const HOME_TITLE='Boise Handyman Services | Upfront Quotes | Boise Handyman Co';
-const HOME_DESCRIPTION='Boise handyman for small repairs, installs and home maintenance across the Treasure Valley. One written quote before work starts. Send your list today.';
+const HOME_TITLE=`${HOME_TOPIC} | Boise Handyman Co`;
 const NOINDEX_TODAY=[
  'carpentry-trim-repair/nampa',
  'drywall-repair/kuna',
@@ -54,7 +54,8 @@ test('visible area, service-city, and hub FAQs match FAQPage JSON-LD',()=>{
   assert.deepEqual(faqs.slice(0,published.length),published,`${city.slug} published FAQs stay first and unchanged`);
   const added=getCityOnlyFaqs(city);
   assert.equal(added.length,2);
-  assert.deepEqual(faqs.slice(published.length),added,`${city.slug} appends the two city-only questions`);
+  assert.deepEqual(faqs.slice(published.length,published.length+added.length),added,`${city.slug} appends the two city-only questions`);
+  assert.deepEqual(faqs.slice(published.length+added.length),AREA_VISIBILITY_FAQS[city.slug]??[],`${city.slug} appends only its visibility questions`);
   assert.equal(new Set(faqs.map((faq)=>faq.question)).size,faqs.length);
  }
  for(const service of SERVICES){
@@ -182,5 +183,27 @@ test('home document, Open Graph, and Twitter titles stay on the published handym
  assert.equal((result.openGraph as {title?:string}).title,HOME_TITLE);
  assert.equal((result.twitter as {title?:string}).title,HOME_TITLE);
  assert.equal(result.description,HOME_DESCRIPTION);
- assert.equal(HOME_TITLE.length,60);
+ assert.equal(HOME_TITLE.length,50);
+ assert.equal(HOME_DESCRIPTION.length,150);
+});
+
+test('Boise and Caldwell visibility titles, answers, and appended FAQs match the brief',()=>{
+ const boise=buildPageMetadata({kind:'area',cityName:'Boise',citySlug:'boise',path:'/areas/boise'});
+ const caldwell=buildPageMetadata({kind:'area',cityName:'Caldwell',citySlug:'caldwell',path:'/areas/caldwell'});
+ assert.equal(boise.title,'Boise Handyman, Written Quote First');
+ assert.equal(caldwell.title,'Caldwell Handyman, Written Quote First');
+ assert.equal(String(boise.title).length+(' | Boise Handyman Co').length,55);
+ assert.equal(String(caldwell.title).length+(' | Boise Handyman Co').length,58);
+ const boiseFaqs=areaPageFaqs(CITIES.find((city)=>city.slug==='boise')!);
+ const caldwellFaqs=areaPageFaqs(CITIES.find((city)=>city.slug==='caldwell')!);
+ assert.deepEqual(faqPairs(boiseFaqs).slice(-2),AREA_VISIBILITY_FAQS.boise);
+ assert.deepEqual(faqPairs(caldwellFaqs).slice(-2),AREA_VISIBILITY_FAQS.caldwell);
+ assert.equal(boiseFaqs.filter((faq)=>faq.question==='How do I get a quote for repairs in Boise?').length,1);
+ assert.equal(caldwellFaqs.filter((faq)=>faq.question==='Is the work guaranteed?').length,1);
+ assert.deepEqual(HOMEPAGE_FAQS.slice(-2).map((faq)=>({question:faq.q,answer:faq.a})),HOME_VISIBILITY_FAQS);
+ assert.equal(HOMEPAGE_FAQS.filter((faq)=>faq.q==='Do you confirm arrival times?').length,1);
+ assert.equal(HOMEPAGE_FAQS.some((faq)=>/bonded|warranty|trip fee|one-hour minimum/i.test(`${faq.q} ${faq.a}`)),false);
+ const dash=new RegExp('['+String.fromCharCode(0x2014)+String.fromCharCode(0x2013)+']');
+ assert.equal(dash.test(`${boise.description} ${caldwell.description} ${HOME_DESCRIPTION}`),false);
+ assert.doesNotMatch(`${boise.description} ${caldwell.description} ${HOME_DESCRIPTION}`,/\btext\b|SMS|bonded/i);
 });
