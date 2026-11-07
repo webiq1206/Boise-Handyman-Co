@@ -7,10 +7,10 @@
 - Phone: `(208) 477-1169`
 - Address model: **Service Area Business** - registered address supplied privately for verification, never published. Public locality: `Meridian, ID`
 - Service area: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell, ID
-- Website: `https://boiseremodeling.co`
-- Email: `hello@boiseremodeling.co`
+- Website: `https://boisehandyman.co`
+- Email: `hello@boisehandyman.co`
 - Hours: Mon–Fri 9:00 AM–6:00 PM, Sat 9:00 AM–4:00 PM, Sun closed
-- Categories: Remodeler; Kitchen remodeler; Bathroom remodeler; General contractor
+- Categories: Handyman; Drywall contractor; Painter; Furniture assembly service; Fence contractor; Gutter cleaning service
 - Description (short, for directories): "Handyman service for small repairs, installations and maintenance across the Treasure Valley. Written quotes before work starts. Insured; certificate on request."
 
 ## On-site NAP audit - CONSISTENT (verified in code)
