@@ -108,10 +108,11 @@ test('the homepage video hero preserves first-response content, poster and sourc
   assert.match(html, /<h1 class="fam-hero-title" id="family-hero-title">Boise handyman\. <span class="fam-hero-accent">Your list, handled\.<\/span><\/h1>/);
   const cta = html.match(/<a [^>]*data-hero-cta="primary"[^>]*>([^<]+)<\/a>/);
   assert.ok(cta, 'hero primary CTA');
-  assert.match(cta[0], /href="\/#consult"/);
+  assert.match(cta[0], /href="tel:\+12084771169"/);
   assert.match(cta[0], /fam-btn--hero fam-btn--lg/);
-  assert.equal(cta[1], 'Send your list and photos');
-  assert.match(html, /<a href="tel:\+12084771169" class="fam-hero-link">Call \(208\) 477-1169<\/a>/);
+  assert.equal(cta[1], 'Call us about your project.');
+  assert.match(html, /<a href="\/#consult" class="fam-hero-link" data-cta="secondary">Send your list and photos<\/a>/);
+  assert.equal((html.match(/sms:/g) ?? []).length, 0);
   assert.match(html, /<img [^>]*fetchPriority="high"[^>]*class="fam-hero-img"/);
   assert.match(html, /<img [^>]*src="\/media\/handyman\/boise-handyman-co-poster\.jpg"/);
   // No-JavaScript uses the approved poster: WebKit can force native controls

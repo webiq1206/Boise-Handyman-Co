@@ -45,7 +45,7 @@ test('service, area and service x city descriptions are keyword first, 140 to 15
   const description=String(meta.description);
   if(city.slug==='boise'){
    assert.equal(description,BOISE_AREA_DESCRIPTION);
-   check(`/areas/${city.slug}`,description,/^From North End plaster/);
+   check(`/areas/${city.slug}`,description,/^Get your Boise repair list handled with a written quote first/);
   }else if(city.slug==='caldwell'){
    assert.equal(description,CALDWELL_AREA_DESCRIPTION);
    check(`/areas/${city.slug}`,description,/^Get your Caldwell repair list/);
@@ -56,6 +56,6 @@ test('service, area and service x city descriptions are keyword first, 140 to 15
  }
  const home=generateMetaDescription({serviceName:'',serviceSlug:'',isHomePage:true});
  assert.equal(home,HOME_DESCRIPTION);
- check('home',home,/^Hand us your repair list/);
+ check('home',home,/^Get your Boise repair list handled with a written quote before work starts/);
  check('generic',generateMetaDescription({serviceName:'',serviceSlug:''}),/^Handyman services in Boise/);
 });

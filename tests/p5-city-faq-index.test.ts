@@ -12,7 +12,7 @@ import {CITY_SERVICE_COPY} from '../shared/content/cityServiceCopy.ts';
 import {getCityOnlyFaqs} from '../shared/cityPageFacts.ts';
 import {AREA_PAGE_FAQS,SERVICE_SEO_CONTENT,areaPageFaqs,cityServicePageFaqs,getAreaIntro,getCityServiceFaqs,getCityServiceIntro,getCityServiceSections} from '../shared/seoContent.ts';
 import {CITY_SEO_DATA} from '../lib/seo.ts';
-import {AREA_VISIBILITY_FAQS,HOME_DESCRIPTION,HOME_TITLE as HOME_TOPIC,HOME_VISIBILITY_FAQS} from '../shared/p5VisibilityCopy.ts';
+import {AREA_VISIBILITY_FAQS,BOISE_AREA_ANSWER,BOISE_AREA_DESCRIPTION,CALDWELL_AREA_ANSWER,HOME_ANSWER,HOME_DESCRIPTION,HOME_TITLE as HOME_TOPIC,HOME_VISIBILITY_FAQS} from '../shared/p5VisibilityCopy.ts';
 import {HOMEPAGE_FAQS} from '../shared/homepageFaqs.ts';
 
 const HOME_TITLE=`${HOME_TOPIC} | Boise Handyman Co`;
@@ -184,7 +184,7 @@ test('home document, Open Graph, and Twitter titles stay on the published handym
  assert.equal((result.twitter as {title?:string}).title,HOME_TITLE);
  assert.equal(result.description,HOME_DESCRIPTION);
  assert.equal(HOME_TITLE.length,50);
- assert.equal(HOME_DESCRIPTION.length,150);
+ assert.equal(HOME_DESCRIPTION.length,154);
 });
 
 test('Boise and Caldwell visibility titles, answers, and appended FAQs match the brief',()=>{
@@ -196,14 +196,26 @@ test('Boise and Caldwell visibility titles, answers, and appended FAQs match the
  assert.equal(String(caldwell.title).length+(' | Boise Handyman Co').length,58);
  const boiseFaqs=areaPageFaqs(CITIES.find((city)=>city.slug==='boise')!);
  const caldwellFaqs=areaPageFaqs(CITIES.find((city)=>city.slug==='caldwell')!);
- assert.deepEqual(faqPairs(boiseFaqs).slice(-2),AREA_VISIBILITY_FAQS.boise);
- assert.deepEqual(faqPairs(caldwellFaqs).slice(-2),AREA_VISIBILITY_FAQS.caldwell);
+ assert.deepEqual(faqPairs(boiseFaqs).slice(-AREA_VISIBILITY_FAQS.boise.length),AREA_VISIBILITY_FAQS.boise);
+ assert.deepEqual(faqPairs(caldwellFaqs).slice(-AREA_VISIBILITY_FAQS.caldwell.length),AREA_VISIBILITY_FAQS.caldwell);
  assert.equal(boiseFaqs.filter((faq)=>faq.question==='How do I get a quote for repairs in Boise?').length,1);
- assert.equal(caldwellFaqs.filter((faq)=>faq.question==='Is the work guaranteed?').length,1);
+ assert.equal(caldwellFaqs.filter((faq)=>faq.question==='Is the work guaranteed?').length,0);
  assert.deepEqual(HOMEPAGE_FAQS.slice(-2).map((faq)=>({question:faq.q,answer:faq.a})),HOME_VISIBILITY_FAQS);
  assert.equal(HOMEPAGE_FAQS.filter((faq)=>faq.q==='Do you confirm arrival times?').length,1);
  assert.equal(HOMEPAGE_FAQS.some((faq)=>/bonded|warranty|trip fee|one-hour minimum/i.test(`${faq.q} ${faq.a}`)),false);
  const dash=new RegExp('['+String.fromCharCode(0x2014)+String.fromCharCode(0x2013)+']');
  assert.equal(dash.test(`${boise.description} ${caldwell.description} ${HOME_DESCRIPTION}`),false);
  assert.doesNotMatch(`${boise.description} ${caldwell.description} ${HOME_DESCRIPTION}`,/\btext\b|SMS|bonded/i);
+ assert.equal(HOME_DESCRIPTION,'Get your Boise repair list handled with a written quote before work starts. Share your list and photos so our team can review your project. Call us today.');
+ assert.equal(BOISE_AREA_DESCRIPTION,'Get your Boise repair list handled with a written quote first. We confirm your arrival time when you book. Call us about repairs for your home in Boise.');
+ assert.equal(String(boise.description).length,152);
+ assert.equal(HOME_ANSWER,'Get your repair list handled with a written quote before work starts. Boise Handyman Co helps with small repairs, installs and home maintenance across Boise and the Treasure Valley. Share your list and photos so we can review the work and confirm your arrival time when you book.');
+ assert.match(BOISE_AREA_ANSWER,/Our own crew does the work, and we confirm your arrival time when you book\.$/);
+ assert.match(CALDWELL_AREA_ANSWER,/explain the next steps and confirm your arrival time when you book\.$/);
+ assert.equal(HOME_VISIBILITY_FAQS.find((faq)=>faq.question==='Do you confirm arrival times?')?.answer,'Yes. We confirm your arrival time when you book.');
+});
+
+test('new visibility answers and area FAQs contain no guarantee or warranty',()=>{
+ const added=`${HOME_ANSWER}\n${JSON.stringify(AREA_VISIBILITY_FAQS)}`;
+ assert.doesNotMatch(added,/guarantee|warranty/i);
 });

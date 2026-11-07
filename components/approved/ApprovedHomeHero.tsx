@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react';
-import { FamilyButton } from '@/components/family/Button';
+import { BusinessPhoneLink } from '@/components/BusinessPhoneContact';
+import { familyButtonClass } from '@/components/family/Button';
 import { brandStyle } from '@/components/family/brandStyle';
 import { ProofStrip } from '@/components/family/ProofStrip';
 import { CONTRACTOR_REGISTRATION } from '@/components/ContractorCredential';
@@ -43,10 +44,15 @@ export function ApprovedHomeHero({heroClassName}: {heroClassName?: string} = {})
               <p className="fam-hero-answer" data-speakable="summary">{HOME_ANSWER}</p>
               <p className="fam-hero-support">Skilled local help for the list that keeps growing.</p>
               <div className="fam-hero-actions">
-                <FamilyButton href={FAMILY_BRAND.cta.href} variant="hero" size="lg" data-hero-cta="primary" data-cta="primary">
-                  {FAMILY_BRAND.cta.label}
-                </FamilyButton>
-                <a href={FAMILY_BRAND.phone.telHref} className="fam-hero-link">Call {FAMILY_BRAND.phone.display}</a>
+                <BusinessPhoneLink
+                  className={familyButtonClass({ variant: 'hero', size: 'lg' })}
+                  data-hero-cta="primary"
+                  data-cta="primary"
+                  data-testid="link-hero-call"
+                >
+                  Call us about your project.
+                </BusinessPhoneLink>
+                <a href={FAMILY_BRAND.cta.href} className="fam-hero-link" data-cta="secondary">{FAMILY_BRAND.cta.label}</a>
               </div>
             </div>
           </div>
