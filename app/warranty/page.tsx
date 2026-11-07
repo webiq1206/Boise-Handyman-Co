@@ -18,11 +18,11 @@ import Link from "next/link";
 import { FamilyButton } from '@/components/family/Button';
 
 const WARRANTY_COPY =
-  "Our work carries a written workmanship warranty, and parts we supply keep their manufacturer warranty. Call or text us with warranty questions.";
+  "Our work carries a written workmanship warranty. Call or text us with warranty questions.";
 
 const TITLE = "Written Workmanship Warranty";
 const DESCRIPTION = fitDescription(
-  "Our repairs and installs come with a written workmanship warranty, and parts we supply keep their manufacturer warranty. Call or text us with questions.",
+  "Read about written workmanship warranty at Boise Handyman Co. Call or text us with warranty questions and to discuss your repair or installation project.",
 );
 
 export const metadata: Metadata = withBrandPageMetadata(
