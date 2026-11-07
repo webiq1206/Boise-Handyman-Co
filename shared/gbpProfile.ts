@@ -67,7 +67,7 @@ export const GBP_CATEGORIES = {
 } as const;
 
 export const GBP_DESCRIPTION =
-  'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to ' +
+  'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. You get one written quote before work starts. Parts and materials appear on your quote as their own line. Larger remodels and licensed trade work are referred to ' +
   (SHOW_TRUST_CLAIMS ? 'trusted specialty contractors' : 'specialty contractors') +
   '. Get a preliminary estimate online or book a handyman visit.';
 
@@ -302,7 +302,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'Who supplies the materials?',
     answer:
-      'Either works. Supply your own fixture, paint, or hardware, or we pick materials up on the way and list them on the invoice at store cost. Common small parts ride on the truck.',
+      'Either works. Supply your own fixture, paint or hardware, or ask us to source it. Parts and materials appear on your quote as their own line.',
   },
   {
     question: 'Do you mount TVs and assemble furniture?',
@@ -346,8 +346,8 @@ export const GBP_POSTS_STARTER: GbpPost[] = [
   },
   {
     week: 3,
-    headline: 'One visit, whole to-do list',
-    body: 'One visit covers the whole list, however many tasks. Send your list with photos and clear the whole thing in one appointment.',
+    headline: 'Send your repair list',
+    body: 'Send your list with photos so we can review the scope, materials and visit plan. You get one written quote before work starts.',
     buttonLabel: 'Send your list',
     buttonUrl: `${SITE}/contact`,
     photoHint: 'Punch-list style photo: tools and task list',
