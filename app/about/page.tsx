@@ -36,9 +36,9 @@ const SPEAKABLE_SUMMARY =
 
 const HANDYMAN_FIVE = [
   'Written quote before work starts',
-  'Materials at cost',
+  'Materials listed separately',
   'Agreed arrival time',
-  'One-trip fixes where the job allows',
+  'Small repairs and installs with a written quote',
   'Cleanup and haul-away',
 ] as const;
 
@@ -225,16 +225,14 @@ export default function AboutPage() {
                 <p className="ed-eyebrow">Warranty</p>
                 <h3 className="ed-h3">Written workmanship warranty</h3>
                 <p className="ed-body mt-3">
-                  If our work fails, we come back and make it right. Full terms on the{' '}
-                  <Link href="/warranty" className="underline underline-offset-2">warranty page</Link>.
+                  Our work carries a written workmanship warranty, and parts we supply keep their manufacturer warranty. Call or text us with warranty questions.
                 </p>
               </div>
               <div className="ed-inset">
                 <p className="ed-eyebrow">Where your money goes</p>
                 <h3 className="ed-h3">Don&apos;t pay for our overhead</h3>
                 <p className="ed-body mt-3">
-                  No showroom, no sales team, no fleet of wrapped trucks. What you spend goes into
-                  the time and materials your repair actually takes, with materials at cost.
+                  No showroom, no sales team, no fleet of wrapped trucks. You get one written quote before work starts. Parts and materials appear on your quote as their own line.
                 </p>
               </div>
             </div>

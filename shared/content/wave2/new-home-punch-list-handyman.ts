@@ -33,7 +33,7 @@ export const newHomePunchListHandyman: BlogPostData = {
     'Report warranty-eligible items to your builder in writing before the warranty window closes; do not pay to fix what the builder owes you.',
     'The common convention is an 11-month walkthrough because most settling has happened and the typical workmanship warranty has not yet expired.',
     'Fix settling cosmetics once, after the first full heating and cooling cycle, instead of chasing each crack as it appears.',
-    'A typical settling punch list, patches, caulk, door adjustments, touch-up, is a half-day handyman visit, not a series of specialist calls.',
+    'A typical settling punch list, patches, caulk, door adjustments and touch-up, is handyman work, not a series of specialist calls.',
   ],
   relatedLinks: [
     { url: '/blog/how-to-patch-drywall', anchor: 'How to Patch Drywall Like a Pro' },

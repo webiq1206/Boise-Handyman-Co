@@ -147,7 +147,7 @@ export const DESCRIPTION_MIN = 140;
 export const DESCRIPTION_MAX = 155;
 
 const HOME_DESCRIPTION =
-  'Boise handyman for small repairs, installs and home maintenance across the Treasure Valley. One written quote before work starts. Send your list today.';
+  'Get your Boise repair list handled with a written quote before work starts. Share your list and photos so our team can review your project. Call us today.';
 
 const GENERIC_DESCRIPTION =
   'Handyman services in Boise and the Treasure Valley: small repairs, installs and home maintenance, with one written quote before any work starts.';
@@ -175,7 +175,7 @@ const SERVICE_DESCRIPTIONS: Record<string, string> = {
 /** Keyed by city name. Each housing note is from that city's guide or area copy. */
 const AREA_DESCRIPTIONS: Record<string, string> = {
   Boise:
-    'Handyman in Boise, Idaho: North End plaster to Harris Ranch nail pops. One written quote before work starts, same pricing valley-wide, no travel surcharge.',
+    'Get your Boise repair list handled with a written quote first. We confirm your arrival time when you book. Call us about repairs for your home in Boise.',
   Meridian:
     'Handyman in Meridian, Idaho: settling cracks and builder-grade swaps in subdivision homes. One written quote before work starts, same pricing valley-wide.',
   Eagle:
@@ -191,7 +191,7 @@ const AREA_DESCRIPTIONS: Record<string, string> = {
   'Garden City':
     'Handyman in Garden City, Idaho: small repairs, installs and upkeep for Ada County homes near the Greenbelt. One written quote before work starts.',
   Caldwell:
-    'Handyman in Caldwell, Idaho: older homes near the historic core and new subdivisions. One written quote before work starts, same pricing across the valley.',
+    'Get your Caldwell repair list handled, from older homes near the historic core to newer subdivisions, with a written quote before work starts. Call us.',
 };
 
 /**

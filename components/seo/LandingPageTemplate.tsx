@@ -6,6 +6,8 @@ import { DrywallSearchHero } from '@/components/approved/DrywallSearchHero';
 import { Section } from '@/components/marketing/Section';
 import { RelatedPostCards } from '@/components/marketing/RelatedPostCards';
 import Image from '@/components/MarketingImage';
+import { BusinessPhoneLink } from '@/components/BusinessPhoneContact';
+import { familyButtonClass } from '@/components/family/Button';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
 import { Reveal } from '@/components/Reveal';
 import { FeaturedBeforeAfterSection } from '@/components/sections/FeaturedBeforeAfterSection';
@@ -209,6 +211,7 @@ export function LandingPageTemplate({
     [heroImageUrl, breatherImage, showProcessPanel ? processImage : undefined].filter(Boolean),
   );
   const uniqueInline = processImage && !shownElsewhere.has(processImage) ? processImage : undefined;
+  const areaCallFirst = h1 === 'Handyman in Boise, Idaho' || h1 === 'Handyman in Caldwell, Idaho';
 
   return (
     <div
@@ -260,6 +263,19 @@ export function LandingPageTemplate({
             </p>
           )}
           </>}
+          </> : areaCallFirst ? <>
+          <div className="fam-hero-actions mt-6">
+            <BusinessPhoneLink
+              className={familyButtonClass({ variant: 'hero', size: 'lg' })}
+              data-hero-cta="primary"
+              data-cta="primary"
+              data-testid="link-area-call"
+            >
+              Call us about your project.
+            </BusinessPhoneLink>
+            <a href="/#consult" className="fam-hero-link" data-cta="secondary">{CTA_PRIMARY}</a>
+          </div>
+          <p className="mt-8 max-w-[60ch] text-base md:text-lg leading-relaxed text-inverse-foreground/95">{overview}</p>
           </> : <>
           {/* Every other service, city and area page: one filled primary
               ("Send your list and photos") directly under the heading, so it

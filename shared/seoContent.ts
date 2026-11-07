@@ -907,7 +907,7 @@ export const AREA_PAGE_FAQS: FAQItem[] = [
   {
     question: 'How does pricing work?',
     answer:
-      'Every job gets one upfront written quote before any work starts, priced by the time it takes. Materials appear as their own line at cost, and bundling several tasks into one visit is the best value.',
+      'You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
   },
   {
     question: 'Do you handle remodels or large projects?',

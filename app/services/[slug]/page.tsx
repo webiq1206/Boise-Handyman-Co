@@ -130,7 +130,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
     {
       heading: `Why book a handyman for ${serviceLC}`,
       paragraphs: [
-        `Specialty contractors are built for big projects, which is why small ${serviceLC} jobs get ignored or wait weeks. A handyman service is built the other way: small jobs are the whole business, so they get quoted quickly, scheduled promptly, and finished in one visit whenever the work allows.`,
+        `Specialty contractors are built for big projects, which is why small ${serviceLC} jobs get ignored or wait weeks. A handyman service focuses on small repairs and installations. Share your list and photos so we can review the scope.`,
         // The pricing model, inclusions, and one-trip framing are already
         // stated as scannable bullets above (benefits/inclusions) - this
         // paragraph adds only what those lists don't: the honest-scope close.

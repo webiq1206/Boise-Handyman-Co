@@ -262,8 +262,8 @@ export const BUDGET_GUIDANCE_POINTS = [
     body: "Send your list and photos. We review the scope before preparing a written quote. You approve that price before anyone opens a toolbox.",
   },
   {
-    title: "Materials at cost",
-    body: "Parts and materials appear on the quote as their own line, at what they cost. Bundling tasks into one trip is usually the best value.",
+    title: "Materials listed separately",
+    body: "Parts and materials appear on your quote as their own line.",
   },
   {
     title: "You can supply the parts",

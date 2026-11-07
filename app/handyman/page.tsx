@@ -2,7 +2,6 @@ import { LandingMobileActions } from "@/components/marketing/LandingMobileAction
 import { LandingContactActions } from "@/components/marketing/LandingContactActions";
 import { ConsultationForm } from "@/components/ConsultationForm";
 import { QuoteFormAnchor } from "@/components/QuoteFormAnchor";
-import { CONTRACTOR_REGISTRATION } from "@/components/ContractorCredential";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { withBrandPageMetadata } from "@/lib/brand-page-metadata";
 import { generateFAQSchema, generateWebPageSchema } from "@/lib/schema";
@@ -61,7 +60,7 @@ const FAQS = [
   },
   {
     question: "Are you insured?",
-    answer: `Yes. We are an ${CONTRACTOR_REGISTRATION} and insured.`,
+    answer: "Yes. P5 Home Co LLC, Idaho Registered Contractor #8381215. Insured; certificate on request.",
   },
 ];
 

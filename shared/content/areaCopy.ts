@@ -16,7 +16,7 @@ export interface AreaCityCopy {
 export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   boise: {
     intro:
-      "Boise's houses have some age on them: the median home was built in 1986, and about 17% of the city's housing predates 1960 (Census ACS 2020-2024). Boise Handyman Co takes care of the small stuff those homes collect, from drywall cracks and sticking doors to dripping faucets, loose deck boards, and a TV that needs mounting, with a written quote and visit plan based on the agreed scope.",
+      "Boise's houses have some age on them: the median home was built in 1986, and about 17% of the city's housing predates 1960 (Census ACS 2020 to 2024). Boise Handyman Co takes care of the small stuff those homes collect, from drywall cracks and sticking doors to dripping faucets, loose deck boards, and a TV that needs mounting, with a written quote and visit plan based on the agreed scope.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
@@ -26,7 +26,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "You get one written quote upfront, before work starts, and it's priced by the time the job takes. Materials are billed at cost on their own line, and grouping a few tasks per visit is the best value (every job gets a written quote first).",
+          "You get one written quote before work starts. Parts and materials appear on your quote as their own line.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -36,12 +36,12 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
+          "Call to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
       },
       {
         question: 'Do you serve Boise, Idaho?',
         answer:
-          'Yes. Boise is core Treasure Valley territory for us, Downtown, the East End, and Southwest Boise included. We handle small repairs, installs, and maintenance anywhere in the city, and quotes and pricing match everywhere else we work.',
+          'Yes. Boise is core Treasure Valley territory for us, Downtown, the East End, and Southwest Boise included. We handle small repairs, installs, and maintenance anywhere in the city.',
       },
       {
         question: 'Which small jobs need a permit in Boise?',
@@ -57,7 +57,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   },
   meridian: {
     intro:
-      "Most of Meridian's housing is young: about 70% of homes were built in 2000 or later, and 82% are detached single-family houses (Census ACS 2020-2024). Newer doesn't mean maintenance-free, and Boise Handyman Co covers the punch lists that come with it across Meridian, including drywall cracks, caulk lines, loose fixtures, fence panels, and mounting jobs, all quoted upfront as one written price.",
+      "Most of Meridian's housing is young: about 70% of homes were built in 2000 or later, and 82% are detached single-family houses (Census ACS 2020 to 2024). Newer doesn't mean maintenance-free, and Boise Handyman Co covers the punch lists that come with it across Meridian, including drywall cracks, caulk lines, loose fixtures, fence panels, and mounting jobs, all quoted upfront as one written price.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
@@ -67,7 +67,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "Before anything starts, you get a single upfront written quote. It's based on how long the work takes; materials show up as a separate line at cost; and stacking a few jobs into the same trip gives you the best value.",
+          "You get one written quote before work starts. Parts and materials appear on your quote as their own line.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -108,7 +108,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   },
   nampa: {
     intro:
-      "Nampa's homes run the full range, with about 15% built before 1960 and 22% since 2010 (Census ACS 2020-2024), so one street can need very different fixes. Boise Handyman Co covers Nampa and Canyon County with the fix-it work: one written price before work starts, materials at cost, and visits planned around the agreed scope.",
+      "Nampa's homes run the full range, with about 15% built before 1960 and 22% since 2010 (Census ACS 2020 to 2024), so one street can need very different fixes. Boise Handyman Co covers Nampa and Canyon County with the fix-it work: one written price before work starts, materials at cost, and visits planned around the agreed scope.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
@@ -118,7 +118,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'Pricing is time-based, and you see it as one upfront written quote before work begins. Materials are listed separately at cost, and if you group several small tasks you get the best value.',
+          'You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -169,7 +169,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'One upfront written quote, delivered before any work begins. The price reflects the time the job takes. Materials appear on their own line at cost, and the best value comes from bundling several tasks into the same visit.',
+          'You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -194,13 +194,13 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How old are homes in Eagle?',
         answer:
-          "Mostly newer. Census ACS 2020-2024 estimates put Eagle's median year built at 2007, with 86% of homes detached single-family houses. Even newer homes need regular attention to caulk lines, door adjustments, and exterior touch-ups as they go through freeze-thaw seasons.",
+          "Mostly newer. Census ACS 2020 to 2024 estimates put Eagle's median year built at 2007, with 86% of homes detached single-family houses. Even newer homes need regular attention to caulk lines, door adjustments, and exterior touch-ups as they go through freeze-thaw seasons.",
       },
     ],
   },
   kuna: {
     intro:
-      "Kuna's homes are some of the newest in the valley, with a median build year of 2008 and roughly 15% built in 2020 or later, per Census ACS 2020-2024 estimates. We take on the small jobs Kuna homeowners collect, from first-year punch lists to fence and gutter repairs, with one written price upfront, materials at cost, and never a travel surcharge.",
+      "Kuna's homes are some of the newest in the valley, with a median build year of 2008 and roughly 15% built in 2020 or later, per Census ACS 2020 to 2024 estimates. We take on the small jobs Kuna homeowners collect, from first-year punch lists to fence and gutter repairs, with one written price upfront, materials at cost, and never a travel surcharge.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
@@ -210,7 +210,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "You'll see one upfront written quote before work starts. We price by the time a job takes, show materials as a separate at-cost line, and the best deal is a visit that knocks out several items at once.",
+          "You get one written quote before work starts. Parts and materials appear on your quote as their own line.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -251,7 +251,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   },
   caldwell: {
     intro:
-      "Caldwell's median home was built in 2003, yet about 15% of its housing was built before 1960 (Census ACS 2020-2024), so one week can bring a modern fixture swap and a settled original door. Boise Handyman Co works across Caldwell with repairs, installs, and upkeep, priced upfront in writing.",
+      "Caldwell's median home was built in 2003, yet about 15% of its housing was built before 1960 (Census ACS 2020 to 2024), so the same list can include a modern fixture swap and a settled original door. Boise Handyman Co works across Caldwell with repairs, installs, and upkeep, priced upfront in writing.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
@@ -261,7 +261,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'Each job is priced by time and written up as a single upfront quote before work starts. Materials are a separate line billed at cost. Bundling tasks together is the best value for Caldwell homeowners.',
+          'You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -271,12 +271,12 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How do I get started?',
         answer:
-          "Call or text to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
+          "Call to discuss your repair list, or send details and optional photos through the inquiry form. The team reviews the scope, prepares a quote and confirms availability before scheduling.",
       },
       {
         question: 'Do you serve Caldwell, Idaho?',
         answer:
-          'Yes. Caldwell is core service territory, with Wilson among its neighborhoods. Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell, and Indian Creek Plaza is in Caldwell. Small repairs, installs, and upkeep throughout Caldwell carry identical upfront quoting and pricing to anywhere else in our service area.',
+          'Yes. Caldwell is core service territory, with Wilson among its neighborhoods. Indian Creek is the creek that runs through Kuna, Nampa, and Caldwell, and Indian Creek Plaza is in Caldwell. Small repairs, installs, and upkeep throughout Caldwell use the same upfront quote as the rest of our service area.',
       },
       {
         question: 'Is a permit needed for a fence in Caldwell?',
@@ -302,7 +302,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   },
   star: {
     intro:
-      'Star is the youngest city we serve: about half its homes went up in 2010 or later, and 90% are single-family detached (Census ACS 2020-2024). We help Star homeowners with the repairs, installs, and maintenance that new, settling houses need, quoted upfront as one written price with materials at cost.',
+      'Star is the youngest city we serve: about half its homes went up in 2010 or later, and 90% are single-family detached (Census ACS 2020 to 2024). We help Star homeowners with the repairs, installs, and maintenance that new, settling houses need, quoted upfront as one written price with materials at cost.',
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
@@ -312,7 +312,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "You'll get one upfront written quote first, before we start. The number is based on time. Materials are their own at-cost line, and combining multiple tasks in a single visit is where the best value is.",
+          "You get one written quote before work starts. Parts and materials appear on your quote as their own line.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -343,7 +343,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
   },
   middleton: {
     intro:
-      "Middleton's housing is newer than most: the median home was built in 2009, and about one in eight went up in 2020 or later (Census ACS 2020-2024). Boise Handyman Co handles the small repairs, installs, and maintenance those homes need across Middleton and Canyon County, quoting each job upfront and confirming the visit plan after scope review.",
+      "Middleton's housing is newer than most: the median home was built in 2009, and about one in eight went up in 2020 or later (Census ACS 2020 to 2024). Boise Handyman Co handles the small repairs, installs, and maintenance those homes need across Middleton and Canyon County, quoting each job upfront and confirming the visit plan after scope review.",
     faqs: [
       {
         question: 'What kinds of jobs do you take on?',
@@ -353,7 +353,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "First you get a written quote, one upfront price before anything starts. It reflects the job's time; materials go on a separate line at cost; and lining up several tasks for one visit gives you the best value.",
+          "You get one written quote before work starts. Parts and materials appear on your quote as their own line.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -404,7 +404,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'Time-based pricing, written up as one upfront quote that you approve before work starts. Materials are billed separately at cost, and putting several jobs on one visit is the best value.',
+          'You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
       },
       {
         question: 'Do you handle remodels or large projects?',

@@ -395,7 +395,7 @@ function executeGetBusinessInfo(input: unknown): string {
         location: SITE_CONFIG.address.cityState,
         serviceArea: SITE_CONFIG.address.serviceArea,
         summary:
-          "Local handyman service for small repair, maintenance, and install jobs across the Treasure Valley. Upfront quotes before work starts, an agreed arrival time rather than a half-day window, most jobs done in one trip. Idaho Registered Contractor #8381215 and insured.",
+          "Local handyman service for small repair, maintenance, and install jobs across the Treasure Valley. Written quotes before work starts. P5 Home Co LLC, Idaho Registered Contractor #8381215. Insured; certificate on request.",
       });
   }
 }

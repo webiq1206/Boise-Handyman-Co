@@ -15,7 +15,7 @@ import {CITY_SEO_DATA} from '../lib/seo.ts';
 
 // Phase 4 (owner-approved plan): keyword-first homepage title from one source.
 const HOME_TITLE='Boise Handyman Services | Upfront Quotes | Boise Handyman Co';
-const HOME_DESCRIPTION='Boise handyman for small repairs, installs and home maintenance across the Treasure Valley. One written quote before work starts. Send your list today.';
+const HOME_DESCRIPTION='Get your Boise repair list handled with a written quote before work starts. Share your list and photos so our team can review your project. Call us today.';
 const NOINDEX_TODAY=[
  'carpentry-trim-repair/nampa',
  'drywall-repair/kuna',
@@ -93,7 +93,7 @@ test('published city claims and the Kuna and Caldwell neighborhood order stay',(
  const kuna=CITIES.find((city)=>city.slug==='kuna')!;
  const caldwell=CITIES.find((city)=>city.slug==='caldwell')!;
  assert.match(getAreaIntro(boise),/median home was built in 1986/);
- assert.match(getAreaIntro(boise),/Census ACS 2020-2024/);
+ assert.match(getAreaIntro(boise),/Census ACS 2020 to 2024/);
  const boiseFaqs=areaPageFaqs(boise);
  assert.ok(boiseFaqs.some((faq)=>faq.answer.includes('Certificate of Appropriateness')));
  const station='the Deer Flat Dam station by Lake Lowell, southwest of Caldwell';
