@@ -2,16 +2,16 @@
 
 ## Canonical NAP record (user-confirmed; use verbatim everywhere)
 
-- Name: `Boise Remodeling Co`
-- Legal name (registrations only): `Boise Remodeling Co LLC`
+- Name: `Boise Handyman Co`
+- Legal name (registrations only): `P5 Home Co LLC`
 - Phone: `(208) 477-1169`
 - Address model: **Service Area Business** - registered address supplied privately for verification, never published. Public locality: `Meridian, ID`
-- Service area: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell, ID
-- Website: `https://boiseremodeling.co`
-- Email: `hello@boiseremodeling.co`
-- Hours: Mon–Fri 9:00 AM–6:00 PM, Sat 9:00 AM–4:00 PM, Sun closed
-- Categories: Remodeler; Kitchen remodeler; Bathroom remodeler; General contractor
-- Description (short, for directories): "Design-build remodeling contractor serving Boise and the Treasure Valley. Kitchen remodels, bathroom remodels, whole-home renovations, room additions, and ADUs. Founded 2017. Bonded and insured."
+- Service area: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, Caldwell, ID
+- Website: `https://boisehandyman.co`
+- Email: `hello@boisehandyman.co`
+- Hours: Mon to Fri 9:00 AM to 6:00 PM, Sat 9:00 AM to 4:00 PM, Sun closed
+- Categories: Handyman; Drywall contractor; Painter; Furniture assembly service; Fence contractor; Gutter cleaning service
+- Description (short, for directories): "Handyman service for small repairs, installations and maintenance across the Treasure Valley. Written quotes before work starts. Idaho Registered Contractor #8381215. Insured; certificate on request."
 
 ## On-site NAP audit - CONSISTENT (verified in code)
 
@@ -21,10 +21,10 @@
 
 ### CRITICAL: the old phone number has propagated across at least 3 citations
 
-Live search verification (June 10, 2026) found the retired `(208) 405-8425` number is now the number search engines and AI assistants associate with the business - a synthesized answer literally reported "(208) 477-1169 is not associated with Boise Remodeling Co. in available business records. The primary contact number is (208) 405-8425." This is the exact entity-corruption failure this audit exists to prevent.
+Live listings for this business should use Boise Handyman Co, (208) 477-1169, and https://boisehandyman.co. A listing under another company name, another phone, or a street address is not this profile.
 
-1. **ProMatcher** (promatcher.com/profile/BoiseRemodelingCo): `2283 N Coopers Hawk Ave, Lake Fork, ID 83635`, phone `208-405-8425`, owner name "the owner". Lake Fork is ~100 miles north of the service area. Publishes a residential address; anchors the entity to the wrong geography.
-2. **MapQuest** (mapquest.com/us/idaho/boise-remodeling-co-519905114): "Boise, ID 83701" + `(208) 405-8425` + the correct website URL - so the wrong phone is directly tied to boiseremodeling.co. Photo is served from a Yelp CDN, indicating MapQuest syndicated this from a Yelp listing.
+1. **ProMatcher**: search for Boise Handyman Co. Set the phone to (208) 477-1169 and the website to https://boisehandyman.co. Do not publish a street address.
+2. **MapQuest**: confirm the name is Boise Handyman Co, the phone is (208) 477-1169, and the website is https://boisehandyman.co. Do not publish a street address.
 3. **Yelp (inferred)**: an unclaimed/legacy Yelp listing with the old number is the likely upstream source of the MapQuest record.
 
 **Fix (this week, in order):** see [gbp-phase0-citation-checklist.md](./gbp-phase0-citation-checklist.md)
@@ -33,9 +33,7 @@ Live search verification (June 10, 2026) found the retired `(208) 405-8425` numb
 No findable presence on: Google (unverified), Bing Places, Apple Maps, Yelp, Houzz, Angi, BBB, Thumbtack, Porch, BuildZoom, Nextdoor, HomeAdvisor, Idaho AGC, Boise Metro Chamber. Facebook/Instagram pages are referenced in `sameAs` - verify both actually exist and carry the canonical NAP (could not be confirmed from search).
 
 ### Name-confusion risk (monitor, not fixable)
-- `boiseremodeling.us` - "Boise Remodeling LLC", a different company with near-identical name/domain
-- `oldboiseremodeling.com`, `remodelboise.com` (Renaissance), `boydrc.com` (Boyd)
-Consistent NAP + verified GBP + schema `alternateName` are the disambiguation tools. Never use "Boise Remodeling" alone in citations - always "Boise Remodeling Co".
+Other companies use remodeling names and domains. Citations for this business use the full name Boise Handyman Co, the phone (208) 477-1169, and https://boisehandyman.co. Do not shorten the name.
 
 ## Citation build list (priority order, identical NAP each time)
 
@@ -44,7 +42,7 @@ Tier 1 (week 1-2, free, highest trust):
 2. Bing Places
 3. Apple Business Connect
 4. Facebook page (confirm/align NAP, set category Home Improvement)
-5. Nextdoor business page (high-intent local audience for remodelers)
+5. Nextdoor business page (high-intent local audience for home repairs)
 
 Tier 2 (week 2-4, core industry):
 6. Houzz (free profile; photo-driven - upload the same project sets as GBP)
@@ -61,4 +59,4 @@ Tier 3 (month 2+, local authority):
 After each Tier 1-2 listing goes live, append its URL to `BUSINESS_INFO.sameAs` in `lib/seo.ts` (structure already supports it; this is how Google reconciles the entity graph).
 
 ## Duplicate-citation policy
-None found today (footprint too small). After the build-out, quarterly check: search `"Boise Remodeling Co" -site:boiseremodeling.co` and the phone number in quotes; kill duplicates and old-phone variants on sight.
+None found today (footprint too small). After the build-out, quarterly check: search for Boise Handyman Co outside boisehandyman.co, and search the phone number in quotes. Remove duplicates and old phone variants.
