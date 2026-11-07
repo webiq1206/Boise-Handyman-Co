@@ -262,7 +262,7 @@ export const GBP_PRODUCTS: GbpProduct[] = [
     name: `Handyman in ${city.name}, ID`,
     price: 'Free quote',
     url: `${SITE}/areas/${city.slug}`,
-    description: `Handyman service in ${city.name}, Idaho: small repairs, installs, and maintenance with upfront quotes and one-trip fixes.`,
+    description: `Handyman service in ${city.name}, Idaho: small repairs, installs, and maintenance with written quotes.`,
   })),
 ];
 
@@ -283,7 +283,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   },
   {
     question: 'How much does a handyman cost in Boise?',
-    answer: `Every job gets a written quote from your list and photos before work starts. Materials are billed at cost, there is a one-hour minimum per visit, and there is no trip fee in Ada and Canyon County. A single faucet swap is usually about one hour plus the faucet; a four-item list is usually about a half day.`,
+    answer: 'You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
   },
   {
     question: 'What services do you offer?',
@@ -297,12 +297,12 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'Is there a minimum charge?',
     answer:
-      'Every visit carries a practical minimum, so a single small task starts around $99. Bundling several tasks into one visit is the best value, because extra tasks only add the time they take.',
+      'You get one written quote before work starts. Parts and materials appear on your quote as their own line.',
   },
   {
     question: 'Are you a registered contractor and insured?',
     answer:
-      'Plumbing, electrical and HVAC work is done by licensed trade partners we schedule and stand behind. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew\'s own work. We are an Idaho Registered Contractor #8381215, bonded, and insured.',
+      'Yes. P5 Home Co LLC, Idaho Registered Contractor #8381215. Insured; certificate on request.',
   },
   {
     question: 'Do you do remodels?',
@@ -339,8 +339,8 @@ export interface GbpPost {
 export const GBP_POSTS_STARTER: GbpPost[] = [
   {
     week: 1,
-    headline: 'Small repairs, done right, in one trip',
-    body: 'Drywall patches, sticking doors, leaky faucets, and to-do lists cleared in a single visit. Upfront quotes before any work starts.',
+    headline: 'Small repairs, installations and maintenance with written quotes',
+    body: 'Drywall patches, sticking doors, leaky faucets, and the rest of the list. Written quotes before work starts.',
     buttonLabel: 'Learn more',
     buttonUrl: `${SITE}/services`,
     photoHint: 'Finished repair photo (before/after pair if available)',
