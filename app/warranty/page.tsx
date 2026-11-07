@@ -21,14 +21,14 @@ import { FamilyButton } from '@/components/family/Button';
 
 const COVERED = [
   "Workmanship on repairs and installs we completed",
-  "Callback when our work fails under normal use",
+  "We come back if our work fails under normal use",
   "Manufacturer warranties passed through on parts we supply",
 ];
 
 const CONDITIONS = [
   "Coverage applies to the original homeowner at the service address",
   "Normal use and care of the repaired or installed item",
-  "Claims filed for the completed visit",
+  "Claims about work from a completed visit",
   "We return to make the workmanship right; parts follow their manufacturer terms",
 ];
 
