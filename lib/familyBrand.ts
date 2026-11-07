@@ -19,11 +19,12 @@ import {
   DOPL_LOOKUP_TITLE,
 } from '@/components/ContractorCredential';
 import { CONTENT_HUBS, guidePath } from '@/shared/contentHubs';
-import { CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
+import { CITIES, SERVICES } from '@/shared/contentData';
 import { CTA_QUOTE } from '@/shared/ctaCopy';
 import { P5_SOCIAL } from '@/shared/gbpProfile';
 import { PUBLIC_NAP_LINE, SITE_CONFIG } from '@/shared/siteConfig';
 import { areaPath, servicePath } from '@/lib/seo-routes';
+import { RE10_LINK_ANCHOR, servicePlainAnchor } from '@/lib/seo';
 
 /** Intrinsic size of public/brand/approved-lockup-{light,dark}.svg. */
 const LOCKUP = { width: 377, height: 50 };
@@ -103,8 +104,8 @@ export const FAMILY_BRAND: FamilyBrand = {
       {
         title: 'Services',
         links: [
-          // Sentence case with the same words (owner call C), as the old footer printed them.
-          ...SERVICES.map((service) => ({ label: serviceHeading(service.name), href: servicePath(service.slug) })),
+          // One plain name per service URL, the same phrase the homepage uses.
+          ...SERVICES.map((service) => ({ label: servicePlainAnchor(service.slug, service.name), href: servicePath(service.slug) })),
           { label: 'All services', href: '/services' },
         ],
       },
@@ -114,7 +115,7 @@ export const FAMILY_BRAND: FamilyBrand = {
           { label: 'About', href: '/about' },
           { label: 'Why choose us', href: '/#why-choose-us' },
           { label: 'How we work', href: '/#how-we-build' },
-          { label: 'RE-10 repairs', href: '/re-10-repairs-boise' },
+          { label: RE10_LINK_ANCHOR, href: '/re-10-repairs-boise' },
           // The old footer CTAs: the homepage request band, kept for the hash history journeys.
           { label: CTA_QUOTE, href: '/#consult' },
           { label: 'Contact', href: '/contact' },

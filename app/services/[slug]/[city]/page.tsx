@@ -10,7 +10,7 @@ landingServiceSchema,
 } from '@/lib/landing-schema';
 import { buildPageMetadata,isCityServiceNoindex } from '@/lib/page-metadata';
 import { generateSpeakableSchema } from '@/lib/schema';
-import { CITY_SEO_DATA } from '@/lib/seo';
+import { CITY_SEO_DATA, servicePlainAnchor } from '@/lib/seo';
 import {
 cityServicePath,
 getAllCityServiceParams,
@@ -122,7 +122,7 @@ export default async function CityServicePage(
         planningFrom={undefined}
         breadcrumbs={[
           { name: 'Home', href: '/' },
-          { name: serviceHeading(service.name), href: `/services/${service.slug}` },
+          { name: servicePlainAnchor(service.slug, service.name), href: `/services/${service.slug}` },
           { name: `${city.name}, Idaho` },
         ]}
         benefits={content.benefits}

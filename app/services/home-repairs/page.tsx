@@ -7,7 +7,8 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { buildCanonical, FEED_ALTERNATES } from '@/lib/page-metadata';
 import { generateBreadcrumbSchema } from '@/lib/schema';
-import { SERVICES, serviceHeading } from '@/shared/contentData';
+import { servicePlainAnchor } from '@/lib/seo';
+import { SERVICES } from '@/shared/contentData';
 
 const title = 'Home repairs in Boise';
 const description = 'Get help with drywall, doors, trim, fixtures and a household repair list. Share what needs attention or request a call from Boise Handyman Co.';
@@ -40,7 +41,7 @@ export default function HomeRepairsPage() {
         <h2 className="ed-h2">One job or a whole repair list</h2>
         <p className="ed-body mt-4">Share photos if you have them, or start with a short description. If a job needs a specialty contractor, we’ll explain the next step rather than promise work outside our scope.</p>
         <ul className="mt-8 grid gap-6 sm:grid-cols-2">
-          {SERVICES.map(service=><li key={service.slug}><h3 className="font-semibold"><Link className="underline underline-offset-4" href={`/services/${service.slug}`}>{serviceHeading(service.name)}</Link></h3><p className="mt-2">{service.shortDescription}</p></li>)}
+          {SERVICES.map(service=><li key={service.slug}><h3 className="font-semibold"><Link className="underline underline-offset-4" href={`/services/${service.slug}`}>{servicePlainAnchor(service.slug, service.name)}</Link></h3><p className="mt-2">{service.shortDescription}</p></li>)}
         </ul>
         <div className="mt-10 flex flex-wrap gap-6"><Link className="underline underline-offset-4" href="/estimate">Tell us about your repairs</Link><a className="underline underline-offset-4" href="tel:+12084771169">Call (208) 477-1169</a></div>
       </div>

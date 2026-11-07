@@ -59,18 +59,22 @@ test('sitemap lists every indexable service, area, and RE-10 URL with lastmod', 
   assert.ok(Array.isArray(rules.sitemap) && rules.sitemap.some((url) => url.endsWith('/sitemap.xml')));
 });
 
-test('home, the services hub, and service pages use Boise service anchors', () => {
+test('home and the services hub use plain service names, and Boise anchors stay on the city URL', () => {
   const home = readFileSync('components/seo/HandymanServicesAnswer.tsx', 'utf8');
   const hub = readFileSync('app/services/page.tsx', 'utf8');
   const related = readFileSync('components/seo/RelatedLinks.tsx', 'utf8');
   const cities = readFileSync('components/approved/family-content.ts', 'utf8');
-  assert.match(home, /serviceCityAnchor\(service\.slug, service\.name, 'Boise'\)/);
+  assert.match(home, /servicePlainAnchor\(service\.slug, service\.name\)/);
+  assert.doesNotMatch(home, /serviceCityAnchor/);
+  assert.match(home, /href="\/services\/drywall-repair\/boise">Drywall repair in Boise</);
   assert.match(home, /\/services\/home-repairs/);
   assert.match(home, /\/areas\/\$\{city\.slug\}/);
-  assert.match(hub, /serviceCityAnchor\(service\.slug, service\.name, 'Boise'\)/);
-  assert.match(hub, /home repairs in Boise/);
-  assert.match(hub, /RE-10 inspection repairs in Boise/);
+  assert.match(hub, /servicePlainAnchor\(service\.slug, service\.name\)/);
+  assert.doesNotMatch(hub, /serviceCityAnchor/);
+  assert.doesNotMatch(hub, /Services in Boise/);
   assert.match(related, /Related services/);
-  assert.match(related, /serviceCityAnchor\(service\.slug, service\.name, 'Boise'\)/);
+  assert.match(related, /servicePlainAnchor\(service\.slug, service\.name\)/);
+  assert.match(related, /\.slice\(0, 4\)/);
   assert.match(cities, /'Garden City'/);
+  assert.match(cities, /'Drywall repair'/);
 });

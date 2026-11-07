@@ -1,6 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
 import { CITIES, SERVICES } from '@/shared/contentData';
-import { serviceCityAnchor } from '@/lib/seo';
+import { HOME_REPAIRS_ANCHOR, RE10_LINK_ANCHOR, servicePlainAnchor } from '@/lib/seo';
 import { brands, serviceExtras } from '@/components/approved/family-content';
 
 const Arrow = () => <ArrowUpRight size={18} aria-hidden="true" />;
@@ -110,15 +110,15 @@ export function HandymanServicesAnswer() {
       </p>
       <nav className="fr-cities" aria-label="All handyman services">
         {SERVICES.map((service) => (
-          <a key={service.slug} href={`/services/${service.slug}`}>{serviceCityAnchor(service.slug, service.name, 'Boise')}</a>
+          <a key={service.slug} href={`/services/${service.slug}`}>{servicePlainAnchor(service.slug, service.name)}</a>
         ))}
-        <a href="/services/home-repairs">Home repairs in Boise</a>
-        <a href="/re-10-repairs-boise">RE-10 inspection repairs in Boise</a>
+        <a href="/services/home-repairs">{HOME_REPAIRS_ANCHOR}</a>
+        <a href="/re-10-repairs-boise">{RE10_LINK_ANCHOR}</a>
       </nav>
 
       <p className="f-answer-links [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center">
         <a href="/contact">Send your repair list and photos</a>
-        <a href="/re-10-repairs-boise">Inspection-related repairs</a>
+        <a href="/re-10-repairs-boise">{RE10_LINK_ANCHOR}</a>
         <a href="/services/drywall-repair/boise">Drywall repair in Boise</a>
         <a href="/areas/boise">Handyman help in Boise</a>
         <a href="#how-we-build">See how it works</a>

@@ -271,10 +271,24 @@ const SERVICE_ANCHOR_NAMES: Record<string, string> = {
   'home-maintenance': 'Caulking and home maintenance',
 };
 
-/** "Drywall repair in Kuna": the anchor an area page uses for a service. */
-export function serviceCityAnchor(serviceSlug: string, serviceName: string, cityName: string): string {
-  return `${SERVICE_ANCHOR_NAMES[serviceSlug] ?? serviceName} in ${cityName}`;
+/** Plain service name. This is the only anchor for /services/<slug>. */
+export function servicePlainAnchor(serviceSlug: string, serviceName = ''): string {
+  return SERVICE_ANCHOR_NAMES[serviceSlug] ?? serviceName;
 }
+
+/**
+ * City-qualified anchor. Use it only when the href is /services/<slug>/<city>.
+ * A noindex city points at the service page and must use the plain name instead.
+ */
+export function serviceCityAnchor(serviceSlug: string, serviceName: string, cityName: string): string {
+  return `${servicePlainAnchor(serviceSlug, serviceName)} in ${cityName}`;
+}
+
+/** One anchor for /re-10-repairs-boise. */
+export const RE10_LINK_ANCHOR = 'RE-10 inspection repairs';
+
+/** One anchor for /services/home-repairs. */
+export const HOME_REPAIRS_ANCHOR = 'Home repairs';
 
 /** Budget after the layout template appends " | Boise Handyman Co" (20). */
 export const CITY_SERVICE_TITLE_BUDGET = 40;

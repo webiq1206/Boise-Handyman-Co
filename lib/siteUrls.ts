@@ -21,6 +21,7 @@ import {
   isCategoryHubIndexable,
 } from '@/shared/contentHubs';
 import { isCityServiceNoindex } from '@/lib/page-metadata';
+import { HOME_REPAIRS_ANCHOR, RE10_LINK_ANCHOR, serviceCityAnchor, servicePlainAnchor } from '@/lib/seo';
 
 export type ChangeFrequency = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
 
@@ -60,7 +61,7 @@ export function getSiteUrlGroups(): SiteUrlGroup[] {
     { path: '/areas', label: 'Service areas', changeFrequency: 'monthly', priority: 0.75 },
     { path: '/contact', label: 'Send your list and photos', changeFrequency: 'monthly', priority: 0.9 },
     { path: '/estimate', label: 'Project intake', changeFrequency: 'monthly', priority: 0.6 },
-    { path: '/re-10-repairs-boise', label: 'RE-10 and inspection repairs', changeFrequency: 'monthly', priority: 0.9 },
+    { path: '/re-10-repairs-boise', label: RE10_LINK_ANCHOR, changeFrequency: 'monthly', priority: 0.9 },
     { path: '/warranty', label: 'Warranty', changeFrequency: 'yearly', priority: 0.6 },
     { path: '/resources', label: 'Resources', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/resources/ada-canyon-permit-flow', label: 'Ada vs Canyon County permit flow', changeFrequency: 'monthly', priority: 0.65 },
@@ -74,13 +75,13 @@ export function getSiteUrlGroups(): SiteUrlGroup[] {
   const services: SiteUrlEntry[] = [
     ...SERVICES.map((s) => ({
       path: `/services/${s.slug}`,
-      label: s.name,
+      label: servicePlainAnchor(s.slug, s.name),
       changeFrequency: 'monthly' as const,
       priority: 0.85,
     })),
     {
       path: '/services/home-repairs',
-      label: 'Home repairs in Boise',
+      label: HOME_REPAIRS_ANCHOR,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
@@ -97,7 +98,7 @@ export function getSiteUrlGroups(): SiteUrlGroup[] {
   const cityServices: SiteUrlEntry[] = SERVICES.flatMap((s) =>
     CITIES.filter((c) => !isCityServiceNoindex(s.slug, c.slug)).map((c) => ({
       path: `/services/${s.slug}/${c.slug}`,
-      label: `${s.name} in ${c.name}`,
+      label: serviceCityAnchor(s.slug, s.name, c.name),
       changeFrequency: 'monthly' as const,
       priority: 0.75,
     })),
