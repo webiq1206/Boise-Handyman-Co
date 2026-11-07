@@ -26,7 +26,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "You get one written quote upfront, before work starts, and it's priced by the time the job takes, with a one-hour minimum. Materials are billed at cost on their own line, and grouping a few tasks per visit is the best value (every job gets a written quote first).",
+          "You get one written quote upfront, before work starts, and it's priced by the time the job takes. Materials are billed at cost on their own line, and grouping a few tasks per visit is the best value (every job gets a written quote first).",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -67,7 +67,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "Before anything starts, you get a single upfront written quote. It's based on how long the work takes, with a one-hour minimum; materials show up as a separate line at cost; and stacking a few jobs into the same trip gives you the best value.",
+          "Before anything starts, you get a single upfront written quote. It's based on how long the work takes; materials show up as a separate line at cost; and stacking a few jobs into the same trip gives you the best value.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -118,7 +118,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'Pricing is time-based with a one-hour minimum, and you see it as one upfront written quote before work begins. Materials are listed separately at cost, and if you group several small tasks you get the best value.',
+          'Pricing is time-based, and you see it as one upfront written quote before work begins. Materials are listed separately at cost, and if you group several small tasks you get the best value.',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -169,7 +169,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'One upfront written quote, delivered before any work begins. The price reflects the time the job takes, subject to a one-hour minimum. Materials appear on their own line at cost, and the best value comes from bundling several tasks into the same visit.',
+          'One upfront written quote, delivered before any work begins. The price reflects the time the job takes. Materials appear on their own line at cost, and the best value comes from bundling several tasks into the same visit.',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -210,7 +210,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "You'll see one upfront written quote before work starts. We price by the time a job takes, with a one-hour minimum, show materials as a separate at-cost line, and the best deal is a visit that knocks out several items at once.",
+          "You'll see one upfront written quote before work starts. We price by the time a job takes, show materials as a separate at-cost line, and the best deal is a visit that knocks out several items at once.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -261,7 +261,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'Each job is priced by time with a one-hour minimum and written up as a single upfront quote before work starts. Materials are a separate line billed at cost. Bundling tasks together is the best value for Caldwell homeowners.',
+          'Each job is priced by time and written up as a single upfront quote before work starts. Materials are a separate line billed at cost. Bundling tasks together is the best value for Caldwell homeowners.',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -312,7 +312,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "You'll get one upfront written quote first, before we start. The number is based on time, with a one-hour minimum. Materials are their own at-cost line, and combining multiple tasks in a single visit is where the best value is.",
+          "You'll get one upfront written quote first, before we start. The number is based on time. Materials are their own at-cost line, and combining multiple tasks in a single visit is where the best value is.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -353,7 +353,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "First you get a written quote, one upfront price before anything starts. It reflects the job's time, subject to a one-hour minimum; materials go on a separate line at cost; and lining up several tasks for one visit gives you the best value.",
+          "First you get a written quote, one upfront price before anything starts. It reflects the job's time; materials go on a separate line at cost; and lining up several tasks for one visit gives you the best value.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -404,7 +404,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'Time-based pricing with a one-hour minimum, written up as one upfront quote that you approve before work starts. Materials are billed separately at cost, and putting several jobs on one visit is the best value.',
+          'Time-based pricing, written up as one upfront quote that you approve before work starts. Materials are billed separately at cost, and putting several jobs on one visit is the best value.',
       },
       {
         question: 'Do you handle remodels or large projects?',

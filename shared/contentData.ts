@@ -7,11 +7,11 @@ export interface ServiceData {
   shortDescription: string;
   /**
    * Planning starting point (a floor, not a bid or a wide range). Rendered as
-   * "From $X" to give price context without committing to a spread - the real
-   * number comes from the estimator + on-site look. Floors derive from the
-   * estimate engine's placeholder model ($49 trip fee + $95/hr, one-hour
-   * minimum = $144 first visit). That rate model is internal only - never
-   * publish the decomposition in customer-facing copy. PLACEHOLDER figures:
+   * "From $X" to give price context without committing to a spread. The real
+   * number comes from the estimator and an on-site look. These floors are
+   * placeholder figures from the internal rate model in estimateEngine.
+   * That model stays internal and is not published as a customer-facing
+   * decomposition. PLACEHOLDER figures:
    * [NEEDS: real pricing confirmation] before launch.
    */
   planningFrom: string;

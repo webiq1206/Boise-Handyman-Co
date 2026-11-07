@@ -77,7 +77,7 @@ export const firstTimeHomeownerRepairHandbook: GuidePageData = {
     {
       question: 'My house is new construction: do I still need repairs?',
       answer:
-        'Yes, a different set. New Treasure Valley homes settle for a year or two: hairline drywall cracks appear at corners and joints, doors drift out of alignment, builder-grade caulk shrinks, and nail pops surface. Document what the builder warranty covers before it expires, usually at one year, and put the rest on a punch list, the scope and visit plan can then be reviewed together.',
+        'Yes, a different set. New Treasure Valley homes settle for a year or two: hairline drywall cracks appear at corners and joints, doors drift out of alignment, builder-grade caulk shrinks, and nail pops surface. Document what the builder warranty covers before it expires, and put the rest on a punch list, the scope and visit plan can then be reviewed together.',
     },
   ],
   content: `
@@ -124,7 +124,7 @@ export const firstTimeHomeownerRepairHandbook: GuidePageData = {
 <p>The discipline is what not to buy: any specialty tool a single job demands is a rental or a reason to hire the job out. A tile saw used once is the most expensive way to learn you dislike tiling.</p>
 
 <h2 id="new-construction">A note for new-construction owners</h2>
-<p><strong>A brand-new house is not a zero-maintenance house; it is a house in its settling years.</strong> Expect hairline drywall cracks at corners and above openings, doors that drift out of alignment, nail pops, and builder-grade caulk shrinking at trim and tubs, all normal, all cosmetic, all worth fixing once the first year or two of movement has happened rather than immediately. The important administrative task: know what your builder warranty covers and when it expires, typically at one year, and walk the house with a list before that date.</p>
+<p><strong>A brand-new house is not a zero-maintenance house; it is a house in its settling years.</strong> Expect hairline drywall cracks at corners and above openings, doors that drift out of alignment, nail pops, and builder-grade caulk shrinking at trim and tubs, all normal, all cosmetic, all worth fixing once the first year or two of movement has happened rather than immediately. The important administrative task: know what your builder warranty covers and when it expires, and walk the house with a list before that date.</p>
 <p>Whatever the warranty does not catch becomes a classic punch list, and reviewing and planning that punch-list work is what our <a href="/services/home-maintenance">home maintenance service</a> exists for: settling cracks patched and painted, doors re-hung true, caulk lines redone properly.</p>
 
 <h2 id="walkthrough">The one-hour walkthrough that pays for itself</h2>

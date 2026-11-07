@@ -20,7 +20,7 @@ new Function('require', 'exports', credentialCompiled)(require, credentialExport
 const ContractorCredential = credentialExports.ContractorCredential!;
 
 const FAQ_ANSWER =
-  'Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew\'s own work. We are an Idaho Registered Contractor #8381215, bonded, and insured.';
+  'Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew\'s own work. We are an Idaho Registered Contractor #8381215 and insured.';
 
 /** A claim that this brand is licensed. Referrals to other trades stay allowed. */
 const SELF_LICENSE =
@@ -69,7 +69,8 @@ test('rendered registration, FAQ schema, and GBP copy do not claim this brand is
     generateFAQSchema(HOMEPAGE_FAQS.slice(0, INITIAL_FAQ_COUNT).map((faq) => ({ question: faq.q, answer: faq.a }))),
   );
   assert.match(faqSchema, /Are you a registered contractor and insured\?/);
-  assert.match(faqSchema, /an Idaho Registered Contractor #8381215, bonded, and insured/);
+  assert.match(faqSchema, /an Idaho Registered Contractor #8381215 and insured/);
+  assert.doesNotMatch(faqSchema, /bonded/i);
 
   const business = generateLocalBusinessSchema();
   assert.doesNotMatch(JSON.stringify([

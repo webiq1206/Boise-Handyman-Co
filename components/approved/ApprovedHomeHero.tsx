@@ -1,7 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { FamilyButton } from '@/components/family/Button';
 import { brandStyle } from '@/components/family/brandStyle';
-import { ProofStrip } from '@/components/family/ProofStrip';
 import { CONTRACTOR_REGISTRATION } from '@/components/ContractorCredential';
 import { FAMILY_BRAND } from '@/lib/familyBrand';
 import { brands } from './family-content';
@@ -50,14 +49,19 @@ export function ApprovedHomeHero({heroClassName}: {heroClassName?: string} = {})
           </div>
         </section>
       </div>
-      {/* The three facts this hero already published: written quote, no trip fee, registration. */}
-      <ProofStrip
-        items={[
-          { label: 'Pricing', text: b.proof[0] },
-          { label: 'Travel', text: b.proof[1] },
-          { label: 'Registered', text: CONTRACTOR_REGISTRATION },
-        ]}
-      />
+      {/* Written quote and registration stay. The shared strip hides fewer than three cells, so these two render here. */}
+      <section className="fam-proof" aria-label="At a glance" style={brandStyle()}>
+        <ul className="fam-container fam-proof-list" data-count={3} style={{ ['--fam-proof-columns' as string]: 2 }}>
+          <li className="fam-proof-cell">
+            <p className="fam-proof-label">Pricing</p>
+            <p className="fam-proof-text">{b.proof[0]}</p>
+          </li>
+          <li className="fam-proof-cell">
+            <p className="fam-proof-label">Registered</p>
+            <p className="fam-proof-text">{CONTRACTOR_REGISTRATION}</p>
+          </li>
+        </ul>
+      </section>
     </>
   );
 }

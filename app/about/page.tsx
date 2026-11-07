@@ -36,7 +36,7 @@ const SPEAKABLE_SUMMARY =
 
 const HANDYMAN_FIVE = [
   'Written quote before work starts',
-  'One-hour minimum and materials at cost',
+  'Materials at cost',
   'Agreed arrival time',
   'One-trip fixes where the job allows',
   'Cleanup and haul-away',
@@ -177,7 +177,7 @@ export default function AboutPage() {
               </div>
               <Reveal>
                 <p className="ed-lede">
-                  P5 Home Co LLC, Idaho Registered Contractor #8381215. Insured; certificate on request. One-year workmanship warranty on repairs and installs.
+                  P5 Home Co LLC, Idaho Registered Contractor #8381215. Insured; certificate on request. Written workmanship warranty on repairs and installs.
                 </p>
                 <p className="ed-body mt-6">
                   Plumbing, electrical and HVAC work on your list is done by the licensed trade
@@ -223,9 +223,9 @@ export default function AboutPage() {
             <div className="ed-split ed-split-even mt-12">
               <div className="ed-inset">
                 <p className="ed-eyebrow">Warranty</p>
-                <h3 className="ed-h3">One year on our workmanship</h3>
+                <h3 className="ed-h3">Written workmanship warranty</h3>
                 <p className="ed-body mt-3">
-                  If our work fails within a year, we come back and make it right. Full terms on the{' '}
+                  If our work fails, we come back and make it right. Full terms on the{' '}
                   <Link href="/warranty" className="underline underline-offset-2">warranty page</Link>.
                 </p>
               </div>
@@ -234,8 +234,7 @@ export default function AboutPage() {
                 <h3 className="ed-h3">Don&apos;t pay for our overhead</h3>
                 <p className="ed-body mt-3">
                   No showroom, no sales team, no fleet of wrapped trucks. What you spend goes into
-                  the time and materials your repair actually takes, with materials at cost and no
-                  trip fee in Ada and Canyon County.
+                  the time and materials your repair actually takes, with materials at cost.
                 </p>
               </div>
             </div>

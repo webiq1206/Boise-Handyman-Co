@@ -31,7 +31,7 @@ export const newHomePunchListHandyman: BlogPostData = {
   keyTakeaways: [
     'Nail pops, hairline drywall cracks, sticking doors, and cracked caulk in year one are normal settling, not defects.',
     'Report warranty-eligible items to your builder in writing before the warranty window closes; do not pay to fix what the builder owes you.',
-    'The common convention is an 11-month walkthrough because most settling has happened and the typical one-year workmanship warranty has not yet expired.',
+    'The common convention is an 11-month walkthrough because most settling has happened and the typical workmanship warranty has not yet expired.',
     'Fix settling cosmetics once, after the first full heating and cooling cycle, instead of chasing each crack as it appears.',
     'A typical settling punch list, patches, caulk, door adjustments, touch-up, is a half-day handyman visit, not a series of specialist calls.',
   ],
@@ -52,7 +52,7 @@ export const newHomePunchListHandyman: BlogPostData = {
     {
       question: 'What is the difference between builder warranty work and handyman work?',
       answer:
-        'Builder warranties generally cover defects in workmanship and materials, commonly for one year, with longer coverage on systems and structure. Normal settling cosmetics, hairline cracks, nail pops, caulk separation, are often excluded or covered only once. Anything your written warranty covers should go to the builder. What it excludes, or what appears after it expires, is handyman scope.',
+        'Builder warranties generally cover defects in workmanship and materials, and they cover systems and structure. Normal settling cosmetics, hairline cracks, nail pops, caulk separation, are often excluded or covered only once. Anything your written warranty covers should go to the builder. What it excludes, or what appears after it expires, is handyman scope.',
     },
     {
       question: 'When should I fix settling cracks and nail pops?',
@@ -91,11 +91,11 @@ export const newHomePunchListHandyman: BlogPostData = {
 <p>A raking flashlight beam along a wall will find most of it. Painter tape and a phone camera turn the walk into a list.</p>
 
 <h2 id="builder-vs-handyman">What belongs to the builder, and what belongs to you</h2>
-<p><strong>Read your warranty document before paying anyone to fix anything.</strong> New-home warranties commonly cover workmanship and materials for a year, mechanical systems longer, and structure longer still, with the exact terms varying by builder. Genuine defects, a window that leaks, a door hung out of square, a plumbing connection weeping in the crawl space, belong on that warranty, reported in writing before the window closes.</p>
+<p><strong>Read your warranty document before paying anyone to fix anything.</strong> New-home warranties commonly cover workmanship and materials, mechanical systems, and structure, with the exact terms varying by builder. Genuine defects, a window that leaks, a door hung out of square, a plumbing connection weeping in the crawl space, belong on that warranty, reported in writing before the window closes.</p>
 <p>Normal settling cosmetics sit in a gray zone: many warranties exclude them, cover them once, or handle them only at a scheduled visit. Whatever your document says, the economics are simple: never pay to fix what the builder owes you, and never burn months waiting on a builder for items the warranty plainly excludes. Sort the list once and send each item to the right address.</p>
 
 <h2 id="eleven-month">The 11-month convention</h2>
-<p><strong>The common playbook is one thorough inspection at month eleven, and it exists for a good reason.</strong> By then the house has been through a full heating season and most of its early movement, so the flaws that were going to appear have appeared. And the typical one-year workmanship warranty has not yet expired, so everything eligible can still be claimed.</p>
+<p><strong>The common playbook is one thorough inspection at month eleven, and it exists for a good reason.</strong> By then the house has been through a full heating season and most of its early movement, so the flaws that were going to appear have appeared. And the typical workmanship warranty has not yet expired, so everything eligible can still be claimed.</p>
 <p>Do the walk yourself with a flashlight and tape, room by room, doors and windows operated, wet-area caulk inspected, exterior joints checked. Submit the warranty items in writing with photos. What remains, the excluded cosmetics plus anything you simply want done nicer, becomes the handyman list.</p>
 
 <h2 id="fix-once">Fix settling once, not piecemeal</h2>

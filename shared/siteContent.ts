@@ -102,15 +102,13 @@ export const PROOF_STATS = {
 };
 
 /**
- * Post-hero proof bar. Bonded and insured is stated in HOW_P5_WORKS, because
- * the operating company is P5 Home Co LLC. This strip stays free of review
- * counts, ratings, and job counters. Keep at six entries so the strip fills
- * the six-column desktop grid in HeroSection.
+ * Post-hero proof bar. Insured is stated in HOW_P5_WORKS, because the
+ * operating company is P5 Home Co LLC. This strip stays free of review
+ * counts, ratings, and job counters.
  */
 export const TRUST_ITEMS = [
   "Locally Owned",
   "Upfront Quotes",
-  "No trip fee in Ada and Canyon County",
   "Agreed Visit Plan",
   "Tidy Job Sites",
   "Idaho Registered Contractor #8381215",
@@ -119,7 +117,7 @@ export const TRUST_ITEMS = [
 export const HOW_P5_WORKS_TITLE = "What you can count on";
 export const HOW_P5_WORKS = [
   "Own install crew",
-  "Bonded & insured",
+  "Insured",
   "Manufacturer warranties passed through on parts we supply",
   "Arrival time agreed and confirmed before we head out",
   "Written quote before work starts",
@@ -264,8 +262,8 @@ export const BUDGET_GUIDANCE_POINTS = [
     body: "Send your list and photos. We review the scope before preparing a written quote. You approve that price before anyone opens a toolbox.",
   },
   {
-    title: "Materials at cost, no trip fee",
-    body: "Parts and materials appear on the quote as their own line, at what they cost. There is no trip fee in Ada and Canyon County. A one-hour minimum applies per visit, and bundling tasks into one trip is usually the best value.",
+    title: "Materials at cost",
+    body: "Parts and materials appear on the quote as their own line, at what they cost. Bundling tasks into one trip is usually the best value.",
   },
   {
     title: "You can supply the parts",
@@ -328,7 +326,7 @@ export const VALUE_MODEL = {
   headlineB: "not the",
   accentWord: "overhead",
   costs: "A franchise fee. A call center in another state. Wrapped trucks and a dispatcher who has never held a drill.",
-  costsBody: "None of it is free. It gets folded into a minimum charge and padded pricing, whether your job needed any of it or not.",
+  costsBody: "None of it is free. It gets folded into padded pricing, whether your job needed any of it or not.",
   reframe:
     "We built the company to leave that out. A small local operation keeps our costs low, so what you pay goes into the time and materials your repair actually takes: one fair written price and nothing padding the invoice.",
   taglineLead: "Fair rates,",

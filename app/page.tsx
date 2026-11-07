@@ -8,7 +8,7 @@ import { LazyConsultationForm as ConsultationForm } from "@/components/LazyConsu
 import { QuoteFormAnchor } from "@/components/QuoteFormAnchor";
 import { FAQSection } from "@/components/FAQSection";
 import { Reveal } from "@/components/Reveal";
-import { HandymanPlanningRange } from "@/components/sections/HandymanPlanningRange";
+import { FreeQuoteCta } from "@/components/sections/FreeQuoteCta";
 import { HowP5Works } from "@/components/sections/HowP5Works";
 import { ProjectGallerySection } from "@/components/sections/ProjectGallerySection";
 import { HomePageSchema } from "@/components/seo/HomePageSchema";
@@ -49,7 +49,7 @@ export default function HomePage() {
           1. Hero (family HeroPhoto: one support line, one primary, Call as a
              text link) and its proof strip
           2. Services: the answer-first block and every service link
-          3. Planning-range interactive proof (C14): a ballpark before contact
+          3. Free quote: call or text, in the slot the planning range used to occupy
              (the gallery slot after it renders nothing until real work exists)
           4. How it works, with "What you can count on" beside the steps
           5. Founder
@@ -85,7 +85,7 @@ export default function HomePage() {
           note="Send your list and photos, and we will reply with one written quote before any work starts."
         />
       </ApprovedFamilyFrame>
-      <HandymanPlanningRange />
+      <FreeQuoteCta />
       <ProjectGallerySection limit={6} showViewAll />
       <ApprovedFamilyFrame>
         <ApprovedHowItWorks aside={<HowP5Works />} />

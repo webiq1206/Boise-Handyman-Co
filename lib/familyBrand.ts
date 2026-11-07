@@ -145,7 +145,7 @@ export const FAMILY_BRAND: FamilyBrand = {
     disclosure: { before: `${SITE_CONFIG.name} is a DBA of `, linkLabel: SITE_CONFIG.legalName, href: 'https://p5homeco.com', after: '' },
     copyrightName: SITE_CONFIG.name,
   },
-  // Boise ADU Co is left out until its own site exists; its projects run through Boise Construction Co.
+  // ADUs are built by sister company Boise ADU Co, part of P5 Home Co.
   family: {
     label: 'The P5 Home Co family',
     companies: [
@@ -153,6 +153,7 @@ export const FAMILY_BRAND: FamilyBrand = {
       { name: 'Boise Construction Co', href: 'https://boiseconstruction.co' },
       { name: 'Boise Remodeling Co', href: 'https://boiseremodeling.co' },
       { name: 'Boise Handyman Co', href: 'https://boisehandyman.co' },
+      { name: 'Boise ADU Co', href: 'https://p5homeco.com/quote/adu' },
       { name: 'Boise Cabinet Co', href: 'https://boisecabinet.co' },
     ],
   },

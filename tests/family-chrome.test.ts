@@ -75,12 +75,13 @@ test('every footer link group points at a published page', () => {
 test('the footer renders the family row, NAP, hours and the registration, with no headings', () => {
   const html = renderToStaticMarkup(React.createElement(Footer));
   assert.equal(/<h[1-6]\b/.test(html), false);
-  for (const name of ['P5 Home Co', 'Boise Construction Co', 'Boise Remodeling Co', 'Boise Cabinet Co']) {
+  for (const name of ['P5 Home Co', 'Boise Construction Co', 'Boise Remodeling Co', 'Boise ADU Co', 'Boise Cabinet Co']) {
     assert.match(html, new RegExp(`<a href="https://[^"]+" rel="noopener">${name}</a>`), name);
   }
+  assert.match(html, /<a href="https:\/\/p5homeco\.com\/quote\/adu" rel="noopener">Boise ADU Co<\/a>/);
   assert.match(html, /<span class="fam-footer-current" aria-current="true">Boise Handyman Co<\/span>/);
   assert.equal(/rel="noopener noreferrer">(P5 Home Co|Boise)/.test(html), false);
-  assert.equal(html.includes('Boise ADU Co'), false);
+  assert.equal(html.includes('run through Boise Construction Co'), false);
   assert.match(html, /Serving Boise and the Treasure Valley\. <a href="tel:/);
   assert.doesNotMatch(html, /public representative|staffed storefront|Wapoot|4031/i);
   const vcard = buildBusinessVCard().replace(/\r?\n[ \t]/g, '');
@@ -121,9 +122,10 @@ test('the homepage video hero preserves first-response content, poster and sourc
   assert.doesNotMatch(html, /handyman-hero-door-hinge-branded|front-door-repaint/, 'no superseded image in the final hero');
   const support = html.match(/<p class="fam-hero-support">([^<]+)<\/p>/)?.[1] ?? '';
   assert.ok(support.split(/\s+/).length <= 14, support);
-  // Proof: the three facts this hero already published, nothing new.
+  // Proof: written quote and registration stay. The removed travel claim must not return.
   assert.match(html, /Written quote before work starts/);
-  assert.match(html, /No trip fee in Ada and Canyon County/);
+  assert.doesNotMatch(html, /No trip fee in Ada and Canyon County/);
+  assert.doesNotMatch(html, /trip fee/i);
   assert.match(html, /Idaho Registered Contractor #8381215/);
 });
 

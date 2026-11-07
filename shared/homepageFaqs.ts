@@ -19,17 +19,17 @@ export const INITIAL_FAQ_COUNT = 6;
  * response before adding context.
  *
  * D4: do not explain hourly pricing without publishing the rate. Lead with the
- * written-quote promise, materials at cost, and no trip fee.
+ * written-quote promise and materials at cost.
  */
 export const HOMEPAGE_FAQS: HomepageFaq[] = [
   {
     q: "How is a Boise handyman visit priced?",
-    a: "You get one written price before work starts, after we review your list and photos. Materials are billed at cost on their own line. There is a one-hour minimum per visit and no trip fee in Ada and Canyon County. Bundling several tasks into one visit is usually the best value. Work that needs a general contractor or a licensed trade is referred out honestly.",
+    a: "You get one written price before work starts, after we review your list and photos. Materials are billed at cost on their own line. Bundling several tasks into one visit is usually the best value. Work that needs a general contractor or a licensed trade is referred out honestly.",
   },
   {
     id: "handyman-cost",
     q: "How much does a handyman cost in Boise and the Treasure Valley?",
-    a: "Every job gets a written quote from your list and photos before work starts. A single faucet swap is usually about one hour plus the faucet; a four-item list like a door, a patch, a faucet and a TV mount is usually about a half day. Materials stay on their own line at cost, with no trip fee in Ada and Canyon County.",
+    a: "Every job gets a written quote from your list and photos before work starts. A single faucet swap is usually about one hour plus the faucet; a four-item list like a door, a patch, a faucet and a TV mount is usually about a half day. Materials stay on their own line at cost.",
   },
   {
     q: "How soon can you come?",
@@ -45,15 +45,11 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "Are you a registered contractor and insured?",
-    a: "Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew's own work. We are an Idaho Registered Contractor #8381215, bonded, and insured.",
+    a: "Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew's own work. We are an Idaho Registered Contractor #8381215 and insured.",
   },
   {
     q: "Who supplies the materials?",
     a: "Either of us, whichever you prefer. Many customers buy their own fixture, paint, or hardware and have it ready when we arrive. If you would rather not, we pick up materials on the way and list them on the invoice at store cost. We also carry common parts on the truck, so small jobs rarely wait on a store run.",
-  },
-  {
-    q: "Is there a trip fee?",
-    a: "No. There is no trip fee in Ada and Canyon County. A one-hour minimum applies per visit, and materials are billed at cost on their own line.",
   },
   {
     q: "Do you handle big remodels or additions?",
@@ -69,6 +65,6 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "How long is the workmanship guarantee?",
-    a: "One year on our workmanship. If something we repaired or installed fails because of how we did the work, rather than normal wear, misuse, or a pre-existing condition, tell us and we come back to make it right. Materials carry their manufacturers' warranties, which we pass through on anything we supply. See the full terms on our warranty page.",
+    a: "Written workmanship warranty. If something we repaired or installed fails because of how we did the work, rather than normal wear, misuse, or a pre-existing condition, tell us and we come back to make it right. Materials carry their manufacturers' warranties, which we pass through on anything we supply. See the full terms on our warranty page.",
   },
 ];

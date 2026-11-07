@@ -605,7 +605,7 @@ export const BUSINESS_INFO = {
   serviceArea: ['Boise', 'Meridian', 'Eagle', 'Nampa', 'Kuna', 'Star', 'Middleton', 'Caldwell', 'Garden City'],
   serviceRadius: '35 miles',
   licenses: ['Idaho Registered Contractor #8381215'],
-  // Bonded and insured is confirmed for the operating company, P5 Home Co LLC.
+  // Insurance is confirmed for the operating company, P5 Home Co LLC.
   // Insurance details stay available on request.
   certifications: [] as string[],
   insurance: 'Insurance details available upon request',

@@ -632,7 +632,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'My home is still under builder warranty: should I call you or the builder?',
         answer:
-          'The builder first, for anything the warranty covers, document settling items and submit them before the warranty window closes, typically at one year. We handle what the warranty does not cover, and everything after it expires, which is when the punch-list pattern begins.',
+          'The builder first, for anything the warranty covers, document settling items and submit them before the warranty window closes. We handle what the warranty does not cover, and everything after it expires, which is when the punch-list pattern begins.',
       },
       {
         question: 'How do I book?',

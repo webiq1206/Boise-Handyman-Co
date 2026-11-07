@@ -21,14 +21,14 @@ import { FamilyButton } from '@/components/family/Button';
 
 const COVERED = [
   "Workmanship on repairs and installs we completed",
-  "Callback within one year when our work fails under normal use",
+  "Callback when our work fails under normal use",
   "Manufacturer warranties passed through on parts we supply",
 ];
 
 const CONDITIONS = [
   "Coverage applies to the original homeowner at the service address",
   "Normal use and care of the repaired or installed item",
-  "Claims filed within one year of the completed visit",
+  "Claims filed for the completed visit",
   "We return to make the workmanship right; parts follow their manufacturer terms",
 ];
 
@@ -39,9 +39,9 @@ const EXCLUDED = [
   "Trade-partner warranties for plumbing, electrical and HVAC follow those licensed trades; we schedule and stand behind the visit",
 ];
 
-const TITLE = "1-Year Workmanship Warranty";
+const TITLE = "Written Workmanship Warranty";
 const DESCRIPTION = fitDescription(
-  "Boise Handyman Co includes a one-year workmanship warranty on repairs and installs. Materials carry manufacturer warranties. Serving the Treasure Valley.",
+  "Boise Handyman Co includes a written workmanship warranty on repairs and installs. Materials carry manufacturer warranties. Serving the Treasure Valley.",
 );
 
 export const metadata: Metadata = withBrandPageMetadata(
@@ -87,10 +87,10 @@ export default function WarrantyPage() {
             Our promise
           </p>
           <h1 className="ed-display ed-statement-display text-inverse-foreground mb-6">
-            One-year <span className="mobile-keep">workmanship <em className="brc-accent">warranty</em></span>
+            Written <span className="mobile-keep">workmanship <em className="brc-accent">warranty</em></span>
           </h1>
           <p className="text-base md:text-lg text-inverse-foreground/85 max-w-2xl leading-relaxed mb-8">
-            If something we repaired or installed fails because of our workmanship within one year,
+            If something we repaired or installed fails because of our workmanship,
             we come back and make it right. Materials we supply carry their manufacturer warranties.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-6">

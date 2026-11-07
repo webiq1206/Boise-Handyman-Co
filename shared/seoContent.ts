@@ -50,7 +50,7 @@ export interface ServiceSEOContent {
  * Pricing story used across every service below, stated once so pages stay
  * consistent: every job gets one upfront written quote before any work
  * starts, with per-visit starting prices as the public anchors. The internal
- * rate model (trip fee + hourly, see estimateEngine) is deliberately NOT
+ * rate model in estimateEngine is deliberately not
  * published anywhere customer-facing. Market context: Treasure Valley
  * handyman rates typically run $60 to $120 per hour. Our own figures (every
  * "from" price) are PLACEHOLDERS pending owner confirmation:
@@ -907,7 +907,7 @@ export const AREA_PAGE_FAQS: FAQItem[] = [
   {
     question: 'How does pricing work?',
     answer:
-      'Every job gets one upfront written quote before any work starts, priced by the time it takes with a one-hour minimum. Materials appear as their own line at cost, and bundling several tasks into one visit is the best value.',
+      'Every job gets one upfront written quote before any work starts, priced by the time it takes. Materials appear as their own line at cost, and bundling several tasks into one visit is the best value.',
   },
   {
     question: 'Do you handle remodels or large projects?',
@@ -937,7 +937,7 @@ export function areaPageFaqs(city: CityData): FAQItem[] {
     ...AREA_PAGE_FAQS,
     {
       question: `Do you serve ${city.name}, Idaho?`,
-      answer: `Yes. ${city.name} is part of our core Treasure Valley service area. We handle small repairs, installs, and maintenance across the city, with the same upfront quotes and pricing as everywhere else we work.`,
+      answer: `Yes. ${city.name} is part of our core Treasure Valley service area. We handle small repairs, installs, and maintenance across the city, with the same upfront quotes as everywhere else we work.`,
     },
   ];
   return appendNewFaqs(base, getCityOnlyFaqs(city));

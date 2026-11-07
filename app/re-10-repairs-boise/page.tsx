@@ -274,7 +274,7 @@ export default function Re10RepairsPage() {
               <p>
                 A typical inspection response spans drywall, paint, a door, a leaking supply valve,
                 a GFCI outlet and some exterior caulking. Hiring that out separately means four
-                schedules, four minimum charges, four sets of paperwork and four chances for one of
+                schedules, four sets of paperwork and four chances for one of
                 them to miss your date.
               </p>
               <p>

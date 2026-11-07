@@ -64,7 +64,7 @@ test('What you can count on lists six selling points without Nick', () => {
   assert.equal(HOW_P5_WORKS_TITLE, 'What you can count on');
   assert.deepEqual([...HOW_P5_WORKS], [
     'Own install crew',
-    'Bonded & insured',
+    'Insured',
     'Manufacturer warranties passed through on parts we supply',
     'Arrival time agreed and confirmed before we head out',
     'Written quote before work starts',
