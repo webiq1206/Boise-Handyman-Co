@@ -37,10 +37,11 @@ test('Boise pricing FAQ and its FAQPage schema drop the finalized clause', () =>
   const faqs = getAreaCityCopy('boise')?.faqs ?? [];
   const pricing = faqs.find((faq) => faq.question === 'How does pricing work?');
   assert.ok(pricing);
-  assert.match(pricing.answer, /\(every job gets a written quote first\)\./);
+  const writtenQuote = 'You get one written quote before work starts. Parts and materials appear on your quote as their own line.';
+  assert.equal(pricing.answer, writtenQuote);
   assert.equal(pricing.answer.includes(PHRASE), false);
   const schema = JSON.stringify(landingFAQSchema(faqs));
-  assert.match(schema, /\(every job gets a written quote first\)/);
+  assert.equal(schema.includes(writtenQuote), true);
   assert.equal(schema.includes(PHRASE), false);
 });
 
