@@ -79,8 +79,8 @@ export function HandymanPlanningRange() {
           </Reveal>
           <Reveal delay={60}>
             <p className="ed-body">
-              Pick a common job to see a planning range. Each job is then priced case
-              by case, in writing, before any work starts.
+              Pick a common job. You get a planning range right away, then a written
+              price before any work starts.
             </p>
           </Reveal>
         </div>
