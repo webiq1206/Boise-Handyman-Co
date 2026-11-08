@@ -79,15 +79,7 @@ export function ServicesGrid() {
                 <p className="ed-eyebrow ed-eyebrow-accent">Most requested</p>
                 <h3 className="ed-h2-sm">{serviceHeading(lead.name)}</h3>
                 <p className="ed-body mt-5">{lead.shortDescription}</p>
-                <p className="ed-small mt-7 flex items-baseline gap-3">
-                  <span className="uppercase tracking-[0.16em]">Planning from</span>
-                  <span
-                    className="brc-display-num text-[1.75rem] leading-none"
-                    style={{ color: "var(--ed-ink)" }}
-                  >
-                    {lead.planningFrom}
-                  </span>
-                </p>
+                <p className="ed-small mt-7">Priced case by case after we review the scope</p>
                 <span className="ed-link ed-link-accent mt-8 self-start">
                   Explore {lead.name.toLowerCase()}
                   <svg className="ed-arrow" viewBox="0 0 22 15" fill="none" aria-hidden="true">
@@ -113,13 +105,7 @@ export function ServicesGrid() {
                 </h3>
                 <p className="ed-body max-w-none">{service.shortDescription}</p>
                 <p className="ed-small flex items-baseline gap-2 whitespace-nowrap">
-                  <span className="uppercase tracking-[0.16em]">From</span>
-                  <span
-                    className="brc-display-num text-[1.25rem] leading-none"
-                    style={{ color: "var(--ed-ink)" }}
-                  >
-                    {service.planningFrom}
-                  </span>
+                  <span className="uppercase tracking-[0.16em]">Case by case</span>
                   <span className="ml-3 self-center md:hidden" aria-hidden="true">
                     <svg className="ed-arrow" viewBox="0 0 22 15" fill="none">
                       <path d="M0 7.5h20M14 1.5l6 6-6 6" />

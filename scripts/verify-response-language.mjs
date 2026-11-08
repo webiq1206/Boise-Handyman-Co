@@ -78,6 +78,46 @@ export function scanSource() {
   return {files, failures};
 }
 
+// D2 (owner decision, 8 November 2026): no "bonded" claim anywhere in public
+// source or built pages. "Insured" and the registration number stay.
+export const PROHIBITED_CLAIM_PHRASES = [/\bbonded\b/i];
+
+export function findProhibitedClaims(text) {
+  const flat = normalizeForClaims(text);
+  const hits = [];
+  for (const re of PROHIBITED_CLAIM_PHRASES) {
+    const m = flat.match(re);
+    if (m) hits.push(flat.slice(Math.max(0, m.index - 60), m.index + m[0].length + 40));
+  }
+  return hits;
+}
+
+export function scanSourceClaims() {
+  const failures = [];
+  let files = 0;
+  for (const dir of SOURCE_DIRS) {
+    const abs = path.join(ROOT, dir);
+    try { statSync(abs); } catch { continue; }
+    for (const file of walk(abs)) {
+      files++;
+      for (const hit of findProhibitedClaims(readFileSync(file, 'utf8'))) {
+        failures.push(`${path.relative(ROOT, file)}: ...${hit}...`);
+      }
+    }
+  }
+  return {files, failures};
+}
+
+export function scanBuiltClaims(dir = path.join(ROOT, '.next/server/app')) {
+  const failures = [];
+  const files = walk(dir).filter((f) => f.endsWith('.html'));
+  for (const file of files) {
+    const text = readFileSync(file, 'utf8').replace(/<!--[\s\S]*?-->/g, ' ');
+    for (const hit of findProhibitedClaims(text)) failures.push(`${path.relative(ROOT, file)}: ...${hit}...`);
+  }
+  return {files: files.length, failures};
+}
+
 export function scanBuiltDocuments(dir = path.join(ROOT, '.next/server/app')) {
   const failures = [];
   const files = walk(dir).filter((f) => f.endsWith('.html'));
@@ -111,6 +151,12 @@ function selfTest() {
     'Anti-tip straps install into a stud in minutes.',
   ];
   for (const s of mustCatch) if (!findResponsePromises(s).length) throw new Error(`guard missed: ${s}`);
+  for (const s of ['Bonded & insured', 'We are bonded, and insured.', 'licensed, bonded{" "}and insured']) {
+    if (!findProhibitedClaims(s).length) throw new Error(`bonded guard missed: ${s}`);
+  }
+  for (const s of ['Insured; certificate on request.', 'Idaho Registered Contractor #8381215 and insured']) {
+    if (findProhibitedClaims(s).length) throw new Error(`bonded guard false positive: ${s}`);
+  }
   for (const s of mustPass) if (findResponsePromises(s).length) throw new Error(`guard false positive: ${s}`);
 }
 
@@ -122,4 +168,10 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     process.exit(1);
   }
   console.log(`Response language verified: ${files} source files carry no inquiry-response time promise.`);
+  const claims = scanSourceClaims();
+  if (claims.failures.length) {
+    console.error(`"Bonded" claims found (D2: say insured and registered, never bonded):\n${claims.failures.join('\n')}`);
+    process.exit(1);
+  }
+  console.log(`Claim language verified: ${claims.files} source files carry no "bonded" claim.`);
 }

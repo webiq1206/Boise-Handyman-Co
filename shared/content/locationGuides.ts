@@ -221,7 +221,7 @@ const PLACES: PlaceGuide[] = [
     excerpt:
       'Kuna splits between brand-new subdivisions and open acreage, and the wind that crosses that open ground is the hardest thing in the valley on fences.',
     quickAnswer:
-      'Kuna home repairs depend on whether the house is a new subdivision build or an acreage property. Kuna’s mix of new builds and acreage produces two distinct repair lists, and we run both. We provide handyman services across Kuna: settling repairs and installs in newer subdivision homes, fence and gate repair after wind, fixture swaps where hard water has done its work, and seasonal maintenance, with flat quotes starting at $145.',
+      'Kuna home repairs depend on whether the house is a new subdivision build or an acreage property. Kuna’s mix of new builds and acreage produces two distinct repair lists, and we run both. We provide handyman services across Kuna: settling repairs and installs in newer subdivision homes, fence and gate repair after wind, fixture swaps where hard water has done its work, and seasonal maintenance, with each job priced case by case after we review the scope.',
     takeaways: [
       'Kuna’s stock splits between very new subdivision homes and rural acreage properties.',
       'Open ground means wind, and wind means Kuna fences and gates take more abuse than most in the valley.',
@@ -258,7 +258,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Kuna?',
         answer:
-          'Valley-standard bands: most single repairs run $100 to $500, and our services carry flat starting prices from $145. Every job gets a firm quote from photos before we arrive, and one-visit batching spreads the trip cost across the whole list.',
+          'Valley-standard bands: most single repairs run $100 to $500, and we price our own work case by case after reviewing the scope. Every job gets a firm quote from photos before we arrive, and one-visit batching spreads the trip cost across the whole list.',
       },
     ],
   },
@@ -383,7 +383,7 @@ const PLACES: PlaceGuide[] = [
     excerpt:
       'Nampa has the widest housing-stock range in Canyon County, from early-1900s homes near downtown to subdivisions finished this year, and the repair lists differ as much as the houses.',
     quickAnswer:
-      'Nampa home repairs follow the age of the house, from early-1900s homes near downtown to new subdivisions. Nampa is Canyon County’s largest city and sits fully inside our service area. We provide handyman services across Nampa: plaster-era repairs in the historic core, settling fixes and installs in the new subdivisions, and fence, gutter, and maintenance work everywhere, with flat quotes starting at $145.',
+      'Nampa home repairs follow the age of the house, from early-1900s homes near downtown to new subdivisions. Nampa is Canyon County’s largest city and sits fully inside our service area. We provide handyman services across Nampa: plaster-era repairs in the historic core, settling fixes and installs in the new subdivisions, and fence, gutter, and maintenance work everywhere, with each job priced case by case after we review the scope.',
     takeaways: [
       'Nampa’s housing runs from early-1900s homes near downtown to subdivisions still being built.',
       'Older-core homes bring plaster, original doors and windows, and mature-tree gutter duty.',
@@ -405,7 +405,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Nampa?',
         answer:
-          'The same as the rest of the Treasure Valley: most single repairs run $100 to $500, market hourly rates run $60 to $120, and our services carry flat starting prices from $145. There is no cross-county premium; Nampa is core service area for us.',
+          'The same as the rest of the Treasure Valley: most single repairs run $100 to $500, market hourly rates run $60 to $120, and we price our own work case by case after reviewing the scope. There is no cross-county premium; Nampa is core service area for us.',
       },
       {
         question: 'Can you do a punch list on my new Nampa build?',
@@ -437,7 +437,7 @@ const PLACES: PlaceGuide[] = [
     excerpt:
       'Caldwell runs from a historic core through mid-century neighborhoods to new subdivisions and working acreage, and each layer keeps its own repair list.',
     quickAnswer:
-      'Caldwell home repairs follow the age of the house, from the historic core to new subdivisions and acreage. Caldwell is fully inside our Ada-and-Canyon service area. We provide handyman services across Caldwell: repairs for the older homes near the historic core, settling fixes and installs in newer subdivisions, and fence, deck, and maintenance work on town lots and acreage alike, with flat quotes starting at $145.',
+      'Caldwell home repairs follow the age of the house, from the historic core to new subdivisions and acreage. Caldwell is fully inside our Ada-and-Canyon service area. We provide handyman services across Caldwell: repairs for the older homes near the historic core, settling fixes and installs in newer subdivisions, and fence, deck, and maintenance work on town lots and acreage alike, with each job priced case by case after we review the scope.',
     takeaways: [
       'Caldwell’s stock spans a historic core, mid-century neighborhoods, new subdivisions, and surrounding acreage.',
       'Older homes need repair carpentry and paint kept ahead of the weather; new builds need settling fixes and installs.',
@@ -464,7 +464,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Caldwell?',
         answer:
-          'The same valley bands: most single repairs run $100 to $500 and our services start at flat prices from $145. Older-home work occasionally uncovers prior deferred repairs; when it does, work pauses and you approve any change before it is billed.',
+          'The same valley bands: most single repairs run $100 to $500 and we price our own work case by case after reviewing the scope. Older-home work occasionally uncovers prior deferred repairs; when it does, work pauses and you approve any change before it is billed.',
       },
       {
         question: 'Do you handle acreage properties around Caldwell?',
@@ -491,7 +491,7 @@ const PLACES: PlaceGuide[] = [
     excerpt:
       'Foothills homes trade valley shelter for exposure: more wind, more sun, and exteriors that age faster on the weather side than anywhere on the valley floor.',
     quickAnswer:
-      'We provide handyman services in the Eagle Foothills: deck and rail care, fence and gate repair, exterior caulk and paint upkeep, and interior repairs and installs, with flat quotes starting at $145. Foothills exteriors face more wind and sun than valley homes, and the weather side of the house sets the maintenance clock.',
+      'We provide handyman services in the Eagle Foothills: deck and rail care, fence and gate repair, exterior caulk and paint upkeep, and interior repairs and installs, with each job priced case by case after we review the scope. Foothills exteriors face more wind and sun than valley homes, and the weather side of the house sets the maintenance clock.',
     takeaways: [
       'Foothills homes take more wind and sun exposure than valley-floor homes, and exteriors age accordingly.',
       'Decks, rails, and view-side finishes are the fastest-wearing assets: inspect them every spring.',
@@ -546,7 +546,7 @@ const PLACES: PlaceGuide[] = [
     excerpt:
       'Hidden Springs homes are entering their third decade, which means original fixtures, caulk, and hardware are aging in unison, and repairs must match a community that cares how things look.',
     quickAnswer:
-      'We provide handyman services in Hidden Springs: repairs and maintenance matched to the community’s design standards, fixture and hardware updates for homes entering their third decade, and seasonal exterior care, with flat quotes starting at $145. The neighborhood’s coherent look means repairs are matched to what exists, exactly.',
+      'We provide handyman services in Hidden Springs: repairs and maintenance matched to the community’s design standards, fixture and hardware updates for homes entering their third decade, and seasonal exterior care, with each job priced case by case after we review the scope. The neighborhood’s coherent look means repairs are matched to what exists, exactly.',
     takeaways: [
       'Hidden Springs homes largely date from the community’s founding era, and their original components are aging together.',
       'Fixtures, caulk, hardware, and exterior finishes from the same build years reach replacement age in unison.',
@@ -573,7 +573,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Hidden Springs?',
         answer:
-          'Valley-standard bands: most single repairs run $100 to $500, and our services carry flat starting prices from $145. Batch pricing is where this neighborhood wins: a planned-refresh list quoted as one visit costs meaningfully less per item than reactive one-off calls.',
+          'Valley-standard bands: most single repairs run $100 to $500, and we price our own work case by case after reviewing the scope. Batch pricing is where this neighborhood wins: a planned-refresh list quoted as one visit costs meaningfully less per item than reactive one-off calls.',
       },
       {
         question: 'Do you handle exterior work here?',
@@ -667,7 +667,7 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     p.housingStock,
     `<h2 id="common-repairs">The repairs ${p.name} homes actually need</h2>`,
     p.commonRepairs,
-    reviewedPriceScope ? `<p>Pricing depends on the agreed scope, materials and access. Send your repair details for review and a written quote.</p>` : `<p>For typical prices on all of this, see the <a href="/guides/boise-home-repair-cost-guide">Boise home repair cost guide</a>, most single repairs across the valley land between $100 and $500, and our services carry flat starting prices from $145.</p>`,
+    reviewedPriceScope ? `<p>Pricing depends on the agreed scope, materials and access. Send your repair details for review and a written quote.</p>` : `<p>For typical prices on all of this, see the <a href="/guides/boise-home-repair-cost-guide">Boise home repair cost guide</a>, most single repairs across the valley land between $100 and $500, and we price our own work case by case after reviewing the scope.</p>`,
     `<h2 id="watch-out">The thing that catches people out here</h2>`,
     p.watchOut,
     `<h2 id="seasonal">Seasonal maintenance in ${p.name}</h2>`,

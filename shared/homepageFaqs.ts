@@ -45,7 +45,7 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "Are you a registered contractor and insured?",
-    a: "Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew's own work. We are an Idaho Registered Contractor #8381215, bonded, and insured.",
+    a: "Plumbing, electrical and HVAC work on your list is done by licensed trade partners we schedule, inside the same written quote and the same visit plan, and their work carries their own warranty. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew's own work. We are an Idaho Registered Contractor #8381215 and insured.",
   },
   {
     q: "Who supplies the materials?",
@@ -61,7 +61,7 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "What kinds of jobs do you take on?",
-    a: "Drywall patching and texture blending, room and trim painting, carpentry and door repair, TV mounting and furniture assembly, fence, deck, and gutter repairs, and caulking, weatherproofing, and punch lists. Plumbing, electrical and HVAC items on the same list are scheduled with licensed trade partners we stand behind. If it is a small job a homeowner would rather not do themselves, it is probably on our list.",
+    a: "Drywall patching and texture blending, room and trim painting, carpentry and door repair, TV mounting and furniture assembly, fence, deck, and gutter repairs, and caulking, weatherproofing, and punch lists. Plumbing, electrical and HVAC items on the same list are scheduled with licensed trade partners, whose work carries their own warranty. If it is a small job a homeowner would rather not do themselves, it is probably on our list.",
   },
   {
     q: "Do you take cards and when is payment due?",
@@ -69,6 +69,6 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "How long is the workmanship guarantee?",
-    a: "One year on our workmanship, from documented Final Completion of the agreed work. If something we repaired or installed fails because of how we did the work, rather than normal wear, misuse, or a pre-existing condition, tell us and we come back to make it right. Materials carry their manufacturers' warranties, which we pass through on anything we supply. See the full terms on our warranty page.",
+    a: "One year on our own team's workmanship, from documented Final Completion of the agreed work. If something our team repaired or installed fails because of how we did the work, rather than normal wear, misuse, or a pre-existing condition, tell us and we come back to make it right. Work by subcontractors, such as licensed plumbing, electrical or HVAC work, is covered by that subcontractor's own warranty, and at the end of every project we provide a complete list of the subcontractors who worked on it, with their contact information. Materials carry their manufacturers' warranties, which we pass through on anything we supply; those terms are separate from ours. See the full terms on our warranty page.",
   },
 ];

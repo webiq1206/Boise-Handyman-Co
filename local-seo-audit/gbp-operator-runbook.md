@@ -25,7 +25,7 @@ Use after verification completes. Copy-paste content from `npm run gbp:print` or
 - [ ] Paste GBP_DESCRIPTION (748 chars)
 
 ### Services (12)
-- [ ] Add all entries from GBP_SERVICES with starting prices where listed
+- [ ] Add all entries from GBP_SERVICES (no starting prices: each job is priced case by case)
 
 ### Products (22, 4 categories)
 - [ ] Create categories: Remodeling Services, Free Planning Resources, Consultation & Tools, Areas We Serve

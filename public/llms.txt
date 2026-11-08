@@ -62,4 +62,4 @@ Serving Boise and the Treasure Valley across Ada and Canyon County. Phone (208) 
 - [RSS feed](https://boisehandyman.co/feed.xml): guides and articles, newest first, with publication and revision dates.
 - [Full text for LLMs](https://boisehandyman.co/llms-full.txt): expanded reference copy of the core facts.
 
-Last updated: 2026-11-04.
+Last updated: 2026-11-08.

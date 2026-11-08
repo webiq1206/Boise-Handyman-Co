@@ -177,7 +177,7 @@ Add categories in this exact order:
 
 Go to **Edit profile → Business description**. Paste this exactly (748 characters):
 
-> Boise Remodeling Co is a design-build remodeling contractor serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho. One accountable team handles design, Ada and Canyon County permits, and construction for kitchen remodels, bathroom remodels, whole-home renovations, room additions, ADUs, garage conversions, and basement finishing. Every project includes a written scope before construction, a dedicated project manager, weekly written progress updates, and a written workmanship guarantee. Founded in 2017. Bonded and insured. Schedule a free 60 to 90 minute in-home visit and leave with a planning range and design direction - no pressure, no obligation.
+> Boise Remodeling Co is a design-build remodeling contractor serving Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, and Caldwell, Idaho. One accountable team handles design, Ada and Canyon County permits, and construction for kitchen remodels, bathroom remodels, whole-home renovations, room additions, ADUs, garage conversions, and basement finishing. Every project includes a written scope before construction, a dedicated project manager, weekly written progress updates, and a written workmanship guarantee. Founded in 2017. Insured. Schedule a free 60 to 90 minute in-home visit and leave with a planning range and design direction - no pressure, no obligation.
 
 ### Step 3.5 — Add all services
 
@@ -344,7 +344,7 @@ As of 2026, planning ranges run roughly $15,000 for a cosmetic refresh, $35,000-
 Guest baths typically plan $18,000-$45,000; primary baths $35,000-$85,000+ depending on layout and finishes. Written scope after your free visit confirms the number. Guide: https://boiseremodeling.co/guides/boise-bathroom-remodeling-guide
 
 **Q6: Are you licensed and insured?**  
-Yes. Boise Remodeling Co is bonded and insured for residential remodeling across the Treasure Valley. Idaho contractor license details are available upon request.
+Yes. Boise Remodeling Co is insured for residential remodeling across the Treasure Valley. Idaho contractor license details are available upon request.
 
 **Q7: Do you build ADUs?**  
 Yes - attached, detached, and garage-conversion ADUs. Planning ranges from $90,000 for garage conversions to $180,000-$300,000+ for detached new builds. Guide: https://boiseremodeling.co/guides/boise-adu-guide

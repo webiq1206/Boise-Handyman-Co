@@ -32,9 +32,9 @@ export interface ServiceSEOContent {
   /**
    * Server-rendered cost copy. The estimator's price bands are client-side JS
    * and invisible to crawlers and AI engines; this section puts the pricing
-   * story (upfront written quotes, per-visit starting prices) in static HTML.
-   * All our own dollar figures are placeholders: [NEEDS: real pricing
-   * confirmation].
+   * story (case-by-case pricing, written price before work) in static HTML.
+   * D6 (owner, 8 November 2026): pricing is case by case, so no starting
+   * prices or hourly ranges are published.
    */
   costGuidance?: { heading: string; paragraphs: string[] };
   /** Examples of jobs this service covers, rendered as a "typical jobs" section. */
@@ -49,12 +49,10 @@ export interface ServiceSEOContent {
 /**
  * Pricing story used across every service below, stated once so pages stay
  * consistent: every job gets one upfront written quote before any work
- * starts, with per-visit starting prices as the public anchors. The internal
- * rate model (trip fee + hourly, see estimateEngine) is deliberately NOT
- * published anywhere customer-facing. Market context: Treasure Valley
- * handyman rates typically run $60 to $120 per hour. Our own figures (every
- * "from" price) are PLACEHOLDERS pending owner confirmation:
- * [NEEDS: real pricing confirmation].
+ * starts. Each job is priced case by case after we review the scope (owner
+ * decision D6, 8 November 2026), so no starting prices or hourly ranges are
+ * published. The internal rate model (trip fee + hourly, see estimateEngine)
+ * is deliberately NOT published anywhere customer-facing.
  */
 export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
   'drywall-repair': {
@@ -233,7 +231,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     headline: 'Minor plumbing repairs in Boise and the Treasure Valley',
     primaryKeyword: 'minor plumbing repair boise',
     overview:
-      'Boise Handyman Co schedules everyday plumbing items on your repair list with licensed plumbing trade partners we stand behind, inside the same written quote and visit plan: dripping faucets, running toilets, slow drains, disposals and worn supply lines. Water heaters, repipes, gas and new plumbing runs stay with the plumber.',
+      'Boise Handyman Co schedules everyday plumbing items on your repair list with licensed plumbing trade partners, inside the same written quote and visit plan: dripping faucets, running toilets, slow drains, disposals and worn supply lines. Water heaters, repipes, gas and new plumbing runs stay with the plumber.',
     benefits: [
       'Fixture scope and parts reviewed before scheduling',
       'Upfront quote before we touch a fitting',
@@ -312,7 +310,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     outOfScope: {
       heading: 'What plumbing work we refer out',
       paragraphs: [
-        'Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Water heaters, repipes, gas lines, sewer and main drain lines, slab leaks and new plumbing runs stay with the plumber. Our crew handles the drywall, mounting, doors, caulk and related finish work around those trades.',
+        'Plumbing, electrical and HVAC work on your list is done by licensed trade partners we schedule, inside the same written quote and the same visit plan, and their work carries their own warranty. Water heaters, repipes, gas lines, sewer and main drain lines, slab leaks and new plumbing runs stay with the plumber. Our crew handles the drywall, mounting, doors, caulk and related finish work around those trades.',
       ],
     },
   },
@@ -323,7 +321,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     headline: 'Minor electrical repairs in Boise and the Treasure Valley',
     primaryKeyword: 'minor electrical repair boise',
     overview:
-      'Boise Handyman Co schedules electrical items on your repair list with licensed electrical trade partners we stand behind, inside the same written quote and visit plan. Like-for-like outlet, switch, fixture and ceiling-fan work on existing wiring is coordinated that way; new circuits, panels and added wiring stay with the electrician.',
+      'Boise Handyman Co schedules electrical items on your repair list with licensed electrical trade partners, inside the same written quote and visit plan. Like-for-like outlet, switch, fixture and ceiling-fan work on existing wiring is coordinated that way; new circuits, panels and added wiring stay with the electrician.',
     benefits: [
       'Like-for-like swaps done safely, with power verified off',
       'Fixture and fan work reviewed against the existing wiring',
@@ -402,7 +400,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
     outOfScope: {
       heading: 'What electrical work we refer out',
       paragraphs: [
-        'Plumbing, electrical and HVAC work on your list is done by the licensed trade partners we schedule and stand behind, inside the same written quote and the same visit plan. Panel and breaker work, new circuits, service upgrades, EV chargers and anything that runs new wire stay with the electrician. Our crew handles the drywall, mounting, doors, caulk and related finish work around those trades.',
+        'Plumbing, electrical and HVAC work on your list is done by licensed trade partners we schedule, inside the same written quote and the same visit plan, and their work carries their own warranty. Panel and breaker work, new circuits, service upgrades, EV chargers and anything that runs new wire stay with the electrician. Our crew handles the drywall, mounting, doors, caulk and related finish work around those trades.',
       ],
     },
   },
@@ -917,7 +915,7 @@ export const AREA_PAGE_FAQS: FAQItem[] = [
   {
     question: 'How do I get started?',
     answer:
-      'Call or text us, use the online estimator for a preliminary planning range, or send your task list with photos through the contact form. We answer your questions, help you work out the next step, and reply with an upfront quote.',
+      'Call or text us, or send your task list with photos through the online form or the contact form. We answer your questions, help you work out the next step, and reply with an upfront quote.',
   },
 ];
 
@@ -952,7 +950,7 @@ export const HOMEPAGE_FAQS_FOR_SCHEMA: FAQItem[] = [
   {
     question: 'What does a handyman cost in the Treasure Valley?',
     answer:
-      'Treasure Valley handyman rates typically run $60 to $120 per hour. Boise Handyman Co quotes every job upfront as one written price, with visits starting around $145 and no work scheduled before you approve the number.',
+      'Each job is priced case by case after we review the scope. Send your list and photos, and Boise Handyman Co replies with a written price before any work starts. Nothing is scheduled before you approve the number.',
   },
   {
     question: 'What services do you offer?',

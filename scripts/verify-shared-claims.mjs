@@ -3,7 +3,7 @@
 import {readFileSync, readdirSync} from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
-import {scanSource, scanBuiltDocuments} from './verify-response-language.mjs';
+import {scanSource, scanBuiltDocuments, scanSourceClaims, scanBuiltClaims, findProhibitedClaims} from './verify-response-language.mjs';
 const publicDocument = html => html.replace(/<script\b([^>]*)>[\s\S]*?<\/script>/gi, (script, attrs) => /type=["']application\/ld\+json["']/i.test(attrs) ? script : '');
 const knownRoutes=JSON.parse(readFileSync(new URL("./known-claims-routes.json",import.meta.url),"utf8"));
 assert.equal(new Set(knownRoutes).size,72);
@@ -51,4 +51,16 @@ assert.doesNotMatch(publicDocument(readFileSync('.next/server/app/guides/first-t
  const built=scanBuiltDocuments();
  assert.equal(built.failures.length,0,`Response-time promises in built documents:\n${built.failures.join('\n')}`);
  console.log(`Response language verified: ${source.files} source files and ${built.files} built documents carry no inquiry-response time promise.`);
+}
+
+// D2: no "bonded" claim in source, in any built document (visible copy,
+// metadata, JSON-LD) or in the generated llms references. Insured and the
+// registration number stay.
+{
+ const source=scanSourceClaims();
+ assert.equal(source.failures.length,0,`"Bonded" claims in source:\n${source.failures.join('\n')}`);
+ const built=scanBuiltClaims();
+ assert.equal(built.failures.length,0,`"Bonded" claims in built documents:\n${built.failures.join('\n')}`);
+ for(const file of ['llms.txt','llms-full.txt'])assert.equal(findProhibitedClaims(readFileSync(`public/${file}`,'utf8')).length,0,`public/${file}: bonded claim`);
+ console.log(`Bonded claim check passed: ${source.files} source files and ${built.files} built documents.`);
 }

@@ -22,7 +22,7 @@ test('the registration number stays outside the DOPL link', () => {
   assert.equal(footer.includes('License details available upon request'), false);
   assert.equal(footer.includes('showVerifyLink={false}'), false);
   assert.match(footer, /<ContractorCredential /);
-  assert.match(about, /licensed trade\s+partners we schedule and stand behind/);
+  assert.match(about, /licensed trade\s+partners we schedule, inside the same written quote and the same visit plan, and\s+their work carries their own warranty/);
   assert.match(about, /<ContractorCredential \/>/);
   assert.match(about, /Insured; certificate on request/);
   assert.equal(about.includes('Business registration and insurance details are available on request'), false);
@@ -64,7 +64,7 @@ test('What you can count on lists six selling points without Nick', () => {
   assert.equal(HOW_P5_WORKS_TITLE, 'What you can count on');
   assert.deepEqual([...HOW_P5_WORKS], [
     'Own install crew',
-    'Bonded & insured',
+    'Insured',
     'Manufacturer warranties passed through on parts we supply',
     'Arrival time agreed and confirmed before we head out',
     'Written quote before work starts',

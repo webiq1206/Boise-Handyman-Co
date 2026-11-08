@@ -118,6 +118,6 @@ export const whatSmallHomeRepairsCostBoise: BlogPostData = {
 <p>When you compare quotes, compare what they contain rather than the bottom line. One number that includes materials, haul-away, and texture matching is not higher than a smaller number that includes none of those.</p>
 
 <h2 id="next-steps">Get a quote on your list</h2>
-<p>If you have a repair list building up, send it over with photos and we will price it as one visit with an upfront quote before we book anything. Start with the <a href="/contact">contact page</a>, or browse <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing repairs</a>, and <a href="/services/carpentry-trim-repair">carpentry and trim repair</a> to see typical starting prices for the most common fixes.</p>
+<p>If you have a repair list building up, send it over with photos and we will price it as one visit with an upfront quote before we book anything. Start with the <a href="/contact">contact page</a>, or browse <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing repairs</a>, and <a href="/services/carpentry-trim-repair">carpentry and trim repair</a> to see what each service covers and how we price it.</p>
 `.trim(),
 };
