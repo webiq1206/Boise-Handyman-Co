@@ -917,7 +917,7 @@ export const AREA_PAGE_FAQS: FAQItem[] = [
   {
     question: 'How do I get started?',
     answer:
-      'Call or text us, use the online estimator for a preliminary planning range, or send your task list with photos through the contact form. We reply within one business day with an upfront quote.',
+      'Call or text us, use the online estimator for a preliminary planning range, or send your task list with photos through the contact form. We answer your questions, help you work out the next step, and reply with an upfront quote.',
   },
 ];
 
@@ -967,7 +967,7 @@ export const HOMEPAGE_FAQS_FOR_SCHEMA: FAQItem[] = [
   {
     question: 'How quickly can you come out?',
     answer:
-      'We reply to new requests within one business day and most jobs are scheduled within the week. Quotes come first, from photos, so the visit itself is spent fixing rather than estimating.',
+      'We answer new requests, then agree a visit time with you once the written quote is approved. Quotes come first, from photos, so the visit itself is spent fixing rather than estimating.',
   },
   {
     question: 'Do you handle big remodels?',

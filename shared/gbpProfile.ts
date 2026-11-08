@@ -141,7 +141,7 @@ export const GBP_ATTRIBUTES = {
 
 export const GBP_MESSAGING = {
   welcomeMessage:
-    'Thanks for reaching out to Boise Handyman Co. We respond within one business day. For faster help, call or text (208) 477-1169, or get a preliminary estimate at boisehandyman.co/estimate',
+    'Thanks for reaching out to Boise Handyman Co. We answer your questions and help you work out the next step. You can also call or text (208) 477-1169, or get a preliminary estimate at boisehandyman.co/estimate',
 } as const;
 
 export interface GbpService {
@@ -212,7 +212,7 @@ export const GBP_SERVICES: GbpService[] = [
   {
     name: 'Free upfront quotes',
     description:
-      'Photo-based written quotes within one business day. No obligation.',
+      'Photo-based written quotes, and answers to your questions along the way. No obligation.',
   },
 ];
 
@@ -246,7 +246,7 @@ export const GBP_PRODUCTS: GbpProduct[] = [
     price: 'Free quote',
     url: `${SITE}/contact`,
     description:
-      'Send your task list with photos and get a written quote within one business day. No pressure, no obligation.',
+      'Send your task list with photos and get a written quote. We answer your questions along the way. No pressure, no obligation.',
   },
   {
     category: 'Quotes & Tools',
@@ -274,7 +274,7 @@ export interface GbpQaEntry {
 export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'Do you provide free estimates?',
-    answer: `Yes. Send your task list with photos and we reply with a written quote within one business day, no pressure and no obligation. Start here: ${SITE}/contact`,
+    answer: `Yes. Send your task list with photos and we reply with a written quote and answer your questions, no pressure and no obligation. Start here: ${SITE}/contact`,
   },
   {
     question: 'What areas do you serve?',
@@ -292,7 +292,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'How quickly can you come out?',
     answer:
-      'We reply within one business day and most jobs are scheduled within the week. Because we quote from photos first, the visit is spent doing the work, not estimating it.',
+      'We answer new requests, then agree a visit time with you once the written quote is approved. Because we quote from photos first, the visit is spent doing the work, not estimating it.',
   },
   {
     question: 'Is there a minimum charge?',
@@ -323,7 +323,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   },
   {
     question: 'How do I get started?',
-    answer: `Call or text (208) 477-1169, or book online: ${SITE}/contact. We respond within one business day.`,
+    answer: `Call or text (208) 477-1169, or book online: ${SITE}/contact. We answer your questions and help you work out the next step.`,
   },
 ];
 
