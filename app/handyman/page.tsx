@@ -24,18 +24,18 @@ const HOURS = "Call or text Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM (Mountain)
 
 const HERO_IMAGE = "/family/handyman-hero-door-hinge-branded.webp";
 const TILES = [
-  { src: "/images/handyman/service-drywall-repair.webp", label: "Drywall repair", from: "$149", alt: "Hands spreading joint compound over a drywall patch" },
-  { src: "/images/handyman/front-door-repaint-p5-reviewed-20260910.webp", label: "Doors, trim & baseboards", from: "$149", alt: "A sage-green front door with white trim and black hardware" },
-  { src: "/images/handyman/service-caulking.webp", label: "Caulking & weatherproofing", from: "$145", alt: "A caulk gun laying a white bead along a bathtub edge" },
-  { src: "/images/handyman/service-plumbing.webp", label: "Minor plumbing", from: "$145", alt: "Hands installing a kitchen faucet at a sink" },
-  { src: "/images/handyman/service-electrical.webp", label: "Minor electrical", from: "$145", alt: "Hands installing a white electrical outlet" },
-  { src: "/images/handyman/service-mounting.webp", label: "TV & shelf mounting", from: "$145", alt: "A worker leveling a TV wall-mount bracket" },
+  { src: "/images/handyman/service-drywall-repair.webp", label: "Drywall repair", alt: "Hands spreading joint compound over a drywall patch" },
+  { src: "/images/handyman/front-door-repaint-p5-reviewed-20260910.webp", label: "Doors, trim & baseboards", alt: "A sage-green front door with white trim and black hardware" },
+  { src: "/images/handyman/service-caulking.webp", label: "Caulking & weatherproofing", alt: "A caulk gun laying a white bead along a bathtub edge" },
+  { src: "/images/handyman/service-plumbing.webp", label: "Minor plumbing", alt: "Hands installing a kitchen faucet at a sink" },
+  { src: "/images/handyman/service-electrical.webp", label: "Minor electrical", alt: "Hands installing a white electrical outlet" },
+  { src: "/images/handyman/service-mounting.webp", label: "TV & shelf mounting", alt: "A worker leveling a TV wall-mount bracket" },
 ] as const;
 
 const TRUST = [
   { icon: FileText, label: "Upfront written quote" },
   { icon: CalendarCheck, label: "One repair or a list" },
-  { icon: ShieldCheck, label: "Bonded & insured" },
+  { icon: ShieldCheck, label: "Insured" },
 ] as const;
 
 const FAQS = [
@@ -61,7 +61,7 @@ const FAQS = [
   },
   {
     question: "Are you insured?",
-    answer: `Yes. We are an ${CONTRACTOR_REGISTRATION}, bonded, and insured.`,
+    answer: `Yes. We are an ${CONTRACTOR_REGISTRATION} and insured.`,
   },
 ];
 

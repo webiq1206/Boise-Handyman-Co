@@ -1,8 +1,8 @@
 import type { BlogPostData } from '../../blogContent';
 
 // Pricing notes: market ranges below are framed as Treasure Valley market context.
-// Our own "from" prices match shared/contentData.ts starting prices.
-// [NEEDS: real pricing confirmation for all starting prices cited]
+// Our own pricing is case by case after scope review (owner decision D6,
+// 8 November 2026); no starting prices are published.
 
 export const handymanPricesBoise: BlogPostData = {
   slug: 'handyman-prices-boise',
@@ -33,7 +33,7 @@ export const handymanPricesBoise: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Handyman rates in the Boise area typically run $60 to $120 per hour in 2026, with most companies carrying a service minimum of roughly $100 to $200 per visit. Common small repairs land between $145 and $400 including labor. Boise Handyman Co quotes flat prices upfront, with common services starting at $145 to $199.',
+    'Handyman rates in the Boise area typically run $60 to $120 per hour in 2026, with most companies carrying a service minimum of roughly $100 to $200 per visit. Common small repairs land between $145 and $400 including labor. Boise Handyman Co prices each job case by case after reviewing the scope, with a written price before work starts.',
   keyTakeaways: [
     'Treasure Valley handyman labor typically runs $60 to $120 per hour in 2026.',
     'Most companies carry a visit minimum around $100 to $200, which is why batching small jobs saves money.',
@@ -56,7 +56,7 @@ export const handymanPricesBoise: BlogPostData = {
     {
       question: 'How much does a handyman cost in Boise in 2026?',
       answer:
-        'Market rates in the Treasure Valley typically run $60 to $120 per hour, and most companies carry a per-visit minimum of roughly $100 to $200. Defined jobs are often flat-priced instead: think $145 to $400 for most common repairs including labor. We quote flat prices upfront, with common services starting between $145 and $199.',
+        'Market rates in the Treasure Valley typically run $60 to $120 per hour, and most companies carry a per-visit minimum of roughly $100 to $200. Defined jobs are often flat-priced instead: think $145 to $400 for most common repairs including labor. We price each job case by case after reviewing the scope, with a written price before work starts.',
     },
     {
       question: 'Why do handymen have minimum charges?',
@@ -87,7 +87,7 @@ export const handymanPricesBoise: BlogPostData = {
   content: `
 <h2 id="the-number">What a handyman costs in Boise</h2>
 <p><strong>Handyman labor in the Treasure Valley typically runs $60 to $120 per hour in 2026, and most companies carry a per-visit minimum of roughly $100 to $200.</strong> Most common repairs, a drywall patch, a faucet swap, a sticking door, a run of caulk, land between $145 and $400 including labor. Larger half-day and full-day visits commonly run $300 to $800 depending on scope and materials.</p>
-<p>Those are market bands, not our price list. Our own model is flat, upfront quotes for defined work, with common services starting at $145 for <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/home-maintenance">caulking and maintenance</a>, and minor plumbing and electrical repairs, and $149 to $199 for <a href="/services/drywall-repair">drywall</a>, carpentry, and painting work. The rest of this post explains how the pricing actually works, because the structure matters more than the sticker. For planning prices on every common repair, job by job, see <a href="/guides/boise-home-repair-cost-guide">the complete Boise home repair cost guide</a>.</p>
+<p>Those are market bands, not our price list. Our own model is case-by-case pricing after we review the scope, with a written price before work starts, whether the job is <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/home-maintenance">caulking and maintenance</a>, minor plumbing and electrical repairs, or <a href="/services/drywall-repair">drywall</a>, carpentry, and painting work. The rest of this post explains how the pricing actually works, because the structure matters more than the sticker. For planning prices on every common repair, job by job, see <a href="/guides/boise-home-repair-cost-guide">the complete Boise home repair cost guide</a>.</p>
 
 <h2 id="hourly-band">Why the hourly band is $60 wide</h2>
 <p><strong>The spread mostly reflects who is showing up and what stands behind them.</strong> At the low end of the market you find solo operators with low overhead, informal scheduling, and sometimes no insurance. At the higher end you get established companies with insurance, warranties on workmanship, stocked trucks, and someone who answers the phone. Neither end is a scam; they are different products. The expensive mistake is paying the low rate while assuming you bought the high-end product.</p>

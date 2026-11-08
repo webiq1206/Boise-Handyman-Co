@@ -37,7 +37,7 @@ export interface Re10Benefit {
 export const RE10_BENEFITS: Re10Benefit[] = [
   {
     title: "One contact for the whole repair list",
-    body: "Carpentry, drywall, paint, flooring and exterior work by our crew, with plumbing, electrical and HVAC scheduled through licensed trade partners we stand behind. You stop chasing four contractors for one inspection response.",
+    body: "Carpentry, drywall, paint, flooring and exterior work by our crew, with plumbing, electrical and HVAC scheduled through licensed trade partners, whose work carries their own warranty. You stop chasing four contractors for one inspection response.",
   },
   {
     title: "You are told before we proceed",

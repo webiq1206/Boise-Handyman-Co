@@ -184,14 +184,14 @@ export function BlogPostLayout({ post, formatDate }: BlogPostLayoutProps) {
               )}
 
               <div className="lg:hidden mt-10">
-                <ArticleSidebarCta description="See what your project might cost with a preliminary Treasure Valley planning range." />
+                <ArticleSidebarCta description="Send your list and photos. We review the scope and reply with a written price before any work starts." />
               </div>
             </div>
 
             <aside className="article-rail hidden lg:block w-72 xl:w-80 flex-shrink-0 sticky top-24 self-start">
               <ArticleSidebar
                 tocHeadings={tocHeadings}
-                ctaDescription="See what your project might cost with a preliminary Treasure Valley planning range."
+                ctaDescription="Send your list and photos. We review the scope and reply with a written price before any work starts."
               />
               {post.tags && post.tags.length > 0 && (
                 <div className="mt-6 rounded-lg border border-border p-4">

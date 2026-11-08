@@ -111,6 +111,6 @@ export const interiorPaintTouchUpGuide: BlogPostData = {
 <p><strong>Touch-up is time-billed, and the efficient package is the whole-house pass.</strong> At Treasure Valley rates of $60 to $120 per hour, a half-day visit typically covers washing, spot-priming, blending every mark that will blend, and repainting the wall or two where sheen says so. Paired with drywall patches and fresh caulk, it is the classic pre-listing and post-move package, and the bundling math from <a href="/blog/what-small-home-repairs-cost-boise">what small home repairs cost in Boise</a> applies in full.</p>
 
 <h2 id="next-steps">Get the walls looking new</h2>
-<p>Send photos of the marks and a note on whether you have the original paint, and we will quote a touch-up pass upfront, and tell you straight which walls will blend and which need corner-to-corner paint. Start at the <a href="/contact">contact page</a> or see our <a href="/services/painting-touch-ups">interior and exterior painting</a> service for typical starting prices.</p>
+<p>Send photos of the marks and a note on whether you have the original paint, and we will quote a touch-up pass upfront, and tell you straight which walls will blend and which need corner-to-corner paint. Start at the <a href="/contact">contact page</a> or see our <a href="/services/painting-touch-ups">interior and exterior painting</a> service for scope and how we price it.</p>
 `.trim(),
 };

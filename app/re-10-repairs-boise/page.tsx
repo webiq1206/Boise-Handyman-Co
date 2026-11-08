@@ -279,7 +279,8 @@ export default function Re10RepairsPage() {
               </p>
               <p>
                 We review the whole list at once, group the work so travel and set-up are shared
-                across it, and give you a single scope, a single schedule and a single invoice. It
+                across it, and give you one accountable company and one point of contact for your
+                project. It
                 is usually cheaper than the alternative, and it is always less work for you.
               </p>
             </div>
@@ -293,7 +294,7 @@ export default function Re10RepairsPage() {
                 "One scope covering every trade on the list",
                 "One schedule built around your repair deadline",
                 "One person to call when something changes",
-                "One invoice and one documentation package",
+                "One accountable company and one point of contact for your project",
                 "Shared travel and set-up instead of per-trade minimums",
               ].map((b) => (
                 <li key={b} className="flex items-start gap-3 text-sm text-muted-foreground">

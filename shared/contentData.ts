@@ -5,16 +5,9 @@ export interface ServiceData {
   slug: string;
   name: string;
   shortDescription: string;
-  /**
-   * Planning starting point (a floor, not a bid or a wide range). Rendered as
-   * "From $X" to give price context without committing to a spread - the real
-   * number comes from the estimator + on-site look. Floors derive from the
-   * estimate engine's placeholder model ($49 trip fee + $95/hr, one-hour
-   * minimum = $144 first visit). That rate model is internal only - never
-   * publish the decomposition in customer-facing copy. PLACEHOLDER figures:
-   * [NEEDS: real pricing confirmation] before launch.
-   */
-  planningFrom: string;
+  // No planningFrom: each job is priced case by case after we review the
+  // scope (owner decision D6, 8 November 2026). Do not reintroduce a public
+  // starting price here.
   /**
    * Secondary services expand keyword coverage. They get full service + city
    * pages, nav, and sitemap entries, but are kept off the homepage grid so the
@@ -49,61 +42,49 @@ export interface CityData {
  * so the service and service+city pages do not compete with each other. Generic
  * "handyman {city}" intent is carried by the location pages, which is why there
  * is no separate generic handyman-services page.
- *
- * planningFrom figures are per-visit starting points for a small job of that
- * type in the Treasure Valley. They are deliberately conservative placeholders
- * pending real pricing: [NEEDS: real pricing confirmation].
  */
 export const SERVICES: ServiceData[] = [
   {
     slug: 'drywall-repair',
     name: 'Drywall Repair & Patching',
     shortDescription: 'Holes, cracks, water-stained patches, and popcorn-ceiling repairs finished and blended to match.',
-    planningFrom: '$149',
   },
   {
     slug: 'painting-touch-ups',
     name: 'Interior & Exterior Painting',
     shortDescription: 'Room refreshes, trim and door repaints, and exterior touch-ups with proper prep and clean lines.',
-    planningFrom: '$199',
   },
   {
     slug: 'plumbing-repairs',
     name: 'Minor Plumbing Repairs',
     shortDescription: 'Faucets, toilets, garbage disposals, supply lines, and slow drains reviewed for repair or replacement.',
-    planningFrom: '$145',
   },
   {
     slug: 'electrical-repairs',
     name: 'Minor Electrical Repairs',
     shortDescription: 'Outlets, switches, light fixtures, and ceiling fans replaced or repaired safely and to code.',
-    planningFrom: '$145',
   },
   {
     slug: 'carpentry-trim-repair',
     name: 'Carpentry & Trim Repair',
     shortDescription: 'Doors that stick, damaged trim and baseboard, stair rails, and small carpentry fixes done cleanly.',
-    planningFrom: '$149',
   },
   {
     slug: 'mounting-assembly',
     name: 'Mounting & Assembly',
     shortDescription: 'TVs, shelves, mirrors, and curtain rods mounted level and anchored right; furniture assembled fast.',
-    planningFrom: '$145',
     secondary: true,
   },
   {
     slug: 'fence-deck-gutter-repair',
     name: 'Fence, Deck & Gutter Repair',
     shortDescription: 'Leaning fence panels, loose deck boards and rails, gutter cleaning, and minor exterior repairs.',
-    planningFrom: '$149',
     secondary: true,
   },
   {
     slug: 'home-maintenance',
     name: 'Caulking & Home Maintenance',
     shortDescription: 'Caulking and weatherproofing, tile and grout touch-ups, and punch-list work planned around your repair list.',
-    planningFrom: '$145',
     secondary: true,
   },
 ];

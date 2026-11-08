@@ -69,7 +69,7 @@ export const GBP_CATEGORIES = {
 export const GBP_DESCRIPTION =
   'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to ' +
   (SHOW_TRUST_CLAIMS ? 'trusted specialty contractors' : 'specialty contractors') +
-  '. Get a preliminary estimate online or book a handyman visit.';
+  '. Send your list and photos for a written quote.';
 
 export const GBP_LINKS = {
   website: SITE,
@@ -151,58 +151,50 @@ export interface GbpService {
 }
 
 /**
- * GBP service list mirrors shared/contentData.ts SERVICES. startingPrice
- * values are the same placeholder "From" figures used on the site:
- * [NEEDS: real pricing confirmation].
+ * GBP service list mirrors shared/contentData.ts SERVICES. No startingPrice
+ * is published: each job is priced case by case after we review the scope
+ * (owner decision D6, 8 November 2026).
  */
 export const GBP_SERVICES: GbpService[] = [
   {
     name: 'Drywall repair and patching',
     description:
       'Holes, cracks, and water-damaged patches repaired, textured to match, and paint-blended. Quoted upfront from photos.',
-    startingPrice: '$149',
   },
   {
     name: 'Interior and exterior painting',
     description:
       'Rooms, accent walls, trim, doors, and exterior touch-ups with proper prep and clean lines. Upfront per-room quotes.',
-    startingPrice: '$199',
   },
   {
     name: 'Minor plumbing repairs',
     description:
       'Faucets, toilets, disposals, supply lines, and slow drains fixed or swapped in one visit. Licensed-plumber work referred out.',
-    startingPrice: '$129',
   },
   {
     name: 'Minor electrical repairs',
     description:
       'Outlets, switches, light fixtures, and ceiling fans replaced on existing wiring, tested before we leave. Panel work referred out.',
-    startingPrice: '$129',
   },
   {
     name: 'Carpentry and trim repair',
     description:
       'Sticking doors, damaged baseboard and casing, stair rails, and small carpentry fixes finished cleanly.',
-    startingPrice: '$149',
   },
   {
     name: 'TV mounting and furniture assembly',
     description:
       'TVs, shelves, mirrors, and curtain rods mounted level and anchored right; flat-pack furniture assembled and tightened.',
-    startingPrice: '$99',
   },
   {
     name: 'Fence, deck, and gutter repair',
     description:
       'Leaning fence posts reset, deck boards and rails replaced, gutters cleaned, resealed, and re-pitched.',
-    startingPrice: '$149',
   },
   {
     name: 'Caulking and home maintenance',
     description:
       'Kitchen and bath recaulking, weatherproofing, tile and grout touch-ups, and whole punch lists cleared in one visit.',
-    startingPrice: '$99',
   },
   {
     name: 'Punch list and to-do list visits',
@@ -236,7 +228,7 @@ export const GBP_PRODUCTS: GbpProduct[] = [
   ...SERVICES.map((service) => ({
     category: 'Handyman Services',
     name: service.name,
-    price: `From ${service.planningFrom}`,
+    price: 'Priced case by case',
     url: `${SITE}/services/${service.slug}`,
     description: service.shortDescription,
   })),
@@ -297,12 +289,12 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'Is there a minimum charge?',
     answer:
-      'Every visit carries a practical minimum, so a single small task starts around $99. Bundling several tasks into one visit is the best value, because extra tasks only add the time they take.',
+      'Each job is priced case by case after we review the scope, with a written price before any work starts. Bundling several tasks into one visit is usually the best value, because extra tasks only add the time they take.',
   },
   {
     question: 'Are you a registered contractor and insured?',
     answer:
-      'Plumbing, electrical and HVAC work is done by licensed trade partners we schedule and stand behind. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew\'s own work. We are an Idaho Registered Contractor #8381215, bonded, and insured.',
+      'Plumbing, electrical and HVAC work is done by licensed trade partners we schedule, and their work carries their own warranty. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware are our crew\'s own work. We are an Idaho Registered Contractor #8381215 and insured.',
   },
   {
     question: 'Do you do remodels?',
@@ -348,8 +340,8 @@ export const GBP_POSTS_STARTER: GbpPost[] = [
   {
     week: 2,
     headline: 'Know the price before you book',
-    body: 'One written price, quoted upfront from photos before any work starts. Get a preliminary planning range online.',
-    buttonLabel: 'Get an estimate',
+    body: 'Each job is priced case by case after we review the scope. Send your list and photos for a written price before any work starts.',
+    buttonLabel: 'Request a quote',
     buttonUrl: `${SITE}/estimate`,
     photoHint: 'Estimator screenshot or quote example',
   },
