@@ -177,12 +177,12 @@ export default function AboutPage() {
               </div>
               <Reveal>
                 <p className="ed-lede">
-                  P5 Home Co LLC, Idaho Registered Contractor #8381215. Insured; certificate on request. One-year workmanship warranty on repairs and installs.
+                  P5 Home Co LLC, Idaho Registered Contractor #8381215. Insured; certificate on request. One-year workmanship warranty on work by our own team.
                 </p>
                 <p className="ed-body mt-6">
-                  Plumbing, electrical and HVAC work on your list is done by the licensed trade
-                  partners we schedule and stand behind, inside the same written quote and the same
-                  visit plan. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware
+                  Plumbing, electrical and HVAC work on your list is done by licensed trade
+                  partners we schedule, inside the same written quote and the same visit plan, and
+                  their work carries their own warranty. Drywall, doors, mounting, fences, decks, caulk, assembly and hardware
                   are our crew&apos;s own work. <ContractorCredential />.
                 </p>
                 <ul className="mt-8 grid gap-3 border-t pt-6 sm:grid-cols-2" style={{ borderColor: 'var(--ed-line)' }}>
@@ -225,7 +225,7 @@ export default function AboutPage() {
                 <p className="ed-eyebrow">Warranty</p>
                 <h3 className="ed-h3">One year on our workmanship</h3>
                 <p className="ed-body mt-3">
-                  If our work fails within a year, we come back and make it right. Full terms on the{' '}
+                  If our own team&apos;s work fails within a year of documented Final Completion, we come back and make it right. Subcontractor work carries the subcontractor&apos;s own warranty. Full terms on the{' '}
                   <Link href="/warranty" className="underline underline-offset-2">warranty page</Link>.
                 </p>
               </div>

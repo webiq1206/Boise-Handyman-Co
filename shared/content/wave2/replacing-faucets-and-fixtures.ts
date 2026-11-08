@@ -108,6 +108,6 @@ export const replacingFaucetsAndFixtures: BlogPostData = {
 <p>Labor for a supplied faucet runs $130 to $300 locally, and the quote should say what it assumes about the valves, exactly the kind of stated assumption described in <a href="/blog/questions-to-ask-a-handyman">questions to ask a handyman</a>.</p>
 
 <h2 id="next-steps">Ready to swap it</h2>
-<p>Send a photo of the faucet, the underside of the sink, and the shutoff valves, and we will confirm the new fixture fits and quote the swap upfront, valves included if yours look tired. Start at the <a href="/contact">contact page</a> or browse <a href="/services/plumbing-repairs">minor plumbing repairs</a> for typical starting prices.</p>
+<p>Send a photo of the faucet, the underside of the sink, and the shutoff valves, and we will confirm the new fixture fits and quote the swap upfront, valves included if yours look tired. Start at the <a href="/contact">contact page</a> or browse <a href="/services/plumbing-repairs">minor plumbing repairs</a> for scope and how we price it.</p>
 `.trim(),
 };

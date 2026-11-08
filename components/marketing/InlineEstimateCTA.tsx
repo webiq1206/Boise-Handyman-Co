@@ -9,10 +9,10 @@ interface InlineEstimateCTAProps {
   className?: string;
 }
 
-/** Compact in-article estimator prompt for cost-related blog posts and guides. */
+/** Compact in-article quote-request prompt for cost-related blog posts and guides. */
 export function InlineEstimateCTA({
-  title = "See what your fix might cost",
-  description = "Get a preliminary planning range based on real Treasure Valley handyman job costs, with no obligation.",
+  title = "Get a written price for your fix",
+  description = "Send your list and photos. Each job is priced case by case after we review the scope, with a written price before any work starts.",
   className,
 }: InlineEstimateCTAProps) {
   return (

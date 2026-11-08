@@ -2,7 +2,8 @@ import type { GuidePageData } from '../../guideContent';
 
 // Market-rate ranges below are editorial context for Treasure Valley pricing,
 // not our quotes. Our own service minimums mirror shared/contentData.ts.
-// [NEEDS: real pricing confirmation for the starting prices referenced here]
+// Market ranges are Treasure Valley context, not our prices. Our own pricing is
+// case by case after scope review (owner decision D6, 8 November 2026).
 
 export const boiseHomeRepairCostGuide: GuidePageData = {
   slug: 'boise-home-repair-cost-guide',
@@ -22,7 +23,7 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
   tags: ['cost', 'handyman rates', 'home repair', 'pricing', 'boise', 'treasure valley'],
   primaryKeyword: 'home repair cost boise',
   quickAnswer:
-    'Handyman rates in the Boise area typically run $60 to $120 per hour in 2026, with most single repairs landing between $100 and $500 total. Small jobs like a faucet swap or drywall patch usually take one to three hours. Our services carry flat starting prices from $145 so you know the number before we arrive.',
+    'Handyman rates in the Boise area typically run $60 to $120 per hour in 2026, with most single repairs landing between $100 and $500 total. Small jobs like a faucet swap or drywall patch usually take one to three hours. We price each job case by case after reviewing the scope, and you get a written price before we arrive.',
   keyTakeaways: [
     'Treasure Valley handyman rates commonly run $60 to $120 per hour, and most single repairs total $100 to $500.',
     'Flat-rate quotes beat open-ended hourly billing for defined jobs, because the risk of a slow afternoon sits with the pro, not with you.',
@@ -64,17 +65,17 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
     {
       question: 'What does drywall repair cost in Boise?',
       answer:
-        'Small holes and cracks commonly run $100 to $300 to patch, texture, and make paint-ready, and larger repairs such as a ceiling section after a leak run $300 to $800 depending on size and texture matching. Our drywall repair service starts at $149. Matching the existing texture is usually the part that separates a good patch from an obvious one.',
+        'Small holes and cracks commonly run $100 to $300 to patch, texture, and make paint-ready, and larger repairs such as a ceiling section after a leak run $300 to $800 depending on size and texture matching. Matching the existing texture is usually the part that separates a good patch from an obvious one.',
     },
     {
       question: 'How much do small plumbing repairs cost?',
       answer:
-        'Typical Treasure Valley ranges: replacing a faucet $150 to $350, swapping a toilet fill valve or flapper $100 to $200, replacing a garbage disposal $150 to $300 plus the unit, and fixing a slow drain $100 to $250. Our minor plumbing service starts at $145. Anything involving the main line, a repipe, or work behind walls belongs with a licensed plumber, and we say so when that is the case.',
+        'Typical Treasure Valley ranges: replacing a faucet $150 to $350, swapping a toilet fill valve or flapper $100 to $200, replacing a garbage disposal $150 to $300 plus the unit, and fixing a slow drain $100 to $250. Anything involving the main line, a repipe, or work behind walls belongs with a licensed plumber, and we say so when that is the case.',
     },
     {
       question: 'What do small electrical repairs cost?',
       answer:
-        'Common jobs run in predictable bands: replacing an outlet or switch $75 to $150, installing a ceiling fan where a fixture already exists $150 to $350, swapping light fixtures $100 to $250 each, and adding a dimmer $75 to $150. Our minor electrical service starts at $145. Panel work, new circuits, and service upgrades require a licensed electrician, which is outside handyman scope.',
+        'Common jobs run in predictable bands: replacing an outlet or switch $75 to $150, installing a ceiling fan where a fixture already exists $150 to $350, swapping light fixtures $100 to $250 each, and adding a dimmer $75 to $150. Panel work, new circuits, and service upgrades require a licensed electrician, which is outside handyman scope.',
     },
     {
       question: 'Why are two quotes for the same repair so different?',
@@ -99,7 +100,7 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
   ],
   content: `
 <h2 id="the-honest-answer">What home repairs cost in Boise</h2>
-<p><strong>Handyman rates in the Treasure Valley typically run $60 to $120 per hour in 2026, and most single household repairs land between $100 and $500 all-in.</strong> A drywall patch, a faucet swap, a sticking door, a ceiling fan install: these are one-to-three-hour jobs, and their prices cluster tightly enough that you can sanity-check any quote against the ranges in this guide. Our own services carry flat starting prices, $145 to $199 depending on the trade, so the number is on the table before anyone is in your hallway.</p>
+<p><strong>Handyman rates in the Treasure Valley typically run $60 to $120 per hour in 2026, and most single household repairs land between $100 and $500 all-in.</strong> A drywall patch, a faucet swap, a sticking door, a ceiling fan install: these are one-to-three-hour jobs, and their prices cluster tightly enough that you can sanity-check any quote against the ranges in this guide. Our own jobs are priced case by case after we review the scope, and the written price is on the table before anyone is in your hallway.</p>
 <p>This guide covers the typical cost of the repairs people actually call about, how handyman pricing models work and which one favors you, why two quotes on the same job can be far apart, and where the line sits between a handyman job and a licensed-contractor job. If you want the short version for a specific repair, the ranges by job type are in the tables below, and <a href="/blog/what-small-home-repairs-cost-boise">what small home repairs cost in Boise</a> keeps a running list. For hourly rates, visit minimums and how a handyman prices one job, see <a href="/blog/handyman-prices-boise">handyman prices in Boise</a>.</p>
 
 <h2 id="how-pricing-works">How handyman pricing works: hourly, flat rate, and minimums</h2>
@@ -127,7 +128,7 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
 <tr><td>Interior painting, single room</td><td>$300 to $800</td></tr>
 </tbody>
 </table>
-<p>Our own starting prices sit inside these bands: <a href="/services/drywall-repair">drywall repair from $149</a>, <a href="/services/plumbing-repairs">minor plumbing from $145</a>, <a href="/services/electrical-repairs">minor electrical from $145</a>, <a href="/services/carpentry-trim-repair">carpentry and trim from $149</a>, <a href="/services/painting-touch-ups">painting from $199</a>, and <a href="/services/mounting-assembly">mounting and assembly from $145</a>. Every job gets a firm quote before work starts.</p>
+<p>These are market bands, not our price list. We price each job case by case after reviewing the scope, for <a href="/services/drywall-repair">drywall repair</a>, <a href="/services/plumbing-repairs">minor plumbing</a>, <a href="/services/electrical-repairs">minor electrical</a>, <a href="/services/carpentry-trim-repair">carpentry and trim</a>, <a href="/services/painting-touch-ups">painting</a>, and <a href="/services/mounting-assembly">mounting and assembly</a> alike. Every job gets a written price before work starts.</p>
 
 <h2 id="what-moves-the-number">What actually moves the price of a small repair</h2>
 <p><strong>Five things move a repair from the bottom of its range to the top: access, matching, surprises, materials, and trip count.</strong> Access means how hard the work is to reach, a ceiling patch over a stairwell costs more than the same patch at shoulder height. Matching means blending new work into old: texture on drywall, sheen on paint, stain on trim, and it is usually the difference between a repair you can find and one you cannot. Surprises are what the wall reveals when it opens, soft subfloor under a toilet, a previous owner's creative wiring. Materials matter when you choose them: a $400 faucet installs for the same labor as a $90 one, but the total is different. And trip count matters because every separate visit carries the same fixed overhead.</p>
@@ -154,7 +155,7 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
 <p>We stay on our side of that line on purpose. When your project crosses it, we say so at the quote stage and point you in the right direction, because the fastest way to lose a client's trust is to attempt a specialist's job with a generalist's toolkit. What we can tell you is <a href="/resources/ada-canyon-permit-flow">when a repair needs a permit in Ada and Canyon County</a>, which is a shorter list than most people fear.</p>
 
 <h2 id="our-model">How we price: flat quotes, one trip, no surprises</h2>
-<p><strong>We quote small jobs as a flat price up front, starting at $145 depending on the service, and we aim to finish in one trip.</strong> You describe the job, ideally with a photo or two, we quote it before we arrive, and the price does not move unless the scope does, in which case you approve the change before the work happens. Most jobs are done in one visit because we show up with the materials the photos told us to bring.</p>
+<p><strong>We price small jobs case by case after reviewing the scope, and you get a written price before any work starts.</strong> You describe the job, ideally with a photo or two, we quote it before we arrive, and the price does not move unless the scope does, in which case you approve the change before the work happens. Most jobs are done in one visit because we show up with the materials the photos told us to bring.</p>
 <p>That model exists because it is the one we would want as customers: no meter running, no mystery invoice, no third visit. <a href="/contact">Send us your list</a>, or read <a href="/guides/hire-a-handyman-treasure-valley">how to vet anyone you hire</a>, including us, before you book.</p>
 
 <h2 id="materials">Materials: who buys them, and where the money hides</h2>

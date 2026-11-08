@@ -1,7 +1,7 @@
 import type { BlogPostData } from '../../blogContent';
 
-// Market-rate ranges are Treasure Valley market context; our starting price
-// matches shared/contentData.ts ($149). [NEEDS: real pricing confirmation]
+// Market-rate ranges are Treasure Valley market context. Our own pricing is
+// case by case after scope review (owner decision D6, 8 November 2026).
 
 export const drywallRepairCostBoise: BlogPostData = {
   slug: 'drywall-repair-cost-boise',
@@ -30,7 +30,7 @@ export const drywallRepairCostBoise: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Drywall repair in the Boise area typically costs $150 to $400 per patch in 2026, covering cutting, backing, taping, mudding, and texture blending. Small nail holes are usually bundled with other work. Ceiling repairs and water damage run higher, often $250 to $600 plus fixing the leak. Boise Handyman Co drywall repair starts at $149, quoted flat upfront.',
+    'Drywall repair in the Boise area typically costs $150 to $400 per patch in 2026, covering cutting, backing, taping, mudding, and texture blending. Small nail holes are usually bundled with other work. Ceiling repairs and water damage run higher, often $250 to $600 plus fixing the leak. Boise Handyman Co prices drywall repair case by case after reviewing the scope, with a written price before work starts.',
   keyTakeaways: [
     'Most single drywall patches in the valley run $150 to $400 including texture blending.',
     'Texture matching, not the patch itself, is the skilled half of the job.',
@@ -51,7 +51,7 @@ export const drywallRepairCostBoise: BlogPostData = {
     {
       question: 'How much does it cost to repair drywall in Boise?',
       answer:
-        'Typical market pricing in the Treasure Valley runs $150 to $400 per patch for common damage, a doorknob hole, a stud-bay opening from a plumbing fix, cracked seams, including taping, mudding, and texture blending. Very small nail holes are usually bundled with other work. Our drywall repair starts at $149 with a flat quote before we start.',
+        'Typical market pricing in the Treasure Valley runs $150 to $400 per patch for common damage, a doorknob hole, a stud-bay opening from a plumbing fix, cracked seams, including taping, mudding, and texture blending. Very small nail holes are usually bundled with other work. We price drywall repair case by case after reviewing the scope, with a written price before we start.',
     },
     {
       question: 'Why does a small hole cost $150 or more to fix properly?',
@@ -82,7 +82,7 @@ export const drywallRepairCostBoise: BlogPostData = {
   content: `
 <h2 id="the-number">What drywall repair costs here</h2>
 <p><strong>Most drywall repairs in the Boise area cost $150 to $400 per patch in 2026 at market rates.</strong> That covers the standard damage catalog: doorknob holes, stud-bay openings cut for plumbing or electrical access, stress cracks over doors and windows, corner bead dings, and anchor pull-outs. Ceiling repairs and water damage price higher, typically $250 to $600, plus whatever caused the water. Whole rooms and new-hang work move out of repair pricing into project pricing.</p>
-<p>Our own <a href="/services/drywall-repair">drywall repair service</a> starts at $149, flat-quoted from photos in most cases. What follows is where the money goes and what moves the number, so the quote you get, from us or anyone, makes sense.</p>
+<p>Our own <a href="/services/drywall-repair">drywall repair service</a> is priced case by case after we review the scope, usually from photos, with a written price before work starts. What follows is where the money goes and what moves the number, so the quote you get, from us or anyone, makes sense.</p>
 
 <h2 id="anatomy">Where the money goes: anatomy of a proper patch</h2>
 <p><strong>The hole is maybe a tenth of the job.</strong> A repair that disappears takes backing or a California patch, tape, and three progressively wider coats of joint compound with drying time between them, then sanding, then texture, then primer. Skip the coats and the patch telegraphs through paint as a shallow crater. Skip the texture and it reads as a smooth rectangle on an orange-peel wall, visible from the hallway forever.</p>

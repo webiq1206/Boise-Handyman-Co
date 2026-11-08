@@ -45,7 +45,7 @@ Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell, ID — plus opti
 
 ### Services (12 items)
 
-Core + supporting services with starting prices — see `GBP_SERVICES`.
+Core + supporting services, no starting prices (pricing is case by case): see `GBP_SERVICES`.
 
 ### Products (22 items, 4 categories)
 

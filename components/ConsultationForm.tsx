@@ -863,9 +863,9 @@ export function ConsultationForm({
         {/* In the dialog, the estimator is one tap away (onRevise opens it). */}
         {onRevise && !callback && !estimate && !initialProjectType && (
           <p className="hm-form-next">
-            Want a ballpark first?{" "}
+            Want to list every item first?{" "}
             <button type="button" className="hm-form-inline-link" onClick={() => onRevise?.()} data-testid="button-start-estimate">
-              See a planning range
+              Open the repair list
             </button>
           </p>
         )}

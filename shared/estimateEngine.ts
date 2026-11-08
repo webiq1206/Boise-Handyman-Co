@@ -464,7 +464,7 @@ export function buildHandymanSummary(input: HandymanEstimateInput): string {
 
 /** Shown wherever a range is rendered. */
 export const HANDYMAN_RATE_DISCLAIMER =
-  "Typical starting rates. Your written quote comes before any work begins.";
+  "Planning guidance, not a price. Each job is priced case by case after we review the scope, with a written price before any work begins.";
 
 /** Shown with every estimate: the range is labor only. */
 export const MATERIALS_COST_NOTE =

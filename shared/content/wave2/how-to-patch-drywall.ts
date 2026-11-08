@@ -111,6 +111,6 @@ export const howToPatchDrywall: BlogPostData = {
 <p>Call rather than DIY when the wall is smooth-finish or the room is bright with side light, when the damage is on a ceiling, when water or recurring cracks are involved, or when you simply want it invisible the first time. Texture matching is a reps game, and it is most of what you are hiring with our <a href="/services/drywall-repair">drywall repair and patching</a> service.</p>
 
 <h2 id="next-steps">Make it disappear</h2>
-<p>Send a photo of the damage with something for scale and a close-up of your wall texture, and we will quote the repair upfront, including texture match and primer, with paint blending priced honestly where it is the right call. Start at the <a href="/contact">contact page</a> or see <a href="/services/drywall-repair">drywall repair and patching</a> for typical starting prices.</p>
+<p>Send a photo of the damage with something for scale and a close-up of your wall texture, and we will quote the repair upfront, including texture match and primer, with paint blending priced honestly where it is the right call. Start at the <a href="/contact">contact page</a> or see <a href="/services/drywall-repair">drywall repair and patching</a> for scope and how we price it.</p>
 `.trim(),
 };

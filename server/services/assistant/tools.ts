@@ -368,7 +368,7 @@ function executeGetBusinessInfo(input: unknown): string {
           description: s.shortDescription,
           page: `/services/${s.slug}`,
         })),
-        note: "planningFrom figures are per-visit starting points for a small job of that type, not bids.",
+        note: "No starting prices are published. Each job is priced case by case after we review the scope, with a written price before work starts.",
       });
     case "service_areas":
       return JSON.stringify({
@@ -395,7 +395,7 @@ function executeGetBusinessInfo(input: unknown): string {
         location: SITE_CONFIG.address.cityState,
         serviceArea: SITE_CONFIG.address.serviceArea,
         summary:
-          "Local handyman service for small repair, maintenance, and install jobs across the Treasure Valley. Upfront quotes before work starts, an agreed arrival time rather than a half-day window, most jobs done in one trip. Idaho Registered Contractor #8381215, bonded and insured.",
+          "Local handyman service for small repair, maintenance, and install jobs across the Treasure Valley. Upfront quotes before work starts, an agreed arrival time rather than a half-day window, most jobs done in one trip. Idaho Registered Contractor #8381215, insured.",
       });
   }
 }
