@@ -69,6 +69,6 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "How long is the workmanship guarantee?",
-    a: "One year on our workmanship. If something we repaired or installed fails because of how we did the work, rather than normal wear, misuse, or a pre-existing condition, tell us and we come back to make it right. Materials carry their manufacturers' warranties, which we pass through on anything we supply. See the full terms on our warranty page.",
+    a: "One year on our workmanship, from documented Final Completion of the agreed work. If something we repaired or installed fails because of how we did the work, rather than normal wear, misuse, or a pre-existing condition, tell us and we come back to make it right. Materials carry their manufacturers' warranties, which we pass through on anything we supply. See the full terms on our warranty page.",
   },
 ];

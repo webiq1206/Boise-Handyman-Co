@@ -498,11 +498,11 @@ export function ConsultationForm({
           </Heading>
           <p className="hm-form-lead">
             {wasCallback
-              ? `We call you back at ${submitted?.phone} within one business day.`
+              ? `We have your request for a call back at ${submitted?.phone}. We will answer your questions and help you work out the next step.`
               : "We review your list and reply with a written quote. Scheduling is confirmed after the scope and quote are agreed."}
           </p>
           <p className="hm-form-next">
-            Need us sooner?{" "}
+            Prefer to talk?{" "}
             <a className="hm-form-inline-link" href={SITE_CONFIG.phoneHref} data-testid="link-consult-success-phone">
               Call {SITE_CONFIG.phone}
             </a>
@@ -854,7 +854,7 @@ export function ConsultationForm({
             </button>
             <p className="hm-form-next">
               {callback
-                ? "We call you back within one business day."
+                ? "We call you back, answer your questions and help you work out the next step."
                 : "We review your list and reply with a written quote. This request does not book a visit."}
             </p>
           </div>

@@ -3,6 +3,7 @@
 import {readFileSync, readdirSync} from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import {scanSource, scanBuiltDocuments} from './verify-response-language.mjs';
 const publicDocument = html => html.replace(/<script\b([^>]*)>[\s\S]*?<\/script>/gi, (script, attrs) => /type=["']application\/ld\+json["']/i.test(attrs) ? script : '');
 const knownRoutes=JSON.parse(readFileSync(new URL("./known-claims-routes.json",import.meta.url),"utf8"));
 assert.equal(new Set(knownRoutes).size,72);
@@ -41,3 +42,13 @@ for (const route of ['/guides/boise-home-maintenance-guide','/guides/treasure-va
  assert.doesNotMatch(publicDocument(html),/\$\d/,`${route}: no undocumented service-price ranges in body, metadata or JSON-LD`);
 }
 assert.doesNotMatch(publicDocument(readFileSync('.next/server/app/guides/first-time-homeowner-repair-handbook.html','utf8')),/\$(?:75|100|150|200|250|300|350|500|2,000)\b|visit handles the whole list in one trip/);
+
+// R03: we say we answer, never how fast. Whole-source scan plus every built HTML
+// document (visible copy, metadata, JSON-LD), whitespace-normalized.
+{
+ const source=scanSource();
+ assert.equal(source.failures.length,0,`Response-time promises in source:\n${source.failures.join('\n')}`);
+ const built=scanBuiltDocuments();
+ assert.equal(built.failures.length,0,`Response-time promises in built documents:\n${built.failures.join('\n')}`);
+ console.log(`Response language verified: ${source.files} source files and ${built.files} built documents carry no inquiry-response time promise.`);
+}

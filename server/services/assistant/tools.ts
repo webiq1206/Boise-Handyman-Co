@@ -484,7 +484,7 @@ async function executeSubmitLead(input: unknown, origin: string): Promise<string
       success: true,
       accepted: outcome.accepted === true,
       duplicate: outcome.duplicate === true,
-      message: `Lead submitted. The visitor will get a confirmation email at ${data.email}, and the team follows up within one business day.`,
+      message: `Lead submitted and saved. Tell the visitor the team will answer their questions and help them work out the next step. A confirmation email is sent to ${data.email} when email delivery is available, so do not say it has arrived. Do not give a response time.`,
     });
   } catch (err) {
     console.error("[assistant] submit_lead error:", err);
