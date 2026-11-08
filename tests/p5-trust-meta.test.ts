@@ -62,8 +62,10 @@ test("built HTML has no trust claims outside the terms page when the flag is off
   }
 
   const terms = readFileSync(new URL("../app/terms-of-service/page.tsx", import.meta.url), "utf8");
-  assert.match(terms, /<h2 id="document-section-9">Satisfaction Guarantee<\/h2>/);
-  const termsBody = terms.replace(/<h2 id="document-section-9">Satisfaction Guarantee<\/h2>/, "");
-  assert.equal(FORBIDDEN.test(termsBody), false);
+  // D9 (Nov 2026): the 48-hour satisfaction window is gone; section 9 is the
+  // workmanship warranty summary.
+  assert.match(terms, /<h2 id="document-section-9">Workmanship warranty<\/h2>/);
+  assert.doesNotMatch(terms, /Satisfaction Guarantee|48 hours/i);
+  assert.equal(FORBIDDEN.test(terms), false);
 
 });
