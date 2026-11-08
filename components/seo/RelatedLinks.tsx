@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
+import { CITIES, SERVICES } from '@/shared/contentData';
 import { isCityServiceNoindex } from '@/lib/page-metadata';
+import { serviceCityAnchor, servicePlainAnchor } from '@/lib/seo';
 import { areaPath, cityServicePath, servicePath } from '@/lib/seo-routes';
 
 interface RelatedLinksProps {
@@ -55,10 +56,49 @@ function ExploreFurther({ serviceSlug }: { serviceSlug?: string }) {
   );
 }
 
+/** Three neighbouring services. Plain names, parent URLs only. */
+const RELATED_SERVICE_SLUGS: Record<string, string[]> = {
+  'drywall-repair': ['painting-touch-ups', 'carpentry-trim-repair', 'home-maintenance'],
+  'painting-touch-ups': ['drywall-repair', 'carpentry-trim-repair', 'home-maintenance'],
+  'plumbing-repairs': ['electrical-repairs', 'home-maintenance', 'drywall-repair'],
+  'electrical-repairs': ['plumbing-repairs', 'mounting-assembly', 'home-maintenance'],
+  'carpentry-trim-repair': ['drywall-repair', 'painting-touch-ups', 'mounting-assembly'],
+  'mounting-assembly': ['electrical-repairs', 'carpentry-trim-repair', 'home-maintenance'],
+  'fence-deck-gutter-repair': ['home-maintenance', 'carpentry-trim-repair', 'painting-touch-ups'],
+  'home-maintenance': ['drywall-repair', 'plumbing-repairs', 'electrical-repairs'],
+};
+
+function destinationLabel(serviceSlug: string, serviceName: string, citySlug?: string): string {
+  if (citySlug && !isCityServiceNoindex(serviceSlug, citySlug)) {
+    const cityName = CITIES.find((city) => city.slug === citySlug)?.name ?? citySlug;
+    return serviceCityAnchor(serviceSlug, serviceName, cityName);
+  }
+  return servicePlainAnchor(serviceSlug, serviceName);
+}
+
 export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksProps) {
   if (variant === 'service' && serviceSlug) {
+    const relatedServices = (RELATED_SERVICE_SLUGS[serviceSlug] ?? [])
+      .map((slug) => SERVICES.find((service) => service.slug === slug))
+      .filter((service): service is (typeof SERVICES)[number] => Boolean(service))
+      .slice(0, 4);
     return (
       <div className="space-y-10">
+        <div>
+          <h2 className="ed-h4 mb-6">Related services</h2>
+          <ul className="grid sm:grid-cols-2 gap-2">
+            {relatedServices.map((service) => (
+              <li key={service.slug} className="list-none">
+                <Link
+                  href={servicePath(service.slug)}
+                  className="ed-body flex min-h-11 items-center text-[0.9375rem] transition-colors hover:[color:var(--ed-accent)] lg:min-h-0"
+                >
+                  {servicePlainAnchor(service.slug, service.name)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
         <ExploreFurther serviceSlug={serviceSlug} />
       </div>
     );
@@ -88,7 +128,7 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
                 }
               >
                 <div className="ed-card ed-card-link h-full">
-                  <h3 className="ed-h4">{serviceHeading(service.name)}</h3>
+                  <h3 className="ed-h4">{destinationLabel(service.slug, service.name, citySlug)}</h3>
                   <p className="ed-body mt-2 text-[0.875rem]">{service.shortDescription}</p>
                 </div>
               </Link>
@@ -121,7 +161,7 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
                   href={cityServicePath(serviceSlug, city.slug)}
                   className="ed-body text-[0.9375rem] transition-colors hover:[color:var(--ed-accent)]"
                 >
-                  {serviceHeading(SERVICES.find((s) => s.slug === serviceSlug)?.name ?? '')} in {city.name}
+                  {serviceCityAnchor(serviceSlug, SERVICES.find((s) => s.slug === serviceSlug)?.name ?? '', city.name)}
                 </Link>
               </li>
             ))}
@@ -142,14 +182,14 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
                   }
                   className="ed-body text-[0.9375rem] transition-colors hover:[color:var(--ed-accent)]"
                 >
-                  {serviceHeading(service.name)}
+                  {destinationLabel(service.slug, service.name, citySlug)}
                 </Link>
               </li>
             ))}
           </ul>
           <div className="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t pt-6" style={{ borderColor: "var(--ed-line)" }}>
             <Link href={servicePath(serviceSlug)} className="ed-link">
-              All {SERVICES.find((s) => s.slug === serviceSlug)?.name.toLowerCase()} areas →
+              {servicePlainAnchor(serviceSlug, SERVICES.find((s) => s.slug === serviceSlug)?.name ?? '')}
             </Link>
             <Link href={areaPath(citySlug)} className="ed-link">
               Handyman services in {CITIES.find((c) => c.slug === citySlug)?.name} →

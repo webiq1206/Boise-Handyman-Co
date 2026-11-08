@@ -1,0 +1,67 @@
+designated_anchor	target	observed
+Drywall repair	https://boisehandyman.co/services/drywall-repair	/services/drywall-repair
+Paint touch-ups	https://boisehandyman.co/services/painting-touch-ups	/services/painting-touch-ups
+Minor plumbing repairs	https://boisehandyman.co/services/plumbing-repairs	/services/plumbing-repairs
+Minor electrical repairs	https://boisehandyman.co/services/electrical-repairs	/services/electrical-repairs
+Carpentry and trim repair	https://boisehandyman.co/services/carpentry-trim-repair	/services/carpentry-trim-repair
+TV mounting and assembly	https://boisehandyman.co/services/mounting-assembly	/services/mounting-assembly
+Fence, deck and gutter repair	https://boisehandyman.co/services/fence-deck-gutter-repair	/services/fence-deck-gutter-repair
+Caulking and home maintenance	https://boisehandyman.co/services/home-maintenance	/services/home-maintenance
+Drywall repair in Boise	https://boisehandyman.co/services/drywall-repair/boise	/services/drywall-repair/boise
+Drywall repair in Meridian	https://boisehandyman.co/services/drywall-repair/meridian	/services/drywall-repair/meridian
+Drywall repair in Eagle	https://boisehandyman.co/services/drywall-repair/eagle	/services/drywall-repair/eagle
+Drywall repair in Nampa	https://boisehandyman.co/services/drywall-repair/nampa	/services/drywall-repair/nampa
+Paint touch-ups in Boise	https://boisehandyman.co/services/painting-touch-ups/boise	/services/painting-touch-ups/boise
+Paint touch-ups in Meridian	https://boisehandyman.co/services/painting-touch-ups/meridian	/services/painting-touch-ups/meridian
+Paint touch-ups in Eagle	https://boisehandyman.co/services/painting-touch-ups/eagle	/services/painting-touch-ups/eagle
+Paint touch-ups in Nampa	https://boisehandyman.co/services/painting-touch-ups/nampa	/services/painting-touch-ups/nampa
+Minor plumbing repairs in Boise	https://boisehandyman.co/services/plumbing-repairs/boise	/services/plumbing-repairs/boise
+Minor plumbing repairs in Meridian	https://boisehandyman.co/services/plumbing-repairs/meridian	/services/plumbing-repairs/meridian
+Minor plumbing repairs in Eagle	https://boisehandyman.co/services/plumbing-repairs/eagle	/services/plumbing-repairs/eagle
+Minor plumbing repairs in Nampa	https://boisehandyman.co/services/plumbing-repairs/nampa	/services/plumbing-repairs/nampa
+Minor electrical repairs in Boise	https://boisehandyman.co/services/electrical-repairs/boise	/services/electrical-repairs/boise
+Minor electrical repairs in Meridian	https://boisehandyman.co/services/electrical-repairs/meridian	/services/electrical-repairs/meridian
+Minor electrical repairs in Eagle	https://boisehandyman.co/services/electrical-repairs/eagle	/services/electrical-repairs/eagle
+Minor electrical repairs in Nampa	https://boisehandyman.co/services/electrical-repairs/nampa	/services/electrical-repairs/nampa
+Carpentry and trim repair in Boise	https://boisehandyman.co/services/carpentry-trim-repair/boise	/services/carpentry-trim-repair/boise
+Carpentry and trim repair in Meridian	https://boisehandyman.co/services/carpentry-trim-repair/meridian	/services/carpentry-trim-repair/meridian
+TV mounting and assembly in Boise	https://boisehandyman.co/services/mounting-assembly/boise	/services/mounting-assembly/boise
+TV mounting and assembly in Meridian	https://boisehandyman.co/services/mounting-assembly/meridian	/services/mounting-assembly/meridian
+TV mounting and assembly in Eagle	https://boisehandyman.co/services/mounting-assembly/eagle	/services/mounting-assembly/eagle
+TV mounting and assembly in Nampa	https://boisehandyman.co/services/mounting-assembly/nampa	/services/mounting-assembly/nampa
+Fence, deck and gutter repair in Boise	https://boisehandyman.co/services/fence-deck-gutter-repair/boise	/services/fence-deck-gutter-repair/boise
+Fence, deck and gutter repair in Meridian	https://boisehandyman.co/services/fence-deck-gutter-repair/meridian	/services/fence-deck-gutter-repair/meridian
+Caulking and home maintenance in Boise	https://boisehandyman.co/services/home-maintenance/boise	/services/home-maintenance/boise
+Caulking and home maintenance in Meridian	https://boisehandyman.co/services/home-maintenance/meridian	/services/home-maintenance/meridian
+Home repairs	https://boisehandyman.co/services/home-repairs	/services/home-repairs
+RE-10 inspection repairs	https://boisehandyman.co/re-10-repairs-boise	/re-10-repairs-boise
+
+designated_anchor_mismatches	0
+exact_anchor_collisions	25
+Collisions below are identical visible labels that point at more than one URL.
+Service and city-service labels are listed in the designated map and are not in this set.
+All articles in this topic	/blog/category/costs-and-hiring | /blog/category/home-maintenance | /blog/category/installs-and-upgrades | /blog/category/repairs-and-fixes
+Boise	/areas/boise | /guides/boise-handyman-guide
+Boise Handyman Co	/ | /about
+Caldwell	/areas/caldwell | /guides/caldwell-handyman-guide
+Costs &amp; hiring	/blog/category/costs-and-hiring | /guides/boise-home-repair-cost-guide
+Eagle	/areas/eagle | /guides/eagle-handyman-guide
+Handyman services in Harris Ranch	/areas/boise | /guides/harris-ranch-handyman-guide
+Handyman services in the Eagle Foothills	/areas/eagle | /guides/eagle-foothills-handyman-guide
+Home maintenance	/blog/category/home-maintenance | /guides/boise-home-maintenance-guide
+Installs &amp; upgrades	/blog/category/installs-and-upgrades | /guides/small-home-upgrades-that-pay-off
+Kuna	/areas/kuna | /guides/kuna-handyman-guide
+Meridian	/areas/meridian | /guides/meridian-handyman-guide
+Middleton	/areas/middleton | /guides/middleton-handyman-guide
+Nampa	/areas/nampa | /guides/nampa-handyman-guide
+PDF	/downloads/home-maintenance-checklist.pdf | /downloads/home-repair-permit-guide.pdf | /downloads/home-repair-priority-worksheet.pdf
+Pillar guide	/guides/boise-home-maintenance-guide | /guides/boise-home-repair-cost-guide | /guides/first-time-homeowner-repair-handbook | /guides/small-home-upgrades-that-pay-off | /guides/treasure-valley-exterior-home-care-guide
+Read	/guides/boise-handyman-guide | /guides/caldwell-handyman-guide | /guides/eagle-foothills-handyman-guide | /guides/eagle-handyman-guide | /guides/harris-ranch-handyman-guide | /guides/hidden-springs-handyman-guide | /guides/kuna-handyman-guide | /guides/meridian-handyman-guide | /guides/middleton-handyman-guide | /guides/nampa-handyman-guide | /guides/star-handyman-guide
+Read article	/blog/ada-vs-canyon-county-permit-timelines | /blog/aging-in-place-home-design | /blog/boise-building-permit-guide | /blog/caulking-guide-boise-homes | /blog/common-toilet-problems-and-fixes | /blog/deck-maintenance-boise | /blog/diy-vs-hiring-a-handyman | /blog/drywall-repair-cost-boise | /blog/energy-saving-home-fixes-boise | /blog/fence-repair-treasure-valley | /blog/fixing-squeaky-floors-and-sticking-doors | /blog/gutter-cleaning-schedule-boise | /blog/handyman-prices-boise | /blog/handyman-red-flags | /blog/handyman-vs-contractor | /blog/home-maintenance-budget-idaho | /blog/home-repairs-before-selling-boise | /blog/hourly-rate-vs-flat-rate-handyman | /blog/how-long-do-common-home-repairs-take | /blog/how-to-budget-home-repairs-boise | /blog/how-to-compare-handyman-quotes | /blog/how-to-patch-drywall | /blog/interior-paint-touch-up-guide | /blog/new-home-punch-list-handyman | /blog/preparing-your-boise-home-for-winter | /blog/questions-to-ask-a-handyman | /blog/replacing-faucets-and-fixtures | /blog/seasonal-home-maintenance-checklist-boise | /blog/small-home-upgrade-ideas-boise | /blog/tv-mounting-and-anchoring-guide | /blog/what-small-home-repairs-cost-boise | /blog/what-to-expect-first-handyman-visit | /blog/who-supplies-materials-handyman-jobs | /blog/why-handyman-quotes-vary
+Read guide	/guides/boise-home-maintenance-guide | /guides/boise-home-repair-cost-guide | /guides/ember-ready-home-checklist-treasure-valley | /guides/first-time-homeowner-repair-handbook | /guides/hire-a-handyman-treasure-valley | /guides/small-home-upgrades-that-pay-off | /guides/treasure-valley-exterior-home-care-guide
+Read the complete guide	/guides/boise-home-maintenance-guide | /guides/boise-home-repair-cost-guide | /guides/first-time-homeowner-repair-handbook | /guides/small-home-upgrades-that-pay-off
+Related articles	/blog/category/costs-and-hiring | /blog/category/exterior-and-outdoor | /blog/category/home-maintenance | /blog/category/installs-and-upgrades | /blog/category/repairs-and-fixes
+Repairs &amp; fixes	/blog/category/repairs-and-fixes | /guides/first-time-homeowner-repair-handbook
+Request a quote	/ | /contact
+Send your list and photos	/ | /contact | /estimate
+Star	/areas/star | /guides/star-handyman-guide
