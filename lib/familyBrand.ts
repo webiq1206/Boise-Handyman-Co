@@ -118,6 +118,8 @@ export const FAMILY_BRAND: FamilyBrand = {
           // The old footer CTAs: the homepage request band, kept for the hash history journeys.
           { label: CTA_QUOTE, href: '/#consult' },
           { label: 'Contact', href: '/contact' },
+          // R13: existing customers reach the support path, not a new-sales form.
+          { label: 'Existing customer? Get help', href: '/warranty#get-help' },
         ],
       },
       {
