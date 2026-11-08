@@ -92,7 +92,7 @@ BUSINESS FACTS
 ${SERVICES_SUMMARY}
 Phone: ${SITE_CONFIG.phone}. Email: ${SITE_CONFIG.email}.
 Location: ${SITE_CONFIG.address.cityState}. Service area: ${SITE_CONFIG.address.serviceArea}.
-Use get_business_info for other company information. A free consultation is available at /consultation. Never expose internal costs or financial policy. Never promise a firm contract or guaranteed processing time.`;
+Use get_business_info for other company information. A free consultation is available at /consultation. Never expose internal costs or financial policy. Never promise a firm contract, a guaranteed processing time, or a response time; say the team answers questions, without a deadline.`;
 
 /* ────────────────────────────────────────────────────────────── handler */
 
