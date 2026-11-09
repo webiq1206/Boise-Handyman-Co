@@ -304,7 +304,8 @@ export function sumTaskHours(tasks: HandymanTaskSelection[]): number {
  * The whole pricing model:
  *
  *   total = billableHours * HOURLY_RATE * urgencyMultiplier
- *   range = [total * 0.9, total * 1.2], rounded to $5
+ *   range = [total * 0.9, total * 1.2], rounded to $5, with the low end
+ *           clamped to the one-hour minimum charge (minimumVisitCharge)
  *
  * Returns null until the input contains at least one priceable task (or a
  * described other-job), so the UI can render a "make your selections" state
@@ -415,6 +416,13 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput): Handyma
     });
   }
 
+  // The displayed low end never drops below the one-hour minimum labor
+  // charge at this urgency (owner rule: the one-hour minimum applies). It is
+  // rounded UP to the display step so rounding cannot pull it back under.
+  const minimumCharge = minimumVisitCharge(input.urgency);
+  const priceLow = Math.max(roundToStep(total * RANGE_LOW_FACTOR, RANGE_ROUNDING_USD), minimumCharge);
+  const priceHigh = Math.max(roundToStep(total * RANGE_HIGH_FACTOR, RANGE_ROUNDING_USD), priceLow);
+
   return {
     laborHours,
     totalHours,
@@ -423,11 +431,20 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput): Handyma
     lines,
     customerLines,
     total,
-    priceLow: roundToStep(total * RANGE_LOW_FACTOR, RANGE_ROUNDING_USD),
-    priceHigh: roundToStep(total * RANGE_HIGH_FACTOR, RANGE_ROUNDING_USD),
+    priceLow,
+    priceHigh,
     taskCount,
     oversized: totalHours > MAX_REASONABLE_HOURS,
   };
+}
+
+/**
+ * The one-hour minimum labor charge at an urgency tier, rounded up to the
+ * display step: the lowest number any estimate band may show.
+ */
+export function minimumVisitCharge(urgency: UrgencyLevel): number {
+  const raw = MINIMUM_LABOR_HOURS * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
+  return Math.ceil(raw / RANGE_ROUNDING_USD - 1e-9) * RANGE_ROUNDING_USD;
 }
 
 function round2(value: number): number {

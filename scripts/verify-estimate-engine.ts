@@ -16,6 +16,7 @@
  */
 import {
   calculateHandymanEstimate,
+  minimumVisitCharge,
   findTaskOption,
   getTasksForCategory,
   HOURLY_RATE_USD,
@@ -162,11 +163,15 @@ for (const [categoryId, tasks] of Object.entries(TASK_CATALOG) as [
       `${task.id} total equals the sum of its lines`,
     );
     assert(
-      estimate.priceLow === Math.round((estimate.total * RANGE_LOW_FACTOR) / RANGE_ROUNDING_USD) * RANGE_ROUNDING_USD,
-      `${task.id} low bound is total * ${RANGE_LOW_FACTOR} rounded to $${RANGE_ROUNDING_USD}`,
+      estimate.priceLow ===
+        Math.max(
+          Math.round((estimate.total * RANGE_LOW_FACTOR) / RANGE_ROUNDING_USD) * RANGE_ROUNDING_USD,
+          minimumVisitCharge(estimate.urgency),
+        ),
+      `${task.id} low bound is total * ${RANGE_LOW_FACTOR} rounded to $${RANGE_ROUNDING_USD}, clamped to the one-hour minimum`,
     );
     assert(
-      estimate.priceHigh === Math.round((estimate.total * RANGE_HIGH_FACTOR) / RANGE_ROUNDING_USD) * RANGE_ROUNDING_USD,
+      estimate.priceHigh === Math.max(Math.round((estimate.total * RANGE_HIGH_FACTOR) / RANGE_ROUNDING_USD) * RANGE_ROUNDING_USD, estimate.priceLow),
       `${task.id} high bound is total * ${RANGE_HIGH_FACTOR} rounded to $${RANGE_ROUNDING_USD}`,
     );
 
@@ -190,6 +195,12 @@ for (const [categoryId, tasks] of Object.entries(TASK_CATALOG) as [
         `${task.id}: ${urgency} never costs less than the tier below`,
       );
       prevUrgencyTotal = withUrgency.total;
+      /* The band never shows a low end under the one-hour minimum charge. */
+      const minimumAtUrgency = MINIMUM_LABOR_HOURS * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
+      assert(
+        withUrgency.priceLow >= minimumAtUrgency && withUrgency.priceHigh >= withUrgency.priceLow,
+        `${task.id} at ${urgency}: low end $${withUrgency.priceLow} is not below the one-hour minimum $${minimumAtUrgency} and high >= low`,
+      );
       const expected =
         withUrgency.laborHours * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
       assert(

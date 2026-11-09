@@ -21,6 +21,10 @@
  * Re-recorded again 2026-11-09 ON PURPOSE: the owner raised the hourly rate
  * from $95 to $125, so every scenario rose by about 32%. Rates now:
  * $125/hr, 1 hr minimum, 0.75 hr supply run, +15%/+30% urgency, no visit fee.
+ * Re-recorded again 2026-11-09 ON PURPOSE: the band's low end is now clamped
+ * to the one-hour minimum charge at the scenario's urgency, rounded up to $5
+ * (minimumVisitCharge). Only the two minimum-visit scenarios moved: one
+ * outlet $115 -> $125 low, emergency smoke detector $145 -> $165 low.
  * Previously recorded 2026-08-13 with the $49 fee.
  * [NEEDS: real pricing confirmation] Re-record when real rates land.
  */
@@ -97,7 +101,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 115, high: 150, laborHours: 1 },
+    golden: { low: 125, high: 150, laborHours: 1 },
   },
   {
     /* Minimum AND emergency tier together. */
@@ -109,7 +113,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "emergency",
     },
-    golden: { low: 145, high: 195, laborHours: 1 },
+    golden: { low: 165, high: 195, laborHours: 1 },
   },
   {
     /* Quantity math on a 1.5 hr task. */
