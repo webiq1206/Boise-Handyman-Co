@@ -289,7 +289,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'Is there a minimum charge?',
     answer:
-      'Each job is priced case by case after we review the scope, with a written price before any work starts. Bundling several tasks into one visit is usually the best value, because extra tasks only add the time they take.',
+      'Yes. A one-hour minimum applies per visit, and there is no trip fee in Ada and Canyon County. Beyond that, each job is priced case by case after we review the scope, with a written price before any work starts. Bundling several tasks into one visit is usually the best value, because extra tasks only add the time they take.',
   },
   {
     question: 'Are you a registered contractor and insured?',
