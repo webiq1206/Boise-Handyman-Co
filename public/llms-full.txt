@@ -84,7 +84,7 @@ Neighborhood guides:
 
 ## Common questions
 
-- What does a handyman visit cost in Boise? Pricing depends on the agreed scope, materials and access. Send your repair list for review; the team prepares a written quote before work starts.
+- What does a handyman visit cost in Boise? Pricing depends on the agreed scope, materials and access, with a one-hour minimum per visit. Send your repair list for review; the team prepares a written quote before work starts.
 - How fast can a repair be scheduled? Share your requested dates with the repair list. The team confirms availability and the number of visits after reviewing scope, materials and access.
 - Who supplies the materials? Either works. You can have parts on the counter when we arrive, or we pick them up and bill materials at cost with a supply-run line on the quote.
 - What is out of scope? Full remodels, additions, structural work, repipes, panel or service upgrades, gas lines, and re-roofs. Those need a general contractor or a licensed trade, and we say so and refer out rather than take the job.
@@ -106,4 +106,4 @@ Neighborhood guides:
 
 Boise Handyman Co also completes RE-10 and home inspection repairs for real estate agents, buyers and sellers across Boise and the Treasure Valley. An RE-10 is the Idaho inspection response form: after a home inspection the buyer requests specific repairs before closing. We review the RE-10 and inspection report, provide a written scope and pricing, coordinate access, complete the approved work across multiple trades, and supply photo documentation, invoices and receipts for the transaction file. Structural, foundation, mold and asbestos abatement, main electrical service, sewer and septic, HVAC replacement, gas lines and full roof replacement are coordinated to licensed specialists rather than performed in house. Inspection repair lists are exactly the small, defined jobs a handyman does every day, and we sequence them against a closing date that will not move. Details: https://boisehandyman.co/re-10-repairs-boise
 
-Last updated: 2026-11-08. Full sitemap: https://boisehandyman.co/sitemap.xml
+Last updated: 2026-11-09. Full sitemap: https://boisehandyman.co/sitemap.xml

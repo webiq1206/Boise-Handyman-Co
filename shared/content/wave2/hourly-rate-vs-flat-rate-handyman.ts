@@ -49,7 +49,7 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
     {
       question: 'Why do handymen have minimum charges?',
       answer:
-        'Because the drive is real work. Loading the truck, driving to Kuna, parking, and unloading takes the same time whether the job is five minutes or five hours. A minimum charge spreads that fixed cost. It is also why the smart move as a customer is to never book a single tiny job: batch the toilet flapper with the door adjustment and the caulking, and the minimum works in your favor.',
+        'Because the drive is real work. Loading the truck, driving to Kuna, parking, and unloading takes the same time whether the job is five minutes or five hours. A minimum charge spreads that fixed cost; ours is one hour per visit. It is also why the smart move as a customer is to never book a single tiny job: batch the toilet flapper with the door adjustment and the caulking, and the minimum works in your favor.',
     },
     {
       question: 'Is flat rate always better for the homeowner?',

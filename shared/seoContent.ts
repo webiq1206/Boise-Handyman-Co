@@ -561,7 +561,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'Is there a minimum job size?',
         answer:
-          "The price depends on your repair list, materials, access and preparation. Send the details and photos for a scope review and written quote before work begins.",
+          "There is a one-hour minimum per visit, so a single small mount is a normal booking. Beyond that, the price depends on your repair list, materials, access and preparation. Send the details and photos for a scope review and written quote before work begins.",
       },
     ],
     costGuidance: {"heading":"Scope and pricing for your project","paragraphs":["Send your repair list and photos. Our team reviews the work, materials and access before preparing a quote.","Scope, price and scheduling are agreed before work begins. A request does not reserve a visit or confirm a price."]},

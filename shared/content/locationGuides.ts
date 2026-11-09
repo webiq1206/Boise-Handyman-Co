@@ -91,7 +91,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'Do you do small jobs, or only big lists?',
         answer:
-          'Both, though batching saves you money. A single repair is a normal call, but our minimum service charge covers the fixed cost of any visit, so three or four tasks in one trip cost far less per task. Most Boise clients keep a running list and call when it reaches a few items.',
+          'Both, though batching saves you money. A single repair is a normal call, but our one-hour minimum per visit covers the fixed cost of any visit, so three or four tasks in one trip cost far less per task. Most Boise clients keep a running list and call when it reaches a few items.',
       },
       {
         question: 'How quickly can you get to a Boise job?',

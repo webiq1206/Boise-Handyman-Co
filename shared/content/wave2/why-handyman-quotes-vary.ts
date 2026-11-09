@@ -67,7 +67,7 @@ export const whyHandymanQuotesVary: BlogPostData = {
     {
       question: 'Why do handymen charge a minimum or trip fee?',
       answer:
-        'The drive, fuel, insurance, scheduling, and invoicing cost the same whether the visit is twenty minutes or three hours, so most companies set a minimum around $100 to $150. Companies that advertise no trip fee recover it inside the hourly rate instead. Neither approach is dishonest; you just cannot compare a quote with a visible fee against one that hides it without lining them up.',
+        'The drive, fuel, insurance, scheduling, and invoicing cost the same whether the visit is twenty minutes or three hours, so most companies set a minimum around $100 to $150. Ours is one hour per visit. Companies that advertise no trip fee recover it inside the hourly rate instead. Neither approach is dishonest; you just cannot compare a quote with a visible fee against one that hides it without lining them up.',
     },
     {
       question: 'How do I compare handyman quotes fairly?',
