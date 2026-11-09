@@ -17,7 +17,7 @@ total    = billableHours * HOURLY_RATE * urgencyMultiplier
 range    = [total * 0.9, total * 1.2], rounded to the nearest $5
 ```
 
-- **Hourly rate:** $95/hr
+- **Hourly rate:** $125/hr (owner decision 2026-11-09; was $95)
 - **Trip / visit fee:** none in Ada and Canyon County (owner decision
   2026-11-09; the former $49 visit fee was removed)
 - **Minimum:** 1 billable labor hour per visit

@@ -13,8 +13,10 @@
  * Boise-market rates for an insured company operating under a design-build
  * parent, and the task hours to realistic billed times for that work:
  *
- *   - Hourly rate 95. Independent operators in the Treasure Valley run 60-85;
- *     established insured companies 85-125. 95 sits where this brand sits.
+ *   - Hourly rate 125 (owner decision, 2026-11-09; was 95). Independent
+ *     operators in the Treasure Valley run 60-85; established insured
+ *     companies 85-125. A one-hour minimum visit is therefore 125 before
+ *     materials, with no trip fee.
  *   - No trip or visit fee in Ada and Canyon County (owner decision,
  *     2026-11-09). The $49 visit fee that used to lead every estimate was
  *     removed because the site publishes "no trip fee" and the estimate
@@ -205,7 +207,7 @@ export const URGENCY_LEVELS: Record<
 /* ─────────────────────────────────────────────────────────────── pricing */
 
 /** Customer-facing hourly labor rate. Boise market for an insured company. */
-export const HOURLY_RATE_USD = 95;
+export const HOURLY_RATE_USD = 125;
 /** Every visit bills at least one labor hour. There is no trip or visit fee. */
 export const MINIMUM_LABOR_HOURS = 1;
 /** Hours added for a materials supply run: a realistic supplier round trip. */
