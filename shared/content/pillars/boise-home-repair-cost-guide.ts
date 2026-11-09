@@ -1,7 +1,7 @@
 import type { GuidePageData } from '../../guideContent';
 
 // Market-rate ranges below are editorial context for Treasure Valley pricing,
-// not our quotes. Our own service minimums mirror shared/contentData.ts.
+// not our quotes. Our own minimum is one hour per visit (owner, 9 November 2026).
 // Market ranges are Treasure Valley context, not our prices. Our own pricing is
 // case by case after scope review (owner decision D6, 8 November 2026).
 
@@ -23,7 +23,7 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
   tags: ['cost', 'handyman rates', 'home repair', 'pricing', 'boise', 'treasure valley'],
   primaryKeyword: 'home repair cost boise',
   quickAnswer:
-    'Handyman rates in the Boise area typically run $60 to $120 per hour in 2026, with most single repairs landing between $100 and $500 total. Small jobs like a faucet swap or drywall patch usually take one to three hours. We price each job case by case after reviewing the scope, and you get a written price before we arrive.',
+    'Handyman rates in the Boise area typically run $60 to $120 per hour in 2026, with most single repairs landing between $100 and $500 total. Small jobs like a faucet swap or drywall patch usually take one to three hours. We price each job case by case after reviewing the scope, with a one-hour minimum per visit, and you get a written price before we arrive.',
   keyTakeaways: [
     'Treasure Valley handyman rates commonly run $60 to $120 per hour, and most single repairs total $100 to $500.',
     'Flat-rate quotes beat open-ended hourly billing for defined jobs, because the risk of a slow afternoon sits with the pro, not with you.',
@@ -55,7 +55,7 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
     {
       question: 'Why do handymen charge a minimum service fee?',
       answer:
-        'Because the fixed costs of a visit, driving to your house, loading the right tools and materials, setting up, and cleaning up, are the same whether the repair takes twenty minutes or two hours. A minimum charge covers that overhead. The practical response is to batch several small tasks into one visit, which spreads the fixed cost across all of them.',
+        'Because the fixed costs of a visit, driving to your house, loading the right tools and materials, setting up, and cleaning up, are the same whether the repair takes twenty minutes or two hours. A minimum charge covers that overhead; ours is one hour per visit. The practical response is to batch several small tasks into one visit, which spreads the fixed cost across all of them.',
     },
     {
       question: 'Is it cheaper to pay hourly or get a flat-rate quote?',

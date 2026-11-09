@@ -1,7 +1,7 @@
 /**
  * Handyman job pricing engine for Boise Handyman Co.
  *
- * Small on purpose: a handyman estimate is trip fee + labor hours at an hourly
+ * Small on purpose: a handyman estimate is labor hours at an hourly
  * rate, adjusted for scheduling urgency, presented as a range. Every function
  * here is pure so the verify scripts (verify:estimate, verify:golden,
  * verify:lead-payload) can exercise the exact arithmetic the UI and the lead
@@ -13,12 +13,18 @@
  * Boise-market rates for an insured company operating under a design-build
  * parent, and the task hours to realistic billed times for that work:
  *
- *   - Hourly rate 95. Independent operators in the Treasure Valley run 60-85;
- *     established insured companies 85-125. 95 sits where this brand sits.
- *   - Trip fee 49, inside the local 39-99 band and competitive at the low end.
- *   - Minimum one billed hour, so the floor for any visit is 144 before
- *     materials - deliberately below the two-hour minimum many competitors
- *     carry, because small jobs are the funnel into larger P5 work.
+ *   - Hourly rate 125 (owner decision, 2026-11-09; was 95). Independent
+ *     operators in the Treasure Valley run 60-85; established insured
+ *     companies 85-125. A one-hour minimum visit is therefore 125 before
+ *     materials, with no trip fee.
+ *   - No trip or visit fee in Ada and Canyon County (owner decision,
+ *     2026-11-09). The $49 visit fee that used to lead every estimate was
+ *     removed because the site publishes "no trip fee" and the estimate
+ *     contradicted it.
+ *   - Minimum one billed hour per visit, so the floor for any visit is one
+ *     hour of labor before materials - deliberately below the two-hour minimum
+ *     many competitors carry, because small jobs are the funnel into larger P5
+ *     work.
  *   - Supply run 0.75 h, a realistic round trip to a Meridian supplier.
  *   - Urgency +15% priority / +30% same-week. Conservative: emergency work
  *     commonly carries +50% or more.
@@ -30,7 +36,7 @@
  * expectation the invoice cannot meet.
  *
  * These are market-derived defaults, NOT confirmed P5 costs. The owner should
- * still sanity-check the rate, the trip fee, and the five tasks Handyman quotes
+ * still sanity-check the rate and the five tasks Handyman quotes
  * most often; any of them can be changed here and verify:golden will show the
  * effect on real quoted scenarios.
  */
@@ -201,10 +207,8 @@ export const URGENCY_LEVELS: Record<
 /* ─────────────────────────────────────────────────────────────── pricing */
 
 /** Customer-facing hourly labor rate. Boise market for an insured company. */
-export const HOURLY_RATE_USD = 95;
-/** Trip fee, applied once per visit. Inside the local 39-99 band. */
-export const TRIP_FEE_USD = 49;
-/** Every visit bills at least one labor hour: a 144 floor before materials. */
+export const HOURLY_RATE_USD = 125;
+/** Every visit bills at least one labor hour. There is no trip or visit fee. */
 export const MINIMUM_LABOR_HOURS = 1;
 /** Hours added for a materials supply run: a realistic supplier round trip. */
 export const SUPPLY_RUN_HOURS = 0.75;
@@ -232,14 +236,13 @@ export interface HandymanEstimateInput {
 }
 
 export interface HandymanLine {
-  id: "trip-fee" | "labor" | "supply-run" | "urgency";
+  id: "labor" | "supply-run" | "urgency";
   label: string;
   amount: number;
 }
 
 /**
- * A customer-facing line item. The visit fee and hourly rate are absorbed
- * silently; each entry shows a task name (or urgency/supply-run) with a
+ * A customer-facing line item. The hourly rate is absorbed silently; each entry shows a task name (or urgency/supply-run) with a
  * pre-computed price.
  */
 export interface CustomerTaskLine {
@@ -257,11 +260,11 @@ export interface HandymanEstimate {
   materials: MaterialsPlan;
   lines: HandymanLine[];
   /**
-   * Customer-facing breakdown: one line per selected task (visit fee and hourly
-   * rate folded in), plus optional urgency and supply-run lines.
+   * Customer-facing breakdown: one line per selected task (hourly rate folded
+   * in), plus optional urgency and supply-run lines.
    */
   customerLines: CustomerTaskLine[];
-  /** Trip fee + labor at the urgency-adjusted rate, unrounded midpoint. */
+  /** Labor at the urgency-adjusted rate, unrounded midpoint. */
   total: number;
   /** The quoted band shown to the visitor. */
   priceLow: number;
@@ -300,8 +303,9 @@ export function sumTaskHours(tasks: HandymanTaskSelection[]): number {
 /**
  * The whole pricing model:
  *
- *   total = TRIP_FEE + billableHours * HOURLY_RATE * urgencyMultiplier
- *   range = [total * 0.9, total * 1.2], rounded to $5
+ *   total = billableHours * HOURLY_RATE * urgencyMultiplier
+ *   range = [total * 0.9, total * 1.2], rounded to $5, with the low end
+ *           clamped to the one-hour minimum charge (minimumVisitCharge)
  *
  * Returns null until the input contains at least one priceable task (or a
  * described other-job), so the UI can render a "make your selections" state
@@ -327,7 +331,6 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput): Handyma
   const urgencyUpcharge = (baseLabor + baseSupplyRun) * (multiplier - 1);
 
   const lines: HandymanLine[] = [
-    { id: "trip-fee", label: "Visit fee", amount: TRIP_FEE_USD },
     {
       id: "labor",
       label: `Labor, ${formatHours(laborHours)}`,
@@ -413,6 +416,13 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput): Handyma
     });
   }
 
+  // The displayed low end never drops below the one-hour minimum labor
+  // charge at this urgency (owner rule: the one-hour minimum applies). It is
+  // rounded UP to the display step so rounding cannot pull it back under.
+  const minimumCharge = minimumVisitCharge(input.urgency);
+  const priceLow = Math.max(roundToStep(total * RANGE_LOW_FACTOR, RANGE_ROUNDING_USD), minimumCharge);
+  const priceHigh = Math.max(roundToStep(total * RANGE_HIGH_FACTOR, RANGE_ROUNDING_USD), priceLow);
+
   return {
     laborHours,
     totalHours,
@@ -421,11 +431,20 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput): Handyma
     lines,
     customerLines,
     total,
-    priceLow: roundToStep(total * RANGE_LOW_FACTOR, RANGE_ROUNDING_USD),
-    priceHigh: roundToStep(total * RANGE_HIGH_FACTOR, RANGE_ROUNDING_USD),
+    priceLow,
+    priceHigh,
     taskCount,
     oversized: totalHours > MAX_REASONABLE_HOURS,
   };
+}
+
+/**
+ * The one-hour minimum labor charge at an urgency tier, rounded up to the
+ * display step: the lowest number any estimate band may show.
+ */
+export function minimumVisitCharge(urgency: UrgencyLevel): number {
+  const raw = MINIMUM_LABOR_HOURS * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
+  return Math.ceil(raw / RANGE_ROUNDING_USD - 1e-9) * RANGE_ROUNDING_USD;
 }
 
 function round2(value: number): number {

@@ -57,7 +57,7 @@ export const whatSmallHomeRepairsCostBoise: BlogPostData = {
     {
       question: 'Why do handymen have minimum charges?',
       answer:
-        'Driving to a house, loading tools, and handling billing costs a company roughly the same whether the visit lasts twenty minutes or three hours. A minimum charge of $100 to $150 covers that fixed cost. It is also why bundling several small tasks into one visit is the single best way to lower your cost per fix.',
+        'Driving to a house, loading tools, and handling billing costs a company roughly the same whether the visit lasts twenty minutes or three hours. Across the market, a minimum charge of $100 to $150 covers that fixed cost; ours is one hour per visit. It is also why bundling several small tasks into one visit is the single best way to lower your cost per fix.',
     },
     {
       question: 'Is it cheaper to supply my own materials?',

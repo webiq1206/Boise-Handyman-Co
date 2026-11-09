@@ -13,12 +13,13 @@ One formula, applied the same way on the page, in the emails, and in the CRM
 record:
 
 ```
-total    = TRIP_FEE + billableHours * HOURLY_RATE * urgencyMultiplier
+total    = billableHours * HOURLY_RATE * urgencyMultiplier
 range    = [total * 0.9, total * 1.2], rounded to the nearest $5
 ```
 
-- **Hourly rate:** $95/hr
-- **Trip fee:** $49, once per visit
+- **Hourly rate:** $125/hr (owner decision 2026-11-09; was $95)
+- **Trip / visit fee:** none in Ada and Canyon County (owner decision
+  2026-11-09; the former $49 visit fee was removed)
 - **Minimum:** 1 billable labor hour per visit
 - **Supply run:** picking materials up for the customer adds 0.75 hr of labor
   as its own line; materials themselves are always billed at cost and are
@@ -52,8 +53,8 @@ and commit the updated goldens in the same change that moved the rates.
 ## What is verified on every build
 
 - `npm run verify:estimate` - invariants: the category list matches the live
-  service catalog, every task prices to a finite ordered range, the trip fee
-  appears exactly once, the 1-hour minimum holds, quantity and urgency are
+  service catalog, every task prices to a finite ordered range, no trip or
+  visit fee appears, the 1-hour minimum holds, quantity and urgency are
   monotonic, the supply run adds exactly its hours, and empty input never
   prices as $0.
 - `npm run verify:golden` - 11 pinned scenarios covering every job category,

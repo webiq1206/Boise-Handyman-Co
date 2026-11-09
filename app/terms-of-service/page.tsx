@@ -75,6 +75,7 @@ export default function TermsOfServicePage() {
             <ul>
               <li>The first conversation and the review of your project are free</li>
               <li>Each job is priced case by case after we review the scope. The scope and price are set in writing before work starts</li>
+              <li>A one-hour minimum applies per visit. Materials are listed separately on the quote</li>
               <li>Any paid planning or other separately priced work happens only after you approve its scope and price in writing</li>
               <li>Changes to scope, price or schedule are agreed with you in writing before the affected work is done or materials are ordered</li>
               <li>Special-order or custom items may not be cancellable once ordered; we tell you this before you approve them</li>
