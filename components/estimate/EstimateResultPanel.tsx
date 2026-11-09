@@ -139,8 +139,8 @@ export interface EstimateResultPanelProps {
 }
 
 /**
- * The estimate surface: range, then the line breakdown that produced it (trip
- * fee, labor hours, supply run, urgency), then the honesty notes. Rendered on
+ * The estimate surface: range, then the line breakdown that produced it (labor
+ * hours, supply run, urgency; there is no trip fee), then the honesty notes. Rendered on
  * the dark band, matching the wizard's inverse tone.
  */
 export function EstimateResultPanel({

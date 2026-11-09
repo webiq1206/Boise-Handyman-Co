@@ -6,7 +6,7 @@
  *
  * - the wizard's categories match the live service catalog in contentData
  * - every task prices to a finite, positive, correctly ordered range
- * - the one-hour minimum and the trip fee always apply, the trip fee once
+ * - the one-hour minimum always applies, and no trip or visit fee ever does
  * - more quantity never costs less; higher urgency never costs less
  * - the we-pick-up supply run always costs more than customer materials
  * - the range brackets the computed total at -10% / +20%, rounded to $5
@@ -31,7 +31,6 @@ import {
   RANGE_ROUNDING_USD,
   SUPPLY_RUN_HOURS,
   TASK_CATALOG,
-  TRIP_FEE_USD,
   URGENCY_LEVELS,
   URGENCY_LEVEL_VALUES,
   type HandymanEstimateInput,
@@ -150,9 +149,13 @@ for (const [categoryId, tasks] of Object.entries(TASK_CATALOG) as [
       `${task.id} bills at least the ${MINIMUM_LABOR_HOURS}-hour minimum`,
     );
     assert(
-      estimate.lines.filter((l) => l.id === "trip-fee").length === 1 &&
-        estimate.lines[0].amount === TRIP_FEE_USD,
-      `${task.id} carries exactly one trip fee of $${TRIP_FEE_USD}`,
+      !estimate.lines.some((l) => /\btrip\b|trip-fee|visit fee/i.test(`${l.id} ${l.label}`)) &&
+        !estimate.customerLines.some((l) => /\btrip\b|trip-fee|visit fee/i.test(`${l.id} ${l.label}`)),
+      `${task.id} carries no trip or visit fee (none in Ada and Canyon County)`,
+    );
+    assert(
+      estimate.lines[0].id === "labor" && estimate.lines[0].amount >= MINIMUM_LABOR_HOURS * HOURLY_RATE_USD,
+      `${task.id} leads with labor of at least the one-hour minimum`,
     );
     assert(
       estimate.total === estimate.lines.reduce((s, l) => s + l.amount, 0),
@@ -188,11 +191,10 @@ for (const [categoryId, tasks] of Object.entries(TASK_CATALOG) as [
       );
       prevUrgencyTotal = withUrgency.total;
       const expected =
-        TRIP_FEE_USD +
         withUrgency.laborHours * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
       assert(
         Math.abs(withUrgency.total - expected) < 0.01,
-        `${task.id} at ${urgency}: total = tripFee + hours * rate * multiplier`,
+        `${task.id} at ${urgency}: total = hours * rate * multiplier`,
       );
     }
 
@@ -254,7 +256,7 @@ assert(
 
 /* Range factors themselves stay sane. */
 assert(RANGE_LOW_FACTOR < 1 && RANGE_HIGH_FACTOR > 1, "range brackets the total");
-assert(TRIP_FEE_USD > 0 && HOURLY_RATE_USD > 0, "rates are positive");
+assert(HOURLY_RATE_USD > 0, "rate is positive");
 
 /*
  * SHOWN MUST MEAN WIRED.

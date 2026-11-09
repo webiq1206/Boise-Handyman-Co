@@ -82,11 +82,8 @@ function customerBreakdownTable(lines: CustomerTaskLine[], total: number): strin
   );
 }
 
-function breakdownTable(estimate: HandymanEstimate, hideInternalLines = false): string {
-  const lines = hideInternalLines
-    ? estimate.lines.filter((l) => l.id !== "trip-fee")
-    : estimate.lines;
-  const rows = lines
+function breakdownTable(estimate: HandymanEstimate): string {
+  const rows = estimate.lines
     .map(
       (line) =>
         `<tr><td style="padding:4px 12px 4px 0;color:#444;">${escapeHtml(line.label)}</td>` +

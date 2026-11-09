@@ -15,8 +15,11 @@
  *   npx tsx scripts/verify-golden-estimates.ts                  # verify
  *   GOLDEN_RECORD=1 npx tsx scripts/verify-golden-estimates.ts  # print table
  *
- * Goldens recorded 2026-08-13 against the placeholder rates ($49 trip fee,
- * $95/hr, 1 hr minimum, 0.75 hr supply run, +15%/+30% urgency).
+ * Goldens re-recorded 2026-11-09 ON PURPOSE: the owner removed the $49 visit
+ * fee (no trip fee in Ada and Canyon County), so every scenario dropped by
+ * the fee, about $45 low / $60 high after the band and $5 rounding. Rates:
+ * $95/hr, 1 hr minimum, 0.75 hr supply run, +15%/+30% urgency, no visit fee.
+ * Previously recorded 2026-08-13 with the $49 fee.
  * [NEEDS: real pricing confirmation] Re-record when real rates land.
  */
 import {
@@ -53,7 +56,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 385, high: 515, laborHours: 4 },
+    golden: { low: 340, high: 455, laborHours: 4 },
   },
   {
     /* Priority tier: +15% on labor. */
@@ -65,7 +68,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "priority",
     },
-    golden: { low: 290, high: 385, laborHours: 2.5 },
+    golden: { low: 245, high: 330, laborHours: 2.5 },
   },
   {
     /* Two different tasks plus the supply run. */
@@ -80,7 +83,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "standard",
     },
-    golden: { low: 365, high: 485, laborHours: 3 },
+    golden: { low: 320, high: 430, laborHours: 3 },
   },
   {
     /* One-hour minimum: a 0.75 hr task bills a full hour. */
@@ -92,7 +95,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 130, high: 175, laborHours: 1 },
+    golden: { low: 85, high: 115, laborHours: 1 },
   },
   {
     /* Minimum AND emergency tier together. */
@@ -104,7 +107,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "emergency",
     },
-    golden: { low: 155, high: 205, laborHours: 1 },
+    golden: { low: 110, high: 150, laborHours: 1 },
   },
   {
     /* Quantity math on a 1.5 hr task. */
@@ -116,7 +119,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 430, high: 570, laborHours: 4.5 },
+    golden: { low: 385, high: 515, laborHours: 4.5 },
   },
   {
     /* Mixed tasks within one category. */
@@ -131,7 +134,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 555, high: 745, laborHours: 6 },
+    golden: { low: 515, high: 685, laborHours: 6 },
   },
   {
     /* Priority + supply run interacting (urgency applies to both). */
@@ -143,7 +146,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "priority",
     },
-    golden: { low: 365, high: 485, laborHours: 2.5 },
+    golden: { low: 320, high: 425, laborHours: 2.5 },
   },
   {
     /* Emergency tier on a maintenance task. */
@@ -155,7 +158,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "emergency",
     },
-    golden: { low: 265, high: 355, laborHours: 2 },
+    golden: { low: 220, high: 295, laborHours: 2 },
   },
   {
     /* The free-text path: a medium job is 4 assumed hours. */
@@ -167,7 +170,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 385, high: 515, laborHours: 4 },
+    golden: { low: 340, high: 455, laborHours: 4 },
   },
   {
     /* Everything at once: large other-job, pickup, emergency. */
@@ -179,7 +182,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "emergency",
     },
-    golden: { low: 1015, high: 1355, laborHours: 8 },
+    golden: { low: 975, high: 1295, laborHours: 8 },
   },
 ];
 
