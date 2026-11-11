@@ -519,7 +519,7 @@
     "lib/p5/imageSignature.ts": "3bc13ad775f4906c6759c9b17680773f8639875b3a121a342547472ba8c9468a",
     "tests/p5-image-signature.test.ts": "074c4406271a79525c99afe1970acd0994e97d426c687ca7019c851798201b6f",
     "scripts/lib/quoteEntry.mjs": "46f9fb18396b8e100dfdfe05c90b3bf21f7777e7feef45767e0e24432eb3b920",
-    "scripts/lib/shortBrandEntry.mjs": "35217b333841e87fa5ee2ebea316eccb1a50b05c262efb79dcfaafcec50e1874"
+    "scripts/lib/shortBrandEntry.mjs": "69b4830d542beb25a8bdfa1d37f9cd7a876c5948c9cb4f3669b0a3057ad31ffb"
   },
   "coordinatedIntakeBatch": {
     "base": "e6e125b83468a402264be2f1e82e5c0466baa178",
@@ -893,6 +893,18 @@
           "file": "scripts/lib/shortBrandEntry.mjs",
           "before": "25bfe6351aa80da1fdfb833bf1d7bef18d5122b828e801c3b7a8f21d5862e9a5",
           "after": "35217b333841e87fa5ee2ebea316eccb1a50b05c262efb79dcfaafcec50e1874"
+        }
+      ],
+      "note": "Only explicitly listed files synchronized; other files and provenance retained. Runtime scope is restricted to mobile-action and route-presentation compatibility."
+    },
+    {
+      "source": "p5-home-co",
+      "commit": "308937f2d8a7b2b08210f1d0e3d4919f6c5e2186",
+      "files": [
+        {
+          "file": "scripts/lib/shortBrandEntry.mjs",
+          "before": "35217b333841e87fa5ee2ebea316eccb1a50b05c262efb79dcfaafcec50e1874",
+          "after": "69b4830d542beb25a8bdfa1d37f9cd7a876c5948c9cb4f3669b0a3057ad31ffb"
         }
       ],
       "note": "Only explicitly listed files synchronized; other files and provenance retained. Runtime scope is restricted to mobile-action and route-presentation compatibility."
