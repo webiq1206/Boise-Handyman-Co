@@ -98,8 +98,8 @@ test("every optional Step 1 field sits behind the one quiet text toggle, which i
 
 test("the optional job address is the first field in the toggle, rides with the request and is never re-asked", () => {
   ascending(step1, ['data-testid="quote-options"', 'data-testid="input-address"', 'data-testid="input-email"']);
-  const field = step1.slice(at(step1, 'data-testid="input-address"') - 120, at(step1, 'data-testid="input-email"'));
-  assert.match(field, /Job address \(optional\)/);
+  const field = step1.slice(at(step1, 'data-testid="input-address"') - 220, at(step1, 'data-testid="input-email"'));
+  assert.match(field, /<label htmlFor=\{ids\("address"\)\}>Job address<\/label>/);
   assert.match(field, /autoComplete="street-address"/);
   assert.match(field, /maxLength=\{300\}/);
   assert.doesNotMatch(field, /aria-required|aria-invalid|fieldError/, "never required, never validated");
@@ -111,6 +111,25 @@ test("the optional job address is the first field in the toggle, rides with the 
   // After sending, the address is asked for only when the request did not carry one.
   assert.match(panel, /const askAddress = !submitted\.address;/);
   assert.match(panel, /\{askAddress && \(\s*<div className="hm-form-field">\s*<label htmlFor=\{ids\("address"\)\}>Address or ZIP code<\/label>/);
+});
+
+test("only the toggles and the callback best time say optional; no label inside a toggle repeats it", () => {
+  const marked = [...form.matchAll(/>([^<>{}]*\(optional\))</g)].map((match) => match[1].trim());
+  assert.deepEqual(marked, [
+    "Best time to call (optional)",
+    "Add address, email or contact preference (optional)",
+    "Add photos, plans or details (optional)",
+  ]);
+  assert.equal(form.match(/<label htmlFor=\{ids\("email"\)\}>Email<\/label>/g)?.length, 2);
+  assert.doesNotMatch(read("../shared/requestFiles.ts"), /Optional\./);
+  const prompt = read("../components/estimate/recovery/AbandonmentPrompt.tsx");
+  assert.equal(prompt.match(/\(optional\)/g)?.length, 1, "the prompt says it once, on its toggle");
+});
+
+test("a final link keeps its full stop: no line can end with a lone stop", () => {
+  assert.equal(form.match(/<span className="hm-form-nowrap">/g)?.length, 3);
+  assert.doesNotMatch(form, /<\/(a|Link|label)>\n\s*\.\n\s*<\/(p|fieldset)>/);
+  assert.match(css, /\.hm-form \.hm-form-nowrap \{\s*white-space: nowrap;/);
 });
 
 test("one send button", () => {

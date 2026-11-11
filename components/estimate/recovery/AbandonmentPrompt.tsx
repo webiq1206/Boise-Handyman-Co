@@ -145,10 +145,12 @@ export function AbandonmentPrompt({ open, flow, method, leaving, onStay, onConti
                 Call {SITE_CONFIG.phone}
               </a>
               {" or "}
+              <span className="whitespace-nowrap">
               <a href={SITE_CONFIG.phoneSmsHref} onClick={onText} className="font-semibold text-inverse-foreground underline underline-offset-4" data-testid="recovery-text">
                 text us
               </a>
               .
+              </span>
             </p>
           </form>
         )}

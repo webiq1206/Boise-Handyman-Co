@@ -496,10 +496,13 @@ export function ConsultationForm({
 
         <p className="hm-form-quiet">
           Prefer to talk?{" "}
-          <a className="hm-form-inline-link" href={SITE_CONFIG.phoneHref} data-testid="link-consult-success-phone">
-            Call {SITE_CONFIG.phone}
-          </a>
-          .
+          {/* The link and its full stop stay together, so the stop never wraps alone. */}
+          <span className="hm-form-nowrap">
+            <a className="hm-form-inline-link" href={SITE_CONFIG.phoneHref} data-testid="link-consult-success-phone">
+              Call {SITE_CONFIG.phone}
+            </a>
+            .
+          </span>
         </p>
       </div>
     );
@@ -639,7 +642,7 @@ export function ConsultationForm({
               </summary>
               <div className="hm-form-more-body">
             <div className="hm-form-field">
-              <label htmlFor={ids("address")}>Job address (optional)</label>
+              <label htmlFor={ids("address")}>Job address</label>
               <input
                 id={ids("address")}
                 data-testid="input-address"
@@ -651,7 +654,7 @@ export function ConsultationForm({
               />
             </div>
             <div className="hm-form-field">
-              <label htmlFor={ids("email")}>{reach === "email" ? "Email" : "Email (optional)"}</label>
+              <label htmlFor={ids("email")}>Email</label>
               <input
                 id={ids("email")}
                 data-field="email"
@@ -750,6 +753,7 @@ export function ConsultationForm({
                 {" or "}
               </>
             )}
+            <span className="hm-form-nowrap">
             <label className={callback ? "hm-form-mode-link" : "sr-only"}>
               <input
                 type="radio"
@@ -773,15 +777,18 @@ export function ConsultationForm({
               <span>Have us call you</span>
             </label>
             .
+            </span>
           </p>
         </fieldset>
 
         <p className="hm-form-quiet">
           No obligation. See our{" "}
-          <Link href="/privacy-policy" prefetch={false} className="hm-form-inline-link">
-            Privacy Policy
-          </Link>
-          .
+          <span className="hm-form-nowrap">
+            <Link href="/privacy-policy" prefetch={false} className="hm-form-inline-link">
+              Privacy Policy
+            </Link>
+            .
+          </span>
         </p>
       </form>
     </div>
@@ -1013,7 +1020,7 @@ function DetailsPanel({
 
       {askEmail && (
         <div className="hm-form-field">
-          <label htmlFor={ids("email")}>Email (optional)</label>
+          <label htmlFor={ids("email")}>Email</label>
           <input
             id={ids("email")}
             data-testid="details-email"

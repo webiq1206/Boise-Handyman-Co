@@ -224,6 +224,11 @@
   color: #555b56;
 }
 
+/* A final link and its full stop wrap together, never the stop alone. */
+.hm-form .hm-form-nowrap {
+  white-space: nowrap;
+}
+
 /* Name and phone share a row on a wide screen. */
 .hm-form .hm-form-pair {
   display: grid;
