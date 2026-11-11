@@ -19,7 +19,7 @@ export const MAX_REQUEST_FILE_BYTES = MAX_REQUEST_FILE_MB * 1024 * 1024;
 export const REQUEST_FILE_ACCEPT = "image/*,application/pdf,.heic,.heif";
 
 /** The one hint line under the tile, from the real limits. */
-export const REQUEST_FILE_HINT = `Optional. Photos, PDFs or drawings. Up to ${MAX_REQUEST_FILES} files, ${MAX_REQUEST_FILE_MB} MB each.`;
+export const REQUEST_FILE_HINT = `Photos, PDFs or drawings. Up to ${MAX_REQUEST_FILES} files, ${MAX_REQUEST_FILE_MB} MB each.`;
 
 const TYPE_TO_EXT = new Map<string, string>([
   ["image/jpeg", "jpg"],
