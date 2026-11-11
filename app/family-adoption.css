@@ -166,12 +166,6 @@
 .hm-form textarea::placeholder {
   color: #62605a;
 }
-.hm-form .hm-form-hint,
-.hm-form .hm-form-next {
-  margin: 0;
-  font: 500 14px/1.5 var(--font-sans);
-  color: #555b56;
-}
 .hm-form .hm-form-error-text {
   margin: 0;
   color: var(--color-error);
@@ -182,9 +176,6 @@
 }
 .hm-form .hm-form-error {
   margin: 0;
-  padding: 12px;
-  border: 1px solid rgba(163, 58, 44, 0.3);
-  background: rgba(163, 58, 44, 0.06);
   color: var(--color-error);
   font: 600 14px/1.45 var(--font-sans);
 }
@@ -197,133 +188,92 @@
   pointer-events: none;
 }
 
-/* The two steps, named above the form (components/forms/QuoteSteps.tsx). */
-.hm-form .hm-form-steps {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 16px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font: 500 14px/1.4 var(--font-sans);
-  color: #555b56;
-}
-.hm-form .hm-form-steps li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.hm-form .hm-form-steps li.is-current-or-done {
-  font-weight: 600;
-  color: var(--color-charcoal);
-}
-.hm-form .hm-form-step-badge {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border: 1px solid rgba(44, 48, 47, 0.45);
-  font: 600 12px/1 var(--font-sans);
-}
-.hm-form .hm-form-steps li.is-current-or-done .hm-form-step-badge {
-  border-color: var(--color-charcoal);
-}
-.hm-form .hm-form-step-badge.is-filled {
-  background: var(--color-charcoal);
-  color: var(--color-paper);
-}
-
-/* "Send a request" | "Have us call you": native radios drawn as quiet tabs. An
-   underline marks the active one, so neither reads as a second send button. */
-.hm-form .hm-form-mode {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.hm-form .hm-form-tab {
+/* The callback switch: two native radios in one quiet line of text. Only the label
+   of the mode you are not in shows, as a text link; the other is visually hidden. */
+.hm-form .hm-form-mode-link {
   position: relative;
-  display: flex;
-  min-width: 0;
-  margin: 0;
+  display: inline;
+  color: var(--color-charcoal);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
-.hm-form .hm-form-tab input {
+.hm-form .hm-form-mode-link.is-inline span {
+  text-transform: lowercase;
+}
+.hm-form .hm-form-mode-link input {
   position: absolute;
-  inset: 0;
+  inset: -8px 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% + 16px);
   margin: 0;
   opacity: 0;
   cursor: pointer;
 }
-.hm-form .hm-form-tab span {
-  display: inline-flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  padding: 0 6px;
-  border-bottom: 2px solid rgba(44, 48, 47, 0.2);
-  color: #555b56;
-  font: 600 15px/1.2 var(--font-sans);
-  text-align: center;
-}
-.hm-form .hm-form-tab:hover span {
-  color: var(--color-charcoal);
-}
-.hm-form .hm-form-tab input:checked + span {
-  border-bottom-color: var(--color-charcoal);
-  color: var(--color-charcoal);
-}
-.hm-form .hm-form-tab input:focus-visible + span {
+.hm-form .hm-form-mode-link:has(input:focus-visible) {
   outline: 2px solid var(--color-charcoal);
   outline-offset: 2px;
 }
 
-/* One closed-by-default dropdown holds everything optional (Step 1: email and
-   how to reach you; Step 2 on the success screen: photos and job details). */
-.hm-form .hm-form-more {
+/* One muted small style for every line that is not a label: the toggle, the line
+   under the button, the privacy line, the attached range. */
+.hm-form .hm-form-quiet {
+  margin: 0;
+  font: 500 14px/1.5 var(--font-sans);
+  color: #555b56;
+}
+
+/* Name and phone share a row on a wide screen. */
+.hm-form .hm-form-pair {
+  display: grid;
+  gap: 16px;
   min-width: 0;
-  border: 1px solid rgba(44, 48, 47, 0.3);
-  border-radius: var(--radius-input, 4px);
-  background: #fff;
+}
+@media (min-width: 640px) {
+  .hm-form .hm-form-pair {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+/* Everything optional sits behind one quiet text toggle: a native details whose
+   summary is one line of muted text with a small plus. No border, no background,
+   no panel; opened, its fields join the normal field flow. */
+.hm-form .hm-form-more {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
 }
 .hm-form .hm-form-more > summary {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 48px;
-  padding: 8px 12px;
+  gap: 6px;
+  width: fit-content;
+  min-height: 24px;
   list-style: none;
-  color: var(--color-charcoal);
-  font: 600 15px/1.35 var(--font-sans);
+  font: 500 14px/1.5 var(--font-sans);
+  color: #555b56;
   cursor: pointer;
 }
 .hm-form .hm-form-more > summary::-webkit-details-marker {
   display: none;
 }
 .hm-form .hm-form-more > summary:hover {
-  background: rgba(44, 48, 47, 0.04);
-}
-.hm-form .hm-form-optional {
-  font-weight: 500;
-  color: #555b56;
+  color: var(--color-charcoal);
 }
 .hm-form .hm-form-more-icon {
   flex-shrink: 0;
   transition: transform 0.15s ease;
 }
 .hm-form .hm-form-more[open] > summary .hm-form-more-icon {
-  transform: rotate(180deg);
+  transform: rotate(45deg);
 }
 .hm-form .hm-form-more-body {
   display: grid;
   gap: 16px;
   min-width: 0;
-  padding: 16px 12px;
-  border-top: 1px solid rgba(44, 48, 47, 0.2);
+  margin-top: 16px;
 }
 @media (prefers-reduced-motion: reduce) {
   .hm-form .hm-form-more-icon {
@@ -379,44 +329,6 @@
   outline-offset: 2px;
 }
 
-.hm-form .hm-form-estimate {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  font: 500 14px/1.45 var(--font-sans);
-}
-.hm-form .hm-form-estimate button {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  gap: 4px;
-  min-height: 44px;
-  background: none;
-  border: 0;
-  color: #555b56;
-  cursor: pointer;
-}
-
-/* One send button, one short line under it, then "Prefer to talk?" as a quiet
-   line of text links (it used to be a stack of outlined buttons above the send). */
-.hm-form .hm-form-send {
-  display: grid;
-  gap: 10px;
-}
-.hm-form .hm-form-footnote {
-  margin: 0;
-  font: 500 14px/1.5 var(--font-sans);
-  color: #555b56;
-  text-align: center;
-}
-.hm-form .hm-form-talk {
-  margin: 6px 0 0;
-  padding-top: 14px;
-  border-top: 1px solid rgba(44, 48, 47, 0.15);
-  font: 500 15px/1.6 var(--font-sans);
-  color: #555b56;
-}
 .hm-form .hm-form-submit {
   box-sizing: border-box;
   width: 100%;
@@ -452,15 +364,6 @@
   margin: 0;
   font: 500 16px/1.55 var(--font-sans);
   color: var(--color-charcoal);
-}
-.hm-form .hm-form-trust {
-  display: grid;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font: 500 13px/1.4 var(--font-sans);
-  color: #555b56;
 }
 /* ---------- Attachment tile (components/forms/AttachmentTile.tsx) ----------
    One dashed tile instead of the browser's raw file control. The native input is
@@ -592,7 +495,7 @@
   background: rgba(44, 48, 47, 0.06);
 }
 
-/* ---------- After sending: the confirmation, then Step 2 as one closed dropdown ---------- */
+/* ---------- After sending: a tick, one sentence, then the same quiet toggle ---------- */
 .hm-form .hm-form-done-head {
   display: grid;
   gap: 16px;
@@ -616,23 +519,9 @@
   background: var(--color-charcoal);
   color: var(--color-paper);
 }
-.hm-form .hm-form-all-set {
-  margin: 0;
-  font: 600 16px/1.5 var(--font-sans);
-  color: var(--color-charcoal);
-}
 .hm-form .hm-details {
   min-width: 0;
   margin: 0;
-  padding-top: 20px;
-  border-top: 1px solid rgba(44, 48, 47, 0.15);
-}
-.hm-form .hm-details .hm-details-title {
-  margin: 0;
-  font: 600 15px/1.35 var(--font-sans);
-  letter-spacing: 0;
-  color: var(--color-charcoal);
-  text-transform: none;
 }
 .hm-form .hm-form-chips {
   display: flex;

@@ -5,14 +5,13 @@ import { markEstimatorCompleted } from "@/lib/estimatorSession";
 
 import { useEffect, useId, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { Check, ChevronDown, X } from "lucide-react";
+import Link from "next/link";
+import { Check, Plus } from "lucide-react";
 import type { StoredEstimate } from "@/shared/estimateEngine";
 import { formatPlanningCurrency } from "@/shared/estimateEngine";
 import { DisplayNum } from "@/components/marketing/DisplayNum";
 import { AttachmentTile, type AttachmentStatus, type PickedFile } from "@/components/forms/AttachmentTile";
-import { QuoteSteps } from "@/components/forms/QuoteSteps";
 import { CTA_FORM_CALLBACK, CTA_FORM_SEND } from "@/shared/ctaCopy";
-import { CONSULT_BULLETS } from "@/shared/siteContent";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { JOB_CHOICES, TIMING_OPTIONS, jobLabel } from "@/shared/consultationChoices";
 import { partitionRequestFiles } from "@/shared/requestFiles";
@@ -27,30 +26,34 @@ import { readStoredPrefill, PREFILL_UPDATED_EVENT, hasPassedGate } from "@/lib/l
  * consult dialog).
  *
  * Two steps (owner, 1 November 2026: the easiest form there is, and the more
- * information the better; 11 November, after a client found a family form
- * confusing because "it just kept asking more questions": nothing optional is
- * shown until asked for, and every step says plainly where the visitor is).
- * The steps are named above the form by components/forms/QuoteSteps.tsx.
+ * information the better; 11 November: nothing optional is shown until asked
+ * for, and the form must look very clean, so nothing sits in it that is not a
+ * field, the button or one quiet line).
  *
- * Step 1, "Your request": only what we need to call back.
- *   [Send a request | Have us call you]  (quiet tabs)
+ * Before sending, top to bottom, and nothing else:
+ *   the heading
  *   Your list
- *   Name, Phone
- *   "Add an email or choose how we reach you (optional)": one closed dropdown
- *     holding Email and How should we reach you
+ *   Name, Phone (side by side on a wide screen)
+ *   "Add email or contact preference (optional)": one quiet text toggle
+ *     (a native details with no box) holding Email and How should we reach you
  *   Send my list
- *   Prefer to talk? Call, text us or chat  (one quiet line)
- * "Have us call you" reduces it to name, phone and an optional best time.
+ *   "Prefer to talk? Call (number) or have us call you."
+ *   "No obligation." and the Privacy Policy link
+ * "Have us call you" is the callback switch: the same two native radios as
+ * before (same names and test ids, cross-site scripts drive them), drawn as
+ * one text link. Only the mode you are not in shows; the active radio stays in
+ * the page, checked and visually hidden. Callback mode asks for name, phone
+ * and a best time, and its line reads "Rather write it down? Send a request".
  *
- * Step 2 sits on the success screen, after the confirmation that the request
- * is sent and nothing else is needed: one closed dropdown, "Add photos or job
- * details (optional)", whose answers and files are added to the SAME request
- * (POST /api/consultation/details with the signed token the request
- * returned), never a second lead. Leaving it closed is skipping it.
+ * After sending: a tick, "Thanks, {first name}. We have your request.", one
+ * sentence ending "Nothing else is needed.", then the same quiet toggle, "Add
+ * photos, plans or details (optional)", whose answers and files are added to
+ * the SAME request (POST /api/consultation/details with the signed token the
+ * request returned), never a second lead. Leaving it closed is skipping it.
  *
- * Files are only ever offered on Step 2: the request is saved first, so an
- * upload can never delay or lose it, then each file uploads on its own and the
- * panel says which ones did not, with a retry and a text link.
+ * Files are only ever offered there: the request is saved first, so an upload
+ * can never delay or lose it, then each file uploads on its own and the
+ * toggle's form says which ones did not, with a retry and a text link.
  *
  * Native elements only (input, textarea, select, radio, details), so nothing
  * here sets state during hydration and every control is announced as itself.
@@ -125,9 +128,6 @@ function pick(files: File[]): PickedFile[] {
 }
 
 interface ConsultationFormProps {
-  onRevise?: () => void;
-  /** Compact trust bullets below the form (used in the modal variant). */
-  showTrust?: boolean;
   initialProjectType?: "drywall-repair" | "home-maintenance";
   /** The form's own heading. Callback mode always reads "Request a call". */
   heading?: string;
@@ -155,8 +155,6 @@ interface FollowUp {
 type Upload = PickedFile & { status: AttachmentStatus; key?: string };
 
 export function ConsultationForm({
-  onRevise,
-  showTrust = false,
   initialProjectType,
   heading = "Send your list",
   headingLevel = "h2",
@@ -462,7 +460,6 @@ export function ConsultationForm({
       // while the form, this success screen or its Step 2 is on screen
       // (components/family/MobileActionBar.tsx).
       <div className="hm-form hm-form-done" data-testid="consultation-success" data-clarity-mask="True" data-family-bar-yield="" data-quote-follow-up="">
-        <QuoteSteps sent />
         <div role="status" className="hm-form-done-head">
           <div className="hm-form-done-title">
             <span className="hm-form-done-tick" aria-hidden="true">
@@ -472,19 +469,10 @@ export function ConsultationForm({
               Thanks{submitted ? `, ${submitted.name.split(" ")[0]}` : ""}. We have your request.
             </Heading>
           </div>
-          <p className="hm-form-lead">
+          <p className="hm-form-lead" data-testid="quote-all-set">
             {wasCallback
-              ? `We have your request for a call back at ${submitted?.phone}. We will answer your questions and help you work out the next step.`
-              : "We review your list and reply with a written quote. Scheduling is confirmed after the scope and quote are agreed."}
-          </p>
-          <p className="hm-form-all-set" data-testid="quote-all-set">
-            You are all set. Nothing else is needed.
-          </p>
-          <p className="hm-form-next">
-            Prefer to talk?{" "}
-            <a className="hm-form-inline-link" href={SITE_CONFIG.phoneHref} data-testid="link-consult-success-phone">
-              Call {SITE_CONFIG.phone}
-            </a>
+              ? `We will call you back at ${submitted?.phone}. Nothing else is needed.`
+              : "We review your list and reply with a written quote. Nothing else is needed."}
           </p>
         </div>
 
@@ -492,12 +480,19 @@ export function ConsultationForm({
           <DetailsPanel
             followUp={followUp}
             submitted={submitted}
-            headingLevel={headingLevel === "h2" ? "h3" : "h4"}
             initialProjectType={initialProjectType}
             uploadOne={uploadOne}
             postDetails={postDetails}
           />
         )}
+
+        <p className="hm-form-quiet">
+          Prefer to talk?{" "}
+          <a className="hm-form-inline-link" href={SITE_CONFIG.phoneHref} data-testid="link-consult-success-phone">
+            Call {SITE_CONFIG.phone}
+          </a>
+          .
+        </p>
       </div>
     );
   }
@@ -510,35 +505,6 @@ export function ConsultationForm({
     </p>
   );
   const errorCount = Object.keys(errors).length;
-
-  // One quiet line under the send button, never a second stack of buttons above it.
-  const talk = (
-    <p className="hm-form-talk" data-quote-talk="">
-      Prefer to talk?{" "}
-      <a className="hm-form-inline-link" href={SITE_CONFIG.phoneHref} data-testid="link-consult-form-call">
-        Call {SITE_CONFIG.phone}
-      </a>
-      ,{" "}
-      <a
-        className="hm-form-inline-link"
-        href={SITE_CONFIG.phoneSmsHref}
-        aria-label={`Text us at ${SITE_CONFIG.phone}`}
-        data-testid="link-consult-form-text"
-      >
-        text us
-      </a>
-      {" or "}
-      <button
-        type="button"
-        className="hm-form-inline-link"
-        onClick={() => window.dispatchEvent(new Event("p5:assistant-open"))}
-        data-testid="button-consult-form-chat"
-      >
-        chat
-      </button>
-      .
-    </p>
-  );
 
   return (
     <div className="hm-form" data-family-bar-yield="">
@@ -568,36 +534,6 @@ export function ConsultationForm({
           {callback ? "Request a call" : heading}
         </Heading>
 
-        <QuoteSteps sent={false} />
-
-        {/* Two native radios drawn as quiet tabs (an underline marks the active one).
-            They used to be filled pills, and the active one read as a second send button. */}
-        <fieldset className="hm-form-mode">
-          <legend className="sr-only">How do you want to start?</legend>
-          <label className="hm-form-tab">
-            <input
-              type="radio"
-              name={ids("mode")}
-              value="request"
-              checked={!callback}
-              onChange={() => setMode("request")}
-              data-testid="request-mode-request"
-            />
-            <span>Send a request</span>
-          </label>
-          <label className="hm-form-tab">
-            <input
-              type="radio"
-              name={ids("mode")}
-              value="callback"
-              checked={callback}
-              onChange={() => setMode("callback")}
-              data-testid="request-mode-callback"
-            />
-            <span>Have us call you</span>
-          </label>
-        </fieldset>
-
         {!callback && (
             <div className="hm-form-field">
               <label htmlFor={ids("message")}>Your list</label>
@@ -620,6 +556,7 @@ export function ConsultationForm({
             </div>
         )}
 
+        <div className="hm-form-pair">
         <div className="hm-form-field">
           <label htmlFor={ids("name")}>Name</label>
           <input
@@ -659,6 +596,7 @@ export function ConsultationForm({
           />
           {fieldError("phone")}
         </div>
+        </div>
 
         {callback ? (
           <div className="hm-form-field">
@@ -668,7 +606,6 @@ export function ConsultationForm({
               name="bestTimeToCall"
               value={bestTime}
               onChange={(event) => setBestTime(event.target.value)}
-              aria-describedby={ids("best-time-hint")}
               data-testid="select-best-time"
             >
               {BEST_TIMES.map((time) => (
@@ -677,13 +614,10 @@ export function ConsultationForm({
                 </option>
               ))}
             </select>
-            <p className="hm-form-hint" id={ids("best-time-hint")}>
-              We call during business hours (Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM).
-            </p>
           </div>
         ) : (
           <>
-            {/* Everything optional lives in this one closed dropdown. */}
+            {/* Everything optional lives behind this one quiet text toggle (no box). */}
             <details
               ref={optionsRef}
               className="hm-form-more"
@@ -692,10 +626,8 @@ export function ConsultationForm({
               data-testid="quote-options"
             >
               <summary>
-                <span>
-                  Add an email or choose how we reach you <span className="hm-form-optional">(optional)</span>
-                </span>
-                <ChevronDown className="hm-form-more-icon" size={20} aria-hidden="true" />
+                <Plus className="hm-form-more-icon" size={16} aria-hidden="true" />
+                <span>Add email or contact preference (optional)</span>
               </summary>
               <div className="hm-form-more-body">
             <div className="hm-form-field">
@@ -713,12 +645,9 @@ export function ConsultationForm({
                 onBlur={touch("email")}
                 aria-required={reach === "email" ? "true" : undefined}
                 aria-invalid={shown("email") ? true : undefined}
-                aria-describedby={describedBy("email", ids("email-hint"))}
+                aria-describedby={describedBy("email")}
                 maxLength={200}
               />
-              <p className="hm-form-hint" id={ids("email-hint")}>
-                {reach === "email" ? "We reply with the written quote here." : "For a written copy of your quote."}
-              </p>
               {fieldError("email")}
             </div>
 
@@ -744,20 +673,18 @@ export function ConsultationForm({
             </details>
 
             {estimate && attached && (
-              <div className="hm-form-estimate" data-testid="text-estimate-summary">
-                <span>
-                  Range attached:{" "}
-                  <span data-testid="text-estimate-range">
-                    <DisplayNum>
-                      {formatPlanningCurrency(estimate.priceLow)} to {formatPlanningCurrency(estimate.priceHigh)}
-                    </DisplayNum>
-                  </span>
+              <p className="hm-form-quiet" data-testid="text-estimate-summary">
+                Range attached:{" "}
+                <span data-testid="text-estimate-range">
+                  <DisplayNum>
+                    {formatPlanningCurrency(estimate.priceLow)} to {formatPlanningCurrency(estimate.priceHigh)}
+                  </DisplayNum>
                 </span>
-                <button type="button" onClick={() => setAttached(false)} data-testid="button-drop-estimate">
-                  <X className="h-3.5 w-3.5" aria-hidden="true" />
+                .{" "}
+                <button type="button" className="hm-form-inline-link" onClick={() => setAttached(false)} data-testid="button-drop-estimate">
                   Remove
                 </button>
-              </div>
+              </p>
             )}
           </>
         )}
@@ -782,49 +709,70 @@ export function ConsultationForm({
           </p>
         ) : null}
 
-        <div className="hm-form-send" data-testid="consult-wizard-actions">
-          <button className="hm-form-submit" type="submit" disabled={mutation.isPending} data-testid="button-consult-submit">
-            {mutation.isPending ? "Sending" : callback ? CTA_FORM_CALLBACK : CTA_FORM_SEND}
-          </button>
-          <p className="hm-form-footnote" data-testid="consult-send-footnote">
-            {callback ? "We call you back during business hours." : "That is all we need. You can add photos after you send."}
-          </p>
-          {talk}
-          <p className="hm-form-next">
-            {callback
-              ? "We answer your questions and help you work out the next step."
-              : "We review your list and reply with a written quote. This request does not book a visit."}
-          </p>
-        </div>
+        <button className="hm-form-submit" type="submit" disabled={mutation.isPending} data-testid="button-consult-submit">
+          {mutation.isPending ? "Sending" : callback ? CTA_FORM_CALLBACK : CTA_FORM_SEND}
+        </button>
 
-        {/* In the dialog, the estimator is one tap away (onRevise opens it). */}
-        {onRevise && !callback && !estimate && !initialProjectType && (
-          <p className="hm-form-next">
-            Want to list every item first?{" "}
-            <button type="button" className="hm-form-inline-link" onClick={() => onRevise?.()} data-testid="button-start-estimate">
-              Open the repair list
-            </button>
+        {/* The callback switch: two native radios in one quiet line. Only the label of
+            the mode you are NOT in shows, as a text link; the active radio stays in the
+            page, checked and visually hidden. */}
+        <fieldset className="hm-form-mode">
+          <legend className="sr-only">How do you want to start?</legend>
+          <p className="hm-form-quiet">
+            {callback ? (
+              "Rather write it down? "
+            ) : (
+              <>
+                Prefer to talk?{" "}
+                <a className="hm-form-inline-link" href={SITE_CONFIG.phoneHref} data-testid="link-consult-form-call">
+                  Call {SITE_CONFIG.phone}
+                </a>
+                {" or "}
+              </>
+            )}
+            <label className={callback ? "hm-form-mode-link" : "sr-only"}>
+              <input
+                type="radio"
+                name={ids("mode")}
+                value="request"
+                checked={!callback}
+                onChange={() => setMode("request")}
+                data-testid="request-mode-request"
+              />
+              <span>Send a request</span>
+            </label>
+            <label className={callback ? "sr-only" : "hm-form-mode-link is-inline"}>
+              <input
+                type="radio"
+                name={ids("mode")}
+                value="callback"
+                checked={callback}
+                onChange={() => setMode("callback")}
+                data-testid="request-mode-callback"
+              />
+              <span>Have us call you</span>
+            </label>
+            .
           </p>
-        )}
+        </fieldset>
 
-        {showTrust && (
-          <ul className="hm-form-trust" data-testid="consult-trust-bullets">
-            {CONSULT_BULLETS.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        )}
+        <p className="hm-form-quiet">
+          No obligation. See our{" "}
+          <Link href="/privacy-policy" prefetch={false} className="hm-form-inline-link">
+            Privacy Policy
+          </Link>
+          .
+        </p>
       </form>
     </div>
   );
 }
 
-/* ───────────────────────────── Step 2: "Add photos or job details (optional)" */
+/* ───────────────────────────── Step 2: "Add photos, plans or details (optional)" */
 
 interface DetailsPanelProps {
   followUp: FollowUp;
   submitted: Submitted;
-  headingLevel: "h3" | "h4";
   initialProjectType?: string;
   uploadOne: (item: Upload, receipt: FollowUp) => Promise<Upload>;
   postDetails: (
@@ -835,7 +783,7 @@ interface DetailsPanelProps {
 }
 
 /**
- * One closed dropdown on the success screen. It used to sit open under the
+ * One quiet text toggle on the success screen. It used to sit open under the
  * confirmation, and a client read it as the form asking for more before the
  * request counted (11 November); leaving it closed is skipping it, so there is
  * no "Skip" button. Optional, and it never re-asks what Step 1 already has:
@@ -846,14 +794,12 @@ interface DetailsPanelProps {
 function DetailsPanel({
   followUp,
   submitted,
-  headingLevel,
   initialProjectType,
   uploadOne,
   postDetails,
 }: DetailsPanelProps) {
   const uid = useId();
   const ids = (name: string) => `${uid}-${name}`;
-  const Heading = headingLevel;
   const wasCallback = submitted.mode === "callback";
   const askJob = !wasCallback && !initialProjectType && submitted.projectType === "task-list";
   const askBestTime = !wasCallback && submitted.reach === "phone";
@@ -949,14 +895,11 @@ function DetailsPanel({
   return (
     <section className="hm-details" aria-labelledby={ids("title")} data-clarity-mask="True" data-testid="consult-details">
       <details className="hm-form-more" data-testid="quote-details-disclosure">
-        <summary>
-          <Heading className="hm-details-title" id={ids("title")}>
-            Add photos or job details <span className="hm-form-optional">(optional)</span>
-          </Heading>
-          <ChevronDown className="hm-form-more-icon" size={20} aria-hidden="true" />
+        <summary id={ids("title")}>
+          <Plus className="hm-form-more-icon" size={16} aria-hidden="true" />
+          <span>Add photos, plans or details (optional)</span>
         </summary>
     <form className="hm-form-more-body" onSubmit={onSave} noValidate data-quote-details-form="">
-      <p className="hm-form-hint">Answer any of these, or none. Each one helps us give you a closer quote on the first call.</p>
 
       {askList && (
         <div className="hm-form-field">
@@ -1003,12 +946,8 @@ function DetailsPanel({
           autoComplete="street-address"
           value={address}
           onChange={(event) => setAddress(event.target.value)}
-          aria-describedby={ids("address-hint")}
           maxLength={300}
         />
-        <p className="hm-form-hint" id={ids("address-hint")}>
-          Confirms you are in our service area. Never shared or sold.
-        </p>
       </div>
 
       <fieldset className="hm-form-reach">
