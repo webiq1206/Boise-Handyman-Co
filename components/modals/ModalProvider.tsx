@@ -39,7 +39,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
       {children}
 
       {(consultMounted || open === "consult") && (
-        <ConsultDialog open={open === "consult"} onClose={close} onRevise={() => setOpen("estimate")} />
+        <ConsultDialog open={open === "consult"} onClose={close} />
       )}
 
       {/* The estimator is its own full-screen experience beneath the site

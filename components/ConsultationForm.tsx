@@ -5,13 +5,13 @@ import { markEstimatorCompleted } from "@/lib/estimatorSession";
 
 import { useEffect, useId, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { MessageSquare, Phone, X } from "lucide-react";
+import Link from "next/link";
+import { Check, Plus } from "lucide-react";
 import type { StoredEstimate } from "@/shared/estimateEngine";
 import { formatPlanningCurrency } from "@/shared/estimateEngine";
 import { DisplayNum } from "@/components/marketing/DisplayNum";
 import { AttachmentTile, type AttachmentStatus, type PickedFile } from "@/components/forms/AttachmentTile";
 import { CTA_FORM_CALLBACK, CTA_FORM_SEND } from "@/shared/ctaCopy";
-import { CONSULT_BULLETS } from "@/shared/siteContent";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { JOB_CHOICES, TIMING_OPTIONS, jobLabel } from "@/shared/consultationChoices";
 import { partitionRequestFiles } from "@/shared/requestFiles";
@@ -26,25 +26,43 @@ import { readStoredPrefill, PREFILL_UPDATED_EVENT, hasPassedGate } from "@/lib/l
  * consult dialog).
  *
  * Two steps (owner, 1 November 2026: the easiest form there is, and the more
- * information the better). Step 1 is one short screen that captures the
- * request: the list first, an optional attachment tile, name, phone, optional
- * email, how to reach you, one send. "Have us call you" reduces it to name,
- * phone and an optional best time. Step 2 sits on the success screen: an
- * optional "Help us prepare" panel whose answers and files are added to the
- * SAME request (POST /api/consultation/details with the signed token the
- * request returned), never a second lead.
+ * information the better; 11 November: nothing optional is shown until asked
+ * for, and the form must look very clean, so nothing sits in it that is not a
+ * field, the button or one quiet line).
  *
- * Files never ride with the request: it is sent first, so an upload can never
- * delay or lose it, then each file uploads on its own and the success screen
- * says which ones did not, with a retry and a text link.
+ * Before sending, top to bottom, and nothing else:
+ *   the heading
+ *   Your list
+ *   Name, Phone (side by side on a wide screen)
+ *   "Add address, email or contact preference (optional)": one quiet text toggle
+ *     (a native details with no box) holding Job address, Email and How
+ *     should we reach you
+ *   Send my list
+ *   "Prefer to talk? Call (number) or have us call you."
+ *   "No obligation." and the Privacy Policy link
+ * "Have us call you" is the callback switch: the same two native radios as
+ * before (same names and test ids, cross-site scripts drive them), drawn as
+ * one text link. Only the mode you are not in shows; the active radio stays in
+ * the page, checked and visually hidden. Callback mode asks for name, phone
+ * and a best time, and its line reads "Rather write it down? Send a request".
  *
- * Native elements only (input, textarea, select, radio), so nothing here sets
- * state during hydration and every control is announced as itself.
+ * After sending: a tick, "Thanks, {first name}. We have your request.", one
+ * sentence ending "Nothing else is needed.", then the same quiet toggle, "Add
+ * photos, plans or details (optional)", whose answers and files are added to
+ * the SAME request (POST /api/consultation/details with the signed token the
+ * request returned), never a second lead. Leaving it closed is skipping it.
+ *
+ * Files are only ever offered there: the request is saved first, so an upload
+ * can never delay or lose it, then each file uploads on its own and the
+ * toggle's form says which ones did not, with a retry and a text link.
+ *
+ * Native elements only (input, textarea, select, radio, details), so nothing
+ * here sets state during hydration and every control is announced as itself.
  */
 
 type Mode = "request" | "callback";
 type Reach = "phone" | "text" | "email";
-type Field = "message" | "files" | "name" | "phone" | "email";
+type Field = "message" | "name" | "phone" | "email";
 type Errors = Partial<Record<Field, string>>;
 
 /** Values match the server's preferredContact enum (phone = call). */
@@ -57,7 +75,7 @@ const REACH_OPTIONS: { value: Reach; label: string }[] = [
 const DEFAULT_REACH: Reach = "text";
 /** Same list as BEST_TIMES_TO_CALL in server/services/consultationRequest.ts. */
 const BEST_TIMES = ["Any time", "Morning", "Midday", "Afternoon"] as const;
-const FIELD_ORDER: Field[] = ["message", "files", "name", "phone", "email"];
+const FIELD_ORDER: Field[] = ["message", "name", "phone", "email"];
 const LIST_PLACEHOLDER = "For example: patch two doorknob holes, fix a leaky kitchen faucet, hang three shelves";
 
 const DRAFT_KEY = "handyman_consult_form_v3";
@@ -67,6 +85,7 @@ interface Draft {
   name?: string;
   phone?: string;
   email?: string;
+  address?: string;
   message?: string;
   reach?: Reach;
   bestTime?: string;
@@ -111,9 +130,6 @@ function pick(files: File[]): PickedFile[] {
 }
 
 interface ConsultationFormProps {
-  onRevise?: () => void;
-  /** Compact trust bullets below the form (used in the modal variant). */
-  showTrust?: boolean;
   initialProjectType?: "drywall-repair" | "home-maintenance";
   /** The form's own heading. Callback mode always reads "Request a call". */
   heading?: string;
@@ -126,6 +142,8 @@ interface Submitted {
   name: string;
   phone: string;
   email: string;
+  /** The optional job address from Step 1; Step 2 asks for one only when this is blank. */
+  address: string;
   reach: Reach;
   projectType: string;
   hadList: boolean;
@@ -141,8 +159,6 @@ interface FollowUp {
 type Upload = PickedFile & { status: AttachmentStatus; key?: string };
 
 export function ConsultationForm({
-  onRevise,
-  showTrust = false,
   initialProjectType,
   heading = "Send your list",
   headingLevel = "h2",
@@ -151,13 +167,14 @@ export function ConsultationForm({
   const ids = (name: string) => `${uid}-${name}`;
   const [mode, setMode] = useState<Mode>("request");
   const [message, setMessage] = useState("");
-  const [files, setFiles] = useState<PickedFile[]>([]);
-  const [fileNote, setFileNote] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [reach, setReach] = useState<Reach>(DEFAULT_REACH);
   const [bestTime, setBestTime] = useState<string>(BEST_TIMES[0]);
+  /** The Step 1 dropdown of optional fields (email, how to reach you); closed until asked for. */
+  const [optionsOpen, setOptionsOpen] = useState(false);
   const [website, setWebsite] = useState("");
   const [estimate, setEstimate] = useState<StoredEstimate | null>(null);
   const [attached, setAttached] = useState(true);
@@ -166,15 +183,11 @@ export function ConsultationForm({
   const [submitted, setSubmitted] = useState<Submitted | null>(null);
   const [success, setSuccess] = useState(false);
   const [followUp, setFollowUp] = useState<FollowUp | null>(null);
-  const [uploads, setUploads] = useState<Upload[]>([]);
-  const [forwardError, setForwardError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
   const lastKeyRef = useRef<string | null>(null);
   const draftHydrated = useRef(false);
-  /** Uploaded file keys already handed to the request (by the upload run or Step 2). */
-  const forwardedRef = useRef<Set<string>>(new Set());
-  const uploadsRef = useRef<Upload[]>([]);
+  const optionsRef = useRef<HTMLDetailsElement>(null);
   const callback = mode === "callback";
   const Heading = headingLevel;
 
@@ -188,15 +201,18 @@ export function ConsultationForm({
     if (draft.name) setName(draft.name);
     if (draft.phone) setPhone(draft.phone);
     if (draft.email) setEmail(draft.email);
+    if (draft.address) setAddress(draft.address);
     if (draft.message) setMessage(draft.message);
     if (draft.reach && REACH_OPTIONS.some((o) => o.value === draft.reach)) setReach(draft.reach);
     if (draft.bestTime) setBestTime(draft.bestTime);
+    // Anything already entered in the optional dropdown is shown, never hidden.
+    if (draft.address || draft.email || (draft.reach && draft.reach !== DEFAULT_REACH)) setOptionsOpen(true);
   }, []);
 
   useEffect(() => {
     if (success || !draftHydrated.current) return;
-    writeDraft({ mode, name, phone, email, message, reach, bestTime });
-  }, [mode, name, phone, email, message, reach, bestTime, success]);
+    writeDraft({ mode, name, phone, email, address, message, reach, bestTime });
+  }, [mode, name, phone, email, address, message, reach, bestTime, success]);
 
   // A Meta lead form click or an earlier form on this visit may already know who this is.
   useEffect(() => {
@@ -204,7 +220,10 @@ export function ConsultationForm({
       const pf = readStoredPrefill();
       if (pf.name) setName((value) => value || pf.name || "");
       if (pf.phone) setPhone((value) => value || pf.phone || "");
-      if (pf.email) setEmail((value) => value || pf.email || "");
+      if (pf.email) {
+        setEmail((value) => value || pf.email || "");
+        setOptionsOpen(true);
+      }
     }
     applyPrefill();
     window.addEventListener(PREFILL_UPDATED_EVENT, applyPrefill);
@@ -281,7 +300,7 @@ export function ConsultationForm({
   const errors = validate();
   const shown = (field: Field) => ((submitTried || touched[field]) && errors[field]) || "";
   const touch = (field: Field) => () => setTouched((current) => ({ ...current, [field]: true }));
-  const engaged = Boolean(name || phone || message || email || files.length);
+  const engaged = Boolean(name || phone || message || email || address);
 
   const formStartedRef = useRef(false);
   function trackFormStart() {
@@ -290,7 +309,7 @@ export function ConsultationForm({
     trackEvent("form_start", { form: "consultation" });
   }
 
-  /* ───────────── files after the request is saved */
+  /* ───────────── files and details, added on Step 2 after the request is saved */
 
   async function uploadOne(item: Upload, receipt: FollowUp): Promise<Upload> {
     const body = new FormData();
@@ -326,43 +345,6 @@ export function ConsultationForm({
     }
   }
 
-  /** Uploads what still needs uploading, then hands the new links to the request. */
-  async function sendFiles(list: Upload[], receipt: FollowUp) {
-    let current = list.map((item) => (item.status === "done" ? item : { ...item, status: "uploading" as const }));
-    uploadsRef.current = current;
-    setUploads(current);
-    for (const item of current) {
-      if (item.status !== "uploading") continue;
-      const result = await uploadOne(item, receipt);
-      current = current.map((entry) => (entry.id === item.id ? result : entry));
-      uploadsRef.current = current;
-      setUploads(current);
-    }
-    uploadsRef.current = current;
-    const keys = claimPending();
-    if (keys.length === 0) return;
-    const sent = await postDetails(receipt, {}, keys);
-    if (sent.ok) {
-      setForwardError("");
-    } else {
-      releaseKeys(keys);
-      setForwardError("Your files are saved, but we could not add them to your request yet.");
-    }
-  }
-
-  /** Keys uploaded but not yet handed to the request, marked as handed. */
-  function claimPending(): string[] {
-    const keys = uploadsRef.current
-      .filter((item) => item.status === "done" && item.key && !forwardedRef.current.has(item.key))
-      .map((item) => item.key as string);
-    for (const key of keys) forwardedRef.current.add(key);
-    return keys;
-  }
-
-  function releaseKeys(keys: string[]) {
-    for (const key of keys) forwardedRef.current.delete(key);
-  }
-
   const mutation = useMutation({
     mutationFn: async (data: Submitted) => {
       const isCallback = data.mode === "callback";
@@ -372,14 +354,16 @@ export function ConsultationForm({
         phone: data.phone,
         email: isCallback ? "" : data.email,
         preferredContact: isCallback ? "phone" : data.reach,
-        address: "",
+        // Optional, from the Step 1 toggle; blank when left out, and always blank for a callback.
+        address: isCallback ? "" : data.address,
         zip: "",
         // Blank is filed as "task-list" by the server; Step 2 can refine it.
         projectType: data.projectType,
         message: isCallback ? undefined : message.trim(),
         requestKind: isCallback ? "callback" : "quote",
         bestTimeToCall: isCallback ? bestTime : undefined,
-        filesPending: !isCallback && files.length > 0 ? files.length : undefined,
+        // Files are offered on Step 2 only, so none are pending when the request is sent.
+        filesPending: undefined,
         propertyProfile: null,
         skipEmail: hasPassedGate() ? true : undefined,
         // A callback after a list (or the other way round) is its own inquiry.
@@ -440,12 +424,6 @@ export function ConsultationForm({
           content_category: "consultation_request",
         });
       }
-      // Files follow the saved request, one upload each.
-      if (variables.mode === "request" && files.length > 0) {
-        const list: Upload[] = files.map((item) => ({ ...item, status: "ready" }));
-        setUploads(list);
-        if (response.followUp) void sendFiles(list, response.followUp);
-      }
     },
     onError: () => {
       trackEvent("form_error", { form: "consultation", reason: "submit_failed" });
@@ -460,6 +438,11 @@ export function ConsultationForm({
     const first = FIELD_ORDER.find((field) => found[field]);
     if (first) {
       trackEvent("form_error", { form: "consultation", fields: Object.keys(found).sort().join(",") });
+      // The email sits in the optional dropdown: open it, then focus the field.
+      if (first === "email" && optionsRef.current && !optionsRef.current.open) {
+        optionsRef.current.open = true;
+        setOptionsOpen(true);
+      }
       formRef.current?.querySelector<HTMLElement>(`[data-field="${first}"]`)?.focus();
       return;
     }
@@ -468,6 +451,7 @@ export function ConsultationForm({
       name: name.trim(),
       phone: phone.trim(),
       email: callback ? "" : email.trim(),
+      address: callback ? "" : address.trim(),
       reach,
       projectType: initialProjectType || (estimate && attached && !callback ? estimate.project : "") || "task-list",
       hadList: !callback && message.trim().length > 0,
@@ -476,103 +460,50 @@ export function ConsultationForm({
     mutation.mutate(data);
   }
 
-  function addFiles(incoming: File[]) {
-    const { accepted, problems } = partitionRequestFiles(incoming, files.map((item) => item.file));
-    if (accepted.length) setFiles((current) => [...current, ...pick(accepted)]);
-    setFileNote(problems.join(" "));
-  }
-
   if (success) {
     const wasCallback = submitted?.mode === "callback";
-    const failed = uploads.filter((item) => item.status === "failed");
-    const busy = uploads.some((item) => item.status === "uploading");
 
     return (
       // data-family-bar-yield (here and on the request form): the family mobile bar steps aside
       // while the form, this success screen or its Step 2 is on screen
       // (components/family/MobileActionBar.tsx).
-      <div className="hm-form hm-form-done" data-testid="consultation-success" data-clarity-mask="True" data-family-bar-yield="">
+      <div className="hm-form hm-form-done" data-testid="consultation-success" data-clarity-mask="True" data-family-bar-yield="" data-quote-follow-up="">
         <div role="status" className="hm-form-done-head">
-          <Heading ref={successHeadingRef} tabIndex={-1} data-clarity-mask="True" className="hm-form-title">
-            Thanks{submitted ? `, ${submitted.name.split(" ")[0]}` : ""}. We have your request.
-          </Heading>
-          <p className="hm-form-lead">
+          <div className="hm-form-done-title">
+            <span className="hm-form-done-tick" aria-hidden="true">
+              <Check size={18} />
+            </span>
+            <Heading ref={successHeadingRef} tabIndex={-1} data-clarity-mask="True" className="hm-form-title">
+              Thanks{submitted ? `, ${submitted.name.split(" ")[0]}` : ""}. We have your request.
+            </Heading>
+          </div>
+          <p className="hm-form-lead" data-testid="quote-all-set">
             {wasCallback
-              ? `We have your request for a call back at ${submitted?.phone}. We will answer your questions and help you work out the next step.`
-              : "We review your list and reply with a written quote. Scheduling is confirmed after the scope and quote are agreed."}
-          </p>
-          <p className="hm-form-next">
-            Prefer to talk?{" "}
-            <a className="hm-form-inline-link" href={SITE_CONFIG.phoneHref} data-testid="link-consult-success-phone">
-              Call {SITE_CONFIG.phone}
-            </a>
+              ? `We will call you back at ${submitted?.phone}. Nothing else is needed.`
+              : "We review your list and reply with a written quote. Nothing else is needed."}
           </p>
         </div>
-
-        {uploads.length > 0 && (
-          <div className="hm-form-uploads" data-testid="consult-upload-status" data-clarity-mask="True" aria-live="polite">
-            <p className="hm-form-uploads-title">
-              {!followUp
-                ? "We could not add your files on this page."
-                : busy
-                  ? "Adding your files to the request"
-                  : failed.length
-                    ? `${failed.length === 1 ? "One file" : `${failed.length} files`} did not upload.`
-                    : "Your files are with your request."}
-            </p>
-            <ul className="hm-tile-chips">
-              {uploads.map((item) => (
-                <li key={item.id} className={`hm-tile-chip is-${followUp ? item.status : "failed"}`} data-testid="upload-row">
-                  <span className="hm-tile-chip-text">
-                    <span className="hm-tile-chip-name">{item.file.name}</span>
-                    <span className="hm-tile-chip-meta">
-                      {!followUp
-                        ? "Not uploaded"
-                        : item.status === "uploading"
-                          ? "Uploading"
-                          : item.status === "done"
-                            ? "Added"
-                            : item.status === "failed"
-                              ? "Did not upload"
-                              : "Waiting"}
-                    </span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-            {forwardError && <p className="hm-form-error-text">{forwardError}</p>}
-            {(failed.length > 0 || forwardError || !followUp) && !busy && (
-              <div className="hm-form-upload-actions">
-                {followUp && (
-                  <button
-                    type="button"
-                    className="hm-form-text"
-                    onClick={() => void sendFiles(uploads, followUp)}
-                    data-testid="button-retry-uploads"
-                  >
-                    Try again
-                  </button>
-                )}
-                <a className="hm-form-text" href={SITE_CONFIG.phoneSmsHref} data-testid="link-text-files">
-                  Text {failed.length === 1 ? "it" : "them"} to us
-                </a>
-              </div>
-            )}
-          </div>
-        )}
 
         {followUp && submitted && (
           <DetailsPanel
             followUp={followUp}
             submitted={submitted}
-            headingLevel={headingLevel === "h2" ? "h3" : "h4"}
             initialProjectType={initialProjectType}
             uploadOne={uploadOne}
             postDetails={postDetails}
-            claimPending={claimPending}
-            releaseKeys={releaseKeys}
           />
         )}
+
+        <p className="hm-form-quiet">
+          Prefer to talk?{" "}
+          {/* The link and its full stop stay together, so the stop never wraps alone. */}
+          <span className="hm-form-nowrap">
+            <a className="hm-form-inline-link" href={SITE_CONFIG.phoneHref} data-testid="link-consult-success-phone">
+              Call {SITE_CONFIG.phone}
+            </a>
+            .
+          </span>
+        </p>
       </div>
     );
   }
@@ -585,30 +516,6 @@ export function ConsultationForm({
     </p>
   );
   const errorCount = Object.keys(errors).length;
-
-  const talk = (
-    <div className="hm-form-talk">
-      <p className="hm-form-talk-title">Prefer to talk?</p>
-      <div className="hm-form-talk-actions">
-        <a className="hm-form-call" href={SITE_CONFIG.phoneHref} data-testid="link-consult-form-call">
-          <Phone size={18} aria-hidden="true" />
-          Call {SITE_CONFIG.phone}
-        </a>
-        <a className="hm-form-text" href={SITE_CONFIG.phoneSmsHref} data-testid="link-consult-form-text">
-          Text us
-        </a>
-        <button
-          type="button"
-          className="hm-form-chat"
-          onClick={() => window.dispatchEvent(new Event("p5:assistant-open"))}
-          data-testid="button-consult-form-chat"
-        >
-          <MessageSquare size={18} aria-hidden="true" />
-          Chat
-        </button>
-      </div>
-    </div>
-  );
 
   return (
     <div className="hm-form" data-family-bar-yield="">
@@ -638,34 +545,7 @@ export function ConsultationForm({
           {callback ? "Request a call" : heading}
         </Heading>
 
-        <fieldset className="hm-form-mode">
-          <legend className="sr-only">How do you want to start?</legend>
-          <label className="hm-form-pill">
-            <input
-              type="radio"
-              name={ids("mode")}
-              value="request"
-              checked={!callback}
-              onChange={() => setMode("request")}
-              data-testid="request-mode-request"
-            />
-            <span>Send a request</span>
-          </label>
-          <label className="hm-form-pill">
-            <input
-              type="radio"
-              name={ids("mode")}
-              value="callback"
-              checked={callback}
-              onChange={() => setMode("callback")}
-              data-testid="request-mode-callback"
-            />
-            <span>Have us call you</span>
-          </label>
-        </fieldset>
-
         {!callback && (
-          <>
             <div className="hm-form-field">
               <label htmlFor={ids("message")}>Your list</label>
               <textarea
@@ -685,22 +565,9 @@ export function ConsultationForm({
               />
               {fieldError("message")}
             </div>
-
-            <div data-field="files" tabIndex={-1}>
-              <AttachmentTile
-                id={ids("files")}
-                files={files}
-                onAdd={addFiles}
-                onRemove={(fileId) => {
-                  setFiles((current) => current.filter((item) => item.id !== fileId));
-                  setFileNote("");
-                }}
-                message={fileNote}
-              />
-            </div>
-          </>
         )}
 
+        <div className="hm-form-pair">
         <div className="hm-form-field">
           <label htmlFor={ids("name")}>Name</label>
           <input
@@ -740,6 +607,7 @@ export function ConsultationForm({
           />
           {fieldError("phone")}
         </div>
+        </div>
 
         {callback ? (
           <div className="hm-form-field">
@@ -749,7 +617,6 @@ export function ConsultationForm({
               name="bestTimeToCall"
               value={bestTime}
               onChange={(event) => setBestTime(event.target.value)}
-              aria-describedby={ids("best-time-hint")}
               data-testid="select-best-time"
             >
               {BEST_TIMES.map((time) => (
@@ -758,14 +625,36 @@ export function ConsultationForm({
                 </option>
               ))}
             </select>
-            <p className="hm-form-hint" id={ids("best-time-hint")}>
-              We call during business hours (Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM).
-            </p>
           </div>
         ) : (
           <>
+            {/* Everything optional lives behind this one quiet text toggle (no box). */}
+            <details
+              ref={optionsRef}
+              className="hm-form-more"
+              open={optionsOpen}
+              onToggle={(event) => setOptionsOpen(event.currentTarget.open)}
+              data-testid="quote-options"
+            >
+              <summary>
+                <Plus className="hm-form-more-icon" size={16} aria-hidden="true" />
+                <span>Add address, email or contact preference (optional)</span>
+              </summary>
+              <div className="hm-form-more-body">
             <div className="hm-form-field">
-              <label htmlFor={ids("email")}>{reach === "email" ? "Email" : "Email (optional)"}</label>
+              <label htmlFor={ids("address")}>Job address</label>
+              <input
+                id={ids("address")}
+                data-testid="input-address"
+                name="address"
+                autoComplete="street-address"
+                value={address}
+                onChange={(event) => setAddress(event.target.value)}
+                maxLength={300}
+              />
+            </div>
+            <div className="hm-form-field">
+              <label htmlFor={ids("email")}>Email</label>
               <input
                 id={ids("email")}
                 data-field="email"
@@ -779,12 +668,9 @@ export function ConsultationForm({
                 onBlur={touch("email")}
                 aria-required={reach === "email" ? "true" : undefined}
                 aria-invalid={shown("email") ? true : undefined}
-                aria-describedby={describedBy("email", ids("email-hint"))}
+                aria-describedby={describedBy("email")}
                 maxLength={200}
               />
-              <p className="hm-form-hint" id={ids("email-hint")}>
-                {reach === "email" ? "We reply with the written quote here." : "For a written copy of your quote."}
-              </p>
               {fieldError("email")}
             </div>
 
@@ -806,22 +692,22 @@ export function ConsultationForm({
                 ))}
               </div>
             </fieldset>
+              </div>
+            </details>
 
             {estimate && attached && (
-              <div className="hm-form-estimate" data-testid="text-estimate-summary">
-                <span>
-                  Range attached:{" "}
-                  <span data-testid="text-estimate-range">
-                    <DisplayNum>
-                      {formatPlanningCurrency(estimate.priceLow)} to {formatPlanningCurrency(estimate.priceHigh)}
-                    </DisplayNum>
-                  </span>
+              <p className="hm-form-quiet" data-testid="text-estimate-summary">
+                Range attached:{" "}
+                <span data-testid="text-estimate-range">
+                  <DisplayNum>
+                    {formatPlanningCurrency(estimate.priceLow)} to {formatPlanningCurrency(estimate.priceHigh)}
+                  </DisplayNum>
                 </span>
-                <button type="button" onClick={() => setAttached(false)} data-testid="button-drop-estimate">
-                  <X className="h-3.5 w-3.5" aria-hidden="true" />
+                .{" "}
+                <button type="button" className="hm-form-inline-link" onClick={() => setAttached(false)} data-testid="button-drop-estimate">
                   Remove
                 </button>
-              </div>
+              </p>
             )}
           </>
         )}
@@ -846,48 +732,74 @@ export function ConsultationForm({
           </p>
         ) : null}
 
-        <div className="hm-form-send" data-testid="consult-wizard-actions">
-          {talk}
-          <div className="hm-form-send-main">
-            <button className="hm-form-submit" type="submit" disabled={mutation.isPending} data-testid="button-consult-submit">
-              {mutation.isPending ? "Sending" : callback ? CTA_FORM_CALLBACK : CTA_FORM_SEND}
-            </button>
-            <p className="hm-form-next">
-              {callback
-                ? "We call you back, answer your questions and help you work out the next step."
-                : "We review your list and reply with a written quote. This request does not book a visit."}
-            </p>
-          </div>
-        </div>
+        <button className="hm-form-submit" type="submit" disabled={mutation.isPending} data-testid="button-consult-submit">
+          {mutation.isPending ? "Sending" : callback ? CTA_FORM_CALLBACK : CTA_FORM_SEND}
+        </button>
 
-        {/* In the dialog, the estimator is one tap away (onRevise opens it). */}
-        {onRevise && !callback && !estimate && !initialProjectType && (
-          <p className="hm-form-next">
-            Want to list every item first?{" "}
-            <button type="button" className="hm-form-inline-link" onClick={() => onRevise?.()} data-testid="button-start-estimate">
-              Open the repair list
-            </button>
+        {/* The callback switch: two native radios in one quiet line. Only the label of
+            the mode you are NOT in shows, as a text link; the active radio stays in the
+            page, checked and visually hidden. */}
+        <fieldset className="hm-form-mode">
+          <legend className="sr-only">How do you want to start?</legend>
+          <p className="hm-form-quiet">
+            {callback ? (
+              "Rather write it down? "
+            ) : (
+              <>
+                Prefer to talk?{" "}
+                <a className="hm-form-inline-link" href={SITE_CONFIG.phoneHref} data-testid="link-consult-form-call">
+                  Call {SITE_CONFIG.phone}
+                </a>
+                {" or "}
+              </>
+            )}
+            <span className="hm-form-nowrap">
+            <label className={callback ? "hm-form-mode-link" : "sr-only"}>
+              <input
+                type="radio"
+                name={ids("mode")}
+                value="request"
+                checked={!callback}
+                onChange={() => setMode("request")}
+                data-testid="request-mode-request"
+              />
+              <span>Send a request</span>
+            </label>
+            <label className={callback ? "sr-only" : "hm-form-mode-link is-inline"}>
+              <input
+                type="radio"
+                name={ids("mode")}
+                value="callback"
+                checked={callback}
+                onChange={() => setMode("callback")}
+                data-testid="request-mode-callback"
+              />
+              <span>Have us call you</span>
+            </label>
+            .
+            </span>
           </p>
-        )}
+        </fieldset>
 
-        {showTrust && (
-          <ul className="hm-form-trust" data-testid="consult-trust-bullets">
-            {CONSULT_BULLETS.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        )}
+        <p className="hm-form-quiet">
+          No obligation. See our{" "}
+          <span className="hm-form-nowrap">
+            <Link href="/privacy-policy" prefetch={false} className="hm-form-inline-link">
+              Privacy Policy
+            </Link>
+            .
+          </span>
+        </p>
       </form>
     </div>
   );
 }
 
-/* ───────────────────────────── Step 2: "Help us prepare (optional)" */
+/* ───────────────────────────── Step 2: "Add photos, plans or details (optional)" */
 
 interface DetailsPanelProps {
   followUp: FollowUp;
   submitted: Submitted;
-  headingLevel: "h3" | "h4";
   initialProjectType?: string;
   uploadOne: (item: Upload, receipt: FollowUp) => Promise<Upload>;
   postDetails: (
@@ -895,12 +807,13 @@ interface DetailsPanelProps {
     details: Record<string, string | undefined>,
     keys: string[],
   ) => Promise<{ ok: boolean; message?: string }>;
-  claimPending: () => string[];
-  releaseKeys: (keys: string[]) => void;
 }
 
 /**
- * Optional, on the success screen, and never re-asks what Step 1 already has:
+ * One quiet text toggle on the success screen. It used to sit open under the
+ * confirmation, and a client read it as the form asking for more before the
+ * request counted (11 November); leaving it closed is skipping it, so there is
+ * no "Skip" button. Optional, and it never re-asks what Step 1 already has:
  * the type of work (unless a service page already set it), the address,
  * timing, the best time to call (only when they asked for a call), an email
  * (only if they left none), their list (only after a callback) and more files.
@@ -908,22 +821,19 @@ interface DetailsPanelProps {
 function DetailsPanel({
   followUp,
   submitted,
-  headingLevel,
   initialProjectType,
   uploadOne,
   postDetails,
-  claimPending,
-  releaseKeys,
 }: DetailsPanelProps) {
   const uid = useId();
   const ids = (name: string) => `${uid}-${name}`;
-  const Heading = headingLevel;
   const wasCallback = submitted.mode === "callback";
   const askJob = !wasCallback && !initialProjectType && submitted.projectType === "task-list";
   const askBestTime = !wasCallback && submitted.reach === "phone";
   const askEmail = !submitted.email;
+  const askAddress = !submitted.address;
   const askList = wasCallback;
-  const [state, setState] = useState<"open" | "saving" | "saved" | "skipped">("open");
+  const [state, setState] = useState<"open" | "saving" | "saved">("open");
   const [projectType, setProjectType] = useState("");
   const [address, setAddress] = useState("");
   const [timing, setTiming] = useState("");
@@ -937,16 +847,9 @@ function DetailsPanel({
   const savedRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    if (state === "saved" || state === "skipped") savedRef.current?.focus({ preventScroll: true });
+    if (state === "saved") savedRef.current?.focus({ preventScroll: true });
   }, [state]);
 
-  if (state === "skipped") {
-    return (
-      <p className="hm-form-next hm-details-done" ref={savedRef} tabIndex={-1} data-testid="consult-details-skipped">
-        No problem. We have what we need to start.
-      </p>
-    );
-  }
   if (state === "saved") {
     return (
       <p className="hm-form-lead hm-details-done" ref={savedRef} tabIndex={-1} role="status" data-testid="consult-details-saved">
@@ -975,7 +878,7 @@ function DetailsPanel({
     };
     const filled = Object.values(details).filter(Boolean).length;
     if (filled === 0 && files.length === 0) {
-      setError("Add a detail or a file, or skip this step.");
+      setError("Add a detail or a photo first. If you have nothing to add, you are already done.");
       return;
     }
     setError("");
@@ -995,12 +898,9 @@ function DetailsPanel({
       setError("Those files did not upload. Try again, or text them to us.");
       return;
     }
-    // Any first-step files that finished uploading ride along, once.
-    const earlier = claimPending();
-    const keys = [...earlier, ...own];
+    const keys = own;
     const sent = await postDetails(followUp, details, keys);
     if (!sent.ok) {
-      releaseKeys(earlier);
       setState("open");
       setError(sent.message || "We could not save that. Try again, or call us.");
       return;
@@ -1021,18 +921,13 @@ function DetailsPanel({
   }
 
   return (
-    <form
-      className="hm-details"
-      onSubmit={onSave}
-      noValidate
-      aria-labelledby={ids("title")}
-      data-clarity-mask="True"
-      data-testid="consult-details"
-    >
-      <Heading className="hm-details-title" id={ids("title")}>
-        Help us prepare (optional)
-      </Heading>
-      <p className="hm-form-hint">A few details help us give you a closer quote on the first call.</p>
+    <section className="hm-details" aria-labelledby={ids("title")} data-clarity-mask="True" data-testid="consult-details">
+      <details className="hm-form-more" data-testid="quote-details-disclosure">
+        <summary id={ids("title")}>
+          <Plus className="hm-form-more-icon" size={16} aria-hidden="true" />
+          <span>Add photos, plans or details (optional)</span>
+        </summary>
+    <form className="hm-form-more-body" onSubmit={onSave} noValidate data-quote-details-form="">
 
       {askList && (
         <div className="hm-form-field">
@@ -1070,6 +965,7 @@ function DetailsPanel({
         </fieldset>
       )}
 
+      {askAddress && (
       <div className="hm-form-field">
         <label htmlFor={ids("address")}>Address or ZIP code</label>
         <input
@@ -1079,13 +975,10 @@ function DetailsPanel({
           autoComplete="street-address"
           value={address}
           onChange={(event) => setAddress(event.target.value)}
-          aria-describedby={ids("address-hint")}
           maxLength={300}
         />
-        <p className="hm-form-hint" id={ids("address-hint")}>
-          Confirms you are in our service area. Never shared or sold.
-        </p>
       </div>
+      )}
 
       <fieldset className="hm-form-reach">
         <legend>When would you like this done?</legend>
@@ -1127,7 +1020,7 @@ function DetailsPanel({
 
       {askEmail && (
         <div className="hm-form-field">
-          <label htmlFor={ids("email")}>Email (optional)</label>
+          <label htmlFor={ids("email")}>Email</label>
           <input
             id={ids("email")}
             data-testid="details-email"
@@ -1146,10 +1039,12 @@ function DetailsPanel({
         </div>
       )}
 
+      {/* File names show here (and nowhere else on the success screen), masked for Clarity. */}
+      <div data-testid="consult-upload-status" data-clarity-mask="True">
       <AttachmentTile
         id={ids("files")}
         files={files}
-        label={wasCallback ? "Add photos, plans or files" : "Add more photos, plans or files"}
+        label="Add photos, plans or files"
         testId="details-attachment-tile"
         onAdd={(incoming) => {
           const { accepted, problems } = partitionRequestFiles(incoming, files.map((item) => item.file));
@@ -1162,6 +1057,7 @@ function DetailsPanel({
         }}
         message={fileNote}
       />
+      </div>
 
       {error && (
         <p className="hm-form-error" role="alert">
@@ -1173,16 +1069,9 @@ function DetailsPanel({
         <button type="submit" className="hm-form-submit" disabled={state === "saving"} data-testid="button-details-save">
           {state === "saving" ? "Saving" : "Save details"}
         </button>
-        <button
-          type="button"
-          className="hm-form-inline-link"
-          onClick={() => setState("skipped")}
-          disabled={state === "saving"}
-          data-testid="button-details-skip"
-        >
-          Skip
-        </button>
       </div>
     </form>
+      </details>
+    </section>
   );
 }

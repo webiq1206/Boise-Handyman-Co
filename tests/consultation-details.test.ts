@@ -207,7 +207,8 @@ test("file validation: photos, HEIC and PDFs up to 20 MB each and ten in all; an
   assert.equal(MAX_REQUEST_FILES, 10);
   assert.equal(MAX_REQUEST_FILE_BYTES, 20 * 1024 * 1024);
   assert.equal(REQUEST_FILE_ACCEPT, "image/*,application/pdf,.heic,.heif");
-  assert.equal(REQUEST_FILE_HINT, "Optional. Photos, PDFs or drawings. Up to 10 files, 20 MB each.");
+  // The tile sits inside the "(optional)" toggle, so its hint does not repeat the word.
+  assert.equal(REQUEST_FILE_HINT, "Photos, PDFs or drawings. Up to 10 files, 20 MB each.");
   assert.equal(requestFileExtension({ type: "application/pdf", name: "plan.pdf" }), "pdf");
   assert.equal(requestFileExtension({ type: "", name: "door.HEIC" }), "heic");
   assert.equal(requestFileExtension({ type: "application/octet-stream", name: "scan.pdf" }), "pdf");
