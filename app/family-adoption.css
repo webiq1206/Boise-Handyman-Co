@@ -197,11 +197,138 @@
   pointer-events: none;
 }
 
-/* Native radios drawn as pills: the input stays focusable and announced. */
+/* The two steps, named above the form (components/forms/QuoteSteps.tsx). */
+.hm-form .hm-form-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 500 14px/1.4 var(--font-sans);
+  color: #555b56;
+}
+.hm-form .hm-form-steps li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hm-form .hm-form-steps li.is-current-or-done {
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+.hm-form .hm-form-step-badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(44, 48, 47, 0.45);
+  font: 600 12px/1 var(--font-sans);
+}
+.hm-form .hm-form-steps li.is-current-or-done .hm-form-step-badge {
+  border-color: var(--color-charcoal);
+}
+.hm-form .hm-form-step-badge.is-filled {
+  background: var(--color-charcoal);
+  color: var(--color-paper);
+}
+
+/* "Send a request" | "Have us call you": native radios drawn as quiet tabs. An
+   underline marks the active one, so neither reads as a second send button. */
 .hm-form .hm-form-mode {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 1px solid var(--color-charcoal);
+}
+.hm-form .hm-form-tab {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  margin: 0;
+}
+.hm-form .hm-form-tab input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.hm-form .hm-form-tab span {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 6px;
+  border-bottom: 2px solid rgba(44, 48, 47, 0.2);
+  color: #555b56;
+  font: 600 15px/1.2 var(--font-sans);
+  text-align: center;
+}
+.hm-form .hm-form-tab:hover span {
+  color: var(--color-charcoal);
+}
+.hm-form .hm-form-tab input:checked + span {
+  border-bottom-color: var(--color-charcoal);
+  color: var(--color-charcoal);
+}
+.hm-form .hm-form-tab input:focus-visible + span {
+  outline: 2px solid var(--color-charcoal);
+  outline-offset: 2px;
+}
+
+/* One closed-by-default dropdown holds everything optional (Step 1: email and
+   how to reach you; Step 2 on the success screen: photos and job details). */
+.hm-form .hm-form-more {
+  min-width: 0;
+  border: 1px solid rgba(44, 48, 47, 0.3);
+  border-radius: var(--radius-input, 4px);
+  background: #fff;
+}
+.hm-form .hm-form-more > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 8px 12px;
+  list-style: none;
+  color: var(--color-charcoal);
+  font: 600 15px/1.35 var(--font-sans);
+  cursor: pointer;
+}
+.hm-form .hm-form-more > summary::-webkit-details-marker {
+  display: none;
+}
+.hm-form .hm-form-more > summary:hover {
+  background: rgba(44, 48, 47, 0.04);
+}
+.hm-form .hm-form-optional {
+  font-weight: 500;
+  color: #555b56;
+}
+.hm-form .hm-form-more-icon {
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+.hm-form .hm-form-more[open] > summary .hm-form-more-icon {
+  transform: rotate(180deg);
+}
+.hm-form .hm-form-more-body {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  padding: 16px 12px;
+  border-top: 1px solid rgba(44, 48, 47, 0.2);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hm-form .hm-form-more-icon {
+    transition: none;
+  }
 }
 .hm-form .hm-form-pills {
   display: grid;
@@ -271,59 +398,24 @@
   cursor: pointer;
 }
 
-/* Call, text or chat sit right above the send button on a phone, beside it on a wide card. */
+/* One send button, one short line under it, then "Prefer to talk?" as a quiet
+   line of text links (it used to be a stack of outlined buttons above the send). */
 .hm-form .hm-form-send {
   display: grid;
-  gap: 14px;
+  gap: 10px;
+}
+.hm-form .hm-form-footnote {
+  margin: 0;
+  font: 500 14px/1.5 var(--font-sans);
+  color: #555b56;
+  text-align: center;
 }
 .hm-form .hm-form-talk {
-  display: grid;
-  gap: 8px;
+  margin: 6px 0 0;
   padding-top: 14px;
   border-top: 1px solid rgba(44, 48, 47, 0.15);
-}
-.hm-form .hm-form-talk-title {
-  margin: 0;
-  font: 600 15px/1.4 var(--font-sans);
-  color: var(--color-charcoal);
-}
-.hm-form .hm-form-talk-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.hm-form .hm-form-call,
-.hm-form .hm-form-text,
-.hm-form .hm-form-chat {
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 48px;
-  padding: 0 12px;
-  border: 1px solid var(--color-charcoal);
-  background: transparent;
-  color: var(--color-charcoal);
-  font: 600 15px/1.2 var(--font-sans);
-  text-decoration: none;
-  cursor: pointer;
-}
-.hm-form .hm-form-call:hover,
-.hm-form .hm-form-text:hover,
-.hm-form .hm-form-chat:hover {
-  background: rgba(44, 48, 47, 0.06);
-}
-.hm-form .hm-form-talk-actions .hm-form-call {
-  flex: 1 1 100%;
-}
-.hm-form .hm-form-talk-actions .hm-form-text,
-.hm-form .hm-form-talk-actions .hm-form-chat {
-  flex: 1 1 0;
-}
-.hm-form .hm-form-send-main {
-  display: grid;
-  gap: 8px;
+  font: 500 15px/1.6 var(--font-sans);
+  color: #555b56;
 }
 .hm-form .hm-form-submit {
   box-sizing: border-box;
@@ -370,25 +462,6 @@
   font: 500 13px/1.4 var(--font-sans);
   color: #555b56;
 }
-/* Beside the send button only where the form itself is wide (homepage and contact
-   cards on a desktop), never in the dialog or a narrow column. */
-@container (min-width: 560px) {
-  .hm-form .hm-form-send {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-    align-items: start;
-    gap: 20px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(44, 48, 47, 0.15);
-  }
-  .hm-form .hm-form-send-main {
-    order: -1;
-  }
-  .hm-form .hm-form-talk {
-    padding-top: 0;
-    border-top: 0;
-  }
-}
-
 /* ---------- Attachment tile (components/forms/AttachmentTile.tsx) ----------
    One dashed tile instead of the browser's raw file control. The native input is
    visually hidden but stays focusable and labelled; its focus ring shows on the
@@ -519,47 +592,47 @@
   background: rgba(44, 48, 47, 0.06);
 }
 
-/* ---------- After sending: file status and Step 2 ("Help us prepare") ---------- */
+/* ---------- After sending: the confirmation, then Step 2 as one closed dropdown ---------- */
 .hm-form .hm-form-done-head {
   display: grid;
   gap: 16px;
 }
-.hm-form .hm-form-uploads {
-  display: grid;
-  gap: 10px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(44, 48, 47, 0.15);
-}
-.hm-form .hm-form-uploads-title {
-  margin: 0;
-  font: 600 15px/1.4 var(--font-sans);
-}
-.hm-form .hm-form-upload-actions {
+.hm-form .hm-form-done-title {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 12px;
 }
-.hm-form .hm-form-upload-actions > * {
-  flex: 1 1 0;
+.hm-form .hm-form-done-title .hm-form-title:focus {
+  outline: none;
+}
+.hm-form .hm-form-done-tick {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-top: 4px;
+  background: var(--color-charcoal);
+  color: var(--color-paper);
+}
+.hm-form .hm-form-all-set {
+  margin: 0;
+  font: 600 16px/1.5 var(--font-sans);
+  color: var(--color-charcoal);
 }
 .hm-form .hm-details {
-  display: grid;
-  gap: 16px;
   min-width: 0;
   margin: 0;
-  padding: 20px;
-  border: 1px solid rgba(44, 48, 47, 0.2);
-  background: rgba(44, 48, 47, 0.025);
+  padding-top: 20px;
+  border-top: 1px solid rgba(44, 48, 47, 0.15);
 }
 .hm-form .hm-details .hm-details-title {
   margin: 0;
-  font: 600 19px/1.3 var(--font-sans);
+  font: 600 15px/1.35 var(--font-sans);
   letter-spacing: 0;
   color: var(--color-charcoal);
   text-transform: none;
-}
-.hm-form .hm-details > .hm-form-hint {
-  margin-top: -10px;
 }
 .hm-form .hm-form-chips {
   display: flex;
@@ -580,19 +653,9 @@
   width: auto;
   flex: 1 1 200px;
 }
-.hm-form .hm-details-actions .hm-form-inline-link {
-  min-height: 48px;
-  padding: 0 8px;
-}
 .hm-form .hm-details-done:focus {
   outline: none;
 }
-@media (max-width: 479px) {
-  .hm-form .hm-details {
-    padding: 16px;
-  }
-}
-
 @media (max-width: 359px) {
   .hm-form .hm-form-pill span {
     padding: 0 4px;

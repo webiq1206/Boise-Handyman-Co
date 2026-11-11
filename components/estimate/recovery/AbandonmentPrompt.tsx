@@ -140,16 +140,23 @@ export function AbandonmentPrompt({ open, flow, method, leaving, onStay, onConti
                   {state === "sending" ? "Sending…" : "Call me"}
                 </Button>
               </div>
-              <label className="sr-only" htmlFor="recovery-name">Your name (optional)</label>
-              <input
-                id="recovery-name"
-                type="text"
-                autoComplete="name"
-                placeholder="Your name (optional)"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="mt-2 h-11 w-full rounded-sm border border-inverse-foreground/25 bg-inverse-foreground/[0.06] px-3 text-sm text-inverse-foreground placeholder:text-inverse-muted/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-legible"
-              />
+              {/* The phone number is all we need. The one optional field stays in a closed dropdown. */}
+              <details className="mt-2" data-testid="recovery-options">
+                <summary className="flex min-h-11 cursor-pointer items-center text-[0.8125rem] text-inverse-muted underline underline-offset-4 hover:text-inverse-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-legible">
+                  Add your name (optional)
+                </summary>
+                <label className="sr-only" htmlFor="recovery-name">Your name (optional)</label>
+                <input
+                  id="recovery-name"
+                  type="text"
+                  autoComplete="name"
+                  placeholder="Your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="mt-1 h-12 w-full rounded-sm border border-inverse-foreground/25 bg-inverse-foreground/[0.06] px-3 text-base text-inverse-foreground placeholder:text-inverse-muted/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-legible"
+                  data-testid="recovery-name"
+                />
+              </details>
               {message && (
                 <p id="recovery-callback-msg" role="alert" className="mt-2 text-[0.8125rem] text-red-300">
                   {message}
