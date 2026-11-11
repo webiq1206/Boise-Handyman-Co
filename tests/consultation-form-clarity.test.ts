@@ -80,20 +80,37 @@ test("Step 1 has no file control: files are offered after sending only", () => {
 test("every optional Step 1 field sits behind the one quiet text toggle, which is not a box", () => {
   const open = at(step1, 'data-testid="quote-options"');
   const close = at(step1, "</details>");
-  for (const needle of ['data-testid="input-email"', "How should we reach you?", "button-preferred-contact-"]) {
+  for (const needle of ['data-testid="input-address"', 'data-testid="input-email"', "How should we reach you?", "button-preferred-contact-"]) {
     const index = at(step1, needle);
     assert.ok(index > open && index < close, needle);
   }
   assert.equal(step1.match(/<details/g)?.length, 1);
-  assert.match(step1, /<span>Add email or contact preference \(optional\)<\/span>/);
+  assert.match(step1, /<span>Add address, email or contact preference \(optional\)<\/span>/);
   const rules = [...css.matchAll(/\.hm-form \.hm-form-more[^{]*\{[^}]*\}/g)].map((match) => match[0]).join("\n");
   assert.ok(rules.length > 0);
   assert.doesNotMatch(rules, /border|background|padding/, "the toggle has no border, background or padding box");
   // Closed until asked for; a draft or prefill with an email, or a non-default reply choice, opens it.
   assert.match(form, /const \[optionsOpen, setOptionsOpen\] = useState\(false\)/);
-  assert.match(form, /draft\.email \|\| \(draft\.reach && draft\.reach !== DEFAULT_REACH\)\) setOptionsOpen\(true\)/);
+  assert.match(form, /draft\.address \|\| draft\.email \|\| \(draft\.reach && draft\.reach !== DEFAULT_REACH\)\) setOptionsOpen\(true\)/);
   // Validation that needs the email opens the toggle before focusing the field.
   assert.match(form, /first === "email" && optionsRef\.current && !optionsRef\.current\.open/);
+});
+
+test("the optional job address is the first field in the toggle, rides with the request and is never re-asked", () => {
+  ascending(step1, ['data-testid="quote-options"', 'data-testid="input-address"', 'data-testid="input-email"']);
+  const field = step1.slice(at(step1, 'data-testid="input-address"') - 120, at(step1, 'data-testid="input-email"'));
+  assert.match(field, /Job address \(optional\)/);
+  assert.match(field, /autoComplete="street-address"/);
+  assert.match(field, /maxLength=\{300\}/);
+  assert.doesNotMatch(field, /aria-required|aria-invalid|fieldError/, "never required, never validated");
+  // Sent in the field the server already accepts; blank when left out and always blank for a callback.
+  assert.match(form, /address: isCallback \? "" : data\.address,/);
+  assert.match(form, /address: callback \? "" : address\.trim\(\),/);
+  const schema = read("../server/services/consultationRequest.ts");
+  assert.match(schema, /address: z\.string\(\)\.max\(300\)\.optional\(\)\.default\(""\)/);
+  // After sending, the address is asked for only when the request did not carry one.
+  assert.match(panel, /const askAddress = !submitted\.address;/);
+  assert.match(panel, /\{askAddress && \(\s*<div className="hm-form-field">\s*<label htmlFor=\{ids\("address"\)\}>Address or ZIP code<\/label>/);
 });
 
 test("one send button", () => {

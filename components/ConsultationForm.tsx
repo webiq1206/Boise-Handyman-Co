@@ -34,8 +34,9 @@ import { readStoredPrefill, PREFILL_UPDATED_EVENT, hasPassedGate } from "@/lib/l
  *   the heading
  *   Your list
  *   Name, Phone (side by side on a wide screen)
- *   "Add email or contact preference (optional)": one quiet text toggle
- *     (a native details with no box) holding Email and How should we reach you
+ *   "Add address, email or contact preference (optional)": one quiet text toggle
+ *     (a native details with no box) holding Job address, Email and How
+ *     should we reach you
  *   Send my list
  *   "Prefer to talk? Call (number) or have us call you."
  *   "No obligation." and the Privacy Policy link
@@ -84,6 +85,7 @@ interface Draft {
   name?: string;
   phone?: string;
   email?: string;
+  address?: string;
   message?: string;
   reach?: Reach;
   bestTime?: string;
@@ -140,6 +142,8 @@ interface Submitted {
   name: string;
   phone: string;
   email: string;
+  /** The optional job address from Step 1; Step 2 asks for one only when this is blank. */
+  address: string;
   reach: Reach;
   projectType: string;
   hadList: boolean;
@@ -166,6 +170,7 @@ export function ConsultationForm({
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [reach, setReach] = useState<Reach>(DEFAULT_REACH);
   const [bestTime, setBestTime] = useState<string>(BEST_TIMES[0]);
   /** The Step 1 dropdown of optional fields (email, how to reach you); closed until asked for. */
@@ -196,17 +201,18 @@ export function ConsultationForm({
     if (draft.name) setName(draft.name);
     if (draft.phone) setPhone(draft.phone);
     if (draft.email) setEmail(draft.email);
+    if (draft.address) setAddress(draft.address);
     if (draft.message) setMessage(draft.message);
     if (draft.reach && REACH_OPTIONS.some((o) => o.value === draft.reach)) setReach(draft.reach);
     if (draft.bestTime) setBestTime(draft.bestTime);
     // Anything already entered in the optional dropdown is shown, never hidden.
-    if (draft.email || (draft.reach && draft.reach !== DEFAULT_REACH)) setOptionsOpen(true);
+    if (draft.address || draft.email || (draft.reach && draft.reach !== DEFAULT_REACH)) setOptionsOpen(true);
   }, []);
 
   useEffect(() => {
     if (success || !draftHydrated.current) return;
-    writeDraft({ mode, name, phone, email, message, reach, bestTime });
-  }, [mode, name, phone, email, message, reach, bestTime, success]);
+    writeDraft({ mode, name, phone, email, address, message, reach, bestTime });
+  }, [mode, name, phone, email, address, message, reach, bestTime, success]);
 
   // A Meta lead form click or an earlier form on this visit may already know who this is.
   useEffect(() => {
@@ -294,7 +300,7 @@ export function ConsultationForm({
   const errors = validate();
   const shown = (field: Field) => ((submitTried || touched[field]) && errors[field]) || "";
   const touch = (field: Field) => () => setTouched((current) => ({ ...current, [field]: true }));
-  const engaged = Boolean(name || phone || message || email);
+  const engaged = Boolean(name || phone || message || email || address);
 
   const formStartedRef = useRef(false);
   function trackFormStart() {
@@ -348,7 +354,8 @@ export function ConsultationForm({
         phone: data.phone,
         email: isCallback ? "" : data.email,
         preferredContact: isCallback ? "phone" : data.reach,
-        address: "",
+        // Optional, from the Step 1 toggle; blank when left out, and always blank for a callback.
+        address: isCallback ? "" : data.address,
         zip: "",
         // Blank is filed as "task-list" by the server; Step 2 can refine it.
         projectType: data.projectType,
@@ -444,6 +451,7 @@ export function ConsultationForm({
       name: name.trim(),
       phone: phone.trim(),
       email: callback ? "" : email.trim(),
+      address: callback ? "" : address.trim(),
       reach,
       projectType: initialProjectType || (estimate && attached && !callback ? estimate.project : "") || "task-list",
       hadList: !callback && message.trim().length > 0,
@@ -627,9 +635,21 @@ export function ConsultationForm({
             >
               <summary>
                 <Plus className="hm-form-more-icon" size={16} aria-hidden="true" />
-                <span>Add email or contact preference (optional)</span>
+                <span>Add address, email or contact preference (optional)</span>
               </summary>
               <div className="hm-form-more-body">
+            <div className="hm-form-field">
+              <label htmlFor={ids("address")}>Job address (optional)</label>
+              <input
+                id={ids("address")}
+                data-testid="input-address"
+                name="address"
+                autoComplete="street-address"
+                value={address}
+                onChange={(event) => setAddress(event.target.value)}
+                maxLength={300}
+              />
+            </div>
             <div className="hm-form-field">
               <label htmlFor={ids("email")}>{reach === "email" ? "Email" : "Email (optional)"}</label>
               <input
@@ -804,6 +824,7 @@ function DetailsPanel({
   const askJob = !wasCallback && !initialProjectType && submitted.projectType === "task-list";
   const askBestTime = !wasCallback && submitted.reach === "phone";
   const askEmail = !submitted.email;
+  const askAddress = !submitted.address;
   const askList = wasCallback;
   const [state, setState] = useState<"open" | "saving" | "saved">("open");
   const [projectType, setProjectType] = useState("");
@@ -937,6 +958,7 @@ function DetailsPanel({
         </fieldset>
       )}
 
+      {askAddress && (
       <div className="hm-form-field">
         <label htmlFor={ids("address")}>Address or ZIP code</label>
         <input
@@ -949,6 +971,7 @@ function DetailsPanel({
           maxLength={300}
         />
       </div>
+      )}
 
       <fieldset className="hm-form-reach">
         <legend>When would you like this done?</legend>
