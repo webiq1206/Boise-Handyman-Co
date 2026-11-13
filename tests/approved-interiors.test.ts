@@ -48,13 +48,17 @@ test('contact hero quote request points at the contact form, ahead of the visit 
   assert.match(source, /interior-contact-actions[\s\S]*?<InteriorEstimateLink\s+label="Send your list and photos"\s+href="\/contact#consult"\s*\/>[\s\S]*?href="#consult"/);
   assert.doesNotMatch(source, /href="\/estimate"/);
   assert.match(read('components/approved/InteriorLayout.tsx'), /href='\/contact'/);
-  for (const phrase of ['Instant online estimate', '60 sec', 'Get my online estimate', 'online estimator', 'Planning range after photos']) {
+  // Owner decision, 13 November 2026: the central estimator at /instant-estimate gives an
+  // on-screen preliminary range, so instant-estimate wording is accurate and allowed; it must
+  // never be called a quote or a final price. 'Instant online estimate' left this list for
+  // that reason. A number of seconds and the other retired stat wording stay out.
+  for (const phrase of ['60 sec', 'Get my online estimate', 'online estimator', 'Planning range after photos']) {
     assert.equal(about.includes(phrase), false, `about: ${phrase}`);
     assert.equal(source.includes(phrase), false, `contact: ${phrase}`);
   }
   assert.match(stats, /label: "Written quote"/);
   assert.match(stats, /num: "before work starts"/);
-  assert.doesNotMatch(stats, /Instant online estimate|60 sec|Planning range after photos/);
+  assert.doesNotMatch(stats, /60 sec|Planning range after photos/);
   assert.match(source, /Send photos and your task list\. We review the scope before preparing a written quote\. Nothing is scheduled until you approve\./);
   assert.match(source, /Send your task list with photos, or call or text our team\. You get one written price before work starts\./);
 });

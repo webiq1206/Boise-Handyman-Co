@@ -5,6 +5,7 @@ import Link from 'next/link';
 import {ArrowUpRight} from 'lucide-react';
 import {Accordion,AccordionItem,AccordionTrigger,AccordionContent} from '@/components/ui/accordion';
 import {brands,cities} from './family-content';
+import {CTA_ESTIMATE,CTA_QUOTE,ESTIMATE_HREF,QUOTE_FORM_HREF} from '@/shared/ctaCopy';
 const Arrow=()=> <ArrowUpRight size={18} aria-hidden="true"/>;
 function Rows({items,numbered=false}:{items:[string,string][];numbered?:boolean}){return <Accordion type="single" collapsible defaultValue="0" className="f-accordion">{items.map(([title,copy],i)=><AccordionItem value={String(i)} key={title}><AccordionTrigger>{numbered&&<span className="f-number" aria-hidden="true">{String(i+1).padStart(2,"0")}</span>}<span>{title}</span></AccordionTrigger><AccordionContent>{copy}</AccordionContent></AccordionItem>)}</Accordion>}
 
@@ -34,6 +35,28 @@ export function ApprovedFounder(){
     <blockquote>&ldquo;Work hard. Keep your word. Treat people right.&rdquo;</blockquote>
     <p><Link className="f-link" href="/about">Read Nick&apos;s story <Arrow/></Link></p>
    </div>
+  </div>
+ </section>;}
+
+/**
+ * The instant estimate, sold once near the top of the page (owner decision,
+ * 13 November 2026): a headline, one sentence, three short benefits and the
+ * button. It reuses the call-to-action strip; the estimator itself is framed on
+ * /instant-estimate. A preliminary range, never a quote or a final price.
+ */
+export function ApprovedInstantEstimate(){
+ return <section className="fr-cta-strip fr-estimate-strip" aria-labelledby="home-instant-estimate">
+  <div className="f-container">
+   <div>
+    <h2 id="home-instant-estimate">An instant estimate for your to-do list.</h2>
+    <p>Pick your jobs, answer a few questions and see a preliminary price range on screen.</p>
+    <ul className="fr-estimate-benefits">
+     <li>Free and open day or night</li>
+     <li>No appointment needed to see your range</li>
+     <li>A preliminary range now, a firm written proposal after we see the work</li>
+    </ul>
+   </div>
+   <div className="fr-cta-strip-actions"><Link className="f-button f-dark" href={ESTIMATE_HREF} data-testid="link-home-instant-estimate">{CTA_ESTIMATE}</Link><a className="f-link" href={QUOTE_FORM_HREF}>{CTA_QUOTE} <Arrow/></a></div>
   </div>
  </section>;}
 

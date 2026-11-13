@@ -16,6 +16,11 @@ for (const file of ['llms.txt', 'llms-full.txt']) {
       assert.ok(line.includes(service.shortDescription), `${service.slug}: source description`);
     }
     assert.match(text, /\/estimate/);
-    assert.doesNotMatch(text, /instant (?:handyman estimate|estimator)/i);
+    // Owner decision, 13 November 2026: the central estimator at /instant-estimate gives an
+    // on-screen preliminary range, so instant-estimate wording is accurate and allowed; it
+    // must never be called a quote or a final price.
+    const estimatorLine = text.split('\n').find(row => row.includes('/instant-estimate'));
+    assert.ok(estimatorLine, 'the instant estimate page is listed');
+    assert.doesNotMatch(text, /instant (?:quote|bid)|guaranteed price/i);
   });
 }

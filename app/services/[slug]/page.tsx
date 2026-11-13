@@ -15,6 +15,7 @@ import { buildPageMetadata,isCityServiceNoindex } from '@/lib/page-metadata';
 import { generateSpeakableSchema } from '@/lib/schema';
 import { SERVICE_SLUGS,getServiceBySlug,servicePath } from '@/lib/seo-routes';
 import { CITIES, serviceHeading } from '@/shared/contentData';
+import { CTA_ESTIMATE, estimatorProjectForService, instantEstimateHref } from '@/shared/ctaCopy';
 import { getFeaturedGalleryProject } from '@/shared/galleryData';
 import { SERVICE_SEO_CONTENT } from '@/shared/seoContent';
 import { getServiceImageSet } from '@/shared/serviceBackgrounds';
@@ -78,11 +79,16 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
   /* Cost guidance is no longer one of the long-form sections: it renders as
      the template's dedicated cost-and-timeline band directly after the hero,
      where the visitor's first question gets answered first. */
+  // Owner decision, 13 November 2026: where an estimator project prices this
+  // service, the cost band leads with the instant estimate. The existing
+  // request paths stay beside it.
+  const estimateProject = estimatorProjectForService(service.slug);
   const costGuidance = content.costGuidance
     ? {
         heading: content.costGuidance.heading,
         paragraphs: content.costGuidance.paragraphs,
         links: [
+          ...(estimateProject ? [{ label: CTA_ESTIMATE, href: instantEstimateHref(estimateProject) }] : []),
           { label: 'Request a repair estimate', href: '/estimate' },
           { label: 'Discuss your repair list', href: '/contact#consult' },
         ],

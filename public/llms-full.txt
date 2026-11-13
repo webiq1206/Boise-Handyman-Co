@@ -13,6 +13,7 @@ Boise Handyman Co is a locally owned handyman service for the Treasure Valley. W
 - Business type: Handyman service (home repairs, installs, and maintenance)
 - Service model: Scope review, written quotes and an agreed visit plan
 - Contact: https://boisehandyman.co/contact
+- Instant estimate: https://boisehandyman.co/instant-estimate (free online estimator; shows a preliminary price range on screen for budgeting, not a quote or a final price)
 - Project inquiry: https://boisehandyman.co/estimate
 
 ## Service area
@@ -96,6 +97,7 @@ Neighborhood guides:
 - About: https://boisehandyman.co/about
 - Services: https://boisehandyman.co/services
 - Service areas: https://boisehandyman.co/areas
+- Instant estimate: https://boisehandyman.co/instant-estimate
 - Project inquiry: https://boisehandyman.co/estimate
 - Blog: https://boisehandyman.co/blog
 - Guides: https://boisehandyman.co/guides
@@ -106,4 +108,4 @@ Neighborhood guides:
 
 Boise Handyman Co also completes RE-10 and home inspection repairs for real estate agents, buyers and sellers across Boise and the Treasure Valley. An RE-10 is the Idaho inspection response form: after a home inspection the buyer requests specific repairs before closing. We review the RE-10 and inspection report, provide a written scope and pricing, coordinate access, complete the approved work across multiple trades, and supply photo documentation, invoices and receipts for the transaction file. Structural, foundation, mold and asbestos abatement, main electrical service, sewer and septic, HVAC replacement, gas lines and full roof replacement are coordinated to licensed specialists rather than performed in house. Inspection repair lists are exactly the small, defined jobs a handyman does every day, and we sequence them against a closing date that will not move. Details: https://boisehandyman.co/re-10-repairs-boise
 
-Last updated: 2026-11-09. Full sitemap: https://boisehandyman.co/sitemap.xml
+Last updated: 2026-11-13. Full sitemap: https://boisehandyman.co/sitemap.xml

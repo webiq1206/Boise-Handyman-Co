@@ -1,0 +1,90 @@
+/*
+ * /instant-estimate. The introduction is deliberately compact: on a phone the
+ * first estimator question has to be visible on the first screen, so this page
+ * does not use the tall interior hero. Colours, type and spacing come from the
+ * family tokens (styles/family-tokens.css).
+ */
+.shell {
+  width: min(100% - 32px, 1380px);
+  margin-inline: auto;
+}
+/* A site rule (app/family.css) owns the top padding of a page's first section,
+   so the introduction's own spacing sits on its inner block. */
+.intro {
+  background: var(--color-paper, #fbfaf6);
+  color: var(--color-charcoal, #2c302f);
+}
+.intro > .shell {
+  padding-block: 18px 12px;
+}
+.title {
+  margin: 0;
+  max-width: 24ch;
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: clamp(1.625rem, 1.2rem + 2vw, 2.5rem);
+  line-height: 1.12;
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+.support {
+  margin: 8px 0 0;
+  max-width: 62ch;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #484c47;
+}
+.frame {
+  padding-block: 4px 40px;
+  background: var(--color-paper, #fbfaf6);
+}
+.steps {
+  display: grid;
+  gap: 28px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.steps > li {
+  margin: 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(44, 48, 47, 0.16);
+}
+.steps > li > p {
+  margin-top: 8px;
+}
+.stepNumber {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-charcoal, #2c302f);
+}
+.pair {
+  display: grid;
+  gap: 48px;
+}
+@media (min-width: 768px) {
+  /* From here the page shares the editorial shell (--ed-shell), so the
+     introduction and the frame line up with the sections below. */
+  .shell {
+    width: var(--ed-shell, min(100% - 48px, 1380px));
+  }
+  .intro > .shell {
+    padding-block: 36px 16px;
+  }
+  .frame {
+    padding-block: 8px 64px;
+  }
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+  }
+  .pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 72px;
+  }
+}

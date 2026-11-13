@@ -11,7 +11,7 @@ import { matchesRoute, isActiveHref } from '../lib/family/types.ts';
 import { FAMILY_BRAND } from '../lib/familyBrand.ts';
 import { BUSINESS_VCARD_PATH, buildBusinessVCard } from '../lib/vcard.ts';
 import { CITIES, SERVICES } from '../shared/contentData.ts';
-import { CTA_QUOTE } from '../shared/ctaCopy.ts';
+import { CTA_ESTIMATE, CTA_ESTIMATE_SHORT, CTA_QUOTE, ESTIMATE_HREF } from '../shared/ctaCopy.ts';
 import { P5_SOCIAL } from '../shared/gbpProfile.ts';
 import { GUIDE_PAGES } from '../shared/guideContent.ts';
 import { PUBLIC_NAP_LINE, SITE_CONFIG } from '../shared/siteConfig.ts';
@@ -22,9 +22,19 @@ import { SITE_TAGLINE } from '../shared/siteContent.ts';
 // Phase 2 family chrome: the shared components read every Handyman fact from
 // lib/familyBrand.ts. These pin that the config says what the site says.
 test('the brand config carries this site’s facts, one CTA and one destination', () => {
-  assert.equal(FAMILY_BRAND.cta.label, 'Send your list and photos');
-  assert.equal(FAMILY_BRAND.cta.label, CTA_QUOTE);
-  assert.equal(FAMILY_BRAND.cta.href, '/#consult');
+  // Owner decision, 13 November 2026: the central estimator at /instant-estimate gives an
+  // on-screen preliminary range, so instant-estimate wording is accurate and allowed; it must
+  // never be called a quote or a final price. It is the header, menu and sticky bar CTA.
+  assert.equal(FAMILY_BRAND.cta.label, 'Instant estimate');
+  assert.equal(FAMILY_BRAND.cta.label, CTA_ESTIMATE_SHORT);
+  assert.equal(FAMILY_BRAND.cta.href, '/instant-estimate');
+  assert.equal(FAMILY_BRAND.cta.href, ESTIMATE_HREF);
+  assert.doesNotMatch(FAMILY_BRAND.cta.label, /quote|bid|final|firm|guarantee/i);
+  // The request form stays as the second path: the footer still links to it by its own label.
+  const company = FAMILY_BRAND.footer.groups.find((group) => group.title === 'Company');
+  assert.ok(company?.links.some((link) => link.label === CTA_QUOTE && link.href === '/#consult'), 'footer keeps the request form');
+  assert.equal(CTA_QUOTE, 'Send your list and photos');
+  assert.ok(company?.links.some((link) => link.href === ESTIMATE_HREF), 'footer links the estimator');
   assert.equal(FAMILY_BRAND.phone.telHref, SITE_CONFIG.phoneHref);
   assert.equal(FAMILY_BRAND.phone.smsHref, SITE_CONFIG.phoneSmsHref);
   assert.equal(FAMILY_BRAND.phone.display, '(208) 477-1169');
@@ -44,6 +54,8 @@ test('the brand config carries this site’s facts, one CTA and one destination'
   assert.deepEqual(FAMILY_BRAND.chat.hiddenOn, ['/estimate*', '/admin*', '/subcontractor*', '/handyman*']);
   assert.equal(matchesRoute('/estimate', FAMILY_BRAND.bar.hiddenOn), true);
   assert.equal(matchesRoute('/estimate/scope', FAMILY_BRAND.bar.hiddenOn), true);
+  // The bar would only link to the page it sits on, over the framed estimator's own buttons.
+  assert.equal(matchesRoute('/instant-estimate', FAMILY_BRAND.bar.hiddenOn), true);
   assert.equal(matchesRoute('/', FAMILY_BRAND.bar.hiddenOn), false);
   assert.equal(matchesRoute('/re-10-repairs-boise', FAMILY_BRAND.bar.hiddenOn), false);
   // Dark header only over the photo hero.
@@ -108,9 +120,10 @@ test('the homepage video hero preserves first-response content, poster and sourc
   assert.match(html, /<h1 class="fam-hero-title" id="family-hero-title">Boise handyman\. <span class="fam-hero-accent">Your list, handled\.<\/span><\/h1>/);
   const cta = html.match(/<a [^>]*data-hero-cta="primary"[^>]*>([^<]+)<\/a>/);
   assert.ok(cta, 'hero primary CTA');
-  assert.match(cta[0], /href="\/#consult"/);
+  assert.match(cta[0], /href="\/instant-estimate"/);
   assert.match(cta[0], /fam-btn--hero fam-btn--lg/);
-  assert.equal(cta[1], 'Send your list and photos');
+  assert.equal(cta[1], 'Get an instant estimate');
+  assert.equal(cta[1], CTA_ESTIMATE);
   assert.match(html, /<a href="tel:\+12084771169" class="fam-hero-link">Call \(208\) 477-1169<\/a>/);
   assert.match(html, /<img [^>]*fetchPriority="high"[^>]*class="fam-hero-img"/);
   assert.match(html, /<img [^>]*src="\/media\/handyman\/boise-handyman-co-poster\.jpg"/);

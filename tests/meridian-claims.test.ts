@@ -31,9 +31,14 @@ const sharedUnsupported = /planning from|\$145|\$149|\$199|\$60 to \$120|(?:with
 for (const city of CITIES) test(`complete ${city.slug} area data excludes unqualified sales promises`, () => {
  assert.doesNotMatch(JSON.stringify([getAreaCityCopy(city.slug), getAreaIntro(city)]), sharedUnsupported);
 });
-for (const file of ['public/llms.txt','public/llms-full.txt']) test(`${file} excludes placeholder prices and instant-price wording`, () => {
- const text=readFileSync(file,'utf8');assert.doesNotMatch(text,sharedUnsupported);assert.doesNotMatch(text,/instant estimator|within the week|two business days/i);
- assert.match(text,/written quote/);assert.match(text,/\/estimate/);
+// Owner decision, 13 November 2026: the central estimator at /instant-estimate gives an
+// on-screen preliminary range, so instant-estimate wording is accurate and allowed; it must
+// never be called a quote or a final price. The "instant estimator" pattern left this guard
+// for that reason; the reply-time patterns stay.
+for (const file of ['public/llms.txt','public/llms-full.txt']) test(`${file} excludes placeholder prices and reply-time wording, and never calls the instant estimate a quote`, () => {
+ const text=readFileSync(file,'utf8');assert.doesNotMatch(text,sharedUnsupported);assert.doesNotMatch(text,/within the week|two business days/i);
+ assert.doesNotMatch(text,/instant (?:quote|bid|price)|(?:final|firm|guaranteed) price (?:online|on screen|instantly)/i);
+ assert.match(text,/written quote/);assert.match(text,/\/estimate/);assert.match(text,/\/instant-estimate/);
 });
 test('service index does not render the placeholder planningFrom field',()=>assert.doesNotMatch(readFileSync('app/services/page.tsx','utf8'),/service.planningFrom|realistic range|preliminary estimate/));
 

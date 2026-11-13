@@ -48,6 +48,7 @@ Serving Boise and the Treasure Valley across Ada and Canyon County. Phone (208) 
 
 - [About Boise Handyman Co](https://boisehandyman.co/about): locally owned handyman service for the Treasure Valley.
 - [Contact](https://boisehandyman.co/contact)
+- [Instant estimate](https://boisehandyman.co/instant-estimate): free online estimator that shows a preliminary price range on screen. It is for budgeting; a written quote follows once the team has reviewed the work.
 - [Request a handyman estimate](https://boisehandyman.co/estimate)
 - [Homeowner resources and checklists](https://boisehandyman.co/resources)
 
@@ -62,4 +63,4 @@ Serving Boise and the Treasure Valley across Ada and Canyon County. Phone (208) 
 - [RSS feed](https://boisehandyman.co/feed.xml): guides and articles, newest first, with publication and revision dates.
 - [Full text for LLMs](https://boisehandyman.co/llms-full.txt): expanded reference copy of the core facts.
 
-Last updated: 2026-11-09.
+Last updated: 2026-11-13.

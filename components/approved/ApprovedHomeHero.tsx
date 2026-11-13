@@ -4,6 +4,7 @@ import { brandStyle } from '@/components/family/brandStyle';
 import { ProofStrip } from '@/components/family/ProofStrip';
 import { CONTRACTOR_REGISTRATION } from '@/components/ContractorCredential';
 import { FAMILY_BRAND } from '@/lib/familyBrand';
+import { CTA_ESTIMATE } from '@/shared/ctaCopy';
 import { brands } from './family-content';
 import { HandymanHeroVideo } from './HandymanHeroVideo';
 
@@ -41,8 +42,11 @@ export function ApprovedHomeHero({heroClassName}: {heroClassName?: string} = {})
               </h1>
               <p className="fam-hero-support">Skilled local help for the list that keeps growing.</p>
               <div className="fam-hero-actions">
+                {/* Owner decision, 13 November 2026: the hero primary opens the instant
+                    estimator (FAMILY_BRAND.cta.href is /instant-estimate). The phone link
+                    beside it and the request form further down stay as the path to a person. */}
                 <FamilyButton href={FAMILY_BRAND.cta.href} variant="hero" size="lg" data-hero-cta="primary" data-cta="primary">
-                  {FAMILY_BRAND.cta.label}
+                  {CTA_ESTIMATE}
                 </FamilyButton>
                 <a href={FAMILY_BRAND.phone.telHref} className="fam-hero-link">Call {FAMILY_BRAND.phone.display}</a>
               </div>
