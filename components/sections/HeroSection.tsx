@@ -16,7 +16,7 @@ export function HeroSection() {
       <div id="hero-sentinel" className="absolute bottom-0 left-0 h-px w-full" aria-hidden="true" />
         <Image
           src={SITE_IMAGES.hero}
-          alt="A worker adjusting an interior door hinge with a screwdriver"
+          alt="An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth"
           fill
           priority
           sizes="(max-width: 768px) 100vw, 1400px"

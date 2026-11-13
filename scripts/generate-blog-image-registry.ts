@@ -30,7 +30,7 @@ const area = (name: string) => `/images/areas/${name}.webp`;
 const LIBRARY = {
   doorRepair: {
     src: img('hero-door-hinge-branded'),
-    alt: 'A worker adjusting an interior door hinge with a screwdriver',
+    alt: 'An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth',
   },
   gutterCleaning: {
     src: img('hero-gutter-cleaning'),
@@ -42,11 +42,11 @@ const LIBRARY = {
   },
   painting: {
     src: img('service-painting-p5-reviewed-20260910'),
-    alt: 'A worker painting white window trim with a brush over a drop cloth',
+    alt: 'Freshly painted white window trim, with a brush resting on an open paint can over a drop cloth',
   },
   plumbing: {
     src: img('service-plumbing'),
-    alt: 'Hands installing a new brushed-nickel kitchen faucet with supply lines and a wrench at a farmhouse sink',
+    alt: 'A new brushed-nickel kitchen faucet at a sink, with a wrench and the old faucet on the counter',
   },
   electrical: {
     src: img('service-electrical'),
@@ -62,7 +62,7 @@ const LIBRARY = {
   },
   fence: {
     src: img('service-fence-repair'),
-    alt: 'Gloved hands screwing a new cedar picket onto a backyard fence rail with a cordless drill',
+    alt: 'Three new cedar pickets screwed onto a weathered fence, with a drill and a box of screws on the grass',
   },
   caulking: {
     src: img('service-caulking'),
@@ -70,7 +70,7 @@ const LIBRARY = {
   },
   consult: {
     src: img('consult-doorstep-branded'),
-    alt: 'Handyman reviewing a small-job checklist on a clipboard with a homeowner at their front door',
+    alt: 'A canvas tool bag and a cordless drill on the front step beside a wood front door',
   },
   toolbag: {
     src: img('toolbag-ready'),
@@ -94,19 +94,19 @@ const LIBRARY = {
   },
   estimate: {
     src: img('estimate-clipboard'),
-    alt: 'Clipboard with estimate paper, calculator, pencil, and tape measure arranged on a wood kitchen table',
+    alt: "A clipboard with a blank work-order form, a carpenter's pencil, a tape measure and a small level on a kitchen table",
   },
   deck: {
     src: img('deck-board-replacement'),
-    alt: 'Gloved hands replacing a weathered deck board with a new cedar board on a backyard deck',
+    alt: 'A new cedar deck board fastened beside an open gap in a weathered deck, with a drill and screws',
   },
   winterSpigot: {
     src: img('winterize-spigot'),
-    alt: 'Insulated faucet cover being fitted over an outdoor hose spigot with frost on the grass',
+    alt: 'An insulated faucet cover fitted over an outdoor hose spigot, with frost on the grass',
   },
   hinge: {
     src: img('door-hinge-fix'),
-    alt: 'Hand tightening the hinge screws of a white interior door with a screwdriver',
+    alt: 'A door hinge at the edge of a white interior door, with a screwdriver, shims and screws on a cloth below',
   },
   punchList: {
     src: img('punch-list-markers'),
@@ -147,11 +147,11 @@ const LIBRARY = {
   },
   middletonArea: {
     src: area('middleton'),
-    alt: 'White farmhouse with a wraparound porch on a Middleton, Idaho parcel surrounded by wheat fields at sunset',
+    alt: 'A white single-story home with an attached garage and a gravel drive, with farm fields and low hills behind',
   },
   nampaArea: {
     src: area('nampa'),
-    alt: 'Established brick ranch home on a landscaped corner lot in Nampa, Idaho with farmland behind',
+    alt: 'A single-story ranch house with tan siding, a brick base and a single garage, behind a bare shade tree',
   },
   caldwellArea: {
     // caldwell.webp is a Tuscan-style villa among vineyards, not a Treasure

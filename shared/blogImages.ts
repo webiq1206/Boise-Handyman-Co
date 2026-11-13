@@ -75,7 +75,7 @@ const INLINE_HUB_ALTS: Record<string, string> = {
   "repairs-and-fixes": "Handyman tools arranged in a ready-to-go tool bag",
   "installs-and-upgrades": "Handyman mounting work inside a home",
   "home-maintenance": "Caulking work at an interior joint",
-  "costs-and-hiring": "Calculator, blank clipboard and tape measure for repair planning",
+  "costs-and-hiring": "Clipboard with a blank work-order form, a pencil, a tape measure and a level for repair planning",
   "exterior-and-outdoor": "An extension ladder set against the gutter of a two-story house"
 };
 

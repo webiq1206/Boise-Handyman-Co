@@ -6,11 +6,11 @@ Locked house for project imagery on boisehandyman.co.
 
 - 1996 Kuna single-storey
 - Beige horizontal lap siding, white trim, white vinyl windows
-- Brown architectural shingle roof with front-facing gable over attached two-car garage
-- White steel garage door, small covered front stoop with white posts, white six-panel front door
+- Brown architectural shingle roof with a front-facing gable over the attached two-car garage
+- Plain white garage door, small covered front entry with two square white posts, white front door
 - Concrete driveway, six-foot cedar privacy fence with cedar gate
-- Irrigated lawn, mature ash tree
-- Open farm fields and faint Owyhee Mountains to the south
+- Mowed lawn, one young staked tree
+- Open farm fields and a faint mountain ridge beyond
 
 ## Placement
 
@@ -20,7 +20,7 @@ Use this set on the homepage project imagery, service pages, and the Kuna area p
 
 - File: `public/images/houses/kuna/kuna-single-storey-front.webp`
 - Alt: Front elevation of a beige single-storey home in Kuna with white trim, two-car garage and open fields beyond
-- Generation note: GPT Image restore session 2026-10-28; original Higgsfield job id ce58c12c-b718-43ea-819c-7b1d34607ff2 remains the owner library reference
+- Generation note: replaced on 13 November 2026 (owner direction: natural daylight, no golden glow, no window grids). The earlier master came from a GPT Image restore session on 2026-10-28. The gutter shot was replaced the same day; the other shots in the set were made from the earlier master, so they match this house in siding, trim and fence but not in every detail.
 
 ## Shot set
 

@@ -355,7 +355,7 @@ export default function ContactPage() {
               {/* People photo: contain / intrinsic - never cover-crop heads or bodies */}
               <Image
                 src={SITE_IMAGES.leadership}
-                alt="A handyman and a homeowner reviewing a clipboard at a front door"
+                alt="A canvas tool bag and a cordless drill on the front step beside a wood front door"
                 width={1461}
                 height={1076}
                 sizes="(max-width: 768px) 100vw, 50vw"

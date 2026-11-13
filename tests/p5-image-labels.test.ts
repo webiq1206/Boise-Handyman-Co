@@ -32,8 +32,8 @@ test("photo alt text describes the picture and does not label it as our work", (
   assert.match(re10, /alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth"/);
   assert.doesNotMatch(re10, /<figcaption>Representative imagery<\/figcaption>/);
   const descriptiveAlts = [
-    "A worker adjusting an interior door hinge with a screwdriver",
-    "A worker painting white window trim with a brush over a drop cloth",
+    "An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth",
+    "Freshly painted white window trim, with a brush resting on an open paint can over a drop cloth",
     "A freshly painted sage-green front door with white trim and black hardware",
   ];
   const registry = read("shared/blogImageRegistry.ts");
@@ -44,7 +44,7 @@ test("photo alt text describes the picture and does not label it as our work", (
   }
   assert.doesNotMatch(registry, /Representative image:/);
   assert.doesNotMatch(generator, /Representative image:/);
-  assert.equal(registry.split("A worker adjusting an interior door hinge with a screwdriver").length - 1, 2);
+  assert.equal(registry.split("An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth").length - 1, 2);
   for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx"]) {
     const source = read(file);
     assert.equal(source.includes('alt="A sage-green front door with white trim and black hardware"'), true, file);

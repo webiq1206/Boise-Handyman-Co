@@ -106,7 +106,7 @@ export default function WarrantyPage() {
         <InteriorHero
           layout="editorial"
           imageSrc={SITE_IMAGES.process}
-          imageAlt="Handyman reviewing finished repair work with a homeowner"
+          imageAlt="A clipboard with a blank work-order form, a carpenter's pencil, a tape measure and a small level on a kitchen table"
         >
           <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>
             Our promise

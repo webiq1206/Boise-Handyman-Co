@@ -27,7 +27,7 @@ const TILES = [
   { src: "/images/handyman/service-drywall-repair.webp", label: "Drywall repair", alt: "Hands spreading joint compound over a drywall patch" },
   { src: "/images/handyman/front-door-repaint-p5-reviewed-20260910.webp", label: "Doors, trim & baseboards", alt: "A sage-green front door with white trim and black hardware" },
   { src: "/images/handyman/service-caulking.webp", label: "Caulking & weatherproofing", alt: "A caulk gun laying a white bead along a bathtub edge" },
-  { src: "/images/handyman/service-plumbing.webp", label: "Minor plumbing", alt: "Hands installing a kitchen faucet at a sink" },
+  { src: "/images/handyman/service-plumbing.webp", label: "Minor plumbing", alt: "A new kitchen faucet at a sink with a wrench on the counter" },
   { src: "/images/handyman/service-electrical.webp", label: "Minor electrical", alt: "Hands installing a white electrical outlet" },
   { src: "/images/handyman/service-mounting.webp", label: "TV & shelf mounting", alt: "A worker leveling a TV wall-mount bracket" },
 ] as const;
@@ -135,7 +135,7 @@ export default function HandymanLandingPage() {
         <div className="hl-hero-photo absolute inset-0">
           <Image
           src={HERO_IMAGE}
-          alt="A worker adjusting an interior door hinge with a screwdriver"
+          alt="An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth"
           fill
           priority
           sizes="100vw"

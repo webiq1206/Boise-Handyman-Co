@@ -9,27 +9,27 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/handyman/service-carpentry-trim-branded.webp':
     'Hands fitting white baseboard trim with a hammer during a repair',
   '/images/handyman/service-painting-p5-reviewed-20260910.webp':
-    'A worker painting white window trim with a brush over a drop cloth',
+    'Freshly painted white window trim, with a brush resting on an open paint can over a drop cloth',
   '/images/handyman/service-painting.webp':
-    'A worker painting white window trim with a brush over a drop cloth',
+    'Freshly painted white window trim, with a brush resting on an open paint can over a drop cloth',
   '/images/handyman/service-plumbing.webp':
-    'Hands installing a kitchen faucet at a sink with supply lines and a wrench',
+    'A new brushed-nickel kitchen faucet at a sink, with a wrench and the old faucet on the counter',
   '/images/handyman/service-electrical.webp':
     'Hands installing a white duplex electrical outlet in an open wall box',
   '/images/handyman/service-mounting.webp':
     'A worker leveling a TV wall-mount bracket with a drill',
   '/images/handyman/service-fence-repair.webp':
-    'Gloved hands fastening a cedar fence picket to a rail with a cordless drill',
+    'Three new cedar pickets screwed onto a weathered fence, with a drill and a box of screws on the grass',
   '/images/handyman/service-caulking.webp':
     'A caulk gun laying a white bead where a bathtub meets subway tile',
   '/images/handyman/hero-door-hinge-branded.webp':
-    'A worker adjusting an interior door hinge with a screwdriver',
+    'An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth',
   '/images/handyman/toolbag-ready.webp':
     'An open canvas tool bag with a drill, level, and tape measure on a drop cloth',
   '/images/handyman/estimate-clipboard.webp':
-    'A clipboard, calculator, pencil, and tape measure on a wood table',
+    "A clipboard with a blank work-order form, a carpenter's pencil, a tape measure and a small level on a kitchen table",
   '/images/handyman/consult-doorstep-branded.webp':
-    'A handyman and a homeowner reviewing a clipboard at a front door',
+    'A canvas tool bag and a cordless drill on the front step beside a wood front door',
   '/images/handyman/punch-list-markers.webp':
     "Blue painter's tape marking touch-up spots on a wall and window trim",
   '/images/handyman/front-door-repaint-p5-reviewed-20260910.webp':
@@ -41,11 +41,11 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/handyman/repair-materials.webp':
     'Screws, wall anchors, and picture hangers sorted in a parts tray',
   '/images/handyman/door-hinge-fix.webp':
-    'A hand tightening an interior door hinge screw with a screwdriver',
+    'A door hinge at the edge of a white interior door, with a screwdriver, shims and screws on a cloth below',
   '/images/handyman/cabinet-hardware-upgrade.webp':
     'Hands installing a brushed-brass knob on a white cabinet door',
   '/images/handyman/deck-board-replacement.webp':
-    'Gloved hands replacing a deck board with a new cedar board',
+    'A new cedar deck board fastened beside an open gap in a weathered deck, with a drill and screws',
   '/images/handyman/hero-gutter-cleaning.webp':
     'An extension ladder set against the gutter of a two-story house, with a bucket on the lawn below',
   '/images/handyman/weatherstripping.webp':
@@ -61,13 +61,13 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/areas/eagle.webp':
     'A single-story white stucco home with a dark metal roof at dusk, set among gravel beds and ornamental grasses',
   '/images/areas/nampa.webp':
-    'A modern single-story home with large windows and landscaping',
+    'A single-story ranch house with tan siding, a brick base and a single garage, behind a bare shade tree',
   '/images/areas/kuna.webp':
     'A single-story stucco home with a dark metal roof and a wood-clad entry, with sagebrush in front and mountains beyond',
   '/images/areas/star.webp':
     'A dark-sided two-story home with a covered patio on a lawn beside a tree-lined river',
   '/images/areas/middleton.webp':
-    'A single-story home with an attached garage',
+    'A white single-story home with an attached garage and a gravel drive, with farm fields and low hills behind',
   '/images/areas/caldwell.webp':
     'A residential street lined with houses and trees',
   '/images/gallery/gallery-painting-boise-before.webp':
