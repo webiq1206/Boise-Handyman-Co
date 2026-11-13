@@ -17,8 +17,8 @@ const g = (name: string) => `/images/gallery/${name}.webp`;
  * unpublished dataset, outside project-proof consumers.
  *
  * Continuity: each pair shares one camera lock. The Boise painting and drywall
- * pairs belong to the same craftsman bungalow (see also
- * `FEATURED_PROPERTY_IMAGES.boiseBungalowExterior`).
+ * pairs were made as one house. `FEATURED_PROPERTY_IMAGES.boiseBungalowExterior`
+ * is no longer that house: its photo was replaced on 13 November 2026.
  */
 export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
   {
@@ -98,7 +98,13 @@ export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
 /** Generated comparison assets are retained for provenance, not published as work. */
 export const GALLERY_PROJECTS: GalleryProject[] = [];
 
-/** Standalone service imagery remains available outside project-proof contexts. */
+/**
+ * Standalone service imagery remains available outside project-proof contexts.
+ *
+ * The key and file name are historical. Since 13 November 2026 the photo is a
+ * single-story ranch home with gray-green siding and a wood front door, so
+ * describe it that way in alt text, never as a bungalow or a porch.
+ */
 export const FEATURED_PROPERTY_IMAGES = {
   boiseBungalowExterior: g("gallery-boise-bungalow-exterior"),
 } as const;

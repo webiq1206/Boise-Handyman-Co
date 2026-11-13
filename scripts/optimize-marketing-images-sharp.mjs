@@ -9,8 +9,11 @@
  * prompt gives a different house, not the same house again.
  *
  * Directory layout under assets/source-renders/ mirrors public/, so
- * assets/source-renders/images/areas/boise.png becomes
- * public/images/areas/boise.webp.
+ * assets/source-renders/images/areas/nampa.png becomes
+ * public/images/areas/nampa.webp.
+ *
+ * Six served photos were replaced on 13 November 2026 and no longer come from
+ * their render here. See SUPERSEDED_SOURCES below.
  *
  * Run: npm run images:optimize
  */
@@ -26,6 +29,22 @@ const publicRoot = path.join(root, "public");
 const MAX_WIDTH = 1920;
 const QUALITY = 80;
 
+/**
+ * Renders whose served WebP was replaced with a different photograph on
+ * 13 November 2026 (owner direction: no Craftsman-style houses in any photo).
+ * The PNG kept here is the OLD picture, so converting it would put the retired
+ * photo back on the site. These are skipped. Remove an entry only when its
+ * render has been replaced with the source of the photo now being served.
+ */
+const SUPERSEDED_SOURCES = new Set([
+  "images/areas/boise.png",
+  "images/areas/eagle.png",
+  "images/areas/kuna.png",
+  "images/areas/meridian.png",
+  "images/areas/star.png",
+  "images/gallery/gallery-boise-bungalow-exterior.png",
+]);
+
 function collectPngs(directory) {
   if (!fs.existsSync(directory)) return [];
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -37,6 +56,10 @@ function collectPngs(directory) {
 
 async function optimizeFile(inputPath) {
   const relative = path.relative(sourceRoot, inputPath);
+  if (SUPERSEDED_SOURCES.has(relative.split(path.sep).join("/"))) {
+    console.log(`${relative}: skipped, the served photo was replaced and this render is the old one`);
+    return;
+  }
   const outputPath = path.join(publicRoot, relative).replace(/\.png$/i, ".webp");
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
