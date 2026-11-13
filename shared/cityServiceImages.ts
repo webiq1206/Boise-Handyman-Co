@@ -96,8 +96,8 @@ export const CITY_HERO_IMAGES: Record<string, string> = {
   star: "/images/areas/star.webp",
   middleton: "/images/areas/middleton.webp",
   // caldwell.webp reads as a Tuscan villa among vineyards, not an Idaho house,
-  // so the Caldwell card and area hero use the high-desert farmhouse (on
-  // sagebrush and open farmland) that no other city card shows.
+  // so the Caldwell card and area hero use the single-story home on open
+  // sagebrush ground that no other city card shows.
   caldwell: "/images/areas/kuna.webp",
   // Garden City used to fall back to the door-hinge photo that is also the
   // home, contact and areas hero. A deck job beside a single-storey home is

@@ -76,7 +76,7 @@ const INLINE_HUB_ALTS: Record<string, string> = {
   "installs-and-upgrades": "Handyman mounting work inside a home",
   "home-maintenance": "Caulking work at an interior joint",
   "costs-and-hiring": "Calculator, blank clipboard and tape measure for repair planning",
-  "exterior-and-outdoor": "Gutter cleaning at a residential roof edge"
+  "exterior-and-outdoor": "An extension ladder set against the gutter of a two-story house"
 };
 
 const INLINE_POOL: { src: string; alt: string; hubs?: string[] }[] = [
@@ -97,7 +97,7 @@ const INLINE_POOL: { src: string; alt: string; hubs?: string[] }[] = [
   },
   {
     src: FEATURED_PROPERTY_IMAGES.boiseBungalowExterior,
-    alt: "Boise porch with a sage-green front door and white trim",
+    alt: "A single-story ranch home with gray-green siding, a wood front door and a shaded front lawn",
     hubs: ["exterior-and-outdoor", "home-maintenance", "costs-and-hiring"],
   },
   {

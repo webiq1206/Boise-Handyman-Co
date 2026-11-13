@@ -47,7 +47,7 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/handyman/deck-board-replacement.webp':
     'Gloved hands replacing a deck board with a new cedar board',
   '/images/handyman/hero-gutter-cleaning.webp':
-    'Autumn leaves filling a house gutter along a cream two-story home exterior',
+    'An extension ladder set against the gutter of a two-story house, with a bucket on the lawn below',
   '/images/handyman/weatherstripping.webp':
     'Hands applying foam weatherstripping to a white exterior door frame',
   '/images/handyman/winterize-spigot.webp':
@@ -55,17 +55,17 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/handyman/grab-bar-install.webp':
     'A brushed-nickel grab bar installed on subway tile in a shower',
   '/images/areas/boise.webp':
-    'Cream Craftsman bungalow on a Boise street with porch, lawn, and foothills beyond',
+    'A tree-lined street of two-story homes with a brush-covered hillside rising behind',
   '/images/areas/meridian.webp':
-    'A modern suburban home exterior with a lawn and front walkway',
+    'A two-story white stucco home with dark siding, a two-car garage and a front lawn',
   '/images/areas/eagle.webp':
-    'A two-story house with a lawn and driveway',
+    'A single-story white stucco home with a dark metal roof at dusk, set among gravel beds and ornamental grasses',
   '/images/areas/nampa.webp':
     'A modern single-story home with large windows and landscaping',
   '/images/areas/kuna.webp':
-    'A farmhouse-style home with a stone front and metal roof, bordered by sagebrush',
+    'A single-story stucco home with a dark metal roof and a wood-clad entry, with sagebrush in front and mountains beyond',
   '/images/areas/star.webp':
-    'A house exterior with a front yard and trees',
+    'A dark-sided two-story home with a covered patio on a lawn beside a tree-lined river',
   '/images/areas/middleton.webp':
     'A single-story home with an attached garage',
   '/images/areas/caldwell.webp':
@@ -103,7 +103,7 @@ const IMAGE_ALTS: Record<string, string> = {
   '/images/gallery/gallery-maintenance-star-after.webp':
     'White exterior door jamb sealed with fresh foam weatherstripping',
   '/images/gallery/gallery-boise-bungalow-exterior.webp':
-    'Boise porch with a sage-green front door and white trim',
+    'A single-story ranch home with gray-green siding, a wood front door and a shaded front lawn',
   '/images/houses/kuna/kuna-gutter-cleaning.webp':
     'White gutter with autumn leaves at the eave of a beige Kuna single-storey home',
   '/images/houses/kuna/kuna-single-storey-front.webp':

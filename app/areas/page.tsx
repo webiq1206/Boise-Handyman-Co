@@ -53,7 +53,7 @@ export default function AreasHubPage() {
       <div className="flex flex-col ">
         <PageHeroBand
           imageSrc={AREAS_HERO_IMAGE}
-          imageAlt="Autumn leaves filling a house gutter along a cream two-story home exterior"
+          imageAlt="An extension ladder set against the gutter of a two-story house, with a bucket on the lawn below"
         >
           <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Service areas" }]} />
           <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Treasure Valley</p>

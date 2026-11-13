@@ -34,7 +34,7 @@ const LIBRARY = {
   },
   gutterCleaning: {
     src: img('hero-gutter-cleaning'),
-    alt: 'Autumn leaves filling a rain gutter on a single-story suburban Boise home',
+    alt: 'An extension ladder set against the gutter of a two-story house, with a bucket on the lawn below',
   },
   drywall: {
     src: img('service-drywall-repair'),
@@ -126,15 +126,15 @@ const LIBRARY = {
   },
   boiseArea: {
     src: area('boise'),
-    alt: 'Established Boise, Idaho neighborhood of craftsman homes with covered porches and the Boise foothills rising behind the street',
+    alt: 'A tree-lined street of two-story homes with a brush-covered hillside rising behind',
   },
   meridianArea: {
     src: area('meridian'),
-    alt: 'Craftsman two-story home lit at dusk on a landscaped subdivision lot in Meridian, Idaho',
+    alt: 'A two-story white stucco home with dark siding, a two-car garage and a front lawn',
   },
   eagleArea: {
     src: area('eagle'),
-    alt: 'Custom home on a landscaped Eagle, Idaho acreage lot at sunset with the foothills in the distance',
+    alt: 'A single-story white stucco home with a dark metal roof at dusk, set among gravel beds and ornamental grasses',
   },
   kunaArea: {
     // The Kuna area page hero, so the guide and the area page show one house.
@@ -143,7 +143,7 @@ const LIBRARY = {
   },
   starArea: {
     src: area('star'),
-    alt: 'Riverfront home in Star, Idaho with a lawn running down to the Boise River and shade trees along the bank',
+    alt: 'A dark-sided two-story home with a covered patio on a lawn beside a tree-lined river',
   },
   middletonArea: {
     src: area('middleton'),
@@ -156,10 +156,10 @@ const LIBRARY = {
   caldwellArea: {
     // caldwell.webp is a Tuscan-style villa among vineyards, not a Treasure
     // Valley house. The guide uses the Caldwell area page hero instead (the
-    // high-desert farmhouse no other city page shows), with alt text that
-    // describes it rather than placing it.
+    // single-story home on sagebrush ground that no other city page shows),
+    // with alt text that describes it rather than placing it.
     src: area('kuna'),
-    alt: 'A farmhouse-style home with a stone front and metal roof, bordered by sagebrush',
+    alt: 'A single-story stucco home with a dark metal roof and a wood-clad entry, with sagebrush in front and mountains beyond',
   },
 } as const;
 
