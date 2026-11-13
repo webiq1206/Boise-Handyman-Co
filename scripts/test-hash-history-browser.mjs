@@ -10,7 +10,10 @@ try {
   const browser=await engine.launch();
   try { for(const width of [390,1440]) {
    const entries=[['main','main a[href="/contact"]','contact-page'],['footer-estimate','footer a[href="/#consult"]','consult'],['footer-contact','footer a[href="/#consult"]','consult']];
-   if(width===1440)entries.push(['header','header a[href="/#consult"]','consult']);
+   // Owner decision, 13 November 2026: the header call to action opens /instant-estimate, so
+   // the fourth desktop journey enters the request form from the homepage estimate band's
+   // "Send your list and photos" link instead of from the header.
+   if(width===1440)entries.push(['main-form','main a[href="/#consult"]','consult']);
    for(const [entry,selector,target] of entries) {
     const context=await browser.newContext({viewport:{width,height:900}});
     await context.route('**/*',r=>{const u=new URL(r.request().url());return u.origin===origin&&!u.pathname.startsWith('/api/')&&r.request().method()==='GET'?r.continue():r.abort('blockedbyclient');});

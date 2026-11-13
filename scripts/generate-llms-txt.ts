@@ -103,6 +103,12 @@ function buildShort(): string {
     `- [About ${SITE_CONFIG.name}](${url('/about')}): locally owned handyman service for the Treasure Valley.`,
   );
   lines.push(`- [Contact](${url('/contact')})`);
+  // Owner decision, 13 November 2026: the central estimator framed at
+  // /instant-estimate gives an on-screen preliminary range. It is described as
+  // that, never as a quote or a final price.
+  lines.push(
+    `- [Instant estimate](${url('/instant-estimate')}): free online estimator that shows a preliminary price range on screen. It is for budgeting; a written quote follows once the team has reviewed the work.`,
+  );
   lines.push(`- [Request a handyman estimate](${url('/estimate')})`);
   lines.push(`- [Homeowner resources and checklists](${url('/resources')})`, '');
 
@@ -140,6 +146,9 @@ function buildFull(): string {
   lines.push('- Business type: Handyman service (home repairs, installs, and maintenance)');
   lines.push('- Service model: Scope review, written quotes and an agreed visit plan');
   lines.push(`- Contact: ${url('/contact')}`);
+  lines.push(
+    `- Instant estimate: ${url('/instant-estimate')} (free online estimator; shows a preliminary price range on screen for budgeting, not a quote or a final price)`,
+  );
   lines.push(`- Project inquiry: ${url('/estimate')}`, '');
 
   lines.push('## Service area', '');
@@ -218,6 +227,7 @@ function buildFull(): string {
   lines.push(`- About: ${url('/about')}`);
   lines.push(`- Services: ${url('/services')}`);
   lines.push(`- Service areas: ${url('/areas')}`);
+  lines.push(`- Instant estimate: ${url('/instant-estimate')}`);
   lines.push(`- Project inquiry: ${url('/estimate')}`);
   lines.push(`- Blog: ${url('/blog')}`);
   lines.push(`- Guides: ${url('/guides')}`);

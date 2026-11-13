@@ -1,7 +1,8 @@
 import { FamilyButton } from '@/components/family/Button';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
+import { InstantEstimateCTA } from '@/components/estimator/InstantEstimateCTA';
 import { SITE_CONFIG } from '@/shared/siteConfig';
-import { CTA_PRIMARY } from '@/shared/ctaCopy';
+import { CTA_ESTIMATE, CTA_PRIMARY } from '@/shared/ctaCopy';
 import styles from './FocusedSearchHero.module.css';
 import { ReviewedPageBarClearance } from './ReviewedPageBarClearance';
 
@@ -9,12 +10,14 @@ interface Breadcrumb { name: string; href?: string }
 
 /** Opted in by exactly the two reviewed drywall URLs. The longer introduction
  * remains visible immediately after the hero, with its original destinations. */
-export function DrywallSearchHero({h1, overview, speakableSummary, breadcrumbs, callFirst}: {
+export function DrywallSearchHero({h1, overview, speakableSummary, breadcrumbs, callFirst, estimateProject = null}: {
   h1: string;
   overview: string;
   speakableSummary: string;
   breadcrumbs: Breadcrumb[];
   callFirst: boolean;
+  /** Estimator project that prices this service; without one the request form stays the primary. */
+  estimateProject?: string | null;
 }) {
   return <>
     <ReviewedPageBarClearance />
@@ -27,7 +30,9 @@ export function DrywallSearchHero({h1, overview, speakableSummary, breadcrumbs, 
           {callFirst ? <>
             <FamilyButton href={SITE_CONFIG.phoneHref} variant="primary" size="lg" aria-label={`Call ${SITE_CONFIG.name}`} data-hero-cta="primary">Call Us</FamilyButton>
             <FamilyButton href={SITE_CONFIG.phoneSmsHref} variant="secondary" size="lg" aria-label={`Text ${SITE_CONFIG.name}`}>Text Us</FamilyButton>
-          </> : <ConsultCTA variant="brand" size="lg" data-testid="button-primary-service-hero" data-hero-cta="primary" trackingLocation="landing_hero">{CTA_PRIMARY}</ConsultCTA>}
+          </> : estimateProject
+            ? <InstantEstimateCTA project={estimateProject} size="lg" data-testid="button-primary-service-hero" data-hero-cta="primary" trackingLocation="landing_hero">{CTA_ESTIMATE}</InstantEstimateCTA>
+            : <ConsultCTA variant="brand" size="lg" data-testid="button-primary-service-hero" data-hero-cta="primary" trackingLocation="landing_hero">{CTA_PRIMARY}</ConsultCTA>}
         </div>
       </div>
       <div className={styles.serviceMedia}>

@@ -3,7 +3,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { AreaCard } from '@/components/marketing/AreaCard';
 import { EstimatePromptBand } from '@/components/marketing/EstimatePromptBand';
 import { Section } from '@/components/marketing/Section';
-import { ConsultCTA } from '@/components/modals/ConsultCTA';
+import { InstantEstimateCTA } from '@/components/estimator/InstantEstimateCTA';
 import { Reveal } from '@/components/Reveal';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
@@ -13,7 +13,7 @@ import { getBaseUrl } from '@/lib/seo';
 import { servicePath } from '@/lib/seo-routes';
 import { CITY_HERO_IMAGES } from '@/shared/cityServiceImages';
 import { CITIES,SERVICES,serviceHeading } from '@/shared/contentData';
-import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
+import { CTA_SECONDARY } from '@/shared/ctaCopy';
 import { altForImage } from '@/shared/imageAlts';
 import { getServiceBackground } from '@/shared/serviceBackgrounds';
 import { SITE_CONFIG } from '@/shared/siteConfig';
@@ -144,10 +144,11 @@ export default function ServicesIndexPage() {
             </h2>
             <div>
               <p className="ed-body">
-                Send your repair list online, or call to discuss the scope and next steps before scheduling.
+                See a preliminary price range online, send your repair list, or call to discuss the scope and next steps before scheduling.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
-                <ConsultCTA variant="brand" tone="dark">{CTA_PRIMARY}</ConsultCTA>
+                {/* Owner decision, 13 November 2026: the estimator is the primary; the request form stays beside it. */}
+                <InstantEstimateCTA tone="dark" trackingLocation="services_closing" />
                 <FamilyButton href="/#consult" variant="secondary" tone="dark">{CTA_SECONDARY}</FamilyButton>
               </div>
             </div>

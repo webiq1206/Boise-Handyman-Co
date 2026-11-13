@@ -20,7 +20,7 @@ import {
 } from '@/components/ContractorCredential';
 import { CONTENT_HUBS, guidePath } from '@/shared/contentHubs';
 import { CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
-import { CTA_QUOTE } from '@/shared/ctaCopy';
+import { CTA_ESTIMATE_SHORT, CTA_QUOTE, ESTIMATE_HREF, QUOTE_FORM_HREF } from '@/shared/ctaCopy';
 import { P5_SOCIAL } from '@/shared/gbpProfile';
 import { PUBLIC_NAP_LINE, SITE_CONFIG } from '@/shared/siteConfig';
 import { areaPath, servicePath } from '@/lib/seo-routes';
@@ -48,7 +48,7 @@ export const FAMILY_BRAND: FamilyBrand = {
   header: {
     // The homepage opens on the full-bleed technician photograph; interior pages open on paper.
     darkOn: ['/'],
-    // Six navigation items, the lockup and "Send your list and photos" do not fit at 1024px;
+    // Six navigation items, the lockup and the call to action do not fit at 1024px;
     // 1180 is where this site's navigation and bottom bar have always switched.
     desktopFrom: 1180,
     phoneActions: ['call', 'text', 'chat'],
@@ -61,12 +61,12 @@ export const FAMILY_BRAND: FamilyBrand = {
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' },
   ],
-  // One label, one destination: the homepage request band (#consult) with the repair-list
-  // wizard. On the homepage it scrolls, as the old header and hero did; elsewhere it lands on
-  // the same form, as Remodeling sends every "Request a quote" to /#request. The owner's
-  // hash Back/Forward journeys (scripts/test-hash-history-browser.mjs) enter from this header
-  // link at 1440 and from the footer link below.
-  cta: { label: CTA_QUOTE, href: '/#consult' },
+  // One label, one destination. Owner decision, 13 November 2026: the family's central
+  // estimator is the primary pricing call to action, so the header, the mobile menu and the
+  // sticky bar open /instant-estimate, which frames it. The request form (#consult, "Send
+  // your list and photos") stays as the second path: the footer link below, the homepage
+  // request band and the contact page.
+  cta: { label: CTA_ESTIMATE_SHORT, href: ESTIMATE_HREF },
   phone: { display: SITE_CONFIG.phone, telHref: SITE_CONFIG.phoneHref, smsHref: SITE_CONFIG.phoneSmsHref },
   // The assistant opens from the menu tile and its own launcher (desktop).
   chat: {
@@ -82,8 +82,10 @@ export const FAMILY_BRAND: FamilyBrand = {
     // homepage hero and appears once the hero's own CTA has left the screen.
     showOverHero: false,
     callLabel: 'Call',
-    // The estimator owns the whole screen (Navigation renders no chrome there either).
-    hiddenOn: ['/estimate/*'],
+    // The estimator owns the whole screen (Navigation renders no chrome there either). On
+    // /instant-estimate the bar would only link to the page it sits on, and would cover the
+    // framed estimator's own buttons.
+    hiddenOn: ['/estimate/*', ESTIMATE_HREF],
     yieldToBodyFlags: ['assistantOpen', 'hideMobileNavBar', 'p5EstimatorActive'],
     // The same check requires the bar gone within 150ms of returning to the hero: it leaves at
     // once instead of after the 300ms slide-out, and still slides in as usual.
@@ -115,8 +117,9 @@ export const FAMILY_BRAND: FamilyBrand = {
           { label: 'Why choose us', href: '/#why-choose-us' },
           { label: 'How we work', href: '/#how-we-build' },
           { label: 'RE-10 repairs', href: '/re-10-repairs-boise' },
+          { label: CTA_ESTIMATE_SHORT, href: ESTIMATE_HREF },
           // The old footer CTAs: the homepage request band, kept for the hash history journeys.
-          { label: CTA_QUOTE, href: '/#consult' },
+          { label: CTA_QUOTE, href: QUOTE_FORM_HREF },
           { label: 'Contact', href: '/contact' },
           // R13: existing customers reach the support path, not a new-sales form.
           { label: 'Existing customer? Get help', href: '/warranty#get-help' },

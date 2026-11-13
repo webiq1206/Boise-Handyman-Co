@@ -258,6 +258,10 @@
 .fr-cta-strip h2 { font-size: var(--fs-h1); max-width: 22ch; font-family: var(--font-display); font-weight: var(--weight-display); line-height: var(--lh-h1); letter-spacing: var(--tracking-display); }
 .fr-cta-strip p:not(.f-eyebrow) { margin-top: 8px; color: var(--fr-ink-soft); }
 .fr-cta-strip-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; flex: none; }
+/* The instant estimate band on the homepage: the same strip, plus three short benefits. */
+.fr-estimate-benefits { display: flex; flex-wrap: wrap; gap: 6px 28px; margin: 16px 0 0; padding: 0; list-style: none; }
+.fr-estimate-benefits li { position: relative; padding-left: 18px; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--fr-ink-soft); }
+.fr-estimate-benefits li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 8px; height: 2px; background: var(--f-accent); }
 
 /* ------------------------------------------------------------------ city line */
 .fr-cities {

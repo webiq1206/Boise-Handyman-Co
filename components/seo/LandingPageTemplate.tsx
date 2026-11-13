@@ -7,6 +7,7 @@ import { Section } from '@/components/marketing/Section';
 import { RelatedPostCards } from '@/components/marketing/RelatedPostCards';
 import Image from '@/components/MarketingImage';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
+import { InstantEstimateCTA } from '@/components/estimator/InstantEstimateCTA';
 import { Reveal } from '@/components/Reveal';
 import { FeaturedBeforeAfterSection } from '@/components/sections/FeaturedBeforeAfterSection';
 import {
@@ -18,7 +19,7 @@ AccordionTrigger,
 import { Button } from '@/components/ui/button';
 import { GRAIN_URL } from '@/lib/grain';
 import { altForImage } from '@/shared/imageAlts';
-import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
+import { CTA_ESTIMATE,CTA_PRIMARY,CTA_SECONDARY,estimatorProjectForService } from '@/shared/ctaCopy';
 import type { GalleryProject } from '@/shared/galleryData';
 import type { FAQItem } from '@/shared/seoContent';
 import { SITE_CONFIG } from '@/shared/siteConfig';
@@ -192,6 +193,12 @@ export function LandingPageTemplate({
   const processAlt = altForImage(processImage) ?? '';
   const showTimelineBelow = !!timeline && !costGuidance;
   const callFirst = callFirstProp || !!paidService;
+  // Owner decision, 13 November 2026: the instant estimator is the primary
+  // pricing call to action. A service page opens it on the project that prices
+  // that service; an area page opens it for the visitor to choose. A service
+  // with no estimator project keeps the request form as its primary.
+  const estimateProject = estimatorProjectForService(related.serviceSlug);
+  const estimateAvailable = related.variant === 'area' || !!estimateProject;
   const focusedDrywallHero = manifestPath === '/services/drywall-repair' || manifestPath === '/services/drywall-repair/boise';
   // Phase 3. The paid-traffic pages (callFirst) render exactly as before. On
   // every other page each photograph is shown once, and the area and
@@ -216,7 +223,7 @@ export function LandingPageTemplate({
       data-ad-landing={callFirst ? '' : undefined}
     >
       {/* Approved editorial hero */}
-      {focusedDrywallHero ? <DrywallSearchHero h1={h1} overview={overview} speakableSummary={speakableSummary} breadcrumbs={breadcrumbs} callFirst={callFirst} /> : <InteriorHero imageSrc={heroImageUrl} imageAlt={heroAlt} layout="split">
+      {focusedDrywallHero ? <DrywallSearchHero h1={h1} overview={overview} speakableSummary={speakableSummary} breadcrumbs={breadcrumbs} callFirst={callFirst} estimateProject={estimateProject} /> : <InteriorHero imageSrc={heroImageUrl} imageAlt={heroAlt} layout="split">
           <HeroBreadcrumbs items={breadcrumbs} />
           <p data-speakable="summary" className="sr-only">{speakableSummary}</p>
           {eyebrow && (
@@ -245,9 +252,15 @@ export function LandingPageTemplate({
           <p className="mt-2 text-sm text-inverse-foreground/80">Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM</p>
           <p className="mt-8 max-w-[60ch] text-base md:text-lg leading-relaxed text-inverse-foreground/95">{overview}</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
-            <ConsultCTA variant="brand">
-              {CTA_PRIMARY} <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </ConsultCTA>
+            {estimateAvailable ? (
+              <InstantEstimateCTA project={estimateProject} trackingLocation="landing_hero">
+                {CTA_ESTIMATE} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </InstantEstimateCTA>
+            ) : (
+              <ConsultCTA variant="brand">
+                {CTA_PRIMARY} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </ConsultCTA>
+            )}
             <Button variant="heroOutline" asChild>
               <a href="/#consult">{CTA_SECONDARY}</a>
             </Button>
@@ -262,13 +275,20 @@ export function LandingPageTemplate({
           </>}
           </> : <>
           {/* Every other service, city and area page: one filled primary
-              ("Send your list and photos") directly under the heading, so it
-              is in the first screen at every size, and the phone as a text
-              link beneath it, as on the RE-10 hero. */}
+              ("Get an instant estimate"; "Send your list and photos" where no
+              estimator project prices the service) directly under the heading,
+              so it is in the first screen at every size, and the phone as a
+              text link beneath it, as on the RE-10 hero. */}
           <div className="mt-6 [&>*]:w-full sm:[&>*]:w-auto">
-            <ConsultCTA variant="brand" data-testid="button-primary-service-hero" data-hero-cta="primary" trackingLocation="landing_hero">
-              {CTA_PRIMARY}
-            </ConsultCTA>
+            {estimateAvailable ? (
+              <InstantEstimateCTA project={estimateProject} data-testid="button-primary-service-hero" data-hero-cta="primary" trackingLocation="landing_hero">
+                {CTA_ESTIMATE}
+              </InstantEstimateCTA>
+            ) : (
+              <ConsultCTA variant="brand" data-testid="button-primary-service-hero" data-hero-cta="primary" trackingLocation="landing_hero">
+                {CTA_PRIMARY}
+              </ConsultCTA>
+            )}
           </div>
           <a
             href={SITE_CONFIG.phoneHref}
@@ -681,9 +701,18 @@ export function LandingPageTemplate({
               </h2>
             </Reveal>
             <Reveal delay={60}>
-              <p className="ed-lede">Send your task list and photos.</p>
-              <p className="ed-body mt-3">Get an upfront quote and arrange a handyman visit, with no obligation.</p>
-              <div className="mt-8"><ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA></div>
+              {estimateAvailable ? <>
+                <p className="ed-lede">See a preliminary price range online, or send your task list and photos.</p>
+                <p className="ed-body mt-3">Get an upfront quote and arrange a handyman visit, with no obligation.</p>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
+                  <InstantEstimateCTA project={estimateProject} trackingLocation="landing_closing" />
+                  <ConsultCTA variant="outline">{CTA_PRIMARY}</ConsultCTA>
+                </div>
+              </> : <>
+                <p className="ed-lede">Send your task list and photos.</p>
+                <p className="ed-body mt-3">Get an upfront quote and arrange a handyman visit, with no obligation.</p>
+                <div className="mt-8"><ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA></div>
+              </>}
             </Reveal>
           </div>
         </div>

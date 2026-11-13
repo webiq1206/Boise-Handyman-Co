@@ -4,7 +4,7 @@ import { AreaCard } from "@/components/marketing/AreaCard";
 import { BlogEndCta } from "@/components/marketing/BlogEndCta";
 import { Section } from "@/components/marketing/Section";
 import { SectionHeader } from "@/components/marketing/SectionHeader";
-import { ConsultCTA } from "@/components/modals/ConsultCTA";
+import { InstantEstimateCTA } from "@/components/estimator/InstantEstimateCTA";
 import { Reveal } from "@/components/Reveal";
 import { PageHeroBand } from "@/components/sections/PageHeroBand";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -18,7 +18,7 @@ generateWebPageSchema,
 import { AREA_PAGE_FAQS } from "@/shared/seoContent";
 import { CITY_HERO_IMAGES } from "@/shared/cityServiceImages";
 import { CITIES,TREASURE_VALLEY_CITIES } from "@/shared/contentData";
-import { CTA_PRIMARY,CTA_SECONDARY } from "@/shared/ctaCopy";
+import { CTA_SECONDARY } from "@/shared/ctaCopy";
 import { FamilyButton } from '@/components/family/Button';
 
 // The door-hinge technician is the homepage hero. The areas index leads with a
@@ -70,7 +70,8 @@ export default function AreasHubPage() {
             Treasure Valley handyman service areas across Ada and Canyon County.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
-            <ConsultCTA variant="brand" data-hero-cta="primary">{CTA_PRIMARY}</ConsultCTA>
+            {/* Owner decision, 13 November 2026: the estimator is the primary; the request form stays beside it. */}
+            <InstantEstimateCTA data-hero-cta="primary" trackingLocation="areas_hero" />
             <FamilyButton href="/#consult" variant="secondary">{CTA_SECONDARY}</FamilyButton>
           </div>
         </PageHeroBand>

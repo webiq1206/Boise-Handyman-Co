@@ -4,7 +4,12 @@
  * - Paid-traffic pages (lib/adLandingPaths.ts) keep the owner's call-first
  *   hero from 19 and 27 October 2026: Call comes before any request action.
  * - Every other service, city and area page leads with the site primary,
- *   "Send your list and photos", and carries the phone as a text link after it.
+ *   "Get an instant estimate", and carries the phone as a text link after it.
+ *   (Owner decision, 13 November 2026: the central estimator at
+ *   /instant-estimate gives an on-screen preliminary range, so
+ *   instant-estimate wording is accurate and allowed; it must never be called
+ *   a quote or a final price. Until then the primary was "Send your list and
+ *   photos".)
  *
  * The real page components are server-rendered here (CSS stubbed), so the
  * test reads the markup a visitor gets, not the source text.
@@ -43,7 +48,7 @@ function heroOf(html:string):string{
  assert.ok(start>=0&&end>start,'hero section rendered');
  return html.slice(start,end);
 }
-const PRIMARY='Send your list and photos';
+const PRIMARY='Get an instant estimate';
 
 test('the ad landing list names the paid service pages and the funnel',async()=>{
  const {AD_CALL_FIRST_PATHS,AD_FUNNEL_PATH,isAdCallFirstPath}=await import('../lib/adLandingPaths.ts');
@@ -88,6 +93,9 @@ for(const [file,params,label] of [
   const phone=hero.indexOf('data-testid="link-call-service-hero"');
   assert.ok(primary>=0,'filled primary in the hero');
   assert.ok(hero.indexOf(PRIMARY)>primary,'primary carries the site label');
+  // A service page opens the estimator on the project that prices it; an area page lets the visitor choose.
+  const expected=label.startsWith('/areas/')?'href="/instant-estimate"':'href="/instant-estimate?project=handyman"';
+  assert.ok(hero.includes(expected),`primary opens the estimator: ${expected}`);
   assert.ok(phone>primary,'phone text link follows the primary');
   assert.ok(hero.slice(phone).includes('Prefer to talk? Call'),'phone is a text link');
   assert.equal(hero.includes('data-testid="button-call-service-hero"'),false,'no filled Call button');

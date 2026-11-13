@@ -1,4 +1,4 @@
-import { ApprovedCtaStrip, ApprovedFounder, ApprovedHowItWorks, ApprovedServiceArea } from "@/components/approved/ApprovedHome";
+import { ApprovedCtaStrip, ApprovedFounder, ApprovedHowItWorks, ApprovedInstantEstimate, ApprovedServiceArea } from "@/components/approved/ApprovedHome";
 import { ApprovedFamilyFrame, ApprovedHomeHero } from "@/components/approved/ApprovedHomeHero";
 import focusedHeroStyles from '@/components/approved/FocusedSearchHero.module.css';
 import { ReviewedPageBarClearance } from '@/components/approved/ReviewedPageBarClearance';
@@ -48,6 +48,8 @@ export default function HomePage() {
 
           1. Hero (family HeroPhoto: one support line, one primary, Call as a
              text link) and its proof strip
+          1a. The instant estimate band (owner decision, 13 November 2026): the
+             central estimator is the primary pricing call to action
           2. Services: the answer-first block and every service link
           3. Planning-range interactive proof (C14): a ballpark before contact
              (the gallery slot after it renders nothing until real work exists)
@@ -66,6 +68,7 @@ export default function HomePage() {
           frame's heading overrides cannot restyle the shared HeroPhoto. */}
       <ApprovedHomeHero heroClassName={focusedHeroStyles.homeHero} />
       <ApprovedFamilyFrame>
+        <ApprovedInstantEstimate />
         <HandymanServicesAnswer />
         {/* The finish: six photographs from the company's own campaign library. */}
         <DesignGallery

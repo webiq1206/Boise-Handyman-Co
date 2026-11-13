@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { familyButtonClass } from "@/components/family/Button";
 import { trackEvent } from "@/lib/analytics";
-import { FAMILY_BRAND } from "@/lib/familyBrand";
+import { QUOTE_FORM_HREF } from "@/shared/ctaCopy";
 
 interface EstimateCTAProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "onClick"> {
   onExtraClick?: () => void;
@@ -27,13 +27,18 @@ interface EstimateCTAProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>,
  * paper fill on dark grounds). It lands on a request form: the contact page's
  * own (#consult), or the homepage form (/#consult) from anywhere else. Tracked once here
  * with the same cta_click event the call sites always sent.
+ *
+ * Since 13 November 2026 the header's call to action is the estimator
+ * (components/estimator/InstantEstimateCTA.tsx), so this button names the form
+ * itself instead of following the header: it is the written-quote path, used
+ * where the words around it are about sending a list and photos.
  */
 export function EstimateCTA({ onExtraClick, children, trackingLocation, variant, size, tone = "light", className, ...props }: EstimateCTAProps) {
   const pathname = usePathname();
   // Owner, 1 November 2026: every "Send your list and photos" lands ON a form.
-  // The contact page has its own (#consult); everywhere else it is the family
-  // header's destination, the homepage form.
-  const href = pathname === "/contact" ? "/contact#consult" : FAMILY_BRAND.cta.href;
+  // The contact page has its own (#consult); everywhere else it is the
+  // homepage form.
+  const href = pathname === "/contact" ? "/contact#consult" : QUOTE_FORM_HREF;
   const secondary = /outline/i.test(variant ?? "");
 
   return (

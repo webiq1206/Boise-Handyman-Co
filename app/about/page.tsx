@@ -7,6 +7,7 @@ import { Hairline } from '@/components/marketing/Hairline';
 import { SectionHeader } from '@/components/marketing/SectionHeader';
 import Image from '@/components/MarketingImage';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
+import { InstantEstimateCTA } from '@/components/estimator/InstantEstimateCTA';
 import { Reveal } from '@/components/Reveal';
 import { StatementBandSection } from '@/components/sections/StatementBandSection';
 import { WhyChooseUsSection } from '@/components/sections/WhyChooseUsSection';
@@ -125,7 +126,8 @@ export default function AboutPage() {
               Boise Handyman Co is a repair, install and maintenance company in Meridian, Idaho, and one of the four companies of P5 Home Co.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-8">
-              <ConsultCTA variant="brand" data-hero-cta="primary">{CTA_PRIMARY}</ConsultCTA>
+              {/* Owner decision, 13 November 2026: the estimator is the primary; the request form stays beside it. */}
+              <InstantEstimateCTA data-hero-cta="primary" trackingLocation="about_hero" />
               <FamilyButton href="/#consult" variant="secondary">{CTA_SECONDARY}</FamilyButton>
             </div>
             <dl className="ed-hero-facts">
