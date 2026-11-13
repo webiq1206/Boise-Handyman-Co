@@ -12,8 +12,12 @@
  * assets/source-renders/images/areas/nampa.png becomes
  * public/images/areas/nampa.webp.
  *
- * Six served photos were replaced on 13 November 2026 and no longer come from
- * their render here. See SUPERSEDED_SOURCES below.
+ * Eight served photos were replaced on 13 November 2026 (seven area photos
+ * and gallery-boise-bungalow-exterior). Their renders here were replaced with
+ * the new photographs at the served pixel size, and the served WebP files are
+ * this script's own output, so a run reproduces them byte for byte. When a
+ * served photo is replaced without its render, list the render in
+ * SUPERSEDED_SOURCES below until the render is replaced too.
  *
  * Run: npm run images:optimize
  */
@@ -30,20 +34,14 @@ const MAX_WIDTH = 1920;
 const QUALITY = 80;
 
 /**
- * Renders whose served WebP was replaced with a different photograph on
- * 13 November 2026 (owner direction: no Craftsman-style houses in any photo).
- * The PNG kept here is the OLD picture, so converting it would put the retired
- * photo back on the site. These are skipped. Remove an entry only when its
- * render has been replaced with the source of the photo now being served.
+ * Renders whose served WebP has been replaced with a different photograph
+ * while the PNG kept here is still the OLD picture. Converting one would put
+ * the retired photo back on the site, so these are skipped. Remove an entry
+ * only when its render has been replaced with the source of the photo now
+ * being served. Empty since 13 November 2026: every render matches its served
+ * file again.
  */
-const SUPERSEDED_SOURCES = new Set([
-  "images/areas/boise.png",
-  "images/areas/eagle.png",
-  "images/areas/kuna.png",
-  "images/areas/meridian.png",
-  "images/areas/star.png",
-  "images/gallery/gallery-boise-bungalow-exterior.png",
-]);
+const SUPERSEDED_SOURCES = new Set([]);
 
 function collectPngs(directory) {
   if (!fs.existsSync(directory)) return [];

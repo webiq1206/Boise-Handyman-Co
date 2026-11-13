@@ -22,14 +22,14 @@ const CARD_ALT: Record<string, string> = {
   'carpentry-trim-repair': 'Interior door trim being fitted and nailed in place',
   'painting-touch-ups': 'A freshly painted interior wall with crisp trim lines',
   'mounting-assembly': 'New cabinet hardware being fitted to a kitchen door',
-  'home-maintenance': 'Careful adjustment of an interior door hinge',
+  'home-maintenance': 'An interior door mid-repair with a tool bag, a drill and a level beside it',
 };
 
 // Existing approved campaign/planning assets, scoped to the homepage cards.
 // These illustrate service scope, never completed company-project evidence.
 const CARD_IMAGES: Record<string, {src: string; alt: string; width: number; height: number; position?: string}> = {
   'drywall-repair': {src: '/images/handyman/punch-list-markers.webp', alt: 'Repair-planning notes and blue wall markers beside a window', width: 1216, height: 896},
-  'carpentry-trim-repair': {src: '/family/drive/square-2-entry-bench-and-coat-hooks.webp', alt: 'Entry bench, beadboard wall and coat hooks', width: 1200, height: 1200, position: '50% 0%'},
+  'carpentry-trim-repair': {src: '/family/drive/square-2-entry-bench-and-coat-hooks.webp', alt: 'Oak entry bench under a rail of black coat hooks', width: 1200, height: 1200},
   'painting-touch-ups': {src: '/images/handyman/front-door-repaint-p5-reviewed-20260910.webp', alt: 'Painted front door and surrounding trim', width: 1461, height: 1076},
   'mounting-assembly': {src: '/family/drive/square-1-front-door-smart-lock.webp', alt: 'Black front door with deadbolt and lever handle', width: 1200, height: 1200},
 };

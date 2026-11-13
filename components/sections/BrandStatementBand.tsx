@@ -18,7 +18,7 @@ export function BrandStatementBand() {
     >
       <Image
         src={SITE_IMAGES.statementBand}
-        alt="A worker painting white window trim with a brush over a drop cloth"
+        alt="Freshly painted white window trim, with a brush resting on an open paint can over a drop cloth"
         fill
         loading="lazy"
         quality={65}

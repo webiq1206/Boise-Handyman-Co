@@ -7,17 +7,17 @@
  */
 
 export const SITE_IMAGES = {
-  /** Homepage hero: a handyman adjusting a sticking interior door in a bright home. */
+  /** Default hero: an interior door mid-repair with a tool bag, drill and level beside it. No people (13 November 2026). */
   hero: "/images/handyman/hero-door-hinge-branded.webp",
-  /** "How we work" split panels: a written quote on a clipboard with a tape measure. */
+  /** "How we work" split panels: a blank work-order form on a clipboard with a tape measure and a level. */
   process: "/images/handyman/estimate-clipboard.webp",
   /** Value and carpentry sections: approved people-free door, trim and hardware. */
   valueCraft: "/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",
   /** Process sections: a tidy tool bag staged on a drop cloth for a repair visit. */
   processInProgress: "/images/handyman/toolbag-ready.webp",
-  /** Full-bleed brand statement band: crisp cut-in paint lines on trim. */
+  /** Full-bleed brand statement band: freshly painted window trim, a brush on an open paint can. No people. */
   statementBand: "/images/handyman/service-painting-p5-reviewed-20260910.webp",
-  /** About/contact split panels and about hero: a doorstep walkthrough with a homeowner. */
+  /** About/contact split panels and about hero: a tool bag and drill on a front step by the door. No people. */
   leadership: "/images/handyman/consult-doorstep-branded.webp",
   /** Consultation section background (homepage): a freshly repainted front door. */
   consultBg: "/images/handyman/front-door-repaint-p5-reviewed-20260910.webp",

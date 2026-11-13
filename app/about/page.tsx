@@ -108,7 +108,7 @@ export default function AboutPage() {
         <InteriorHero
           layout="editorial"
           imageSrc={SITE_IMAGES.leadership}
-          imageAlt="A handyman and a homeowner reviewing a clipboard at a front door"
+          imageAlt="A canvas tool bag and a cordless drill on the front step beside a wood front door"
           imageFit="contain"
         >
             <HeroBreadcrumbs />
