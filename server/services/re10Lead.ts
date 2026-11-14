@@ -7,6 +7,7 @@ import {
   formatFromAddress,
   getReplyToAddress,
 } from "@/server/services/emailLayout";
+import { leadConfirmationPlainText } from "@/server/services/scheduleEmail";
 import { formatLeadReplyTo } from "@/server/services/consultationEmail";
 import { forwardToLeadDashboard } from "@/server/services/leadDashboardForward";
 import { SITE_CONFIG } from "@/shared/siteConfig";
@@ -396,7 +397,7 @@ export async function deliverRe10Lead(input: Re10DeliveryInput): Promise<Re10Del
         to: contact.email,
         subject: buildRe10CustomerSubject(contact),
         html: customerHtml,
-        text: htmlToPlainText(customerHtml),
+        text: leadConfirmationPlainText(customerHtml),
       });
       if (sent?.error) console.error("[re10Lead] customer email failed:", JSON.stringify(sent.error));
       else if (!isNoop) result.customerEmailed = true;

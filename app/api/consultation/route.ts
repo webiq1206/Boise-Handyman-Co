@@ -14,6 +14,7 @@ import {
   formatFromAddress,
   getReplyToAddress,
 } from "@/server/services/emailLayout";
+import { leadConfirmationPlainText } from "@/server/services/scheduleEmail";
 import {
   buildAdminEmailHtml,
   buildCustomerEmailHtml,
@@ -340,7 +341,7 @@ export async function POST(request: NextRequest) {
             to: data.email,
             subject: buildCustomerSubject(lead, estimate),
             html: customerHtml,
-            text: htmlToPlainText(customerHtml),
+            text: leadConfirmationPlainText(customerHtml),
           });
           if (customerResult?.error) {
             console.error(
