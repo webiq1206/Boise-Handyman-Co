@@ -5,6 +5,13 @@ import {
 } from "@/server/services/emailLayout";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import {
+  HANDYMAN_ACCENT,
+  estimateScheduleLetter,
+  paperPanel,
+  requestLetter,
+  scheduleIntentFor,
+} from "@/server/services/scheduleEmail";
+import {
   takeoffForRange,
   takeoffForClient,
   formatQuantity,
@@ -819,6 +826,11 @@ export function buildCustomerEmailHtml(
 ): string {
   const firstName = firstNameOf(lead.name);
   const projectLabel = estimate ? PROJECT_LABELS[estimate.project].label : lead.projectType;
+  // A callback, or a chat that did not build a range, is a 15 minute phone
+  // consult. A project request, including one with a planning range, is a
+  // 1 hour home walkthrough. Same split as the parent booking letter.
+  const form = !estimate && /assistant chat/i.test(lead.message ?? "") ? "site chat" : null;
+  const intent = scheduleIntentFor({ requestKind: lead.requestKind, form });
 
   // Only when there is no computed comparison to show. Once the estimator has a
   // real number it renders the solved version - where their budget actually
@@ -833,20 +845,25 @@ export function buildCustomerEmailHtml(
 
   const content = estimate
     ? `
-      <p class="greeting" style="font-size:18px;color:${EMAIL_BRAND.text};margin:0 0 20px;">Thanks, ${escapeHtml(firstName)}. Here is the planning range you built.</p>
+      ${paperPanel(estimateScheduleLetter({
+        intro: `Thanks, ${firstName}. Here is the planning range you built.`,
+        intent,
+        phone: SITE_CONFIG.phone,
+        accent: HANDYMAN_ACCENT,
+      }).html)}
       ${buildEstimateSectionsHtml(estimate, overrides)}
       ${budgetNote}
-      <p style="color:${EMAIL_BRAND.text};line-height:1.6;">We will reach out to answer your questions, confirm the scope, give you a firm number, and help you work out the next step. You can also reply here or call <a href="${SITE_CONFIG.phoneHref}" style="color:${EMAIL_BRAND.accent};">${escapeHtml(SITE_CONFIG.phone)}</a> with any questions.</p>
-      <p style="margin-top:24px;color:${EMAIL_BRAND.text};">The ${escapeHtml(SITE_CONFIG.name)} team</p>
     `
-    : `
-      <p class="greeting" style="font-size:18px;color:${EMAIL_BRAND.text};margin:0 0 20px;">We received your request. We will reach out to answer your questions, talk through the job and help you work out the next step.</p>
-      <p style="color:${EMAIL_BRAND.text};line-height:1.6;">In the meantime, feel free to call us at <a href="${SITE_CONFIG.phoneHref}" style="color:${EMAIL_BRAND.accent};">${escapeHtml(SITE_CONFIG.phone)}</a>, <a href="${SITE_CONFIG.phoneSmsHref}" style="color:${EMAIL_BRAND.accent};">send us a text</a>, or reply to this email with any questions.</p>
-      <p style="margin-top:24px;color:${EMAIL_BRAND.text};">The ${escapeHtml(SITE_CONFIG.name)} team</p>
-    `;
+    : paperPanel(requestLetter({
+        firstName,
+        brandName: SITE_CONFIG.name,
+        intent,
+        phone: SITE_CONFIG.phone,
+        accent: HANDYMAN_ACCENT,
+      }).html);
 
   return wrapEmailHtml({
-    title: estimate ? `Your ${projectLabel} planning range` : `Thanks, ${escapeHtml(lead.name)}!`,
+    title: estimate ? `Your ${projectLabel} planning range` : `Thanks, ${lead.name}!`,
     subtitle: estimate ? "Saved so you have it in writing" : "We received your consultation request",
     content,
   });
