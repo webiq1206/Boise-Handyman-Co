@@ -1,15 +1,16 @@
 /**
  * Handyman planning calculator for Boise Handyman Co.
  *
- * Every dollar comes from the shared P5 cost book through the rate map built
- * by shared/handymanBookRates.ts (`sharedBookRate` in lib/p5/priceBook.ts).
- * This file names the book code for each task. It does not store a price.
- * The tier is Signature (`mid`), the book's default. Handyman lines are not
- * remodel-premium lines, so the lookup uses remodel = false.
+ * Task cards name a cost book code. The dollars are the customer price from
+ * the shared pricing engine (lib/p5/pricing.ts): direct cost, the project
+ * reserve, overhead and profit, then the estimator's quote-class range.
+ * The factors arrive in HandymanPriceContext from shared/handymanCustomerPrice.ts.
+ * This file does not store a markup factor.
  *
  * A task with no single cost-book line is listed in UNPRICED_CALCULATOR_ITEMS
  * and is not given a number here.
  */
+import { priceFromRiskAdjustedCost } from "../lib/p5/pricing.ts";
 
 /* ────────────────────────────────────────────────────────────── categories */
 
@@ -151,9 +152,6 @@ export const UNPRICED_CALCULATOR_ITEMS: { id: string; label: string; reason: str
   { id: "caulk-exterior", label: "Exterior caulking touch-up", reason: "07-92-02 is one window or door. 07-92-01 is the whole house. The old card is a touch-up area." },
   { id: "grout-touch-up", label: "Tile grout touch-up", reason: "22-01-08 regrouts a shower per SF. There is no small-area each." },
   { id: "other-small", label: "Something else, small", reason: "No two-hour package. 01-01-02 is an hourly rate and the old card does not say one hour or two." },
-  { id: "urgency-priority", label: "Priority scheduling", reason: "01-01-15 is a percentage of cost (rush), and sharedBookRate does not return a unit price for it. The old +15% is not that line." },
-  { id: "urgency-emergency", label: "Same-week emergency", reason: "01-01-09 is an after-hours percentage, and sharedBookRate does not return a unit price for it. The old +30% is not that line." },
-  { id: "minimum-visit", label: "One-hour minimum", reason: "01-01-07 is its own minimum service charge, not a floor added on top of a priced task. Applying it would replace the task price." },
 ];
 
 /* ─────────────────────────────────────────────── "something else" sizing */
@@ -177,10 +175,10 @@ export const MATERIALS_PLAN_VALUES = ["customer", "we-pick-up"] as const satisfi
 
 export const MATERIALS_PLANS: Record<MaterialsPlan, { label: string; sub: string }> = {
   customer: { label: "I will have materials ready", sub: "You buy the parts, we bring the tools" },
-  "we-pick-up": { label: "Pick materials up for me", sub: "Adds the book's trip and material run charge" },
+  "we-pick-up": { label: "Pick materials up for me", sub: "The estimator credits the trip charge when you move forward" },
 };
 
-/** Cost book line for a supply run. Priced only through the shared rate map. */
+/** Cost book trip line. The estimator shows it and credits it, so it does not change the customer total. */
 export const SUPPLY_RUN_CODE = "01-01-08";
 
 export type UrgencyLevel = "standard" | "priority" | "emergency";
@@ -188,9 +186,9 @@ export type UrgencyLevel = "standard" | "priority" | "emergency";
 export const URGENCY_LEVEL_VALUES = ["standard", "priority", "emergency"] as const satisfies readonly UrgencyLevel[];
 
 /**
- * Scheduling labels only. Priority and same-week emergency are not given a
- * dollar surcharge: the book's rush lines are percentages, and this calculator
- * does not turn a percentage into a price.
+ * Priority uses cost book line 01-01-15 (rush, a percentage of cost).
+ * Same-week emergency uses 01-01-09 (after-hours, a percentage of cost).
+ * The rates are read from the book in HandymanPriceContext.
  */
 export const URGENCY_LEVELS: Record<UrgencyLevel, { label: string; sub: string }> = {
   standard: { label: "Standard", sub: "Next available opening" },
@@ -245,9 +243,9 @@ export interface HandymanEstimate {
   customerLines: CustomerTaskLine[];
   /** Selected lines that have no cost-book price. They are not in the total. */
   unpriced: UnpricedCalculatorLine[];
-  /** Sum of the cost-book lines, unrounded beyond cents. */
+  /** Customer contract price, before the quote-class range is widened. */
   total: number;
-  /** Same as total. The book does not publish a low and high band. */
+  /** Customer range, rounded outward to $10 by division the way the estimator does. */
   priceLow: number;
   priceHigh: number;
   /** Number of catalog tasks priced (a priced other-job counts as one). */
@@ -255,8 +253,26 @@ export interface HandymanEstimate {
   oversized: boolean;
 }
 
-/** Book code to dollar amount, built only by shared/handymanBookRates.ts. */
-export type HandymanBookRates = Readonly<Record<string, number>>;
+/**
+ * Factors and book amounts for one pricing pass. Built on the server by
+ * shared/handymanCustomerPrice.ts from lib/p5/pricing.ts and the cost book.
+ */
+export type HandymanPriceContext = {
+  overhead: number;
+  profit: number;
+  contingency: number;
+  /** Quote-class width. This calculator has no address, so the jurisdiction risk is included. */
+  rangeWidth: number;
+  minimumCode: string;
+  minimumDirect: number;
+  rushCode: string;
+  rushRate: number;
+  emergencyCode: string;
+  emergencyRate: number;
+  /** Signature direct amount by cost book code. */
+  direct: Readonly<Record<string, number>>;
+  division: Readonly<Record<string, string>>;
+};
 
 function round2(value: number): number {
   return Math.round(value * 100) / 100;
@@ -268,68 +284,105 @@ function clampQuantity(quantity: number, task: TaskOption): number {
   return Math.min(Math.max(Math.round(quantity), 1), max);
 }
 
-function rateFor(code: string | undefined, rates: HandymanBookRates): number | null {
-  if (!code) return null;
-  const amount = rates[code];
-  if (!Number.isFinite(amount) || amount <= 0) return null;
-  return amount;
+/** Customer unit price: the shared engine's direct cost x (1 + reserve) / (1 - overhead - profit), rounded to the cent. */
+function sell(direct: number, context: HandymanPriceContext): number {
+  return round2(priceFromRiskAdjustedCost(direct * (1 + context.contingency), context.overhead, context.profit));
 }
 
+type PricedPiece = { id: string; label: string; division: string; direct: number; amount: number };
+
 /**
- * Price the selection from the shared cost book rate map.
+ * Customer price for one visit, using the estimator's handyman rules:
+ * the minimum service charge balance, then a book percentage for priority
+ * or same-week emergency, then the quote-class range rounded outward by division.
  *
- * Returns null until at least one selected line has a book price, so the UI
- * can ask for a choice instead of showing a made-up zero.
+ * A materials pickup does not change the total. The estimator shows the trip
+ * charge and an equal credit, so the two net to zero.
+ *
+ * Returns null until at least one selected line has a book price.
  */
 export function calculateHandymanEstimate(
   input: HandymanEstimateInput,
-  rates: HandymanBookRates,
+  context?: HandymanPriceContext,
 ): HandymanEstimate | null {
-  const customerLines: CustomerTaskLine[] = [];
+  if (!context) return null;
+  const pieces: PricedPiece[] = [];
   const unpriced: UnpricedCalculatorLine[] = [];
   let taskCount = 0;
+
+  const addUnit = (id: string, label: string, code: string | undefined, quantity: number) => {
+    if (!code || context.direct[code] === undefined) {
+      unpriced.push({ id, label });
+      return;
+    }
+    const unitDirect = context.direct[code];
+    const direct = round2(unitDirect * quantity);
+    pieces.push({
+      id,
+      label,
+      division: context.division[code] ?? code.slice(0, 2),
+      direct,
+      amount: round2(sell(unitDirect, context) * quantity),
+    });
+    taskCount += 1;
+  };
 
   for (const selection of input.tasks) {
     const task = findTaskOption(selection.taskId);
     if (!task) continue;
     const qty = clampQuantity(selection.quantity, task);
     const label = qty > 1 ? `${task.label} x${qty}` : task.label;
-    const unit = rateFor(task.bookCode, rates);
-    if (unit === null) {
-      unpriced.push({ id: task.id, label });
-      continue;
-    }
-    customerLines.push({ id: task.id, label, amount: round2(unit * qty) });
-    taskCount += 1;
+    addUnit(task.id, label, task.bookCode, qty);
   }
 
   if (input.otherJob && input.otherJob.description.trim().length > 0) {
     const size = OTHER_JOB_SIZES[input.otherJob.size];
     const desc = input.otherJob.description.trim();
-    const label = desc.length > 0 ? desc : size.label;
-    const unit = rateFor(size.bookCode, rates);
-    if (unit === null) unpriced.push({ id: `other-${input.otherJob.size}`, label });
-    else {
-      customerLines.push({ id: "other-job", label, amount: round2(unit) });
-      taskCount += 1;
-    }
+    addUnit("other-job", desc.length > 0 ? desc : size.label, size.bookCode, 1);
   }
 
-  if (customerLines.length === 0) return null;
+  if (pieces.length === 0) return null;
 
-  if (input.materials === "we-pick-up") {
-    const trip = rateFor(SUPPLY_RUN_CODE, rates);
-    if (trip === null) unpriced.push({ id: "supply-run", label: "Materials pickup" });
-    else customerLines.push({ id: "supply-run", label: "Materials pickup", amount: round2(trip) });
+  const taskDirect = round2(pieces.reduce((sum, piece) => sum + piece.direct, 0));
+  if (taskDirect < context.minimumDirect) {
+    const quantity = Math.ceil(((context.minimumDirect - taskDirect) / context.minimumDirect) * 100) / 100;
+    const direct = round2(context.minimumDirect * quantity);
+    pieces.push({
+      id: "minimum",
+      label: "Minimum service charge, balance",
+      division: "01",
+      direct,
+      amount: round2(sell(context.minimumDirect, context) * quantity),
+    });
   }
 
+  if (input.urgency === "priority" || input.urgency === "emergency") {
+    const rate = input.urgency === "priority" ? context.rushRate : context.emergencyRate;
+    const directBase = round2(pieces.reduce((sum, piece) => sum + piece.direct, 0));
+    const direct = round2(directBase * rate);
+    pieces.push({
+      id: "urgency",
+      label: input.urgency === "priority" ? "Rush premium" : "Emergency, after hours",
+      division: "01",
+      direct,
+      amount: sell(direct, context),
+    });
+  }
+
+  const customerLines: CustomerTaskLine[] = pieces.map((piece) => ({ id: piece.id, label: piece.label, amount: piece.amount }));
   const total = round2(customerLines.reduce((sum, line) => sum + line.amount, 0));
-  const laborAmount = round2(
-    customerLines.filter((line) => line.id !== "supply-run").reduce((sum, line) => sum + line.amount, 0),
-  );
-  const lines: HandymanLine[] = [{ id: "labor", label: "Cost book tasks", amount: laborAmount }];
-  const tripLine = customerLines.find((line) => line.id === "supply-run");
-  if (tripLine) lines.push({ id: "supply-run", label: tripLine.label, amount: tripLine.amount });
+  const byDivision = new Map<string, number>();
+  for (const piece of pieces) byDivision.set(piece.division, round2((byDivision.get(piece.division) ?? 0) + piece.amount));
+  let priceLow = 0;
+  let priceHigh = 0;
+  for (const amount of byDivision.values()) {
+    priceLow += Math.max(0, Math.floor((amount * (1 - context.rangeWidth)) / 10) * 10);
+    priceHigh += Math.ceil((amount * (1 + context.rangeWidth)) / 10) * 10;
+  }
+
+  const urgencyAmount = pieces.find((piece) => piece.id === "urgency")?.amount ?? 0;
+  const lines: HandymanLine[] = [{ id: "labor", label: "Selected work", amount: round2(total - urgencyAmount) }];
+  if (urgencyAmount > 0) lines.push({ id: "urgency", label: input.urgency === "priority" ? "Rush premium" : "Emergency, after hours", amount: urgencyAmount });
 
   return {
     laborHours: 0,
@@ -340,8 +393,8 @@ export function calculateHandymanEstimate(
     customerLines,
     unpriced,
     total,
-    priceLow: total,
-    priceHigh: total,
+    priceLow,
+    priceHigh,
     taskCount,
     oversized: false,
   };

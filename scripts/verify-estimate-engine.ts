@@ -23,17 +23,16 @@ import {
   MAX_TASK_QUANTITY,
   OTHER_JOB_SIZES,
   OTHER_JOB_SIZE_VALUES,
-  SUPPLY_RUN_CODE,
   TASK_CATALOG,
   UNPRICED_CALCULATOR_ITEMS,
   URGENCY_LEVEL_VALUES,
   type HandymanEstimateInput,
   type JobCategoryId,
 } from "../shared/estimateEngine";
-import { handymanBookRates } from "../shared/handymanBookRates";
+import { handymanPriceContext } from "../shared/handymanCustomerPrice";
 import { SERVICES } from "../shared/contentData";
 
-const rates = handymanBookRates();
+const context = handymanPriceContext();
 
 let checks = 0;
 let failures = 0;
@@ -85,7 +84,7 @@ for (const [categoryId, tasks] of Object.entries(TASK_CATALOG)) {
     seenIds.add(task.id);
     const flagged = UNPRICED_CALCULATOR_ITEMS.some((item) => item.id === task.id);
     assert(Boolean(task.bookCode) !== flagged, `${task.id} is either a book code or an unpriced flag, not both and not neither`);
-    if (task.bookCode) assert(rates[task.bookCode] > 0, `${task.id} book code ${task.bookCode} has a unit price`);
+    if (task.bookCode) assert(context.direct[task.bookCode] > 0, `${task.id} book code ${task.bookCode} has a unit price`);
     assert(
       (task.maxQuantity ?? 1) >= 1 && (task.maxQuantity ?? 1) <= MAX_TASK_QUANTITY,
       `${task.id} maxQuantity within bounds`,
@@ -105,7 +104,7 @@ for (const category of JOB_CATEGORY_IDS) {
     otherJob: null,
     materials: "customer",
     urgency: "standard",
-  }, rates);
+  }, context);
   assert(empty === null, `${category}: no tasks means no estimate, never $0`);
 }
 assert(
@@ -115,7 +114,7 @@ assert(
     otherJob: { description: "   ", size: "small" },
     materials: "customer",
     urgency: "standard",
-  }, rates) === null,
+  }, context) === null,
   "whitespace-only other-job description does not price",
 );
 
@@ -136,49 +135,53 @@ for (const [categoryId, tasks] of Object.entries(TASK_CATALOG) as [
   (typeof TASK_CATALOG)[keyof typeof TASK_CATALOG],
 ][]) {
   for (const task of tasks) {
-    const estimate = calculateHandymanEstimate(base(categoryId, task.id), rates);
+    const estimate = calculateHandymanEstimate(base(categoryId, task.id), context);
     if (!task.bookCode) {
       assert(estimate === null, `${task.id} has no book code and is not given a price`);
       continue;
     }
     assert(estimate !== null, `${task.id} produces an estimate`);
     if (!estimate) continue;
-    const unit = rates[task.bookCode];
-    assert(estimate.total === unit, `${task.id} total is the book amount ${unit}`);
-    assert(estimate.priceLow === estimate.total && estimate.priceHigh === estimate.total, `${task.id} shows the book amount, not a made-up band`);
+    const unit = context.direct[task.bookCode];
+    assert(estimate.total > unit, `${task.id} customer price ${estimate.total} is above the direct cost ${unit}`);
+    assert(estimate.priceLow <= estimate.total && estimate.priceHigh >= estimate.total, `${task.id} range contains the customer price`);
+    assert(estimate.priceHigh > estimate.priceLow, `${task.id} customer range is wider than a point`);
     assert(estimate.unpriced.length === 0, `${task.id} has nothing unpriced`);
     assert(
       !estimate.lines.some((l) => /\btrip\b|trip-fee|visit fee/i.test(`${l.id} ${l.label}`)),
       `${task.id} carries no trip fee when the customer supplies materials`,
     );
     assert(
-      estimate.total === estimate.lines.reduce((s, l) => s + l.amount, 0),
+      Math.abs(estimate.total - estimate.lines.reduce((s, l) => s + l.amount, 0)) < 0.02,
       `${task.id} total equals the sum of its lines`,
     );
     assert(
-      estimate.customerLines.reduce((s, l) => s + l.amount, 0) === estimate.total,
+      Math.abs(estimate.customerLines.reduce((s, l) => s + l.amount, 0) - estimate.total) < 0.02,
       `${task.id} customer lines sum to the total`,
     );
 
     const max = task.maxQuantity ?? 1;
     let prevTotal = estimate.total;
     for (let qty = 2; qty <= Math.min(max, 4); qty++) {
-      const more = calculateHandymanEstimate(base(categoryId, task.id, qty), rates);
-      assert(more !== null && more.total === unit * qty, `${task.id} x${qty} is the book amount times quantity`);
+      const more = calculateHandymanEstimate(base(categoryId, task.id, qty), context);
+      const priorDirect = unit * (qty - 1);
+      const nextDirect = unit * qty;
+      if (more && priorDirect >= context.minimumDirect && nextDirect >= context.minimumDirect) {
+        assert(more.total >= prevTotal - 0.02, `${task.id} x${qty} never costs less once the visit is above the minimum`);
+      }
       if (more) prevTotal = more.total;
     }
     void prevTotal;
 
     for (const urgency of URGENCY_LEVEL_VALUES) {
-      const withUrgency = calculateHandymanEstimate({ ...base(categoryId, task.id), urgency }, rates);
-      assert(withUrgency !== null && withUrgency.total === estimate.total, `${task.id} at ${urgency} keeps the book amount`);
+      const withUrgency = calculateHandymanEstimate({ ...base(categoryId, task.id), urgency }, context);
+      assert(withUrgency !== null && (urgency === "standard" ? withUrgency.total === estimate.total : withUrgency.total > estimate.total), `${task.id} at ${urgency} uses the book percentage when it is not standard`);
     }
 
-    const withPickup = calculateHandymanEstimate({ ...base(categoryId, task.id), materials: "we-pick-up" }, rates);
+    const withPickup = calculateHandymanEstimate({ ...base(categoryId, task.id), materials: "we-pick-up" }, context);
     assert(withPickup !== null, `${task.id} prices a materials pickup`);
     if (withPickup) {
-      assert(Math.abs(withPickup.total - (estimate.total + rates[SUPPLY_RUN_CODE])) < 0.01, `${task.id}: pickup adds the book trip line`);
-      assert(withPickup.lines.some((l) => l.id === "supply-run"), `${task.id}: pickup shows a supply-run line`);
+      assert(withPickup.total === estimate.total, `${task.id}: the estimator credits the trip charge, so pickup does not change the customer total`);
     }
   }
 }
@@ -191,7 +194,7 @@ const small = calculateHandymanEstimate({
   otherJob: { description: "Sagging gate and a loose railing", size: "small" },
   materials: "customer",
   urgency: "standard",
-}, rates);
+}, context);
 assert(small === null, "a small unlisted job has no book line and is not priced");
 
 let prevOtherTotal = 0;
@@ -202,8 +205,8 @@ for (const size of ["medium", "large"] as const) {
     otherJob: { description: "Sagging gate and a loose railing", size },
     materials: "customer",
     urgency: "standard",
-  }, rates);
-  assert(est !== null && est.total === rates[OTHER_JOB_SIZES[size].bookCode!], `other-job ${size} uses its book line`);
+  }, context);
+  assert(est !== null && est.total > context.direct[OTHER_JOB_SIZES[size].bookCode!], `other-job ${size} is above its direct cost`);
   if (!est) continue;
   assert(est.total > prevOtherTotal, `other-job ${size} costs more than the size below`);
   prevOtherTotal = est.total;
@@ -218,8 +221,8 @@ const withUnknown = calculateHandymanEstimate({
   otherJob: null,
   materials: "customer",
   urgency: "standard",
-}, rates);
-const knownOnly = calculateHandymanEstimate(base("plumbing-repairs", "plumbing-faucet-swap"), rates);
+}, context);
+const knownOnly = calculateHandymanEstimate(base("plumbing-repairs", "plumbing-faucet-swap"), context);
 assert(
   withUnknown !== null && knownOnly !== null && withUnknown.total === knownOnly.total,
   "unknown task ids never move the price",
@@ -237,11 +240,11 @@ assert(
       materials: "customer",
       urgency: "standard",
     };
-    const total = (i: HandymanEstimateInput) => calculateHandymanEstimate(i, rates)?.total ?? null;
+    const total = (i: HandymanEstimateInput) => calculateHandymanEstimate(i, context)?.total ?? null;
     const urgencyPrices = new Set(URGENCY_LEVEL_VALUES.map((urgency) => total({ ...input, urgency })));
-    assert(urgencyPrices.size === 1, "urgency is recorded and does not invent a second price");
+    assert(urgencyPrices.size === URGENCY_LEVEL_VALUES.length, "priority and emergency use the book percentage lines");
     const materialsPrices = new Set(MATERIALS_PLAN_VALUES.map((materials) => total({ ...input, materials })));
-    assert(materialsPrices.size === MATERIALS_PLAN_VALUES.length, "the materials plan changes the total by the book trip line");
+    assert(materialsPrices.size === 1, "the trip charge is credited, so the materials plan does not change the customer total");
     const quantityPrices = new Set([1, 2, 3].map((quantity) => total({ ...input, tasks: [{ taskId: probe.id, quantity }] })));
     assert(quantityPrices.size === 3, "quantity multiplies the book amount");
   }

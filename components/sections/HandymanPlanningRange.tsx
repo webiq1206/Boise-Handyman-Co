@@ -15,7 +15,7 @@ import {
   calculateHandymanEstimate,
   formatHandymanRange,
   HANDYMAN_RATE_DISCLAIMER,
-  type HandymanBookRates,
+  type HandymanPriceContext,
   type JobCategoryId,
 } from "@/shared/estimateEngine";
 
@@ -34,7 +34,7 @@ const PROOF_CATEGORIES = [
  * immediately, no email gate. Rates come from shared/estimateEngine (reviewed
  * market defaults). Written quote still happens after contact.
  */
-export function HandymanPlanningRange({ rates = {} }: { rates?: HandymanBookRates } = {}) {
+export function HandymanPlanningRange({ context }: { context?: HandymanPriceContext } = {}) {
   // Drywall and its first task are selected on arrival, so the panel opens on a
   // worked example instead of an empty box; one click changes it.
   const [category, setCategory] = useState<(typeof PROOF_CATEGORIES)[number] | null>(PROOF_CATEGORIES[0]);
@@ -50,8 +50,8 @@ export function HandymanPlanningRange({ rates = {} }: { rates?: HandymanBookRate
       tasks: [{ taskId, quantity: 1 }],
       materials: "customer",
       urgency: "standard",
-    }, rates);
-  }, [category, taskId, rates]);
+    }, context);
+  }, [category, taskId, context]);
 
   function selectCategory(next: (typeof PROOF_CATEGORIES)[number]) {
     setCategory(next);
