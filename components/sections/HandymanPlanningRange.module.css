@@ -28,7 +28,7 @@
 @media (min-width: 640px) { .panel { padding: 48px 32px; } .panel .heading { font-size: 26px; } }
 @media (max-width: 1023px) {
   .panel[data-fixed-nav=true] { padding-bottom: calc(32px + var(--planner-nav-height, 73px)); }
-  .panel[data-fixed-nav=true] .navigation { position: fixed; z-index: 45; left: 50%; bottom: 0; transform: translateX(-50%); width: min(720px, calc(100% - 32px)); margin: 0; padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); background: #fbfaf6; border-top: 1px solid #979794; }
+  .panel[data-fixed-nav=true] .navigation { position: fixed; z-index: 45; left: var(--planner-left, 16px); bottom: 0; width: var(--planner-width, calc(100% - 32px)); margin: 0; padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); background: #fbfaf6; border-top: 1px solid #979794; }
 }
 @media (max-height: 500px) and (min-width: 640px) {
   .panel { padding-top: 32px; padding-bottom: 32px; }

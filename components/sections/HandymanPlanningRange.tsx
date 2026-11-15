@@ -52,10 +52,14 @@ export function HandymanPlanningRange({planning}: {planning: HandymanPlanningDat
       if (!panel.current) return;
       const r = panel.current.getBoundingClientRect();
       const h = document.querySelector("[data-family-header]")?.getBoundingClientRect().bottom || 0;
-      setFixedNav(innerWidth < 1024 && r.top <= h + 24 && r.bottom > h + 64);
+      panel.current.style.setProperty("--planner-left", `${r.left}px`);
+      panel.current.style.setProperty("--planner-width", `${r.width}px`);
+      const overlay = ["familyMenuOpen", "assistantOpen", "hideMobileNavBar", "p5EstimatorActive"].some(key => document.body.dataset[key] === "true");
+      setFixedNav(!overlay && innerWidth < 1024 && r.top <= h + 24 && r.bottom > h + 64);
     };
     window.addEventListener("scroll", update, {passive: true}); window.addEventListener("resize", update); update();
-    return () => {window.removeEventListener("scroll", update); window.removeEventListener("resize", update);};
+    const observer = new MutationObserver(update); observer.observe(document.body, {attributes: true});
+    return () => {observer.disconnect(); window.removeEventListener("scroll", update); window.removeEventListener("resize", update);};
   }, [state.step]);
   useEffect(() => {
     if (!panel.current || !navigation.current) return;
@@ -120,7 +124,7 @@ export function HandymanPlanningRange({planning}: {planning: HandymanPlanningDat
         <Reveal delay={60}><p className="ed-body">Pick a common job. You get a planning range right away, then a written price before any work starts.</p></Reveal>
       </div>
 
-      <div ref={panel} className={styles.panel} data-family-bar-yield="" data-testid="proof-step-panel" data-step={state.step} data-fixed-nav={fixedNav} data-direction={direction.current}>
+      <div ref={panel} className={styles.panel} data-family-bar-yield="" data-testid="proof-step-panel" data-ready={restored} data-step={state.step} data-fixed-nav={fixedNav} data-direction={direction.current}>
         {category ? <>
           <div key={state.step} className={styles.stepBody}>
           <p className={styles.progress} aria-live="polite" data-testid="proof-progress">Step {stepNumber} of 4 <span aria-hidden="true">·</span> {storageIssue ? <span data-testid="proof-storage-note">Not saved on refresh</span> : state.step === "category" ? "Job" : state.step === "task" ? SHORT_LABELS[category.id] || "Task" : state.step === "review" ? "Review" : "Range"}</p>

@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import {getHandymanPlanningData} from '../shared/handymanPlanning.server.ts';
 import {calculateHandymanEstimate, TASK_CATALOG, type JobCategoryId} from '../shared/estimateEngine.ts';
 import {handymanPriceContext} from '../shared/handymanCustomerPrice.ts';
+import {build} from 'esbuild';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+import ts from 'typescript';
 import {formatPlanningCurrency} from '../shared/formatPlanningCurrency.ts';
 import {formatPlanningCurrency as legacyFormatPlanningCurrency} from '../shared/legacy/constructionEstimateEngine.ts';
 
@@ -17,6 +21,25 @@ const EXPECTED: Record<string, readonly string[]> = {
   'carpentry-trim-repair': ['carpentry-door-adjust', 'carpentry-trim-repair', 'carpentry-cabinet-repair', 'carpentry-window-repair'],
 };
 const NOW = new Date('2026-11-13T12:00:00Z');
+
+test('private calculation modules reject browser bundling while the public module stays browser-safe', async () => {
+  for (const file of ['shared/estimateEngine.ts', 'shared/handymanCustomerPrice.ts']) {
+    await assert.rejects(() => build({entryPoints: [file], bundle: true, platform: 'browser', write: false, logLevel: 'silent'}), (error: any) => {
+      assert.ok(error.errors?.some((item: any) => item.text.includes('node:crypto')), file + ' keeps its Node-only boundary');
+      return true;
+    });
+  }
+  const publicBundle = await build({entryPoints: ['shared/handymanPlanning.ts'], bundle: true, platform: 'browser', write: false, logLevel: 'silent'});
+  assert.ok(publicBundle.outputFiles?.length);
+});
+
+test('private modules also refuse browser execution if a bundler supplies Node shims', () => {
+  for (const file of ['shared/estimateEngine.ts', 'shared/handymanCustomerPrice.ts']) {
+    const source = readFileSync(file, 'utf8');
+    const compiled = ts.transpileModule(source, {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022}}).outputText;
+    assert.throws(() => vm.runInNewContext(compiled, {window: {}, exports: {}, require: () => ({})}), /Private planning calculations are server-only/, file);
+  }
+});
 
 test('the public projection retains all 24 homepage choices and exact server-priced ranges', () => {
   const data = getHandymanPlanningData(NOW);

@@ -7,6 +7,9 @@
  *
  * Server only: the price book uses node:crypto.
  */
+// Keep this private context out of browser builds; ordinary offline Node fixtures remain supported.
+import "node:crypto";
+if (typeof window !== "undefined") throw new Error("Private planning calculations are server-only.");
 import { PRICE_BOOK } from "../lib/p5/priceBookData.ts";
 import { DEFAULT_FINANCE, SERVICE_MATRIX, companyAllocation } from "../lib/p5/pricing.ts";
 import { OTHER_JOB_SIZES, SUPPLY_RUN_CODE, TASK_CATALOG, type HandymanPriceContext } from "./estimateEngine.ts";

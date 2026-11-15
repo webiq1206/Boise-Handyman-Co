@@ -10,6 +10,9 @@
  * A task with no single cost-book line is listed in UNPRICED_CALCULATOR_ITEMS
  * and is not given a number here.
  */
+// This Node-only dependency rejects accidental browser bundling without changing legacy Node fixture imports.
+import "node:crypto";
+if (typeof window !== "undefined") throw new Error("Private planning calculations are server-only.");
 import { priceFromRiskAdjustedCost } from "../lib/p5/pricing.ts";
 
 /* ────────────────────────────────────────────────────────────── categories */
@@ -402,20 +405,7 @@ export function calculateHandymanEstimate(
 
 /* ─────────────────────────────────────────────────────────── formatting */
 
-export function formatHandymanCurrency(value: number): string {
-  return `$${Math.round(value).toLocaleString("en-US")}`;
-}
-
-export function formatHours(hours: number): string {
-  const rounded = Math.round(hours * 4) / 4;
-  return rounded === 1 ? "1 hr" : `${rounded} hrs`;
-}
-
-export function formatHandymanRange(estimate: Pick<HandymanEstimate, "priceLow" | "priceHigh">): string {
-  const low = formatHandymanCurrency(estimate.priceLow);
-  const high = formatHandymanCurrency(estimate.priceHigh);
-  return low === high ? low : `${low} to ${high}`;
-}
+export {formatHandymanCurrency, formatHours, formatHandymanRange, HANDYMAN_RATE_DISCLAIMER, MATERIALS_COST_NOTE, OVERSIZED_JOB_NOTE} from "./handymanDisplay.ts";
 
 /** One-line summary of the selections, for sticky bars and lead records. */
 export function buildHandymanSummary(input: HandymanEstimateInput): string {
@@ -436,17 +426,7 @@ export function buildHandymanSummary(input: HandymanEstimateInput): string {
 
 /* ─────────────────────────────────────────────────────────── disclaimers */
 
-/** Shown wherever a figure is rendered. */
-export const HANDYMAN_RATE_DISCLAIMER =
-  "Planning guidance from the cost book, not a price. Each job is priced case by case after we review the scope, with a written price before any work begins.";
-
-/** Shown with every estimate: the figure does not include materials the book line leaves out. */
-export const MATERIALS_COST_NOTE =
-  "This figure covers the cost book lines for your selected tasks. Materials the line does not include are billed at cost with your receipt.";
-
-/** Shown when a visit is larger than we book online. The cost book path does not set this from hours. */
-export const OVERSIZED_JOB_NOTE =
-  "That is a bigger visit than we usually book online. Send it through anyway and we will call to scope it properly, or split it across visits.";
+// Display-only qualifications are re-exported above; client code imports their safe module directly.
 
 /* ────────────────────────────────────────────── legacy construction engine */
 

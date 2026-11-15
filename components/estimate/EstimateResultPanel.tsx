@@ -9,7 +9,7 @@ import {
   HANDYMAN_RATE_DISCLAIMER,
   MATERIALS_COST_NOTE,
   OVERSIZED_JOB_NOTE,
-} from "@/shared/estimateEngine";
+} from "@/shared/handymanDisplay";
 
 const ANIM_DURATION = 320;
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);

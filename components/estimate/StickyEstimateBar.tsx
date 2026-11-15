@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AnimatedPrice } from "@/components/estimate/EstimateResultPanel";
 import type { HandymanEstimate } from "@/shared/estimateEngine";
-import { formatHandymanCurrency, HANDYMAN_RATE_DISCLAIMER } from "@/shared/estimateEngine";
+import { formatHandymanCurrency, HANDYMAN_RATE_DISCLAIMER } from "@/shared/handymanDisplay";
 
 export interface StickyEstimateBarProps {
   estimate: HandymanEstimate | null;
