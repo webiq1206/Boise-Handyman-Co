@@ -197,9 +197,13 @@ async function geometry(page,meta,label,shot=false) {
     const header=document.querySelector('[data-family-header]'),nav=panel.querySelector('nav'),body=panel.querySelector(':scope > div');
     const safe=document.createElement('div');safe.style.cssText='position:fixed;visibility:hidden;height:100svh;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);pointer-events:none';document.body.append(safe);
     const safeStyle=getComputedStyle(safe);const svh=parseFloat(safeStyle.height)||safe.getBoundingClientRect().height;const safeArea={top:parseFloat(safeStyle.paddingTop)||0,bottom:parseFloat(safeStyle.paddingBottom)||0};safe.remove();
+    const channels=color=>{const values=color.match(/[\d.]+/g)?.map(Number);if(!values||values.length<3)throw new Error('Unsupported computed control color: '+color);return [...values.slice(0,3),values[3]??1];};
+    const background=element=>{if(!element)return [255,255,255];const c=channels(getComputedStyle(element).backgroundColor),under=background(element.parentElement);return c.slice(0,3).map((v,i)=>v*c[3]+under[i]*(1-c[3]));};
+    const luminance=rgb=>{const c=rgb.slice(0,3).map(v=>{const s=v/255;return s<=.04045?s/12.92:((s+.055)/1.055)**2.4;});return .2126*c[0]+.7152*c[1]+.0722*c[2];};
+    const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
     const controls=[...panel.querySelectorAll('button,a')].filter(visible).map(element=>{
       const r=box(element),style=getComputedStyle(element),hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
-      return {...r,text:element.textContent,testId:element.getAttribute('data-testid'),role:element.getAttribute('role'),disabled:Boolean(element.disabled),fontSize:parseFloat(style.fontSize),covered:!!hit&&!element.contains(hit)};
+      return {...r,text:element.textContent,testId:element.getAttribute('data-testid'),role:element.getAttribute('role'),disabled:Boolean(element.disabled),fontSize:parseFloat(style.fontSize),covered:!!hit&&!element.contains(hit),foregroundContrast:contrast(channels(style.color),background(element)),borderContrast:contrast(channels(style.borderTopColor),background(element.parentElement)),borderWidth:parseFloat(style.borderTopWidth),borderStyle:style.borderTopStyle};
     });
     const clipped=[panel,...panel.querySelectorAll('*')].filter(element=>element instanceof HTMLElement&&visible(element)).filter(element=>{const s=getComputedStyle(element);return (/auto|scroll|hidden|clip/.test(s.overflowY)&&element.clientHeight>0&&element.scrollHeight>element.clientHeight+1)||(/auto|scroll|hidden|clip/.test(s.overflowX)&&element.clientWidth>0&&element.scrollWidth>element.clientWidth+1);}).map(element=>({tag:element.tagName,testId:element.getAttribute('data-testid'),overflow:getComputedStyle(element).overflow,scrollHeight:element.scrollHeight,clientHeight:element.clientHeight}));
     const promo=document.querySelector('[data-family-bar]');
@@ -222,6 +226,8 @@ async function geometry(page,meta,label,shot=false) {
     check(!control.covered,`Control is covered: ${control.testId}`,context);
     check(control.width>=43.5&&control.height>=43.5,`Touch target is under44px: ${control.testId}`,context);
     if(control.role==='radio')check(control.height>=55.5,`Choice card is under56px: ${control.testId}`,context);
+    if(!control.disabled)check(control.foregroundContrast>=4.5,`Control text contrast is under4.5:1: ${control.testId}`,{...context,ratio:control.foregroundContrast});
+    if(control.role==='radio'||['proof-back','proof-edit-category','proof-edit-task'].includes(control.testId))check(control.borderWidth>=1&&control.borderStyle!=='none'&&control.borderContrast>=3,`Interactive boundary contrast is under3:1: ${control.testId}`,{...context,ratio:control.borderContrast});
     if(control.testId==='proof-next'||control.testId==='proof-cta-contact')check(control.height>=47.5,`Primary action is under48px: ${control.testId}`,context);
   }
   if(meta.reducedMotion!=='no-preference'&&facts.animation)check(facts.animation.name==='none'||facts.animation.duration.split(',').every(value=>parseFloat(value)===0),'Reduced motion still animates step content',context);
