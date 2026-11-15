@@ -76,7 +76,8 @@ test('rendered registration, FAQ schema, and GBP copy do not claim this brand is
     business,
     generateServiceSchema('Drywall repair', 'Patch a wall', 'Boise'),
     generateReviewSchema([]),
-  ]), /streetAddress|Wapoot|4031|public representative|43\.6515|-116\.4444/i);
+  ]), /streetAddress|public representative|43\.6515|-116\.4444/i);
+  assert.equal(Object.hasOwn(business.address as object, 'streetAddress'), false);
   const credential = {
     '@type': 'EducationalOccupationalCredential',
     credentialCategory: 'registration',
