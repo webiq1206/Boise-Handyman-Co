@@ -2,6 +2,7 @@
  * Central site configuration - NAP, URLs, and contact strings.
  * Override via env for staging; replace placeholder values before launch.
  */
+import { SERVICE_AREA_LINE } from "./contentData";
 
 const DEFAULT_PHONE = "(208) 477-1169";
 const DEFAULT_PHONE_TEL = "2084771169";
@@ -47,15 +48,14 @@ export const SITE_CONFIG = {
     city: "Meridian",
     state: "ID",
     cityState: "Meridian, ID",
-    serviceArea: "Treasure Valley · Ada and Canyon County",
+    serviceArea: SERVICE_AREA_LINE,
   },
 } as const;
 
 /**
  * One customer-facing service-area line for footers and contact surfaces.
  */
-export const PUBLIC_NAP_LINE =
-  "Serving Boise and the Treasure Valley.";
+export const PUBLIC_NAP_LINE = `Serving ${SERVICE_AREA_LINE}.`;
 
 /**
  * Answer-first entity sentence already published in LocalBusiness schema.

@@ -17,12 +17,12 @@ generateWebPageSchema,
 } from "@/lib/schema";
 import { AREA_PAGE_FAQS } from "@/shared/seoContent";
 import { CITY_HERO_IMAGES } from "@/shared/cityServiceImages";
-import { CITIES,TREASURE_VALLEY_CITIES } from "@/shared/contentData";
+import { SERVICE_AREA_CITIES, SERVICE_AREA_LINE } from "@/shared/contentData";
 import { CTA_SECONDARY } from "@/shared/ctaCopy";
 import { FamilyButton } from '@/components/family/Button';
 
 // The door-hinge technician is the homepage hero. The areas index leads with a
-// house exterior instead, one that none of its nine city cards uses.
+// house exterior instead, one that none of its seven city cards uses.
 const AREAS_HERO_IMAGE = "/images/handyman/hero-gutter-cleaning.webp";
 
 export const metadata = withBrandPageMetadata((buildPageMetadata({
@@ -30,14 +30,14 @@ export const metadata = withBrandPageMetadata((buildPageMetadata({
   path: "/areas",
   titleOverride: "Treasure Valley Service Areas",
   descriptionOverride:
-    "Handyman service across Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho. Upfront quotes, same fair pricing.",
+    `Handyman service in ${SERVICE_AREA_LINE}. Written quote before work starts.`,
 })), "/areas");
 
 export default function AreasHubPage() {
   const schemas = [
     generateWebPageSchema({
       title: "Treasure Valley Service Areas",
-      description: `Handyman repairs, installs, and maintenance serving ${TREASURE_VALLEY_CITIES}.`,
+      description: `Handyman repairs, installs, and maintenance serving ${SERVICE_AREA_LINE}.`,
       url: "/areas",
     }),
     generateBreadcrumbSchema([
@@ -62,9 +62,8 @@ export default function AreasHubPage() {
             <span className="mobile-keep">service <em className="brc-accent">areas</em></span>
           </h1>
           <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
-            We handle small repairs, installs, and home maintenance across {TREASURE_VALLEY_CITIES},
-            and the surrounding communities, with upfront quotes and the same fair pricing
-            everywhere we work.
+            We handle small repairs, installs, and home maintenance in {SERVICE_AREA_LINE},
+            with a written quote before work starts.
           </p>
           <p className="sr-only" data-speakable="summary">
             Treasure Valley handyman service areas across Ada and Canyon County.
@@ -80,12 +79,12 @@ export default function AreasHubPage() {
           <div className="ed-shell">
             <SectionHeader
               eyebrow="Treasure Valley"
-              title={<>Nine cities, one local handyman team</>}
-              description="Repairs, installs, and maintenance across Ada and Canyon County, quoted upfront."
+              title={<>Seven cities, one local handyman team</>}
+              description="Repairs, installs, and maintenance in Ada County and Canyon County, with a written quote before work starts."
               align="left"
             />
             <div className="grid gap-5 sm:grid-cols-3">
-              {CITIES.map((city, i) => (
+              {SERVICE_AREA_CITIES.map((city, i) => (
                 <Reveal key={city.slug} delay={i * 40}>
                   <AreaCard city={city} imageSrc={CITY_HERO_IMAGES[city.slug]} />
                 </Reveal>

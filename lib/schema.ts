@@ -5,7 +5,7 @@ import {schemaTime} from './schemaTime';
  */
 
 import { BUSINESS_INFO, getBaseUrl } from './seo';
-import { SERVICES } from '@/shared/contentData';
+import { SERVICE_AREA_COUNTIES, SERVICE_AREA_LINE, SERVICES } from '@/shared/contentData';
 import { SITE_CONFIG, handymanServiceSentence } from '@/shared/siteConfig';
 import { P5_SOCIAL } from '@/shared/gbpProfile';
 
@@ -91,6 +91,24 @@ function schemaTelephone(tel: string = SITE_CONFIG.phoneTel): string {
 const SCHEMA_TELEPHONE = schemaTelephone();
 
 /**
+ * LocalBusiness and Organization areaServed: seven City nodes in GBP order,
+ * then the two counties. City Wikipedia sameAs stays. Counties are named only.
+ */
+function businessAreaServed() {
+  return [
+    ...BUSINESS_INFO.serviceArea.map((area) => ({
+      '@type': 'City' as const,
+      name: area,
+      ...(CITY_WIKIPEDIA[area] ? { sameAs: CITY_WIKIPEDIA[area] } : {}),
+    })),
+    ...SERVICE_AREA_COUNTIES.map((name) => ({
+      '@type': 'AdministrativeArea' as const,
+      name,
+    })),
+  ];
+}
+
+/**
  * Shared Person node. The @id lives on p5homeco.com so Handyman, Construction,
  * and P5 resolve to one Nick Perkins entity. worksFor points at the parent
  * organization, which is the same @id parentOrganization uses.
@@ -105,7 +123,8 @@ const founderPerson = {
 /**
  * Public locality only. The website does not publish a street address or
  * precise premises coordinates; the owner retains verification records.
- * Region and country stay ISO codes, and areaServed lists the served cities.
+ * Region and country stay ISO codes. areaServed lists the seven cities, then
+ * Ada County and Canyon County. Nothing else on this graph publishes a street.
  */
 export function publicPostalAddress() {
   return {
@@ -166,11 +185,7 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
       closes: hours === 'Closed' ? undefined : schemaTime(hours.split(' - ')[1]),
     })).filter(spec => spec.opens),
     priceRange: '$$',
-    areaServed: BUSINESS_INFO.serviceArea.map(area => ({
-      '@type': 'City',
-      name: area,
-      ...(CITY_WIKIPEDIA[area] ? { sameAs: CITY_WIKIPEDIA[area] } : {}),
-    })),
+    areaServed: businessAreaServed(),
     ...(BUSINESS_INFO.reviewCount > 0
       ? {
           aggregateRating: {
@@ -213,8 +228,7 @@ export function generateWebSiteSchema(): SchemaContext {
     '@id': WEBSITE_ID,
     name: BUSINESS_INFO.name,
     url: baseUrl,
-    description:
-      'Handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Caldwell, and the Treasure Valley, Idaho.',
+    description: `Handyman service for ${SERVICE_AREA_LINE}, Idaho.`,
     publisher: { '@id': ORG_ID },
     // NOTE: SearchAction intentionally omitted. The previous target
     // (/blog?q={search_term_string}) had no search handler, which advertised a
@@ -251,10 +265,7 @@ export function generateServiceSchema(serviceName: string, serviceDescription: s
       name: city,
       addressCountry: 'US',
       addressRegion: 'ID',
-    } : BUSINESS_INFO.serviceArea.map(area => ({
-      '@type': 'City',
-      name: area,
-    })),
+    } : businessAreaServed(),
     serviceType: serviceName,
     offers: {
       '@type': 'Offer',
@@ -317,6 +328,7 @@ export function generateOrganizationSchema(): SchemaContext {
     telephone: SCHEMA_TELEPHONE,
     email: BUSINESS_INFO.email,
     address: publicPostalAddress(),
+    areaServed: businessAreaServed(),
     contactPoint: customerServiceContact,
     knowsAbout: [
       'drywall repair and patching',

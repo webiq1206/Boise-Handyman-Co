@@ -1,3 +1,5 @@
+import { SERVICE_AREA_CITY_NAMES } from "../contentData";
+
 /**
  * RE-10 landing page content.
  *
@@ -255,7 +257,7 @@ export const RE10_FAQS: Re10Faq[] = [
   {
     question: "Do you work throughout the Treasure Valley?",
     answer:
-      "Yes. Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City and Caldwell, across Ada and Canyon County.",
+      "Yes. Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, across Ada County and Canyon County.",
   },
   {
     question: "How do I submit an RE-10 or inspection report?",
@@ -264,18 +266,8 @@ export const RE10_FAQS: Re10Faq[] = [
   },
 ];
 
-/** Service-area names, matching the areas the company actually covers. */
-export const RE10_SERVICE_AREAS = [
-  "Boise",
-  "Meridian",
-  "Eagle",
-  "Nampa",
-  "Kuna",
-  "Star",
-  "Middleton",
-  "Garden City",
-  "Caldwell",
-];
+/** Service-area city names, in the Google Business Profile order. */
+export const RE10_SERVICE_AREAS = [...SERVICE_AREA_CITY_NAMES];
 
 /**
  * RE-10 intake is document-only on the public path (D5): confirm the list,

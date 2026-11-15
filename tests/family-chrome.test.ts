@@ -10,7 +10,7 @@ import { Footer } from '../components/Footer.tsx';
 import { matchesRoute, isActiveHref } from '../lib/family/types.ts';
 import { FAMILY_BRAND } from '../lib/familyBrand.ts';
 import { BUSINESS_VCARD_PATH, buildBusinessVCard } from '../lib/vcard.ts';
-import { CITIES, SERVICES } from '../shared/contentData.ts';
+import { SERVICE_AREA_CITY_NAMES, SERVICES } from '../shared/contentData.ts';
 import { CTA_ESTIMATE, CTA_ESTIMATE_SHORT, CTA_QUOTE, ESTIMATE_HREF } from '../shared/ctaCopy.ts';
 import { P5_SOCIAL } from '../shared/gbpProfile.ts';
 import { GUIDE_PAGES } from '../shared/guideContent.ts';
@@ -42,7 +42,10 @@ test('the brand config carries this site’s facts, one CTA and one destination'
   assert.equal(FAMILY_BRAND.parentFacebook.href, P5_SOCIAL.facebook);
   assert.equal(FAMILY_BRAND.tagline, `${SITE_TAGLINE}.`);
   assert.equal(`${FAMILY_BRAND.nap.line}.`, PUBLIC_NAP_LINE);
-  assert.equal(FAMILY_BRAND.nap.line, 'Serving Boise and the Treasure Valley');
+  assert.equal(
+    FAMILY_BRAND.nap.line,
+    'Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County',
+  );
   assert.equal(FAMILY_BRAND.registration.text, CONTRACTOR_REGISTRATION);
   assert.equal(FAMILY_BRAND.registration.href, DOPL_LOOKUP_HREF);
   assert.equal(FAMILY_BRAND.accent, '#c56b4a');
@@ -81,7 +84,12 @@ test('every footer link group points at a published page', () => {
   for (const link of guides) assert.ok(published.has(link.href), link.href);
   const services = FAMILY_BRAND.footer.groups.find((group) => group.title === 'Services');
   assert.equal(services?.links.length, SERVICES.length + 1);
-  assert.equal(FAMILY_BRAND.footer.areas.links.length, CITIES.length);
+  assert.deepEqual(
+    FAMILY_BRAND.footer.areas.links.map((link) => link.label),
+    SERVICE_AREA_CITY_NAMES.map((name) => `${name}, Idaho`),
+  );
+  assert.equal(FAMILY_BRAND.footer.areas.links.some((link) => link.href.includes('middleton')), false);
+  assert.equal(FAMILY_BRAND.footer.areas.links.some((link) => link.href.includes('garden-city')), false);
 });
 
 test('the footer renders the family row, NAP, hours and the registration, with no headings', () => {
@@ -93,7 +101,7 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   assert.match(html, /<span class="fam-footer-current" aria-current="true">Boise Handyman Co<\/span>/);
   assert.equal(/rel="noopener noreferrer">(P5 Home Co|Boise)/.test(html), false);
   assert.equal(html.includes('Boise ADU Co'), false);
-  assert.match(html, /Serving Boise and the Treasure Valley\. <a href="tel:/);
+  assert.match(html, /Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County\. <a href="tel:/);
   assert.doesNotMatch(html, /public representative|staffed storefront|Wapoot|4031/i);
   const vcard = buildBusinessVCard().replace(/\r?\n[ \t]/g, '');
   assert.doesNotMatch(vcard, /public representative|staffed storefront|Wapoot|4031/i);

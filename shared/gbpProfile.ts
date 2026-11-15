@@ -6,7 +6,7 @@
 
 import { publishedFoundingYear } from '@/shared/foundingYear';
 import { SITE_CONFIG } from '@/shared/siteConfig';
-import { CITIES, SERVICES } from '@/shared/contentData';
+import { SERVICE_AREA_CITIES, SERVICE_AREA_CITY_NAMES, SERVICE_AREA_COUNTIES, SERVICE_AREA_LINE, SERVICES } from '@/shared/contentData';
 import { SHOW_TRUST_CLAIMS } from '@/shared/trustClaims';
 
 const SITE = SITE_CONFIG.siteUrl.replace(/\/$/, '');
@@ -42,14 +42,8 @@ export const GBP_NAP = {
 } as const;
 
 export const GBP_SERVICE_AREAS = [
-  'Boise, ID',
-  'Meridian, ID',
-  'Eagle, ID',
-  'Nampa, ID',
-  'Kuna, ID',
-  'Star, ID',
-  'Middleton, ID',
-  'Caldwell, ID',
+  ...SERVICE_AREA_CITY_NAMES.map((name) => `${name}, ID`),
+  ...SERVICE_AREA_COUNTIES.map((name) => `${name}, ID`),
 ] as const;
 
 // Primary category drives which local pack a listing competes in. "Handyman"
@@ -67,7 +61,8 @@ export const GBP_CATEGORIES = {
 } as const;
 
 export const GBP_DESCRIPTION =
-  'Boise Handyman Co is a locally owned handyman service for Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho. We handle small repairs, installs, and maintenance: drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to ' +
+  `Boise Handyman Co is a locally owned handyman service for ${SERVICE_AREA_LINE}, Idaho. We handle small repairs, installs, and maintenance: ` +
+  'drywall repair and patching, interior and exterior painting touch-ups, minor plumbing and electrical repairs, carpentry and trim repair, TV mounting and furniture assembly, fence, deck, and gutter repair, and caulking and home maintenance. Simple pricing with one upfront written quote before any work starts, and most jobs finished in a single visit. Larger remodels and licensed trade work are referred to ' +
   (SHOW_TRUST_CLAIMS ? 'trusted specialty contractors' : 'specialty contractors') +
   '. Send your list and photos for a written quote.';
 
@@ -249,7 +244,7 @@ export const GBP_PRODUCTS: GbpProduct[] = [
   },
   // Generated from the canonical city list so GBP area products cannot drift
   // out of sync with the /areas routes.
-  ...CITIES.map((city) => ({
+  ...SERVICE_AREA_CITIES.map((city) => ({
     category: 'Areas We Serve',
     name: `Handyman in ${city.name}, ID`,
     price: 'Free quote',
@@ -271,7 +266,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'What areas do you serve?',
     answer:
-      'Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, Idaho - all of Ada and Canyon County in the Treasure Valley. Where you live in the service area never inflates the quote.',
+      `${SERVICE_AREA_LINE} in the Treasure Valley. Where you live in the service area never inflates the quote.`,
   },
   {
     question: 'How much does a handyman cost in Boise?',

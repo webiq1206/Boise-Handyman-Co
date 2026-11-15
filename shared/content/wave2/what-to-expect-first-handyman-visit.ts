@@ -105,6 +105,6 @@ export const whatToExpectFirstHandymanVisit: BlogPostData = {
 <p>A deposit has one legitimate purpose, covering special-order materials, and full prepayment has none. If a first visit with any outfit ends with a demand for the whole price before work is scheduled, read our list of <a href="/blog/handyman-red-flags">handyman red flags</a> before you send anything.</p>
 
 <h2 id="next-steps">Where to go from here</h2>
-<p>If you have a list building up anywhere in Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton or Caldwell, <a href="/contact">send it over with photos</a> and we will come back with a quote, usually without needing a separate estimate trip. If you are still choosing who to call, take <a href="/blog/questions-to-ask-a-handyman">the questions worth asking</a> with you; a good outfit answers all of them without flinching.</p>
+<p>If you have a list building up anywhere in Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, or Star, <a href="/contact">send it over with photos</a> and we will come back with a quote, usually without needing a separate estimate trip. If you are still choosing who to call, take <a href="/blog/questions-to-ask-a-handyman">the questions worth asking</a> with you; a good outfit answers all of them without flinching.</p>
 `.trim(),
 };

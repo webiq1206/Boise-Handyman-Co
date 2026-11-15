@@ -19,7 +19,7 @@ import {
   DOPL_LOOKUP_TITLE,
 } from '@/components/ContractorCredential';
 import { CONTENT_HUBS, guidePath } from '@/shared/contentHubs';
-import { CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
+import { SERVICE_AREA_CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
 import { CTA_ESTIMATE_SHORT, CTA_QUOTE, ESTIMATE_HREF, QUOTE_FORM_HREF } from '@/shared/ctaCopy';
 import { P5_SOCIAL } from '@/shared/gbpProfile';
 import { PUBLIC_NAP_LINE, SITE_CONFIG } from '@/shared/siteConfig';
@@ -138,7 +138,7 @@ export const FAMILY_BRAND: FamilyBrand = {
     areas: {
       label: 'Service areas',
       href: '/areas',
-      links: CITIES.map((city) => ({ label: `${city.name}, Idaho`, href: areaPath(city.slug) })),
+      links: SERVICE_AREA_CITIES.map((city) => ({ label: `${city.name}, Idaho`, href: areaPath(city.slug) })),
     },
     legal: [
       { label: 'Site map', href: '/sitemap' },

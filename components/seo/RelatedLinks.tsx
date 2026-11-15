@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
+import { CITIES, SERVICE_AREA_CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
 import { isCityServiceNoindex } from '@/lib/page-metadata';
 import { areaPath, cityServicePath, servicePath } from '@/lib/seo-routes';
 
@@ -105,7 +105,7 @@ export function RelatedLinks({ serviceSlug, citySlug, variant }: RelatedLinksPro
     // cannot rank, so it does not get the link. Every service has at least two
     // indexed cities, so this list is never empty. Other services in this city
     // point at the service page when their city page is noindexed.
-    const otherCities = CITIES.filter((c) => c.slug !== citySlug && !isCityServiceNoindex(serviceSlug, c.slug)).slice(0, 4);
+    const otherCities = SERVICE_AREA_CITIES.filter((c) => c.slug !== citySlug && !isCityServiceNoindex(serviceSlug, c.slug)).slice(0, 4);
     const otherServices = SERVICES.filter((s) => s.slug !== serviceSlug).slice(0, 3);
     return (
       <div className="space-y-10">

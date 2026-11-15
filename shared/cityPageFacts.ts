@@ -8,7 +8,7 @@
  * full visible list. The shared area questions stay on /areas.
  */
 import type { CityData } from './contentData';
-import { CITIES, getCountyLabel } from './contentData';
+import { SERVICE_AREA_CITIES, getCountyLabel } from './contentData';
 import { publishedPlaceFacts, type PublishedPlaceFacts } from './content/locationGuides';
 import { CITY_SEO_DATA } from '@/lib/seo';
 
@@ -56,7 +56,7 @@ function joinNames(names: string[]): string {
 }
 
 function neighborsInCounty(city: CityData): CityData[] {
-  return CITIES.filter((other) => other.county === city.county && other.slug !== city.slug);
+  return SERVICE_AREA_CITIES.filter((other) => other.county === city.county && other.slug !== city.slug);
 }
 
 function permitAnswer(city: CityData, work: string): string {
@@ -157,7 +157,7 @@ export function getCityLocalSection(city: CityData, serviceName?: string): CityL
   const work = serviceName ? serviceName.toLowerCase() : 'handyman repairs';
   paragraphs.push(
     `${city.name} permit checks start with ${county}. Inside a named city's limits, that city's building department reviews permitted ${work}. Outside those limits, ${county} does. The Ada and Canyon County permit flow is the reference already published for that line.`,
-    `Nearby ${county} service areas served with ${city.name} are ${neighbors.map((other) => other.name).join(', ')}.`,
+    `Nearby ${county} service areas served with ${city.name} are ${joinNames(neighbors.map((other) => other.name))}.`,
   );
 
   const links: CityLocalSection['links'] = [];

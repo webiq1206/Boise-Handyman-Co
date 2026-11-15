@@ -258,8 +258,10 @@ export function parseFormattedAddress(text: string): PropertyProfileInput {
   const cleaned = text.replace(/,?\s*(United States|U\.?S\.?A\.?)\s*$/i, "").trim();
   const parts = cleaned.split(",").map((p) => p.trim()).filter(Boolean);
 
-  // City: prefer an exact match against the cities we actually serve. This is
-  // robust against verbose geocoder output (neighborhood, county, state, zip).
+  // City: prefer an exact match against known Treasure Valley place names,
+  // including published town pages outside the service-area list. This is
+  // address parsing, not a claim about where we work. It stays robust against
+  // verbose geocoder output (neighborhood, county, state, zip).
   let city = "";
   for (const part of parts) {
     const candidate = part.replace(/\s+(ID|Idaho)$/i, "").replace(/\s+\d{5}.*$/, "").trim();

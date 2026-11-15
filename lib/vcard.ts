@@ -63,7 +63,7 @@ export function buildBusinessVCard(): string {
   // it is confirmed whether the profiles were renamed, a saved contact should
   // not ship a link that may point at the wrong or a defunct account.
   const note = [
-    "Repairs, installs and maintenance in Boise and the Treasure Valley.",
+    "Repairs, installs and maintenance.",
     "A P5 Home Co company (P5 Home Co LLC, Idaho Registered Contractor #8381215).",
     SITE_CONFIG.address.serviceArea,
     `Hours: ${hoursSummary}`,

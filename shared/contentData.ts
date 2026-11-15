@@ -1,5 +1,6 @@
 // Content Data for Boise Handyman Co
-// Serves the Treasure Valley: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton
+// Service area: Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star,
+// plus Ada County and Canyon County. Other town pages stay published.
 
 export interface ServiceData {
   slug: string;
@@ -92,6 +93,11 @@ export const SERVICES: ServiceData[] = [
 // Alias so existing imports stay compatible
 export const PRIORITY_SERVICES = SERVICES;
 
+/**
+ * Published town pages. Middleton and Garden City stay in this list so their
+ * pages, city guides, and sitemap entries remain. They are not part of the
+ * service-area lists below.
+ */
 export const CITIES: CityData[] = [
   { slug: 'boise', name: 'Boise', county: 'ada', isPrimary: true },
   { slug: 'meridian', name: 'Meridian', county: 'ada', isPrimary: false },
@@ -104,11 +110,42 @@ export const CITIES: CityData[] = [
   { slug: 'caldwell', name: 'Caldwell', county: 'canyon', isPrimary: false },
 ];
 
-export const SERVICE_AREA_CITY_NAMES = CITIES.map((c) => c.name);
-export const TREASURE_VALLEY_CITIES = CITIES.map((c) => c.name).join(', ');
+/**
+ * Google Business Profile service area. Owner decision, 15 November 2026:
+ * these seven cities, in this order, plus Ada County and Canyon County.
+ */
+export const SERVICE_AREA_CITY_NAMES = [
+  'Boise',
+  'Meridian',
+  'Nampa',
+  'Eagle',
+  'Kuna',
+  'Caldwell',
+  'Star',
+] as const;
+
+export const SERVICE_AREA_COUNTIES = ['Ada County', 'Canyon County'] as const;
+
+export function formatNameList(names: readonly string[], conjunction = 'and'): string {
+  if (names.length <= 1) return names[0] ?? '';
+  if (names.length === 2) return `${names[0]} ${conjunction} ${names[1]}`;
+  return `${names.slice(0, -1).join(', ')}, ${conjunction} ${names[names.length - 1]}`;
+}
+
+export const SERVICE_AREA_CITIES: CityData[] = SERVICE_AREA_CITY_NAMES.map((name) => {
+  const city = CITIES.find((item) => item.name === name);
+  if (!city) throw new Error(`Service area city ${name} has no published page`);
+  return city;
+});
+
+/** "Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star" */
+export const TREASURE_VALLEY_CITIES = formatNameList(SERVICE_AREA_CITY_NAMES);
+
+/** Cities plus the two counties, for service-area sentences. */
+export const SERVICE_AREA_LINE = `${TREASURE_VALLEY_CITIES}, plus ${formatNameList(SERVICE_AREA_COUNTIES)}`;
 
 export function isServiceAreaCity(value: string): boolean {
-  return SERVICE_AREA_CITY_NAMES.includes(value);
+  return (SERVICE_AREA_CITY_NAMES as readonly string[]).includes(value);
 }
 
 export function getServiceBySlug(slug: string): ServiceData | undefined {

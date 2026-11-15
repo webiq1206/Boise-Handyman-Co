@@ -21,7 +21,7 @@ generateOrganizationSchema,
 generateWebPageSchema,
 } from '@/lib/schema';
 import { CITY_HERO_IMAGES } from '@/shared/cityServiceImages';
-import { CITIES,TREASURE_VALLEY_CITIES } from '@/shared/contentData';
+import { SERVICE_AREA_CITIES, SERVICE_AREA_LINE } from '@/shared/contentData';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { visibleTrustItems } from '@/shared/foundingClaims';
@@ -317,11 +317,11 @@ export default function AboutPage() {
                   Service <em className="brc-accent">areas</em>
                 </>
               }
-              description={`We handle repairs, installs, and maintenance for homeowners in ${TREASURE_VALLEY_CITIES}, and surrounding communities. Where you live never inflates the quote.`}
+              description={`We handle repairs, installs, and maintenance for homeowners in ${SERVICE_AREA_LINE}. Where you live never inflates the quote.`}
               className="max-w-3xl"
             />
             <div className="grid sm:grid-cols-3 gap-4">
-              {CITIES.map((city, i) => (
+              {SERVICE_AREA_CITIES.map((city, i) => (
                 <Reveal key={city.slug} delay={Math.min(i, 7) * 50}>
                   <AreaCard city={city} imageSrc={CITY_HERO_IMAGES[city.slug]} />
                 </Reveal>

@@ -109,6 +109,6 @@ export const smallHomeUpgradeIdeasBoise: BlogPostData = {
 <p>Batching also solves the sequencing quietly: patching before paint, paint before hardware, anchors before shelves. A room-in-a-day visit is really a small, correctly-ordered project plan executed by someone who has run it before.</p>
 
 <h2 id="next-steps">Where to go from here</h2>
-<p>Pick the room that bothers you most, list what is attached to it, and <a href="/contact">send us the list with photos</a>. We will quote the batch in writing, tell you honestly which items are worth doing and which the room does not need, and handle it in a visit or two anywhere in Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton or Caldwell. If choosing fixtures is the fun part for you, buy them ahead and we install what arrives.</p>
+<p>Pick the room that bothers you most, list what is attached to it, and <a href="/contact">send us the list with photos</a>. We will quote the batch in writing, tell you honestly which items are worth doing and which the room does not need, and handle it in a visit or two anywhere in Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, or Star. If choosing fixtures is the fun part for you, buy them ahead and we install what arrives.</p>
 `.trim(),
 };

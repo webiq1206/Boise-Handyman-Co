@@ -37,7 +37,7 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "What areas do you serve?",
-    a: "We serve the Treasure Valley: Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City, and Caldwell, along with the surrounding areas of Ada and Canyon County. The same pricing applies across the whole service area, so where you live never inflates the quote. If you sit just outside these areas, reach out anyway and we will tell you honestly whether we can take the job.",
+    a: "We serve Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County. The same pricing applies across that service area, so where you live never inflates the quote.",
   },
   {
     q: "How do quotes work?",
