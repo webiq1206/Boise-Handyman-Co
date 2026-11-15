@@ -5,6 +5,12 @@ on:
     paths:
       - components/sections/HandymanPlanningRange.tsx
       - tests/handyman-planning-cta.test.mjs
+      - tests/handyman-public-planning.test.ts
+      - components/sections/HandymanPlanningRange.module.css
+      - shared/handymanPlanning*
+      - shared/handymanDisplay.ts
+      - scripts/export-handyman-planning.mts
+      - scripts/verify-handyman-planning-browser.cjs
       - tests/fixtures/handyman-planning-before.tsx.txt
       - scripts/verify-home-planning.cjs
       - scripts/offline-run.mjs
@@ -35,22 +41,17 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Isolated component regression
         run: node scripts/offline-run.mjs test tests/handyman-planning-cta.test.mjs
-      - name: Preserve before and after source
+      - name: Preserve immutable historical baseline source
         run: |
-          cp components/sections/HandymanPlanningRange.tsx /tmp/planning-after.tsx
-          # Exact component blob c570e88c96db1b52ae4fb766d2316da39e184e51 from base c249da7.
-          cp tests/fixtures/handyman-planning-before.tsx.txt components/sections/HandymanPlanningRange.tsx
+          mkdir -p test-results/home-planning/before-lineage
+          cp tests/fixtures/handyman-planning-before.tsx.txt test-results/home-planning/before-lineage/
+          printf '%s\n' 'Historical source blob c570e88c96db1b52ae4fb766d2316da39e184e51 from base c249da7. This is source lineage, not a fresh rendered baseline against the current server-only pricing boundary.' > test-results/home-planning/before-lineage/README.txt
       - name: Start isolated homepage preview
         run: |
           mkdir -p test-results/home-planning
           node scripts/offline-run.mjs dev --hostname 127.0.0.1 --port 34863 > test-results/home-planning/server.log 2>&1 &
           node -e 'let n=0;const t=setInterval(async()=>{try{if((await fetch("http://127.0.0.1:34863/",{signal:AbortSignal.timeout(10000)})).ok){clearInterval(t);return}}catch{}if(++n>150){clearInterval(t);process.exit(1)}},1000)'
-      - name: Capture baseline categories and tasks
-        run: node scripts/verify-home-planning.cjs --baseline
-      - name: Restore proposed component
-        if: always()
-        run: cp /tmp/planning-after.tsx components/sections/HandymanPlanningRange.tsx
-      - name: Check proposed CTA across every category and task
+      - name: Check all current choices, ranges, recovery and viewport fit
         run: node scripts/verify-home-planning.cjs
       - name: Bound complete artifact group 1 to64MiB
         id: bounded_artifact_01

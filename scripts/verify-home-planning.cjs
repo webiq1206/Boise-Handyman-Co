@@ -1,4 +1,23 @@
-/* Offline public-homepage-only QA. Never submits a form or loads an API. */
+/* Offline public-homepage-only QA. Never submits a form or loads an API.
+ * --baseline retains the historic fixture driver for lineage only; the current
+ * workflow does not combine that client-importing fixture with private modules.
+ */
+if (!process.argv.includes('--baseline')) {
+  const {spawnSync} = require('node:child_process');
+  const path = require('node:path');
+  const fs = require('node:fs');
+  const output = path.resolve('test-results/home-planning/after');
+  fs.mkdirSync(output, {recursive: true});
+  const expected = path.join(output, 'public-planning.json');
+  const env = {};
+  for (const key of ['PATH','HOME','TMPDIR','SHELL','LANG','PLAYWRIGHT_CHROMIUM_PATH','PLAYWRIGHT_BROWSERS_PATH']) if (process.env[key] !== undefined) env[key] = process.env[key];
+  env.NODE_OPTIONS = '--require=' + path.resolve('scripts/offline-network-guard.cjs');
+  env.NEXT_TELEMETRY_DISABLED = '1';
+  const projection = spawnSync(process.execPath, ['--conditions=react-server','--import','tsx','scripts/export-handyman-planning.mts',expected], {env, stdio:'inherit'});
+  if (projection.status !== 0) process.exit(projection.status || 1);
+  const acceptance = spawnSync(process.execPath, ['scripts/verify-handyman-planning-browser.cjs','--expected',expected,'--output',output], {env, stdio:'inherit'});
+  process.exit(acceptance.status || (acceptance.error ? 1 : 0));
+}
 const {chromium}=require('playwright');
 const fs=require('node:fs');
 const path=require('node:path');
