@@ -2,7 +2,7 @@
   "source": "p5-home-co",
   "commit": "0377417a2f7518af253b9348e5a1f9ccd454efb5",
   "generatedAt": "2026-11-15T17:19:24.127Z",
-  "note": "Local scoped integration of Handyman PR170 email and PR171 calculator/cost-book changes. Unrelated attribution, model, chrome, sync-tool and upload-validator changes excluded; baseline upload validation preserved. Source manifests union retained for existing reviewed files. No publication performed. Root shared outbox routing repair synchronized from P5 local candidate d5495f2; only three approved file hashes updated. Narrow amount-column wrapping repair synchronized from P5 local5eba855. Final approved admin financial and key-value wrapping synchronized from P5 local0b580ec. Saved-estimate signed-link secondary CTA correction synchronized from P5 local3ec3c32; local fixture exercises numeric contrast and signed-link presence.",
+  "note": "Local scoped integration of Handyman PR170 email and PR171 calculator/cost-book changes. Unrelated attribution, model, chrome, sync-tool and upload-validator changes excluded; baseline upload validation preserved. Source manifests union retained for existing reviewed files. No publication performed. Root shared outbox routing repair synchronized from P5 local candidate d5495f2; only three approved file hashes updated. Narrow amount-column wrapping repair synchronized from P5 local5eba855. Final approved admin financial and key-value wrapping synchronized from P5 local0b580ec. Saved-estimate signed-link secondary CTA correction synchronized from P5 local3ec3c32; local fixture exercises numeric contrast and signed-link presence. Three conversion/privacy test paths classified brand-owned, preserving local variants; no shared engine sync performed.",
   "files": {
     "app/admin/p5-estimators/page.tsx": "f9b7f729daa74f542cdece161d2bf158fb784f5a8c55356fe7283e73db2c139d",
     "app/api/admin/p5-intake/file/route.ts": "e8b49e0f2e19508d1f21903445fdcd36b2e3f6aa95edbc6ecdac110a625b11dc",
@@ -312,7 +312,7 @@
     "scripts/p5-runtime-acceptance.mts": "feac60f3e0300f6de0be2f3f71a76f182364cc580f3517dd05e772f669ed8be5",
     "scripts/p5-schema-safety.mjs": "0bb3e004ef3a75718430de5a6f4f4f9a0aee8ff6c387aaee360818a6c89831b1",
     "scripts/p5-storage-check.ts": "87dcfbb0b77f53b08e220c51729323a06851837232c30a8b179ec0aed2807e4b",
-    "scripts/p5-sync.mjs": "9def5618c2b7c26606dad76ddd78aa9577ab7620b5df6206bd1be80714bcde40",
+    "scripts/p5-sync.mjs": "dcb9c27e3fda8e1ae026207df141f3a440aba8e9030de6567fc32f148cc17c9c",
     "scripts/p5-verify-visual.mjs": "67363630ae7fb0ef3748a377a193495ff1427dfca34e0c9c655e1a02c71ca61d",
     "scripts/p5-visual-review.mjs": "9918874379624da97ddb3b6bff056ddd5f27242c3dbf58c5dea84a077a66a12f",
     "scripts/p5-visual-routes.json": "670468cb7925d2b5b049e0b52f4e05f911b72474e76d376b5492b69ba51cf8bc",
