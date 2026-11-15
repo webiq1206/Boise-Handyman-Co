@@ -5,7 +5,6 @@ import {publicProjectMode,intakeSite,routeIntake,intakeRoutingContext,INTAKE_COP
 import {incomingTransfer,clearIncomingTransfer,persistOutgoingTransfer,outgoingTransfer,recoverOutgoingTransfer,clearOutgoingTransfer,newTransferSeed,browserTransferProof,openTransferredProject,acceptTransferredDraft,persistTransferredDraft,type BrowserTransferView,type BrowserTransferProof} from '../lib/p5/intakeTransferBrowser';
 import {reconcileQuestionMemory,recordQuestion,answerState,mergeQuestionMemory,type QuestionState} from '../lib/p5/intakeQuestionMemory';
 import {intakeQuestions} from '../lib/p5/intakeQuestions';
-import {captureAttribution} from "../lib/p5/browserAttribution";
 import {emptyIntakeDetails,intakeContact,IntakeContactError,type IntakeContactField,requireIntakeReceipt,intakeReviewFingerprint,intakeScopeReviewed,type IntakeReceipt} from '../lib/p5/intakeContract';
 import {estimateDeliveryStates,DELIVERY_LABEL} from '../lib/p5/deliveryPresentation.ts';
 import {P5EstimatorNavigation} from './P5EstimatorNavigation';
@@ -161,7 +160,6 @@ export function P5Estimator({defaultService='',entryLabel,headingAs='h1',project
       mounted.current=true;
       return()=>{mounted.current=false;};
     }
-    captureAttribution();
     // An emailed estimate link (?estimate=<id>&t=<signed token>) is exchanged once for a key for this
     // device, saved like any draft, and the page reloads on a clean address; the saved estimate or its
     // live progress then loads through the normal restore below. A bad or expired link says so.
@@ -208,7 +206,7 @@ export function P5Estimator({defaultService='',entryLabel,headingAs='h1',project
         const next={...newBrowserDraft(defaultService),namespace:current.current.namespace,text:carried.text||'',answers,pendingFiles:carried.requiredFiles||[]};
         if(!persistBrowserDraft(next))throw new Error('This browser could not save the transferred project. Return to the original site and retry.');
         filesRef.current=[];setFiles([]);apply(next);setPreparingFiles(false);setConfirmed(false);
-        setStatus(`Your project details were carried over from ${carried.fromName||'another P5 company'}.${next.pendingFiles.length?' Reattach the listed original files before continuing.':''}`);
+        setStatus(`Your project details were carried over from ${carried.fromName||'our sister company'}.${next.pendingFiles.length?' Reattach the listed original files before continuing.':''}`);
       }).catch(()=>{setError('Your project transfer could not be opened. Return to the original site and retry; your original project remains saved.');});
     }setRecoveries(listBrowserDraftRecoveries(d.namespace));setWarning(d.analysisWarning||d.extraction?.reviewNotes.find(n=>n.startsWith("Your files are saved, but"))||"");
     setSpeechAvailable(Boolean((window as any).SpeechRecognition||(window as any).webkitSpeechRecognition));
@@ -317,7 +315,7 @@ export function P5Estimator({defaultService='',entryLabel,headingAs='h1',project
     const d=current.current;if(!d)throw new Error('Your project is still loading.');
     const remembered=remember(d);
     const requestSource=sourceSnapshot(d);
-    const put=(revision:number)=>operationFetch('/api/p5-estimator/draft',{method:'PUT',headers:{...draftHeaders(d),'Content-Type':'application/json'},body:JSON.stringify({text:d.text,answers:d.answers,contact:d.contact,revision,wizard:d.wizard,intake:{...(remembered.intake||emptyIntakeDetails()),attribution:remembered.intake?.attribution||captureAttribution(),transcript:d.transcript||[],desiredOutcome:d.answers.desiredOutcome||'',workContext:d.answers.workContext||'',budget:d.answers.budget||''},reviewed,clarification,scopeFingerprint:scopeFingerprint(d.text)})});
+    const put=(revision:number)=>operationFetch('/api/p5-estimator/draft',{method:'PUT',headers:{...draftHeaders(d),'Content-Type':'application/json'},body:JSON.stringify({text:d.text,answers:d.answers,contact:d.contact,revision,wizard:d.wizard,intake:{...(remembered.intake||emptyIntakeDetails()),transcript:d.transcript||[],desiredOutcome:d.answers.desiredOutcome||'',workContext:d.answers.workContext||'',budget:d.answers.budget||''},reviewed,clarification,scopeFingerprint:scopeFingerprint(d.text)})});
     let response=await put(d.revision);
     let data=await readJson(response);
     if(response.status===409&&intakeMode)throw new Error(data.error||'The saved project could not be updated. Your local edits are retained. Reload and review the saved project before sending.');
@@ -661,7 +659,7 @@ export function P5Estimator({defaultService='',entryLabel,headingAs='h1',project
       const response=await operationFetch('/api/p5-estimator/intake',{method:'POST',headers:{...draftHeaders(latest),'Content-Type':'application/json'},body:JSON.stringify({revision:latest.revision,confirmed:true})});
       const value=await readJson(response);if(!response.ok)throw new Error(value.error||'Your request was not confirmed. Your work is retained; please retry.');
       const receipt=requireIntakeReceipt(value);if(receipt.revision!==latest.revision)throw new Error('The saved request version could not be confirmed. Retry to check the same request.');
-      setIntakeReceipt(receipt);setStatus('');trackGoogleAdsLeadConversion({service:latest.answers.service},`intake:${receipt.projectId}`,{accepted:receipt.accepted===true});
+      setIntakeReceipt(receipt);setStatus('');trackGoogleAdsLeadConversion({service:latest.answers.service},`intake:${receipt.projectId}`);
     });
   }
   async function submit(event:React.FormEvent){
@@ -686,7 +684,7 @@ export function P5Estimator({defaultService='',entryLabel,headingAs='h1',project
         // A quantity needed before pricing can start opens its own question straight away.
         if(details?.preflight){const needed=parseMissing(details.missingFields);if(needed.length){preflightField.current=needed[0].field;throw new Error('p5-preflight');}}
         if(details?.pricingReviewRequired){setMissingFields(parseMissing(details.missingFields));setVerificationItems(parseItems(details.verificationItems));throw new Error(details.error||'A few more details are needed before pricing.');}throw failure;}
-      checkSubmission();setResult(data.result);setEstimateDoc(data.document||null);setDelivery(data.delivery||[]);trackGoogleAdsLeadConversion({service:d.answers.service},`estimator:${d.id}`,{accepted:data.accepted===true});if(data.result?.range)trackScopeEvent('estimateGenerated',d.answers.service);if(data.delivery?.some((v:any)=>v.channel==='customer'&&v.status==='sent'))trackScopeEvent('estimateEmailed',d.answers.service);setStatus('');
+      checkSubmission();setResult(data.result);setEstimateDoc(data.document||null);setDelivery(data.delivery||[]);trackGoogleAdsLeadConversion({service:d.answers.service},`estimator:${d.id}`);if(data.result?.range)trackScopeEvent('estimateGenerated',d.answers.service);if(data.delivery?.some((v:any)=>v.channel==='customer'&&v.status==='sent'))trackScopeEvent('estimateEmailed',d.answers.service);setStatus('');
     },'pricing');
   }
   const continuePaused=()=>{const kind=paused?.kind;setPaused(null);resuming.current=true;if(kind==='pricing'){const form=document.getElementById(`${id}-form`) as HTMLFormElement|null;if(form)form.requestSubmit();else void begin();}else void begin();};
