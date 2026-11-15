@@ -1330,9 +1330,9 @@ export const PROJECT_LABELS: Record<ProjectType, { label: string; sub: string }>
 };
 
 export const FINISH_LABELS: Record<FinishLevel, { label: string; sub: string }> = {
-  refresh: { label: "Refresh", sub: "Cosmetic upgrades, repaint" },
-  "mid-range": { label: "Mid-Range", sub: "Replace and upgrade" },
-  "high-end": { label: "High-End", sub: "Premium finishes" },
+  refresh: { label: "Essential", sub: "Cosmetic upgrades, repaint" },
+  "mid-range": { label: "Signature", sub: "Replace and upgrade" },
+  "high-end": { label: "Premium", sub: "Upgraded finishes" },
   luxury: { label: "Luxury", sub: "No constraints" },
 };
 
@@ -1352,7 +1352,7 @@ export const NEW_CONSTRUCTION_FINISH_LABELS: Record<FinishLevel, { label: string
   refresh: { label: "Essential", sub: "Well built, value finishes: laminate counters, LVP and carpet, painted trim" },
   "mid-range": { label: "Signature", sub: "Our standard spec: quartz counters, tile showers, solid-core doors" },
   "high-end": { label: "Premium", sub: "Custom cabinetry, stone and hardwood, tall ceilings, upgraded windows" },
-  luxury: { label: "Bespoke", sub: "Specified room by room with your designer, no allowances" },
+  luxury: { label: "Luxury", sub: "Specified room by room with your designer, no allowances" },
 };
 
 export function getFinishLabels(project: ProjectType): Record<FinishLevel, { label: string; sub: string }> {
