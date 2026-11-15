@@ -3,6 +3,8 @@ import { join } from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildBusinessVCard } from '../lib/vcard.ts';
+import { generateLocalBusinessSchema, generateOrganizationSchema, publicPostalAddress } from '../lib/schema.ts';
+import { BUSINESS_INFO } from '../lib/seo.ts';
 import { SITE_CONFIG } from '../shared/siteConfig.ts';
 import { getAreaCityCopy } from '../shared/content/areaCopy.ts';
 import { landingFAQSchema } from '../lib/landing-schema.ts';
@@ -75,12 +77,80 @@ test('every vCard line is at most 75 octets and lines use CRLF', () => {
 
 test('the service-area vCard preserves locality without publishing a street-address label', () => {
   const card = buildBusinessVCard();
-  const { city, state } = SITE_CONFIG.address;
+  const unfolded = card.replace(/\r\n[ \t]/g, '');
+  const { city, state, postalCode } = SITE_CONFIG.address;
   assert.deepEqual(
     card.split('\r\n').filter((line) => line.startsWith('ADR;TYPE=WORK:')),
-    [`ADR;TYPE=WORK:;;;${city};${state};;USA`],
+    [`ADR;TYPE=WORK:;;;${city};${state};${postalCode};USA`],
   );
+  assert.match(unfolded, /ADR;TYPE=WORK:;;;Meridian;ID;83646;USA/);
+  assert.match(unfolded, /ORG:Boise Handyman Co\r\n/);
+  assert.match(unfolded, /FN:Nick Perkins\r\n/);
+  assert.match(unfolded, /TEL;TYPE=WORK,VOICE:\+12084771169/);
+  assert.equal(unfolded.includes('P5 Home Co LLC'), false);
+  assert.equal(unfolded.includes('P5 Home Co.'), false);
   assert.equal(Object.hasOwn(SITE_CONFIG.address, 'street'), false);
-  assert.equal(Object.hasOwn(SITE_CONFIG.address, 'postalCode'), false);
+  assert.equal(Object.hasOwn(SITE_CONFIG.address, 'streetAddress'), false);
+  assert.equal(postalCode, '83646');
   assert.equal(card.includes('LABEL;TYPE=WORK:'), false);
+  assert.equal(card.includes('streetAddress'), false);
+});
+
+test('visible phone, schema telephone, and schema email match the brand', () => {
+  assert.equal(SITE_CONFIG.phone, '(208) 477-1169');
+  assert.equal(BUSINESS_INFO.phone, '(208) 477-1169');
+  const local = generateLocalBusinessSchema();
+  const organization = generateOrganizationSchema();
+  assert.equal(local.telephone, '+1-208-477-1169');
+  assert.equal(organization.telephone, '+1-208-477-1169');
+  const domain = new URL(SITE_CONFIG.siteUrl).hostname.replace(/^www\./, '');
+  assert.equal(local.email, `hello@${domain}`);
+  assert.equal(organization.email, `hello@${domain}`);
+  assert.equal(local.email, 'hello@boisehandyman.co');
+  const address = publicPostalAddress();
+  assert.deepEqual(address, {
+    '@type': 'PostalAddress',
+    addressLocality: 'Meridian',
+    addressRegion: 'ID',
+    postalCode: '83646',
+    addressCountry: 'US',
+  });
+  assert.equal(Object.hasOwn(address, 'streetAddress'), false);
+  for (const node of [local, organization]) {
+    assert.equal(node.legalName, 'P5 Home Co LLC');
+    const parent = node.parentOrganization as { name: string };
+    assert.equal(parent.name, 'P5 Home Co');
+    assert.equal(JSON.stringify(node).includes('streetAddress'), false);
+  }
+});
+
+/** "P5 Home Co." with the period inside the name, not a sentence that ends on the name. */
+const NAME_WITH_PERIOD = /P5 Home Co\.(?=\s+[a-z])/;
+
+test('site copy does not use P5 Home Co LLC or P5 Home Co. as a name', () => {
+  const files = ['app', 'public', 'lib/vcard.ts'].flatMap((entry) => {
+    const info = statSync(entry);
+    if (info.isFile()) return [entry];
+    const found: string[] = [];
+    const walkDir = (dir: string) => {
+      for (const name of readdirSync(dir)) {
+        if (name === 'node_modules' || name === '.next') continue;
+        const path = join(dir, name);
+        const child = statSync(path);
+        if (child.isDirectory()) walkDir(path);
+        else if (/\.(tsx|ts|txt|mdx)$/.test(name)) found.push(path);
+      }
+    };
+    walkDir(entry);
+    return found;
+  });
+  const llc: string[] = [];
+  const dotted: string[] = [];
+  for (const file of files) {
+    const text = readFileSync(file, 'utf8');
+    if (text.includes('P5 Home Co LLC')) llc.push(file);
+    if (NAME_WITH_PERIOD.test(text)) dotted.push(file);
+  }
+  assert.deepEqual(llc, []);
+  assert.deepEqual(dotted, []);
 });

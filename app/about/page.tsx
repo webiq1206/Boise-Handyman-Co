@@ -179,7 +179,7 @@ export default function AboutPage() {
               </div>
               <Reveal>
                 <p className="ed-lede">
-                  P5 Home Co LLC, Idaho Registered Contractor #8381215. Insured; certificate on request. One-year workmanship warranty on work by our own team.
+                  P5 Home Co, Idaho Registered Contractor #8381215. Insured; certificate on request. One-year workmanship warranty on work by our own team.
                 </p>
                 <p className="ed-body mt-6">
                   Plumbing, electrical and HVAC work on your list is done by licensed trade

@@ -123,14 +123,16 @@ const founderPerson = {
 /**
  * Public locality only. The website does not publish a street address or
  * precise premises coordinates; the owner retains verification records.
- * Region and country stay ISO codes. areaServed lists the seven cities, then
- * Ada County and Canyon County. Nothing else on this graph publishes a street.
+ * Region and country stay ISO codes. The ZIP is 83646. areaServed lists the
+ * seven cities, then Ada County and Canyon County. Nothing on this graph
+ * publishes a street.
  */
 export function publicPostalAddress() {
   return {
     '@type': 'PostalAddress' as const,
     addressLocality: SITE_CONFIG.address.city,
     addressRegion: SITE_CONFIG.address.state,
+    postalCode: SITE_CONFIG.address.postalCode,
     addressCountry: 'US',
   };
 }
