@@ -156,7 +156,7 @@ export function HandymanPlanningRange({ context }: { context?: HandymanPriceCont
                     {formatHandymanRange(estimate)}
                   </p>
                   <p className="ed-body mt-3 text-[0.875rem]">
-                    Before materials.
+                    Material needs are confirmed with your written price.
                   </p>
                   <p className="ed-small mt-4" style={{ color: "var(--ed-muted-ink)" }}>
                     {HANDYMAN_RATE_DISCLAIMER}
@@ -164,7 +164,7 @@ export function HandymanPlanningRange({ context }: { context?: HandymanPriceCont
                 </>
               ) : selectedTask && !selectedTask.bookCode ? (
                 <p className="ed-body mt-4 text-[0.9375rem]" style={{ color: "var(--ed-muted-ink)" }} data-testid="proof-unpriced">
-                  This task is not a single cost book line, so it is not priced here. Send the list for a written price.
+                  This task needs a closer look. Send the list for a written price.
                 </p>
               ) : (
                 <p className="ed-body mt-4 text-[0.9375rem]" style={{ color: "var(--ed-muted-ink)" }}>
