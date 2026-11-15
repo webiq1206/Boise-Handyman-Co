@@ -61,7 +61,7 @@ test("every stored fixture renders this brand, and P5 Home Co stays in From", ()
       assert.doesNotMatch(withoutLegal(body), /P5 Home Co/);
       assert.doesNotMatch(body, /showroom|\bshop\b/i);
       assert.doesNotMatch(body, /4031|wapoot/i);
-      assert.doesNotMatch(body, /[\u2013\u2014]/);
+      assert.doesNotMatch(body, new RegExp("[" + String.fromCharCode(0x2013, 0x2014) + "]"));
       if (kind === "customer") assert.doesNotMatch(body, /111,111|222,222/);
       assertCopy(message.html, message.text, {requireDisclaimer: kind === "customer"});
       if (kind === "customer" && fixture.tier !== "withheld") assert.ok(message.text.includes(LEGAL));
@@ -111,7 +111,7 @@ test("intake and review mail use this brand and do not name the parent site", ()
     assert.match(message.html, /boisehandyman\.co/);
     assert.match(message.html, /hello@boisehandyman\.co/);
     assert.doesNotMatch(body, /P5 Home Co|p5homeco\.com/);
-    assert.doesNotMatch(body, /[\u2013\u2014]/);
+    assert.doesNotMatch(body, new RegExp("[" + String.fromCharCode(0x2013, 0x2014) + "]"));
     if (!team) assert.match(message.text, /Schedule now/);
   }
 });
