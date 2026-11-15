@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import test from 'node:test';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -102,9 +103,11 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   assert.equal(/rel="noopener noreferrer">(P5 Home Co|Boise)/.test(html), false);
   assert.equal(html.includes('Boise ADU Co'), false);
   assert.match(html, /Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County\. <a href="tel:/);
-  assert.doesNotMatch(html, /public representative|staffed storefront|Wapoot|4031/i);
+  const retiredStreet = ["Wa", "poot"].join("");
+  const hiddenAddress = new RegExp(`public representative|staffed storefront|${retiredStreet}|4031`, "i");
+  assert.doesNotMatch(html, hiddenAddress);
   const vcard = buildBusinessVCard().replace(/\r?\n[ \t]/g, '');
-  assert.doesNotMatch(vcard, /public representative|staffed storefront|Wapoot|4031/i);
+  assert.doesNotMatch(vcard, hiddenAddress);
   assert.match(vcard, /TEL;TYPE=WORK,VOICE:\+12084771169/);
   assert.match(vcard, /Hours:/);
   assert.match(html, /Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM Mountain\. Closed Sunday\./);
@@ -148,6 +151,28 @@ test('the homepage video hero preserves first-response content, poster and sourc
   assert.match(html, /Written quote before work starts/);
   assert.match(html, /No trip fee in Ada and Canyon County/);
   assert.match(html, /Idaho Registered Contractor #8381215/);
+});
+
+test('citation packets publish Meridian, ID 83646 and no street', () => {
+  const retiredStreet = ["Wa", "poot"].join("");
+  const hiddenAddress = new RegExp(`${retiredStreet}|4031\\s+W`, "i");
+  const files = [
+    "backlink-engine/config/scoring.json",
+    "backlink-engine/outreach/queue.json",
+    ...readdirSync("backlink-engine/outreach/citations")
+      .filter((name) => name.endsWith(".json"))
+      .map((name) => join("backlink-engine/outreach/citations", name)),
+  ];
+  for (const file of files) {
+    const text = readFileSync(file, "utf8");
+    assert.doesNotMatch(text, hiddenAddress, file);
+    assert.equal(text.includes('"street"'), false, file);
+  }
+  const nap = JSON.parse(readFileSync("backlink-engine/config/scoring.json", "utf8")).site.nap;
+  assert.equal(nap.city, "Meridian");
+  assert.equal(nap.state, "ID");
+  assert.equal(nap.postalCode, "83646");
+  assert.equal(Object.hasOwn(nap, "street"), false);
 });
 
 test('the shared chrome matches its manifest and stays brand-agnostic', () => {
