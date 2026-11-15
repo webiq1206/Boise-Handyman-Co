@@ -5,6 +5,7 @@ export const ESTIMATOR_BRAND = {
   id:"handyman", name:"Boise Handyman Co", domain:"boisehandyman.co",
   legalName:null, parentLegalName:"P5 Home Co, LLC",
   email:"hello@boisehandyman.co", phone:"(208) 477-1169", accent:"#C56B4A", ink:BRAND_CHARCOAL, paper:"#FBFAF6",
+  cityLine:"Meridian, ID 83646",
   logo:"/brand/png/wordmark/light/boise-handyman-co-wordmark-charcoal-accent-1200w.png",
   font:"/fonts/p5-estimator-sans.ttf", headingFont:"/fonts/p5-estimator-serif.ttf",
   services:["handyman","re10","change-order","rush"], defaultService:"handyman",
