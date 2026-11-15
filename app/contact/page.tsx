@@ -28,7 +28,7 @@ generateWebPageSchema,
 } from '@/lib/schema';
 import { BUSINESS_INFO } from '@/lib/seo';
 import { areaPath } from '@/lib/seo-routes';
-import { CITIES,TREASURE_VALLEY_CITIES } from '@/shared/contentData';
+import { SERVICE_AREA_CITIES, SERVICE_AREA_LINE } from '@/shared/contentData';
 import { CTA_PRIMARY,CTA_SECONDARY } from '@/shared/ctaCopy';
 import { PUBLIC_NAP_LINE, SITE_CONFIG } from '@/shared/siteConfig';
 import { CONSULT_BULLETS,HERO_STATS } from '@/shared/siteContent';
@@ -55,7 +55,7 @@ const CONTACT_FAQS = [
   },
   {
     question: 'What areas do you serve?',
-    answer: `We work in ${TREASURE_VALLEY_CITIES}, and surrounding Treasure Valley communities across Ada and Canyon County. Where you live in the service area never inflates the quote.`,
+    answer: `We work in ${SERVICE_AREA_LINE}. Where you live in the service area never inflates the quote.`,
   },
   {
     question: 'Can I book more than one task in a visit?',
@@ -341,7 +341,7 @@ export default function ContactPage() {
                   label="Service area"
                   subtext="The same fair pricing across the whole Treasure Valley"
                 >
-                  <span className="text-sm leading-relaxed">{TREASURE_VALLEY_CITIES}</span>
+                  <span className="text-sm leading-relaxed">{SERVICE_AREA_LINE}</span>
                 </ContactChannel>
               </Reveal>
             </div>
@@ -447,11 +447,11 @@ export default function ContactPage() {
                   Where we <em className="brc-accent">work</em>
                 </>
               }
-              description={`We handle repairs, installs, and maintenance for homeowners in ${TREASURE_VALLEY_CITIES}, and surrounding communities.`}
+              description={`We handle repairs, installs, and maintenance for homeowners in ${SERVICE_AREA_LINE}.`}
               className="max-w-3xl"
             />
             <nav aria-label="Service areas" className="grid grid-cols-2 sm:grid-cols-3 border-t border-l border-border">
-              {CITIES.map((city) => (
+              {SERVICE_AREA_CITIES.map((city) => (
                 <Link
                   key={city.slug}
                   href={areaPath(city.slug)}

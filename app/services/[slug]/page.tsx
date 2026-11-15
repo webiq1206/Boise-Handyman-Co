@@ -14,7 +14,7 @@ landingServiceSchema
 import { buildPageMetadata,isCityServiceNoindex } from '@/lib/page-metadata';
 import { generateSpeakableSchema } from '@/lib/schema';
 import { SERVICE_SLUGS,getServiceBySlug,servicePath } from '@/lib/seo-routes';
-import { CITIES, serviceHeading } from '@/shared/contentData';
+import { SERVICE_AREA_CITIES, serviceHeading } from '@/shared/contentData';
 import { CTA_ESTIMATE, estimatorProjectForService, instantEstimateHref } from '@/shared/ctaCopy';
 import { getFeaturedGalleryProject } from '@/shared/galleryData';
 import { SERVICE_SEO_CONTENT } from '@/shared/seoContent';
@@ -128,7 +128,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
       ],
       // Only city pages that are in the index (the sitemap's rule). A
       // noindexed combination cannot rank, so it does not get the link.
-      links: CITIES.filter((c) => !isCityServiceNoindex(service.slug, c.slug)).map((c) => ({
+      links: SERVICE_AREA_CITIES.filter((c) => !isCityServiceNoindex(service.slug, c.slug)).map((c) => ({
         label: `${serviceHeading(service.name)} in ${c.name}`,
         href: `/services/${service.slug}/${c.slug}`,
       })),

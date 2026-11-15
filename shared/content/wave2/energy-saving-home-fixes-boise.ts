@@ -109,6 +109,6 @@ export const energySavingHomeFixesBoise: BlogPostData = {
 <p>Compare that against the alternatives people usually consider first, new windows or a new HVAC system, and the sequencing logic is clear: seal the envelope first, because it is two orders of magnitude cheaper, and let the expensive decisions wait for a house that is no longer leaking.</p>
 
 <h2 id="next-steps">Where to go from here</h2>
-<p>For help with your repair list in Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton or Caldwell, <a href="/contact">get in touch</a> and tell us how many exterior doors you have and roughly how old the house is; the team can review the scope, materials and access before preparing a quote. For the bigger picture of keeping a house ahead of its problems, start with our <a href="/blog/seasonal-home-maintenance-checklist-boise">seasonal maintenance checklist for Boise homes</a>, where most of these fixes appear in their fall slot.</p>
+<p>For help with your repair list in Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, or Star, <a href="/contact">get in touch</a> and tell us how many exterior doors you have and roughly how old the house is; the team can review the scope, materials and access before preparing a quote. For the bigger picture of keeping a house ahead of its problems, start with our <a href="/blog/seasonal-home-maintenance-checklist-boise">seasonal maintenance checklist for Boise homes</a>, where most of these fixes appear in their fall slot.</p>
 `.trim(),
 };

@@ -15,7 +15,7 @@
 import fs from 'fs';
 import path from 'path';
 import { SITE_CONFIG } from '../shared/siteConfig';
-import { SERVICES, CITIES } from '../shared/contentData';
+import { SERVICES, CITIES, SERVICE_AREA_CITIES, SERVICE_AREA_LINE } from '../shared/contentData';
 import { GUIDE_PAGES } from '../shared/guideContent';
 import { CONTENT_HUBS, isCategoryHubIndexable } from '../shared/contentHubs';
 import { BLOG_POSTS } from '../shared/blogContent';
@@ -24,8 +24,8 @@ const BASE = SITE_CONFIG.siteUrl.replace(/\/$/, '');
 const url = (p: string) => `${BASE}${p}`;
 const today = new Date().toISOString().slice(0, 10);
 
-const adaCities = CITIES.filter((c) => c.county === 'ada').map((c) => c.name);
-const canyonCities = CITIES.filter((c) => c.county === 'canyon').map((c) => c.name);
+const adaCities = SERVICE_AREA_CITIES.filter((c) => c.county === 'ada').map((c) => c.name);
+const canyonCities = SERVICE_AREA_CITIES.filter((c) => c.county === 'canyon').map((c) => c.name);
 
 const pillarGuides = GUIDE_PAGES.filter((g) => g.guideType === 'hub-pillar' || g.guideType === 'master');
 const cityGuides = GUIDE_PAGES.filter((g) => g.guideType === 'location');
@@ -35,7 +35,7 @@ const SUMMARY =
   `Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, ` +
   `and maintenance. Drywall repair, interior and exterior painting, minor plumbing and ` +
   `electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, ` +
-  `caulking and punch-list work. Serving ${CITIES.map((c) => c.name).join(', ')}. ` +
+  `caulking and punch-list work. Serving ${SERVICE_AREA_LINE}. ` +
   `Phone ${SITE_CONFIG.phone}.`;
 
 const indexableHubs = CONTENT_HUBS.filter((h) =>
@@ -46,7 +46,7 @@ const indexableHubs = CONTENT_HUBS.filter((h) =>
 );
 
 const CONTACT =
-  `Serving Boise and the Treasure Valley across Ada and Canyon County. ` +
+  `Serving ${SERVICE_AREA_LINE}. ` +
   `Phone ${SITE_CONFIG.phone}. Email ${SITE_CONFIG.email}.`;
 
 const POSITIONING =
@@ -152,7 +152,7 @@ function buildFull(): string {
   lines.push(`- Project inquiry: ${url('/estimate')}`, '');
 
   lines.push('## Service area', '');
-  lines.push('We serve the following Treasure Valley cities across Ada and Canyon County:', '');
+  lines.push(`We serve ${SERVICE_AREA_LINE}.`, '');
   if (adaCities.length) lines.push(`- Ada County: ${adaCities.join(', ')}`);
   if (canyonCities.length) lines.push(`- Canyon County: ${canyonCities.join(', ')}`);
   lines.push(
@@ -169,8 +169,9 @@ function buildFull(): string {
   }
   lines.push(
     '',
-    `Each service has a dedicated page per city at /services/{service-slug}/{city-slug} for ` +
-      `${CITIES.map((c) => c.slug).join(', ')}. City service-area hubs live at /areas/{city-slug}.`,
+    `Each service has a dedicated page per published city at /services/{service-slug}/{city-slug} for ` +
+      `${CITIES.map((c) => c.slug).join(', ')}. Service-area hubs are the seven cities above. ` +
+      `Other published town pages stay at /areas/{city-slug}, including middleton and garden-city.`,
     '',
   );
 

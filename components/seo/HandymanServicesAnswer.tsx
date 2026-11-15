@@ -1,5 +1,5 @@
 import { ArrowUpRight } from 'lucide-react';
-import { SERVICES } from '@/shared/contentData';
+import { SERVICE_AREA_LINE, SERVICES } from '@/shared/contentData';
 import { toSentenceCase } from '@/shared/sentenceCase';
 import { brands, serviceExtras } from '@/components/approved/family-content';
 
@@ -66,7 +66,7 @@ export function HandymanServicesAnswer() {
             <li>TV mounting and assembly</li>
             <li>Fence, deck, gutter repair, and caulking</li>
           </ul>
-          <p>We serve Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton, Garden City and Caldwell.</p>
+          <p>We serve {SERVICE_AREA_LINE}.</p>
         </div>
       </div>
 

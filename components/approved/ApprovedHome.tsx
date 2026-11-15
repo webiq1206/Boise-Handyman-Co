@@ -4,7 +4,8 @@ import type {ReactNode} from 'react';
 import Link from 'next/link';
 import {ArrowUpRight} from 'lucide-react';
 import {Accordion,AccordionItem,AccordionTrigger,AccordionContent} from '@/components/ui/accordion';
-import {brands,cities} from './family-content';
+import {SERVICE_AREA_CITY_NAMES} from '@/shared/contentData';
+import {brands} from './family-content';
 import {CTA_ESTIMATE,CTA_QUOTE,ESTIMATE_HREF,QUOTE_FORM_HREF} from '@/shared/ctaCopy';
 const Arrow=()=> <ArrowUpRight size={18} aria-hidden="true"/>;
 function Rows({items,numbered=false}:{items:[string,string][];numbered?:boolean}){return <Accordion type="single" collapsible defaultValue="0" className="f-accordion">{items.map(([title,copy],i)=><AccordionItem value={String(i)} key={title}><AccordionTrigger>{numbered&&<span className="f-number" aria-hidden="true">{String(i+1).padStart(2,"0")}</span>}<span>{title}</span></AccordionTrigger><AccordionContent>{copy}</AccordionContent></AccordionItem>)}</Accordion>}
@@ -69,6 +70,6 @@ export function ApprovedCtaStrip(){
   </div>
  </section>;}
 
-/** Service area: the eight area pages as one line of linked cities. */
+/** Service area: the seven GBP cities, linked. Other town pages stay published. */
 export function ApprovedServiceArea(){
- return <ServiceArea image={{src:'/family/drive/square-1-front-door-smart-lock.webp',alt:'Door handle and lock beside painted trim',width:1200,height:1200}}><p className="f-eyebrow">AT HOME IN IDAHO</p><h2>Local people.<br/><em>Valley-wide reach.</em></h2><p>Serving homeowners throughout the Treasure Valley.</p><nav className="fr-cities" aria-label="Service area cities">{cities.map(city=><a key={city} href={`/areas/${city.toLowerCase().replaceAll(" ","-")}`} aria-label={`Handyman services in ${city}`}>{city}</a>)}</nav></ServiceArea>;}
+ return <ServiceArea image={{src:'/family/drive/square-1-front-door-smart-lock.webp',alt:'Door handle and lock beside painted trim',width:1200,height:1200}}><p className="f-eyebrow">AT HOME IN IDAHO</p><h2>Local people.<br/><em>Valley-wide reach.</em></h2><p>Serving homeowners throughout the Treasure Valley.</p><nav className="fr-cities" aria-label="Service area cities">{SERVICE_AREA_CITY_NAMES.map(city=><a key={city} href={`/areas/${city.toLowerCase().replaceAll(" ","-")}`} aria-label={`Handyman services in ${city}`}>{city}</a>)}</nav></ServiceArea>;}

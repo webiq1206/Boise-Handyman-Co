@@ -5,6 +5,7 @@
  */
 
 import { publishedFoundingYear } from '@/shared/foundingYear';
+import { SERVICE_AREA_CITY_NAMES } from '@/shared/contentData';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { GBP_SOCIAL, getExternalProfileUrls } from '@/shared/gbpProfile';
 import { SHOW_TRUST_CLAIMS } from '@/shared/trustClaims';
@@ -602,7 +603,7 @@ export const BUSINESS_INFO = {
   // and are omitted while SHOW_FOUNDING_YEAR is false. Schema emits foundingDate
   // only when this string is non-empty.
   founded: publishedFoundingYear(),
-  serviceArea: ['Boise', 'Meridian', 'Eagle', 'Nampa', 'Kuna', 'Star', 'Middleton', 'Caldwell', 'Garden City'],
+  serviceArea: [...SERVICE_AREA_CITY_NAMES],
   serviceRadius: '35 miles',
   licenses: ['Idaho Registered Contractor #8381215'],
   // Insured is confirmed for the operating company, P5 Home Co LLC.

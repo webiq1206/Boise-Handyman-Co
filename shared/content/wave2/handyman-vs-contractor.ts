@@ -69,7 +69,7 @@ export const handymanVsContractor: BlogPostData = {
     {
       question: 'Who should I call if I do not know which my job is?',
       answer:
-        'Either one, honestly, as long as they are the kind to tell you the truth. Describe the job and ask directly whether it is handyman scope. We take small repair and install jobs across Boise, Meridian, Eagle, Nampa, Kuna, Star, Middleton and Caldwell, and when a job is past our line we say so and point you toward the right kind of contractor.',
+        'Either one, honestly, as long as they are the kind to tell you the truth. Describe the job and ask directly whether it is handyman scope. We take small repair and install jobs across Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, and when a job is past our line we say so and point you toward the right kind of contractor.',
     },
   ],
   content: `
