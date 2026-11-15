@@ -14,7 +14,8 @@ import {emptyIntakeDetails} from "../lib/p5/intakeContract.ts";
 import {renderIntakeEmail} from "../lib/p5/intakeEmail.ts";
 import {routeIntake} from "../lib/p5/intakePolicy.ts";
 import {projectReviewHandler} from "../lib/p5/reviewRequest.ts";
-import {EMAIL_FIXTURES, renderFixture, storedRange} from "./estimator-email-fixtures.ts";
+import {estimateEmail} from "../lib/p5/estimateEmail.ts";
+import {EMAIL_FIXTURES, recordFor, renderFixture, storedRange} from "./estimator-email-fixtures.ts";
 
 const PREPARED = "Boise Handyman Co prepared this estimate.";
 const LOGO = "https://boisehandyman.co/brand/png/wordmark/light/boise-handyman-co-wordmark-charcoal-accent-1200w.png";
@@ -24,6 +25,30 @@ const TIER_LINE: Record<string, RegExp> = {
   major: /planning consultation/,
   withheld: /home walkthrough/,
 };
+
+test("the saved-estimate link uses readable normal-size button text", () => {
+  const previous = process.env.P5_LINK_SECRET;
+  process.env.P5_LINK_SECRET = "isolated-render-only-signed-link-fixture";
+  try {
+    const id = "12345678-1234-4234-8234-123456789abc";
+    const message = estimateEmail(id, recordFor(EMAIL_FIXTURES[0]), false);
+    const style = message.html.match(/<a href="[^"]+" style="([^"]+)">View or update your estimate online<\/a>/)?.[1];
+    assert.ok(style, "a configured saved estimate renders its signed link");
+    const background = style.match(/(?:^|;)background:(#[a-f0-9]{6})/i)?.[1];
+    const foreground = style.match(/(?:^|;)color:(#[a-f0-9]{6})/i)?.[1];
+    assert.ok(background && foreground);
+    const luminance = (hex: string) => {
+      const values = [1, 3, 5].map(start => parseInt(hex.slice(start, start + 2), 16) / 255).map(v => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4);
+      return values[0] * .2126 + values[1] * .7152 + values[2] * .0722;
+    };
+    const a = luminance(background), b = luminance(foreground);
+    assert.ok((Math.max(a, b) + .05) / (Math.min(a, b) + .05) >= 4.5, "15px text meets 4.5:1");
+    assert.ok(message.html.includes(`/estimate/scope?estimate=${id}&amp;t=`));
+  } finally {
+    if (previous === undefined) delete process.env.P5_LINK_SECRET;
+    else process.env.P5_LINK_SECRET = previous;
+  }
+});
 
 test("brand.ts supplies this site to the shared kit", () => {
   assert.equal(ESTIMATOR_BRAND.name, "Boise Handyman Co");

@@ -2,7 +2,7 @@
   "source": "p5-home-co",
   "commit": "0377417a2f7518af253b9348e5a1f9ccd454efb5",
   "generatedAt": "2026-11-15T17:19:24.127Z",
-  "note": "Local scoped integration of Handyman PR170 email and PR171 calculator/cost-book changes. Unrelated attribution, model, chrome, sync-tool and upload-validator changes excluded; baseline upload validation preserved. Source manifests union retained for existing reviewed files. No publication performed. Root shared outbox routing repair synchronized from P5 local candidate d5495f2; only three approved file hashes updated. Narrow amount-column wrapping repair synchronized from P5 local5eba855. Final approved admin financial and key-value wrapping synchronized from P5 local0b580ec.",
+  "note": "Local scoped integration of Handyman PR170 email and PR171 calculator/cost-book changes. Unrelated attribution, model, chrome, sync-tool and upload-validator changes excluded; baseline upload validation preserved. Source manifests union retained for existing reviewed files. No publication performed. Root shared outbox routing repair synchronized from P5 local candidate d5495f2; only three approved file hashes updated. Narrow amount-column wrapping repair synchronized from P5 local5eba855. Final approved admin financial and key-value wrapping synchronized from P5 local0b580ec. Saved-estimate signed-link secondary CTA correction synchronized from P5 local3ec3c32; local fixture exercises numeric contrast and signed-link presence.",
   "files": {
     "app/admin/p5-estimators/page.tsx": "f9b7f729daa74f542cdece161d2bf158fb784f5a8c55356fe7283e73db2c139d",
     "app/api/admin/p5-intake/file/route.ts": "e8b49e0f2e19508d1f21903445fdcd36b2e3f6aa95edbc6ecdac110a625b11dc",
@@ -98,7 +98,7 @@
     "lib/p5/emailReplyTo.ts": "9d57d9f21181422a73d97f127649c94c296ca488f18b6ceebec18e6e2feb0abf",
     "lib/p5/estimateDocument.ts": "518a2def097f01d18e87d9fa248b7c20c3e2e30c3663e50fe3d03c6ff01fe984",
     "lib/p5/estimateDriver.ts": "7e86bb8c32ba9e07680d45d3d4327d4f73521925c7d469f5669e900bca0245e9",
-    "lib/p5/estimateEmail.ts": "427726b793820157130c2125876d9b7898183c333657173ff184b657a89ef4c9",
+    "lib/p5/estimateEmail.ts": "1c70c92dfa1c66ce77c0b451714b7c3d345c32e7aae43364f5e267d2f7ad5588",
     "lib/p5/estimateLinks.ts": "9dacd407e7c541e370670a7daa5650e8ebf792e534dd10f4b32899764520b6d5",
     "lib/p5/estimatePdf.ts": "fbc8da123b356ceeb0e357599b988995b6b3daa56f9651dc079b995c6779971a",
     "lib/p5/estimateRevisions.ts": "8215ffd84e99684078b279cbaa96c5a9ec250f48721d728f31073a1be6212e58",
