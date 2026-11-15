@@ -24,7 +24,12 @@ process.env.BRAND_METADATA_STRICT='1';
 // Page modules import CSS (directly or through components). Node cannot load
 // it, and metadata never depends on it, so stub every stylesheet as empty.
 register('data:text/javascript,'+encodeURIComponent(`
+export async function resolve(specifier,context,next){
+ if(specifier==='server-only')return {url:'data:text/javascript,export default {};',shortCircuit:true};
+ return next(specifier,context);
+}
 export async function load(url,context,next){
+ if(new URL(url).pathname.endsWith('/node_modules/server-only/index.js'))return {format:'module',source:'export default {};',shortCircuit:true};
  if(/\\.(css|scss|sass)(\\?.*)?$/.test(url))return {format:'module',source:'export default {};',shortCircuit:true};
  return next(url,context);
 }`),import.meta.url);
@@ -32,6 +37,17 @@ export async function load(url,context,next){
 // tsx loads most of the app through the CommonJS path, which needs its own stub.
 const extensions=(Module as unknown as {_extensions:Record<string,(module:{exports:unknown})=>void>})._extensions;
 for(const ext of ['.css','.scss','.sass'])extensions[ext]=(module)=>{module.exports={};};
+
+// This tool evaluates server page metadata in Node, without rendering a client
+// component. Treat the server-only marker as a server-context assertion here;
+// changing React's global export condition would break imported client modules.
+// Product builds and browser-boundary tests retain the real marker unchanged.
+const nodeModule=Module as unknown as {_load:(id:string,...args:unknown[])=>unknown};
+const load=nodeModule._load;
+nodeModule._load=function(id:string,...args:unknown[]){
+ if(id==='server-only'||id.replaceAll('\\','/').endsWith('/node_modules/server-only/index.js'))return {};
+ return load.call(this,id,...args);
+};
 
 const root=process.cwd();
 const SKIP_DIRS=new Set(['api','admin','subcontractor']);
