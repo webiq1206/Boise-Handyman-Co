@@ -4,16 +4,18 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
 
-/** Run the actual component with passive effects deferred until after a user
+/** Run the actual component with effects deferred until after a user
  * interaction, as happens while the initial production tree is hydrating. */
 function scrollComponent(initialPath = '/') {
   let pathname = initialPath, hook = 0, scrollY = 0;
+  const listeners = new Map<string, Set<() => void>>();
+  const location = {pathname: initialPath, hash: ""};
   const refs: Array<{current: unknown}> = [], dependencies: unknown[][] = [], pending: Array<() => void> = [];
   const calls: Array<{top: number; left: number; behavior: string}> = [];
   const exports: any = {};
   const react = {
     useRef(value: unknown) { const index = hook++; return refs[index] ||= {current: value}; },
-    useEffect(effect: () => void, deps: unknown[]) {
+    useLayoutEffect(effect: () => void, deps: unknown[]) {
       const index = hook++, previous = dependencies[index];
       if (!previous || deps.some((value, i) => value !== previous[i])) pending.push(effect);
       dependencies[index] = deps;
@@ -28,18 +30,25 @@ function scrollComponent(initialPath = '/') {
       if (name === 'next/navigation') return {usePathname: () => pathname};
       throw new Error(`Unexpected dependency ${name}`);
     },
-    window: {scrollTo(options: {top: number; left: number; behavior: string}) {calls.push({...options}); scrollY = options.top;}},
+    window: {
+      location,
+      addEventListener(name: string, callback: () => void) {if (!listeners.has(name)) listeners.set(name, new Set()); listeners.get(name)!.add(callback);},
+      removeEventListener(name: string, callback: () => void) {listeners.get(name)?.delete(callback);},
+      scrollTo(options: {top: number; left: number; behavior: string}) {calls.push({...options}); scrollY = options.top;},
+    },
   });
   return {
     calls,
-    render(path = pathname) {pathname = path; hook = 0; exports.ScrollToTop();},
+    render(path = pathname) {pathname = path; location.pathname = path; hook = 0; exports.ScrollToTop();},
+    hash(value: string) {location.hash = value;},
+    pop(path: string) {location.pathname = path; for (const callback of listeners.get("popstate") || []) callback();},
     flush() {for (const effect of pending.splice(0)) effect();},
     move(top: number) {scrollY = top;},
     get scrollY() {return scrollY;},
   };
 }
 
-test('delayed initial passive effect cannot displace a pointer already on the quote link', () => {
+test('initial deferred effect cannot displace a pointer already on the quote link', () => {
   const app = scrollComponent();
   app.render();
   // The browser has scrolled to the native /estimate anchor for pointerdown.
@@ -73,4 +82,16 @@ test('later client pathname changes reset once; same pathname/search/hash render
   app.render('/services'); app.flush();
   assert.equal(app.scrollY, 0);
   assert.equal(app.calls.length, 2);
+});
+
+
+test('later hash navigation and browser history keep their native restoration position', () => {
+  const app = scrollComponent();
+  app.render(); app.flush();
+  app.move(1213); app.hash('#consult'); app.render('/services'); app.flush();
+  assert.equal(app.scrollY, 1213); assert.deepEqual(app.calls, []);
+  app.hash(''); app.move(860); app.pop('/'); app.render('/'); app.flush();
+  assert.equal(app.scrollY, 860); assert.deepEqual(app.calls, []);
+  app.render('/contact'); app.flush();
+  assert.equal(app.scrollY, 0); assert.equal(app.calls.length, 1);
 });
