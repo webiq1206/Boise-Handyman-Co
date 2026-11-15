@@ -87,7 +87,7 @@ const sentLeadKeys = new Set<string>();
  * Fires the Google Ads lead conversion once per dedupe key (per page load and,
  * where storage allows, per browser session). Returns true when it was sent.
  */
-export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string): boolean {
+export function trackGoogleAdsLeadConversion(ctx: LeadContext = {}, dedupeKey?: string, _acceptance?: { accepted?: boolean }): boolean {
   if (typeof window === "undefined") return false;
   const storageKey = dedupeKey ? `google_ads_lead:${dedupeKey}` : undefined;
   if (storageKey) {

@@ -14,11 +14,11 @@ test('paid attribution survives draft validation, cross-brand snapshot, and CRM 
  const prior=intakeDraftContext('12345678-1234-4234-8234-123456789abc','p5',null,details,contact);
  const next=intakeDraftContext('12345678-1234-4234-8234-123456789abc','cabinet',{intake:prior,revision:2} as Draft,{...details,attribution:{utm_medium:'social'}},contact);
  assert.deepEqual(next.attribution,attribution);assert.equal(next.originSite,'p5');
- const snapshot:IntakeSnapshot={schema:1,projectId:prior.projectId,draftId:'12345678-1234-4234-8234-123456789abc',originSite:next.originSite,currentSite:next.currentSite,revision:3,contextVersion:2,contact,details:next,scope:{text:'Cabinet project',answers:{service:'kitchen'},extraction:null,uploads:[]},routing:routeIntake(next.currentSite,'kitchen'),unresolved:[],savedAt:'2026-10-09T14:00:00Z'};
+ const snapshot:IntakeSnapshot={schema:1,projectId:prior.projectId,draftId:'12345678-1234-4234-8234-123456789abc',originSite:next.originSite,currentSite:next.currentSite,revision:3,contextVersion:2,contact,details:next,scope:{text:'Cabinet project',answers:{service:'cabinet-install'},extraction:null,uploads:[]},routing:routeIntake(next.currentSite,'cabinet-install'),unresolved:[],savedAt:'2026-10-09T14:00:00Z'};
  const record=intakeLocalCrmRecord(snapshot);
  assert.deepEqual(record.attribution,attribution);assert.equal(record.brand,'Boise Cabinet Co');
  assert.equal(sourceFromAttribution(collectAttribution(record.attribution||{})),'Paid Search');
- assert.equal(validateIntakeLocalCrm(intakeDeliveryEnvelope(snapshot,'crm','digest')),null);
+ assert.equal(validateIntakeLocalCrm(intakeDeliveryEnvelope(snapshot,'crm','a'.repeat(64))),null);
  assert.equal(intakeLeadKey(snapshot.projectId),intakeLeadKey(prior.projectId));
 });
 test('untrusted acquisition context excludes arbitrary fields, tokens and referrer paths',()=>{
