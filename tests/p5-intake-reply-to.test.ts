@@ -34,7 +34,7 @@ test('both channels keep From, recipients, content, attachment bytes and deliver
   const frozen=JSON.parse(JSON.stringify(envelope)),email=frozen.email;
   const attachments=email.attachments.map((f:any)=>({filename:f.filename,content:Buffer.from(f.base64,'base64')}));
   await a.sendEmail({...email,attachments,key:envelope.key});const sent=a.calls.at(-1);
-  assert.equal(sent.body.replyTo,channel==='team'?s.contact.email:mailbox);assert.equal(sent.body.to,channel==='team'?mailbox:s.contact.email);assert.equal(sent.body.from,a.from);
+  assert.equal(sent.body.replyTo,channel==='team'?s.contact.email:mailbox);assert.equal(sent.body.to,channel==='team'?mailbox:s.contact.email);assert.equal(sent.body.from,'P5 Home Co <hello@p5homeco.com>');
   assert.equal(sent.body.subject,email.subject);assert.equal(sent.body.text,email.text);assert.equal(sent.body.html,email.html);assert.equal(sent.body.attachments,attachments);
   assert.equal(site==='p5'?sent.body.messageId:sent.options.idempotencyKey,site==='p5'?`<${envelope.key}@${brand.domain}>`:envelope.key);
   assert.deepEqual(envelope,frozen,'Preparation and transport never mutate the frozen envelope');
