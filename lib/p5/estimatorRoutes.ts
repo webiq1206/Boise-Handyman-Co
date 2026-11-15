@@ -1,5 +1,3 @@
-import {ESTIMATOR_BRAND} from './brand.ts';
-
 /**
  * Which routes the estimator owns.
  *
@@ -13,9 +11,7 @@ import {ESTIMATOR_BRAND} from './brand.ts';
  * the one route customers actually use - so every real estimate rendered a full marketing footer
  * below it (owner report 2026-09-23, mobile).
  */
-export function isEstimatorPath(pathname: string | null | undefined, brandId:string=ESTIMATOR_BRAND.id): boolean {
+export function isEstimatorPath(pathname: string | null | undefined): boolean {
   if (!pathname) return false;
-  // Remodeling's public entry is its new short request wizard. Retained nested
-  // estimator routes still own their full-screen chrome on every site.
-  return (pathname === '/estimate' && brandId !== 'remodeling') || pathname.startsWith('/estimate/');
+  return pathname === '/estimate' || pathname.startsWith('/estimate/');
 }

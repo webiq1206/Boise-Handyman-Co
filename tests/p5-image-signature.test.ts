@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import sharp from 'sharp';
+import {verifyImageSignature} from '../lib/p5/imageSignature.ts';
+import {verifyUpload} from '../lib/p5/documents.ts';
+import {prepareImages} from '../lib/p5/imagePreparation.ts';
+const box=(brand:string,compatible:string[]=[])=>{const b=Buffer.alloc(16+4*compatible.length);b.writeUInt32BE(b.length);b.write('ftyp',4);b.write(brand,8);compatible.forEach((v,i)=>b.write(v,16+4*i));return b;};
+test('accepts classic and BigTIFF endian signatures',()=>{for(const bytes of [[73,73,42,0,8,0,0,0],[77,77,0,42,0,0,0,8],[73,73,43,0,8,0,0,0,16,0,0,0,0,0,0,0],[77,77,0,43,0,8,0,0,0,0,0,0,0,0,0,16]])assert.doesNotThrow(()=>verifyImageSignature('image/tiff',Buffer.from(bytes)));});
+test('accepts major and compatible HEIF/AVIF brands',()=>{for(const [type,b] of [['image/avif',box('avif')],['image/avif',box('mif1',['avif'])],['image/heic',box('heic')],['image/heif',box('mif1',['heic'])]] as const)assert.doesNotThrow(()=>verifyImageSignature(type,b));});
+test('rejects mismatched, truncated and unbounded containers',()=>{for(const type of ['image/tiff','image/avif','image/heic','image/heif'])for(const b of [Buffer.alloc(0),Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"/>'),Buffer.from('ordinary text')])assert.throws(()=>verifyImageSignature(type,b),/does not match/);for(const b of [box('jpeg'),box('avif').subarray(0,15),Buffer.concat([Buffer.from([0,0,255,255]),box('avif').subarray(4)])])assert.throws(()=>verifyImageSignature('image/avif',b));});
+test('upload and saved-image entry reject benign text disguised as photos',async()=>{const data=Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"/>');for(const ext of ['tif','tiff','avif','heic','heif'])assert.throws(()=>verifyUpload(`fixture.${ext}`,data),/does not match/);for(const type of ['image/tiff','image/avif','image/heic','image/heif'])await assert.rejects(prepareImages({name:'fixture',type,data}),/does not match/);});
+for(const format of ['tiff','avif','png','jpeg','webp','gif'] as const)test(`valid benign ${format} photo retains decoding behavior`,async()=>{const data=await sharp({create:{width:8,height:6,channels:3,background:'#aabbcc'}}).toFormat(format).toBuffer();const file=verifyUpload(`fixture.${format}`,data);const prepared=await prepareImages(file);assert.equal(prepared.length,1);assert.equal(prepared[0].type,'image/jpeg');const metadata=await sharp(prepared[0].data).metadata();assert.equal(metadata.width,8);assert.equal(metadata.height,6);});
+test('malformed but correctly signed TIFF still fails in decoder',async()=>{await assert.rejects(prepareImages({name:'broken.tiff',type:'image/tiff',data:Buffer.from([73,73,42,0,8,0,0,0])}));});

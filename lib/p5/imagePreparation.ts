@@ -1,6 +1,7 @@
 import {Worker} from 'node:worker_threads';
 import {join} from 'node:path';
 import sharp from 'sharp';
+import {verifyImageSignature} from './imageSignature.ts';
 import type {AnalysisFile} from './extraction.ts';
 async function convertHeic(bytes:Buffer):Promise<Buffer[]>{
   return new Promise((resolve,reject)=>{
@@ -13,6 +14,7 @@ async function convertHeic(bytes:Buffer):Promise<Buffer[]>{
 }
 /** Preserve originals in storage; prepare oriented, bounded images for document vision. */
 export async function prepareImages(file:AnalysisFile):Promise<AnalysisFile[]>{
+  verifyImageSignature(file.type,file.data);
   const sources=['image/heic','image/heif'].includes(file.type)?await convertHeic(file.data):[file.data];
   const output:AnalysisFile[]=[];
   for(const [index,data]of sources.entries()){
