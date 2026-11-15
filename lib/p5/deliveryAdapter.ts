@@ -13,21 +13,23 @@ export async function adminRecipients(){return [...new Set(await getAdminRecipie
 /** The outbox must not schedule another customer send. One retry happens inside this request. */
 export const EMAIL_SUPPORTS_IDEMPOTENCY=false;
 export function isTransientEmailError(error: unknown): boolean {
-  const err = error as { code?: string; message?: string };
+  const err = error as { code?: string; message?: string; statusCode?: number };
   const code = String(err?.code || "");
   const message = String(err?.message || "");
+  if (err?.statusCode === 429 || (Number.isInteger(err?.statusCode) && Number(err.statusCode) >= 500 && Number(err.statusCode) <= 599)) return true;
+  if (Number.isInteger(err?.statusCode) && Number(err.statusCode) >= 400) return false;
   if (/EAUTH|EENVELOPE|EMESSAGE/i.test(code)) return false;
   if (/\b(535|550|551|552|553|554)\b/.test(message)) return false;
   if (/\b(421|450|451|452)\b/.test(message)) return true;
   return /ETIMEDOUT|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ESOCKET|EPIPE|timeout|socket hang up|try again/i.test(`${code} ${message}`);
 }
 function acceptedId(result: any): string {
-  if (result?.error) throw new Error("Email provider rejected delivery");
+  if (result?.error) throw Object.assign(new Error("Email provider rejected delivery"), {statusCode: result.error.statusCode});
   const id = result?.data?.id || result?.id;
   if (!id || id === "noop" || result?.skipped) throw new Error("Email delivery is not configured");
   return String(id);
 }
-export async function sendEmail(input:{to:string;replyTo?:string;subject:string;text:string;html?:string;attachments:{filename:string;content:Buffer;contentType?:string}[];key:string}){
+export async function sendEmail(input:{to:string;replyTo?:string;subject:string;text:string;html?:string;attachments:{filename:string;content:Buffer;contentType?:string}[];key:string;suppressFailureAlert?:boolean}){
   const {client}=await getUncachableEmailClient("p5homeco.com");
   const sender=client.emails as unknown as {send:(body:unknown,options:unknown)=>Promise<any>};
   const body={from:ESTIMATOR_FROM,to:input.to,replyTo:safeEmailReplyTo(input.replyTo,brand.email),subject:input.subject,text:input.text,html:input.html,attachments:input.attachments};
@@ -36,7 +38,7 @@ export async function sendEmail(input:{to:string;replyTo?:string;subject:string;
     return acceptedId(await once());
   } catch (error) {
     if (!isTransientEmailError(error)) {
-      await alertFailedCustomer(input, error);
+      if (!input.suppressFailureAlert) await alertFailedCustomer(input, error);
       throw error;
     }
     console.error(`[estimator-email] retrying once key=${input.key}`);
@@ -45,7 +47,7 @@ export async function sendEmail(input:{to:string;replyTo?:string;subject:string;
     } catch (again) {
       const message = again instanceof Error ? again.message : "Delivery failed";
       console.error(`[estimator-email] failed key=${input.key}: ${message.slice(0, 200)}`);
-      await alertFailedCustomer(input, again);
+      if (!input.suppressFailureAlert) await alertFailedCustomer(input, again);
       throw again;
     }
   }
