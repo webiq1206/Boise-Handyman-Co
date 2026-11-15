@@ -47,6 +47,8 @@ export const SITE_CONFIG = {
   address: {
     city: "Meridian",
     state: "ID",
+    // City, state, and ZIP only. No street is published on the site.
+    postalCode: "83646",
     cityState: "Meridian, ID",
     serviceArea: SERVICE_AREA_LINE,
   },

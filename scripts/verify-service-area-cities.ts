@@ -72,6 +72,8 @@ assert.equal(middleton.name, "Middleton");
 
 const localJson = JSON.stringify(local);
 assert.equal(localJson.includes("streetAddress"), false);
+assert.match(localJson, /"postalCode":"83646"/);
+assert.equal((local.address as { postalCode?: string; streetAddress?: string }).streetAddress, undefined);
 assert.match(localJson, /8381215/);
 assert.equal(localJson.includes(String(BUSINESS_INFO.email)), true);
 assert.equal(organization.email, BUSINESS_INFO.email);

@@ -110,7 +110,9 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   assert.match(html, /Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM Mountain\. Closed Sunday\./);
   assert.match(html, /mailto:hello@boisehandyman\.co/);
   assert.match(html, /href="\/contact\.vcf"/);
-  assert.match(html, /is a DBA of <a href="https:\/\/p5homeco\.com" rel="noopener">P5 Home Co LLC<\/a>/);
+  assert.match(html, /is a DBA of <a href="https:\/\/p5homeco\.com" rel="noopener">P5 Home Co<\/a>/);
+  assert.equal(html.includes('P5 Home Co LLC'), false);
+  assert.equal(html.includes('P5 Home Co.'), false);
   assert.match(html, /<a href="\/subcontractor" rel="nofollow">Subcontractor login<\/a>/);
   assert.match(html, />P5 Home Co on Facebook<\/a>/);
   assert.match(html, /<a href="https:\/\/www\.google\.com\/search\?kgmid=\/g\/11ntl1t7dc" rel="noopener" target="_blank" data-testid="link-footer-google">P5 Home Co on Google<\/a>/);

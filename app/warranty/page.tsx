@@ -203,7 +203,7 @@ export default function WarrantyPage() {
             </p>
           </div>
           <p className="container px-4 max-w-5xl mt-10 text-sm text-muted-foreground">
-            {SITE_CONFIG.name} is a DBA of P5 Home Co LLC. Full company story on the{" "}
+            {SITE_CONFIG.name} is a DBA of P5 Home Co. Full company story on the{" "}
             <Link href="/about" className="underline underline-offset-2">
               About page
             </Link>

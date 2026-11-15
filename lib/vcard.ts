@@ -64,7 +64,7 @@ export function buildBusinessVCard(): string {
   // not ship a link that may point at the wrong or a defunct account.
   const note = [
     "Repairs, installs and maintenance.",
-    "A P5 Home Co company (P5 Home Co LLC, Idaho Registered Contractor #8381215).",
+    "A P5 Home Co company. Idaho Registered Contractor #8381215.",
     SITE_CONFIG.address.serviceArea,
     `Hours: ${hoursSummary}`,
   ].join("\n");
@@ -80,7 +80,7 @@ export function buildBusinessVCard(): string {
     foldLine(`EMAIL;TYPE=WORK:${escapeVCard(SITE_CONFIG.email)}`),
     foldLine(`URL:${escapeVCard(SITE_CONFIG.siteUrl)}`),
     foldLine(
-      `ADR;TYPE=WORK:;;;${escapeVCard(SITE_CONFIG.address.city)};${escapeVCard(SITE_CONFIG.address.state)};;USA`,
+      `ADR;TYPE=WORK:;;;${escapeVCard(SITE_CONFIG.address.city)};${escapeVCard(SITE_CONFIG.address.state)};${escapeVCard(SITE_CONFIG.address.postalCode)};USA`,
     ),
     foldLine(`NOTE:${escapeVCard(note)}`),
     "END:VCARD",
