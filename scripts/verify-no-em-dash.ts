@@ -63,6 +63,8 @@ const EXCLUDED_FILES = new Set([
   // The shared kit's dash detector names the characters it rejects. That file
   // stays byte-identical with p5-home-co, so the gate skips it.
   join('lib', 'p5', 'emailKit.ts'),
+  // Copied byte-identical. Its assertion names the dash characters it rejects.
+  join('tests', 'p5-email-brand.test.ts'),
 ]);
 
 interface Violation {

@@ -9,19 +9,21 @@ import ts from "typescript";
 import {PGlite} from "@electric-sql/pglite";
 import {ESTIMATOR_BRAND} from "../lib/p5/brand.ts";
 import {ESTIMATOR_FROM, isTransientEmailError} from "../lib/p5/deliveryAdapter.ts";
-import {assertCopy, emailBrandFrom} from "../lib/p5/emailKit.ts";
+import {assertCopy, emailBrandFrom, internalDeliveryTo, tierNextStep} from "../lib/p5/emailKit.ts";
 import {emptyIntakeDetails} from "../lib/p5/intakeContract.ts";
 import {renderIntakeEmail} from "../lib/p5/intakeEmail.ts";
 import {routeIntake} from "../lib/p5/intakePolicy.ts";
 import {projectReviewHandler} from "../lib/p5/reviewRequest.ts";
 import {EMAIL_FIXTURES, renderFixture, storedRange} from "./estimator-email-fixtures.ts";
 
-const LEGAL = "Boise Handyman Co is a DBA of P5 Home Co, LLC.";
+const PREPARED = "Boise Handyman Co prepared this estimate.";
 const LOGO = "https://boisehandyman.co/brand/png/wordmark/light/boise-handyman-co-wordmark-charcoal-accent-1200w.png";
-
-function withoutLegal(value: string): string {
-  return value.split(LEGAL).join(" ");
-}
+const TIER_LINE: Record<string, RegExp> = {
+  small: /quick visit/,
+  standard: /home walkthrough/,
+  major: /planning consultation/,
+  withheld: /home walkthrough/,
+};
 
 test("brand.ts supplies this site to the shared kit", () => {
   assert.equal(ESTIMATOR_BRAND.name, "Boise Handyman Co");
@@ -32,6 +34,8 @@ test("brand.ts supplies this site to the shared kit", () => {
   assert.equal(ESTIMATOR_BRAND.ink, "#383837");
   assert.equal(ESTIMATOR_BRAND.cityLine, "Meridian, ID 83646");
   assert.equal(ESTIMATOR_FROM, "P5 Home Co <hello@p5homeco.com>");
+  assert.equal(internalDeliveryTo("test", ESTIMATOR_BRAND), "hello@p5homeco.com");
+  assert.equal(internalDeliveryTo("alert", ESTIMATOR_BRAND), "hello@p5homeco.com");
   const mail = emailBrandFrom(ESTIMATOR_BRAND);
   assert.equal(mail.name, "Boise Handyman Co");
   assert.equal(mail.accent, "#C56B4A");
@@ -58,13 +62,19 @@ test("every stored fixture renders this brand, and P5 Home Co stays in From", ()
       assert.match(message.html, /#C56B4A/i);
       assert.match(message.html, /#383837/i);
       assert.doesNotMatch(body, /p5homeco\.com/i);
-      assert.doesNotMatch(withoutLegal(body), /P5 Home Co/);
+      assert.doesNotMatch(body, /P5 Home Co/);
+      assert.doesNotMatch(body, /is a DBA of/);
       assert.doesNotMatch(body, /showroom|\bshop\b/i);
       assert.doesNotMatch(body, /4031|wapoot/i);
       assert.doesNotMatch(body, new RegExp("[" + String.fromCharCode(0x2013, 0x2014) + "]"));
-      if (kind === "customer") assert.doesNotMatch(body, /111,111|222,222/);
+      if (kind === "customer") {
+        assert.doesNotMatch(body, /111,111|222,222/);
+        assert.ok(message.text.includes(PREPARED));
+        assert.match(message.text, /Meridian, ID 83646/);
+        assert.match(message.text, TIER_LINE[fixture.tier]);
+        assert.ok(message.text.includes(tierNextStep(fixture.high)));
+      }
       assertCopy(message.html, message.text, {requireDisclaimer: kind === "customer"});
-      if (kind === "customer" && fixture.tier !== "withheld") assert.ok(message.text.includes(LEGAL));
     }
     if (fixture.tier === "withheld") {
       assert.equal(storedRange(fixture), "");
@@ -110,7 +120,8 @@ test("intake and review mail use this brand and do not name the parent site", ()
     assert.match(message.html, /#C56B4A/i);
     assert.match(message.html, /boisehandyman\.co/);
     assert.match(message.html, /hello@boisehandyman\.co/);
-    assert.doesNotMatch(body, /P5 Home Co|p5homeco\.com/);
+    assert.match(message.text, /Meridian, ID 83646/);
+    assert.doesNotMatch(body, /P5 Home Co|p5homeco\.com|is a DBA of/);
     assert.doesNotMatch(body, new RegExp("[" + String.fromCharCode(0x2013, 0x2014) + "]"));
     if (!team) assert.match(message.text, /Schedule now/);
   }
