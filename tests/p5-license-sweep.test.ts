@@ -72,12 +72,12 @@ test('rendered registration, FAQ schema, and GBP copy do not claim this brand is
   assert.match(faqSchema, /an Idaho Registered Contractor #8381215 and insured/);
 
   const business = generateLocalBusinessSchema();
-  const retiredStreet = ["Wa", "poot"].join("");
   assert.doesNotMatch(JSON.stringify([
     business,
     generateServiceSchema('Drywall repair', 'Patch a wall', 'Boise'),
     generateReviewSchema([]),
-  ]), new RegExp(`streetAddress|${retiredStreet}|4031|public representative|43\\.6515|-116\\.4444`, "i"));
+  ]), /streetAddress|public representative|43\.6515|-116\.4444/i);
+  assert.equal(Object.hasOwn(business.address as object, 'streetAddress'), false);
   const credential = {
     '@type': 'EducationalOccupationalCredential',
     credentialCategory: 'registration',

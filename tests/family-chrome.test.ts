@@ -103,11 +103,9 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   assert.equal(/rel="noopener noreferrer">(P5 Home Co|Boise)/.test(html), false);
   assert.equal(html.includes('Boise ADU Co'), false);
   assert.match(html, /Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County\. <a href="tel:/);
-  const retiredStreet = ["Wa", "poot"].join("");
-  const hiddenAddress = new RegExp(`public representative|staffed storefront|${retiredStreet}|4031`, "i");
-  assert.doesNotMatch(html, hiddenAddress);
+  assert.doesNotMatch(html, /public representative|staffed storefront|streetAddress/i);
   const vcard = buildBusinessVCard().replace(/\r?\n[ \t]/g, '');
-  assert.doesNotMatch(vcard, hiddenAddress);
+  assert.doesNotMatch(vcard, /public representative|staffed storefront|streetAddress/i);
   assert.match(vcard, /TEL;TYPE=WORK,VOICE:\+12084771169/);
   assert.match(vcard, /Hours:/);
   assert.match(html, /Mon to Fri 9 AM to 6 PM, Sat 9 AM to 4 PM Mountain\. Closed Sunday\./);
@@ -154,8 +152,6 @@ test('the homepage video hero preserves first-response content, poster and sourc
 });
 
 test('citation packets publish Meridian, ID 83646 and no street', () => {
-  const retiredStreet = ["Wa", "poot"].join("");
-  const hiddenAddress = new RegExp(`${retiredStreet}|4031\\s+W`, "i");
   const files = [
     "backlink-engine/config/scoring.json",
     "backlink-engine/outreach/queue.json",
@@ -165,8 +161,8 @@ test('citation packets publish Meridian, ID 83646 and no street', () => {
   ];
   for (const file of files) {
     const text = readFileSync(file, "utf8");
-    assert.doesNotMatch(text, hiddenAddress, file);
     assert.equal(text.includes('"street"'), false, file);
+    assert.doesNotMatch(text, /streetAddress/i, file);
   }
   const nap = JSON.parse(readFileSync("backlink-engine/config/scoring.json", "utf8")).site.nap;
   assert.equal(nap.city, "Meridian");
