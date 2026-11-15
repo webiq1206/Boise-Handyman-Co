@@ -1,0 +1,48 @@
+.panel { max-width: 720px; margin-top: 32px; padding: 32px 20px; color: #383837; background: #fbfaf6; border-top: 4px solid #c56b4a; scroll-margin-top: 108px; }
+.progress { margin: 0 0 8px; font-size: 14px; line-height: 1.5; color: #565d58; }
+.shortProgress { display: none; }
+.panel .heading { margin: 0 0 16px; color: #383837; font: 500 22px/1.2 var(--font-manrope), sans-serif; }
+.choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.choice { display: flex; align-items: center; gap: 8px; min-height: 56px; padding: 16px 20px; border: 1px solid #979794; border-radius: 4px; background: #fff; color: #383837; text-align: left; font: 500 17px/1.3 var(--font-manrope), sans-serif; }
+.choice[aria-checked=true] { border-color: #92472c; box-shadow: inset 0 0 0 1px #92472c; background: #f1ede4; text-decoration: underline; text-underline-offset: 4px; }
+.choice svg { flex-shrink: 0; color: #92472c; }
+.choice:focus-visible, .navigation :is(a,button):focus-visible, .summary button:focus-visible { outline: 3px solid #92472c; outline-offset: 4px; }
+.context { margin: 0 0 16px; font-size: 14px; line-height: 1.5; }
+.hint { margin: 12px 0 0; font-size: 14px; line-height: 1.5; }
+.panel :is(button,a) { scroll-margin-block: 108px 96px; }
+.range { margin: 0 0 12px; font: 400 clamp(36px, 4vw, 48px)/1.1 var(--font-cormorant), Georgia, serif; }
+.taskName { margin: 0; font-size: 17px; line-height: 1.3; }
+.qualifier { margin: 12px 0 0; font-size: 14px; line-height: 1.5; color: #565d58; }
+.summary { margin: 0; }
+.summary > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; align-items: center; min-height: 56px; padding-block: 4px; border-bottom: 1px solid #d7d7d2; }
+.summary dt { grid-column: 1; color: #565d58; font-size: 14px; line-height: 1.5; }
+.summary dd { grid-column: 1; margin: 0; font-size: 17px; line-height: 1.3; }
+.summary button { grid-column: 2; grid-row: 1 / 3; min-width: 60px; min-height: 44px; padding: 8px; background: transparent; color: #383837; border: 1px solid #979794; border-radius: 4px; font-size: 14px; }
+.notice { margin: 16px 0 0; color: #565d58; font-size: 14px; line-height: 1.5; }
+.unpriced { margin: 0 0 16px; font-size: 17px; line-height: 1.5; }
+.navigation { display: flex; align-items: stretch; justify-content: space-between; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #d7d7d2; }
+.navigation :is(a,button) { min-height: 48px; padding: 12px; font: 600 16px/1.25 var(--font-manrope), sans-serif; text-align: center; border-radius: 4px; }
+.back { background: transparent; border: 1px solid #979794; color: #383837; }
+.primary { display: inline-flex; flex: 1; align-items: center; justify-content: center; background: #383837; color: #fff; border: 1px solid #383837; text-decoration: none; }
+.primary:disabled { background: #e4e2dc; color: #565d58; border-color: #979794; cursor: not-allowed; }
+@media (min-width: 640px) { .panel { padding: 48px 32px; } .panel .heading { font-size: 26px; } }
+@media (max-width: 1023px) {
+  .panel[data-fixed-nav=true] { padding-bottom: calc(32px + var(--planner-nav-height, 73px)); }
+  .panel[data-fixed-nav=true] .navigation { position: fixed; z-index: 45; left: 50%; bottom: 0; transform: translateX(-50%); width: min(720px, calc(100% - 32px)); margin: 0; padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); background: #fbfaf6; border-top: 1px solid #979794; }
+}
+@media (max-height: 500px) and (min-width: 640px) {
+  .panel { padding-top: 32px; padding-bottom: 32px; }
+  .panel { scroll-margin-top: 80px; }
+  .progress { display: none; }
+  .shortProgress { display: inline; font-size: 17px; }
+  .panel .heading { margin-bottom: 12px; font-size: 22px; }
+  .range { margin-bottom: 8px; }
+  .notice, .qualifier { margin-top: 8px; }
+  .choices { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .panel[data-step=task] .choices { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .navigation { margin-top: 12px; padding-top: 12px; }
+}
+@keyframes forward { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes backward { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+@media (prefers-reduced-motion: no-preference) { .choice { transition: background-color 200ms ease-out, border-color 200ms ease-out; } .stepBody { animation: forward 300ms ease-out; } .panel[data-direction=back] .stepBody { animation-name: backward; } }

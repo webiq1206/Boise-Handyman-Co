@@ -9,3 +9,4 @@
 - [Estimator replacement sources](estimator-replacement-sources.md) — keep stored file history separate from the active source generation; replacement, append, and retry have different merge rules.
 - [CRM receiver contract](crm-receiver-contract.md) — external lead receiver has a 100 KiB body limit and only a 60-second email duplicate window; sender-side uniqueness is authoritative.
 - [Logo color intent](logo-color-intent.md) — the visible Boise Handyman icon and wordmark should be terracotta throughout, not just a tiny accent.
+- [Public planning boundary](public-planning-boundary.md) — server-precomputed customer ranges only; preserve the calculator's complete viewport, state and safe offline acceptance gates.

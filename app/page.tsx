@@ -9,7 +9,7 @@ import { QuoteFormAnchor } from "@/components/QuoteFormAnchor";
 import { FAQSection } from "@/components/FAQSection";
 import { Reveal } from "@/components/Reveal";
 import { HandymanPlanningRange } from "@/components/sections/HandymanPlanningRange";
-import { handymanPriceContext } from "@/shared/handymanCustomerPrice";
+import { getHandymanPlanningData } from "@/shared/handymanPlanning.server";
 import { HowP5Works } from "@/components/sections/HowP5Works";
 import { ProjectGallerySection } from "@/components/sections/ProjectGallerySection";
 import { HomePageSchema } from "@/components/seo/HomePageSchema";
@@ -89,7 +89,7 @@ export default function HomePage() {
           note="Send your list and photos, and we will reply with one written quote before any work starts."
         />
       </ApprovedFamilyFrame>
-      <HandymanPlanningRange context={handymanPriceContext()} />
+      <HandymanPlanningRange planning={getHandymanPlanningData()} />
       <ProjectGallerySection limit={6} showViewAll />
       <ApprovedFamilyFrame>
         <ApprovedHowItWorks aside={<HowP5Works />} />

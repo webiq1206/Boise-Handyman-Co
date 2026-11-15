@@ -1,5 +1,13 @@
 # Boise Handyman Co brand profile
 
+### November 15 bounded planning-calculator correction
+
+The authorized correction keeps internal costs and financial policy on the server. The homepage receives only category/task display copy and customer ranges for its existing 24 fixed one-task examples. It keeps the default worked range, unpriced states, scope qualifiers, truthful materials qualification and the existing written-quote destination. No public pricing API, provider call, persistence service, schema or credential change is introduced.
+
+The affected inline tool uses job, task, review and result screens so the current step can fit the available viewport. Review exposes the selected answers and task qualifier; Back and browser/session restoration retain valid IDs. The result appears before contact. During the task, its navigation replaces the existing promotional bottom action using the established yield mechanism. The surrounding homepage composition, public routes, metadata, identity, approved palette and font families remain the protected baseline.
+
+Apply the complete Website Design Quality2.3 master and implementation rules, including C10/D2 and independent F4/F5 review, plus the current organic-search preservation standard. No new rule exception is asserted. Source implementation, isolated tests, production bundle/serialized-data checks, independent rendered acceptance and publication are separate gates; this record does not claim they have all passed.
+
 Profile version: source record 2026-11-05.1. The later explicit instruction to resolve and merge Charcoal PR 144 authorizes its neutral palette. This records that integration with the reviewed November 4 family work; final rendered review and publication remain separate gates. No new logo, typeface or rule exception is asserted.
 
 Source of truth: `docs/approved-design-handoff.md` (implemented 2026-09-24), `lib/familyBrand.ts`, `styles/family-tokens.css`, current loaded `app/approved-system.css`, `app/family-redesign.css`, `app/layout.tsx` and `components/approved/family-content.ts`. Those implementation files retain authority for actual values. Older Montserrat/Libre references in the brand kit and content brief conflict with the loaded approved family design and are not instructions to revert it.

@@ -8,7 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { Check, Plus } from "lucide-react";
 import type { StoredEstimate } from "@/shared/estimateEngine";
-import { formatPlanningCurrency } from "@/shared/estimateEngine";
+import { formatPlanningCurrency } from "@/shared/formatPlanningCurrency";
 import { DisplayNum } from "@/components/marketing/DisplayNum";
 import { AttachmentTile, type AttachmentStatus, type PickedFile } from "@/components/forms/AttachmentTile";
 import { CTA_FORM_CALLBACK, CTA_FORM_SEND } from "@/shared/ctaCopy";
