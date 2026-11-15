@@ -34,7 +34,7 @@ function harness() {
       JOB_CATEGORY_LABELS: Object.fromEntries(categories.map(id => [id, { label: id, sub: 'Test category' }])),
       TASK_CATALOG: tasks,
       calculateHandymanEstimate: () => ({ priceLow: 100, priceHigh: 200, totalHours: 1 }),
-      formatHandymanCurrency: n => `$${n}`,
+      formatHandymanRange: estimate => `$${estimate.priceLow} to $${estimate.priceHigh}`,
       HANDYMAN_RATE_DISCLAIMER: 'Test disclaimer',
     },
   };

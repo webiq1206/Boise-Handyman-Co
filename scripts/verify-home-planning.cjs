@@ -41,13 +41,15 @@ const check=(ok,text)=>{if(!ok)failures.push(text)};
      return {sectionHeight:b.height,headerHeight:h?.height||0,viewportHeight:innerHeight,horizontalOverflow:document.documentElement.scrollWidth>innerWidth+1,controls};
     });
     const cta=section.getByTestId('proof-cta-contact');const count=await cta.count();
-    record.states.push({state,empty,ctaCount:count,ctaText:count?await cta.innerText():null,range:await section.getByTestId('proof-range-value').count()?await section.getByTestId('proof-range-value').innerText():null,metrics});
+    const unpriced=await section.getByTestId('proof-unpriced').count();
+    const rangeCount=await section.getByTestId('proof-range-value').count();
+    record.states.push({state,empty,unpriced,ctaCount:count,ctaText:count?await cta.innerText():null,range:rangeCount?await section.getByTestId('proof-range-value').innerText():null,metrics});
     if(metrics.sectionHeight>height-metrics.headerHeight)layoutFindings.push(`${key} ${state}: existing input section exceeds viewport budget (${Math.round(metrics.sectionHeight)}px section; ${height-metrics.headerHeight}px before other occupied UI). Independent C10 review required.`);
     check(!metrics.horizontalOverflow,`${key} ${state}: horizontal overflow`);
     if(!baseline){
      check(count===1,`${key} ${state}: expected one persistent CTA`);
      if(count){check((await cta.textContent()).trim()==='Request a quote',`${key} ${state}: quote wording`);check(await cta.getAttribute('href')==='/#consult',`${key} ${state}: destination`);}
-     check(await section.getByTestId('proof-range-value').count()===(empty?0:1),`${key} ${state}: range state`);
+     check(rangeCount===(empty||unpriced?0:1),`${key} ${state}: range state`);
     }
     await section.screenshot({path:path.join(output,`${state}-${key}.png`)});
     if(state==='default'||empty)await page.screenshot({path:path.join(output,`${state}-viewport-${key}.png`)});

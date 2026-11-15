@@ -9,7 +9,7 @@
  */
 import {
   formatHandymanCurrency,
-  formatHours,
+  formatHandymanRange,
   HANDYMAN_RATE_DISCLAIMER,
   JOB_CATEGORY_LABELS,
   MATERIALS_COST_NOTE,
@@ -64,7 +64,7 @@ export function describeSelections(input: HandymanEstimateInput): string[] {
 }
 
 function rangeLine(estimate: HandymanEstimate): string {
-  return `${formatHandymanCurrency(estimate.priceLow)} to ${formatHandymanCurrency(estimate.priceHigh)}`;
+  return formatHandymanRange(estimate);
 }
 
 function customerBreakdownTable(lines: CustomerTaskLine[], total: number): string {
@@ -134,7 +134,7 @@ export function buildHandymanAdminEmailHtml(
       <tr><td style="padding:3px 12px 3px 0;color:#666;">Job type</td><td>${escapeHtml(JOB_CATEGORY_LABELS[input.category].label)}</td></tr>
       <tr><td style="padding:3px 12px 3px 0;color:#666;">Timing</td><td>${escapeHtml(`${urgency.label} (${urgency.sub})`)}</td></tr>
       <tr><td style="padding:3px 12px 3px 0;color:#666;">Materials</td><td>${input.materials === "we-pick-up" ? "We pick up (supply run added)" : "Customer supplies"}</td></tr>
-      <tr><td style="padding:3px 12px 3px 0;color:#666;">Est. hours</td><td>${escapeHtml(formatHours(estimate.totalHours))}</td></tr>
+      <tr><td style="padding:3px 12px 3px 0;color:#666;">Price source</td><td>P5 cost book, Signature tier</td></tr>
     </table>
     <h3 style="color:#383837;margin-bottom:2px;">Requested work</h3>
     ${selectionsList(input)}

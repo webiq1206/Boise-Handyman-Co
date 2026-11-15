@@ -1,45 +1,16 @@
 /**
- * Handyman job pricing engine for Boise Handyman Co.
+ * Handyman planning calculator for Boise Handyman Co.
  *
- * Small on purpose: a handyman estimate is labor hours at an hourly
- * rate, adjusted for scheduling urgency, presented as a range. Every function
- * here is pure so the verify scripts (verify:estimate, verify:golden,
- * verify:lead-payload) can exercise the exact arithmetic the UI and the lead
- * routes use.
+ * Task cards name a cost book code. The dollars are the customer price from
+ * the shared pricing engine (lib/p5/pricing.ts): direct cost, the project
+ * reserve, overhead and profit, then the estimator's quote-class range.
+ * The factors arrive in HandymanPriceContext from shared/handymanCustomerPrice.ts.
+ * This file does not store a markup factor.
  *
- * WHERE THE NUMBERS COME FROM (reviewed 2026-09-03)
- *
- * These were previously flagged as plausible placeholders. They are now set to
- * Boise-market rates for an insured company operating under a design-build
- * parent, and the task hours to realistic billed times for that work:
- *
- *   - Hourly rate 125 (owner decision, 2026-11-09; was 95). Independent
- *     operators in the Treasure Valley run 60-85; established insured
- *     companies 85-125. A one-hour minimum visit is therefore 125 before
- *     materials, with no trip fee.
- *   - No trip or visit fee in Ada and Canyon County (owner decision,
- *     2026-11-09). The $49 visit fee that used to lead every estimate was
- *     removed because the site publishes "no trip fee" and the estimate
- *     contradicted it.
- *   - Minimum one billed hour per visit, so the floor for any visit is one
- *     hour of labor before materials - deliberately below the two-hour minimum
- *     many competitors carry, because small jobs are the funnel into larger P5
- *     work.
- *   - Supply run 0.75 h, a realistic round trip to a Meridian supplier.
- *   - Urgency +15% priority / +30% same-week. Conservative: emergency work
- *     commonly carries +50% or more.
- *
- * Task hours were raised on the eleven jobs where real-world friction, not the
- * task itself, sets the duration: seized angle stops on a faucet swap, texture
- * matching, overhead ceiling work, stripping old caulk. The prior figures
- * under-quoted those, and under-quoting is the dangerous direction - it sets an
- * expectation the invoice cannot meet.
- *
- * These are market-derived defaults, NOT confirmed P5 costs. The owner should
- * still sanity-check the rate and the five tasks Handyman quotes
- * most often; any of them can be changed here and verify:golden will show the
- * effect on real quoted scenarios.
+ * A task with no single cost-book line is listed in UNPRICED_CALCULATOR_ITEMS
+ * and is not given a number here.
  */
+import { priceFromRiskAdjustedCost } from "../lib/p5/pricing.ts";
 
 /* ────────────────────────────────────────────────────────────── categories */
 
@@ -83,11 +54,10 @@ export interface TaskOption {
   /** One-line clarifier under the card label. */
   sub?: string;
   /**
-   * Estimated on-site hours for one unit of this task.
-   * Figures below are Boise-market defaults reviewed 2026-09-03; see the
-   * provenance note at the top of this file.
+   * Cost book code priced by sharedBookRate. Absent when the old line has no
+   * single book line (see UNPRICED_CALCULATOR_ITEMS).
    */
-  hours: number;
+  bookCode?: string;
   /** What "quantity" counts, when more than one makes sense. */
   unitLabel?: string;
   /** Highest quantity the picker offers (defaults to 1: no quantity control). */
@@ -95,60 +65,59 @@ export interface TaskOption {
 }
 
 /**
- * Common fixed-scope tasks per category. Deliberately short lists: these are
- * the jobs we can scope from a description alone. Anything else goes through
- * the "something not listed" path with a small/medium/large duration.
+ * Common fixed-scope tasks per category. Each mapped task is one cost-book
+ * line. Anything without a clean code stays on the card and is not priced.
  */
 export const TASK_CATALOG: Record<Exclude<JobCategoryId, "something-else">, TaskOption[]> = {
   "drywall-repair": [
-    { id: "drywall-small-patch", label: "Small hole patch", sub: "Doorknob or fist-size, under 6 in", hours: 2, unitLabel: "patches", maxQuantity: 10 },
-    { id: "drywall-large-patch", label: "Large hole or crack repair", sub: "6 in to about 2 ft", hours: 3, unitLabel: "areas", maxQuantity: 6 },
-    { id: "drywall-ceiling-patch", label: "Ceiling patch", sub: "Includes texture blend", hours: 3, unitLabel: "areas", maxQuantity: 4 },
-    { id: "drywall-texture-match", label: "Texture matching", sub: "Blend a patched area into the wall", hours: 2, unitLabel: "areas", maxQuantity: 6 },
+    { id: "drywall-small-patch", label: "Small hole patch", sub: "Doorknob or fist-size, under 6 in", bookCode: "09-01-07", unitLabel: "patches", maxQuantity: 10 },
+    { id: "drywall-large-patch", label: "Large hole or crack repair", sub: "6 in to about 2 ft", unitLabel: "areas", maxQuantity: 6 },
+    { id: "drywall-ceiling-patch", label: "Ceiling patch", sub: "Includes texture blend", unitLabel: "areas", maxQuantity: 4 },
+    { id: "drywall-texture-match", label: "Texture matching", sub: "Blend a patched area into the wall", bookCode: "09-01-10", unitLabel: "areas", maxQuantity: 6 },
   ],
   "painting-touch-ups": [
-    { id: "paint-room-touch-up", label: "Touch-up painting, one room", sub: "Scuffs, patches, small areas", hours: 2.5, unitLabel: "rooms", maxQuantity: 6 },
-    { id: "paint-accent-wall", label: "Paint a single wall", sub: "Accent wall or repaired wall", hours: 2, unitLabel: "walls", maxQuantity: 8 },
-    { id: "paint-door-trim", label: "Paint a door or trim run", sub: "One door or one room of trim", hours: 2, unitLabel: "items", maxQuantity: 8 },
-    { id: "paint-exterior-spot", label: "Exterior touch-up", sub: "Siding or trim spot repair", hours: 2.5, unitLabel: "areas", maxQuantity: 6 },
+    { id: "paint-room-touch-up", label: "Touch-up painting, one room", sub: "Scuffs, patches, small areas", unitLabel: "rooms", maxQuantity: 6 },
+    { id: "paint-accent-wall", label: "Paint a single wall", sub: "Accent wall or repaired wall", bookCode: "09-91-08", unitLabel: "walls", maxQuantity: 8 },
+    { id: "paint-door-trim", label: "Paint a door or trim run", sub: "One door or one room of trim", unitLabel: "items", maxQuantity: 8 },
+    { id: "paint-exterior-spot", label: "Exterior touch-up", sub: "Siding or trim spot repair", unitLabel: "areas", maxQuantity: 6 },
   ],
   "plumbing-repairs": [
-    { id: "plumbing-faucet-swap", label: "Faucet replacement", sub: "Kitchen or bath, like for like", hours: 2, unitLabel: "faucets", maxQuantity: 6 },
-    { id: "plumbing-toilet-repair", label: "Toilet repair", sub: "Fill valve, flapper, seal, handle", hours: 1, unitLabel: "toilets", maxQuantity: 6 },
-    { id: "plumbing-toilet-replace", label: "Toilet replacement", sub: "Swap in a new unit", hours: 2.5, unitLabel: "toilets", maxQuantity: 4 },
-    { id: "plumbing-disposal-swap", label: "Garbage disposal swap", sub: "Replace an existing unit", hours: 1.5, unitLabel: "units", maxQuantity: 3 },
-    { id: "plumbing-drain-clear", label: "Slow drain clearing", sub: "Sink or tub, snake and clean", hours: 1, unitLabel: "drains", maxQuantity: 6 },
+    { id: "plumbing-faucet-swap", label: "Faucet replacement", sub: "Kitchen or bath, like for like", bookCode: "22-42-02", unitLabel: "faucets", maxQuantity: 6 },
+    { id: "plumbing-toilet-repair", label: "Toilet repair", sub: "Fill valve, flapper, seal, handle", bookCode: "22-01-04", unitLabel: "toilets", maxQuantity: 6 },
+    { id: "plumbing-toilet-replace", label: "Toilet replacement", sub: "Swap in a new unit", bookCode: "22-42-01", unitLabel: "toilets", maxQuantity: 4 },
+    { id: "plumbing-disposal-swap", label: "Garbage disposal swap", sub: "Replace an existing unit", bookCode: "22-42-04", unitLabel: "units", maxQuantity: 3 },
+    { id: "plumbing-drain-clear", label: "Slow drain clearing", sub: "Sink or tub, snake and clean", bookCode: "22-01-05", unitLabel: "drains", maxQuantity: 6 },
   ],
   "electrical-repairs": [
-    { id: "electrical-outlet-switch", label: "Outlet or switch replacement", sub: "Like-for-like device swap", hours: 0.75, unitLabel: "devices", maxQuantity: 12 },
-    { id: "electrical-light-fixture", label: "Light fixture replacement", sub: "Existing box and wiring", hours: 1, unitLabel: "fixtures", maxQuantity: 8 },
-    { id: "electrical-ceiling-fan", label: "Ceiling fan install or swap", sub: "Fan-rated box in place", hours: 2.5, unitLabel: "fans", maxQuantity: 4 },
-    { id: "electrical-smoke-detector", label: "Smoke detector replacement", sub: "Battery or existing wired base", hours: 0.5, unitLabel: "detectors", maxQuantity: 10 },
+    { id: "electrical-outlet-switch", label: "Outlet or switch replacement", sub: "Like-for-like device swap", bookCode: "26-01-04", unitLabel: "devices", maxQuantity: 12 },
+    { id: "electrical-light-fixture", label: "Light fixture replacement", sub: "Existing box and wiring", bookCode: "26-50-02", unitLabel: "fixtures", maxQuantity: 8 },
+    { id: "electrical-ceiling-fan", label: "Ceiling fan install or swap", sub: "Fan-rated box in place", bookCode: "26-01-03", unitLabel: "fans", maxQuantity: 4 },
+    { id: "electrical-smoke-detector", label: "Smoke detector replacement", sub: "Battery or existing wired base", bookCode: "28-01-02", unitLabel: "detectors", maxQuantity: 10 },
   ],
   "carpentry-trim-repair": [
-    { id: "carpentry-door-adjust", label: "Door repair or adjustment", sub: "Sticking, sagging, hardware", hours: 1.5, unitLabel: "doors", maxQuantity: 8 },
-    { id: "carpentry-trim-repair", label: "Baseboard or trim repair", sub: "One room or one damaged run", hours: 2, unitLabel: "rooms", maxQuantity: 6 },
-    { id: "carpentry-cabinet-repair", label: "Cabinet door or hinge repair", sub: "Realign, rehang, replace hardware", hours: 1, unitLabel: "doors", maxQuantity: 10 },
-    { id: "carpentry-window-repair", label: "Window hardware or screen repair", sub: "Latches, balances, screens", hours: 1.5, unitLabel: "windows", maxQuantity: 8 },
+    { id: "carpentry-door-adjust", label: "Door repair or adjustment", sub: "Sticking, sagging, hardware", bookCode: "08-01-05", unitLabel: "doors", maxQuantity: 8 },
+    { id: "carpentry-trim-repair", label: "Baseboard or trim repair", sub: "One room or one damaged run", unitLabel: "rooms", maxQuantity: 6 },
+    { id: "carpentry-cabinet-repair", label: "Cabinet door or hinge repair", sub: "Realign, rehang, replace hardware", bookCode: "12-01-06", unitLabel: "doors", maxQuantity: 10 },
+    { id: "carpentry-window-repair", label: "Window hardware or screen repair", sub: "Latches, balances, screens", unitLabel: "windows", maxQuantity: 8 },
   ],
   "mounting-assembly": [
-    { id: "mount-tv", label: "TV wall mount", sub: "Bracket supplied or picked up", hours: 2, unitLabel: "TVs", maxQuantity: 4 },
-    { id: "mount-shelves", label: "Shelves or picture hanging", sub: "One wall or one set", hours: 1, unitLabel: "sets", maxQuantity: 8 },
-    { id: "assemble-furniture", label: "Furniture assembly", sub: "Flat-pack, per item", hours: 2, unitLabel: "items", maxQuantity: 10 },
-    { id: "mount-curtain-rods", label: "Curtain rods or blinds", sub: "Per window", hours: 1, unitLabel: "windows", maxQuantity: 10 },
+    { id: "mount-tv", label: "TV wall mount", sub: "Bracket supplied or picked up", bookCode: "27-01-02", unitLabel: "TVs", maxQuantity: 4 },
+    { id: "mount-shelves", label: "Shelves or picture hanging", sub: "One wall or one set", unitLabel: "sets", maxQuantity: 8 },
+    { id: "assemble-furniture", label: "Furniture assembly", sub: "Flat-pack, per item", bookCode: "12-01-03", unitLabel: "items", maxQuantity: 10 },
+    { id: "mount-curtain-rods", label: "Curtain rods or blinds", sub: "Per window", bookCode: "12-01-02", unitLabel: "windows", maxQuantity: 10 },
   ],
   "fence-deck-gutter-repair": [
-    { id: "fence-section-repair", label: "Fence picket or rail repair", sub: "Per damaged section", hours: 2, unitLabel: "sections", maxQuantity: 6 },
-    { id: "fence-gate-repair", label: "Gate repair or realignment", sub: "Sagging or dragging gate", hours: 1.5, unitLabel: "gates", maxQuantity: 4 },
-    { id: "deck-board-replace", label: "Deck board replacement", sub: "A handful of damaged boards", hours: 2.5, unitLabel: "areas", maxQuantity: 4 },
-    { id: "gutter-clean", label: "Gutter cleaning", sub: "Single-story home", hours: 2.5, unitLabel: "homes", maxQuantity: 1 },
-    { id: "gutter-reattach", label: "Gutter reattach or reseal", sub: "Sagging run or leaking seam", hours: 1.5, unitLabel: "runs", maxQuantity: 6 },
+    { id: "fence-section-repair", label: "Fence picket or rail repair", sub: "Per damaged section", bookCode: "32-01-02", unitLabel: "sections", maxQuantity: 6 },
+    { id: "fence-gate-repair", label: "Gate repair or realignment", sub: "Sagging or dragging gate", bookCode: "32-01-04", unitLabel: "gates", maxQuantity: 4 },
+    { id: "deck-board-replace", label: "Deck board replacement", sub: "A handful of damaged boards", unitLabel: "areas", maxQuantity: 4 },
+    { id: "gutter-clean", label: "Gutter cleaning", sub: "Single-story home", bookCode: "07-01-03", unitLabel: "homes", maxQuantity: 1 },
+    { id: "gutter-reattach", label: "Gutter reattach or reseal", sub: "Sagging run or leaking seam", bookCode: "07-01-09", unitLabel: "runs", maxQuantity: 6 },
   ],
   "home-maintenance": [
-    { id: "caulk-tub-shower", label: "Re-caulk tub or shower", sub: "Strip and recaulk one surround", hours: 2, unitLabel: "surrounds", maxQuantity: 4 },
-    { id: "caulk-exterior", label: "Exterior caulking touch-up", sub: "Windows, doors, trim gaps", hours: 1.5, unitLabel: "areas", maxQuantity: 6 },
-    { id: "weatherstrip-door", label: "Door weatherstripping", sub: "Seal a drafty exterior door", hours: 1, unitLabel: "doors", maxQuantity: 6 },
-    { id: "grout-touch-up", label: "Tile grout touch-up", sub: "Small regrout or repair area", hours: 2, unitLabel: "areas", maxQuantity: 4 },
+    { id: "caulk-tub-shower", label: "Re-caulk tub or shower", sub: "Strip and recaulk one surround", bookCode: "22-01-07", unitLabel: "surrounds", maxQuantity: 4 },
+    { id: "caulk-exterior", label: "Exterior caulking touch-up", sub: "Windows, doors, trim gaps", unitLabel: "areas", maxQuantity: 6 },
+    { id: "weatherstrip-door", label: "Door weatherstripping", sub: "Seal a drafty exterior door", bookCode: "08-01-06", unitLabel: "doors", maxQuantity: 6 },
+    { id: "grout-touch-up", label: "Tile grout touch-up", sub: "Small regrout or repair area", unitLabel: "areas", maxQuantity: 4 },
   ],
 };
 
@@ -166,17 +135,36 @@ export function getTasksForCategory(category: JobCategoryId): TaskOption[] {
   return TASK_CATALOG[category];
 }
 
+/**
+ * Old calculator lines that do not match one cost-book unit. They stay
+ * selectable and are omitted from the total. Do not invent a price for them.
+ */
+export const UNPRICED_CALCULATOR_ITEMS: { id: string; label: string; reason: string }[] = [
+  { id: "drywall-large-patch", label: "Large hole or crack repair", reason: "The book splits this size: 09-01-08 is 1-2 SF and 09-01-06 is a per-SF large area. The old line covers 6 in to about 2 ft, so neither code is the line." },
+  { id: "drywall-ceiling-patch", label: "Ceiling patch", reason: "No ceiling drywall patch line. 09-01-20 is a ceiling water stain and paint, not a patch." },
+  { id: "paint-room-touch-up", label: "Touch-up painting, one room", reason: "No touch-up line. 09-91-07 paints a whole 12x12 room." },
+  { id: "paint-door-trim", label: "Paint a door or trim run", reason: "A door (09-91-05) and trim (09-91-04, per LF) are different lines. The old card is either one." },
+  { id: "paint-exterior-spot", label: "Exterior touch-up", reason: "Exterior paint is per SF (09-91-06). There is no spot-repair each." },
+  { id: "carpentry-trim-repair", label: "Baseboard or trim repair", reason: "06-01-03 and 06-01-06 are per LF. The old card is one room or one run, with no length." },
+  { id: "carpentry-window-repair", label: "Window hardware or screen repair", reason: "08-01-22 is the lock and 08-01-07 is the screen. The old card is either one." },
+  { id: "mount-shelves", label: "Shelves or picture hanging", reason: "10-01-02 is a shelf and 10-01-01 is a picture. The old card is either one." },
+  { id: "deck-board-replace", label: "Deck board replacement", reason: "06-01-04 is per SF. A handful of boards is not a book quantity. 06-01-05 is a different small deck repair." },
+  { id: "caulk-exterior", label: "Exterior caulking touch-up", reason: "07-92-02 is one window or door. 07-92-01 is the whole house. The old card is a touch-up area." },
+  { id: "grout-touch-up", label: "Tile grout touch-up", reason: "22-01-08 regrouts a shower per SF. There is no small-area each." },
+  { id: "other-small", label: "Something else, small", reason: "No two-hour package. 01-01-02 is an hourly rate and the old card does not say one hour or two." },
+];
+
 /* ─────────────────────────────────────────────── "something else" sizing */
 
 export type OtherJobSize = "small" | "medium" | "large";
 
 export const OTHER_JOB_SIZE_VALUES = ["small", "medium", "large"] as const satisfies readonly OtherJobSize[];
 
-/** Assumed hours per bucket for the unlisted-job path. Boise-market defaults. */
-export const OTHER_JOB_SIZES: Record<OtherJobSize, { label: string; sub: string; hours: number }> = {
-  small: { label: "Small", sub: "An hour or two", hours: 2 },
-  medium: { label: "Medium", sub: "Half a day", hours: 4 },
-  large: { label: "Large", sub: "Most of a day", hours: 8 },
+/** Unlisted work. Medium and large match the book's half-day and full-day lines. Small does not. */
+export const OTHER_JOB_SIZES: Record<OtherJobSize, { label: string; sub: string; bookCode?: string }> = {
+  small: { label: "Small", sub: "An hour or two" },
+  medium: { label: "Medium", sub: "Half a day", bookCode: "01-01-04" },
+  large: { label: "Large", sub: "Most of a day", bookCode: "01-01-05" },
 };
 
 /* ───────────────────────────────────────────────── materials and urgency */
@@ -187,39 +175,31 @@ export const MATERIALS_PLAN_VALUES = ["customer", "we-pick-up"] as const satisfi
 
 export const MATERIALS_PLANS: Record<MaterialsPlan, { label: string; sub: string }> = {
   customer: { label: "I will have materials ready", sub: "You buy the parts, we bring the tools" },
-  "we-pick-up": { label: "Pick materials up for me", sub: "Adds a supply-run line; materials billed at cost" },
+  "we-pick-up": { label: "Pick materials up for me", sub: "The estimator credits the trip charge when you move forward" },
 };
+
+/** Cost book trip line. The estimator shows it and credits it, so it does not change the customer total. */
+export const SUPPLY_RUN_CODE = "01-01-08";
 
 export type UrgencyLevel = "standard" | "priority" | "emergency";
 
 export const URGENCY_LEVEL_VALUES = ["standard", "priority", "emergency"] as const satisfies readonly UrgencyLevel[];
 
-/** Scheduling surcharges. Conservative: emergency work often carries +50% or more. */
-export const URGENCY_LEVELS: Record<
-  UrgencyLevel,
-  { label: string; sub: string; multiplier: number; surchargeLabel: string | null }
-> = {
-  standard: { label: "Standard", sub: "Next available opening", multiplier: 1, surchargeLabel: null },
-  priority: { label: "Priority", sub: "Within 2 business days", multiplier: 1.15, surchargeLabel: "+15%" },
-  emergency: { label: "Same-week emergency", sub: "We shuffle the schedule", multiplier: 1.3, surchargeLabel: "+30%" },
+/**
+ * Priority uses cost book line 01-01-15 (rush, a percentage of cost).
+ * Same-week emergency uses 01-01-09 (after-hours, a percentage of cost).
+ * The rates are read from the book in HandymanPriceContext.
+ */
+export const URGENCY_LEVELS: Record<UrgencyLevel, { label: string; sub: string }> = {
+  standard: { label: "Standard", sub: "Next available opening" },
+  priority: { label: "Priority", sub: "Within 2 business days" },
+  emergency: { label: "Same-week emergency", sub: "We shuffle the schedule" },
 };
 
-/* ─────────────────────────────────────────────────────────────── pricing */
-
-/** Customer-facing hourly labor rate. Boise market for an insured company. */
-export const HOURLY_RATE_USD = 125;
-/** Every visit bills at least one labor hour. There is no trip or visit fee. */
-export const MINIMUM_LABOR_HOURS = 1;
-/** Hours added for a materials supply run: a realistic supplier round trip. */
-export const SUPPLY_RUN_HOURS = 0.75;
-/** The quoted band around the computed total: -10% to +20%. */
-export const RANGE_LOW_FACTOR = 0.9;
-export const RANGE_HIGH_FACTOR = 1.2;
-/** Dollar rounding step for the displayed range. */
-export const RANGE_ROUNDING_USD = 5;
-/** Sanity cap: a handyman visit is 1 to 8 hours; past this we refer out. */
-export const MAX_REASONABLE_HOURS = 16;
+/** Highest quantity a picker may send. Not a price. */
 export const MAX_TASK_QUANTITY = 20;
+
+/* ─────────────────────────────────────────────────────────────── pricing */
 
 export interface HandymanTaskSelection {
   taskId: string;
@@ -241,46 +221,61 @@ export interface HandymanLine {
   amount: number;
 }
 
-/**
- * A customer-facing line item. The hourly rate is absorbed silently; each entry shows a task name (or urgency/supply-run) with a
- * pre-computed price.
- */
 export interface CustomerTaskLine {
   id: string;
   label: string;
   amount: number;
 }
 
+export interface UnpricedCalculatorLine {
+  id: string;
+  label: string;
+}
+
 export interface HandymanEstimate {
-  /** Task hours after the one-hour minimum, before the supply run. */
+  /** Kept for older lead records. The cost book prices units, not hours. */
   laborHours: number;
-  /** Labor plus supply-run hours: what the visit is expected to take. */
+  /** Kept for older lead records. The cost book prices units, not hours. */
   totalHours: number;
   urgency: UrgencyLevel;
   materials: MaterialsPlan;
   lines: HandymanLine[];
-  /**
-   * Customer-facing breakdown: one line per selected task (hourly rate folded
-   * in), plus optional urgency and supply-run lines.
-   */
   customerLines: CustomerTaskLine[];
-  /** Labor at the urgency-adjusted rate, unrounded midpoint. */
+  /** Selected lines that have no cost-book price. They are not in the total. */
+  unpriced: UnpricedCalculatorLine[];
+  /** Customer contract price, before the quote-class range is widened. */
   total: number;
-  /** The quoted band shown to the visitor. */
+  /** Customer range, rounded outward to $10 by division the way the estimator does. */
   priceLow: number;
   priceHigh: number;
-  /** Number of catalog tasks priced (other-job counts as one when present). */
+  /** Number of catalog tasks priced (a priced other-job counts as one). */
   taskCount: number;
-  /** True when the visit exceeds MAX_REASONABLE_HOURS and we should talk first. */
   oversized: boolean;
 }
 
-function roundToStep(value: number, step: number): number {
-  return Math.round(value / step) * step;
-}
+/**
+ * Factors and book amounts for one pricing pass. Built on the server by
+ * shared/handymanCustomerPrice.ts from lib/p5/pricing.ts and the cost book.
+ */
+export type HandymanPriceContext = {
+  overhead: number;
+  profit: number;
+  contingency: number;
+  /** Quote-class width. This calculator has no address, so the jurisdiction risk is included. */
+  rangeWidth: number;
+  minimumCode: string;
+  minimumDirect: number;
+  rushCode: string;
+  rushRate: number;
+  emergencyCode: string;
+  emergencyRate: number;
+  /** Signature direct amount by cost book code. */
+  direct: Readonly<Record<string, number>>;
+  division: Readonly<Record<string, string>>;
+};
 
-function roundQuarterHours(hours: number): number {
-  return Math.round(hours * 4) / 4;
+function round2(value: number): number {
+  return Math.round(value * 100) / 100;
 }
 
 function clampQuantity(quantity: number, task: TaskOption): number {
@@ -289,166 +284,120 @@ function clampQuantity(quantity: number, task: TaskOption): number {
   return Math.min(Math.max(Math.round(quantity), 1), max);
 }
 
-/** Raw task hours for a selection list, before minimums. Unknown ids are ignored. */
-export function sumTaskHours(tasks: HandymanTaskSelection[]): number {
-  let hours = 0;
-  for (const selection of tasks) {
-    const task = findTaskOption(selection.taskId);
-    if (!task) continue;
-    hours += task.hours * clampQuantity(selection.quantity, task);
-  }
-  return roundQuarterHours(hours);
+/** Customer unit price: the shared engine's direct cost x (1 + reserve) / (1 - overhead - profit), rounded to the cent. */
+function sell(direct: number, context: HandymanPriceContext): number {
+  return round2(priceFromRiskAdjustedCost(direct * (1 + context.contingency), context.overhead, context.profit));
 }
 
+type PricedPiece = { id: string; label: string; division: string; direct: number; amount: number };
+
 /**
- * The whole pricing model:
+ * Customer price for one visit, using the estimator's handyman rules:
+ * the minimum service charge balance, then a book percentage for priority
+ * or same-week emergency, then the quote-class range rounded outward by division.
  *
- *   total = billableHours * HOURLY_RATE * urgencyMultiplier
- *   range = [total * 0.9, total * 1.2], rounded to $5, with the low end
- *           clamped to the one-hour minimum charge (minimumVisitCharge)
+ * A materials pickup does not change the total. The estimator shows the trip
+ * charge and an equal credit, so the two net to zero.
  *
- * Returns null until the input contains at least one priceable task (or a
- * described other-job), so the UI can render a "make your selections" state
- * instead of a fake $0 estimate.
+ * Returns null until at least one selected line has a book price.
  */
-export function calculateHandymanEstimate(input: HandymanEstimateInput): HandymanEstimate | null {
-  const taskHours = sumTaskHours(input.tasks);
-  const otherHours =
-    input.otherJob && input.otherJob.description.trim().length > 0
-      ? OTHER_JOB_SIZES[input.otherJob.size].hours
-      : 0;
+export function calculateHandymanEstimate(
+  input: HandymanEstimateInput,
+  context?: HandymanPriceContext,
+): HandymanEstimate | null {
+  if (!context) return null;
+  const pieces: PricedPiece[] = [];
+  const unpriced: UnpricedCalculatorLine[] = [];
+  let taskCount = 0;
 
-  const rawHours = roundQuarterHours(taskHours + otherHours);
-  if (rawHours <= 0) return null;
-
-  const laborHours = Math.max(rawHours, MINIMUM_LABOR_HOURS);
-  const supplyRunHours = input.materials === "we-pick-up" ? SUPPLY_RUN_HOURS : 0;
-  const totalHours = roundQuarterHours(laborHours + supplyRunHours);
-
-  const multiplier = URGENCY_LEVELS[input.urgency].multiplier;
-  const baseLabor = laborHours * HOURLY_RATE_USD;
-  const baseSupplyRun = supplyRunHours * HOURLY_RATE_USD;
-  const urgencyUpcharge = (baseLabor + baseSupplyRun) * (multiplier - 1);
-
-  const lines: HandymanLine[] = [
-    {
-      id: "labor",
-      label: `Labor, ${formatHours(laborHours)}`,
-      amount: round2(baseLabor),
-    },
-  ];
-  if (supplyRunHours > 0) {
-    lines.push({
-      id: "supply-run",
-      label: `Materials pick-up run, ${formatHours(supplyRunHours)}`,
-      amount: round2(baseSupplyRun),
+  const addUnit = (id: string, label: string, code: string | undefined, quantity: number) => {
+    if (!code || context.direct[code] === undefined) {
+      unpriced.push({ id, label });
+      return;
+    }
+    const unitDirect = context.direct[code];
+    const direct = round2(unitDirect * quantity);
+    pieces.push({
+      id,
+      label,
+      division: context.division[code] ?? code.slice(0, 2),
+      direct,
+      amount: round2(sell(unitDirect, context) * quantity),
     });
-  }
-  if (multiplier > 1) {
-    const surcharge = URGENCY_LEVELS[input.urgency].surchargeLabel ?? "";
-    lines.push({
-      id: "urgency",
-      label: `${URGENCY_LEVELS[input.urgency].label} scheduling ${surcharge}`.trim(),
-      amount: round2(urgencyUpcharge),
-    });
-  }
+    taskCount += 1;
+  };
 
-  const total = round2(lines.reduce((sum, line) => sum + line.amount, 0));
-
-  const taskCount =
-    input.tasks.filter((t) => findTaskOption(t.taskId) !== null).length + (otherHours > 0 ? 1 : 0);
-
-  // ── Customer-facing lines: task names with prices baked in ──────────────
-  // All amounts are whole dollars so the sum of displayed line amounts always
-  // equals the displayed total (formatHandymanCurrency rounds to whole dollars).
-  // We use the largest-remainder method to distribute each pool exactly.
-  const displayTotal = Math.round(total);
-  const urgencyDollars = multiplier > 1 ? Math.round(urgencyUpcharge) : 0;
-  const supplyRunDollars = supplyRunHours > 0 ? Math.round(baseSupplyRun) : 0;
-  // The task pool is whatever remains after urgency and supply-run are claimed.
-  const taskPoolDollars = displayTotal - urgencyDollars - supplyRunDollars;
-
-  // Collect per-task entries with their raw unrounded hours for proportional split.
-  const perTaskEntries: { id: string; label: string; rawHrs: number }[] = [];
-  for (const sel of input.tasks) {
-    const task = findTaskOption(sel.taskId);
+  for (const selection of input.tasks) {
+    const task = findTaskOption(selection.taskId);
     if (!task) continue;
-    const qty = clampQuantity(sel.quantity, task);
-    const label = qty > 1 ? `${task.label} \u00d7${qty}` : task.label;
-    perTaskEntries.push({ id: task.id, label, rawHrs: task.hours * qty });
+    const qty = clampQuantity(selection.quantity, task);
+    const label = qty > 1 ? `${task.label} x${qty}` : task.label;
+    addUnit(task.id, label, task.bookCode, qty);
   }
-  if (otherHours > 0 && input.otherJob) {
+
+  if (input.otherJob && input.otherJob.description.trim().length > 0) {
+    const size = OTHER_JOB_SIZES[input.otherJob.size];
     const desc = input.otherJob.description.trim();
-    perTaskEntries.push({
-      id: "other-job",
-      label: desc.length > 0 ? desc : OTHER_JOB_SIZES[input.otherJob.size].label,
-      rawHrs: otherHours,
+    addUnit("other-job", desc.length > 0 ? desc : size.label, size.bookCode, 1);
+  }
+
+  if (pieces.length === 0) return null;
+
+  const taskDirect = round2(pieces.reduce((sum, piece) => sum + piece.direct, 0));
+  if (taskDirect < context.minimumDirect) {
+    const quantity = Math.ceil(((context.minimumDirect - taskDirect) / context.minimumDirect) * 100) / 100;
+    const direct = round2(context.minimumDirect * quantity);
+    pieces.push({
+      id: "minimum",
+      label: "Minimum service charge, balance",
+      division: "01",
+      direct,
+      amount: round2(sell(context.minimumDirect, context) * quantity),
     });
   }
 
-  // Distribute taskPoolDollars across task entries proportionally, using the
-  // largest-remainder method so integer amounts sum exactly to taskPoolDollars.
-  const totalRawHrs = perTaskEntries.reduce((s, e) => s + e.rawHrs, 0);
-  const exactShares = perTaskEntries.map((e) =>
-    totalRawHrs > 0 ? taskPoolDollars * (e.rawHrs / totalRawHrs) : taskPoolDollars / perTaskEntries.length
-  );
-  const floorShares = exactShares.map(Math.floor);
-  const remainder = taskPoolDollars - floorShares.reduce((s, v) => s + v, 0);
-  const fractionals = exactShares
-    .map((v, i) => ({ i, frac: v - Math.floor(v) }))
-    .sort((a, b) => b.frac - a.frac);
-  for (let k = 0; k < remainder; k++) floorShares[fractionals[k].i]++;
-
-  const customerLines: CustomerTaskLine[] = perTaskEntries.map((entry, i) => ({
-    id: entry.id,
-    label: entry.label,
-    amount: floorShares[i],
-  }));
-  if (supplyRunHours > 0) {
-    customerLines.push({ id: "supply-run", label: "Materials pickup", amount: supplyRunDollars });
-  }
-  if (multiplier > 1) {
-    const surcharge = URGENCY_LEVELS[input.urgency].surchargeLabel ?? "";
-    customerLines.push({
+  if (input.urgency === "priority" || input.urgency === "emergency") {
+    const rate = input.urgency === "priority" ? context.rushRate : context.emergencyRate;
+    const directBase = round2(pieces.reduce((sum, piece) => sum + piece.direct, 0));
+    const direct = round2(directBase * rate);
+    pieces.push({
       id: "urgency",
-      label: `${URGENCY_LEVELS[input.urgency].label} scheduling${surcharge ? ` (${surcharge})` : ""}`,
-      amount: urgencyDollars,
+      label: input.urgency === "priority" ? "Rush premium" : "Emergency, after hours",
+      division: "01",
+      direct,
+      amount: sell(direct, context),
     });
   }
 
-  // The displayed low end never drops below the one-hour minimum labor
-  // charge at this urgency (owner rule: the one-hour minimum applies). It is
-  // rounded UP to the display step so rounding cannot pull it back under.
-  const minimumCharge = minimumVisitCharge(input.urgency);
-  const priceLow = Math.max(roundToStep(total * RANGE_LOW_FACTOR, RANGE_ROUNDING_USD), minimumCharge);
-  const priceHigh = Math.max(roundToStep(total * RANGE_HIGH_FACTOR, RANGE_ROUNDING_USD), priceLow);
+  const customerLines: CustomerTaskLine[] = pieces.map((piece) => ({ id: piece.id, label: piece.label, amount: piece.amount }));
+  const total = round2(customerLines.reduce((sum, line) => sum + line.amount, 0));
+  const byDivision = new Map<string, number>();
+  for (const piece of pieces) byDivision.set(piece.division, round2((byDivision.get(piece.division) ?? 0) + piece.amount));
+  let priceLow = 0;
+  let priceHigh = 0;
+  for (const amount of byDivision.values()) {
+    priceLow += Math.max(0, Math.floor((amount * (1 - context.rangeWidth)) / 10) * 10);
+    priceHigh += Math.ceil((amount * (1 + context.rangeWidth)) / 10) * 10;
+  }
+
+  const urgencyAmount = pieces.find((piece) => piece.id === "urgency")?.amount ?? 0;
+  const lines: HandymanLine[] = [{ id: "labor", label: "Selected work", amount: round2(total - urgencyAmount) }];
+  if (urgencyAmount > 0) lines.push({ id: "urgency", label: input.urgency === "priority" ? "Rush premium" : "Emergency, after hours", amount: urgencyAmount });
 
   return {
-    laborHours,
-    totalHours,
+    laborHours: 0,
+    totalHours: 0,
     urgency: input.urgency,
     materials: input.materials,
     lines,
     customerLines,
+    unpriced,
     total,
     priceLow,
     priceHigh,
     taskCount,
-    oversized: totalHours > MAX_REASONABLE_HOURS,
+    oversized: false,
   };
-}
-
-/**
- * The one-hour minimum labor charge at an urgency tier, rounded up to the
- * display step: the lowest number any estimate band may show.
- */
-export function minimumVisitCharge(urgency: UrgencyLevel): number {
-  const raw = MINIMUM_LABOR_HOURS * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
-  return Math.ceil(raw / RANGE_ROUNDING_USD - 1e-9) * RANGE_ROUNDING_USD;
-}
-
-function round2(value: number): number {
-  return Math.round(value * 100) / 100;
 }
 
 /* ─────────────────────────────────────────────────────────── formatting */
@@ -458,8 +407,14 @@ export function formatHandymanCurrency(value: number): string {
 }
 
 export function formatHours(hours: number): string {
-  const rounded = roundQuarterHours(hours);
+  const rounded = Math.round(hours * 4) / 4;
   return rounded === 1 ? "1 hr" : `${rounded} hrs`;
+}
+
+export function formatHandymanRange(estimate: Pick<HandymanEstimate, "priceLow" | "priceHigh">): string {
+  const low = formatHandymanCurrency(estimate.priceLow);
+  const high = formatHandymanCurrency(estimate.priceHigh);
+  return low === high ? low : `${low} to ${high}`;
 }
 
 /** One-line summary of the selections, for sticky bars and lead records. */
@@ -481,15 +436,15 @@ export function buildHandymanSummary(input: HandymanEstimateInput): string {
 
 /* ─────────────────────────────────────────────────────────── disclaimers */
 
-/** Shown wherever a range is rendered. */
+/** Shown wherever a figure is rendered. */
 export const HANDYMAN_RATE_DISCLAIMER =
-  "Planning guidance, not a price. Each job is priced case by case after we review the scope, with a written price before any work begins.";
+  "Planning guidance from the cost book, not a price. Each job is priced case by case after we review the scope, with a written price before any work begins.";
 
-/** Shown with every estimate: the range is labor only. */
+/** Shown with every estimate: the figure does not include materials the book line leaves out. */
 export const MATERIALS_COST_NOTE =
-  "This estimate covers your selected tasks only. Materials are billed at cost with your receipt, whether you supply them or we pick them up.";
+  "This figure covers the cost book lines for your selected tasks. Materials the line does not include are billed at cost with your receipt.";
 
-/** Shown when totalHours exceeds MAX_REASONABLE_HOURS. */
+/** Shown when a visit is larger than we book online. The cost book path does not set this from hours. */
 export const OVERSIZED_JOB_NOTE =
   "That is a bigger visit than we usually book online. Send it through anyway and we will call to scope it properly, or split it across visits.";
 
@@ -498,7 +453,7 @@ export const OVERSIZED_JOB_NOTE =
 /*
  * Everything below re-exports the retired Boise Construction Co engine so
  * modules owned by other packages (server/services, admin routes,
- * ConsultationForm, shared/costs) keep compiling. The handyman estimator does
- * not use any of it. Remove once those consumers are converted.
+ * ConsultationForm, shared/costs) keep compiling. The handyman calculator
+ * does not use any of it.
  */
 export * from "./legacy/constructionEstimateEngine";

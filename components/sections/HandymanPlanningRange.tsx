@@ -13,8 +13,9 @@ import {
   JOB_CATEGORY_LABELS,
   TASK_CATALOG,
   calculateHandymanEstimate,
-  formatHandymanCurrency,
+  formatHandymanRange,
   HANDYMAN_RATE_DISCLAIMER,
+  type HandymanPriceContext,
   type JobCategoryId,
 } from "@/shared/estimateEngine";
 
@@ -33,13 +34,14 @@ const PROOF_CATEGORIES = [
  * immediately, no email gate. Rates come from shared/estimateEngine (reviewed
  * market defaults). Written quote still happens after contact.
  */
-export function HandymanPlanningRange() {
+export function HandymanPlanningRange({ context }: { context?: HandymanPriceContext } = {}) {
   // Drywall and its first task are selected on arrival, so the panel opens on a
   // worked example instead of an empty box; one click changes it.
   const [category, setCategory] = useState<(typeof PROOF_CATEGORIES)[number] | null>(PROOF_CATEGORIES[0]);
   const [taskId, setTaskId] = useState<string | null>(TASK_CATALOG[PROOF_CATEGORIES[0]][0]?.id ?? null);
 
   const tasks = category ? TASK_CATALOG[category].slice(0, 4) : [];
+  const selectedTask = tasks.find((task) => task.id === taskId);
 
   const estimate = useMemo(() => {
     if (!category || !taskId) return null;
@@ -48,8 +50,8 @@ export function HandymanPlanningRange() {
       tasks: [{ taskId, quantity: 1 }],
       materials: "customer",
       urgency: "standard",
-    });
-  }, [category, taskId]);
+    }, context);
+  }, [category, taskId, context]);
 
   function selectCategory(next: (typeof PROOF_CATEGORIES)[number]) {
     setCategory(next);
@@ -151,17 +153,19 @@ export function HandymanPlanningRange() {
                     className="fr-range-result-figure"
                     data-testid="proof-range-value"
                   >
-                    {formatHandymanCurrency(estimate.priceLow)}
-                    <span className="mx-2 text-[0.55em] opacity-50">to</span>
-                    {formatHandymanCurrency(estimate.priceHigh)}
+                    {formatHandymanRange(estimate)}
                   </p>
                   <p className="ed-body mt-3 text-[0.875rem]">
-                    Before materials · about {estimate.totalHours} hrs on site
+                    Before materials.
                   </p>
                   <p className="ed-small mt-4" style={{ color: "var(--ed-muted-ink)" }}>
                     {HANDYMAN_RATE_DISCLAIMER}
                   </p>
                 </>
+              ) : selectedTask && !selectedTask.bookCode ? (
+                <p className="ed-body mt-4 text-[0.9375rem]" style={{ color: "var(--ed-muted-ink)" }} data-testid="proof-unpriced">
+                  This task is not a single cost book line, so it is not priced here. Send the list for a written price.
+                </p>
               ) : (
                 <p className="ed-body mt-4 text-[0.9375rem]" style={{ color: "var(--ed-muted-ink)" }}>
                   Choose a job and task to see a planning range. No email required.
