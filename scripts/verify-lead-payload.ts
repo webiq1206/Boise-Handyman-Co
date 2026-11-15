@@ -31,6 +31,9 @@ import {
   URGENCY_LEVEL_VALUES,
   type HandymanEstimateInput,
 } from "../shared/estimateEngine";
+import { handymanBookRates } from "../shared/handymanBookRates";
+
+const rates = handymanBookRates();
 
 let checks = 0;
 let failures = 0;
@@ -61,7 +64,7 @@ for (const v of URGENCY_LEVEL_VALUES) {
 /* ─────────────────────── an honest payload round-trips and re-verifies */
 
 function buildPayload(input: HandymanEstimateInput) {
-  const estimate = calculateHandymanEstimate(input);
+  const estimate = calculateHandymanEstimate(input, rates);
   if (!estimate) throw new Error("scenario did not price");
   return {
     category: input.category,
@@ -79,7 +82,7 @@ function buildPayload(input: HandymanEstimateInput) {
 for (const [category, tasks] of Object.entries(TASK_CATALOG)) {
   const input: HandymanEstimateInput = {
     category: category as HandymanEstimateInput["category"],
-    tasks: [{ taskId: tasks[0].id, quantity: 2 }],
+    tasks: [{ taskId: (tasks.find((task) => task.bookCode) ?? tasks[0]).id, quantity: 2 }],
     otherJob: null,
     materials: "we-pick-up",
     urgency: "priority",
@@ -96,7 +99,7 @@ for (const [category, tasks] of Object.entries(TASK_CATALOG)) {
     otherJob: parsed.data.otherJob ?? null,
     materials: parsed.data.materials,
     urgency: parsed.data.urgency,
-  });
+  }, rates);
   assert(
     recomputed !== null &&
       recomputed.priceLow === payload.priceLow &&
@@ -108,7 +111,7 @@ for (const [category, tasks] of Object.entries(TASK_CATALOG)) {
 const otherPayload = buildPayload({
   category: "something-else",
   tasks: [],
-  otherJob: { description: "Handful of small fixes around the house", size: "small" },
+  otherJob: { description: "Handful of small fixes around the house", size: "medium" },
   materials: "customer",
   urgency: "standard",
 });
@@ -190,7 +193,7 @@ if (staleParsed.success) {
     otherJob: null,
     materials: staleParsed.data.materials,
     urgency: staleParsed.data.urgency,
-  });
+  }, rates);
   assert(
     recomputed === null,
     "a payload with only unknown tasks re-verifies to null (route 400s it)",

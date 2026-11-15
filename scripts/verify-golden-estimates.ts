@@ -32,6 +32,9 @@ import {
   calculateHandymanEstimate,
   type HandymanEstimateInput,
 } from "../shared/estimateEngine";
+import { handymanBookRates } from "../shared/handymanBookRates";
+
+const rates = handymanBookRates();
 
 let checks = 0;
 let failed = 0;
@@ -48,12 +51,12 @@ function assertEqual(name: string, got: number, want: number) {
 type Scenario = {
   id: string;
   input: HandymanEstimateInput;
-  golden: { low: number; high: number; laborHours: number };
+  golden: { total: number };
 };
 
 const SCENARIOS: Scenario[] = [
   {
-    /* Quantity math: two patches at 2 hrs each. */
+    /* Quantity math: two small patches at the book each. */
     id: "drywall-two-small-patches-standard",
     input: {
       category: "drywall-repair",
@@ -62,19 +65,19 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 450, high: 600, laborHours: 4 },
+    golden: { total: 170 },
   },
   {
-    /* Priority tier: +15% on labor. */
-    id: "painting-room-touch-up-priority",
+    /* Accent wall at Signature. Priority does not add a surcharge. */
+    id: "painting-accent-wall-priority",
     input: {
       category: "painting-touch-ups",
-      tasks: [{ taskId: "paint-room-touch-up", quantity: 1 }],
+      tasks: [{ taskId: "paint-accent-wall", quantity: 1 }],
       otherJob: null,
       materials: "customer",
       urgency: "priority",
     },
-    golden: { low: 325, high: 430, laborHours: 2.5 },
+    golden: { total: 350 },
   },
   {
     /* Two different tasks plus the supply run. */
@@ -89,7 +92,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "standard",
     },
-    golden: { low: 420, high: 565, laborHours: 3 },
+    golden: { total: 345 },
   },
   {
     /* One-hour minimum: a 0.75 hr task bills a full hour. */
@@ -101,7 +104,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 125, high: 150, laborHours: 1 },
+    golden: { total: 99 },
   },
   {
     /* Minimum AND emergency tier together. */
@@ -113,7 +116,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "emergency",
     },
-    golden: { low: 165, high: 195, laborHours: 1 },
+    golden: { total: 65 },
   },
   {
     /* Quantity math on a 1.5 hr task. */
@@ -125,7 +128,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 505, high: 675, laborHours: 4.5 },
+    golden: { total: 300 },
   },
   {
     /* Mixed tasks within one category. */
@@ -140,7 +143,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 675, high: 900, laborHours: 6 },
+    golden: { total: 327 },
   },
   {
     /* Priority + supply run interacting (urgency applies to both). */
@@ -152,7 +155,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "priority",
     },
-    golden: { low: 420, high: 560, laborHours: 2.5 },
+    golden: { total: 165 },
   },
   {
     /* Emergency tier on a maintenance task. */
@@ -164,10 +167,10 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "emergency",
     },
-    golden: { low: 295, high: 390, laborHours: 2 },
+    golden: { total: 160 },
   },
   {
-    /* The free-text path: a medium job is 4 assumed hours. */
+    /* The free-text path: a medium job is the book's half day. */
     id: "something-else-medium-standard",
     input: {
       category: "something-else",
@@ -176,7 +179,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 450, high: 600, laborHours: 4 },
+    golden: { total: 190 },
   },
   {
     /* Everything at once: large other-job, pickup, emergency. */
@@ -188,34 +191,34 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "emergency",
     },
-    golden: { low: 1280, high: 1705, laborHours: 8 },
+    golden: { total: 430 },
   },
 ];
 
 if (record) {
   console.log("id | laborHours | low | high | total");
   for (const s of SCENARIOS) {
-    const est = calculateHandymanEstimate(s.input);
+    const est = calculateHandymanEstimate(s.input, rates);
     if (!est) {
       console.log(`${s.id} | DID NOT PRICE`);
       continue;
     }
-    console.log(`${s.id} | ${est.laborHours} | ${est.priceLow} | ${est.priceHigh} | ${est.total}`);
+    console.log(`${s.id} | ${est.total}`);
   }
   process.exit(0);
 }
 
 for (const s of SCENARIOS) {
-  const est = calculateHandymanEstimate(s.input);
+  const est = calculateHandymanEstimate(s.input, rates);
   checks++;
   if (!est) {
     failed++;
     console.error(`FAIL ${s.id}: did not price`);
     continue;
   }
-  assertEqual(`${s.id}.laborHours`, est.laborHours, s.golden.laborHours);
-  assertEqual(`${s.id}.priceLow`, est.priceLow, s.golden.low);
-  assertEqual(`${s.id}.priceHigh`, est.priceHigh, s.golden.high);
+  assertEqual(`${s.id}.total`, est.total, s.golden.total);
+  assertEqual(`${s.id}.priceLow`, est.priceLow, s.golden.total);
+  assertEqual(`${s.id}.priceHigh`, est.priceHigh, s.golden.total);
 }
 
 if (failed > 0) {

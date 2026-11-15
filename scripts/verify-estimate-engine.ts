@@ -5,39 +5,35 @@
  * the RELATIONSHIPS that must hold for every reachable input:
  *
  * - the wizard's categories match the live service catalog in contentData
- * - every task prices to a finite, positive, correctly ordered range
- * - the one-hour minimum always applies, and no trip or visit fee ever does
- * - more quantity never costs less; higher urgency never costs less
- * - the we-pick-up supply run always costs more than customer materials
- * - the range brackets the computed total at -10% / +20%, rounded to $5
+ * - a mapped task prices at its cost book amount, and an unmapped task does not
+ * - more quantity never costs less
+ * - urgency does not invent a surcharge
+ * - the we-pick-up supply run adds the book's trip line
  * - empty input produces no estimate (never a fake $0 range)
  *
  *   npx tsx scripts/verify-estimate-engine.ts
  */
 import {
   calculateHandymanEstimate,
-  minimumVisitCharge,
   findTaskOption,
   getTasksForCategory,
-  HOURLY_RATE_USD,
   JOB_CATEGORY_IDS,
   JOB_CATEGORY_LABELS,
   MATERIALS_PLAN_VALUES,
   MAX_TASK_QUANTITY,
-  MINIMUM_LABOR_HOURS,
   OTHER_JOB_SIZES,
   OTHER_JOB_SIZE_VALUES,
-  RANGE_HIGH_FACTOR,
-  RANGE_LOW_FACTOR,
-  RANGE_ROUNDING_USD,
-  SUPPLY_RUN_HOURS,
+  SUPPLY_RUN_CODE,
   TASK_CATALOG,
-  URGENCY_LEVELS,
+  UNPRICED_CALCULATOR_ITEMS,
   URGENCY_LEVEL_VALUES,
   type HandymanEstimateInput,
   type JobCategoryId,
 } from "../shared/estimateEngine";
+import { handymanBookRates } from "../shared/handymanBookRates";
 import { SERVICES } from "../shared/contentData";
+
+const rates = handymanBookRates();
 
 let checks = 0;
 let failures = 0;
@@ -80,14 +76,16 @@ for (const id of JOB_CATEGORY_IDS) {
   }
 }
 
-/* Task ids are globally unique, hours sane, quantities bounded. */
+/* Task ids are globally unique, and every task is either mapped or flagged. */
 const seenIds = new Set<string>();
 for (const [categoryId, tasks] of Object.entries(TASK_CATALOG)) {
   assert(tasks.length >= 3, `${categoryId} offers at least 3 common tasks`);
   for (const task of tasks) {
     assert(!seenIds.has(task.id), `task id ${task.id} is globally unique`);
     seenIds.add(task.id);
-    assert(task.hours > 0 && task.hours <= 8, `${task.id} hours are in (0, 8]`);
+    const flagged = UNPRICED_CALCULATOR_ITEMS.some((item) => item.id === task.id);
+    assert(Boolean(task.bookCode) !== flagged, `${task.id} is either a book code or an unpriced flag, not both and not neither`);
+    if (task.bookCode) assert(rates[task.bookCode] > 0, `${task.id} book code ${task.bookCode} has a unit price`);
     assert(
       (task.maxQuantity ?? 1) >= 1 && (task.maxQuantity ?? 1) <= MAX_TASK_QUANTITY,
       `${task.id} maxQuantity within bounds`,
@@ -107,7 +105,7 @@ for (const category of JOB_CATEGORY_IDS) {
     otherJob: null,
     materials: "customer",
     urgency: "standard",
-  });
+  }, rates);
   assert(empty === null, `${category}: no tasks means no estimate, never $0`);
 }
 assert(
@@ -117,7 +115,7 @@ assert(
     otherJob: { description: "   ", size: "small" },
     materials: "customer",
     urgency: "standard",
-  }) === null,
+  }, rates) === null,
   "whitespace-only other-job description does not price",
 );
 
@@ -138,117 +136,79 @@ for (const [categoryId, tasks] of Object.entries(TASK_CATALOG) as [
   (typeof TASK_CATALOG)[keyof typeof TASK_CATALOG],
 ][]) {
   for (const task of tasks) {
-    const estimate = calculateHandymanEstimate(base(categoryId, task.id));
+    const estimate = calculateHandymanEstimate(base(categoryId, task.id), rates);
+    if (!task.bookCode) {
+      assert(estimate === null, `${task.id} has no book code and is not given a price`);
+      continue;
+    }
     assert(estimate !== null, `${task.id} produces an estimate`);
     if (!estimate) continue;
-
-    assert(Number.isFinite(estimate.priceLow) && Number.isFinite(estimate.priceHigh), `${task.id} range is finite`);
-    assert(estimate.priceLow > 0, `${task.id} low bound is positive`);
-    assert(estimate.priceLow < estimate.priceHigh, `${task.id} range is ordered and never collapses`);
+    const unit = rates[task.bookCode];
+    assert(estimate.total === unit, `${task.id} total is the book amount ${unit}`);
+    assert(estimate.priceLow === estimate.total && estimate.priceHigh === estimate.total, `${task.id} shows the book amount, not a made-up band`);
+    assert(estimate.unpriced.length === 0, `${task.id} has nothing unpriced`);
     assert(
-      estimate.laborHours >= MINIMUM_LABOR_HOURS,
-      `${task.id} bills at least the ${MINIMUM_LABOR_HOURS}-hour minimum`,
-    );
-    assert(
-      !estimate.lines.some((l) => /\btrip\b|trip-fee|visit fee/i.test(`${l.id} ${l.label}`)) &&
-        !estimate.customerLines.some((l) => /\btrip\b|trip-fee|visit fee/i.test(`${l.id} ${l.label}`)),
-      `${task.id} carries no trip or visit fee (none in Ada and Canyon County)`,
-    );
-    assert(
-      estimate.lines[0].id === "labor" && estimate.lines[0].amount >= MINIMUM_LABOR_HOURS * HOURLY_RATE_USD,
-      `${task.id} leads with labor of at least the one-hour minimum`,
+      !estimate.lines.some((l) => /\btrip\b|trip-fee|visit fee/i.test(`${l.id} ${l.label}`)),
+      `${task.id} carries no trip fee when the customer supplies materials`,
     );
     assert(
       estimate.total === estimate.lines.reduce((s, l) => s + l.amount, 0),
       `${task.id} total equals the sum of its lines`,
     );
     assert(
-      estimate.priceLow ===
-        Math.max(
-          Math.round((estimate.total * RANGE_LOW_FACTOR) / RANGE_ROUNDING_USD) * RANGE_ROUNDING_USD,
-          minimumVisitCharge(estimate.urgency),
-        ),
-      `${task.id} low bound is total * ${RANGE_LOW_FACTOR} rounded to $${RANGE_ROUNDING_USD}, clamped to the one-hour minimum`,
-    );
-    assert(
-      estimate.priceHigh === Math.max(Math.round((estimate.total * RANGE_HIGH_FACTOR) / RANGE_ROUNDING_USD) * RANGE_ROUNDING_USD, estimate.priceLow),
-      `${task.id} high bound is total * ${RANGE_HIGH_FACTOR} rounded to $${RANGE_ROUNDING_USD}`,
+      estimate.customerLines.reduce((s, l) => s + l.amount, 0) === estimate.total,
+      `${task.id} customer lines sum to the total`,
     );
 
-    /* Monotonic in quantity. */
     const max = task.maxQuantity ?? 1;
     let prevTotal = estimate.total;
     for (let qty = 2; qty <= Math.min(max, 4); qty++) {
-      const more = calculateHandymanEstimate(base(categoryId, task.id, qty));
-      assert(more !== null && more.total >= prevTotal, `${task.id} x${qty} never costs less than x${qty - 1}`);
+      const more = calculateHandymanEstimate(base(categoryId, task.id, qty), rates);
+      assert(more !== null && more.total === unit * qty, `${task.id} x${qty} is the book amount times quantity`);
       if (more) prevTotal = more.total;
     }
+    void prevTotal;
 
-    /* Monotonic in urgency, and exact multiplier arithmetic. */
-    let prevUrgencyTotal = 0;
     for (const urgency of URGENCY_LEVEL_VALUES) {
-      const withUrgency = calculateHandymanEstimate({ ...base(categoryId, task.id), urgency });
-      assert(withUrgency !== null, `${task.id} prices at ${urgency}`);
-      if (!withUrgency) continue;
-      assert(
-        withUrgency.total >= prevUrgencyTotal,
-        `${task.id}: ${urgency} never costs less than the tier below`,
-      );
-      prevUrgencyTotal = withUrgency.total;
-      /* The band never shows a low end under the one-hour minimum charge. */
-      const minimumAtUrgency = MINIMUM_LABOR_HOURS * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
-      assert(
-        withUrgency.priceLow >= minimumAtUrgency && withUrgency.priceHigh >= withUrgency.priceLow,
-        `${task.id} at ${urgency}: low end $${withUrgency.priceLow} is not below the one-hour minimum $${minimumAtUrgency} and high >= low`,
-      );
-      const expected =
-        withUrgency.laborHours * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
-      assert(
-        Math.abs(withUrgency.total - expected) < 0.01,
-        `${task.id} at ${urgency}: total = hours * rate * multiplier`,
-      );
+      const withUrgency = calculateHandymanEstimate({ ...base(categoryId, task.id), urgency }, rates);
+      assert(withUrgency !== null && withUrgency.total === estimate.total, `${task.id} at ${urgency} keeps the book amount`);
     }
 
-    /* Supply run costs exactly SUPPLY_RUN_HOURS of labor more (standard urgency). */
-    for (const materials of MATERIALS_PLAN_VALUES) {
-      const withMaterials = calculateHandymanEstimate({ ...base(categoryId, task.id), materials });
-      assert(withMaterials !== null, `${task.id} prices with materials=${materials}`);
-      if (materials === "we-pick-up" && withMaterials) {
-        assert(
-          Math.abs(withMaterials.total - (estimate.total + SUPPLY_RUN_HOURS * HOURLY_RATE_USD)) < 0.01,
-          `${task.id}: pick-up adds exactly the supply run`,
-        );
-        assert(
-          withMaterials.lines.some((l) => l.id === "supply-run"),
-          `${task.id}: pick-up shows a supply-run line`,
-        );
-      }
+    const withPickup = calculateHandymanEstimate({ ...base(categoryId, task.id), materials: "we-pick-up" }, rates);
+    assert(withPickup !== null, `${task.id} prices a materials pickup`);
+    if (withPickup) {
+      assert(Math.abs(withPickup.total - (estimate.total + rates[SUPPLY_RUN_CODE])) < 0.01, `${task.id}: pickup adds the book trip line`);
+      assert(withPickup.lines.some((l) => l.id === "supply-run"), `${task.id}: pickup shows a supply-run line`);
     }
   }
 }
 
 /* ───────────────────────────────────────────── other-job size behaviour */
 
+const small = calculateHandymanEstimate({
+  category: "something-else",
+  tasks: [],
+  otherJob: { description: "Sagging gate and a loose railing", size: "small" },
+  materials: "customer",
+  urgency: "standard",
+}, rates);
+assert(small === null, "a small unlisted job has no book line and is not priced");
+
 let prevOtherTotal = 0;
-for (const size of OTHER_JOB_SIZE_VALUES) {
+for (const size of ["medium", "large"] as const) {
   const est = calculateHandymanEstimate({
     category: "something-else",
     tasks: [],
     otherJob: { description: "Sagging gate and a loose railing", size },
     materials: "customer",
     urgency: "standard",
-  });
-  assert(est !== null, `other-job ${size} prices`);
+  }, rates);
+  assert(est !== null && est.total === rates[OTHER_JOB_SIZES[size].bookCode!], `other-job ${size} uses its book line`);
   if (!est) continue;
   assert(est.total > prevOtherTotal, `other-job ${size} costs more than the size below`);
   prevOtherTotal = est.total;
-  assert(
-    est.laborHours === Math.max(OTHER_JOB_SIZES[size].hours, MINIMUM_LABOR_HOURS),
-    `other-job ${size} bills its bucket hours`,
-  );
 }
 
-/* Unknown task ids are ignored, not priced and not fatal. */
 const withUnknown = calculateHandymanEstimate({
   category: "plumbing-repairs",
   tasks: [
@@ -258,102 +218,32 @@ const withUnknown = calculateHandymanEstimate({
   otherJob: null,
   materials: "customer",
   urgency: "standard",
-});
-const knownOnly = calculateHandymanEstimate(base("plumbing-repairs", "plumbing-faucet-swap"));
+}, rates);
+const knownOnly = calculateHandymanEstimate(base("plumbing-repairs", "plumbing-faucet-swap"), rates);
 assert(
   withUnknown !== null && knownOnly !== null && withUnknown.total === knownOnly.total,
   "unknown task ids never move the price",
 );
 
-/* Range factors themselves stay sane. */
-assert(RANGE_LOW_FACTOR < 1 && RANGE_HIGH_FACTOR > 1, "range brackets the total");
-assert(HOURLY_RATE_USD > 0, "rate is positive");
-
-/*
- * SHOWN MUST MEAN WIRED.
- *
- * Every "never costs less" check above permits EQUAL, so an input the wizard
- * asks about can be collected, validated and displayed while changing nothing
- * about the price, and the suite still passes. Asking someone a question that
- * cannot affect their answer is the defect, so each dimension the wizard shows
- * must produce distinct prices across its own range of values.
- */
 {
-  const probeCategories = JOB_CATEGORY_IDS.filter(
-    (c) => c !== "something-else" && getTasksForCategory(c).length > 0,
-  );
-  const baseCategory = probeCategories[0];
-  const baseTask = baseCategory ? getTasksForCategory(baseCategory)[0] : undefined;
-  if (!baseCategory || !baseTask) {
-    assert(false, "task catalog has no priceable task to probe with");
+  const probe = getTasksForCategory("electrical-repairs").find((task) => task.bookCode);
+  if (!probe?.bookCode) {
+    assert(false, "electrical catalog has no priced task");
   } else {
-    const base: HandymanEstimateInput = {
-      category: baseCategory,
-      tasks: [{ taskId: baseTask.id, quantity: 1 }],
+    const input: HandymanEstimateInput = {
+      category: "electrical-repairs",
+      tasks: [{ taskId: probe.id, quantity: 1 }],
       otherJob: null,
       materials: "customer",
       urgency: "standard",
     };
-    const total = (i: HandymanEstimateInput) => calculateHandymanEstimate(i)?.total ?? null;
-
-    const urgencyPrices = new Set(URGENCY_LEVEL_VALUES.map((urgency) => total({ ...base, urgency })));
-    assert(
-      urgencyPrices.size === URGENCY_LEVEL_VALUES.length,
-      `urgency is shown to the visitor but its ${URGENCY_LEVEL_VALUES.length} levels produce only ${urgencyPrices.size} distinct prices - collected and ignored`,
-    );
-
-    const materialsPrices = new Set(MATERIALS_PLAN_VALUES.map((materials) => total({ ...base, materials })));
-    assert(
-      materialsPrices.size === MATERIALS_PLAN_VALUES.length,
-      `the materials plan is shown but its ${MATERIALS_PLAN_VALUES.length} options produce only ${materialsPrices.size} distinct prices - collected and ignored`,
-    );
-
-    const quantityPrices = new Set(
-      [1, 2, 3].map((quantity) => total({ ...base, tasks: [{ taskId: baseTask.id, quantity }] })),
-    );
-    assert(
-      quantityPrices.size === 3,
-      `task quantity is shown but 1, 2 and 3 of "${baseTask.id}" produce only ${quantityPrices.size} distinct prices - collected and ignored`,
-    );
-
-    const sizePrices = new Set(
-      OTHER_JOB_SIZE_VALUES.map((size) =>
-        total({
-          ...base,
-          category: "something-else",
-          tasks: [],
-          otherJob: { description: "probe", size },
-        }),
-      ),
-    );
-    assert(
-      sizePrices.size === OTHER_JOB_SIZE_VALUES.length,
-      `the other-job size is shown but its ${OTHER_JOB_SIZE_VALUES.length} buckets produce only ${sizePrices.size} distinct prices - collected and ignored`,
-    );
-
-    /*
-     * And every task on the menu must carry its own hours into the total: a task
-     * that costs the same however many you order is a menu entry that does
-     * nothing.
-     *
-     * Compared at 1 against the task's OWN maximum rather than at 1 against 2,
-     * because the one-hour minimum legitimately absorbs small quantities of a
-     * short task - two smoke detectors really are one hour of work, and flagging
-     * that would be reporting the minimum as a bug.
-     */
-    const flat: string[] = [];
-    for (const category of probeCategories) {
-      for (const task of getTasksForCategory(category)) {
-        if (task.maxQuantity < 2) continue;
-        const one = total({ ...base, category, tasks: [{ taskId: task.id, quantity: 1 }] });
-        const many = total({ ...base, category, tasks: [{ taskId: task.id, quantity: task.maxQuantity }] });
-        if (one !== null && one === many) flat.push(task.id);
-      }
-    }
-    assert(
-      flat.length === 0,
-      `${flat.length} task(s) price identically at quantity 1 and 2, so their hours never reach the total: ${flat.join(", ")}`,
-    );
+    const total = (i: HandymanEstimateInput) => calculateHandymanEstimate(i, rates)?.total ?? null;
+    const urgencyPrices = new Set(URGENCY_LEVEL_VALUES.map((urgency) => total({ ...input, urgency })));
+    assert(urgencyPrices.size === 1, "urgency is recorded and does not invent a second price");
+    const materialsPrices = new Set(MATERIALS_PLAN_VALUES.map((materials) => total({ ...input, materials })));
+    assert(materialsPrices.size === MATERIALS_PLAN_VALUES.length, "the materials plan changes the total by the book trip line");
+    const quantityPrices = new Set([1, 2, 3].map((quantity) => total({ ...input, tasks: [{ taskId: probe.id, quantity }] })));
+    assert(quantityPrices.size === 3, "quantity multiplies the book amount");
   }
 }
 
