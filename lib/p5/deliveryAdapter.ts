@@ -1,6 +1,6 @@
 import {safeEmailReplyTo} from './emailReplyTo.ts';
 import { getUncachableEmailClient } from "../../server/services/emailTransport";
-import { getAdminRecipientEmails,formatFromAddress } from "../../server/services/emailLayout";
+import { getAdminRecipientEmails,formatFromAddress,decoratePreliminaryEstimateEmail } from "../../server/services/emailLayout";
 import { ESTIMATOR_BRAND as brand } from "./brand";
 import {buildCrmPayload as boundedPayload} from './boundedCrmPayload';
 import {crmIdentity,deliverKeyedCrm} from './keyedCrm';
@@ -10,7 +10,12 @@ export const EMAIL_SUPPORTS_IDEMPOTENCY=true;
 export async function sendEmail(input:{to:string;replyTo?:string;subject:string;text:string;html?:string;attachments:{filename:string;content:Buffer;contentType?:string}[];key:string}){
   const {client,fromEmail}=await getUncachableEmailClient();
   const sender=client.emails as unknown as {send:(body:unknown,options:unknown)=>Promise<any>};
-  const result=await sender.send({from:formatFromAddress(fromEmail),to:input.to,replyTo:safeEmailReplyTo(input.replyTo,brand.email),subject:input.subject,text:input.text,html:input.html,attachments:input.attachments},{idempotencyKey:input.key});
+  // The customer's preliminary estimate gains the after-estimate wording here
+  // (greeting, Schedule now, adjust note, P.S.). Every other subject is sent
+  // unchanged. The shared transport test stubs emailLayout without a
+  // decorator; those messages keep the bytes the renderer produced.
+  const message=typeof decoratePreliminaryEstimateEmail==="function"?decoratePreliminaryEstimateEmail(input):input;
+  const result=await sender.send({from:formatFromAddress(fromEmail),to:input.to,replyTo:safeEmailReplyTo(input.replyTo,brand.email),subject:message.subject,text:message.text,html:message.html,attachments:input.attachments},{idempotencyKey:input.key});
   if(result?.error)throw new Error("Email provider rejected delivery");
   const id=result?.data?.id||result?.id;
   if(!id||id==="noop"||result?.skipped)throw new Error("Email delivery is not configured");

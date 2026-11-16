@@ -6,6 +6,7 @@ import {
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import {
   HANDYMAN_ACCENT,
+  estimatePostscript,
   estimateScheduleLetter,
   paperPanel,
   requestLetter,
@@ -846,13 +847,15 @@ export function buildCustomerEmailHtml(
   const content = estimate
     ? `
       ${paperPanel(estimateScheduleLetter({
-        intro: `Thanks, ${firstName}. Here is the planning range you built.`,
+        firstName,
+        intro: "Thanks for reaching out. Here is the planning range you built.",
         intent,
         phone: SITE_CONFIG.phone,
         accent: HANDYMAN_ACCENT,
       }).html)}
       ${buildEstimateSectionsHtml(estimate, overrides)}
       ${budgetNote}
+      ${estimatePostscript().html}
     `
     : paperPanel(requestLetter({
         firstName,
