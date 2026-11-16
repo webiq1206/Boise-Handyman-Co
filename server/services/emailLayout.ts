@@ -1,6 +1,13 @@
 import { PUBLIC_NAP_LINE, SITE_CONFIG } from "@/shared/siteConfig";
 
 /**
+ * Re-exported for lib/p5/deliveryAdapter.ts, which reaches this site's email
+ * code through this module only. The decorator itself lives with the rest of
+ * the estimate wording in scheduleEmail.ts.
+ */
+export { decoratePreliminaryEstimateEmail } from "./scheduleEmail";
+
+/**
  * Dark-brand email tokens - the site's actual palette (app/globals.css). Every
  * outbound email renders on the charcoal ground with bone text and terracotta accents
  * so it matches boisehandyman.co. Key names are semantic (bg/surface/text/...)

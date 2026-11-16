@@ -2,7 +2,7 @@ import { escapeHtml, wrapEmailHtml, EMAIL_BRAND } from "@/server/services/emailL
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { TRADE_LABELS, type Re10Estimate } from "@/shared/costs/re10Repairs";
 import { RE10_PRICING_DISCLAIMER } from "@/shared/content/re10Content";
-import { HANDYMAN_ACCENT, estimateScheduleLetter, paperPanel } from "@/server/services/scheduleEmail";
+import { HANDYMAN_ACCENT, estimatePostscript, estimateScheduleLetter, paperPanel } from "@/server/services/scheduleEmail";
 
 /**
  * The two RE-10 emails.
@@ -133,7 +133,8 @@ export function buildRe10CustomerEmail(
 
   const content = `
     ${paperPanel(estimateScheduleLetter({
-      intro: `Thanks, ${firstName}. Here is the price for the repairs on the RE-10 you sent.`,
+      firstName,
+      intro: "Thanks for reaching out. Here is the price for the repairs on the RE-10 you sent.",
       intent: "walkthrough",
       phone: SITE_CONFIG.phone,
       accent: HANDYMAN_ACCENT,
@@ -170,6 +171,7 @@ export function buildRe10CustomerEmail(
 
     <p style="color:${EMAIL_BRAND.text};line-height:1.6;">Reply here or call <a href="${SITE_CONFIG.phoneHref}" style="color:${EMAIL_BRAND.accent};">${escapeHtml(SITE_CONFIG.phone)}</a> and we will line the visit up against your deadline.</p>
     <p style="margin-top:24px;color:${EMAIL_BRAND.text};">The Boise Handyman Co team</p>
+    ${estimatePostscript().html}
   `;
 
   return wrapEmailHtml({
