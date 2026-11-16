@@ -1,7 +1,8 @@
 import Script from 'next/script';
 import { atWindowLoad } from '@/lib/deferredThirdParty';
+import { handymanBrowserDataset } from '@/lib/metaDataset';
 
-const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? '2461987544292871';
+const META_PIXEL_ID = handymanBrowserDataset(process.env.NEXT_PUBLIC_META_PIXEL_ID);
 
 /**
  * Meta (Facebook) Pixel. The inline stub runs with strategy="afterInteractive",

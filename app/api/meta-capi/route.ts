@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createHash } from 'crypto';
+import { handymanServerDataset } from '@/lib/metaDataset';
 
 /**
  * Meta Conversions API (server-side) endpoint.
@@ -35,7 +36,7 @@ function hashPhone(phone?: unknown): string | undefined {
 
 export async function POST(req: Request) {
   const token = process.env.META_CAPI_ACCESS_TOKEN;
-  const datasetId = process.env.META_DATASET_ID || process.env.NEXT_PUBLIC_META_PIXEL_ID;
+  const datasetId = handymanServerDataset(process.env.META_DATASET_ID, process.env.NEXT_PUBLIC_META_PIXEL_ID);
   if (!token || !datasetId) {
     return NextResponse.json({ ok: true, skipped: 'capi-not-configured' });
   }

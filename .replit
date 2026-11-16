@@ -51,7 +51,7 @@ NODE_OPTIONS = "--max-old-space-size=1536"
 # account 396104300, property 549906676, web stream 15437749728. Read from
 # the GA admin data-stream page 2026-09-03. Never G-NGE449QF9Y (Remodeling).
 NEXT_PUBLIC_GA_MEASUREMENT_ID = "G-4WQQ639LR1"
-NEXT_PUBLIC_META_PIXEL_ID = "2461987544292871"
+NEXT_PUBLIC_META_PIXEL_ID = "1499692835589602"
 
 [userenv.development]
 P5_OBJECT_STORAGE_ENABLED = "true"
