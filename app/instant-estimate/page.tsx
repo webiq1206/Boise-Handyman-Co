@@ -60,7 +60,7 @@ const STEPS = [
   },
   {
     title: "See your preliminary range on screen",
-    text: "Add your name, email and phone, and your preliminary price range appears on screen with a breakdown of what makes it up.",
+    text: "Add your name, email and phone, and your preliminary price range appears on screen with the full scope of work it covers.",
   },
 ];
 
