@@ -46,7 +46,11 @@ import { resolveQuotedRange } from "@/shared/costs/resolve";
 import { forwardToLeadDashboard } from "@/server/services/leadDashboardForward";
 import { forwardConsultationToP5Intake, type P5BridgeResult } from "@/server/services/p5IntakeBridge";
 import { scheduleTeamEmail } from "@/server/services/teamEmailGate";
-import { buildRequestInternalNotes, buildRequestTeamNotes } from "@/server/services/consultationTeamNotes";
+import {
+  buildRequestEstimate,
+  buildRequestInternalNotes,
+  buildRequestTeamNotes,
+} from "@/server/services/consultationTeamNotes";
 import { readUnitCostOverrides } from "@/server/services/unitCostOverrides";
 import {
   buildCrmIntakeFields,
@@ -241,6 +245,9 @@ export async function POST(request: NextRequest) {
         // Our cost, the margin and the pricing checks behind a planning range.
         // A separate field: p5 keeps an email that carries it out of HubSpot.
         teamInternalNotes: buildRequestInternalNotes({ estimate }),
+        // The verified range as figures, customer amounts only: p5 creates
+        // the QuickBooks customer and an unsent estimate from it.
+        estimate: buildRequestEstimate({ estimate }),
       });
       after(() => bridge);
     } catch (bridgeErr) {

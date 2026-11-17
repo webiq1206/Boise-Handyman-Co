@@ -88,6 +88,20 @@ is the one that stays. This site's own team email is the fallback.
   * The figures come from the same `resolveInternalEstimate()` call as the
     email's `renderTradeRollupHtml()`; a test compares them with the rendered
     email for every project, finish and size. Change one and change the other.
+* `estimate` (`buildRequestEstimate()`, same file; owner, 13 and 17 November
+  2026: every estimate a visitor is given becomes a customer and an UNSENT
+  estimate in QuickBooks, and p5 creates both from this field). Sent with a
+  Step 1 request that has a planning range: nothing for a plain request, a
+  callback or Step 2 (the bridge drops it for those). `low` and `high` are the
+  range the customer was shown; `verified: true` because the route recomputes
+  it (`verifyEstimate`), never because the browser said so; `label` is the
+  project, finish and size; `lines` are one per trade with that trade's
+  CUSTOMER amount. The lines add up, to the cent, to the customer price the
+  team email shows (the centre of the range), and that sum is the QuickBooks
+  total, so never drop or reorder a line without keeping the sum.
+  **Customer amounts only:** no cost, margin, markup, profit, contingency or
+  overhead in any field, titles and descriptions included. On any problem the
+  builder returns null and the request goes without the field; it never throws.
 * The contract belongs to p5homeco.com (`docs/lead-intake-contract.md` there).
   Do not change the field names here alone.
 * Guard: `tests/p5-one-team-email.test.ts`, with `tests/p5-intake-bridge.test.ts`
