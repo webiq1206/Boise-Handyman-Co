@@ -140,12 +140,22 @@ export type ConsultationBridgeInput = {
   /**
    * Lines for the team only, each `Label: value`. p5 prints them in its team
    * email under "From the website" and nowhere else. See teamNoteLines().
+   * Never a cost or a margin: that email is copied into HubSpot.
    */
   teamNotes?: readonly string[];
+  /**
+   * This site's INTERNAL pricing lines for a planning range: our cost, the
+   * margin, gross profit, contingency and the wording of pricing checks. p5
+   * prints them under "Internal pricing" and, when any are present, sends the
+   * email as "Lead and pricing: ...", a subject its inbox sync never copies
+   * into HubSpot. That is the only reason these figures may travel.
+   */
+  teamInternalNotes?: readonly string[];
 };
 
-/** p5 intake limits for team_notes (app/lib/leads/intakeContract.ts there). */
+/** p5 intake limits for team notes (app/lib/leads/intakeContract.ts there). */
 export const MAX_TEAM_NOTES = 40;
+export const MAX_TEAM_INTERNAL_NOTES = 60;
 export const MAX_TEAM_NOTE_LENGTH = 300;
 
 /** Fields the bridge already sends. A note that repeats one is dropped. */
@@ -153,11 +163,12 @@ const TEAM_NOTE_RESERVED_LABELS = new Set(["name", "email", "phone"]);
 
 /**
  * Makes team notes safe to send: plain single lines of `Label: value`, at
- * most 40 lines of at most 300 characters. A line with no label, an empty
- * value, or a label the bridge already sends (name, email, phone) is dropped.
- * When there are more than 40, the last line says how many were left out.
+ * most `max` lines (40 for team_notes, 60 for team_internal_notes) of at most
+ * 300 characters. A line with no label, an empty value, or a label the bridge
+ * already sends (name, email, phone) is dropped. When there are more than
+ * `max`, the last line says how many were left out.
  */
-export function teamNoteLines(raw: readonly unknown[] | null | undefined): string[] {
+export function teamNoteLines(raw: readonly unknown[] | null | undefined, max: number = MAX_TEAM_NOTES): string[] {
   if (!Array.isArray(raw)) return [];
   const lines: string[] = [];
   for (const item of raw) {
@@ -169,9 +180,9 @@ export function teamNoteLines(raw: readonly unknown[] | null | undefined): strin
     if (TEAM_NOTE_RESERVED_LABELS.has(line.slice(0, at).toLowerCase())) continue;
     lines.push(line.length > MAX_TEAM_NOTE_LENGTH ? `${line.slice(0, MAX_TEAM_NOTE_LENGTH - 3).trimEnd()}...` : line);
   }
-  if (lines.length <= MAX_TEAM_NOTES) return lines;
-  const left = lines.length - (MAX_TEAM_NOTES - 1);
-  return [...lines.slice(0, MAX_TEAM_NOTES - 1), `More: ${left} further lines are on this site's lead record`];
+  if (lines.length <= max) return lines;
+  const left = lines.length - (max - 1);
+  return [...lines.slice(0, max - 1), `More: ${left} further lines are on this site's lead record`];
 }
 
 export type P5IntakeFile = { name: string; url: string; contentType: string; size: number };
@@ -270,6 +281,8 @@ export function buildP5IntakeBody(input: ConsultationBridgeInput): Record<string
   body.team_alert = "confirm";
   const teamNotes = teamNoteLines(input.teamNotes);
   if (teamNotes.length) body.team_notes = teamNotes;
+  const teamInternalNotes = teamNoteLines(input.teamInternalNotes, MAX_TEAM_INTERNAL_NOTES);
+  if (teamInternalNotes.length) body.team_internal_notes = teamInternalNotes;
   if (input.requestKind) body.request_kind = input.requestKind;
   if (input.preferredContact) {
     body.contact_preference = input.requestKind === "callback" ? "call" : P5_CONTACT_PREFERENCE[input.preferredContact];
