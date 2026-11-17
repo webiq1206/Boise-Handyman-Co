@@ -41,6 +41,41 @@ primary pricing call to action on this site.
 * Guard: `tests/instant-estimate.test.ts` (`npm run verify:instant-estimate`,
   in prebuild).
 
+## One team email per request (owner decision, 17 November 2026)
+
+A request from this site used to put two emails in the shared inbox: this
+site's own team email and the "New lead" (or "Details added") email
+p5homeco.com sends when the request is forwarded to its intake. The p5 email
+is the one that stays. This site's own team email is the fallback.
+
+* `server/services/p5IntakeBridge.ts` posts with `team_alert: "confirm"` and
+  returns `{ forwarded, alert }`, never throwing. `alert` is `sent`, `failed`,
+  `none`, or `unknown` (no answer, an error, a timeout, an older p5, anything
+  that is not exactly one of the three). It waits 30 seconds.
+* `server/services/teamEmailGate.ts` decides. `sent`: the shared family inbox
+  (`isSharedFamilyInbox()`: `hello@` at p5homeco.com, boisecabinet.co,
+  boiseconstruction.co, boiseremodeling.co, boisehandyman.co, boiseadu.co) is
+  left out, and any other admin recipient still gets this site's email.
+  Anything else, including nothing forwarded: everyone gets it, as before. A
+  lead must never end with no team email; when in doubt, send.
+* Only the TEAM email waits for the bridge, inside `after()`. The visitor
+  response and the customer's confirmation email never wait on p5. Both team
+  emails are covered: Step 1 in `app/api/consultation/route.ts` (request,
+  callback, request with a planning range) and "Details added" in
+  `app/api/consultation/details/route.ts`. `skipEmail` still means this site
+  sends neither email.
+* `team_notes` (`server/services/consultationTeamNotes.ts`) carry what only
+  this site knows into the p5 email: the lead dashboard link, the saved request
+  id, the county parcel record, the planning range, its selections and its
+  price split by trade. Lines are `Label: value`, at most 40 of at most 300
+  characters. Our cost and margin are left out on purpose: p5's "New lead"
+  email is copied into HubSpot, and costs and margins stay out of HubSpot.
+* The contract belongs to p5homeco.com (`docs/lead-intake-contract.md` there).
+  Do not change the field names here alone.
+* Guard: `tests/p5-one-team-email.test.ts`, with `tests/p5-intake-bridge.test.ts`
+  and `tests/consultation-details.test.ts` (`npm run verify:one-team-email`, in
+  prebuild). Tests use a fake fetch; never post a test to the live intake.
+
 ## Scope and one total for customers (owner decision, 16 November 2026)
 
 Every customer-facing estimate shows the full scope of work and ONE price (the

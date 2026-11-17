@@ -1,13 +1,18 @@
 import { consultationAttribution, consultationSource } from "../../lib/consultationAttribution";
 /**
- * Fire-and-forget bridge from an accepted Handyman consultation to the
- * multi-brand intake on p5homeco.com.
+ * Bridge from an accepted Handyman consultation to the multi-brand intake on
+ * p5homeco.com.
  *
  * That route already creates the HubSpot contact, the mapped deal, and the
- * fail-open lead_created notice (p5 tip 8a33b28c). This repo must not take a
- * HubSpot dependency or a portal token. A bridge failure is logged and never
- * thrown, so the visitor response, the local save, Resend, and the BRC
+ * team's "New lead" email. This repo must not take a HubSpot dependency or a
+ * portal token. A bridge failure is logged and never thrown, so the visitor
+ * response, the local save, the customer's confirmation email, and the BRC
  * dashboard forward stay independent of it.
+ *
+ * One team email per request (owner, 17 November 2026). The bridge asks p5 to
+ * confirm its team email (`team_alert: "confirm"`) and returns what p5
+ * answered. Only this site's own TEAM email waits for that answer, inside
+ * after(): see server/services/teamEmailGate.ts.
  *
  * Project strings are rewritten only when p5 already accepts them: either as
  * a HUBSPOT_PROJECT_TYPES value or as a PROJECT_TYPE_ALIASES key. Unknown
@@ -132,7 +137,42 @@ export type ConsultationBridgeInput = {
   submissionKind?: "initial" | "details";
   /** Step 2 timing ("Soon", "1 to 3 months", ...). */
   timeline?: string | null;
+  /**
+   * Lines for the team only, each `Label: value`. p5 prints them in its team
+   * email under "From the website" and nowhere else. See teamNoteLines().
+   */
+  teamNotes?: readonly string[];
 };
+
+/** p5 intake limits for team_notes (app/lib/leads/intakeContract.ts there). */
+export const MAX_TEAM_NOTES = 40;
+export const MAX_TEAM_NOTE_LENGTH = 300;
+
+/** Fields the bridge already sends. A note that repeats one is dropped. */
+const TEAM_NOTE_RESERVED_LABELS = new Set(["name", "email", "phone"]);
+
+/**
+ * Makes team notes safe to send: plain single lines of `Label: value`, at
+ * most 40 lines of at most 300 characters. A line with no label, an empty
+ * value, or a label the bridge already sends (name, email, phone) is dropped.
+ * When there are more than 40, the last line says how many were left out.
+ */
+export function teamNoteLines(raw: readonly unknown[] | null | undefined): string[] {
+  if (!Array.isArray(raw)) return [];
+  const lines: string[] = [];
+  for (const item of raw) {
+    if (typeof item !== "string") continue;
+    const line = item.replace(/[\u0000-\u001f\u007f]+/g, " ").replace(/\s+/g, " ").trim();
+    const at = line.indexOf(": ");
+    if (at <= 0 || at > 40) continue;
+    if (!line.slice(at + 2).trim()) continue;
+    if (TEAM_NOTE_RESERVED_LABELS.has(line.slice(0, at).toLowerCase())) continue;
+    lines.push(line.length > MAX_TEAM_NOTE_LENGTH ? `${line.slice(0, MAX_TEAM_NOTE_LENGTH - 3).trimEnd()}...` : line);
+  }
+  if (lines.length <= MAX_TEAM_NOTES) return lines;
+  const left = lines.length - (MAX_TEAM_NOTES - 1);
+  return [...lines.slice(0, MAX_TEAM_NOTES - 1), `More: ${left} further lines are on this site's lead record`];
+}
 
 export type P5IntakeFile = { name: string; url: string; contentType: string; size: number };
 
@@ -226,6 +266,10 @@ export function buildP5IntakeBody(input: ConsultationBridgeInput): Record<string
     body.external_id = externalId;
   }
   body.submission_kind = input.submissionKind ?? "initial";
+  // p5 sends its team email before it answers, and the answer says whether it went.
+  body.team_alert = "confirm";
+  const teamNotes = teamNoteLines(input.teamNotes);
+  if (teamNotes.length) body.team_notes = teamNotes;
   if (input.requestKind) body.request_kind = input.requestKind;
   if (input.preferredContact) {
     body.contact_preference = input.requestKind === "callback" ? "call" : P5_CONTACT_PREFERENCE[input.preferredContact];
@@ -248,13 +292,38 @@ export function buildP5IntakeBody(input: ConsultationBridgeInput): Record<string
 type FetchLike = (url: string, init: RequestInit) => Promise<Response>;
 
 /**
- * POST the consultation to p5 intake. Never throws.
- * Callers must not await this on the visitor's success path.
+ * What p5 said about its own team email:
+ *   sent     its mail server accepted the email
+ *   failed   it did not, or it was still sending when p5 answered
+ *   none     this post produced no p5 email (an exact repeat, or details that
+ *            are waiting for their request)
+ *   unknown  anything else: no answer, an error, a timeout, an older p5
+ */
+export type P5TeamAlert = "sent" | "failed" | "none" | "unknown";
+
+export type P5BridgeResult = { forwarded: boolean; alert: P5TeamAlert };
+
+/** p5 waits for HubSpot and its mail server in confirm mode, about 25 seconds at most. */
+export const P5_BRIDGE_TIMEOUT_MS = 30_000;
+
+/** Anything that is not exactly one of the three known answers is "unknown". */
+export function readP5TeamAlert(answer: unknown): P5TeamAlert {
+  if (!answer || typeof answer !== "object" || Array.isArray(answer)) return "unknown";
+  const alert = (answer as Record<string, unknown>).alert;
+  return alert === "sent" || alert === "failed" || alert === "none" ? alert : "unknown";
+}
+
+/**
+ * POST the consultation to p5 intake and report what p5 answered. Never throws.
+ * Callers must not await this on the visitor's success path: the visitor
+ * response and the customer's email never wait on p5. Only this site's own
+ * team email does, inside after().
  */
 export async function forwardConsultationToP5Intake(
   input: ConsultationBridgeInput,
   fetchImpl: FetchLike = fetch,
-): Promise<void> {
+  timeoutMs: number = P5_BRIDGE_TIMEOUT_MS,
+): Promise<P5BridgeResult> {
   try {
     const body = buildP5IntakeBody(input);
     const res = await fetchImpl(P5_INTAKE_URL, {
@@ -264,18 +333,24 @@ export async function forwardConsultationToP5Intake(
         Accept: "application/json",
       },
       body: JSON.stringify(body),
-      signal: AbortSignal.timeout(10_000),
+      signal: AbortSignal.timeout(timeoutMs),
     });
     if (!res.ok) {
       const detail = await res.text().catch(() => "");
       console.error(
         `[p5-intake] Bridge rejected: ${res.status} ${detail.slice(0, 300)}`,
       );
-      return;
+      return { forwarded: false, alert: "unknown" };
     }
-    console.info(`[p5-intake] Consultation forwarded (${res.status}).`);
+    // A body that is not JSON, or has no alert, is an answer we cannot read:
+    // the request was forwarded, the team email is not confirmed.
+    const answer: unknown = await res.json().catch(() => null);
+    const alert = readP5TeamAlert(answer);
+    console.info(`[p5-intake] Consultation forwarded (${res.status}), team email: ${alert}.`);
+    return { forwarded: true, alert };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error(`[p5-intake] Bridge failed: ${message}`);
+    return { forwarded: false, alert: "unknown" };
   }
 }
