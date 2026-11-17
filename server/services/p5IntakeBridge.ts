@@ -151,7 +151,44 @@ export type ConsultationBridgeInput = {
    * into HubSpot. That is the only reason these figures may travel.
    */
   teamInternalNotes?: readonly string[];
+  /**
+   * The planning range as figures (Step 1 with a range only). p5 creates the
+   * QuickBooks customer and an UNSENT estimate from it. CUSTOMER amounts
+   * only: never a cost or a margin, in any field.
+   */
+  estimate?: P5IntakeEstimate | null;
 };
+
+/** One line of the customer price: a trade and what the customer pays for it. */
+export type P5IntakeEstimateLine = {
+  title: string;
+  description?: string;
+  quantity?: number;
+  unit?: string;
+  /** What the customer pays for this line. Never a cost. */
+  amount: number;
+  division?: string;
+};
+
+/**
+ * `estimate` on the p5 intake (its docs/lead-intake-contract.md). With lines,
+ * the QuickBooks total is their sum to the cent; without, p5 uses `base`, or
+ * the midpoint of the range.
+ */
+export type P5IntakeEstimate = {
+  kind: "planning-range";
+  /** The range the customer was shown. */
+  low: number;
+  high: number;
+  label?: string;
+  /** Only ever `true`, and only because this site's server recomputed the range. */
+  verified?: true;
+  base?: number;
+  lines?: P5IntakeEstimateLine[];
+};
+
+/** p5 reads at most this many estimate lines; one more and it ignores the estimate. */
+export const MAX_ESTIMATE_LINES = 60;
 
 /** p5 intake limits for team notes (app/lib/leads/intakeContract.ts there). */
 export const MAX_TEAM_NOTES = 40;
@@ -283,6 +320,11 @@ export function buildP5IntakeBody(input: ConsultationBridgeInput): Record<string
   if (teamNotes.length) body.team_notes = teamNotes;
   const teamInternalNotes = teamNoteLines(input.teamInternalNotes, MAX_TEAM_INTERNAL_NOTES);
   if (teamInternalNotes.length) body.team_internal_notes = teamInternalNotes;
+  // The planning range as figures: Step 1 with a range only, never a callback
+  // and never Step 2 (the request already carried it).
+  if (input.estimate && input.requestKind !== "callback" && (input.submissionKind ?? "initial") === "initial") {
+    body.estimate = input.estimate;
+  }
   if (input.requestKind) body.request_kind = input.requestKind;
   if (input.preferredContact) {
     body.contact_preference = input.requestKind === "callback" ? "call" : P5_CONTACT_PREFERENCE[input.preferredContact];
