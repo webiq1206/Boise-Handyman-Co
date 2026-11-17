@@ -97,6 +97,8 @@ test("intake body uses the fields the p5 route already reads", () => {
     externalLeadId: "boisehandyman-consultation:11111111-1111-4111-8111-111111111111",
     external_id: "boisehandyman-consultation:11111111-1111-4111-8111-111111111111",
     submission_kind: "initial",
+    // p5 confirms its team email in the answer (one team email per request).
+    team_alert: "confirm",
   });
 });
 
@@ -136,10 +138,12 @@ test("bridge posts once and swallows transport and HTTP failures", async () => {
     calls.push({ url, init });
     return new Response(JSON.stringify({ ok: true, accepted: true }), { status: 201 });
   };
-  await forwardConsultationToP5Intake(
+  const result = await forwardConsultationToP5Intake(
     { name: "Ada Example", email: "ada@example.com", projectType: "home-maintenance" },
     ok,
   );
+  // Forwarded, but an answer with no `alert` (an older p5) confirms nothing.
+  assert.deepEqual(result, { forwarded: true, alert: "unknown" });
   assert.equal(calls.length, 1);
   assert.equal(calls[0].url, P5_INTAKE_URL);
   assert.equal(calls[0].init.method, "POST");
@@ -164,17 +168,40 @@ test("bridge posts once and swallows transport and HTTP failures", async () => {
   );
 });
 
-test("consultation success path schedules the bridge without awaiting it", () => {
+test("consultation success path: the visitor response and the customer email never wait on the bridge; only the team email does, inside after()", () => {
   const source = readFileSync(new URL("../app/api/consultation/route.ts", import.meta.url), "utf8");
   const acceptedGate = source.indexOf("if (!accepted.accepted)");
   const bridge = source.indexOf("forwardConsultationToP5Intake(");
   const keptAlive = source.indexOf("after(() => bridge)");
-  const resend = source.indexOf("await getUncachableEmailClient");
   const dashboard = source.indexOf("forwardToLeadDashboard(");
+  const teamEmail = source.indexOf("scheduleTeamEmail(after, {");
+  const teamEmailEnd = source.indexOf("if (teamEmailNow) await teamEmailNow;");
+  const customerEmail = source.indexOf("buildCustomerEmailHtml(");
+  const response = source.lastIndexOf("NextResponse.json({ success: true, accepted: true");
   assert.ok(acceptedGate >= 0 && bridge > acceptedGate, "bridge runs only after a durable accept");
   assert.ok(keptAlive > bridge, "bridge is kept alive with after(), not awaited");
   assert.ok(dashboard > acceptedGate, "BRC dashboard forward still runs on accept");
-  assert.ok(resend > bridge, "Resend still runs and is not gated on the bridge");
+
+  // The TEAM email is handed to after() with the bridge, and is built and sent
+  // nowhere else: every admin send sits inside that one call.
+  assert.ok(teamEmail > bridge && teamEmailEnd > teamEmail, "the team email is scheduled after the bridge starts");
+  const teamBlock = source.slice(teamEmail, teamEmailEnd);
+  assert.match(teamBlock, /\bbridge,/, "the team email is given the bridge to wait for");
+  assert.match(teamBlock, /getAdminRecipientEmails\(SITE_CONFIG\.email\)/);
+  assert.match(teamBlock, /buildAdminEmailHtml\(/);
+  const outsideTeamBlock = source.slice(0, teamEmail) + source.slice(teamEmailEnd);
+  assert.doesNotMatch(outsideTeamBlock, /buildAdminEmailHtml\(|buildAdminSubject\(|getAdminRecipientEmails\(/);
+
+  // The CUSTOMER email still runs on the visitor's path, before the response,
+  // and nothing about it reads the bridge.
+  assert.ok(customerEmail > teamEmailEnd && response > customerEmail, "the customer email is still sent before the response");
+  const customerBlock = source.slice(teamEmailEnd, response);
+  assert.match(customerBlock, /await client\.emails\.send\(/);
+  assert.doesNotMatch(customerBlock, /\bbridge\b|scheduleTeamEmail|sendTeamEmailAfterBridge/);
+
+  // Nothing on the visitor's path awaits the bridge or its result.
   assert.doesNotMatch(source, /await\s+forwardConsultationToP5Intake/);
+  assert.doesNotMatch(source, /await\s+bridge\b/);
+  assert.doesNotMatch(source, /await\s+sendTeamEmailAfterBridge/);
   assert.doesNotMatch(source, /HUBSPOT_TOKEN|@hubspot/);
 });

@@ -327,5 +327,17 @@ test("the details route validates the token before reading the row and forwards 
   }
   assert.match(source, /submissionKind: "details"/);
   assert.match(source, /key\.startsWith\(prefix\)/, "only files stored under this request are accepted");
+  // The visitor's response never waits on the bridge. Only this site's own
+  // "Details added" email does, inside after() (one team email per request).
   assert.doesNotMatch(source, /await\s+forwardConsultationToP5Intake/);
+  assert.doesNotMatch(source, /await\s+bridge\b/);
+  assert.doesNotMatch(source, /await\s+sendTeamEmailAfterBridge/);
+  const teamEmail = source.indexOf("after(() =>\n      sendTeamEmailAfterBridge({");
+  const response = source.indexOf("NextResponse.json({ ok: true, saved: true, duplicate: false })");
+  assert.ok(teamEmail > write && response > teamEmail, "the team email is handed to after() before the response");
+  const teamBlock = source.slice(teamEmail, response);
+  assert.match(teamBlock, /\bbridge,/, "the team email is given the bridge to wait for");
+  assert.match(teamBlock, /getAdminRecipientEmails\(SITE_CONFIG\.email\)/);
+  assert.match(teamBlock, /buildDetailsAddedEmailHtml\(/);
+  assert.doesNotMatch(source.slice(0, teamEmail), /emails\.send\(|getAdminRecipientEmails\(/, "no team email is sent outside that call");
 });

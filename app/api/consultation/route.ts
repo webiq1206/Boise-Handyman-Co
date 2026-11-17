@@ -44,7 +44,9 @@ import {
 import { detailsSecret, issueDetailsToken } from "@/server/services/consultationDetails";
 import { resolveQuotedRange } from "@/shared/costs/resolve";
 import { forwardToLeadDashboard } from "@/server/services/leadDashboardForward";
-import { forwardConsultationToP5Intake } from "@/server/services/p5IntakeBridge";
+import { forwardConsultationToP5Intake, type P5BridgeResult } from "@/server/services/p5IntakeBridge";
+import { scheduleTeamEmail } from "@/server/services/teamEmailGate";
+import { buildRequestTeamNotes } from "@/server/services/consultationTeamNotes";
 import { readUnitCostOverrides } from "@/server/services/unitCostOverrides";
 import {
   buildCrmIntakeFields,
@@ -203,13 +205,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "We could not save your request. Please try again." }, { status: 503 });
     }
 
-    // HubSpot contact + mapped deal + lead_created mail live on p5 intake.
-    // Started as soon as the lead is durable so it overlaps Resend, and kept
-    // alive with after() so the visitor response does not wait on it.
-    // Failures stay inside the bridge and cannot change this status.
+    // HubSpot contact + mapped deal + the team's "New lead" email live on p5
+    // intake. Started as soon as the lead is durable so it overlaps the rest,
+    // and kept alive with after() so the visitor response does not wait on it.
+    // Failures stay inside the bridge and cannot change this status. Its
+    // answer says whether p5's team email went, which only this site's own
+    // team email waits for (further down, inside after()).
     const location = (data.propertyProfile as PropertyProfile | null) ?? null;
+    let bridge: Promise<P5BridgeResult> | null = null;
     try {
-      const bridge = forwardConsultationToP5Intake({
+      bridge = forwardConsultationToP5Intake({
         attribution: data.attribution,
         name: data.name,
         email: data.email,
@@ -226,6 +231,13 @@ export async function POST(request: NextRequest) {
         preferredContact: data.preferredContact,
         bestTime: data.requestKind === "callback" ? data.bestTimeToCall : undefined,
         submissionKind: "initial",
+        // What only this site knows, for p5's team email: the planning range
+        // and its split, the parcel record, and where the request is kept.
+        teamNotes: buildRequestTeamNotes({
+          estimate,
+          profile: (data.propertyProfile as PropertyEnrichment | null) ?? null,
+          requestId: savedRow.id,
+        }),
       });
       after(() => bridge);
     } catch (bridgeErr) {
@@ -288,31 +300,37 @@ export async function POST(request: NextRequest) {
     });
 
     if (!data.skipEmail) {
-      try {
-        const { client, fromEmail } = await getUncachableEmailClient();
-        const from = formatFromAddress(fromEmail);
+      const lead = {
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        address: data.address,
+        zip: data.zip,
+        projectType: data.projectType,
+        message: data.message,
+        preferredContact: data.preferredContact,
+        requestKind: data.requestKind,
+      };
+      const enrichment = (data.propertyProfile as PropertyEnrichment | null) ?? null;
 
-        const lead = {
-          name: data.name,
-          phone: data.phone,
-          email: data.email,
-          address: data.address,
-          zip: data.zip,
-          projectType: data.projectType,
-          message: data.message,
-          preferredContact: data.preferredContact,
-          requestKind: data.requestKind,
-        };
-        const enrichment = (data.propertyProfile as PropertyEnrichment | null) ?? null;
-
-        // ---- Admin / internal-team email ------------------------------------
-        // Reply-To is the LEAD, so hitting Reply in any mail client goes straight
-        // to the customer.
-        const adminHtml = buildAdminEmailHtml(lead, estimate, enrichment, unitCostOverrides);
-        const adminEmails = await getAdminRecipientEmails(SITE_CONFIG.email);
-        for (const adminEmail of adminEmails) {
+      // ---- Admin / internal-team email --------------------------------------
+      // One team email per request (owner, 17 November 2026). p5 sends the
+      // team's "New lead" email, so this one is the fallback: it is decided
+      // inside after(), once the bridge has answered, and never on the
+      // visitor's path. p5 confirmed "sent": the shared family inbox is left
+      // out and any other admin recipient still gets it. Anything else
+      // (failed, none, no answer, nothing forwarded): everyone gets it, as
+      // before. Reply-To is the LEAD, so hitting Reply in any mail client goes
+      // straight to the customer.
+      const teamEmailNow = scheduleTeamEmail(after, {
+        label: "consultation",
+        bridge,
+        recipients: () => getAdminRecipientEmails(SITE_CONFIG.email),
+        send: async (adminEmail) => {
+          const { client, fromEmail } = await getUncachableEmailClient();
+          const adminHtml = buildAdminEmailHtml(lead, estimate, enrichment, unitCostOverrides);
           const adminResult = await client.emails.send({
-            from,
+            from: formatFromAddress(fromEmail),
             // No reply-to-the-lead shortcut when they didn't leave an email -
             // the admin email body still shows their preferred contact method.
             replyTo: data.email ? formatLeadReplyTo(data.name, data.email) : undefined,
@@ -327,16 +345,22 @@ export async function POST(request: NextRequest) {
               JSON.stringify(adminResult.error)
             );
           }
-        }
+        },
+      });
+      // Only when after() could not take it: the email goes to everyone now.
+      if (teamEmailNow) await teamEmailNow;
 
-        // ---- Customer / lead email ------------------------------------------
-        // Includes the full estimate + every selection so the lead has it in
-        // writing without ever logging in. Skipped entirely when the visitor
-        // chose to be reached by phone/text and never gave an email address.
-        if (data.email) {
+      // ---- Customer / lead email ------------------------------------------
+      // On the visitor's path as before: it never waits on p5.
+      // Includes the full estimate + every selection so the lead has it in
+      // writing without ever logging in. Skipped entirely when the visitor
+      // chose to be reached by phone/text and never gave an email address.
+      if (data.email) {
+        try {
+          const { client, fromEmail } = await getUncachableEmailClient();
           const customerHtml = buildCustomerEmailHtml(lead, estimate, unitCostOverrides);
           const customerResult = await client.emails.send({
-            from,
+            from: formatFromAddress(fromEmail),
             replyTo: getReplyToAddress(),
             to: data.email,
             subject: buildCustomerSubject(lead, estimate),
@@ -349,9 +373,9 @@ export async function POST(request: NextRequest) {
               JSON.stringify(customerResult.error)
             );
           }
+        } catch (emailErr) {
+          console.error("[consultation] Email send failed:", emailErr);
         }
-      } catch (emailErr) {
-        console.error("[consultation] Email send failed:", emailErr);
       }
     }
 

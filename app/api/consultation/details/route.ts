@@ -15,7 +15,9 @@ import {
   type StoredLead,
 } from "@/server/services/consultationDetails";
 import { buildDetailsAddedEmailHtml, buildDetailsAddedSubject } from "@/server/services/consultationDetailsEmail";
-import { forwardConsultationToP5Intake } from "@/server/services/p5IntakeBridge";
+import { forwardConsultationToP5Intake, type P5BridgeResult } from "@/server/services/p5IntakeBridge";
+import { sendTeamEmailAfterBridge } from "@/server/services/teamEmailGate";
+import { buildDetailsTeamNotes } from "@/server/services/consultationTeamNotes";
 import { forwardToLeadDashboard } from "@/server/services/leadDashboardForward";
 import { getUncachableEmailClient } from "@/server/services/emailTransport";
 import { formatFromAddress, getAdminRecipientEmails, htmlToPlainText } from "@/server/services/emailLayout";
@@ -27,10 +29,13 @@ import { formatLeadReplyTo } from "@/server/services/consultationEmail";
  * Body: { requestId, inquiryId, token, details, files } where token is the one
  * /api/consultation issued with the saved request. The details merge into the
  * SAME row (never blanking an answer), a "DETAILS ADDED" block is appended to
- * its notes, and the same destinations the request went to hear about it: a
- * short "Details added" internal email, the lead dashboard, and the p5 intake
- * as a submission_kind "details" post (p5 merges it into the deal and its
- * HubSpot record). The same post twice is saved once and forwarded once.
+ * its notes, and the same destinations the request went to hear about it: the
+ * lead dashboard, and the p5 intake as a submission_kind "details" post (p5
+ * merges it into the deal and its HubSpot record, and sends the team its
+ * "Details added" email). This site's own short "Details added" email is the
+ * fallback: the shared family inbox gets it only when p5 did not confirm its
+ * own (owner, 17 November 2026; server/services/teamEmailGate.ts). The same
+ * post twice is saved once and forwarded once.
  */
 
 export const dynamic = "force-dynamic";
@@ -136,9 +141,11 @@ export async function POST(request: NextRequest) {
     };
     const isCallback = (row.message ?? "").startsWith(CALLBACK_MARKER);
 
-    // p5 intake (HubSpot): kept alive after the response, never awaited.
+    // p5 intake (HubSpot and the team's email): kept alive after the response,
+    // never awaited on the visitor's path.
+    let bridge: Promise<P5BridgeResult> | null = null;
     try {
-      const bridge = forwardConsultationToP5Intake({
+      bridge = forwardConsultationToP5Intake({
         name: lead.name,
         email: lead.email,
         phone: lead.phone,
@@ -153,6 +160,7 @@ export async function POST(request: NextRequest) {
         timeline: body.details.timing,
         files: files.map(({ name, url, contentType, size }) => ({ name, url, contentType, size })),
         submissionKind: "details",
+        teamNotes: buildDetailsTeamNotes({ requestId: row.id }),
       });
       after(() => bridge);
     } catch (bridgeErr) {
@@ -176,12 +184,18 @@ export async function POST(request: NextRequest) {
       }).then(() => undefined),
     );
 
-    // Short internal follow-up, after the response so the visitor never waits on mail.
-    after(async () => {
-      try {
-        const { client } = await getUncachableEmailClient();
-        const html = buildDetailsAddedEmailHtml(lead, merged.added);
-        for (const to of await getAdminRecipientEmails(SITE_CONFIG.email)) {
+    // Short internal follow-up, after the response so the visitor never waits
+    // on mail. It waits for the bridge: p5 confirmed its own "Details added"
+    // email, so the shared family inbox is left out; anything else, everyone
+    // gets this one, as before.
+    after(() =>
+      sendTeamEmailAfterBridge({
+        label: "consultation-details",
+        bridge,
+        recipients: () => getAdminRecipientEmails(SITE_CONFIG.email),
+        send: async (to) => {
+          const { client } = await getUncachableEmailClient();
+          const html = buildDetailsAddedEmailHtml(lead, merged.added);
           const result = await client.emails.send({
             from: formatFromAddress(),
             replyTo: lead.email ? formatLeadReplyTo(lead.name, lead.email) : undefined,
@@ -191,11 +205,9 @@ export async function POST(request: NextRequest) {
             text: htmlToPlainText(html),
           });
           if (result?.error) console.error(`[consultation-details] Email to ${to} failed:`, JSON.stringify(result.error));
-        }
-      } catch (emailErr) {
-        console.error("[consultation-details] Email send failed:", emailErr);
-      }
-    });
+        },
+      }),
+    );
 
     return NextResponse.json({ ok: true, saved: true, duplicate: false });
   } catch (err) {
