@@ -64,12 +64,30 @@ is the one that stays. This site's own team email is the fallback.
   callback, request with a planning range) and "Details added" in
   `app/api/consultation/details/route.ts`. `skipEmail` still means this site
   sends neither email.
-* `team_notes` (`server/services/consultationTeamNotes.ts`) carry what only
-  this site knows into the p5 email: the lead dashboard link, the saved request
-  id, the county parcel record, the planning range, its selections and its
-  price split by trade. Lines are `Label: value`, at most 40 of at most 300
-  characters. Our cost and margin are left out on purpose: p5's "New lead"
-  email is copied into HubSpot, and costs and margins stay out of HubSpot.
+* Two note fields travel with a Step 1 request, both built in
+  `server/services/consultationTeamNotes.ts`, both `Label: value` lines of at
+  most 300 characters. Never mix them up:
+  * `team_notes` (`buildRequestTeamNotes()`, at most 40 lines, "From the
+    website" in the p5 email): the lead dashboard link, the saved request id,
+    the county parcel record, the planning range, its selections and its PRICE
+    split by trade. Never a cost, margin, markup, profit, contingency or
+    overhead figure, and pricing checks as a count only: a p5 "New lead" email
+    is copied into HubSpot, those figures stay out of HubSpot, and p5 withholds
+    any `team_notes` line that names one.
+  * `team_internal_notes` (`buildRequestInternalNotes()`, at most 60 lines,
+    "Internal pricing" in the p5 email; owner, 17 November 2026): what this
+    site's own team email shows under "Internal breakdown" for a request with a
+    planning range. Totals first (total internal cost, gross profit, the
+    margin line, quoted range, direct cost, contingency), then the wording of
+    each pricing check, our cost and the customer amount per trade, and the
+    first eight assumptions. When any are sent, p5 sends the email as "Lead and
+    pricing: ..." instead of "New lead: ...", a subject its inbox sync never
+    copies into HubSpot; that is the only reason these figures may travel.
+    Sent only for a request with a planning range: nothing for a plain
+    request, a callback or Step 2.
+  * The figures come from the same `resolveInternalEstimate()` call as the
+    email's `renderTradeRollupHtml()`; a test compares them with the rendered
+    email for every project, finish and size. Change one and change the other.
 * The contract belongs to p5homeco.com (`docs/lead-intake-contract.md` there).
   Do not change the field names here alone.
 * Guard: `tests/p5-one-team-email.test.ts`, with `tests/p5-intake-bridge.test.ts`

@@ -1,20 +1,26 @@
 /**
- * Team notes for the p5 intake (`team_notes`, owner decision 17 November 2026).
+ * Team notes for the p5 intake (owner decisions, 17 November 2026).
  *
  * When p5 confirms its own team email, this site's team email is not sent to
  * the shared inbox, so what only this site knows travels in the p5 email
- * instead, under "From the website": the in-house planning range and how it
- * splits by trade, the selections behind it, the county parcel record, and
- * where this site keeps the request.
+ * instead, in two fields that must never be mixed up:
+ *
+ * `team_notes` ("From the website"): the in-house planning range and how its
+ * price splits by trade, the selections behind it, the county parcel record,
+ * and where this site keeps the request. p5 copies a "New lead" email into
+ * HubSpot, and costs and margins stay out of HubSpot, so NO cost, margin,
+ * markup, profit, contingency or overhead line belongs here (p5 withholds any
+ * line that names one).
+ *
+ * `team_internal_notes` ("Internal pricing"): what this site's own team email
+ * shows under "Internal breakdown" for a request with a planning range: our
+ * cost by trade, direct cost, contingency, total internal cost, gross profit,
+ * the margin, and the wording of pricing checks. When any are sent, p5 sends
+ * the email as "Lead and pricing: ...", which is never copied into HubSpot.
  *
  * Every line is `Label: value` on one line. Nothing the bridge already sends
  * is repeated (name, phone, email, address, project type, message, timing,
  * files, attribution).
- *
- * Our cost, contingency, gross profit and margin are deliberately NOT here.
- * p5's "New lead" email is copied into HubSpot by its inbox sync, and costs
- * and margins stay out of HubSpot. This site's own team email (the fallback)
- * still carries them, and they can be rebuilt from the selections sent here.
  */
 import { PROJECT_LABELS, isNewConstructionProject } from "@/shared/estimateEngine";
 import { resolveInternalEstimate } from "@/shared/costs/resolve";
@@ -26,7 +32,11 @@ import {
   type PropertyEnrichment,
   type VerifiedEstimate,
 } from "@/server/services/consultationEmail";
-import { MAX_TEAM_NOTE_LENGTH, teamNoteLines } from "@/server/services/p5IntakeBridge";
+import {
+  MAX_TEAM_INTERNAL_NOTES,
+  MAX_TEAM_NOTE_LENGTH,
+  teamNoteLines,
+} from "@/server/services/p5IntakeBridge";
 
 /** Packs `a: b` pairs into as few `Label: a: b; c: d` lines as fit. */
 function packed(label: string, items: string[]): string[] {
@@ -76,8 +86,8 @@ function estimateNotes(est: VerifiedEstimate): string[] {
   const resolved = resolveInternalEstimate(est.project, est.finish, est.sqft, est.refinements);
   if (resolved) {
     const { admin } = resolved;
-    lines.push("Cost and margin: left out on purpose, because this email is copied into HubSpot");
-    // The notes themselves can name a margin, so only their count travels.
+    // The notes themselves can name a margin, so only their count travels
+    // here. Their wording is in the internal notes.
     if (admin.warnings.length) {
       lines.push(
         `Needs review: ${admin.warnings.length} pricing ${admin.warnings.length === 1 ? "note" : "notes"} on this range (duplicate scope lines or a trimmed price)`,
@@ -94,6 +104,46 @@ function estimateNotes(est: VerifiedEstimate): string[] {
     }
   }
   return lines;
+}
+
+/** How many of the engine's assumptions this site's own team email prints. */
+const INTERNAL_ASSUMPTIONS_SHOWN = 8;
+
+/**
+ * Step 1 with a planning range: the lines for `team_internal_notes`. The same
+ * figures, from the same resolver, as "Internal breakdown (not shown to the
+ * lead)" in this site's own team email (renderTradeRollupHtml). The totals
+ * come first so the 60 line cap can only ever trim the tail.
+ *
+ * Nothing for a request without a range, and nothing for Step 2. Never
+ * throws: if the breakdown cannot be built, the request is still forwarded.
+ */
+export function buildRequestInternalNotes(input: { estimate?: VerifiedEstimate | null }): string[] {
+  const est = input.estimate;
+  if (!est) return [];
+  try {
+    const resolved = resolveInternalEstimate(est.project, est.finish, est.sqft, est.refinements);
+    if (!resolved) return [];
+    const { admin } = resolved;
+    const lines = [
+      `Total internal cost: ${formatUsd(admin.totalInternalCost)}`,
+      `Gross profit: ${formatUsd(admin.grossProfit)}`,
+      `Margin: ${admin.marginLabel}`,
+      `Quoted range: ${admin.rangeLabel}`,
+      `Direct cost: ${formatUsd(admin.directCost)}`,
+      `Contingency: ${formatUsd(admin.contingency)}`,
+      ...admin.warnings.map((warning) => `Needs review: ${warning.message}`),
+      ...admin.trades.map(
+        (trade) =>
+          `Trade: ${trade.division}: our cost ${formatUsd(trade.internalCost)}, customer ${formatUsd(trade.customerAmount)}${trade.scopeSummary ? ` (${trade.scopeSummary})` : ""}`,
+      ),
+      ...admin.assumptions.slice(0, INTERNAL_ASSUMPTIONS_SHOWN).map((assumption) => `Assumption: ${assumption}`),
+    ];
+    return teamNoteLines(lines, MAX_TEAM_INTERNAL_NOTES);
+  } catch (err) {
+    console.error("[p5-intake] Could not build the internal pricing notes:", err);
+    return [];
+  }
 }
 
 export type RequestTeamNotesInput = {
