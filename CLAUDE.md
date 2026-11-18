@@ -108,6 +108,50 @@ is the one that stays. This site's own team email is the fallback.
   and `tests/consultation-details.test.ts` (`npm run verify:one-team-email`, in
   prebuild). Tests use a fake fetch; never post a test to the live intake.
 
+## The document estimator's leads go to P5 (owner decisions, 13, 17 and 18 November 2026)
+
+What the shared document estimator (`lib/p5`, `/estimate/scope`) takes on this
+site becomes a P5 lead and a HubSpot deal, and a priced estimate becomes a
+QuickBooks customer with an UNSENT estimate, with ONE team email. Both are
+posts to p5homeco.com's public lead intake, built by the shared
+`lib/p5/p5LeadIntake.ts`. Both are on while `P5_CRM_DELIVERY` is `on`, which
+is already set in production: there is no further switch.
+
+* The project request (no price). The `crm` channel in
+  `lib/p5/intakeDeliveryRuntime.ts` (brand-owned) is
+  `p5LeadIntakeTransport()`: `form: "p5-project-request"`, the brand of the
+  primary team the request was routed to (a kitchen request taken here is
+  filed under Boise Remodeling Co), the request's lead key as its id, and
+  `team_alert: "site"`, because the `team` channel has already emailed the
+  team. Without the variable it is `crm-disabled`. Only requests saved since
+  18 November 2026 are sent (`P5_REQUEST_LEADS_SINCE` names another moment).
+  `lib/p5/intakeCrmValidation.ts` is the same check the channel runs.
+* The published estimate. `syncCrm()` in `lib/p5/deliveryAdapter.ts`
+  (brand-owned) calls `forwardEstimateToP5(record, key, { brand: "Boise
+  Handyman Co" })`: `form: "p5-estimator"`, `team_alert: "site"` (the internal
+  estimate record has already been emailed), `request_external_id` (the
+  request it answers, so both are one lead) and an `estimate` of kind
+  `document`. **Customer amounts only:** no cost, margin, markup, profit,
+  contingency or overhead. A refused post throws, and the outbox marks the job
+  for review. The old lead dashboard (`LEAD_DASHBOARD_API_URL`) is no longer
+  called from the adapter; the request form's own forward
+  (`server/services/leadDashboardForward.ts`) is unchanged.
+* Keep the forwarder a dynamic `await import('./p5LeadIntake.ts')` inside
+  `syncCrm()`: the shared `tests/p5-intake-reply-to.test.ts` runs the adapter
+  in a VM with a fixed dependency list.
+* The canonical review receiver (`canonicalReviewTransport.ts`,
+  `INTAKE_RUNTIME_PROOF.crm`) is not used by this runtime and stays gated. Do
+  not activate it.
+* `p5LeadIntake.ts`, `documentEstimateFigures.ts`, `manualReview.ts`,
+  `submitEndpoint.ts` and `tests/p5-lead-intake.test.ts` are shared: edit them
+  in p5-home-co only. They were copied on their own from commit `7e0338c`
+  (`documentEstimatorLeads` in `lib/p5/shared-manifest.json`), not by a full
+  sync. The contract is p5homeco.com's `docs/lead-intake-contract.md`.
+* Guards: `tests/p5-intake-local-crm.test.ts` (the request) and
+  `tests/p5-delivery-adapter.test.ts` (the estimate), both brand-owned, with
+  the shared `tests/p5-lead-intake.test.ts`. Tests use a fake fetch; never
+  post a test to the live intake.
+
 ## Scope and one total for customers (owner decision, 16 November 2026)
 
 Every customer-facing estimate shows the full scope of work and ONE price (the
