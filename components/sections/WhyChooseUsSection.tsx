@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { SITE_IMAGES } from "@/shared/siteImages";
@@ -65,7 +66,7 @@ export function WhyChooseUsSection({ limit }: WhyChooseUsSectionProps) {
                 <div className="relative aspect-[4/3] overflow-hidden" style={{ border: "1px solid var(--ed-line)" }}>
                   <Image
                     src={SITE_IMAGES.valueCraft}
-                    alt="A sage-green front door with white trim and black hardware"
+                    alt={localAlt('A sage-green front door with white trim and black hardware')}
                     fill
                     sizes="(min-width: 1024px) 40vw, 100vw"
                     className="object-cover img-brand-grade"
@@ -75,22 +76,22 @@ export function WhyChooseUsSection({ limit }: WhyChooseUsSectionProps) {
             </Reveal>
           </div>
 
-          <div className="ed-steps">
+          {/* Ten points with a paragraph each ran to several screens on a phone.
+              Each is a native disclosure now: the title always shows, one opens
+              at a time, and every paragraph stays in the HTML. */}
+          <div className="lx-faq lx-why w-full border-t" style={{ borderColor: "var(--ed-line)" }}>
             {items.map((item, i) => (
-              <Reveal key={item.title} delay={i * 40}>
-                <div className="ed-step">
-                  <span className="ed-step-n">{String(i + 1).padStart(2, "0")}</span>
-                  <div>
+              <details key={item.title} name="why-choose-us" open={i === 0} className="border-b" style={{ borderColor: "var(--ed-line)" }}>
+                <summary>
+                  <span className="lx-why-title">
+                    <span className="ed-step-n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
                     <h3 className="ed-h3">{item.title}</h3>
-                    {/* The contrast ends mid-sentence and the body completes
-                        it, so they read as one paragraph with the turn in the
-                        stronger colour rather than two fragments with a gap. */}
-                    <p className="ed-body mt-3 max-w-[56ch]">
-                      <span className="text-foreground">{item.contrast}</span> {item.body}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
+                  </span>
+                </summary>
+                <p className="ed-body max-w-[56ch]">
+                  <span className="text-foreground">{item.contrast}</span> {item.body}
+                </p>
+              </details>
             ))}
           </div>
         </div>

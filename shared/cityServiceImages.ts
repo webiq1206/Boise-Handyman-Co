@@ -5,8 +5,9 @@
  * point at the AI-generated handyman photo library in public/images/handyman
  * (2026-08); swap for real job photography when it exists.
  *
- * City variants use a trade-specific shortlist. Relevant representative
- * images may repeat across cities; unrelated work must never fill a slot.
+ * City variants use a trade-specific shortlist, widened on 19 November 2026
+ * from the owner's photo folder so fewer city pages share a photograph. An
+ * image may still repeat across cities; unrelated work must never fill a slot.
  * The rotation is deterministic between builds.
  *
  * Key format for CITY_SERVICE_IMAGES: "service-slug/city-slug"
@@ -15,17 +16,25 @@
 import { SITE_IMAGES } from "./siteImages";
 import { getServiceImageSet, type LandingImageSet } from "./serviceBackgrounds";
 
+/**
+ * In the order the site lists its cities (SERVICE_AREA_CITY_NAMES), so two
+ * cities that sit side by side in a row of cards take consecutive photographs.
+ * With three or more photographs in a rotation, neighbours never match, also
+ * when the current city is left out of the row.
+ */
 const CITY_SLUGS = [
   "boise",
   "meridian",
-  "eagle",
   "nampa",
+  "eagle",
   "kuna",
+  "caldwell",
   "star",
   "middleton",
-  "caldwell",
   "garden-city",
 ] as const;
+
+const house = (name: string) => `/images/houses/kuna/${name}.webp`;
 
 /** AI-generated handyman photo library (2026-08). */
 const h = (name: string) => `/images/handyman/${name}.webp`;
@@ -38,39 +47,66 @@ const h = (name: string) => `/images/handyman/${name}.webp`;
 const SERVICE_ROTATION: Record<string, readonly string[]> = {
   "drywall-repair": [
     h("service-drywall-repair"),
+    house("kuna-drywall-patch"),
     h("punch-list-markers"),
+    h("wall-prep-ladder"),
   ],
   "painting-touch-ups": [
     h("service-painting-p5-reviewed-20260910"),
     h("front-door-repaint-p5-reviewed-20260910"),
+    h("paint-trim-brush"),
+    h("paint-wall-first-coat"),
+    h("paint-ceiling-roller"),
+    h("paint-room-masked"),
   ],
   "plumbing-repairs": [
     h("service-plumbing"),
     h("toilet-repair"),
+    h("under-sink-plumbing"),
+    h("vanity-faucet-cabinet"),
+    h("bathroom-vanity-faucet"),
   ],
+  // Three electrical photographs: the outlet being wired, and the two outlet
+  // close-ups from the gallery. Unrelated work never fills the slot.
   "electrical-repairs": [
     h("service-electrical"),
+    "/images/gallery/gallery-electrical-kuna-after.webp",
+    "/images/gallery/gallery-electrical-kuna-before.webp",
   ],
   "carpentry-trim-repair": [
     SITE_IMAGES.valueCraft,
     h("hero-door-hinge-branded"),
     h("door-hinge-fix"),
+    h("baseboard-new-length"),
+    h("baseboard-caulk-tools"),
+    h("door-hinge-shims"),
+    h("door-lock-keypad"),
   ],
   "mounting-assembly": [
     h("service-mounting"),
     h("grab-bar-install"),
     h("cabinet-hardware-upgrade"),
+    h("tv-and-shelves-mounted"),
+    h("floating-shelf-install"),
+    h("entry-bench-assembled"),
+    h("cabinet-pulls-installed"),
+    house("kuna-tv-mount"),
   ],
   "fence-deck-gutter-repair": [
     h("service-fence-repair"),
     h("deck-board-replacement"),
     h("hero-gutter-cleaning"),
+    h("fence-and-deck-boards"),
+    house("kuna-fence-gate-latch"),
+    house("kuna-gutter-cleaning"),
+    house("kuna-deck-board-replacement"),
   ],
   "home-maintenance": [
     h("service-caulking"),
     h("weatherstripping"),
     h("winterize-spigot"),
     h("hero-gutter-cleaning"),
+    h("caulk-baseboard-gap"),
   ],
 };
 
@@ -146,7 +182,7 @@ export function getCityServiceImageSet(
   return {
     hero,
     // Keep the visible work within this trade. Related city pages may share
-    // a suitable representative photo when a distinct job image is unavailable.
+    // a suitable photo when a distinct one is unavailable.
     breather: rotation.length > 1
       ? rotation[(cityIndex + 1) % rotation.length]
       : getServiceImageSet(serviceSlug).breather,

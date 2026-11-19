@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import { ApprovedCtaStrip, ApprovedFounder, ApprovedHowItWorks, ApprovedInstantEstimate, ApprovedServiceArea } from "@/components/approved/ApprovedHome";
 import { ApprovedFamilyFrame, ApprovedHomeHero } from "@/components/approved/ApprovedHomeHero";
 import focusedHeroStyles from '@/components/approved/FocusedSearchHero.module.css';
@@ -78,12 +79,12 @@ export default function HomePage() {
           accent="Finished properly."
           intro="A door that closes, a fence that stands straight, a clean caulk line. The small things make a home feel cared for, and we leave every job tidy."
           photos={[
-            { src: "/family/drive/landscape-1-front-porch-and-wood-door.webp", alt: "Covered front porch with a wood front door, a black wall light, light gray siding and a cedar railing", label: "Front porch", wide: true },
-            { src: "/family/drive/square-3-handyman-caulking-baseboard.webp", alt: "Fresh caulk line along a white baseboard, with a caulk gun, painter's tape and a rag on an oak floor", label: "Caulking and trim" },
-            { src: "/family/drive/square-1-front-door-smart-lock.webp", alt: "Black front door with a new deadbolt and lever handle beside white trim", label: "Door hardware" },
-            { src: "/family/drive/landscape-2-refreshed-living-room.webp", alt: "Wall-mounted television and two floating oak shelves above a media console, with a level and a drill left on top", label: "Mounting and shelves", wide: true },
-            { src: "/family/drive/landscape-3-cedar-fence-and-backyard-deck.webp", alt: "Cedar privacy fence and gate with new pickets, seen across a deck with a drill and a box of screws", label: "Fence and deck", wide: true },
-            { src: "/family/drive/square-2-entry-bench-and-coat-hooks.webp", alt: "Entry wall with a new oak bench under a rail of black coat hooks", label: "Entry bench and hooks" },
+            { src: "/family/drive/landscape-1-front-porch-and-wood-door.webp", alt: localAlt("Covered front porch with a wood front door, a black wall light, light gray siding and a cedar railing"), label: "Front porch", wide: true },
+            { src: "/family/drive/square-3-handyman-caulking-baseboard.webp", alt: localAlt("Fresh caulk line along a white baseboard, with a caulk gun, painter's tape and a rag on an oak floor"), label: "Caulking and trim" },
+            { src: "/family/drive/square-1-front-door-smart-lock.webp", alt: localAlt("Black front door with a new deadbolt and lever handle beside white trim"), label: "Door hardware" },
+            { src: "/family/drive/landscape-2-refreshed-living-room.webp", alt: localAlt("Wall-mounted television and two floating oak shelves above a media console, with a level and a drill left on top"), label: "Mounting and shelves", wide: true },
+            { src: "/family/drive/landscape-3-cedar-fence-and-backyard-deck.webp", alt: localAlt("Cedar privacy fence and gate with new pickets, seen across a deck with a drill and a box of screws"), label: "Fence and deck", wide: true },
+            { src: "/family/drive/square-2-entry-bench-and-coat-hooks.webp", alt: localAlt("Entry wall with a new oak bench under a rail of black coat hooks"), label: "Entry bench and hooks" },
           ]}
           note="Send your list and photos, and we will reply with one written quote before any work starts."
         />

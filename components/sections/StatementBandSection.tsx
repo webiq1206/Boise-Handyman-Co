@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import Image from "@/components/MarketingImage";
 import { SITE_IMAGES } from "@/shared/siteImages";
 
@@ -7,7 +8,7 @@ export function StatementBandSection() {
     <section className="relative h-48 md:h-64 overflow-hidden">
       <Image
         src={SITE_IMAGES.statementBand}
-        alt="Freshly painted white window trim, with a brush resting on an open paint can over a drop cloth"
+        alt={localAlt('Freshly painted white window trim, with a brush resting on an open paint can over a drop cloth')}
         fill
         loading="lazy"
         quality={65}

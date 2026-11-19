@@ -78,7 +78,7 @@ export function HandymanHeroVideo() {
     <div ref={media} className="fam-hero-media" aria-hidden="true">
       {/* The approved poster is immediately readable, including while loading. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img data-hero-poster="" src={POSTER} alt="" width={1920} height={1080}
+      <img data-hero-poster="" src={POSTER} alt="Handyman services in Boise, Idaho by Boise Handyman Co" width={1920} height={1080}
         fetchPriority="high" loading="eager" className="fam-hero-img" />
       {ready && <video ref={video} id="handyman-hero-video" poster={POSTER}
         autoPlay muted loop playsInline preload="auto" tabIndex={-1}

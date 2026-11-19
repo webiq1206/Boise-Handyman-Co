@@ -118,7 +118,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
     getCityLocalSection(city),
   ];
 
-  // Representative design pairs only - no seeded testimonials or star ratings
+  // Comparison pairs only - no seeded testimonials or star ratings
   // until genuine, verified reviews exist.
   const cityProjects = getGalleryProjectsForCity(city.slug);
   const proof: LandingProof | undefined =

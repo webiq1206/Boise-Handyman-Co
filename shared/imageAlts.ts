@@ -1,9 +1,59 @@
+import { cityForSlug, localAlt, type LocalAltContext } from './localAlt';
+
 /**
  * Alt text written from the photographs themselves.
  * Paths that are not listed here were not identifiable, so callers leave
  * the existing alt alone (or empty, if it was already empty).
  */
 const IMAGE_ALTS: Record<string, string> = {
+  '/images/handyman/hero-door-repair.webp':
+    "A white interior door standing open, with a tool bag, a drill and hinges on a drop cloth",
+  '/images/houses/kuna/kuna-fence-gate-latch.webp':
+    "A black latch on a wood fence gate",
+  '/images/houses/kuna/kuna-tv-mount.webp':
+    "A television wall bracket above a television resting on the floor, with a level and a drill",
+  // Added 19 November 2026 (second pass) so drywall and plumbing city pages rotate through more than two or three photographs.
+  '/images/handyman/wall-prep-ladder.webp':
+    "An empty room with blue tape along the baseboard, a step ladder, a paint can and a roller tray on a drop cloth",
+  '/images/handyman/vanity-faucet-cabinet.webp':
+    "A bathroom vanity with a black faucet beside an open recessed oak medicine cabinet",
+  '/images/handyman/bathroom-vanity-faucet.webp':
+    "An oak bathroom vanity with a white top and a black faucet under a black-framed mirror",
+  '/images/handyman/front-porch-door.webp':
+    "A covered front porch with a wood entry door, white lap siding and a wood railing",
+  '/images/houses/kuna/kuna-drywall-patch.webp':
+    "A square drywall patch with fresh joint compound framed in blue tape, with a taping knife on a drop cloth",
+  // Added 19 November 2026 from the owner's photo folder, to widen each trade's rotation.
+  '/images/handyman/paint-trim-brush.webp':
+    "A paint brush resting on an open can of white paint beside a freshly painted door casing",
+  '/images/handyman/paint-wall-first-coat.webp':
+    "A bedroom wall partly rolled with a first coat of white paint over a drop cloth",
+  '/images/handyman/paint-ceiling-roller.webp':
+    "A step ladder and a paint roller on an extension pole in a room with a sloped ceiling",
+  '/images/handyman/paint-room-masked.webp':
+    "An empty room with blue tape along the baseboard and a drop cloth on the floor",
+  '/images/handyman/under-sink-plumbing.webp':
+    "Open sink cabinet showing the drain trap and supply lines, with a tool bag and a drill on the floor",
+  '/images/handyman/baseboard-new-length.webp':
+    "A new length of white baseboard leaning against a wall above a wood floor",
+  '/images/handyman/baseboard-caulk-tools.webp':
+    "White baseboard along a wood floor, with a hammer and a caulk gun on a drop cloth",
+  '/images/handyman/door-hinge-shims.webp':
+    "A white interior door at its hinge, with a screwdriver, shims and screws on a cloth below",
+  '/images/handyman/door-lock-keypad.webp':
+    "A black entry door with a keypad deadbolt and a lever handle",
+  '/images/handyman/tv-and-shelves-mounted.webp':
+    "A wall-mounted television above an oak media console, with two floating shelves and a level",
+  '/images/handyman/entry-bench-assembled.webp':
+    "An assembled oak bench against a white entry wall",
+  '/images/handyman/floating-shelf-install.webp':
+    "A floating oak shelf mounted on a wall, with a drill, a level and a tape measure on a drop cloth",
+  '/images/handyman/cabinet-pulls-installed.webp':
+    "White shaker cabinet drawers and doors with black bar pulls",
+  '/images/handyman/fence-and-deck-boards.webp':
+    "A cedar privacy fence with new pickets and a deck with replaced boards, with a drill on the deck",
+  '/images/handyman/caulk-baseboard-gap.webp':
+    "A caulk gun, painter’s tape and a rag beside white baseboard on a wood floor",
   '/images/handyman/service-drywall-repair.webp':
     'Hands spreading joint compound over a drywall patch with a taping knife',
   '/images/handyman/service-carpentry-trim-branded.webp':
@@ -54,6 +104,10 @@ const IMAGE_ALTS: Record<string, string> = {
     'An insulated cover fitted over an outdoor faucet, with frost on the grass',
   '/images/handyman/grab-bar-install.webp':
     'A brushed-nickel grab bar installed on subway tile in a shower',
+  '/images/areas/boise-hidden-springs.webp':
+    'White two-story homes with covered porches on a street below a green hillside',
+  '/images/areas/boise-harris-ranch.webp':
+    'Two-story homes with grey lap siding and small covered entries below a dry foothill',
   '/images/areas/boise.webp':
     'A tree-lined street of two-story homes with a brush-covered hillside rising behind',
   '/images/areas/meridian.webp':
@@ -112,8 +166,30 @@ const IMAGE_ALTS: Record<string, string> = {
     'New deck boards going down beside a single-storey home with a wood privacy fence',
 };
 
-export function altForImage(src: string | undefined | null): string | undefined {
+/** What the picture shows, with no local wording. */
+export function imageDescription(src: string | undefined | null): string | undefined {
   if (!src) return undefined;
   const path = src.split('?')[0].split('#')[0];
   return IMAGE_ALTS[path];
+}
+
+/** The place an area photograph belongs to, read from its path. */
+function cityFromPath(path: string): string | undefined {
+  const area = path.match(/\/areas\/([^./]+)\.webp$/);
+  if (area) return cityForSlug(area[1]);
+  if (path.includes('/houses/kuna/')) return 'Kuna';
+  return undefined;
+}
+
+/**
+ * The alt for a content photograph: the work and the place, then what the
+ * picture shows (shared/localAlt.ts). Pass the page's own service and city;
+ * without them an area photograph supplies its city and Boise is the place.
+ * Returns undefined for a path with no description, as before.
+ */
+export function altForImage(src: string | undefined | null, context: LocalAltContext = {}): string | undefined {
+  const description = imageDescription(src);
+  if (!description || !src) return undefined;
+  const path = src.split('?')[0].split('#')[0];
+  return localAlt(description, { subject: context.subject, city: context.city ?? cityFromPath(path) });
 }

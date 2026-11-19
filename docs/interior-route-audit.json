@@ -12,7 +12,7 @@
   {
     "route": "/areas",
     "file": "app/areas/page.tsx",
-    "seoSignature": "49fdeac6bae86ba275c532628f8500d229fdf56c9f4fd6731f85b5ca3ac2c119"
+    "seoSignature": "f4d7a112a6540ac114c9ba000de77a84cb06a1945162d6f325dce7c48716ee29"
   },
   {
     "route": "/blog/[slug]",

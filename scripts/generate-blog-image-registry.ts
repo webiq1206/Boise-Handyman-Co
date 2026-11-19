@@ -27,7 +27,74 @@ const img = (name: string) => `/images/handyman/${name}.webp`;
 const area = (name: string) => `/images/areas/${name}.webp`;
 
 /** The handyman image library, with the alt text each image warrants. */
+const house = (name: string) => `/images/houses/kuna/${name}.webp`;
+
 const LIBRARY = {
+  // Added 19 November 2026 so posts that sat side by side in a list stop sharing one photograph.
+  drywallPatch: {
+    src: house('kuna-drywall-patch'),
+    alt: 'A square drywall patch with fresh joint compound framed in blue tape, with a taping knife on a drop cloth',
+  },
+  underSink: {
+    src: img('under-sink-plumbing'),
+    alt: 'Open sink cabinet showing the drain trap and supply lines, with a tool bag and a drill on the floor',
+  },
+  doorWork: {
+    src: img('hero-door-repair'),
+    alt: 'A white interior door standing open, with a tool bag, a drill and hinges on a drop cloth',
+  },
+  doorLock: {
+    src: img('door-lock-keypad'),
+    alt: 'A black entry door with a keypad deadbolt and a lever handle',
+  },
+  hingeShims: {
+    src: img('door-hinge-shims'),
+    alt: 'A white interior door at its hinge, with a screwdriver, shims and screws on a cloth below',
+  },
+  shelfInstall: {
+    src: img('floating-shelf-install'),
+    alt: 'A floating oak shelf mounted on a wall, with a drill, a level and a tape measure on a drop cloth',
+  },
+  cabinetPulls: {
+    src: img('cabinet-pulls-installed'),
+    alt: 'White shaker cabinet drawers and doors with black bar pulls',
+  },
+  baseboard: {
+    src: img('baseboard-new-length'),
+    alt: 'A new length of white baseboard leaning against a wall above a wood floor',
+  },
+  baseboardCaulk: {
+    src: img('baseboard-caulk-tools'),
+    alt: 'White baseboard along a wood floor, with a hammer and a caulk gun on a drop cloth',
+  },
+  caulkGap: {
+    src: img('caulk-baseboard-gap'),
+    alt: 'A caulk gun, painter’s tape and a rag beside white baseboard on a wood floor',
+  },
+  fenceBoards: {
+    src: img('fence-and-deck-boards'),
+    alt: 'A cedar privacy fence with new pickets and a deck with replaced boards, with a drill on the deck',
+  },
+  tvShelves: {
+    src: img('tv-and-shelves-mounted'),
+    alt: 'A wall-mounted television above an oak media console, with two floating shelves and a level',
+  },
+  paintWall: {
+    src: img('paint-wall-first-coat'),
+    alt: 'A bedroom wall partly rolled with a first coat of white paint over a drop cloth',
+  },
+  porch: {
+    src: img('front-porch-door'),
+    alt: 'A covered front porch with a wood entry door, white lap siding and a wood railing',
+  },
+  gutterLeaves: {
+    src: house('kuna-gutter-cleaning'),
+    alt: 'White gutter with autumn leaves at the eave of a beige Kuna single-storey home',
+  },
+  deckBoards: {
+    src: house('kuna-deck-board-replacement'),
+    alt: 'New deck boards going down beside a single-storey home with a wood privacy fence',
+  },
   doorRepair: {
     src: img('hero-door-hinge-branded'),
     alt: 'An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth',
@@ -188,7 +255,7 @@ const HUB_DEFAULT: Record<string, LibraryKey> = {
  */
 const BY_SLUG: Record<string, LibraryKey> = {
   // Repairs & fixes
-  'how-to-patch-drywall': 'drywall',
+  'how-to-patch-drywall': 'drywallPatch',
   'interior-paint-touch-up-guide': 'painting',
   'common-toilet-problems-and-fixes': 'toilet',
   'fixing-squeaky-floors-and-sticking-doors': 'hinge',
@@ -203,7 +270,7 @@ const BY_SLUG: Record<string, LibraryKey> = {
 
   // Home maintenance
   'caulking-guide-boise-homes': 'caulking',
-  'seasonal-home-maintenance-checklist-boise': 'deck',
+  'seasonal-home-maintenance-checklist-boise': 'deckBoards',
   'preparing-your-boise-home-for-winter': 'winterSpigot',
   'energy-saving-home-fixes-boise': 'weatherstrip',
   'gutter-cleaning-schedule-boise': 'gutterCleaning',
@@ -211,19 +278,19 @@ const BY_SLUG: Record<string, LibraryKey> = {
 
   // Costs & hiring
   'handyman-prices-boise': 'estimate',
-  'what-small-home-repairs-cost-boise': 'materials',
+  'what-small-home-repairs-cost-boise': 'doorLock',
   'drywall-repair-cost-boise': 'drywall',
-  'why-handyman-quotes-vary': 'estimate',
+  'why-handyman-quotes-vary': 'underSink',
   'how-to-compare-handyman-quotes': 'estimate',
-  'hourly-rate-vs-flat-rate-handyman': 'estimate',
-  'how-to-budget-home-repairs-boise': 'materials',
-  'home-maintenance-budget-idaho': 'estimate',
-  'questions-to-ask-a-handyman': 'consult',
-  'handyman-red-flags': 'consult',
-  'handyman-vs-contractor': 'consult',
-  'what-to-expect-first-handyman-visit': 'consult',
-  'diy-vs-hiring-a-handyman': 'carpentry',
-  'who-supplies-materials-handyman-jobs': 'materials',
+  'hourly-rate-vs-flat-rate-handyman': 'doorWork',
+  'how-to-budget-home-repairs-boise': 'caulkGap',
+  'home-maintenance-budget-idaho': 'baseboardCaulk',
+  'questions-to-ask-a-handyman': 'shelfInstall',
+  'handyman-red-flags': 'hingeShims',
+  'handyman-vs-contractor': 'baseboard',
+  'what-to-expect-first-handyman-visit': 'porch',
+  'diy-vs-hiring-a-handyman': 'paintWall',
+  'who-supplies-materials-handyman-jobs': 'fenceBoards',
   'ada-vs-canyon-county-permit-timelines': 'permits',
   'boise-building-permit-guide': 'permits',
 
@@ -232,12 +299,12 @@ const BY_SLUG: Record<string, LibraryKey> = {
   'deck-maintenance-boise': 'deck',
 
   // Pillar guides
-  'boise-home-repair-cost-guide': 'estimate',
+  'boise-home-repair-cost-guide': 'materials',
   'hire-a-handyman-treasure-valley': 'consult',
-  'boise-home-maintenance-guide': 'winterSpigot',
-  'small-home-upgrades-that-pay-off': 'hardware',
+  'boise-home-maintenance-guide': 'caulking',
+  'small-home-upgrades-that-pay-off': 'cabinetPulls',
   'first-time-homeowner-repair-handbook': 'doorRepair',
-  'treasure-valley-exterior-home-care-guide': 'gutterCleaning',
+  'treasure-valley-exterior-home-care-guide': 'gutterLeaves',
 
   // Location guides - each place keeps a locally specific streetscape hero.
   'boise-handyman-guide': 'boiseArea',

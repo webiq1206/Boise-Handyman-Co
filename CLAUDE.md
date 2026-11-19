@@ -185,3 +185,87 @@ Every time, in this order, in the Replit workspace:
 This applies whoever does the pull: a person, Replit's assistant or Claude.
 Never run a schema command against the live database. The same checklist is in
 `replit.md`, which Replit's assistant reads.
+
+## Interior page refinement (owner approval, 19 November 2026)
+
+Service, city and area landing pages, blog articles and guides follow the
+family pattern first built on Boise Remodeling Co. Styles live in
+`app/interior-refinement.css` (imported last in `app/layout.tsx`). The homepage
+layout and the paid-traffic landing pages (`callFirst`) are unchanged.
+
+* **Landing template** (`components/seo/LandingPageTemplate.tsx`): a fact row
+  under the hero (`.lx-facts`, wording already used on the page; never a reply
+  time), benefits two across on phones, process steps that swipe on phones,
+  and questions as native `<details>` so every answer stays in the HTML. Phones
+  keep copy before the photograph in the hero.
+* **One closing links block**, "Keep exploring"
+  (`components/seo/RelatedLinks.tsx`): places and services as photo cards (a
+  swipe row on phones, balanced rows from tablet up), guides and articles as
+  one list with thumbnails, and no link shown twice. Cards keep the full
+  anchor text for search (`sr-only`); `.lx-cell` stays `position: relative` so
+  that hidden text cannot widen the page. A noindexed city combination still
+  links to the service page. Do not stack separate link lists under it again.
+* **Articles and guides**: quiet header and date line, one "On this page" row
+  on phones, downloads and the guide note after the article, one estimate
+  prompt at the end on phones, related pages with their photographs. On
+  desktop the reading column and the sticky rail fill the container.
+* **Photographs.** Each trade's rotation in `shared/cityServiceImages.ts` was
+  widened from the owner's photo folder so fewer city pages share a picture.
+  A new file needs a description in `shared/imageAlts.ts`; unrelated work never
+  fills a trade's slot.
+* **Image alt text is local.** Every content image's alt is "<work> in <city>,
+  Idaho: <what the picture shows>", built by `localAlt()` in
+  `shared/localAlt.ts`. `altForImage()` and `getBlogImageAlt()` apply it; a
+  page passes its own service and city, and Boise is the default place. New
+  images go through one of those helpers, never a bare string. Brand lockups
+  in the shared header and footer keep an empty alt because their link carries
+  the company name. Guard: `tests/local-alt.test.ts`.
+* **No qualifier beside a photograph** (owner direction). No "inspiration",
+  "possibilities", "idea", "concept", "representative" or "tailored to your
+  property" in an alt, heading, eyebrow, caption or image sitemap entry. Use a
+  plain subject label (the service, with the city where the page has one). Do
+  not replace it with wording that claims a photograph is a completed customer
+  job.
+* `.guide-section-details[open] .guide-section-summary > span` keeps the child
+  combinator, so the rule that hides "Tap to expand" cannot hide part of a
+  heading.
+
+### Second pass (19 November 2026)
+
+* **Photo rotations follow the display order of cities** (`CITY_SLUGS` in
+  `shared/cityServiceImages.ts` matches `SERVICE_AREA_CITY_NAMES`), so two
+  cities side by side in a card row take consecutive photographs. Keep three
+  or more photographs in a rotation where the photo folder allows; electrical
+  has one and nothing unrelated fills it.
+* **Blog and guide heroes** are assigned in `scripts/generate-blog-image-registry.ts`
+  (then `npm run images:blog`). No more than two posts share one photograph,
+  apart from the Boise street photo used by three Boise-area guides.
+* **Listing cards are compact rows on phones** (`lx-row-card` on `BlogCard`,
+  `AreaCard` and the guide index cards): photograph, label and title, the whole
+  row a link. Excerpts, dates and "Read" links return from 701px up. Row photos
+  use `object-position: 50% 20%` so a square crop never cuts off a head.
+* **Buttons match their surface.** On a charcoal band (`surface="gradient"`,
+  `ed-on-gradient`) a CTA takes `tone="dark"`; on paper it is the charcoal
+  primary. `BlogEndCta`, the landing closing section and the warranty hero were
+  each one tone off and nearly invisible.
+* **One use per photo holds on paid-traffic pages too** (19 November 2026).
+  `LandingPageTemplate` used to repeat the breather and process photos inside
+  the long-form block on `callFirst` pages. An inline photo now appears only
+  when the page has not already shown it, on every page.
+* **Touch targets are 44px on phones and tablets.** The rule at the end of
+  `app/interior-refinement.css` (`max-width: 1023px`) covers text links in
+  lists, row links, disclosure summaries, phone and text links and topic
+  chips. Add a new link style to that selector rather than shrinking it.
+  Inline links inside a sentence are exempt.
+* **About: "What sets us apart" is tap-to-open** (`WhyChooseUsSection`,
+  native `details` sharing one `name`, first one open). Every paragraph stays
+  in the HTML. Do not turn it back into ten open paragraphs.
+* **Electrical has three photographs**: the outlet being wired and the two
+  outlet close-ups from the gallery. Drive holds no other electrical photo, so
+  nearby-city cards on an electrical page can still repeat one. Never fill the
+  slot with unrelated work.
+* **Paid-traffic pages (`callFirst`) take no fact row.** Their hero is followed
+  directly by the request form the hero links to; nothing goes between them.
+* `docs/interior-route-audit.json` holds a fingerprint of each interior page's
+  metadata and schema calls. When a page's metadata changes on purpose, update
+  its `seoSignature` in the same commit (`tests/approved-interiors.test.ts`).

@@ -33,7 +33,7 @@ export function BlogEndCta() {
       {/* C5: one primary, and the phone as a text link. The band used to carry
           four actions (send, book, call, text) that all led to the same intake. */}
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 [&>a:first-child]:w-full sm:[&>a:first-child]:w-auto">
-        <EstimateCTA variant="brand" size="lg" data-testid="link-bottom-cta-estimate">
+        <EstimateCTA variant="brand" size="lg" tone="dark" data-testid="link-bottom-cta-estimate">
           {CTA_PRIMARY}
           <ArrowRight className="ml-2 h-5 w-5" />
         </EstimateCTA>

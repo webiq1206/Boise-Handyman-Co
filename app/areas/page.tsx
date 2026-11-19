@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import { InteriorPage } from '@/components/approved/InteriorLayout';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AreaCard } from "@/components/marketing/AreaCard";
@@ -53,7 +54,7 @@ export default function AreasHubPage() {
       <div className="flex flex-col ">
         <PageHeroBand
           imageSrc={AREAS_HERO_IMAGE}
-          imageAlt="An extension ladder set against the gutter of a two-story house, with a bucket on the lawn below"
+          imageAlt={localAlt('An extension ladder set against the gutter of a two-story house, with a bucket on the lawn below')}
         >
           <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Service areas" }]} />
           <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Treasure Valley</p>

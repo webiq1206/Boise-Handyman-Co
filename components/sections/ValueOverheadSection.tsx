@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { Section } from "@/components/marketing/Section";
@@ -71,7 +72,7 @@ export function ValueOverheadSection() {
                 <Image
                   src={SITE_IMAGES.valueCraft}
                   loading="lazy"
-                  alt="A sage-green front door with white trim and black hardware"
+                  alt={localAlt('A sage-green front door with white trim and black hardware')}
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover img-brand-grade"

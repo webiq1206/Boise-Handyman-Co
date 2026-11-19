@@ -1,3 +1,4 @@
+import { cityFromTags, localAlt, subjectFromTags } from './localAlt';
 import {
   BLOG_IMAGE_REGISTRY,
   HUB_HERO_IMAGES,
@@ -25,7 +26,12 @@ export function getBlogImageForSlug(
 }
 
 export function getBlogImageAlt(slug: string): string {
-  return BLOG_IMAGE_REGISTRY[slug]?.alt ?? 'Handyman repair work';
+  const entry = BLOG_IMAGE_REGISTRY[slug];
+  // The work and the place first (from the post's topic tags), then what the picture shows.
+  return localAlt(entry?.alt ?? 'Handyman repair work', {
+    subject: subjectFromTags(entry?.topicTags),
+    city: cityFromTags(entry?.topicTags),
+  });
 }
 
 export function getBlogHeroImage(
@@ -148,7 +154,7 @@ export function getArticleInlineFigures(
     if (hubHero !== primarySrc) {
       queue.unshift({
         src: hubHero,
-        alt: altForSrc(hubHero, hubSlug),
+        alt: localAlt(altForSrc(hubHero, hubSlug)),
         hubs: [hubSlug],
       });
     }
@@ -170,7 +176,7 @@ export function getArticleInlineFigures(
     figures.push({
       afterSectionIndex,
       src: next.src,
-      alt: next.alt || altForSrc(next.src, hubSlug),
+      alt: localAlt(next.alt || altForSrc(next.src, hubSlug)),
     });
   }
 
