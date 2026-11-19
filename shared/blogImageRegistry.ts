@@ -318,14 +318,14 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'hidden-springs-handyman-guide': {
-    hero: '/images/areas/boise.webp',
-    alt: 'A tree-lined street of two-story homes with a brush-covered hillside rising behind',
+    hero: '/images/areas/boise-hidden-springs.webp',
+    alt: 'White two-story homes with covered porches on a street below a green hillside',
     topicTags: ["boise","hidden springs","idaho","handyman","costs"],
     source: 'handyman',
   },
   'harris-ranch-handyman-guide': {
-    hero: '/images/areas/boise.webp',
-    alt: 'A tree-lined street of two-story homes with a brush-covered hillside rising behind',
+    hero: '/images/areas/boise-harris-ranch.webp',
+    alt: 'Two-story homes with grey lap siding and small covered entries below a dry foothill',
     topicTags: ["boise","harris ranch","idaho","handyman","costs"],
     source: 'handyman',
   },

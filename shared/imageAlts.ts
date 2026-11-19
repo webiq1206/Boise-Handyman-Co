@@ -104,6 +104,10 @@ const IMAGE_ALTS: Record<string, string> = {
     'An insulated cover fitted over an outdoor faucet, with frost on the grass',
   '/images/handyman/grab-bar-install.webp':
     'A brushed-nickel grab bar installed on subway tile in a shower',
+  '/images/areas/boise-hidden-springs.webp':
+    'White two-story homes with covered porches on a street below a green hillside',
+  '/images/areas/boise-harris-ranch.webp':
+    'Two-story homes with grey lap siding and small covered entries below a dry foothill',
   '/images/areas/boise.webp':
     'A tree-lined street of two-story homes with a brush-covered hillside rising behind',
   '/images/areas/meridian.webp':

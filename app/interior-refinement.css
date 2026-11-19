@@ -376,3 +376,25 @@
   .approved-shell .approved-interior .interior-contact-channel { padding: var(--space-5, 20px); }
   .approved-shell .approved-interior .interior-contact-channel-inner { flex-direction: row; align-items: flex-start; gap: var(--space-4, 16px); }
 }
+
+/* "What sets us apart" as tap-to-open rows (about page). */
+.approved-shell .lx-why .lx-why-title { display: flex; align-items: baseline; gap: var(--space-4, 16px); min-width: 0; }
+.approved-shell .lx-why .lx-why-title h3 { margin: 0; }
+.approved-shell .lx-why details > p { padding-left: calc(var(--space-4, 16px) + 2.25rem); }
+@media (max-width: 700px) { .approved-shell .lx-why details > p { padding-left: 0; } }
+
+/* Touch targets on phones and tablets: text links and disclosure rows that sat
+   at 20 to 32px are 44px tall, without changing how they look. */
+@media (max-width: 1023px) {
+  .approved-shell main :is(.interior-service-list a, .interior-text-link, .ed-link, .ed-rule-link, details > summary, a[href^="tel:"], a[href^="sms:"], li a.underline, h3 > a.underline, .flex > a.underline, .lx-row-link, a.inline-flex.text-sm, a.inline-flex.text-accent-legible, button.min-h-9, .ed-btn, .ed-btn-ghost, .ed-btn-outline) {
+    min-height: var(--touch-min, 44px);
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* Home repairs: service cards two across on desktop, photo beside the copy. */
+@media (min-width: 701px) {
+  .approved-shell .lx-related.lx-related-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .approved-shell .lx-related-two .lx-related-card { grid-template-columns: 200px minmax(0, 1fr); align-items: center; }
+}

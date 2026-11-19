@@ -66,9 +66,12 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("vanity-faucet-cabinet"),
     h("bathroom-vanity-faucet"),
   ],
-  // The photo folder holds one electrical photograph. Unrelated work never fills the slot.
+  // Three electrical photographs: the outlet being wired, and the two outlet
+  // close-ups from the gallery. Unrelated work never fills the slot.
   "electrical-repairs": [
     h("service-electrical"),
+    "/images/gallery/gallery-electrical-kuna-after.webp",
+    "/images/gallery/gallery-electrical-kuna-before.webp",
   ],
   "carpentry-trim-repair": [
     SITE_IMAGES.valueCraft,

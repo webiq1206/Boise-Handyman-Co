@@ -248,6 +248,22 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
   `ed-on-gradient`) a CTA takes `tone="dark"`; on paper it is the charcoal
   primary. `BlogEndCta`, the landing closing section and the warranty hero were
   each one tone off and nearly invisible.
+* **One use per photo holds on paid-traffic pages too** (19 November 2026).
+  `LandingPageTemplate` used to repeat the breather and process photos inside
+  the long-form block on `callFirst` pages. An inline photo now appears only
+  when the page has not already shown it, on every page.
+* **Touch targets are 44px on phones and tablets.** The rule at the end of
+  `app/interior-refinement.css` (`max-width: 1023px`) covers text links in
+  lists, row links, disclosure summaries, phone and text links and topic
+  chips. Add a new link style to that selector rather than shrinking it.
+  Inline links inside a sentence are exempt.
+* **About: "What sets us apart" is tap-to-open** (`WhyChooseUsSection`,
+  native `details` sharing one `name`, first one open). Every paragraph stays
+  in the HTML. Do not turn it back into ten open paragraphs.
+* **Electrical has three photographs**: the outlet being wired and the two
+  outlet close-ups from the gallery. Drive holds no other electrical photo, so
+  nearby-city cards on an electrical page can still repeat one. Never fill the
+  slot with unrelated work.
 * **Paid-traffic pages (`callFirst`) take no fact row.** Their hero is followed
   directly by the request form the hero links to; nothing goes between them.
 * `docs/interior-route-audit.json` holds a fingerprint of each interior page's

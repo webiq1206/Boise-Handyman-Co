@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { InteriorHero, InteriorPage } from '@/components/approved/InteriorLayout';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
@@ -7,6 +8,8 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { buildCanonical } from '@/lib/page-metadata';
 import { generateBreadcrumbSchema } from '@/lib/schema';
 import { SERVICES, serviceHeading } from '@/shared/contentData';
+import { getCityServiceImage } from '@/shared/cityServiceImages';
+import { altForImage } from '@/shared/imageAlts';
 
 const title = 'Home Repairs in Boise & the Treasure Valley';
 const description = 'Get help with drywall, doors, trim, fixtures and a household repair list. Share what needs attention or request a call from Boise Handyman Co.';
@@ -38,9 +41,19 @@ export default function HomeRepairsPage() {
       <div className="ed-shell">
         <h2 className="ed-h2">One job or a whole repair list</h2>
         <p className="ed-body mt-4">Share photos if you have them, or start with a short description. If a job needs a specialty contractor, we’ll explain the next step rather than promise work outside our scope.</p>
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2">
-          {SERVICES.map(service=><li key={service.slug}><h3 className="font-semibold"><Link className="underline underline-offset-4" href={`/services/${service.slug}`}>{serviceHeading(service.name)}</Link></h3><p className="mt-2">{service.shortDescription}</p></li>)}
-        </ul>
+        {/* Each service with its own photograph, so the page is not a wall of links. */}
+        <div className="lx-related lx-related-two mt-10">
+          {SERVICES.map(service=>{
+            const src = getCityServiceImage(`/services/${service.slug}`);
+            return <Link key={service.slug} href={`/services/${service.slug}`} className="lx-related-card group">
+              {src && <span className="lx-related-photo"><Image src={src} alt={altForImage(src,{subject:serviceHeading(service.name),city:'Boise'}) ?? ''} fill sizes="(max-width: 700px) 112px, 400px" className="object-cover img-brand-grade"/></span>}
+              <span className="lx-related-copy">
+                <span role="heading" aria-level={3} className="ed-h4 group-hover:underline group-hover:underline-offset-4">{serviceHeading(service.name)}</span>
+                <span className="ed-body">{service.shortDescription}</span>
+              </span>
+            </Link>;
+          })}
+        </div>
         <div className="mt-10 flex flex-wrap gap-6"><Link className="underline underline-offset-4" href="/estimate">Tell us about your repairs</Link><a className="underline underline-offset-4" href="tel:+12084771169">Call (208) 477-1169</a></div>
       </div>
     </Section>

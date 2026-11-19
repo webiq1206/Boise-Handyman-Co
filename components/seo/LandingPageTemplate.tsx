@@ -540,21 +540,12 @@ export function LandingPageTemplate({
                 {sections.map((section, i) => {
                   // Mid-guide photography for mobile scroll rhythm: after the first
                   // long-form block, and again near the midpoint on longer pages.
-                  // Paid-traffic pages keep their original pair of inline photos.
-                  // Everywhere else an inline photo appears only when it is one
-                  // the page has not already shown (Phase 3: one use per image).
-                  const showInlinePhoto = callFirst
-                    ? !!breatherImage &&
-                      (i === 0 || (sections.length >= 4 && i === Math.floor(sections.length / 2) - 1))
-                    : !!uniqueInline && i === 0;
-                  const inlineSrc = !callFirst
-                    ? uniqueInline
-                    : i === 0
-                      ? (breatherImage ?? heroImageUrl)
-                      : (processImage ?? breatherImage ?? heroImageUrl);
-                  const inlineAlt = !callFirst
-                    ? processAlt
-                    : i === 0 ? breatherAlt : (processAlt || breatherAlt);
+                  // An inline photo appears only when it is one the page has not
+                  // already shown (one use per image), paid-traffic pages included:
+                  // they used to repeat the breather and process photos here.
+                  const showInlinePhoto = !!uniqueInline && i === 0;
+                  const inlineSrc = uniqueInline;
+                  const inlineAlt = processAlt;
                   // Area and city pages keep running text in the body sans; the
                   // serif lede is for service pages and the paid landings.
                   const ledeFirst = i === 0 && !costGuidance && !isLocal;
