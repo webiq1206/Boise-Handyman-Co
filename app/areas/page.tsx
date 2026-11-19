@@ -69,7 +69,7 @@ export default function AreasHubPage() {
           <p className="sr-only" data-speakable="summary">
             Treasure Valley handyman service areas across Ada and Canyon County.
           </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
             {/* Owner decision, 13 November 2026: the estimator is the primary; the request form stays beside it. */}
             <InstantEstimateCTA data-hero-cta="primary" trackingLocation="areas_hero" />
             <FamilyButton href="/#consult" variant="secondary">{CTA_SECONDARY}</FamilyButton>
@@ -84,7 +84,7 @@ export default function AreasHubPage() {
               description="Repairs, installs, and maintenance in Ada County and Canyon County, with a written quote before work starts."
               align="left"
             />
-            <div className="grid gap-5 sm:grid-cols-3">
+            <div className="lx-seven grid gap-5 sm:grid-cols-3">
               {SERVICE_AREA_CITIES.map((city, i) => (
                 <Reveal key={city.slug} delay={i * 40}>
                   <AreaCard city={city} imageSrc={CITY_HERO_IMAGES[city.slug]} />

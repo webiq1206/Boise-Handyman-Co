@@ -442,7 +442,7 @@ export default function ContactPage() {
               description={`We handle repairs, installs, and maintenance for homeowners in ${SERVICE_AREA_LINE}.`}
               className="max-w-3xl"
             />
-            <nav aria-label="Service areas" className="grid grid-cols-2 sm:grid-cols-3 border-t border-l border-border">
+            <nav aria-label="Service areas" className="lx-area-nav grid grid-cols-2 sm:grid-cols-3 border-t border-l border-border">
               {SERVICE_AREA_CITIES.map((city) => (
                 <Link
                   key={city.slug}

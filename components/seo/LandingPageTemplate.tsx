@@ -683,7 +683,7 @@ export function LandingPageTemplate({
       {/* ─── Related links & posts ─── */}
       <Section surface="deep" spacing="lg" edge>
         <div className="ed-shell">
-          <RelatedLinks {...related} manifestPath={manifestPath} exclude={(sections ?? []).flatMap((section) => section.links?.map((link) => link.href) ?? [])} />
+          <RelatedLinks {...related} manifestPath={manifestPath} pageImages={[heroImageUrl, breatherImage, processImage, focusedDrywallHero ? '/images/handyman/punch-list-markers.webp' : undefined]} exclude={(sections ?? []).flatMap((section) => section.links?.map((link) => link.href) ?? [])} />
         </div>
       </Section>
 

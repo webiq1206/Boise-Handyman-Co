@@ -384,17 +384,71 @@
 @media (max-width: 700px) { .approved-shell .lx-why details > p { padding-left: 0; } }
 
 /* Touch targets on phones and tablets: text links and disclosure rows that sat
-   at 20 to 32px are 44px tall, without changing how they look. */
-@media (max-width: 1023px) {
-  .approved-shell main :is(.interior-service-list a, .interior-text-link, .ed-link, .ed-rule-link, details > summary, a[href^="tel:"], a[href^="sms:"], li a.underline, h3 > a.underline, .flex > a.underline, .lx-row-link, a.inline-flex.text-sm, a.inline-flex.text-accent-legible, button.min-h-9, .ed-btn, .ed-btn-ghost, .ed-btn-outline) {
+   at 20 to 32px are 44px tall, without changing how they look. A tablet held
+   sideways is 1024 wide or more, so any touch screen is covered as well. */
+@media (max-width: 1023px), (pointer: coarse) {
+  .approved-shell main :is(.interior-service-list a, .interior-text-link, .ed-link, .ed-rule-link, details > summary, a[href^="tel:"]:not(.block), a[href^="sms:"]:not(.block), li a.underline, h3 > a.underline, .flex > a.underline, .lx-row-link, a.inline-flex.text-sm, a.inline-flex.text-accent-legible, button.min-h-9, .article-rail a, .ed-btn, .ed-btn-ghost, .ed-btn-outline) {
     min-height: var(--touch-min, 44px);
     display: inline-flex;
     align-items: center;
   }
 }
 
-/* Home repairs: service cards two across on desktop, photo beside the copy. */
+/* Home repairs: photo beside the copy. One column on tablets (two columns left
+   the copy a 110px strip at 768), two across from 1024. */
 @media (min-width: 701px) {
-  .approved-shell .lx-related.lx-related-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .approved-shell .lx-related.lx-related-two { grid-template-columns: minmax(0, 1fr); }
   .approved-shell .lx-related-two .lx-related-card { grid-template-columns: 200px minmax(0, 1fr); align-items: center; }
+}
+@media (min-width: 1024px) {
+  .approved-shell .lx-related.lx-related-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ── Tablet pass (19 November 2026) ── */
+/* Seven city cards never leave one alone: two, two and three on tablets, four
+   and three from 1024. Only when the grid holds exactly seven. */
+@media (min-width: 701px) {
+  .approved-shell .lx-seven:has(> :nth-child(7):last-child) { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .approved-shell .lx-seven:has(> :nth-child(7):last-child) > * { grid-column: span 3; }
+  .approved-shell .lx-seven:has(> :nth-child(7):last-child) > :nth-child(n+5) { grid-column: span 2; }
+}
+@media (min-width: 1024px) {
+  .approved-shell .lx-seven:has(> :nth-child(7):last-child) { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .approved-shell .lx-seven:has(> :nth-child(7):last-child) > * { grid-column: span 3; }
+  .approved-shell .lx-seven:has(> :nth-child(7):last-child) > :nth-child(n+5) { grid-column: span 4; }
+}
+/* A last city link alone on its row fills the row. */
+@media (min-width: 640px) { .approved-shell .lx-area-nav > :last-child:nth-child(3n+1) { grid-column: 1 / -1; } }
+@media (max-width: 639px) { .approved-shell .lx-area-nav > :last-child:nth-child(odd) { grid-column: 1 / -1; } }
+/* Check lists in two columns: the "paragraph after paragraph" gap pushed every
+   second item down, so the columns did not line up. */
+.approved-shell ul.grid > li.ed-body { margin-top: 0; }
+/* Hero facts beside a photograph on tablets: three columns left each value a
+   word wide ("before / work / starts"). One fact per line, label beside value. */
+@media (min-width: 701px) and (max-width: 1100px) {
+  .approved-shell .approved-interior .interior-hero-contact .interior-hero-copy .ed-hero-facts { grid-template-columns: minmax(0, 1fr); gap: var(--space-2, 8px); }
+  .approved-shell .approved-interior .interior-hero-contact .interior-hero-copy .ed-hero-facts > div { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--space-3, 12px); }
+}
+/* Article sections: the open and close mark sits at the end of the row, not as
+   a stray dash right after the heading. */
+.approved-shell .guide-section-summary > div { flex: 1 1 0; min-width: 0; }
+.approved-shell .guide-section-summary::after { align-self: center; }
+/* About: five "on every visit" cells in two columns left an empty cell. */
+@media (min-width: 701px) and (max-width: 1100px) { .approved-shell .ed-matrix > li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+/* Contact channels on tablets: one card per row. Two across broke the email
+   address in half; a phone or text link that wraps a whole card stays a block
+   (the touch-target rule above is for text links only). */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .approved-shell .approved-interior .interior-contact-channels { grid-template-columns: minmax(0, 1fr); }
+  .approved-shell .approved-interior .interior-contact-channels > * { grid-column: auto; }
+}
+/* A card with a link under it ("Save our contact"): the card takes the room
+   that is left, so the link shows below it and no longer slides out of view. */
+.approved-shell .interior-contact-channels div:has(> .interior-contact-channel-companion) { display: flex; flex-direction: column; }
+.approved-shell .interior-contact-channels div:has(> .interior-contact-channel-companion) > a { flex: 1 1 auto; height: auto; }
+/* Articles on a tablet held sideways: a 340px rail left the reading column
+   417px wide. A narrower rail and gap give the text the room. */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .approved-shell .approved-interior .interior-article-grid { grid-template-columns: minmax(0, 1fr) 280px; gap: var(--space-8, 32px); }
+  .approved-shell .approved-interior .interior-article-grid > aside { width: 280px; }
 }

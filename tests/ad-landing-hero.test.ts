@@ -42,7 +42,20 @@ async function render(file:string,params:Record<string,string>):Promise<string>{
  const tree=React.createElement(QueryClientProvider,{client:new QueryClient()},element as never);
  return renderToStaticMarkup(tree);
 }
+// The two reviewed drywall pages (/services/drywall-repair and its Boise page)
+// use DrywallSearchHero, not the shared interior hero: the 4 November 2026 hero
+// remediation (docs/hero-remediation-20261104.md) moved their breadcrumbs,
+// overview and phone details into the section directly below the hero so the
+// first screen fits. For those two the hero is both sections together.
+const FOCUSED='data-focused-search-hero';
 function heroOf(html:string):string{
+ const focused=html.indexOf(FOCUSED);
+ if(focused>=0){
+  const first=html.indexOf('</section>',focused);
+  const end=html.indexOf('</section>',first+1);
+  assert.ok(first>focused&&end>first,'focused hero and its details section rendered');
+  return html.slice(focused,end);
+ }
  const start=html.indexOf('interior-hero');
  const end=html.indexOf('</section>',start);
  assert.ok(start>=0&&end>start,'hero section rendered');
@@ -67,7 +80,12 @@ for(const slug of ['drywall-repair','home-maintenance']){
   const call=hero.indexOf('>Call Us<');
   assert.ok(call>=0,'Call Us in the hero');
   assert.ok(hero.indexOf('>Text Us<')>call,'Text Us follows Call Us');
-  assert.ok(hero.includes('data-landing-contact'),'the paid contact actions render');
+  // The focused drywall hero renders Call Us itself as the filled primary; the other paid pages use LandingContactActions.
+  if(hero.includes(FOCUSED)){
+   const callTag=hero.slice(hero.lastIndexOf('<a',call),call);
+   assert.ok(callTag.includes('data-hero-cta="primary"')&&callTag.includes('href="tel:'),'Call Us is the filled primary and dials');
+   assert.ok(hero.includes('href="#service-inquiry"'),'the request form link follows');
+  }else assert.ok(hero.includes('data-landing-contact'),'the paid contact actions render');
   assert.equal(hero.includes('button-primary-service-hero'),false,'no site-primary hero button on an ad page');
   assert.equal(hero.includes('Prefer to talk?'),false);
  });

@@ -236,3 +236,37 @@ export function getCityServiceImage(url: string): string | undefined {
 
   return undefined;
 }
+
+/**
+ * Photographs for a row of "Keep exploring" cards, so that no card repeats a
+ * picture already on the page or in another card (owner, 19 November 2026).
+ *
+ * Each card asks for the photograph of the page it opens. When that one is
+ * taken, it takes another photograph of the same trade that is still free.
+ * When the trade has none left (electrical holds three), the card shows the
+ * city's own area photograph instead: `area` is true, and the caller describes
+ * it as the place, not as the trade. Unrelated trade work never fills a card.
+ *
+ * `taken` is shared between the rows of one page and is updated here.
+ */
+export function pickCardImages(
+  cards: readonly { serviceSlug: string; citySlug: string }[],
+  taken: Set<string>,
+): { src: string | undefined; area: boolean }[] {
+  return cards.map(({ serviceSlug, citySlug }) => {
+    const rotation = SERVICE_ROTATION[serviceSlug] ?? [];
+    const own = CITY_SERVICE_IMAGES[`${serviceSlug}/${citySlug}`] ?? rotation[0];
+    const trade = [own, ...rotation].find((src) => src && !taken.has(src));
+    if (trade) {
+      taken.add(trade);
+      return { src: trade, area: false };
+    }
+    const area = CITY_HERO_IMAGES[citySlug];
+    if (area && !taken.has(area)) {
+      taken.add(area);
+      return { src: area, area: true };
+    }
+    // No free photograph at all: a card without a picture, never a repeat.
+    return { src: undefined, area: false };
+  });
+}

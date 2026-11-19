@@ -269,3 +269,33 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
 * `docs/interior-route-audit.json` holds a fingerprint of each interior page's
   metadata and schema calls. When a page's metadata changes on purpose, update
   its `seoSignature` in the same commit (`tests/approved-interiors.test.ts`).
+
+### Tablet pass and card photographs (19 November 2026)
+
+* **No Keep exploring card repeats a photograph.** `pickCardImages()` in
+  `shared/cityServiceImages.ts` gives each card a picture that is not on the
+  page and not in another card: its own trade first, and when the trade has
+  none left (electrical holds three) the card's city area photograph, described
+  as the place. A card never shows another trade's work. The template passes
+  the page's own photographs as `pageImages`. Guard:
+  `tests/explore-card-images.test.ts`.
+* **Seven city cards never leave one alone.** The services, areas and about
+  grids carry `lx-seven`: two, two and three on tablets, four and three from
+  1024. It only acts on a grid of exactly seven.
+* **Tablets (701 to 1023px).** Home repairs is one column (two left the copy a
+  110px strip); contact channels are one card per row; the contact hero facts
+  are one per line; RE-10 repair groups are one column until 1024. From 1024 to
+  1199 the article rail is 280px so the reading column keeps its width.
+* **The touch-target rule also applies to any touch screen** (`pointer:
+  coarse`), so a tablet held sideways is covered. It is for text links: a phone
+  or text link that wraps a whole card carries `block` and is left out, or the
+  card shrinks to its text (this hid half of each contact card).
+* **A link under a contact card** ("Save our contact") stays visible: the card
+  wrapper is a column and the card takes the room that is left.
+* **Buttons on the charcoal RE-10 closing band** take `tone="dark"`; the
+  primary is the `hero` variant (paper fill). Two were invisible.
+* **`tests/ad-landing-hero.test.ts`** knows the two reviewed drywall pages use
+  `DrywallSearchHero` (4 November 2026 hero remediation,
+  `docs/hero-remediation-20261104.md`): their hero is the focused section plus
+  the details section under it. It runs in prebuild with the card photograph
+  test (`npm run verify:landing-heroes`).

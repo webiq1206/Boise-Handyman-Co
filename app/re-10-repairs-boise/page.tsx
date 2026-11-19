@@ -221,7 +221,7 @@ export default function Re10RepairsPage() {
             }
             className="mb-10 max-w-3xl"
           />
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid lg:grid-cols-3 gap-5">
             {RE10_SERVICES.map((group) => (
               <MarketingCard key={group.heading} padding="lg">
                 <h3 className="text-base font-normal text-foreground mb-4">{group.heading}</h3>
@@ -499,13 +499,13 @@ export default function Re10RepairsPage() {
             report and any photos.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <FamilyButton href="/contact#consult" variant="primary" size="lg">
+            <FamilyButton href="/contact#consult" variant="hero" size="lg" tone="dark">
               Submit an RE-10 for review
             </FamilyButton>
-            <FamilyButton href={SITE_CONFIG.phoneHref} variant="secondary" size="lg" data-testid="link-re10-call-footer">
+            <FamilyButton href={SITE_CONFIG.phoneHref} variant="secondary" size="lg" tone="dark" data-testid="link-re10-call-footer">
               <Phone className="h-4 w-4" aria-hidden="true" /> {SITE_CONFIG.phone}
             </FamilyButton>
-            <FamilyButton href={SITE_CONFIG.phoneSmsHref} variant="secondary" size="lg" data-testid="link-re10-text">
+            <FamilyButton href={SITE_CONFIG.phoneSmsHref} variant="secondary" size="lg" tone="dark" data-testid="link-re10-text">
               <MessageSquare className="h-4 w-4" aria-hidden="true" /> Text us
             </FamilyButton>
           </div>

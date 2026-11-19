@@ -6,7 +6,7 @@ import { isCityServiceNoindex } from '@/lib/page-metadata';
 import { areaPath, cityServicePath, servicePath } from '@/lib/seo-routes';
 import { getManifestLinks } from '@/lib/internal-links';
 import { getBlogHeroImage, getBlogImageAlt } from '@/shared/blogImages';
-import { getCityServiceImage } from '@/shared/cityServiceImages';
+import { getCityServiceImage, pickCardImages } from '@/shared/cityServiceImages';
 import { altForImage } from '@/shared/imageAlts';
 import { cityForSlug, localAlt, subjectForService } from '@/shared/localAlt';
 import { SITE_IMAGES } from '@/shared/siteImages';
@@ -19,6 +19,8 @@ interface RelatedLinksProps {
   manifestPath?: string;
   /** Links the page already shows in its body. They are not repeated here. */
   exclude?: readonly string[];
+  /** Photographs the page already shows. No card repeats one. */
+  pageImages?: readonly (string | undefined)[];
 }
 
 /**
@@ -35,7 +37,7 @@ interface RelatedLinksProps {
  * Indexed city pages get the link; a noindexed combination points at the
  * service page instead, so no link is spent on a page that cannot rank.
  */
-interface Cell { href: string; label: string; context?: string; image?: string; alt?: string }
+interface Cell { href: string; label: string; context?: string; image?: string; alt?: string; noImage?: boolean }
 
 /** The photograph that belongs to the page a link opens. */
 function pageImage(href: string): string | undefined {
@@ -69,13 +71,13 @@ function Cells({ cells }: { cells: Cell[] }) {
       }}
     >
       {cells.map((cell) => {
-        const image = cell.image ?? pageImage(cell.href);
+        const image = cell.noImage ? undefined : cell.image ?? pageImage(cell.href);
         return (
           <li key={cell.href + cell.label}>
             <Link href={cell.href} className="lx-cell">
               {image ? (
                 <span className="lx-cell-photo">
-                  <Image src={image} alt={pageImageAlt(cell.href, image)} fill sizes="(max-width: 700px) 46vw, 300px" className="object-cover img-brand-grade" />
+                  <Image src={image} alt={cell.alt ?? pageImageAlt(cell.href, image)} fill sizes="(max-width: 700px) 46vw, 300px" className="object-cover img-brand-grade" />
                 </span>
               ) : null}
               <span className="lx-cell-label">
@@ -165,8 +167,25 @@ function Reading({ links }: { links: { href: string; label: string }[] }) {
   );
 }
 
-export function RelatedLinks({ serviceSlug, citySlug, variant, manifestPath, exclude = [] }: RelatedLinksProps) {
+/**
+ * Give each card a photograph nothing else on the page shows. A card whose
+ * trade has no free photograph left shows its city's area photograph, described
+ * as the place.
+ */
+function withPhotos(cells: Cell[], cards: { serviceSlug: string; citySlug: string }[], shown: Set<string>): Cell[] {
+  const picks = pickCardImages(cards, shown);
+  return cells.map((cell, i) => {
+    const pick = picks[i];
+    if (!pick.src) return { ...cell, noImage: true };
+    if (!pick.area) return { ...cell, image: pick.src };
+    const city = cityForSlug(cards[i].citySlug);
+    return { ...cell, image: pick.src, alt: altForImage(pick.src, { city }) ?? localAlt('Homes on a residential street', { city }) };
+  });
+}
+
+export function RelatedLinks({ serviceSlug, citySlug, variant, manifestPath, exclude = [], pageImages = [] }: RelatedLinksProps) {
   const taken = new Set<string>(exclude);
+  const shown = new Set<string>(pageImages.filter((src): src is string => Boolean(src)));
   const service = SERVICES.find((s) => s.slug === serviceSlug);
   const city = CITIES.find((c) => c.slug === citySlug);
   const groups: React.ReactNode[] = [];
@@ -174,27 +193,29 @@ export function RelatedLinks({ serviceSlug, citySlug, variant, manifestPath, exc
     isCityServiceNoindex(slug, cityslug) ? servicePath(slug) : cityServicePath(slug, cityslug);
 
   if (variant === 'area' && citySlug && city) {
-    const cells: Cell[] = SERVICES.map((s) => ({
+    const cells = withPhotos(SERVICES.map((s) => ({
       href: serviceInCity(s.slug, citySlug),
       label: serviceHeading(s.name),
       context: `${city.name}:`,
-      image: getCityServiceImage(cityServicePath(s.slug, citySlug)),
-    }));
+    })), SERVICES.map((s) => ({ serviceSlug: s.slug, citySlug })), shown);
     cells.forEach((cell) => taken.add(cell.href));
     groups.push(<Group key="services" label={`More handyman help in ${city.name}`}><Cells cells={cells} /></Group>);
   }
 
   if (variant === 'city-service' && serviceSlug && citySlug && service && city) {
     const name = serviceHeading(service.name);
-    const cityCells: Cell[] = SERVICE_AREA_CITIES.filter(
-      (c) => c.slug !== citySlug && !isCityServiceNoindex(serviceSlug, c.slug),
-    ).map((c) => ({ href: cityServicePath(serviceSlug, c.slug), label: c.name, context: `${name} in` }));
-    const serviceCells: Cell[] = SERVICES.filter((s) => s.slug !== serviceSlug).slice(0, 4).map((s) => ({
-      href: serviceInCity(s.slug, citySlug),
-      label: serviceHeading(s.name),
-      context: `${city.name}:`,
-      image: getCityServiceImage(cityServicePath(s.slug, citySlug)),
-    }));
+    const nearby = SERVICE_AREA_CITIES.filter((c) => c.slug !== citySlug && !isCityServiceNoindex(serviceSlug, c.slug));
+    const cityCells = withPhotos(
+      nearby.map((c) => ({ href: cityServicePath(serviceSlug, c.slug), label: c.name, context: `${name} in` })),
+      nearby.map((c) => ({ serviceSlug, citySlug: c.slug })),
+      shown,
+    );
+    const others = SERVICES.filter((s) => s.slug !== serviceSlug).slice(0, 4);
+    const serviceCells = withPhotos(
+      others.map((s) => ({ href: serviceInCity(s.slug, citySlug), label: serviceHeading(s.name), context: `${city.name}:` })),
+      others.map((s) => ({ serviceSlug: s.slug, citySlug })),
+      shown,
+    );
     [...cityCells, ...serviceCells].forEach((cell) => taken.add(cell.href));
     taken.add(servicePath(serviceSlug));
     taken.add(areaPath(citySlug));
