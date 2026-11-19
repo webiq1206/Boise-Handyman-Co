@@ -323,3 +323,33 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
   in the markup, the same value the masking script in `app/layout.tsx` sets
   before hydration, so the two agree. A new server-rendered text field needs
   the attribute too. Tags on a post or guide are shown once each.
+
+### A replaced photograph gets a new URL (19 November 2026)
+
+The image optimizer (`/_next/image`) answers with a one-year `Cache-Control`
+(`minimumCacheTTL` in `next.config.js`; measured live on 19 November 2026:
+`max-age=31536000`) and keys its own cache by the image URL. A photograph
+replaced under the same file name kept its URL, so returning visitors could
+keep the old picture. A file served directly (`/images/...`) answers
+`max-age=0` and is not affected.
+
+* `components/VersionedImage.tsx` wraps `next/image` and adds
+  `?v=<content hash>` to every replaced file; `components/MarketingImage.tsx`
+  goes through it. Import one of the two, never `next/image`
+  (`tests/image-versions.test.ts` fails on a direct import outside
+  `components/family`).
+* The list is `shared/generated/imageVersions.ts`, written by
+  `npm run images:versions` (`scripts/build-image-versions.mjs`), which also
+  keeps every file's hash in `shared/generated/imageHashes.json`. A file whose
+  content differs from its remembered hash joins the list and stays. It was
+  seeded with the 70 files replaced since 1 November 2026 (git history).
+  **Run `npm run images:versions` after adding or replacing an image**; the
+  test in prebuild (`verify:landing-heroes`) fails until you do.
+* Page code keeps plain paths everywhere else: alt text, page URLs, sitemaps,
+  structured data and the card photograph rules never see the version.
+* The shared family chrome is untouched. `components/family/HeroPhoto.tsx` is
+  the only shared file that reaches the optimizer and this site does not render
+  it.
+* Next 15 warns that a query string on a local image will need
+  `images.localPatterns` from Next 16. Add that with the upgrade, and check a
+  versioned URL still answers 200.
