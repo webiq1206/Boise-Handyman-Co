@@ -284,6 +284,17 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
   as the place. A card never shows another trade's work. The template passes
   the page's own photographs as `pageImages`. Guard:
   `tests/explore-card-images.test.ts`.
+* **The guide list under the cards is in the same no-repeat set**
+  (`shared/exploreReading.ts`, 19 November 2026). A row asks for the picture
+  of the page it opens; when the page or a card already shows it, the row
+  takes the next free general picture (`READING_FALLBACK_IMAGES`: tools,
+  paperwork, a front door), described as what it shows. It never takes a
+  trade's work. Every row has a thumbnail; add a general picture to that list
+  rather than letting a row go bare. The two drywall pages that open with
+  `DrywallSearchHero` swap an inline photograph that would repeat the hero's
+  picture for the page's unused hero photograph. The whole page (hero, inline
+  photographs, cards, thumbnails) is tested for every service and
+  service-in-city page in `tests/explore-card-images.test.ts`.
 * **Seven city cards never leave one alone.** The services, areas and about
   grids carry `lx-seven`: two, two and three on tablets, four and three from
   1024. It only acts on a grid of exactly seven.

@@ -15,6 +15,8 @@ import {
   getCityServiceImageSet,
   pickCardImages,
 } from '../shared/cityServiceImages';
+import { pickReadingImages, readingLinks, READING_FALLBACK_IMAGES, pageImage } from '../shared/exploreReading';
+import { getServiceImageSet } from '../shared/serviceBackgrounds';
 
 const tradePhotos = (service: string) =>
   new Set(Object.entries(CITY_SERVICE_IMAGES).filter(([key]) => key.startsWith(`${service}/`)).map(([, src]) => src));
@@ -76,6 +78,80 @@ test('area pages: the service cards do not repeat the page or each other', () =>
       if (!pick.src) continue;
       assert.equal(seen.has(pick.src), false, `${city.slug} repeats ${pick.src}`);
       seen.add(pick.src);
+    }
+  }
+});
+
+/** Every picture a landing page shows: its own three, the cards, then the reading list thumbnails. */
+function wholePage(path: string, page: (string | undefined)[], cardRows: { serviceSlug: string; citySlug: string }[][], cardHrefs: string[]) {
+  const shown = new Set<string>(page.filter((src): src is string => Boolean(src)));
+  const pictures = [...shown];
+  for (const row of cardRows) for (const pick of pickCardImages(row, shown)) if (pick.src) pictures.push(pick.src);
+  const links = readingLinks(path, new Set(cardHrefs), cardRows.length > 0);
+  const picks = pickReadingImages(links, shown);
+  for (const pick of picks) if (pick.src) pictures.push(pick.src);
+  return { pictures, links, picks };
+}
+
+function assertDistinct(path: string, pictures: string[]) {
+  const seen = new Set<string>();
+  for (const src of pictures) {
+    assert.equal(seen.has(src), false, `${path} shows ${src} twice`);
+    seen.add(src);
+  }
+}
+
+test('service pages: hero, inline photographs and reading thumbnails never repeat a picture', () => {
+  for (const service of SERVICES) {
+    const set = getServiceImageSet(service.slug);
+    const path = `/services/${service.slug}`;
+    assertDistinct(path, wholePage(path, [set.hero, set.breather, set.process], [], []).pictures);
+  }
+});
+
+test('service-in-city pages: hero, inline photographs, cards and reading thumbnails never repeat a picture', () => {
+  for (const service of SERVICES) {
+    for (const city of SERVICE_AREA_CITIES) {
+      const set = getCityServiceImageSet(service.slug, city.slug);
+      const nearby = SERVICE_AREA_CITIES.filter((c) => c.slug !== city.slug).map((c) => ({ serviceSlug: service.slug, citySlug: c.slug }));
+      const others = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 4).map((s) => ({ serviceSlug: s.slug, citySlug: city.slug }));
+      const hrefs = [...nearby, ...others].map((c) => `/services/${c.serviceSlug}/${c.citySlug}`);
+      const path = `/services/${service.slug}/${city.slug}`;
+      assertDistinct(path, wholePage(path, [set.hero, set.breather, set.process], [nearby, others], hrefs).pictures);
+    }
+  }
+});
+
+test('a reading thumbnail is the linked page\'s own photograph or a general picture, never another trade\'s work', () => {
+  for (const service of SERVICES) {
+    for (const city of SERVICE_AREA_CITIES) {
+      const set = getCityServiceImageSet(service.slug, city.slug);
+      const path = `/services/${service.slug}/${city.slug}`;
+      const { links, picks } = wholePage(path, [set.hero, set.breather, set.process], [], []);
+      picks.forEach((pick, i) => {
+        if (!pick.src) return;
+        if (pick.own) assert.equal(pick.src, pageImage(links[i].href), `${path}: ${links[i].href} shows its own photograph`);
+        else assert.ok(READING_FALLBACK_IMAGES.includes(pick.src), `${path}: ${pick.src} is not a general picture`);
+      });
+    }
+  }
+});
+
+test('every reading row has a thumbnail on service and service-in-city pages', () => {
+  for (const service of SERVICES) {
+    const overview = getServiceImageSet(service.slug);
+    const pages: [string, (string | undefined)[], { serviceSlug: string; citySlug: string }[][]][] = [
+      [`/services/${service.slug}`, [overview.hero, overview.breather, overview.process], []],
+    ];
+    for (const city of SERVICE_AREA_CITIES) {
+      const set = getCityServiceImageSet(service.slug, city.slug);
+      const nearby = SERVICE_AREA_CITIES.filter((c) => c.slug !== city.slug).map((c) => ({ serviceSlug: service.slug, citySlug: c.slug }));
+      const others = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 4).map((s) => ({ serviceSlug: s.slug, citySlug: city.slug }));
+      pages.push([`/services/${service.slug}/${city.slug}`, [set.hero, set.breather, set.process], [nearby, others]]);
+    }
+    for (const [path, page, rows] of pages) {
+      const { links, picks } = wholePage(path, page, rows, []);
+      picks.forEach((pick, i) => assert.ok(pick.src, `${path}: ${links[i].href} has no thumbnail`));
     }
   }
 });

@@ -4,12 +4,11 @@ import Image from '@/components/MarketingImage';
 import { CITIES, SERVICE_AREA_CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
 import { isCityServiceNoindex } from '@/lib/page-metadata';
 import { areaPath, cityServicePath, servicePath } from '@/lib/seo-routes';
-import { getManifestLinks } from '@/lib/internal-links';
-import { getBlogHeroImage, getBlogImageAlt } from '@/shared/blogImages';
-import { getCityServiceImage, pickCardImages } from '@/shared/cityServiceImages';
+import { getBlogImageAlt } from '@/shared/blogImages';
+import { pickCardImages } from '@/shared/cityServiceImages';
+import { pageImage, pickReadingImages, readingLinks, type ReadingPick } from '@/shared/exploreReading';
 import { altForImage } from '@/shared/imageAlts';
 import { cityForSlug, localAlt, subjectForService } from '@/shared/localAlt';
-import { SITE_IMAGES } from '@/shared/siteImages';
 
 interface RelatedLinksProps {
   serviceSlug?: string;
@@ -38,18 +37,6 @@ interface RelatedLinksProps {
  * service page instead, so no link is spent on a page that cannot rank.
  */
 interface Cell { href: string; label: string; context?: string; image?: string; alt?: string; noImage?: boolean }
-
-/** The photograph that belongs to the page a link opens. */
-function pageImage(href: string): string | undefined {
-  const [section, slug] = href.split('/').filter(Boolean);
-  if ((section === 'blog' || section === 'guides') && slug) return getBlogHeroImage(slug);
-  if (section === 'services' && slug) return getCityServiceImage(href);
-  if (section === 'services') return SITE_IMAGES.hero;
-  if (section === 'areas' && slug) return getCityServiceImage(href);
-  if (section === 'resources') return '/images/handyman/estimate-clipboard.webp';
-  if (section === 'estimate') return '/images/handyman/repair-materials.webp';
-  return undefined;
-}
 
 function pageImageAlt(href: string, src: string): string {
   const [section, slug, city] = href.split('/').filter(Boolean);
@@ -113,47 +100,19 @@ function Group({ label, action, children }: { label: string; action?: { href: st
   );
 }
 
-const MAX_READING = 6;
-
-/**
- * The hiring guide, the services index, the worksheets, the estimator and the
- * page's related pages, each once. The guide points at its canonical slug, not
- * the legacy one, so no internal link is spent on a redirect hop.
- */
-function readingLinks(manifestPath: string | undefined, taken: Set<string>, readingOnly: boolean) {
-  const fixed = [
-    { href: '/guides/hire-a-handyman-treasure-valley', label: 'Hiring a handyman in the Treasure Valley' },
-    { href: '/services', label: 'Explore repair and installation services' },
-    { href: '/resources', label: 'Free home maintenance planning worksheets' },
-    { href: '/estimate', label: 'Estimate your repair cost' },
-  ];
-  // Beside cards of places and services, the list holds guides and articles only.
-  const related = (manifestPath ? getManifestLinks(manifestPath) : [])
-    .filter((link) => !readingOnly || !/^\/(services|areas)\//.test(link.url))
-    .map((link) => ({ href: link.url, label: link.anchor }));
-  const out: { href: string; label: string }[] = [];
-  for (const link of [...fixed, ...related]) {
-    if (taken.has(link.href)) continue;
-    taken.add(link.href);
-    out.push(link);
-    if (out.length === MAX_READING) break;
-  }
-  return out;
-}
-
-function Reading({ links }: { links: { href: string; label: string }[] }) {
+function Reading({ links, picks }: { links: { href: string; label: string }[]; picks: ReadingPick[] }) {
   if (links.length === 0) return null;
   return (
     <Group label="Guides and planning">
       <ul className="lx-reading">
-        {links.map((link) => {
-          const image = pageImage(link.href);
+        {links.map((link, i) => {
+          const { src: image, own } = picks[i];
           return (
             <li key={link.href}>
               <Link href={link.href} className="lx-reading-link">
                 {image ? (
                   <span className="lx-reading-photo">
-                    <Image src={image} alt={pageImageAlt(link.href, image)} fill sizes="72px" className="object-cover img-brand-grade" />
+                    <Image src={image} alt={own ? pageImageAlt(link.href, image) : altForImage(image) ?? localAlt('Tools set out for a home repair visit')} fill sizes="72px" className="object-cover img-brand-grade" />
                   </span>
                 ) : null}
                 <span className="lx-reading-title">{link.label}</span>
@@ -235,13 +194,15 @@ export function RelatedLinks({ serviceSlug, citySlug, variant, manifestPath, exc
 
   const reading = readingLinks(manifestPath, taken, groups.length > 0);
   if (groups.length === 0 && reading.length === 0) return null;
+  // Thumbnails join the page's and the cards' no-repeat set.
+  const readingPicks = pickReadingImages(reading, shown);
 
   return (
     <div className="lx-explore">
       <h2 className="ed-h2-sm ed-statement-wide">Keep exploring</h2>
       <div className="lx-explore-grid">
         {groups}
-        <Reading links={reading} />
+        <Reading links={reading} picks={readingPicks} />
       </div>
     </div>
   );

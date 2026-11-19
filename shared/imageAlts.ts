@@ -82,6 +82,8 @@ const IMAGE_ALTS: Record<string, string> = {
     'A caulk gun laying a white bead where a bathtub meets subway tile',
   '/images/handyman/hero-door-hinge-branded.webp':
     'An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth',
+  '/images/handyman/permit-paperwork.webp':
+    'Permit paperwork and folded residential drawings on a counter, with a hand holding a pen',
   '/images/handyman/toolbag-ready.webp':
     'An open canvas tool bag with a drill, level, and tape measure on a drop cloth',
   '/images/handyman/estimate-clipboard.webp':
