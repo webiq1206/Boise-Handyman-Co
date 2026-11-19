@@ -29,7 +29,9 @@ test("photo alt text describes the picture and does not label it as our work", (
     assert.equal(source.includes(">Our work<"), false, file);
   }
   const re10 = read("app/re-10-repairs-boise/page.tsx");
-  assert.match(re10, /alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth"/);
+  // Alt text goes through localAlt() since 19 November 2026 (the work and the
+  // place, then the same description of the picture).
+  assert.match(re10, /alt=\{localAlt\('An open canvas tool bag with a drill, level, and tape measure on a drop cloth'\)\}/);
   assert.doesNotMatch(re10, /<figcaption>Representative imagery<\/figcaption>/);
   const descriptiveAlts = [
     "An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth",
@@ -47,7 +49,7 @@ test("photo alt text describes the picture and does not label it as our work", (
   assert.equal(registry.split("An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth").length - 1, 2);
   for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx"]) {
     const source = read(file);
-    assert.equal(source.includes('alt="A sage-green front door with white trim and black hardware"'), true, file);
+    assert.equal(source.includes("alt={localAlt('A sage-green front door with white trim and black hardware')}"), true, file);
   }
   for (const file of ["components/sections/ValueOverheadSection.tsx", "components/sections/WhyChooseUsSection.tsx", "shared/imageAlts.ts"]) {
     assert.equal(read(file).includes("nail gun"), false, file);
