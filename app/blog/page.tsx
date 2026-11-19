@@ -11,7 +11,10 @@ generateBreadcrumbSchema,
 generateCollectionPageSchema,
 } from "@/lib/schema";
 import { BLOG_POSTS } from "@/shared/blogContent";
-import { getBlogHeroImage,getBlogImageAlt } from "@/shared/blogImages";
+import { altForImage } from "@/shared/imageAlts";
+
+// The index hero is a picture no post card on this page uses (19 November 2026).
+const BLOG_INDEX_HERO = "/images/handyman/wall-prep-ladder.webp";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -44,8 +47,8 @@ export default function BlogPage() {
       <JsonLd data={schemas} />
 
       <PageHeroBand
-        imageSrc={getBlogHeroImage("what-small-home-repairs-cost-boise")}
-        imageAlt={getBlogImageAlt("what-small-home-repairs-cost-boise")}
+        imageSrc={BLOG_INDEX_HERO}
+        imageAlt={altForImage(BLOG_INDEX_HERO) ?? ""}
       >
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Blog" }]} />
         <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Blog</p>

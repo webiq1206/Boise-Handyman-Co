@@ -1,13 +1,21 @@
 import { InteriorDocument,InteriorPage } from '@/components/approved/InteriorLayout';
+import { PhoneFold } from '@/components/marketing/PhoneFold';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
 import { buildCanonical,FEED_ALTERNATES } from "@/lib/page-metadata";
 import { generateBreadcrumbSchema,generateWebPageSchema } from "@/lib/schema";
 import { getSiteUrlGroups } from "@/lib/siteUrls";
+import { toSentenceCase } from "@/shared/sentenceCase";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { Metadata } from "next";
 import Link from "next/link";
 
 const SITEMAP_CANONICAL = buildCanonical("/sitemap");
+
+/** Service names are stored in title case (they also feed titles and schema); the
+ *  list shows them in sentence case. Post and guide titles are already sentence
+ *  case, and the helper would capitalise the word after their colon, so they are
+ *  left as written. */
+const siteMapLabel = (label: string) => (label.includes(":") ? label : toSentenceCase(label));
 const DESCRIPTION = `Every page on the ${SITE_CONFIG.name} website in one place: services, service areas, guides, and articles.`;
 
 export const metadata: Metadata = withBrandPageMetadata(({
@@ -54,20 +62,27 @@ export default function SitemapPage() {
               <p className="lead text-muted-foreground">{DESCRIPTION}</p>
             </InteriorDocument>
             {/* Groups flow into columns so a 60-link group and a 6-link group share the width evenly. */}
-            <div className="mt-10 columns-1 gap-x-10 sm:columns-2 lg:columns-3 [&_section]:mb-8 [&_section]:break-inside-avoid [&_ul]:mt-3 [&_h2]:mt-0 [&_li]:my-1">
-            {groups.map((group) =>
+            <div className="interior-sitemap mt-10 columns-1 gap-x-10 sm:columns-2 lg:columns-3 [&_section]:mb-8 [&_section]:break-inside-avoid [&_ul]:mt-3 [&_h2]:mt-0 [&_li]:my-1">
+            {groups.map((group, index) =>
               group.entries.length === 0 ? null : (
                 <section key={group.heading} aria-labelledby={`sitemap-${group.heading.replace(/\s+/g, "-").toLowerCase()}`}>
-                  <h2 id={`sitemap-${group.heading.replace(/\s+/g, "-").toLowerCase()}`} className="mobile-keep">
-                    {group.heading} <span className="text-muted-foreground font-normal">({group.entries.length})</span>
-                  </h2>
-                  <ul>
-                    {group.entries.map((e) => (
-                      <li key={e.path}>
-                        <Link href={e.path}>{e.label}</Link>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Tap-to-open on phones (the first group starts open), always open from tablet up. */}
+                  <PhoneFold
+                    open={index === 0}
+                    summary={
+                      <h2 id={`sitemap-${group.heading.replace(/\s+/g, "-").toLowerCase()}`} className="mobile-keep">
+                        {group.heading} <span className="text-muted-foreground font-normal">({group.entries.length})</span>
+                      </h2>
+                    }
+                  >
+                    <ul>
+                      {group.entries.map((e) => (
+                        <li key={e.path}>
+                          <Link href={e.path}>{siteMapLabel(e.label)}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </PhoneFold>
                 </section>
               ),
             )}

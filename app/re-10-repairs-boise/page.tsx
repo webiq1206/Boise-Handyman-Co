@@ -1,4 +1,6 @@
 import { localAlt } from '@/shared/localAlt';
+import { ReadMore } from '@/components/marketing/ReadMore';
+import { PhoneFold } from '@/components/marketing/PhoneFold';
 import { InteriorPage } from '@/components/approved/InteriorLayout';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { MarketingCard } from "@/components/marketing/MarketingCard";
@@ -144,7 +146,7 @@ export default function Re10RepairsPage() {
 
       {/* ------------------------------------------- realtor trust statement */}
       <Section variant="greige" divider>
-        <div className="container px-4 max-w-3xl mx-auto">
+        <div className="container px-4 lx-prose-split">
           <SectionHeader
             eyebrow="Why a handyman service fits this work"
             size="display"
@@ -164,6 +166,7 @@ export default function Re10RepairsPage() {
               fixes have to move through an occupied house and be finished before a date that will
               not move.
             </p>
+            <ReadMore>
             <p>
               A normal repair visit has one homeowner and a flexible calendar. An RE-10 has a
               contractual deadline, two sides who have already argued about the price, an
@@ -178,6 +181,7 @@ export default function Re10RepairsPage() {
               work, sewer, HVAC - we name it up front and help you get the right trade in, rather
               than quietly leaving it off the quote.
             </p>
+            </ReadMore>
           </div>
         </div>
       </Section>
@@ -196,11 +200,13 @@ export default function Re10RepairsPage() {
             }
             className="mb-10 max-w-3xl"
           />
-          <div className="ed-cards-3 gap-5">
-            {RE10_BENEFITS.map((b) => (
+          {/* Phones: each benefit is a tap-to-open row; the body stays in the HTML. */}
+          <div className="ed-cards-3 lx-fold-list gap-5">
+            {RE10_BENEFITS.map((b, i) => (
               <MarketingCard key={b.title} padding="lg">
-                <h3 className="text-base font-normal text-foreground mb-2.5">{b.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{b.body}</p>
+                <PhoneFold open={i === 0} summary={<h3 className="text-base font-normal text-foreground">{b.title}</h3>}>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{b.body}</p>
+                </PhoneFold>
               </MarketingCard>
             ))}
           </div>
@@ -221,10 +227,10 @@ export default function Re10RepairsPage() {
             }
             className="mb-10 max-w-3xl"
           />
-          <div className="grid lg:grid-cols-3 gap-5">
-            {RE10_SERVICES.map((group) => (
+          <div className="lx-fold-list grid lg:grid-cols-3 gap-5">
+            {RE10_SERVICES.map((group, i) => (
               <MarketingCard key={group.heading} padding="lg">
-                <h3 className="text-base font-normal text-foreground mb-4">{group.heading}</h3>
+                <PhoneFold open={i === 0} summary={<h3 className="text-base font-normal text-foreground">{group.heading}</h3>}>
                 <ul className="space-y-2.5">
                   {group.items.map((i) => (
                     <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed">
@@ -233,31 +239,37 @@ export default function Re10RepairsPage() {
                     </li>
                   ))}
                 </ul>
+                </PhoneFold>
               </MarketingCard>
             ))}
           </div>
 
           {/* Said plainly and in the same breath as what we DO handle. An agent
               finding this out on closing week is the worst possible moment. */}
-          <div className="mt-8 max-w-3xl">
+          <div className="lx-fold-list mt-8">
             <MarketingCard padding="lg">
-              <div className="flex items-start gap-3 mb-3">
-                <AlertTriangle className="h-4 w-4 text-accent-legible flex-shrink-0 mt-1" />
-                <h3 className="text-base font-normal text-foreground">
-                  What we coordinate rather than perform
-                </h3>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+              <PhoneFold
+                summary={
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="h-4 w-4 text-accent-legible flex-shrink-0 mt-1" />
+                    <h3 className="text-base font-normal text-foreground">
+                      What we coordinate rather than perform
+                    </h3>
+                  </div>
+                }
+              >
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4 max-w-3xl">
                 These need a licensed specialist or an engineer. We will tell you so up front and,
                 where we can, point you to the right trade rather than leave you to find one.
               </p>
-              <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+              <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-2">
                 {RE10_COORDINATION_ONLY.map((i) => (
                   <li key={i} className="text-sm text-muted-foreground leading-relaxed">
                     {i}
                   </li>
                 ))}
               </ul>
+              </PhoneFold>
             </MarketingCard>
           </div>
         </div>
@@ -278,12 +290,14 @@ export default function Re10RepairsPage() {
                 schedules, four minimum charges, four sets of paperwork and four chances for one of
                 them to miss your date.
               </p>
+              <ReadMore>
               <p>
                 We review the whole list at once, group the work so travel and set-up are shared
                 across it, and give you one accountable company and one point of contact for your
                 project. It
                 is usually cheaper than the alternative, and it is always less work for you.
               </p>
+              </ReadMore>
             </div>
           </div>
           <MarketingCard padding="lg">
@@ -323,12 +337,13 @@ export default function Re10RepairsPage() {
             }
             className="mb-10 max-w-3xl"
           />
-          <ol className="ed-cards-3 gap-x-8 gap-y-9">
-            {RE10_PROCESS.map((s) => (
+          <ol className="ed-cards-3 lx-fold-steps gap-x-8 gap-y-9">
+            {RE10_PROCESS.map((s, i) => (
               <li key={s.step}>
                 <div className="brc-display-num text-inverse-muted/70 text-2xl mb-2">{s.step}</div>
-                <h3 className="text-base font-normal text-inverse-foreground mb-2">{s.title}</h3>
-                <p className="text-sm text-inverse-foreground/70 leading-relaxed">{s.body}</p>
+                <PhoneFold open={i === 0} summary={<h3 className="text-base font-normal text-inverse-foreground">{s.title}</h3>}>
+                  <p className="text-sm text-inverse-foreground/70 leading-relaxed">{s.body}</p>
+                </PhoneFold>
               </li>
             ))}
           </ol>
@@ -337,7 +352,7 @@ export default function Re10RepairsPage() {
 
       {/* ------------------------------------------------------ deadlines */}
       <Section divider>
-        <div className="container px-4 max-w-3xl mx-auto">
+        <div className="container px-4 lx-prose-split">
           <SectionHeader
             eyebrow="Built around your dates"
             size="display"
@@ -356,12 +371,14 @@ export default function Re10RepairsPage() {
               finished the day after the walkthrough is not finished as far as the transaction is
               concerned.
             </p>
+            <ReadMore>
             <p>
               So we prioritize transaction-related repairs, and we will tell you clearly what can
               reasonably be completed inside your timeframe. What we will not do is promise a date we
               have not checked against material lead times and property access. Send the documents as
               early as you can, even if the repair list is not final.
             </p>
+            </ReadMore>
             <p className="text-foreground">{RE10_PRICING_DISCLAIMER}</p>
           </div>
         </div>
@@ -403,7 +420,7 @@ export default function Re10RepairsPage() {
 
       {/* ----------------------------------------------- pre-listing work */}
       <Section divider>
-        <div className="container px-4 max-w-3xl mx-auto">
+        <div className="container px-4 lx-prose-split">
           <SectionHeader
             eyebrow="Before the inspection"
             size="display"
@@ -443,7 +460,7 @@ export default function Re10RepairsPage() {
 
       {/* --------------------------------------------------- service area */}
       <Section variant="greige" divider>
-        <div className="container px-4 max-w-3xl mx-auto">
+        <div className="container px-4 lx-prose-split">
           <SectionHeader
             eyebrow="Service area"
             size="display"

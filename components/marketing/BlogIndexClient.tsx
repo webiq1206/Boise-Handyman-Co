@@ -215,7 +215,7 @@ export function BlogIndexClient({ posts }: { posts: BlogIndexPost[] }) {
                     {featured && (
                       <div role="presentation" className="border-t border-border/60 mb-10" />
                     )}
-                    <div className="ed-cards-3 gap-6">
+                    <div className="ed-cards-3 lx-index-grid gap-6">
                       {rest.map((post) => (
                         <BlogCard key={post.slug} post={post} formatDate={formatDate} />
                       ))}

@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Section } from "./Section";
 import { Reveal } from "@/components/Reveal";
-import { Button } from "@/components/ui/button";
+import { familyButtonClass } from "@/components/family/Button";
 import { CTA_PRIMARY } from "@/shared/ctaCopy";
 
 interface EstimatePromptBandProps {
@@ -52,12 +52,11 @@ export function EstimatePromptBand({
           <Reveal delay={80}>
             <div className="flex flex-col items-start gap-6">
               <p className="ed-body">{description}</p>
-              <Button variant="brand" size="lg" className="w-full sm:w-auto" asChild>
-                <a href={href}>
-                  {CTA_PRIMARY}
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                </a>
-              </Button>
+              {/* The site's normal button: paper on the charcoal band, sentence case. */}
+              <a href={href} className={familyButtonClass({ variant: "hero", tone: "dark", size: "lg", className: "w-full sm:w-auto" })}>
+                {CTA_PRIMARY}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
               <p className="ed-small">Free · Not a binding quote</p>
             </div>
           </Reveal>

@@ -228,6 +228,21 @@ const LIBRARY = {
     src: area('kuna'),
     alt: 'A single-story stucco home with a dark metal roof and a wood-clad entry, with sagebrush in front and mountains beyond',
   },
+  // Added 19 November 2026 (every-page sweep): the generator had drifted from the
+  // registry, which already gave these two guides their own street photographs.
+  hiddenSpringsArea: {
+    src: area('boise-hidden-springs'),
+    alt: 'White two-story homes with covered porches on a street below a green hillside',
+  },
+  harrisRanchArea: {
+    src: area('boise-harris-ranch'),
+    alt: 'Two-story homes with grey lap siding and small covered entries below a dry foothill',
+  },
+  // A foothills photograph so the Eagle and Eagle Foothills guides stop sharing one picture.
+  eagleFoothillsArea: {
+    src: area('eagle-foothills'),
+    alt: 'A small dark-sided single-story home with a metal roof and a wood door, set among sagebrush below dry foothills',
+  },
 } as const;
 
 type LibraryKey = keyof typeof LIBRARY;
@@ -281,7 +296,7 @@ const BY_SLUG: Record<string, LibraryKey> = {
   'what-small-home-repairs-cost-boise': 'doorLock',
   'drywall-repair-cost-boise': 'drywall',
   'why-handyman-quotes-vary': 'underSink',
-  'how-to-compare-handyman-quotes': 'estimate',
+  'how-to-compare-handyman-quotes': 'materials',
   'hourly-rate-vs-flat-rate-handyman': 'doorWork',
   'how-to-budget-home-repairs-boise': 'caulkGap',
   'home-maintenance-budget-idaho': 'baseboardCaulk',
@@ -291,7 +306,7 @@ const BY_SLUG: Record<string, LibraryKey> = {
   'what-to-expect-first-handyman-visit': 'porch',
   'diy-vs-hiring-a-handyman': 'paintWall',
   'who-supplies-materials-handyman-jobs': 'fenceBoards',
-  'ada-vs-canyon-county-permit-timelines': 'permits',
+  'ada-vs-canyon-county-permit-timelines': 'nampaArea',
   'boise-building-permit-guide': 'permits',
 
   // Exterior & outdoor
@@ -315,12 +330,22 @@ const BY_SLUG: Record<string, LibraryKey> = {
   'middleton-handyman-guide': 'middletonArea',
   'nampa-handyman-guide': 'nampaArea',
   'caldwell-handyman-guide': 'caldwellArea',
-  'eagle-foothills-handyman-guide': 'eagleArea',
-  'hidden-springs-handyman-guide': 'boiseArea',
-  'harris-ranch-handyman-guide': 'boiseArea',
+  'eagle-foothills-handyman-guide': 'eagleFoothillsArea',
+  'hidden-springs-handyman-guide': 'hiddenSpringsArea',
+  'harris-ranch-handyman-guide': 'harrisRanchArea',
 };
 
-const HUB_HERO: Record<string, LibraryKey> = HUB_DEFAULT;
+/**
+ * Category page heroes. Kept apart from HUB_DEFAULT (19 November 2026): a
+ * category page lists its posts, and a hero shared with one of those cards
+ * showed the same photograph twice on the page.
+ */
+const HUB_HERO: Record<string, LibraryKey> = {
+  ...HUB_DEFAULT,
+  'costs-and-hiring': 'consult',
+  'home-maintenance': 'gutterLeaves',
+  'installs-and-upgrades': 'cabinetPulls',
+};
 
 interface Entry {
   hero: string;

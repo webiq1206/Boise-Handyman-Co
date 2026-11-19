@@ -1,4 +1,5 @@
 import { LazyConsultationForm as ConsultationForm } from "@/components/LazyConsultationForm";
+import { ReadMore } from '@/components/marketing/ReadMore';
 import { QuoteFormAnchor } from "@/components/QuoteFormAnchor";
 import { LandingContactActions } from "@/components/marketing/LandingContactActions";
 import { InteriorHero,InteriorProjectAside } from '@/components/approved/InteriorLayout';
@@ -561,9 +562,15 @@ export function LandingPageTemplate({
                     <div key={section.heading}>
                       <Reveal delay={Math.min(i, 4) * 60}>
                         <h2 id={sectionId(section.heading)} className="ed-h2-sm ed-statement-wide scroll-mt-28">{section.heading}</h2>
-                        {section.paragraphs?.map((p, j) => (
-                          <p key={j} className={ledeFirst && j === 0 ? 'ed-lede mt-6 max-w-[52ch]' : j === 0 ? 'ed-body mt-6 max-w-[62ch]' : 'ed-body mt-4 max-w-[62ch]'}>{p}</p>
-                        ))}
+                        {(() => {
+                          const rendered = (section.paragraphs ?? []).map((p, j) => (
+                            <p key={j} className={ledeFirst && j === 0 ? 'ed-lede mt-6 max-w-[52ch]' : j === 0 ? 'ed-body mt-6 max-w-[62ch]' : 'ed-body mt-4 max-w-[62ch]'}>{p}</p>
+                          ));
+                          // Phones: the first paragraph shows and the rest fold behind
+                          // "Read more" (still in the HTML). Paid-traffic pages are left as they are.
+                          if (callFirst || rendered.length < 2) return rendered;
+                          return <>{rendered[0]}<ReadMore>{rendered.slice(1)}</ReadMore></>;
+                        })()}
                         {section.subsections?.map((sub) => (
                           <div key={sub.heading} className="mt-8 border-t pt-6" style={line}>
                             <h3 className="ed-h4">{sub.heading}</h3>

@@ -10,7 +10,6 @@ import Image from '@/components/MarketingImage';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
 import { InstantEstimateCTA } from '@/components/estimator/InstantEstimateCTA';
 import { Reveal } from '@/components/Reveal';
-import { StatementBandSection } from '@/components/sections/StatementBandSection';
 import { WhyChooseUsSection } from '@/components/sections/WhyChooseUsSection';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
@@ -262,8 +261,6 @@ export default function AboutPage() {
             style={{ backgroundImage: GRAIN_URL, backgroundRepeat: 'repeat', opacity: 0.03 }}
           />
         </section>
-
-        <StatementBandSection />
 
         {/* ─── Principles ─── */}
         <Section variant="inverse" divider>

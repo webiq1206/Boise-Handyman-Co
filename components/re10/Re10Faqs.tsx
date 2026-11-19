@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import { Section } from "@/components/marketing/Section";
 import { SectionHeader } from "@/components/marketing/SectionHeader";
-import { Button } from "@/components/ui/button";
+import { familyButtonClass } from "@/components/family/Button";
 import { RE10_FAQS } from "@/shared/content/re10Content";
 
 /**
@@ -29,7 +29,7 @@ export function Re10Faqs() {
   return (
     <Section id="faq" divider>
       <div className="container px-4">
-        <div className="max-w-3xl mx-auto">
+        <div className="lx-prose-split">
           <SectionHeader
             eyebrow="Common questions"
             size="display"
@@ -65,13 +65,14 @@ export function Re10Faqs() {
 
           {!showAll && RE10_FAQS.length > INITIAL_COUNT && (
             <div className="mt-8 text-center">
-              <Button
-                variant="brandOutline"
+              <button
+                type="button"
+                className={familyButtonClass({ variant: "secondary" })}
                 onClick={() => setShowAll(true)}
                 data-testid="button-re10-more-faqs"
               >
                 Show all {RE10_FAQS.length} questions
-              </Button>
+              </button>
             </div>
           )}
         </div>

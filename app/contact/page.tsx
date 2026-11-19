@@ -11,7 +11,6 @@ import Image from '@/components/MarketingImage';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
 import { Reveal } from '@/components/Reveal';
 import { SaveContactLink } from '@/components/SaveContactLink';
-import { StatementBandSection } from '@/components/sections/StatementBandSection';
 import { JsonLd } from '@/components/seo/JsonLd';
 import {
 Accordion,
@@ -308,9 +307,6 @@ export default function ContactPage() {
                   label="Text us"
                   href={SITE_CONFIG.phoneSmsHref}
                   subtext="Quick questions? Send us a text"
-                  companion={
-                    <SaveContactLink className="text-sm text-muted-foreground hover:text-foreground transition-colors" />
-                  }
                 >
                   <span className="brc-display-num tabular-nums">{BUSINESS_INFO.phone}</span>
                 </ContactChannel>
@@ -425,7 +421,6 @@ export default function ContactPage() {
           </div>
         </Section>
 
-        <StatementBandSection />
 
 
         {/* ─── Service areas ─── */}
