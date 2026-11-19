@@ -354,3 +354,60 @@ keep the old picture. A file served directly (`/images/...`) answers
   local path with or without a query string. Next 15 warns about a query no
   pattern covers and Next 16 refuses it; leaving `search` out is what allows
   the `?v=`. Do not add a `search` value to it.
+
+### Every-page sweep (19 November 2026)
+
+Every public route (the 115 in the sitemap, plus `/handyman`, `/estimate/scope`
+and the 404) was captured at 390, 768 and 1440 after the owner found an
+unrefined page on a sister site.
+
+* **Phones shorten without losing copy.** `ReadMore` (secondary paragraphs,
+  closed below 701px) and `PhoneFold` (a card or step that is tap-to-open on
+  phones and plain from 701px) in `components/marketing` are native
+  `<details>`: every word stays in the HTML. The RE-10 page uses both (about
+  15,600px tall on a phone before, about 11,800px after); landing-page
+  long-form sections fold after their first paragraph (not on `callFirst`
+  pages). The services index is one row per service on phones. No estimator,
+  upload or pricing code changed.
+* **Sections fill the container.** A prose section beside its heading uses
+  `lx-prose-split` (heading left, copy right from 1024px; a reading column
+  below). Question lists are native `<details>` beside their heading (areas,
+  site map groups on phones). Do not put a section in a centred `max-w-3xl`
+  column that leaves half the desktop empty.
+* **No picture twice on a page, articles included.** "Related resources"
+  (`RelatedPostCards`) skips the page's hero and its inline figures
+  (`pageImages`). Blog and category heroes are pictures no card on that page
+  uses: the blog index hero is `wall-prep-ladder`, and category heroes come
+  from `HUB_HERO` in `scripts/generate-blog-image-registry.ts`, kept apart from
+  `HUB_DEFAULT`. The Eagle Foothills guide has its own foothills photograph
+  (`/images/areas/eagle-foothills.webp`). The generator had drifted from the
+  registry (Hidden Springs and Harris Ranch); it now carries those keys, so
+  `npm run images:blog` is safe to run again.
+* **Nothing alone on a last row.** Listing grids with `lx-index-grid` turn a
+  lone last card into a row across the grid (tablet and desktop); the Keep
+  exploring reading list spans an odd last link and only takes three columns
+  when the count fills them.
+* **The faded photo strip (`StatementBandSection`) is not used.** It sat under
+  another photo band on About and added a third, washed-out photograph on
+  Contact.
+* Document pages: the "On this page" links are 44px on phones and tablets.
+* **Labels are sentence case.** Blog card chips and the article breadcrumb run
+  the category through `toSentenceCase()` ("Costs & hiring"). Category pages
+  close with the same estimate band as the blog index.
+* **Numbered matrix rows below 821px** put a circled step number (`.ed-step-n`)
+  beside its line, as the older rule already did for `.ed-small` (About, "What
+  you can count on"). It needs the long selector in `app/interior-refinement.css`
+  to beat the `design-refresh.css` and `audit-accessibility.css` rules.
+* A filled estimate button is never underlined, even inside the site map's
+  link styles. On `/handyman` the closing Call and Text pair stacks on phones
+  (the phone number wrapped inside two half-width buttons); its hero is
+  unchanged.
+* **Keep exploring groups of one or two cards.** A group with one card (a
+  service offered in one other city) is a wide row, photograph beside the
+  name; two cards take two columns on tablets, not two of three.
+* Listing grids leave a fourth card alone: four cards are a 2 x 2 grid from
+  1024px (`family.css`), and the lone-last-card rule skips them.
+* The site map shows service names in sentence case (`siteMapLabel()`); post
+  and guide titles, already sentence case, are left as written.
+* Warranty: "What is covered", "How it works" and "What is not covered" stack
+  below 1024px; three columns at 768 left about 220px each.

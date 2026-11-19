@@ -10,7 +10,7 @@ import { SaveContactLink } from "@/components/SaveContactLink";
 
 export const metadata: Metadata = {
   title: "Page Not Found (404)",
-  description: "The page you're looking for could not be found. Browse our home building services or contact Boise Handyman Co.",
+  description: "The page you're looking for could not be found. Browse our handyman services or contact Boise Handyman Co.",
   robots: {
     index: false,
     follow: true,
@@ -43,14 +43,14 @@ export default function NotFound() {
             <div className="grid grid-cols-2 gap-2">
               {[
                 { href: "/services", label: "Our services" },
-                { href: "/#consult", label: "Free consultation" },
-                { href: "/blog", label: "Blog and ideas" },
-                { href: "/#calculator", label: "Project estimator" },
+                { href: "/#consult", label: "Send your list and photos" },
+                { href: "/blog", label: "Blog" },
+                { href: "/instant-estimate", label: "Instant estimate" },
               ].map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="flex items-center gap-2 p-3 rounded-sm hover:bg-muted transition-colors text-sm text-muted-foreground hover:text-foreground"
+                  className="flex min-h-[44px] items-center gap-2 p-3 rounded-sm hover:bg-muted transition-colors text-sm text-muted-foreground hover:text-foreground"
                 >
                   <ArrowRight className="h-4 w-4 text-accent-legible" />
                   {item.label}
@@ -60,24 +60,20 @@ export default function NotFound() {
           </CardContent>
         </Card>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        {/* Three equal actions; the contact link sits under the row so no button is pushed out of line. */}
+        <div className="grid gap-3 sm:grid-cols-3 [&>*]:w-full">
           <Button variant="brand" size="lg" asChild>
             <Link href="/">
               <Home className="h-5 w-5 mr-2" />
-              Go to Homepage
+              Go to the homepage
             </Link>
           </Button>
-          <div className="flex flex-col items-center gap-1">
-            <Button variant="brandOutline" size="lg" asChild>
-              <a href={SITE_CONFIG.phoneHref}>
-                <Phone className="h-5 w-5 mr-2" />
-                Call {SITE_CONFIG.phone}
-              </a>
-            </Button>
-            <SaveContactLink className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Save to contacts
-            </SaveContactLink>
-          </div>
+          <Button variant="brandOutline" size="lg" asChild>
+            <a href={SITE_CONFIG.phoneHref}>
+              <Phone className="h-5 w-5 mr-2" />
+              Call {SITE_CONFIG.phone}
+            </a>
+          </Button>
           <Button variant="brandOutline" size="lg" asChild>
             <a href={SITE_CONFIG.phoneSmsHref} data-testid="link-404-text">
               <MessageSquare className="h-5 w-5 mr-2" />
@@ -85,6 +81,11 @@ export default function NotFound() {
             </a>
           </Button>
         </div>
+        <p className="mt-3">
+          <SaveContactLink className="inline-flex min-h-[44px] items-center text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors">
+            Save to contacts
+          </SaveContactLink>
+        </p>
 
         <div className="mt-12">
           <p className="text-sm text-muted-foreground mb-3">

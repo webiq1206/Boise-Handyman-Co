@@ -85,7 +85,7 @@ function CallTextButtons({ onDark = false }: { onDark?: boolean }) {
   const base =
     "inline-flex min-h-14 w-full items-center justify-center rounded-sm px-5 text-base font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:w-auto sm:min-w-[220px]";
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid gap-3 sm:grid-cols-2">
       <a
         href={SITE_CONFIG.phoneHref}
         className={`${base} ${onDark ? "bg-[#fbfaf6] text-[var(--color-charcoal)] focus-visible:ring-[#fbfaf6]" : "bg-primary text-primary-foreground focus-visible:ring-ring"}`}

@@ -4,6 +4,7 @@ import { Calendar } from "lucide-react";
 import { MarketingCard } from "./MarketingCard";
 import { TextLink } from "./TextLink";
 import { Chip } from "./Chip";
+import { toSentenceCase } from "@/shared/sentenceCase";
 import type { BlogPostData } from "@/shared/blogContent";
 import { getBlogImageAlt, getBlogThumbnail } from "@/shared/blogImages";
 
@@ -37,7 +38,7 @@ export function BlogCard({ post, featured = false, formatDate }: BlogCardProps) 
         </div>
         <div className="p-6 md:p-8">
           <div className="flex items-center gap-3 mb-3 flex-wrap">
-            <Chip>{post.category}</Chip>
+            <Chip>{toSentenceCase(post.category)}</Chip>
             <span className="flex items-center gap-2 text-sm text-muted-foreground">
               <Calendar className="h-4 w-4" />
               {formatDate(post.publishedAt)}
@@ -71,7 +72,7 @@ export function BlogCard({ post, featured = false, formatDate }: BlogCardProps) 
       </div>
       <div className="lx-row-body p-6 flex flex-col flex-1">
         <div className="lx-row-meta flex flex-col items-start gap-2 mb-3">
-          <Chip>{post.category}</Chip>
+          <Chip>{toSentenceCase(post.category)}</Chip>
           <span className="lx-row-hide flex items-center gap-2 text-sm text-muted-foreground">
             <Calendar className="h-4 w-4" />
             {formatDate(post.publishedAt)}

@@ -52,9 +52,9 @@ function Cells({ cells }: { cells: Cell[] }) {
     <ul
       className="lx-cells"
       style={{
-        // One full row on desktop for up to six cards; otherwise rows of four. Tablets take rows of three or four.
+        // One full row on desktop for up to six cards; otherwise rows of four. Tablets take one row for one or two cards, otherwise rows of three or four.
         ['--lx-cols' as string]: cells.length <= 6 ? cells.length : 4,
-        ['--lx-cols-tablet' as string]: cells.length % 4 === 0 ? 4 : 3,
+        ['--lx-cols-tablet' as string]: cells.length <= 2 ? cells.length : cells.length % 4 === 0 ? 4 : 3,
       }}
     >
       {cells.map((cell) => {

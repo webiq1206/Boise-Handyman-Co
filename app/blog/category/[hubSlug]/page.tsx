@@ -1,6 +1,7 @@
 import { InteriorPage } from '@/components/approved/InteriorLayout';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { BlogCard } from '@/components/marketing/BlogCard';
+import { EstimatePromptBand } from '@/components/marketing/EstimatePromptBand';
 import { HubHeroBanner } from '@/components/marketing/BlogHeroBanner';
 import { Section } from '@/components/marketing/Section';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
@@ -154,13 +155,26 @@ export default async function BlogCategoryHubPage(
             <ArrowRight className="ml-1 h-4 w-4" />
           </Link></header><HubHeroBanner src={hubHero} alt={hubAlt} />
 
-          <div className="ed-cards-3 gap-6">
+          <div className="ed-cards-3 lx-index-grid gap-6">
             {posts.map((post) => (
               <BlogCard key={post.slug} post={post} formatDate={formatDate} />
             ))}
           </div>
         </div>
       </Section>
+
+      {/* Same closing band as the blog index, so a category page does not end on a card row. */}
+      <EstimatePromptBand
+        eyebrow="Ready to fix it"
+        title={
+          <>
+            From articles to an{' '}
+            <em className="brc-accent">actual quote</em>
+          </>
+        }
+        description="Send your repair list and optional photos for scope review, a written quote and a confirmed visit plan."
+        variant="greige"
+      />
     </></InteriorPage>
   );
 }

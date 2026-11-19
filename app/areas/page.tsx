@@ -95,17 +95,23 @@ export default function AreasHubPage() {
         </Section>
 
         <Section surface="bone" spacing="xl">
-          <div className="ed-shell max-w-3xl">
-            <p className="ed-eyebrow">Common questions</p>
-            <h2 className="ed-h2 ed-statement">Questions about Treasure Valley handyman service</h2>
-            <dl className="mt-8 border-t" style={{ borderColor: "var(--ed-line)" }}>
-              {AREA_PAGE_FAQS.map((faq) => (
-                <div key={faq.question} className="border-b py-6" style={{ borderColor: "var(--ed-line)" }}>
-                  <dt className="ed-h4">{faq.question}</dt>
-                  <dd className="ed-body mt-3">{faq.answer}</dd>
-                </div>
-              ))}
-            </dl>
+          <div className="ed-shell">
+            {/* Heading beside the questions so the section fills the container;
+                native disclosure keeps every answer in the HTML. */}
+            <div className="ed-split ed-split-narrow">
+              <div className="lg:sticky lg:top-28 lg:self-start">
+                <p className="ed-eyebrow">Common questions</p>
+                <h2 className="ed-h2 ed-statement">Questions about Treasure Valley handyman service</h2>
+              </div>
+              <div className="lx-faq w-full border-t" style={{ borderColor: "var(--ed-line)" }}>
+                {AREA_PAGE_FAQS.map((faq, i) => (
+                  <details key={faq.question} name="areas-faq" open={i === 0} className="border-b" style={{ borderColor: "var(--ed-line)" }}>
+                    <summary><h3 className="ed-h4 text-left">{faq.question}</h3></summary>
+                    <p className="ed-body text-[0.9375rem]">{faq.answer}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
           </div>
         </Section>
 

@@ -29,7 +29,7 @@ export function Re10Faqs() {
   return (
     <Section id="faq" divider>
       <div className="container px-4">
-        <div className="max-w-3xl mx-auto">
+        <div className="lx-prose-split">
           <SectionHeader
             eyebrow="Common questions"
             size="display"

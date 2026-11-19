@@ -130,7 +130,7 @@ export default function WarrantyPage() {
         </InteriorHero>
 
         <Section variant="greige" divider>
-          <div className="container px-4 max-w-5xl grid gap-8 md:grid-cols-3">
+          <div className="container px-4 max-w-5xl grid gap-8 lg:grid-cols-3">
             <div>
               <SectionHeader eyebrow="Coverage" title={<>What is covered</>} className="mb-4" />
               <ul className="space-y-2">
@@ -163,7 +163,9 @@ export default function WarrantyPage() {
               </ul>
             </div>
           </div>
-          <div className="container px-4 max-w-5xl mt-12">
+          {/* Two short sections side by side from 1024px, so neither leaves half the row empty. */}
+          <div className="container px-4 max-w-5xl mt-12 grid gap-12 lg:grid-cols-2">
+          <div>
             <SectionHeader eyebrow="Subcontractors" title={<>Work by subcontractors</>} className="mb-4" />
             <ul className="space-y-2">
               {SUBCONTRACTOR_TERMS.map((item) => (
@@ -174,7 +176,7 @@ export default function WarrantyPage() {
               ))}
             </ul>
           </div>
-          <div id="get-help" className="container px-4 max-w-5xl mt-12 scroll-mt-28">
+          <div id="get-help" className="scroll-mt-28">
             <SectionHeader eyebrow="Existing customers" title={<>Get help with a completed project</>} className="mb-4" />
             <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">
               Email{" "}
@@ -202,6 +204,7 @@ export default function WarrantyPage() {
               stop, or sparking or burning electrical, contact emergency services or your utility first. We
               are not an emergency service.
             </p>
+          </div>
           </div>
           <p className="container px-4 max-w-5xl mt-10 text-sm text-muted-foreground">
             {SITE_CONFIG.name} is a DBA of P5 Home Co. Full company story on the{" "}
