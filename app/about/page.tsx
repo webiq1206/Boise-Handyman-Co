@@ -343,7 +343,7 @@ export default function AboutPage() {
                 Send your tasks with photos for review and a written quote. No
                 pressure, no obligation.
               </p>
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto sm:justify-center">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
                 <ConsultCTA variant="brand" tone="dark">{CTA_PRIMARY}</ConsultCTA>
                 <FamilyButton href="/contact#consult" variant="secondary" tone="dark">{CTA_SECONDARY}</FamilyButton>
               </div>

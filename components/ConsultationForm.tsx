@@ -135,6 +135,8 @@ interface ConsultationFormProps {
   heading?: string;
   /** h2 on a page, h3 inside the dialog (which has its own title). */
   headingLevel?: "h2" | "h3";
+  /** Stable id for labels and fields, made by the lazy wrapper. */
+  idPrefix?: string;
 }
 
 interface Submitted {
@@ -162,8 +164,14 @@ export function ConsultationForm({
   initialProjectType,
   heading = "Send your list",
   headingLevel = "h2",
+  idPrefix,
 }: ConsultationFormProps = {}) {
-  const uid = useId();
+  // next/dynamic renders one more wrapper on the server than in the browser, so
+  // an id made here differed between the two and React reported a hydration
+  // mismatch on every label and field. LazyConsultationForm makes the id above
+  // that boundary and passes it in.
+  const ownId = useId();
+  const uid = idPrefix ?? ownId;
   const ids = (name: string) => `${uid}-${name}`;
   const [mode, setMode] = useState<Mode>("request");
   const [message, setMessage] = useState("");
@@ -549,6 +557,7 @@ export function ConsultationForm({
             <div className="hm-form-field">
               <label htmlFor={ids("message")}>Your list</label>
               <textarea
+                data-clarity-mask="True"
                 id={ids("message")}
                 data-field="message"
                 data-testid="textarea-message"
@@ -571,6 +580,7 @@ export function ConsultationForm({
         <div className="hm-form-field">
           <label htmlFor={ids("name")}>Name</label>
           <input
+            data-clarity-mask="True"
             id={ids("name")}
             data-field="name"
             data-testid="input-name"
@@ -590,6 +600,7 @@ export function ConsultationForm({
         <div className="hm-form-field">
           <label htmlFor={ids("phone")}>Phone</label>
           <input
+            data-clarity-mask="True"
             id={ids("phone")}
             data-field="phone"
             data-testid="input-phone"
@@ -613,6 +624,7 @@ export function ConsultationForm({
           <div className="hm-form-field">
             <label htmlFor={ids("best-time")}>Best time to call (optional)</label>
             <select
+              data-clarity-mask="True"
               id={ids("best-time")}
               name="bestTimeToCall"
               value={bestTime}
@@ -644,6 +656,7 @@ export function ConsultationForm({
             <div className="hm-form-field">
               <label htmlFor={ids("address")}>Job address</label>
               <input
+                data-clarity-mask="True"
                 id={ids("address")}
                 data-testid="input-address"
                 name="address"
@@ -656,6 +669,7 @@ export function ConsultationForm({
             <div className="hm-form-field">
               <label htmlFor={ids("email")}>Email</label>
               <input
+                data-clarity-mask="True"
                 id={ids("email")}
                 data-field="email"
                 data-testid="input-email"
@@ -713,6 +727,7 @@ export function ConsultationForm({
         )}
 
         <input
+          data-clarity-mask="True"
           className="hm-form-honeypot"
           name="website"
           tabIndex={-1}

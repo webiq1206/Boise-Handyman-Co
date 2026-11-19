@@ -170,7 +170,7 @@ export function GuidePageLayout({ guide, formatDate }: GuidePageLayoutProps) {
                 <div className="mt-10 pt-8 border-t border-border">
                   <div className="flex items-center gap-2 flex-wrap">
                     <Tag className="h-4 w-4 text-muted-foreground" />
-                    {guide.tags.map((tag) => (
+                    {Array.from(new Set(guide.tags)).map((tag) => (
                       <Chip key={tag}>{tag}</Chip>
                     ))}
                   </div>

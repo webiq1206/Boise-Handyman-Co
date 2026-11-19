@@ -122,6 +122,7 @@ export function BlogIndexClient({ posts }: { posts: BlogIndexPost[] }) {
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search articles..."
                     aria-label="Search articles"
+                    data-clarity-mask="True"
                     className="h-11 w-full rounded-sm border border-border bg-input pl-9 pr-9 text-base text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-search-cancel-button]:hidden"
                     data-testid="input-blog-search"
                   />

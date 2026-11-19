@@ -299,3 +299,11 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
   `docs/hero-remediation-20261104.md`): their hero is the focused section plus
   the details section under it. It runs in prebuild with the card photograph
   test (`npm run verify:landing-heroes`).
+* **The request form's ids are made above the lazy boundary.**
+  `LazyConsultationForm` calls `useId()` and passes `idPrefix`; an id made
+  inside the form differed between server and browser (next/dynamic renders one
+  more wrapper on the server) and every label and field failed hydration. The
+  form's text fields and the blog search field carry `data-clarity-mask="True"`
+  in the markup, the same value the masking script in `app/layout.tsx` sets
+  before hydration, so the two agree. A new server-rendered text field needs
+  the attribute too. Tags on a post or guide are shown once each.
