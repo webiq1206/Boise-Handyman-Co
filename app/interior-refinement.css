@@ -345,3 +345,34 @@
   .approved-shell .lx-reading { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) { .approved-shell .lx-cell, .approved-shell .lx-cell-photo img { transition: none; } }
+
+/* ── Index and listing cards on phones: compact rows ──
+   One full-height card per post, guide or city made the phone blog index about
+   21,000px tall. After any lead card, each item is one row (photograph, label,
+   title) so a visitor sees four or five per screen. The whole row is the link.
+   Excerpts, dates and "Read" links return from tablet up. */
+@media (max-width: 700px) {
+  .approved-shell .lx-row-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    align-items: stretch;
+    min-height: 112px;
+  }
+  .approved-shell .lx-row-card .lx-row-photo { aspect-ratio: auto; height: 100%; min-height: 112px; }
+  /* Favour the top of the frame so a square crop never cuts off a person's head. */
+  .approved-shell .lx-row-card .lx-row-photo img { object-position: 50% 20%; }
+  .approved-shell .lx-row-card .lx-row-body { justify-content: center; padding: var(--space-3, 12px) var(--space-4, 16px); }
+  .approved-shell .lx-row-card .lx-row-body > *:not(h2):not(h3):not(.lx-row-meta):not(.lx-row-link),
+  .approved-shell .lx-row-card .lx-row-hide { display: none; }
+  .approved-shell .lx-row-card .lx-row-meta { margin-bottom: var(--space-2, 8px); }
+  .approved-shell .lx-row-card :is(h2, h3) { margin: 0; font-size: 18px; line-height: 1.25; }
+  .approved-shell .lx-row-card .lx-row-link { margin-top: var(--space-2, 8px); }
+  .approved-shell .lx-row-card .lx-row-link::after { content: ""; position: absolute; inset: 0; }
+}
+
+/* ── Contact channels on phones: icon beside the text, tighter padding ── */
+@media (max-width: 700px) {
+  .approved-shell .approved-interior .interior-contact-channel { padding: var(--space-5, 20px); }
+  .approved-shell .approved-interior .interior-contact-channel-inner { flex-direction: row; align-items: flex-start; gap: var(--space-4, 16px); }
+}

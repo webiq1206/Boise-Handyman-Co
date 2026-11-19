@@ -16,17 +16,25 @@
 import { SITE_IMAGES } from "./siteImages";
 import { getServiceImageSet, type LandingImageSet } from "./serviceBackgrounds";
 
+/**
+ * In the order the site lists its cities (SERVICE_AREA_CITY_NAMES), so two
+ * cities that sit side by side in a row of cards take consecutive photographs.
+ * With three or more photographs in a rotation, neighbours never match, also
+ * when the current city is left out of the row.
+ */
 const CITY_SLUGS = [
   "boise",
   "meridian",
-  "eagle",
   "nampa",
+  "eagle",
   "kuna",
+  "caldwell",
   "star",
   "middleton",
-  "caldwell",
   "garden-city",
 ] as const;
+
+const house = (name: string) => `/images/houses/kuna/${name}.webp`;
 
 /** AI-generated handyman photo library (2026-08). */
 const h = (name: string) => `/images/handyman/${name}.webp`;
@@ -39,7 +47,9 @@ const h = (name: string) => `/images/handyman/${name}.webp`;
 const SERVICE_ROTATION: Record<string, readonly string[]> = {
   "drywall-repair": [
     h("service-drywall-repair"),
+    house("kuna-drywall-patch"),
     h("punch-list-markers"),
+    h("wall-prep-ladder"),
   ],
   "painting-touch-ups": [
     h("service-painting-p5-reviewed-20260910"),
@@ -53,7 +63,10 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("service-plumbing"),
     h("toilet-repair"),
     h("under-sink-plumbing"),
+    h("vanity-faucet-cabinet"),
+    h("bathroom-vanity-faucet"),
   ],
+  // The photo folder holds one electrical photograph. Unrelated work never fills the slot.
   "electrical-repairs": [
     h("service-electrical"),
   ],
@@ -74,12 +87,16 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("floating-shelf-install"),
     h("entry-bench-assembled"),
     h("cabinet-pulls-installed"),
+    house("kuna-tv-mount"),
   ],
   "fence-deck-gutter-repair": [
     h("service-fence-repair"),
     h("deck-board-replacement"),
     h("hero-gutter-cleaning"),
     h("fence-and-deck-boards"),
+    house("kuna-fence-gate-latch"),
+    house("kuna-gutter-cleaning"),
+    house("kuna-deck-board-replacement"),
   ],
   "home-maintenance": [
     h("service-caulking"),

@@ -229,3 +229,27 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
 * `.guide-section-details[open] .guide-section-summary > span` keeps the child
   combinator, so the rule that hides "Tap to expand" cannot hide part of a
   heading.
+
+### Second pass (19 November 2026)
+
+* **Photo rotations follow the display order of cities** (`CITY_SLUGS` in
+  `shared/cityServiceImages.ts` matches `SERVICE_AREA_CITY_NAMES`), so two
+  cities side by side in a card row take consecutive photographs. Keep three
+  or more photographs in a rotation where the photo folder allows; electrical
+  has one and nothing unrelated fills it.
+* **Blog and guide heroes** are assigned in `scripts/generate-blog-image-registry.ts`
+  (then `npm run images:blog`). No more than two posts share one photograph,
+  apart from the Boise street photo used by three Boise-area guides.
+* **Listing cards are compact rows on phones** (`lx-row-card` on `BlogCard`,
+  `AreaCard` and the guide index cards): photograph, label and title, the whole
+  row a link. Excerpts, dates and "Read" links return from 701px up. Row photos
+  use `object-position: 50% 20%` so a square crop never cuts off a head.
+* **Buttons match their surface.** On a charcoal band (`surface="gradient"`,
+  `ed-on-gradient`) a CTA takes `tone="dark"`; on paper it is the charcoal
+  primary. `BlogEndCta`, the landing closing section and the warranty hero were
+  each one tone off and nearly invisible.
+* **Paid-traffic pages (`callFirst`) take no fact row.** Their hero is followed
+  directly by the request form the hero links to; nothing goes between them.
+* `docs/interior-route-audit.json` holds a fingerprint of each interior page's
+  metadata and schema calls. When a page's metadata changes on purpose, update
+  its `seoSignature` in the same commit (`tests/approved-interiors.test.ts`).

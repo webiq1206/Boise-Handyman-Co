@@ -58,9 +58,9 @@ export function BlogCard({ post, featured = false, formatDate }: BlogCardProps) 
   }
 
   return (
-    <MarketingCard padding="none" className="h-full flex flex-col overflow-hidden hover-elevate group relative">
+    <MarketingCard padding="none" className="lx-row-card h-full flex flex-col overflow-hidden hover-elevate group relative">
       <Link href={href} className="absolute inset-0 z-0" aria-label={post.title} />
-      <div className="relative aspect-[16/10] overflow-hidden">
+      <div className="lx-row-photo relative aspect-[16/10] overflow-hidden">
         <Image
           src={thumbnail}
           alt={alt}
@@ -69,10 +69,10 @@ export function BlogCard({ post, featured = false, formatDate }: BlogCardProps) 
           className="object-cover img-brand-grade transition-transform duration-300 ease-out group-hover:scale-[1.02]"
         />
       </div>
-      <div className="p-6 flex flex-col flex-1">
-        <div className="flex flex-col items-start gap-2 mb-3">
+      <div className="lx-row-body p-6 flex flex-col flex-1">
+        <div className="lx-row-meta flex flex-col items-start gap-2 mb-3">
           <Chip>{post.category}</Chip>
-          <span className="flex items-center gap-2 text-sm text-muted-foreground">
+          <span className="lx-row-hide flex items-center gap-2 text-sm text-muted-foreground">
             <Calendar className="h-4 w-4" />
             {formatDate(post.publishedAt)}
           </span>
@@ -80,8 +80,8 @@ export function BlogCard({ post, featured = false, formatDate }: BlogCardProps) 
         <h3 className="text-lg font-serif tracking-tight text-foreground text-balance mb-2">
           {post.title}
         </h3>
-        <p className="text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>
-        <TextLink href={href} className="mt-auto pt-4 relative z-10" showArrow>
+        <p className="lx-row-hide text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>
+        <TextLink href={href} className="lx-row-hide mt-auto pt-4 relative z-10" showArrow>
           Read article
         </TextLink>
       </div>

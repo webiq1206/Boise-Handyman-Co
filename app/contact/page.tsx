@@ -329,20 +329,11 @@ export default function ContactPage() {
                 <ContactChannel
                   icon={<MapPin className="h-5 w-5" strokeWidth={1.5} />}
                   label="Where we work"
-                  subtext={SITE_CONFIG.address.serviceArea}
+                  subtext="The same fair pricing across the whole Treasure Valley"
                 >
                   <address className="not-italic leading-relaxed">
                     {PUBLIC_NAP_LINE}
                   </address>
-                </ContactChannel>
-              </Reveal>
-              <Reveal delay={180} className="sm:col-span-2">
-                <ContactChannel
-                  icon={<MapPin className="h-5 w-5" strokeWidth={1.5} />}
-                  label="Service area"
-                  subtext="The same fair pricing across the whole Treasure Valley"
-                >
-                  <span className="text-sm leading-relaxed">{SERVICE_AREA_LINE}</span>
                 </ContactChannel>
               </Reveal>
             </div>

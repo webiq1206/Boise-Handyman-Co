@@ -6,6 +6,23 @@ import { cityForSlug, localAlt, type LocalAltContext } from './localAlt';
  * the existing alt alone (or empty, if it was already empty).
  */
 const IMAGE_ALTS: Record<string, string> = {
+  '/images/handyman/hero-door-repair.webp':
+    "A white interior door standing open, with a tool bag, a drill and hinges on a drop cloth",
+  '/images/houses/kuna/kuna-fence-gate-latch.webp':
+    "A black latch on a wood fence gate",
+  '/images/houses/kuna/kuna-tv-mount.webp':
+    "A television wall bracket above a television resting on the floor, with a level and a drill",
+  // Added 19 November 2026 (second pass) so drywall and plumbing city pages rotate through more than two or three photographs.
+  '/images/handyman/wall-prep-ladder.webp':
+    "An empty room with blue tape along the baseboard, a step ladder, a paint can and a roller tray on a drop cloth",
+  '/images/handyman/vanity-faucet-cabinet.webp':
+    "A bathroom vanity with a black faucet beside an open recessed oak medicine cabinet",
+  '/images/handyman/bathroom-vanity-faucet.webp':
+    "An oak bathroom vanity with a white top and a black faucet under a black-framed mirror",
+  '/images/handyman/front-porch-door.webp':
+    "A covered front porch with a wood entry door, white lap siding and a wood railing",
+  '/images/houses/kuna/kuna-drywall-patch.webp':
+    "A square drywall patch with fresh joint compound framed in blue tape, with a taping knife on a drop cloth",
   // Added 19 November 2026 from the owner's photo folder, to widen each trade's rotation.
   '/images/handyman/paint-trim-brush.webp':
     "A paint brush resting on an open can of white paint beside a freshly painted door casing",

@@ -121,7 +121,7 @@ export default function WarrantyPage() {
             subcontractor&apos;s own warranty.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto mb-6">
-            <FamilyButton href="#get-help" variant="hero" data-hero-cta="primary">Get help with a completed project</FamilyButton>
+            <FamilyButton href="#get-help" variant="primary" data-hero-cta="primary">Get help with a completed project</FamilyButton>
             <FamilyButton href={SITE_CONFIG.phoneHref} variant="secondary">Call {SITE_CONFIG.phone}</FamilyButton>
           </div>
           <p className="text-sm text-inverse-foreground/70">

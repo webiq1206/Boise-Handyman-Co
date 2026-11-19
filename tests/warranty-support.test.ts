@@ -52,7 +52,7 @@ test('terms drop the 48-hour satisfaction window and keep the D9 payment and can
 });
 
 test('warranty page primary next step is getting help with a completed project', () => {
-  assert.match(page, /href="#get-help" variant="hero" data-hero-cta="primary">Get help with a completed project</);
+  assert.match(page, /href="#get-help" variant="primary" data-hero-cta="primary">Get help with a completed project</);
   assert.doesNotMatch(page, /ConsultCTA|CTA_PRIMARY/);
   assert.match(page, /id="get-help"/);
   for (const item of ['Your name', 'The project address', 'The affected item and where it is in the home', 'When it started', 'Photos, if you have them']) {
