@@ -409,5 +409,12 @@ unrefined page on a sister site.
   1024px (`family.css`), and the lone-last-card rule skips them.
 * The site map shows service names in sentence case (`siteMapLabel()`); post
   and guide titles, already sentence case, are left as written.
+* **No uppercase tracked buttons.** The estimate band (`EstimatePromptBand`:
+  blog, categories, guides, services), the 404 and the RE-10 "Show all
+  questions" button use the family button (`familyButtonClass`, sentence
+  case; paper on charcoal bands). The old `brand`/`brandOutline` variants
+  are uppercase; do not use them on a public page. The one left is the
+  "Request a quote" secondary in the `callFirst` hero of the paid-traffic
+  pages, which stays as the owner set it.
 * Warranty: "What is covered", "How it works" and "What is not covered" stack
   below 1024px; three columns at 768 left about 220px each.

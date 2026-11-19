@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
-import { Button } from "@/components/ui/button";
+import { familyButtonClass } from "@/components/family/Button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Home, ArrowRight, MessageSquare, Phone, Wrench } from "lucide-react";
 import { DisplayNum } from "@/components/marketing/DisplayNum";
@@ -62,24 +62,18 @@ export default function NotFound() {
 
         {/* Three equal actions; the contact link sits under the row so no button is pushed out of line. */}
         <div className="grid gap-3 sm:grid-cols-3 [&>*]:w-full">
-          <Button variant="brand" size="lg" asChild>
-            <Link href="/">
-              <Home className="h-5 w-5 mr-2" />
-              Go to the homepage
-            </Link>
-          </Button>
-          <Button variant="brandOutline" size="lg" asChild>
-            <a href={SITE_CONFIG.phoneHref}>
-              <Phone className="h-5 w-5 mr-2" />
-              Call {SITE_CONFIG.phone}
-            </a>
-          </Button>
-          <Button variant="brandOutline" size="lg" asChild>
-            <a href={SITE_CONFIG.phoneSmsHref} data-testid="link-404-text">
-              <MessageSquare className="h-5 w-5 mr-2" />
-              Text us
-            </a>
-          </Button>
+          <Link href="/" className={familyButtonClass({ variant: "primary", size: "lg" })}>
+            <Home className="h-5 w-5" aria-hidden="true" />
+            Go to the homepage
+          </Link>
+          <a href={SITE_CONFIG.phoneHref} className={familyButtonClass({ variant: "secondary", size: "lg" })}>
+            <Phone className="h-5 w-5" aria-hidden="true" />
+            Call {SITE_CONFIG.phone}
+          </a>
+          <a href={SITE_CONFIG.phoneSmsHref} data-testid="link-404-text" className={familyButtonClass({ variant: "secondary", size: "lg" })}>
+            <MessageSquare className="h-5 w-5" aria-hidden="true" />
+            Text us
+          </a>
         </div>
         <p className="mt-3">
           <SaveContactLink className="inline-flex min-h-[44px] items-center text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors">

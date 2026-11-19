@@ -104,8 +104,8 @@ export default function AreasHubPage() {
                 <h2 className="ed-h2 ed-statement">Questions about Treasure Valley handyman service</h2>
               </div>
               <div className="lx-faq w-full border-t" style={{ borderColor: "var(--ed-line)" }}>
-                {AREA_PAGE_FAQS.map((faq, i) => (
-                  <details key={faq.question} name="areas-faq" open={i === 0} className="border-b" style={{ borderColor: "var(--ed-line)" }}>
+                {AREA_PAGE_FAQS.map((faq) => (
+                  <details key={faq.question} name="areas-faq" open={faq === AREA_PAGE_FAQS[0]} className="border-b" style={{ borderColor: "var(--ed-line)" }}>
                     <summary><h3 className="ed-h4 text-left">{faq.question}</h3></summary>
                     <p className="ed-body text-[0.9375rem]">{faq.answer}</p>
                   </details>
