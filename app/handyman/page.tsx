@@ -10,7 +10,7 @@ import { generateFAQSchema, generateWebPageSchema } from "@/lib/schema";
 import { SITE_CONFIG } from "@/shared/siteConfig";
 import { CalendarCheck, FileText, ShieldCheck } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from '@/components/VersionedImage';
 
 /**
  * Paid-search landing page. Calls are the goal, so Call and Text sit in the

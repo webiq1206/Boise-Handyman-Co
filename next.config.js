@@ -48,9 +48,15 @@ const nextConfig = {
     imageSizes: [96, 256, 384],
     // Next defaults this to 60 SECONDS, so optimized variants expired and were
     // re-encoded about once a minute - the main reason images felt slow again
-    // and again. Optimized URLs are keyed by src + width + quality, so a long
-    // TTL is safe: changing an image changes its URL.
+    // and again. Optimized URLs are keyed by src + width + quality, and the
+    // answer is cached for this long by browsers too, so a photograph replaced
+    // under the same file name must change its URL: components/VersionedImage.tsx
+    // adds ?v=<content hash> to replaced files (npm run images:versions).
     minimumCacheTTL: 31536000,
+    // Every local path, with or without a query string (the ?v= above). Next 15
+    // warns about a query string that no pattern covers and Next 16 refuses it.
+    // Leaving `search` out is what allows any query.
+    localPatterns: [{ pathname: '/**' }],
     remotePatterns: [
       {
         protocol: 'https',

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import Image from '@/components/VersionedImage';
 import Link from 'next/link';
 import { InteriorHero, InteriorPage } from '@/components/approved/InteriorLayout';
 import { Breadcrumbs } from '@/components/Breadcrumbs';

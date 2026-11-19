@@ -236,7 +236,7 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
   `shared/cityServiceImages.ts` matches `SERVICE_AREA_CITY_NAMES`), so two
   cities side by side in a card row take consecutive photographs. Keep three
   or more photographs in a rotation where the photo folder allows; electrical
-  has one and nothing unrelated fills it.
+  has seven (see below) and nothing unrelated fills it.
 * **Blog and guide heroes** are assigned in `scripts/generate-blog-image-registry.ts`
   (then `npm run images:blog`). No more than two posts share one photograph,
   apart from the Boise street photo used by three Boise-area guides.
@@ -260,12 +260,97 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
 * **About: "What sets us apart" is tap-to-open** (`WhyChooseUsSection`,
   native `details` sharing one `name`, first one open). Every paragraph stays
   in the HTML. Do not turn it back into ten open paragraphs.
-* **Electrical has three photographs**: the outlet being wired and the two
-  outlet close-ups from the gallery. Drive holds no other electrical photo, so
-  nearby-city cards on an electrical page can still repeat one. Never fill the
-  slot with unrelated work.
+* **Electrical has seven pictures** (19 November 2026): the outlet being
+  wired and the two outlet close-ups from the gallery, then four stills the
+  owner approved that day (`electrical-gfci-outlet`, `electrical-light-switch`,
+  `electrical-ceiling-fan`, `electrical-exterior-wall-light` in
+  `public/images/handyman`). Those four are AI-generated, like the rest of
+  that library: describe only what a picture shows and never caption one as a
+  completed customer job, a recent project or the team's own work. A page and
+  its eight nearby-city cards need eleven, so the last cards still fall back
+  to their city's area photograph. Never fill the slot with unrelated work.
 * **Paid-traffic pages (`callFirst`) take no fact row.** Their hero is followed
   directly by the request form the hero links to; nothing goes between them.
 * `docs/interior-route-audit.json` holds a fingerprint of each interior page's
   metadata and schema calls. When a page's metadata changes on purpose, update
   its `seoSignature` in the same commit (`tests/approved-interiors.test.ts`).
+
+### Tablet pass and card photographs (19 November 2026)
+
+* **No Keep exploring card repeats a photograph.** `pickCardImages()` in
+  `shared/cityServiceImages.ts` gives each card a picture that is not on the
+  page and not in another card: its own trade first, and when the trade has
+  none left (electrical holds seven) the card's city area photograph, described
+  as the place. A card never shows another trade's work. The template passes
+  the page's own photographs as `pageImages`. Guard:
+  `tests/explore-card-images.test.ts`.
+* **The guide list under the cards is in the same no-repeat set**
+  (`shared/exploreReading.ts`, 19 November 2026). A row asks for the picture
+  of the page it opens; when the page or a card already shows it, the row
+  takes the next free general picture (`READING_FALLBACK_IMAGES`: tools,
+  paperwork, a front door), described as what it shows. It never takes a
+  trade's work. Every row has a thumbnail; add a general picture to that list
+  rather than letting a row go bare. The two drywall pages that open with
+  `DrywallSearchHero` swap an inline photograph that would repeat the hero's
+  picture for the page's unused hero photograph. The whole page (hero, inline
+  photographs, cards, thumbnails) is tested for every service and
+  service-in-city page in `tests/explore-card-images.test.ts`.
+* **Seven city cards never leave one alone.** The services, areas and about
+  grids carry `lx-seven`: two, two and three on tablets, four and three from
+  1024. It only acts on a grid of exactly seven.
+* **Tablets (701 to 1023px).** Home repairs is one column (two left the copy a
+  110px strip); contact channels are one card per row; the contact hero facts
+  are one per line; RE-10 repair groups are one column until 1024. From 1024 to
+  1199 the article rail is 280px so the reading column keeps its width.
+* **The touch-target rule also applies to any touch screen** (`pointer:
+  coarse`), so a tablet held sideways is covered. It is for text links: a phone
+  or text link that wraps a whole card carries `block` and is left out, or the
+  card shrinks to its text (this hid half of each contact card).
+* **A link under a contact card** ("Save our contact") stays visible: the card
+  wrapper is a column and the card takes the room that is left.
+* **Buttons on the charcoal RE-10 closing band** take `tone="dark"`; the
+  primary is the `hero` variant (paper fill). Two were invisible.
+* **`tests/ad-landing-hero.test.ts`** knows the two reviewed drywall pages use
+  `DrywallSearchHero` (4 November 2026 hero remediation,
+  `docs/hero-remediation-20261104.md`): their hero is the focused section plus
+  the details section under it. It runs in prebuild with the card photograph
+  test (`npm run verify:landing-heroes`).
+* **The request form's ids are made above the lazy boundary.**
+  `LazyConsultationForm` calls `useId()` and passes `idPrefix`; an id made
+  inside the form differed between server and browser (next/dynamic renders one
+  more wrapper on the server) and every label and field failed hydration. The
+  form's text fields and the blog search field carry `data-clarity-mask="True"`
+  in the markup, the same value the masking script in `app/layout.tsx` sets
+  before hydration, so the two agree. A new server-rendered text field needs
+  the attribute too. Tags on a post or guide are shown once each.
+
+### A replaced photograph gets a new URL (19 November 2026)
+
+The image optimizer (`/_next/image`) answers with a one-year `Cache-Control`
+(`minimumCacheTTL` in `next.config.js`; measured live on 19 November 2026:
+`max-age=31536000`) and keys its own cache by the image URL. A photograph
+replaced under the same file name kept its URL, so returning visitors could
+keep the old picture. A file served directly (`/images/...`) answers
+`max-age=0` and is not affected.
+
+* `components/VersionedImage.tsx` wraps `next/image` and adds
+  `?v=<content hash>` to every replaced file; `components/MarketingImage.tsx`
+  goes through it. Import one of the two, never `next/image`
+  (`tests/image-versions.test.ts` fails on a direct import outside
+  `components/family`).
+* The list is `shared/generated/imageVersions.ts`, written by
+  `npm run images:versions` (`scripts/build-image-versions.mjs`), which also
+  keeps every file's hash in `shared/generated/imageHashes.json`. A file whose
+  content differs from its remembered hash joins the list and stays. It was
+  seeded with the 70 files replaced since 1 November 2026 (git history).
+  **Run `npm run images:versions` after adding or replacing an image**; the
+  test in prebuild (`verify:landing-heroes`) fails until you do.
+* Page code keeps plain paths everywhere else: alt text, page URLs, sitemaps,
+  structured data and the card photograph rules never see the version.
+* The shared family chrome is untouched. `components/family/HeroPhoto.tsx` is
+  the only shared file that reaches the optimizer and this site does not render
+  it.
+* `images.localPatterns: [{ pathname: '/**' }]` in `next.config.js` covers every
+  local path with or without a query string. Next 15 warns about a query no
+  pattern covers and Next 16 refuses it; leaving `search` out is what allows
+  the `?v=`. Do not add a `search` value to it.

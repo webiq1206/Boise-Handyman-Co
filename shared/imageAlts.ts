@@ -66,6 +66,14 @@ const IMAGE_ALTS: Record<string, string> = {
     'A new brushed-nickel kitchen faucet at a sink, with a wrench and the old faucet on the counter',
   '/images/handyman/service-electrical.webp':
     'Hands installing a white duplex electrical outlet in an open wall box',
+  '/images/handyman/electrical-gfci-outlet.webp':
+    'Gloved hands fastening a white GFCI outlet into a wall box with an insulated screwdriver',
+  '/images/handyman/electrical-light-switch.webp':
+    'Hands setting a white rocker light switch into a wall box beside a door frame',
+  '/images/handyman/electrical-ceiling-fan.webp':
+    'A worker on a step ladder joining the wires of a white ceiling fan at the ceiling box',
+  '/images/handyman/electrical-exterior-wall-light.webp':
+    'Hands mounting a black wall light on gray lap siding beside a front door',
   '/images/handyman/service-mounting.webp':
     'A worker leveling a TV wall-mount bracket with a drill',
   '/images/handyman/service-fence-repair.webp':
@@ -74,6 +82,8 @@ const IMAGE_ALTS: Record<string, string> = {
     'A caulk gun laying a white bead where a bathtub meets subway tile',
   '/images/handyman/hero-door-hinge-branded.webp':
     'An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth',
+  '/images/handyman/permit-paperwork.webp':
+    'Permit paperwork and folded residential drawings on a counter, with a hand holding a pen',
   '/images/handyman/toolbag-ready.webp':
     'An open canvas tool bag with a drill, level, and tape measure on a drop cloth',
   '/images/handyman/estimate-clipboard.webp':

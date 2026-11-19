@@ -180,8 +180,16 @@ export function LandingPageTemplate({
   const eyebrow = breadcrumbs[breadcrumbs.length - 2]?.name;
   const hasProof =
     !!proof && ((proof.testimonials?.length ?? 0) > 0 || (proof.projects?.length ?? 0) > 0);
-  const breatherImage = breatherImageUrl ?? heroImageUrl;
-  const processImage = processImageUrl ?? heroImageUrl;
+  // The two reviewed drywall pages open with DrywallSearchHero, which shows its
+  // own picture and leaves the page's hero photograph unused. Where an inline
+  // photograph would be that same picture, it takes the unused one instead, so
+  // no picture is on the page twice.
+  const drywallHeroPicture = manifestPath === '/services/drywall-repair' || manifestPath === '/services/drywall-repair/boise'
+    ? '/images/handyman/punch-list-markers.webp'
+    : undefined;
+  const inline = (src: string | undefined) => (drywallHeroPicture && src === drywallHeroPicture ? heroImageUrl : src);
+  const breatherImage = inline(breatherImageUrl ?? heroImageUrl);
+  const processImage = inline(processImageUrl ?? heroImageUrl);
   // Every photograph names this page's work and place before it describes the picture.
   const altContext = { subject: subjectForService(related.serviceSlug), city: cityForSlug(related.citySlug) };
   const heroAlt = altForImage(heroImageUrl, altContext) ?? '';
@@ -683,7 +691,7 @@ export function LandingPageTemplate({
       {/* ─── Related links & posts ─── */}
       <Section surface="deep" spacing="lg" edge>
         <div className="ed-shell">
-          <RelatedLinks {...related} manifestPath={manifestPath} exclude={(sections ?? []).flatMap((section) => section.links?.map((link) => link.href) ?? [])} />
+          <RelatedLinks {...related} manifestPath={manifestPath} pageImages={[heroImageUrl, breatherImage, processImage, drywallHeroPicture]} exclude={(sections ?? []).flatMap((section) => section.links?.map((link) => link.href) ?? [])} />
         </div>
       </Section>
 

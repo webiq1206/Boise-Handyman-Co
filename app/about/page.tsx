@@ -321,7 +321,7 @@ export default function AboutPage() {
               description={`We handle repairs, installs, and maintenance for homeowners in ${SERVICE_AREA_LINE}. Where you live never inflates the quote.`}
               className="max-w-3xl"
             />
-            <div className="grid sm:grid-cols-3 gap-4">
+            <div className="lx-seven grid sm:grid-cols-3 gap-4">
               {SERVICE_AREA_CITIES.map((city, i) => (
                 <Reveal key={city.slug} delay={Math.min(i, 7) * 50}>
                   <AreaCard city={city} imageSrc={CITY_HERO_IMAGES[city.slug]} />
@@ -343,7 +343,7 @@ export default function AboutPage() {
                 Send your tasks with photos for review and a written quote. No
                 pressure, no obligation.
               </p>
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto sm:justify-center">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
                 <ConsultCTA variant="brand" tone="dark">{CTA_PRIMARY}</ConsultCTA>
                 <FamilyButton href="/contact#consult" variant="secondary" tone="dark">{CTA_SECONDARY}</FamilyButton>
               </div>
