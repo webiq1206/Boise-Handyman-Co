@@ -711,13 +711,13 @@ export function LandingPageTemplate({
                 <p className="ed-lede">See a preliminary price range online, or send your task list and photos.</p>
                 <p className="ed-body mt-3">Get an upfront quote and arrange a handyman visit, with no obligation.</p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
-                  <InstantEstimateCTA project={estimateProject} trackingLocation="landing_closing" />
-                  <ConsultCTA variant="outline">{CTA_PRIMARY}</ConsultCTA>
+                  <InstantEstimateCTA project={estimateProject} trackingLocation="landing_closing" tone="dark" />
+                  <ConsultCTA variant="outline" tone="dark">{CTA_PRIMARY}</ConsultCTA>
                 </div>
               </> : <>
                 <p className="ed-lede">Send your task list and photos.</p>
                 <p className="ed-body mt-3">Get an upfront quote and arrange a handyman visit, with no obligation.</p>
-                <div className="mt-8"><ConsultCTA variant="brand">{CTA_PRIMARY}</ConsultCTA></div>
+                <div className="mt-8"><ConsultCTA variant="brand" tone="dark">{CTA_PRIMARY}</ConsultCTA></div>
               </>}
             </Reveal>
           </div>
