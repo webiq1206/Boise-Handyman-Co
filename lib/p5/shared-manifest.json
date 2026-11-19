@@ -519,7 +519,7 @@
     "lib/p5/imageSignature.ts": "3bc13ad775f4906c6759c9b17680773f8639875b3a121a342547472ba8c9468a",
     "tests/p5-image-signature.test.ts": "074c4406271a79525c99afe1970acd0994e97d426c687ca7019c851798201b6f",
     "scripts/lib/quoteEntry.mjs": "46f9fb18396b8e100dfdfe05c90b3bf21f7777e7feef45767e0e24432eb3b920",
-    "scripts/lib/shortBrandEntry.mjs": "27f7270125bf48773c7564b9b98bb8ff4ca02321d7a2b8b4d5c0e857737570c2",
+    "scripts/lib/shortBrandEntry.mjs": "73dd7dbeac5f08eea2000eb1b15d50149cc36efb41dd5fb1737b5e6ccecabfef",
     "lib/p5/documentEstimateFigures.ts": "bcfb00ee4c343c8578bae359258306cdc93f3f34b19ca1870663a558da661793",
     "lib/p5/p5LeadIntake.ts": "622a1aa11d0e4c241e7dc1f4524836a890d4d5b208cbab950776a282f25cac16",
     "tests/p5-lead-intake.test.ts": "da130020d2d897a0c9121306c76d77e0c88142b4f2ffe2fdcda41ae05bef6156"
@@ -923,6 +923,19 @@
         }
       ],
       "note": "Only explicitly listed files synchronized; other files and provenance retained. Runtime scope is restricted to mobile-action and route-presentation compatibility."
+    },
+    {
+      "source": "p5-home-co",
+      "commit": "a467c7bdc5682259958c9d9113b8929b755c65ab",
+      "date": "2026-11-19",
+      "files": [
+        {
+          "file": "scripts/lib/shortBrandEntry.mjs",
+          "before": "27f7270125bf48773c7564b9b98bb8ff4ca02321d7a2b8b4d5c0e857737570c2",
+          "after": "73dd7dbeac5f08eea2000eb1b15d50149cc36efb41dd5fb1737b5e6ccecabfef"
+        }
+      ],
+      "note": "Only this file copied: the homepage link step retries a click that opens nothing and checks the address at commit. Test code only; every other file and all prior provenance retained."
     }
   ],
   "selectivePresentationBatches": [
