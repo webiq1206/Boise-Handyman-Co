@@ -33,6 +33,7 @@ import { GuideContentBlocks,GuideJumpChips } from './GuideContentBlocks';
 import { GuideResourceDownloads } from './GuideResourceDownloads';
 import { InlineEstimateCTA } from './InlineEstimateCTA';
 import { RelatedPostCards } from './RelatedPostCards';
+import { toSentenceCase } from '@/shared/sentenceCase';
 import { Section } from './Section';
 import { SectionedArticle } from './SectionedArticle';
 
@@ -69,7 +70,7 @@ export function BlogPostLayout({ post, formatDate }: BlogPostLayoutProps) {
               { name: 'Home', href: '/' },
               { name: 'Blog', href: '/blog' },
               ...(hub && isCategoryHubIndexable(post.hubSlug, hubPosts.length)
-                ? [{ name: hub.categoryLabel ?? hub.title, href: categoryHubPath(post.hubSlug) }]
+                ? [{ name: toSentenceCase(hub.categoryLabel ?? hub.title), href: categoryHubPath(post.hubSlug) }]
                 : []),
               { name: post.title },
             ]}
@@ -201,7 +202,7 @@ export function BlogPostLayout({ post, formatDate }: BlogPostLayoutProps) {
 
       <Section spacing="sm" divider>
         <div className="container px-4 max-w-6xl mx-auto">
-          <RelatedPostCards path={blogPath} />
+          <RelatedPostCards path={blogPath} pageImages={inlineFigures.map((f) => f.src)} />
         </div>
       </Section>
 

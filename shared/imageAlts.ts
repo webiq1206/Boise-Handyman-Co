@@ -124,6 +124,8 @@ const IMAGE_ALTS: Record<string, string> = {
     'A two-story white stucco home with dark siding, a two-car garage and a front lawn',
   '/images/areas/eagle.webp':
     'A single-story white stucco home with a dark metal roof at dusk, set among gravel beds and ornamental grasses',
+  '/images/areas/eagle-foothills.webp':
+    'A small dark-sided single-story home with a metal roof and a wood door, set among sagebrush below dry foothills',
   '/images/areas/nampa.webp':
     'A single-story ranch house with tan siding, a brick base and a single garage, behind a bare shade tree',
   '/images/areas/kuna.webp':

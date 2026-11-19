@@ -18,8 +18,8 @@ export interface BlogImageEntry {
 
 export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
   'ada-vs-canyon-county-permit-timelines': {
-    hero: '/images/handyman/permit-paperwork.webp',
-    alt: 'Permit paperwork and folded residential drawings on a municipal counter with a hand holding a pen',
+    hero: '/images/areas/nampa.webp',
+    alt: 'A single-story ranch house with tan siding, a brick base and a single garage, behind a bare shade tree',
     topicTags: ["permits","ada county","canyon county","home repairs","costs"],
     source: 'handyman',
   },
@@ -138,8 +138,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'how-to-compare-handyman-quotes': {
-    hero: '/images/handyman/estimate-clipboard.webp',
-    alt: 'A clipboard with a blank work-order form, a carpenter\'s pencil, a tape measure and a small level on a kitchen table',
+    hero: '/images/handyman/repair-materials.webp',
+    alt: 'Assorted screws, wall anchors, and picture hangers organized in a small parts tray on a workbench',
     topicTags: ["handyman quotes","hiring a handyman","boise","pricing","costs"],
     source: 'handyman',
   },
@@ -312,8 +312,8 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
     source: 'handyman',
   },
   'eagle-foothills-handyman-guide': {
-    hero: '/images/areas/eagle.webp',
-    alt: 'A single-story white stucco home with a dark metal roof at dusk, set among gravel beds and ornamental grasses',
+    hero: '/images/areas/eagle-foothills.webp',
+    alt: 'A small dark-sided single-story home with a metal roof and a wood door, set among sagebrush below dry foothills',
     topicTags: ["eagle","the eagle foothills","idaho","handyman","costs"],
     source: 'handyman',
   },
@@ -333,9 +333,9 @@ export const BLOG_IMAGE_REGISTRY: Record<string, BlogImageEntry> = {
 
 export const HUB_HERO_IMAGES: Record<string, string> = {
   'repairs-and-fixes': '/images/handyman/service-electrical.webp',
-  'installs-and-upgrades': '/images/handyman/service-mounting.webp',
-  'home-maintenance': '/images/handyman/service-caulking.webp',
-  'costs-and-hiring': '/images/handyman/estimate-clipboard.webp',
+  'installs-and-upgrades': '/images/handyman/cabinet-pulls-installed.webp',
+  'home-maintenance': '/images/houses/kuna/kuna-gutter-cleaning.webp',
+  'costs-and-hiring': '/images/handyman/consult-doorstep-branded.webp',
   'exterior-and-outdoor': '/images/handyman/hero-gutter-cleaning.webp',
 };
 
