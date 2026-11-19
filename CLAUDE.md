@@ -350,6 +350,7 @@ keep the old picture. A file served directly (`/images/...`) answers
 * The shared family chrome is untouched. `components/family/HeroPhoto.tsx` is
   the only shared file that reaches the optimizer and this site does not render
   it.
-* Next 15 warns that a query string on a local image will need
-  `images.localPatterns` from Next 16. Add that with the upgrade, and check a
-  versioned URL still answers 200.
+* `images.localPatterns: [{ pathname: '/**' }]` in `next.config.js` covers every
+  local path with or without a query string. Next 15 warns about a query no
+  pattern covers and Next 16 refuses it; leaving `search` out is what allows
+  the `?v=`. Do not add a `search` value to it.

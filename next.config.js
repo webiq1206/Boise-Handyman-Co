@@ -53,6 +53,10 @@ const nextConfig = {
     // under the same file name must change its URL: components/VersionedImage.tsx
     // adds ?v=<content hash> to replaced files (npm run images:versions).
     minimumCacheTTL: 31536000,
+    // Every local path, with or without a query string (the ?v= above). Next 15
+    // warns about a query string that no pattern covers and Next 16 refuses it.
+    // Leaving `search` out is what allows any query.
+    localPatterns: [{ pathname: '/**' }],
     remotePatterns: [
       {
         protocol: 'https',
