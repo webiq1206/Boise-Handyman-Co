@@ -66,6 +66,14 @@ const IMAGE_ALTS: Record<string, string> = {
     'A new brushed-nickel kitchen faucet at a sink, with a wrench and the old faucet on the counter',
   '/images/handyman/service-electrical.webp':
     'Hands installing a white duplex electrical outlet in an open wall box',
+  '/images/handyman/electrical-gfci-outlet.webp':
+    'Gloved hands fastening a white GFCI outlet into a wall box with an insulated screwdriver',
+  '/images/handyman/electrical-light-switch.webp':
+    'Hands setting a white rocker light switch into a wall box beside a door frame',
+  '/images/handyman/electrical-ceiling-fan.webp':
+    'A worker on a step ladder joining the wires of a white ceiling fan at the ceiling box',
+  '/images/handyman/electrical-exterior-wall-light.webp':
+    'Hands mounting a black wall light on gray lap siding beside a front door',
   '/images/handyman/service-mounting.webp':
     'A worker leveling a TV wall-mount bracket with a drill',
   '/images/handyman/service-fence-repair.webp':

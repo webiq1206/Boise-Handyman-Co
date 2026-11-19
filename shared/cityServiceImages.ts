@@ -66,12 +66,19 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     h("vanity-faucet-cabinet"),
     h("bathroom-vanity-faucet"),
   ],
-  // Three electrical photographs: the outlet being wired, and the two outlet
-  // close-ups from the gallery. Unrelated work never fills the slot.
+  // Seven electrical pictures: the outlet being wired and the two outlet
+  // close-ups from the gallery first, then four stills the owner approved on
+  // 19 November 2026 (outlet, switch, ceiling fan, exterior light). Describe
+  // only what a picture shows; never caption one as a completed customer job.
+  // Unrelated work never fills the slot.
   "electrical-repairs": [
     h("service-electrical"),
     "/images/gallery/gallery-electrical-kuna-after.webp",
     "/images/gallery/gallery-electrical-kuna-before.webp",
+    h("electrical-gfci-outlet"),
+    h("electrical-light-switch"),
+    h("electrical-ceiling-fan"),
+    h("electrical-exterior-wall-light"),
   ],
   "carpentry-trim-repair": [
     SITE_IMAGES.valueCraft,
@@ -243,7 +250,7 @@ export function getCityServiceImage(url: string): string | undefined {
  *
  * Each card asks for the photograph of the page it opens. When that one is
  * taken, it takes another photograph of the same trade that is still free.
- * When the trade has none left (electrical holds three), the card shows the
+ * When the trade has none left (electrical holds seven), the card shows the
  * city's own area photograph instead: `area` is true, and the caller describes
  * it as the place, not as the trade. Unrelated trade work never fills a card.
  *

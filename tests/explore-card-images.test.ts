@@ -2,7 +2,7 @@
  * Keep exploring cards never repeat a photograph (owner, 19 November 2026).
  * On every service-in-city page, no two cards share a picture and no card
  * shows a picture the page already carries. A trade with too few photographs
- * (electrical has three) hands the card its city's area photograph; work from
+ * (electrical has seven, a page and its eight nearby cards need eleven) hands the card its city's area photograph; work from
  * another trade never fills the card.
  */
 import { test } from 'node:test';
@@ -61,7 +61,7 @@ test('electrical pages: every nearby-city card has a photograph, the trade ones 
     const { picks } = cardsFor('electrical-repairs', city.slug);
     const nearby = picks.slice(0, SERVICE_AREA_CITIES.length - 1);
     assert.ok(nearby.every((pick) => pick.src), `${city.slug}: a nearby card has no photograph`);
-    assert.ok(nearby.some((pick) => pick.area), `${city.slug}: three electrical photographs cannot fill the row`);
+    assert.ok(nearby.some((pick) => pick.area), `${city.slug}: seven electrical pictures cannot fill a page and eight cards`);
   }
 });
 

@@ -236,7 +236,7 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
   `shared/cityServiceImages.ts` matches `SERVICE_AREA_CITY_NAMES`), so two
   cities side by side in a card row take consecutive photographs. Keep three
   or more photographs in a rotation where the photo folder allows; electrical
-  has one and nothing unrelated fills it.
+  has seven (see below) and nothing unrelated fills it.
 * **Blog and guide heroes** are assigned in `scripts/generate-blog-image-registry.ts`
   (then `npm run images:blog`). No more than two posts share one photograph,
   apart from the Boise street photo used by three Boise-area guides.
@@ -260,10 +260,15 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
 * **About: "What sets us apart" is tap-to-open** (`WhyChooseUsSection`,
   native `details` sharing one `name`, first one open). Every paragraph stays
   in the HTML. Do not turn it back into ten open paragraphs.
-* **Electrical has three photographs**: the outlet being wired and the two
-  outlet close-ups from the gallery. Drive holds no other electrical photo, so
-  nearby-city cards on an electrical page can still repeat one. Never fill the
-  slot with unrelated work.
+* **Electrical has seven pictures** (19 November 2026): the outlet being
+  wired and the two outlet close-ups from the gallery, then four stills the
+  owner approved that day (`electrical-gfci-outlet`, `electrical-light-switch`,
+  `electrical-ceiling-fan`, `electrical-exterior-wall-light` in
+  `public/images/handyman`). Those four are AI-generated, like the rest of
+  that library: describe only what a picture shows and never caption one as a
+  completed customer job, a recent project or the team's own work. A page and
+  its eight nearby-city cards need eleven, so the last cards still fall back
+  to their city's area photograph. Never fill the slot with unrelated work.
 * **Paid-traffic pages (`callFirst`) take no fact row.** Their hero is followed
   directly by the request form the hero links to; nothing goes between them.
 * `docs/interior-route-audit.json` holds a fingerprint of each interior page's
@@ -275,7 +280,7 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
 * **No Keep exploring card repeats a photograph.** `pickCardImages()` in
   `shared/cityServiceImages.ts` gives each card a picture that is not on the
   page and not in another card: its own trade first, and when the trade has
-  none left (electrical holds three) the card's city area photograph, described
+  none left (electrical holds seven) the card's city area photograph, described
   as the place. A card never shows another trade's work. The template passes
   the page's own photographs as `pageImages`. Guard:
   `tests/explore-card-images.test.ts`.
