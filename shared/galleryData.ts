@@ -28,7 +28,7 @@ export const UNPUBLISHED_GALLERY_CONCEPTS: GalleryProject[] = [
     afterImageUrl: g("gallery-painting-boise-after"),
     title: "Front Door Paint Refresh",
     description:
-      "Exterior door paint, trim and hardware. Final color and prep are tailored to your door.",
+      "Exterior door paint, trim and hardware.",
   },
   {
     serviceType: "drywall-repair",

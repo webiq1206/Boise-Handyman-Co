@@ -185,3 +185,47 @@ Every time, in this order, in the Replit workspace:
 This applies whoever does the pull: a person, Replit's assistant or Claude.
 Never run a schema command against the live database. The same checklist is in
 `replit.md`, which Replit's assistant reads.
+
+## Interior page refinement (owner approval, 19 November 2026)
+
+Service, city and area landing pages, blog articles and guides follow the
+family pattern first built on Boise Remodeling Co. Styles live in
+`app/interior-refinement.css` (imported last in `app/layout.tsx`). The homepage
+layout and the paid-traffic landing pages (`callFirst`) are unchanged.
+
+* **Landing template** (`components/seo/LandingPageTemplate.tsx`): a fact row
+  under the hero (`.lx-facts`, wording already used on the page; never a reply
+  time), benefits two across on phones, process steps that swipe on phones,
+  and questions as native `<details>` so every answer stays in the HTML. Phones
+  keep copy before the photograph in the hero.
+* **One closing links block**, "Keep exploring"
+  (`components/seo/RelatedLinks.tsx`): places and services as photo cards (a
+  swipe row on phones, balanced rows from tablet up), guides and articles as
+  one list with thumbnails, and no link shown twice. Cards keep the full
+  anchor text for search (`sr-only`); `.lx-cell` stays `position: relative` so
+  that hidden text cannot widen the page. A noindexed city combination still
+  links to the service page. Do not stack separate link lists under it again.
+* **Articles and guides**: quiet header and date line, one "On this page" row
+  on phones, downloads and the guide note after the article, one estimate
+  prompt at the end on phones, related pages with their photographs. On
+  desktop the reading column and the sticky rail fill the container.
+* **Photographs.** Each trade's rotation in `shared/cityServiceImages.ts` was
+  widened from the owner's photo folder so fewer city pages share a picture.
+  A new file needs a description in `shared/imageAlts.ts`; unrelated work never
+  fills a trade's slot.
+* **Image alt text is local.** Every content image's alt is "<work> in <city>,
+  Idaho: <what the picture shows>", built by `localAlt()` in
+  `shared/localAlt.ts`. `altForImage()` and `getBlogImageAlt()` apply it; a
+  page passes its own service and city, and Boise is the default place. New
+  images go through one of those helpers, never a bare string. Brand lockups
+  in the shared header and footer keep an empty alt because their link carries
+  the company name. Guard: `tests/local-alt.test.ts`.
+* **No qualifier beside a photograph** (owner direction). No "inspiration",
+  "possibilities", "idea", "concept", "representative" or "tailored to your
+  property" in an alt, heading, eyebrow, caption or image sitemap entry. Use a
+  plain subject label (the service, with the city where the page has one). Do
+  not replace it with wording that claims a photograph is a completed customer
+  job.
+* `.guide-section-details[open] .guide-section-summary > span` keeps the child
+  combinator, so the rule that hides "Tap to expand" cannot hide part of a
+  heading.

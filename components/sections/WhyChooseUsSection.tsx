@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { SITE_IMAGES } from "@/shared/siteImages";
@@ -65,7 +66,7 @@ export function WhyChooseUsSection({ limit }: WhyChooseUsSectionProps) {
                 <div className="relative aspect-[4/3] overflow-hidden" style={{ border: "1px solid var(--ed-line)" }}>
                   <Image
                     src={SITE_IMAGES.valueCraft}
-                    alt="A sage-green front door with white trim and black hardware"
+                    alt={localAlt('A sage-green front door with white trim and black hardware')}
                     fill
                     sizes="(min-width: 1024px) 40vw, 100vw"
                     className="object-cover img-brand-grade"

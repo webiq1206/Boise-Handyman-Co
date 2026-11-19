@@ -2,7 +2,7 @@ import { BLOG_POSTS } from '@/shared/blogContent';
 import { GUIDE_PAGES } from '@/shared/guideContent';
 import { GALLERY_PROJECTS } from '@/shared/galleryData';
 import { guidePath } from '@/shared/contentHubs';
-import { getBlogImageEntry } from '@/shared/blogImages';
+import { getBlogImageEntry, getBlogImageAlt } from '@/shared/blogImages';
 import { getBaseUrl } from '@/lib/seo';
 
 /**
@@ -73,7 +73,7 @@ export async function GET() {
     add(`${baseUrl}${guidePath(guide.slug)}`, {
       loc: absolute(hero, baseUrl),
       title: guide.title,
-      caption: getBlogImageEntry(guide.slug)?.alt ?? guide.excerpt,
+      caption: getBlogImageEntry(guide.slug) ? getBlogImageAlt(guide.slug) : guide.excerpt,
     });
   }
 
@@ -83,7 +83,7 @@ export async function GET() {
     add(`${baseUrl}/blog/${post.slug}`, {
       loc: absolute(hero, baseUrl),
       title: post.title,
-      caption: getBlogImageEntry(post.slug)?.alt ?? post.excerpt,
+      caption: getBlogImageEntry(post.slug) ? getBlogImageAlt(post.slug) : post.excerpt,
     });
   }
 

@@ -81,7 +81,7 @@ export default async function CityServicePage(
   const images = getCityServiceImageSet(service.slug, city.slug);
   const sections = getCityServiceSections(content, city, seo);
 
-  // Representative design pairs only. Written testimonials stay hidden until we
+  // Comparison pairs only. Written testimonials stay hidden until we
   // have genuine, verified reviews (no seeded quotes or star ratings).
   const matchedProjects = getGalleryProjectsFor(service.slug, city.slug);
   const proof: LandingProof | undefined =
@@ -132,7 +132,7 @@ export default async function CityServicePage(
         localNote={localNote}
         sections={sections}
         proof={proof}
-        proofHeading={`${city.name} ${service.name.toLowerCase()} inspiration`}
+        proofHeading={`${serviceHeading(service.name)} in ${city.name}`}
         showEstimatePrompt
         faqs={faqs}
         related={{

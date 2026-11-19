@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import { InteriorHero,InteriorPage } from '@/components/approved/InteriorLayout';
 import { ContractorCredential } from '@/components/ContractorCredential';
 import { DisplayNum, formatStepNumber } from '@/components/marketing/DisplayNum';
@@ -108,7 +109,7 @@ export default function AboutPage() {
         <InteriorHero
           layout="editorial"
           imageSrc={SITE_IMAGES.leadership}
-          imageAlt="A canvas tool bag and a cordless drill on the front step beside a wood front door"
+          imageAlt={localAlt('A canvas tool bag and a cordless drill on the front step beside a wood front door')}
           imageFit="contain"
         >
             <HeroBreadcrumbs />
@@ -251,7 +252,7 @@ export default function AboutPage() {
         <section className="relative h-[clamp(220px,32vw,400px)] overflow-hidden" aria-label="Kuna single-storey home exterior">
           <Image
             src="/images/houses/kuna/kuna-gutter-cleaning.webp"
-            alt="White gutter with autumn leaves at the eave of a beige Kuna single-storey home"
+            alt={localAlt('White gutter with autumn leaves at the eave of a beige Kuna single-storey home')}
             fill
             sizes="100vw"
             className="object-cover img-brand-grade"

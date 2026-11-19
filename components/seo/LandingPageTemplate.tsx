@@ -4,21 +4,15 @@ import { LandingContactActions } from "@/components/marketing/LandingContactActi
 import { InteriorHero,InteriorProjectAside } from '@/components/approved/InteriorLayout';
 import { DrywallSearchHero } from '@/components/approved/DrywallSearchHero';
 import { Section } from '@/components/marketing/Section';
-import { RelatedPostCards } from '@/components/marketing/RelatedPostCards';
 import Image from '@/components/MarketingImage';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
 import { InstantEstimateCTA } from '@/components/estimator/InstantEstimateCTA';
 import { Reveal } from '@/components/Reveal';
 import { FeaturedBeforeAfterSection } from '@/components/sections/FeaturedBeforeAfterSection';
-import {
-Accordion,
-AccordionContent,
-AccordionItem,
-AccordionTrigger,
-} from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { GRAIN_URL } from '@/lib/grain';
 import { altForImage } from '@/shared/imageAlts';
+import { cityForSlug, localAlt, subjectForService } from '@/shared/localAlt';
 import { CTA_ESTIMATE,CTA_PRIMARY,CTA_SECONDARY,estimatorProjectForService } from '@/shared/ctaCopy';
 import type { GalleryProject } from '@/shared/galleryData';
 import type { FAQItem } from '@/shared/seoContent';
@@ -188,9 +182,11 @@ export function LandingPageTemplate({
     !!proof && ((proof.testimonials?.length ?? 0) > 0 || (proof.projects?.length ?? 0) > 0);
   const breatherImage = breatherImageUrl ?? heroImageUrl;
   const processImage = processImageUrl ?? heroImageUrl;
-  const heroAlt = altForImage(heroImageUrl) ?? '';
-  const breatherAlt = altForImage(breatherImage) ?? '';
-  const processAlt = altForImage(processImage) ?? '';
+  // Every photograph names this page's work and place before it describes the picture.
+  const altContext = { subject: subjectForService(related.serviceSlug), city: cityForSlug(related.citySlug) };
+  const heroAlt = altForImage(heroImageUrl, altContext) ?? '';
+  const breatherAlt = altForImage(breatherImage, altContext) ?? '';
+  const processAlt = altForImage(processImage, altContext) ?? '';
   const showTimelineBelow = !!timeline && !costGuidance;
   const callFirst = callFirstProp || !!paidService;
   // Owner decision, 13 November 2026: the instant estimator is the primary
@@ -309,6 +305,17 @@ export function LandingPageTemplate({
           )}
           </>}
         </InteriorHero>}
+      {/* Three facts a visitor can check, in wording already used on this page and
+          in its closing section. Paid-traffic pages keep their layout as set. */}
+      {!callFirst && (
+        <ul className="lx-facts" aria-label="At a glance">
+          {planningFrom && (
+            <li><strong>From {planningFrom}</strong><span>Planning figure. Send photos for an upfront written quote</span></li>
+          )}
+          <li><strong>One written price</strong><span>You approve one clear price before anything is scheduled</span></li>
+          <li><strong>Quoted from photos</strong><span>Send your task list and photos, with no obligation</span></li>
+        </ul>
+      )}
       {/* The hero's form link lands on the form itself: its heading is the form's
           own, and the note that used to sit above it follows the form. */}
       {paidService && <section id="service-inquiry" tabIndex={-1} data-quote-anchor="" className="fr-request family-site family-handyman" style={{ '--f-accent': '#C56B4A' } as React.CSSProperties} aria-label="Send your list">
@@ -396,7 +403,7 @@ export function LandingPageTemplate({
             </Reveal>
             <Reveal delay={60}>
               <ul
-                className="ed-matrix mt-[clamp(40px,5vw,72px)] list-none p-0"
+                className="ed-matrix lx-benefits mt-[clamp(40px,5vw,72px)] list-none p-0"
                 style={{ ['--ed-cols' as string]: benefits.length === 4 ? 4 : Math.min(benefits.length, 3), ['--ed-cell-h' as string]: '0' }}
               >
                 {/* Each benefit is one sentence and renders whole. Splitting it at a
@@ -444,7 +451,7 @@ export function LandingPageTemplate({
                   Our <em className="not-italic" style={accent}>process,</em> step by step
                 </h2>
               </Reveal>
-              <div className="ed-steps mt-[clamp(32px,4vw,56px)]">
+              <div className="ed-steps lx-steps mt-[clamp(32px,4vw,56px)]">
                 {processSteps.map((step, i) => (
                   <Reveal key={step.title} delay={Math.min(i, 5) * 60}>
                     <div className="ed-step">
@@ -619,10 +626,10 @@ export function LandingPageTemplate({
                     <article className="flex h-full flex-col" style={{ border: '1px solid var(--ed-line)' }}>
                       <div className="grid grid-cols-2">
                         <div className="relative aspect-[4/3]">
-                          <Image src={project.beforeImageUrl} alt={project.title} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
+                          <Image src={project.beforeImageUrl} alt={altForImage(project.beforeImageUrl, altContext) ?? localAlt(project.title, altContext)} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
                         </div>
                         <div className="relative aspect-[4/3]">
-                          <Image src={project.afterImageUrl} alt={project.title} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
+                          <Image src={project.afterImageUrl} alt={altForImage(project.afterImageUrl, altContext) ?? localAlt(project.title, altContext)} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
                         </div>
                       </div>
                       <div className="p-6">
@@ -668,25 +675,24 @@ export function LandingPageTemplate({
                 Frequently asked <em className="not-italic" style={accent}>questions</em>
               </h2>
             </div>
-            <Accordion type="single" collapsible className="w-full border-t" style={line}>
+            {/* Native disclosure: every answer stays in the HTML for search and
+                assistive technology, and one question is open at a time. */}
+            <div className="lx-faq w-full border-t" style={line}>
               {faqs.map((faq, i) => (
-                <AccordionItem key={i} value={`faq-${i}`} className="border-0 border-b" style={line}>
-                  <AccordionTrigger className="ed-h4 py-6 text-left hover:no-underline [&[data-state=open]]:underline [&[data-state=open]]:underline-offset-4">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="ed-body pb-7 text-[0.9375rem]">{faq.answer}</AccordionContent>
-                </AccordionItem>
+                <details key={faq.question} name="landing-faq" open={i === 0} className="border-b" style={line}>
+                  <summary><h3 className="ed-h4 text-left">{faq.question}</h3></summary>
+                  <p className="ed-body text-[0.9375rem]">{faq.answer}</p>
+                </details>
               ))}
-            </Accordion>
+            </div>
           </div>
         </div>
       </Section>
 
       {/* ─── Related links & posts ─── */}
       <Section surface="deep" spacing="lg" edge>
-        <div className="ed-shell space-y-12">
-          <Reveal><RelatedLinks {...related} /></Reveal>
-          {manifestPath && (<Reveal><RelatedPostCards path={manifestPath} /></Reveal>)}
+        <div className="ed-shell">
+          <RelatedLinks {...related} manifestPath={manifestPath} exclude={(sections ?? []).flatMap((section) => section.links?.map((link) => link.href) ?? [])} />
         </div>
       </Section>
 

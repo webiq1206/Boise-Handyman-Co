@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import { InteriorHero, InteriorPage } from "@/components/approved/InteriorLayout";
 import { ContractorCredential } from "@/components/ContractorCredential";
 import { Section } from "@/components/marketing/Section";
@@ -106,7 +107,7 @@ export default function WarrantyPage() {
         <InteriorHero
           layout="editorial"
           imageSrc={SITE_IMAGES.process}
-          imageAlt="A clipboard with a blank work-order form, a carpenter's pencil, a tape measure and a small level on a kitchen table"
+          imageAlt={localAlt("A clipboard with a blank work-order form, a carpenter's pencil, a tape measure and a small level on a kitchen table")}
         >
           <p className="ed-eyebrow" style={{ color: "rgb(255 255 255 / 0.72)" }}>
             Our promise

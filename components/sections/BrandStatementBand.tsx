@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { SITE_IMAGES } from "@/shared/siteImages";
@@ -18,7 +19,7 @@ export function BrandStatementBand() {
     >
       <Image
         src={SITE_IMAGES.statementBand}
-        alt="Freshly painted white window trim, with a brush resting on an open paint can over a drop cloth"
+        alt={localAlt('Freshly painted white window trim, with a brush resting on an open paint can over a drop cloth')}
         fill
         loading="lazy"
         quality={65}

@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import Image from "@/components/MarketingImage";
 import { Reveal } from "@/components/Reveal";
 import { Section } from "@/components/marketing/Section";
@@ -24,7 +25,7 @@ export function ProcessSection() {
         <div className="ed-panel-media">
           <Image
             src={SITE_IMAGES.processInProgress}
-            alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth"
+            alt={localAlt('An open canvas tool bag with a drill, level, and tape measure on a drop cloth')}
             fill
             loading="lazy"
             sizes="(max-width: 820px) 100vw, 43vw"

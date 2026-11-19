@@ -5,8 +5,9 @@
  * point at the AI-generated handyman photo library in public/images/handyman
  * (2026-08); swap for real job photography when it exists.
  *
- * City variants use a trade-specific shortlist. Relevant representative
- * images may repeat across cities; unrelated work must never fill a slot.
+ * City variants use a trade-specific shortlist, widened on 19 November 2026
+ * from the owner's photo folder so fewer city pages share a photograph. An
+ * image may still repeat across cities; unrelated work must never fill a slot.
  * The rotation is deterministic between builds.
  *
  * Key format for CITY_SERVICE_IMAGES: "service-slug/city-slug"
@@ -43,10 +44,15 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
   "painting-touch-ups": [
     h("service-painting-p5-reviewed-20260910"),
     h("front-door-repaint-p5-reviewed-20260910"),
+    h("paint-trim-brush"),
+    h("paint-wall-first-coat"),
+    h("paint-ceiling-roller"),
+    h("paint-room-masked"),
   ],
   "plumbing-repairs": [
     h("service-plumbing"),
     h("toilet-repair"),
+    h("under-sink-plumbing"),
   ],
   "electrical-repairs": [
     h("service-electrical"),
@@ -55,22 +61,32 @@ const SERVICE_ROTATION: Record<string, readonly string[]> = {
     SITE_IMAGES.valueCraft,
     h("hero-door-hinge-branded"),
     h("door-hinge-fix"),
+    h("baseboard-new-length"),
+    h("baseboard-caulk-tools"),
+    h("door-hinge-shims"),
+    h("door-lock-keypad"),
   ],
   "mounting-assembly": [
     h("service-mounting"),
     h("grab-bar-install"),
     h("cabinet-hardware-upgrade"),
+    h("tv-and-shelves-mounted"),
+    h("floating-shelf-install"),
+    h("entry-bench-assembled"),
+    h("cabinet-pulls-installed"),
   ],
   "fence-deck-gutter-repair": [
     h("service-fence-repair"),
     h("deck-board-replacement"),
     h("hero-gutter-cleaning"),
+    h("fence-and-deck-boards"),
   ],
   "home-maintenance": [
     h("service-caulking"),
     h("weatherstripping"),
     h("winterize-spigot"),
     h("hero-gutter-cleaning"),
+    h("caulk-baseboard-gap"),
   ],
 };
 
@@ -146,7 +162,7 @@ export function getCityServiceImageSet(
   return {
     hero,
     // Keep the visible work within this trade. Related city pages may share
-    // a suitable representative photo when a distinct job image is unavailable.
+    // a suitable photo when a distinct one is unavailable.
     breather: rotation.length > 1
       ? rotation[(cityIndex + 1) % rotation.length]
       : getServiceImageSet(serviceSlug).breather,

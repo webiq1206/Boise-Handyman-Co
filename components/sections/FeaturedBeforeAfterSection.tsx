@@ -4,6 +4,9 @@ import { SectionHeader } from "@/components/marketing/SectionHeader";
 import { MarketingCard } from "@/components/marketing/MarketingCard";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import type { GalleryProject } from "@/shared/galleryData";
+import { SERVICES, serviceHeading } from "@/shared/contentData";
+import { altForImage } from "@/shared/imageAlts";
+import { cityForSlug, localAlt, subjectForService } from "@/shared/localAlt";
 
 interface FeaturedBeforeAfterSectionProps {
   project: GalleryProject;
@@ -11,24 +14,23 @@ interface FeaturedBeforeAfterSectionProps {
 }
 
 /**
- * Featured comparison slider for service hub pages. Imagery is representative
- * design photography, not completed customer projects.
+ * Featured comparison slider for service hub pages. The heading is the plain
+ * service name (owner, 19 November 2026: no qualifier label beside a
+ * photograph), and it makes no claim about a customer job.
  */
 export function FeaturedBeforeAfterSection({
   project,
-  title = (
-    <>
-      See the <em className="brc-accent">possibilities</em>
-    </>
-  ),
+  title,
 }: FeaturedBeforeAfterSectionProps) {
+  const service = SERVICES.find((item) => item.slug === project.serviceType);
+  const subject = { subject: subjectForService(project.serviceType), city: cityForSlug(project.city) };
+  const heading = title ?? (service ? serviceHeading(service.name) : project.title);
   return (
     <Section divider>
       <div className="container px-4 max-w-5xl">
         <SectionHeader
           eyebrow="Repair details"
-          title={title}
-          description="Final scope and materials are tailored to your property."
+          title={heading}
           className="mb-8 max-w-3xl"
         />
         <Reveal>
@@ -36,8 +38,8 @@ export function FeaturedBeforeAfterSection({
             <BeforeAfterSlider
               beforeSrc={project.beforeImageUrl}
               afterSrc={project.afterImageUrl}
-              beforeAlt={project.title}
-              afterAlt={project.title}
+              beforeAlt={altForImage(project.beforeImageUrl, subject) ?? localAlt(project.title, subject)}
+              afterAlt={altForImage(project.afterImageUrl, subject) ?? localAlt(project.title, subject)}
               aspectClass="aspect-[16/10] md:aspect-[21/9]"
             />
             <div className="p-6 md:p-8">

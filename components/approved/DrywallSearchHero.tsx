@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import { FamilyButton } from '@/components/family/Button';
 import { ConsultCTA } from '@/components/modals/ConsultCTA';
 import { InstantEstimateCTA } from '@/components/estimator/InstantEstimateCTA';
@@ -36,7 +37,7 @@ export function DrywallSearchHero({h1, overview, speakableSummary, breadcrumbs, 
         </div>
       </div>
       <div className={styles.serviceMedia}>
-        <img src="/images/handyman/punch-list-markers.webp" width={1216} height={896} loading="eager" fetchPriority="high" alt="Repair-planning notes and blue wall markers beside a window" />
+        <img src="/images/handyman/punch-list-markers.webp" width={1216} height={896} loading="eager" fetchPriority="high" alt={localAlt('Repair-planning notes and blue wall markers beside a window')} />
       </div>
     </section>
     <section className={styles.details} aria-label="Repair scope and contact details">

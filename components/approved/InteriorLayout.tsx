@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import { ArrowUpRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { familyButtonClass } from '@/components/family/Button';
@@ -46,7 +47,7 @@ export function InteriorHero({
           linked page would fetch this hero too. */}
       {imageSrc && (
         <div className={imageClass}>
-          <img src={imageSrc} alt={imageAlt} width={1400} height={1100} fetchPriority="high" />
+          <img src={imageSrc} alt={imageAlt ? localAlt(imageAlt) : ''} width={1400} height={1100} fetchPriority="high" />
         </div>
       )}
     </section>

@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import { InteriorPage } from '@/components/approved/InteriorLayout';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { MarketingCard } from "@/components/marketing/MarketingCard";
@@ -122,7 +123,7 @@ export default function Re10RepairsPage() {
             </div>
           </div>
           <figure>
-            <img src={SITE_IMAGES.processInProgress} alt="An open canvas tool bag with a drill, level, and tape measure on a drop cloth" width={1200} height={896} />
+            <img src={SITE_IMAGES.processInProgress} alt={localAlt('An open canvas tool bag with a drill, level, and tape measure on a drop cloth')} width={1200} height={896} />
           </figure>
         </div>
       </section>

@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import { InteriorPage } from '@/components/approved/InteriorLayout';
 import { EstimatePromptBand } from '@/components/marketing/EstimatePromptBand';
 import { MarketingCard } from '@/components/marketing/MarketingCard';
@@ -82,7 +83,7 @@ export default function GuidesIndexPage() {
         /* Not the cost guide's own photo: that guide is the featured card just
            below, and the estimate clipboard is also the warranty page hero. */
         imageSrc="/images/handyman/punch-list-markers.webp"
-        imageAlt="Blue painter's tape marking touch-up spots on a wall and window trim"
+        imageAlt={localAlt("Blue painter's tape marking touch-up spots on a wall and window trim")}
       >
         <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Treasure Valley know-how</p>
         <h1 className="ed-display ed-statement-display text-inverse-foreground">

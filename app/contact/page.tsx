@@ -1,3 +1,4 @@
+import { localAlt } from '@/shared/localAlt';
 import { InteriorEstimateLink,InteriorHero,InteriorPage } from '@/components/approved/InteriorLayout';
 import { BusinessPhoneContact } from '@/components/BusinessPhoneContact';
 import { LazyConsultationForm as ConsultationForm } from '@/components/LazyConsultationForm';
@@ -201,7 +202,7 @@ export default function ContactPage() {
       <JsonLd data={schemas} />
       <div className="flex flex-col ">
         {/* Approved editorial hero */}
-        <InteriorHero layout="contact" imageSrc={SITE_IMAGES.consultBg} imageAlt="A freshly painted sage-green front door with white trim and black hardware">
+        <InteriorHero layout="contact" imageSrc={SITE_IMAGES.consultBg} imageAlt={localAlt('A freshly painted sage-green front door with white trim and black hardware')}>
             <HeroBreadcrumbs />
             <p data-speakable="summary" className="sr-only">
               {SPEAKABLE_SUMMARY}
@@ -355,7 +356,7 @@ export default function ContactPage() {
               {/* People photo: contain / intrinsic - never cover-crop heads or bodies */}
               <Image
                 src={SITE_IMAGES.leadership}
-                alt="A canvas tool bag and a cordless drill on the front step beside a wood front door"
+                alt={localAlt('A canvas tool bag and a cordless drill on the front step beside a wood front door')}
                 width={1461}
                 height={1076}
                 sizes="(max-width: 768px) 100vw, 50vw"
