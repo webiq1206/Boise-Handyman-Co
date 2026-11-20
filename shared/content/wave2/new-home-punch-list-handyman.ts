@@ -12,7 +12,7 @@ export const newHomePunchListHandyman: BlogPostData = {
   hubSlug: 'home-maintenance',
   author: 'Boise Handyman Co',
   publishedAt: '2026-07-22',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['punch list', 'home maintenance', 'boise', 'new home'],
   primaryKeyword: 'new home punch list handyman',
   secondaryKeywords: [
@@ -67,7 +67,7 @@ export const newHomePunchListHandyman: BlogPostData = {
     {
       question: 'What does it cost to clear a typical punch list?',
       answer:
-        'A typical settling list on a Treasure Valley home, a handful of nail pops, a few caulk joints, two or three door adjustments, and paint touch-up, is usually a half-day to full-day visit. At market rates of $60 to $120 per hour that puts most lists in the $300 to $800 range depending on count and texture matching. Bundling everything into one visit is much cheaper than separate bookings.',
+        'A typical settling list on a Treasure Valley home, a handful of nail pops, a few caulk joints, two or three door adjustments, and paint touch-up, is usually a half-day to full-day visit. In our instant estimate (November 2026), three door adjustments on one visit come to a preliminary $550 to $620; nail pops, caulk and touch-up add to that, so send the whole list for a written quote. Bundling everything into one visit is cheaper than separate bookings.',
     },
     {
       question: 'Should I do the 11-month walkthrough myself?',
@@ -104,7 +104,7 @@ export const newHomePunchListHandyman: BlogPostData = {
 
 <h2 id="typical-list">What a typical punch-list visit includes</h2>
 <p><strong>Most new-home lists are a half-day of mixed small trades, which is exactly what handyman work is for.</strong> A representative Treasure Valley list: eight nail pops patched and textured, two settling cracks taped and skimmed, three interior doors adjusted at hinges and strikes, tub and backsplash caulk cut out and rerun, a toilet paper holder that pulled its anchors remounted properly, and paint touch-up where sheen allows.</p>
-<p>Separately booked, that is five appointments across three trades. Bundled, it is one visit under our <a href="/services/home-maintenance">home maintenance</a> service, drawing on <a href="/services/drywall-repair">drywall repair</a> and <a href="/services/carpentry-trim-repair">carpentry and trim</a> skills as the list demands. Market labor rates in the valley run $60 to $120 per hour, which puts most complete lists in the $300 to $800 range.</p>
+<p>Separately booked, that is five appointments across three trades. Bundled, it is one visit under our <a href="/services/home-maintenance">home maintenance</a> service, drawing on <a href="/services/drywall-repair">drywall repair</a> and <a href="/services/carpentry-trim-repair">carpentry and trim</a> skills as the list demands. Our instant estimate gives a preliminary range for the common items on it, and a written quote covers the rest.</p>
 
 <h2 id="watch-items">The items that are not cosmetic</h2>
 <p><strong>A short list of year-one symptoms deserves attention rather than spackle.</strong> Cracks wider than about a quarter inch, cracks that keep growing after the second year, doors across the house going out of square at once, stair-step cracks in foundation walls, or floors developing a visible slope point at movement beyond normal settling. Water staining anywhere, around windows, under sinks, at ceiling corners, is never a wait-and-see item.</p>

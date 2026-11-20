@@ -12,7 +12,7 @@ export const whyHandymanQuotesVary: BlogPostData = {
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',
   publishedAt: '2026-07-03',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['handyman costs', 'hiring a handyman', 'boise', 'quotes'],
   primaryKeyword: 'why handyman quotes vary',
   secondaryKeywords: [
@@ -62,12 +62,12 @@ export const whyHandymanQuotesVary: BlogPostData = {
     {
       question: 'Is a cash deal from a side-gig handyman a bad idea?',
       answer:
-        'It is a risk you should price honestly. With no insurance, an injury on your property or damage to your home can become your problem. With no paper trail there is no warranty and often no way to reach the person next month. For a $100 task the risk may be tolerable. For anything involving water, electricity, or your walls, the discount rarely covers the exposure.',
+        'It is a risk you should price honestly. With no insurance, an injury on your property or damage to your home can become your problem. With no paper trail there is no warranty and often no way to reach the person next month. For a small, low-stakes task the risk may be tolerable. For anything involving water, electricity, or your walls, the discount rarely covers the exposure.',
     },
     {
       question: 'Why do handymen charge a minimum or trip fee?',
       answer:
-        'The drive, fuel, insurance, scheduling, and invoicing cost the same whether the visit is twenty minutes or three hours, so most companies set a minimum around $100 to $150. Ours is one hour per visit. Companies that advertise no trip fee recover it inside the hourly rate instead. Neither approach is dishonest; you just cannot compare a quote with a visible fee against one that hides it without lining them up.',
+        'The drive, fuel, insurance, scheduling, and invoicing cost the same whether the visit is twenty minutes or three hours, so most companies set a minimum. Ours is the reason one small job on its own, such as replacing one outlet or switch, comes to a preliminary $200 to $240 in our instant estimate (November 2026). Companies that advertise no trip fee recover it inside the hourly rate instead. Neither approach is dishonest; you just cannot compare a quote with a visible fee against one that hides it without lining them up.',
     },
     {
       question: 'How do I compare handyman quotes fairly?',
@@ -77,11 +77,11 @@ export const whyHandymanQuotesVary: BlogPostData = {
   ],
   content: `
 <h2 id="the-short-answer">The short answer</h2>
-<p><strong>Quotes differ because of what is in them, not because of what labor costs.</strong> Every legitimate handyman in Ada and Canyon County pays roughly the same for screws, mud, wax rings, fuel, and insurance, and bills labor somewhere in the same $60 to $120 per hour band. So when three quotes on the same repair arrive at $150, $280, and $450, the explanation lives in the scope, the overhead, and the assumptions, and you can usually find it with two questions. This article separates the legitimate differences from the warning signs.</p>
+<p><strong>Quotes differ because of what is in them, not because of what labor costs.</strong> Every legitimate handyman in Ada and Canyon County pays roughly the same for screws, mud, wax rings, fuel, and insurance, and bills labor in a similar band. So when three quotes on the same repair arrive far apart, the explanation lives in the scope, the overhead, and the assumptions, and you can usually find it with two questions. This article separates the legitimate differences from the warning signs.</p>
 
 <h2 id="anatomy">Anatomy of a 3x spread</h2>
-<p><strong>You can build a 3x gap on one drywall patch without anyone quoting labor differently.</strong> Take a fist-sized hole in a hallway. One quote covers the patch only: mud, tape, sand, done, $150. The second adds texture matching so the repair disappears into the surrounding orange peel, $280. The third includes texture plus priming and repainting the wall corner to corner so there is no sheen flash, $450.</p>
-<p>All three are honest. They are also not the same product. The first leaves you with a smooth square on a textured wall that your eye will find every time you walk past. The homeowner who accepts the $150 quote expecting the $450 result is the one who ends up angry, and no one technically lied. The fix is boring: ask each quote what done looks like. Our guide to <a href="/blog/how-to-patch-drywall">patching drywall</a> shows why the texture step is where the time goes.</p>
+<p><strong>You can build a large gap on one drywall patch without anyone quoting labor differently.</strong> Take a fist-sized hole in a hallway. One quote covers the patch only: mud, tape, sand, done, and it is the lowest number. The second adds texture matching so the repair disappears into the surrounding orange peel, and costs more. The third includes texture plus priming and repainting the wall corner to corner so there is no sheen flash, and costs the most.</p>
+<p>All three are honest. They are also not the same product. The first leaves you with a smooth square on a textured wall that your eye will find every time you walk past. The homeowner who accepts the patch-only quote expecting the repainted-wall result is the one who ends up angry, and no one technically lied. The fix is boring: ask each quote what done looks like. Our guide to <a href="/blog/how-to-patch-drywall">patching drywall</a> shows why the texture step is where the time goes.</p>
 
 <h2 id="scope-assumptions">Scope assumptions and sight-unseen quotes</h2>
 <p><strong>A quote given without photos or a visit is a guess wearing a number.</strong> Small repairs hide surprises: the toilet that just needs a wax ring is sitting on soft subfloor, the faucet swap meets shutoff valves that crumble when turned, the fence post is fine but the rail behind it is rotten. An experienced estimator prices the likely condition and says what happens if it is worse. An inexperienced or hungry one prices the best case and adjusts on site.</p>
@@ -96,7 +96,7 @@ export const whyHandymanQuotesVary: BlogPostData = {
 <p>This is the honest core of most quote gaps that scope does not explain. The uninsured operator is not cheaper because they are efficient; they are cheaper because you are carrying the risk they declined to insure. Sometimes that trade is fine for trivial tasks. Make it knowingly.</p>
 
 <h2 id="materials">Materials handling</h2>
-<p><strong>Whether materials are included, marked up, or yours to supply moves small-job quotes by real percentages.</strong> On a $200 job, a $40 faucet supply run with a modest markup is a fifth of the price. Some quotes include commodity materials, some bill them at cost plus a handling fee, some assume you supply everything. All three are defensible and all three produce different bottom lines on identical work.</p>
+<p><strong>Whether materials are included, marked up, or yours to supply moves small-job quotes by real percentages.</strong> On a small job, a faucet supply run with a modest markup is a real share of the price. Some quotes include commodity materials, some bill them at cost plus a handling fee, some assume you supply everything. All three are defensible and all three produce different bottom lines on identical work.</p>
 <p>When you compare, move materials to the same side of every quote. And for style-driven parts, fixtures, hardware, fans, supply them yourself so the quote spread reflects labor, not catalog choices. More on that in <a href="/blog/what-small-home-repairs-cost-boise">what small home repairs cost in Boise</a>.</p>
 
 <h2 id="lowball">The lowball, and how it recovers its money</h2>

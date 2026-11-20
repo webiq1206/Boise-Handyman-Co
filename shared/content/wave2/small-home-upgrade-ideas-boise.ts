@@ -12,7 +12,7 @@ export const smallHomeUpgradeIdeasBoise: BlogPostData = {
   hubSlug: 'installs-and-upgrades',
   author: 'Boise Handyman Co',
   publishedAt: '2026-06-15',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['home upgrades', 'installs', 'boise', 'painting', 'lighting'],
   primaryKeyword: 'small home upgrade ideas',
   secondaryKeywords: [
@@ -69,7 +69,7 @@ export const smallHomeUpgradeIdeasBoise: BlogPostData = {
     {
       question: 'How much do these upgrades cost in the Treasure Valley?',
       answer:
-        'Labor at market rates runs roughly $60 to $120 per hour, and most items on this list are one-to-two-hour installs, so the labor per upgrade is modest and the materials are your main lever: a light fixture can cost $40 or $400 and installs identically. Batching a full room of upgrades into a single visit spreads the trip cost and usually finishes the room in a day.',
+        'Most items on this list are one-to-two-hour installs, so the labor per upgrade is modest (swapping one light fixture you supply is a preliminary $200 to $240 in our instant estimate, November 2026) and the materials are your main lever: a light fixture can cost $40 or $400 and installs identically. Batching a full room of upgrades into a single visit spreads the trip cost and usually finishes the room in a day.',
     },
   ],
   content: `

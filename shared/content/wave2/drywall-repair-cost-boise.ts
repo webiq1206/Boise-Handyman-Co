@@ -8,14 +8,14 @@ export const drywallRepairCostBoise: BlogPostData = {
   title: 'Drywall repair cost in Boise: what patches really run',
   seoTitle: 'Drywall Repair Cost in Boise (2026 Prices)',
   metaDescription:
-    'Drywall repair in Boise runs $150 to $400 for most patches, texture matching included. See what drives the price and get a flat quote on your repair today.',
+    'Drywall repair in Boise: our instant estimate puts one small patch at a preliminary $240 to $280. See what drives the price and get a written quote on your repair.',
   excerpt:
     'From doorknob holes to water-stained ceilings, here is what drywall repair actually costs in the Treasure Valley, and why texture matching is where the money goes.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',
   publishedAt: '2026-06-24',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['drywall', 'cost', 'boise', 'repairs'],
   primaryKeyword: 'drywall repair cost Boise',
   secondaryKeywords: [
@@ -30,9 +30,9 @@ export const drywallRepairCostBoise: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Drywall repair in the Boise area typically costs $150 to $400 per patch in 2026, covering cutting, backing, taping, mudding, and texture blending. Small nail holes are usually bundled with other work. Ceiling repairs and water damage run higher, often $250 to $600 plus fixing the leak. Boise Handyman Co prices drywall repair case by case after reviewing the scope, with a written price before work starts.',
+    'In our instant estimate (November 2026), one small drywall patch under 6 inches comes to a preliminary $240 to $280, and one medium patch of 1 to 2 square feet $460 to $510. Small nail holes are usually bundled with other work. Ceiling repairs and water damage run higher and are priced from your photos, after the leak is fixed. Boise Handyman Co prices drywall repair case by case after reviewing the scope, with a written price before work starts.',
   keyTakeaways: [
-    'Most single drywall patches in the valley run $150 to $400 including texture blending.',
+    'One small drywall patch is a preliminary $240 to $280 in our instant estimate, and one medium patch of 1 to 2 square feet $460 to $510.',
     'Texture matching, not the patch itself, is the skilled half of the job.',
     'Ceiling work and water damage price higher, and the leak must be fixed first.',
     'Multiple patches in one visit cost far less per patch than separate trips.',
@@ -51,12 +51,12 @@ export const drywallRepairCostBoise: BlogPostData = {
     {
       question: 'How much does it cost to repair drywall in Boise?',
       answer:
-        'Typical market pricing in the Treasure Valley runs $150 to $400 per patch for common damage, a doorknob hole, a stud-bay opening from a plumbing fix, cracked seams, including taping, mudding, and texture blending. Very small nail holes are usually bundled with other work. We price drywall repair case by case after reviewing the scope, with a written price before we start.',
+        'Our instant estimate (November 2026) gives a preliminary $240 to $280 for one small patch under 6 inches and $460 to $510 for one medium patch of 1 to 2 square feet. Larger openings, cracked seams and ceilings are priced from your photos. Very small nail holes are usually bundled with other work. We price drywall repair case by case after reviewing the scope, with a written price before we start.',
     },
     {
-      question: 'Why does a small hole cost $150 or more to fix properly?',
+      question: 'Why does a small hole cost more than you expect to fix properly?',
       answer:
-        'Because the hole is the easy part. A proper repair is backing, patch, tape, three coats of mud with drying time between, sanding, and then texture matched to the surrounding wall, which is the part that separates an invisible repair from an obvious one. Add the visit itself, drive time, tools, materials, and $150 is honest pricing, not padding.',
+        'Because the hole is the easy part. A proper repair is backing, patch, tape, three coats of mud with drying time between, sanding, and then texture matched to the surrounding wall, which is the part that separates an invisible repair from an obvious one. Add the visit itself, drive time, tools, and materials, and the preliminary $240 to $280 our instant estimate gives for one small patch is honest pricing, not padding.',
     },
     {
       question: 'Does drywall repair include painting?',
@@ -66,7 +66,7 @@ export const drywallRepairCostBoise: BlogPostData = {
     {
       question: 'How much does ceiling drywall repair cost?',
       answer:
-        'Ceilings run higher than walls, commonly $250 to $600 in the valley, because overhead work is slower and ceiling textures are harder to blend. Water-stained ceilings add a step: the leak gets found and fixed first, then the drywall dries or is cut out, then the repair happens. Patching under an active leak buys you the same repair twice.',
+        'Ceilings run higher than walls because overhead work is slower and ceiling textures are harder to blend. Water-stained ceilings add a step: the leak gets found and fixed first, then the drywall dries or is cut out, then the repair happens. Patching under an active leak buys you the same repair twice.',
     },
     {
       question: 'Can drywall texture really be matched?',
@@ -81,7 +81,7 @@ export const drywallRepairCostBoise: BlogPostData = {
   ],
   content: `
 <h2 id="the-number">What drywall repair costs here</h2>
-<p><strong>Most drywall repairs in the Boise area cost $150 to $400 per patch in 2026 at market rates.</strong> That covers the standard damage catalog: doorknob holes, stud-bay openings cut for plumbing or electrical access, stress cracks over doors and windows, corner bead dings, and anchor pull-outs. Ceiling repairs and water damage price higher, typically $250 to $600, plus whatever caused the water. Whole rooms and new-hang work move out of repair pricing into project pricing.</p>
+<p><strong>In our instant estimate, one small drywall patch under 6 inches comes to a preliminary $240 to $280, and one medium patch of 1 to 2 square feet $460 to $510 (November 2026).</strong> The standard damage catalog is doorknob holes, stud-bay openings cut for plumbing or electrical access, stress cracks over doors and windows, corner bead dings, and anchor pull-outs; a larger opening is priced from your photos. Ceiling repairs and water damage price higher, plus whatever caused the water. Whole rooms and new-hang work move out of repair pricing into project pricing.</p>
 <p>Our own <a href="/services/drywall-repair">drywall repair service</a> is priced case by case after we review the scope, usually from photos, with a written price before work starts. What follows is where the money goes and what moves the number, so the quote you get, from us or anyone, makes sense.</p>
 
 <h2 id="anatomy">Where the money goes: anatomy of a proper patch</h2>
@@ -100,7 +100,7 @@ export const drywallRepairCostBoise: BlogPostData = {
 <p><strong>Stained or soft drywall is a symptom, and patching a symptom buys the same repair twice.</strong> The sequence that works: find the source, roof, flashing, a weeping supply line, failed caulk above, condensation; fix it; confirm the cavity is dry; then repair the drywall. Brown rings on a ceiling sometimes trace to a one-time event, an overflowed tub, a past roof leak already fixed, in which case seal and patch away. But nobody should skip the question. When we quote water-damage drywall, finding the cause is part of the conversation, and if the cause is roof-level or inside a wall system, we say plainly whether it is our fix or a referral.</p>
 
 <h2 id="paint">The paint question</h2>
-<p><strong>Every patch ends at the same fork: touch up the spot, or repaint the wall.</strong> Paint fades and sheens shift with age, so touch-up from the garage can rarely vanishes, especially in satin or eggshell under raking light. The reliable route is painting the full wall, corner to corner, where edges hide naturally. We quote drywall with primer included and offer <a href="/services/painting-touch-ups">painting</a> either way, with a straight answer about which option will actually look finished in your light and your paint's age. Budget roughly $100 to $300 more for a single-wall repaint at market rates, and consider batching walls if several rooms carry patches.</p>
+<p><strong>Every patch ends at the same fork: touch up the spot, or repaint the wall.</strong> Paint fades and sheens shift with age, so touch-up from the garage can rarely vanishes, especially in satin or eggshell under raking light. The reliable route is painting the full wall, corner to corner, where edges hide naturally. We quote drywall with primer included and offer <a href="/services/painting-touch-ups">painting</a> either way, with a straight answer about which option will actually look finished in your light and your paint's age. Ask for the single-wall repaint as its own line on the quote, and consider batching walls if several rooms carry patches.</p>
 
 <h2 id="next-steps">Get a flat quote from two photos</h2>
 <p><strong>Drywall is the easiest repair in the house to quote remotely.</strong> One photo close up, one from across the room, and a note about what happened: that is enough for a flat price on most patches. Batch every wall wound in the house into the same visit and the per-patch math improves sharply. For where drywall sits in overall handyman pricing, see <a href="/blog/handyman-prices-boise">what a handyman costs in Boise</a>, then <a href="/contact">send us your photos</a>. We patch, texture, and blend across the whole Treasure Valley.</p>

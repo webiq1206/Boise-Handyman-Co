@@ -12,7 +12,7 @@ export const howToCompareHandymanQuotes: BlogPostData = {
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',
   publishedAt: '2026-06-26',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['handyman quotes', 'hiring a handyman', 'boise', 'pricing'],
   primaryKeyword: 'compare handyman quotes',
   secondaryKeywords: [
@@ -82,7 +82,7 @@ export const howToCompareHandymanQuotes: BlogPostData = {
 
 <h2 id="totals-not-rates">Compare totals, never rates</h2>
 <p><strong>A rate is not a price. Convert every bid to an expected total before comparing anything.</strong> For hourly bidders, ask directly: how many hours do you expect, what is the trip fee or minimum, what does the whole list land at with materials. For flat bidders, confirm the number covers the whole written list. Now you have totals for identical scope, and arithmetic can finally happen.</p>
-<p>The classic mistake is choosing the $65-per-hour bid over the $105-per-hour bid without asking about hours. Slower hands, second trips, and uncapped clocks make cheap rates expensive. The mechanics of both models, and where each favors you, are covered in <a href="/blog/hourly-rate-vs-flat-rate-handyman">hourly versus flat-rate pricing</a>.</p>
+<p>The classic mistake is choosing the lower hourly bid over the higher one without asking about hours. Slower hands, second trips, and uncapped clocks make cheap rates expensive. The mechanics of both models, and where each favors you, are covered in <a href="/blog/hourly-rate-vs-flat-rate-handyman">hourly versus flat-rate pricing</a>.</p>
 
 <h2 id="materials">Surface the materials question</h2>
 <p><strong>Whether the faucet is inside the number is most of many price gaps.</strong> Every quote should answer: which materials are included, which are assumed to be yours, and how included materials are billed, pass-through with receipts, or with a stated handling markup. Fixtures are the big swings; consumables like caulk and fasteners are normally in the labor side and not worth auditing.</p>
@@ -97,7 +97,7 @@ export const howToCompareHandymanQuotes: BlogPostData = {
 <p>Reviews and references matter more for list work than for a single small fix, since you may be handing over a whole day of access to your home. The full pre-hire conversation is laid out in <a href="/blog/questions-to-ask-a-handyman">questions to ask before hiring a handyman</a>; for comparison purposes, insurance and identity are the two that change the math.</p>
 
 <h2 id="outliers">Read the outlier correctly</h2>
-<p><strong>When three aligned quotes come back and one is far below the others, the low one usually contains less job.</strong> Materials are the same price for everyone, and honest labor in this market runs in a fairly narrow band, roughly $60 to $120 per hour. A dramatic outlier on identical written scope has usually omitted paint, omitted the second coat, omitted the return trip, or omitted the insurance.</p>
+<p><strong>When three aligned quotes come back and one is far below the others, the low one usually contains less job.</strong> Materials are the same price for everyone, and honest labor in this market runs in a fairly narrow band. A dramatic outlier on identical written scope has usually omitted paint, omitted the second coat, omitted the return trip, or omitted the insurance.</p>
 <p>The move is not to reject it; it is to ask. "Your number is well under the others, can you walk me through what it includes?" A good answer, less drive time, a cancellation slot, a simpler method they can explain, turns the outlier into the winner. A vague answer settles the question the other way.</p>
 
 <h2 id="decide">Deciding between close quotes</h2>

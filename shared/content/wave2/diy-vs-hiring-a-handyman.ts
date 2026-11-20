@@ -12,7 +12,7 @@ export const diyVsHiringAHandyman: BlogPostData = {
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',
   publishedAt: '2026-07-06',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['diy', 'hiring', 'home repairs', 'handyman'],
   primaryKeyword: 'DIY vs hiring a handyman',
   secondaryKeywords: [
@@ -94,7 +94,7 @@ export const diyVsHiringAHandyman: BlogPostData = {
 <p><strong>Gas, panels, structure, roofs.</strong> Gas appliance connections and gas lines; electrical panel work and new circuits; cutting into studs, joists, or anything holding the house up; and walking a roof. The failure modes here are fire, collapse, and falls, not cosmetic regret, and most of this work legally requires permits and licensed trades regardless of skill, as our <a href="/blog/boise-building-permit-guide">Boise permit guide</a> lays out. The test of an honest handyman is that this list is refused there too. We fix outlets and fixtures on existing circuits; we do not touch panels, and we will name the right electrician instead.</p>
 
 <h2 id="honest-math">The honest math of a DIY Saturday</h2>
-<p><strong>DIY looks free because we price our weekends at zero.</strong> The real ledger for a typical middle-list job: materials, often bought 1.5 times as first choices turn out wrong; a tool purchase that may never be used again; two or three store trips at 40 minutes each; the attempt; sometimes the redo. Against that, a handyman visit at <a href="/blog/handyman-prices-boise">Treasure Valley market rates</a>, quoted flat, warrantied, and done while you do something else.</p>
+<p><strong>DIY looks free because we price our weekends at zero.</strong> The real ledger for a typical middle-list job: materials, often bought 1.5 times as first choices turn out wrong; a tool purchase that may never be used again; two or three store trips at 40 minutes each; the attempt; sometimes the redo. Against that, a handyman visit <a href="/blog/handyman-prices-boise">priced before it starts</a>, quoted flat, warrantied, and done while you do something else.</p>
 <p>Batching flips the equation hardest. Six accumulated jobs are six DIY Saturdays or one two-to-three-hour professional visit; per-job cost drops to its floor, and our <a href="/blog/what-small-home-repairs-cost-boise">per-job price guide</a> shows the numbers. If you enjoy the work, none of this applies; a satisfying Saturday of successful repairs needs no justification. This section is for everyone doing the third store run out of obligation.</p>
 
 <h2 id="hybrid">The hybrid play: DIY the forgiving parts</h2>

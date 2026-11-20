@@ -1,10 +1,11 @@
 import type { BlogPostData } from '../../blogContent';
 
-// Pricing notes: market ranges below are framed as Treasure Valley market context.
-// Our own pricing is case by case after scope review (owner decision D6,
-// 8 November 2026); no starting prices are published. The $145 to $400 band is
-// market context only: its low end sits near our old engine floor, so every
-// mention says "market" and names our own one-hour minimum instead.
+// Pricing notes: every job price below is the instant estimator's preliminary
+// range for one stated job (owner instruction, 20 November 2026), from
+// shared/content/p5PublishedFigures.json and pinned by
+// tests/p5-published-figures.test.ts. The only hourly figure is the labor rate
+// the estimator uses ($120, owner, 20 November 2026). Our own pricing is case
+// by case after scope review (owner decision D6, 8 November 2026).
 
 export const handymanPricesBoise: BlogPostData = {
   slug: 'handyman-prices-boise',
@@ -13,14 +14,14 @@ export const handymanPricesBoise: BlogPostData = {
   title: 'Handyman prices in Boise: hourly rates and job prices (2026)',
   seoTitle: 'Handyman Prices in Boise | Hourly Rates',
   metaDescription:
-    'Handyman prices in Boise for 2026: typical hourly rates, visit minimums and trip fees, what common jobs cost, and how a flat written quote compares.',
+    'Handyman prices in Boise for 2026: our hourly rate, visit minimums and trip fees, what common jobs cost, and how a flat written quote compares.',
   excerpt:
-    'Handyman pricing in the Treasure Valley is not mysterious: an hourly market band, trip minimums, and flat rates for common jobs. Here is how the numbers actually work.',
+    'Handyman pricing in the Treasure Valley is not mysterious: an hourly rate, trip minimums, and flat rates for common jobs. Here is how the numbers actually work.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',
   publishedAt: '2026-06-02',
-  updatedAt: '2026-11-09',
+  updatedAt: '2026-11-20',
   tags: ['cost', 'handyman rates', 'boise', 'hiring'],
   primaryKeyword: 'handyman prices boise',
   secondaryKeywords: [
@@ -35,10 +36,10 @@ export const handymanPricesBoise: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Handyman rates in the Boise area typically run $60 to $120 per hour in 2026, with most companies carrying a service minimum of roughly $100 to $200 per visit. Across the local market, common small repairs typically land between $145 and $400 including labor. Those are market figures, not our price list: Boise Handyman Co prices each job case by case after reviewing the scope, with a one-hour minimum per visit and a written price before work starts.',
+    'Our instant estimate (November 2026) puts one small job on its own, such as replacing one outlet or switch, at a preliminary $200 to $240, replacing one faucet you supply at $290 to $330, and a list of nine common jobs at $1,780 to $2,000. Where our own labor is billed by the hour, the rate is $120 an hour. Boise Handyman Co then prices each job case by case after reviewing the scope, with a written price before work starts.',
   keyTakeaways: [
-    'Treasure Valley handyman labor typically runs $60 to $120 per hour in 2026.',
-    'Most companies carry a visit minimum around $100 to $200, which is why batching small jobs saves money.',
+    'Our instant estimate gives a preliminary range for each job: one outlet or switch $200 to $240, one faucet you supply $290 to $330 (November 2026).',
+    'Every visit has a fixed cost, so small jobs on a longer list cost less than the same jobs booked one at a time, which is why batching small jobs saves money.',
     'Flat upfront quotes beat open-ended hourly billing for defined jobs.',
     'Materials are usually billed on top of labor; clarify who buys them before work starts.',
     'A handyman costs meaningfully less than dispatching a licensed trade for small, non-permit work.',
@@ -58,12 +59,12 @@ export const handymanPricesBoise: BlogPostData = {
     {
       question: 'How much does a handyman cost in Boise in 2026?',
       answer:
-        'Market rates in the Treasure Valley typically run $60 to $120 per hour, and most companies carry a per-visit minimum of roughly $100 to $200. Across the market, defined jobs are often flat-priced instead, commonly $145 to $400 for most common repairs including labor. That is market context, not our price: we price each job case by case after reviewing the scope, with a one-hour minimum per visit and a written price before work starts.',
+        'Our instant estimate (November 2026) gives a preliminary range for each common job: replacing one outlet or switch $200 to $240, replacing one faucet you supply $290 to $330, one small drywall patch $240 to $280, and fixing one running toilet $230 to $260. Small jobs on one list cost less than booking them one at a time: two outlets or switches on the same visit come to $290 to $330. Where our labor is billed by the hour, the rate is $120 an hour. We then price each job case by case after reviewing the scope, with a written price before work starts.',
     },
     {
       question: 'Why do handymen have minimum charges?',
       answer:
-        'Because every visit carries fixed costs before the first screw turns: drive time, fuel, scheduling, tools on the truck. A $30 fix cannot absorb those costs, so companies set a floor. The practical takeaway for homeowners is to batch work. Five small jobs in one two-hour visit costs far less than five separate visits, and it is how we prefer to work. Our own minimum is one hour per visit.',
+        'Because every visit carries fixed costs before the first screw turns: drive time, fuel, scheduling, tools on the truck. A two-screw fix cannot absorb those costs, so companies set a floor. The practical takeaway for homeowners is to batch work. Five small jobs in one two-hour visit costs far less than five separate visits, and it is how we prefer to work. A minimum service charge is also why one small job on its own, such as replacing one outlet or switch, comes to a preliminary $200 to $240 in our instant estimate.',
     },
     {
       question: 'Is hourly or flat-rate pricing better?',
@@ -78,7 +79,7 @@ export const handymanPricesBoise: BlogPostData = {
     {
       question: 'Why hire a handyman instead of a plumber or electrician for small jobs?',
       answer:
-        'Licensed trades price for licensed-trade work, and their service-call minimums in the valley commonly start around $150 to $300 before repairs begin. That is the right money for a water heater or a new circuit. For a running toilet, a leaky faucet, or a dead outlet on an existing circuit, a handyman does the same fix for less, and can knock out the rest of your list in the same visit.',
+        'Licensed trades price for licensed-trade work, and their service calls carry minimums set for permit-level system work before repairs begin. That is the right money for a water heater or a new circuit. For a running toilet, a leaky faucet, or a dead outlet on an existing circuit, a handyman does the same fix for less, and can knock out the rest of your list in the same visit.',
     },
     {
       question: 'How do I get an accurate handyman quote?',
@@ -88,10 +89,10 @@ export const handymanPricesBoise: BlogPostData = {
   ],
   content: `
 <h2 id="the-number">What a handyman costs in Boise</h2>
-<p><strong>Handyman labor in the Treasure Valley typically runs $60 to $120 per hour in 2026, and most companies carry a per-visit minimum of roughly $100 to $200.</strong> Across the market, most common repairs, a drywall patch, a faucet swap, a sticking door, a run of caulk, land between $145 and $400 including labor. Larger half-day and full-day visits commonly run $300 to $800 depending on scope and materials.</p>
-<p>Those are 2026 market bands, not our price list. Our own model is case-by-case pricing after we review the scope, with a one-hour minimum per visit and a written price before work starts, whether the job is <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/home-maintenance">caulking and maintenance</a>, minor plumbing and electrical repairs, or <a href="/services/drywall-repair">drywall</a>, carpentry, and painting work. The rest of this post explains how the pricing actually works, because the structure matters more than the sticker. For planning prices on every common repair, job by job, see <a href="/guides/boise-home-repair-cost-guide">the complete Boise home repair cost guide</a>.</p>
+<p><strong>Our instant estimate puts one small job on its own, such as replacing one outlet or switch, at a preliminary $200 to $240, and nine common jobs on one list at $1,780 to $2,000 (November 2026).</strong> Each common repair has its own preliminary range: one small drywall patch $240 to $280, one faucet you supply $290 to $330, one sticking door $200 to $240, and re-caulking one tub or shower $300 to $340.</p>
+<p>Those are preliminary ranges, not quotes. Where our labor is billed by the hour, the rate is $120 an hour. Our own model is case-by-case pricing after we review the scope, with a written price before work starts, whether the job is <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/home-maintenance">caulking and maintenance</a>, minor plumbing and electrical repairs, or <a href="/services/drywall-repair">drywall</a>, carpentry, and painting work. The rest of this post explains how the pricing actually works, because the structure matters more than the sticker. For planning prices on every common repair, job by job, see <a href="/guides/boise-home-repair-cost-guide">the complete Boise home repair cost guide</a>.</p>
 
-<h2 id="hourly-band">Why the hourly band is $60 wide</h2>
+<h2 id="hourly-band">Why hourly rates vary so much</h2>
 <p><strong>The spread mostly reflects who is showing up and what stands behind them.</strong> At the low end of the market you find solo operators with low overhead, informal scheduling, and sometimes no insurance. At the higher end you get established companies with insurance, warranties on workmanship, stocked trucks, and someone who answers the phone. Neither end is a scam; they are different products. The expensive mistake is paying the low rate while assuming you bought the high-end product.</p>
 <p>Skill shows up in the band too. An experienced generalist works fast, which means a higher hourly rate often produces a lower total. A drywall patch that takes a practiced hand ninety minutes can absorb an afternoon for someone learning on your wall.</p>
 
@@ -107,13 +108,13 @@ export const handymanPricesBoise: BlogPostData = {
 <p><strong>Labor bands do not include materials, and materials handling varies by company.</strong> Common patterns: small consumables included, purchased items billed with a markup for the shopping time, or the homeowner supplies the big items and the handyman supplies labor. Each is fine when stated upfront and annoying when discovered on the invoice. We cover the tradeoffs, including when supplying your own faucet actually saves money and when it backfires, in <a href="/blog/who-supplies-materials-handyman-jobs">who supplies materials on a handyman job</a>.</p>
 
 <h2 id="vs-trades">Handyman vs licensed trade vs contractor: the right tool for the job size</h2>
-<p><strong>Three price tiers exist for good reasons, and matching the job to the tier is where the savings are.</strong> Licensed plumbers and electricians in the valley commonly carry service-call minimums around $150 to $300, priced for permit-level system work: water heaters, new circuits, gas lines. General contractors price for projects: remodels, additions, anything with drawings. A handyman prices for the layer underneath both: repairs, maintenance, and small installs on existing systems, no permit required.</p>
-<p>Send a $150 repair to a $300-minimum trade and you overpay. Ask a handyman to do a water heater and you have hired the wrong tier entirely, which is why we decline that work and say who to call instead. Our guide to <a href="/blog/boise-building-permit-guide">which repairs need a permit in Boise</a> maps the boundary in detail.</p>
+<p><strong>Three price tiers exist for good reasons, and matching the job to the tier is where the savings are.</strong> Licensed plumbers and electricians carry service-call minimums priced for permit-level system work: water heaters, new circuits, gas lines. General contractors price for projects: remodels, additions, anything with drawings. A handyman prices for the layer underneath both: repairs, maintenance, and small installs on existing systems, no permit required.</p>
+<p>Send a small repair to a trade priced for system work and you overpay. Ask a handyman to do a water heater and you have hired the wrong tier entirely, which is why we decline that work and say who to call instead. Our guide to <a href="/blog/boise-building-permit-guide">which repairs need a permit in Boise</a> maps the boundary in detail.</p>
 
 <h2 id="red-flags">Reading a quote: what good looks like</h2>
 <p><strong>A trustworthy handyman quote is boring.</strong> It names the jobs, states a flat price or a clearly framed hourly rate with an estimate, says how materials are handled, and mentions insurance and workmanship warranty without being asked. Caution signs are the same as in any trade: cash-only pricing, large deposits for small jobs, reluctance to put numbers in writing, and quotes that undercut everyone by half, which usually means the scope or the follow-through is half too. The cheapest visit that has to be redone is the most expensive option on the table.</p>
 
 <h2 id="next-steps">Get a real number for your list</h2>
-<p><strong>The fastest way to price your repairs is to show us.</strong> Send a few photos and a sentence per item, and we will send back flat prices for the work we can take on, and straight referrals for anything past handyman scope. For per-job market figures, see <a href="/blog/what-small-home-repairs-cost-boise">what common home repairs cost in Boise</a>. We serve Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County. <a href="/contact">Request a quote</a> and start the list.</p>
+<p><strong>The fastest way to price your repairs is to show us.</strong> Send a few photos and a sentence per item, and we will send back flat prices for the work we can take on, and straight referrals for anything past handyman scope. For more job-by-job figures, see <a href="/blog/what-small-home-repairs-cost-boise">what common home repairs cost in Boise</a>. We serve Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County. <a href="/contact">Request a quote</a> and start the list.</p>
 `.trim(),
 };

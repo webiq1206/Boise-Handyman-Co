@@ -5,14 +5,14 @@ export const whatSmallHomeRepairsCostBoise: BlogPostData = {
   title: 'What small home repairs cost in Boise',
   seoTitle: 'What Small Home Repairs Cost in Boise',
   metaDescription:
-    'Real Treasure Valley price ranges for drywall patches, faucet swaps, minor electrical, trim and more, plus what moves a handyman bill up or down. Budget before you book.',
+    'Preliminary price ranges from our instant estimate for drywall patches, faucet swaps, minor electrical, trim and more, plus what moves a handyman bill up or down.',
   excerpt:
     'Small home repair costs in Boise depend on materials, access and the repair list. Gather those details and ask for a written quote before scheduling.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',
   publishedAt: '2026-06-16',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['handyman costs', 'boise', 'hiring a handyman', 'home repair'],
   primaryKeyword: 'small home repair cost boise',
   secondaryKeywords: [
@@ -27,10 +27,10 @@ export const whatSmallHomeRepairsCostBoise: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Most small home repairs in Boise cost $100 to $600 per visit. Treasure Valley handyman labor typically runs $60 to $120 per hour, and most companies carry a minimum charge of roughly $100 to $150. The final number depends on materials, access, and how many separate tasks you bundle into one trip.',
+    'In our instant estimate (November 2026), one small repair on its own comes to a preliminary $200 to $240 for an outlet or switch, $240 to $280 for a small drywall patch and $290 to $330 for a faucet you supply, and a list of nine common jobs to $1,780 to $2,000. The final number depends on materials, access, and how many separate tasks you bundle into one trip.',
   keyTakeaways: [
-    'Treasure Valley handyman rates typically run $60 to $120 per hour, with a one-hour to two-hour minimum being standard.',
-    'A single drywall patch, faucet swap, or door adjustment usually lands between $100 and $400 including basic materials.',
+    'Our instant estimate gives a preliminary range for each job, and one small job on its own, such as one outlet or switch, comes to $200 to $240 (November 2026).',
+    'One small drywall patch is a preliminary $240 to $280, one faucet you supply $290 to $330, and one sticking door $200 to $240.',
     'The trip is the expensive part. Bundling three or four small tasks into one visit costs far less than three separate bookings.',
     'Materials you supply yourself can cut the bill, but a wrong part turns a one-trip fix into a two-trip fix.',
     'Jobs that touch a panel, a main line, or the structure are not handyman jobs and are priced in a different universe. Expect a referral instead of a quote.',
@@ -47,17 +47,17 @@ export const whatSmallHomeRepairsCostBoise: BlogPostData = {
     {
       question: 'How much does a handyman cost per hour in Boise?',
       answer:
-        'Treasure Valley handyman labor typically runs $60 to $120 per hour depending on the trade skill involved, with most established companies carrying a minimum charge of about $100 to $150 per visit. Flat-rate pricing for common jobs like a faucet swap or a drywall patch is increasingly common and usually works out to the same range.',
+        'Where our labor is billed by the hour, the rate is $120 an hour, the rate our instant estimate uses (November 2026). Common jobs are priced as flat lines instead: one outlet or switch on its own comes to a preliminary $200 to $240, one faucet you supply $290 to $330, and one small drywall patch $240 to $280. Flat pricing for defined jobs like these is increasingly common.',
     },
     {
       question: 'What does a drywall patch cost in Boise?',
       answer:
-        'A single small patch, including mud, tape, texture matching, and primer, usually runs $150 to $350 in the Treasure Valley. Multiple patches in the same visit cost much less per patch because setup, drying stages, and texture work overlap. A patch that needs full paint blending across the wall costs more than one hidden behind furniture.',
+        'In our instant estimate (November 2026), one small patch under 6 inches comes to a preliminary $240 to $280, and one medium patch of 1 to 2 square feet $460 to $510. A patch that needs full paint blending across the wall costs more than one hidden behind furniture.',
     },
     {
       question: 'Why do handymen have minimum charges?',
       answer:
-        'Driving to a house, loading tools, and handling billing costs a company roughly the same whether the visit lasts twenty minutes or three hours. Across the market, a minimum charge of $100 to $150 covers that fixed cost; ours is one hour per visit. It is also why bundling several small tasks into one visit is the single best way to lower your cost per fix.',
+        'Driving to a house, loading tools, and handling billing costs a company roughly the same whether the visit lasts twenty minutes or three hours. A minimum charge covers that fixed cost: in our instant estimate one outlet or switch on its own comes to a preliminary $200 to $240, and two on the same visit $290 to $330. It is also why bundling several small tasks into one visit is the single best way to lower your cost per fix.',
     },
     {
       question: 'Is it cheaper to supply my own materials?',
@@ -77,24 +77,24 @@ export const whatSmallHomeRepairsCostBoise: BlogPostData = {
   ],
   content: `
 <h2 id="the-short-answer">The short answer</h2>
-<p><strong>Most small home repairs in Boise cost between $100 and $600 per visit.</strong> Treasure Valley handyman labor typically runs $60 to $120 per hour, most companies carry a minimum charge around $100 to $150, and the average small job takes one to four hours. The interesting question is not the average but the spread, because the same drywall patch can cost $150 at one house and $400 at another for reasons that are completely knowable in advance. This article walks through the typical ranges by task and the handful of factors that move a bill inside them.</p>
+<p><strong>In our instant estimate, one small repair on its own comes to a preliminary $200 to $240 for an outlet or switch and $290 to $330 for a faucet you supply, and nine common jobs on one list to $1,780 to $2,000 (November 2026).</strong> The average small job takes one to four hours. The interesting question is not the average but the spread, because the same drywall patch can cost more at one house than at another for reasons that are completely knowable in advance. This article walks through the preliminary ranges by task and the handful of factors that move a bill inside them.</p>
 
 <h2 id="how-handymen-price">How handyman work is priced</h2>
 <p><strong>You will see two models in the valley: hourly plus materials, and flat rate per task.</strong> Hourly is the traditional model and is fair when the scope is genuinely unknown, like chasing an intermittent leak. Flat rate is better for defined jobs, a faucet swap, a ceiling fan replacement, a door adjustment, because you know the number before anyone starts and the company carries the risk of a slow job.</p>
 <p>Neither model is inherently cheaper. An honest hourly shop and an honest flat-rate shop land within a few dollars of each other on the same task, because both are recovering the same labor, drive time, insurance, and overhead. What matters is that the quote states what is included, which is a bigger subject covered in <a href="/blog/why-handyman-quotes-vary">why handyman quotes vary</a>.</p>
 
 <h2 id="typical-ranges">Typical ranges by task</h2>
-<p><strong>These are market ranges for the Treasure Valley, framed as planning numbers rather than quotes.</strong> Every house is different, and access, materials, and finish level move each of them.</p>
+<p><strong>These are the preliminary ranges our instant estimate gives for one of each job, as of November 2026, not quotes.</strong> Every house is different, and access, materials, and finish level move each of them.</p>
 <ul>
-  <li><strong>Drywall patch, one location:</strong> $150 to $350 including texture match and primer. See <a href="/services/drywall-repair">drywall repair and patching</a>.</li>
-  <li><strong>Interior door adjustment or hardware swap:</strong> $100 to $250.</li>
-  <li><strong>Faucet replacement, homeowner-supplied fixture:</strong> $130 to $300. Old corroded shutoff valves add to that, which is common in homes from the 1990s and earlier.</li>
-  <li><strong>Toilet repair, flapper, fill valve, or wax ring:</strong> $120 to $350.</li>
-  <li><strong>Light fixture or ceiling fan replacement on an existing box:</strong> $120 to $300 per fixture.</li>
-  <li><strong>TV mounting:</strong> $100 to $300 depending on size, wall type, and cable concealment. Our <a href="/blog/tv-mounting-and-anchoring-guide">TV mounting guide</a> breaks this down.</li>
-  <li><strong>Caulking a tub or shower surround:</strong> $120 to $250.</li>
-  <li><strong>Fence post or picket repair:</strong> $150 to $450 per section, covered in detail in <a href="/blog/fence-repair-treasure-valley">fence repair in the Treasure Valley</a>.</li>
-  <li><strong>Gutter cleaning, single-story home:</strong> $100 to $250.</li>
+  <li><strong>Small drywall patch, under 6 inches:</strong> $240 to $280; a medium patch of 1 to 2 square feet, $460 to $510. See <a href="/services/drywall-repair">drywall repair and patching</a>.</li>
+  <li><strong>Adjusting a sticking door:</strong> $200 to $240.</li>
+  <li><strong>Replacing a faucet you supply:</strong> $290 to $330. Old corroded shutoff valves add to that, which is common in homes from the 1990s and earlier.</li>
+  <li><strong>Fixing a running toilet:</strong> $230 to $260; replacing a toilet you supply, $420 to $470.</li>
+  <li><strong>Swapping a light fixture you supply:</strong> $200 to $240; installing a ceiling fan on an existing fan-rated box, $290 to $330.</li>
+  <li><strong>TV mounting:</strong> priced from your request and photos, because size, wall type, and cable concealment change the job. Our <a href="/blog/tv-mounting-and-anchoring-guide">TV mounting guide</a> breaks this down.</li>
+  <li><strong>Re-caulking a tub or shower:</strong> $300 to $340.</li>
+  <li><strong>Repairing fence boards, one section:</strong> $460 to $510; replacing a fence post, $420 to $470, covered in detail in <a href="/blog/fence-repair-treasure-valley">fence repair in the Treasure Valley</a>.</li>
+  <li><strong>Cleaning gutters, one-story home:</strong> $260 to $300.</li>
 </ul>
 
 <h2 id="what-moves-the-number">What moves the number inside the range</h2>

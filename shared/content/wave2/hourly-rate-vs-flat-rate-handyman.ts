@@ -7,12 +7,12 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
   metaDescription:
     'Hourly vs flat rate handyman pricing in the Treasure Valley: how rates, flat quotes, minimums and trip fees work, and which model favors you on which job.',
   excerpt:
-    'Hourly and flat-rate handyman pricing put the risk of a slow job on different people. Here is how each model works, where the market rates sit, and which favors you when.',
+    'Hourly and flat-rate handyman pricing put the risk of a slow job on different people. Here is how each model works, where our rate sits, and which favors you when.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',
   publishedAt: '2026-07-12',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['handyman rates', 'pricing', 'boise', 'hiring a handyman'],
   primaryKeyword: 'handyman hourly rate vs flat rate',
   secondaryKeywords: [
@@ -24,9 +24,9 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
   featuredSnippetTargets: ['handyman hourly rate vs flat rate', 'how much do handymen charge per hour'],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Handymen price work two ways. Hourly billing, typically $60 to $120 per hour in the Treasure Valley, charges for time spent and puts slow-job risk on you. Flat-rate quotes a fixed price for a defined scope and puts that risk on the handyman. Flat rate favors you on well-defined jobs; hourly can be fair for open-ended lists with a cap.',
+    'Handymen price work two ways. Hourly billing charges for time spent and puts slow-job risk on you. Flat-rate quotes a fixed price for a defined scope and puts that risk on the handyman. Flat rate favors you on well-defined jobs; hourly can be fair for open-ended lists with a cap.',
   keyTakeaways: [
-    'Treasure Valley handyman labor typically runs $60 to $120 per hour at market rates, plus materials.',
+    'Where our labor is billed by the hour, the rate is $120 an hour, the rate our instant estimate uses (November 2026); common jobs are priced as flat lines instead.',
     'Hourly billing puts the risk of a slow job on you; a flat quote puts it on the handyman.',
     'Most outfits carry a minimum charge or trip fee, which is why batching small jobs into one visit saves money.',
     'Flat rate is the better structure for defined jobs; hourly with a not-to-exceed cap is fair for open-ended lists.',
@@ -44,7 +44,7 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
     {
       question: 'How much do handymen charge per hour in Boise?',
       answer:
-        'Market rates in the Treasure Valley typically run about $60 to $120 per hour depending on the trade skill involved, plus materials. Below that band, ask what is missing, often insurance. Above it, you are usually paying for specialty skill or a licensed trade. Most outfits also carry a minimum charge, commonly around the first hour or a fixed trip fee.',
+        'We do not publish a market average. Where our own labor is billed by the hour, the rate is $120 an hour, the rate our instant estimate uses (November 2026), and common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary $200 to $240. When a bid carries a very low rate, ask what is missing, often insurance; a very high one usually means specialty skill or a licensed trade. Most outfits also carry a minimum charge, commonly around the first hour or a fixed trip fee.',
     },
     {
       question: 'Why do handymen have minimum charges?',
@@ -74,7 +74,7 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
   ],
   content: `
 <h2 id="the-short-answer">The short answer</h2>
-<p><strong>Hourly and flat-rate pricing are not two prices for the same thing. They are two answers to the question of who absorbs a slow job.</strong> Under hourly billing, if the drywall patch fights back, you pay for the extra hour. Under a flat quote, the handyman does. Everything else about the two models, the cushions, the minimums, the incentives, follows from that one allocation. Treasure Valley handyman labor typically runs $60 to $120 per hour at market rates, and most flat quotes are built from that same math plus a risk margin.</p>
+<p><strong>Hourly and flat-rate pricing are not two prices for the same thing. They are two answers to the question of who absorbs a slow job.</strong> Under hourly billing, if the drywall patch fights back, you pay for the extra hour. Under a flat quote, the handyman does. Everything else about the two models, the cushions, the minimums, the incentives, follows from that one allocation. Most flat quotes are built from the same hourly math plus a risk margin.</p>
 
 <h2 id="how-hourly-works">How hourly billing works</h2>
 <p><strong>Hourly is the simplest model: a rate, a clock, and materials passed through on top.</strong> It is the natural fit for open-ended work, a long punch list where nobody knows exactly what item eleven involves until the cover comes off, and for repeat customers where trust is already established.</p>
@@ -102,7 +102,7 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
 
 <h2 id="comparing-models">Comparing an hourly quote against a flat one</h2>
 <p><strong>Never compare a rate against a price. Convert both to expected totals first.</strong> Ask the hourly bidder for their expected hours and the all-in landing zone including trip fee and materials. Ask the flat bidder what the price includes and excludes. Now you have two totals for one scope, and the comparison means something.</p>
-<p>The low hourly rate is the classic trap. Sixty dollars an hour for six hours costs more than a $300 flat quote, and the incentive under uncapped hourly billing does not push toward speed. Rate-shopping selects for the outfit best at advertising a number, not the one best at finishing your list.</p>
+<p>The low hourly rate is the classic trap. A low rate for six hours can cost more than a higher flat quote for the same job, and the incentive under uncapped hourly billing does not push toward speed. Rate-shopping selects for the outfit best at advertising a number, not the one best at finishing your list.</p>
 
 <h2 id="next-steps">Where to go from here</h2>
 <p>However the pricing is structured, the constant is writing: scope and number, agreed before work starts. That is how we quote every job across Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, flat wherever the job allows it. <a href="/contact">Send us your list with photos</a> for a written quote, and if you are collecting several, our guide to <a href="/blog/how-to-compare-handyman-quotes">comparing handyman quotes</a> shows you how to line them up fairly.</p>

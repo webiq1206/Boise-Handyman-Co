@@ -12,7 +12,7 @@ export const agingInPlaceHomeDesign: BlogPostData = {
   hubSlug: 'installs-and-upgrades',
   author: 'Boise Handyman Co',
   publishedAt: '2026-07-08',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['aging in place', 'grab bars', 'home safety', 'installs'],
   primaryKeyword: 'aging in place home modifications',
   secondaryKeywords: [
@@ -59,7 +59,7 @@ export const agingInPlaceHomeDesign: BlogPostData = {
     {
       question: 'How much does it cost to install grab bars?',
       answer:
-        'In the Treasure Valley, professional grab bar installation commonly runs $100 to $250 per bar installed depending on wall construction, with tile and fiberglass surrounds at the higher end. Doing several in one visit brings the per-bar cost down, which is why we usually suggest a walkthrough and a single trip rather than one bar at a time.',
+        'In our instant estimate (November 2026), installing one grab bar, blocked or anchored, comes to a preliminary $260 to $300; tile and fiberglass surrounds take more work. Doing several in one visit saves separate trips, which is why we usually suggest a walkthrough and a single trip rather than one bar at a time.',
     },
     {
       question: 'Are towel bars strong enough to use as grab bars?',

@@ -12,7 +12,7 @@ export const fenceRepairTreasureValley: BlogPostData = {
   hubSlug: 'exterior-and-outdoor',
   author: 'Boise Handyman Co',
   publishedAt: '2026-06-19',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['fence repair', 'exterior', 'treasure valley', 'boise'],
   primaryKeyword: 'fence repair treasure valley',
   secondaryKeywords: [
@@ -27,7 +27,7 @@ export const fenceRepairTreasureValley: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Most Treasure Valley fence problems, leaning posts, sagging gates, loose pickets, come from rot at the soil line, wind loading, and irrigation water, and are repairable section by section. Post repairs typically run $150 to $450 per post locally; full cedar fence replacement runs many times that per foot, so repair usually wins until rot is widespread.',
+    'Most Treasure Valley fence problems, leaning posts, sagging gates, loose pickets, come from rot at the soil line, wind loading, and irrigation water, and are repairable section by section. In our instant estimate (November 2026), replacing one fence post comes to a preliminary $420 to $470; full cedar fence replacement costs far more, so repair usually wins until rot is widespread.',
   keyTakeaways: [
     'Fences fail at the soil line. A post that looks fine above grade can be mush where it meets the concrete.',
     'Boise-area wind events knock over fences whose posts were already rotted; the wind gets blamed, the rot did the work.',
@@ -52,7 +52,7 @@ export const fenceRepairTreasureValley: BlogPostData = {
     {
       question: 'Is it cheaper to repair or replace a fence?',
       answer:
-        'Repair, until the damage stops being local. A post repair at $150 to $450 or a handful of new pickets is far cheaper than new fence, which runs many times that per linear foot installed. The crossover comes when a third or more of the posts are failing or rails are rotting throughout; then replacing whole sections, reusing sound materials where possible, beats an endless patch cycle.',
+        'Repair, until the damage stops being local. Replacing a post, a preliminary $420 to $470 in our instant estimate, or a handful of new pickets is far cheaper than new fence. The crossover comes when a third or more of the posts are failing or rails are rotting throughout; then replacing whole sections, reusing sound materials where possible, beats an endless patch cycle.',
     },
     {
       question: 'Why do fences lean after windstorms in the Boise area?',
@@ -67,7 +67,7 @@ export const fenceRepairTreasureValley: BlogPostData = {
     {
       question: 'What does fence repair cost in the Treasure Valley?',
       answer:
-        'Typical local ranges: individual picket replacement $10 to $25 per board installed, a repaired or reset post $150 to $450 depending on method and footing, a gate rebuild or rehang $150 to $400, and a full 8-foot panel rebuilt in place $200 to $500. Staining and sealing is priced by the linear foot and adds years to whatever you repair.',
+        'Our instant estimate (November 2026) gives a preliminary $460 to $510 for repairing the boards of one fence section, $420 to $470 for replacing one fence post, and $340 to $390 for repairing one gate. Single pickets and a full panel rebuilt in place are priced from your photos. Staining and sealing is priced by the linear foot and adds years to whatever you repair.',
     },
     {
       question: 'Who owns a shared fence between neighbors?',
@@ -88,7 +88,7 @@ export const fenceRepairTreasureValley: BlogPostData = {
 <p>A fully rotted post gets replaced, old footing out, new post set. When the post is sound above the break, a steel repair bracket driven or concreted alongside can sister the upper section to a new anchor for less than a full replacement, a fair fix on a fence with years left. What does not work is the dirt-pack-and-hope, which lasts precisely until the next windstorm.</p>
 
 <h2 id="panels">Pickets, rails, and panels</h2>
-<p><strong>Boards are the cheap part; the pattern of their failure is the information.</strong> Individual pickets split, cup, or pop free as cedar dries, and swapping them is fast, $10 to $25 per board installed locally. A run of failing boards along the bottom of the fence points at sprinklers or soil contact. Whole panels sagging usually means the horizontal rails have rotted at their post connections, and rail replacement or steel rail brackets restore the structure without rebuilding the section.</p>
+<p><strong>Boards are the cheap part; the pattern of their failure is the information.</strong> Individual pickets split, cup, or pop free as cedar dries, and swapping them is fast. A run of failing boards along the bottom of the fence points at sprinklers or soil contact. Whole panels sagging usually means the horizontal rails have rotted at their post connections, and rail replacement or steel rail brackets restore the structure without rebuilding the section.</p>
 <p>Match new cedar to old knowing it will not match for a year; new wood weathers toward its neighbors, or a stain coat unifies everything immediately. This is bread-and-butter <a href="/services/fence-deck-gutter-repair">fence, deck and gutter repair</a> work, usually one visit per problem area.</p>
 
 <h2 id="gates">Gates: the moving part that moves wrong</h2>

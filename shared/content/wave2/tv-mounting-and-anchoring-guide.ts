@@ -12,7 +12,7 @@ export const tvMountingAndAnchoringGuide: BlogPostData = {
   hubSlug: 'installs-and-upgrades',
   author: 'Boise Handyman Co',
   publishedAt: '2026-06-30',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['tv mounting', 'installs', 'boise', 'anchoring'],
   primaryKeyword: 'tv mounting boise',
   secondaryKeywords: [
@@ -27,7 +27,7 @@ export const tvMountingAndAnchoringGuide: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'A TV should be mounted into wall studs whenever possible, using lag bolts through a bracket rated above the TV weight. Plastic cone anchors in bare drywall are how TVs end up on the floor. In the Treasure Valley, professional mounting typically runs $100 to $300 depending on size, wall type, and cable concealment.',
+    'A TV should be mounted into wall studs whenever possible, using lag bolts through a bracket rated above the TV weight. Plastic cone anchors in bare drywall are how TVs end up on the floor. Professional mounting is priced from your request and photos, because size, wall type, and cable concealment change the job.',
   keyTakeaways: [
     'Mounts fail at the wall, not the bracket. Hitting studs, or using the right heavy-duty anchors when you cannot, is the whole job.',
     'Center of the screen at seated eye height, roughly 42 inches from the floor, beats the too-high default most rooms end up with.',
@@ -57,7 +57,7 @@ export const tvMountingAndAnchoringGuide: BlogPostData = {
     {
       question: 'What does TV mounting cost in Boise?',
       answer:
-        'Professional mounting in the Treasure Valley typically runs $100 to $300 per TV. The low end is a standard-size TV on a customer-supplied mount into wood studs. Size above 65 inches, articulating mounts, tile or brick surfaces, steel studs, and cable concealment each push the price up. In-wall power relocation adds the cost of a code-compliant kit and the labor to install it.',
+        'We price TV mounting from your request and photos, because it is not on our instant estimate\'s list. The simplest version is a standard-size TV on a customer-supplied mount into wood studs. Size above 65 inches, articulating mounts, tile or brick surfaces, steel studs, and cable concealment each push the price up. In-wall power relocation adds the cost of a code-compliant kit and the labor to install it.',
     },
     {
       question: 'Is it safe to mount a TV over a fireplace?',
@@ -110,7 +110,7 @@ export const tvMountingAndAnchoringGuide: BlogPostData = {
 
 <h2 id="diy-or-pro">DIY or call someone</h2>
 <p><strong>An honest split: standard TV, wood studs where you need them, fixed mount, no cable hiding, that is a very doable Saturday job.</strong> Two people, a level, a torque-limited driver, and patience with the stud finder.</p>
-<p>Call a pro when the TV is 65 inches or larger, when the wall is tile, stone, or steel stud, when the mount is a long articulating arm, when power needs relocating, or when the location is above a fireplace or over a stairwell. Those are the versions where a mistake costs a television or a wall repair, and where professional mounting at $100 to $300 is cheap insurance.</p>
+<p>Call a pro when the TV is 65 inches or larger, when the wall is tile, stone, or steel stud, when the mount is a long articulating arm, when power needs relocating, or when the location is above a fireplace or over a stairwell. Those are the versions where a mistake costs a television or a wall repair, and where professional mounting is cheap insurance.</p>
 
 <h2 id="next-steps">Get it on the wall</h2>
 <p>Tell us the TV size, a photo of the wall, and where the nearest outlet is, and we will quote the mount upfront, including cable concealment if you want the clean look. Book through the <a href="/contact">contact page</a> or read more about our <a href="/services/mounting-assembly">mounting and assembly</a> service, which covers TVs, shelves, mirrors, and furniture anchoring in the same visit.</p>

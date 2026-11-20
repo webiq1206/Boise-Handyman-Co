@@ -12,7 +12,7 @@ export const commonToiletProblemsAndFixes: BlogPostData = {
   hubSlug: 'repairs-and-fixes',
   author: 'Boise Handyman Co',
   publishedAt: '2026-07-18',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['plumbing', 'toilet repair', 'boise', 'repairs'],
   primaryKeyword: 'toilet repair boise',
   secondaryKeywords: [
@@ -27,7 +27,7 @@ export const commonToiletProblemsAndFixes: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Most toilet problems come down to five causes: a worn flapper or fill valve makes it run, a failed wax ring makes it rock or leak at the base, mineral buildup weakens the flush, and loose bolts or a cracked flange cause movement. Parts are cheap; a Treasure Valley repair visit typically runs $120 to $350.',
+    'Most toilet problems come down to five causes: a worn flapper or fill valve makes it run, a failed wax ring makes it rock or leak at the base, mineral buildup weakens the flush, and loose bolts or a cracked flange cause movement. Parts are cheap; in our instant estimate (November 2026), fixing one running toilet comes to a preliminary $230 to $260.',
   keyTakeaways: [
     'A running toilet is almost always a $10 flapper or a $15 fill valve, and it can waste hundreds of gallons a day until fixed.',
     'The dye test finds a leaking flapper in ten minutes: food coloring in the tank, wait, look in the bowl.',
@@ -67,7 +67,7 @@ export const commonToiletProblemsAndFixes: BlogPostData = {
     {
       question: 'What does toilet repair cost in Boise?',
       answer:
-        'Typical Treasure Valley ranges: flapper or fill valve replacement $120 to $200, wax ring replacement including pulling and resetting the toilet $180 to $350, and full toilet replacement with a customer-supplied unit $200 to $400 in labor. Discovering damaged subfloor or a broken flange under a pulled toilet adds cost, which is one reason rocking toilets should not wait.',
+        'Our instant estimate (November 2026) gives a preliminary $230 to $260 for fixing one running toilet and $420 to $470 for replacing one toilet you supply. A wax ring replacement is not on its list, so it is priced from your request and photos. Discovering damaged subfloor or a broken flange under a pulled toilet adds cost, which is one reason rocking toilets should not wait.',
     },
     {
       question: 'When should I stop DIYing a toilet problem?',
@@ -101,11 +101,11 @@ export const commonToiletProblemsAndFixes: BlogPostData = {
 
 <h2 id="replace">Repair or replace the whole toilet</h2>
 <p><strong>Parts-level repair wins until the porcelain itself is the problem.</strong> Flappers, fill valves, flush valves, seats, and supply lines are all replaceable indefinitely. Replace the fixture when the bowl or tank is cracked, when an old low-quality unit clogs chronically, or when a pre-1994 high-volume toilet is costing real water every day; modern units flush better on far less.</p>
-<p>Labor to swap a customer-supplied toilet typically runs $200 to $400 in the valley, and it is worth doing the wax ring, bolts, and supply line as a package while the old one is out. This is standard <a href="/services/plumbing-repairs">minor plumbing repair</a> territory, the same lane as the faucet work covered in <a href="/blog/replacing-faucets-and-fixtures">replacing faucets and fixtures</a>.</p>
+<p>In our instant estimate, replacing one toilet you supply comes to a preliminary $420 to $470 (November 2026), and it is worth doing the wax ring, bolts, and supply line as a package while the old one is out. This is standard <a href="/services/plumbing-repairs">minor plumbing repair</a> territory, the same lane as the faucet work covered in <a href="/blog/replacing-faucets-and-fixtures">replacing faucets and fixtures</a>.</p>
 
 <h2 id="when-to-call">When to call someone</h2>
 <p><strong>The stop-DIYing signals are about water and floors, not difficulty.</strong> Call a pro when water is reaching the floor and you cannot say from where, when the floor flexes near the toilet, when the shutoff valve will not close or starts weeping when touched, when the flange is cracked or the closet bolts spin freely, or when the same repair has failed twice, because the second failure means the diagnosis was wrong.</p>
-<p>A toilet repair visit in the Treasure Valley typically lands between $120 and $350 depending on what the fix turns out to be, and bundling it with the rest of the bathroom's small complaints, a slow drain, tired caulk, a loose towel bar, makes the trip earn its minimum, as laid out in <a href="/blog/what-small-home-repairs-cost-boise">what small home repairs cost in Boise</a>.</p>
+<p>Fixing one running toilet comes to a preliminary $230 to $260 in our instant estimate, and bundling it with the rest of the bathroom's small complaints, a slow drain, tired caulk, a loose towel bar, makes the trip earn its minimum, as laid out in <a href="/blog/what-small-home-repairs-cost-boise">what small home repairs cost in Boise</a>.</p>
 
 <h2 id="next-steps">Get it fixed in one trip</h2>
 <p>Describe the symptom, running, rocking, weak, or wet, send a photo of the toilet and its shutoff valve, and we will quote the likely fix upfront and bring the parts for the probable causes so one trip finishes it. Start at the <a href="/contact">contact page</a> or see the scope of our <a href="/services/plumbing-repairs">minor plumbing repairs</a> service.</p>
