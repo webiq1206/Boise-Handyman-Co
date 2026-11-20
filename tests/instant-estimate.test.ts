@@ -37,7 +37,14 @@ test('/instant-estimate frames the central estimator with this site\'s brand id'
   assert.match(source, /<EstimatorFrame\b[\s\S]*?brand="handyman"/);
   assert.match(source, /<EstimatorAnalytics \/>/);
   assert.match(source, /headerOffset=\{HEADER_OFFSET\}/);
-  assert.match(source, /\/\^\[a-z0-9-\]\{1,40\}\$\//, 'the project parameter is validated');
+  // SEO audit S1 (20 November 2026): the page no longer reads ?project on the
+  // server, because reading searchParams made the route dynamic and Next then
+  // streamed its title, description, canonical and robots tags into <body>.
+  // The frame reads ?project in the browser and validates it there.
+  assert.doesNotMatch(source, /searchParams/, 'the page stays static so its metadata is in <head>');
+  assert.match(source, /project=\{null\}/, 'the frame reads ?project itself');
+  assert.match(read(FRAME), /here\.get\("project"\)/, 'the frame reads ?project from the address');
+  assert.match(read(FRAME), /\/\^\[a-z0-9-\]\{1,40\}\$\//, 'the project parameter is validated');
   assert.doesNotMatch(source, /['"]use client['"]/, 'the page is a server component');
 
   const html = await renderPage({ project: 'handyman' });
