@@ -5,14 +5,14 @@ export const howToBudgetHomeRepairsBoise: BlogPostData = {
   title: 'How to budget a home repair punch list in Boise',
   seoTitle: 'How to Budget a Home Repair Punch List',
   metaDescription:
-    'Turn nagging home repairs into a punch list with a realistic budget: market rates, batching, materials, and a sane priority order.',
+    'Turn nagging home repairs into a punch list with a realistic budget: preliminary ranges, batching, materials, and a sane priority order.',
   excerpt:
     'Budgeting a home repair punch list in Boise as one list, instead of ten emergencies, is the cheapest way to handle home repairs. Here is how to build the list, price it, and sequence it.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',
   publishedAt: '2026-06-23',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['home repair costs', 'budgeting', 'boise', 'punch list'],
   primaryKeyword: 'home repair budget',
   secondaryKeywords: [
@@ -24,11 +24,11 @@ export const howToBudgetHomeRepairsBoise: BlogPostData = {
   featuredSnippetTargets: ['how to budget for home repairs', 'how much should I budget for home maintenance'],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Budget home repairs as a batched punch list, not one-off emergencies. Walk the house, write every item down, split must-fix from cosmetic, and price the list against Treasure Valley handyman rates of roughly $60 to $120 per hour plus materials. A half-day visit typically clears four to six small repairs under a single trip charge.',
+    'Budget home repairs as a batched punch list, not one-off emergencies. Walk the house, write every item down, split must-fix from cosmetic, and price the list in our instant estimate, which gives a preliminary range for each common job. A half-day visit typically clears four to six small repairs under a single trip charge.',
   keyTakeaways: [
     'A written whole-house list is the budget; repairs priced one at a time always cost more.',
     'Split the list three ways: safety and water first, gets-worse-if-ignored second, cosmetic third.',
-    'Price against market labor of roughly $60 to $120 per hour, plus materials, and expect a minimum or trip charge per visit.',
+    'Price the list as a whole: in our instant estimate, nine common jobs on one list come to a preliminary $1,780 to $2,000 (November 2026), less than the same jobs booked one at a time.',
     'Batching four to six items into one visit spreads the trip cost and is the biggest single saving available.',
     'A common planning benchmark is setting aside about one percent of home value per year for repairs and maintenance.',
   ],
@@ -49,7 +49,7 @@ export const howToBudgetHomeRepairsBoise: BlogPostData = {
     {
       question: 'What does a typical handyman visit cost in Boise?',
       answer:
-        'Market labor in the Treasure Valley typically runs about $60 to $120 per hour, and most outfits carry a minimum charge or trip fee. A half-day visit clearing four to six small items commonly lands in the mid hundreds plus materials, which is why batching matters: the same items booked as separate visits would each carry their own trip cost.',
+        'Our instant estimate prices the whole list at once: nine common jobs (a faucet you supply, two light fixtures, three outlets or switches, two small drywall patches and a sticking door) come to a preliminary $1,780 to $2,000 (November 2026). Most outfits also carry a minimum charge or trip fee, which is why batching matters: the same items booked as separate visits would each carry their own trip cost.',
     },
     {
       question: 'Which repairs should come first when the budget is limited?',
@@ -74,7 +74,7 @@ export const howToBudgetHomeRepairsBoise: BlogPostData = {
   ],
   content: `
 <h2 id="the-short-answer">The short answer</h2>
-<p><strong>The expensive way to handle repairs is one emergency at a time. The cheap way is a list with a budget.</strong> Every repair booked separately carries its own trip cost, its own scheduling, and its own risk of being deferred until it grows. A punch list, priced as a batch against known market rates, converts all of that into one or two planned visits a year. This article is the method: build the list, sort it, price it, and decide what to hand off.</p>
+<p><strong>The expensive way to handle repairs is one emergency at a time. The cheap way is a list with a budget.</strong> Every repair booked separately carries its own trip cost, its own scheduling, and its own risk of being deferred until it grows. A punch list, priced as a batch, converts all of that into one or two planned visits a year. This article is the method: build the list, sort it, price it, and decide what to hand off.</p>
 
 <h2 id="build-the-list">Walk the house and write everything down</h2>
 <p><strong>The budget starts with a walk, and the walk has one rule: everything goes on the list.</strong> The sticking door you stopped noticing, the toilet that runs at 2am, the cracked caulk in the guest shower, the gate that needs a shoulder, the wall anchor that pulled out. Room by room, then the exterior. Photos of each item as you go, because the photos become the quote request later.</p>
@@ -84,8 +84,8 @@ export const howToBudgetHomeRepairsBoise: BlogPostData = {
 <p><strong>Three buckets, in strict order.</strong> First, anything involving water or safety: active leaks, running toilets, loose stair railings, outlets that spark or warm up, doors that do not lock. These items compound; a slow leak under a sink is a cabinet floor this month and a mold conversation by spring.</p>
 <p>Second, items that get more expensive if ignored: failed exterior caulk, peeling exterior paint, leaning fence posts, gutter runs that dump water at the foundation. These are cheap now and structural later. Third, the cosmetic backlog: nail pops, scuffed trim, dated hardware. It matters, and it waits without penalty, which is exactly why it goes last.</p>
 
-<h2 id="price-labor">Price the labor against market rates</h2>
-<p><strong>Treasure Valley handyman labor typically runs about $60 to $120 per hour at market rates, and most repairs on your list are one-to-three-hour items.</strong> Our breakdown of <a href="/blog/how-long-do-common-home-repairs-take">how long common repairs take</a> gives job-by-job ranges, but a serviceable planning shortcut is: small item, one hour; typical item, two; anything with dry time or digging, plan for a return visit.</p>
+<h2 id="price-labor">Price the labor before you book</h2>
+<p><strong>Most repairs on your list are one-to-three-hour items, and our instant estimate gives a preliminary range for each common one.</strong> Our breakdown of <a href="/blog/how-long-do-common-home-repairs-take">how long common repairs take</a> gives job-by-job ranges, but a serviceable planning shortcut is: small item, one hour; typical item, two; anything with dry time or digging, plan for a return visit.</p>
 <p>Add the structural facts of the market: nearly every outfit has a minimum charge or trip fee, and quotes come either flat or hourly. For list work, a flat quote on the defined items with hourly-plus-cap on any unknowns is the structure to ask for, a distinction covered fully in <a href="/blog/hourly-rate-vs-flat-rate-handyman">hourly versus flat-rate pricing</a>.</p>
 
 <h2 id="price-materials">Budget materials as their own line</h2>

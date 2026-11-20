@@ -12,7 +12,7 @@ export const replacingFaucetsAndFixtures: BlogPostData = {
   hubSlug: 'installs-and-upgrades',
   author: 'Boise Handyman Co',
   publishedAt: '2026-07-01',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['plumbing', 'faucet replacement', 'installs', 'boise'],
   primaryKeyword: 'faucet replacement boise',
   secondaryKeywords: [
@@ -27,11 +27,11 @@ export const replacingFaucetsAndFixtures: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Replace a faucet when repairs chase corrosion, when cartridge parts are no longer available, or when you want the upgrade; otherwise a dripping faucet is usually a repairable cartridge. In the Treasure Valley, labor to swap a customer-supplied faucet typically runs $130 to $300, with old shutoff valves the main wildcard.',
+    'Replace a faucet when repairs chase corrosion, when cartridge parts are no longer available, or when you want the upgrade; otherwise a dripping faucet is usually a repairable cartridge. In our instant estimate (November 2026), replacing one faucet you supply comes to a preliminary $290 to $330, with old shutoff valves the main wildcard.',
   keyTakeaways: [
     'Match the new faucet to the existing hole pattern in the sink and you avoid most installation drama.',
     'The shutoff valves under the sink, not the faucet, are what turns a one-hour swap into a longer visit in older Treasure Valley homes.',
-    'A dripping faucet is usually a $20 cartridge repair; replace the whole faucet for fit, finish, or dead brands, not for a drip.',
+    'A dripping faucet is usually a worn cartridge, a $10 to $40 part; replace the whole faucet for fit, finish, or dead brands, not for a drip.',
     'Hard water is the local faucet killer. Budget finishes pit and cartridges scale faster here than the national average.',
     'Bundling faucet, showerhead, disposal, and light fixture swaps into one visit cuts the per-item cost sharply.',
   ],
@@ -47,7 +47,7 @@ export const replacingFaucetsAndFixtures: BlogPostData = {
     {
       question: 'How much does it cost to replace a faucet in Boise?',
       answer:
-        'Labor to install a customer-supplied kitchen or bathroom faucet typically runs $130 to $300 in the Treasure Valley. Replacing corroded shutoff valves or supply lines while under the sink adds parts and time. The faucet itself is the bigger variable: solid units run $60 to $200 at local suppliers and designer models far beyond that, for similar installation labor.',
+        'In our instant estimate (November 2026), replacing one kitchen or bathroom faucet you supply comes to a preliminary $290 to $330. Replacing corroded shutoff valves or supply lines while under the sink adds parts and time. The faucet itself is the bigger variable: solid units run $60 to $200 at local suppliers and designer models far beyond that, for similar installation labor.',
     },
     {
       question: 'Should I repair a dripping faucet or replace it?',
@@ -67,7 +67,7 @@ export const replacingFaucetsAndFixtures: BlogPostData = {
     {
       question: 'Can a handyman replace a light fixture or ceiling fan too?',
       answer:
-        'Yes. Swapping a light fixture or fan on an existing, properly supported box is standard minor electrical work, typically $120 to $300 per fixture in the valley. The limits: a fan needs a fan-rated box, and any job that involves new circuits, aluminum wiring, or panel work belongs with a licensed electrician. Bundling fixture swaps with a faucet visit shares the trip cost.',
+        'Yes. Swapping a light fixture or fan on an existing, properly supported box is standard minor electrical work. In our instant estimate (November 2026), swapping one light fixture you supply comes to a preliminary $200 to $240, and installing one ceiling fan on an existing fan-rated box $290 to $330. The limits: a fan needs a fan-rated box, and any job that involves new circuits, aluminum wiring, or panel work belongs with a licensed electrician. Bundling fixture swaps with a faucet visit shares the trip cost.',
     },
     {
       question: 'What should I have ready before the install visit?',
@@ -105,7 +105,7 @@ export const replacingFaucetsAndFixtures: BlogPostData = {
 
 <h2 id="diy-or-pro">DIY or book it</h2>
 <p><strong>Honest split: a bathroom faucet with healthy valves and room to work is a reasonable DIY afternoon.</strong> A basin wrench, patience, and the manual get it done. Book a pro when the valves are original, when the old mounting nuts are corroded overhead in a cramped cabinet, when the job is a widespread or wall-mount faucet, or when you want the disposal, showerhead, and two light fixtures done in the same trip.</p>
-<p>Labor for a supplied faucet runs $130 to $300 locally, and the quote should say what it assumes about the valves, exactly the kind of stated assumption described in <a href="/blog/questions-to-ask-a-handyman">questions to ask a handyman</a>.</p>
+<p>Our instant estimate puts replacing one faucet you supply at a preliminary $290 to $330, and the written quote should say what it assumes about the valves, exactly the kind of stated assumption described in <a href="/blog/questions-to-ask-a-handyman">questions to ask a handyman</a>.</p>
 
 <h2 id="next-steps">Ready to swap it</h2>
 <p>Send a photo of the faucet, the underside of the sink, and the shutoff valves, and we will confirm the new fixture fits and quote the swap upfront, valves included if yours look tired. Start at the <a href="/contact">contact page</a> or browse <a href="/services/plumbing-repairs">minor plumbing repairs</a> for scope and how we price it.</p>

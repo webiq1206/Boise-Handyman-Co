@@ -41,6 +41,35 @@ primary pricing call to action on this site.
 * Guard: `tests/instant-estimate.test.ts` (`npm run verify:instant-estimate`,
   in prebuild).
 
+## Published prices come from the instant estimator (owner, 20 November 2026)
+
+Every handyman job price on a public page (blog posts, guides, FAQs and their
+FAQPage data, the downloadable worksheet, llms.txt) is the P5 instant
+estimator's preliminary customer range for one stated job, so a visitor who
+clicks "Get an instant estimate" is never shown a different story.
+
+* `scripts/pricing/p5-published-figures.mts` (`npm run pricing:p5-figures`,
+  needs p5-home-co beside this repository or `P5_HOME_CO_DIR`) runs
+  `priceEstimate()` then `customerEstimate()` for every handyman task, brand
+  `handyman`, the seed cost book, labor at $120 an hour (owner: the live
+  rate), and writes `shared/content/p5PublishedFigures.json`. The site never
+  imports p5-home-co; the JSON is committed.
+* Copy states the job ("replacing one faucet you supply"), calls the figure a
+  preliminary range from our instant estimate and dates it (November 2026).
+  A job the estimator does not price (TV mounting, slow drains, deck work,
+  squeaks, wax rings, smart devices) gets no figure: point to the request form.
+* No market hourly band. The only hourly figure is $120 an hour, and only
+  where the copy discusses billing. Single-task results do not move with the
+  labor rate (they are cost book lines), so the JSON says what was run.
+* Guard: `tests/p5-published-figures.test.ts` (`npm run
+  verify:published-prices`, in prebuild). A dollar range in copy must be in
+  the JSON; any other figure must be on its allowlist with a reason (city
+  permit fees, retail part prices, the 1 to 2 percent budgeting rule). Never
+  add a job price to the allowlist. When the cost book changes, re-run the
+  script and fix the copy until the test passes.
+* Not changed: the homepage planning range (`HandymanPlanningRange`, this
+  site's own engine), which the owner keeps until it is retired.
+
 ## One team email per request (owner decision, 17 November 2026)
 
 A request from this site used to put two emails in the shared inbox: this

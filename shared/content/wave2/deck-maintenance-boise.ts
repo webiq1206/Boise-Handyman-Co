@@ -12,7 +12,7 @@ export const deckMaintenanceBoise: BlogPostData = {
   hubSlug: 'exterior-and-outdoor',
   author: 'Boise Handyman Co',
   publishedAt: '2026-07-28',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['deck', 'exterior', 'maintenance', 'boise'],
   primaryKeyword: 'deck maintenance Boise',
   secondaryKeywords: [
@@ -58,7 +58,7 @@ export const deckMaintenanceBoise: BlogPostData = {
     {
       question: 'What does deck repair cost in Boise?',
       answer:
-        'Market ranges: replacing a handful of deck boards commonly runs $150 to $400; tightening or repairing a railing section $100 to $300; stair tread and minor stringer fixes $100 to $350; and a wash-and-reseal for a typical deck $300 to $800 depending on size and prep. Structural work, framing, posts, or ledger problems, moves to contractor scope and pricing.',
+        'Deck boards, railings, stair treads and a wash-and-reseal are not on our instant estimate\'s list, so we price them from your request and photos. Structural work, framing, posts, or ledger problems, moves to contractor scope and pricing.',
     },
     {
       question: 'When is a deck problem beyond a handyman?',
@@ -91,7 +91,7 @@ export const deckMaintenanceBoise: BlogPostData = {
 
 <h2 id="repairs">Fix-now items: boards, rails, and stairs</h2>
 <p><strong>Three findings from the inspection should never wait for a convenient season.</strong> Soft or cracked boards get replaced promptly, because a compromised board is both an ankle risk and a water channel to the framing below; matching and weathering-in a few new boards is routine. Wobbly railings get re-anchored now, railings are fall protection, and the moment they are needed is precisely when a loose one lets go. Stairs, the highest-load, highest-consequence part of the deck, get loose treads refastened and cracked stringers addressed immediately.</p>
-<p>All of this is board-level carpentry, squarely handyman scope, and typically $100 to $400 per item at <a href="/blog/what-small-home-repairs-cost-boise">valley market rates</a>. Batched into one visit with the wash or the fastener sweep, the per-item math improves the usual way.</p>
+<p>All of this is board-level carpentry, squarely handyman scope, priced from your photos, and <a href="/blog/what-small-home-repairs-cost-boise">what small home repairs cost in Boise</a> shows the instant estimate's ranges for comparable jobs. Batched into one visit with the wash or the fastener sweep, the per-item math improves the usual way.</p>
 
 <h2 id="structural">Knowing when it is bigger than maintenance</h2>
 <p><strong>The line between deck repair and deck rebuilding runs through the frame.</strong> Rot in joists or beams, posts moving at their bases, footing heave from frost, noticeable sway underfoot, or any concern at the ledger connection, the bolted joint holding the deck to the house, and the failure point in most real deck collapses: these are structural findings. They call for a contractor, and possibly a permit, not a handyman with a board. Our part is the honest referral: when an inspection turns up frame-level trouble, we say so plainly, because a fresh coat of stain on a failing frame is the worst money a deck owner can spend.</p>

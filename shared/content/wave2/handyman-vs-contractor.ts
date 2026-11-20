@@ -12,7 +12,7 @@ export const handymanVsContractor: BlogPostData = {
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',
   publishedAt: '2026-06-19',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['hiring a handyman', 'contractors', 'boise', 'home repairs'],
   primaryKeyword: 'handyman vs contractor',
   secondaryKeywords: [
@@ -54,7 +54,7 @@ export const handymanVsContractor: BlogPostData = {
     {
       question: 'Is a handyman cheaper than a contractor?',
       answer:
-        'For small jobs, almost always. Treasure Valley handyman rates typically run around $60 to $120 per hour, and small jobs are priced as small jobs. A general contractor carries overhead for project management, permits, and subcontractor coordination, which is worth paying for on a remodel and wasted on a sticking door. The mistake in both directions is mismatching the pro to the job size.',
+        'For small jobs, almost always. Small jobs are priced as small jobs: in our instant estimate, adjusting one sticking door comes to a preliminary $200 to $240 (November 2026). A general contractor carries overhead for project management, permits, and subcontractor coordination, which is worth paying for on a remodel and wasted on a sticking door. The mistake in both directions is mismatching the pro to the job size.',
     },
     {
       question: 'Do handyman jobs need permits in Boise?',
@@ -101,7 +101,7 @@ export const handymanVsContractor: BlogPostData = {
 <p>Removing or notching a wall, sistering joists, fixing a sagging beam, or anything where the framing itself failed needs an engineer's eyes and a contractor's permit. Structural mistakes do not announce themselves right away, which is exactly why the permit process exists for them.</p>
 
 <h2 id="cost-difference">What the cost difference looks like</h2>
-<p><strong>Market rates for Treasure Valley handyman work typically run about $60 to $120 per hour, with small jobs often quoted flat.</strong> Contractors price differently because they are selling a different product: estimates carry overhead and project management, and many have minimums that make a small repair uneconomical for everyone involved. That is not a criticism; it is why the two trades coexist.</p>
+<p><strong>Small handyman jobs are often quoted flat, and our instant estimate gives a preliminary range for each common one.</strong> Contractors price differently because they are selling a different product: estimates carry overhead and project management, and many have minimums that make a small repair uneconomical for everyone involved. That is not a criticism; it is why the two trades coexist.</p>
 <p>The expensive mistakes are mismatches. Paying contractor overhead to hang three doors wastes money. Hiring a handyman to take out a wall risks far more than money. <a href="/blog/hourly-rate-vs-flat-rate-handyman">How handyman pricing is structured</a> covers the handyman side in detail.</p>
 
 <h2 id="gray-zone">The honest gray zone</h2>

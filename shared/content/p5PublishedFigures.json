@@ -1,0 +1,391 @@
+{
+  "about": "Preliminary customer ranges from the P5 instant estimator (the tool behind \"Get an instant estimate\"), one estimate per entry. Written by scripts/pricing/p5-published-figures.mts; do not edit by hand.",
+  "asOf": "November 2026",
+  "generatedOn": "2026-11-20",
+  "p5Commit": "3d741d97",
+  "inputs": {
+    "brand": "handyman",
+    "project": "handyman",
+    "tier": "mid",
+    "laborRatePerHour": 120,
+    "handymanTripCharge": 45,
+    "costBook": "p5-home-co seed cost book, no database overrides",
+    "address": "100 Example Ave, Boise, ID 83702",
+    "property": null
+  },
+  "tasks": {
+    "faucet": {
+      "label": "Replace a faucet",
+      "hint": "You supply the faucet",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "faucet": 1
+        }
+      },
+      "low": 290,
+      "high": 330
+    },
+    "toilet-repair": {
+      "label": "Fix a running toilet",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "toilet-repair": 1
+        }
+      },
+      "low": 230,
+      "high": 260
+    },
+    "toilet-replace": {
+      "label": "Replace a toilet",
+      "hint": "You supply the toilet",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "toilet-replace": 1
+        }
+      },
+      "low": 420,
+      "high": 470
+    },
+    "disposal": {
+      "label": "Replace a garbage disposal",
+      "hint": "You supply the disposal",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "disposal": 1
+        }
+      },
+      "low": 340,
+      "high": 390
+    },
+    "caulk-tub": {
+      "label": "Re-caulk a tub or shower",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "caulk-tub": 1
+        }
+      },
+      "low": 300,
+      "high": 340
+    },
+    "light": {
+      "label": "Swap a light fixture",
+      "hint": "You supply the fixture",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "light": 1
+        }
+      },
+      "low": 200,
+      "high": 240
+    },
+    "fan": {
+      "label": "Install a ceiling fan",
+      "hint": "Existing fan-rated box",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "fan": 1
+        }
+      },
+      "low": 290,
+      "high": 330
+    },
+    "outlet": {
+      "label": "Replace an outlet or switch",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "outlet": 1
+        }
+      },
+      "low": 200,
+      "high": 240
+    },
+    "gfci": {
+      "label": "Replace a GFCI outlet",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "gfci": 1
+        }
+      },
+      "low": 190,
+      "high": 240
+    },
+    "smoke": {
+      "label": "Hardwired smoke or CO detector",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "smoke": 1
+        }
+      },
+      "low": 210,
+      "high": 240
+    },
+    "patch-small": {
+      "label": "Small drywall patch",
+      "hint": "Under 6 inches",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "patch-small": 1
+        }
+      },
+      "low": 240,
+      "high": 280
+    },
+    "patch-medium": {
+      "label": "Medium drywall patch",
+      "hint": "1 to 2 square feet",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "patch-medium": 1
+        }
+      },
+      "low": 460,
+      "high": 510
+    },
+    "paint-room": {
+      "label": "Paint a room",
+      "hint": "Walls, about 12 x 12 ft",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "paint-room": 1
+        }
+      },
+      "low": 880,
+      "high": 980
+    },
+    "trim-caulk": {
+      "label": "Caulk and paint trim in a room",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "trim-caulk": 1
+        }
+      },
+      "low": 380,
+      "high": 430
+    },
+    "door-hang": {
+      "label": "Hang an interior door",
+      "hint": "You supply the prehung door",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "door-hang": 1
+        }
+      },
+      "low": 420,
+      "high": 470
+    },
+    "door-adjust": {
+      "label": "Adjust a sticking door",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "door-adjust": 1
+        }
+      },
+      "low": 200,
+      "high": 240
+    },
+    "weatherstrip": {
+      "label": "Weatherstrip an exterior door",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "weatherstrip": 1
+        }
+      },
+      "low": 200,
+      "high": 240
+    },
+    "hang-art": {
+      "label": "Hang a picture or mirror",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "hang-art": 1
+        }
+      },
+      "low": 200,
+      "high": 240
+    },
+    "hang-heavy": {
+      "label": "Hang a heavy mirror or art",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "hang-heavy": 1
+        }
+      },
+      "low": 260,
+      "high": 300
+    },
+    "shelf": {
+      "label": "Install a shelf",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "shelf": 1
+        }
+      },
+      "low": 200,
+      "high": 230
+    },
+    "blinds": {
+      "label": "Install blinds or a curtain rod",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "blinds": 1
+        }
+      },
+      "low": 200,
+      "high": 240
+    },
+    "grab-bar": {
+      "label": "Install a grab bar",
+      "hint": "Blocked or anchored",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "grab-bar": 1
+        }
+      },
+      "low": 260,
+      "high": 300
+    },
+    "furniture": {
+      "label": "Assemble furniture",
+      "hint": "Per piece",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "furniture": 1
+        }
+      },
+      "low": 210,
+      "high": 240
+    },
+    "fence-boards": {
+      "label": "Repair fence boards",
+      "hint": "Per section",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "fence-boards": 1
+        }
+      },
+      "low": 460,
+      "high": 510
+    },
+    "fence-post": {
+      "label": "Replace a fence post",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "fence-post": 1
+        }
+      },
+      "low": 420,
+      "high": 470
+    },
+    "gate": {
+      "label": "Repair a gate",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "gate": 1
+        }
+      },
+      "low": 340,
+      "high": 390
+    },
+    "gutters-1": {
+      "label": "Clean gutters, one story",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "gutters-1": 1
+        }
+      },
+      "low": 260,
+      "high": 300
+    },
+    "gutters-2": {
+      "label": "Clean gutters, two story",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "gutters-2": 1
+        }
+      },
+      "low": 380,
+      "high": 430
+    },
+    "dryer-vent": {
+      "label": "Clean the dryer vent",
+      "quantity": 1,
+      "inputs": {
+        "tasks": {
+          "dryer-vent": 1
+        }
+      },
+      "low": 230,
+      "high": 260
+    }
+  },
+  "lists": {
+    "mixed-list": {
+      "label": "A mixed list: replace a faucet, swap two light fixtures, replace three outlets or switches, two small drywall patches, adjust a sticking door",
+      "inputs": {
+        "tasks": {
+          "faucet": 1,
+          "light": 2,
+          "outlet": 3,
+          "patch-small": 2,
+          "door-adjust": 1
+        }
+      },
+      "low": 1780,
+      "high": 2000
+    },
+    "outlets-2": {
+      "label": "Replace two outlets or switches on one visit",
+      "inputs": {
+        "tasks": {
+          "outlet": 2
+        }
+      },
+      "low": 290,
+      "high": 330
+    },
+    "doors-3": {
+      "label": "Adjust three sticking doors on one visit",
+      "inputs": {
+        "tasks": {
+          "door-adjust": 3
+        }
+      },
+      "low": 550,
+      "high": 620
+    }
+  },
+  "singleTaskSpan": {
+    "low": 190,
+    "lowTask": "gfci",
+    "high": 980,
+    "highTask": "paint-room"
+  }
+}

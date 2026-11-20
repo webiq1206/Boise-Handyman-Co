@@ -12,7 +12,7 @@ export const preparingYourBoiseHomeForWinter: BlogPostData = {
   hubSlug: 'home-maintenance',
   author: 'Boise Handyman Co',
   publishedAt: '2026-07-17',
-  updatedAt: '2026-08-13',
+  updatedAt: '2026-11-20',
   tags: ['winterizing', 'home maintenance', 'boise', 'seasonal'],
   primaryKeyword: 'winterize home Boise',
   secondaryKeywords: [
@@ -59,7 +59,7 @@ export const preparingYourBoiseHomeForWinter: BlogPostData = {
     {
       question: 'Do gutters really matter for winter?',
       answer:
-        'Yes, disproportionately. Gutters full of cottonwood and maple leaves hold water, freeze solid, and back melting snow up under shingles as ice dams, which is how a $150 cleaning becomes a ceiling stain. Clean after leaf drop, confirm downspouts run water away from the foundation, and re-secure any sagging runs so meltwater flows instead of pooling.',
+        'Yes, disproportionately. Gutters full of cottonwood and maple leaves hold water, freeze solid, and back melting snow up under shingles as ice dams, which is how a skipped gutter cleaning becomes a ceiling stain. Clean after leaf drop, confirm downspouts run water away from the foundation, and re-secure any sagging runs so meltwater flows instead of pooling.',
     },
     {
       question: 'What should I caulk before winter?',
@@ -74,7 +74,7 @@ export const preparingYourBoiseHomeForWinter: BlogPostData = {
     {
       question: 'What does fall winterization cost?',
       answer:
-        'At Treasure Valley market rates, a bundled visit covering gutters, exterior sealing, weatherstripping, and hose bib prep commonly lands in the $250 to $600 range depending on home size and gutter condition, less than a single ceiling repair from an ice dam. Booked as one visit, it prices far better than the items would separately.',
+        'In our instant estimate (November 2026), cleaning the gutters of a one-story home comes to a preliminary $260 to $300 and weatherstripping one exterior door $200 to $240; exterior sealing and hose bib prep are priced from your list. Booked as one visit, the bundle saves the separate trips and costs less than a single ceiling repair from an ice dam.',
     },
   ],
   content: `
@@ -100,7 +100,7 @@ export const preparingYourBoiseHomeForWinter: BlogPostData = {
 <p><strong>Heating season is when detector batteries and blocked airflow matter most.</strong> Test smoke and carbon monoxide detectors and replace batteries; CO risk peaks when furnaces and gas fireplaces run daily. Replace the furnace filter and confirm registers are not buried under furniture. Reverse ceiling fans to push warm air down. Clean the dryer vent run, a lint-packed duct working overtime through winter is a fire item, not a chore. Furnace servicing itself belongs to an HVAC company; everything around it is fair game for a handyman visit.</p>
 
 <h2 id="one-visit">The one-visit version</h2>
-<p><strong>Almost everything above fits a single two-to-three hour visit in October.</strong> Our fall bookings usually run: hose bibs and visible pipe runs, gutter cleaning with minor repairs, the exterior caulk pass, weatherstripping and door adjustments, detectors, and a punch list of whatever small items surfaced since spring. At market rates a bundled visit commonly lands between $250 and $600 depending on house size, which is cheaper than any single one of the failures it prevents. For how this fits an annual plan, see <a href="/blog/home-maintenance-budget-idaho">budgeting for home maintenance in Idaho</a>.</p>
+<p><strong>Almost everything above fits a single two-to-three hour visit in October.</strong> Our fall bookings usually run: hose bibs and visible pipe runs, gutter cleaning with minor repairs, the exterior caulk pass, weatherstripping and door adjustments, detectors, and a punch list of whatever small items surfaced since spring. Our instant estimate gives a preliminary range for the items on its list, such as $260 to $300 for a one-story home's gutters, and the visit is cheaper than any single one of the failures it prevents. For how this fits an annual plan, see <a href="/blog/home-maintenance-budget-idaho">budgeting for home maintenance in Idaho</a>.</p>
 
 <h2 id="next-steps">Book the fall visit before the fall rush</h2>
 <p><strong>The winterization window is short and everyone remembers it the same week.</strong> Book in early October and the whole list is done calmly before the first freeze warning; call in late November and you are scheduling repairs instead. Send us your address and anything you already know needs attention, and we will handle the rest of the checklist in one trip. We winterize homes across Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County. <a href="/contact">Get on the fall schedule</a>.</p>
