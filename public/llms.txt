@@ -1,12 +1,16 @@
 # Boise Handyman Co
 
-> Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, and maintenance. Drywall repair, interior and exterior painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, caulking and punch-list work. Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County. Phone (208) 477-1169.
+> Handyman service for Boise, Idaho and the Treasure Valley: small home repairs, installs, and maintenance. Drywall repair, interior and exterior painting, minor plumbing and electrical, carpentry and trim, mounting and assembly, fence, deck and gutter repair, caulking and punch-list work. Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County. Phone (208) 477-1169.
+
+Boise Handyman Co is a P5 Home Co company (https://p5homeco.com). Sister companies: Boise Construction Co, Boise Remodeling Co and Boise Cabinet Co.
 
 Every job gets a written quote before work starts. The team reviews the repair list, materials and access, then confirms scope, pricing and the visit plan before scheduling. Work that needs a general contractor or a licensed trade, such as full remodels, additions, repipes, or panel work, is out of scope and referred out honestly.
 
 ## Contact
 
-Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County. Phone (208) 477-1169. Email hello@boisehandyman.co.
+Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County. Phone (208) 477-1169. Email hello@boisehandyman.co.
+
+P5 Home Co profiles: Facebook https://www.facebook.com/p5homeco, Instagram https://www.instagram.com/p5_home_co, Google Business Profile https://www.google.com/maps/place/?q=place_id:ChIJzxMoavs6P6IRNc6i9aOvt6Q.
 
 ## Services
 
@@ -63,4 +67,4 @@ Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County
 - [RSS feed](https://boisehandyman.co/feed.xml): guides and articles, newest first, with publication and revision dates.
 - [Full text for LLMs](https://boisehandyman.co/llms-full.txt): expanded reference copy of the core facts.
 
-Last updated: 2026-11-15.
+Last updated: 2026-11-20.

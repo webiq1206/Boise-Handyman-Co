@@ -21,27 +21,32 @@ const counties = [...SERVICE_AREA_COUNTIES];
 
 assert.deepEqual(
   cities,
-  ["Boise", "Meridian", "Nampa", "Eagle", "Kuna", "Caldwell", "Star"],
-  "service area cities stay in Google Business Profile order",
+  ["Boise", "Meridian", "Nampa", "Eagle", "Kuna", "Caldwell", "Star", "Middleton", "Garden City"],
+  "the nine official service-area cities (owner, 20 November 2026): the seven in their order, then Middleton and Garden City",
 );
 assert.deepEqual(counties, ["Ada County", "Canyon County"]);
 assert.equal(
   SERVICE_AREA_LINE,
-  "Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County",
+  "Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County",
 );
 assert.equal(SITE_CONFIG.address.serviceArea, SERVICE_AREA_LINE);
 assert.equal(PUBLIC_NAP_LINE, `Serving ${SERVICE_AREA_LINE}.`);
-assert.deepEqual(RE10_SERVICE_AREAS, cities, "RE-10 service areas match the seven cities");
-assert.deepEqual([...BUSINESS_INFO.serviceArea], cities, "BUSINESS_INFO.serviceArea is the seven cities");
+assert.deepEqual(RE10_SERVICE_AREAS, cities, "RE-10 service areas match the service-area cities");
+assert.deepEqual([...BUSINESS_INFO.serviceArea], cities, "BUSINESS_INFO.serviceArea is the service-area cities");
 assert.equal(CITIES.length, 9, "published town pages stay, including Middleton and Garden City");
+assert.deepEqual(
+  [...CITIES.map((city) => city.name)].sort(),
+  [...cities].sort(),
+  "every published town page is a service-area city, and every service-area city has a page",
+);
 assert.equal(CITIES.some((city) => city.slug === "middleton"), true);
 assert.equal(CITIES.some((city) => city.slug === "garden-city"), true);
 
 for (const city of cities) {
   assert.equal(isServiceAreaCity(city), true, `${city} is in the service area`);
 }
-assert.equal(isServiceAreaCity("Middleton"), false, "Middleton stays a page, not a service-area city");
-assert.equal(isServiceAreaCity("Garden City"), false, "Garden City stays a page, not a service-area city");
+assert.equal(isServiceAreaCity("Middleton"), true, "Middleton has a published page and is served");
+assert.equal(isServiceAreaCity("Garden City"), true, "Garden City is in the official service area");
 assert.equal(isServiceAreaCity("Emmett"), false, "towns outside the profile are not service-area cities");
 
 const expectedNodes = [
@@ -84,4 +89,4 @@ for (const slug of ["middleton", "garden-city", "boise", "star"]) {
   assert.equal(paths.has(`/areas/${slug}`), true, `${slug} stays in the sitemap`);
 }
 
-console.log("verify-service-area-cities: seven cities, two counties, published town pages kept");
+console.log("verify-service-area-cities: nine cities, two counties, one per published town page");

@@ -45,7 +45,7 @@ test('the brand config carries this site’s facts, one CTA and one destination'
   assert.equal(`${FAMILY_BRAND.nap.line}.`, PUBLIC_NAP_LINE);
   assert.equal(
     FAMILY_BRAND.nap.line,
-    'Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County',
+    'Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County',
   );
   assert.equal(FAMILY_BRAND.registration.text, CONTRACTOR_REGISTRATION);
   assert.equal(FAMILY_BRAND.registration.href, DOPL_LOOKUP_HREF);
@@ -89,8 +89,10 @@ test('every footer link group points at a published page', () => {
     FAMILY_BRAND.footer.areas.links.map((link) => link.label),
     SERVICE_AREA_CITY_NAMES.map((name) => `${name}, Idaho`),
   );
-  assert.equal(FAMILY_BRAND.footer.areas.links.some((link) => link.href.includes('middleton')), false);
-  assert.equal(FAMILY_BRAND.footer.areas.links.some((link) => link.href.includes('garden-city')), false);
+  // Owner answers, 20 November 2026 (SEO audit HM-T3): the official service
+  // area is nine cities, Middleton and Garden City included.
+  assert.equal(FAMILY_BRAND.footer.areas.links.some((link) => link.href === '/areas/middleton'), true);
+  assert.equal(FAMILY_BRAND.footer.areas.links.some((link) => link.href === '/areas/garden-city'), true);
 });
 
 test('the footer renders the family row, NAP, hours and the registration, with no headings', () => {
@@ -102,7 +104,7 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   assert.match(html, /<span class="fam-footer-current" aria-current="true">Boise Handyman Co<\/span>/);
   assert.equal(/rel="noopener noreferrer">(P5 Home Co|Boise)/.test(html), false);
   assert.equal(html.includes('Boise ADU Co'), false);
-  assert.match(html, /Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County\. <a href="tel:/);
+  assert.match(html, /Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County\. <a href="tel:/);
   assert.doesNotMatch(html, /public representative|staffed storefront|streetAddress/i);
   const vcard = buildBusinessVCard().replace(/\r?\n[ \t]/g, '');
   assert.doesNotMatch(vcard, /public representative|staffed storefront|streetAddress/i);

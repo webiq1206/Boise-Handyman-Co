@@ -16,6 +16,7 @@ import fs from 'fs';
 import path from 'path';
 import { SITE_CONFIG } from '../shared/siteConfig';
 import { SERVICES, CITIES, SERVICE_AREA_CITIES, SERVICE_AREA_LINE } from '../shared/contentData';
+import { P5_SOCIAL } from '../shared/gbpProfile';
 import { GUIDE_PAGES } from '../shared/guideContent';
 import { CONTENT_HUBS, isCategoryHubIndexable } from '../shared/contentHubs';
 import { BLOG_POSTS } from '../shared/blogContent';
@@ -38,6 +39,17 @@ const SUMMARY =
   `caulking and punch-list work. Serving ${SERVICE_AREA_LINE}. ` +
   `Phone ${SITE_CONFIG.phone}.`;
 
+// SEO audit XS-08 (20 November 2026): name the parent company near the top,
+// as the Remodeling and Cabinet files already do.
+const FAMILY =
+  `${SITE_CONFIG.name} is a P5 Home Co company (https://p5homeco.com). ` +
+  `Sister companies: Boise Construction Co, Boise Remodeling Co and Boise Cabinet Co.`;
+
+// Owner, 20 November 2026: the parent company's profiles, shared by every site.
+const PARENT_PROFILES =
+  `P5 Home Co profiles: Facebook ${P5_SOCIAL.facebook}, Instagram ${P5_SOCIAL.instagram}, ` +
+  `Google Business Profile ${P5_SOCIAL.maps}.`;
+
 const indexableHubs = CONTENT_HUBS.filter((h) =>
   isCategoryHubIndexable(
     h.hubSlug,
@@ -59,8 +71,9 @@ function buildShort(): string {
   const lines: string[] = [];
   lines.push(`# ${SITE_CONFIG.name}`, '');
   lines.push(`> ${SUMMARY}`, '');
+  lines.push(FAMILY, '');
   lines.push(POSITIONING, '');
-  lines.push('## Contact', '', CONTACT, '');
+  lines.push('## Contact', '', CONTACT, '', PARENT_PROFILES, '');
 
   lines.push('## Services', '');
   for (const s of SERVICES) {
@@ -129,7 +142,8 @@ function buildFull(): string {
   const lines: string[] = [];
   lines.push(`# ${SITE_CONFIG.name} - Full Reference`, '');
   lines.push(`> ${SUMMARY}`, '');
-  lines.push('## Contact', '', CONTACT, '');
+  lines.push(FAMILY, '');
+  lines.push('## Contact', '', CONTACT, '', PARENT_PROFILES, '');
 
   lines.push('## About', '');
   lines.push(
@@ -170,8 +184,8 @@ function buildFull(): string {
   lines.push(
     '',
     `Each service has a dedicated page per published city at /services/{service-slug}/{city-slug} for ` +
-      `${CITIES.map((c) => c.slug).join(', ')}. Service-area hubs are the seven cities above. ` +
-      `Other published town pages stay at /areas/{city-slug}, including middleton and garden-city.`,
+      `${CITIES.map((c) => c.slug).join(', ')}. Every one of those cities is in the service area above ` +
+      `and has its own area page at /areas/{city-slug}.`,
     '',
   );
 
