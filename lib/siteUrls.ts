@@ -49,7 +49,6 @@ export function getSiteUrlGroups(): SiteUrlGroup[] {
     { path: '/areas', label: 'Service areas', changeFrequency: 'monthly', priority: 0.75 },
     { path: '/contact', label: 'Send your list and photos', changeFrequency: 'monthly', priority: 0.9 },
     { path: '/instant-estimate', label: 'Instant estimate', changeFrequency: 'monthly', priority: 0.9 },
-    { path: '/estimate', label: 'Project intake', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/re-10-repairs-boise', label: 'RE-10 and inspection repairs', changeFrequency: 'monthly', priority: 0.9 },
     { path: '/warranty', label: 'Warranty', changeFrequency: 'yearly', priority: 0.6 },
     { path: '/resources', label: 'Resources', changeFrequency: 'monthly', priority: 0.7 },

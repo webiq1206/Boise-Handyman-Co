@@ -216,7 +216,24 @@ const nextConfig = {
       });
     }
 
+    // SEO audit S6 (owner approval, 20 November 2026): /services/home-repairs
+    // was an indexable orphan that repeated the services index. One permanent
+    // hop (308) to /services; the route file was removed.
+    redirects.push(...r('/services/home-repairs', '/services'));
+
     return redirects;
+  },
+
+  async headers() {
+    return [
+      // SEO audit S6 (owner approval, 20 November 2026): the static brand kit
+      // in public/brand is a working file, not a page for search. A static
+      // file cannot carry a robots meta tag, so it gets the header instead.
+      {
+        source: '/brand/:file(.*\\.html)',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex' }],
+      },
+    ];
   },
 }
 

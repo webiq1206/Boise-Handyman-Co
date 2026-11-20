@@ -6,9 +6,10 @@ import assert from 'node:assert/strict';
 import {scanSource, scanBuiltDocuments, scanSourceClaims, scanBuiltClaims, findProhibitedClaims} from './verify-response-language.mjs';
 const publicDocument = html => html.replace(/<script\b([^>]*)>[\s\S]*?<\/script>/gi, (script, attrs) => /type=["']application\/ld\+json["']/i.test(attrs) ? script : '');
 const knownRoutes=JSON.parse(readFileSync(new URL("./known-claims-routes.json",import.meta.url),"utf8"));
-assert.equal(new Set(knownRoutes).size,72);
+// 71 since /services/home-repairs became a redirect to /services (SEO audit S6).
+assert.equal(new Set(knownRoutes).size,71);
 const cities=['boise','meridian','nampa','eagle','kuna','caldwell','star','middleton','garden-city'];
-const routes=['/','/contact','/guides/boise-home-maintenance-guide','/guides/treasure-valley-exterior-home-care-guide','/guides/boise-handyman-guide','/guides/eagle-handyman-guide','/guides/harris-ranch-handyman-guide','/guides/middleton-handyman-guide','/guides/star-handyman-guide','/services','/services/home-repairs','/blog/energy-saving-home-fixes-boise',...cities.map(c=>`/areas/${c}`)];
+const routes=['/','/contact','/guides/boise-home-maintenance-guide','/guides/treasure-valley-exterior-home-care-guide','/guides/boise-handyman-guide','/guides/eagle-handyman-guide','/guides/harris-ranch-handyman-guide','/guides/middleton-handyman-guide','/guides/star-handyman-guide','/services','/blog/energy-saving-home-fixes-boise',...cities.map(c=>`/areas/${c}`)];
 const unsupported=/Upfront quotes and one-trip fixes|one-visit work almost without exception|Nearly all of it is one-visit work|classic one-visit handyman work|one-visit punch-list work|quoted flat, finished in one trip|Repair in one trip|all in one visit|job finishes in one trip|each visit is a half day|one-visit plan, usually within a day|flat quotes starting at|most items are one-visit work|we arrive with materials for all of it|planning from|\$145|\$149|\$199|\$60 to \$120|(?:within|inside) one business day|same-week scheduling|most jobs.{0,60}(?:single|one) (?:visit|trip)|usually finished in one visit|knocked out in one trip|fixed or swapped in a single visit|usually within the week|single half-day handyman visit|all of them fit in one handyman visit/ig;
 for(const route of knownRoutes.filter(r=>!r.endsWith('.txt'))){
  const html=readFileSync(`.next/server/app${route==='/'?'/index':route}.html`,'utf8');

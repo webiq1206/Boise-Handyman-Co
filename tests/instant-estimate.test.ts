@@ -9,7 +9,7 @@
  * preliminary range a quote or a final price.
  */
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import Module from 'node:module';
 import { test } from 'node:test';
 
@@ -91,8 +91,13 @@ test('the central call to action and the service pages open the estimator', asyn
   assert.equal(instantEstimateHref(null), '/instant-estimate');
   assert.equal(instantEstimateHref('Not Valid'), '/instant-estimate');
   assert.ok(getAllSiteUrls().some((entry) => entry.path === '/instant-estimate'), 'the page is in the sitemap');
-  // The existing tools stay: the request form and the in-house intake are still routes and still linked.
-  assert.ok(getAllSiteUrls().some((entry) => entry.path === '/estimate'));
+  // The existing tools stay: the request form and the in-house intake are still routes.
+  // SEO audit S6 (owner approval, 20 November 2026): /estimate is a form tool
+  // with no answer for a searcher, so it is noindex, follow and out of the
+  // sitemaps, and still mounted.
+  assert.ok(existsSync('app/estimate/page.tsx'), 'the in-house intake is still a route');
+  assert.ok(!getAllSiteUrls().some((entry) => entry.path === '/estimate'), '/estimate is not in the sitemap');
+  assert.match(read('app/estimate/page.tsx'), /robots:\s*\{\s*index:\s*false,\s*follow:\s*true/);
   assert.match(read('app/page.tsx'), /id="consult"[\s\S]*<ConsultationForm\s*\/>/);
 });
 

@@ -56,8 +56,10 @@ for(const slug of ['boise-home-maintenance-guide','treasure-valley-exterior-home
  const guide=getGuideBySlug(slug);assert(guide);
  assert.doesNotMatch(JSON.stringify(guide),/\$\d|one-visit work almost without exception|Nearly all of it is one-visit work|usually within a day|within one business day/);
 });
-test('known full-document boundary includes all 72 agreed URLs and the previously missed guide',()=>{
- const routes=JSON.parse(readFileSync('scripts/known-claims-routes.json','utf8'));assert.equal(new Set(routes).size,72);
+// 71: /services/home-repairs became a 308 to /services (SEO audit S6, owner approval 20 November 2026).
+test('known full-document boundary includes all 71 agreed URLs and the previously missed guide',()=>{
+ const routes=JSON.parse(readFileSync('scripts/known-claims-routes.json','utf8'));assert.equal(new Set(routes).size,71);
+ assert(!routes.includes('/services/home-repairs'),'the redirected page is not a document');
  for(const route of ['/','/contact','/guides/boise-home-maintenance-guide','/blog','/blog/category/home-maintenance','/areas/middleton','/llms.txt','/llms-full.txt'])assert(routes.includes(route));
 });
 
