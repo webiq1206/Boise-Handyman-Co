@@ -177,6 +177,8 @@ export const FAMILY_BRAND: FamilyBrand = {
   // P5 Home Co's Facebook page (shared/gbpProfile P5_SOCIAL): the owner's profile, labelled for
   // the parent and never this brand's own.
   parentFacebook: { href: P5_SOCIAL.facebook, label: 'P5 Home Co on Facebook' },
+  // The one Instagram for every family site (owner, 20 November 2026).
+  parentInstagram: { href: P5_SOCIAL.instagram, label: 'P5 Home Co on Instagram' },
   // P5 Home Co's Google Business Profile (owner decision A, 1 November 2026), the owner's one
   // Google profile, labelled for the parent like the Facebook link and listed right after it.
   parentGoogle: { href: P5_SOCIAL.google, label: 'P5 Home Co on Google' },
