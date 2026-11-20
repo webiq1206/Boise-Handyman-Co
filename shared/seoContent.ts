@@ -21,6 +21,12 @@ export interface CitySeoFacts {
 export interface ServiceSEOContent {
   slug: string;
   name: string;
+  /**
+   * The service-in-city H1 name, when it should carry the searched term the
+   * title and description lead with (SEO audit, mounting-assembly city pages:
+   * "TV mounting and assembly in Boise, Idaho"). Default: name.
+   */
+  cityHeadingName?: string;
   headline: string;
   primaryKeyword: string;
   overview: string;
@@ -492,6 +498,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
   'mounting-assembly': {
     slug: 'mounting-assembly',
     name: 'Mounting & assembly',
+    cityHeadingName: 'TV mounting and assembly',
     headline: 'TV mounting, shelving, and furniture assembly in Boise',
     primaryKeyword: 'tv mounting boise',
     overview:
