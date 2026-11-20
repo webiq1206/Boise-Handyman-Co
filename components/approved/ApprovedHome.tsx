@@ -98,6 +98,6 @@ export function ApprovedCtaStrip(){
   </div>
  </section>;}
 
-/** Service area: the seven GBP cities, linked. Other town pages stay published. */
+/** Service area: the nine service-area cities, linked. */
 export function ApprovedServiceArea(){
  return <ServiceArea image={{src:'/family/drive/square-1-front-door-smart-lock.webp',alt: localAlt('Door handle and lock beside painted trim'),width:1200,height:1200}}><p className="f-eyebrow">AT HOME IN IDAHO</p><h2>Local people.<br/><em>Valley-wide reach.</em></h2><p>Serving homeowners throughout the Treasure Valley.</p><nav className="fr-cities" aria-label="Service area cities">{SERVICE_AREA_CITY_NAMES.map(city=><a key={city} href={`/areas/${city.toLowerCase().replaceAll(" ","-")}`} aria-label={`Handyman services in ${city}`}>{city}</a>)}</nav></ServiceArea>;}
