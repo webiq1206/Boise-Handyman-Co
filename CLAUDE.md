@@ -413,8 +413,9 @@ unrefined page on a sister site.
   blog, categories, guides, services), the 404 and the RE-10 "Show all
   questions" button use the family button (`familyButtonClass`, sentence
   case; paper on charcoal bands). The old `brand`/`brandOutline` variants
-  are uppercase; do not use them on a public page. The one left is the
+  are uppercase; do not use them on a public page. The last one, the
   "Request a quote" secondary in the `callFirst` hero of the paid-traffic
-  pages, which stays as the owner set it.
+  pages, moved to the family secondary on the owner's word (20 November
+  2026); that hero's layout, wording and links are otherwise unchanged.
 * Warranty: "What is covered", "How it works" and "What is not covered" stack
   below 1024px; three columns at 768 left about 220px each.
