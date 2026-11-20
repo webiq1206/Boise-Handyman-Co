@@ -5,9 +5,9 @@ export const whoSuppliesMaterialsHandymanJobs: BlogPostData = {
   title: 'Who supplies materials on a handyman job?',
   seoTitle: 'Who Buys Materials on a Handyman Job?',
   metaDescription:
-    'Consumables, fixtures, markups, returns: how materials work on a handyman job, when to buy your own, and when to let the pro handle it. Get a clear quote.',
+    'Who supplies materials on a handyman job: consumables, fixtures, markups and returns, when to buy your own, and when to let the pro handle it.',
   excerpt:
-    'The faucet, the boards, the caulk, the screws: somebody buys them, and how that is handled changes your invoice and your schedule. Here is how it normally works and what to agree on upfront.',
+    'Who supplies materials on a handyman job changes your invoice and your schedule: the faucet, the boards, the caulk, the screws. Here is how it normally works and what to agree on upfront.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',

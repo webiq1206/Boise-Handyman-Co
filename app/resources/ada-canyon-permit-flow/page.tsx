@@ -74,8 +74,8 @@ export default function AdaCanyonPermitFlowPage() {
           </p>
 
           <p className="text-lg text-muted-foreground mb-4 max-w-2xl">
-            Most handyman-scope repairs, patching, painting, caulking, and like-for-like fixture
-            swaps, need no permit at all. Permits enter the picture when work moves or adds
+            Home repair permits in Ada County and Canyon County are not needed for most
+            handyman-scope repairs: patching, painting, caulking, and like-for-like fixture swaps. Permits enter the picture when work moves or adds
             wiring, plumbing, or structure. Here is the line, and who to call when a job sits
             near it.
           </p>

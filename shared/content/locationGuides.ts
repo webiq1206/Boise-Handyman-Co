@@ -57,7 +57,7 @@ const PLACES: PlaceGuide[] = [
     metaDescription:
       'Boise home repair guide: what local houses need by the decade they were built, the repairs they collect, the one local trap to watch, and seasonal upkeep.',
     excerpt:
-      'Boise houses span a century of construction, and a 1920s North End bungalow needs a very different repair list from a 2015 build in Barber Valley.',
+      'This Boise home repair guide covers a century of construction: a 1920s North End bungalow needs a very different repair list from a 2015 build in Barber Valley.',
     quickAnswer:
       'Boise home repairs follow the age of the house. Boise’s housing spans a century, so the work ranges from plaster-era repairs in the North End to settling fixes in newer East Boise homes. We provide handyman services across Boise: drywall repair, minor plumbing and electrical, carpentry, painting, mounting, and seasonal maintenance, with written quotes after scope review.',
     takeaways: [
@@ -219,7 +219,7 @@ const PLACES: PlaceGuide[] = [
     metaDescription:
       'Kuna home repair guide: what local houses need by the decade they were built, the repairs they collect, the one local trap to watch, and seasonal upkeep.',
     excerpt:
-      'Kuna splits between brand-new subdivisions and open acreage, and the wind that crosses that open ground is the hardest thing in the valley on fences.',
+      'This Kuna home repair guide covers a town split between brand-new subdivisions and open acreage, and the wind that crosses that open ground is the hardest thing in the valley on fences.',
     quickAnswer:
       'Kuna home repairs depend on whether the house is a new subdivision build or an acreage property. Kuna’s mix of new builds and acreage produces two distinct repair lists, and we run both. We provide handyman services across Kuna: settling repairs and installs in newer subdivision homes, fence and gate repair after wind, fixture swaps where hard water has done its work, and seasonal maintenance, with each job priced case by case after we review the scope.',
     takeaways: [
@@ -273,7 +273,7 @@ const PLACES: PlaceGuide[] = [
     metaDescription:
       'Star home repair guide: what local houses need by the decade they were built, the repairs they collect, the one local trap to watch, and seasonal upkeep.',
     excerpt:
-      'Star is mid-transition from farmland to subdivisions, so brand-new homes and decades-old properties sit a mile apart and need entirely different lists.',
+      'This Star home repair guide follows a town mid-transition from farmland to subdivisions, where brand-new homes and decades-old properties sit a mile apart and need entirely different lists.',
     quickAnswer:
       'Star home repairs follow the age of the house. Star’s housing runs from this year’s builds to farmhouse-era homes, often on the same road. We provide handyman services across Star: settling repairs and installs in the new subdivisions, honest upkeep for the older properties that predate them, and fence, gate, and exterior work everywhere, with written quotes after scope review.',
     takeaways: [
@@ -327,7 +327,7 @@ const PLACES: PlaceGuide[] = [
     metaDescription:
       'Middleton home repair guide: what local houses need by the decade they were built, the repairs they collect, the local trap to watch and seasonal upkeep.',
     excerpt:
-      'Middleton pairs a small-town core and working acreage with a ring of new subdivisions, and we run repair lists for all three.',
+      'This Middleton home repair guide covers a small-town core and working acreage with a ring of new subdivisions, and we run repair lists for all three.',
     quickAnswer:
       'Middleton home repairs follow the kind of property: the small-town core, working acreage or a new subdivision. Middleton is in Canyon County and sits fully inside our Treasure Valley service area. We provide handyman services across Middleton: settling repairs and installs in the newer subdivisions, repair carpentry and upkeep for small-town and acreage properties, and fence, deck, and gutter work everywhere, with written quotes after scope review.',
     takeaways: [
@@ -435,7 +435,7 @@ const PLACES: PlaceGuide[] = [
     metaDescription:
       'Caldwell home repair guide: what local houses need by the decade they were built, the repairs they collect, the local trap to watch and seasonal upkeep.',
     excerpt:
-      'Caldwell runs from a historic core through mid-century neighborhoods to new subdivisions and working acreage, and each layer keeps its own repair list.',
+      'This Caldwell home repair guide runs from a historic core through mid-century neighborhoods to new subdivisions and working acreage, and each layer keeps its own repair list.',
     quickAnswer:
       'Caldwell home repairs follow the age of the house, from the historic core to new subdivisions and acreage. Caldwell is fully inside our Ada-and-Canyon service area. We provide handyman services across Caldwell: repairs for the older homes near the historic core, settling fixes and installs in newer subdivisions, and fence, deck, and maintenance work on town lots and acreage alike, with each job priced case by case after we review the scope.',
     takeaways: [

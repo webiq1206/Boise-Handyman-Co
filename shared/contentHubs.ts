@@ -32,6 +32,12 @@ export interface ContentHub {
   pillarSlug: string;
   pillarRoute: ContentRoute;
   description: string;
+  /**
+   * Category page H1 and opening sentence, when they lead with the page's
+   * search term (SEO audit HM-T10). Default: title and description.
+   */
+  heading?: string;
+  intro?: string;
   /** Category page title, keyword first; the layout appends the brand (60 max in total). */
   seoTitle: string;
   /** Category page meta description: keyword first, 140 to 155 characters. */
@@ -88,6 +94,9 @@ export const CONTENT_HUBS: ContentHub[] = [
     pillarRoute: 'guide',
     description:
       'Season-by-season upkeep for Treasure Valley homes: caulking, weatherstripping, gutter cleaning, and the small tasks that prevent expensive repairs.',
+    heading: 'Home maintenance articles for Boise homes',
+    intro:
+      'Home maintenance articles for Boise and Treasure Valley homes: season-by-season caulking, weatherstripping, gutter cleaning, and the small tasks that prevent expensive repairs.',
     seoTitle: 'Home Maintenance Articles | Boise Homes',
     metaDescription:
       'Home maintenance articles for Treasure Valley homes: seasonal checklists, caulking, gutter cleaning, winterizing, energy fixes and new-home punch lists.',
@@ -102,6 +111,9 @@ export const CONTENT_HUBS: ContentHub[] = [
     pillarRoute: 'guide',
     description:
       'What small home repairs cost in the Boise area, how handyman pricing works, how to vet who you hire, and when a job needs a licensed trade instead.',
+    heading: 'Handyman costs and hiring in Boise',
+    intro:
+      'Handyman costs and hiring in the Boise area: what small home repairs cost, how handyman pricing works, how to vet who you hire, and when a job needs a licensed trade instead.',
     seoTitle: 'Handyman Costs & Hiring | Boise Articles',
     metaDescription:
       'Costs and hiring articles: what a handyman costs in Boise, hourly versus flat rate, comparing quotes, red flags, questions to ask and when to call a pro.',
@@ -179,7 +191,7 @@ function guide(
 export const CONTENT_MANIFEST: ContentManifestEntry[] = [
   // Hub pillars
   { slug: 'boise-home-repair-cost-guide', title: 'The complete Boise home repair cost guide', ...hubPillar('costs-and-hiring'), status: PUBLISHED, replacesSlug: 'boise-home-building-cost-guide' },
-  { slug: 'hire-a-handyman-treasure-valley', title: 'How to hire a handyman in the Treasure Valley', hubSlug: 'costs-and-hiring', contentType: 'pillar', route: 'guide', status: PUBLISHED, replacesSlug: 'choose-home-builder-boise' },
+  { slug: 'hire-a-handyman-treasure-valley', title: 'How to hire a handyman in Boise and the Treasure Valley', hubSlug: 'costs-and-hiring', contentType: 'pillar', route: 'guide', status: PUBLISHED, replacesSlug: 'choose-home-builder-boise' },
   { slug: 'boise-home-maintenance-guide', title: 'The complete Boise home maintenance guide', ...hubPillar('home-maintenance'), status: PUBLISHED, replacesSlug: 'boise-home-building-process-guide' },
   { slug: 'small-home-upgrades-that-pay-off', title: 'Small home upgrades that pay off', ...hubPillar('installs-and-upgrades'), status: PUBLISHED, replacesSlug: 'custom-home-design-guide' },
   { slug: 'first-time-homeowner-repair-handbook', title: "The first-time homeowner's repair handbook", ...hubPillar('repairs-and-fixes'), status: PUBLISHED, replacesSlug: 'buying-land-to-build-boise' },

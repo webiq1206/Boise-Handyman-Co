@@ -5,9 +5,9 @@ export const adaVsCanyonCountyPermitTimelines: BlogPostData = {
   title: 'Ada vs Canyon County: permits for small home projects',
   seoTitle: 'Ada vs Canyon County Permits: Small Jobs',
   metaDescription:
-    'Most handyman-scale repairs need no permit in Ada or Canyon County, but a few small jobs do. See what differs by county and book the fix with confidence.',
+    'Ada vs Canyon County permits for small projects: most handyman-scale repairs need none, but a few jobs do. See what differs by county before you book.',
   excerpt:
-    'Most repair and maintenance work needs no permit on either side of the county line. A few small jobs do, and the desk you deal with changes with your address. Here is the practical version.',
+    'Ada vs Canyon County permits for small projects come down to a few jobs: most repair and maintenance work needs no permit on either side of the county line, and the desk you deal with changes with your address. Here is the practical version.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',
