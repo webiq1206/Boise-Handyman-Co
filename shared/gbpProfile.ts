@@ -91,7 +91,7 @@ export const GBP_LINKS = {
  * or a schema sameAs. P5 Home Co's own Facebook page is dropped here too: it
  * describes the parent, so it belongs on the parentOrganization node only.
  */
-const NOT_THIS_COMPANY = /(facebook|instagram)\.com\/(boiseremodeling\b|1228704823655951\b)/i;
+const NOT_THIS_COMPANY = /(facebook|instagram)\.com\/(boiseremodeling\b|1228704823655951\b|p5homeco\b|p5_home_co\b)/i;
 function ownProfile(url: string | undefined): string {
   const value = url?.trim() ?? '';
   return value && !NOT_THIS_COMPANY.test(value) ? value : '';
@@ -119,8 +119,15 @@ export const GBP_SOCIAL = {
  * sameAs: Boise Handyman Co has no Google profile of its own.
  */
 export const P5_SOCIAL = {
-  facebook: 'https://www.facebook.com/1228704823655951',
+  // Owner, 20 November 2026: one Facebook URL for every site, the vanity
+  // address of the same page (the numeric /1228704823655951 redirects to it).
+  facebook: 'https://www.facebook.com/p5homeco',
+  // Owner, 20 November 2026: the one Instagram for every site, confirmed live.
+  instagram: 'https://www.instagram.com/p5_home_co',
   google: 'https://www.google.com/search?kgmid=/g/11ntl1t7dc',
+  // The same Google Business Profile by its place id (owner, 20 November
+  // 2026), the link for "See our Google reviews" and the parent's hasMap.
+  maps: 'https://www.google.com/maps/place/?q=place_id:ChIJzxMoavs6P6IRNc6i9aOvt6Q',
 } as const;
 
 /** P5 Home Co's Google profile id; never published as this brand's sameAs. */

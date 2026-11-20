@@ -3,11 +3,11 @@ import type { BlogPostData } from '../../blogContent';
 export const agingInPlaceHomeDesign: BlogPostData = {
   slug: 'aging-in-place-home-design',
   title: 'Aging in place: small home modifications that matter most',
-  seoTitle: 'Aging in Place Fixes a Handyman Installs',
+  seoTitle: 'Aging in Place Home Modifications',
   metaDescription:
     'Aging-in-place modifications a Boise handyman can install in a day: grab bars, railings, lever handles and better lighting. Plan a safety visit.',
   excerpt:
-    'Most falls at home happen in a handful of predictable places, and most of the fixes are small: grab bars, railings, lighting, thresholds. Here is the modification list that earns its keep.',
+    'Aging in place home modifications are mostly small: most falls at home happen in a handful of predictable places, and grab bars, railings, lighting and thresholds address them. Here is the modification list that earns its keep.',
   category: 'Installs & Upgrades',
   hubSlug: 'installs-and-upgrades',
   author: 'Boise Handyman Co',

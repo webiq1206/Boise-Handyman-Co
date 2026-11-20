@@ -3,11 +3,11 @@ import type { BlogPostData } from '../../blogContent';
 export const howToBudgetHomeRepairsBoise: BlogPostData = {
   slug: 'how-to-budget-home-repairs-boise',
   title: 'How to budget a home repair punch list in Boise',
-  seoTitle: 'Budgeting Home Repairs in Boise',
+  seoTitle: 'How to Budget a Home Repair Punch List',
   metaDescription:
     'Turn nagging home repairs into a punch list with a realistic budget: market rates, batching, materials, and a sane priority order.',
   excerpt:
-    'The cheapest way to handle home repairs is to budget them as one list instead of ten emergencies. Here is how to build the list, price it, and sequence it.',
+    'Budgeting a home repair punch list in Boise as one list, instead of ten emergencies, is the cheapest way to handle home repairs. Here is how to build the list, price it, and sequence it.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',

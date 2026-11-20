@@ -6,6 +6,8 @@
  * (public/family/drive). These generic service and material details are not
  * evidence of completed customer jobs.
  */
+import Image from '@/components/VersionedImage';
+
 export interface GalleryPhoto {
   src: string;
   alt: string;
@@ -48,14 +50,14 @@ export function DesignGallery({
         <div className="fr-mosaic">
           {photos.map((p, i) => (
             <figure key={p.src} className={p.wide ? 'is-wide' : undefined}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              {/* SEO audit HM-T6: sized to the slot, so a phone does not fetch the 1200px file. */}
+              <Image
                 src={p.src}
                 alt={p.alt}
                 width={1200}
                 height={p.wide ? 628 : 1200}
+                sizes={p.wide ? '(max-width: 700px) 100vw, 800px' : '(max-width: 700px) 50vw, 400px'}
                 loading={i < 2 ? 'eager' : 'lazy'}
-                decoding="async"
               />
               <figcaption>{p.label}</figcaption>
             </figure>

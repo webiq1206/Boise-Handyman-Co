@@ -14,7 +14,9 @@ import { SiteFooter } from "@/components/family/SiteFooter";
  * The registration line rides the brand column (SiteFooter brandExtra) because
  * the shared config has no slot for it: this site's ContractorCredential rather
  * than the shared one-link line, so the number stays outside the DOPL link
- * (tests/p5-contractor-registration.test.ts).
+ * (tests/p5-contractor-registration.test.ts). It names the holder first,
+ * "P5 Home Co LLC, Idaho Registered Contractor #8381215", the one line every
+ * family footer uses (owner, 20 November 2026; SEO audit XS-05).
  */
 export function Footer() {
   return (
@@ -22,7 +24,7 @@ export function Footer() {
       hideRegistration
       brandExtra={
         <p className="fam-footer-credential">
-          <ContractorCredential linkClassName="fam-footer-credential-link" />
+          <ContractorCredential showHolder linkClassName="fam-footer-credential-link" />
         </p>
       }
     />

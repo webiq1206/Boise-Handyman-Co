@@ -9,7 +9,7 @@
  * preliminary range a quote or a final price.
  */
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import Module from 'node:module';
 import { test } from 'node:test';
 
@@ -37,7 +37,14 @@ test('/instant-estimate frames the central estimator with this site\'s brand id'
   assert.match(source, /<EstimatorFrame\b[\s\S]*?brand="handyman"/);
   assert.match(source, /<EstimatorAnalytics \/>/);
   assert.match(source, /headerOffset=\{HEADER_OFFSET\}/);
-  assert.match(source, /\/\^\[a-z0-9-\]\{1,40\}\$\//, 'the project parameter is validated');
+  // SEO audit S1 (20 November 2026): the page no longer reads ?project on the
+  // server, because reading searchParams made the route dynamic and Next then
+  // streamed its title, description, canonical and robots tags into <body>.
+  // The frame reads ?project in the browser and validates it there.
+  assert.doesNotMatch(source, /searchParams/, 'the page stays static so its metadata is in <head>');
+  assert.match(source, /project=\{null\}/, 'the frame reads ?project itself');
+  assert.match(read(FRAME), /here\.get\("project"\)/, 'the frame reads ?project from the address');
+  assert.match(read(FRAME), /\/\^\[a-z0-9-\]\{1,40\}\$\//, 'the project parameter is validated');
   assert.doesNotMatch(source, /['"]use client['"]/, 'the page is a server component');
 
   const html = await renderPage({ project: 'handyman' });
@@ -84,8 +91,13 @@ test('the central call to action and the service pages open the estimator', asyn
   assert.equal(instantEstimateHref(null), '/instant-estimate');
   assert.equal(instantEstimateHref('Not Valid'), '/instant-estimate');
   assert.ok(getAllSiteUrls().some((entry) => entry.path === '/instant-estimate'), 'the page is in the sitemap');
-  // The existing tools stay: the request form and the in-house intake are still routes and still linked.
-  assert.ok(getAllSiteUrls().some((entry) => entry.path === '/estimate'));
+  // The existing tools stay: the request form and the in-house intake are still routes.
+  // SEO audit S6 (owner approval, 20 November 2026): /estimate is a form tool
+  // with no answer for a searcher, so it is noindex, follow and out of the
+  // sitemaps, and still mounted.
+  assert.ok(existsSync('app/estimate/page.tsx'), 'the in-house intake is still a route');
+  assert.ok(!getAllSiteUrls().some((entry) => entry.path === '/estimate'), '/estimate is not in the sitemap');
+  assert.match(read('app/estimate/page.tsx'), /robots:\s*\{\s*index:\s*false,\s*follow:\s*true/);
   assert.match(read('app/page.tsx'), /id="consult"[\s\S]*<ConsultationForm\s*\/>/);
 });
 

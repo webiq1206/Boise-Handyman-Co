@@ -5,9 +5,9 @@ export const diyVsHiringAHandyman: BlogPostData = {
   title: 'DIY vs hiring a handyman: when each actually makes sense',
   seoTitle: 'DIY vs Hiring a Handyman: How to Decide',
   metaDescription:
-    'Some repairs are perfect DIY; others punish beginners. An honest framework for the DIY vs handyman call, job by job, plus what hiring out costs in Boise.',
+    'DIY vs hiring a handyman: some repairs are perfect DIY, others punish beginners. An honest framework, job by job, plus what hiring out costs in Boise.',
   excerpt:
-    'The DIY question is really four questions: tools, skill, stakes, and your Saturday. Here is an honest sorting of common repairs into do-it-yourself, hire-it-out, and it-depends.',
+    'DIY vs hiring a handyman is really four questions: tools, skill, stakes, and your Saturday. Here is an honest sorting of common repairs into do-it-yourself, hire-it-out, and it-depends.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',

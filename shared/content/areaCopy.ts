@@ -1,5 +1,5 @@
 /**
- * Per-city area page copy for the seven Treasure Valley hubs.
+ * Per-city area page copy for the Treasure Valley area pages.
  * Other cities keep the shared template in shared/seoContent.ts.
  * Visible FAQ text and FAQPage schema both read this array, in this order.
  */

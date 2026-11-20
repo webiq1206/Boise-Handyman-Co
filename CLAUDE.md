@@ -297,7 +297,9 @@ layout and the paid-traffic landing pages (`callFirst`) are unchanged.
   service-in-city page in `tests/explore-card-images.test.ts`.
 * **Seven city cards never leave one alone.** The services, areas and about
   grids carry `lx-seven`: two, two and three on tablets, four and three from
-  1024. It only acts on a grid of exactly seven.
+  1024. It only acts on a grid of exactly seven. Since the service area became
+  nine cities (20 November 2026) those grids hold nine cards, three across
+  from 640px (3 x 3), so `lx-seven` is idle there.
 * **Tablets (701 to 1023px).** Home repairs is one column (two left the copy a
   110px strip); contact channels are one card per row; the contact hero facts
   are one per line; RE-10 repair groups are one column until 1024. From 1024 to
@@ -419,3 +421,40 @@ unrefined page on a sister site.
   2026); that hero's layout, wording and links are otherwise unchanged.
 * Warranty: "What is covered", "How it works" and "What is not covered" stack
   below 1024px; three columns at 768 left about 220px each.
+
+## SEO audit fixes (owner approval and answers, 20 November 2026)
+
+Audit: `seo-audit/handyman/report.md` in the owner's audit folder (S and HM-T
+ids), with the cross-site items XS-05, XS-06 and XS-08.
+
+* **Service area is nine cities**: the seven Google Business Profile cities,
+  then Middleton and Garden City (`SERVICE_AREA_CITY_NAMES`). The footer,
+  `areaServed`, the NAP line, the vCard, the city grids and llms.txt all read
+  that list; every published town page is in it
+  (`scripts/verify-service-area-cities.ts`).
+* **`/instant-estimate` is static.** It does not read `?project` on the
+  server: reading `searchParams` made it dynamic and Next streamed its
+  metadata into `<body>`. `EstimatorFrame` reads and checks `?project` in the
+  browser. Do not read the query in the page again.
+* **Indexation.** `/estimate` stays mounted, noindex, follow, and out of the
+  sitemaps. `/brand/*.html` answers `X-Robots-Tag: noindex`.
+  `/services/home-repairs` is a 308 to `/services` (route removed).
+* **Footer registration line** is "P5 Home Co LLC, Idaho Registered
+  Contractor #8381215" (`ContractorCredential showHolder`, footer only), the
+  one line on every family footer. The DOPL link's accessible name starts with
+  its visible words.
+* **Parent profiles.** Facebook is `https://www.facebook.com/p5homeco` (the
+  numeric URL is the same page), Instagram `https://www.instagram.com/p5_home_co`,
+  and the Google Business Profile by place id; all three sit on the parent
+  node's `sameAs` (the profile is also its `hasMap`), never this brand's. The
+  homepage shows one verbatim Google review of P5 Home Co under the instant
+  estimate band, labelled as the parent's, with "See our Google reviews". No
+  rating, Review or AggregateRating markup.
+* **Author.** Articles and guides carry "By Nick Perkins, founder of P5 Home
+  Co" linked to `https://p5homeco.com/about`, and a Person author with the
+  shared founder `@id`; the Organization stays publisher (`shared/authors.ts`).
+* **Images.** Phones up to 480px get `boise-handyman-co-poster-phone.webp`,
+  the owner's poster cut to the centre 926 x 1080 they show; the poster and
+  video themselves are unchanged. Card and tile images carry slot `sizes`.
+  Article and guide heroes load with priority (they are the LCP).
+

@@ -94,9 +94,8 @@ export const SERVICES: ServiceData[] = [
 export const PRIORITY_SERVICES = SERVICES;
 
 /**
- * Published town pages. Middleton and Garden City stay in this list so their
- * pages, city guides, and sitemap entries remain. They are not part of the
- * service-area lists below.
+ * Published town pages. Every one is also in the official service area below
+ * (owner, 20 November 2026).
  */
 export const CITIES: CityData[] = [
   { slug: 'boise', name: 'Boise', county: 'ada', isPrimary: true },
@@ -111,8 +110,12 @@ export const CITIES: CityData[] = [
 ];
 
 /**
- * Google Business Profile service area. Owner decision, 15 November 2026:
- * these seven cities, in this order, plus Ada County and Canyon County.
+ * Service area. Owner decision, 15 November 2026: the Google Business Profile
+ * cities, in this order, plus Ada County and Canyon County. Owner answers,
+ * 20 November 2026 (SEO audit HM-T3): the official list is nine cities, so
+ * Middleton and Garden City follow the seven, in the footer, areaServed, the
+ * /areas hub and llms.txt alike. The order matches CITY_SLUGS in
+ * shared/cityServiceImages.ts.
  */
 export const SERVICE_AREA_CITY_NAMES = [
   'Boise',
@@ -122,6 +125,8 @@ export const SERVICE_AREA_CITY_NAMES = [
   'Kuna',
   'Caldwell',
   'Star',
+  'Middleton',
+  'Garden City',
 ] as const;
 
 export const SERVICE_AREA_COUNTIES = ['Ada County', 'Canyon County'] as const;
@@ -138,7 +143,7 @@ export const SERVICE_AREA_CITIES: CityData[] = SERVICE_AREA_CITY_NAMES.map((name
   return city;
 });
 
-/** "Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star" */
+/** "Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City" */
 export const TREASURE_VALLEY_CITIES = formatNameList(SERVICE_AREA_CITY_NAMES);
 
 /** Cities plus the two counties, for service-area sentences. */

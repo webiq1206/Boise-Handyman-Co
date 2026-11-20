@@ -1,5 +1,8 @@
 'use client';
+
+import Image from '@/components/VersionedImage';
 import { localAlt } from '@/shared/localAlt';
+import { P5_SOCIAL } from '@/shared/gbpProfile';
 import {ServiceArea} from '@/components/family/ServiceArea';
 import type {ReactNode} from 'react';
 import Link from 'next/link';
@@ -29,7 +32,7 @@ export function ApprovedHowItWorks({aside}:{aside?:ReactNode}){const b=brands['h
 export function ApprovedFounder(){
  return <section className="f-section f-container" id="who-you-are-hiring" aria-labelledby="who-hiring-heading">
   <div className="fr-founder">
-   <img className="family-people-photo" src="/images/about/perkins-family-meridian-idaho-1x1.webp" alt="Nick Perkins with his wife and five children at a pumpkin patch in Meridian, Idaho" width="2048" height="2048" loading="lazy" style={{objectFit:'contain'}}/>
+   <Image className="family-people-photo" src="/images/about/perkins-family-meridian-idaho-1x1.webp" alt="Nick Perkins with his wife and five children at a pumpkin patch in Meridian, Idaho" width={2048} height={2048} sizes="(max-width: 700px) 100vw, 560px" style={{objectFit:'contain'}}/>
    <div>
     <p className="f-eyebrow">WHO YOU ARE HIRING</p>
     <h2 id="who-hiring-heading">Nick Perkins, founder.</h2>
@@ -60,7 +63,31 @@ export function ApprovedInstantEstimate(){
    </div>
    <div className="fr-cta-strip-actions"><Link className="f-button f-dark" href={ESTIMATE_HREF} data-testid="link-home-instant-estimate">{CTA_ESTIMATE}</Link><a className="f-link" href={QUOTE_FORM_HREF}>{CTA_QUOTE} <Arrow/></a></div>
   </div>
+  <ParentGoogleReview/>
  </section>;}
+
+/**
+ * One real Google review, beside the primary call to action (owner, 20
+ * November 2026; SEO audit HM-T4). It is a review of the parent company, P5
+ * Home Co, on its Google Business Profile, and it says so. Quoted verbatim, no
+ * rating markup, no star count, no Review or AggregateRating JSON-LD.
+ */
+export const PARENT_REVIEW = {
+  author: 'beverly van zandt',
+  text: "We had P5 remodel our bathroom and kitchen, and we couldn't be happier with the work! They do a little bit of everything. No job seems too big or too small. If you're looking for someone reliable who can handle a variety of projects, I highly recommend giving P5 a call. Definitely recommend!",
+} as const;
+
+export function ParentGoogleReview(){
+ return <div className="f-container fr-parent-review">
+  <figure>
+   <blockquote><p>&ldquo;{PARENT_REVIEW.text}&rdquo;</p></blockquote>
+   <figcaption>
+    <span className="fr-parent-review-name">{PARENT_REVIEW.author}</span>
+    <span>Google review of P5 Home Co, our parent company</span>
+    <a className="f-link" href={P5_SOCIAL.maps} target="_blank" rel="noopener">See our Google reviews <Arrow/></a>
+   </figcaption>
+  </figure>
+ </div>;}
 
 /** A quiet ask halfway down the page, for the reader who is already convinced. */
 export function ApprovedCtaStrip(){
@@ -71,6 +98,6 @@ export function ApprovedCtaStrip(){
   </div>
  </section>;}
 
-/** Service area: the seven GBP cities, linked. Other town pages stay published. */
+/** Service area: the nine service-area cities, linked. */
 export function ApprovedServiceArea(){
  return <ServiceArea image={{src:'/family/drive/square-1-front-door-smart-lock.webp',alt: localAlt('Door handle and lock beside painted trim'),width:1200,height:1200}}><p className="f-eyebrow">AT HOME IN IDAHO</p><h2>Local people.<br/><em>Valley-wide reach.</em></h2><p>Serving homeowners throughout the Treasure Valley.</p><nav className="fr-cities" aria-label="Service area cities">{SERVICE_AREA_CITY_NAMES.map(city=><a key={city} href={`/areas/${city.toLowerCase().replaceAll(" ","-")}`} aria-label={`Handyman services in ${city}`}>{city}</a>)}</nav></ServiceArea>;}

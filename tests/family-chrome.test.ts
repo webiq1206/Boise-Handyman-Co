@@ -45,7 +45,7 @@ test('the brand config carries this site’s facts, one CTA and one destination'
   assert.equal(`${FAMILY_BRAND.nap.line}.`, PUBLIC_NAP_LINE);
   assert.equal(
     FAMILY_BRAND.nap.line,
-    'Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County',
+    'Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County',
   );
   assert.equal(FAMILY_BRAND.registration.text, CONTRACTOR_REGISTRATION);
   assert.equal(FAMILY_BRAND.registration.href, DOPL_LOOKUP_HREF);
@@ -89,8 +89,10 @@ test('every footer link group points at a published page', () => {
     FAMILY_BRAND.footer.areas.links.map((link) => link.label),
     SERVICE_AREA_CITY_NAMES.map((name) => `${name}, Idaho`),
   );
-  assert.equal(FAMILY_BRAND.footer.areas.links.some((link) => link.href.includes('middleton')), false);
-  assert.equal(FAMILY_BRAND.footer.areas.links.some((link) => link.href.includes('garden-city')), false);
+  // Owner answers, 20 November 2026 (SEO audit HM-T3): the official service
+  // area is nine cities, Middleton and Garden City included.
+  assert.equal(FAMILY_BRAND.footer.areas.links.some((link) => link.href === '/areas/middleton'), true);
+  assert.equal(FAMILY_BRAND.footer.areas.links.some((link) => link.href === '/areas/garden-city'), true);
 });
 
 test('the footer renders the family row, NAP, hours and the registration, with no headings', () => {
@@ -102,7 +104,7 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   assert.match(html, /<span class="fam-footer-current" aria-current="true">Boise Handyman Co<\/span>/);
   assert.equal(/rel="noopener noreferrer">(P5 Home Co|Boise)/.test(html), false);
   assert.equal(html.includes('Boise ADU Co'), false);
-  assert.match(html, /Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County\. <a href="tel:/);
+  assert.match(html, /Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County\. <a href="tel:/);
   assert.doesNotMatch(html, /public representative|staffed storefront|streetAddress/i);
   const vcard = buildBusinessVCard().replace(/\r?\n[ \t]/g, '');
   assert.doesNotMatch(vcard, /public representative|staffed storefront|streetAddress/i);
@@ -112,7 +114,11 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   assert.match(html, /mailto:hello@boisehandyman\.co/);
   assert.match(html, /href="\/contact\.vcf"/);
   assert.match(html, /is a DBA of <a href="https:\/\/p5homeco\.com" rel="noopener">P5 Home Co<\/a>/);
-  assert.equal(html.includes('P5 Home Co LLC'), false);
+  // Owner, 20 November 2026 (SEO audit XS-05): the legal name appears once,
+  // in the registration line, the same line on every family footer. The
+  // parent is still named P5 Home Co everywhere else.
+  assert.equal((html.match(/P5 Home Co LLC/g) ?? []).length, 1);
+  assert.match(html, /P5 Home Co LLC, Idaho Registered Contractor #8381215/);
   assert.equal(html.includes('P5 Home Co.'), false);
   assert.match(html, /<a href="\/subcontractor" rel="nofollow">Subcontractor login<\/a>/);
   assert.match(html, />P5 Home Co on Facebook<\/a>/);
@@ -122,7 +128,7 @@ test('the footer renders the family row, NAP, hours and the registration, with n
   // The registration number stays outside the DOPL link, once.
   assert.equal((html.match(/Idaho Registered Contractor #8381215/g) ?? []).length, 1);
   assert.equal(/>Idaho Registered Contractor #8381215<\/a>/.test(html), false);
-  assert.match(html, /aria-label="Verify Idaho contractor registration 8381215, opens in a new tab"/);
+  assert.match(html, /aria-label="Verify registration: Idaho contractor registration 8381215, opens in a new tab"/);
 });
 
 test('the homepage video hero preserves first-response content, poster and sourced proof', () => {
@@ -140,7 +146,10 @@ test('the homepage video hero preserves first-response content, poster and sourc
   assert.match(html, /<img [^>]*src="\/media\/handyman\/boise-handyman-co-poster\.jpg"/);
   // No-JavaScript uses the approved poster: WebKit can force native controls
   // onto an SSR video even when its controls attribute is absent.
-  assert.doesNotMatch(html, /<video\b|<source\b/, 'video is enhanced only when JavaScript is available');
+  assert.doesNotMatch(html, /<video\b|<source\b[^>]*type="video/, 'video is enhanced only when JavaScript is available');
+  // SEO audit HM-T6: phones up to 480px get the same poster cut to the part
+  // they show, so they do not fetch the 1920px file.
+  assert.match(html, /<source media="\(max-width: 480px\)" srcSet="\/media\/handyman\/boise-handyman-co-poster-phone\.webp" type="image\/webp"/);
   assert.doesNotMatch(html, /handyman-hero-video-control|aria-controls="handyman-hero-video"/, 'no page-level video controls');
   assert.doesNotMatch(html, /handyman-hero-door-hinge-branded|front-door-repaint/, 'no superseded image in the final hero');
   const support = html.match(/<p class="fam-hero-support">([^<]+)<\/p>/)?.[1] ?? '';

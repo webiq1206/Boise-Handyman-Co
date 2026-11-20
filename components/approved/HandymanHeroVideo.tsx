@@ -4,6 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 
 const MEDIA = '/media/handyman/boise-handyman-co-';
 const POSTER = `${MEDIA}poster.jpg`;
+/**
+ * The owner's poster, unchanged, cut to the centre 926 x 1080 px for phones
+ * (SEO audit HM-T6, 20 November 2026). Up to 480px wide the hero box is
+ * narrower than 926:1080, so object-fit: cover shows exactly the same pixels
+ * from this file as from the 1920px original, at about a fifth of the bytes.
+ */
+const PHONE_POSTER = `${MEDIA}poster-phone.webp`;
+const PHONE_POSTER_MEDIA = '(max-width: 480px)';
 const PHONE_VIDEO = `${MEDIA}background-720p.mp4`;
 const DESKTOP_VIDEO = `${MEDIA}background-1080p.mp4`;
 
@@ -78,9 +86,13 @@ export function HandymanHeroVideo() {
     <div ref={media} className="fam-hero-media" aria-hidden="true">
       {/* The approved poster is immediately readable, including while loading. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img data-hero-poster="" src={POSTER} alt="Handyman services in Boise, Idaho by Boise Handyman Co" width={1920} height={1080}
-        fetchPriority="high" loading="eager" className="fam-hero-img" />
-      {ready && <video ref={video} id="handyman-hero-video" poster={POSTER}
+      <picture style={{ display: 'contents' }}>
+        <source media={PHONE_POSTER_MEDIA} srcSet={PHONE_POSTER} type="image/webp" width={926} height={1080} />
+        <img data-hero-poster="" src={POSTER} alt="Handyman services in Boise, Idaho by Boise Handyman Co" width={1920} height={1080}
+          fetchPriority="high" loading="eager" className="fam-hero-img" />
+      </picture>
+      {ready && <video ref={video} id="handyman-hero-video"
+        poster={window.matchMedia(PHONE_POSTER_MEDIA).matches ? PHONE_POSTER : POSTER}
         autoPlay muted loop playsInline preload="auto" tabIndex={-1}
         disablePictureInPicture hidden={failed} className="handyman-hero-video"
         onError={event => { if (event.currentTarget.error) setFailed(true); }}>

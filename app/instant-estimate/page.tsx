@@ -64,13 +64,16 @@ const STEPS = [
   },
 ];
 
-type SearchParams = Promise<Record<string, string | string[] | undefined>>;
-
-export default async function InstantEstimatePage({ searchParams }: { searchParams: SearchParams }) {
-  const raw = (await searchParams).project;
-  const requested = Array.isArray(raw) ? raw[0] : raw;
-  const project = requested && /^[a-z0-9-]{1,40}$/.test(requested) ? requested : null;
-
+/**
+ * The page is static: it does not read ?project on the server. Reading
+ * the query on the server made the route dynamic, and Next then streamed the title,
+ * description, canonical and robots tags into <body> for browsers, Googlebot
+ * and the AI crawlers (SEO audit S1, 20 November 2026). EstimatorFrame already
+ * reads ?project from the address in the browser and checks it against
+ * /^[a-z0-9-]{1,40}$/ when no project prop is given, so the frame opens on the
+ * same project as before.
+ */
+export default function InstantEstimatePage() {
   const schemas = [
     generateWebPageSchema({ title: TITLE, description: DESCRIPTION, url: ESTIMATE_HREF }),
     generateBreadcrumbSchema([
@@ -89,7 +92,7 @@ export default async function InstantEstimatePage({ searchParams }: { searchPara
         <section className={styles.intro} aria-labelledby="instant-estimate-title">
           <div className={styles.shell}>
             <h1 id="instant-estimate-title" className={styles.title}>
-              Get an instant estimate for your to-do list
+              Get an instant handyman estimate for your to-do list
             </h1>
             <p className={styles.support}>
               Answer a few questions and see a preliminary price range on screen. Free, any time, with no
@@ -103,7 +106,7 @@ export default async function InstantEstimatePage({ searchParams }: { searchPara
             <EstimatorAnalytics />
             <EstimatorFrame
               brand="handyman"
-              project={project}
+              project={null}
               title={`${SITE_CONFIG.name} instant estimate`}
               headerOffset={HEADER_OFFSET}
             />

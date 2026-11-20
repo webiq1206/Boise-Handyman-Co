@@ -7,7 +7,7 @@ export const boiseBuildingPermitGuide: BlogPostData = {
   metaDescription:
     'Most Boise home repairs need no permit: painting, drywall, trim, fixture swaps. See which small jobs do, which do not, and get yours fixed the right way.',
   excerpt:
-    'The permit question stops a lot of small projects that never needed stopping. Here is where the line actually sits in Boise, and what it means for the repair list on your fridge.',
+    'Do home repairs need a permit in Boise? Most do not, and the permit question stops a lot of small projects that never needed stopping. Here is where the line actually sits in Boise, and what it means for the repair list on your fridge.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',

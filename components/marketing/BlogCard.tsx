@@ -66,7 +66,7 @@ export function BlogCard({ post, featured = false, formatDate }: BlogCardProps) 
           src={thumbnail}
           alt={alt}
           fill
-          sizes="(max-width: 768px) 100vw, 400px"
+          sizes="(max-width: 700px) 112px, (max-width: 1023px) 50vw, 400px"
           className="object-cover img-brand-grade transition-transform duration-300 ease-out group-hover:scale-[1.02]"
         />
       </div>

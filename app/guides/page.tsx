@@ -90,9 +90,9 @@ export default function GuidesIndexPage() {
           Home repair &amp; maintenance guides
         </h1>
         <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
-          In-depth guides for Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley.
-          What small repairs cost here, how to hire well, what each season demands, and which
-          fixes to do before they get expensive.
+          Home repair guides for Boise and the rest of the Treasure Valley, in depth: what small
+          repairs cost here, how to hire well, what each season demands, and which fixes to do
+          before they get expensive.
         </p>
         <Link
           href="/resources"

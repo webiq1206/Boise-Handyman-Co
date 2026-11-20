@@ -18,20 +18,24 @@ generateWebPageSchema,
 } from "@/lib/schema";
 import { AREA_PAGE_FAQS } from "@/shared/seoContent";
 import { CITY_HERO_IMAGES } from "@/shared/cityServiceImages";
-import { SERVICE_AREA_CITIES, SERVICE_AREA_LINE } from "@/shared/contentData";
+import { SERVICE_AREA_CITIES, SERVICE_AREA_LINE, TREASURE_VALLEY_CITIES } from "@/shared/contentData";
 import { CTA_SECONDARY } from "@/shared/ctaCopy";
 import { FamilyButton } from '@/components/family/Button';
 
 // The door-hinge technician is the homepage hero. The areas index leads with a
-// house exterior instead, one that none of its seven city cards uses.
+// house exterior instead, one that none of its city cards uses.
 const AREAS_HERO_IMAGE = "/images/handyman/hero-gutter-cleaning.webp";
+
+const AREAS_DESCRIPTION =
+  `Handyman service area across the Treasure Valley: ${TREASURE_VALLEY_CITIES}. See each area we serve.`;
 
 export const metadata = withBrandPageMetadata((buildPageMetadata({
   kind: "about",
   path: "/areas",
   titleOverride: "Treasure Valley Service Areas",
-  descriptionOverride:
-    `Handyman service in ${SERVICE_AREA_LINE}. Written quote before work starts.`,
+  // SEO audit HM-T3 and HM-T10 (20 November 2026): the description leads with
+  // the page's term and names all nine area pages.
+  descriptionOverride: AREAS_DESCRIPTION,
 })), "/areas");
 
 export default function AreasHubPage() {
@@ -63,8 +67,8 @@ export default function AreasHubPage() {
             <span className="mobile-keep">service <em className="brc-accent">areas</em></span>
           </h1>
           <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
-            We handle small repairs, installs, and home maintenance in {SERVICE_AREA_LINE},
-            with a written quote before work starts.
+            Our handyman service area covers the Treasure Valley, across Ada and Canyon County:
+            small repairs, installs, and home maintenance, with a written quote before work starts.
           </p>
           <p className="sr-only" data-speakable="summary">
             Treasure Valley handyman service areas across Ada and Canyon County.
@@ -80,7 +84,7 @@ export default function AreasHubPage() {
           <div className="ed-shell">
             <SectionHeader
               eyebrow="Treasure Valley"
-              title={<>Seven cities, one local handyman team</>}
+              title={<>Nine cities, one local handyman team</>}
               description="Repairs, installs, and maintenance in Ada County and Canyon County, with a written quote before work starts."
               align="left"
             />

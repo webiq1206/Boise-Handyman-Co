@@ -53,10 +53,10 @@ export default function BlogPage() {
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Blog" }]} />
         <p className="ed-eyebrow mt-8" style={{ color: "rgb(255 255 255 / 0.72)" }}>Blog</p>
         <h1 className="ed-display ed-statement-display text-inverse-foreground">
-          Home repair &amp; maintenance insights
+          Boise home repair &amp; maintenance blog
         </h1>
         <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
-          Straight answers for Treasure Valley homeowners. What small repairs actually cost,
+          The Boise home repair blog gives Treasure Valley homeowners straight answers: what small repairs actually cost,
           which fixes cannot wait, how to hire someone you can trust, and what to do each
           season before the weather does it for you.
         </p>

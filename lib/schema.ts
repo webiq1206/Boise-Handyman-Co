@@ -49,7 +49,10 @@ export const P5_PARENT_ORGANIZATION = {
   // The owner's only profiles are P5 Home Co's Facebook page and Google
   // Business Profile, so they are asserted here on the parent and kept out of
   // this brand's own sameAs.
-  sameAs: [P5_SOCIAL.facebook, P5_SOCIAL.google],
+  sameAs: [P5_SOCIAL.facebook, P5_SOCIAL.instagram, P5_SOCIAL.google, P5_SOCIAL.maps],
+  // SEO audit XS-03 and HM-T4 (owner, 20 November 2026): the parent's one
+  // Google Business Profile. No rating or review markup anywhere.
+  hasMap: P5_SOCIAL.maps,
 } as const;
 
 // Organization logo for knowledge-panel / rich-result use. The approved seal on
@@ -91,7 +94,7 @@ function schemaTelephone(tel: string = SITE_CONFIG.phoneTel): string {
 const SCHEMA_TELEPHONE = schemaTelephone();
 
 /**
- * LocalBusiness and Organization areaServed: seven City nodes in GBP order,
+ * LocalBusiness and Organization areaServed: one City node per service-area city (the nine official cities),
  * then the two counties. City Wikipedia sameAs stays. Counties are named only.
  */
 function businessAreaServed() {
@@ -124,7 +127,7 @@ const founderPerson = {
  * Public locality only. The website does not publish a street address or
  * precise premises coordinates; the owner retains verification records.
  * Region and country stay ISO codes. The ZIP is 83646. areaServed lists the
- * seven cities, then Ada County and Canyon County. Nothing on this graph
+ * service-area cities, then Ada County and Canyon County. Nothing on this graph
  * publishes a street.
  */
 export function publicPostalAddress() {
@@ -440,7 +443,16 @@ export function generateArticleSchema(article: {
   const prefix = article.pathPrefix ?? 'blog';
   const isPersonAuthor =
     !!article.author && article.author.trim() !== BUSINESS_INFO.name;
-  const author = isPersonAuthor
+  const isFounder = isPersonAuthor && article.author?.trim() === SITE_CONFIG.founderName;
+  const author = isFounder
+    ? {
+        // The shared founder node (same @id as the P5 graph), so articles on
+        // every family site resolve to one Nick Perkins.
+        ...founderPerson,
+        jobTitle: 'Founder',
+        url: article.authorUrl ?? `${P5_ORIGIN}/about`,
+      }
+    : isPersonAuthor
     ? {
         '@type': 'Person',
         name: article.author,
@@ -586,7 +598,9 @@ export function generateHomePageSchemaGraph(
     '@context': 'https://schema.org',
     '@graph': [
       stripSchemaContext(generateOrganizationSchema()),
-      stripSchemaContext(generateLocalBusinessSchema('Boise')),
+      // The HomeAndConstructionBusiness node is emitted once, on every page,
+      // by app/layout.tsx (SiteBusinessSchema). Repeating it here put the same
+      // @id on the homepage twice (SEO audit, XS-12 note).
       stripSchemaContext(generateWebSiteSchema()),
       stripSchemaContext(generateFAQSchema(faqs)),
       stripSchemaContext(

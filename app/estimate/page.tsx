@@ -19,6 +19,10 @@ export const metadata: Metadata = withBrandPageMetadata(({
   title: { absolute: `${TITLE} | ${SITE_CONFIG.name}` },
   description: DESCRIPTION,
   alternates: { canonical: buildCanonical("/estimate") },
+  // SEO audit S6 (owner approval, 20 November 2026): a three-step form tool
+  // with no answer for a searcher. It stays mounted and linked, out of the
+  // index and the sitemaps (lib/siteUrls.ts).
+  robots: { index: false, follow: true },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,

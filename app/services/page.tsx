@@ -1,3 +1,4 @@
+import Image from '@/components/VersionedImage';
 import { InteriorHero,InteriorPage } from '@/components/approved/InteriorLayout';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { AreaCard } from '@/components/marketing/AreaCard';
@@ -87,17 +88,17 @@ export default function ServicesIndexPage() {
         <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Services' }]} />
         <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>Our services</p>
         <h1 className="ed-display ed-statement-display text-inverse-foreground">
-          Everything we fix{' '}
-            <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>and maintain</em>
+          Handyman services in Boise{' '}
+            <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>and the Treasure Valley</em>
         </h1>
         <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
-          Small repairs, installs and maintenance for Treasure Valley homes, quoted upfront as one
-            written price. The team reviews your repair list and confirms scope, materials and the visit plan before scheduling.
+          Handyman services in Boise and the Treasure Valley include small repairs, installs and
+            maintenance, quoted upfront as one written price. The team reviews your repair list and confirms scope, materials and the visit plan before scheduling.
         </p>
       </InteriorHero>
 
       {/* Approved photo-led service directory. */}
-      <section className="interior-service-grid" aria-label="All services">{SERVICES.map(service=><Link className="interior-service-card" href={servicePath(service.slug)} key={service.slug}><img src={getServiceBackground(service.slug)} alt={altForImage(getServiceBackground(service.slug), { subject: subjectForService(service.slug) }) ?? localAlt(service.name)} width={900} height={675} loading="lazy"/><div><h2>{keepTail(serviceHeading(service.name))}</h2><ArrowRight size={18} aria-hidden="true"/></div><p>{service.shortDescription}</p></Link>)}</section>
+      <section className="interior-service-grid" aria-label="All services">{SERVICES.map(service=><Link className="interior-service-card" href={servicePath(service.slug)} key={service.slug}><Image src={getServiceBackground(service.slug)} alt={altForImage(getServiceBackground(service.slug), { subject: subjectForService(service.slug) }) ?? localAlt(service.name)} width={900} height={675} sizes="(max-width: 700px) 112px, (max-width: 1023px) 50vw, 400px"/><div><h2>{keepTail(serviceHeading(service.name))}</h2><ArrowRight size={18} aria-hidden="true"/></div><p>{service.shortDescription}</p></Link>)}</section>
 
       <EstimatePromptBand
         title={
@@ -126,7 +127,7 @@ export default function ServicesIndexPage() {
               </p>
             </Reveal>
           </div>
-          <div className="lx-seven mt-[clamp(40px,5vw,72px)] grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="lx-seven mt-[clamp(40px,5vw,72px)] grid gap-4 sm:grid-cols-3">
             {SERVICE_AREA_CITIES.map((city, i) => (
               <Reveal key={city.slug} delay={Math.min(i, 7) * 40}>
                 <AreaCard city={city} imageSrc={CITY_HERO_IMAGES[city.slug]} />

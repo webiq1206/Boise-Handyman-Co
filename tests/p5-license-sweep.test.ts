@@ -53,7 +53,7 @@ test('rendered registration, FAQ schema, and GBP copy do not claim this brand is
   assert.match(withLink, /target="_blank"/);
   assert.match(withLink, /rel="noopener noreferrer"/);
   assert.match(withLink, /title="Verify Idaho contractor registration 8381215"/);
-  assert.match(withLink, /aria-label="Verify Idaho contractor registration 8381215, opens in a new tab"/);
+  assert.match(withLink, /aria-label="Verify registration: Idaho contractor registration 8381215, opens in a new tab"/);
   assert.equal(numberOnly.includes('edopl.idaho.gov'), false);
   assert.match(numberOnly, /Idaho Registered Contractor #8381215/);
 

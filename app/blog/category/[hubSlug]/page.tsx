@@ -137,9 +137,9 @@ export default async function BlogCategoryHubPage(
 
 
           <header className="interior-article-header"><h1 className="text-3xl md:text-4xl font-serif tracking-tight mb-4">
-            {hub.title}
+            {hub.heading ?? hub.title}
           </h1>
-          <p className="text-lg text-muted-foreground mb-4 max-w-2xl">{hub.description}</p>
+          <p className="text-lg text-muted-foreground mb-4 max-w-2xl">{hub.intro ?? hub.description}</p>
           <p className="text-base text-muted-foreground mb-6 max-w-2xl leading-relaxed">
             Every article below is written by the Boise Handyman Co team for homeowners across
             Boise, Meridian, Eagle, Nampa and the wider Treasure Valley, with realistic local
@@ -155,6 +155,9 @@ export default async function BlogCategoryHubPage(
             <ArrowRight className="ml-1 h-4 w-4" />
           </Link></header><HubHeroBanner src={hubHero} alt={hubAlt} />
 
+          {/* SEO audit HM-T2: the card titles are h3, so the grid needs its own
+              h2 under the h1 (Lighthouse heading-order). */}
+          <h2 className="ed-h4 mb-6">{`Articles in ${hub.title.toLowerCase()}`}</h2>
           <div className="ed-cards-3 lx-index-grid gap-6">
             {posts.map((post) => (
               <BlogCard key={post.slug} post={post} formatDate={formatDate} />

@@ -2,7 +2,10 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 
-const P5_FACEBOOK='https://www.facebook.com/1228704823655951';
+// Owner, 20 November 2026: the vanity URL of the same page replaces the numeric one.
+const P5_FACEBOOK='https://www.facebook.com/p5homeco';
+const P5_INSTAGRAM='https://www.instagram.com/p5_home_co';
+const P5_MAPS='https://www.google.com/maps/place/?q=place_id:ChIJzxMoavs6P6IRNc6i9aOvt6Q';
 const P5_GOOGLE='https://www.google.com/search?kgmid=/g/11ntl1t7dc';
 
 // Boise Handyman Co has no social profiles of its own. The boiseremodeling
@@ -31,7 +34,8 @@ test('the P5 Home Co Facebook page sits on the parent node, not this brand',asyn
  const {P5_SOCIAL}=await import('../shared/gbpProfile.ts');
  assert.equal(P5_SOCIAL.facebook,P5_FACEBOOK);
  const {P5_PARENT_ORGANIZATION}=await import('../lib/schema.ts');
- assert.deepEqual([...P5_PARENT_ORGANIZATION.sameAs],[P5_FACEBOOK,P5_GOOGLE]);
+ assert.deepEqual([...P5_PARENT_ORGANIZATION.sameAs],[P5_FACEBOOK,P5_INSTAGRAM,P5_GOOGLE,P5_MAPS]);
+ assert.equal(P5_PARENT_ORGANIZATION.hasMap,P5_MAPS);
  const {BUSINESS_INFO}=await import('../lib/seo.ts');
  assert.equal(BUSINESS_INFO.sameAs.includes(P5_FACEBOOK),false);
  // The footer is the shared family SiteFooter (Phase 2); lib/familyBrand.ts gives it the

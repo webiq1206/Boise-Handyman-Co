@@ -21,6 +21,12 @@ export interface CitySeoFacts {
 export interface ServiceSEOContent {
   slug: string;
   name: string;
+  /**
+   * The service-in-city H1 name, when it should carry the searched term the
+   * title and description lead with (SEO audit, mounting-assembly city pages:
+   * "TV mounting and assembly in Boise, Idaho"). Default: name.
+   */
+  cityHeadingName?: string;
   headline: string;
   primaryKeyword: string;
   overview: string;
@@ -492,6 +498,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
   'mounting-assembly': {
     slug: 'mounting-assembly',
     name: 'Mounting & assembly',
+    cityHeadingName: 'TV mounting and assembly',
     headline: 'TV mounting, shelving, and furniture assembly in Boise',
     primaryKeyword: 'tv mounting boise',
     overview:
@@ -744,9 +751,12 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
 
 export function getAreaIntro(city: CityData): string {
   const county = getCountyLabel(city.county);
-  const base = `Boise Handyman Co provides small repairs, installs and maintenance for homes in ${city.name}, Idaho and throughout ${county}. Scope, pricing and the number of visits are confirmed after review.`;
+  // SEO audit HM-T10: the opening sentence leads with the page's term,
+  // "handyman <city> Idaho", in natural form; the local facts follow.
+  const lead = `Handyman service in ${city.name}, Idaho, from Boise Handyman Co covers small repairs, installs and maintenance for homes throughout ${county}.`;
+  const close = 'Scope, pricing and the number of visits are confirmed after review.';
   const added = getAreaCityCopy(city.slug)?.intro;
-  return added ? `${added} ${base}` : base;
+  return added ? `${lead} ${added} ${close}` : `${lead} ${close}`;
 }
 
 export function getCityServiceIntro(

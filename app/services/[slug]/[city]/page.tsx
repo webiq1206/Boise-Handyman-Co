@@ -75,7 +75,7 @@ export default async function CityServicePage(
   // The page's display name: the catalog name in sentence case, except where
   // the page was retitled to its slug and scope (painting-touch-ups reads
   // "Painting touch-ups", matching its title).
-  const h1 = `${content.name} in ${city.name}, Idaho`;
+  const h1 = `${content.cityHeadingName ?? content.name} in ${city.name}, Idaho`;
   const faqs = cityServicePageFaqs(content, city);
   const localNote = `${city.name} sits inside our core ${county} service area, so ${content.name.toLowerCase()} jobs are quoted from photos, scheduled locally, and priced the same as everywhere else we work.`;
   const images = getCityServiceImageSet(service.slug, city.slug);

@@ -152,7 +152,7 @@ export function HandymanPlanningRange() {
                     data-testid="proof-range-value"
                   >
                     {formatHandymanCurrency(estimate.priceLow)}
-                    <span className="mx-2 text-[0.55em] opacity-50">to</span>
+                    <span className="mx-2 text-[0.55em] opacity-80">to</span>
                     {formatHandymanCurrency(estimate.priceHigh)}
                   </p>
                   <p className="ed-body mt-3 text-[0.875rem]">
