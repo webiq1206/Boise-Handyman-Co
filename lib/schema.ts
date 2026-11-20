@@ -443,7 +443,16 @@ export function generateArticleSchema(article: {
   const prefix = article.pathPrefix ?? 'blog';
   const isPersonAuthor =
     !!article.author && article.author.trim() !== BUSINESS_INFO.name;
-  const author = isPersonAuthor
+  const isFounder = isPersonAuthor && article.author?.trim() === SITE_CONFIG.founderName;
+  const author = isFounder
+    ? {
+        // The shared founder node (same @id as the P5 graph), so articles on
+        // every family site resolve to one Nick Perkins.
+        ...founderPerson,
+        jobTitle: 'Founder',
+        url: article.authorUrl ?? `${P5_ORIGIN}/about`,
+      }
+    : isPersonAuthor
     ? {
         '@type': 'Person',
         name: article.author,
@@ -589,7 +598,9 @@ export function generateHomePageSchemaGraph(
     '@context': 'https://schema.org',
     '@graph': [
       stripSchemaContext(generateOrganizationSchema()),
-      stripSchemaContext(generateLocalBusinessSchema('Boise')),
+      // The HomeAndConstructionBusiness node is emitted once, on every page,
+      // by app/layout.tsx (SiteBusinessSchema). Repeating it here put the same
+      // @id on the homepage twice (SEO audit, XS-12 note).
       stripSchemaContext(generateWebSiteSchema()),
       stripSchemaContext(generateFAQSchema(faqs)),
       stripSchemaContext(
