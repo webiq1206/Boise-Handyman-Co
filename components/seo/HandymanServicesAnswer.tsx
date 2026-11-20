@@ -1,3 +1,4 @@
+import Image from '@/components/VersionedImage';
 import { localAlt } from '@/shared/localAlt';
 import { ArrowUpRight } from 'lucide-react';
 import { SERVICE_AREA_LINE, SERVICES } from '@/shared/contentData';
@@ -75,7 +76,8 @@ export function HandymanServicesAnswer() {
         {b.services.map((s, i) => (
           <a className="fr-card" key={s.slug} href={s.live || `/services/${s.slug}`}>
             <span className="fr-card-media">
-              <img src={CARD_IMAGES[s.slug]?.src ?? s.image} alt={CARD_IMAGES[s.slug]?.alt ?? (CARD_ALT[s.slug] ? localAlt(CARD_ALT[s.slug]) : '')} loading={i < 3 ? 'eager' : 'lazy'} width={CARD_IMAGES[s.slug]?.width ?? 1000} height={CARD_IMAGES[s.slug]?.height ?? 750} style={CARD_IMAGES[s.slug]?.position ? {objectPosition: CARD_IMAGES[s.slug].position} : undefined} />
+              {/* SEO audit HM-T6: sized to the card, never the full file. */}
+              <Image src={CARD_IMAGES[s.slug]?.src ?? s.image} alt={CARD_IMAGES[s.slug]?.alt ?? (CARD_ALT[s.slug] ? localAlt(CARD_ALT[s.slug]) : '')} loading={i < 3 ? 'eager' : 'lazy'} width={CARD_IMAGES[s.slug]?.width ?? 1000} height={CARD_IMAGES[s.slug]?.height ?? 750} sizes="(max-width: 700px) 180px, (max-width: 1023px) 33vw, 400px" style={CARD_IMAGES[s.slug]?.position ? {objectPosition: CARD_IMAGES[s.slug].position} : undefined} />
             </span>
             <span className="fr-card-body">
               <h3>{keepTail(s.name)}</h3>

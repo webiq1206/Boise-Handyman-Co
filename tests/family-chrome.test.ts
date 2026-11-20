@@ -146,7 +146,10 @@ test('the homepage video hero preserves first-response content, poster and sourc
   assert.match(html, /<img [^>]*src="\/media\/handyman\/boise-handyman-co-poster\.jpg"/);
   // No-JavaScript uses the approved poster: WebKit can force native controls
   // onto an SSR video even when its controls attribute is absent.
-  assert.doesNotMatch(html, /<video\b|<source\b/, 'video is enhanced only when JavaScript is available');
+  assert.doesNotMatch(html, /<video\b|<source\b[^>]*type="video/, 'video is enhanced only when JavaScript is available');
+  // SEO audit HM-T6: phones up to 480px get the same poster cut to the part
+  // they show, so they do not fetch the 1920px file.
+  assert.match(html, /<source media="\(max-width: 480px\)" srcSet="\/media\/handyman\/boise-handyman-co-poster-phone\.webp" type="image\/webp"/);
   assert.doesNotMatch(html, /handyman-hero-video-control|aria-controls="handyman-hero-video"/, 'no page-level video controls');
   assert.doesNotMatch(html, /handyman-hero-door-hinge-branded|front-door-repaint/, 'no superseded image in the final hero');
   const support = html.match(/<p class="fam-hero-support">([^<]+)<\/p>/)?.[1] ?? '';
