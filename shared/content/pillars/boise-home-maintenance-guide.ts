@@ -5,7 +5,7 @@ export const boiseHomeMaintenanceGuide: GuidePageData = {
   title: 'The complete Boise home maintenance guide',
   seoTitle: 'Boise Home Maintenance Guide',
   metaDescription:
-    'Boise home maintenance guide: what to check in spring, summer, fall and winter, which tasks are easy DIY, and which to hand to a pro in the Treasure Valley.',
+    'Boise home maintenance guide: what to check in spring, summer, fall and winter, which tasks are easy DIY, and which to hand to a Treasure Valley pro.',
   excerpt:
     'This Boise home maintenance guide sets the full-year rhythm for a Treasure Valley home: what our climate does to houses, what to check each season, which tasks are easy DIY, and which ones are worth a service call.',
   hubSlug: 'home-maintenance',
