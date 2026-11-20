@@ -14,7 +14,7 @@ test('the registration number stays outside the DOPL link', () => {
   const gateAt = credential.indexOf('showVerifyLink ?');
   assert.ok(numberAt >= 0 && gateAt > numberAt);
   assert.match(credential, /DOPL_LOOKUP_TITLE = "Verify Idaho contractor registration 8381215"/);
-  assert.match(credential, /DOPL_LOOKUP_LABEL = "Verify Idaho contractor registration 8381215, opens in a new tab"/);
+  assert.match(credential, /DOPL_LOOKUP_LABEL = "Verify registration: Idaho contractor registration 8381215, opens in a new tab"/);
   assert.match(credential, /DOPL_LOOKUP_HREF = "https:\/\/edopl\.idaho\.gov\/OnlineServices\/\?link=PubSearch"/);
   assert.match(credential, /title=\{DOPL_LOOKUP_TITLE\}/);
   assert.match(credential, /aria-label=\{DOPL_LOOKUP_LABEL\}/);

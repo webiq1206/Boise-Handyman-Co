@@ -328,6 +328,8 @@ export default function ContactPage() {
                   subtext="The same fair pricing across the whole Treasure Valley"
                 >
                   <address className="not-italic leading-relaxed">
+                    {/* SEO audit XS-06: the public locality, as in the JSON-LD (no street). */}
+                    <span className="block">{`${SITE_CONFIG.address.cityState} ${SITE_CONFIG.address.postalCode}`}</span>
                     {PUBLIC_NAP_LINE}
                   </address>
                 </ContactChannel>
