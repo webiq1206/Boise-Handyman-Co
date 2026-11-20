@@ -262,6 +262,14 @@
 .fr-estimate-benefits { display: flex; flex-wrap: wrap; gap: 6px 28px; margin: 16px 0 0; padding: 0; list-style: none; }
 .fr-estimate-benefits li { position: relative; padding-left: 18px; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--fr-ink-soft); }
 .fr-estimate-benefits li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 8px; height: 2px; background: var(--f-accent); }
+/* The parent company's Google review under the instant estimate band (owner, 20 November 2026). */
+.fr-cta-strip > .fr-parent-review { display: block; padding-block: 0 44px; }
+.fr-parent-review figure { margin: 0; padding-left: 22px; border-left: 2px solid var(--f-accent); max-width: 72ch; }
+.fr-parent-review blockquote { margin: 0; }
+.fr-parent-review blockquote p { margin: 0; color: var(--fr-ink); font-size: var(--fs-body); line-height: var(--lh-body); }
+.fr-parent-review figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; margin-top: 12px; font-size: var(--fs-small); line-height: var(--lh-small); color: var(--fr-ink); }
+.fr-parent-review-name { font-weight: 600; }
+.fr-parent-review .f-link { min-height: 44px; display: inline-flex; align-items: center; }
 
 /* ------------------------------------------------------------------ city line */
 .fr-cities {
