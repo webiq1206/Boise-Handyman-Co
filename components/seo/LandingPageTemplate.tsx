@@ -10,7 +10,7 @@ import { ConsultCTA } from '@/components/modals/ConsultCTA';
 import { InstantEstimateCTA } from '@/components/estimator/InstantEstimateCTA';
 import { Reveal } from '@/components/Reveal';
 import { FeaturedBeforeAfterSection } from '@/components/sections/FeaturedBeforeAfterSection';
-import { Button } from '@/components/ui/button';
+import { familyButtonClass } from '@/components/family/Button';
 import { GRAIN_URL } from '@/lib/grain';
 import { altForImage } from '@/shared/imageAlts';
 import { cityForSlug, localAlt, subjectForService } from '@/shared/localAlt';
@@ -266,9 +266,8 @@ export function LandingPageTemplate({
                 {CTA_PRIMARY} <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </ConsultCTA>
             )}
-            <Button variant="heroOutline" asChild>
-              <a href="/#consult">{CTA_SECONDARY}</a>
-            </Button>
+            {/* The family secondary (sentence case, outlined; the hero copy sits on paper), matching the primary beside it (owner, 20 November 2026). */}
+            <a href="/#consult" className={familyButtonClass({ variant: 'secondary' })}>{CTA_SECONDARY}</a>
           </div>
           {planningFrom && (
             <p className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-inverse-foreground/80">
