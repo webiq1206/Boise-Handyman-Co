@@ -53,7 +53,7 @@ const FAQS = [
   {
     question: "What areas do you serve?",
     answer:
-      "Homes in Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County.",
+      "Homes in Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County.",
   },
   {
     question: "What do you not do?",

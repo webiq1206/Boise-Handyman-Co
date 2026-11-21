@@ -37,7 +37,7 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "What areas do you serve?",
-    a: "We serve Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County. The same pricing applies across that service area, so where you live never inflates the quote.",
+    a: "We serve Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County. The same pricing applies across that service area, so where you live never inflates the quote.",
   },
   {
     q: "How do quotes work?",

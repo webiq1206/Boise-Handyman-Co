@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { join } from "node:path";
 import {
   CITIES,
   SERVICE_AREA_CITY_NAMES,
@@ -87,6 +89,26 @@ assert.equal(organization.telephone, local.telephone);
 const paths = new Set(getAllSiteUrls().map((entry) => entry.path));
 for (const slug of ["middleton", "garden-city", "boise", "star"]) {
   assert.equal(paths.has(`/areas/${slug}`), true, `${slug} stays in the sitemap`);
+}
+
+// A sentence that names the seven profile cities in order must go on to
+// Middleton and Garden City. Thirteen copies of the old seven-city sentence
+// (homepage FAQ, articles, RE-10, the subcontractor page) sat untouched by the
+// 20 November 2026 change until a live read found them on 21 November 2026.
+{
+  const roots = ["shared", "app", "components", "lib", "public"];
+  const sevenThenStop = /Boise, Meridian, Nampa, Eagle, Kuna, Caldwell,? (?:and|or) Star\b/;
+  const offenders: string[] = [];
+  const walk = (dir: string) => {
+    for (const name of readdirSync(dir)) {
+      const path = join(dir, name);
+      if (name === "node_modules" || name.startsWith(".")) continue;
+      if (statSync(path).isDirectory()) walk(path);
+      else if (/\.(tsx?|mjs|json|txt|md|html)$/.test(name) && sevenThenStop.test(readFileSync(path, "utf8"))) offenders.push(path);
+    }
+  };
+  for (const root of roots) walk(root);
+  assert.deepEqual(offenders, [], "a city list stops at Star; name all nine (SERVICE_AREA_LINE)");
 }
 
 console.log("verify-service-area-cities: nine cities, two counties, one per published town page");

@@ -105,6 +105,6 @@ export const seasonalHomeMaintenanceChecklistBoise: BlogPostData = {
 <p>The economics follow. Early attention can help limit deterioration, but the work and cost depend on the home. Ask for a written quote covering the agreed tasks and materials.</p>
 
 <h2 id="next-steps">Where to go from here</h2>
-<p>If your house has missed a few seasons of this, start with a walkthrough list and photos, and <a href="/contact">send it over</a>; we will quote a catch-up visit in writing anywhere in Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, or Star, and from there the spring-and-fall rhythm is easy to keep. Our <a href="/services/home-maintenance">caulking and home maintenance service</a> is built around exactly this list.</p>
+<p>If your house has missed a few seasons of this, start with a walkthrough list and photos, and <a href="/contact">send it over</a>; we will quote a catch-up visit in writing anywhere in Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, or Garden City, and from there the spring-and-fall rhythm is easy to keep. Our <a href="/services/home-maintenance">caulking and home maintenance service</a> is built around exactly this list.</p>
 `.trim(),
 };
