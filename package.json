@@ -31,7 +31,7 @@
     "verify:family-chrome": "node scripts/verify-family-chrome.mjs",
     "verify:landing-heroes": "node --import tsx --test tests/ad-landing-hero.test.ts tests/explore-card-images.test.ts tests/image-versions.test.ts",
     "images:versions": "node scripts/build-image-versions.mjs",
-    "verify:instant-estimate": "node --import tsx --test tests/instant-estimate.test.ts",
+    "verify:instant-estimate": "node --import tsx --test tests/instant-estimate.test.ts tests/home-instant-estimate-block.test.ts",
     "verify:published-prices": "node --import tsx --test tests/p5-published-figures.test.ts",
     "pricing:p5-figures": "node --experimental-strip-types scripts/pricing/p5-published-figures.mts",
     "verify:one-team-email": "node --import tsx --test tests/p5-one-team-email.test.ts tests/p5-intake-bridge.test.ts tests/consultation-details.test.ts",

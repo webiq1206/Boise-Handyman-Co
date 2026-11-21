@@ -34,6 +34,18 @@ const SERVICE_ESTIMATOR_PROJECT: Record<string, string> = {
 export function estimatorProjectForService(slug: string | null | undefined): string | null {
   return (slug && SERVICE_ESTIMATOR_PROJECT[slug]) || null;
 }
+/**
+ * The projects the central estimator prices for this brand, in its own order
+ * and with its own names (p5-home-co `app/lib/estimator/brands.ts`, brand
+ * "handyman"). The homepage block that replaced the planning range slider
+ * (owner, 21 November 2026) links each one to /instant-estimate?project=<id>.
+ * Change this list only when that brand list changes.
+ */
+export const HOME_ESTIMATOR_PROJECTS: ReadonlyArray<{ id: string; label: string }> = [
+  { id: "handyman", label: "Repairs and small jobs" },
+  { id: "interior-paint", label: "Interior painting" },
+  { id: "flooring", label: "New flooring" },
+];
 /** The estimator page, opened on one project when the page maps to one. */
 export function instantEstimateHref(project?: string | null): string {
   return project && /^[a-z0-9-]{1,40}$/.test(project) ? `${ESTIMATE_HREF}?project=${project}` : ESTIMATE_HREF;

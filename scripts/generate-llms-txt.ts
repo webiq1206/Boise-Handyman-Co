@@ -215,7 +215,7 @@ function buildFull(): string {
   lines.push('## Common questions', '');
   lines.push(
     '- What does a handyman visit cost in Boise? Pricing depends on the agreed scope, materials ' +
-      'and access, with a one-hour minimum per visit. Send your repair list for review; the team prepares a written quote before work starts.',
+      'and access. Labor is billed at $120 an hour, with a one-hour minimum per visit. Send your repair list for review; the team prepares a written quote before work starts.',
   );
   lines.push(
     '- How fast can a repair be scheduled? Share your requested dates with the repair list. ' +

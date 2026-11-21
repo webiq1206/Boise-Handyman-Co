@@ -35,9 +35,19 @@ primary pricing call to action on this site.
   name, email and phone before the range); a specific number of minutes or
   seconds; em dashes; "near me"; invented numbers or reviews.
 * Existing tools stay until the owner retires them: the request form, the
-  in-house intake at `/estimate` and `/estimate/scope`, the homepage planning
-  range, the RE-10 upload tool, the chat assistant and every API route. Only
-  primary CTAs were re-pointed.
+  in-house intake at `/estimate` and `/estimate/scope`, the RE-10 upload tool,
+  the chat assistant and every API route. Only primary CTAs were re-pointed.
+* **The homepage price slider is retired** (owner, 21 November 2026: one
+  source of prices). `HandymanPlanningRange` ran this site's own engine and
+  showed figures that differed from the instant estimator, so the homepage
+  shows `HomeInstantEstimateProjects` (`components/sections`) in its place: a
+  heading, one sentence, one button per project the estimator prices for this
+  brand (`HOME_ESTIMATOR_PROJECTS` in `shared/ctaCopy.ts`, the handyman list
+  in p5-home-co `brands.ts`) to `/instant-estimate?project=<id>`, and the
+  request form and the phone beside them. No figure. The slider component
+  stays in the repository, unmounted; do not mount it again. The block keeps
+  a `#planning-range` anchor for links from outside the site.
+  Guard: `tests/home-instant-estimate-block.test.ts` (renders the homepage).
 * Guard: `tests/instant-estimate.test.ts` (`npm run verify:instant-estimate`,
   in prebuild).
 
@@ -67,8 +77,17 @@ clicks "Get an instant estimate" is never shown a different story.
   permit fees, retail part prices, the 1 to 2 percent budgeting rule). Never
   add a job price to the allowlist. When the cost book changes, re-run the
   script and fix the copy until the test passes.
-* Not changed: the homepage planning range (`HandymanPlanningRange`, this
-  site's own engine), which the owner keeps until it is retired.
+* The homepage planning range (`HandymanPlanningRange`, this site's own
+  engine) was retired on 21 November 2026, so no page shows a price that is
+  not the estimator's.
+* **Labor and the minimum** (owner, 21 November 2026): a job that takes less
+  than an hour is billed as one hour at the hourly rate. Every mention says it
+  the same way: "Labor is billed at $120 an hour, with a one-hour minimum per
+  visit." (FAQs, area pages, terms, GBP copy, llms.txt), never in a hero
+  paragraph. The neighborhood guides carry no dollar figure at all
+  (`scripts/verify-shared-claims.mjs`), so the Boise guide speaks of a visit's
+  fixed cost without naming the minimum.
+  `tests/home-instant-estimate-block.test.ts` checks each mention.
 
 ## One team email per request (owner decision, 17 November 2026)
 

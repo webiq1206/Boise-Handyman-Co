@@ -265,7 +265,7 @@ export const BUDGET_GUIDANCE_POINTS = [
   },
   {
     title: "Materials at cost, no trip fee",
-    body: "Parts and materials appear on the quote as their own line, at what they cost. There is no trip fee in Ada and Canyon County. A one-hour minimum applies per visit, and bundling tasks into one trip is usually the best value.",
+    body: "Parts and materials appear on the quote as their own line, at what they cost. There is no trip fee in Ada and Canyon County. Labor is billed at $120 an hour, with a one-hour minimum per visit. Bundling tasks into one trip is usually the best value.",
   },
   {
     title: "You can supply the parts",

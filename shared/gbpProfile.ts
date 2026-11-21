@@ -277,7 +277,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   },
   {
     question: 'How much does a handyman cost in Boise?',
-    answer: `Every job gets a written quote from your list and photos before work starts. Materials are billed at cost, there is a one-hour minimum per visit, and there is no trip fee in Ada and Canyon County. A single faucet swap is usually about one hour plus the faucet; a four-item list is usually about a half day.`,
+    answer: `Every job gets a written quote from your list and photos before work starts. Labor is billed at $120 an hour, with a one-hour minimum per visit. Materials are billed at cost, and there is no trip fee in Ada and Canyon County. A four-item list is usually about a half day.`,
   },
   {
     question: 'What services do you offer?',
@@ -291,7 +291,7 @@ export const GBP_QA_SEED: GbpQaEntry[] = [
   {
     question: 'Is there a minimum charge?',
     answer:
-      'Yes. A one-hour minimum applies per visit, and there is no trip fee in Ada and Canyon County. Beyond that, each job is priced case by case after we review the scope, with a written price before any work starts. Bundling several tasks into one visit is usually the best value, because extra tasks only add the time they take.',
+      'Yes. Labor is billed at $120 an hour, with a one-hour minimum per visit. A job that takes less than an hour is billed as one hour. There is no trip fee in Ada and Canyon County. Beyond that, each job is priced case by case after we review the scope, with a written price before any work starts. Bundling several tasks into one visit is usually the best value, because extra tasks only add the time they take.',
   },
   {
     question: 'Are you a registered contractor and insured?',

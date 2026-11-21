@@ -24,7 +24,7 @@ export const INITIAL_FAQ_COUNT = 6;
 export const HOMEPAGE_FAQS: HomepageFaq[] = [
   {
     q: "How is a Boise handyman visit priced?",
-    a: "You get one written price before work starts, after we review your list and photos. Materials are billed at cost on their own line. There is a one-hour minimum per visit and no trip fee in Ada and Canyon County. Bundling several tasks into one visit is usually the best value. Work that needs a general contractor or a licensed trade is referred out honestly.",
+    a: "You get one written price before work starts, after we review your list and photos. Labor is billed at $120 an hour, with a one-hour minimum per visit. Materials are billed at cost on their own line, and there is no trip fee in Ada and Canyon County. Bundling several tasks into one visit is usually the best value. Work that needs a general contractor or a licensed trade is referred out honestly.",
   },
   {
     id: "handyman-cost",
@@ -53,7 +53,7 @@ export const HOMEPAGE_FAQS: HomepageFaq[] = [
   },
   {
     q: "Is there a trip fee?",
-    a: "No. There is no trip fee in Ada and Canyon County. A one-hour minimum applies per visit, and materials are billed at cost on their own line.",
+    a: "No. There is no trip fee in Ada and Canyon County. Labor is billed at $120 an hour, with a one-hour minimum per visit. Materials are billed at cost on their own line.",
   },
   {
     q: "Do you handle big remodels or additions?",

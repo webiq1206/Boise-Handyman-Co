@@ -568,7 +568,7 @@ export const SERVICE_SEO_CONTENT: Record<string, ServiceSEOContent> = {
       {
         question: 'Is there a minimum job size?',
         answer:
-          "There is a one-hour minimum per visit, so a single small mount is a normal booking. Beyond that, the price depends on your repair list, materials, access and preparation. Send the details and photos for a scope review and written quote before work begins.",
+          "Labor is billed at $120 an hour, with a one-hour minimum per visit. A single small mount is a normal booking. Beyond that, the price depends on your repair list, materials, access and preparation. Send the details and photos for a scope review and written quote before work begins.",
       },
     ],
     costGuidance: {"heading":"Scope and pricing for your project","paragraphs":["Send your repair list and photos. Our team reviews the work, materials and access before preparing a quote.","Scope, price and scheduling are agreed before work begins. A request does not reserve a visit or confirm a price."]},
@@ -915,7 +915,7 @@ export const AREA_PAGE_FAQS: FAQItem[] = [
   {
     question: 'How does pricing work?',
     answer:
-      'Every job gets one upfront written quote before any work starts, priced by the time it takes with a one-hour minimum. Materials appear as their own line at cost, and bundling several tasks into one visit is the best value.',
+      'Every job gets one upfront written quote before any work starts. Labor is billed at $120 an hour, with a one-hour minimum per visit. Materials appear as their own line at cost, and bundling several tasks into one visit is the best value.',
   },
   {
     question: 'Do you handle remodels or large projects?',

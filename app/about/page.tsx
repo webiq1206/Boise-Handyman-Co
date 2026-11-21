@@ -37,7 +37,7 @@ const SPEAKABLE_SUMMARY =
 
 const HANDYMAN_FIVE = [
   'Written quote before work starts',
-  'One-hour minimum and materials at cost',
+  'Labor at $120 an hour, one-hour minimum, materials at cost',
   'Agreed arrival time',
   'One-trip fixes where the job allows',
   'Cleanup and haul-away',
