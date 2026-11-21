@@ -36,8 +36,7 @@ export function ApprovedFounder(){
    <div>
     <p className="f-eyebrow">WHO YOU ARE HIRING</p>
     <h2 id="who-hiring-heading">Nick Perkins, founder.</h2>
-    <p>Construction project manager with a bachelor&apos;s degree in Construction with an emphasis in Project Management, and more than a decade of custom homes, remodels and developments. Husband, father of five. The family moved to the Treasure Valley in 2025.</p>
-    <blockquote>&ldquo;Work hard. Keep your word. Treat people right.&rdquo;</blockquote>
+    <p>Nick Perkins founded P5 Home Co, the family company behind Boise Handyman Co. He is a construction project manager with a bachelor&apos;s degree in construction, an emphasis in project management, and years of custom homes, remodels and developments behind him. His rule for every visit: work hard, keep your word, treat people right.</p>
     <p><Link className="f-link" href="/about">Read Nick&apos;s story <Arrow/></Link></p>
    </div>
   </div>

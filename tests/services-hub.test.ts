@@ -181,11 +181,15 @@ test('the services page renders the hub copy, nine cities and no rating markup',
   assert.match(html, />Verify</);
 });
 
-test('homepage proof keeps the parent review and does not rewrite the founder block', () => {
+test('homepage proof keeps the parent review and the founder heading', () => {
   assert.equal(PARENT_REVIEW.author, 'beverly van zandt');
   assert.equal(PARENT_REVIEW.text, REVIEW);
   const founder = read('components/approved/ApprovedHome.tsx');
   assert.match(founder, /<h2 id="who-hiring-heading">Nick Perkins, founder\.<\/h2>/);
+  assert.match(founder, /Nick Perkins founded P5 Home Co, the family company behind Boise Handyman Co\. He is a construction project manager with a bachelor&apos;s degree in construction, an emphasis in project management, and years of custom homes, remodels and developments behind him\. His rule for every visit: work hard, keep your word, treat people right\./);
+  assert.match(founder, /Read Nick&apos;s story/);
+  assert.doesNotMatch(founder, /more than a decade of custom homes/);
+  assert.doesNotMatch(founder, /Work hard\. Keep your word\. Treat people right\./);
   assert.match(founder, /Google review of P5 Home Co, our parent company/);
   assert.match(founder, /href=\{P5_SOCIAL\.maps\}/);
   assert.doesNotMatch(founder, /@type['"]?\s*:\s*['"]AggregateRating/);
