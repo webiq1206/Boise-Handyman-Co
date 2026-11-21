@@ -67,4 +67,4 @@ P5 Home Co profiles: Facebook https://www.facebook.com/p5homeco, Instagram https
 - [RSS feed](https://boisehandyman.co/feed.xml): guides and articles, newest first, with publication and revision dates.
 - [Full text for LLMs](https://boisehandyman.co/llms-full.txt): expanded reference copy of the core facts.
 
-Last updated: 2026-11-20.
+Last updated: 2026-11-21.

@@ -9,7 +9,7 @@ import { LazyConsultationForm as ConsultationForm } from "@/components/LazyConsu
 import { QuoteFormAnchor } from "@/components/QuoteFormAnchor";
 import { FAQSection } from "@/components/FAQSection";
 import { Reveal } from "@/components/Reveal";
-import { HandymanPlanningRange } from "@/components/sections/HandymanPlanningRange";
+import { HomeInstantEstimateProjects } from "@/components/sections/HomeInstantEstimateProjects";
 import { HowP5Works } from "@/components/sections/HowP5Works";
 import { ProjectGallerySection } from "@/components/sections/ProjectGallerySection";
 import { HomePageSchema } from "@/components/seo/HomePageSchema";
@@ -52,8 +52,12 @@ export default function HomePage() {
           1a. The instant estimate band (owner decision, 13 November 2026): the
              central estimator is the primary pricing call to action
           2. Services: the answer-first block and every service link
-          3. Planning-range interactive proof (C14): a ballpark before contact
-             (the gallery slot after it renders nothing until real work exists)
+          3. The instant estimate by project, on its own dark band: one link
+             per project the estimator prices, and the path to a person. The
+             planning range slider that sat here was retired on 21 November
+             2026 (one source of prices); HandymanPlanningRange.tsx stays in
+             the repository, unmounted. (The gallery slot after it renders
+             nothing until real work exists.)
           4. How it works, with "What you can count on" beside the steps
           5. Founder
           6. Service area
@@ -89,7 +93,7 @@ export default function HomePage() {
           note="Send your list and photos, and we will reply with one written quote before any work starts."
         />
       </ApprovedFamilyFrame>
-      <HandymanPlanningRange />
+      <HomeInstantEstimateProjects />
       <ProjectGallerySection limit={6} showViewAll />
       <ApprovedFamilyFrame>
         <ApprovedHowItWorks aside={<HowP5Works />} />
