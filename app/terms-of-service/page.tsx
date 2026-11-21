@@ -60,7 +60,7 @@ export default function TermsOfServicePage() {
 
             <h2 id="document-section-1">Agreement to terms</h2>
             <p>
-              Boise Handyman Co is a DBA of P5 Home Co ("Company," "we," "us," or "our"). By accessing or using our services, you agree to these Terms of Service. If you do not agree to these terms, please do not use our services.
+              Boise Handyman Co is a DBA of P5 Home Co LLC ("Company," "we," "us," or "our"). By accessing or using our services, you agree to these Terms of Service. If you do not agree to these terms, please do not use our services.
             </p>
             <p>
               Your signed agreement, quote or work order for a job controls that job. These terms are a general summary of how we work and do not change any agreement you have already signed. If these terms and your signed agreement differ, your signed agreement governs.

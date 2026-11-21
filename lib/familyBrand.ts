@@ -37,7 +37,7 @@ export const FAMILY_BRAND: FamilyBrand = {
   id: 'handyman',
   name: SITE_CONFIG.name,
   domain: SITE_CONFIG.siteUrl.replace(/\/$/, ''),
-  lockupLabel: `${SITE_CONFIG.name}, a P5 Home Company`,
+  lockupLabel: `${SITE_CONFIG.name}, a P5 Home Co brand`,
   lockup: {
     onDark: { src: '/brand/approved-lockup-light.svg', ...LOCKUP },
     onLight: { src: '/brand/approved-lockup-dark.svg', ...LOCKUP },

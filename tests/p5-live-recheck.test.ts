@@ -144,11 +144,17 @@ test('site copy does not use P5 Home Co LLC or P5 Home Co. as a name', () => {
     walkDir(entry);
     return found;
   });
+  // Legal-entity spots only: terms, privacy, and the registration line.
+  const llcAllowed = new Set([
+    'app/terms-of-service/page.tsx',
+    'app/privacy-policy/page.tsx',
+    'app/about/page.tsx',
+  ]);
   const llc: string[] = [];
   const dotted: string[] = [];
   for (const file of files) {
     const text = readFileSync(file, 'utf8');
-    if (text.includes('P5 Home Co LLC')) llc.push(file);
+    if (text.includes('P5 Home Co LLC') && !llcAllowed.has(file)) llc.push(file);
     if (NAME_WITH_PERIOD.test(text)) dotted.push(file);
   }
   assert.deepEqual(llc, []);
