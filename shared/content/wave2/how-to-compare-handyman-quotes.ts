@@ -105,6 +105,6 @@ export const howToCompareHandymanQuotes: BlogPostData = {
 <p>Quoting behavior predicts job behavior with unreasonable accuracy, because both are the same skill: organized communication under small stakes. Pick the bidder you would want answering the phone when something under the sink surprises everyone.</p>
 
 <h2 id="next-steps">Where to go from here</h2>
-<p>If you are collecting quotes on a repair list anywhere in Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, or Star, we would like to be one of them: <a href="/contact">send the written list with photos</a> and you will get back a flat, itemized number with materials and fees stated, which is the format this whole article is asking every bidder to produce. And before the first conversation, skim <a href="/blog/what-to-expect-first-handyman-visit">what a first visit should look like</a> so you know what good looks like in person.</p>
+<p>If you are collecting quotes on a repair list anywhere in Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, or Garden City, we would like to be one of them: <a href="/contact">send the written list with photos</a> and you will get back a flat, itemized number with materials and fees stated, which is the format this whole article is asking every bidder to produce. And before the first conversation, skim <a href="/blog/what-to-expect-first-handyman-visit">what a first visit should look like</a> so you know what good looks like in person.</p>
 `.trim(),
 };

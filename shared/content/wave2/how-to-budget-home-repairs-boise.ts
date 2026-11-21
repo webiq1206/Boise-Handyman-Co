@@ -105,6 +105,6 @@ export const howToBudgetHomeRepairsBoise: BlogPostData = {
 <p>Pair the fund with a rhythm, one or two planned visits a year, and the backlog stops being a backlog. Our <a href="/blog/seasonal-home-maintenance-checklist-boise">seasonal maintenance checklist</a> is the calendar version of this article.</p>
 
 <h2 id="next-steps">Where to go from here</h2>
-<p>If you have done the walk and are holding the list, the next step is a written quote. <a href="/contact">Send it over with photos</a>, we quote punch lists across Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star as flat numbers wherever the work allows, and the whole point of this article is that one planned visit beats ten emergencies. If you are getting several quotes, and for a longer list you should, read <a href="/blog/how-to-compare-handyman-quotes">how to compare them fairly</a> first.</p>
+<p>If you have done the walk and are holding the list, the next step is a written quote. <a href="/contact">Send it over with photos</a>, we quote punch lists across Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City as flat numbers wherever the work allows, and the whole point of this article is that one planned visit beats ten emergencies. If you are getting several quotes, and for a longer list you should, read <a href="/blog/how-to-compare-handyman-quotes">how to compare them fairly</a> first.</p>
 `.trim(),
 };

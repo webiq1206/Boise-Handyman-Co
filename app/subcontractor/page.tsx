@@ -108,7 +108,7 @@ export default function SubcontractorPage() {
                 </div>
                 <CardTitle>Local Service Area</CardTitle>
                 <CardDescription>
-                  We focus on Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, plus Ada County and Canyon County. All leads are from property owners in that service area.
+                  We focus on Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County. All leads are from property owners in that service area.
                 </CardDescription>
               </CardHeader>
             </Card>

@@ -105,6 +105,6 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
 <p>The low hourly rate is the classic trap. A low rate for six hours can cost more than a higher flat quote for the same job, and the incentive under uncapped hourly billing does not push toward speed. Rate-shopping selects for the outfit best at advertising a number, not the one best at finishing your list.</p>
 
 <h2 id="next-steps">Where to go from here</h2>
-<p>However the pricing is structured, the constant is writing: scope and number, agreed before work starts. That is how we quote every job across Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, flat wherever the job allows it. <a href="/contact">Send us your list with photos</a> for a written quote, and if you are collecting several, our guide to <a href="/blog/how-to-compare-handyman-quotes">comparing handyman quotes</a> shows you how to line them up fairly.</p>
+<p>However the pricing is structured, the constant is writing: scope and number, agreed before work starts. That is how we quote every job across Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, flat wherever the job allows it. <a href="/contact">Send us your list with photos</a> for a written quote, and if you are collecting several, our guide to <a href="/blog/how-to-compare-handyman-quotes">comparing handyman quotes</a> shows you how to line them up fairly.</p>
 `.trim(),
 };

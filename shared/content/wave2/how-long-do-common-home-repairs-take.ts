@@ -109,6 +109,6 @@ export const howLongDoCommonHomeRepairsTake: BlogPostData = {
 <p>Send the list with photos when you book, so parts get staged and nothing waits on a supply run. Our guides to <a href="/blog/what-to-expect-first-handyman-visit">what a first visit looks like</a> and <a href="/blog/how-to-budget-home-repairs-boise">budgeting a punch list</a> cover how to set that up.</p>
 
 <h2 id="next-steps">Where to go from here</h2>
-<p>If items on this page sound like your house, that is the list, and it is probably a single visit. We work across Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, and Star, and we quote in writing before work starts. <a href="/contact">Send your list over with photos</a> and we will tell you honestly how many hours it is.</p>
+<p>If items on this page sound like your house, that is the list, and it is probably a single visit. We work across Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, and we quote in writing before work starts. <a href="/contact">Send your list over with photos</a> and we will tell you honestly how many hours it is.</p>
 `.trim(),
 };
