@@ -144,11 +144,17 @@ test('site copy does not use P5 Home Co LLC or P5 Home Co. as a name', () => {
     walkDir(entry);
     return found;
   });
+  // Legal name "P5 Home Co LLC" is limited to the terms and the registration
+  // line (21 November 2026). Everywhere else stays "P5 Home Co".
+  const llcAllowed = new Set([
+    'app/terms-of-service/page.tsx',
+    'app/about/page.tsx',
+  ]);
   const llc: string[] = [];
   const dotted: string[] = [];
   for (const file of files) {
     const text = readFileSync(file, 'utf8');
-    if (text.includes('P5 Home Co LLC')) llc.push(file);
+    if (text.includes('P5 Home Co LLC') && !llcAllowed.has(file)) llc.push(file);
     if (NAME_WITH_PERIOD.test(text)) dotted.push(file);
   }
   assert.deepEqual(llc, []);

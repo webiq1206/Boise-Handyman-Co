@@ -11,7 +11,7 @@ landingBreadcrumbs,
 landingFAQSchema,
 landingServiceSchema
 } from '@/lib/landing-schema';
-import { buildPageMetadata,isCityServiceNoindex } from '@/lib/page-metadata';
+import { buildPageMetadata,cityServiceHref,isCityServiceInSitemap } from '@/lib/page-metadata';
 import { generateSpeakableSchema } from '@/lib/schema';
 import { SERVICE_SLUGS,getServiceBySlug,servicePath } from '@/lib/seo-routes';
 import { SERVICE_AREA_CITIES, serviceHeading } from '@/shared/contentData';
@@ -104,7 +104,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
             'Describe the existing texture and tell us whether you have matching paint, including the color and sheen if known. For water damage, explain the cause and whether the leak has been fixed. These details help us review preparation, finish expectations and the visit plan before quoting.',
           ],
           links: [
-            { label: 'Plan drywall repair at a Boise address', href: '/services/drywall-repair/boise' },
+            { label: 'Plan drywall repair at a Boise address', href: '/services/drywall-repair' },
             { label: 'Paint touch-ups and small repaints', href: '/services/painting-touch-ups' },
             { label: 'Send repair details and optional photos', href: '/contact#consult' },
           ],
@@ -128,9 +128,9 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
       ],
       // Only city pages that are in the index (the sitemap's rule). A
       // noindexed combination cannot rank, so it does not get the link.
-      links: SERVICE_AREA_CITIES.filter((c) => !isCityServiceNoindex(service.slug, c.slug)).map((c) => ({
+      links: SERVICE_AREA_CITIES.filter((c) => isCityServiceInSitemap(service.slug, c.slug)).map((c) => ({
         label: `${serviceHeading(service.name)} in ${c.name}`,
-        href: `/services/${service.slug}/${c.slug}`,
+        href: cityServiceHref(service.slug, c.slug),
       })),
     },
     {

@@ -12,3 +12,8 @@ npm run build
 mkdir -p .next/standalone/.next/static .next/standalone/public
 cp -a .next/static/. .next/standalone/.next/static/
 cp -a public/. .next/standalone/public/
+# The payload is written during postbuild, before this copy. Keep it beside
+# the standalone server so start.sh can read it after the new build is serving.
+if [ -f .next/indexnow-deploy.json ]; then
+  cp .next/indexnow-deploy.json .next/standalone/indexnow-deploy.json
+fi

@@ -78,7 +78,7 @@ test('the central call to action and the service pages open the estimator', asyn
   const { FAMILY_BRAND } = await import('../lib/familyBrand.ts');
   const { CTA_ESTIMATE, ESTIMATE_HREF, estimatorProjectForService, instantEstimateHref } = await import('../shared/ctaCopy.ts');
   const { SERVICES } = await import('../shared/contentData.ts');
-  const { getAllSiteUrls } = await import('../lib/siteUrls.ts');
+  const { getAllSiteUrls, getXmlSiteUrls } = await import('../lib/siteUrls.ts');
   assert.equal(FAMILY_BRAND.cta.href, '/instant-estimate');
   assert.equal(ESTIMATE_HREF, '/instant-estimate');
   assert.equal(CTA_ESTIMATE, 'Get an instant estimate');
@@ -90,7 +90,9 @@ test('the central call to action and the service pages open the estimator', asyn
   assert.equal(instantEstimateHref('handyman'), '/instant-estimate?project=handyman');
   assert.equal(instantEstimateHref(null), '/instant-estimate');
   assert.equal(instantEstimateHref('Not Valid'), '/instant-estimate');
-  assert.ok(getAllSiteUrls().some((entry) => entry.path === '/instant-estimate'), 'the page is in the sitemap');
+  assert.ok(getAllSiteUrls().some((entry) => entry.path === '/instant-estimate'), 'the page stays on the HTML sitemap');
+  assert.equal(getXmlSiteUrls().some((entry) => entry.path === '/instant-estimate'), false, 'sitemap.xml omits the estimator');
+  assert.equal(getXmlSiteUrls().some((entry) => entry.path === '/sitemap'), false, 'sitemap.xml omits the HTML site map');
   // The existing tools stay: the request form and the in-house intake are still routes.
   // SEO audit S6 (owner approval, 20 November 2026): /estimate is a form tool
   // with no answer for a searcher, so it is noindex, follow and out of the

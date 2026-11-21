@@ -125,9 +125,12 @@ export const P5_SOCIAL = {
   // Owner, 20 November 2026: the one Instagram for every site, confirmed live.
   instagram: 'https://www.instagram.com/p5_home_co',
   google: 'https://www.google.com/search?kgmid=/g/11ntl1t7dc',
-  // The same Google Business Profile by its place id (owner, 20 November
-  // 2026), the link for "See our Google reviews" and the parent's hasMap.
-  maps: 'https://www.google.com/maps/place/?q=place_id:ChIJzxMoavs6P6IRNc6i9aOvt6Q',
+  // The same Google Business Profile by Maps cid (verified 21 November 2026:
+  // the cid and the place id both resolve to feature 0xa4b7afa3f5a2ce35).
+  // The link for "See our Google reviews" and the parent's hasMap.
+  maps: 'https://maps.google.com/?cid=11869148461693849141',
+  // Profile link only. No rating, grade, or accreditation claim.
+  bbb: 'https://www.bbb.org/us/id/meridian/profile/general-contractor/p5-home-co-llc-1296-1000203624',
 } as const;
 
 /** P5 Home Co's Google profile id; never published as this brand's sameAs. */

@@ -221,6 +221,17 @@ const nextConfig = {
     // hop (308) to /services; the route file was removed.
     redirects.push(...r('/services/home-repairs', '/services'));
 
+    // 21 November 2026: one permanent hop for a thin Boise child. statusCode
+    // 301 (not the default 308) and the destination is the service page, so
+    // nothing chains. The page file stays; redirects() wins before it.
+    const cityServiceIndex = require('./shared/cityServiceIndex.json');
+    for (const rule of cityServiceIndex.redirects) {
+      redirects.push(
+        { source: rule.source, destination: rule.destination, statusCode: 301 },
+        { source: `${rule.source}/`, destination: rule.destination, statusCode: 301 },
+      );
+    }
+
     return redirects;
   },
 

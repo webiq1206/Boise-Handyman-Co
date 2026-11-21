@@ -1,4 +1,3 @@
 #!/bin/bash
-# IndexNow submission runs on startup, then the dev server starts.
-node scripts/submit-indexnow.mjs
+# Dev never pings IndexNow. The ping runs from start.sh after a production deploy.
 npm run dev

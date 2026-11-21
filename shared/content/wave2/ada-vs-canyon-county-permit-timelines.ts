@@ -1,4 +1,5 @@
 import type { BlogPostData } from '../../blogContent';
+import { TREASURE_VALLEY_CITIES } from '../../contentData';
 
 export const adaVsCanyonCountyPermitTimelines: BlogPostData = {
   slug: 'ada-vs-canyon-county-permit-timelines',
@@ -118,6 +119,6 @@ export const adaVsCanyonCountyPermitTimelines: BlogPostData = {
 <p><strong>Because unpermitted work that needed a permit follows the house.</strong> It surfaces at sale time in inspections and disclosures, it can complicate insurance claims, and fixing it retroactively costs more than doing it right. A handyman who offers to quietly do permit-level work without one is not saving you money, they are transferring risk to you. Our position is boring and firm: exempt work we do well and promptly, permit work we refer to the right licensed contractor. If you are weighing whether a job is worth doing yourself, our post on <a href="/blog/diy-vs-hiring-a-handyman">DIY vs hiring a handyman</a> walks the same line from the other side.</p>
 
 <h2 id="next-steps">Not sure which side of the line your job is on?</h2>
-<p><strong>Describe the job and we will tell you straight: handyman fix, or contractor project.</strong> Most of the time it is the first one, and we can usually handle it in a single visit with an upfront quote. We work across Ada and Canyon County, Boise, Meridian, Eagle, Kuna, Star, Nampa, Caldwell, and Middleton. <a href="/contact">Get in touch</a> with a photo or two and we will point you the right way, even when the right way is not us.</p>
+<p><strong>Describe the job and we will tell you straight: handyman fix, or contractor project.</strong> Most of the time it is the first one, and we can usually handle it in a single visit with an upfront quote. We work across Ada and Canyon County: ${TREASURE_VALLEY_CITIES}. <a href="/contact">Get in touch</a> with a photo or two and we will point you the right way, even when the right way is not us.</p>
 `.trim(),
 };

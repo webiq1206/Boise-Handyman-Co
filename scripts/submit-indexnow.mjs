@@ -1,177 +1,67 @@
 #!/usr/bin/env node
 /**
- * IndexNow automatic submission script.
- * Fetches sitemap(s), extracts URLs, and submits them to IndexNow API.
- *
- * Environment (or defaults):
- *   INDEXNOW_KEY    (default: 9e89d20492d96d9f284ac07ca15508f1)
- *   HOST            (default: boisehandyman.co)
- *   SITEMAP_URL     (default: https://boisehandyman.co/sitemap.xml)
- *   KEY_LOCATION    (default: https://boisehandyman.co/9e89d20492d96d9f284ac07ca15508f1.txt)
+ * Post-deploy IndexNow ping. Runs from start.sh after the server is listening.
+ * Cold starts of a deploy that already submitted this SHA do nothing.
+ * CI and pull-request builds never reach the network: isPostDeploy() is false
+ * unless REPLIT_DEPLOYMENT=1 or INDEXNOW_POST_DEPLOY=1.
  */
+import { readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+import { isPostDeploy, planSubmit } from './indexnow-lib.mjs';
 
 const INDEXNOW_KEY = process.env.INDEXNOW_KEY ?? '9e89d20492d96d9f284ac07ca15508f1';
 const HOST = process.env.HOST ?? 'boisehandyman.co';
-const SITEMAP_URL = process.env.SITEMAP_URL ?? 'https://boisehandyman.co/sitemap.xml';
-const KEY_LOCATION = process.env.KEY_LOCATION ?? 'https://boisehandyman.co/9e89d20492d96d9f284ac07ca15508f1.txt';
-const INDEXNOW_API = 'https://api.indexnow.org/indexnow';
+const KEY_LOCATION = process.env.KEY_LOCATION ?? `https://${HOST}/${INDEXNOW_KEY}.txt`;
+const STATE_FILE = process.env.INDEXNOW_STATE_FILE ?? path.join(process.cwd(), '.indexnow-state.json');
 
-/**
- * @param {string} url
- * @returns {Promise<string>}
- */
-async function fetchText(url) {
-  const res = await fetch(url, { redirect: 'follow' });
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status} fetching ${url}`);
+function readJson(file) {
+  try {
+    return JSON.parse(readFileSync(file, 'utf8'));
+  } catch {
+    return null;
   }
-  return res.text();
 }
 
-/**
- * Extract <loc> URLs from sitemap XML text.
- * @param {string} xml
- * @returns {string[]}
- */
-function extractUrls(xml) {
-  const urls = [];
-  const re = /<loc>([^<]+)<\/loc>/gi;
-  let m;
-  while ((m = re.exec(xml)) !== null) {
-    urls.push(m[1].trim());
+function loadPayload() {
+  const candidates = [
+    process.env.INDEXNOW_PAYLOAD,
+    path.join(process.cwd(), '.next/standalone/indexnow-deploy.json'),
+    path.join(process.cwd(), '.next/indexnow-deploy.json'),
+    path.join(process.cwd(), 'indexnow-deploy.json'),
+  ].filter(Boolean);
+  for (const file of candidates) {
+    const payload = readJson(file);
+    if (payload && payload.sha) return payload;
   }
-  return urls;
+  return null;
 }
 
-/**
- * @param {string} url
- * @returns {boolean}
- */
-function isSitemapIndex(url) {
-  return url.includes('sitemapindex') || url.includes('/sitemap-index');
-}
-
-/**
- * Recursively fetch all URLs from a sitemap or sitemap index.
- * @param {string} url
- * @param {Set<string>} visited
- * @returns {Promise<string[]>}
- */
-async function collectSitemapUrls(url, visited = new Set()) {
-  if (visited.has(url)) return [];
-  visited.add(url);
-
-  console.log(`[IndexNow] Fetching sitemap: ${url}`);
-  const xml = await fetchText(url);
-  const urls = extractUrls(xml);
-
-  // Detect if this is a sitemap index by checking for <sitemapindex> or if the URLs look like sitemaps
-  const isIndex = xml.includes('<sitemapindex') || xml.includes('<sitemap>');
-  if (isIndex) {
-    const childUrls = [];
-    for (const childUrl of urls) {
-      if (childUrl.endsWith('.xml')) {
-        const childUrls2 = await collectSitemapUrls(childUrl, visited);
-        childUrls.push(...childUrls2);
-      } else {
-        childUrls.push(childUrl);
-      }
-    }
-    return childUrls;
-  }
-
-  return urls;
-}
-
-/**
- * Main entry point.
- */
 async function main() {
-  console.log(`[IndexNow] Host: ${HOST}`);
-  console.log(`[IndexNow] Key:  ${INDEXNOW_KEY}`);
-  console.log(`[IndexNow] Key location: ${KEY_LOCATION}`);
-  console.log(`[IndexNow] Sitemap: ${SITEMAP_URL}`);
-
-  // Verify prerequisites
-  const checks = [
-    { url: SITEMAP_URL, label: 'sitemap.xml' },
-    { url: `https://${HOST}/robots.txt`, label: 'robots.txt' },
-    { url: KEY_LOCATION, label: 'key file' },
-  ];
-
-  for (const { url, label } of checks) {
-    const res = await fetch(url, { method: 'HEAD', redirect: 'follow' });
-    console.log(`[IndexNow] ${label} ${res.ok ? 'OK' : 'FAIL'} (${res.status}) ${url}`);
-    if (!res.ok) {
-      console.warn(`[IndexNow] WARNING: ${label} returned HTTP ${res.status} at ${url}. Proceeding anyway. The key file must be publicly accessible before search engines will validate it.`);
-    }
+  if (!isPostDeploy(process.env)) {
+    console.log('[IndexNow] skipped: not a production deploy');
+    return;
   }
-
-  // Collect URLs
-  const allUrls = await collectSitemapUrls(SITEMAP_URL);
-  const hostUrls = allUrls.filter((u) => u.startsWith(`https://${HOST}`) || u.startsWith(`http://${HOST}`));
-
-  console.log(`[IndexNow] Total URLs in sitemap(s): ${allUrls.length}`);
-  console.log(`[IndexNow] URLs belonging to ${HOST}: ${hostUrls.length}`);
-
-  if (hostUrls.length === 0) {
-    console.log('[IndexNow] No URLs to submit. Exiting.');
-    process.exit(0);
-  }
-
-  // Submit to IndexNow
-  const payload = {
-    host: HOST,
-    key: INDEXNOW_KEY,
-    keyLocation: KEY_LOCATION,
-    urlList: hostUrls,
-  };
-
-  console.log(`[IndexNow] Submitting ${hostUrls.length} URL(s) to ${INDEXNOW_API} ...`);
-
-  // Submit to the unified IndexNow API first, then fall back to Yandex
-  const endpoints = [
-    { url: INDEXNOW_API, name: 'IndexNow (Microsoft)' },
-    { url: 'https://yandex.com/indexnow', name: 'IndexNow (Yandex)' },
-  ];
-
-  let succeeded = false;
-  for (const { url, name } of endpoints) {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
-
-    const responseText = await res.text();
-    console.log(`[IndexNow] ${name} response: HTTP ${res.status}`);
-    if (responseText) {
-      console.log(`[IndexNow] ${name} body: ${responseText}`);
+  const payload = loadPayload();
+  const state = readJson(STATE_FILE);
+  const result = await planSubmit({
+    env: process.env,
+    payload: payload
+      ? { ...payload, host: HOST, key: INDEXNOW_KEY, keyLocation: KEY_LOCATION }
+      : null,
+    state,
+    fetchImpl: (url, init) => fetch(url, init),
+  });
+  if (result.log) console.log(result.log);
+  if (result.nextState && result.nextState !== state) {
+    try {
+      writeFileSync(STATE_FILE, `${JSON.stringify(result.nextState)}\n`);
+    } catch (error) {
+      console.warn(`[IndexNow] could not record sha: ${error instanceof Error ? error.message : 'unknown'}`);
     }
-
-    if (res.status === 200 || res.status === 202) {
-      console.log(`[IndexNow] SUCCESS: ${name} accepted ${hostUrls.length} URL(s)`);
-      succeeded = true;
-    } else if (res.status === 403) {
-      console.warn(`[IndexNow] ${name} returned HTTP 403. This usually means the site is not yet authorized by that search engine. Submission is still valid for other engines. Continuing with next endpoint...`);
-    } else if (res.status === 429) {
-      console.warn(`[IndexNow] ${name} returned HTTP 429 (rate limited). Retrying with next endpoint...`);
-    } else {
-      console.warn(`[IndexNow] ${name} returned HTTP ${res.status}. Continuing with next endpoint...`);
-    }
-  }
-
-  if (succeeded) {
-    console.log(`[IndexNow] DONE: At least one search engine accepted the submission.`);
-  } else {
-    console.warn(`[IndexNow] WARNING: No search engine accepted the submission. The URLs may not be indexed yet. The site may need to be registered with the search engines first. The key file is available at ${KEY_LOCATION}.`);
   }
 }
 
-main().catch((err) => {
-  console.error(`[IndexNow] Error: ${err.message}`);
-  process.exit(1);
+main().catch((error) => {
+  console.error(`[IndexNow] Error: ${error instanceof Error ? error.message : 'unknown'}`);
+  process.exitCode = 0;
 });

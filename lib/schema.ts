@@ -46,10 +46,9 @@ export const P5_PARENT_ORGANIZATION = {
   '@id': P5_ORG_ID,
   name: 'P5 Home Co',
   url: P5_ORIGIN,
-  // The owner's only profiles are P5 Home Co's Facebook page and Google
-  // Business Profile, so they are asserted here on the parent and kept out of
-  // this brand's own sameAs.
-  sameAs: [P5_SOCIAL.facebook, P5_SOCIAL.instagram, P5_SOCIAL.google, P5_SOCIAL.maps],
+  // Parent profiles only. Boise Handyman Co has none of its own, so these stay
+  // off this brand's sameAs. The list is the link, with no rating or grade.
+  sameAs: [P5_SOCIAL.facebook, P5_SOCIAL.instagram, P5_SOCIAL.google, P5_SOCIAL.maps, P5_SOCIAL.bbb],
   // SEO audit XS-03 and HM-T4 (owner, 20 November 2026): the parent's one
   // Google Business Profile. No rating or review markup anywhere.
   hasMap: P5_SOCIAL.maps,

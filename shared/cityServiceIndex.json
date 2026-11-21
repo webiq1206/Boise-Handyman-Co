@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    {
+      "source": "/services/drywall-repair/boise",
+      "destination": "/services/drywall-repair"
+    }
+  ],
+  "noindex": [
+    "drywall-repair/eagle",
+    "home-maintenance/meridian",
+    "painting-touch-ups/eagle",
+    "mounting-assembly/meridian",
+    "painting-touch-ups/meridian",
+    "plumbing-repairs/eagle"
+  ]
+}

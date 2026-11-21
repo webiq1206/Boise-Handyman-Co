@@ -8,10 +8,10 @@ landingAreaBusinessSchema,
 landingBreadcrumbs,
 landingFAQSchema,
 } from '@/lib/landing-schema';
-import { buildPageMetadata,isCityServiceNoindex } from '@/lib/page-metadata';
+import { buildPageMetadata,cityServiceHref,isCityServiceInSitemap } from '@/lib/page-metadata';
 import { generateSpeakableSchema } from '@/lib/schema';
 import { CITY_SEO_DATA,serviceCityAnchor } from '@/lib/seo';
-import { areaPath,cityServicePath,CITY_SLUGS,getCityBySlug,servicePath } from '@/lib/seo-routes';
+import { areaPath,CITY_SLUGS,getCityBySlug } from '@/lib/seo-routes';
 import { getAreaImageSet } from '@/shared/cityServiceImages';
 import { LOCATION_GUIDES } from '@/shared/content/locationGuides';
 import { getCountyLabel,SERVICES } from '@/shared/contentData';
@@ -64,7 +64,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
   // Link only the city x service pages that are in the index. The others are
   // noindex, follow, and linking them from every area page spent crawl budget
   // on pages that cannot rank, so those services link to their service page.
-  const indexedCount = SERVICES.filter((s) => !isCityServiceNoindex(s.slug, city.slug)).length;
+  const indexedCount = SERVICES.filter((s) => isCityServiceInSitemap(s.slug, city.slug)).length;
   const cityGuide = LOCATION_GUIDES.find((g) => g.guideType === 'location' && g.linkedCities?.includes(city.slug));
   const serviceIntro =
     indexedCount === SERVICES.length
@@ -77,7 +77,7 @@ export default async function AreaPage(props: { params: Promise<{ city: string }
   const serviceLinks = [
     ...SERVICES.map((s) => ({
       label: serviceCityAnchor(s.slug, s.name, city.name),
-      href: isCityServiceNoindex(s.slug, city.slug) ? servicePath(s.slug) : cityServicePath(s.slug, city.slug),
+      href: cityServiceHref(s.slug, city.slug),
     })),
     ...(cityGuide ? [{ label: `${city.name} home repair guide`, href: guidePath(cityGuide.slug) }] : []),
     { label: `RE-10 inspection repairs in ${city.name}`, href: '/re-10-repairs-boise' },
