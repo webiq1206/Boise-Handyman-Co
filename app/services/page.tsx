@@ -1,162 +1,221 @@
-import Image from '@/components/VersionedImage';
-import { InteriorHero,InteriorPage } from '@/components/approved/InteriorLayout';
+import { InteriorHero, InteriorPage } from '@/components/approved/InteriorLayout';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
-import { AreaCard } from '@/components/marketing/AreaCard';
-import { EstimatePromptBand } from '@/components/marketing/EstimatePromptBand';
+import { FamilyButton } from '@/components/family/Button';
 import { Section } from '@/components/marketing/Section';
-import { InstantEstimateCTA } from '@/components/estimator/InstantEstimateCTA';
-import { Reveal } from '@/components/Reveal';
+import { VisitProofRow } from '@/components/marketing/VisitProofRow';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { withBrandPageMetadata } from '@/lib/brand-page-metadata';
-import { buildCanonical,FEED_ALTERNATES,fitDescription } from '@/lib/page-metadata';
-import { generateBreadcrumbSchema } from '@/lib/schema';
-import { getBaseUrl } from '@/lib/seo';
-import { servicePath } from '@/lib/seo-routes';
-import { CITY_HERO_IMAGES } from '@/shared/cityServiceImages';
-import { SERVICE_AREA_CITIES,SERVICES,serviceHeading } from '@/shared/contentData';
-import { CTA_SECONDARY } from '@/shared/ctaCopy';
-import { altForImage } from '@/shared/imageAlts';
-import { localAlt, subjectForService } from '@/shared/localAlt';
-import { getServiceBackground } from '@/shared/serviceBackgrounds';
+import { buildCanonical, FEED_ALTERNATES } from '@/lib/page-metadata';
+import { areaPath } from '@/lib/seo-routes';
+import {
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+  generateOrganizationSchema,
+  generateWebPageSchema,
+} from '@/lib/schema';
+import { SERVICE_AREA_CITIES } from '@/shared/contentData';
 import { SITE_CONFIG } from '@/shared/siteConfig';
-import { ArrowRight } from 'lucide-react';
+import {
+  LARGER_WORK,
+  SERVICES_HUB_ANSWER,
+  SERVICES_HUB_CARDS,
+  SERVICES_HUB_DESCRIPTION,
+  SERVICES_HUB_DOCUMENT_TITLE,
+  SERVICES_HUB_FAQS,
+  SERVICES_HUB_FIX_INTRO,
+  SERVICES_HUB_LARGER,
+  SERVICES_HUB_OG_DESCRIPTION,
+  SERVICES_HUB_OG_TITLE,
+  SERVICES_HUB_PRICING,
+  SERVICES_HUB_PRICING_ID,
+  SERVICES_HUB_WHERE,
+  VISIT_STEPS,
+} from '@/shared/servicesHub';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { FamilyButton } from '@/components/family/Button';
-import type { ReactNode } from 'react';
 
-/** Keeps the last two words together so a short heading does not end on one word. */
-function keepTail(label: string): ReactNode {
-  const words = label.trim().split(/\s+/);
-  if (words.length < 3) return label;
-  return (
-    <>
-      {words.slice(0, -2).join(' ')}{' '}
-      <span className="mobile-keep">{words.slice(-2).join(' ')}</span>
-    </>
-  );
-}
+const branded = withBrandPageMetadata(
+  {
+    alternates: { canonical: buildCanonical('/services'), types: FEED_ALTERNATES },
+    openGraph: {
+      url: buildCanonical('/services'),
+      type: 'website',
+    },
+  },
+  '/services',
+);
 
-const TITLE = 'Handyman Services | Treasure Valley';
-const DESCRIPTION =
-  fitDescription('Handyman services in Boise, Meridian, Eagle, Nampa and the Treasure Valley: drywall repair, painting, minor plumbing and electrical, carpentry, mounting, and home maintenance, quoted upfront.');
-
-export const metadata: Metadata = withBrandPageMetadata(({
-  title: { absolute: `${TITLE} | ${SITE_CONFIG.name}` },
-  description: DESCRIPTION,
-  alternates: { canonical: buildCanonical('/services'), types: FEED_ALTERNATES },
+export const metadata: Metadata = {
+  ...branded,
   openGraph: {
-    title: TITLE,
-    description: DESCRIPTION,
-    url: buildCanonical('/services'),
-    type: 'website',
-    images: [{ url: '/images/og-default.png', width: 1200, height: 630, alt: SITE_CONFIG.name }],
+    ...branded.openGraph,
+    title: SERVICES_HUB_OG_TITLE,
+    description: SERVICES_HUB_OG_DESCRIPTION,
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: TITLE,
-    description: DESCRIPTION,
-    images: ['/images/og-default.png'],
-  },
-}), "/services");
+};
 
 export default function ServicesIndexPage() {
-  const base = getBaseUrl().replace(/\/$/, '');
-
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
     { name: 'Services', url: '/services' },
   ]);
-
-  const itemListSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Handyman Services',
-    itemListElement: SERVICES.map((service, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: service.name,
-      url: `${base}${servicePath(service.slug)}`,
-    })),
-  };
+  const webPageSchema = generateWebPageSchema({
+    title: SERVICES_HUB_DOCUMENT_TITLE,
+    description: SERVICES_HUB_DESCRIPTION,
+    url: '/services',
+    speakable: true,
+  });
+  const faqSchema = generateFAQSchema([...SERVICES_HUB_FAQS]);
 
   return (
-    <InteriorPage kind="services"><>
-      <JsonLd data={[breadcrumbSchema, itemListSchema]} />
+    <InteriorPage kind="services">
+      <>
+        <JsonLd data={[webPageSchema, breadcrumbSchema, faqSchema, generateOrganizationSchema()]} />
 
-      <InteriorHero layout="editorial">
-        <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Services' }]} />
-        <p className="ed-eyebrow mt-8" style={{ color: 'rgb(255 255 255 / 0.72)' }}>Our services</p>
-        <h1 className="ed-display ed-statement-display text-inverse-foreground">
-          Handyman services in Boise{' '}
-            <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>and the Treasure Valley</em>
-        </h1>
-        <p className="ed-lede mt-8 max-w-[44ch] text-inverse-foreground/85">
-          Handyman services in Boise and the Treasure Valley include small repairs, installs and
-            maintenance, quoted upfront as one written price. The team reviews your repair list and confirms scope, materials and the visit plan before scheduling.
-        </p>
-      </InteriorHero>
-
-      {/* Approved photo-led service directory. */}
-      <section className="interior-service-grid" aria-label="All services">{SERVICES.map(service=><Link className="interior-service-card" href={servicePath(service.slug)} key={service.slug}><Image src={getServiceBackground(service.slug)} alt={altForImage(getServiceBackground(service.slug), { subject: subjectForService(service.slug) }) ?? localAlt(service.name)} width={900} height={675} sizes="(max-width: 700px) 112px, (max-width: 1023px) 50vw, 400px"/><div><h2>{keepTail(serviceHeading(service.name))}</h2><ArrowRight size={18} aria-hidden="true"/></div><p>{service.shortDescription}</p></Link>)}</section>
-
-      <EstimatePromptBand
-        title={
-          <>
-            Share your repair list before{' '}
-              <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>you book</em>
-          </>
-        }
-        description="Send your repair, install or maintenance details for team review. Scope, pricing and availability are confirmed before scheduling."
-      />
-
-      <Section surface="bone" spacing="xl" edge>
-        <div className="ed-shell">
-          <div className="ed-split ed-split-end">
-            <Reveal>
-              <p className="ed-eyebrow">Treasure Valley</p>
-              <h2 className="ed-h2 ed-statement-wide">
-                Serving communities across{' '}
-                <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>the valley</em>
-              </h2>
-            </Reveal>
-            <Reveal delay={60}>
-              <p className="ed-body">
-                We serve every Ada and Canyon County community below with the same fair pricing.
-                  Choose your city for local details and scheduling.
-              </p>
-            </Reveal>
+        <InteriorHero layout="editorial">
+          <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Services' }]} />
+          <h1 className="ed-display">
+            Handyman services in Boise{' '}
+            <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>
+              and the Treasure Valley
+            </em>
+          </h1>
+          <p className="ed-lede mt-8 max-w-[62ch]" data-speakable="summary">
+            {SERVICES_HUB_ANSWER}
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3">
+            <FamilyButton className="w-full sm:w-auto" href={SITE_CONFIG.phoneHref} variant="primary" size="lg">
+              Call {SITE_CONFIG.phone}
+            </FamilyButton>
+            <FamilyButton className="w-full sm:w-auto" href={SITE_CONFIG.phoneSmsHref} variant="secondary" size="lg">
+              Text us your list
+            </FamilyButton>
+            <FamilyButton href="/instant-estimate" variant="tertiary" size="lg">
+              Get an instant estimate
+            </FamilyButton>
           </div>
-          <div className="lx-seven mt-[clamp(40px,5vw,72px)] grid gap-4 sm:grid-cols-3">
-            {SERVICE_AREA_CITIES.map((city, i) => (
-              <Reveal key={city.slug} delay={Math.min(i, 7) * 40}>
-                <AreaCard city={city} imageSrc={CITY_HERO_IMAGES[city.slug]} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </Section>
+        </InteriorHero>
 
-      <Section surface="gradient" spacing="lg" edge>
-        <div className="ed-shell">
-          <div className="ed-split ed-split-center">
-            <h2 className="ed-h2 ed-statement">
-              Ready to get it{' '}
-                <em className="not-italic" style={{ color: 'var(--ed-accent)' }}>fixed?</em>
-            </h2>
-            <div>
-              <p className="ed-body">
-                See a preliminary price range online, send your repair list, or call to discuss the scope and next steps before scheduling.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 [&>*]:w-full sm:[&>*]:w-auto">
-                {/* Owner decision, 13 November 2026: the estimator is the primary; the request form stays beside it. */}
-                <InstantEstimateCTA tone="dark" trackingLocation="services_closing" />
-                <FamilyButton href="/#consult" variant="secondary" tone="dark">{CTA_SECONDARY}</FamilyButton>
+        <div className="services-hub">
+          <Section surface="bone" spacing="lg" edge>
+            <div className="ed-shell">
+              <h2 className="ed-h2-sm">What we fix</h2>
+              <p className="ed-body mt-6">{SERVICES_HUB_FIX_INTRO}</p>
+              <ul className="services-hub-cards">
+                {SERVICES_HUB_CARDS.map((card) => (
+                  <li key={card.href}>
+                    <h3 className="ed-h3">{card.title}</h3>
+                    <p className="ed-body">{card.benefit}</p>
+                    <Link href={card.href}>{card.link}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Section>
+
+          <Section surface="dark" spacing="lg" edge>
+            <div className="ed-shell">
+              <div className="lx-prose-split">
+                <h2 id={SERVICES_HUB_PRICING_ID} className="ed-h2-sm scroll-mt-28">
+                  How a handyman visit is priced
+                </h2>
+                <p className="ed-body mt-6 lg:mt-0">{SERVICES_HUB_PRICING}</p>
               </div>
             </div>
-          </div>
+          </Section>
+
+          <Section surface="bone" spacing="lg" edge>
+            <div className="ed-shell">
+              <h2 className="ed-h2-sm">How it works</h2>
+              <ol className="services-hub-steps">
+                {VISIT_STEPS.map((step, index) => (
+                  <li key={step.title}>
+                    <span className="services-hub-step-n" aria-hidden="true">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="ed-h3">{step.title}</h3>
+                    <p className="ed-body">{step.body}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </Section>
+
+          <Section surface="dark" spacing="lg" edge>
+            <div className="ed-shell">
+              <h2 className="ed-h2-sm">Why Boise homeowners call us</h2>
+              <div className="mt-8">
+                <VisitProofRow as="div" />
+              </div>
+            </div>
+          </Section>
+
+          <Section surface="bone" spacing="lg" edge>
+            <div className="ed-shell">
+              <div className="lx-prose-split">
+                <h2 className="ed-h2-sm">Where we work</h2>
+                <div className="mt-6 lg:mt-0">
+                  <p className="ed-body">{SERVICES_HUB_WHERE}</p>
+                  <nav className="services-hub-cities" aria-label="Cities we serve">
+                    {SERVICE_AREA_CITIES.map((city) => (
+                      <Link key={city.slug} href={areaPath(city.slug)}>
+                        {city.name}
+                      </Link>
+                    ))}
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </Section>
+
+          <Section surface="dark" spacing="lg" edge>
+            <div className="ed-shell">
+              <div className="lx-prose-split">
+                <h2 className="ed-h2-sm">Bigger than a handyman job?</h2>
+                <div className="mt-6 lg:mt-0">
+                  <p className="ed-body">{SERVICES_HUB_LARGER}</p>
+                  <ul className="services-hub-family">
+                    {LARGER_WORK.map((item) => (
+                      <li key={item.href}>
+                        {item.lead}:{' '}
+                        <a href={item.href} rel="noopener noreferrer">
+                          {item.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </Section>
+
+          <Section surface="bone" spacing="lg" edge>
+            <div className="ed-shell">
+              <div className="ed-split ed-split-narrow">
+                <div className="lg:sticky lg:top-28 lg:self-start">
+                  <h2 className="ed-h2-sm">Handyman services FAQ</h2>
+                </div>
+                <div className="lx-faq w-full border-t" style={{ borderColor: 'var(--ed-line)' }}>
+                  {SERVICES_HUB_FAQS.map((faq, index) => (
+                    <details
+                      key={faq.question}
+                      name="services-hub-faq"
+                      open={index === 0}
+                      className="border-b"
+                      style={{ borderColor: 'var(--ed-line)' }}
+                    >
+                      <summary>
+                        <h3 className="ed-h4 text-left">{faq.question}</h3>
+                      </summary>
+                      <p className="ed-body">{faq.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Section>
         </div>
-      </Section>
-    </></InteriorPage>
+      </>
+    </InteriorPage>
   );
 }

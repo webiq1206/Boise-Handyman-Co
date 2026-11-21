@@ -44,7 +44,7 @@ export interface SiteUrlGroup {
 export function getSiteUrlGroups(): SiteUrlGroup[] {
   const core: SiteUrlEntry[] = [
     { path: '/', label: 'Home', changeFrequency: 'weekly', priority: 1 },
-    { path: '/services', label: 'Services', changeFrequency: 'monthly', priority: 0.85 },
+    { path: '/services', label: 'Services', changeFrequency: 'monthly', priority: 0.85, lastModified: new Date('2026-11-21') },
     { path: '/about', label: 'About', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/areas', label: 'Service areas', changeFrequency: 'monthly', priority: 0.75 },
     { path: '/contact', label: 'Send your list and photos', changeFrequency: 'monthly', priority: 0.9 },

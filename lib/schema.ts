@@ -5,7 +5,8 @@ import {schemaTime} from './schemaTime';
  */
 
 import { BUSINESS_INFO, getBaseUrl } from './seo';
-import { SERVICE_AREA_COUNTIES, SERVICE_AREA_LINE, SERVICES } from '@/shared/contentData';
+import { SERVICE_AREA_COUNTIES, SERVICE_AREA_LINE } from '@/shared/contentData';
+import { SERVICES_HUB_CARDS } from '@/shared/servicesHub';
 import { SITE_CONFIG, handymanServiceSentence } from '@/shared/siteConfig';
 import { P5_SOCIAL } from '@/shared/gbpProfile';
 
@@ -209,13 +210,13 @@ export function generateLocalBusinessSchema(city?: string): SchemaContext {
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Handyman Services',
-      itemListElement: SERVICES.map((s) => ({
+      itemListElement: SERVICES_HUB_CARDS.map((card) => ({
         '@type': 'Offer',
-        url: `${baseUrl}/services/${s.slug}`,
+        url: `${baseUrl}${card.href}`,
         itemOffered: {
           '@type': 'Service',
-          name: s.name,
-          description: s.shortDescription,
+          name: card.title,
+          description: card.benefit,
         },
       })),
     },

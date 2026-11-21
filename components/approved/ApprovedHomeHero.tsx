@@ -1,8 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { FamilyButton } from '@/components/family/Button';
 import { brandStyle } from '@/components/family/brandStyle';
-import { ProofStrip } from '@/components/family/ProofStrip';
-import { CONTRACTOR_REGISTRATION } from '@/components/ContractorCredential';
+import { VisitProofRow } from '@/components/marketing/VisitProofRow';
 import { FAMILY_BRAND } from '@/lib/familyBrand';
 import { CTA_ESTIMATE } from '@/shared/ctaCopy';
 import { brands } from './family-content';
@@ -54,14 +53,8 @@ export function ApprovedHomeHero({heroClassName}: {heroClassName?: string} = {})
           </div>
         </section>
       </div>
-      {/* The three facts this hero already published: written quote, no trip fee, registration. */}
-      <ProofStrip
-        items={[
-          { label: 'Pricing', text: b.proof[0] },
-          { label: 'Travel', text: b.proof[1] },
-          { label: 'Registered', text: CONTRACTOR_REGISTRATION },
-        ]}
-      />
+      {/* Four sourced facts, directly under the hero. The visit link points at the services hub pricing section. */}
+      <VisitProofRow showPricingLink />
     </>
   );
 }

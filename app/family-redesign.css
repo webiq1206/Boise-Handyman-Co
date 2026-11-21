@@ -615,3 +615,43 @@ html .fr-gallery p.fr-gallery-note {
   .hm-estimate-projects { grid-template-columns: 1fr; gap: 8px; }
   .hm-estimate-person { flex-direction: column; align-items: flex-start; }
 }
+
+/* Homepage proof row and the trust links above the footer. */
+.visit-proof .fam-proof-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.visit-proof .visit-proof-more {
+  margin: 0;
+  padding: 0 var(--gutter) var(--space-5);
+}
+.visit-proof .visit-proof-more a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.visit-trust {
+  background: var(--color-bone, #f1ede4);
+  color: #383837;
+  border-top: 1px solid var(--color-border);
+}
+.visit-trust ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+  list-style: none;
+  margin: 0;
+  padding: 12px 0;
+}
+.visit-trust a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
