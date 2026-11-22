@@ -42,6 +42,22 @@ test('Group 1 customer copy does not state the hourly rate or the one-hour minim
   assert.equal(gbp.includes('one-hour minimum'), false);
 });
 
+test('the Boise prices post keeps its title and uses the written-quote description', async () => {
+  const { handymanPricesBoise } = await import('../shared/content/wave2/handyman-prices-boise.ts');
+  assert.equal(handymanPricesBoise.slug, 'handyman-prices-boise');
+  assert.equal(handymanPricesBoise.title, 'Handyman prices in Boise: hourly rates and job prices (2026)');
+  assert.equal(handymanPricesBoise.seoTitle, 'Handyman Prices in Boise | Hourly Rates');
+  assert.equal(handymanPricesBoise.primaryKeyword, 'handyman prices boise');
+  assert.deepEqual(handymanPricesBoise.secondaryKeywords, [
+    'handyman hourly rate boise',
+    'how much does a handyman charge in idaho',
+    'handyman prices treasure valley',
+  ]);
+  const description = 'Handyman prices in Boise for 2026: how hourly and flat pricing work, what common jobs cost, and why a written quote before any work starts protects you.';
+  assert.equal(handymanPricesBoise.metaDescription, description);
+  assert.equal(description.length, 152);
+});
+
 test('the visit-priced FAQ states one written price', () => {
   const text = readFileSync('components/approved/family-content.ts', 'utf8');
   assert.match(

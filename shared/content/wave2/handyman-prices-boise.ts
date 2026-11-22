@@ -14,7 +14,7 @@ export const handymanPricesBoise: BlogPostData = {
   title: 'Handyman prices in Boise: hourly rates and job prices (2026)',
   seoTitle: 'Handyman Prices in Boise | Hourly Rates',
   metaDescription:
-    'Handyman prices in Boise for 2026: our hourly rate, visit minimums and trip fees, what common jobs cost, and how a flat written quote compares.',
+    'Handyman prices in Boise for 2026: how hourly and flat pricing work, what common jobs cost, and why a written quote before any work starts protects you.',
   excerpt:
     'Handyman pricing in the Treasure Valley is not mysterious: an hourly rate, trip minimums, and flat rates for common jobs. Here is how the numbers actually work.',
   category: 'Costs & Hiring',
