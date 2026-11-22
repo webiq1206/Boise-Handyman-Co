@@ -49,7 +49,7 @@ export const P5_PARENT_ORGANIZATION = {
   // The owner's only profiles are P5 Home Co's Facebook page and Google
   // Business Profile, so they are asserted here on the parent and kept out of
   // this brand's own sameAs.
-  sameAs: [P5_SOCIAL.facebook, P5_SOCIAL.instagram, P5_SOCIAL.google, P5_SOCIAL.maps],
+  sameAs: [P5_SOCIAL.facebook, P5_SOCIAL.instagram, P5_SOCIAL.google, P5_SOCIAL.maps, P5_SOCIAL.bbb],
   // SEO audit XS-03 and HM-T4 (owner, 20 November 2026): the parent's one
   // Google Business Profile. No rating or review markup anywhere.
   hasMap: P5_SOCIAL.maps,

@@ -48,7 +48,7 @@ const FAMILY =
 // Owner, 20 November 2026: the parent company's profiles, shared by every site.
 const PARENT_PROFILES =
   `P5 Home Co profiles: Facebook ${P5_SOCIAL.facebook}, Instagram ${P5_SOCIAL.instagram}, ` +
-  `Google Business Profile ${P5_SOCIAL.maps}.`;
+  `Google Business Profile ${P5_SOCIAL.maps}, BBB ${P5_SOCIAL.bbb}.`;
 
 const indexableHubs = CONTENT_HUBS.filter((h) =>
   isCategoryHubIndexable(

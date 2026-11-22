@@ -34,7 +34,8 @@ test('the P5 Home Co Facebook page sits on the parent node, not this brand',asyn
  const {P5_SOCIAL}=await import('../shared/gbpProfile.ts');
  assert.equal(P5_SOCIAL.facebook,P5_FACEBOOK);
  const {P5_PARENT_ORGANIZATION}=await import('../lib/schema.ts');
- assert.deepEqual([...P5_PARENT_ORGANIZATION.sameAs],[P5_FACEBOOK,P5_INSTAGRAM,P5_GOOGLE,P5_MAPS]);
+ const P5_BBB='https://www.bbb.org/us/id/meridian/profile/general-contractor/p5-home-co-llc-1296-1000203624';
+ assert.deepEqual([...P5_PARENT_ORGANIZATION.sameAs],[P5_FACEBOOK,P5_INSTAGRAM,P5_GOOGLE,P5_MAPS,P5_BBB]);
  assert.equal(P5_PARENT_ORGANIZATION.hasMap,P5_MAPS);
  const {BUSINESS_INFO}=await import('../lib/seo.ts');
  assert.equal(BUSINESS_INFO.sameAs.includes(P5_FACEBOOK),false);
