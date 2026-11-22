@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { CITIES, SERVICES } from '@/shared/contentData';
+import cityServiceIndex from '@/shared/cityServiceIndex.json';
 import {
   generateCityServiceDescription,
   generateCityServiceTitle,
@@ -56,10 +57,49 @@ const SECONDARY_SERVICES = ['carpentry-trim-repair','fence-deck-gutter-repair','
 const SECONDARY_CITIES = ['boise','meridian'];
 const EXTRA_INDEXABLE = [] as string[];
 
+/**
+ * City pages kept out of the index on purpose (21 November 2026). The page
+ * stays reachable. A merged URL is a permanent redirect instead, so it is not
+ * in this set.
+ */
+const NOINDEX_EXTRA = new Set<string>(cityServiceIndex.noindex);
+
 function isIndexable(serviceSlug: string, citySlug: string): boolean {
+  if (NOINDEX_EXTRA.has(`${serviceSlug}/${citySlug}`)) return false;
   if (CORE_SERVICES.includes(serviceSlug) && CORE_CITIES.includes(citySlug)) return true;
   if (SECONDARY_SERVICES.includes(serviceSlug) && SECONDARY_CITIES.includes(citySlug)) return true;
   return EXTRA_INDEXABLE.includes(`${serviceSlug}/${citySlug}`);
+}
+
+/** Permanent moves. Keyed as service/city. The destination is the public URL. */
+export const CITY_SERVICE_REDIRECTS: Record<string, string> = Object.fromEntries(
+  cityServiceIndex.redirects.map((rule) => {
+    const [, , serviceSlug, citySlug] = rule.source.split('/');
+    return [`${serviceSlug}/${citySlug}`, rule.destination];
+  }),
+);
+
+export function cityServiceRedirectTarget(serviceSlug: string, citySlug: string): string | undefined {
+  return CITY_SERVICE_REDIRECTS[`${serviceSlug}/${citySlug}`];
+}
+
+/** Sitemap and internal links skip noindex pages and redirect sources. */
+export function isCityServiceInSitemap(serviceSlug: string, citySlug: string): boolean {
+  return !isCityServiceNoindex(serviceSlug, citySlug) && !cityServiceRedirectTarget(serviceSlug, citySlug);
+}
+
+/**
+ * Public href for a city x service link. A redirect source points at its
+ * target. A noindex page points at the service page. An indexed page keeps
+ * its own URL.
+ */
+export function cityServiceHref(serviceSlug: string, citySlug: string): string {
+  return (
+    cityServiceRedirectTarget(serviceSlug, citySlug) ??
+    (isCityServiceNoindex(serviceSlug, citySlug)
+      ? `/services/${serviceSlug}`
+      : `/services/${serviceSlug}/${citySlug}`)
+  );
 }
 
 /** Keyed as `${serviceSlug}/${citySlug}`. Derived from the allowlist above. */

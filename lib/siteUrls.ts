@@ -20,7 +20,7 @@ import {
   guidePath,
   isCategoryHubIndexable,
 } from '@/shared/contentHubs';
-import { isCityServiceNoindex } from '@/lib/page-metadata';
+import { isCityServiceInSitemap } from '@/lib/page-metadata';
 
 export type ChangeFrequency = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
 
@@ -74,9 +74,9 @@ export function getSiteUrlGroups(): SiteUrlGroup[] {
     priority: 0.8,
   }));
 
-  // Noindexed doorway-risk combos are excluded, exactly as in the XML sitemap.
+  // Noindexed doorway-risk combos and permanent redirects are excluded.
   const cityServices: SiteUrlEntry[] = SERVICES.flatMap((s) =>
-    CITIES.filter((c) => !isCityServiceNoindex(s.slug, c.slug)).map((c) => ({
+    CITIES.filter((c) => isCityServiceInSitemap(s.slug, c.slug)).map((c) => ({
       path: `/services/${s.slug}/${c.slug}`,
       label: `${s.name} in ${c.name}`,
       changeFrequency: 'monthly' as const,
@@ -122,7 +122,17 @@ export function getSiteUrlGroups(): SiteUrlGroup[] {
   ];
 }
 
-/** Flat list, for the XML sitemap. */
+/** Flat list, for the HTML sitemap. */
 export function getAllSiteUrls(): SiteUrlEntry[] {
   return getSiteUrlGroups().flatMap((g) => g.entries);
+}
+
+/**
+ * XML sitemap only. The HTML site map and the instant estimate stay as pages.
+ * They are not submitted in sitemap.xml (21 November 2026).
+ */
+const XML_SITEMAP_OMIT = new Set(['/sitemap', '/instant-estimate']);
+
+export function getXmlSiteUrls(): SiteUrlEntry[] {
+  return getAllSiteUrls().filter((entry) => !XML_SITEMAP_OMIT.has(entry.path));
 }

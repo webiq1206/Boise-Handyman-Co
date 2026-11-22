@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {landingFAQSchema} from '../lib/landing-schema.ts';
 import {buildPageMetadata,isCityServiceNoindex,NOINDEX_CITY_SERVICE} from '../lib/page-metadata.ts';
-import {getAllSiteUrls} from '../lib/siteUrls.ts';
+import {getAllSiteUrls,getXmlSiteUrls} from '../lib/siteUrls.ts';
 import robots from '../app/robots.ts';
 import {withBrandPageMetadata} from '../lib/brand-page-metadata.ts';
 import {CITIES,SERVICES} from '../shared/contentData.ts';
@@ -27,12 +27,19 @@ const NOINDEX_TODAY=[
 ];
 const INDEXED_TODAY=[
  'drywall-repair/boise',
- 'painting-touch-ups/meridian',
  'electrical-repairs/eagle',
  'plumbing-repairs/nampa',
  'mounting-assembly/nampa',
  'home-maintenance/boise',
  'fence-deck-gutter-repair/meridian',
+];
+const NOINDEX_ADDED=[
+ 'drywall-repair/eagle',
+ 'home-maintenance/meridian',
+ 'painting-touch-ups/eagle',
+ 'mounting-assembly/meridian',
+ 'painting-touch-ups/meridian',
+ 'plumbing-repairs/eagle',
 ];
 
 function read(path:string){
@@ -131,23 +138,29 @@ test('published city claims and the Kuna and Caldwell neighborhood order stay',(
 });
 
 test('noindex pages stay noindex and robots and sitemap rules are unchanged',()=>{
- assert.equal(NOINDEX_CITY_SERVICE.size,SERVICES.length*CITIES.length-26);
+ assert.equal(NOINDEX_CITY_SERVICE.size,SERVICES.length*CITIES.length-20);
  for(const key of INDEXED_TODAY){
   assert.equal(NOINDEX_CITY_SERVICE.has(key),false,key);
  }
- for(const key of NOINDEX_TODAY){
+ for(const key of [...NOINDEX_TODAY,...NOINDEX_ADDED]){
   const [serviceSlug,citySlug]=key.split('/');
   assert.equal(isCityServiceNoindex(serviceSlug,citySlug),true,key);
  }
  const paths=new Set(getAllSiteUrls().map((entry)=>entry.path));
- for(const key of NOINDEX_TODAY){
+ const xmlPaths=new Set(getXmlSiteUrls().map((entry)=>entry.path));
+ for(const key of [...NOINDEX_TODAY,...NOINDEX_ADDED,'drywall-repair/boise']){
   const [serviceSlug,citySlug]=key.split('/');
   assert.equal(paths.has(`/services/${serviceSlug}/${citySlug}`),false,key);
+  assert.equal(xmlPaths.has(`/services/${serviceSlug}/${citySlug}`),false,key);
  }
  const cityServicePaths=[...paths].filter((path)=>/^\/services\/[^/]+\/[^/]+$/.test(path));
- assert.equal(cityServicePaths.length,SERVICES.length*CITIES.length-NOINDEX_CITY_SERVICE.size);
- assert.equal(paths.has('/services/drywall-repair/boise'),true);
+ assert.equal(cityServicePaths.length,19);
+ assert.equal(paths.has('/services/drywall-repair'),true);
  assert.equal(paths.has('/areas/boise'),true);
+ assert.equal(paths.has('/areas/garden-city'),true);
+ assert.equal(xmlPaths.has('/sitemap'),false);
+ assert.equal(xmlPaths.has('/instant-estimate'),false);
+ assert.equal(paths.has('/instant-estimate'),true);
  const rules=robots();
  const base=process.env.NEXT_PUBLIC_SITE_URL||'https://boisehandyman.co';
  assert.deepEqual(rules.sitemap,[`${base}/sitemap.xml`,`${base}/sitemap-images.xml`]);
@@ -161,7 +174,7 @@ test('noindex pages stay noindex and robots and sitemap rules are unchanged',()=
  assert.equal(visible.robots,undefined);
  const servicePage=read('app/services/[slug]/[city]/page.tsx');
  assert.match(servicePage,/noindex: isCityServiceNoindex\(service\.slug, city\.slug\)/);
- assert.match(read('app/sitemap.ts'),/getAllSiteUrls\(\)/);
+ assert.match(read('app/sitemap.ts'),/getXmlSiteUrls\(\)/);
  assert.match(read('app/admin/layout.tsx'),/index: false/);
  assert.match(read('app/estimate/scope/page.tsx'),/index:false/);
  assert.match(read('app/estimate/p5-preview/page.tsx'),/index:false/);
