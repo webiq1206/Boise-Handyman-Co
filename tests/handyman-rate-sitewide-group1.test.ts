@@ -62,6 +62,27 @@ test('the visit-priced FAQ states one written price', () => {
   const text = readFileSync('components/approved/family-content.ts', 'utf8');
   assert.match(
     text,
-    /How is the visit priced\?','Every job gets one written price before work starts\. Parts and materials are listed separately, and your written quote confirms the details\.'/,
+    /How is the visit priced\?','You get one written price before work starts, with parts and materials listed separately\.'/,
   );
+});
+
+test('the finds drop the remaining rate wording', () => {
+  const prices = readFileSync('shared/content/wave2/handyman-prices-boise.ts', 'utf8');
+  assert.match(prices, /two outlets or switches on the same visit come to \$290 to \$330\. We then price each job case by case after reviewing the scope, with a written price before work starts\./);
+  assert.equal(prices.includes('Where our labor is billed by the hour, the rate is $120 an hour'), false);
+
+  const stats = readFileSync('shared/siteContent.ts', 'utf8');
+  assert.match(stats, /\{ num: "at cost", label: "Materials" \}/);
+  assert.equal(stats.includes('one hour", label: "Minimum"'), false);
+
+  const hourly = readFileSync('shared/content/wave2/hourly-rate-vs-flat-rate-handyman.ts', 'utf8');
+  assert.match(hourly, /Here is how each model works, and which favors you when\./);
+  assert.equal(hourly.includes('where our rate sits'), false);
+
+  const generator = readFileSync('scripts/generate-llms-txt.ts', 'utf8');
+  const published = readFileSync('public/llms-full.txt', 'utf8');
+  const sentence = 'Labor is billed at $120 an hour, with a one-hour minimum per visit.';
+  assert.equal(generator.includes(sentence), false);
+  assert.equal(published.includes(sentence), false);
+  assert.match(published, /Pricing depends on the agreed scope, materials and access\. Send your repair list for review/);
 });

@@ -7,7 +7,7 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
   metaDescription:
     'Hourly vs flat rate handyman pricing in the Treasure Valley: how rates, flat quotes, minimums and trip fees work, and which model favors you on which job.',
   excerpt:
-    'Hourly and flat-rate handyman pricing put the risk of a slow job on different people. Here is how each model works, where our rate sits, and which favors you when.',
+    'Hourly and flat-rate handyman pricing put the risk of a slow job on different people. Here is how each model works, and which favors you when.',
   category: 'Costs & Hiring',
   hubSlug: 'costs-and-hiring',
   author: 'Boise Handyman Co',

@@ -21,7 +21,7 @@ export const HERO_SUBHEAD =
 
 export const HERO_STATS = [
   { num: "before work starts", label: "Written quote" },
-  { num: "one hour", label: "Minimum" },
+  { num: "at cost", label: "Materials" },
   { num: "after scope review", label: "Visit plan" },
 ] as const;
 

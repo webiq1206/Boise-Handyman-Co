@@ -59,7 +59,7 @@ export const handymanPricesBoise: BlogPostData = {
     {
       question: 'How much does a handyman cost in Boise in 2026?',
       answer:
-        'Our instant estimate (November 2026) gives a preliminary range for each common job: replacing one outlet or switch $200 to $240, replacing one faucet you supply $290 to $330, one small drywall patch $240 to $280, and fixing one running toilet $230 to $260. Small jobs on one list cost less than booking them one at a time: two outlets or switches on the same visit come to $290 to $330. Where our labor is billed by the hour, the rate is $120 an hour. We then price each job case by case after reviewing the scope, with a written price before work starts.',
+        'Our instant estimate (November 2026) gives a preliminary range for each common job: replacing one outlet or switch $200 to $240, replacing one faucet you supply $290 to $330, one small drywall patch $240 to $280, and fixing one running toilet $230 to $260. Small jobs on one list cost less than booking them one at a time: two outlets or switches on the same visit come to $290 to $330. We then price each job case by case after reviewing the scope, with a written price before work starts.',
     },
     {
       question: 'Why do handymen have minimum charges?',
