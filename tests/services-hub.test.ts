@@ -12,7 +12,6 @@ import { withBrandPageMetadata } from '../lib/brand-page-metadata.ts';
 import { generateFAQSchema, generateLocalBusinessSchema, publicPostalAddress } from '../lib/schema.ts';
 import { SERVICE_AREA_CITY_NAMES } from '../shared/contentData.ts';
 import {
-  BBB_PROFILE_HREF,
   HOME_META_DESCRIPTION,
   SERVICES_HUB_ANSWER,
   SERVICES_HUB_CARDS,
@@ -194,10 +193,8 @@ test('homepage proof keeps the parent review and the founder heading', () => {
   assert.match(founder, /href=\{P5_SOCIAL\.maps\}/);
   assert.doesNotMatch(founder, /@type['"]?\s*:\s*['"]AggregateRating/);
   const trust = read('components/marketing/HomeTrustLinks.tsx');
-  assert.equal(BBB_PROFILE_HREF, 'https://www.bbb.org/us/id/meridian/profile/general-contractor/p5-home-co-llc-1296-1000203624');
-  assert.match(trust, /href=\{BBB_PROFILE_HREF\}/);
-  assert.match(trust, /Better Business Bureau profile for P5 Home Co/);
   assert.match(trust, /P5 Home Co on Google/);
+  assert.equal(trust.includes('bbb.org'), false);
   assert.doesNotMatch(trust, /\brating\b|\baccredit|\bstars?\b/i);
   const intro = read('components/seo/HandymanServicesAnswer.tsx');
   assert.match(intro, /<Link href="\/services">handyman services in Boise<\/Link>/);

@@ -1,6 +1,7 @@
 import { InteriorHero, InteriorPage } from '@/components/approved/InteriorLayout';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { FamilyButton } from '@/components/family/Button';
+import Image from '@/components/VersionedImage';
 import { Section } from '@/components/marketing/Section';
 import { VisitProofRow } from '@/components/marketing/VisitProofRow';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -13,7 +14,11 @@ import {
   generateOrganizationSchema,
   generateWebPageSchema,
 } from '@/lib/schema';
+import { CITY_HERO_IMAGES } from '@/shared/cityServiceImages';
 import { SERVICE_AREA_CITIES } from '@/shared/contentData';
+import { altForImage } from '@/shared/imageAlts';
+import { localAlt, subjectForService } from '@/shared/localAlt';
+import { getServiceBackground } from '@/shared/serviceBackgrounds';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import {
   LARGER_WORK,
@@ -102,13 +107,28 @@ export default function ServicesIndexPage() {
               <h2 className="ed-h2-sm">What we fix</h2>
               <p className="ed-body mt-6">{SERVICES_HUB_FIX_INTRO}</p>
               <ul className="services-hub-cards">
-                {SERVICES_HUB_CARDS.map((card) => (
-                  <li key={card.href}>
-                    <h3 className="ed-h3">{card.title}</h3>
-                    <p className="ed-body">{card.benefit}</p>
-                    <Link href={card.href}>{card.link}</Link>
-                  </li>
-                ))}
+                {SERVICES_HUB_CARDS.map((card) => {
+                  const slug = card.href.startsWith('/services/') ? card.href.slice('/services/'.length) : undefined;
+                  const src = slug ? getServiceBackground(slug) : undefined;
+                  const alt = src ? (altForImage(src, { subject: subjectForService(slug) }) ?? localAlt(card.title)) : '';
+                  return (
+                    <li key={card.href}>
+                      {src ? (
+                        <Image
+                          src={src}
+                          alt={alt}
+                          width={900}
+                          height={675}
+                          sizes="(max-width: 700px) 112px, (max-width: 1023px) 50vw, 400px"
+                          className="h-auto w-full object-cover"
+                        />
+                      ) : null}
+                      <h3 className="ed-h3">{card.title}</h3>
+                      <p className="ed-body">{card.benefit}</p>
+                      <Link href={card.href}>{card.link}</Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </Section>
@@ -157,11 +177,22 @@ export default function ServicesIndexPage() {
                 <div className="mt-6 lg:mt-0">
                   <p className="ed-body">{SERVICES_HUB_WHERE}</p>
                   <nav className="services-hub-cities" aria-label="Cities we serve">
-                    {SERVICE_AREA_CITIES.map((city) => (
-                      <Link key={city.slug} href={areaPath(city.slug)}>
-                        {city.name}
-                      </Link>
-                    ))}
+                    {SERVICE_AREA_CITIES.map((city) => {
+                      const src = CITY_HERO_IMAGES[city.slug];
+                      return (
+                        <Link key={city.slug} href={areaPath(city.slug)}>
+                          <Image
+                            src={src}
+                            alt={altForImage(src) ?? ''}
+                            width={900}
+                            height={675}
+                            sizes="(max-width: 700px) 112px, (max-width: 1023px) 34vw, 400px"
+                            className="h-auto w-full object-cover"
+                          />
+                          {city.name}
+                        </Link>
+                      );
+                    })}
                   </nav>
                 </div>
               </div>

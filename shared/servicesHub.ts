@@ -38,9 +38,6 @@ export const SERVICES_HUB_WHERE =
 export const SERVICES_HUB_LARGER =
   'Some projects need more than a repair visit. When yours does, we will say so plainly and point you to the right team in the P5 Home Co family.';
 
-export const BBB_PROFILE_HREF =
-  'https://www.bbb.org/us/id/meridian/profile/general-contractor/p5-home-co-llc-1296-1000203624';
-
 export interface ServicesHubCard {
   title: string;
   benefit: string;
