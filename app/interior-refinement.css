@@ -731,3 +731,39 @@
   .services-hub-cards > :last-child:nth-child(odd) { grid-column: auto; }
   .services-hub-steps { grid-template-columns: 1fr 1fr 1fr 1fr; }
 }
+
+/* Services hub hero only. The copy uses the section gutter, so its left edge
+   matches the shells below (48px from 1024, not the 88% measure). From 701px
+   the photograph fills the right half. On a phone it leads, so it is above
+   the fold. */
+.approved-shell .interior-services .interior-hero-editorial .interior-hero-copy {
+  width: auto;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: var(--gutter);
+}
+.approved-shell .interior-services .interior-hero-editorial .interior-hero-image {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+@media (max-width: 700px) {
+  .approved-shell .interior-services .interior-hero-editorial .interior-hero-image {
+    order: -1;
+    height: 240px;
+  }
+}
+@media (min-width: 701px) {
+  .approved-shell .interior-services .interior-hero-editorial {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .approved-shell .interior-services .interior-hero-editorial .interior-hero-copy {
+    align-self: center;
+  }
+  .approved-shell .interior-services .interior-hero-editorial .interior-hero-image {
+    min-height: 100%;
+    height: auto;
+  }
+}

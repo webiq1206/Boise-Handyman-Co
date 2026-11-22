@@ -71,13 +71,20 @@ export default function ServicesIndexPage() {
     speakable: true,
   });
   const faqSchema = generateFAQSchema([...SERVICES_HUB_FAQS]);
+  // The hub has no trade of its own. This is the default service hero, the
+  // door-hinge photograph getServiceBackground returns for an unknown slug.
+  const heroSrc = getServiceBackground('services');
 
   return (
     <InteriorPage kind="services">
       <>
         <JsonLd data={[webPageSchema, breadcrumbSchema, faqSchema, generateOrganizationSchema()]} />
 
-        <InteriorHero layout="editorial">
+        <InteriorHero
+          layout="editorial"
+          imageSrc={heroSrc}
+          imageAlt="An interior door mid-repair, with a tool bag, a drill, a level and a new hinge on a drop cloth"
+        >
           <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Services' }]} />
           <h1 className="ed-display">
             Handyman services in Boise{' '}
