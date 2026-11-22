@@ -14,7 +14,7 @@ export const handymanPricesBoise: BlogPostData = {
   title: 'Handyman prices in Boise: hourly rates and job prices (2026)',
   seoTitle: 'Handyman Prices in Boise | Hourly Rates',
   metaDescription:
-    'Handyman prices in Boise for 2026: our hourly rate, visit minimums and trip fees, what common jobs cost, and how a flat written quote compares.',
+    'Handyman prices in Boise for 2026: how hourly and flat pricing work, what common jobs cost, and why a written quote before any work starts protects you.',
   excerpt:
     'Handyman pricing in the Treasure Valley is not mysterious: an hourly rate, trip minimums, and flat rates for common jobs. Here is how the numbers actually work.',
   category: 'Costs & Hiring',
@@ -36,7 +36,7 @@ export const handymanPricesBoise: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Our instant estimate (November 2026) puts one small job on its own, such as replacing one outlet or switch, at a preliminary $200 to $240, replacing one faucet you supply at $290 to $330, and a list of nine common jobs at $1,780 to $2,000. Where our own labor is billed by the hour, the rate is $120 an hour. Boise Handyman Co then prices each job case by case after reviewing the scope, with a written price before work starts.',
+    'Our instant estimate (November 2026) puts one small job on its own, such as replacing one outlet or switch, at a preliminary $200 to $240, replacing one faucet you supply at $290 to $330, and a list of nine common jobs at $1,780 to $2,000. Boise Handyman Co then prices each job case by case after reviewing the scope, with a written price before work starts.',
   keyTakeaways: [
     'Our instant estimate gives a preliminary range for each job: one outlet or switch $200 to $240, one faucet you supply $290 to $330 (November 2026).',
     'Every visit has a fixed cost, so small jobs on a longer list cost less than the same jobs booked one at a time, which is why batching small jobs saves money.',
@@ -59,7 +59,7 @@ export const handymanPricesBoise: BlogPostData = {
     {
       question: 'How much does a handyman cost in Boise in 2026?',
       answer:
-        'Our instant estimate (November 2026) gives a preliminary range for each common job: replacing one outlet or switch $200 to $240, replacing one faucet you supply $290 to $330, one small drywall patch $240 to $280, and fixing one running toilet $230 to $260. Small jobs on one list cost less than booking them one at a time: two outlets or switches on the same visit come to $290 to $330. Where our labor is billed by the hour, the rate is $120 an hour. We then price each job case by case after reviewing the scope, with a written price before work starts.',
+        'Our instant estimate (November 2026) gives a preliminary range for each common job: replacing one outlet or switch $200 to $240, replacing one faucet you supply $290 to $330, one small drywall patch $240 to $280, and fixing one running toilet $230 to $260. Small jobs on one list cost less than booking them one at a time: two outlets or switches on the same visit come to $290 to $330. We then price each job case by case after reviewing the scope, with a written price before work starts.',
     },
     {
       question: 'Why do handymen have minimum charges?',
@@ -90,7 +90,7 @@ export const handymanPricesBoise: BlogPostData = {
   content: `
 <h2 id="the-number">What a handyman costs in Boise</h2>
 <p><strong>Our instant estimate puts one small job on its own, such as replacing one outlet or switch, at a preliminary $200 to $240, and nine common jobs on one list at $1,780 to $2,000 (November 2026).</strong> Each common repair has its own preliminary range: one small drywall patch $240 to $280, one faucet you supply $290 to $330, one sticking door $200 to $240, and re-caulking one tub or shower $300 to $340.</p>
-<p>Those are preliminary ranges, not quotes. Where our labor is billed by the hour, the rate is $120 an hour. Our own model is case-by-case pricing after we review the scope, with a written price before work starts, whether the job is <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/home-maintenance">caulking and maintenance</a>, minor plumbing and electrical repairs, or <a href="/services/drywall-repair">drywall</a>, carpentry, and painting work. The rest of this post explains how the pricing actually works, because the structure matters more than the sticker. For planning prices on every common repair, job by job, see <a href="/guides/boise-home-repair-cost-guide">the complete Boise home repair cost guide</a>.</p>
+<p>Those are preliminary ranges, not quotes. Our own model is case-by-case pricing after we review the scope, with a written price before work starts, whether the job is <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/home-maintenance">caulking and maintenance</a>, minor plumbing and electrical repairs, or <a href="/services/drywall-repair">drywall</a>, carpentry, and painting work. The rest of this post explains how the pricing actually works, because the structure matters more than the sticker. For planning prices on every common repair, job by job, see <a href="/guides/boise-home-repair-cost-guide">the complete Boise home repair cost guide</a>.</p>
 
 <h2 id="hourly-band">Why hourly rates vary so much</h2>
 <p><strong>The spread mostly reflects who is showing up and what stands behind them.</strong> At the low end of the market you find solo operators with low overhead, informal scheduling, and sometimes no insurance. At the higher end you get established companies with insurance, warranties on workmanship, stocked trucks, and someone who answers the phone. Neither end is a scam; they are different products. The expensive mistake is paying the low rate while assuming you bought the high-end product.</p>
