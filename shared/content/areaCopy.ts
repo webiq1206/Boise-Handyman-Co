@@ -26,7 +26,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "You get one written quote upfront, before work starts. Labor is billed at $120 an hour, with a one-hour minimum per visit. Materials are billed at cost on their own line, and grouping a few tasks per visit is the best value (every job gets a written quote first).",
+          "You get one written quote upfront, before work starts. Materials are billed at cost on their own line, and grouping a few tasks per visit is the best value (every job gets a written quote first).",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -67,7 +67,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "Before anything starts, you get a single upfront written quote. Labor is billed at $120 an hour, with a one-hour minimum per visit. Materials show up as a separate line at cost, and stacking a few jobs into the same trip gives you the best value.",
+          "Before anything starts, you get a single upfront written quote. Materials show up as a separate line at cost, and stacking a few jobs into the same trip gives you the best value.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -118,7 +118,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'Labor is billed at $120 an hour, with a one-hour minimum per visit. You see the price as one upfront written quote before work begins. Materials are listed separately at cost, and if you group several small tasks you get the best value.',
+          'You see the price as one upfront written quote before work begins. Materials are listed separately at cost, and if you group several small tasks you get the best value.',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -169,7 +169,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'One upfront written quote, delivered before any work begins. Labor is billed at $120 an hour, with a one-hour minimum per visit. Materials appear on their own line at cost, and the best value comes from bundling several tasks into the same visit.',
+          'One upfront written quote, delivered before any work begins. Materials appear on their own line at cost, and the best value comes from bundling several tasks into the same visit.',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -210,7 +210,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "You'll see one upfront written quote before work starts. Labor is billed at $120 an hour, with a one-hour minimum per visit. Materials are a separate at-cost line, and the best deal is a visit that knocks out several items at once.",
+          "You'll see one upfront written quote before work starts. Materials are a separate at-cost line, and the best deal is a visit that knocks out several items at once.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -261,7 +261,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'Each job is written up as a single upfront quote before work starts. Labor is billed at $120 an hour, with a one-hour minimum per visit. Materials are a separate line billed at cost. Bundling tasks together is the best value for Caldwell homeowners.',
+          'Each job is written up as a single upfront quote before work starts. Materials are a separate line billed at cost. Bundling tasks together is the best value for Caldwell homeowners.',
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -312,7 +312,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "You'll get one upfront written quote first, before we start. Labor is billed at $120 an hour, with a one-hour minimum per visit. Materials are their own at-cost line, and combining multiple tasks in a single visit is where the best value is.",
+          "You'll get one upfront written quote first, before we start. Materials are their own at-cost line, and combining multiple tasks in a single visit is where the best value is.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -353,7 +353,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          "First you get a written quote, one upfront price before anything starts. Labor is billed at $120 an hour, with a one-hour minimum per visit. Materials go on a separate line at cost, and lining up several tasks for one visit gives you the best value.",
+          "First you get a written quote, one upfront price before anything starts. Materials go on a separate line at cost, and lining up several tasks for one visit gives you the best value.",
       },
       {
         question: 'Do you handle remodels or large projects?',
@@ -404,7 +404,7 @@ export const AREA_CITY_COPY: Record<string, AreaCityCopy> = {
       {
         question: 'How does pricing work?',
         answer:
-          'Labor is billed at $120 an hour, with a one-hour minimum per visit. The price is written up as one upfront quote that you approve before work starts. Materials are billed separately at cost, and putting several jobs on one visit is the best value.',
+          'The price is written up as one upfront quote that you approve before work starts. Materials are billed separately at cost, and putting several jobs on one visit is the best value.',
       },
       {
         question: 'Do you handle remodels or large projects?',
