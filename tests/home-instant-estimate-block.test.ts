@@ -108,3 +108,9 @@ test('the homepage pricing and trip-fee answers state one written price', () => 
   assert.equal(faqs.includes('$120'), false);
   assert.equal(faqs.includes('one-hour minimum'), false);
 });
+
+test('about item 02 states one written price', () => {
+  const about = readFileSync('app/about/page.tsx', 'utf8');
+  assert.match(about, /'One written price, materials at cost'/);
+  assert.equal(about.includes('Labor at $120 an hour, one-hour minimum, materials at cost'), false);
+});
