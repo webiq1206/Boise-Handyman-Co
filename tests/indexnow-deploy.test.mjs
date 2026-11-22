@@ -3,7 +3,10 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { isPostDeploy, planSubmit, urlsForChangedFiles, formatLog } from '../scripts/indexnow-lib.mjs';
 
-const index = JSON.parse(readFileSync(new URL('../shared/cityServiceIndex.json', import.meta.url), 'utf8'));
+const index = {
+  redirects: [{ source: '/services/drywall-repair/boise', destination: '/services/drywall-repair' }],
+  noindex: [],
+};
 
 test('IndexNow does not post from CI or a pull request build', () => {
   assert.equal(isPostDeploy({ CI: 'true', REPLIT_DEPLOYMENT: '1' }), false);
