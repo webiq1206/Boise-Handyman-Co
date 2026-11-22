@@ -47,7 +47,7 @@ export const whatSmallHomeRepairsCostBoise: BlogPostData = {
     {
       question: 'How much does a handyman cost per hour in Boise?',
       answer:
-        'Where our labor is billed by the hour, the rate is $120 an hour, the rate our instant estimate uses (November 2026). Common jobs are priced as flat lines instead: one outlet or switch on its own comes to a preliminary $200 to $240, one faucet you supply $290 to $330, and one small drywall patch $240 to $280. Flat pricing for defined jobs like these is increasingly common.',
+        'Common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary $200 to $240, one faucet you supply $290 to $330, and one small drywall patch $240 to $280. Flat pricing for defined jobs like these is increasingly common.',
     },
     {
       question: 'What does a drywall patch cost in Boise?',

@@ -17,11 +17,29 @@ test('Group 1 customer copy does not state the hourly rate or the one-hour minim
     assert.equal(text.includes('one-hour minimum'), false, file);
   }
   const hourly = readFileSync('shared/content/wave2/hourly-rate-vs-flat-rate-handyman.ts', 'utf8');
+  assert.equal(hourly.includes('$120'), false);
   assert.equal(hourly.includes('one-hour minimum'), false);
-  assert.equal(hourly.includes('Ours: labor is billed at $120 an hour'), false);
-  const lines = hourly.split('\n');
-  const rateLines = lines.flatMap((line, index) => (line.includes('$120') ? [index + 1] : []));
-  assert.deepEqual(rateLines, [29, 47]);
+  assert.match(hourly, /We price each job after reviewing the scope, with a written price before work starts\. Common jobs are priced as flat lines\./);
+  assert.match(hourly, /We do not publish a market average\. Common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary \$200 to \$240\./);
+
+  const small = readFileSync('shared/content/wave2/what-small-home-repairs-cost-boise.ts', 'utf8');
+  assert.match(small, /Common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary \$200 to \$240, one faucet you supply \$290 to \$330, and one small drywall patch \$240 to \$280\. Flat pricing for defined jobs like these is increasingly common\./);
+  assert.equal(small.includes('$120'), false);
+  assert.equal(small.includes('one-hour minimum'), false);
+
+  const prices = readFileSync('shared/content/wave2/handyman-prices-boise.ts', 'utf8');
+  assert.match(prices, /and a list of nine common jobs at \$1,780 to \$2,000\. Boise Handyman Co then prices each job case by case after reviewing the scope, with a written price before work starts\./);
+  assert.match(prices, /<p>Those are preliminary ranges, not quotes\. Our own model is case-by-case pricing after we review the scope, with a written price before work starts,/);
+
+  const vary = readFileSync('shared/content/wave2/why-handyman-quotes-vary.ts', 'utf8');
+  assert.match(vary, /That is why one small job on its own, such as replacing one outlet or switch, comes to a preliminary \$200 to \$240 in our instant estimate \(November 2026\)\./);
+  assert.equal(vary.includes('Ours is the reason'), false);
+
+  const gbp = readFileSync('shared/gbpProfile.ts', 'utf8');
+  assert.match(gbp, /Every job gets a written quote from your list and photos before work starts\. Materials are billed at cost, and there is no trip fee in Ada and Canyon County\./);
+  assert.match(gbp, /There is no trip fee in Ada and Canyon County\. Each job is priced case by case after we review the scope, with a written price before any work starts\./);
+  assert.equal(gbp.includes('$120'), false);
+  assert.equal(gbp.includes('one-hour minimum'), false);
 });
 
 test('the visit-priced FAQ states one written price', () => {

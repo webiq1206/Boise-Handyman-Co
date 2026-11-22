@@ -91,7 +91,7 @@ test('every mention of the minimum says the rate and the minimum the same way', 
   // hourly rate, $120 an hour. The neighborhood guides carry no dollar figure
   // at all (scripts/verify-shared-claims.mjs), so the Boise guide speaks of the
   // fixed cost of a visit without naming the minimum.
-  const files = ['shared/gbpProfile.ts', 'app/terms-of-service/page.tsx'];
+  const files = ['app/terms-of-service/page.tsx'];
   assert.doesNotMatch(readFileSync('shared/content/locationGuides.ts', 'utf8'), /one-hour minimum/);
   for (const file of files) {
     const text = readFileSync(file, 'utf8');

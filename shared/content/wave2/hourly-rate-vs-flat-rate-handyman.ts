@@ -26,7 +26,7 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
   quickAnswer:
     'Handymen price work two ways. Hourly billing charges for time spent and puts slow-job risk on you. Flat-rate quotes a fixed price for a defined scope and puts that risk on the handyman. Flat rate favors you on well-defined jobs; hourly can be fair for open-ended lists with a cap.',
   keyTakeaways: [
-    'Where our labor is billed by the hour, the rate is $120 an hour, the rate our instant estimate uses (November 2026); common jobs are priced as flat lines instead.',
+    'We price each job after reviewing the scope, with a written price before work starts. Common jobs are priced as flat lines.',
     'Hourly billing puts the risk of a slow job on you; a flat quote puts it on the handyman.',
     'Most outfits carry a minimum charge or trip fee, which is why batching small jobs into one visit saves money.',
     'Flat rate is the better structure for defined jobs; hourly with a not-to-exceed cap is fair for open-ended lists.',
@@ -44,7 +44,7 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
     {
       question: 'How much do handymen charge per hour in Boise?',
       answer:
-        'We do not publish a market average. Where our own labor is billed by the hour, the rate is $120 an hour, the rate our instant estimate uses (November 2026), and common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary $200 to $240. When a bid carries a very low rate, ask what is missing, often insurance; a very high one usually means specialty skill or a licensed trade. Most outfits also carry a minimum charge, commonly around the first hour or a fixed trip fee.',
+        'We do not publish a market average. Common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary $200 to $240. When a bid carries a very low rate, ask what is missing, often insurance; a very high one usually means specialty skill or a licensed trade. Most outfits also carry a minimum charge, commonly around the first hour or a fixed trip fee.',
     },
     {
       question: 'Why do handymen have minimum charges?',
