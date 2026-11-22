@@ -5,6 +5,9 @@ node_modules
 .next
 out
 
+# Written at runtime after a production IndexNow ping. Not part of the build.
+.indexnow-state.json
+
 # caches
 .npm-cache
 .cache

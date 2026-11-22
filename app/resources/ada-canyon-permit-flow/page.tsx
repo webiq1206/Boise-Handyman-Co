@@ -48,7 +48,7 @@ export default function AdaCanyonPermitFlowPage() {
         { name: 'Describe the actual work', text: 'Write down exactly what is changing. A like-for-like swap (same faucet location, same fixture type) is treated very differently from moving, adding, or extending plumbing, wiring, or structure.' },
         { name: 'Check the usually-exempt list', text: 'Painting, drywall patching, caulking, like-for-like fixture swaps, cabinet and trim repair, fence repair, and deck board replacement generally do not require a permit. Most handyman-scope work lives here.' },
         { name: 'Check the permit-trigger list', text: 'New circuits or panel work, moved or added plumbing, water heater replacement, structural changes, additions, re-roofs, HVAC replacement, and any gas work generally require permits and often a licensed trade.' },
-        { name: 'Confirm your jurisdiction', text: 'Determine whether the home sits inside city limits (Boise, Meridian, Eagle, Kuna, Star, Nampa, Caldwell, Middleton) or in unincorporated Ada or Canyon County, because that decides which building department answers the question.' },
+        { name: 'Confirm your jurisdiction', text: 'Determine whether the home sits inside city limits (Boise, Meridian, Eagle, Kuna, Star, Garden City, Nampa, Caldwell, Middleton) or in unincorporated Ada or Canyon County, because that decides which building department answers the question.' },
         { name: 'Call and ask before work starts', text: 'A five-minute call to the building department, describing the work precisely, settles borderline cases for free. If a permit is needed, the licensed contractor doing that work normally pulls it.' },
       ],
     }),

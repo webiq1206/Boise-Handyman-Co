@@ -204,7 +204,7 @@ export const REPAIR_PERMIT_BLOCKS: PdfBlock[] = [
     headers: ['If your home is in', 'County', 'Ask'],
     rows: [
       ['Boise, Meridian, Eagle', 'Ada', 'Your city building dept, or Ada County if unincorporated'],
-      ['Kuna, Star', 'Ada', 'Your city building dept, or Ada County if unincorporated'],
+      ['Kuna, Star, Garden City', 'Ada', 'Your city building dept, or Ada County if unincorporated'],
       ['Nampa, Caldwell, Middleton', 'Canyon', 'Your city building dept, or Canyon County if unincorporated'],
     ],
   },

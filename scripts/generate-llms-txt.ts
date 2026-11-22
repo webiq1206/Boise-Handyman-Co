@@ -23,7 +23,7 @@ import { BLOG_POSTS } from '../shared/blogContent';
 
 const BASE = SITE_CONFIG.siteUrl.replace(/\/$/, '');
 const url = (p: string) => `${BASE}${p}`;
-const today = new Date().toISOString().slice(0, 10);
+const today = '2026-11-21';
 
 const adaCities = SERVICE_AREA_CITIES.filter((c) => c.county === 'ada').map((c) => c.name);
 const canyonCities = SERVICE_AREA_CITIES.filter((c) => c.county === 'canyon').map((c) => c.name);
@@ -45,10 +45,17 @@ const FAMILY =
   `${SITE_CONFIG.name} is a P5 Home Co company (https://p5homeco.com). ` +
   `Sister companies: Boise Construction Co, Boise Remodeling Co and Boise Cabinet Co.`;
 
-// Owner, 20 November 2026: the parent company's profiles, shared by every site.
+// Parent profiles, shared by every site.
 const PARENT_PROFILES =
   `P5 Home Co profiles: Facebook ${P5_SOCIAL.facebook}, Instagram ${P5_SOCIAL.instagram}, ` +
   `Google Business Profile ${P5_SOCIAL.maps}.`;
+
+const NAP =
+  `P5 Home Co, Meridian, ID 83646 (service-area business, no public street). ` +
+  `Phone ${SITE_CONFIG.phone}. Web https://p5homeco.com.`;
+
+const BRAND_SITE =
+  `${SITE_CONFIG.name}: ${BASE}. Email ${SITE_CONFIG.email}.`;
 
 const indexableHubs = CONTENT_HUBS.filter((h) =>
   isCategoryHubIndexable(
@@ -57,9 +64,7 @@ const indexableHubs = CONTENT_HUBS.filter((h) =>
   ),
 );
 
-const CONTACT =
-  `Serving ${SERVICE_AREA_LINE}. ` +
-  `Phone ${SITE_CONFIG.phone}. Email ${SITE_CONFIG.email}.`;
+const CONTACT = [`Serving ${SERVICE_AREA_LINE}.`, NAP, BRAND_SITE].join('\n\n');
 
 const POSITIONING =
   `Every job gets a written quote before work starts. The team reviews the repair list, ` +
@@ -85,7 +90,7 @@ function buildShort(): string {
     `- [RE-10 / Inspection Repairs](${url('/re-10-repairs-boise')}): repairs from an Idaho RE-10 inspection response, completed and documented before closing, for real estate agents, buyers and sellers.`,
   );
   lines.push(
-    `- [All Services](${url('/services')}): plus city pages at /services/{service}/{city} and [Service Areas](${url('/areas')}).`,
+    `- [All Services](${url('/services')}): [Service Areas](${url('/areas')}).`,
     '',
   );
 
@@ -183,9 +188,8 @@ function buildFull(): string {
   }
   lines.push(
     '',
-    `Each service has a dedicated page per published city at /services/{service-slug}/{city-slug} for ` +
-      `${CITIES.map((c) => c.slug).join(', ')}. Every one of those cities is in the service area above ` +
-      `and has its own area page at /areas/{city-slug}.`,
+    `Service pages are at /services/{service-slug}. Every city in the service area above has its own ` +
+      `area page at /areas/{city-slug}: ${CITIES.map((c) => c.slug).join(', ')}.`,
     '',
   );
 

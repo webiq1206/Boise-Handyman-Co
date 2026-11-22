@@ -122,7 +122,7 @@ export function PermitFlowGraphic() {
           <CountyColumn
             title="Ada County"
             subtitle="Eastern Treasure Valley"
-            cities={['Boise', 'Meridian', 'Eagle', 'Kuna', 'Star']}
+            cities={['Boise', 'Meridian', 'Eagle', 'Kuna', 'Star', 'Garden City']}
             accentClass="border-accent/40 bg-accent/5"
           />
           <CountyColumn

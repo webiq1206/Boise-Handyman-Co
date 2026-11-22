@@ -8,9 +8,13 @@ Every job gets a written quote before work starts. The team reviews the repair l
 
 ## Contact
 
-Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County. Phone (208) 477-1169. Email hello@boisehandyman.co.
+Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County.
 
-P5 Home Co profiles: Facebook https://www.facebook.com/p5homeco, Instagram https://www.instagram.com/p5_home_co, Google Business Profile https://www.google.com/maps/place/?q=place_id:ChIJzxMoavs6P6IRNc6i9aOvt6Q.
+P5 Home Co, Meridian, ID 83646 (service-area business, no public street). Phone (208) 477-1169. Web https://p5homeco.com.
+
+Boise Handyman Co: https://boisehandyman.co. Email hello@boisehandyman.co.
+
+P5 Home Co profiles: Facebook https://www.facebook.com/p5homeco, Instagram https://www.instagram.com/p5_home_co, Google Business Profile https://maps.google.com/?cid=11869148461693849141.
 
 ## Services
 
@@ -23,7 +27,7 @@ P5 Home Co profiles: Facebook https://www.facebook.com/p5homeco, Instagram https
 - [Fence, Deck & Gutter Repair](https://boisehandyman.co/services/fence-deck-gutter-repair): Leaning fence panels, loose deck boards and rails, gutter cleaning, and minor exterior repairs.
 - [Caulking & Home Maintenance](https://boisehandyman.co/services/home-maintenance): Caulking and weatherproofing, tile and grout touch-ups, and punch-list work planned around your repair list.
 - [RE-10 / Inspection Repairs](https://boisehandyman.co/re-10-repairs-boise): repairs from an Idaho RE-10 inspection response, completed and documented before closing, for real estate agents, buyers and sellers.
-- [All Services](https://boisehandyman.co/services): plus city pages at /services/{service}/{city} and [Service Areas](https://boisehandyman.co/areas).
+- [All Services](https://boisehandyman.co/services): [Service Areas](https://boisehandyman.co/areas).
 
 ## Authoritative guides
 

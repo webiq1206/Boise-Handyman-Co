@@ -6,9 +6,13 @@ Boise Handyman Co is a P5 Home Co company (https://p5homeco.com). Sister compani
 
 ## Contact
 
-Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County. Phone (208) 477-1169. Email hello@boisehandyman.co.
+Serving Boise, Meridian, Nampa, Eagle, Kuna, Caldwell, Star, Middleton, and Garden City, plus Ada County and Canyon County.
 
-P5 Home Co profiles: Facebook https://www.facebook.com/p5homeco, Instagram https://www.instagram.com/p5_home_co, Google Business Profile https://www.google.com/maps/place/?q=place_id:ChIJzxMoavs6P6IRNc6i9aOvt6Q.
+P5 Home Co, Meridian, ID 83646 (service-area business, no public street). Phone (208) 477-1169. Web https://p5homeco.com.
+
+Boise Handyman Co: https://boisehandyman.co. Email hello@boisehandyman.co.
+
+P5 Home Co profiles: Facebook https://www.facebook.com/p5homeco, Instagram https://www.instagram.com/p5_home_co, Google Business Profile https://maps.google.com/?cid=11869148461693849141.
 
 ## About
 
@@ -40,7 +44,7 @@ Most handyman-scope repairs do not require a permit in Ada or Canyon County, and
 - Fence, Deck & Gutter Repair: /services/fence-deck-gutter-repair - Leaning fence panels, loose deck boards and rails, gutter cleaning, and minor exterior repairs.
 - Caulking & Home Maintenance: /services/home-maintenance - Caulking and weatherproofing, tile and grout touch-ups, and punch-list work planned around your repair list.
 
-Each service has a dedicated page per published city at /services/{service-slug}/{city-slug} for boise, meridian, eagle, nampa, kuna, star, middleton, garden-city, caldwell. Every one of those cities is in the service area above and has its own area page at /areas/{city-slug}.
+Service pages are at /services/{service-slug}. Every city in the service area above has its own area page at /areas/{city-slug}: boise, meridian, eagle, nampa, kuna, star, middleton, garden-city, caldwell.
 
 ## Authoritative guides (https://boisehandyman.co/guides)
 

@@ -23,13 +23,14 @@ export interface CityLocalSection {
   links: { label: string; href: string }[];
 }
 
-/** Cities the permit guide names as city-limits jurisdictions. Garden City is not on that list. */
+/** Cities the permit guide names as city-limits jurisdictions. */
 const NAMED_ON_PERMIT_GUIDE = new Set([
   'boise',
   'meridian',
   'eagle',
   'kuna',
   'star',
+  'garden-city',
   'nampa',
   'caldwell',
   'middleton',
@@ -64,7 +65,7 @@ function permitAnswer(city: CityData, work: string): string {
   if (NAMED_ON_PERMIT_GUIDE.has(city.slug)) {
     return `${city.name} is in ${county}. Inside ${city.name} city limits, the city building department reviews permitted ${work}. Outside those limits, ${county} does. Most handyman repairs stay on the usually-exempt side of the Ada and Canyon County permit flow: painting, drywall patching, caulking, and like-for-like fixture swaps. Moved wiring, moved plumbing, and structural changes usually need a permit and a licensed trade.`;
   }
-  return `${city.name} is in ${county}. The Ada and Canyon County permit flow names city limits for Boise, Meridian, Eagle, Kuna, and Star, and for Nampa, Caldwell, and Middleton. ${city.name} is not on that list. Confirm which office reviews permitted ${work} before any job that moves wiring, plumbing, or structure. Painting, drywall patching, caulking, and like-for-like fixture swaps are the repairs that page lists as usually needing no permit.`;
+  return `${city.name} is in ${county}. The Ada and Canyon County permit flow names city limits for Boise, Meridian, Eagle, Kuna, Star, and Garden City, and for Nampa, Caldwell, and Middleton. ${city.name} is not on that list. Confirm which office reviews permitted ${work} before any job that moves wiring, plumbing, or structure. Painting, drywall patching, caulking, and like-for-like fixture swaps are the repairs that page lists as usually needing no permit.`;
 }
 
 function neighborhoodFaq(city: CityData, serviceName?: string): CityFaq {
@@ -150,7 +151,7 @@ export function getCityLocalSection(city: CityData, serviceName?: string): CityL
   if (!location && neighborhoods.length === 0) {
     paragraphs.push(
       `${city.name} is in ${county}. Boise Handyman Co serves ${city.name} for small repairs, installs, and maintenance, with the same upfront written quote used across the Treasure Valley.`,
-      `The Ada and Canyon County permit flow names city limits for Boise, Meridian, Eagle, Kuna, and Star, and for Nampa, Caldwell, and Middleton. ${city.name} is not on that list. Confirm which office reviews a permitted job in ${city.name} before work that moves wiring, plumbing, or structure.`,
+      `The Ada and Canyon County permit flow names city limits for Boise, Meridian, Eagle, Kuna, Star, and Garden City, and for Nampa, Caldwell, and Middleton. ${city.name} is not on that list. Confirm which office reviews a permitted job in ${city.name} before work that moves wiring, plumbing, or structure.`,
     );
   }
 
@@ -174,6 +175,9 @@ export function getCityLocalSection(city: CityData, serviceName?: string): CityL
   });
   for (const other of neighbors) {
     links.push({ label: `Handyman in ${other.name}`, href: `/areas/${other.slug}` });
+  }
+  if (city.slug !== 'garden-city' && !links.some((link) => link.href === '/areas/garden-city')) {
+    links.push({ label: 'Handyman in Garden City', href: '/areas/garden-city' });
   }
 
   return {
