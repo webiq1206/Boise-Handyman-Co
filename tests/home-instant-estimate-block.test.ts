@@ -91,7 +91,7 @@ test('every mention of the minimum says the rate and the minimum the same way', 
   // hourly rate, $120 an hour. The neighborhood guides carry no dollar figure
   // at all (scripts/verify-shared-claims.mjs), so the Boise guide speaks of the
   // fixed cost of a visit without naming the minimum.
-  const files = ['shared/homepageFaqs.ts', 'shared/gbpProfile.ts', 'shared/content/areaCopy.ts', 'shared/seoContent.ts', 'shared/siteContent.ts', 'components/approved/family-content.ts', 'app/terms-of-service/page.tsx', 'public/llms-full.txt'];
+  const files = ['shared/gbpProfile.ts', 'shared/content/areaCopy.ts', 'shared/seoContent.ts', 'shared/siteContent.ts', 'components/approved/family-content.ts', 'app/terms-of-service/page.tsx', 'public/llms-full.txt'];
   assert.doesNotMatch(readFileSync('shared/content/locationGuides.ts', 'utf8'), /one-hour minimum/);
   for (const file of files) {
     const text = readFileSync(file, 'utf8');
@@ -99,4 +99,12 @@ test('every mention of the minimum says the rate and the minimum the same way', 
     assert.ok(mentions.length > 0, `${file} states the minimum`);
     for (const mention of mentions) assert.match(mention, /[Ll]abor is billed at \$120 an hour, with a one-hour minimum per visit/, `${file}: ${mention.trim()}`);
   }
+});
+
+test('the homepage pricing and trip-fee answers state one written price', () => {
+  const faqs = readFileSync('shared/homepageFaqs.ts', 'utf8');
+  assert.match(faqs, /You get one written price before any work starts, after we review your list and photos\. Materials sit on their own line at cost, and there is no trip fee in Ada and Canyon County\. Bundling several tasks into one visit is usually the best value\. If a job needs a general contractor or a licensed trade, we tell you plainly and point you to the right team\./);
+  assert.match(faqs, /No\. There is no trip fee in Ada and Canyon County\. You get one written price for the whole list before work starts, with materials at cost on their own line\./);
+  assert.equal(faqs.includes('$120'), false);
+  assert.equal(faqs.includes('one-hour minimum'), false);
 });
