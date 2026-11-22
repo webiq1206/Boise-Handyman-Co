@@ -101,6 +101,6 @@ export const emberReadyHomeChecklistTreasureValley: GuidePageData = {
 <p>None of this makes a home fireproof, and no one can promise that. In the June 18, 2026 interview, Captain Kirpach's advice was not to assume firefighters can defend every structure during a fast-moving fire. Ada Fire Adapted puts the goal this way: changes that help your home withstand the brunt of a wildfire without the assistance of firefighters or fire equipment.</p>
 <p><a href="/estimate">Send photos for a written quote</a></p>
 <p><em>Sources: NFPA Firewise USA, "Preparing homes for wildfire"; City of Boise, "Boise Fire Department Highlights Free Chipping Program" (April 28, 2026); Ada Fire Adapted, Wildfire Home Safety Evaluation; Idaho News 6 (KIVI), "Boise Fire encourages homeowners to prepare before wildfire season" (June 18, 2026).</em></p>
-<p><strong>Boise Handyman Co · A P5 Home Company</strong></p>
+<p><strong>Boise Handyman Co · A P5 Home Co brand</strong></p>
 `.trim(),
 };
