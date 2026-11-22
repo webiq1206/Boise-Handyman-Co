@@ -45,10 +45,10 @@ const FAMILY =
   `${SITE_CONFIG.name} is a P5 Home Co company (https://p5homeco.com). ` +
   `Sister companies: Boise Construction Co, Boise Remodeling Co and Boise Cabinet Co.`;
 
-// Parent profiles, shared by every site. The BBB entry is a link only.
+// Parent profiles, shared by every site.
 const PARENT_PROFILES =
   `P5 Home Co profiles: Facebook ${P5_SOCIAL.facebook}, Instagram ${P5_SOCIAL.instagram}, ` +
-  `Google Business Profile ${P5_SOCIAL.maps}, BBB ${P5_SOCIAL.bbb}.`;
+  `Google Business Profile ${P5_SOCIAL.maps}.`;
 
 const NAP =
   `P5 Home Co, Meridian, ID 83646 (service-area business, no public street). ` +

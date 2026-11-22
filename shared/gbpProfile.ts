@@ -129,8 +129,6 @@ export const P5_SOCIAL = {
   // the cid and the place id both resolve to feature 0xa4b7afa3f5a2ce35).
   // The link for "See our Google reviews" and the parent's hasMap.
   maps: 'https://maps.google.com/?cid=11869148461693849141',
-  // Profile link only. No rating, grade, or accreditation claim.
-  bbb: 'https://www.bbb.org/us/id/meridian/profile/general-contractor/p5-home-co-llc-1296-1000203624',
 } as const;
 
 /** P5 Home Co's Google profile id; never published as this brand's sameAs. */

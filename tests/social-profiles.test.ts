@@ -7,7 +7,6 @@ const P5_FACEBOOK='https://www.facebook.com/p5homeco';
 const P5_INSTAGRAM='https://www.instagram.com/p5_home_co';
 const P5_MAPS='https://maps.google.com/?cid=11869148461693849141';
 const P5_GOOGLE='https://www.google.com/search?kgmid=/g/11ntl1t7dc';
-const P5_BBB='https://www.bbb.org/us/id/meridian/profile/general-contractor/p5-home-co-llc-1296-1000203624';
 
 // Boise Handyman Co has no social profiles of its own. The boiseremodeling
 // handles never belonged to it and must not reach the footer or sameAs even if
@@ -35,7 +34,7 @@ test('the P5 Home Co Facebook page sits on the parent node, not this brand',asyn
  const {P5_SOCIAL}=await import('../shared/gbpProfile.ts');
  assert.equal(P5_SOCIAL.facebook,P5_FACEBOOK);
  const {P5_PARENT_ORGANIZATION}=await import('../lib/schema.ts');
- assert.deepEqual([...P5_PARENT_ORGANIZATION.sameAs],[P5_FACEBOOK,P5_INSTAGRAM,P5_GOOGLE,P5_MAPS,P5_BBB]);
+ assert.deepEqual([...P5_PARENT_ORGANIZATION.sameAs],[P5_FACEBOOK,P5_INSTAGRAM,P5_GOOGLE,P5_MAPS]);
  assert.equal(P5_PARENT_ORGANIZATION.hasMap,P5_MAPS);
  assert.equal(JSON.stringify(P5_PARENT_ORGANIZATION).includes('rating'),false);
  assert.equal(JSON.stringify(P5_PARENT_ORGANIZATION).includes('accreditation'),false);
