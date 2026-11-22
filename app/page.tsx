@@ -1,5 +1,6 @@
 import { localAlt } from '@/shared/localAlt';
 import { ApprovedCtaStrip, ApprovedFounder, ApprovedHowItWorks, ApprovedInstantEstimate, ApprovedServiceArea } from "@/components/approved/ApprovedHome";
+import { HomeTrustLinks } from "@/components/marketing/HomeTrustLinks";
 import { ApprovedFamilyFrame, ApprovedHomeHero } from "@/components/approved/ApprovedHomeHero";
 import focusedHeroStyles from '@/components/approved/FocusedSearchHero.module.css';
 import { ReviewedPageBarClearance } from '@/components/approved/ReviewedPageBarClearance';
@@ -141,6 +142,7 @@ export default function HomePage() {
           </div>
         </section>
       </ApprovedFamilyFrame>
+      <HomeTrustLinks />
     </div>
   );
 }

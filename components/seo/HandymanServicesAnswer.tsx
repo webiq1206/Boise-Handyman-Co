@@ -1,6 +1,7 @@
 import Image from '@/components/VersionedImage';
 import { localAlt } from '@/shared/localAlt';
 import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 import { SERVICE_AREA_LINE, SERVICES } from '@/shared/contentData';
 import { toSentenceCase } from '@/shared/sentenceCase';
 import { brands, serviceExtras } from '@/components/approved/family-content';
@@ -54,7 +55,7 @@ export function HandymanServicesAnswer() {
         </div>
         <div className="min-w-0">
           <p data-speakable="summary">
-            Boise Handyman Co handles small home repairs, installs and maintenance in Boise and the Treasure Valley.
+            Boise Handyman Co handles <Link href="/services">handyman services in Boise</Link> and the Treasure Valley: small home repairs, installs and maintenance.
             {/* The family relationship, said plainly on the page that owns the
                 brand query. A followed link: P5 Home Co is the parent company. */}
             <span className="f-parent-company">

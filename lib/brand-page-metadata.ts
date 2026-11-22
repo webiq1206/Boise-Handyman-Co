@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import {ESTIMATOR_BRAND as brand} from './p5/brand.ts';
+import {HOME_META_DESCRIPTION,SERVICES_HUB_DESCRIPTION,SERVICES_HUB_TITLE} from '../shared/servicesHub.ts';
 
 /** Branded sharing previews are the owner's preference. Product/article schema
  * retains its real subject image. Neither favicon nor preview display is guaranteed. */
@@ -23,9 +24,9 @@ const COPY:Record<string,Record<string,Copy>>={
   "/blog/drywall-repair-cost-boise":{title:"Boise Drywall Repair Costs (2026)",description:"Review Boise drywall repair costs for holes, cracks, texture matching and paint. Learn what affects the price and how to describe your repair for a quote."},
   "/blog/what-small-home-repairs-cost-boise":{title:"Small Home Repair Costs in Boise",description:"Small home repair costs in Boise: budgets for drywall, doors, fixtures and maintenance. Plan your list and understand labor, materials and visit costs."},
   // The homepage's only title and description source; app/page.tsx sets neither.
-  '/':{title:'Boise Handyman Services | Upfront Quotes',description:'Boise handyman for small repairs, installs and home maintenance across the Treasure Valley. One written quote before work starts. Send your list today.'},
-  // SEO audit HM-T10: the hub leads with "handyman services Boise".
-  '/services':{title:'Handyman Services in Boise, ID',description:'Handyman services in Boise: drywall, painting, minor plumbing and electrical, carpentry, mounting and upkeep. See what we fix and get an instant estimate.'},
+  '/':{title:'Boise Handyman Services | Upfront Quotes',description:HOME_META_DESCRIPTION},
+  // The hub owns "handyman services". The homepage keeps the head term.
+  '/services':{title:SERVICES_HUB_TITLE,description:SERVICES_HUB_DESCRIPTION},
   '/about':{title:'About Our Boise Handyman Team',description:'Learn how Boise Handyman Co handles Treasure Valley home repairs and installations, with clear project scopes, scheduling and attention to small jobs.'},
   '/contact':{title:'Contact a Boise Handyman',description:'Contact Boise Handyman Co about your repair list, installation or maintenance project. Call our team or send your scope for a Treasure Valley estimate.'}},
  cabinet:{

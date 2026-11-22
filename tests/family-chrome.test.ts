@@ -154,10 +154,17 @@ test('the homepage video hero preserves first-response content, poster and sourc
   assert.doesNotMatch(html, /handyman-hero-door-hinge-branded|front-door-repaint/, 'no superseded image in the final hero');
   const support = html.match(/<p class="fam-hero-support">([^<]+)<\/p>/)?.[1] ?? '';
   assert.ok(support.split(/\s+/).length <= 14, support);
-  // Proof: the three facts this hero already published, nothing new.
-  assert.match(html, /Written quote before work starts/);
-  assert.match(html, /No trip fee in Ada and Canyon County/);
-  assert.match(html, /Idaho Registered Contractor #8381215/);
+  // Proof row under the hero: four sourced facts, registration outside the Verify link.
+  assert.match(html, /Written quote first/);
+  assert.match(html, /One price for your whole list before any work starts\./);
+  assert.match(html, /No trip fee/);
+  assert.match(html, /Anywhere in Ada and Canyon County\./);
+  assert.match(html, /Idaho Registered Contractor #8381215\./);
+  assert.equal(/>Idaho Registered Contractor #8381215\.?<\/a>/.test(html), false);
+  assert.match(html, /href="https:\/\/edopl\.idaho\.gov\/OnlineServices\/\?link=PubSearch"/);
+  assert.match(html, />Verify</);
+  assert.match(html, /Our crew is insured\./);
+  assert.match(html, /href="\/services#how-a-handyman-visit-is-priced"[^>]*>see how a visit is priced</);
 });
 
 test('citation packets publish Meridian, ID 83646 and no street', () => {

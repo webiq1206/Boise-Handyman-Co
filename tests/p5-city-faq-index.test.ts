@@ -15,7 +15,7 @@ import {CITY_SEO_DATA} from '../lib/seo.ts';
 
 // Phase 4 (owner-approved plan): keyword-first homepage title from one source.
 const HOME_TITLE='Boise Handyman Services | Upfront Quotes | Boise Handyman Co';
-const HOME_DESCRIPTION='Boise handyman for small repairs, installs and home maintenance across the Treasure Valley. One written quote before work starts. Send your list today.';
+const HOME_DESCRIPTION='Boise handyman for small repairs, installs and home upkeep across the Treasure Valley. One written quote before work starts. Call, text or send your list.';
 const NOINDEX_TODAY=[
  'carpentry-trim-repair/nampa',
  'drywall-repair/kuna',

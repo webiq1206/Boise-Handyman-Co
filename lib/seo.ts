@@ -5,6 +5,7 @@
  */
 
 import { publishedFoundingYear } from '@/shared/foundingYear';
+import { HOME_META_DESCRIPTION } from '@/shared/servicesHub';
 import { SERVICE_AREA_CITY_NAMES } from '@/shared/contentData';
 import { SITE_CONFIG } from '@/shared/siteConfig';
 import { GBP_SOCIAL, getExternalProfileUrls } from '@/shared/gbpProfile';
@@ -147,8 +148,7 @@ export function generatePageTitle(params: ServiceSEOParams): string {
 export const DESCRIPTION_MIN = 140;
 export const DESCRIPTION_MAX = 155;
 
-const HOME_DESCRIPTION =
-  'Boise handyman for small repairs, installs and home maintenance across the Treasure Valley. One written quote before work starts. Send your list today.';
+const HOME_DESCRIPTION = HOME_META_DESCRIPTION;
 
 const GENERIC_DESCRIPTION =
   'Handyman services in Boise and the Treasure Valley: small repairs, installs and home maintenance, with one written quote before any work starts.';
