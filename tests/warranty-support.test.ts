@@ -41,8 +41,8 @@ test('no copy says our coverage includes subcontractors or that we stand behind 
 test('terms drop the 48-hour satisfaction window and keep the D9 payment and cancellation policy', () => {
   const terms = readFileSync('app/terms-of-service/page.tsx', 'utf8');
   assert.match(terms, /Last updated November 8, 2026/);
-  assert.match(terms, /Boise Handyman Co is a DBA of P5 Home Co LLC \(/);
-  assert.equal(terms.includes('P5 Home Co, LLC'), false);
+  assert.match(terms, /Boise Handyman Co is a DBA of P5 Home Co \(/);
+  assert.equal(terms.includes('P5 Home Co LLC'), false);
   assert.equal(terms.includes('P5 Home Co.'), false);
   assert.match(terms, /signed agreement governs/);
   assert.doesNotMatch(terms, /48 hours|Satisfaction Guarantee|automatic billing|Recurring service/i);

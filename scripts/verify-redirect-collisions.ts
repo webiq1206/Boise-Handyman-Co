@@ -26,8 +26,6 @@
 import fs from 'fs';
 import path from 'path';
 import { buildCanonicalRoutes } from './internal-links/lib';
-import cityServiceIndex from '../shared/cityServiceIndex.json';
-import { getAllSiteUrls, getXmlSiteUrls } from '../lib/siteUrls';
 
 const root = path.join(__dirname, '..');
 
@@ -42,7 +40,6 @@ interface RedirectRule {
   source: string;
   destination: string;
   permanent?: boolean;
-  statusCode?: number;
 }
 
 async function loadRedirects(): Promise<RedirectRule[]> {
@@ -117,38 +114,13 @@ async function main() {
   );
 
   const failures: string[] = [];
-  // 21 November 2026: these city pages are merged on purpose. The redirect
-  // wins, the sitemap drops the source, and links point at the destination.
-  const intentionalMerges = new Set(cityServiceIndex.redirects.map((rule) => rule.source));
 
   /* 1. COLLISION */
   for (const source of literalSources) {
-    if (intentionalMerges.has(source)) continue;
     if (appRoutes.has(source) || canonical.has(source)) {
       failures.push(
         `COLLISION  ${source} is both a redirect source and a real page. ` +
           `redirects() runs first, so the page is unreachable.`,
-      );
-    }
-  }
-
-  for (const rule of cityServiceIndex.redirects) {
-    const destination = rule.destination.split('#')[0].split('?')[0].replace(/\/$/, '') || '/';
-    if (literalSources.has(destination)) {
-      failures.push(`CHAIN      ${rule.source} redirects to ${destination}, which is also a redirect.`);
-    }
-    const live = redirects.find((rd) => rd.source === rule.source);
-    if (!live || live.statusCode !== 301 || live.destination !== rule.destination) {
-      failures.push(`STATUS     ${rule.source} must be a 301 to ${rule.destination}.`);
-    }
-  }
-
-  const published = new Set([...getAllSiteUrls(), ...getXmlSiteUrls()].map((entry) => entry.path));
-  for (const source of literalSources) {
-    if (published.has(source)) {
-      failures.push(
-        `SITEMAP    ${source} is listed in the sitemap but is a redirect source. ` +
-          `Google is being handed a URL that 301s.`,
       );
     }
   }

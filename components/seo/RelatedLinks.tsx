@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import Image from '@/components/MarketingImage';
 import { CITIES, SERVICE_AREA_CITIES, SERVICES, serviceHeading } from '@/shared/contentData';
-import { cityServiceHref, isCityServiceInSitemap } from '@/lib/page-metadata';
-import { areaPath, servicePath } from '@/lib/seo-routes';
+import { isCityServiceNoindex } from '@/lib/page-metadata';
+import { areaPath, cityServicePath, servicePath } from '@/lib/seo-routes';
 import { getBlogImageAlt } from '@/shared/blogImages';
 import { pickCardImages } from '@/shared/cityServiceImages';
 import { pageImage, pickReadingImages, readingLinks, type ReadingPick } from '@/shared/exploreReading';
@@ -148,7 +148,8 @@ export function RelatedLinks({ serviceSlug, citySlug, variant, manifestPath, exc
   const service = SERVICES.find((s) => s.slug === serviceSlug);
   const city = CITIES.find((c) => c.slug === citySlug);
   const groups: React.ReactNode[] = [];
-  const serviceInCity = (slug: string, cityslug: string) => cityServiceHref(slug, cityslug);
+  const serviceInCity = (slug: string, cityslug: string) =>
+    isCityServiceNoindex(slug, cityslug) ? servicePath(slug) : cityServicePath(slug, cityslug);
 
   if (variant === 'area' && citySlug && city) {
     const cells = withPhotos(SERVICES.map((s) => ({
@@ -162,9 +163,9 @@ export function RelatedLinks({ serviceSlug, citySlug, variant, manifestPath, exc
 
   if (variant === 'city-service' && serviceSlug && citySlug && service && city) {
     const name = serviceHeading(service.name);
-    const nearby = SERVICE_AREA_CITIES.filter((c) => c.slug !== citySlug && isCityServiceInSitemap(serviceSlug, c.slug));
+    const nearby = SERVICE_AREA_CITIES.filter((c) => c.slug !== citySlug && !isCityServiceNoindex(serviceSlug, c.slug));
     const cityCells = withPhotos(
-      nearby.map((c) => ({ href: cityServiceHref(serviceSlug, c.slug), label: c.name, context: `${name} in` })),
+      nearby.map((c) => ({ href: cityServicePath(serviceSlug, c.slug), label: c.name, context: `${name} in` })),
       nearby.map((c) => ({ serviceSlug, citySlug: c.slug })),
       shown,
     );

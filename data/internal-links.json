@@ -1974,9 +1974,9 @@
           "score": 0.783
         },
         {
-          "url": "/services/home-maintenance/boise",
-          "anchor": "Caulking & Home Maintenance in Boise",
-          "title": "Caulking & Home Maintenance in Boise, Idaho",
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
           "type": "city-service",
           "score": 0.738
         },
@@ -2102,11 +2102,11 @@
           "score": 1.419
         },
         {
-          "url": "/services/electrical-repairs/eagle",
-          "anchor": "Minor Electrical Repairs in Eagle",
-          "title": "Minor Electrical Repairs in Eagle, Idaho",
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
           "type": "city-service",
-          "score": 0.737
+          "score": 0.774
         },
         {
           "url": "/areas/eagle",
@@ -2529,6 +2529,13 @@
       "url": "/services/drywall-repair/boise",
       "links": [
         {
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.793
+        },
+        {
           "url": "/services/drywall-repair/meridian",
           "anchor": "Drywall Repair & Patching in Meridian",
           "title": "Drywall Repair & Patching in Meridian, Idaho",
@@ -2548,13 +2555,6 @@
           "title": "Drywall Repair & Patching in Boise & Treasure Valley, Idaho",
           "type": "service",
           "score": 1.53
-        },
-        {
-          "url": "/services/electrical-repairs/boise",
-          "anchor": "Minor Electrical Repairs in Boise",
-          "title": "Minor Electrical Repairs in Boise, Idaho",
-          "type": "city-service",
-          "score": 0.78
         },
         {
           "url": "/areas/boise",
@@ -2593,16 +2593,23 @@
       "url": "/services/drywall-repair/caldwell",
       "links": [
         {
-          "url": "/services/drywall-repair/meridian",
-          "anchor": "Drywall Repair & Patching in Meridian",
-          "title": "Drywall Repair & Patching in Meridian, Idaho",
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
+          "type": "city-service",
+          "score": 1.793
+        },
+        {
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
           "type": "city-service",
           "score": 1.695
         },
         {
-          "url": "/services/drywall-repair/nampa",
-          "anchor": "Drywall Repair & Patching in Nampa",
-          "title": "Drywall Repair & Patching in Nampa, Idaho",
+          "url": "/services/drywall-repair/meridian",
+          "anchor": "Drywall Repair & Patching in Meridian",
+          "title": "Drywall Repair & Patching in Meridian, Idaho",
           "type": "city-service",
           "score": 1.695
         },
@@ -2619,13 +2626,6 @@
           "title": "Remodeling Services in Caldwell, Idaho",
           "type": "city",
           "score": 0.423
-        },
-        {
-          "url": "/guides/caldwell-handyman-guide",
-          "anchor": "Caldwell home repair guide: what local houses need, by age",
-          "title": "Caldwell home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.291
         },
         {
           "url": "/services/mounting-assembly",
@@ -2657,16 +2657,23 @@
       "url": "/services/drywall-repair/eagle",
       "links": [
         {
-          "url": "/services/drywall-repair/meridian",
-          "anchor": "Drywall Repair & Patching in Meridian",
-          "title": "Drywall Repair & Patching in Meridian, Idaho",
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
           "type": "city-service",
-          "score": 1.655
+          "score": 1.753
         },
         {
           "url": "/services/drywall-repair/nampa",
           "anchor": "Drywall Repair & Patching in Nampa",
           "title": "Drywall Repair & Patching in Nampa, Idaho",
+          "type": "city-service",
+          "score": 1.695
+        },
+        {
+          "url": "/services/drywall-repair/meridian",
+          "anchor": "Drywall Repair & Patching in Meridian",
+          "title": "Drywall Repair & Patching in Meridian, Idaho",
           "type": "city-service",
           "score": 1.655
         },
@@ -2676,13 +2683,6 @@
           "title": "Drywall Repair & Patching in Boise & Treasure Valley, Idaho",
           "type": "service",
           "score": 1.383
-        },
-        {
-          "url": "/services/electrical-repairs/eagle",
-          "anchor": "Minor Electrical Repairs in Eagle",
-          "title": "Minor Electrical Repairs in Eagle, Idaho",
-          "type": "city-service",
-          "score": 0.775
         },
         {
           "url": "/areas/eagle",
@@ -2721,18 +2721,25 @@
       "url": "/services/drywall-repair/garden-city",
       "links": [
         {
-          "url": "/services/drywall-repair/meridian",
-          "anchor": "Drywall Repair & Patching in Meridian",
-          "title": "Drywall Repair & Patching in Meridian, Idaho",
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
           "type": "city-service",
-          "score": 1.564
+          "score": 1.655
+        },
+        {
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.604
         },
         {
           "url": "/services/drywall-repair/nampa",
           "anchor": "Drywall Repair & Patching in Nampa",
           "title": "Drywall Repair & Patching in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.564
+          "score": 1.604
         },
         {
           "url": "/services/drywall-repair",
@@ -2747,13 +2754,6 @@
           "title": "Remodeling Services in Garden City, Idaho",
           "type": "city",
           "score": 0.478
-        },
-        {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Eagle home repair guide: what local houses need, by age",
-          "title": "Eagle home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.163
         },
         {
           "url": "/services/fence-deck-gutter-repair",
@@ -2785,18 +2785,25 @@
       "url": "/services/drywall-repair/kuna",
       "links": [
         {
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
+          "type": "city-service",
+          "score": 1.74
+        },
+        {
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.673
+        },
+        {
           "url": "/services/drywall-repair/meridian",
           "anchor": "Drywall Repair & Patching in Meridian",
           "title": "Drywall Repair & Patching in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.633
-        },
-        {
-          "url": "/services/drywall-repair/nampa",
-          "anchor": "Drywall Repair & Patching in Nampa",
-          "title": "Drywall Repair & Patching in Nampa, Idaho",
-          "type": "city-service",
-          "score": 1.633
+          "score": 1.673
         },
         {
           "url": "/services/drywall-repair",
@@ -2811,13 +2818,6 @@
           "title": "Remodeling Services in Kuna, Idaho",
           "type": "city",
           "score": 0.36
-        },
-        {
-          "url": "/guides/kuna-handyman-guide",
-          "anchor": "Kuna home repair guide: what local houses need, by age",
-          "title": "Kuna home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.268
         },
         {
           "url": "/services/plumbing-repairs",
@@ -2849,25 +2849,25 @@
       "url": "/services/drywall-repair/meridian",
       "links": [
         {
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
+          "type": "city-service",
+          "score": 1.633
+        },
+        {
           "url": "/services/drywall-repair/nampa",
           "anchor": "Drywall Repair & Patching in Nampa",
           "title": "Drywall Repair & Patching in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.535
+          "score": 1.615
         },
         {
-          "url": "/services/electrical-repairs/meridian",
-          "anchor": "Minor Electrical Repairs in Meridian",
-          "title": "Minor Electrical Repairs in Meridian, Idaho",
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
           "type": "city-service",
-          "score": 0.815
-        },
-        {
-          "url": "/services/plumbing-repairs/meridian",
-          "anchor": "Minor Plumbing Repairs in Meridian",
-          "title": "Minor Plumbing Repairs in Meridian, Idaho",
-          "type": "city-service",
-          "score": 0.811
+          "score": 1.575
         },
         {
           "url": "/areas/meridian",
@@ -2913,18 +2913,25 @@
       "url": "/services/drywall-repair/middleton",
       "links": [
         {
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
+          "type": "city-service",
+          "score": 1.593
+        },
+        {
           "url": "/services/drywall-repair/meridian",
           "anchor": "Drywall Repair & Patching in Meridian",
           "title": "Drywall Repair & Patching in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.535
+          "score": 1.575
         },
         {
           "url": "/services/drywall-repair/nampa",
           "anchor": "Drywall Repair & Patching in Nampa",
           "title": "Drywall Repair & Patching in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.495
+          "score": 1.575
         },
         {
           "url": "/areas/middleton",
@@ -2932,13 +2939,6 @@
           "title": "Remodeling Services in Middleton, Idaho",
           "type": "city",
           "score": 0.423
-        },
-        {
-          "url": "/guides/middleton-handyman-guide",
-          "anchor": "Middleton home repair guide: what local houses need, by age",
-          "title": "Middleton home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.259
         },
         {
           "url": "/services/electrical-repairs",
@@ -2977,25 +2977,25 @@
       "url": "/services/drywall-repair/nampa",
       "links": [
         {
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
+          "type": "city-service",
+          "score": 1.553
+        },
+        {
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.535
+        },
+        {
           "url": "/services/drywall-repair/meridian",
           "anchor": "Drywall Repair & Patching in Meridian",
           "title": "Drywall Repair & Patching in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.495
-        },
-        {
-          "url": "/services/electrical-repairs/nampa",
-          "anchor": "Minor Electrical Repairs in Nampa",
-          "title": "Minor Electrical Repairs in Nampa, Idaho",
-          "type": "city-service",
-          "score": 0.815
-        },
-        {
-          "url": "/services/plumbing-repairs/nampa",
-          "anchor": "Minor Plumbing Repairs in Nampa",
-          "title": "Minor Plumbing Repairs in Nampa, Idaho",
-          "type": "city-service",
-          "score": 0.811
+          "score": 1.535
         },
         {
           "url": "/areas/nampa",
@@ -3041,18 +3041,25 @@
       "url": "/services/drywall-repair/star",
       "links": [
         {
-          "url": "/services/drywall-repair/meridian",
-          "anchor": "Drywall Repair & Patching in Meridian",
-          "title": "Drywall Repair & Patching in Meridian, Idaho",
-          "type": "city-service",
-          "score": 1.455
-        },
-        {
           "url": "/services/drywall-repair/nampa",
           "anchor": "Drywall Repair & Patching in Nampa",
           "title": "Drywall Repair & Patching in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.455
+          "score": 1.535
+        },
+        {
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
+          "type": "city-service",
+          "score": 1.513
+        },
+        {
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.495
         },
         {
           "url": "/areas/star",
@@ -3060,13 +3067,6 @@
           "title": "Remodeling Services in Star, Idaho",
           "type": "city",
           "score": 0.423
-        },
-        {
-          "url": "/guides/star-handyman-guide",
-          "anchor": "Star home repair guide: what local houses need, by age",
-          "title": "Star home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.289
         },
         {
           "url": "/services/painting-touch-ups",
@@ -3105,25 +3105,25 @@
       "url": "/services/electrical-repairs/boise",
       "links": [
         {
+          "url": "/services/electrical-repairs/eagle",
+          "anchor": "Minor Electrical Repairs in Eagle",
+          "title": "Minor Electrical Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.829
+        },
+        {
           "url": "/services/electrical-repairs/meridian",
           "anchor": "Minor Electrical Repairs in Meridian",
           "title": "Minor Electrical Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.789
+          "score": 1.829
         },
         {
           "url": "/services/electrical-repairs/nampa",
           "anchor": "Minor Electrical Repairs in Nampa",
           "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.789
-        },
-        {
-          "url": "/services/electrical-repairs/eagle",
-          "anchor": "Minor Electrical Repairs in Eagle",
-          "title": "Minor Electrical Repairs in Eagle, Idaho",
-          "type": "city-service",
-          "score": 1.749
+          "score": 1.829
         },
         {
           "url": "/services/electrical-repairs",
@@ -3173,21 +3173,21 @@
           "anchor": "Minor Electrical Repairs in Boise",
           "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": 1.789
+          "score": 1.829
+        },
+        {
+          "url": "/services/electrical-repairs/eagle",
+          "anchor": "Minor Electrical Repairs in Eagle",
+          "title": "Minor Electrical Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.727
         },
         {
           "url": "/services/electrical-repairs/meridian",
           "anchor": "Minor Electrical Repairs in Meridian",
           "title": "Minor Electrical Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.687
-        },
-        {
-          "url": "/services/electrical-repairs/nampa",
-          "anchor": "Minor Electrical Repairs in Nampa",
-          "title": "Minor Electrical Repairs in Nampa, Idaho",
-          "type": "city-service",
-          "score": 1.687
+          "score": 1.727
         },
         {
           "url": "/services/electrical-repairs",
@@ -3237,21 +3237,21 @@
           "anchor": "Minor Electrical Repairs in Boise",
           "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": 1.749
-        },
-        {
-          "url": "/services/electrical-repairs/meridian",
-          "anchor": "Minor Electrical Repairs in Meridian",
-          "title": "Minor Electrical Repairs in Meridian, Idaho",
-          "type": "city-service",
-          "score": 1.647
+          "score": 1.789
         },
         {
           "url": "/services/electrical-repairs/nampa",
           "anchor": "Minor Electrical Repairs in Nampa",
           "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.647
+          "score": 1.727
+        },
+        {
+          "url": "/services/electrical-repairs/meridian",
+          "anchor": "Minor Electrical Repairs in Meridian",
+          "title": "Minor Electrical Repairs in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.687
         },
         {
           "url": "/services/electrical-repairs",
@@ -3301,21 +3301,21 @@
           "anchor": "Minor Electrical Repairs in Boise",
           "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": 1.647
+          "score": 1.687
         },
         {
           "url": "/services/electrical-repairs/eagle",
           "anchor": "Minor Electrical Repairs in Eagle",
           "title": "Minor Electrical Repairs in Eagle, Idaho",
           "type": "city-service",
-          "score": 1.593
+          "score": 1.633
         },
         {
-          "url": "/services/electrical-repairs/meridian",
-          "anchor": "Minor Electrical Repairs in Meridian",
-          "title": "Minor Electrical Repairs in Meridian, Idaho",
+          "url": "/services/electrical-repairs/nampa",
+          "anchor": "Minor Electrical Repairs in Nampa",
+          "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.553
+          "score": 1.633
         },
         {
           "url": "/services/electrical-repairs",
@@ -3365,21 +3365,21 @@
           "anchor": "Minor Electrical Repairs in Boise",
           "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": 1.74
+          "score": 1.78
         },
         {
           "url": "/services/electrical-repairs/eagle",
           "anchor": "Minor Electrical Repairs in Eagle",
           "title": "Minor Electrical Repairs in Eagle, Idaho",
           "type": "city-service",
-          "score": 1.669
+          "score": 1.709
         },
         {
-          "url": "/services/electrical-repairs/nampa",
-          "anchor": "Minor Electrical Repairs in Nampa",
-          "title": "Minor Electrical Repairs in Nampa, Idaho",
+          "url": "/services/electrical-repairs/meridian",
+          "anchor": "Minor Electrical Repairs in Meridian",
+          "title": "Minor Electrical Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.669
+          "score": 1.709
         },
         {
           "url": "/services/electrical-repairs",
@@ -3429,21 +3429,21 @@
           "anchor": "Minor Electrical Repairs in Boise",
           "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": 1.629
-        },
-        {
-          "url": "/services/electrical-repairs/eagle",
-          "anchor": "Minor Electrical Repairs in Eagle",
-          "title": "Minor Electrical Repairs in Eagle, Idaho",
-          "type": "city-service",
-          "score": 1.567
+          "score": 1.669
         },
         {
           "url": "/services/electrical-repairs/nampa",
           "anchor": "Minor Electrical Repairs in Nampa",
           "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.567
+          "score": 1.647
+        },
+        {
+          "url": "/services/electrical-repairs/eagle",
+          "anchor": "Minor Electrical Repairs in Eagle",
+          "title": "Minor Electrical Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.607
         },
         {
           "url": "/areas/meridian",
@@ -3493,21 +3493,21 @@
           "anchor": "Minor Electrical Repairs in Boise",
           "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": 1.589
+          "score": 1.629
         },
         {
           "url": "/services/electrical-repairs/meridian",
           "anchor": "Minor Electrical Repairs in Meridian",
           "title": "Minor Electrical Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.567
+          "score": 1.607
         },
         {
-          "url": "/services/electrical-repairs/eagle",
-          "anchor": "Minor Electrical Repairs in Eagle",
-          "title": "Minor Electrical Repairs in Eagle, Idaho",
+          "url": "/services/electrical-repairs/nampa",
+          "anchor": "Minor Electrical Repairs in Nampa",
+          "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.527
+          "score": 1.607
         },
         {
           "url": "/areas/middleton",
@@ -3557,21 +3557,21 @@
           "anchor": "Minor Electrical Repairs in Boise",
           "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": 1.549
-        },
-        {
-          "url": "/services/electrical-repairs/meridian",
-          "anchor": "Minor Electrical Repairs in Meridian",
-          "title": "Minor Electrical Repairs in Meridian, Idaho",
-          "type": "city-service",
-          "score": 1.527
+          "score": 1.589
         },
         {
           "url": "/services/electrical-repairs/eagle",
           "anchor": "Minor Electrical Repairs in Eagle",
           "title": "Minor Electrical Repairs in Eagle, Idaho",
           "type": "city-service",
-          "score": 1.487
+          "score": 1.567
+        },
+        {
+          "url": "/services/electrical-repairs/meridian",
+          "anchor": "Minor Electrical Repairs in Meridian",
+          "title": "Minor Electrical Repairs in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.567
         },
         {
           "url": "/areas/nampa",
@@ -3621,21 +3621,21 @@
           "anchor": "Minor Electrical Repairs in Nampa",
           "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.527
+          "score": 1.567
         },
         {
           "url": "/services/electrical-repairs/boise",
           "anchor": "Minor Electrical Repairs in Boise",
           "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": 1.509
+          "score": 1.549
         },
         {
-          "url": "/services/electrical-repairs/meridian",
-          "anchor": "Minor Electrical Repairs in Meridian",
-          "title": "Minor Electrical Repairs in Meridian, Idaho",
+          "url": "/services/electrical-repairs/eagle",
+          "anchor": "Minor Electrical Repairs in Eagle",
+          "title": "Minor Electrical Repairs in Eagle, Idaho",
           "type": "city-service",
-          "score": 1.487
+          "score": 1.527
         },
         {
           "url": "/areas/star",
@@ -3702,9 +3702,9 @@
           "score": 0.825
         },
         {
-          "url": "/services/painting-touch-ups/boise",
-          "anchor": "Interior & Exterior Painting in Boise",
-          "title": "Interior & Exterior Painting in Boise, Idaho",
+          "url": "/services/home-maintenance/boise",
+          "anchor": "Caulking & Home Maintenance in Boise",
+          "title": "Caulking & Home Maintenance in Boise, Idaho",
           "type": "city-service",
           "score": 0.738
         },
@@ -3777,7 +3777,7 @@
           "anchor": "Caldwell home repair guide: what local houses need, by age",
           "title": "Caldwell home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.253
+          "score": 0.293
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
@@ -3823,11 +3823,11 @@
           "score": 1.647
         },
         {
-          "url": "/services/mounting-assembly/eagle",
-          "anchor": "Mounting & Assembly in Eagle",
-          "title": "Mounting & Assembly in Eagle, Idaho",
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
           "type": "city-service",
-          "score": 0.736
+          "score": 0.86
         },
         {
           "url": "/areas/eagle",
@@ -3898,7 +3898,7 @@
           "anchor": "Eagle home repair guide: what local houses need, by age",
           "title": "Eagle home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.158
+          "score": 0.198
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
@@ -3962,7 +3962,7 @@
           "anchor": "Kuna home repair guide: what local houses need, by age",
           "title": "Kuna home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.229
+          "score": 0.269
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
@@ -4012,14 +4012,14 @@
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 0.82
+          "score": 0.86
         },
         {
-          "url": "/services/carpentry-trim-repair/meridian",
-          "anchor": "Carpentry & Trim Repair in Meridian",
-          "title": "Carpentry & Trim Repair in Meridian, Idaho",
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
           "type": "city-service",
-          "score": 0.5
+          "score": 0.774
         },
         {
           "url": "/areas/meridian",
@@ -4090,7 +4090,7 @@
           "anchor": "Middleton home repair guide: what local houses need, by age",
           "title": "Middleton home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.221
+          "score": 0.261
         },
         {
           "url": "/blog/deck-maintenance-boise",
@@ -4147,7 +4147,7 @@
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 0.82
+          "score": 0.86
         },
         {
           "url": "/areas/nampa",
@@ -4218,7 +4218,14 @@
           "anchor": "Star home repair guide: what local houses need, by age",
           "title": "Star home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.25
+          "score": 0.29
+        },
+        {
+          "url": "/guides/eagle-handyman-guide",
+          "anchor": "Eagle home repair guide: what local houses need, by age",
+          "title": "Eagle home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": 0.161
         },
         {
           "url": "/guides/meridian-handyman-guide",
@@ -4226,13 +4233,6 @@
           "title": "Meridian home repair guide: what local houses need, by age",
           "type": "guide",
           "score": 0.147
-        },
-        {
-          "url": "/guides/treasure-valley-exterior-home-care-guide",
-          "anchor": "The Treasure Valley exterior home care guide",
-          "title": "The Treasure Valley exterior home care guide",
-          "type": "guide",
-          "score": 0.132
         },
         {
           "url": "/blog/gutter-cleaning-schedule-boise",
@@ -4257,11 +4257,18 @@
       "url": "/services/home-maintenance/boise",
       "links": [
         {
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.793
+        },
+        {
           "url": "/services/painting-touch-ups/boise",
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": 0.737
+          "score": 0.777
         },
         {
           "url": "/services/mounting-assembly/boise",
@@ -4283,13 +4290,6 @@
           "title": "Carpentry & Trim Repair in Boise, Idaho",
           "type": "city-service",
           "score": 0.418
-        },
-        {
-          "url": "/services/fence-deck-gutter-repair/boise",
-          "anchor": "Fence, Deck & Gutter Repair in Boise",
-          "title": "Fence, Deck & Gutter Repair in Boise, Idaho",
-          "type": "city-service",
-          "score": 0.378
         },
         {
           "url": "/areas/boise",
@@ -4328,18 +4328,25 @@
           "score": 1.793
         },
         {
-          "url": "/areas/caldwell",
-          "anchor": "Handyman in Caldwell",
-          "title": "Remodeling Services in Caldwell, Idaho",
-          "type": "city",
-          "score": 0.303
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.695
         },
         {
           "url": "/guides/caldwell-handyman-guide",
           "anchor": "Caldwell home repair guide: what local houses need, by age",
           "title": "Caldwell home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.268
+          "score": 0.308
+        },
+        {
+          "url": "/areas/caldwell",
+          "anchor": "Handyman in Caldwell",
+          "title": "Remodeling Services in Caldwell, Idaho",
+          "type": "city",
+          "score": 0.303
         },
         {
           "url": "/guides/meridian-handyman-guide",
@@ -4354,13 +4361,6 @@
           "title": "Nampa home repair guide: what local houses need, by age",
           "type": "guide",
           "score": 0.134
-        },
-        {
-          "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman services in the Eagle Foothills",
-          "title": "Handyman services in the Eagle Foothills",
-          "type": "guide",
-          "score": 0.08
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
@@ -4392,18 +4392,32 @@
           "score": 1.753
         },
         {
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.655
+        },
+        {
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
+          "type": "city-service",
+          "score": 0.811
+        },
+        {
           "url": "/services/mounting-assembly/eagle",
           "anchor": "Mounting & Assembly in Eagle",
           "title": "Mounting & Assembly in Eagle, Idaho",
           "type": "city-service",
-          "score": 0.694
+          "score": 0.734
         },
         {
-          "url": "/services/electrical-repairs/eagle",
-          "anchor": "Minor Electrical Repairs in Eagle",
-          "title": "Minor Electrical Repairs in Eagle, Idaho",
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
           "type": "city-service",
-          "score": 0.416
+          "score": 0.731
         },
         {
           "url": "/areas/eagle",
@@ -4411,20 +4425,6 @@
           "title": "Remodeling Services in Eagle, Idaho",
           "type": "city",
           "score": 0.303
-        },
-        {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Eagle home repair guide: what local houses need, by age",
-          "title": "Eagle home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.286
-        },
-        {
-          "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman services in the Eagle Foothills",
-          "title": "Handyman services in the Eagle Foothills",
-          "type": "guide",
-          "score": 0.171
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
@@ -4456,6 +4456,13 @@
           "score": 1.655
         },
         {
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.564
+        },
+        {
           "url": "/areas/garden-city",
           "anchor": "Handyman in Garden City",
           "title": "Remodeling Services in Garden City, Idaho",
@@ -4477,18 +4484,11 @@
           "score": 0.093
         },
         {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Eagle home repair guide: what local houses need, by age",
-          "title": "Eagle home repair guide: what local houses need, by age",
+          "url": "/guides/eagle-foothills-handyman-guide",
+          "anchor": "Handyman services in the Eagle Foothills",
+          "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
-          "score": 0.014
-        },
-        {
-          "url": "/guides/kuna-handyman-guide",
-          "anchor": "Kuna home repair guide: what local houses need, by age",
-          "title": "Kuna home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.014
+          "score": 0.08
         },
         {
           "url": "/blog/new-home-punch-list-handyman",
@@ -4520,6 +4520,20 @@
           "score": 1.74
         },
         {
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.633
+        },
+        {
+          "url": "/guides/kuna-handyman-guide",
+          "anchor": "Kuna home repair guide: what local houses need, by age",
+          "title": "Kuna home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": 0.257
+        },
+        {
           "url": "/areas/kuna",
           "anchor": "Handyman in Kuna",
           "title": "Remodeling Services in Kuna, Idaho",
@@ -4527,11 +4541,11 @@
           "score": 0.24
         },
         {
-          "url": "/guides/kuna-handyman-guide",
-          "anchor": "Kuna home repair guide: what local houses need, by age",
-          "title": "Kuna home repair guide: what local houses need, by age",
+          "url": "/guides/eagle-handyman-guide",
+          "anchor": "Eagle home repair guide: what local houses need, by age",
+          "title": "Eagle home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.177
+          "score": 0.057
         },
         {
           "url": "/guides/meridian-handyman-guide",
@@ -4539,20 +4553,6 @@
           "title": "Meridian home repair guide: what local houses need, by age",
           "type": "guide",
           "score": 0.056
-        },
-        {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Nampa home repair guide: what local houses need, by age",
-          "title": "Nampa home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.056
-        },
-        {
-          "url": "/guides/star-handyman-guide",
-          "anchor": "Star home repair guide: what local houses need, by age",
-          "title": "Star home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.01
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
@@ -4584,32 +4584,32 @@
           "score": 1.633
         },
         {
+          "url": "/services/painting-touch-ups/meridian",
+          "anchor": "Interior & Exterior Painting in Meridian",
+          "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 0.811
+        },
+        {
+          "url": "/services/mounting-assembly/meridian",
+          "anchor": "Mounting & Assembly in Meridian",
+          "title": "Mounting & Assembly in Meridian, Idaho",
+          "type": "city-service",
+          "score": 0.734
+        },
+        {
           "url": "/services/plumbing-repairs/meridian",
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 0.691
+          "score": 0.731
         },
         {
           "url": "/services/electrical-repairs/meridian",
           "anchor": "Minor Electrical Repairs in Meridian",
           "title": "Minor Electrical Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 0.416
-        },
-        {
-          "url": "/services/carpentry-trim-repair/meridian",
-          "anchor": "Carpentry & Trim Repair in Meridian",
-          "title": "Carpentry & Trim Repair in Meridian, Idaho",
-          "type": "city-service",
-          "score": 0.414
-        },
-        {
-          "url": "/services/fence-deck-gutter-repair/meridian",
-          "anchor": "Fence, Deck & Gutter Repair in Meridian",
-          "title": "Fence, Deck & Gutter Repair in Meridian, Idaho",
-          "type": "city-service",
-          "score": 0.414
+          "score": 0.496
         },
         {
           "url": "/areas/meridian",
@@ -4648,6 +4648,13 @@
           "score": 1.593
         },
         {
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.535
+        },
+        {
           "url": "/areas/middleton",
           "anchor": "Handyman in Middleton",
           "title": "Remodeling Services in Middleton, Idaho",
@@ -4659,28 +4666,21 @@
           "anchor": "Middleton home repair guide: what local houses need, by age",
           "title": "Middleton home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.211
-        },
-        {
-          "url": "/guides/meridian-handyman-guide",
-          "anchor": "Meridian home repair guide: what local houses need, by age",
-          "title": "Meridian home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.014
+          "score": 0.251
         },
         {
           "url": "/guides/nampa-handyman-guide",
           "anchor": "Nampa home repair guide: what local houses need, by age",
           "title": "Nampa home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.014
+          "score": 0.054
         },
         {
-          "url": "/guides/ember-ready-home-checklist-treasure-valley",
-          "anchor": "Ember-ready: a fall checklist for Treasure Valley homes",
-          "title": "Ember-ready: a fall checklist for Treasure Valley homes",
+          "url": "/guides/star-handyman-guide",
+          "anchor": "Star home repair guide: what local houses need, by age",
+          "title": "Star home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.007
+          "score": 0.049
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
@@ -4712,6 +4712,13 @@
           "score": 1.553
         },
         {
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.495
+        },
+        {
           "url": "/services/painting-touch-ups/nampa",
           "anchor": "Interior & Exterior Painting in Nampa",
           "title": "Interior & Exterior Painting in Nampa, Idaho",
@@ -4730,14 +4737,7 @@
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 0.691
-        },
-        {
-          "url": "/services/electrical-repairs/nampa",
-          "anchor": "Minor Electrical Repairs in Nampa",
-          "title": "Minor Electrical Repairs in Nampa, Idaho",
-          "type": "city-service",
-          "score": 0.456
+          "score": 0.731
         },
         {
           "url": "/areas/nampa",
@@ -4776,6 +4776,13 @@
           "score": 1.513
         },
         {
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.455
+        },
+        {
           "url": "/areas/star",
           "anchor": "Handyman in Star",
           "title": "Remodeling Services in Star, Idaho",
@@ -4787,28 +4794,21 @@
           "anchor": "Star home repair guide: what local houses need, by age",
           "title": "Star home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.195
+          "score": 0.235
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
           "anchor": "Handyman services in the Eagle Foothills",
           "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
-          "score": 0
-        },
-        {
-          "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman services in Hidden Springs",
-          "title": "Handyman services in Hidden Springs",
-          "type": "guide",
-          "score": 0
+          "score": 0.04
         },
         {
           "url": "/guides/caldwell-handyman-guide",
           "anchor": "Caldwell home repair guide: what local houses need, by age",
           "title": "Caldwell home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": -0.001
+          "score": 0.039
         },
         {
           "url": "/blog/caulking-guide-boise-homes",
@@ -4833,6 +4833,20 @@
       "url": "/services/mounting-assembly/boise",
       "links": [
         {
+          "url": "/services/mounting-assembly/eagle",
+          "anchor": "Mounting & Assembly in Eagle",
+          "title": "Mounting & Assembly in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.793
+        },
+        {
+          "url": "/services/mounting-assembly/meridian",
+          "anchor": "Mounting & Assembly in Meridian",
+          "title": "Mounting & Assembly in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.793
+        },
+        {
           "url": "/services/mounting-assembly/nampa",
           "anchor": "Mounting & Assembly in Nampa",
           "title": "Mounting & Assembly in Nampa, Idaho",
@@ -4840,18 +4854,11 @@
           "score": 1.793
         },
         {
-          "url": "/services/mounting-assembly/eagle",
-          "anchor": "Mounting & Assembly in Eagle",
-          "title": "Mounting & Assembly in Eagle, Idaho",
-          "type": "city-service",
-          "score": 1.753
-        },
-        {
           "url": "/services/painting-touch-ups/boise",
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": 0.62
+          "score": 0.66
         },
         {
           "url": "/services/plumbing-repairs/boise",
@@ -4859,13 +4866,6 @@
           "title": "Minor Plumbing Repairs in Boise, Idaho",
           "type": "city-service",
           "score": 0.62
-        },
-        {
-          "url": "/services/carpentry-trim-repair/boise",
-          "anchor": "Carpentry & Trim Repair in Boise",
-          "title": "Carpentry & Trim Repair in Boise, Idaho",
-          "type": "city-service",
-          "score": 0.34
         },
         {
           "url": "/areas/boise",
@@ -4904,18 +4904,25 @@
           "score": 1.793
         },
         {
+          "url": "/services/mounting-assembly/eagle",
+          "anchor": "Mounting & Assembly in Eagle",
+          "title": "Mounting & Assembly in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.695
+        },
+        {
+          "url": "/services/mounting-assembly/meridian",
+          "anchor": "Mounting & Assembly in Meridian",
+          "title": "Mounting & Assembly in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.695
+        },
+        {
           "url": "/services/mounting-assembly/nampa",
           "anchor": "Mounting & Assembly in Nampa",
           "title": "Mounting & Assembly in Nampa, Idaho",
           "type": "city-service",
           "score": 1.695
-        },
-        {
-          "url": "/services/mounting-assembly/eagle",
-          "anchor": "Mounting & Assembly in Eagle",
-          "title": "Mounting & Assembly in Eagle, Idaho",
-          "type": "city-service",
-          "score": 1.655
         },
         {
           "url": "/areas/caldwell",
@@ -4929,14 +4936,7 @@
           "anchor": "Caldwell home repair guide: what local houses need, by age",
           "title": "Caldwell home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.105
-        },
-        {
-          "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman services in the Eagle Foothills",
-          "title": "Handyman services in the Eagle Foothills",
-          "type": "guide",
-          "score": -0.04
+          "score": 0.145
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
@@ -4968,6 +4968,13 @@
           "score": 1.753
         },
         {
+          "url": "/services/mounting-assembly/meridian",
+          "anchor": "Mounting & Assembly in Meridian",
+          "title": "Mounting & Assembly in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.655
+        },
+        {
           "url": "/services/mounting-assembly/nampa",
           "anchor": "Mounting & Assembly in Nampa",
           "title": "Mounting & Assembly in Nampa, Idaho",
@@ -4975,11 +4982,18 @@
           "score": 1.655
         },
         {
-          "url": "/services/electrical-repairs/eagle",
-          "anchor": "Minor Electrical Repairs in Eagle",
-          "title": "Minor Electrical Repairs in Eagle, Idaho",
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
           "type": "city-service",
-          "score": 0.376
+          "score": 0.694
+        },
+        {
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 0.654
         },
         {
           "url": "/areas/eagle",
@@ -4987,20 +5001,6 @@
           "title": "Remodeling Services in Eagle, Idaho",
           "type": "city",
           "score": 0.263
-        },
-        {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Eagle home repair guide: what local houses need, by age",
-          "title": "Eagle home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.147
-        },
-        {
-          "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman services in the Eagle Foothills",
-          "title": "Handyman services in the Eagle Foothills",
-          "type": "guide",
-          "score": 0.051
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
@@ -5036,6 +5036,13 @@
           "anchor": "Mounting & Assembly in Eagle",
           "title": "Mounting & Assembly in Eagle, Idaho",
           "type": "city-service",
+          "score": 1.604
+        },
+        {
+          "url": "/services/mounting-assembly/meridian",
+          "anchor": "Mounting & Assembly in Meridian",
+          "title": "Mounting & Assembly in Meridian, Idaho",
+          "type": "city-service",
           "score": 1.564
         },
         {
@@ -5053,18 +5060,11 @@
           "score": 0.318
         },
         {
-          "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman services in Harris Ranch",
-          "title": "Handyman services in Harris Ranch",
+          "url": "/guides/eagle-foothills-handyman-guide",
+          "anchor": "Handyman services in the Eagle Foothills",
+          "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
-          "score": -0.04
-        },
-        {
-          "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman services in Hidden Springs",
-          "title": "Handyman services in Hidden Springs",
-          "type": "guide",
-          "score": -0.04
+          "score": 0
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
@@ -5100,6 +5100,13 @@
           "anchor": "Mounting & Assembly in Eagle",
           "title": "Mounting & Assembly in Eagle, Idaho",
           "type": "city-service",
+          "score": 1.673
+        },
+        {
+          "url": "/services/mounting-assembly/meridian",
+          "anchor": "Mounting & Assembly in Meridian",
+          "title": "Mounting & Assembly in Meridian, Idaho",
+          "type": "city-service",
           "score": 1.633
         },
         {
@@ -5121,14 +5128,7 @@
           "anchor": "Kuna home repair guide: what local houses need, by age",
           "title": "Kuna home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.08
-        },
-        {
-          "url": "/guides/ember-ready-home-checklist-treasure-valley",
-          "anchor": "Ember-ready: a fall checklist for Treasure Valley homes",
-          "title": "Ember-ready: a fall checklist for Treasure Valley homes",
-          "type": "guide",
-          "score": -0.08
+          "score": 0.16
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
@@ -5164,7 +5164,7 @@
           "anchor": "Mounting & Assembly in Eagle",
           "title": "Mounting & Assembly in Eagle, Idaho",
           "type": "city-service",
-          "score": 1.535
+          "score": 1.575
         },
         {
           "url": "/services/mounting-assembly/nampa",
@@ -5174,18 +5174,18 @@
           "score": 1.535
         },
         {
+          "url": "/services/painting-touch-ups/meridian",
+          "anchor": "Interior & Exterior Painting in Meridian",
+          "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 0.694
+        },
+        {
           "url": "/services/plumbing-repairs/meridian",
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 0.614
-        },
-        {
-          "url": "/services/electrical-repairs/meridian",
-          "anchor": "Minor Electrical Repairs in Meridian",
-          "title": "Minor Electrical Repairs in Meridian, Idaho",
-          "type": "city-service",
-          "score": 0.376
+          "score": 0.654
         },
         {
           "url": "/areas/meridian",
@@ -5228,7 +5228,14 @@
           "anchor": "Mounting & Assembly in Eagle",
           "title": "Mounting & Assembly in Eagle, Idaho",
           "type": "city-service",
-          "score": 1.495
+          "score": 1.535
+        },
+        {
+          "url": "/services/mounting-assembly/meridian",
+          "anchor": "Mounting & Assembly in Meridian",
+          "title": "Mounting & Assembly in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.535
         },
         {
           "url": "/services/mounting-assembly/nampa",
@@ -5249,14 +5256,7 @@
           "anchor": "Middleton home repair guide: what local houses need, by age",
           "title": "Middleton home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.109
-        },
-        {
-          "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman services in Harris Ranch",
-          "title": "Handyman services in Harris Ranch",
-          "type": "guide",
-          "score": -0.08
+          "score": 0.149
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
@@ -5292,7 +5292,14 @@
           "anchor": "Mounting & Assembly in Eagle",
           "title": "Mounting & Assembly in Eagle, Idaho",
           "type": "city-service",
-          "score": 1.455
+          "score": 1.495
+        },
+        {
+          "url": "/services/mounting-assembly/meridian",
+          "anchor": "Mounting & Assembly in Meridian",
+          "title": "Mounting & Assembly in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.495
         },
         {
           "url": "/services/painting-touch-ups/nampa",
@@ -5306,14 +5313,7 @@
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 0.614
-        },
-        {
-          "url": "/services/electrical-repairs/nampa",
-          "anchor": "Minor Electrical Repairs in Nampa",
-          "title": "Minor Electrical Repairs in Nampa, Idaho",
-          "type": "city-service",
-          "score": 0.416
+          "score": 0.654
         },
         {
           "url": "/areas/nampa",
@@ -5352,18 +5352,25 @@
           "score": 1.513
         },
         {
+          "url": "/services/mounting-assembly/eagle",
+          "anchor": "Mounting & Assembly in Eagle",
+          "title": "Mounting & Assembly in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.455
+        },
+        {
+          "url": "/services/mounting-assembly/meridian",
+          "anchor": "Mounting & Assembly in Meridian",
+          "title": "Mounting & Assembly in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.455
+        },
+        {
           "url": "/services/mounting-assembly/nampa",
           "anchor": "Mounting & Assembly in Nampa",
           "title": "Mounting & Assembly in Nampa, Idaho",
           "type": "city-service",
           "score": 1.455
-        },
-        {
-          "url": "/services/mounting-assembly/eagle",
-          "anchor": "Mounting & Assembly in Eagle",
-          "title": "Mounting & Assembly in Eagle, Idaho",
-          "type": "city-service",
-          "score": 1.415
         },
         {
           "url": "/areas/star",
@@ -5377,14 +5384,7 @@
           "anchor": "Star home repair guide: what local houses need, by age",
           "title": "Star home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.104
-        },
-        {
-          "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman services in Hidden Springs",
-          "title": "Handyman services in Hidden Springs",
-          "type": "guide",
-          "score": -0.08
+          "score": 0.144
         },
         {
           "url": "/blog/tv-mounting-and-anchoring-guide",
@@ -5409,6 +5409,20 @@
       "url": "/services/painting-touch-ups/boise",
       "links": [
         {
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.753
+        },
+        {
+          "url": "/services/painting-touch-ups/meridian",
+          "anchor": "Interior & Exterior Painting in Meridian",
+          "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.753
+        },
+        {
           "url": "/services/painting-touch-ups/nampa",
           "anchor": "Interior & Exterior Painting in Nampa",
           "title": "Interior & Exterior Painting in Nampa, Idaho",
@@ -5428,20 +5442,6 @@
           "title": "Caulking & Home Maintenance in Boise, Idaho",
           "type": "city-service",
           "score": 0.417
-        },
-        {
-          "url": "/services/electrical-repairs/boise",
-          "anchor": "Minor Electrical Repairs in Boise",
-          "title": "Minor Electrical Repairs in Boise, Idaho",
-          "type": "city-service",
-          "score": 0.34
-        },
-        {
-          "url": "/services/mounting-assembly/boise",
-          "anchor": "Mounting & Assembly in Boise",
-          "title": "Mounting & Assembly in Boise, Idaho",
-          "type": "city-service",
-          "score": 0.34
         },
         {
           "url": "/areas/boise",
@@ -5477,7 +5477,21 @@
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": 1.713
+          "score": 1.753
+        },
+        {
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.655
+        },
+        {
+          "url": "/services/painting-touch-ups/meridian",
+          "anchor": "Interior & Exterior Painting in Meridian",
+          "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.655
         },
         {
           "url": "/services/painting-touch-ups/nampa",
@@ -5498,21 +5512,7 @@
           "anchor": "Caldwell home repair guide: what local houses need, by age",
           "title": "Caldwell home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.065
-        },
-        {
-          "url": "/guides/treasure-valley-exterior-home-care-guide",
-          "anchor": "The Treasure Valley exterior home care guide",
-          "title": "The Treasure Valley exterior home care guide",
-          "type": "guide",
-          "score": -0.019
-        },
-        {
-          "url": "/guides/hire-a-handyman-treasure-valley",
-          "anchor": "How to hire a handyman in Boise and the Treasure Valley",
-          "title": "How to hire a handyman in Boise and the Treasure Valley",
-          "type": "guide",
-          "score": -0.08
+          "score": 0.105
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
@@ -5541,7 +5541,14 @@
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": 1.673
+          "score": 1.713
+        },
+        {
+          "url": "/services/painting-touch-ups/meridian",
+          "anchor": "Interior & Exterior Painting in Meridian",
+          "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.615
         },
         {
           "url": "/services/painting-touch-ups/nampa",
@@ -5551,18 +5558,18 @@
           "score": 1.615
         },
         {
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 0.651
+        },
+        {
           "url": "/services/electrical-repairs/eagle",
           "anchor": "Minor Electrical Repairs in Eagle",
           "title": "Minor Electrical Repairs in Eagle, Idaho",
           "type": "city-service",
-          "score": 0.336
-        },
-        {
-          "url": "/services/mounting-assembly/eagle",
-          "anchor": "Mounting & Assembly in Eagle",
-          "title": "Mounting & Assembly in Eagle, Idaho",
-          "type": "city-service",
-          "score": 0.334
+          "score": 0.456
         },
         {
           "url": "/areas/eagle",
@@ -5570,13 +5577,6 @@
           "title": "Remodeling Services in Eagle, Idaho",
           "type": "city",
           "score": 0.223
-        },
-        {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Eagle home repair guide: what local houses need, by age",
-          "title": "Eagle home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.136
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
@@ -5605,7 +5605,21 @@
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": 1.575
+          "score": 1.615
+        },
+        {
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.564
+        },
+        {
+          "url": "/services/painting-touch-ups/meridian",
+          "anchor": "Interior & Exterior Painting in Meridian",
+          "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.524
         },
         {
           "url": "/services/painting-touch-ups/nampa",
@@ -5626,21 +5640,7 @@
           "anchor": "The Treasure Valley exterior home care guide",
           "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
-          "score": -0.061
-        },
-        {
-          "url": "/guides/meridian-handyman-guide",
-          "anchor": "Meridian home repair guide: what local houses need, by age",
-          "title": "Meridian home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.08
-        },
-        {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Nampa home repair guide: what local houses need, by age",
-          "title": "Nampa home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.08
+          "score": 0.019
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
@@ -5669,7 +5669,21 @@
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": 1.66
+          "score": 1.7
+        },
+        {
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.633
+        },
+        {
+          "url": "/services/painting-touch-ups/meridian",
+          "anchor": "Interior & Exterior Painting in Meridian",
+          "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.593
         },
         {
           "url": "/services/painting-touch-ups/nampa",
@@ -5690,21 +5704,7 @@
           "anchor": "Kuna home repair guide: what local houses need, by age",
           "title": "Kuna home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.04
-        },
-        {
-          "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Small home upgrades that pay off",
-          "title": "Small home upgrades that pay off",
-          "type": "guide",
-          "score": -0.09
-        },
-        {
-          "url": "/guides/ember-ready-home-checklist-treasure-valley",
-          "anchor": "Ember-ready: a fall checklist for Treasure Valley homes",
-          "title": "Ember-ready: a fall checklist for Treasure Valley homes",
-          "type": "guide",
-          "score": -0.097
+          "score": 0.12
         },
         {
           "url": "/blog/small-home-upgrade-ideas-boise",
@@ -5733,7 +5733,14 @@
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": 1.553
+          "score": 1.593
+        },
+        {
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.535
         },
         {
           "url": "/services/painting-touch-ups/nampa",
@@ -5747,21 +5754,14 @@
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 0.611
+          "score": 0.651
         },
         {
-          "url": "/services/carpentry-trim-repair/meridian",
-          "anchor": "Carpentry & Trim Repair in Meridian",
-          "title": "Carpentry & Trim Repair in Meridian, Idaho",
+          "url": "/services/electrical-repairs/meridian",
+          "anchor": "Minor Electrical Repairs in Meridian",
+          "title": "Minor Electrical Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 0.374
-        },
-        {
-          "url": "/services/drywall-repair/meridian",
-          "anchor": "Drywall Repair & Patching in Meridian",
-          "title": "Drywall Repair & Patching in Meridian, Idaho",
-          "type": "city-service",
-          "score": 0.374
+          "score": 0.456
         },
         {
           "url": "/areas/meridian",
@@ -5797,7 +5797,21 @@
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": 1.513
+          "score": 1.553
+        },
+        {
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.495
+        },
+        {
+          "url": "/services/painting-touch-ups/meridian",
+          "anchor": "Interior & Exterior Painting in Meridian",
+          "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.495
         },
         {
           "url": "/services/painting-touch-ups/nampa",
@@ -5818,21 +5832,7 @@
           "anchor": "Middleton home repair guide: what local houses need, by age",
           "title": "Middleton home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.069
-        },
-        {
-          "url": "/guides/treasure-valley-exterior-home-care-guide",
-          "anchor": "The Treasure Valley exterior home care guide",
-          "title": "The Treasure Valley exterior home care guide",
-          "type": "guide",
-          "score": -0.099
-        },
-        {
-          "url": "/guides/boise-handyman-guide",
-          "anchor": "Boise home repair guide: what local houses need, by age",
-          "title": "Boise home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.12
+          "score": 0.109
         },
         {
           "url": "/blog/home-repairs-before-selling-boise",
@@ -5861,35 +5861,35 @@
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": 1.473
+          "score": 1.513
+        },
+        {
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.455
+        },
+        {
+          "url": "/services/painting-touch-ups/meridian",
+          "anchor": "Interior & Exterior Painting in Meridian",
+          "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.455
         },
         {
           "url": "/services/plumbing-repairs/nampa",
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 0.611
+          "score": 0.651
         },
         {
           "url": "/services/electrical-repairs/nampa",
           "anchor": "Minor Electrical Repairs in Nampa",
           "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 0.376
-        },
-        {
-          "url": "/services/drywall-repair/nampa",
-          "anchor": "Drywall Repair & Patching in Nampa",
-          "title": "Drywall Repair & Patching in Nampa, Idaho",
-          "type": "city-service",
-          "score": 0.374
-        },
-        {
-          "url": "/services/mounting-assembly/nampa",
-          "anchor": "Mounting & Assembly in Nampa",
-          "title": "Mounting & Assembly in Nampa, Idaho",
-          "type": "city-service",
-          "score": 0.374
+          "score": 0.496
         },
         {
           "url": "/areas/nampa",
@@ -5925,7 +5925,21 @@
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": 1.433
+          "score": 1.473
+        },
+        {
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.415
+        },
+        {
+          "url": "/services/painting-touch-ups/meridian",
+          "anchor": "Interior & Exterior Painting in Meridian",
+          "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.415
         },
         {
           "url": "/services/painting-touch-ups/nampa",
@@ -5946,21 +5960,7 @@
           "anchor": "Star home repair guide: what local houses need, by age",
           "title": "Star home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.064
-        },
-        {
-          "url": "/guides/boise-home-maintenance-guide",
-          "anchor": "The complete Boise home maintenance guide",
-          "title": "The complete Boise home maintenance guide",
-          "type": "guide",
-          "score": -0.12
-        },
-        {
-          "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman services in the Eagle Foothills",
-          "title": "Handyman services in the Eagle Foothills",
-          "type": "guide",
-          "score": -0.12
+          "score": 0.104
         },
         {
           "url": "/blog/deck-maintenance-boise",
@@ -5985,39 +5985,39 @@
       "url": "/services/plumbing-repairs/boise",
       "links": [
         {
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.673
+        },
+        {
           "url": "/services/plumbing-repairs/meridian",
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.633
+          "score": 1.673
         },
         {
           "url": "/services/plumbing-repairs/nampa",
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.633
+          "score": 1.673
         },
         {
           "url": "/services/fence-deck-gutter-repair/boise",
           "anchor": "Fence, Deck & Gutter Repair in Boise",
           "title": "Fence, Deck & Gutter Repair in Boise, Idaho",
           "type": "city-service",
-          "score": 0.425
+          "score": 0.465
         },
         {
           "url": "/services/electrical-repairs/boise",
           "anchor": "Minor Electrical Repairs in Boise",
           "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": 0.38
-        },
-        {
-          "url": "/services/carpentry-trim-repair/boise",
-          "anchor": "Carpentry & Trim Repair in Boise",
-          "title": "Carpentry & Trim Repair in Boise, Idaho",
-          "type": "city-service",
-          "score": 0.338
+          "score": 0.46
         },
         {
           "url": "/areas/boise",
@@ -6056,18 +6056,25 @@
           "score": 1.673
         },
         {
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.575
+        },
+        {
           "url": "/services/plumbing-repairs/meridian",
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.535
+          "score": 1.575
         },
         {
           "url": "/services/plumbing-repairs/nampa",
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.535
+          "score": 1.575
         },
         {
           "url": "/areas/caldwell",
@@ -6081,14 +6088,7 @@
           "anchor": "Caldwell home repair guide: what local houses need, by age",
           "title": "Caldwell home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.051
-        },
-        {
-          "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "The first-time homeowner's repair handbook",
-          "title": "The first-time homeowner's repair handbook",
-          "type": "guide",
-          "score": -0.071
+          "score": 0.091
         },
         {
           "url": "/blog/replacing-faucets-and-fixtures",
@@ -6124,28 +6124,28 @@
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.495
+          "score": 1.535
         },
         {
           "url": "/services/plumbing-repairs/nampa",
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.495
+          "score": 1.535
         },
         {
           "url": "/services/electrical-repairs/eagle",
           "anchor": "Minor Electrical Repairs in Eagle",
           "title": "Minor Electrical Repairs in Eagle, Idaho",
           "type": "city-service",
-          "score": 0.375
+          "score": 0.495
         },
         {
-          "url": "/services/mounting-assembly/eagle",
-          "anchor": "Mounting & Assembly in Eagle",
-          "title": "Mounting & Assembly in Eagle, Idaho",
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
           "type": "city-service",
-          "score": 0.294
+          "score": 0.491
         },
         {
           "url": "/areas/eagle",
@@ -6184,18 +6184,25 @@
           "score": 1.535
         },
         {
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.484
+        },
+        {
           "url": "/services/plumbing-repairs/meridian",
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.404
+          "score": 1.444
         },
         {
           "url": "/services/plumbing-repairs/nampa",
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.404
+          "score": 1.444
         },
         {
           "url": "/areas/garden-city",
@@ -6205,18 +6212,11 @@
           "score": 0.238
         },
         {
-          "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman services in Harris Ranch",
-          "title": "Handyman services in Harris Ranch",
-          "type": "guide",
-          "score": -0.093
-        },
-        {
           "url": "/guides/hidden-springs-handyman-guide",
           "anchor": "Handyman services in Hidden Springs",
           "title": "Handyman services in Hidden Springs",
           "type": "guide",
-          "score": -0.094
+          "score": 0.026
         },
         {
           "url": "/blog/boise-building-permit-guide",
@@ -6248,18 +6248,25 @@
           "score": 1.62
         },
         {
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.553
+        },
+        {
           "url": "/services/plumbing-repairs/meridian",
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.473
+          "score": 1.513
         },
         {
           "url": "/services/plumbing-repairs/nampa",
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.473
+          "score": 1.513
         },
         {
           "url": "/areas/kuna",
@@ -6273,14 +6280,7 @@
           "anchor": "Kuna home repair guide: what local houses need, by age",
           "title": "Kuna home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.028
-        },
-        {
-          "url": "/guides/meridian-handyman-guide",
-          "anchor": "Meridian home repair guide: what local houses need, by age",
-          "title": "Meridian home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.093
+          "score": 0.108
         },
         {
           "url": "/blog/common-toilet-problems-and-fixes",
@@ -6312,32 +6312,32 @@
           "score": 1.513
         },
         {
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.455
+        },
+        {
           "url": "/services/plumbing-repairs/nampa",
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.375
-        },
-        {
-          "url": "/services/fence-deck-gutter-repair/meridian",
-          "anchor": "Fence, Deck & Gutter Repair in Meridian",
-          "title": "Fence, Deck & Gutter Repair in Meridian, Idaho",
-          "type": "city-service",
-          "score": 0.46
-        },
-        {
-          "url": "/services/electrical-repairs/meridian",
-          "anchor": "Minor Electrical Repairs in Meridian",
-          "title": "Minor Electrical Repairs in Meridian, Idaho",
-          "type": "city-service",
-          "score": 0.415
+          "score": 1.415
         },
         {
           "url": "/services/drywall-repair/meridian",
           "anchor": "Drywall Repair & Patching in Meridian",
           "title": "Drywall Repair & Patching in Meridian, Idaho",
           "type": "city-service",
-          "score": 0.411
+          "score": 0.531
+        },
+        {
+          "url": "/services/fence-deck-gutter-repair/meridian",
+          "anchor": "Fence, Deck & Gutter Repair in Meridian",
+          "title": "Fence, Deck & Gutter Repair in Meridian, Idaho",
+          "type": "city-service",
+          "score": 0.5
         },
         {
           "url": "/areas/meridian",
@@ -6376,18 +6376,25 @@
           "score": 1.473
         },
         {
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.415
+        },
+        {
           "url": "/services/plumbing-repairs/meridian",
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.375
+          "score": 1.415
         },
         {
           "url": "/services/plumbing-repairs/nampa",
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.335
+          "score": 1.375
         },
         {
           "url": "/areas/middleton",
@@ -6401,14 +6408,7 @@
           "anchor": "Middleton home repair guide: what local houses need, by age",
           "title": "Middleton home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.059
-        },
-        {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Nampa home repair guide: what local houses need, by age",
-          "title": "Nampa home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.094
+          "score": 0.099
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
@@ -6440,32 +6440,32 @@
           "score": 1.433
         },
         {
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.375
+        },
+        {
           "url": "/services/plumbing-repairs/meridian",
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.335
+          "score": 1.375
         },
         {
           "url": "/services/electrical-repairs/nampa",
           "anchor": "Minor Electrical Repairs in Nampa",
           "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 0.415
+          "score": 0.535
         },
         {
           "url": "/services/drywall-repair/nampa",
           "anchor": "Drywall Repair & Patching in Nampa",
           "title": "Drywall Repair & Patching in Nampa, Idaho",
           "type": "city-service",
-          "score": 0.411
-        },
-        {
-          "url": "/services/painting-touch-ups/nampa",
-          "anchor": "Interior & Exterior Painting in Nampa",
-          "title": "Interior & Exterior Painting in Nampa, Idaho",
-          "type": "city-service",
-          "score": 0.371
+          "score": 0.531
         },
         {
           "url": "/areas/nampa",
@@ -6504,18 +6504,25 @@
           "score": 1.393
         },
         {
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.335
+        },
+        {
           "url": "/services/plumbing-repairs/meridian",
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.295
+          "score": 1.335
         },
         {
           "url": "/services/plumbing-repairs/nampa",
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.295
+          "score": 1.335
         },
         {
           "url": "/areas/star",
@@ -6529,14 +6536,7 @@
           "anchor": "Star home repair guide: what local houses need, by age",
           "title": "Star home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.049
-        },
-        {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Eagle home repair guide: what local houses need, by age",
-          "title": "Eagle home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.104
+          "score": 0.089
         },
         {
           "url": "/blog/boise-building-permit-guide",
@@ -6582,32 +6582,32 @@
           "score": 0.58
         },
         {
-          "url": "/services/home-maintenance/boise",
-          "anchor": "Caulking & Home Maintenance in Boise",
-          "title": "Caulking & Home Maintenance in Boise, Idaho",
-          "type": "city-service",
-          "score": 0
-        },
-        {
-          "url": "/services/mounting-assembly/boise",
-          "anchor": "Mounting & Assembly in Boise",
-          "title": "Mounting & Assembly in Boise, Idaho",
-          "type": "city-service",
-          "score": 0
-        },
-        {
           "url": "/services/carpentry-trim-repair/boise",
           "anchor": "Carpentry & Trim Repair in Boise",
           "title": "Carpentry & Trim Repair in Boise, Idaho",
           "type": "city-service",
-          "score": -0.04
+          "score": 0.04
+        },
+        {
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
+          "type": "city-service",
+          "score": 0.04
         },
         {
           "url": "/services/electrical-repairs/boise",
           "anchor": "Minor Electrical Repairs in Boise",
           "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": -0.04
+          "score": 0.04
+        },
+        {
+          "url": "/services/mounting-assembly/boise",
+          "anchor": "Mounting & Assembly in Boise",
+          "title": "Mounting & Assembly in Boise, Idaho",
+          "type": "city-service",
+          "score": 0.04
         },
         {
           "url": "/blog/how-to-compare-handyman-quotes",
@@ -6717,32 +6717,32 @@
           "score": 0.333
         },
         {
-          "url": "/areas/caldwell",
-          "anchor": "Handyman in Caldwell",
-          "title": "Remodeling Services in Caldwell, Idaho",
-          "type": "city",
-          "score": 0.313
-        },
-        {
-          "url": "/areas/garden-city",
-          "anchor": "Handyman in Garden City",
-          "title": "Remodeling Services in Garden City, Idaho",
-          "type": "city",
-          "score": 0.29
-        },
-        {
           "url": "/services/electrical-repairs/eagle",
           "anchor": "Minor Electrical Repairs in Eagle",
           "title": "Minor Electrical Repairs in Eagle, Idaho",
           "type": "city-service",
-          "score": -0.013
+          "score": 0.107
+        },
+        {
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
+          "type": "city-service",
+          "score": 0.103
         },
         {
           "url": "/services/mounting-assembly/eagle",
           "anchor": "Mounting & Assembly in Eagle",
           "title": "Mounting & Assembly in Eagle, Idaho",
           "type": "city-service",
-          "score": -0.017
+          "score": 0.103
+        },
+        {
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
+          "type": "city-service",
+          "score": 0.063
         }
       ]
     },
@@ -6781,18 +6781,18 @@
           "score": 0.25
         },
         {
+          "url": "/areas/caldwell",
+          "anchor": "Handyman in Caldwell",
+          "title": "Remodeling Services in Caldwell, Idaho",
+          "type": "city",
+          "score": 0.23
+        },
+        {
           "url": "/areas/meridian",
           "anchor": "Handyman in Meridian",
           "title": "Remodeling Services in Meridian, Idaho",
           "type": "city",
           "score": 0.21
-        },
-        {
-          "url": "/areas/caldwell",
-          "anchor": "Handyman in Caldwell",
-          "title": "Remodeling Services in Caldwell, Idaho",
-          "type": "city",
-          "score": 0.19
         },
         {
           "url": "/areas/middleton",
@@ -6838,18 +6838,18 @@
           "score": 0.46
         },
         {
+          "url": "/areas/caldwell",
+          "anchor": "Handyman in Caldwell",
+          "title": "Remodeling Services in Caldwell, Idaho",
+          "type": "city",
+          "score": 0.44
+        },
+        {
           "url": "/areas/meridian",
           "anchor": "Handyman in Meridian",
           "title": "Remodeling Services in Meridian, Idaho",
           "type": "city",
           "score": 0.42
-        },
-        {
-          "url": "/areas/caldwell",
-          "anchor": "Handyman in Caldwell",
-          "title": "Remodeling Services in Caldwell, Idaho",
-          "type": "city",
-          "score": 0.4
         },
         {
           "url": "/areas/middleton",
@@ -6870,7 +6870,7 @@
           "anchor": "Handyman in Garden City",
           "title": "Remodeling Services in Garden City, Idaho",
           "type": "city",
-          "score": 0.333
+          "score": 0.373
         }
       ]
     },
@@ -6913,28 +6913,28 @@
           "anchor": "Carpentry & Trim Repair in Meridian",
           "title": "Carpentry & Trim Repair in Meridian, Idaho",
           "type": "city-service",
-          "score": 0.027
+          "score": 0.147
         },
         {
           "url": "/services/electrical-repairs/meridian",
           "anchor": "Minor Electrical Repairs in Meridian",
           "title": "Minor Electrical Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 0.027
-        },
-        {
-          "url": "/services/fence-deck-gutter-repair/meridian",
-          "anchor": "Fence, Deck & Gutter Repair in Meridian",
-          "title": "Fence, Deck & Gutter Repair in Meridian, Idaho",
-          "type": "city-service",
-          "score": 0.027
+          "score": 0.147
         },
         {
           "url": "/services/drywall-repair/meridian",
           "anchor": "Drywall Repair & Patching in Meridian",
           "title": "Drywall Repair & Patching in Meridian, Idaho",
           "type": "city-service",
-          "score": 0.023
+          "score": 0.143
+        },
+        {
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
+          "type": "city-service",
+          "score": 0.103
         }
       ]
     },
@@ -6949,7 +6949,7 @@
           "anchor": "Handyman in Caldwell",
           "title": "Remodeling Services in Caldwell, Idaho",
           "type": "city",
-          "score": 0.293
+          "score": 0.333
         },
         {
           "url": "/areas/nampa",
@@ -6973,6 +6973,13 @@
           "score": 0.28
         },
         {
+          "url": "/areas/garden-city",
+          "anchor": "Handyman in Garden City",
+          "title": "Remodeling Services in Garden City, Idaho",
+          "type": "city",
+          "score": 0.15
+        },
+        {
           "url": "/areas/eagle",
           "anchor": "Handyman in Eagle",
           "title": "Remodeling Services in Eagle, Idaho",
@@ -6992,13 +6999,6 @@
           "title": "Remodeling Services in Star, Idaho",
           "type": "city",
           "score": 0.113
-        },
-        {
-          "url": "/areas/garden-city",
-          "anchor": "Handyman in Garden City",
-          "title": "Remodeling Services in Garden City, Idaho",
-          "type": "city",
-          "score": 0.11
         }
       ]
     },
@@ -7009,18 +7009,18 @@
       "url": "/areas/nampa",
       "links": [
         {
+          "url": "/areas/caldwell",
+          "anchor": "Handyman in Caldwell",
+          "title": "Remodeling Services in Caldwell, Idaho",
+          "type": "city",
+          "score": 0.293
+        },
+        {
           "url": "/areas/middleton",
           "anchor": "Handyman in Middleton",
           "title": "Remodeling Services in Middleton, Idaho",
           "type": "city",
           "score": 0.293
-        },
-        {
-          "url": "/areas/caldwell",
-          "anchor": "Handyman in Caldwell",
-          "title": "Remodeling Services in Caldwell, Idaho",
-          "type": "city",
-          "score": 0.253
         },
         {
           "url": "/areas/boise",
@@ -7037,32 +7037,32 @@
           "score": 0.24
         },
         {
-          "url": "/services/mounting-assembly/nampa",
-          "anchor": "Mounting & Assembly in Nampa",
-          "title": "Mounting & Assembly in Nampa, Idaho",
-          "type": "city-service",
-          "score": 0.063
-        },
-        {
           "url": "/services/electrical-repairs/nampa",
           "anchor": "Minor Electrical Repairs in Nampa",
           "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 0.027
+          "score": 0.147
         },
         {
           "url": "/services/drywall-repair/nampa",
           "anchor": "Drywall Repair & Patching in Nampa",
           "title": "Drywall Repair & Patching in Nampa, Idaho",
           "type": "city-service",
-          "score": 0.023
+          "score": 0.143
+        },
+        {
+          "url": "/services/mounting-assembly/nampa",
+          "anchor": "Mounting & Assembly in Nampa",
+          "title": "Mounting & Assembly in Nampa, Idaho",
+          "type": "city-service",
+          "score": 0.103
         },
         {
           "url": "/services/painting-touch-ups/nampa",
           "anchor": "Interior & Exterior Painting in Nampa",
           "title": "Interior & Exterior Painting in Nampa, Idaho",
           "type": "city-service",
-          "score": 0.023
+          "score": 0.063
         }
       ]
     },
@@ -7087,6 +7087,13 @@
           "score": 0.3
         },
         {
+          "url": "/areas/garden-city",
+          "anchor": "Handyman in Garden City",
+          "title": "Remodeling Services in Garden City, Idaho",
+          "type": "city",
+          "score": 0.21
+        },
+        {
           "url": "/areas/eagle",
           "anchor": "Handyman in Eagle",
           "title": "Remodeling Services in Eagle, Idaho",
@@ -7101,11 +7108,11 @@
           "score": 0.173
         },
         {
-          "url": "/areas/garden-city",
-          "anchor": "Handyman in Garden City",
-          "title": "Remodeling Services in Garden City, Idaho",
+          "url": "/areas/caldwell",
+          "anchor": "Handyman in Caldwell",
+          "title": "Remodeling Services in Caldwell, Idaho",
           "type": "city",
-          "score": 0.17
+          "score": 0.153
         },
         {
           "url": "/areas/middleton",
@@ -7120,13 +7127,6 @@
           "title": "Remodeling Services in Nampa, Idaho",
           "type": "city",
           "score": 0.153
-        },
-        {
-          "url": "/areas/caldwell",
-          "anchor": "Handyman in Caldwell",
-          "title": "Remodeling Services in Caldwell, Idaho",
-          "type": "city",
-          "score": 0.113
         }
       ]
     },
@@ -7165,11 +7165,11 @@
           "score": 999
         },
         {
-          "url": "/guides/meridian-handyman-guide",
-          "anchor": "Meridian home repair guide: what local houses need, by age",
-          "title": "Meridian home repair guide: what local houses need, by age",
+          "url": "/guides/eagle-handyman-guide",
+          "anchor": "Eagle home repair guide: what local houses need, by age",
+          "title": "Eagle home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.933
+          "score": 1.06
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
@@ -7247,14 +7247,14 @@
           "anchor": "Ember-ready: a fall checklist for Treasure Valley homes",
           "title": "Ember-ready: a fall checklist for Treasure Valley homes",
           "type": "guide",
-          "score": 0.103
+          "score": 0.223
         },
         {
           "url": "/services/home-maintenance/boise",
           "anchor": "Caulking & Home Maintenance in Boise",
           "title": "Caulking & Home Maintenance in Boise, Idaho",
           "type": "city-service",
-          "score": -0.279
+          "score": -0.239
         }
       ]
     },
@@ -7290,7 +7290,7 @@
           "anchor": "Boise home repair guide: what local houses need, by age",
           "title": "Boise home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.809
+          "score": 0.849
         },
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
@@ -7314,11 +7314,11 @@
           "score": 0.404
         },
         {
-          "url": "/services/fence-deck-gutter-repair/boise",
-          "anchor": "Fence, Deck & Gutter Repair in Boise",
-          "title": "Fence, Deck & Gutter Repair in Boise, Idaho",
+          "url": "/services/carpentry-trim-repair/boise",
+          "anchor": "Carpentry & Trim Repair in Boise",
+          "title": "Carpentry & Trim Repair in Boise, Idaho",
           "type": "city-service",
-          "score": -0.284
+          "score": -0.244
         }
       ]
     },
@@ -7361,7 +7361,7 @@
           "anchor": "Middleton home repair guide: what local houses need, by age",
           "title": "Middleton home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.034
+          "score": 1.074
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
@@ -7418,7 +7418,7 @@
           "anchor": "Eagle home repair guide: what local houses need, by age",
           "title": "Eagle home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.021
+          "score": 1.141
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
@@ -7446,7 +7446,7 @@
           "anchor": "Minor Electrical Repairs in Eagle",
           "title": "Minor Electrical Repairs in Eagle, Idaho",
           "type": "city-service",
-          "score": -0.388
+          "score": -0.268
         }
       ]
     },
@@ -7478,11 +7478,11 @@
           "score": 999
         },
         {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Nampa home repair guide: what local houses need, by age",
-          "title": "Nampa home repair guide: what local houses need, by age",
+          "url": "/guides/meridian-handyman-guide",
+          "anchor": "Meridian home repair guide: what local houses need, by age",
+          "title": "Meridian home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.996
+          "score": 1.116
         },
         {
           "url": "/blog/home-maintenance-budget-idaho",
@@ -7506,11 +7506,11 @@
           "score": 0.247
         },
         {
-          "url": "/services/fence-deck-gutter-repair/boise",
-          "anchor": "Fence, Deck & Gutter Repair in Boise",
-          "title": "Fence, Deck & Gutter Repair in Boise, Idaho",
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
           "type": "city-service",
-          "score": -0.355
+          "score": -0.182
         }
       ]
     },
@@ -7556,6 +7556,13 @@
           "score": 0.27
         },
         {
+          "url": "/guides/small-home-upgrades-that-pay-off",
+          "anchor": "Small home upgrades that pay off",
+          "title": "Small home upgrades that pay off",
+          "type": "guide",
+          "score": 0.122
+        },
+        {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
           "anchor": "Seasonal home maintenance checklist for Boise homes",
           "title": "Seasonal home maintenance checklist for Boise homes",
@@ -7563,18 +7570,11 @@
           "score": 0.088
         },
         {
-          "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Small home upgrades that pay off",
-          "title": "Small home upgrades that pay off",
-          "type": "guide",
-          "score": 0.082
-        },
-        {
-          "url": "/services/painting-touch-ups/boise",
-          "anchor": "Interior & Exterior Painting in Boise",
-          "title": "Interior & Exterior Painting in Boise, Idaho",
+          "url": "/services/fence-deck-gutter-repair/boise",
+          "anchor": "Fence, Deck & Gutter Repair in Boise",
+          "title": "Fence, Deck & Gutter Repair in Boise, Idaho",
           "type": "city-service",
-          "score": -0.317
+          "score": -0.276
         }
       ]
     },
@@ -7627,18 +7627,18 @@
           "score": 0.219
         },
         {
-          "url": "/guides/boise-handyman-guide",
-          "anchor": "Boise home repair guide: what local houses need, by age",
-          "title": "Boise home repair guide: what local houses need, by age",
+          "url": "/guides/ember-ready-home-checklist-treasure-valley",
+          "anchor": "Ember-ready: a fall checklist for Treasure Valley homes",
+          "title": "Ember-ready: a fall checklist for Treasure Valley homes",
           "type": "guide",
-          "score": 0.042
+          "score": 0.156
         },
         {
-          "url": "/services/mounting-assembly/boise",
-          "anchor": "Mounting & Assembly in Boise",
-          "title": "Mounting & Assembly in Boise, Idaho",
+          "url": "/services/electrical-repairs/boise",
+          "anchor": "Minor Electrical Repairs in Boise",
+          "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": -0.316
+          "score": -0.249
         }
       ]
     },
@@ -7674,7 +7674,7 @@
           "anchor": "Handyman services in Hidden Springs",
           "title": "Handyman services in Hidden Springs",
           "type": "guide",
-          "score": 0.944
+          "score": 1.064
         },
         {
           "url": "/blog/what-to-expect-first-handyman-visit",
@@ -7698,11 +7698,11 @@
           "score": 0.275
         },
         {
-          "url": "/services/carpentry-trim-repair/boise",
-          "anchor": "Carpentry & Trim Repair in Boise",
-          "title": "Carpentry & Trim Repair in Boise, Idaho",
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
           "type": "city-service",
-          "score": -0.319
+          "score": -0.271
         }
       ]
     },
@@ -7731,14 +7731,14 @@
           "anchor": "Handyman services in Harris Ranch",
           "title": "Handyman services in Harris Ranch",
           "type": "guide",
-          "score": 0.944
+          "score": 1.064
         },
         {
           "url": "/guides/boise-handyman-guide",
           "anchor": "Boise home repair guide: what local houses need, by age",
           "title": "Boise home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.881
+          "score": 0.961
         },
         {
           "url": "/blog/handyman-red-flags",
@@ -7766,7 +7766,7 @@
           "anchor": "Minor Electrical Repairs in Boise",
           "title": "Minor Electrical Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": -0.321
+          "score": -0.281
         }
       ]
     },
@@ -7788,21 +7788,21 @@
           "anchor": "Handyman services in Hidden Springs",
           "title": "Handyman services in Hidden Springs",
           "type": "guide",
-          "score": 0.75
-        },
-        {
-          "url": "/guides/boise-handyman-guide",
-          "anchor": "Boise home repair guide: what local houses need, by age",
-          "title": "Boise home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.745
+          "score": 0.87
         },
         {
           "url": "/guides/harris-ranch-handyman-guide",
           "anchor": "Handyman services in Harris Ranch",
           "title": "Handyman services in Harris Ranch",
           "type": "guide",
-          "score": 0.725
+          "score": 0.845
+        },
+        {
+          "url": "/guides/boise-handyman-guide",
+          "anchor": "Boise home repair guide: what local houses need, by age",
+          "title": "Boise home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": 0.825
         },
         {
           "url": "/blog/handyman-prices-boise",
@@ -7826,11 +7826,11 @@
           "score": 0.344
         },
         {
-          "url": "/services/home-maintenance/boise",
-          "anchor": "Caulking & Home Maintenance in Boise",
-          "title": "Caulking & Home Maintenance in Boise, Idaho",
+          "url": "/services/mounting-assembly/boise",
+          "anchor": "Mounting & Assembly in Boise",
+          "title": "Mounting & Assembly in Boise, Idaho",
           "type": "city-service",
-          "score": -0.38
+          "score": -0.3
         }
       ]
     },
@@ -7862,11 +7862,11 @@
           "score": 999
         },
         {
-          "url": "/guides/middleton-handyman-guide",
-          "anchor": "Middleton home repair guide: what local houses need, by age",
-          "title": "Middleton home repair guide: what local houses need, by age",
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Nampa home repair guide: what local houses need, by age",
+          "title": "Nampa home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.037
+          "score": 1.08
         },
         {
           "url": "/blog/who-supplies-materials-handyman-jobs",
@@ -7894,7 +7894,7 @@
           "anchor": "Carpentry & Trim Repair in Meridian",
           "title": "Carpentry & Trim Repair in Meridian, Idaho",
           "type": "city-service",
-          "score": -0.452
+          "score": -0.332
         }
       ]
     },
@@ -7930,7 +7930,7 @@
           "anchor": "Eagle home repair guide: what local houses need, by age",
           "title": "Eagle home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.916
+          "score": 1.036
         },
         {
           "url": "/blog/diy-vs-hiring-a-handyman",
@@ -7954,11 +7954,11 @@
           "score": 0.181
         },
         {
-          "url": "/services/fence-deck-gutter-repair/meridian",
-          "anchor": "Fence, Deck & Gutter Repair in Meridian",
-          "title": "Fence, Deck & Gutter Repair in Meridian, Idaho",
+          "url": "/services/drywall-repair/meridian",
+          "anchor": "Drywall Repair & Patching in Meridian",
+          "title": "Drywall Repair & Patching in Meridian, Idaho",
           "type": "city-service",
-          "score": -0.324
+          "score": -0.206
         }
       ]
     },
@@ -7994,7 +7994,7 @@
           "anchor": "Kuna home repair guide: what local houses need, by age",
           "title": "Kuna home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 1.077
+          "score": 1.157
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
@@ -8018,11 +8018,11 @@
           "score": 0.181
         },
         {
-          "url": "/services/drywall-repair/meridian",
-          "anchor": "Drywall Repair & Patching in Meridian",
-          "title": "Drywall Repair & Patching in Meridian, Idaho",
+          "url": "/services/drywall-repair/nampa",
+          "anchor": "Drywall Repair & Patching in Nampa",
+          "title": "Drywall Repair & Patching in Nampa, Idaho",
           "type": "city-service",
-          "score": -0.451
+          "score": -0.331
         }
       ]
     },
@@ -8058,7 +8058,7 @@
           "anchor": "Meridian home repair guide: what local houses need, by age",
           "title": "Meridian home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.913
+          "score": 1.033
         },
         {
           "url": "/blog/handyman-vs-contractor",
@@ -8086,7 +8086,7 @@
           "anchor": "Drywall Repair & Patching in Nampa",
           "title": "Drywall Repair & Patching in Nampa, Idaho",
           "type": "city-service",
-          "score": -0.297
+          "score": -0.217
         }
       ]
     },
@@ -8129,28 +8129,28 @@
           "anchor": "Ember-ready: a fall checklist for Treasure Valley homes",
           "title": "Ember-ready: a fall checklist for Treasure Valley homes",
           "type": "guide",
-          "score": 0.042
+          "score": 0.122
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
           "anchor": "The Treasure Valley exterior home care guide",
           "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
-          "score": -0.027
+          "score": 0.093
         },
         {
-          "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "The first-time homeowner's repair handbook",
-          "title": "The first-time homeowner's repair handbook",
+          "url": "/guides/harris-ranch-handyman-guide",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
           "type": "guide",
-          "score": -0.04
+          "score": 0.004
         },
         {
           "url": "/services/painting-touch-ups/boise",
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": -0.35
+          "score": -0.27
         }
       ]
     },
@@ -8168,25 +8168,25 @@
           "score": 999
         },
         {
+          "url": "/guides/boise-home-maintenance-guide",
+          "anchor": "Boise home maintenance guide",
+          "title": "The complete Boise home maintenance guide",
+          "type": "guide",
+          "score": 999
+        },
+        {
+          "url": "/guides/hire-a-handyman-treasure-valley",
+          "anchor": "How to hire a handyman",
+          "title": "How to hire a handyman in Boise and the Treasure Valley",
+          "type": "guide",
+          "score": 999
+        },
+        {
           "url": "/guides/nampa-handyman-guide",
           "anchor": "Nampa home repair guide: what local houses need, by age",
           "title": "Nampa home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": 0.95
-        },
-        {
-          "url": "/guides/kuna-handyman-guide",
-          "anchor": "Kuna home repair guide: what local houses need, by age",
-          "title": "Kuna home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.912
-        },
-        {
-          "url": "/guides/caldwell-handyman-guide",
-          "anchor": "Caldwell home repair guide: what local houses need, by age",
-          "title": "Caldwell home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": 0.896
+          "score": 1.07
         },
         {
           "url": "/blog/hourly-rate-vs-flat-rate-handyman",
@@ -8210,11 +8210,11 @@
           "score": 0.13
         },
         {
-          "url": "/services/plumbing-repairs/boise",
-          "anchor": "Minor Plumbing Repairs in Boise",
-          "title": "Minor Plumbing Repairs in Boise, Idaho",
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
           "type": "city-service",
-          "score": -0.456
+          "score": -0.351
         }
       ]
     },
@@ -8250,7 +8250,21 @@
           "anchor": "Small home upgrades that pay off",
           "title": "Small home upgrades that pay off",
           "type": "guide",
-          "score": 0.053
+          "score": 0.093
+        },
+        {
+          "url": "/guides/boise-handyman-guide",
+          "anchor": "Boise home repair guide: what local houses need, by age",
+          "title": "Boise home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": 0.037
+        },
+        {
+          "url": "/guides/hidden-springs-handyman-guide",
+          "anchor": "Handyman services in Hidden Springs",
+          "title": "Handyman services in Hidden Springs",
+          "type": "guide",
+          "score": 0.029
         },
         {
           "url": "/blog/seasonal-home-maintenance-checklist-boise",
@@ -8260,25 +8274,11 @@
           "score": -0.005
         },
         {
-          "url": "/guides/boise-handyman-guide",
-          "anchor": "Boise home repair guide: what local houses need, by age",
-          "title": "Boise home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.043
-        },
-        {
-          "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "The first-time homeowner's repair handbook",
-          "title": "The first-time homeowner's repair handbook",
-          "type": "guide",
-          "score": -0.059
-        },
-        {
           "url": "/services/fence-deck-gutter-repair/boise",
           "anchor": "Fence, Deck & Gutter Repair in Boise",
           "title": "Fence, Deck & Gutter Repair in Boise, Idaho",
           "type": "city-service",
-          "score": -0.241
+          "score": -0.161
         }
       ]
     },
@@ -8293,21 +8293,42 @@
           "anchor": "Carpentry & Trim Repair in Boise",
           "title": "Carpentry & Trim Repair in Boise, Idaho",
           "type": "city-service",
-          "score": 1.38
+          "score": 1.46
         },
         {
           "url": "/services/carpentry-trim-repair/meridian",
           "anchor": "Carpentry & Trim Repair in Meridian",
           "title": "Carpentry & Trim Repair in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.309
+          "score": 1.429
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
           "anchor": "Handyman services in the Eagle Foothills",
           "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
-          "score": -0.16
+          "score": -0.04
+        },
+        {
+          "url": "/guides/meridian-handyman-guide",
+          "anchor": "Meridian home repair guide: what local houses need, by age",
+          "title": "Meridian home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": -0.092
+        },
+        {
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Nampa home repair guide: what local houses need, by age",
+          "title": "Nampa home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": -0.092
+        },
+        {
+          "url": "/guides/harris-ranch-handyman-guide",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
+          "type": "guide",
+          "score": -0.099
         },
         {
           "url": "/blog/aging-in-place-home-design",
@@ -8317,32 +8338,11 @@
           "score": -0.174
         },
         {
-          "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman services in Harris Ranch",
-          "title": "Handyman services in Harris Ranch",
-          "type": "guide",
-          "score": -0.179
-        },
-        {
           "url": "/blog/energy-saving-home-fixes-boise",
           "anchor": "Energy-saving home fixes for Boise houses",
           "title": "Energy-saving home fixes for Boise houses",
           "type": "blog",
           "score": -0.191
-        },
-        {
-          "url": "/guides/small-home-upgrades-that-pay-off",
-          "anchor": "Small home upgrades that pay off",
-          "title": "Small home upgrades that pay off",
-          "type": "guide",
-          "score": -0.209
-        },
-        {
-          "url": "/guides/meridian-handyman-guide",
-          "anchor": "Meridian home repair guide: what local houses need, by age",
-          "title": "Meridian home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.212
         }
       ]
     },
@@ -8353,18 +8353,39 @@
       "url": "/services/drywall-repair",
       "links": [
         {
+          "url": "/services/drywall-repair/boise",
+          "anchor": "Drywall Repair & Patching in Boise",
+          "title": "Drywall Repair & Patching in Boise, Idaho",
+          "type": "city-service",
+          "score": 1.46
+        },
+        {
           "url": "/services/drywall-repair/meridian",
           "anchor": "Drywall Repair & Patching in Meridian",
           "title": "Drywall Repair & Patching in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.313
+          "score": 1.433
+        },
+        {
+          "url": "/services/drywall-repair/eagle",
+          "anchor": "Drywall Repair & Patching in Eagle",
+          "title": "Drywall Repair & Patching in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.393
         },
         {
           "url": "/services/drywall-repair/nampa",
           "anchor": "Drywall Repair & Patching in Nampa",
           "title": "Drywall Repair & Patching in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.313
+          "score": 1.393
+        },
+        {
+          "url": "/guides/eagle-handyman-guide",
+          "anchor": "Eagle home repair guide: what local houses need, by age",
+          "title": "Eagle home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": -0.072
         },
         {
           "url": "/blog/drywall-repair-cost-boise",
@@ -8374,25 +8395,11 @@
           "score": -0.08
         },
         {
-          "url": "/guides/hidden-springs-handyman-guide",
-          "anchor": "Handyman services in Hidden Springs",
-          "title": "Handyman services in Hidden Springs",
+          "url": "/guides/eagle-foothills-handyman-guide",
+          "anchor": "Handyman services in the Eagle Foothills",
+          "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
-          "score": -0.183
-        },
-        {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Nampa home repair guide: what local houses need, by age",
-          "title": "Nampa home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.184
-        },
-        {
-          "url": "/guides/eagle-handyman-guide",
-          "anchor": "Eagle home repair guide: what local houses need, by age",
-          "title": "Eagle home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.192
+          "score": -0.08
         },
         {
           "url": "/blog/how-to-patch-drywall",
@@ -8400,13 +8407,6 @@
           "title": "How to patch drywall like a pro (and when to call one)",
           "type": "blog",
           "score": -0.197
-        },
-        {
-          "url": "/guides/eagle-foothills-handyman-guide",
-          "anchor": "Handyman services in the Eagle Foothills",
-          "title": "Handyman services in the Eagle Foothills",
-          "type": "guide",
-          "score": -0.2
         }
       ]
     },
@@ -8417,46 +8417,46 @@
       "url": "/services/electrical-repairs",
       "links": [
         {
-          "url": "/services/electrical-repairs/boise",
-          "anchor": "Minor Electrical Repairs in Boise",
-          "title": "Minor Electrical Repairs in Boise, Idaho",
-          "type": "city-service",
-          "score": 1.38
-        },
-        {
           "url": "/services/electrical-repairs/meridian",
           "anchor": "Minor Electrical Repairs in Meridian",
           "title": "Minor Electrical Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.349
+          "score": 1.469
         },
         {
           "url": "/services/electrical-repairs/nampa",
           "anchor": "Minor Electrical Repairs in Nampa",
           "title": "Minor Electrical Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.349
+          "score": 1.469
+        },
+        {
+          "url": "/services/electrical-repairs/boise",
+          "anchor": "Minor Electrical Repairs in Boise",
+          "title": "Minor Electrical Repairs in Boise, Idaho",
+          "type": "city-service",
+          "score": 1.42
         },
         {
           "url": "/services/electrical-repairs/eagle",
           "anchor": "Minor Electrical Repairs in Eagle",
           "title": "Minor Electrical Repairs in Eagle, Idaho",
           "type": "city-service",
-          "score": 1.269
+          "score": 1.389
         },
         {
           "url": "/guides/hidden-springs-handyman-guide",
           "anchor": "Handyman services in Hidden Springs",
           "title": "Handyman services in Hidden Springs",
           "type": "guide",
-          "score": -0.221
+          "score": -0.101
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
           "anchor": "Handyman services in the Eagle Foothills",
           "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
-          "score": -0.24
+          "score": -0.12
         },
         {
           "url": "/blog/new-home-punch-list-handyman",
@@ -8481,46 +8481,46 @@
       "url": "/services/fence-deck-gutter-repair",
       "links": [
         {
-          "url": "/services/fence-deck-gutter-repair/boise",
-          "anchor": "Fence, Deck & Gutter Repair in Boise",
-          "title": "Fence, Deck & Gutter Repair in Boise, Idaho",
-          "type": "city-service",
-          "score": 1.34
-        },
-        {
           "url": "/services/fence-deck-gutter-repair/meridian",
           "anchor": "Fence, Deck & Gutter Repair in Meridian",
           "title": "Fence, Deck & Gutter Repair in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.309
+          "score": 1.429
+        },
+        {
+          "url": "/services/fence-deck-gutter-repair/boise",
+          "anchor": "Fence, Deck & Gutter Repair in Boise",
+          "title": "Fence, Deck & Gutter Repair in Boise, Idaho",
+          "type": "city-service",
+          "score": 1.42
         },
         {
           "url": "/guides/treasure-valley-exterior-home-care-guide",
           "anchor": "The Treasure Valley exterior home care guide",
           "title": "The Treasure Valley exterior home care guide",
           "type": "guide",
-          "score": -0.141
+          "score": -0.021
         },
         {
           "url": "/guides/eagle-handyman-guide",
           "anchor": "Eagle home repair guide: what local houses need, by age",
           "title": "Eagle home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": -0.195
+          "score": -0.075
         },
         {
-          "url": "/guides/star-handyman-guide",
-          "anchor": "Star home repair guide: what local houses need, by age",
-          "title": "Star home repair guide: what local houses need, by age",
+          "url": "/guides/meridian-handyman-guide",
+          "anchor": "Meridian home repair guide: what local houses need, by age",
+          "title": "Meridian home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": -0.215
+          "score": -0.132
         },
         {
-          "url": "/guides/harris-ranch-handyman-guide",
-          "anchor": "Handyman services in Harris Ranch",
-          "title": "Handyman services in Harris Ranch",
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Nampa home repair guide: what local houses need, by age",
+          "title": "Nampa home repair guide: what local houses need, by age",
           "type": "guide",
-          "score": -0.251
+          "score": -0.132
         },
         {
           "url": "/blog/ada-vs-canyon-county-permit-timelines",
@@ -8549,7 +8549,42 @@
           "anchor": "Caulking & Home Maintenance in Boise",
           "title": "Caulking & Home Maintenance in Boise, Idaho",
           "type": "city-service",
-          "score": 1.38
+          "score": 1.46
+        },
+        {
+          "url": "/services/home-maintenance/meridian",
+          "anchor": "Caulking & Home Maintenance in Meridian",
+          "title": "Caulking & Home Maintenance in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.393
+        },
+        {
+          "url": "/guides/caldwell-handyman-guide",
+          "anchor": "Caldwell home repair guide: what local houses need, by age",
+          "title": "Caldwell home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": -0.119
+        },
+        {
+          "url": "/guides/kuna-handyman-guide",
+          "anchor": "Kuna home repair guide: what local houses need, by age",
+          "title": "Kuna home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": -0.143
+        },
+        {
+          "url": "/guides/meridian-handyman-guide",
+          "anchor": "Meridian home repair guide: what local houses need, by age",
+          "title": "Meridian home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": -0.144
+        },
+        {
+          "url": "/guides/nampa-handyman-guide",
+          "anchor": "Nampa home repair guide: what local houses need, by age",
+          "title": "Nampa home repair guide: what local houses need, by age",
+          "type": "guide",
+          "score": -0.144
         },
         {
           "url": "/blog/preparing-your-boise-home-for-winter",
@@ -8564,41 +8599,6 @@
           "title": "Aging in place: small home modifications that matter most",
           "type": "blog",
           "score": -0.189
-        },
-        {
-          "url": "/guides/caldwell-handyman-guide",
-          "anchor": "Caldwell home repair guide: what local houses need, by age",
-          "title": "Caldwell home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.199
-        },
-        {
-          "url": "/blog/energy-saving-home-fixes-boise",
-          "anchor": "Energy-saving home fixes for Boise houses",
-          "title": "Energy-saving home fixes for Boise houses",
-          "type": "blog",
-          "score": -0.207
-        },
-        {
-          "url": "/blog/new-home-punch-list-handyman",
-          "anchor": "New-home punch list: what a handyman fixes after you move in",
-          "title": "New-home punch list: what a handyman fixes after you move in",
-          "type": "blog",
-          "score": -0.209
-        },
-        {
-          "url": "/blog/caulking-guide-boise-homes",
-          "anchor": "The caulking guide for Boise homes: what, where, and how often",
-          "title": "The caulking guide for Boise homes: what, where, and how often",
-          "type": "blog",
-          "score": -0.217
-        },
-        {
-          "url": "/blog/how-to-budget-home-repairs-boise",
-          "anchor": "How to budget a home repair punch list in Boise",
-          "title": "How to budget a home repair punch list in Boise",
-          "type": "blog",
-          "score": -0.222
         }
       ]
     },
@@ -8609,46 +8609,46 @@
       "url": "/services/mounting-assembly",
       "links": [
         {
+          "url": "/services/mounting-assembly/meridian",
+          "anchor": "Mounting & Assembly in Meridian",
+          "title": "Mounting & Assembly in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.473
+        },
+        {
           "url": "/services/mounting-assembly/boise",
           "anchor": "Mounting & Assembly in Boise",
           "title": "Mounting & Assembly in Boise, Idaho",
           "type": "city-service",
-          "score": 1.42
-        },
-        {
-          "url": "/services/mounting-assembly/nampa",
-          "anchor": "Mounting & Assembly in Nampa",
-          "title": "Mounting & Assembly in Nampa, Idaho",
-          "type": "city-service",
-          "score": 1.393
+          "score": 1.46
         },
         {
           "url": "/services/mounting-assembly/eagle",
           "anchor": "Mounting & Assembly in Eagle",
           "title": "Mounting & Assembly in Eagle, Idaho",
           "type": "city-service",
-          "score": 1.313
+          "score": 1.433
+        },
+        {
+          "url": "/services/mounting-assembly/nampa",
+          "anchor": "Mounting & Assembly in Nampa",
+          "title": "Mounting & Assembly in Nampa, Idaho",
+          "type": "city-service",
+          "score": 1.433
         },
         {
           "url": "/guides/eagle-foothills-handyman-guide",
           "anchor": "Handyman services in the Eagle Foothills",
           "title": "Handyman services in the Eagle Foothills",
           "type": "guide",
-          "score": -0.28
+          "score": -0.16
         },
         {
-          "url": "/guides/ember-ready-home-checklist-treasure-valley",
-          "anchor": "Ember-ready: a fall checklist for Treasure Valley homes",
-          "title": "Ember-ready: a fall checklist for Treasure Valley homes",
+          "url": "/guides/first-time-homeowner-repair-handbook",
+          "anchor": "The first-time homeowner's repair handbook",
+          "title": "The first-time homeowner's repair handbook",
           "type": "guide",
-          "score": -0.28
-        },
-        {
-          "url": "/guides/meridian-handyman-guide",
-          "anchor": "Meridian home repair guide: what local houses need, by age",
-          "title": "Meridian home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.28
+          "score": -0.176
         },
         {
           "url": "/blog/fixing-squeaky-floors-and-sticking-doors",
@@ -8677,35 +8677,42 @@
           "anchor": "Interior & Exterior Painting in Boise",
           "title": "Interior & Exterior Painting in Boise, Idaho",
           "type": "city-service",
-          "score": 1.38
+          "score": 1.46
+        },
+        {
+          "url": "/services/painting-touch-ups/meridian",
+          "anchor": "Interior & Exterior Painting in Meridian",
+          "title": "Interior & Exterior Painting in Meridian, Idaho",
+          "type": "city-service",
+          "score": 1.433
+        },
+        {
+          "url": "/services/painting-touch-ups/eagle",
+          "anchor": "Interior & Exterior Painting in Eagle",
+          "title": "Interior & Exterior Painting in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.393
         },
         {
           "url": "/services/painting-touch-ups/nampa",
           "anchor": "Interior & Exterior Painting in Nampa",
           "title": "Interior & Exterior Painting in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.353
+          "score": 1.393
         },
         {
           "url": "/guides/small-home-upgrades-that-pay-off",
           "anchor": "Small home upgrades that pay off",
           "title": "Small home upgrades that pay off",
           "type": "guide",
-          "score": -0.25
+          "score": -0.17
         },
         {
-          "url": "/guides/nampa-handyman-guide",
-          "anchor": "Nampa home repair guide: what local houses need, by age",
-          "title": "Nampa home repair guide: what local houses need, by age",
+          "url": "/guides/ember-ready-home-checklist-treasure-valley",
+          "anchor": "Ember-ready: a fall checklist for Treasure Valley homes",
+          "title": "Ember-ready: a fall checklist for Treasure Valley homes",
           "type": "guide",
-          "score": -0.28
-        },
-        {
-          "url": "/guides/star-handyman-guide",
-          "anchor": "Star home repair guide: what local houses need, by age",
-          "title": "Star home repair guide: what local houses need, by age",
-          "type": "guide",
-          "score": -0.28
+          "score": -0.177
         },
         {
           "url": "/blog/interior-paint-touch-up-guide",
@@ -8715,18 +8722,11 @@
           "score": -0.282
         },
         {
-          "url": "/blog/home-repairs-before-selling-boise",
-          "anchor": "Home repairs worth making before selling your Boise house",
-          "title": "Home repairs worth making before selling your Boise house",
+          "url": "/blog/caulking-guide-boise-homes",
+          "anchor": "The caulking guide for Boise homes: what, where, and how often",
+          "title": "The caulking guide for Boise homes: what, where, and how often",
           "type": "blog",
-          "score": -0.293
-        },
-        {
-          "url": "/guides/ember-ready-home-checklist-treasure-valley",
-          "anchor": "Ember-ready: a fall checklist for Treasure Valley homes",
-          "title": "Ember-ready: a fall checklist for Treasure Valley homes",
-          "type": "guide",
-          "score": -0.297
+          "score": -0.288
         }
       ]
     },
@@ -8741,21 +8741,42 @@
           "anchor": "Minor Plumbing Repairs in Boise",
           "title": "Minor Plumbing Repairs in Boise, Idaho",
           "type": "city-service",
-          "score": 1.38
+          "score": 1.42
+        },
+        {
+          "url": "/services/plumbing-repairs/eagle",
+          "anchor": "Minor Plumbing Repairs in Eagle",
+          "title": "Minor Plumbing Repairs in Eagle, Idaho",
+          "type": "city-service",
+          "score": 1.353
         },
         {
           "url": "/services/plumbing-repairs/meridian",
           "anchor": "Minor Plumbing Repairs in Meridian",
           "title": "Minor Plumbing Repairs in Meridian, Idaho",
           "type": "city-service",
-          "score": 1.313
+          "score": 1.353
         },
         {
           "url": "/services/plumbing-repairs/nampa",
           "anchor": "Minor Plumbing Repairs in Nampa",
           "title": "Minor Plumbing Repairs in Nampa, Idaho",
           "type": "city-service",
-          "score": 1.313
+          "score": 1.353
+        },
+        {
+          "url": "/guides/harris-ranch-handyman-guide",
+          "anchor": "Handyman services in Harris Ranch",
+          "title": "Handyman services in Harris Ranch",
+          "type": "guide",
+          "score": -0.171
+        },
+        {
+          "url": "/guides/hidden-springs-handyman-guide",
+          "anchor": "Handyman services in Hidden Springs",
+          "title": "Handyman services in Hidden Springs",
+          "type": "guide",
+          "score": -0.172
         },
         {
           "url": "/blog/replacing-faucets-and-fixtures",
@@ -8770,27 +8791,6 @@
           "title": "How long do common home repairs take?",
           "type": "blog",
           "score": -0.266
-        },
-        {
-          "url": "/blog/how-to-patch-drywall",
-          "anchor": "How to patch drywall like a pro (and when to call one)",
-          "title": "How to patch drywall like a pro (and when to call one)",
-          "type": "blog",
-          "score": -0.266
-        },
-        {
-          "url": "/guides/first-time-homeowner-repair-handbook",
-          "anchor": "The first-time homeowner's repair handbook",
-          "title": "The first-time homeowner's repair handbook",
-          "type": "guide",
-          "score": -0.27
-        },
-        {
-          "url": "/blog/common-toilet-problems-and-fixes",
-          "anchor": "Fixing common toilet problems: running, rocking, and leaks",
-          "title": "Fixing common toilet problems: running, rocking, and leaks",
-          "type": "blog",
-          "score": -0.277
         }
       ]
     }
@@ -8800,11 +8800,11 @@
     "/blog/aging-in-place-home-design": 7,
     "/blog/boise-building-permit-guide": 9,
     "/blog/caulking-guide-boise-homes": 9,
-    "/blog/common-toilet-problems-and-fixes": 10,
+    "/blog/common-toilet-problems-and-fixes": 9,
     "/blog/deck-maintenance-boise": 10,
     "/blog/diy-vs-hiring-a-handyman": 11,
     "/blog/drywall-repair-cost-boise": 10,
-    "/blog/energy-saving-home-fixes-boise": 8,
+    "/blog/energy-saving-home-fixes-boise": 7,
     "/blog/fence-repair-treasure-valley": 10,
     "/blog/fixing-squeaky-floors-and-sticking-doors": 11,
     "/blog/gutter-cleaning-schedule-boise": 11,
@@ -8812,14 +8812,14 @@
     "/blog/handyman-red-flags": 9,
     "/blog/handyman-vs-contractor": 9,
     "/blog/home-maintenance-budget-idaho": 11,
-    "/blog/home-repairs-before-selling-boise": 9,
+    "/blog/home-repairs-before-selling-boise": 8,
     "/blog/hourly-rate-vs-flat-rate-handyman": 8,
     "/blog/how-long-do-common-home-repairs-take": 10,
-    "/blog/how-to-budget-home-repairs-boise": 10,
+    "/blog/how-to-budget-home-repairs-boise": 9,
     "/blog/how-to-compare-handyman-quotes": 9,
-    "/blog/how-to-patch-drywall": 9,
+    "/blog/how-to-patch-drywall": 8,
     "/blog/interior-paint-touch-up-guide": 11,
-    "/blog/new-home-punch-list-handyman": 9,
+    "/blog/new-home-punch-list-handyman": 8,
     "/blog/preparing-your-boise-home-for-winter": 7,
     "/blog/questions-to-ask-a-handyman": 9,
     "/blog/replacing-faucets-and-fixtures": 9,
@@ -8832,22 +8832,22 @@
     "/blog/why-handyman-quotes-vary": 9,
     "/guides/boise-home-maintenance-guide": 18,
     "/guides/boise-home-repair-cost-guide": 18,
-    "/guides/ember-ready-home-checklist-treasure-valley": 12,
-    "/guides/first-time-homeowner-repair-handbook": 12,
+    "/guides/ember-ready-home-checklist-treasure-valley": 9,
+    "/guides/first-time-homeowner-repair-handbook": 9,
     "/guides/hire-a-handyman-treasure-valley": 18,
-    "/guides/small-home-upgrades-that-pay-off": 11,
-    "/guides/treasure-valley-exterior-home-care-guide": 12,
-    "/guides/boise-handyman-guide": 12,
-    "/guides/meridian-handyman-guide": 11,
-    "/guides/eagle-handyman-guide": 12,
-    "/guides/kuna-handyman-guide": 11,
-    "/guides/star-handyman-guide": 11,
-    "/guides/middleton-handyman-guide": 11,
-    "/guides/nampa-handyman-guide": 11,
-    "/guides/caldwell-handyman-guide": 11,
-    "/guides/eagle-foothills-handyman-guide": 11,
-    "/guides/hidden-springs-handyman-guide": 11,
-    "/guides/harris-ranch-handyman-guide": 11,
+    "/guides/small-home-upgrades-that-pay-off": 9,
+    "/guides/treasure-valley-exterior-home-care-guide": 9,
+    "/guides/boise-handyman-guide": 10,
+    "/guides/meridian-handyman-guide": 9,
+    "/guides/eagle-handyman-guide": 9,
+    "/guides/kuna-handyman-guide": 9,
+    "/guides/star-handyman-guide": 8,
+    "/guides/middleton-handyman-guide": 9,
+    "/guides/nampa-handyman-guide": 9,
+    "/guides/caldwell-handyman-guide": 9,
+    "/guides/eagle-foothills-handyman-guide": 8,
+    "/guides/hidden-springs-handyman-guide": 9,
+    "/guides/harris-ranch-handyman-guide": 9,
     "/services/drywall-repair": 18,
     "/services/painting-touch-ups": 18,
     "/services/plumbing-repairs": 18,
@@ -8863,46 +8863,46 @@
     "/areas/kuna": 17,
     "/areas/star": 15,
     "/areas/middleton": 14,
-    "/areas/garden-city": 13,
-    "/areas/caldwell": 15,
-    "/services/drywall-repair/boise": 0,
-    "/services/drywall-repair/meridian": 14,
-    "/services/drywall-repair/eagle": 0,
-    "/services/drywall-repair/nampa": 14,
+    "/areas/garden-city": 12,
+    "/areas/caldwell": 14,
+    "/services/drywall-repair/boise": 12,
+    "/services/drywall-repair/meridian": 11,
+    "/services/drywall-repair/eagle": 12,
+    "/services/drywall-repair/nampa": 12,
     "/services/drywall-repair/kuna": 0,
     "/services/drywall-repair/star": 0,
     "/services/drywall-repair/middleton": 0,
     "/services/drywall-repair/garden-city": 0,
     "/services/drywall-repair/caldwell": 0,
-    "/services/painting-touch-ups/boise": 14,
-    "/services/painting-touch-ups/meridian": 0,
-    "/services/painting-touch-ups/eagle": 0,
-    "/services/painting-touch-ups/nampa": 13,
+    "/services/painting-touch-ups/boise": 12,
+    "/services/painting-touch-ups/meridian": 11,
+    "/services/painting-touch-ups/eagle": 12,
+    "/services/painting-touch-ups/nampa": 12,
     "/services/painting-touch-ups/kuna": 0,
     "/services/painting-touch-ups/star": 0,
     "/services/painting-touch-ups/middleton": 0,
     "/services/painting-touch-ups/garden-city": 0,
     "/services/painting-touch-ups/caldwell": 0,
-    "/services/plumbing-repairs/boise": 14,
-    "/services/plumbing-repairs/meridian": 14,
-    "/services/plumbing-repairs/eagle": 0,
-    "/services/plumbing-repairs/nampa": 14,
+    "/services/plumbing-repairs/boise": 13,
+    "/services/plumbing-repairs/meridian": 13,
+    "/services/plumbing-repairs/eagle": 13,
+    "/services/plumbing-repairs/nampa": 13,
     "/services/plumbing-repairs/kuna": 0,
     "/services/plumbing-repairs/star": 0,
     "/services/plumbing-repairs/middleton": 0,
     "/services/plumbing-repairs/garden-city": 0,
     "/services/plumbing-repairs/caldwell": 0,
-    "/services/electrical-repairs/boise": 14,
-    "/services/electrical-repairs/meridian": 13,
-    "/services/electrical-repairs/eagle": 15,
-    "/services/electrical-repairs/nampa": 13,
+    "/services/electrical-repairs/boise": 13,
+    "/services/electrical-repairs/meridian": 10,
+    "/services/electrical-repairs/eagle": 12,
+    "/services/electrical-repairs/nampa": 10,
     "/services/electrical-repairs/kuna": 0,
     "/services/electrical-repairs/star": 0,
     "/services/electrical-repairs/middleton": 0,
     "/services/electrical-repairs/garden-city": 0,
     "/services/electrical-repairs/caldwell": 0,
-    "/services/carpentry-trim-repair/boise": 14,
-    "/services/carpentry-trim-repair/meridian": 14,
+    "/services/carpentry-trim-repair/boise": 12,
+    "/services/carpentry-trim-repair/meridian": 11,
     "/services/carpentry-trim-repair/eagle": 0,
     "/services/carpentry-trim-repair/nampa": 0,
     "/services/carpentry-trim-repair/kuna": 0,
@@ -8910,17 +8910,17 @@
     "/services/carpentry-trim-repair/middleton": 0,
     "/services/carpentry-trim-repair/garden-city": 0,
     "/services/carpentry-trim-repair/caldwell": 0,
-    "/services/mounting-assembly/boise": 13,
-    "/services/mounting-assembly/meridian": 0,
-    "/services/mounting-assembly/eagle": 14,
-    "/services/mounting-assembly/nampa": 12,
+    "/services/mounting-assembly/boise": 12,
+    "/services/mounting-assembly/meridian": 10,
+    "/services/mounting-assembly/eagle": 11,
+    "/services/mounting-assembly/nampa": 11,
     "/services/mounting-assembly/kuna": 0,
     "/services/mounting-assembly/star": 0,
     "/services/mounting-assembly/middleton": 0,
     "/services/mounting-assembly/garden-city": 0,
     "/services/mounting-assembly/caldwell": 0,
-    "/services/fence-deck-gutter-repair/boise": 15,
-    "/services/fence-deck-gutter-repair/meridian": 14,
+    "/services/fence-deck-gutter-repair/boise": 13,
+    "/services/fence-deck-gutter-repair/meridian": 11,
     "/services/fence-deck-gutter-repair/eagle": 0,
     "/services/fence-deck-gutter-repair/nampa": 0,
     "/services/fence-deck-gutter-repair/kuna": 0,
@@ -8928,8 +8928,8 @@
     "/services/fence-deck-gutter-repair/middleton": 0,
     "/services/fence-deck-gutter-repair/garden-city": 0,
     "/services/fence-deck-gutter-repair/caldwell": 0,
-    "/services/home-maintenance/boise": 14,
-    "/services/home-maintenance/meridian": 0,
+    "/services/home-maintenance/boise": 12,
+    "/services/home-maintenance/meridian": 12,
     "/services/home-maintenance/eagle": 0,
     "/services/home-maintenance/nampa": 0,
     "/services/home-maintenance/kuna": 0,
