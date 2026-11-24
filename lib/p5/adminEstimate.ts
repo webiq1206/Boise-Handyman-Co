@@ -62,10 +62,14 @@ export function buildAdminSummary(input:{id:string;record:any;brand:EstimateBran
     ['Direct project cost',money(r.directCost)],
     ['Contingency'+contingencyRate,money(r.contingency)],
     ['Overhead recovery',money(overhead)],
+    ...(r.ownerServices?[
+      ['Owner services, final $120/hour',money(r.ownerServices.total)],
+      ['Owner salary overlap credited',money(r.ownerServices.salaryOverheadCredit)],
+    ]:[]),
     [`Operating profit${typeof r.targetOperatingProfit==='number'?` (${pct(r.targetOperatingProfit)} target)`:''}`,money(r.operatingProfit)],
     ['Overhead and profit share of price',ohp===undefined?'':pct(ohp)],
   ] as [string,string][]).filter(([,v])=>v&&v!=='Not available');
-  const lines:any[]=Array.isArray(r.lines)?r.lines:[];
+  const lines:any[]=[...(Array.isArray(r.lines)?r.lines:[]),...(Array.isArray(r.ownerServiceLines)?r.ownerServiceLines:[])];
   const byTrade=new Map<string,{lines:number;cost:number}>();
   for(const l of lines){const t=String(l.trade||TRADE_LABEL(String(l.category||'Other')));const g=byTrade.get(t)||{lines:0,cost:0};g.lines++;g.cost+=Number(l.cost)||0;byTrade.set(t,g);}
   const direct=Number(r.directCost)||[...byTrade.values()].reduce((t,g)=>t+g.cost,0);
@@ -81,7 +85,7 @@ export function buildAdminSummary(input:{id:string;record:any;brand:EstimateBran
     doc,released,status:released?`${suppressSyntheticEstimateNotifications(r)?'Synthetic test range':'Preliminary range'} saved; delivery tracked separately`:doc.total?`Customer price saved; ${blocking} blocking check${blocking===1?'':'s'} to clear before a firm proposal`:`Withheld from the customer${blocking?`: ${blocking} blocking check${blocking===1?'':'s'}`:''}`,
     build,contractPrice:money(r.contractPrice),customerPrice:doc.total?.amount||'Not released',
     trades:[...byTrade.entries()].sort((a,b)=>b[1].cost-a[1].cost).map(([trade,g])=>({trade,lines:g.lines,cost:money(g.cost),share:direct>0?`${Math.round(g.cost/direct*100)}%`:''})),
-    lines:lines.map(l=>({item:clean(String(l.description||'')).replace(/\s+/g,' ').slice(0,160),qty:`${Number(l.quantity).toLocaleString('en-US')} ${l.unit||''}`.trim(),unitCost:money(l.unitCost,true),cost:money(l.cost,true),basis:basisOf(l)})),
+    lines:lines.map(l=>({item:clean(String(l.description||'')).replace(/\s+/g,' ').slice(0,160),qty:`${Number(l.quantity).toLocaleString('en-US')} ${l.unit||''}`.trim(),unitCost:money(l.finalClientRate??l.unitCost,true),cost:money(l.finalClientRate?l.sellingAmount:l.cost,true),basis:l.finalClientRate?`${l.code}: final client rate, QBO ${l.qboItemId}`:basisOf(l)})),
     checks:groupedChecks(r.warnings),
     // Owner report 2026-09-22: 'Not priced' listed every remark the pricing check made, so fully priced
     // estimates looked full of unpriced work. It now lists only work that is truly outside the total (carried

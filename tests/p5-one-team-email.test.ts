@@ -394,7 +394,7 @@ test("a request with a planning range carries a well-formed estimate: the range 
   for (const line of lines) {
     assert.equal(line.division, line.title);
     assert.ok(line.amount > 0);
-    for (const key of Object.keys(line)) assert.ok(["title", "description", "quantity", "unit", "amount", "division"].includes(key), key);
+    for (const key of Object.keys(line)) assert.ok(["title", "description", "quantity", "unit", "amount", "division", "sku", "qboItemId"].includes(key), key);
   }
   // A single clear quantity travels; two measures in one summary do not.
   const cabinetry = lines.find((line) => line.title === "COUNTERTOPS + CABINETRY");

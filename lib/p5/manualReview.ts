@@ -34,6 +34,10 @@ export async function saveManualReview(body:any,actor:Actor){
   const [policy]=await query("SELECT payload FROM p5_estimator_policy WHERE id='current'");
   const finance=policy?.payload?.finance||EMPTY_CONFIGURATION.finance;
   const input={...body.input} as PricingInput;
+  // Historical/signed display is read-only. An explicit new review must use
+  // current pricing, never a client-supplied replay flag to bypass services.
+  delete input.pricingState;
+  if(draft.status==="signed"||draft.payload?.signedAt||draft.internal_estimate?.signedAt)throw new DraftError("Signed pricing is immutable. Create a separate change request.",409);
   if(draft.payload.answers?.complexity==="complex")input.complexity="complex";
   const declaredUrgency=draft.payload.answers?.urgency;
   if(declaredUrgency==="emergency"||declaredUrgency==="priority"&&input.urgency!=="emergency")input.urgency=declaredUrgency;
@@ -63,6 +67,7 @@ export async function approveManualReview(body:any,actor:Actor){
 }
 export async function publishManualReview(body:any,actor:Actor){
   await ensureReviewSchema();const {review,draft,finance}=await currentReview(body.reviewId);
+  if(draft.status==="signed"||draft.payload?.signedAt||draft.internal_estimate?.signedAt)throw new DraftError("Signed pricing is immutable. Create a separate change request.",409);
   if(body.confirmed!==true)throw new DraftError("Confirm the reviewed costs, uploads, allowances, exclusions and warning dispositions before publication.");
   const estimate=calculate(review.input,finance,await approvalsFor(review.id));
   if(!estimate.publishable)throw new DraftError("Resolve all blocking pricing warnings and required owner approvals before publication.",409);

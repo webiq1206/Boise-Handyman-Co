@@ -161,6 +161,8 @@ export type ConsultationBridgeInput = {
 
 /** One line of the customer price: a trade and what the customer pays for it. */
 export type P5IntakeEstimateLine = {
+  sku?: string;
+  qboItemId?: string;
   title: string;
   description?: string;
   quantity?: number;

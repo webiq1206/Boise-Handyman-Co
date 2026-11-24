@@ -15,7 +15,7 @@
 export const DOCUMENT_ESTIMATE_MAX_LINES=60;
 
 /** One line of the estimate as the intake reads it. `amount` is what the customer pays for the line. */
-export interface DocumentEstimateLine {title:string;description?:string;quantity?:number;unit?:string;amount:number;division?:string}
+export interface DocumentEstimateLine {title:string;description?:string;quantity?:number;unit?:string;amount:number;division?:string;sku?:string;qboItemId?:string}
 /** The contract's `estimate` object for a document estimate. Customer amounts only. */
 export interface DocumentEstimateBody {kind:'document';low:number;high:number;base:number;label:string;verified:true;lines:DocumentEstimateLine[]}
 
@@ -26,10 +26,12 @@ const sumOf=(lines:DocumentEstimateLine[])=>round2(lines.reduce((sum,line)=>sum+
 
 /** One line per trade, same total. Empty when even that is more lines than one estimate carries. */
 export function linesByTrade(lines:DocumentEstimateLine[]):DocumentEstimateLine[]{
+  const owner=lines.filter(line=>line.sku&&/^01-31-0[345]$/.test(line.sku));
+  lines=lines.filter(line=>!owner.includes(line));
   const byTrade=new Map<string,number>();
   for(const line of lines)byTrade.set(line.division??OTHER_TRADE,round2((byTrade.get(line.division??OTHER_TRADE)??0)+line.amount));
   const combined=[...byTrade].map(([trade,amount])=>({title:trade,amount,division:trade}));
-  return combined.length>DOCUMENT_ESTIMATE_MAX_LINES?[]:combined;
+  return combined.length+owner.length>DOCUMENT_ESTIMATE_MAX_LINES?[]:[...combined,...owner];
 }
 
 /**
@@ -41,18 +43,22 @@ export function linesByTrade(lines:DocumentEstimateLine[]):DocumentEstimateLine[
  * price. Cost, contingency, overhead and profit fields are never read.
  */
 export function documentEstimate(record:unknown):{estimate:DocumentEstimateBody;notes:string[]}|null{
-  const source=(record&&typeof record==='object'?record:{}) as {scope?:{answers?:{service?:unknown}};customer?:{range?:{low?:unknown;high?:unknown}|null};internal?:{contractPrice?:unknown;lines?:unknown}};
+  const source=(record&&typeof record==='object'?record:{}) as {scope?:{answers?:{service?:unknown}};customer?:{range?:{low?:unknown;high?:unknown}|null};internal?:{contractPrice?:unknown;lines?:unknown;ownerServiceLines?:unknown}};
   const low=Number(source.customer?.range?.low),high=Number(source.customer?.range?.high),contract=Number(source.internal?.contractPrice);
   if(![low,high,contract].every(value=>Number.isFinite(value)&&value>0))return null;
   const base=round2(contract);
   const notes:string[]=[];
   let lines:DocumentEstimateLine[]=[];
-  for(const entry of Array.isArray(source.internal?.lines)?source.internal.lines as Record<string,unknown>[]:[]){
+  const pricedLines=[...(Array.isArray(source.internal?.lines)?source.internal.lines:[]),...(Array.isArray(source.internal?.ownerServiceLines)?source.internal.ownerServiceLines:[])] as Record<string,unknown>[];
+  for(const entry of pricedLines){
     const amount=round2(Number(entry?.sellingAmount));
     const description=oneLine(entry?.description,Number.MAX_SAFE_INTEGER);
     if(!Number.isFinite(amount)||amount<=0||!description)continue;
     const quantity=Number(entry.quantity),unit=oneLine(entry.unit,20),trade=oneLine(entry.trade,80);
+    const sku=oneLine(entry.code||entry.id,40),qboItemId=oneLine(entry.qboItemId,40);
+    const owner=/^01-31-0[345]$/.test(sku)&&!!qboItemId;
     lines.push({title:description.slice(0,200).trim(),...(description.length>200?{description:description.slice(0,1000).trim()}:{}),
+      ...(owner?{sku,qboItemId,description:`${sku}; requested QBO item ${qboItemId}; final client rate $120/hour`}:{}),
       ...(Number.isFinite(quantity)&&quantity>0?{quantity}:{}),...(unit?{unit}:{}),amount,...(trade?{division:trade}:{})});
   }
   // Rounding can move at most a cent for each line that was priced, however they are grouped afterwards.
@@ -64,7 +70,8 @@ export function documentEstimate(record:unknown):{estimate:DocumentEstimateBody;
   if(lines.length){
     const drift=round2(base-sumOf(lines));
     if(drift!==0&&Math.abs(drift)<=tolerance+1e-9){
-      const largest=lines.reduce((a,b)=>b.amount>a.amount?b:a);
+      const candidates=lines.filter(l=>!l.sku);
+      const largest=(candidates.length?candidates:lines).reduce((a,b)=>b.amount>a.amount?b:a);
       largest.amount=round2(largest.amount+drift);
     }
   }

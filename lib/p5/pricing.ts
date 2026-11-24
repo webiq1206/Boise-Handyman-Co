@@ -1,7 +1,10 @@
 import {publicPricingText} from './customerProjection.ts';
 import {tradeForLine,apportionAmount,type TradeCategory} from "./trades.ts";
 /** Internal policy. Import only from server entry points, never client components. */
-export const POLICY_VERSION = "p5-2026-10-01-contingency-and-minor-work";
+import {addOwnerServices,outsideOwnerLines} from "./ownerServicePricing.ts";
+import type {OwnerServiceOptions} from "./ownerServices.ts";
+import {ownerServiceCode} from "./ownerServices.ts";
+export const POLICY_VERSION = "p5-2026-11-23-owner-services";
 export const STANDARD_OVERHEAD_RATE = .20;
 /** Operating profit targets. Owner business plan (P5 Comprehensive Business Planning Roadmap, 2026):
  * a 32% planning gross margin with a 30% hard floor, company-wide. The engine prices as
@@ -92,6 +95,10 @@ export interface OwnerApproval {
   approvedAt: string; estimateRevision: string;
 }
 export interface PricingInput {
+  /** Internal review only; public scope extraction cannot supply these overrides. */
+  ownerServices?:OwnerServiceOptions;
+  /** Explicit replay support. Saved/signed records are never repriced on read. */
+  pricingState?:"new"|"signed"|"historical";
   estimatePurpose?:'preliminary';
   /** One price instead of a range (owner rule: an RE-10 repair list gets a single firm price). */
   firmPrice?:boolean;
@@ -156,6 +163,16 @@ export function allowanceAdjustment(newDirectAmount: number, oldDirectAmount: nu
   return (newDirectAmount - oldDirectAmount) * (1 + contingencyRate) * priceFromRiskAdjustedCost(1, allocation, operatingProfit);
 }
 export function calculateP5Estimate(input: PricingInput, finance: FinancePolicy, approvals: OwnerApproval[] = [], now = new Date()) {
+  if(input.pricingState==="signed"||input.pricingState==="historical") {
+    return {...calculateBaseP5Estimate(input,finance,approvals,now),ownerServices:null,ownerServiceLines:[]};
+  }
+  const original=input.lines;
+  const lines=outsideOwnerLines(original);
+  const coverage=input.coverage.map(c=>({...c,status:c.status==="included"&&!lines.some(l=>l.category===c.category)&&original.some(l=>l.category===c.category)?"not-applicable" as const:c.status}));
+  const priced=calculateBaseP5Estimate({...input,lines,coverage},finance,approvals,now);
+  return addOwnerServices(priced,original,input.ownerServices);
+}
+function calculateBaseP5Estimate(input: PricingInput, finance: FinancePolicy, approvals: OwnerApproval[] = [], now = new Date()) {
   const warnings: PricingWarning[] = [];
   const warn = (code: string, message: string, severity: "review" | "block" = "review") => warnings.push({ code, message, severity });
   if (!input.scopeSummary.trim() || !input.revision.trim()) throw new Error("A scope summary and estimate revision are required");
@@ -424,7 +441,10 @@ export function customerNextStep(service: string, firm: boolean): string {
   if (["new-construction", "addition", "adu"].includes(service)) return "Book a planning meeting. We will review your plans, site and selections and turn this range into a detailed proposal.";
   return "Book a free consultation. We will walk the space with you, go over selections, and turn this range into a fixed-price proposal.";
 }
-export function customerEstimate(estimate: P5Estimate, summary: string) {
+export function customerEstimate(saved: P5Estimate, summary: string) {
+  // Owner hours, SKU mappings and overlap credits belong only in internal/QBO
+  // detail. Allocate the public total across the actual customer work scope.
+  const estimate={...saved,lines:saved.lines.filter(line=>!ownerServiceCode(line.id))};
   const trades=[...new Set(estimate.lines.map(l=>tradeForLine(l)))];
   const weights=estimate.lines.map(line=>line.cost);
   const lows=apportionAmount(estimate.planningRange.low,weights);

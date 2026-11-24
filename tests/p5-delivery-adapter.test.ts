@@ -114,9 +114,9 @@ test('syncCrm posts a published estimate once to the P5 intake: p5-estimator, te
   assert.equal(estimate.label,'Document estimate, handyman');
   assert.deepEqual([estimate.low,estimate.high],[record.customer.range!.low,record.customer.range!.high]);
   assert.equal(estimate.base,round2(record.internal.contractPrice));
-  assert.equal(estimate.lines.length,WORK.length);
+  assert.equal(estimate.lines.length,record.internal.lines.length+record.internal.ownerServiceLines.length);
   assert.equal(round2(estimate.lines.reduce((sum:number,line:{amount:number})=>sum+line.amount,0)),estimate.base,'the lines add up to the contract price, to the cent');
-  for(const line of estimate.lines)for(const key of Object.keys(line))assert.ok(['title','description','quantity','unit','amount','division'].includes(key),key);
+  for(const line of estimate.lines)for(const key of Object.keys(line))assert.ok(['title','description','quantity','unit','amount','division','sku','qboItemId'].includes(key),key);
   record.internal.lines.forEach((line,index)=>assert.ok(Math.abs(estimate.lines[index].amount-line.sellingAmount)<=0.01*WORK.length,'each line is its customer selling amount'));
   // By word: no field and no text names an internal figure, anywhere in the post.
   assert.doesNotMatch(String(calls[0].init.body),INTERNAL_WORD);

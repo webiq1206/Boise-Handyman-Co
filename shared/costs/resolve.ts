@@ -19,6 +19,7 @@ import { buildInternalEstimate, type QualityLevel, type ScopeSelections } from "
 import { buildPlanningRange } from "./pricing";
 import { buildAdminView } from "./outputs";
 import { RULES_BY_PROJECT } from "./scopeRules";
+import {duplicateOwnerTime,excludedOutsideCost,planOwnerServices,cents,type OwnerServiceOptions} from "../../lib/p5/ownerServices";
 import {
   ACCESSORY_STRUCTURE_LABELS,
   GARAGE_BAY_SQFT,
@@ -203,19 +204,8 @@ export function resolveQuotedRange(
   refinements: ResolverRefinements,
   detailRatio = 0,
 ): { priceLow: number; priceHigh: number } | null {
-  const rules = RULES_BY_PROJECT[project];
-  if (!rules) return null;
-  const selections = toSelections(finish, sqft, refinements);
-  const internal = buildInternalEstimate(rules, selections, project);
-  const range = buildPlanningRange(
-    internal,
-    project,
-    selections.quality,
-    sqft,
-    detailRatio,
-    toPlanningStage(refinements.planningStage),
-  );
-  return { priceLow: range.low, priceHigh: range.high };
+  const result=resolveInternalEstimate(project,finish,sqft,refinements,detailRatio);
+  return result?{priceLow:result.range.low,priceHigh:result.range.high}:null;
 }
 
 /** The internal estimate and trade rollup behind a quoted number, for admin surfaces. */
@@ -225,11 +215,14 @@ export function resolveInternalEstimate(
   sqft: number,
   refinements: ResolverRefinements,
   detailRatio = 0,
+  ownerOptions:OwnerServiceOptions={},
 ) {
   const rules = RULES_BY_PROJECT[project];
   if (!rules) return null;
   const selections = toSelections(finish, sqft, refinements);
-  const internal = buildInternalEstimate(rules, selections, project);
+  // Replace the old owner-management/supervision allowance before contingency
+  // or margin. Outside superintendent/field-supervision lines remain intact.
+  const internal = buildInternalEstimate(rules.filter(rule=>!duplicateOwnerTime({code:rule.code})), selections, project);
   const range = buildPlanningRange(
     internal,
     project,
@@ -238,5 +231,19 @@ export function resolveInternalEstimate(
     detailRatio,
     toPlanningStage(refinements.planningStage),
   );
-  return { internal, range, admin: buildAdminView(internal, range) };
+  const ownerServices=planOwnerServices(internal.lines.filter(l=>!excludedOutsideCost(l)).reduce((n,l)=>n+l.cost,0),ownerOptions);
+  const adjustedRange={...range,low:cents(range.low+ownerServices.total),high:cents(range.high+ownerServices.total),centre:cents(range.centre+ownerServices.total)};
+  const admin=buildAdminView(internal,range);
+  const ownerTrades=ownerServices.lines.map(line=>({
+    division:line.description,scopeSummary:`${line.quantity} HR`,internalCost:0,customerAmount:line.amount,
+    children:[],sku:line.code,qboItemId:line.qboItemId,
+  }));
+  const outsideTrades=admin.trades.map(t=>({...t}));
+  const rounding=cents(adjustedRange.centre-ownerServices.total)-outsideTrades.reduce((n,t)=>n+t.customerAmount,0);
+  if(outsideTrades.length)outsideTrades.reduce((a,b)=>a.customerAmount>b.customerAmount?a:b).customerAmount+=rounding;
+  return {internal:{...internal,ownerServices},range:adjustedRange,
+    admin:{...admin,ownerServices,trades:[...outsideTrades,...ownerTrades],customerPrice:adjustedRange.centre,
+      grossProfit:adjustedRange.centre-internal.totalInternalCost,
+      rangeLabel:`${(adjustedRange.low/adjustedRange.centre).toFixed(2)}x to ${(adjustedRange.high/adjustedRange.centre).toFixed(2)}x of $${Math.round(adjustedRange.centre).toLocaleString("en-US")}`,
+      range:{low:adjustedRange.low,high:adjustedRange.high}}};
 }

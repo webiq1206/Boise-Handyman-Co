@@ -24,7 +24,9 @@ test('minor policy audit amounts and mapping instructions never enter customer n
 });
 const finance: FinancePolicy = { annualOverhead: 420000, annualRevenue: 6000000, forecastSource: "TEST FIXTURE ONLY: conservative forecast", reviewedAt: "2026-09-10", approvedBy: ["Nick"] };
 function input(service: Service = "kitchen"): PricingInput {
-  return { service, revision: "fixture-revision-1", scopeSummary: "Test project scope", uncertainty: "low", locationProvided: true,
+  // These September fixtures explicitly lock the historical finance policy.
+  // New-project owner services are exercised separately in p5-owner-services.
+  return { service, pricingState:"historical", revision: "fixture-revision-1", scopeSummary: "Test project scope", uncertainty: "low", locationProvided: true,
     lines: [{ id: "trade-1", category: "subcontractors", description: "Complete defined trade scope", unit: "package", quantity: 1, unitCost: 60000,
       quantitySource: "TEST signed scope", evidence: { basis: "written-quote", reference: "TEST quote", verifiedAt: "2026-09-01", validUntil: "2026-10-01" } }],
     coverage: COST_CATEGORIES.map(category => ({ category, status: category === "subcontractors" ? "included" : "not-applicable", reason: "TEST ONLY: explicitly reviewed fixture coverage" })),

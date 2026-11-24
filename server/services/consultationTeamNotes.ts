@@ -215,6 +215,10 @@ export function buildRequestEstimate(input: { estimate?: VerifiedEstimate | null
 
     estimate.lines = priced.map(({ trade, cents }) => {
       const line: P5IntakeEstimateLine = { title: trade.division, division: trade.division, amount: cents / 100 };
+      if("sku" in trade&&"qboItemId" in trade){
+        line.sku=String(trade.sku);line.qboItemId=String(trade.qboItemId);
+        line.description=`${line.sku}; requested QBO item ${line.qboItemId}; final client rate $120/hour`;
+      }
       // One clear measure travels as quantity and unit (p5 prints it beside
       // the title, so repeating it as the description would say it twice).
       // Anything else ("1 MO, 0 EA") travels as words.
