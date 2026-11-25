@@ -89,7 +89,7 @@ export const whatSmallHomeRepairsCostBoise: BlogPostData = {
   <li><strong>Small drywall patch, under 6 inches:</strong> $156 to $170; a medium patch of 1 to 2 square feet, $285 to $300. See <a href="/services/drywall-repair">drywall repair and patching</a>.</li>
   <li><strong>Adjusting a sticking door:</strong> $184 to $200.</li>
   <li><strong>Replacing a faucet you supply:</strong> $303 to $320. Old corroded shutoff valves add to that, which is common in homes from the 1990s and earlier.</li>
-  <li><strong>Fixing a running toilet:</strong> $239 to $260; replacing a toilet you supply, $193 to $210.</li>
+  <li><strong>Fixing a running toilet:</strong> $239 to $260; replacing a toilet you supply, $349 to $380.</li>
   <li><strong>Swapping a light fixture you supply:</strong> $220 to $240; installing a ceiling fan on an existing fan-rated box, $321 to $340.</li>
   <li><strong>TV mounting:</strong> priced from your request and photos, because size, wall type, and cable concealment change the job. Our <a href="/blog/tv-mounting-and-anchoring-guide">TV mounting guide</a> breaks this down.</li>
   <li><strong>Re-caulking a tub or shower:</strong> $294 to $310.</li>

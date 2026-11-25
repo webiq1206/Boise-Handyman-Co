@@ -71,7 +71,7 @@ export const boiseHomeRepairCostGuide: GuidePageData = {
     {
       question: 'How much do small plumbing repairs cost?',
       answer:
-        'Our instant estimate (November 2026) gives these preliminary ranges for one of each job: replacing a faucet you supply $303 to $320, fixing a running toilet $239 to $260, replacing a garbage disposal you supply $220 to $240, and replacing a toilet you supply $193 to $210. A slow drain is not on its list, so send it with your request and photos. Anything involving the main line, a repipe, or work behind walls belongs with a licensed plumber, and we say so when that is the case.',
+        'Our instant estimate (November 2026) gives these preliminary ranges for one of each job: replacing a faucet you supply $303 to $320, fixing a running toilet $239 to $260, replacing a garbage disposal you supply $220 to $240, and replacing a toilet you supply $349 to $380. A slow drain is not on its list, so send it with your request and photos. Anything involving the main line, a repipe, or work behind walls belongs with a licensed plumber, and we say so when that is the case.',
     },
     {
       question: 'What do small electrical repairs cost?',
