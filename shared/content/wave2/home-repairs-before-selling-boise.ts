@@ -74,7 +74,7 @@ export const homeRepairsBeforeSellingBoise: BlogPostData = {
   ],
   content: `
 <h2 id="the-short-answer">The short answer</h2>
-<p><strong>Buyers do not price small defects at repair cost. They price them at worry cost, which is several times higher.</strong> A small drywall patch left undone, a preliminary $240 to $280 in our instant estimate (November 2026), reads as "what happened here?" A dripping faucet becomes an inspection line item and a negotiation token. The pre-sale move is not to remodel; it is to spend a few handyman visits removing every small piece of evidence against your house before photos, showings, and the inspector arrive. Here is the list, in the order it pays.</p>
+<p><strong>Buyers do not price small defects at repair cost. They price them at worry cost, which is several times higher.</strong> A small drywall patch left undone, a preliminary $156 to $170 in our instant estimate (November 2026), reads as "what happened here?" A dripping faucet becomes an inspection line item and a negotiation token. The pre-sale move is not to remodel; it is to spend a few handyman visits removing every small piece of evidence against your house before photos, showings, and the inspector arrive. Here is the list, in the order it pays.</p>
 
 <h2 id="walls-and-paint">Walls first: patches and paint touch-ups</h2>
 <p><strong>Walls are most of every listing photo, and wall damage is the cheapest thing in the frame to fix.</strong> Nail holes from the gallery wall, the doorknob crater in the hallway, the water stain from the long-fixed roof leak, corner dings from the move in: each is a small <a href="/services/drywall-repair">drywall repair</a>, patched, textured to match, and painted.</p>

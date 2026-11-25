@@ -27,7 +27,7 @@ export const gutterCleaningScheduleBoise: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Boise homes should have gutters cleaned twice a year: late fall after the leaves finish dropping, and spring after the cottonwood and seed drop. Homes under mature trees may need a third visit. In our instant estimate (November 2026), cleaning the gutters of a one-story home comes to a preliminary $260 to $300, and a two-story home $380 to $430.',
+    'Boise homes should have gutters cleaned twice a year: late fall after the leaves finish dropping, and spring after the cottonwood and seed drop. Homes under mature trees may need a third visit. In our instant estimate (November 2026), cleaning the gutters of a one-story home comes to a preliminary $211 to $230, and a two-story home $358 to $380.',
   keyTakeaways: [
     'Twice a year, late fall and spring, is the Boise baseline; heavy tree cover adds a third visit.',
     'The late-fall clean matters most here: debris left in gutters over winter feeds the freeze-thaw cycle and ice dams.',
@@ -62,7 +62,7 @@ export const gutterCleaningScheduleBoise: BlogPostData = {
     {
       question: 'What does gutter cleaning cost in Boise?',
       answer:
-        'In our instant estimate (November 2026), cleaning the gutters of a one-story home comes to a preliminary $260 to $300 and a two-story home $380 to $430; steep or complex rooflines run higher. Bundling gutter cleaning with small exterior repairs, resetting sagging hangers, resealing an end cap, adding a downspout extension, uses the same visit and ladder time.',
+        'In our instant estimate (November 2026), cleaning the gutters of a one-story home comes to a preliminary $211 to $230 and a two-story home $358 to $380; steep or complex rooflines run higher. Bundling gutter cleaning with small exterior repairs, resetting sagging hangers, resealing an end cap, adding a downspout extension, uses the same visit and ladder time.',
     },
     {
       question: 'Are gutter guards worth it?',
@@ -104,7 +104,7 @@ export const gutterCleaningScheduleBoise: BlogPostData = {
 <p>The honest rule: under heavy cottonwoods or poplars, good guards pay for themselves in skipped cleanings and avoided overflow. On an open lot, the money is usually better spent on the twice-a-year schedule. Either way, inspection stays on the calendar.</p>
 
 <h2 id="diy-vs-pro">DIY versus booking it</h2>
-<p><strong>The dividing line is the second story.</strong> Single-story gutters with a stable ladder, dry shoes, a footing helper, and a scoop are a legitimate homeowner job, tedious rather than difficult. Two-story homes move the same job into different risk territory: ladder falls are among the most common serious home-maintenance injuries nationally, and wet grass, window wells, and sloped ground multiply the odds. Our instant estimate puts a two-story home at a preliminary $380 to $430 (one story, $260 to $300), which is inexpensive insurance against both the fall and the rot.</p>
+<p><strong>The dividing line is the second story.</strong> Single-story gutters with a stable ladder, dry shoes, a footing helper, and a scoop are a legitimate homeowner job, tedious rather than difficult. Two-story homes move the same job into different risk territory: ladder falls are among the most common serious home-maintenance injuries nationally, and wet grass, window wells, and sloped ground multiply the odds. Our instant estimate puts a two-story home at a preliminary $358 to $380 (one story, $211 to $230), which is inexpensive insurance against both the fall and the rot.</p>
 <p>The efficient booking bundles the ladder time: cleaning plus downspout flush plus the small repairs the ladder reveals, in one visit, the same trip-charge logic laid out in <a href="/blog/what-small-home-repairs-cost-boise">what small home repairs cost in Boise</a>. A spring exterior walk pairs naturally with the fence inspection from <a href="/blog/fence-repair-treasure-valley">fence repair in the Treasure Valley</a>.</p>
 
 <h2 id="next-steps">Get on the schedule</h2>

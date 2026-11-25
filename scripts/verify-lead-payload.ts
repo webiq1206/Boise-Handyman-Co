@@ -60,8 +60,11 @@ for (const v of URGENCY_LEVEL_VALUES) {
 
 /* ─────────────────────── an honest payload round-trips and re-verifies */
 
+const reviewedCosts = { direct: 28, otherDollars: 12, otherRate: 0.08 };
+
 function buildPayload(input: HandymanEstimateInput) {
-  const estimate = calculateHandymanEstimate(input);
+  assert(calculateHandymanEstimate(input) === null, "an unverified fixed-price submission needs review");
+  const estimate = calculateHandymanEstimate(input, reviewedCosts);
   if (!estimate) throw new Error("scenario did not price");
   return {
     category: input.category,
@@ -96,7 +99,7 @@ for (const [category, tasks] of Object.entries(TASK_CATALOG)) {
     otherJob: parsed.data.otherJob ?? null,
     materials: parsed.data.materials,
     urgency: parsed.data.urgency,
-  });
+  }, reviewedCosts);
   assert(
     recomputed !== null &&
       recomputed.priceLow === payload.priceLow &&
