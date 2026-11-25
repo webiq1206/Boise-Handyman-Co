@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AnimatedPrice } from "@/components/estimate/EstimateResultPanel";
 import type { HandymanEstimate } from "@/shared/estimateEngine";
-import { formatHandymanCurrency, HANDYMAN_RATE_DISCLAIMER } from "@/shared/estimateEngine";
+import { HANDYMAN_RATE_DISCLAIMER } from "@/shared/estimateEngine";
 
 export interface StickyEstimateBarProps {
   estimate: HandymanEstimate | null;
@@ -62,25 +62,9 @@ export function StickyEstimateBar({
                 className={`flex items-baseline justify-between gap-3 text-xs leading-snug ${mutedText}`}
               >
                 <span>{line.label}</span>
-                <span
-                  className={cn("tabular-nums", !revealRange && "blur-sm select-none")}
-                  aria-hidden={!revealRange}
-                >
-                  {revealRange ? formatHandymanCurrency(line.amount) : MASKED_AMOUNT}
-                </span>
               </li>
             ))}
-            <li
-              className={`flex items-baseline justify-between gap-3 border-t ${hairline} pt-1.5 text-xs leading-snug ${strongText}`}
-            >
-              <span>Estimated visit total</span>
-              <span
-                className={cn("tabular-nums", !revealRange && "blur-sm select-none")}
-                aria-hidden={!revealRange}
-              >
-                {revealRange ? formatHandymanCurrency(estimate.total) : MASKED_AMOUNT}
-              </span>
-            </li>
+
           </ul>
           <p className={`text-caption leading-snug ${mutedText}`}>
             {HANDYMAN_RATE_DISCLAIMER}

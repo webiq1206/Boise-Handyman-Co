@@ -110,7 +110,8 @@ function verifyEstimate(
     refinements,
     maxFields > 0 ? detailCount / maxFields : 0,
   );
-  const recomputed = { ...guide, ...(lineItemRange ?? {}) };
+  if (!lineItemRange) return null;
+  const recomputed = { ...guide, ...lineItemRange };
 
   if (
     estimate.priceLow !== recomputed.priceLow ||
