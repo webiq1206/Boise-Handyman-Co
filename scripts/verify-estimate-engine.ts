@@ -195,13 +195,13 @@ for (const [categoryId, tasks] of Object.entries(TASK_CATALOG) as [
       );
       prevUrgencyTotal = withUrgency.total;
       /* The band never shows a low end under the one-hour minimum charge. */
-      const minimumAtUrgency = MINIMUM_LABOR_HOURS * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
+      const minimumAtUrgency = minimumVisitCharge(urgency);
       assert(
         withUrgency.priceLow >= minimumAtUrgency && withUrgency.priceHigh >= withUrgency.priceLow,
         `${task.id} at ${urgency}: low end $${withUrgency.priceLow} is not below the one-hour minimum $${minimumAtUrgency} and high >= low`,
       );
       const expected =
-        withUrgency.laborHours * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
+        Math.max(minimumAtUrgency,withUrgency.laborHours * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier);
       assert(
         Math.abs(withUrgency.total - expected) < 0.01,
         `${task.id} at ${urgency}: total = hours * rate * multiplier`,
