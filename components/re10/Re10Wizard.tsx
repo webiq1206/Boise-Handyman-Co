@@ -15,7 +15,7 @@ import styles from "./Re10Wizard.module.css";
  * an engine that already exists, so nothing here computes a price:
  *   - "Tap the repairs" frames the P5 instant estimator (EstimatorFrame), the
  *     one estimator for the family. Its range is the estimator's own output.
- *   - "Send the file" is the shared document intake (P5Estimator, re10), which
+ *   - "Upload" is the shared document intake (P5Estimator, re10), which
  *     reads the RE-10, routes the request and keeps the written-quote promise.
  * Lead delivery for both paths is unchanged: each engine sends its own lead.
  *
@@ -25,7 +25,7 @@ import styles from "./Re10Wizard.module.css";
  * is only one.
  */
 type Screen = "start" | "price" | "send";
-const HASH: Record<string, Screen> = { "#re10-price": "price", "#re10-send": "send" };
+const HASH: Record<string, Screen> = { "#re10-price": "price", "#re10-upload": "send", "#re10-send": "send" };
 const HEADER_OFFSET = 72;
 
 export function Re10Wizard() {
@@ -62,7 +62,7 @@ export function Re10Wizard() {
       <div className={styles.app} data-screen={screen}>
         <header className={styles.bar}>
           <span className={styles.brand}>RE-10 repairs</span>
-          <span className={styles.stepText}>{screen === "start" ? "Start here" : screen === "price" ? "Tap your repairs" : "Send your list"}</span>
+          <span className={styles.stepText}>{screen === "start" ? "Start here" : screen === "price" ? "Tap your repairs" : "Upload your list"}</span>
         </header>
 
         {screen === "start" && (
@@ -81,7 +81,7 @@ export function Re10Wizard() {
               <button type="button" className={styles.choice} onClick={() => go("send")} data-testid="re10-choose-send">
                 <span className={styles.icon} aria-hidden="true"><FileUp size={24} /></span>
                 <span className={styles.choiceText}>
-                  <strong>Send my RE-10 or photos</strong>
+                  <strong>Upload my RE-10 or photos</strong>
                   <span>We read the whole list and reply with one written price.</span>
                 </span>
                 <ChevronRight className={styles.chev} size={20} aria-hidden="true" />
@@ -103,14 +103,14 @@ export function Re10Wizard() {
             </div>
             <p className={styles.note}>
               Item not on the list?{" "}
-              <button type="button" className={styles.link} onClick={() => go("send")}>Send your RE-10 instead</button>
+              <button type="button" className={styles.link} onClick={() => go("send")}>Upload your RE-10 instead</button>
             </p>
           </div>
         )}
 
         {screen === "send" && (
           <div className={styles.screen}>
-            <h2 ref={heading} tabIndex={-1} className={styles.title}>Send your RE-10</h2>
+            <h2 ref={heading} tabIndex={-1} className={styles.title}>Upload your RE-10</h2>
             <p className={styles.lead}>Add the RE-10 and inspection pages, or type the list. We confirm it with you and send one written price.</p>
             <div className={styles.intake}>
               <P5Estimator headingAs="h2" defaultService="re10" layout="embedded" />

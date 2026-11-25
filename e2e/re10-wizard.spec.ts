@@ -20,8 +20,8 @@ for(const width of [320,390,1440])test(`RE-10 app paths at ${width}px`,async({pa
  const frame=app.locator('iframe');
  await expect(frame).toHaveAttribute('src',/^https:\/\/p5homeco\.com\/estimator\/embed\?.*brand=handyman.*project=handyman/);
 
- await app.getByRole('button',{name:'Send your RE-10 instead'}).click();
- await expect(app.getByRole('heading',{name:'Send your RE-10'})).toBeVisible();
+ await app.getByRole('button',{name:'Upload your RE-10 instead'}).click();
+ await expect(app.getByRole('heading',{name:'Upload your RE-10'})).toBeVisible();
  const scope=app.getByRole('textbox',{name:'Tell us about your project',exact:true});
  await scope.fill('TEST ONLY: Repair the inspection-listed door.');
  await expect(app.getByRole('button',{name:'Attach files',exact:true})).toBeVisible();
@@ -31,8 +31,8 @@ for(const width of [320,390,1440])test(`RE-10 app paths at ${width}px`,async({pa
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 
-test('RE-10 hash opens the send path',async({page})=>{
+test('RE-10 hash opens the upload path',async({page})=>{
  await page.route('**/api/**',route=>route.fulfill({status:503,contentType:'application/json',body:'{}'}));
  await page.goto('/re-10-repairs-boise#re10-send');
- await expect(page.locator('#re10-wizard').getByRole('heading',{name:'Send your RE-10'})).toBeVisible();
+ await expect(page.locator('#re10-wizard').getByRole('heading',{name:'Upload your RE-10'})).toBeVisible();
 });
