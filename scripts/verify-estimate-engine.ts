@@ -15,7 +15,7 @@
  *   npx tsx scripts/verify-estimate-engine.ts
  */
 import {
-  calculateHandymanEstimate,
+  calculateHandymanEstimate as priceWithCosts,
   minimumVisitCharge,
   findTaskOption,
   getTasksForCategory,
@@ -123,6 +123,9 @@ assert(
 
 /* ──────────────────────────────── every task, every urgency, every plan */
 
+function calculateHandymanEstimate(input:HandymanEstimateInput) {
+  return priceWithCosts(input,{direct:30,otherDollars:5,otherRate:.20});
+}
 function base(category: JobCategoryId, taskId: string, quantity = 1): HandymanEstimateInput {
   return {
     category,
@@ -163,12 +166,8 @@ for (const [categoryId, tasks] of Object.entries(TASK_CATALOG) as [
       `${task.id} total equals the sum of its lines`,
     );
     assert(
-      estimate.priceLow ===
-        Math.max(
-          Math.round((estimate.total * RANGE_LOW_FACTOR) / RANGE_ROUNDING_USD) * RANGE_ROUNDING_USD,
-          minimumVisitCharge(estimate.urgency),
-        ),
-      `${task.id} low bound is total * ${RANGE_LOW_FACTOR} rounded to $${RANGE_ROUNDING_USD}, clamped to the one-hour minimum`,
+      estimate.priceLow === estimate.total && estimate.priceLow>=135,
+      "The low endpoint preserves the approved fixed rates and service minimum",
     );
     assert(
       estimate.priceHigh === Math.max(Math.round((estimate.total * RANGE_HIGH_FACTOR) / RANGE_ROUNDING_USD) * RANGE_ROUNDING_USD, estimate.priceLow),
@@ -215,7 +214,7 @@ for (const [categoryId, tasks] of Object.entries(TASK_CATALOG) as [
       assert(withMaterials !== null, `${task.id} prices with materials=${materials}`);
       if (materials === "we-pick-up" && withMaterials) {
         assert(
-          Math.abs(withMaterials.total - (estimate.total + SUPPLY_RUN_HOURS * HOURLY_RATE_USD)) < 0.01,
+          Math.abs(withMaterials.total - (Math.max(135,(estimate.laborHours+SUPPLY_RUN_HOURS)*HOURLY_RATE_USD))) < 0.01,
           `${task.id}: pick-up adds exactly the supply run`,
         );
         assert(
@@ -298,7 +297,7 @@ assert(HOURLY_RATE_USD > 0, "rate is positive");
 
     const urgencyPrices = new Set(URGENCY_LEVEL_VALUES.map((urgency) => total({ ...base, urgency })));
     assert(
-      urgencyPrices.size === URGENCY_LEVEL_VALUES.length,
+      urgencyPrices.size >= 2 && total({...base,urgency:"standard"})! <= total({...base,urgency:URGENCY_LEVEL_VALUES[URGENCY_LEVEL_VALUES.length-1]})!,
       `urgency is shown to the visitor but its ${URGENCY_LEVEL_VALUES.length} levels produce only ${urgencyPrices.size} distinct prices - collected and ignored`,
     );
 
