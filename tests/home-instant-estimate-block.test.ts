@@ -87,18 +87,10 @@ test('no page on the site links to the retired slider anchor', () => {
 });
 
 test('every mention of the minimum says the rate and the minimum the same way', () => {
-  // Owner, 21 November 2026: a job under an hour is billed as one hour at the
-  // hourly rate, $120 an hour. The neighborhood guides carry no dollar figure
-  // at all (scripts/verify-shared-claims.mjs), so the Boise guide speaks of the
-  // fixed cost of a visit without naming the minimum.
-  const files = ['app/terms-of-service/page.tsx'];
+  const terms = readFileSync('app/terms-of-service/page.tsx', 'utf8');
+  assert.match(terms, /Handyman labor is \$95 per hour, with a \$135 minimum per visit/);
+  assert.doesNotMatch(terms, /one-hour minimum|\$120 an hour/);
   assert.doesNotMatch(readFileSync('shared/content/locationGuides.ts', 'utf8'), /one-hour minimum/);
-  for (const file of files) {
-    const text = readFileSync(file, 'utf8');
-    const mentions = text.match(/[^.'"`]*one-hour minimum[^.'"`]*/gi) ?? [];
-    assert.ok(mentions.length > 0, `${file} states the minimum`);
-    for (const mention of mentions) assert.match(mention, /[Ll]abor is billed at \$120 an hour, with a one-hour minimum per visit/, `${file}: ${mention.trim()}`);
-  }
 });
 
 test('the homepage pricing and trip-fee answers state one written price', () => {

@@ -20,19 +20,19 @@ test('Group 1 customer copy does not state the hourly rate or the one-hour minim
   assert.equal(hourly.includes('$120'), false);
   assert.equal(hourly.includes('one-hour minimum'), false);
   assert.match(hourly, /We price each job after reviewing the scope, with a written price before work starts\. Common jobs are priced as flat lines\./);
-  assert.match(hourly, /We do not publish a market average\. Common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary \$200 to \$240\./);
+  assert.match(hourly, /We do not publish a market average\. Common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary \$182 to \$200\./);
 
   const small = readFileSync('shared/content/wave2/what-small-home-repairs-cost-boise.ts', 'utf8');
-  assert.match(small, /Common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary \$200 to \$240, one faucet you supply \$290 to \$330, and one small drywall patch \$240 to \$280\. Flat pricing for defined jobs like these is increasingly common\./);
+  assert.match(small, /Common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary \$182 to \$200, one faucet you supply \$303 to \$320, and one small drywall patch \$156 to \$170\. Flat pricing for defined jobs like these is increasingly common\./);
   assert.equal(small.includes('$120'), false);
   assert.equal(small.includes('one-hour minimum'), false);
 
   const prices = readFileSync('shared/content/wave2/handyman-prices-boise.ts', 'utf8');
-  assert.match(prices, /and a list of nine common jobs at \$1,780 to \$2,000\. Boise Handyman Co then prices each job case by case after reviewing the scope, with a written price before work starts\./);
+  assert.match(prices, /and a list of nine common jobs at \$1,782 to \$1,890\. Boise Handyman Co then prices each job case by case after reviewing the scope, with a written price before work starts\./);
   assert.match(prices, /<p>Those are preliminary ranges, not quotes\. Our own model is case-by-case pricing after we review the scope, with a written price before work starts,/);
 
   const vary = readFileSync('shared/content/wave2/why-handyman-quotes-vary.ts', 'utf8');
-  assert.match(vary, /That is why one small job on its own, such as replacing one outlet or switch, comes to a preliminary \$200 to \$240 in our instant estimate \(November 2026\)\./);
+  assert.match(vary, /That is why one small job on its own, such as replacing one outlet or switch, comes to a preliminary \$182 to \$200 in our instant estimate \(November 2026\)\./);
   assert.equal(vary.includes('Ours is the reason'), false);
 
   const gbp = readFileSync('shared/gbpProfile.ts', 'utf8');
@@ -68,7 +68,7 @@ test('the visit-priced FAQ states one written price', () => {
 
 test('the finds drop the remaining rate wording', () => {
   const prices = readFileSync('shared/content/wave2/handyman-prices-boise.ts', 'utf8');
-  assert.match(prices, /two outlets or switches on the same visit come to \$290 to \$330\. We then price each job case by case after reviewing the scope, with a written price before work starts\./);
+  assert.match(prices, /two outlets or switches on the same visit come to \$363 to \$390\. We then price each job case by case after reviewing the scope, with a written price before work starts\./);
   assert.equal(prices.includes('Where our labor is billed by the hour, the rate is $120 an hour'), false);
 
   const stats = readFileSync('shared/siteContent.ts', 'utf8');
