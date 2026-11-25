@@ -1,3 +1,4 @@
+import {netQuotePrice,checkFixedQuote} from "../lib/p5/netPricingPolicy.ts";
 /**
  * Handyman job pricing engine for Boise Handyman Co.
  *
@@ -431,8 +432,9 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput, reviewed
   // charge at this urgency (owner rule: the one-hour minimum applies). It is
   // rounded UP to the display step so rounding cannot pull it back under.
   const agreed=total;
-  const required=(reviewedCosts.direct+reviewedCosts.otherDollars)/(1-reviewedCosts.otherRate-.18);
-  if(agreed<required || agreed<reviewedCosts.direct/.60) return null;
+  const quote=netQuotePrice({jobClass:"short-service",direct:reviewedCosts.direct,otherCostDollars:reviewedCosts.otherDollars,
+    otherCostRate:reviewedCosts.otherRate,minimumNetTarget:multiplier>1?.25:undefined});
+  if(!checkFixedQuote(quote,agreed).meets) return null;
   const priceLow = agreed;
   const priceHigh = Math.max(roundToStep(total * RANGE_HIGH_FACTOR, RANGE_ROUNDING_USD), priceLow);
 
