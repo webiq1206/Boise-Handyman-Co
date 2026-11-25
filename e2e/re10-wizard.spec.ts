@@ -1,22 +1,38 @@
 import {test,expect} from '@playwright/test';
 
-// The retired RE-10-specific wizard has been replaced by the shared intake.
-// Keep this public entry point covered without calling extraction or submitting a lead.
-for(const width of [320,390,1440])test(`RE-10 intake and callback preserve scope at ${width}px`,async({page})=>{
+// The RE-10 app: one question first, then either the framed P5 instant estimator
+// (tap repairs, on-screen range from the estimator itself) or the shared document
+// intake. No extraction is called and no lead is submitted.
+for(const width of [320,390,1440])test(`RE-10 app paths at ${width}px`,async({page})=>{
  await page.setViewportSize({width,height:900});
  await page.route('**/api/**',route=>route.fulfill({status:503,contentType:'application/json',body:'{"error":"Local test: persistence unavailable"}'}));
+ await page.route('https://p5homeco.com/**',route=>route.fulfill({status:200,contentType:'text/html',body:'<html><body>estimator</body></html>'}));
  await page.goto('/re-10-repairs-boise');
- const estimator=page.locator('#re10-wizard');
- await expect(estimator.getByText('This page is for Inspection and RE-10 repairs.',{exact:false})).toBeVisible();
- const scope=estimator.getByRole('textbox',{name:'Tell us about your project',exact:true});
- await scope.fill('TEST ONLY: Repair the inspection-listed door. Preserve the existing trim.');
- const shortcut=estimator.getByRole('button',{name:'Just contact me',exact:true});
- await shortcut.click();
- const dialog=page.getByRole('dialog');await expect(dialog).toBeVisible();
- await expect(dialog.getByText('This does not sign you up for marketing.',{exact:false})).toBeVisible();
- await page.keyboard.press('Escape');await expect(dialog).not.toBeVisible();
- await expect(shortcut).toBeFocused();
- await expect(scope).toHaveValue('TEST ONLY: Repair the inspection-listed door. Preserve the existing trim.');
- await expect(estimator.getByRole('button',{name:'Attach files',exact:true})).toBeVisible();
+ const app=page.locator('#re10-wizard');
+ await expect(app.getByRole('heading',{name:'How do you want to price your RE-10?'})).toBeVisible();
+ await expect(app.getByText('Start here')).toBeVisible();
+ await expect(app.getByTestId('re10-app-call')).toHaveAttribute('href',/^tel:/);
+ await expect(app.getByTestId('re10-app-text')).toHaveAttribute('href',/^sms:/);
+ for(const choice of ['re10-choose-price','re10-choose-send']){const box=await app.getByTestId(choice).boundingBox();expect(box!.height).toBeGreaterThanOrEqual(72);}
+
+ await app.getByTestId('re10-choose-price').click();
+ await expect(app.getByText('Tap your repairs')).toBeVisible();
+ const frame=app.locator('iframe');
+ await expect(frame).toHaveAttribute('src',/^https:\/\/p5homeco\.com\/estimator\/embed\?.*brand=handyman.*project=handyman/);
+
+ await app.getByRole('button',{name:'Send your RE-10 instead'}).click();
+ await expect(app.getByRole('heading',{name:'Send your RE-10'})).toBeVisible();
+ const scope=app.getByRole('textbox',{name:'Tell us about your project',exact:true});
+ await scope.fill('TEST ONLY: Repair the inspection-listed door.');
+ await expect(app.getByRole('button',{name:'Attach files',exact:true})).toBeVisible();
+
+ await app.getByRole('button',{name:'Back to the first step'}).click();
+ await expect(app.getByRole('heading',{name:'How do you want to price your RE-10?'})).toBeVisible();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+
+test('RE-10 hash opens the send path',async({page})=>{
+ await page.route('**/api/**',route=>route.fulfill({status:503,contentType:'application/json',body:'{}'}));
+ await page.goto('/re-10-repairs-boise#re10-send');
+ await expect(page.locator('#re10-wizard').getByRole('heading',{name:'Send your RE-10'})).toBeVisible();
 });
