@@ -26,9 +26,9 @@ wrong.)
 
 ### Claims that are true and may be used
 
-- An upfront quote before any work starts: hourly rate, trip fee, and expected
+- An upfront quote before any work starts: hourly rate, the visit minimum, and expected
   time, with materials as their own line.
-- One flat trip fee per visit, however many tasks are on the list, which is why
+- One minimum per visit, however many tasks are on the list, which is why
   bundling a punch list into one visit is the best value.
 - An agreed arrival time rather than a half-day window.
 - Most repairs and installs finished in a single visit ("one-trip fixes").
