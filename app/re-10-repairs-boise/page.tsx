@@ -119,7 +119,7 @@ export default function Re10RepairsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 mt-4">
               <FamilyButton href="#re10-wizard" variant="primary" size="lg" data-hero-cta="primary">
-                Upload your RE-10
+                Price my RE-10
               </FamilyButton>
               <a className="re10-phone" href={SITE_CONFIG.phoneHref} data-testid="link-re10-call"><Phone size={18} aria-hidden="true" /> Prefer to talk? {SITE_CONFIG.phone}</a>
             </div>
