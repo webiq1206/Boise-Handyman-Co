@@ -212,6 +212,8 @@ export const HOURLY_RATE_USD = 95;
 export const MINIMUM_LABOR_HOURS = 1;
 /** Hours added for a materials supply run: a realistic supplier round trip. */
 export const SUPPLY_RUN_HOURS = 0.75;
+/** Final approved trip charge. Time still counts toward the job cost review. */
+export const SUPPLY_RUN_FEE = 50;
 /** The quoted band around the computed total: -10% to +20%. */
 export const RANGE_LOW_FACTOR = 0.9;
 export const RANGE_HIGH_FACTOR = 1.2;
@@ -329,8 +331,8 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput, reviewed
 
   const multiplier = URGENCY_LEVELS[input.urgency].multiplier;
   const baseLabor = laborHours * HOURLY_RATE_USD;
-  const baseSupplyRun = supplyRunHours * HOURLY_RATE_USD;
-  const urgencyUpcharge = (baseLabor + baseSupplyRun) * (multiplier - 1);
+  const baseSupplyRun = supplyRunHours > 0 ? SUPPLY_RUN_FEE : 0;
+  const urgencyUpcharge = baseLabor * (multiplier - 1);
 
   const lines: HandymanLine[] = [
     {

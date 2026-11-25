@@ -225,29 +225,9 @@ export function EstimateResultPanel({
                 data-testid={`estimate-line-${line.id}`}
               >
                 <span>{line.label}</span>
-                <span
-                  className={cn(
-                    "brc-display-num tabular-nums text-inverse-foreground/90",
-                    !revealRange && "blur-sm select-none",
-                  )}
-                  aria-hidden={!revealRange}
-                >
-                  {revealRange ? formatHandymanCurrency(line.amount) : MASKED_AMOUNT}
-                </span>
               </div>
             ))}
-            <div className="flex items-baseline justify-between gap-3 pt-1 text-xs text-inverse-foreground border-t border-inverse-foreground/10">
-              <span>Estimated visit total</span>
-              <span
-                className={cn(
-                  "brc-display-num tabular-nums",
-                  !revealRange && "blur-sm select-none",
-                )}
-                aria-hidden={!revealRange}
-              >
-                {revealRange ? formatHandymanCurrency(estimate.total) : MASKED_AMOUNT}
-              </span>
-            </div>
+
           </div>
 
           {estimate.oversized && (

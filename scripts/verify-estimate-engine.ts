@@ -30,7 +30,7 @@ import {
   RANGE_HIGH_FACTOR,
   RANGE_LOW_FACTOR,
   RANGE_ROUNDING_USD,
-  SUPPLY_RUN_HOURS,
+  SUPPLY_RUN_FEE,
   TASK_CATALOG,
   URGENCY_LEVELS,
   URGENCY_LEVEL_VALUES,
@@ -208,13 +208,13 @@ for (const [categoryId, tasks] of Object.entries(TASK_CATALOG) as [
       );
     }
 
-    /* Supply run costs exactly SUPPLY_RUN_HOURS of labor more (standard urgency). */
+    /* A requested supply run adds the approved fixed fee before the visit minimum. */
     for (const materials of MATERIALS_PLAN_VALUES) {
       const withMaterials = calculateHandymanEstimate({ ...base(categoryId, task.id), materials });
       assert(withMaterials !== null, `${task.id} prices with materials=${materials}`);
       if (materials === "we-pick-up" && withMaterials) {
         assert(
-          Math.abs(withMaterials.total - (Math.max(135,(estimate.laborHours+SUPPLY_RUN_HOURS)*HOURLY_RATE_USD))) < 0.01,
+          Math.abs(withMaterials.total - (Math.max(135,estimate.laborHours*HOURLY_RATE_USD+SUPPLY_RUN_FEE))) < 0.01,
           `${task.id}: pick-up adds exactly the supply run`,
         );
         assert(

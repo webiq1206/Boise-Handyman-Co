@@ -89,7 +89,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "standard",
     },
-    golden: { low: 356.25, high: 430, laborHours: 3 },
+    golden: { low: 335, high: 400, laborHours: 3 },
   },
   {
     /* One-hour minimum: a 0.75 hr task bills a full hour. */
@@ -152,7 +152,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "priority",
     },
-    golden: { low: 355.06, high: 425, laborHours: 2.5 },
+    golden: { low: 323.12, high: 390, laborHours: 2.5 },
   },
   {
     /* Emergency tier on a maintenance task. */
@@ -188,7 +188,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "emergency",
     },
-    golden: { low: 1080.63, high: 1295, laborHours: 8 },
+    golden: { low: 1038, high: 1245, laborHours: 8 },
   },
 ];
 
