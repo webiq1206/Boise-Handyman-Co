@@ -37,7 +37,7 @@ export const caulkingGuideBoiseHomes: BlogPostData = {
     'Boise freeze-thaw makes exterior caulk an annual inspection item.',
     'All the skill is in prep: old caulk fully out, joint clean and dry, then one clean tooled bead.',
     'Caulk gaps at tubs, windows, and siding penetrations feed the most expensive water damage in the house.',
-    'Re-caulking one tub or shower comes to a preliminary $300 to $340 in our instant estimate (November 2026); a whole-house sealing pass is priced from your list.',
+    'Re-caulking one tub or shower comes to a preliminary $240 to $280 in our instant estimate (November 2026); a whole-house sealing pass is priced from your list.',
   ],
   relatedLinks: [
     { url: '/services/home-maintenance', anchor: 'Caulking & Home Maintenance' },
@@ -71,7 +71,7 @@ export const caulkingGuideBoiseHomes: BlogPostData = {
     {
       question: 'What does professional caulking cost?',
       answer:
-        'In our instant estimate (November 2026), re-caulking one tub or shower comes to a preliminary $300 to $340. A whole-house exterior sealing pass is not on its list, so we price it, and the rest of your caulking and maintenance, case by case after reviewing the scope. Set against what water damage repair costs, sealing is the best-value work order in the house.',
+        'In our instant estimate (November 2026), re-caulking one tub or shower comes to a preliminary $240 to $280. A whole-house exterior sealing pass is not on its list, so we price it, and the rest of your caulking and maintenance, case by case after reviewing the scope. Set against what water damage repair costs, sealing is the best-value work order in the house.',
     },
     {
       question: 'Which caulk gaps cause the worst damage when ignored?',
@@ -103,7 +103,7 @@ export const caulkingGuideBoiseHomes: BlogPostData = {
 <p><strong>Two looks a year cover everything.</strong> Fall, before the first freeze: walk the exterior, every window, door, and penetration, and redo anything cracked or pulling. Any time indoors, yearly: check wet-zone beads for darkening, lifting, or gaps, and re-caulk on the three-to-five year cycle or at first failure, whichever comes first. Interior cosmetic beads go on no schedule at all; fix them when they crack or when painting anyway. As a line in the <a href="/blog/home-maintenance-budget-idaho">annual maintenance budget</a>, sealing is nearly a rounding error, and it protects against the single most expensive category of home damage there is: slow water.</p>
 
 <h2 id="pro-or-diy">Run the bead yourself, or book the pass</h2>
-<p><strong>Caulking is honest DIY territory with two exceptions: prep discipline and ladder height.</strong> If you will fully strip the old bead, truly dry the joint, and tool one continuous pass, the material is forgiving and the tools cost $15. The failure mode is the shortcut version, over-old-caulk, damp joint, which is why so much DIY caulk is redone within the year. A professional pass makes sense when the list spans the whole house: our instant estimate puts one tub or shower re-caulk at a preliminary $300 to $340, and we price a whole-house exterior pass case by case after scope review; that figure sits in context in <a href="/blog/what-small-home-repairs-cost-boise">what small repairs cost in Boise</a>.</p>
+<p><strong>Caulking is honest DIY territory with two exceptions: prep discipline and ladder height.</strong> If you will fully strip the old bead, truly dry the joint, and tool one continuous pass, the material is forgiving and the tools cost $15. The failure mode is the shortcut version, over-old-caulk, damp joint, which is why so much DIY caulk is redone within the year. A professional pass makes sense when the list spans the whole house: our instant estimate puts one tub or shower re-caulk at a preliminary $240 to $280, and we price a whole-house exterior pass case by case after scope review; that figure sits in context in <a href="/blog/what-small-home-repairs-cost-boise">what small repairs cost in Boise</a>.</p>
 
 <h2 id="next-steps">Get every joint sealed in one visit</h2>
 <p><strong>The efficient version is one sealing visit: every wet zone checked, every exterior joint walked, every failed bead stripped and redone with the right product.</strong> It pairs naturally with gutter and weatherstripping work in the fall, and it is quiet, unglamorous work that prevents loud, expensive problems. We run sealing passes across Boise, Meridian, Eagle, Nampa, and the rest of the Treasure Valley, flat-quoted upfront. <a href="/contact">Book a sealing visit</a> before the next freeze does the inspecting for you.</p>

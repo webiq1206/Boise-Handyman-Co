@@ -67,7 +67,7 @@ export const howToPatchDrywall: BlogPostData = {
     {
       question: 'What does drywall repair cost in Boise?',
       answer:
-        'In our instant estimate (November 2026), one small patch under 6 inches comes to a preliminary $240 to $280, and one medium patch of 1 to 2 square feet $460 to $510. Repairs needing full-wall paint blending, ceiling work, or water-damage investigation run higher. Multiple small repairs bundled into one visit is the efficient way to buy this work.',
+        'In our instant estimate (November 2026), one small patch under 6 inches comes to a preliminary $130 to $150, and one medium patch of 1 to 2 square feet $230 to $270. Repairs needing full-wall paint blending, ceiling work, or water-damage investigation run higher. Multiple small repairs bundled into one visit is the efficient way to buy this work.',
     },
     {
       question: 'When is a drywall problem not DIY?',
@@ -107,7 +107,7 @@ export const howToPatchDrywall: BlogPostData = {
 <p>Then prime, without exception. Dried compound is more porous than painted wall, and paint applied straight over it flashes, a dull ghost square that no number of topcoats cures. Prime the repair, let it dry, then paint, and mind the sheen rules covered in the <a href="/blog/interior-paint-touch-up-guide">interior paint touch-up guide</a>, because on many walls the honest final step is painting corner to corner.</p>
 
 <h2 id="cost-and-calling">What pros charge, and when to call one</h2>
-<p><strong>In our instant estimate, one small drywall patch comes to a preliminary $240 to $280, and one medium patch of 1 to 2 square feet $460 to $510 (November 2026).</strong> Several repairs on one visit share the trip. That bundling logic is the through-line of <a href="/blog/what-small-home-repairs-cost-boise">what small home repairs cost in Boise</a>.</p>
+<p><strong>In our instant estimate, one small drywall patch comes to a preliminary $130 to $150, and one medium patch of 1 to 2 square feet $230 to $270 (November 2026).</strong> Several repairs on one visit share the trip. That bundling logic is the through-line of <a href="/blog/what-small-home-repairs-cost-boise">what small home repairs cost in Boise</a>.</p>
 <p>Call rather than DIY when the wall is smooth-finish or the room is bright with side light, when the damage is on a ceiling, when water or recurring cracks are involved, or when you simply want it invisible the first time. Texture matching is a reps game, and it is most of what you are hiring with our <a href="/services/drywall-repair">drywall repair and patching</a> service.</p>
 
 <h2 id="next-steps">Make it disappear</h2>

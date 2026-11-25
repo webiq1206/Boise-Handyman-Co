@@ -28,7 +28,7 @@ export const howToBudgetHomeRepairsBoise: BlogPostData = {
   keyTakeaways: [
     'A written whole-house list is the budget; repairs priced one at a time always cost more.',
     'Split the list three ways: safety and water first, gets-worse-if-ignored second, cosmetic third.',
-    'Price the list as a whole: in our instant estimate, nine common jobs on one list come to a preliminary $1,780 to $2,000 (November 2026), less than the same jobs booked one at a time.',
+    'Price the list as a whole: in our instant estimate, nine common jobs on one list come to a preliminary $1,480 to $1,670 (November 2026), less than the same jobs booked one at a time.',
     'Batching four to six items into one visit spreads the trip cost and is the biggest single saving available.',
     'A common planning benchmark is setting aside about one percent of home value per year for repairs and maintenance.',
   ],
@@ -49,7 +49,7 @@ export const howToBudgetHomeRepairsBoise: BlogPostData = {
     {
       question: 'What does a typical handyman visit cost in Boise?',
       answer:
-        'Our instant estimate prices the whole list at once: nine common jobs (a faucet you supply, two light fixtures, three outlets or switches, two small drywall patches and a sticking door) come to a preliminary $1,780 to $2,000 (November 2026). Most outfits also carry a minimum charge or trip fee, which is why batching matters: the same items booked as separate visits would each carry their own trip cost.',
+        'Our instant estimate prices the whole list at once: nine common jobs (a faucet you supply, two light fixtures, three outlets or switches, two small drywall patches and a sticking door) come to a preliminary $1,480 to $1,670 (November 2026). Most outfits also carry a minimum charge or trip fee, which is why batching matters: the same items booked as separate visits would each carry their own trip cost.',
     },
     {
       question: 'Which repairs should come first when the budget is limited?',

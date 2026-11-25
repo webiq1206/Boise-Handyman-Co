@@ -171,11 +171,11 @@ function inAllowlist(file: string, text: string, at: number): boolean {
   return false;
 }
 
-test('the figures file states its inputs: handyman brand, labor at $120 an hour, November 2026', () => {
+test('the figures file states its inputs: handyman brand, labor at $95 an hour, November 2026', () => {
   assert.equal(figures.asOf, 'November 2026');
   assert.equal(figures.inputs.brand, 'handyman');
   assert.equal(figures.inputs.project, 'handyman');
-  assert.equal(figures.inputs.laborRatePerHour, 120, 'owner, 20 November 2026: the live estimator bills labor at $120 an hour');
+  assert.equal(figures.inputs.laborRatePerHour, 95, 'owner, 20 November 2026: the live estimator bills labor at $95 an hour');
   assert.match(figures.about, /scripts\/pricing\/p5-published-figures\.mts/);
   assert.ok(Object.keys(figures.tasks).length >= 20, 'every task the estimator offers is priced');
   for (const [id, r] of [...Object.entries(figures.tasks), ...Object.entries(figures.lists)]) {

@@ -243,7 +243,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'Can you fix wind-damaged fences?',
         answer:
-          'It is one of our most common Kuna jobs: resetting or replacing heaved posts, rebuilding leaning sections, re-screwing pickets, and re-hanging gates. In our instant estimate (November 2026), repairing the boards of one fence section comes to a preliminary $460 to $510, and replacing one fence post $420 to $470. The best money in fencing here is fixing the first leaning post before the next windstorm converts it into a section rebuild.',
+          'It is one of our most common Kuna jobs: resetting or replacing heaved posts, rebuilding leaning sections, re-screwing pickets, and re-hanging gates. In our instant estimate (November 2026), repairing the boards of one fence section comes to a preliminary $330 to $380, and replacing one fence post $300 to $340. The best money in fencing here is fixing the first leaning post before the next windstorm converts it into a section rebuild.',
       },
       {
         question: 'My new Kuna home has drywall cracks: is that normal?',
@@ -258,7 +258,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Kuna?',
         answer:
-          'The same as across the valley. Our instant estimate gives a preliminary range for each common job; in November 2026, replacing one outlet or switch comes to $200 to $240 and replacing one faucet you supply to $290 to $330. We price our own work case by case after reviewing the scope. Every job gets a firm quote from photos before we arrive, and one-visit batching spreads the trip cost across the whole list.',
+          'The same as across the valley. Our instant estimate gives a preliminary range for each common job; in November 2026, replacing one outlet or switch comes to $150 to $170 and replacing one faucet you supply to $250 to $290. We price our own work case by case after reviewing the scope. Every job gets a firm quote from photos before we arrive, and one-visit batching spreads the trip cost across the whole list.',
       },
     ],
   },
@@ -405,7 +405,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Nampa?',
         answer:
-          'The same as the rest of the Treasure Valley. Our instant estimate gives a preliminary range for each common job; in November 2026, replacing one outlet or switch comes to $200 to $240 and replacing one faucet you supply to $290 to $330. We price our own work case by case after reviewing the scope. There is no cross-county premium; Nampa is core service area for us.',
+          'The same as the rest of the Treasure Valley. Our instant estimate gives a preliminary range for each common job; in November 2026, replacing one outlet or switch comes to $150 to $170 and replacing one faucet you supply to $250 to $290. We price our own work case by case after reviewing the scope. There is no cross-county premium; Nampa is core service area for us.',
       },
       {
         question: 'Can you do a punch list on my new Nampa build?',
@@ -464,7 +464,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Caldwell?',
         answer:
-          'The same as across the valley. Our instant estimate gives a preliminary range for each common job; in November 2026, replacing one outlet or switch comes to $200 to $240 and replacing one faucet you supply to $290 to $330. We price our own work case by case after reviewing the scope. Older-home work occasionally uncovers prior deferred repairs; when it does, work pauses and you approve any change before it is billed.',
+          'The same as across the valley. Our instant estimate gives a preliminary range for each common job; in November 2026, replacing one outlet or switch comes to $150 to $170 and replacing one faucet you supply to $250 to $290. We price our own work case by case after reviewing the scope. Older-home work occasionally uncovers prior deferred repairs; when it does, work pauses and you approve any change before it is billed.',
       },
       {
         question: 'Do you handle acreage properties around Caldwell?',
@@ -523,7 +523,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What does handyman work cost in the foothills?',
         answer:
-          'The same as across the valley. Our instant estimate gives a preliminary range for each common job; in November 2026, replacing one outlet or switch comes to $200 to $240 and replacing one faucet you supply to $290 to $330, with scale and finish-matching sometimes placing jobs above those figures. A standing spring exterior visit is the best value on sloped, exposed lots: per item it beats reactive repairs comfortably.',
+          'The same as across the valley. Our instant estimate gives a preliminary range for each common job; in November 2026, replacing one outlet or switch comes to $150 to $170 and replacing one faucet you supply to $250 to $290, with scale and finish-matching sometimes placing jobs above those figures. A standing spring exterior visit is the best value on sloped, exposed lots: per item it beats reactive repairs comfortably.',
       },
       {
         question: 'Do you handle wind-damage repairs?',
@@ -573,7 +573,7 @@ const PLACES: PlaceGuide[] = [
       {
         question: 'What do handyman services cost in Hidden Springs?',
         answer:
-          'The same as across the valley. Our instant estimate gives a preliminary range for each common job; in November 2026, replacing one outlet or switch comes to $200 to $240 and replacing one faucet you supply to $290 to $330. We price our own work case by case after reviewing the scope. Batch pricing is where this neighborhood wins: a planned-refresh list quoted as one visit costs meaningfully less per item than reactive one-off calls.',
+          'The same as across the valley. Our instant estimate gives a preliminary range for each common job; in November 2026, replacing one outlet or switch comes to $150 to $170 and replacing one faucet you supply to $250 to $290. We price our own work case by case after reviewing the scope. Batch pricing is where this neighborhood wins: a planned-refresh list quoted as one visit costs meaningfully less per item than reactive one-off calls.',
       },
       {
         question: 'Do you handle exterior work here?',
@@ -667,7 +667,7 @@ function buildLocationGuide(p: PlaceGuide): GuidePageData {
     p.housingStock,
     `<h2 id="common-repairs">The repairs ${p.name} homes actually need</h2>`,
     p.commonRepairs,
-    reviewedPriceScope ? `<p>Pricing depends on the agreed scope, materials and access. Send your repair details for review and a written quote.</p>` : `<p>For typical prices on all of this, see the <a href="/guides/boise-home-repair-cost-guide">Boise home repair cost guide</a>, which gives the instant estimate's preliminary range for each common job, such as $200 to $240 for replacing one outlet or switch, and we price our own work case by case after reviewing the scope.</p>`,
+    reviewedPriceScope ? `<p>Pricing depends on the agreed scope, materials and access. Send your repair details for review and a written quote.</p>` : `<p>For typical prices on all of this, see the <a href="/guides/boise-home-repair-cost-guide">Boise home repair cost guide</a>, which gives the instant estimate's preliminary range for each common job, such as $150 to $170 for replacing one outlet or switch, and we price our own work case by case after reviewing the scope.</p>`,
     `<h2 id="watch-out">The thing that catches people out here</h2>`,
     p.watchOut,
     `<h2 id="seasonal">Seasonal maintenance in ${p.name}</h2>`,

@@ -59,7 +59,7 @@ export const agingInPlaceHomeDesign: BlogPostData = {
     {
       question: 'How much does it cost to install grab bars?',
       answer:
-        'In our instant estimate (November 2026), installing one grab bar, blocked or anchored, comes to a preliminary $260 to $300; tile and fiberglass surrounds take more work. Doing several in one visit saves separate trips, which is why we usually suggest a walkthrough and a single trip rather than one bar at a time.',
+        'In our instant estimate (November 2026), installing one grab bar, blocked or anchored, comes to a preliminary $160 to $190; tile and fiberglass surrounds take more work. Doing several in one visit saves separate trips, which is why we usually suggest a walkthrough and a single trip rather than one bar at a time.',
     },
     {
       question: 'Are towel bars strong enough to use as grab bars?',

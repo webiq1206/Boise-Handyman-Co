@@ -69,7 +69,7 @@ export const smallHomeUpgradeIdeasBoise: BlogPostData = {
     {
       question: 'How much do these upgrades cost in the Treasure Valley?',
       answer:
-        'Most items on this list are one-to-two-hour installs, so the labor per upgrade is modest (swapping one light fixture you supply is a preliminary $200 to $240 in our instant estimate, November 2026) and the materials are your main lever: a light fixture can cost $40 or $400 and installs identically. Batching a full room of upgrades into a single visit spreads the trip cost and usually finishes the room in a day.',
+        'Most items on this list are one-to-two-hour installs, so the labor per upgrade is modest (swapping one light fixture you supply is a preliminary $180 to $210 in our instant estimate, November 2026) and the materials are your main lever: a light fixture can cost $40 or $400 and installs identically. Batching a full room of upgrades into a single visit spreads the trip cost and usually finishes the room in a day.',
     },
   ],
   content: `

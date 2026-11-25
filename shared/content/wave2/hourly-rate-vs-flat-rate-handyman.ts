@@ -44,7 +44,7 @@ export const hourlyRateVsFlatRateHandyman: BlogPostData = {
     {
       question: 'How much do handymen charge per hour in Boise?',
       answer:
-        'We do not publish a market average. Common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary $200 to $240. When a bid carries a very low rate, ask what is missing, often insurance; a very high one usually means specialty skill or a licensed trade. Most outfits also carry a minimum charge, commonly around the first hour or a fixed trip fee.',
+        'We do not publish a market average. Common jobs are priced as flat lines: one outlet or switch on its own comes to a preliminary $150 to $170. When a bid carries a very low rate, ask what is missing, often insurance; a very high one usually means specialty skill or a licensed trade. Most outfits also carry a minimum charge, commonly around the first hour or a fixed trip fee.',
     },
     {
       question: 'Why do handymen have minimum charges?',

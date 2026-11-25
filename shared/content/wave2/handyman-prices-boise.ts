@@ -36,9 +36,9 @@ export const handymanPricesBoise: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Our instant estimate (November 2026) puts one small job on its own, such as replacing one outlet or switch, at a preliminary $200 to $240, replacing one faucet you supply at $290 to $330, and a list of nine common jobs at $1,780 to $2,000. Boise Handyman Co then prices each job case by case after reviewing the scope, with a written price before work starts.',
+    'Our instant estimate (November 2026) puts one small job on its own, such as replacing one outlet or switch, at a preliminary $150 to $170, replacing one faucet you supply at $250 to $290, and a list of nine common jobs at $1,480 to $1,670. Boise Handyman Co then prices each job case by case after reviewing the scope, with a written price before work starts.',
   keyTakeaways: [
-    'Our instant estimate gives a preliminary range for each job: one outlet or switch $200 to $240, one faucet you supply $290 to $330 (November 2026).',
+    'Our instant estimate gives a preliminary range for each job: one outlet or switch $150 to $170, one faucet you supply $250 to $290 (November 2026).',
     'Every visit has a fixed cost, so small jobs on a longer list cost less than the same jobs booked one at a time, which is why batching small jobs saves money.',
     'Flat upfront quotes beat open-ended hourly billing for defined jobs.',
     'Materials are usually billed on top of labor; clarify who buys them before work starts.',
@@ -59,12 +59,12 @@ export const handymanPricesBoise: BlogPostData = {
     {
       question: 'How much does a handyman cost in Boise in 2026?',
       answer:
-        'Our instant estimate (November 2026) gives a preliminary range for each common job: replacing one outlet or switch $200 to $240, replacing one faucet you supply $290 to $330, one small drywall patch $240 to $280, and fixing one running toilet $230 to $260. Small jobs on one list cost less than booking them one at a time: two outlets or switches on the same visit come to $290 to $330. We then price each job case by case after reviewing the scope, with a written price before work starts.',
+        'Our instant estimate (November 2026) gives a preliminary range for each common job: replacing one outlet or switch $150 to $170, replacing one faucet you supply $250 to $290, one small drywall patch $130 to $150, and fixing one running toilet $190 to $230. Small jobs on one list cost less than booking them one at a time: two outlets or switches on the same visit come to $300 to $340. We then price each job case by case after reviewing the scope, with a written price before work starts.',
     },
     {
       question: 'Why do handymen have minimum charges?',
       answer:
-        'Because every visit carries fixed costs before the first screw turns: drive time, fuel, scheduling, tools on the truck. A two-screw fix cannot absorb those costs, so companies set a floor. The practical takeaway for homeowners is to batch work. Five small jobs in one two-hour visit costs far less than five separate visits, and it is how we prefer to work. A minimum service charge is also why one small job on its own, such as replacing one outlet or switch, comes to a preliminary $200 to $240 in our instant estimate.',
+        'Because every visit carries fixed costs before the first screw turns: drive time, fuel, scheduling, tools on the truck. A two-screw fix cannot absorb those costs, so companies set a floor. The practical takeaway for homeowners is to batch work. Five small jobs in one two-hour visit costs far less than five separate visits, and it is how we prefer to work. A minimum service charge is also why one small job on its own, such as replacing one outlet or switch, comes to a preliminary $150 to $170 in our instant estimate.',
     },
     {
       question: 'Is hourly or flat-rate pricing better?',
@@ -89,7 +89,7 @@ export const handymanPricesBoise: BlogPostData = {
   ],
   content: `
 <h2 id="the-number">What a handyman costs in Boise</h2>
-<p><strong>Our instant estimate puts one small job on its own, such as replacing one outlet or switch, at a preliminary $200 to $240, and nine common jobs on one list at $1,780 to $2,000 (November 2026).</strong> Each common repair has its own preliminary range: one small drywall patch $240 to $280, one faucet you supply $290 to $330, one sticking door $200 to $240, and re-caulking one tub or shower $300 to $340.</p>
+<p><strong>Our instant estimate puts one small job on its own, such as replacing one outlet or switch, at a preliminary $150 to $170, and nine common jobs on one list at $1,480 to $1,670 (November 2026).</strong> Each common repair has its own preliminary range: one small drywall patch $130 to $150, one faucet you supply $250 to $290, one sticking door $150 to $170, and re-caulking one tub or shower $240 to $280.</p>
 <p>Those are preliminary ranges, not quotes. Our own model is case-by-case pricing after we review the scope, with a written price before work starts, whether the job is <a href="/services/mounting-assembly">mounting and assembly</a>, <a href="/services/home-maintenance">caulking and maintenance</a>, minor plumbing and electrical repairs, or <a href="/services/drywall-repair">drywall</a>, carpentry, and painting work. The rest of this post explains how the pricing actually works, because the structure matters more than the sticker. For planning prices on every common repair, job by job, see <a href="/guides/boise-home-repair-cost-guide">the complete Boise home repair cost guide</a>.</p>
 
 <h2 id="hourly-band">Why hourly rates vary so much</h2>

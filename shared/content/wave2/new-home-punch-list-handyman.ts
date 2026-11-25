@@ -67,7 +67,7 @@ export const newHomePunchListHandyman: BlogPostData = {
     {
       question: 'What does it cost to clear a typical punch list?',
       answer:
-        'A typical settling list on a Treasure Valley home, a handful of nail pops, a few caulk joints, two or three door adjustments, and paint touch-up, is usually a half-day to full-day visit. In our instant estimate (November 2026), three door adjustments on one visit come to a preliminary $550 to $620; nail pops, caulk and touch-up add to that, so send the whole list for a written quote. Bundling everything into one visit is cheaper than separate bookings.',
+        'A typical settling list on a Treasure Valley home, a handful of nail pops, a few caulk joints, two or three door adjustments, and paint touch-up, is usually a half-day to full-day visit. In our instant estimate (November 2026), three door adjustments on one visit come to a preliminary $460 to $510; nail pops, caulk and touch-up add to that, so send the whole list for a written quote. Bundling everything into one visit is cheaper than separate bookings.',
     },
     {
       question: 'Should I do the 11-month walkthrough myself?',

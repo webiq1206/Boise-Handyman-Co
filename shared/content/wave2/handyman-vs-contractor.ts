@@ -54,7 +54,7 @@ export const handymanVsContractor: BlogPostData = {
     {
       question: 'Is a handyman cheaper than a contractor?',
       answer:
-        'For small jobs, almost always. Small jobs are priced as small jobs: in our instant estimate, adjusting one sticking door comes to a preliminary $200 to $240 (November 2026). A general contractor carries overhead for project management, permits, and subcontractor coordination, which is worth paying for on a remodel and wasted on a sticking door. The mistake in both directions is mismatching the pro to the job size.',
+        'For small jobs, almost always. Small jobs are priced as small jobs: in our instant estimate, adjusting one sticking door comes to a preliminary $150 to $170 (November 2026). A general contractor carries overhead for project management, permits, and subcontractor coordination, which is worth paying for on a remodel and wasted on a sticking door. The mistake in both directions is mismatching the pro to the job size.',
     },
     {
       question: 'Do handyman jobs need permits in Boise?',

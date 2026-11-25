@@ -20,9 +20,9 @@
  *   - brand "handyman", project "handyman" (the task list), tier "mid"
  *     (the handyman flow has no finish question, so the tier is fixed)
  *   - one task at a time, quantity 1, unless a list says otherwise
- *   - the seed cost book in p5-home-co (no database), labor billed at $120 an
- *     hour (owner, 20 November 2026: the live estimator's rate; the code
- *     default is $125), every other scope setting at its default
+ *   - the seed cost book in p5-home-co (no database), Handyman labor billed at $95 an
+ *     hour all-in (owner, 24 November 2026: HANDYMAN_HOURLY_RATE; the estimator
+ *     uses it for handyman whatever laborRate says), every other setting at its default
  *   - a Boise address and no property record (handyman pricing reads neither)
  *   - the customer range is customerEstimate().range, exactly what a visitor
  *     is shown on screen
@@ -38,7 +38,7 @@ const repo = path.resolve(here, "..", "..");
 const p5Dir = path.resolve(process.env.P5_HOME_CO_DIR ?? path.join(repo, "..", "p5-home-co"));
 const outFile = path.join(repo, "shared", "content", "p5PublishedFigures.json");
 
-const LABOR_RATE = 120;
+const LABOR_RATE = 95;
 const NOW = new Date("2026-11-20T12:00:00Z");
 const ADDRESS = "100 Example Ave, Boise, ID 83702";
 

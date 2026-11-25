@@ -27,12 +27,12 @@ export const fixingSqueakyFloorsAndStickingDoors: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Floor squeaks are almost always wood moving against a fastener or a joist, fixed by re-securing the subfloor with screws. Sticking doors come from sagging hinges, seasonal wood swelling, or normal house settling, fixed by hinge adjustment, strike realignment, or planing. In our instant estimate (November 2026), adjusting one sticking door comes to a preliminary $200 to $240, and several fixes can be handled in one visit.',
+    'Floor squeaks are almost always wood moving against a fastener or a joist, fixed by re-securing the subfloor with screws. Sticking doors come from sagging hinges, seasonal wood swelling, or normal house settling, fixed by hinge adjustment, strike realignment, or planing. In our instant estimate (November 2026), adjusting one sticking door comes to a preliminary $150 to $170, and several fixes can be handled in one visit.',
   keyTakeaways: [
     'Squeaks are movement: subfloor against joist or fastener, silenced by proper re-fastening.',
     'Boise’s dry summers and humid springs cycle wood enough to cause both problems seasonally.',
     'Check hinges first on a sticking door; planing is the last resort, not the first.',
-    'One sticking door is a preliminary $200 to $240 in our instant estimate, and three on one visit $550 to $620.',
+    'One sticking door is a preliminary $150 to $170 in our instant estimate, and three on one visit $460 to $510.',
     'A door that suddenly sticks in a house that never had door trouble is worth a closer look at settling.',
     'Both fixes are classic one-trip handyman jobs with upfront quotes.',
   ],
@@ -63,7 +63,7 @@ export const fixingSqueakyFloorsAndStickingDoors: BlogPostData = {
     {
       question: 'What does it cost to fix a sticking door or squeaky floor?',
       answer:
-        'Our instant estimate (November 2026) gives a preliminary $200 to $240 for adjusting one sticking door and $550 to $620 for three on the same visit. A squeak repair is not on its list, so it is priced from your request. The economics improve with batching: most houses have three or four doors and a couple of squeaks, and one visit that clears the whole list costs less than fixing them one at a time.',
+        'Our instant estimate (November 2026) gives a preliminary $150 to $170 for adjusting one sticking door and $460 to $510 for three on the same visit. A squeak repair is not on its list, so it is priced from your request. The economics improve with batching: most houses have three or four doors and a couple of squeaks, and one visit that clears the whole list costs less than fixing them one at a time.',
     },
     {
       question: 'Is a sticking door a sign of foundation problems?',
@@ -97,7 +97,7 @@ export const fixingSqueakyFloorsAndStickingDoors: BlogPostData = {
 <p><strong>One sticky door is a door problem; a sudden pattern of them is worth a closer look.</strong> The combination that earns attention: multiple doors going out of alignment in the same season, fresh drywall cracks running diagonally from door and window corners, and floors that have developed a perceptible slope. That cluster can indicate settling beyond the normal, and evaluating it is a job for a structural engineer or foundation specialist rather than any handyman. Our part of that story is honesty: we fix the doors that are just doors, and we say plainly when the pattern suggests you should look deeper before spending on trim fixes.</p>
 
 <h2 id="cost">What the fixes cost, and the batching rule</h2>
-<p><strong>These are among the cheapest high-satisfaction repairs in the house.</strong> In our instant estimate, one sticking door comes to a preliminary $200 to $240 and three on one visit $550 to $620, because the visit is shared. The playbook: collect every door that rubs, latch badly, or swings itself open (a two-minute hinge tweak), every squeak, and any loose rail or wobbly baluster, and book them as one list. Full pricing context is in our <a href="/blog/what-small-home-repairs-cost-boise">common repair cost guide</a>, and if you are weighing the DIY route, our <a href="/blog/diy-vs-hiring-a-handyman">DIY vs handyman framework</a> is frank about which of these fixes forgive amateurs and which do not.</p>
+<p><strong>These are among the cheapest high-satisfaction repairs in the house.</strong> In our instant estimate, one sticking door comes to a preliminary $150 to $170 and three on one visit $460 to $510, because the visit is shared. The playbook: collect every door that rubs, latch badly, or swings itself open (a two-minute hinge tweak), every squeak, and any loose rail or wobbly baluster, and book them as one list. Full pricing context is in our <a href="/blog/what-small-home-repairs-cost-boise">common repair cost guide</a>, and if you are weighing the DIY route, our <a href="/blog/diy-vs-hiring-a-handyman">DIY vs handyman framework</a> is frank about which of these fixes forgive amateurs and which do not.</p>
 <p>Worth adding: silent floors and doors that swing freely are not just comfort. For anyone unsteady on their feet, a door that needs a shoulder is a fall risk, which is why door work shows up in our <a href="/blog/aging-in-place-home-design">aging-in-place modification list</a> too.</p>
 
 <h2 id="next-steps">Make the list while the house is talking</h2>
