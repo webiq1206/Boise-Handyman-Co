@@ -62,7 +62,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 450, high: 600, laborHours: 4 },
+    golden: { low: 380, high: 455, laborHours: 4 },
   },
   {
     /* Priority tier: +15% on labor. */
@@ -74,7 +74,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "priority",
     },
-    golden: { low: 325, high: 430, laborHours: 2.5 },
+    golden: { low: 273.12, high: 330, laborHours: 2.5 },
   },
   {
     /* Two different tasks plus the supply run. */
@@ -89,7 +89,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "standard",
     },
-    golden: { low: 420, high: 565, laborHours: 3 },
+    golden: { low: 356.25, high: 430, laborHours: 3 },
   },
   {
     /* One-hour minimum: a 0.75 hr task bills a full hour. */
@@ -101,7 +101,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 125, high: 150, laborHours: 1 },
+    golden: { low: 135, high: 160, laborHours: 1 },
   },
   {
     /* Minimum AND emergency tier together. */
@@ -113,7 +113,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "emergency",
     },
-    golden: { low: 165, high: 195, laborHours: 1 },
+    golden: { low: 135, high: 160, laborHours: 1 },
   },
   {
     /* Quantity math on a 1.5 hr task. */
@@ -125,7 +125,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 505, high: 675, laborHours: 4.5 },
+    golden: { low: 427.5, high: 515, laborHours: 4.5 },
   },
   {
     /* Mixed tasks within one category. */
@@ -140,7 +140,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 675, high: 900, laborHours: 6 },
+    golden: { low: 570, high: 685, laborHours: 6 },
   },
   {
     /* Priority + supply run interacting (urgency applies to both). */
@@ -152,7 +152,7 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "priority",
     },
-    golden: { low: 420, high: 560, laborHours: 2.5 },
+    golden: { low: 355.06, high: 425, laborHours: 2.5 },
   },
   {
     /* Emergency tier on a maintenance task. */
@@ -164,7 +164,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "emergency",
     },
-    golden: { low: 295, high: 390, laborHours: 2 },
+    golden: { low: 247, high: 295, laborHours: 2 },
   },
   {
     /* The free-text path: a medium job is 4 assumed hours. */
@@ -176,7 +176,7 @@ const SCENARIOS: Scenario[] = [
       materials: "customer",
       urgency: "standard",
     },
-    golden: { low: 450, high: 600, laborHours: 4 },
+    golden: { low: 380, high: 455, laborHours: 4 },
   },
   {
     /* Everything at once: large other-job, pickup, emergency. */
@@ -188,14 +188,14 @@ const SCENARIOS: Scenario[] = [
       materials: "we-pick-up",
       urgency: "emergency",
     },
-    golden: { low: 1280, high: 1705, laborHours: 8 },
+    golden: { low: 1080.63, high: 1295, laborHours: 8 },
   },
 ];
 
 if (record) {
   console.log("id | laborHours | low | high | total");
   for (const s of SCENARIOS) {
-    const est = calculateHandymanEstimate(s.input);
+    const est = calculateHandymanEstimate(s.input,{direct:30,otherDollars:5,otherRate:.20});
     if (!est) {
       console.log(`${s.id} | DID NOT PRICE`);
       continue;
@@ -206,7 +206,7 @@ if (record) {
 }
 
 for (const s of SCENARIOS) {
-  const est = calculateHandymanEstimate(s.input);
+  const est = calculateHandymanEstimate(s.input,{direct:30,otherDollars:5,otherRate:.20});
   checks++;
   if (!est) {
     failed++;

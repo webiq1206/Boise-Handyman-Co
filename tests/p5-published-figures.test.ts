@@ -24,6 +24,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
+import { minimumVisitCharge } from '../shared/estimateEngine';
 
 type Range = { low: number; high: number; label: string; inputs: { tasks: Record<string, number> } };
 type Figures = {
@@ -171,11 +172,11 @@ function inAllowlist(file: string, text: string, at: number): boolean {
   return false;
 }
 
-test('the figures file states its inputs: handyman brand, labor at $120 an hour, November 2026', () => {
+test('the figures file states its inputs: handyman brand, labor at $95 an hour, November 2026', () => {
   assert.equal(figures.asOf, 'November 2026');
   assert.equal(figures.inputs.brand, 'handyman');
   assert.equal(figures.inputs.project, 'handyman');
-  assert.equal(figures.inputs.laborRatePerHour, 120, 'owner, 20 November 2026: the live estimator bills labor at $120 an hour');
+  assert.equal(figures.inputs.laborRatePerHour, 95, 'owner, 24 November 2026: the live estimator bills labor at $95 an hour');
   assert.match(figures.about, /scripts\/pricing\/p5-published-figures\.mts/);
   assert.ok(Object.keys(figures.tasks).length >= 20, 'every task the estimator offers is priced');
   for (const [id, r] of [...Object.entries(figures.tasks), ...Object.entries(figures.lists)]) {
@@ -193,6 +194,7 @@ test('every dollar range in published copy is an instant estimate range from the
     for (const f of found) {
       if (f.isRange && allowedRanges.has(f.text)) continue;
       if (!f.isRange && f.value === figures.inputs.laborRatePerHour && HOURLY.test(f.after)) continue;
+      if (!f.isRange && file === 'app/terms-of-service/page.tsx' && f.value === minimumVisitCharge('standard') && text.startsWith(f.text + ' minimum per visit', f.at)) continue;
       if (inAllowlist(file, text, f.at)) continue;
       problems.push(`${file}: ${f.text}${f.after.slice(0, 8)}`);
     }

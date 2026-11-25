@@ -207,7 +207,7 @@ export const URGENCY_LEVELS: Record<
 /* ─────────────────────────────────────────────────────────────── pricing */
 
 /** Customer-facing hourly labor rate. Boise market for an insured company. */
-export const HOURLY_RATE_USD = 125;
+export const HOURLY_RATE_USD = 95;
 /** Every visit bills at least one labor hour. There is no trip or visit fee. */
 export const MINIMUM_LABOR_HOURS = 1;
 /** Hours added for a materials supply run: a realistic supplier round trip. */
@@ -236,7 +236,7 @@ export interface HandymanEstimateInput {
 }
 
 export interface HandymanLine {
-  id: "labor" | "supply-run" | "urgency";
+  id: "labor" | "supply-run" | "urgency" | "minimum";
   label: string;
   amount: number;
 }
@@ -311,7 +311,9 @@ export function sumTaskHours(tasks: HandymanTaskSelection[]): number {
  * described other-job), so the UI can render a "make your selections" state
  * instead of a fake $0 estimate.
  */
-export function calculateHandymanEstimate(input: HandymanEstimateInput): HandymanEstimate | null {
+export function calculateHandymanEstimate(input: HandymanEstimateInput, reviewedCosts?:{direct:number;otherDollars:number;otherRate:number}): HandymanEstimate | null {
+  // The live intake form collects the list without quoting; fixed-price work needs its actual costs.
+  if(!reviewedCosts || !Object.values(reviewedCosts).every(x=>Number.isFinite(x)&&x>=0) || reviewedCosts.otherRate>=.82) return null;
   const taskHours = sumTaskHours(input.tasks);
   const otherHours =
     input.otherJob && input.otherJob.description.trim().length > 0
@@ -353,7 +355,10 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput): Handyma
     });
   }
 
-  const total = round2(lines.reduce((sum, line) => sum + line.amount, 0));
+  const subtotal=round2(lines.reduce((sum,line)=>sum+line.amount,0));
+  const minimumCharge=minimumVisitCharge(input.urgency);
+  if(subtotal<minimumCharge) lines.push({id:"minimum",label:"Balance to the service minimum",amount:round2(minimumCharge-subtotal)});
+  const total=Math.max(subtotal,minimumCharge);
 
   const taskCount =
     input.tasks.filter((t) => findTaskOption(t.taskId) !== null).length + (otherHours > 0 ? 1 : 0);
@@ -419,8 +424,10 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput): Handyma
   // The displayed low end never drops below the one-hour minimum labor
   // charge at this urgency (owner rule: the one-hour minimum applies). It is
   // rounded UP to the display step so rounding cannot pull it back under.
-  const minimumCharge = minimumVisitCharge(input.urgency);
-  const priceLow = Math.max(roundToStep(total * RANGE_LOW_FACTOR, RANGE_ROUNDING_USD), minimumCharge);
+  const agreed=total;
+  const required=(reviewedCosts.direct+reviewedCosts.otherDollars)/(1-reviewedCosts.otherRate-.18);
+  if(agreed<required || agreed<reviewedCosts.direct/.60) return null;
+  const priceLow = agreed;
   const priceHigh = Math.max(roundToStep(total * RANGE_HIGH_FACTOR, RANGE_ROUNDING_USD), priceLow);
 
   return {
@@ -443,7 +450,7 @@ export function calculateHandymanEstimate(input: HandymanEstimateInput): Handyma
  * display step: the lowest number any estimate band may show.
  */
 export function minimumVisitCharge(urgency: UrgencyLevel): number {
-  const raw = MINIMUM_LABOR_HOURS * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier;
+  const raw = Math.max(135,MINIMUM_LABOR_HOURS * HOURLY_RATE_USD * URGENCY_LEVELS[urgency].multiplier);
   return Math.ceil(raw / RANGE_ROUNDING_USD - 1e-9) * RANGE_ROUNDING_USD;
 }
 

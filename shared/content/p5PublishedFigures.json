@@ -1,14 +1,14 @@
 {
   "about": "Preliminary customer ranges from the P5 instant estimator (the tool behind \"Get an instant estimate\"), one estimate per entry. Written by scripts/pricing/p5-published-figures.mts; do not edit by hand.",
   "asOf": "November 2026",
-  "generatedOn": "2026-11-20",
-  "p5Commit": "3d741d97",
+  "generatedOn": "2026-11-24",
+  "p5Commit": "5aca025154",
   "inputs": {
     "brand": "handyman",
     "project": "handyman",
     "tier": "mid",
-    "laborRatePerHour": 120,
-    "handymanTripCharge": 45,
+    "laborRatePerHour": 95,
+    "handymanTripCharge": 50,
     "costBook": "p5-home-co seed cost book, no database overrides",
     "address": "100 Example Ave, Boise, ID 83702",
     "property": null
@@ -23,8 +23,8 @@
           "faucet": 1
         }
       },
-      "low": 290,
-      "high": 330
+      "low": 303,
+      "high": 320
     },
     "toilet-repair": {
       "label": "Fix a running toilet",
@@ -34,7 +34,7 @@
           "toilet-repair": 1
         }
       },
-      "low": 230,
+      "low": 239,
       "high": 260
     },
     "toilet-replace": {
@@ -46,8 +46,8 @@
           "toilet-replace": 1
         }
       },
-      "low": 420,
-      "high": 470
+      "low": 193,
+      "high": 210
     },
     "disposal": {
       "label": "Replace a garbage disposal",
@@ -58,8 +58,8 @@
           "disposal": 1
         }
       },
-      "low": 340,
-      "high": 390
+      "low": 220,
+      "high": 240
     },
     "caulk-tub": {
       "label": "Re-caulk a tub or shower",
@@ -69,8 +69,8 @@
           "caulk-tub": 1
         }
       },
-      "low": 300,
-      "high": 340
+      "low": 294,
+      "high": 310
     },
     "light": {
       "label": "Swap a light fixture",
@@ -81,7 +81,7 @@
           "light": 1
         }
       },
-      "low": 200,
+      "low": 220,
       "high": 240
     },
     "fan": {
@@ -93,8 +93,8 @@
           "fan": 1
         }
       },
-      "low": 290,
-      "high": 330
+      "low": 321,
+      "high": 340
     },
     "outlet": {
       "label": "Replace an outlet or switch",
@@ -104,8 +104,8 @@
           "outlet": 1
         }
       },
-      "low": 200,
-      "high": 240
+      "low": 182,
+      "high": 200
     },
     "gfci": {
       "label": "Replace a GFCI outlet",
@@ -115,7 +115,7 @@
           "gfci": 1
         }
       },
-      "low": 190,
+      "low": 220,
       "high": 240
     },
     "smoke": {
@@ -126,8 +126,8 @@
           "smoke": 1
         }
       },
-      "low": 210,
-      "high": 240
+      "low": 257,
+      "high": 270
     },
     "patch-small": {
       "label": "Small drywall patch",
@@ -138,8 +138,8 @@
           "patch-small": 1
         }
       },
-      "low": 240,
-      "high": 280
+      "low": 156,
+      "high": 170
     },
     "patch-medium": {
       "label": "Medium drywall patch",
@@ -150,8 +150,8 @@
           "patch-medium": 1
         }
       },
-      "low": 460,
-      "high": 510
+      "low": 285,
+      "high": 300
     },
     "paint-room": {
       "label": "Paint a room",
@@ -162,8 +162,8 @@
           "paint-room": 1
         }
       },
-      "low": 880,
-      "high": 980
+      "low": 660,
+      "high": 700
     },
     "trim-caulk": {
       "label": "Caulk and paint trim in a room",
@@ -173,8 +173,8 @@
           "trim-caulk": 1
         }
       },
-      "low": 380,
-      "high": 430
+      "low": 459,
+      "high": 490
     },
     "door-hang": {
       "label": "Hang an interior door",
@@ -185,8 +185,8 @@
           "door-hang": 1
         }
       },
-      "low": 420,
-      "high": 470
+      "low": 211,
+      "high": 230
     },
     "door-adjust": {
       "label": "Adjust a sticking door",
@@ -196,8 +196,8 @@
           "door-adjust": 1
         }
       },
-      "low": 200,
-      "high": 240
+      "low": 184,
+      "high": 200
     },
     "weatherstrip": {
       "label": "Weatherstrip an exterior door",
@@ -207,8 +207,8 @@
           "weatherstrip": 1
         }
       },
-      "low": 200,
-      "high": 240
+      "low": 180,
+      "high": 190
     },
     "hang-art": {
       "label": "Hang a picture or mirror",
@@ -218,8 +218,8 @@
           "hang-art": 1
         }
       },
-      "low": 200,
-      "high": 240
+      "low": 135,
+      "high": 150
     },
     "hang-heavy": {
       "label": "Hang a heavy mirror or art",
@@ -229,8 +229,8 @@
           "hang-heavy": 1
         }
       },
-      "low": 260,
-      "high": 300
+      "low": 321,
+      "high": 340
     },
     "shelf": {
       "label": "Install a shelf",
@@ -240,8 +240,8 @@
           "shelf": 1
         }
       },
-      "low": 200,
-      "high": 230
+      "low": 202,
+      "high": 220
     },
     "blinds": {
       "label": "Install blinds or a curtain rod",
@@ -251,8 +251,8 @@
           "blinds": 1
         }
       },
-      "low": 200,
-      "high": 240
+      "low": 135,
+      "high": 150
     },
     "grab-bar": {
       "label": "Install a grab bar",
@@ -263,8 +263,8 @@
           "grab-bar": 1
         }
       },
-      "low": 260,
-      "high": 300
+      "low": 202,
+      "high": 220
     },
     "furniture": {
       "label": "Assemble furniture",
@@ -275,8 +275,8 @@
           "furniture": 1
         }
       },
-      "low": 210,
-      "high": 240
+      "low": 176,
+      "high": 190
     },
     "fence-boards": {
       "label": "Repair fence boards",
@@ -287,8 +287,8 @@
           "fence-boards": 1
         }
       },
-      "low": 460,
-      "high": 510
+      "low": 404,
+      "high": 430
     },
     "fence-post": {
       "label": "Replace a fence post",
@@ -298,8 +298,8 @@
           "fence-post": 1
         }
       },
-      "low": 420,
-      "high": 470
+      "low": 367,
+      "high": 390
     },
     "gate": {
       "label": "Repair a gate",
@@ -309,8 +309,8 @@
           "gate": 1
         }
       },
-      "low": 340,
-      "high": 390
+      "low": 303,
+      "high": 320
     },
     "gutters-1": {
       "label": "Clean gutters, one story",
@@ -320,8 +320,8 @@
           "gutters-1": 1
         }
       },
-      "low": 260,
-      "high": 300
+      "low": 211,
+      "high": 230
     },
     "gutters-2": {
       "label": "Clean gutters, two story",
@@ -331,8 +331,8 @@
           "gutters-2": 1
         }
       },
-      "low": 380,
-      "high": 430
+      "low": 358,
+      "high": 380
     },
     "dryer-vent": {
       "label": "Clean the dryer vent",
@@ -342,8 +342,8 @@
           "dryer-vent": 1
         }
       },
-      "low": 230,
-      "high": 260
+      "low": 175,
+      "high": 190
     }
   },
   "lists": {
@@ -358,8 +358,8 @@
           "door-adjust": 1
         }
       },
-      "low": 1780,
-      "high": 2000
+      "low": 1782,
+      "high": 1890
     },
     "outlets-2": {
       "label": "Replace two outlets or switches on one visit",
@@ -368,8 +368,8 @@
           "outlet": 2
         }
       },
-      "low": 290,
-      "high": 330
+      "low": 363,
+      "high": 390
     },
     "doors-3": {
       "label": "Adjust three sticking doors on one visit",
@@ -379,13 +379,13 @@
         }
       },
       "low": 550,
-      "high": 620
+      "high": 580
     }
   },
   "singleTaskSpan": {
-    "low": 190,
-    "lowTask": "gfci",
-    "high": 980,
+    "low": 135,
+    "lowTask": "hang-art",
+    "high": 700,
     "highTask": "paint-room"
   }
 }

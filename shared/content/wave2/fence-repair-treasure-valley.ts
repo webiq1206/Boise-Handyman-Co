@@ -27,7 +27,7 @@ export const fenceRepairTreasureValley: BlogPostData = {
   ],
   wordCountTarget: 'cluster',
   quickAnswer:
-    'Most Treasure Valley fence problems, leaning posts, sagging gates, loose pickets, come from rot at the soil line, wind loading, and irrigation water, and are repairable section by section. In our instant estimate (November 2026), replacing one fence post comes to a preliminary $420 to $470; full cedar fence replacement costs far more, so repair usually wins until rot is widespread.',
+    'Most Treasure Valley fence problems, leaning posts, sagging gates, loose pickets, come from rot at the soil line, wind loading, and irrigation water, and are repairable section by section. In our instant estimate (November 2026), replacing one fence post comes to a preliminary $367 to $390; full cedar fence replacement costs far more, so repair usually wins until rot is widespread.',
   keyTakeaways: [
     'Fences fail at the soil line. A post that looks fine above grade can be mush where it meets the concrete.',
     'Boise-area wind events knock over fences whose posts were already rotted; the wind gets blamed, the rot did the work.',
@@ -52,7 +52,7 @@ export const fenceRepairTreasureValley: BlogPostData = {
     {
       question: 'Is it cheaper to repair or replace a fence?',
       answer:
-        'Repair, until the damage stops being local. Replacing a post, a preliminary $420 to $470 in our instant estimate, or a handful of new pickets is far cheaper than new fence. The crossover comes when a third or more of the posts are failing or rails are rotting throughout; then replacing whole sections, reusing sound materials where possible, beats an endless patch cycle.',
+        'Repair, until the damage stops being local. Replacing a post, a preliminary $367 to $390 in our instant estimate, or a handful of new pickets is far cheaper than new fence. The crossover comes when a third or more of the posts are failing or rails are rotting throughout; then replacing whole sections, reusing sound materials where possible, beats an endless patch cycle.',
     },
     {
       question: 'Why do fences lean after windstorms in the Boise area?',
@@ -67,7 +67,7 @@ export const fenceRepairTreasureValley: BlogPostData = {
     {
       question: 'What does fence repair cost in the Treasure Valley?',
       answer:
-        'Our instant estimate (November 2026) gives a preliminary $460 to $510 for repairing the boards of one fence section, $420 to $470 for replacing one fence post, and $340 to $390 for repairing one gate. Single pickets and a full panel rebuilt in place are priced from your photos. Staining and sealing is priced by the linear foot and adds years to whatever you repair.',
+        'Our instant estimate (November 2026) gives a preliminary $404 to $430 for repairing the boards of one fence section, $367 to $390 for replacing one fence post, and $303 to $320 for repairing one gate. Single pickets and a full panel rebuilt in place are priced from your photos. Staining and sealing is priced by the linear foot and adds years to whatever you repair.',
     },
     {
       question: 'Who owns a shared fence between neighbors?',
