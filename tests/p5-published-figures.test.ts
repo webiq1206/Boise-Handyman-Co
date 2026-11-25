@@ -24,6 +24,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
+import { minimumVisitCharge } from '../shared/estimateEngine';
 
 type Range = { low: number; high: number; label: string; inputs: { tasks: Record<string, number> } };
 type Figures = {
@@ -193,6 +194,7 @@ test('every dollar range in published copy is an instant estimate range from the
     for (const f of found) {
       if (f.isRange && allowedRanges.has(f.text)) continue;
       if (!f.isRange && f.value === figures.inputs.laborRatePerHour && HOURLY.test(f.after)) continue;
+      if (!f.isRange && file === 'app/terms-of-service/page.tsx' && f.value === minimumVisitCharge('standard') && text.startsWith(f.text + ' minimum per visit', f.at)) continue;
       if (inAllowlist(file, text, f.at)) continue;
       problems.push(`${file}: ${f.text}${f.after.slice(0, 8)}`);
     }
