@@ -45,7 +45,7 @@ const price = await load("app/lib/estimator/price.ts");
 const flows = await load("app/lib/estimator/flows.ts");
 const scopeTypes = await load("app/lib/scopes/types.ts");
 
-const settings = { ...scopeTypes.DEFAULT_SCOPE_SETTINGS, laborRate: LABOR_RATE, handymanTripCharge: 50 };
+const settings = { ...scopeTypes.DEFAULT_SCOPE_SETTINGS, laborRate: LABOR_RATE, handymanTripCharge: 0 }; // owner, 25 November 2026: no trip fee in Ada and Canyon County
 
 const flow = flows.flowById("handyman");
 const question = flow.questions[0];

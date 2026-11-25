@@ -2,13 +2,13 @@
   "about": "Preliminary customer ranges from the P5 instant estimator (the tool behind \"Get an instant estimate\"), one estimate per entry. Written by scripts/pricing/p5-published-figures.mts; do not edit by hand.",
   "asOf": "November 2026",
   "generatedOn": "2026-11-24",
-  "p5Commit": "5aca025154",
+  "p5Commit": "dfda4a28",
   "inputs": {
     "brand": "handyman",
     "project": "handyman",
     "tier": "mid",
     "laborRatePerHour": 95,
-    "handymanTripCharge": 50,
+    "handymanTripCharge": 0,
     "costBook": "p5-home-co seed cost book, no database overrides",
     "address": "100 Example Ave, Boise, ID 83702",
     "property": null
@@ -46,8 +46,8 @@
           "toilet-replace": 1
         }
       },
-      "low": 193,
-      "high": 210
+      "low": 349,
+      "high": 380
     },
     "disposal": {
       "label": "Replace a garbage disposal",

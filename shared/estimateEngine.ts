@@ -212,7 +212,11 @@ export const HOURLY_RATE_USD = 95;
 export const MINIMUM_LABOR_HOURS = 1;
 /** Hours added for a materials supply run: a realistic supplier round trip. */
 export const SUPPLY_RUN_HOURS = 0.75;
-/** Final approved trip charge. Time still counts toward the job cost review. */
+/**
+ * Materials pick-up line, only when the customer asks us to pick materials up.
+ * This is not a trip fee: there is no trip fee in Ada and Canyon County
+ * (owner, 25 November 2026). Time still counts toward the job cost review.
+ */
 export const SUPPLY_RUN_FEE = 50;
 /** The quoted band around the computed total: -10% to +20%. */
 export const RANGE_LOW_FACTOR = 0.9;

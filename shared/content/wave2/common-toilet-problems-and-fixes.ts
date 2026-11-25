@@ -67,7 +67,7 @@ export const commonToiletProblemsAndFixes: BlogPostData = {
     {
       question: 'What does toilet repair cost in Boise?',
       answer:
-        'Our instant estimate (November 2026) gives a preliminary $239 to $260 for fixing one running toilet and $193 to $210 for replacing one toilet you supply. A wax ring replacement is not on its list, so it is priced from your request and photos. Discovering damaged subfloor or a broken flange under a pulled toilet adds cost, which is one reason rocking toilets should not wait.',
+        'Our instant estimate (November 2026) gives a preliminary $239 to $260 for fixing one running toilet and $349 to $380 for replacing one toilet you supply. A wax ring replacement is not on its list, so it is priced from your request and photos. Discovering damaged subfloor or a broken flange under a pulled toilet adds cost, which is one reason rocking toilets should not wait.',
     },
     {
       question: 'When should I stop DIYing a toilet problem?',
@@ -101,7 +101,7 @@ export const commonToiletProblemsAndFixes: BlogPostData = {
 
 <h2 id="replace">Repair or replace the whole toilet</h2>
 <p><strong>Parts-level repair wins until the porcelain itself is the problem.</strong> Flappers, fill valves, flush valves, seats, and supply lines are all replaceable indefinitely. Replace the fixture when the bowl or tank is cracked, when an old low-quality unit clogs chronically, or when a pre-1994 high-volume toilet is costing real water every day; modern units flush better on far less.</p>
-<p>In our instant estimate, replacing one toilet you supply comes to a preliminary $193 to $210 (November 2026), and it is worth doing the wax ring, bolts, and supply line as a package while the old one is out. This is standard <a href="/services/plumbing-repairs">minor plumbing repair</a> territory, the same lane as the faucet work covered in <a href="/blog/replacing-faucets-and-fixtures">replacing faucets and fixtures</a>.</p>
+<p>In our instant estimate, replacing one toilet you supply comes to a preliminary $349 to $380 (November 2026), and it is worth doing the wax ring, bolts, and supply line as a package while the old one is out. This is standard <a href="/services/plumbing-repairs">minor plumbing repair</a> territory, the same lane as the faucet work covered in <a href="/blog/replacing-faucets-and-fixtures">replacing faucets and fixtures</a>.</p>
 
 <h2 id="when-to-call">When to call someone</h2>
 <p><strong>The stop-DIYing signals are about water and floors, not difficulty.</strong> Call a pro when water is reaching the floor and you cannot say from where, when the floor flexes near the toilet, when the shutoff valve will not close or starts weeping when touched, when the flange is cracked or the closet bolts spin freely, or when the same repair has failed twice, because the second failure means the diagnosis was wrong.</p>
