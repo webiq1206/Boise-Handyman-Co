@@ -1,8 +1,8 @@
 {
   "about": "Preliminary customer ranges from the P5 instant estimator (the tool behind \"Get an instant estimate\"), one estimate per entry. Written by scripts/pricing/p5-published-figures.mts; do not edit by hand.",
   "asOf": "November 2026",
-  "generatedOn": "2026-11-24",
-  "p5Commit": "dfda4a28",
+  "generatedOn": "2026-11-25",
+  "p5Commit": "6ba36b66b0",
   "inputs": {
     "brand": "handyman",
     "project": "handyman",
