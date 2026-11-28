@@ -1,4 +1,4 @@
-import {chromium,webkit} from '@playwright/test';
+import {chromium,expect,webkit} from '@playwright/test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 const base=process.env.P5_TEST_BASE_URL||'http://127.0.0.1:5000';
@@ -21,6 +21,16 @@ try {
     try {
      await page.goto(base+'/',{waitUntil:'networkidle'});
      const homeHeading=await page.locator('h1').innerText();
+     // At phone widths the request link is inside the collapsed Company disclosure.
+     // Exercise the native toggle with the same pointer or keyboard path as the link.
+     if(entry.startsWith('footer-')&&width<1024) {
+      const company=page.locator('footer details').filter({has:page.locator('a[href="/#consult"]')});
+      await expect(company).toHaveCount(1);
+      const summary=company.locator('summary');
+      if(entry==='footer-contact'){await summary.focus();await page.keyboard.press('Enter');}
+      else await summary.click();
+      await expect(company).toHaveJSProperty('open',true);
+     }
      const entryLink=page.locator(selector).first();
      if(entry==='footer-contact'){await entryLink.focus();await page.keyboard.press('Enter');}else await entryLink.click();
      const isContact=target==='contact-page';
@@ -33,13 +43,13 @@ try {
      if(width<1024)await page.getByRole('button',{name:'Open navigation menu',exact:true}).click();
      const services=page.locator((width<1024?'[data-testid="mobile-nav-drawer"]':'header')+' a[href="/services"]:visible').first();
      await services.click();await page.waitForURL(u=>u.pathname==='/services');
-     await page.waitForFunction(()=>document.querySelector('h1')?.textContent?.includes('Everything we fix'));
+     await expect(page.getByRole('region',{name:'All services',exact:true})).toBeVisible();
      assert.equal(await page.locator('#calculator').count(),0);
      await page.goBack();await page.waitForURL(u=>isContact?u.pathname==='/contact':u.pathname==='/'&&u.hash==='#'+target);
      await page.waitForFunction(h=>document.querySelector('h1')?.innerText===h,expectedHeading);
      assert.equal(await page.locator('#'+actualTarget).count(),1,'Back must restore actual entry-page content, not only URL/scroll');
      await page.goForward();await page.waitForURL(u=>u.pathname==='/services');
-     await page.waitForFunction(()=>document.querySelector('h1')?.textContent?.includes('Everything we fix'));
+     await expect(page.getByRole('region',{name:'All services',exact:true})).toBeVisible();
      assert.equal(await page.locator('#calculator').count(),0,'Forward must restore Services content');
      await page.goBack();await page.waitForFunction(h=>document.querySelector('h1')?.innerText===h,expectedHeading);
      assert.equal(await page.locator('#'+actualTarget).count(),1);
